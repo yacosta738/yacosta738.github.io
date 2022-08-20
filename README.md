@@ -1,5 +1,5 @@
 # Welcome to [Astro](https://astro.build)
-
+[![Github Pages Astro CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml)
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
