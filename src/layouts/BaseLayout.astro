@@ -1,6 +1,6 @@
 ---
 // Component Imports
-import SocialLinks from '../components/SocialLinks.astro'
+import AppFooter from '../components/AppFooter.astro'
 import Navbar from '../components/Navbar.vue'
 
 import "../styles/global.css";
@@ -53,11 +53,7 @@ permalink = permalink ? 'https://yunielacosta.com' + permalink : 'https://yuniel
       <main class="flex flex-grow justify-center items-center mt-8 md:mt-20 lg:mt-15">
         <slot></slot>
       </main>
-      <footer
-        class="w-full h-16 flex justify-center items-center bg-gray-900 dark:bg-gray-800 text-white transition duration-100"
-      >
-        <SocialLinks />
-      </footer>
+      <AppFooter />
     </div>
 
   </body>

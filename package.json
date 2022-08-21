@@ -24,6 +24,7 @@
     "@tailwindcss/typography": "^0.5.4",
     "@vueuse/core": "^9.1.0",
     "astro": "^1.0.6",
+    "astro-icon": "^0.7.3",
     "nanostores": "^0.6.0",
     "postcss-nesting": "^10.1.10",
     "postcss-preset-env": "^7.8.0",
