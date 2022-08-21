@@ -67,7 +67,7 @@ onClickOutside(navMenu, () => {
   <a href="https://www.yunielacosta.com" 
     rel="noopener nofollow noreferrer" target="_blank" tabindex="0" 
     class="group flex items-center transition-height delay-200 h-10 bg-green-400 hover:bg-green-500">
-    <p class="text-navy group-hover:text-black sm:top-1.5 w-full pl-4 sm:pl-0 sm:text-center text-sm">
+    <p class="text-navy group-hover:text-black sm:top-1.5 w-full pl-4 sm:text-center text-sm">
       <b>This page is under construction</b> If you want to check more about me please visit my blog on <b>www.yunielacosta.com</b>
     </p> 
     </a>
