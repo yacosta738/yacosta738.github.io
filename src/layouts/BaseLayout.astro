@@ -1,0 +1,64 @@
+---
+// Component Imports
+import SocialLinks from '../components/SocialLinks.astro'
+import Navbar from '../components/Navbar.vue'
+
+import "../styles/global.css";
+
+let { title, description, image, permalink } = Astro.props;
+
+title = title || 'Yuniel Acosta | Software Engineer';
+description = description || 'Programmer, writer, technology and science enthusiast, specialized in building mobile and web applications. Interested in Vue, Typescript, Node.js, and Elm.';
+image = image ? 'https://yunielacosta.com' + image : 'https://i.pravatar.cc/300'
+permalink = permalink ? 'https://yunielacosta.com' + permalink : 'https://yunielacosta.com';
+---
+<html lang="en">
+  <head>
+    <!-- Global Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Yuniel Acosta" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={permalink} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={permalink} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Rokkitt|Fira+Sans&display=swap">
+
+    <slot name="head"></slot>
+  </head>
+
+  <body class="content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen">
+    <div class="relative flex flex-col min-h-[100vh]">
+      <Navbar client:load/>
+      <main class="flex flex-grow justify-center items-center mt-8 md:mt-20 lg:mt-15">
+        <slot></slot>
+      </main>
+      <footer
+        class="w-full h-16 flex justify-center items-center bg-gray-900 dark:bg-gray-800 text-white transition duration-100"
+      >
+        <SocialLinks />
+      </footer>
+    </div>
+
+  </body>
+</html>

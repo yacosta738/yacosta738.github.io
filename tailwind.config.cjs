@@ -26,20 +26,20 @@ module.exports = {
       },
       colors: {
         background: {
-          primary: 'var(--bg-background-primary)',
-          secondary: 'var(--bg-background-secondary)',
-          tertiary: 'var(--bg-background-tertiary)',
+          primary: '#0a192f',
+          secondary: '#102c44',
+          tertiary: '#1e3951',
 
-          form: 'var(--bg-background-form)',
+          form: '#1a202c',
         },
 
         copy: {
-          primary: 'var(--text-copy-primary)',
-          secondary: 'var(--text-copy-hover)',
+          primary: '#cbd5e0',
+          secondary: '#e2e8f0',
         },
 
         'border-color': {
-          primary: 'var(--border-border-color-primary)',
+          primary: '#1a202c',
         },
 
         transparent: 'transparent',

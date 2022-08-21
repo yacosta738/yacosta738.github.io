@@ -17,16 +17,18 @@
   "devDependencies": {
     "@astrojs/tailwind": "^1.0.0",
     "@astrojs/vue": "^1.0.0",
-    "astro": "^1.0.6",
-    "postcss-nesting": "^10.1.10",
-    "postcss-preset-env": "^7.8.0",
-    "vue": "^3.2.37",
     "@nanostores/vue": "^0.6.0",
-    "nanostores": "^0.6.0",
     "@tailwindcss/aspect-ratio": "0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.4"
+    "@tailwindcss/typography": "^0.5.4",
+    "@vueuse/core": "^9.1.0",
+    "astro": "^1.0.6",
+    "nanostores": "^0.6.0",
+    "postcss-nesting": "^10.1.10",
+    "postcss-preset-env": "^7.8.0",
+    "sass": "^1.54.5",
+    "vue": "^3.2.37"
   },
   "dependencies": {
     "@storyblok/js": "^1.7.2"
