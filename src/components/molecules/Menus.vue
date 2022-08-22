@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { generalStore, updateDrawer, updateShowNavbar, toggleSearchModal } from '../store';
+import { generalStore, updateDrawer, updateShowNavbar, toggleSearchModal } from '@store:index';
 import { useStore } from '@nanostores/vue'; 
 
 const general = useStore(generalStore);
@@ -53,7 +53,7 @@ onMounted(() => {
 const openSearchBox = (): void => {
   toggleSearchModal();
   updateDrawer(false);
-  if (!general.searchModal) return;
+  if (!general.value.searchModal) return;
   const searchBox: HTMLInputElement = document.querySelector(
     '#search-box'
   ) as HTMLInputElement;
@@ -106,7 +106,7 @@ const closeMenu = (): void => {
     </li>
     <li>
       <!-- <LocaleSwitcher /> -->
-      <div>Locale Switcher</div>
+      LOCALE
     </li>
     <li>
       <a

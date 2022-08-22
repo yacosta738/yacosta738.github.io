@@ -1,0 +1,39 @@
+---
+import i18next, { t } from "i18next";
+import { localizePath } from "astro-i18next";
+
+const { ...attributes } = Astro.props;
+
+// TODO: add as a utility function for astro-i18next. (out of scope?)
+const isCurrentPath = (path: string) => {
+  const { pathname } = Astro.url;
+
+  const currentNormalizedPath = pathname.replace(/\/$/, "");
+  path = path.replace(/\/$/, "");
+
+  return currentNormalizedPath === path;
+};
+
+const navigationItems = {
+  "/": t("navigation.home"),
+  "/about/": t("navigation.about"),
+};
+---
+
+<nav class="py-2 mt-2 flex gap-x-2" {...attributes}>
+  {Object.keys(navigationItems).map((key) => {
+    let className =
+      "py-2 px-4 uppercase text-sm underline-offset-2 tracking-wider decoration-4 font-semibold";
+    if (isCurrentPath(localizePath(key, i18next.language))) {
+      className += " underline decoration-cyan-500";
+    } else {
+      className +=
+        " opacity-75 hover:opacity-100 hover:underline decoration-gray-300";
+    }
+    return (
+      <a class={className} href={localizePath(key, i18next.language)}>
+        {navigationItems[key]}
+      </a>
+    );
+  })}
+</nav>

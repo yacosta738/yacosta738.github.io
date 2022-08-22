@@ -1,20 +1,17 @@
 {
-  "name": "yap",
+  "name": "yunielacosta.com",
   "version": "0.0.1",
   "private": true,
-  "author": {
-    "name": "Yuniel Acosta",
-    "email": "yunielacosta738@gmail.com",
-    "url": "https://yunielacosta.com"
-  },
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "i18n:generate": "astro-i18next generate"
   },
   "devDependencies": {
+    "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^1.0.0",
     "@astrojs/vue": "^1.0.0",
     "@nanostores/vue": "^0.6.0",
@@ -24,14 +21,14 @@
     "@tailwindcss/typography": "^0.5.4",
     "@vueuse/core": "^9.1.0",
     "astro": "^1.0.6",
+    "astro-i18next": "1.0.0-beta.4",
     "astro-icon": "^0.7.3",
+    "astro-seo": "^0.5.1",
     "nanostores": "^0.6.0",
+    "i18next-fs-backend": "^1.1.5",
     "postcss-nesting": "^10.1.10",
     "postcss-preset-env": "^7.8.0",
     "sass": "^1.54.5",
     "vue": "^3.2.37"
-  },
-  "dependencies": {
-    "@storyblok/js": "^1.7.2"
   }
 }
