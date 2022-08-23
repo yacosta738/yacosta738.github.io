@@ -9,8 +9,10 @@
     "home": "Home",
     "about": "Sobre Me"
   },
+  "bannerDescription": "<b>Esta página esta en construcción 👷‍♂️ 🏗 🚧</b>. Si quieres saber más sobre me por favor visita <0>portfolio</0> 🚀!",
   "description": "Une intégration <0>astro</0> d'<1>i18next</1> + quelques composants utilitaires pour vous aider à traduire vos sites astro !",
   "about": "Créé avec amour ❤️, fromage 🧀 et baguettes 🥖 durant le <0>hackathon d'Astro</0> en Avril / Mai 2022 par <1>@yassinedoghri</1>.",
+  "portfolio": "yuniel acosta portfolio",
   "astroTitle": "Site web d'Astro",
   "i18nextTitle": "Site web d'i18next",
   "astroHackathonTitle": "Exposition d'astro-i18next par Astro",
