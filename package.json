@@ -20,7 +20,7 @@
     "@tailwindcss/line-clamp": "^0.4.0",
     "@tailwindcss/typography": "^0.5.4",
     "@vueuse/core": "^9.1.0",
-    "astro": "^1.0.6",
+    "astro": "^1.0.7",
     "astro-i18next": "1.0.0-beta.4",
     "astro-icon": "^0.7.3",
     "astro-seo": "^0.5.1",
