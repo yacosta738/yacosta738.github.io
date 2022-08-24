@@ -1,59 +1,64 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import {
   breakpointsTailwind,
   onClickOutside,
   useBreakpoints,
-} from '@vueuse/core'
-import Menus from './Menus.vue'
-import { generalStore, updateDrawer, toggleDrawer, updateShowNavbar } from '@store:index';
-import { useStore } from '@nanostores/vue'
+} from "@vueuse/core";
+import Menus from "./Menus.vue";
+import {
+  generalStore,
+  updateDrawer,
+  toggleDrawer,
+  updateShowNavbar,
+} from "@store:index";
+import { useStore } from "@nanostores/vue";
 
-const useGeneralStore = useStore(generalStore)
-const scrollDirection = ref('DOWN')
-const lastScrollPosition = ref(0)
+const $generalStore = useStore(generalStore);
+const scrollDirection = ref("DOWN");
+const lastScrollPosition = ref(0);
 
-const breakpoints = useBreakpoints(breakpointsTailwind)
+const breakpoints = useBreakpoints(breakpointsTailwind);
 
-const mdAndLarger = breakpoints.greater('md')
+const mdAndLarger = breakpoints.greater("md");
 
 const showNavbar = computed({
   get() {
-    return useGeneralStore.value.showNavbar
+    return $generalStore.value.showNavbar;
   },
   set(show: boolean) {
-    updateShowNavbar(show)
+    updateShowNavbar(show);
   },
-})
+});
 watch(mdAndLarger, () => {
-  if (useGeneralStore.drawer && mdAndLarger.value) {
-    toggleDrawer()
+  if ($generalStore.drawer && mdAndLarger.value) {
+    toggleDrawer();
   }
-})
+});
 
 const onScroll = () => {
   const currentScrollPosition =
-    window.scrollY || document.documentElement.scrollTop
-  if (currentScrollPosition < 0 || useGeneralStore.value.drawer) return
+    window.scrollY || document.documentElement.scrollTop;
+  if (currentScrollPosition < 0 || $generalStore.value.drawer) return;
 
-  showNavbar.value = currentScrollPosition < lastScrollPosition.value
+  showNavbar.value = currentScrollPosition < lastScrollPosition.value;
   scrollDirection.value =
-    currentScrollPosition < lastScrollPosition.value ? 'UP' : 'DOWN'
-  lastScrollPosition.value = currentScrollPosition
-}
+    currentScrollPosition < lastScrollPosition.value ? "UP" : "DOWN";
+  lastScrollPosition.value = currentScrollPosition;
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', onScroll)
-})
+  window.addEventListener("scroll", onScroll);
+});
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', onScroll)
-})
+  window.removeEventListener("scroll", onScroll);
+});
 
-const navMenu = ref(null)
+const navMenu = ref(null);
 
 onClickOutside(navMenu, () => {
-  updateDrawer(false)
-})
+  updateDrawer(false);
+});
 </script>
 
 <template>
@@ -75,7 +80,7 @@ onClickOutside(navMenu, () => {
         <svg
           ref="menu-svg"
           class="ham hamRotate ham7"
-          :class="{ 'active-menu': useGeneralStore.drawer }"
+          :class="{ 'active-menu': $generalStore.drawer }"
           viewBox="0 0 100 100"
           width="60"
           @click="toggleDrawer()"
@@ -95,11 +100,11 @@ onClickOutside(navMenu, () => {
         <Menus />
       </div>
       <div
-        v-if="useGeneralStore.drawer"
+        v-if="$generalStore.drawer"
         ref="navMenu"
         :class="{
-          'navbar-menu-open': useGeneralStore.drawer,
-          'navbar-menu-close': !useGeneralStore.drawer,
+          'navbar-menu-open': $generalStore.drawer,
+          'navbar-menu-close': !$generalStore.drawer,
         }"
         class="navbar-menu absolute top-0 right-0 z-40 -mx-14 h-screen w-64 flex-grow overflow-y-hidden bg-light-navy px-4 py-8 md:pb-0"
       >

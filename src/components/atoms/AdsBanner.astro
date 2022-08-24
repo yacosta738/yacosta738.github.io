@@ -1,0 +1,32 @@
+---
+import { t, changeLanguage } from "i18next";
+import {
+    Trans,
+} from "astro-i18next/components";
+import BannerWrapper from "./BannerWrapper.vue";
+import { Icon } from "astro-icon";
+---
+
+<BannerWrapper client:idle>
+    <Trans i18nKey="bannerDescription">
+        This page is under construction 👷‍♂️ 🏗 🚧. If you want to
+        check more about me please visit my blog on
+        <a
+            rel="noopener nofollow noreferrer"
+            target="_blank"
+            tabindex="0"
+            class="underline hover:no-underline hover:bg-light-navy hover:px-2 decoration-2 decoration-cyan-500"
+            href="https://www.yunielacosta.com"
+            title={t("portfolio")}
+        >
+            portfolio
+        </a>{" "}
+        🚀!
+    </Trans>
+    <Icon
+    slot="close-button-icon"
+    id="close-icon"
+    name="ion:close-circle-outline"
+    class="text-navy mr-6 h-6 hover:h-7 hover:cursor-pointer"
+/>
+</BannerWrapper>

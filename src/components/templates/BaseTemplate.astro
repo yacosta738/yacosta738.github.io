@@ -1,15 +1,10 @@
 ---
-import i18next, { t } from "i18next";
-import Navigation from "molecules:Navigation";
+import i18next from "i18next";
 import HeadSEO from "organisms:HeadSEO";
-import { LanguageSelector, HeadHrefLangs } from "astro-i18next/components";
-import Button from "atoms:Button";
+import { HeadHrefLangs } from "astro-i18next/components";
 import AppFooter from "molecules:AppFooter";
+import AdsBanner from "atoms:AdsBanner";
 import Navbar from "@components:molecules/Navbar.vue";
-
-import Link from "atoms:Link";
-import { t, changeLanguage } from "i18next";
-import { Trans } from "astro-i18next/components";
 
 import "styles/global.css";
 ---
@@ -26,15 +21,7 @@ import "styles/global.css";
   </head>
 
   <body class="content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen">
-    <div class="flex items-center transition-height delay-200 h-10 bg-green-400 hover:bg-green-500">
-    <p class="text-navy group-hover:text-black sm:top-1.5 w-full pl-4 sm:text-center text-sm">  
-      <Trans i18nKey="bannerDescription">            
-        This page is under construction 👷‍♂️ 🏗 🚧. If you want to check more about me please visit my blog on 
-        <a rel="noopener nofollow noreferrer" target="_blank" tabindex="0"
-        class="underline hover:no-underline hover:bg-light-navy hover:px-2 decoration-2 decoration-cyan-500"
-         href="https://www.yunielacosta.com" title={t("portfolio")}>portfolio</a> 🚀!
-      </Trans></p>
-    </div>
+    <AdsBanner />
     <div class="relative flex flex-col min-h-[100vh]">
       <Navbar client:load/>
       <main class="flex flex-grow justify-center items-center mt-8 md:mt-20 lg:mt-15">

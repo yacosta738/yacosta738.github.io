@@ -1,53 +1,62 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { generalStore, updateDrawer, updateShowNavbar, toggleSearchModal } from '@store:index';
-import { useStore } from '@nanostores/vue'; 
+import { onMounted } from "vue";
+import {
+  generalStore,
+  updateDrawer,
+  updateShowNavbar,
+  toggleSearchModal,
+} from "@store:index";
+import { useStore } from "@nanostores/vue";
 
 const general = useStore(generalStore);
-interface Menu { title: string, link:string, dataCypress:string }
+interface Menu {
+  title: string;
+  link: string;
+  dataCypress: string;
+}
 const navMenus: Menu[] = [
   {
-    title: 'about',
-    link: '/#about',
-    dataCypress: 'about',
+    title: "about",
+    link: "/#about",
+    dataCypress: "about",
   },
   {
-    title: 'experience',
-    link: '/#jobs',
-    dataCypress: 'jobs',
+    title: "experience",
+    link: "/#jobs",
+    dataCypress: "jobs",
   },
   {
-    title: 'work',
-    link: '/#projects',
-    dataCypress: 'projects',
+    title: "work",
+    link: "/#projects",
+    dataCypress: "projects",
   },
   {
-    title: 'last-articles',
-    link: '/#last3articles',
-    dataCypress: 'last3articles',
+    title: "last-articles",
+    link: "/#last3articles",
+    dataCypress: "last3articles",
   },
   {
-    title: 'contact',
-    link: '/#contact',
-    dataCypress: 'contact',
+    title: "contact",
+    link: "/#contact",
+    dataCypress: "contact",
   },
   {
-    title: 'blog',
-    link: '/blog',
-    dataCypress: 'blog',
+    title: "blog",
+    link: "/blog",
+    dataCypress: "blog",
   },
 ];
 const addEventToClassName = (
   className: string,
   func: Function,
-  event = 'click'
+  event = "click"
 ): void => {
- const elements = Array.from(document.querySelectorAll(className));
-    elements.forEach(element => element.addEventListener(event, () => func()));
+  const elements = Array.from(document.querySelectorAll(className));
+  elements.forEach((element) => element.addEventListener(event, () => func()));
 };
 
 onMounted(() => {
-  addEventToClassName('close-menu-dummy', closeMenu);
+  addEventToClassName("close-menu-dummy", closeMenu);
 });
 
 const openSearchBox = (): void => {
@@ -55,7 +64,7 @@ const openSearchBox = (): void => {
   updateDrawer(false);
   if (!general.value.searchModal) return;
   const searchBox: HTMLInputElement = document.querySelector(
-    '#search-box'
+    "#search-box"
   ) as HTMLInputElement;
   if (searchBox) searchBox.focus();
 };
@@ -95,10 +104,7 @@ const closeMenu = (): void => {
         class="order-list mt-8 items-center space-y-6 lg:mt-0 lg:flex lg:w-auto lg:flex-initial lg:space-x-8 lg:space-y-0"
       >
         <li v-for="(menu, i) in navMenus" :key="i">
-          <a
-            :href="menu.link"
-            class="close-menu-dummy"
-          >
+          <a :href="menu.link" class="close-menu-dummy">
             {{ menu.title }}
           </a>
         </li>
