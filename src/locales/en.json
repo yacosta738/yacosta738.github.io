@@ -9,6 +9,14 @@
     "home": "Home",
     "about": "About"
   },
+  "menus":{
+    "about": "About",
+    "experience": "Experience",
+    "work": "Work",
+    "last-articles": "Last Articles",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
   "bannerDescription": "<b>This page is under construction 👷‍♂️ 🏗 🚧</b>. If you want to check more about me please visit my blog on <0>portfolio</0> 🚀!",
   "description": "An <0>astro</0> integration of <1>i18next</1> + some utility components to help you translate your astro websites !",
   "about": "Created with love ❤️, cheese 🧀 and baguettes 🥖 during the <0>Astro hackathon</0> of April / May 2022 by <1>@yassinedoghri</1>.",

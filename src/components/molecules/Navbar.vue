@@ -1,17 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import {
-  breakpointsTailwind,
-  onClickOutside,
-  useBreakpoints,
-} from "@vueuse/core";
+import { breakpointsTailwind, onClickOutside, useBreakpoints } from "@vueuse/core";
 import Menus from "./Menus.vue";
-import {
-  generalStore,
-  updateDrawer,
-  toggleDrawer,
-  updateShowNavbar,
-} from "@store:index";
+import { generalStore, updateDrawer, toggleDrawer, updateShowNavbar } from "@store:index";
 import { useStore } from "@nanostores/vue";
 
 const $generalStore = useStore(generalStore);
@@ -37,8 +28,7 @@ watch(mdAndLarger, () => {
 });
 
 const onScroll = () => {
-  const currentScrollPosition =
-    window.scrollY || document.documentElement.scrollTop;
+  const currentScrollPosition = window.scrollY || document.documentElement.scrollTop;
   if (currentScrollPosition < 0 || $generalStore.value.drawer) return;
 
   showNavbar.value = currentScrollPosition < lastScrollPosition.value;
@@ -97,7 +87,11 @@ onClickOutside(navMenu, () => {
         </svg>
       </div>
       <div class="hidden lg:block">
-        <Menus />
+       <Menus>
+          <template v-slot:language-selector>
+            <slot name="language-selector" />
+          </template>
+        </Menus>
       </div>
       <div
         v-if="$generalStore.drawer"
@@ -108,7 +102,11 @@ onClickOutside(navMenu, () => {
         }"
         class="navbar-menu absolute top-0 right-0 z-40 -mx-14 h-screen w-64 flex-grow overflow-y-hidden bg-light-navy px-4 py-8 md:pb-0"
       >
-        <Menus />
+        <Menus>
+          <template v-slot:language-selector>
+            <slot name="language-selector" />
+          </template>
+        </Menus>
       </div>
     </nav>
   </header>

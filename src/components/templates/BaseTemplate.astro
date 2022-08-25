@@ -4,8 +4,8 @@ import HeadSEO from "organisms:HeadSEO";
 import { HeadHrefLangs } from "astro-i18next/components";
 import AppFooter from "molecules:AppFooter";
 import AdsBanner from "atoms:AdsBanner";
+import LanguageSelector from "atoms:LanguageSelector";
 import Navbar from "@components:molecules/Navbar.vue";
-
 import "styles/global.css";
 ---
 
@@ -15,20 +15,31 @@ import "styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <HeadSEO />
     <HeadHrefLangs />
-       <!-- Fonts -->
-       <link rel="preconnect" href="https://fonts.gstatic.com" />
-       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Rokkitt|Fira+Sans&display=swap">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato|Rokkitt|Fira+Sans&display=swap"
+    />
   </head>
 
-  <body class="content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen">
+  <body
+    class="content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen"
+  >
     <AdsBanner />
     <div class="relative flex flex-col min-h-[100vh]">
-      <Navbar client:load/>
-      <main class="flex flex-grow justify-center items-center mt-8 md:mt-20 lg:mt-15">
-        <slot></slot>
+      <Navbar client:load>
+        <!-- <LanguageSelector name="language-selector"/> -->
+        <div slot="language-selector">
+          <LanguageSelector showFlag={true} class="cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm  text-green-500 hover:border-green-500 hover:bg-green-900" />
+        </div>
+      </Navbar>
+      <main
+        class="flex flex-grow justify-center items-center mt-8 md:mt-20 lg:mt-15"
+      >
+        <slot />
       </main>
       <AppFooter />
     </div>
-
   </body>
 </html>

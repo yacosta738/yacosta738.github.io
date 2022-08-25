@@ -2,12 +2,14 @@
 import Link from "atoms:Link";
 import { t, changeLanguage } from "i18next";
 import { Trans } from "astro-i18next/components";
+import { LanguageSelector } from "astro-i18next/components";
 import BaseTemplate from "templates:BaseTemplate";
 
 changeLanguage("en");
 ---
 
 <BaseTemplate>
+  <LanguageSelector showFlag={true} class="my-select-class" />
   <p class="mt-4 text-center text-xl max-w-xl">
     <Trans i18nKey="description">
       An <Link href="https://astro.build" title={t("astroTitle")}>astro</Link> integration

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
+import { t } from "i18next";
 import {
   generalStore,
   updateDrawer,
@@ -8,7 +9,7 @@ import {
 } from "@store:index";
 import { useStore } from "@nanostores/vue";
 
-const general = useStore(generalStore);
+const $generalStore = useStore(generalStore);
 interface Menu {
   title: string;
   link: string;
@@ -62,7 +63,7 @@ onMounted(() => {
 const openSearchBox = (): void => {
   toggleSearchModal();
   updateDrawer(false);
-  if (!general.value.searchModal) return;
+  if (!$generalStore.value.searchModal) return;
   const searchBox: HTMLInputElement = document.querySelector(
     "#search-box"
   ) as HTMLInputElement;
@@ -80,12 +81,12 @@ const closeMenu = (): void => {
 <template>
   <ul
     class="menu-list"
-    :class="general.drawer ? 'block' : 'hidden'"
+    :class="$generalStore.drawer ? 'block' : 'hidden'"
     data-cypress="menu"
   >
     <li class="mb-6 lg:mb-0">
       <div
-        v-if="!general.showSide"
+        v-if="!$generalStore.showSide"
         class="cursor-pointer text-lightest-slate hover:text-gray-600"
       >
         <!-- <SvgIcon
@@ -105,14 +106,13 @@ const closeMenu = (): void => {
       >
         <li v-for="(menu, i) in navMenus" :key="i">
           <a :href="menu.link" class="close-menu-dummy">
-            {{ menu.title }}
+            {{ t("menus." + menu.title) }}
           </a>
         </li>
       </ol>
     </li>
     <li>
-      <!-- <LocaleSwitcher /> -->
-      LOCALE
+      <slot name="language-selector"></slot>
     </li>
     <li>
       <a
