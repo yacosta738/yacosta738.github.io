@@ -15,16 +15,12 @@ specifiers:
   astro-icon: ^0.7.3
   astro-seo: ^0.5.1
   i18next-fs-backend: ^1.1.5
-  ityped: ^1.0.3
   locale-emoji: ^0.3.0
   nanostores: ^0.6.0
   postcss-nesting: ^10.1.10
   postcss-preset-env: ^7.8.0
   sass: ^1.54.5
   vue: ^3.2.37
-
-dependencies:
-  ityped: 1.0.3
 
 devDependencies:
   '@astrojs/sitemap': 1.0.0
@@ -2484,10 +2480,6 @@ packages:
     resolution: {integrity: sha512-7c7mBznZu2ktfvyT582E2msM+Udc1EjOyhVRE/0ZsjD9LBtWSm23h3PtiRh2a35XoUsTQQjJXaJzuLjXsOdFDg==}
     engines: {node: '>=6.0'}
     dev: true
-
-  /ityped/1.0.3:
-    resolution: {integrity: sha512-46Qnh3qs+6EJlWDHmvWRW6qiz5jFy2mkh9UvtTvQmLJMZIjKrdz4du68le7hLX4tAWCp6QTKiq/OuLv6huHxZg==}
-    dev: false
 
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
