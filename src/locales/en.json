@@ -18,12 +18,10 @@
     "blog": "Blog"
   },
   "bannerDescription": "<b>This page is under construction 👷‍♂️ 🏗 🚧</b>. If you want to check more about me please visit my blog on <0>portfolio</0> 🚀!",
-  "description": "An <0>astro</0> integration of <1>i18next</1> + some utility components to help you translate your astro websites !",
-  "about": "Created with love ❤️, cheese 🧀 and baguettes 🥖 during the <0>Astro hackathon</0> of April / May 2022 by <1>@yassinedoghri</1>.",
-  "portfolio": "yuniel acosta portfolio",
-  "astroTitle": "Astro website",
-  "i18nextTitle": "i18next website",
-  "astroHackathonTitle": "Astro's showcase of astro-i18next",
-  "twitterTitle": "Follow me on Twitter :)",
-  "getStarted": "Get started"
+  "welcome": "Hi, my name is",
+  "name": "Yuniel Acosta.",
+  "slogan": "If I cannot do great things, I can do small things in a great way.",
+  "my-self": "I’m a software engineer, technology and science enthusiast, specialized in building mobile and web applications.",
+  "get-in-touch": "Get in touch",
+  "resume": "Resume"
 }

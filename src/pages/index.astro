@@ -1,21 +1,11 @@
 ---
-import Link from "atoms:Link";
-import { t, changeLanguage } from "i18next";
-import { Trans } from "astro-i18next/components";
-import { LanguageSelector } from "astro-i18next/components";
+import { changeLanguage } from "i18next";
 import BaseTemplate from "templates:BaseTemplate";
+import Hero from "organisms:Hero";
 
 changeLanguage("en");
 ---
 
 <BaseTemplate>
-  <LanguageSelector showFlag={true} class="my-select-class" />
-  <p class="mt-4 text-center text-xl max-w-xl">
-    <Trans i18nKey="description">
-      An <Link href="https://astro.build" title={t("astroTitle")}>astro</Link> integration
-      of <Link href="https://www.i18next.com/" title={t("i18nextTitle")}
-        >i18next
-      </Link> and utility components to help you translate your astro websites!
-    </Trans>
-  </p>
+  <Hero />
 </BaseTemplate>

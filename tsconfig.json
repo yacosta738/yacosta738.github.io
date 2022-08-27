@@ -13,6 +13,7 @@
     "paths": {
       "@store:*": ["store/*"],
       "@components:*": ["components/*"],
+      "@util:*": ["util/*"],
       "atoms:*": ["components/atoms/*.astro"],
       "molecules:*": ["components/molecules/*.astro"],
       "organisms:*": ["components/organisms/*.astro"],

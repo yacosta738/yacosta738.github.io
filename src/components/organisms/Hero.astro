@@ -1,0 +1,60 @@
+---
+import i18next,{ t } from "i18next";
+import { email } from "@store:constants";
+const slogan = t("slogan");
+---
+
+<section class="min-h-screen">
+    <div class="container mx-auto flex h-full flex-col items-start">
+        <h1 class="my-2 font-mono text-base font-normal text-green-500 md:my-6">
+            {t("welcome")}
+        </h1>
+        <h2
+            id="generalName"
+            class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl"
+        >
+            {t("name")}
+        </h2>
+        <h3
+            id="phrase"
+            class={`text-3xl text-gray-500 sm:text-4xl md:my-2 md:text-5xl lg:text-7xl slogan-${i18next.language}`}
+        >
+            <!-- {slogan} -->
+        </h3>
+        <p class="my-4 max-w-none md:max-w-2xl">
+            {t("my-self")}
+        </p>
+        <footer
+            class="container mx-auto flex flex-col items-center md:items-start"
+        >
+            <a href={`mailto:${email}`} class="big-button my-10">
+                {t("get-in-touch")}
+            </a>
+        </footer>
+    </div>
+</section>
+
+<style lang="scss">
+    @import "../../styles/typed.scss";
+    $slogan: "If I cannot do great things, I can do small things in a great way.";
+    $slogan-es: "Si no puedo hacer grandes cosas, hago que las pequeñas sean grandiosas.";
+    .slogan-en {
+        @include typed($slogan,
+        1.5,
+        (
+            caret-width: 2px,
+            caret-space: 2px
+        )
+        );
+    }
+    .slogan-es {
+        @include typed($slogan-es,
+        1.5,
+        (
+            caret-width: 2px,
+            caret-space: 2px
+        )
+        );
+    }
+</style>
+
