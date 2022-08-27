@@ -38,13 +38,8 @@ const updateShowNavbar = (showNavbar: boolean) => {
 };
 
 const toggleShowAdsBanner = () => {
-  console.log({ ...generalStore.get(), showAdsBanner: generalStore.get().showAdsBanner });
-  console.log({ ...generalStore.get(), showAdsBanner: !generalStore.get().showAdsBanner });
   const { showAdsBanner } = generalStore.get();
   generalStore.set({ ...generalStore.get(), showAdsBanner: !showAdsBanner });
-  console.log("------------------------------");
-  console.log({ ...generalStore.get(), showAdsBanner: generalStore.get().showAdsBanner });
-  console.log({ ...generalStore.get(), showAdsBanner: !generalStore.get().showAdsBanner });
 };
 
 const updateDrawer = (drawer: boolean) => {

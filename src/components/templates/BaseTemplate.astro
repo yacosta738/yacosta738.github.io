@@ -3,10 +3,12 @@ import i18next from "i18next";
 import HeadSEO from "organisms:HeadSEO";
 import { HeadHrefLangs } from "astro-i18next/components";
 import AppFooter from "molecules:AppFooter";
+import Social from "atoms:Social";
+import Email from "atoms:Email";
 import AdsBanner from "atoms:AdsBanner";
 import LanguageSelector from "atoms:LanguageSelector";
 import Navbar from "@components:molecules/Navbar.vue";
-import "styles/global.css";
+import "../../styles/global.css";
 ---
 
 <html lang={i18next.language}>
@@ -29,17 +31,21 @@ import "styles/global.css";
     <AdsBanner />
     <div class="relative flex flex-col min-h-[100vh]">
       <Navbar client:load>
-        <!-- <LanguageSelector name="language-selector"/> -->
         <div slot="language-selector">
-          <LanguageSelector showFlag={true} class="cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm  text-green-500 hover:border-green-500 hover:bg-green-900" />
+          <LanguageSelector
+            showFlag={true}
+            class="cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900"
+          />
         </div>
       </Navbar>
-      <main
-        class="flex flex-grow justify-center items-center mt-8 md:mt-20 lg:mt-15"
-      >
-        <slot />
-      </main>
-      <AppFooter />
+      <div class="flex flex-wrap flex-col md:flex-row justify-around">
+        <main class="container mx-auto flex-grow mt-8 md:mt-20 lg:mt-15">
+          <slot />
+        </main>
+      </div>
+      <Social />
+      <Email />
     </div>
+    <AppFooter />
   </body>
 </html>

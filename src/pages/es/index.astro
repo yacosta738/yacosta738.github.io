@@ -2,10 +2,14 @@
 import { changeLanguage } from "i18next";
 import BaseTemplate from "templates:BaseTemplate";
 import Hero from "organisms:Hero";
+import About from "organisms:About";
 
 changeLanguage("es");
 ---
 
 <BaseTemplate>
-  <Hero />
+  <div class="container mx-auto px-4">
+    <Hero />
+    <About />
+  </div>
 </BaseTemplate>

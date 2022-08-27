@@ -10,7 +10,7 @@
     "about": "About"
   },
   "menus":{
-    "about": "About",
+    "about": "About me",
     "experience": "Experience",
     "work": "Work",
     "last-articles": "Last Articles",
@@ -23,5 +23,7 @@
   "slogan": "If I cannot do great things, I can do small things in a great way.",
   "my-self": "I’m a software engineer, technology and science enthusiast, specialized in building mobile and web applications.",
   "get-in-touch": "Get in touch",
-  "resume": "Resume"
+  "resume": "Resume",
+  "bio": "Software engineer with approximately 5 years working in software development. Proficiency with front-end and back-end technologies. Technology and science enthusiast. I am experienced with Web Application Architecture, Software Design Principles, and Software Design Patterns. Interested in object-oriented programming, design patterns, functional programming, domain-driven design, and microservices. I am a versatile person with wide-ranging skills, eager to learn, and ready to face new and tough challenges in or out of my country.",
+  "about-tech": "Here are a few technologies that I've been working with recently:"
 }
