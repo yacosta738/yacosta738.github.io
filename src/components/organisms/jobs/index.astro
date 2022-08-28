@@ -1,0 +1,15 @@
+---
+import Jobs from "./Jobs.vue";
+import { Job } from "@models:Job";
+import i18next from "i18next";
+const data = await Astro.glob<Job>("../../../data/jobs/**/*.json");
+const jobs = data
+    .filter((job) =>job.published && job.lang === i18next.language)
+    .sort((a: Job, b: Job) => {
+        if (a.startDate > b.startDate) return -1;
+        if (a.startDate < b.startDate) return 1;
+        return 0;
+    });
+---
+
+<Jobs client:idle jobs={jobs} />

@@ -22,7 +22,7 @@ const showNavbar = computed({
   },
 });
 watch(mdAndLarger, () => {
-  if ($generalStore.drawer && mdAndLarger.value) {
+  if ($generalStore.value.drawer && mdAndLarger.value) {
     toggleDrawer();
   }
 });

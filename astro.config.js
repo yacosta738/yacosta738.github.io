@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import astroI18next from "astro-i18next";
+import image from '@astrojs/image';
 import vue from "@astrojs/vue";
 
 // https://astro.build/config
@@ -20,6 +21,7 @@ export default defineConfig({
     tailwind(),
     vue(),
     astroI18next(),
+    image()
   ],
   vite: {
     ssr: {

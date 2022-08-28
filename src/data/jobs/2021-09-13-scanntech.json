@@ -1,0 +1,17 @@
+{
+  "title": "Senior Software Engineer in Scanntech",
+  "lang": "en",
+  "role": "Senior Software Engineer",
+  "company": "Scanntech",
+  "location": "Montevideo, Uruguay",
+  "startDate": "2021-09-13",
+  "endDate": "",
+  "url": "https://www.scanntech.com",
+  "published": true,
+  "achievement": [
+    "Trained over 10 staff members in internal web functions, including steps on how to make minor updates and changes.",
+    "Guided and assisted the development team throughout the process of implementing software requirements with new technologies.",
+    "Trained over 15 staff members in microservices architecture with Kubernetes and Istio.",
+    "Designed, implemented and developed microservice architecture for online reputation management system."
+  ]
+}

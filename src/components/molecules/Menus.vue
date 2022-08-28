@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { t } from "i18next";
+import { localizePath } from "astro-i18next";
 import {
   generalStore,
   updateDrawer,
@@ -94,18 +95,15 @@ const closeMenu = (): void => {
           class="mt-3 cursor-pointer"
           @click="openSearchBox()"
         /> -->
-        ICON
+        Search
       </div>
     </li>
-    <!--    <li>-->
-    <!--      <theme-switcher/>-->
-    <!--    </li>-->
     <li>
       <ol
         class="order-list mt-8 items-center space-y-6 lg:mt-0 lg:flex lg:w-auto lg:flex-initial lg:space-x-8 lg:space-y-0"
       >
         <li v-for="(menu, i) in navMenus" :key="i">
-          <a :href="menu.link" class="close-menu-dummy">
+          <a :href="localizePath(menu.link)" class="close-menu-dummy">
             {{ t("menus." + menu.title) }}
           </a>
         </li>
@@ -120,7 +118,7 @@ const closeMenu = (): void => {
         target="_blank"
         class="resume-button"
       >
-        Resume
+        {{t("resume")}}
       </a>
     </li>
   </ul>

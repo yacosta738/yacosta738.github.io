@@ -1,0 +1,16 @@
+{
+  "title": "Desarrollador Web",
+  "lang": "es",
+  "role": "Desarrollador Web",
+  "company": "Desoft",
+  "location": "Ciego de Ávila, Cuba",
+  "startDate": "2017-10-01",
+  "endDate": "2017-12-31",
+  "url": "https://www.desoft.cu",
+  "published": true,
+  "achievement": [
+    "Desarrollé interfaces de usuario de sitios web construidas con HTML, CSS, JavaScript.",
+    "Desarrollé y solucioné problemas y errores para sitios web internos y de clientes que utilizan principalmente HTML, CSS, JavaScript, TypeScript, Angular y Vuejs.",
+    "Sitios probados manualmente en varios navegadores y dispositivos móviles para garantizar la compatibilidad y capacidad de respuesta entre navegadores."
+  ]
+}

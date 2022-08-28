@@ -1,0 +1,16 @@
+{
+  "title": "Web developer Intern",
+  "lang": "en",
+  "role": "Web Developer",
+  "company": "Desoft",
+  "location": "Ciego de Ávila, Cuba",
+  "startDate": "2017-10-01",
+  "endDate": "2017-12-31",
+  "url": "https://www.desoft.cu",
+  "published": true,
+  "achievement": [
+    "Developed websites interfaces built with HTML, CSS, JavaScript",
+    "Developed and fixed issues and mistakes for internal and client websites that mainly use HTML, CSS, JavaScript, Typescript, Angular and Vuejs.",
+    "Manually tested sites in various browsers and mobile devices to ensure cross-browser compatibility and responsiveness."
+  ]
+}
