@@ -25,5 +25,15 @@
   "get-in-touch": "Contácteme",
   "resume": "Currículum",
   "bio": "Ingeniero de software con aproximadamente 5 años trabajando en desarrollo de software. Competencia en tecnologías de front-end y back-end. Entusiasta de la tecnología y la ciencia. Tengo experiencia en Arquitectura de Aplicaciones Web, Principios de Diseño de Software y Patrones de Diseño de Software. Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño impulsado por dominios y microservicios. Soy una persona versátil con una amplia gama de habilidades, con muchas ganas de aprender y preparado para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.",
-  "about-tech": "Aquí hay algunas tecnologías con las que he trabajado recientemente:"
+  "about-tech": "Aquí hay algunas tecnologías con las que he trabajado recientemente:",
+  "contact": "Contacto",
+  "contact-me": "Contácteme",
+  "contact-information": "Información de Contacto",
+  "contact-description": "Estoy interesado en nuevas oportunidades especialmente en proyectos grandes y ambiciosos. Sin embargo, si tienes otra solicitud o pregunta, no dudes en contactarme usando el siguiente formulario.",
+  "lets-talk": "Hablemos de cualquier cosa!",
+  "your-full-name": "Su Nombre Completo",
+  "your-email": "Su Email",
+  "subject": "Asunto",
+  "message": "Mensaje",
+  "send-message": "Enviar Mensaje"
 }
