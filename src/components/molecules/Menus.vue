@@ -1,82 +1,82 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { t } from "i18next";
-import { localizePath } from "astro-i18next";
+import { onMounted } from 'vue'
+import { t } from 'i18next'
 import {
   generalStore,
   updateDrawer,
   updateShowNavbar,
   toggleSearchModal,
-} from "@store:index";
-import { useStore } from "@nanostores/vue";
+} from '@store:index'
+import { localizePath } from '@util:utilities'
+import { useStore } from '@nanostores/vue'
 
-const $generalStore = useStore(generalStore);
+const $generalStore = useStore(generalStore)
 interface Menu {
-  title: string;
-  link: string;
-  dataCypress: string;
+  title: string
+  link: string
+  dataCypress: string
 }
 const navMenus: Menu[] = [
   {
-    title: "about",
-    link: "/#about",
-    dataCypress: "about",
+    title: 'about',
+    link: '/#about',
+    dataCypress: 'about',
   },
   {
-    title: "experience",
-    link: "/#jobs",
-    dataCypress: "jobs",
+    title: 'experience',
+    link: '/#jobs',
+    dataCypress: 'jobs',
   },
   {
-    title: "work",
-    link: "/#projects",
-    dataCypress: "projects",
+    title: 'work',
+    link: '/#projects',
+    dataCypress: 'projects',
   },
   {
-    title: "last-articles",
-    link: "/#last3articles",
-    dataCypress: "last3articles",
+    title: 'last-articles',
+    link: '/#last3articles',
+    dataCypress: 'last3articles',
   },
   {
-    title: "contact",
-    link: "/#contact",
-    dataCypress: "contact",
+    title: 'contact',
+    link: '/#contact',
+    dataCypress: 'contact',
   },
   {
-    title: "blog",
-    link: "/blog",
-    dataCypress: "blog",
+    title: 'blog',
+    link: '/blog',
+    dataCypress: 'blog',
   },
-];
+]
 const addEventToClassName = (
   className: string,
   func: Function,
-  event = "click"
+  event = 'click',
 ): void => {
-  const elements = Array.from(document.querySelectorAll(className));
-  elements.forEach((element) => element.addEventListener(event, () => func()));
-};
+  const elements = Array.from(document.querySelectorAll(className))
+  elements.forEach((element) => element.addEventListener(event, () => func()))
+}
 
 onMounted(() => {
-  addEventToClassName("close-menu-dummy", closeMenu);
-});
+  addEventToClassName('close-menu-dummy', closeMenu)
+})
 
 const openSearchBox = (): void => {
-  toggleSearchModal();
-  updateDrawer(false);
-  if (!$generalStore.value.searchModal) return;
+  toggleSearchModal()
+  updateDrawer(false)
+  if (!$generalStore.value.searchModal) return
   const searchBox: HTMLInputElement = document.querySelector(
-    "#search-box"
-  ) as HTMLInputElement;
-  if (searchBox) searchBox.focus();
-};
+    '#search-box',
+  ) as HTMLInputElement
+  if (searchBox) searchBox.focus()
+}
 
 const closeMenu = (): void => {
-  updateDrawer(false);
+  updateDrawer(false)
   setTimeout(() => {
-    updateShowNavbar(true);
-  }, 2000);
-};
+    updateShowNavbar(true)
+  }, 2000)
+}
 </script>
 
 <template>
@@ -104,7 +104,7 @@ const closeMenu = (): void => {
       >
         <li v-for="(menu, i) in navMenus" :key="i">
           <a :href="localizePath(menu.link)" class="close-menu-dummy">
-            {{ t("menus." + menu.title) }}
+            {{ t('menus.' + menu.title) }}
           </a>
         </li>
       </ol>
@@ -118,7 +118,7 @@ const closeMenu = (): void => {
         target="_blank"
         class="resume-button"
       >
-        {{t("resume")}}
+        {{ t('resume') }}
       </a>
     </li>
   </ul>

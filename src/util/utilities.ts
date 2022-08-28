@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 export const randomInt = (min: number, max: number) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -15,37 +17,51 @@ export const inlineLinks = (className: string) => {
   }
 };
 
-export const formatDate = (
-  date: string,
-  dateFormat = "MMMM, yyyy",
-  locale = "en"
+export const localizePath = (
+  path: string = "/",
+  locale: string | null = null
 ): string => {
-  let lc;
-  switch (locale) {
-    case "en":
-        lc = "en-US";
-        break;
-    case "es":
-        lc = "es-ES";
-        break;
-    default:
-        lc = "en-US";
-        break;
+  if (!locale) {
+    locale = i18next.language;
+  }
+
+  if (!(i18next.options.supportedLngs as string[])?.includes(locale)) {
+    return path;
+  }
+
+  // remove all leading slashes
+  path = path.replace(/^\/+/g, "");
+
+  let pathSegments = path.split("/");
+
+  if (
+    JSON.stringify(pathSegments) === JSON.stringify([""]) ||
+    JSON.stringify(pathSegments) === JSON.stringify(["", ""])
+  ) {
+    const supportedLanguages = i18next.options.supportedLngs;
+    if (supportedLanguages)
+      return locale === supportedLanguages[0] ? `/` : `/${locale}/`;
+    else return `/`;
+  }
+
+  // make a copy of i18next's supportedLngs
+  const otherLocales = [...(i18next.options.supportedLngs as string[])];
+  otherLocales.slice(1); // remove base locale (first index)
+
+  // loop over all locales except the base one
+  for (const otherLocale of otherLocales) {
+    if (pathSegments[0] === otherLocale) {
+      // if the path starts with one of the other locales, remove it from the path
+      pathSegments.shift();
+      break; // no need to continue
     }
-    const d = new Date(date);
-    return d.toLocaleDateString(lc, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        timeZoneName: "short",
-        hour12: false,
-        timeZone: "America/New_York",
-        dateStyle: "full",
-        timeStyle: "short",
-        formatMatcher: "basic"
-    });
-    
+  }
+
+  const supportedLanguages = i18next.options.supportedLngs;
+  // prepend the given locale if it's not the base one
+  if (supportedLanguages && locale !== supportedLanguages[0]) {
+    pathSegments = [locale, ...pathSegments];
+  }
+
+  return "/" + pathSegments.join("/");
 };
