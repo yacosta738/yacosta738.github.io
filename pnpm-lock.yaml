@@ -15,8 +15,10 @@ specifiers:
   astro-i18next: 1.0.0-beta.4
   astro-icon: ^0.7.3
   astro-seo: ^0.5.1
+  dompurify: ^2.4.0
   i18next-fs-backend: ^1.1.5
   locale-emoji: ^0.3.0
+  marked: ^4.0.19
   nanostores: ^0.6.0
   postcss-nesting: ^10.1.10
   postcss-preset-env: ^7.8.0
@@ -38,8 +40,10 @@ devDependencies:
   astro-i18next: 1.0.0-beta.4_astro@1.1.1
   astro-icon: 0.7.3
   astro-seo: 0.5.1
+  dompurify: 2.4.0
   i18next-fs-backend: 1.1.5
   locale-emoji: 0.3.0
+  marked: 4.0.19
   nanostores: 0.6.0
   postcss-nesting: 10.1.10
   postcss-preset-env: 7.8.0
@@ -1824,6 +1828,10 @@ packages:
       domelementtype: 2.3.0
     dev: true
 
+  /dompurify/2.4.0:
+    resolution: {integrity: sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA==}
+    dev: true
+
   /domutils/2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
     dependencies:
@@ -2739,6 +2747,12 @@ packages:
 
   /markdown-table/3.0.2:
     resolution: {integrity: sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA==}
+    dev: true
+
+  /marked/4.0.19:
+    resolution: {integrity: sha512-rgQF/OxOiLcvgUAj1Q1tAf4Bgxn5h5JZTp04Fx4XUkVhs7B+7YA9JEWJhJpoO8eJt8MkZMwqLCNeNqj1bCREZQ==}
+    engines: {node: '>= 12'}
+    hasBin: true
     dev: true
 
   /mdast-util-definitions/5.1.1:

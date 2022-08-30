@@ -35,5 +35,19 @@
   "your-email": "Su Email",
   "subject": "Asunto",
   "message": "Mensaje",
-  "send-message": "Enviar Mensaje"
+  "send-message": "Enviar Mensaje",
+  "where-worked": "Dónde he trabajado",
+  "project-title": "Cosas que he construido",
+  "project-subtitle": "Otros proyectos",
+  "project-view": "ver todos los proyectos",
+  "all-projects": "Todos los proyectos",
+  "big-list": "Una lista extensa de cosas en las que he trabajado",
+  "year": "Año",
+  "title": "Título",
+  "made-at": "Hecho en",
+  "built-at": "Construido con",
+  "link": "Enlace",
+  "show-less": "Mostrar menos",
+  "show-more": "Mostrar más",
+  "view-all": "Ver Todos"
 }

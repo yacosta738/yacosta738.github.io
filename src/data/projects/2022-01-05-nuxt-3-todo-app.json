@@ -1,0 +1,20 @@
+{
+"title": "Nuxt 3 Todo App",
+"lang": "en",
+"cover": "/uploads/app.png",
+"date": "2022-01-05T03:29:14.163Z",
+"repository": "https://github.com/yacosta738/todo-app",
+"url": "https://task-app-acosta.vercel.app/",
+"company": "Personal",
+"tech":
+[
+  "vuejs",
+  "tailwind",
+  "typescript",
+  "vite"
+ ],
+"showInProjects": true,
+"featured": false,
+"published": true,
+"content": "Application for manage a task list. It allows us add, mark as completed and delete a task. The App has three principal Views (All, Aactive and Completed)"
+}

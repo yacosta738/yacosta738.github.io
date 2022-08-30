@@ -1,0 +1,20 @@
+{
+"title": "Nuxt 3 Todo App",
+"lang": "es",
+"cover": "/uploads/app.png",
+"date": "2022-01-05T03:29:14.163Z",
+"repository": "https://github.com/yacosta738/todo-app",
+"url": "https://task-app-acosta.vercel.app/",
+"company": "Personal",
+"tech":
+[
+  "vuejs",
+  "tailwind",
+  "typescript",
+  "vite"
+ ],
+"showInProjects": true,
+"featured": false,
+"published": true,
+"content": "Aplicación para gestionar lista de tareas. Permite agregar, marcar como completada y eliminar una tarea. Posee tres vistas principales donde se muestran todas las tareas, las tareas activas y las tareas completadas."
+}

@@ -1,0 +1,19 @@
+{
+"title": "Bankiva",
+"lang": "es",
+"cover": "/uploads/bankiva.png",
+"date": "2020-02-17T14:58:55.840Z",
+"company": "Desoft",
+"tech":[
+  "Java",
+  "Spring",
+  "Vuejs",
+  "PostgreSQL",
+  "Typescript"
+  ],
+"showInProjects": true,
+"featured": false,
+"published": true,
+
+"content": "Permite mantener el control de la producción avícola de la empresa CAN. Realizado con [JHIPSTER](https://www.jhipster.tech/), con una arquitectura monolítica, diseñado para multiempresas."
+}

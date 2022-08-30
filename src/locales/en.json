@@ -35,5 +35,19 @@
   "your-email": "Your Email",
   "subject": "Subject",
   "message": "Message",
-  "send-message": "Send Message"
+  "send-message": "Send Message",
+  "where-worked": "Where I've Worked",
+  "project-title": "Some Things I’ve Built",
+  "project-subtitle": "Other Noteworthy Projects",
+  "project-view": "view all projects",
+  "all-projects": "All projects",
+  "big-list": "A big list of things I've worked on",
+  "year": "Year",
+  "title": "Title",
+  "made-at": "Made at",
+  "built-at": "Built with",
+  "link": "Link",
+  "show-less": "Show Less",
+  "show-more": "Show More",
+  "view-all": "View All"
 }

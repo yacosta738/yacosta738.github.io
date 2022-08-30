@@ -1,0 +1,18 @@
+{
+"date": "2020-12-25",
+"title": "MealApp",
+"lang": "es",
+"cover": "/uploads/cover-meal-app.png",
+"repository": "https://github.com/yacosta738/flutter_meal_app",
+"url": "https://imgur.com/a/gpFxVA2",
+"company": "Personal Project",
+"tech": [
+  "Flutter",
+  "Dart",
+  "Idea"
+],
+"showInProjects": true ,
+"featured": false ,
+"published": true,
+"content": "Una sencilla aplicación realizada en [Flutter](https://flutter.dev/) donde se muestra un listado por categorías de los platos y sus ingredientes. Te permite ver el detalle de los platos y los pasos a seguir para realizarlos, además te permite añadir comidas favoritas y filtrar por ingredientes (sin glucosa, comida vegetariana, etc.)"
+}

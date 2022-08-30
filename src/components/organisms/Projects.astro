@@ -1,0 +1,24 @@
+---
+import i18next from "i18next";
+import { Project } from "@models:Project";
+import ProjectsFeatured from "molecules:ProjectsFeatured";
+
+const data = await Astro.glob<Project>("../../data/projects/**/*.json");
+const projects: Project[] = data
+    .filter((project) => project.published && project.lang === i18next.language)
+    .sort((a, b) => {
+        if (a.date > b.date) return -1;
+        if (a.date < b.date) return 1;
+        return 0;
+    });
+const featuredProjects = projects.filter((project) => project.featured);
+const commonProjects = projects.filter((project) => project.showInProjects);
+---
+
+<section id="projects" class="mx-4 md:mx-auto">
+    {featuredProjects && featuredProjects.length > 0 && <ProjectsFeatured projects={featuredProjects} />}
+    <!-- <ProjectsCommon
+        v-if="projectStore.getCommonProjects.length > 0"
+        :projects="projectStore.getCommonProjects"
+    /> -->
+</section>

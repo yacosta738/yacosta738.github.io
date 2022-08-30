@@ -1,16 +1,15 @@
 import { atom } from "nanostores";
-
-const DARK = "dark";
-const LIGHT = "light";
-
-const getTheme = (): string => {
-  if (!localStorage.getItem("theme")) localStorage.setItem("theme", DARK);
-
-  return localStorage.getItem("theme");
+const SHOW_ADS_BANNER = "SHOW_ADS_BANNER";
+const getShowAdsBanner = (): boolean => {
+  const adsBanner: string | null = localStorage.getItem(SHOW_ADS_BANNER);
+  if (adsBanner === null) {
+    localStorage.setItem(SHOW_ADS_BANNER, "true");
+    return true;
+  }
+  return adsBanner === "true";
 };
 
 export interface IGeneralStore {
-  theme: string;
   drawer: boolean;
   showNavbar: boolean;
   showAdsBanner: boolean;
@@ -22,10 +21,9 @@ export interface IGeneralStore {
 }
 
 const generalStore = atom<IGeneralStore>({
-  theme: getTheme(),
   drawer: false,
   showNavbar: true,
-  showAdsBanner: true,
+  showAdsBanner: getShowAdsBanner(),
   showSide: true,
   loading: false,
   firstTimeLoading: true,
@@ -39,6 +37,7 @@ const updateShowNavbar = (showNavbar: boolean) => {
 
 const toggleShowAdsBanner = () => {
   const { showAdsBanner } = generalStore.get();
+  localStorage.setItem(SHOW_ADS_BANNER, String(!showAdsBanner));
   generalStore.set({ ...generalStore.get(), showAdsBanner: !showAdsBanner });
 };
 

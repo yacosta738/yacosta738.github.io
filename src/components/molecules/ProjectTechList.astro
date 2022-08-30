@@ -1,0 +1,56 @@
+---
+import { Project } from "@models:Project";
+import Link from "atoms:Link";
+import { Icon } from "astro-icon";
+
+export interface Props {
+    position: string;
+    showIcon: boolean;
+    project: Project;
+}
+
+const { position, showIcon, project } = Astro.props;
+---
+
+<ul
+    class={`project-tech-list ${
+        position === "end"
+            ? "justify-end"
+            : position === "center"
+            ? "justify-center"
+            : "justify-start"
+    }`}
+>
+    {
+        project &&
+            project.tech &&
+            project.tech.map((tech) => (
+                <li
+                    class="my-2 text-light-slate font-mono text-xs whitespace-nowrap"
+                    class={
+                        position === "end"
+                            ? "ml-3"
+                            : position === "center"
+                            ? "mx-2"
+                            : "mr-3"
+                    }
+                >
+                    <Link
+                        class="flex"
+                        href="https://docs.astro.build/es/guides/integrations-guide/image/"
+                        target="_blank"
+                    >
+                        {showIcon && <Icon name="mdi:vuejs" class="h-4" />}
+                        <span class="mx-1">{tech}</span>
+                    </Link>
+                </li>
+            ))
+    }
+</ul>
+
+<style>
+    .project-tech-list {
+        z-index: 2;
+        @apply flex flex-wrap relative list-none p-0 my-4;
+    }
+</style>

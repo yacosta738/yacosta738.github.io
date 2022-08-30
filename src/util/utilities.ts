@@ -1,4 +1,6 @@
 import i18next from "i18next";
+// import DOMPurify from 'dompurify';
+import marked from 'marked';
 
 export const randomInt = (min: number, max: number) => {
   min = Math.ceil(min);
@@ -65,3 +67,11 @@ export const localizePath = (
 
   return "/" + pathSegments.join("/");
 };
+
+
+/**
+ * markdownfy the string
+ * @param {string} str String to markdownfy
+ * @returns {string}
+ */
+ export const markdownfy = (str: string): string => marked.parse(str);
