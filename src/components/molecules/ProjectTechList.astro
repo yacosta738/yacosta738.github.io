@@ -1,6 +1,6 @@
 ---
 import { Project } from "@models:Project";
-import Link from "atoms:Link";
+import { Tech } from "@models:Tech";
 import { Icon } from "astro-icon";
 
 export interface Props {
@@ -9,7 +9,7 @@ export interface Props {
     project: Project;
 }
 
-const { position, showIcon, project } = Astro.props;
+const { position, showIcon = true, project } = Astro.props;
 ---
 
 <ul
@@ -24,7 +24,7 @@ const { position, showIcon, project } = Astro.props;
     {
         project &&
             project.tech &&
-            project.tech.map((tech) => (
+            project.tech.map((tech: Tech) => (
                 <li
                     class="my-2 text-light-slate font-mono text-xs whitespace-nowrap"
                     class={
@@ -35,14 +35,19 @@ const { position, showIcon, project } = Astro.props;
                             : "mr-3"
                     }
                 >
-                    <Link
+                   {
+                    tech?.url != null? (
+                    <a
                         class="flex"
-                        href="https://docs.astro.build/es/guides/integrations-guide/image/"
+                        href={tech?.url}
                         target="_blank"
                     >
-                        {showIcon && <Icon name="mdi:vuejs" class="h-4" />}
-                        <span class="mx-1">{tech}</span>
-                    </Link>
+                        {showIcon && tech?.icon && <Icon name={tech?.icon} class="h-4" />}
+                        <span class="mx-1">{tech?.name}</span>
+                    </a>
+                    ) 
+                    : <span class="mx-1">{tech?.name}</span>
+                   }
                 </li>
             ))
     }

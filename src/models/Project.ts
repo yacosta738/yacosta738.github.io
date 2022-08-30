@@ -1,15 +1,33 @@
-export interface Project {
-  id?: string | undefined;
-  title?: string | undefined;
-  lang?: string | undefined;
-  date?: string | Date | undefined;
-  cover?: string | undefined;
-  repository?: string | undefined;
-  url?: string | undefined;
-  company?: string | undefined;
+import { Tech } from "./Tech";
+
+export interface ProjectJson {
+  id?: string;
+  title?: string;
+  lang?: string;
+  date?: string | Date;
+  cover?: string;
+  repository?: string;
+  url?: string;
+  company?: string;
   tech?: string[];
   showInProjects?: boolean;
   featured?: boolean;
   published?: boolean;
-  content?: string | undefined;
+  content?: string;
+}
+
+export interface Project {
+  id?: string;
+  title?: string;
+  lang?: string;
+  date?: string | Date;
+  cover?: string;
+  repository?: string;
+  url?: string;
+  company?: string;
+  tech?: Tech[];
+  showInProjects?: boolean;
+  featured?: boolean;
+  published?: boolean;
+  content?: string;
 }

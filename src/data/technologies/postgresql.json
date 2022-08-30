@@ -1,0 +1,6 @@
+{
+    "id": "postgresql",
+    "name": "PostgreSQL",
+    "icon": "akar-icons:postgresql-fill",
+    "url": "https://www.postgresql.org/"
+  }
