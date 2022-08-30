@@ -1,6 +1,6 @@
 import i18next from "i18next";
 // import DOMPurify from 'dompurify';
-import marked from 'marked';
+import {marked} from 'marked';
 
 export const randomInt = (min: number, max: number) => {
   min = Math.ceil(min);
