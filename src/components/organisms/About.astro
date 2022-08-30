@@ -1,7 +1,5 @@
 ---
 import { t } from "i18next";
-import { Image } from '@astrojs/image/components';
-import meImage from '../../../public/assets/images/me.png';
 
 const skills: string[] = [
   'TypeScript',
@@ -30,7 +28,7 @@ const skills: string[] = [
       </div>
       <div class="styled-pic">
         <div class="wrapper">
-          <Image src={meImage}
+          <img src="/assets/images/me.png"
             alt="Yuniel Acosta Pérez"
             class="img"
           />
