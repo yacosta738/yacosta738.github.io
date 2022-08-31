@@ -1,18 +1,14 @@
 {
-"date": "2020-12-25",
-"title": "MealApp",
-"lang": "en",
-"cover": "/uploads/cover-meal-app.png",
-"repository": "https://github.com/yacosta738/flutter_meal_app",
-"url": "https://imgur.com/a/gpFxVA2",
-"company": "Proyecto Personal",
-"tech": [
-  "Flutter",
-  "Dart",
-  "Idea"
-],
-"showInProjects": true ,
-"featured": false ,
-"published": true,
-"content": "A simple application made in [Flutter](https://flutter.dev/) where a list by categories of the dishes and their ingredients is shown. It allows you to see the details of the dishes and the steps to follow to make them, It also allows you to add favorite foods and filter by ingredients (glucose-free, vegetarian food, etc.)"
+  "date": "2020-12-25",
+  "title": "MealApp",
+  "lang": "en",
+  "cover": "/uploads/cover-meal-app.png",
+  "repository": "https://github.com/yacosta738/flutter_meal_app",
+  "url": "https://imgur.com/a/gpFxVA2",
+  "company": "Proyecto Personal",
+  "tech": ["Flutter", "Dart", "Idea"],
+  "showInProjects": true,
+  "featured": false,
+  "published": true,
+  "content": "A simple application made in [Flutter](https://flutter.dev/) where a list by categories of the dishes and their ingredients is shown. It allows you to see the details of the dishes and the steps to follow to make them, It also allows you to add favorite foods and filter by ingredients (glucose-free, vegetarian food, etc.)"
 }

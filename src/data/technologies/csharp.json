@@ -1,6 +1,6 @@
 {
-    "id": "c#",
-    "name": "C#",
-    "icon": "mdi:language-csharp",
-    "url": "https://docs.microsoft.com/en-us/dotnet/csharp/"
-  }
+  "id": "c#",
+  "name": "C#",
+  "icon": "mdi:language-csharp",
+  "url": "https://docs.microsoft.com/en-us/dotnet/csharp/"
+}

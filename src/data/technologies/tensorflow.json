@@ -1,6 +1,6 @@
 {
-    "id": "tensorflow",
-    "name": "TensorFlow",
-    "icon": "simple-icons:tensorflow",
-    "url": "https://www.tensorflow.org/"
-  }
+  "id": "tensorflow",
+  "name": "TensorFlow",
+  "icon": "simple-icons:tensorflow",
+  "url": "https://www.tensorflow.org/"
+}

@@ -1,6 +1,6 @@
 {
-    "id": "pytorch",
-    "name": "PyTorch",
-    "icon": "simple-icons:pytorch",
-    "url": "https://pytorch.org/"
-  }
+  "id": "pytorch",
+  "name": "PyTorch",
+  "icon": "simple-icons:pytorch",
+  "url": "https://pytorch.org/"
+}

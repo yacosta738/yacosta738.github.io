@@ -1,6 +1,6 @@
 {
-    "id": "go",
-    "name": "Go",
-    "icon": "mdi:language-go",
-    "url": "https://golang.org/"
-  }
+  "id": "go",
+  "name": "Go",
+  "icon": "mdi:language-go",
+  "url": "https://golang.org/"
+}

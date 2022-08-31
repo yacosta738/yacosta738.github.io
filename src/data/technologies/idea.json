@@ -1,6 +1,6 @@
 {
-    "id": "idea",
-    "name": "IntelliJ Idea",
-    "icon": "logos:intellij-idea",
-    "url": "https://www.jetbrains.com/idea/"
-  }
+  "id": "idea",
+  "name": "IntelliJ Idea",
+  "icon": "logos:intellij-idea",
+  "url": "https://www.jetbrains.com/idea/"
+}
