@@ -15,6 +15,7 @@
       "@components:*": ["components/*"],
       "@util:*": ["util/*"],
       "@models:*": ["models/*"],
+      "@/*": ["src/*"],
       "atoms:*": ["components/atoms/*.astro"],
       "molecules:*": ["components/molecules/*.astro"],
       "organisms:*": ["components/organisms/*.astro"],

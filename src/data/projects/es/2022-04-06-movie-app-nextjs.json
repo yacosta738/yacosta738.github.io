@@ -1,18 +1,14 @@
 {
-"title": "Movie App Nextjs",
-"lang": "es",
-"cover": "/uploads/movie-app-reactjs.png",
-"date": "2022-04-06T22:07:47.151Z",
-"repository": "https://github.com/yacosta738/movie-app-nextjs",
-"url": "https://movie-app-nextjs-nine.vercel.app/",
-"company": "Personal",
-"tech":
-[
-  "typescript",
-  "react"
-],
-"showInProjects": true,
-"featured": false,
-"published": true,
-"content":"MAN es una aplicación de búsqueda de películas que ayuda a mostrar y clasificar todas las películas disponibles en la API de TMDB. Esta aplicación está construida con ReactJS, Tailwincss y Typescript. Además, utiliza Vercel para implementar."
+  "title": "Aplicación de Películas (Netxjs)",
+  "lang": "es",
+  "cover": "/uploads/movie-app-reactjs.png",
+  "date": "2022-04-06T22:07:47.151Z",
+  "repository": "https://github.com/yacosta738/movie-app-nextjs",
+  "url": "https://movie-app-nextjs-nine.vercel.app/",
+  "company": "Personal",
+  "tech": ["typescript", "react"],
+  "showInProjects": true,
+  "featured": false,
+  "published": true,
+  "content": "MAN es una aplicación de búsqueda de películas que ayuda a mostrar y clasificar todas las películas disponibles en la API de TMDB. Esta aplicación está construida con ReactJS, Tailwincss y Typescript. Además, utiliza Vercel para implementar."
 }

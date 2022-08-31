@@ -10,6 +10,9 @@ module.exports = {
     require("@tailwindcss/aspect-ratio"),
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       spacing: {
         80: "20rem",
