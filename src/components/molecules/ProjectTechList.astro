@@ -35,19 +35,16 @@ const { position, showIcon = true, project } = Astro.props;
                             : "mr-3"
                     }
                 >
-                   {
-                    tech?.url != null? (
-                    <a
-                        class="flex"
-                        href={tech?.url}
-                        target="_blank"
-                    >
-                        {showIcon && tech?.icon && <Icon name={tech?.icon} class="h-4" />}
+                    {tech?.url != null ? (
+                        <a class="flex" href={tech?.url} target="_blank">
+                            {showIcon && tech?.icon && (
+                                <Icon name={tech?.icon} class="h-4" />
+                            )}
+                            <span class="mx-1">{tech?.name}</span>
+                        </a>
+                    ) : (
                         <span class="mx-1">{tech?.name}</span>
-                    </a>
-                    ) 
-                    : <span class="mx-1">{tech?.name}</span>
-                   }
+                    )}
                 </li>
             ))
     }
