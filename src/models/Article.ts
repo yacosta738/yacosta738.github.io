@@ -14,7 +14,6 @@ export interface Article {
 }
 
 export const jsonToArticle = (json: any): Article => {
-	console.log(json.frontmatter.minutesRead)
 	return {
 		url: json.url,
 		title: json.frontmatter.title,

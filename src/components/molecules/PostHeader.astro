@@ -28,15 +28,12 @@ const formatDate = (date: Date | string) => {
     </li>}
     {article.url && <li class="my-2 whitespace-nowrap mx-1">
       <a href={localizePath(article.url)} class="flex text-green-500">
-        <svg fill="none" viewBox="0 0 24 24" class="w-6 h-6" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-        </svg>
+        <Icon name="la:comments" class="h-4 mr-1" />
         300
       </a>
     </li>}
     {article.author && <li class="my-2 whitespace-nowrap mx-1">
-      <span class="mr-3" v-text="$t('author')">Author:</span>
+      <span class="mr-1">{t('author')}</span>
       <a href={localizePath(urlize(article.author))} class="inline-link">{ article.author }</a>
     </li>}
   </ul>
