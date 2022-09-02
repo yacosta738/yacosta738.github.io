@@ -1,5 +1,5 @@
 ---
-import i18next from "i18next";
+import i18next, { t } from "i18next";
 import HeadSEO from "organisms:HeadSEO";
 import { HeadHrefLangs } from "astro-i18next/components";
 import AppFooter from "molecules:AppFooter";
@@ -9,13 +9,21 @@ import AdsBanner from "atoms:AdsBanner";
 import LanguageSelector from "atoms:LanguageSelector";
 import Navbar from "@components:molecules/Navbar.vue";
 import "../../styles/global.css";
+import { domain } from "@store:constants";
+
+let { title, description, image, ogImageAlt } = Astro.props;
+
+title = title ||  t("seo.title");
+description = description || t("seo.description");
+image = image ? `${domain}${image}`: `${domain}/assets/images/me.png`;
+ogImageAlt = ogImageAlt || t("seo.ogImageAlt");
 ---
 
 <html lang={i18next.language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <HeadSEO />
+    <HeadSEO title={title} description={description} image={image} ogImageAlt={ogImageAlt}/>
     <HeadHrefLangs />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />

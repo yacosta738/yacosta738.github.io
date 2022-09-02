@@ -9,7 +9,7 @@ import { urlize } from "@util:utilities";
 const projectData = await Astro.glob<ProjectJson>(
     "../../data/projects/**/*.json"
 );
-const techData = await Astro.glob<Tech[]>("../../data/technologies/**/*.json");
+const techData = await Astro.glob<Tech>("../../data/technologies/**/*.json");
 const tech: { [key: string]: Tech } = {};
 techData.forEach((t) => (tech[t.id] = t));
 

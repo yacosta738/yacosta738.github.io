@@ -1,0 +1,64 @@
+---
+import i18next, { t } from 'i18next'
+import BlogTemplate from 'templates:BlogTemplate'
+import { localizePath } from 'astro-i18next'
+import { Icon } from 'astro-icon'
+
+import { domain } from '@store:constants'
+export interface Props {
+	title: string
+	description: string
+	image: string
+	ogImageAlt: string
+	categories: string[]
+	tags: string[]
+}
+
+let { title, description, image, ogImageAlt, categories, tags } =
+	Astro.props.frontmatter || Astro.props
+
+title = title || t('seo.title')
+description = description || t('seo.description')
+image = image ? `${domain}${image}` : `${domain}/assets/images/me.png`
+ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
+categories = categories || Array<string>()
+tags = tags || Array<string>()
+---
+
+<BlogTemplate title={title} description={description} image={image} ogImageAlt={ogImageAlt}>
+	<article class='container-inner mx-auto'>
+		<slot />
+		<div class='mb-8 my-8 flex items-start justify-items-start'>
+			<a href={localizePath('/blog')} class='font-bold uppercase'>
+				<div class='flex items-start justify-center'>
+					<Icon name='ic:round-arrow-back' class='h-7 mr-1' />
+					<span>{t('back-to-block')}</span>
+				</div>
+			</a>
+		</div>
+		<div class='flex flex-col md:flex-row'>
+			<!--category-->
+			<div class='flex items-center justify-center mb-8 text-sm mx-1'>
+				<Icon name='ic:outline-category' class='h-5 mr-2' />
+				{
+					categories.map((category) => (
+						<a href={localizePath(category)} class='inline-link mx-1'>
+							{category}
+						</a>
+					))
+				}
+			</div>
+			<!-- tags -->
+			<div class='flex items-center justify-center mb-8 text-sm mx-1'>
+				<Icon name='clarity:tags-solid-alerted' class='h-5 mr-2' />
+				{
+					tags.map((tag) => (
+						<a href={localizePath(tag)} class='inline-link mx-1'>
+							{tag}
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</article>
+</BlogTemplate>

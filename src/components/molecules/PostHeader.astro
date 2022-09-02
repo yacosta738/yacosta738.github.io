@@ -1,0 +1,42 @@
+---
+import { t} from 'i18next'
+import { localizePath } from "astro-i18next";
+import { Article } from '@models:Article';
+import { urlize } from '@util:utilities';
+import { Icon } from 'astro-icon'
+
+export interface Props {
+    article: Article;
+}
+const {article} = Astro.props;
+
+const formatDate = (date: Date | string) => {
+    if (typeof date === 'string') {
+        date = new Date(date);
+    }
+    return date.toLocaleDateString();
+}
+---
+
+<ul class="flex flex-col md:flex-row items-center relative list-none p-0 mb-4 text-light-slate font-mono text-sm">
+    {article.date && <li class="my-2 flex items-center whitespace-nowrap mx-1">
+      <Icon name="mdi:calendar-month-outline" class="h-4" />
+      <span class="mx-2">{ formatDate(article.date) }</span>
+    </li>}
+    {article.timeToRead && <li class="my-2 whitespace-nowrap mx-1">
+      <span>{t('time-to-read', { timeToRead: article.timeToRead })}</span>
+    </li>}
+    {article.url && <li class="my-2 whitespace-nowrap mx-1">
+      <a href={localizePath(article.url)} class="flex text-green-500">
+        <svg fill="none" viewBox="0 0 24 24" class="w-6 h-6" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+        </svg>
+        300
+      </a>
+    </li>}
+    {article.author && <li class="my-2 whitespace-nowrap mx-1">
+      <span class="mr-3" v-text="$t('author')">Author:</span>
+      <a href={localizePath(urlize(article.author))} class="inline-link">{ article.author }</a>
+    </li>}
+  </ul>

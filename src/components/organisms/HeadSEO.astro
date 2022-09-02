@@ -1,30 +1,41 @@
 ---
+import { domain } from "@store:constants";
 import { SEO } from "astro-seo";
 import { t } from "i18next";
-
+export interface Props {
+  title: string;
+   description: string;
+    image: string;
+     ogImageAlt :string;
+}
 const { href: canonicalUrl } = Astro.url;
+let { title, description, image, ogImageAlt } = Astro.props;
+
+title = title ||  t("seo.title");
+description = description || t("seo.description");
+image = image ? `${domain}${image}`: `${domain}/assets/images/me.png`;
+ogImageAlt = ogImageAlt || t("seo.ogImageAlt");
 ---
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <SEO
-  title={t("seo.title")}
-  description={t("seo.description")}
+  title={title}
+  description={description}
   canonical={canonicalUrl}
   openGraph={{
     basic: {
       title: t("seo.ogTitle"),
       description: t("seo.description"),
       type: "website",
-      image:
-        "https://astro-i18next.yassinedoghri.com/assets/images/open-graph.jpg",
+      image: {image},
       url: canonicalUrl,
     },
     image: {
-      alt: t("seo.ogImageAlt"),
+      alt: {ogImageAlt},
       width: "1200",
       height: "630",
       type: "image/jpeg",
     },
   }}
-  twitter={{ card: "summary_large_image", creator: "@yassinedoghri" }}
+  twitter={{ card: "summary_large_image", creator: "@yacosta738" }}
 />

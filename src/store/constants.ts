@@ -5,6 +5,7 @@ export interface SocialMedia {
 }
 
 export const email = 'yunielacosta738@gmail.com'
+export const domain = 'https://yunielacosta.com'
 
 export const socialMedia: SocialMedia[] = [
 	{

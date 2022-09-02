@@ -25,10 +25,10 @@
       "parserOptions": {
         "parser": "@typescript-eslint/parser",
         "extraFileExtensions": [".astro"]
-      },
-      "rules": {
-        "astro/no-set-html-directive": "error" // prevent XSS attack
       }
+      // "rules": {
+      //   "astro/no-set-html-directive": "error" // prevent XSS attack
+      // }
     }
   ]
 }
