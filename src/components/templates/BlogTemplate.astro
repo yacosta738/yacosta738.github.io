@@ -10,12 +10,12 @@ import { domain } from '@store:constants'
 
 export interface Props {
 	title: string
-	description: string
-	image: string
-	ogImageAlt: string
+	description?: string
+	image?: string
+	ogImageAlt?: string
 }
 
-let { title, description, image, ogImageAlt } = Astro.props.frontmatter || Astro.props
+let { title, description, image, ogImageAlt } = Astro.props
 
 title = title || t('seo.title')
 description = description || t('seo.description')

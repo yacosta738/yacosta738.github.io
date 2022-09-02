@@ -3,7 +3,8 @@
     "title": "Yuniel Acosta | Software Engineer",
     "description": "Programador, escritor, entusiasta de la ciencia y la tecnología, especializado en construir aplicaciones web. Interesado en  Vue, Typescript, Node.js, Java/Kotlin y Spring Boot.",
     "ogTitle": "Yuniel Acosta",
-    "ogImageAlt": "Yuniel Acosta | Ingeniero de Software - Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño dirigido por dominios y microservicios. Soy una persona versátil con amplias habilidades, con muchas ganas de aprender y lista para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país."
+    "ogImageAlt": "Yuniel Acosta | Ingeniero de Software - Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño dirigido por dominios y microservicios. Soy una persona versátil con amplias habilidades, con muchas ganas de aprender y lista para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.",
+    "blog-description": "Blog sobre programación y tecnologías web, escalables, de alta disponibilidad y tips para ser mas productivos."
   },
   "navigation": {
     "home": "Home",
