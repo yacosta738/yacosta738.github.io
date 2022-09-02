@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config'
+import { remarkReadingTime } from './remark-reading-time.mjs'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import astroI18next from 'astro-i18next'
@@ -27,5 +28,8 @@ export default defineConfig({
 		ssr: {
 			external: ['svgo']
 		}
+	},
+	markdown: {
+		remarkPlugins: [remarkReadingTime]
 	}
 })

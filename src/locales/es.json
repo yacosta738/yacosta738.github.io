@@ -58,7 +58,7 @@
   "tags": "Etiquetas",
   "categories": "Categorías",
   "recent-post": "Artículos recientes",
-  "time-to-read": "Tiempo de lectura . {{timeToRead, number(minimumFractionDigits: 2)}} min",
+  "time-to-read": "Tiempo de lectura . {{timeToRead, number}} min",
   "author": "Autor:",
   "read": "Leer →",
   "prev": "← Anterior",

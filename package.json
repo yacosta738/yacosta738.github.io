@@ -36,15 +36,19 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.2.5",
     "eslint-plugin-promise": "6.0.1",
-    "prettier": "2.7.1",
-    "prettier-plugin-astro": "0.5.3",
     "i18next-fs-backend": "^1.1.5",
     "locale-emoji": "^0.3.0",
     "marked": "^4.0.19",
     "nanostores": "^0.6.0",
     "postcss-nesting": "^10.1.10",
     "postcss-preset-env": "^7.8.0",
+    "prettier": "2.7.1",
+    "prettier-plugin-astro": "0.5.3",
     "sass": "^1.54.5",
     "vue": "^3.2.37"
+  },
+  "dependencies": {
+    "mdast-util-to-string": "^3.1.0",
+    "reading-time": "^1.5.0"
   }
 }

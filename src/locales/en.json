@@ -58,7 +58,7 @@
   "tags": "Tags",
   "categories": "Categories",
   "recent-post": "Recent Post",
-  "time-to-read": "Reading time . {{timeToRead, number(minimumFractionDigits: 2)}} min",
+  "time-to-read": "Reading time . {{timeToRead, number}} min",
   "author": "Author:",
   "read": "Read →",
   "prev": "← Prev",
