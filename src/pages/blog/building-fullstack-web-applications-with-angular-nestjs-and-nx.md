@@ -24,7 +24,7 @@ draft: false
 
 ## Why this post?
 
-[Angular](https://angular.io/) is one of the most highly recommended frontend frameworks in the software industry. However, if you want to create a full-stack web-application, it only covers half of the requirements. For a while now, I've been pairing it with [NestJS](https://nestjs.com/) and it's been working really well in multiple projects.
+Angular is one of the most highly recommended frontend frameworks in the software industry. However, if you want to create a full-stack web-application, it only covers half of the requirements. For a while now, I've been pairing it with [NestJS](https://nestjs.com/) and it's been working really well in multiple projects.
 
 I keep recommending this combination to friends and coworkers, so I wanted to finally write down the setup I use as a reference/starting point. Maybe this post inspires you to also give it a try. If so, please let me know how it worked for you.
 

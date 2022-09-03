@@ -23,7 +23,7 @@ draft: false
 
 ## ¿Por qué esta publicación?
 
-[Angular](https://angular.io/) es uno de los frameworks frontend más recomendados en la industria del software. Sin embargo, si desea crear una aplicación web fullStack, solo cubre la mitad de los requisitos. Por un tiempo, lo he estado emparejando con [NestJS](https://nestjs.com/) y ha funcionado muy bien en múltiples proyectos.
+Angular es uno de los frameworks frontend más recomendados en la industria del software. Sin embargo, si desea crear una aplicación web fullStack, solo cubre la mitad de los requisitos. Por un tiempo, lo he estado emparejando con [NestJS](https://nestjs.com/) y ha funcionado muy bien en múltiples proyectos.
 
 Sigo recomendando esta combinación a amigos y compañeros de trabajo, así que finalmente quería escribir la configuración que uso como referencia / punto de partida. Quizás esta publicación te inspire a que también la pruebes. Si es así, hágamelo saber cómo le funcionó.
 
