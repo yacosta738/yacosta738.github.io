@@ -1,8 +1,18 @@
 ---
 const { page } = Astro.props
+console.log(page)
+
+/*
+start: 0,
+  end: 4,
+  size: 5,
+  total: 7,
+  currentPage: 1,
+  lastPage: 2,
+*/
 ---
 
-<section class="flex space-x-8 justify-center text-xl pt-16 font-bold">
+<section class="flex items-center justify-between text-xl">
   {page.url.prev &&
   <a
     href={page.url.prev}
@@ -11,7 +21,9 @@ const { page } = Astro.props
     <span class="squiggle">&larr;</span> Prev
   </a>
   }
-
+  <div class="text-base">
+    {page.currentPage} of {page.lastPage}
+  </div>
   {page.url.next &&
   <a
     href={page.url.next}
