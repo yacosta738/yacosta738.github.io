@@ -235,49 +235,9 @@ a:hover,
 a:focus {
 	@apply text-green-500;
 }
-
-a.inline-link {
-	display: inline-block;
-	text-decoration: none;
-	text-decoration-skip-ink: auto;
-	position: relative;
-	transition: var(--transition);
-	cursor: pointer;
-	@apply text-green-500;
+a.inline-link{
+	@apply text-green-500 hover:underline hover:underline-offset-2 hover:font-bold hover:text-green-600;
 }
-
-a.inline-link:hover,
-a.inline-link:focus,
-a.inline-link:active {
-	@apply text-green-600;
-	outline: 0;
-}
-
-a.inline-link:hover:after,
-a.inline-link:focus:after,
-a.inline-link:active:after {
-	width: 100%;
-}
-
-a.inline-link:hover > *,
-a.inline-link:focus > *,
-a.inline-link:active > * {
-	@apply text-green-600 !important;
-	transition: var(--transition);
-}
-
-a.inline-link:after {
-	content: '';
-	display: block;
-	width: 0;
-	height: 1px;
-	position: relative;
-	bottom: 0.37em;
-	@apply bg-green-500;
-	transition: var(--transition);
-	opacity: 0.5;
-}
-
 main {
 	counter-reset: section;
 }
