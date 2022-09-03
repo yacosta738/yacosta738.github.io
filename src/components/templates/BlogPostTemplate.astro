@@ -11,6 +11,7 @@ export interface Props {
 	frontmatter: {
 		title: string
 		description: string
+		lang: string
 		date: string
 		cover: string
 		timeToRead: number
@@ -28,9 +29,10 @@ const image = frontmatter.cover ? frontmatter.cover : `${domain}/assets/images/m
 const ogImageAlt = description || t('seo.ogImageAlt')
 const categories = frontmatter.categories || Array<string>()
 const tags = frontmatter.tags || Array<string>()
+const lang = frontmatter.lang || 'en'
 ---
 
-<BlogTemplate title={title} description={description} image={image} ogImageAlt={ogImageAlt}>
+<BlogTemplate title={title} description={description} image={image} ogImageAlt={ogImageAlt} lang={lang}>
 	<article class='container-inner mx-auto'>
 		<h1 class='text-3xl md:text-4xl font-bold leading-tight tracking-wider'>{frontmatter.title}</h1>
 		<PostHeader article={frontmatter} />

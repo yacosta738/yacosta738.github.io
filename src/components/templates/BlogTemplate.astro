@@ -1,5 +1,5 @@
 ---
-import i18next, { t } from 'i18next'
+import i18next, { t, changeLanguage } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
 import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
@@ -9,22 +9,23 @@ import Navbar from '@components:molecules/Navbar.vue'
 import '../../styles/global.css'
 import { domain } from '@store:constants'
 
-const {pathname} = Astro.url
-const isBlogRoot = pathname.endsWith('/blog')
-
 export interface Props {
-	title: string;
-	description?: string;
-	image?: string;
-	ogImageAlt?: string;
+	title: string
+	description?: string
+	image?: string
+	ogImageAlt?: string
+	lang?: string
 }
 
-let { title, description, image, ogImageAlt } = Astro.props
+let { title, description, image, ogImageAlt, lang } = Astro.props
 
 title = title || t('seo.title')
 description = description || t('seo.description')
 image = image ? `${domain}${image}` : `${domain}/assets/images/me.png`
 ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
+lang = lang || i18next.language
+
+changeLanguage(lang)
 ---
 
 <html lang={i18next.language}>
@@ -53,11 +54,11 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 					/>
 				</div>
 			</Navbar>
-			<div class='flex  flex-col md:flex-row justify-around mt-10 md:mt-24 lg:mt-15'>
-				<main class='container mx-auto flex-grow'>
+			<div class='flex flex-col md:flex-row justify-around mt-10 md:mt-24 lg:mt-15'>
+				<main class='container mx-auto basis-2/3'>
 					<slot />
 				</main>
-				<aside class='w-1/2 md:mr-80'>
+				<aside class='basis-1/3 w-1/2 md:mr-32'>
 					<slot name='widget'>
 						<WidgetWrapper />
 					</slot>

@@ -3,6 +3,8 @@ import { Article } from '@models:Article'
 import Icon from 'astro-icon'
 import WidgetCard from 'molecules:WidgetCard'
 
+const { pathname } = Astro.url
+
 export interface Props {
 	recentPosts: Article[]
 }
@@ -12,7 +14,9 @@ const { recentPosts } = Astro.props
 <WidgetCard v-if='articlesStore.getCurrentArticle' title='Recent Post'>
 	<ul class='relative my-4 flex list-none flex-col p-0'>
 		{
-			recentPosts.map((article) => (
+			recentPosts
+			.filter((article) => article.url !== pathname)
+			.map((article) => (
 				<li class='my-2 flex flex-row font-mono text-base text-light-slate'>
 					<div class='flex flex-row items-center justify-center'>
 						<a href={article.url} class='inline-link flex items-center justify-center'>
