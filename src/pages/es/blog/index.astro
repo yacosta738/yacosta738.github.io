@@ -16,13 +16,13 @@ const allPosts: Article[] = postsData
 changeLanguage("es");
 ---
 
-<BlogTemplate title={t('blog')}>
+<BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
 	<div class='container-inner mx-auto py-16 pl-10'>
     {
         allPosts.map((post) => (
-            <div class='mb-20 border-b border-gray-400'>
+            <article class='mb-20 border-b border-gray-400'>
                 <ArticleSummary article={post} />
-            </div>
+            </article>
         ))
     }
     {

@@ -4,17 +4,13 @@ import HeadSEO from 'organisms:HeadSEO'
 import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import LanguageSelector from 'atoms:LanguageSelector'
-import WidgetRecentPost from 'molecules:WidgetRecentPost'
-import WidgetCategory from 'molecules:WidgetCategory'
-import WidgetTagCloud from 'molecules:WidgetTagCloud'
+import WidgetWrapper from 'molecules:WidgetWrapper'
 import Navbar from '@components:molecules/Navbar.vue'
 import '../../styles/global.css'
 import { domain } from '@store:constants'
 
 const {pathname} = Astro.url
 const isBlogRoot = pathname.endsWith('/blog')
-console.log('isBlogRoot', isBlogRoot);
-console.log('pathname', pathname);
 
 export interface Props {
 	title: string;
@@ -62,13 +58,9 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 					<slot />
 				</main>
 				<aside class='lg:mt-15 mt-2 w-auto md:mr-80 md:mt-20 md:w-80'>
-					<div class='my-12 md:my-16'>
-						<slot name='widget'>
-							{!isBlogRoot && <WidgetRecentPost />}
-							<WidgetCategory />
-							<WidgetTagCloud />
-						</slot>
-					</div>
+					<slot name='widget'>
+						<WidgetWrapper />
+					</slot>
 				</aside>
 			</div>
 		</div>

@@ -1,0 +1,56 @@
+---
+import i18next, { t, changeLanguage } from 'i18next'
+import WidgetRecentPost from 'molecules:WidgetRecentPost'
+import WidgetCategory from 'molecules:WidgetCategory'
+import WidgetTagCloud from 'molecules:WidgetTagCloud'
+import { Article, jsonToArticle } from '@models:Article'
+import { MarkdownInstance } from 'astro'
+
+const { pathname } = Astro.url
+const isBlogRoot = pathname.endsWith('/blog')
+
+const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
+	en: Astro.glob('../../pages/blog/**/*.md'),
+	es: Astro.glob('../../pages/es/blog/**/*.md')
+}
+const postsData = i18next.language in articlesFiles ? await articlesFiles[i18next.language] : []
+
+const allPosts: Article[] = postsData
+	.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+	.map((post) => jsonToArticle(post))
+	.sort((a, b) => {
+		let aDate = new Date(a.date)
+		let bDate = new Date(b.date)
+		return bDate.getTime() - aDate.getTime()
+	})
+
+const tags: { [key: string]: number } = allPosts.reduce((acc, post) => {
+	post.tags.forEach((tag) => {
+		if (tag in acc) {
+			acc[tag] += 1
+		} else {
+			acc[tag] = 1
+		}
+	})
+	return acc
+}, {})
+
+const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
+	post.categories.forEach((category) => {
+		if (category in acc) {
+			acc[category] += 1
+		} else {
+			acc[category] = 1
+		}
+	})
+	return acc
+}, {})
+---
+
+<div class='my-12 md:my-16'>
+	<slot name='widget'>
+		{!isBlogRoot && <WidgetRecentPost />}
+		<WidgetTagCloud tags={tags} />
+		<WidgetCategory categories={categories} />
+	</slot>
+</div>

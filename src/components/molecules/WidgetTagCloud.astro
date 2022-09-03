@@ -1,7 +1,63 @@
 ---
+import WidgetCard from 'molecules:WidgetCard'
 
+export interface Props {
+	tags: { [key: string]: number }
+}
+const { tags } = Astro.props
+
+const allTags = Object.keys(tags)
+
+const textSize = (tag): string => {
+	const totalCountInPost: number = tags[tag]
+	const totalCount: number = allTags.reduce((acc, cur) => acc + tags[cur], 0)
+	const percent = (totalCountInPost / totalCount) * 100
+	if (percent <= 12.5) return 'text-base'
+	else if (percent > 12.5 && percent <= 25) return 'text-lg'
+	else if (percent > 25 && percent <= 37.5) return 'text-xl'
+	else if (percent > 37.5 && percent <= 50) return 'text-2xl'
+	else if (percent > 50 && percent <= 62.5) return 'text-3xl'
+	else if (percent > 62.5 && percent <= 75) return 'text-4xl'
+	else if (percent > 75 && percent <= 87.5) return 'text-5xl'
+	else return 'text-6xl'
+}
 ---
 
-<div>
-    <p>WidgetTagCloud</p>
-</div>
+<WidgetCard v-if='totalCount > 0' title='Tags'>
+	<div class='tag-cloud-tags'>
+		{
+			allTags.map((tag) => (
+				<a href='/' aria-label={tag} class={`inline-link ${textSize(tag)}`}>
+					{tag}
+				</a>
+			))
+		}
+	</div>
+</WidgetCard>
+
+<style scoped lang='scss'>
+	.tag-cloud-tags {
+		display: block;
+		margin: 0;
+		list-style-type: none;
+		a {
+			display: inline-block;
+			padding: 0.3rem;
+			line-height: 1em;
+			word-break: break-word;
+			white-space: normal;
+		}
+		a:nth-child(5n + 1) {
+			transform: rotate(-2deg);
+		}
+		a:nth-child(3n + 3) {
+			transform: rotate(1deg);
+		}
+		a:nth-child(3n + 4) {
+			transform: rotate(-3deg);
+		}
+		a:nth-child(5n + 5) {
+			transform: rotate(3deg);
+		}
+	}
+</style>
