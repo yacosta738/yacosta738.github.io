@@ -8,7 +8,7 @@ import vue from '@astrojs/vue'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://astro-i18next.yassinedoghri.com/',
+	site: 'https://yunielacosta.com/',
 	integrations: [
 		sitemap({
 			i18n: {
