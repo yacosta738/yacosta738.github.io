@@ -1,7 +1,27 @@
 ---
+import { Article } from '@models:Article'
+import Icon from 'astro-icon'
+import WidgetCard from 'molecules:WidgetCard'
 
+export interface Props {
+	recentPosts: Article[]
+}
+const { recentPosts } = Astro.props
 ---
 
-<div>
-    <p>WidgetRecentPost</p>
-</div>
+<WidgetCard v-if='articlesStore.getCurrentArticle' title='Recent Post'>
+	<ul class='relative my-4 flex list-none flex-col p-0'>
+		{
+			recentPosts.map((article) => (
+				<li class='my-2 flex flex-row font-mono text-base text-light-slate'>
+					<div class='flex flex-row items-center justify-center'>
+						<a href={article.url} class='inline-link flex items-center justify-center'>
+							<Icon name='zondicons:cheveron-right' class='h-6' />
+							<p class='pl-2'>{article.title}</p>
+						</a>
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</WidgetCard>

@@ -1,33 +1,42 @@
 ---
 import i18next, { t } from 'i18next'
 import BlogTemplate from 'templates:BlogTemplate'
+import PostHeader from 'molecules:PostHeader'
 import { localizePath } from 'astro-i18next'
 import { Icon } from 'astro-icon'
+import "../../styles/github-markdown.css";
 
 import { domain } from '@store:constants'
 export interface Props {
-	title: string
-	description: string
-	image: string
-	ogImageAlt: string
-	categories: string[]
-	tags: string[]
+	frontmatter: {
+		title: string
+		description: string
+		date: string
+		cover: string
+		timeToRead: number
+		url: string
+		author: string
+		categories: string[]
+		tags: string[]
+	}
 }
 
-let { title, description, image, ogImageAlt, categories, tags } =
-	Astro.props.frontmatter || Astro.props
-
-title = title || t('seo.title')
-description = description || t('seo.description')
-image = image ? `${domain}${image}` : `${domain}/assets/images/me.png`
-ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
-categories = categories || Array<string>()
-tags = tags || Array<string>()
+let { frontmatter } = Astro.props
+const title = frontmatter.title || t('seo.title')
+const description = frontmatter.description || t('seo.description')
+const image = frontmatter.cover ? frontmatter.cover : `${domain}/assets/images/me.png`
+const ogImageAlt = description || t('seo.ogImageAlt')
+const categories = frontmatter.categories || Array<string>()
+const tags = frontmatter.tags || Array<string>()
 ---
 
 <BlogTemplate title={title} description={description} image={image} ogImageAlt={ogImageAlt}>
 	<article class='container-inner mx-auto'>
+		<h1 class='text-3xl md:text-4xl font-bold leading-tight tracking-wider'>{frontmatter.title}</h1>
+		<PostHeader article={frontmatter} />
+	<div class="markdown-body">
 		<slot />
+	</div>	
 		<div class='mb-8 my-8 flex items-start justify-items-start'>
 			<a href={localizePath('/blog')} class='font-bold uppercase'>
 				<div class='flex items-start justify-center'>

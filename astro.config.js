@@ -30,6 +30,7 @@ export default defineConfig({
 		}
 	},
 	markdown: {
+		extendDefaultPlugins: true,
 		remarkPlugins: [remarkReadingTime]
 	}
 })

@@ -235,7 +235,7 @@ a:hover,
 a:focus {
 	@apply text-green-500;
 }
-a.inline-link{
+a.inline-link {
 	@apply text-green-500 hover:underline hover:underline-offset-2 hover:font-bold hover:text-green-600;
 }
 main {

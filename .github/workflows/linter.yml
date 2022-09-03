@@ -27,4 +27,4 @@ jobs:
       #   run: npm run lint
 
       - name: format with Prettier
-        run: npm run format
+        run: npm run i18n:generate && npm run format

@@ -53,11 +53,11 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 					/>
 				</div>
 			</Navbar>
-			<div class='flex  flex-col md:flex-row justify-around'>
-				<main class='container mx-auto flex-grow mt-8 md:mt-20 lg:mt-15'>
+			<div class='flex  flex-col md:flex-row justify-around mt-10 md:mt-24 lg:mt-15'>
+				<main class='container mx-auto flex-grow'>
 					<slot />
 				</main>
-				<aside class='lg:mt-15 mt-2 w-auto md:mr-80 md:mt-20 md:w-80'>
+				<aside class='w-1/2 md:mr-80'>
 					<slot name='widget'>
 						<WidgetWrapper />
 					</slot>
