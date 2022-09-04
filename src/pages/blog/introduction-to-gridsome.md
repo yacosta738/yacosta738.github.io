@@ -39,8 +39,8 @@ Gridsome is a Vue.js-powered, modern site generator for building the fastest pos
 </template>
 ```
 
-
 ### Prerequisites
+
 You should have basic knowledge about HTML, CSS, [Vue.js](https://vuejs.org) and how to use the [Terminal](https://www.linode.com/docs/tools-reference/tools/using-the-terminal/). Knowing how [Vue Single File components](https://vuejs.org/v2/guide/single-file-components.html) & [GraphQL](https://www.graphql.com/) works is a plus, but not required. Gridsome is a great way to learn both.
 
 Gridsome requires **Node.js** and recommends **Yarn**. [How to setup](https://gridsome.org/docs/#prerequisites)
@@ -66,7 +66,6 @@ Using npm:
 
 1. Create `.vue` components in the `/pages` directory to create page routes.
 2. Use `gridsome build` to generate static files in a `/dist` folder
-
 
 - [How it works](https://gridsome.org/docs/#how-it-works)
 - [How Pages work](https://gridsome.org/docs/pages/)

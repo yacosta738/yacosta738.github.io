@@ -38,9 +38,9 @@ Gridsome es un generador de sitios web estáticos con tecnología Vue.js para cr
 </template>
 ```
 
-
 ### Prerrequisitos
-Debe tener conocimientos básicos sobre HTML, CSS, [Vue.js](https://vuejs.org) y cómo utilizar la  [Terminal](https://www.linode.com/docs/tools-reference/tools/using-the-terminal/). Saber cómo funcionan los [componentes de Vue Single File](https://vuejs.org/v2/guide/single-file-components.html) y [GraphQL](https://www.graphql.com/) es una ventaja, pero no es obligatorio. Gridsome es una excelente manera de aprender ambos.
+
+Debe tener conocimientos básicos sobre HTML, CSS, [Vue.js](https://vuejs.org) y cómo utilizar la [Terminal](https://www.linode.com/docs/tools-reference/tools/using-the-terminal/). Saber cómo funcionan los [componentes de Vue Single File](https://vuejs.org/v2/guide/single-file-components.html) y [GraphQL](https://www.graphql.com/) es una ventaja, pero no es obligatorio. Gridsome es una excelente manera de aprender ambos.
 
 Gridsome requiere **Node.js** y recomienda **Yarn**. [Cómo configurar](https://gridsome.org/docs/#prerequisites)
 
@@ -65,7 +65,6 @@ Usando npm:
 
 1. Cree componentes `.vue` en el directorio `/pages` para crear rutas de página.
 2. Utilice `gridsome build` para generar archivos estáticos en una carpeta `/dist`
-
 
 - [Cómo funciona](https://gridsome.org/docs/#how-it-works)
 - [Cómo funcionan las páginas](https://gridsome.org/docs/pages/)

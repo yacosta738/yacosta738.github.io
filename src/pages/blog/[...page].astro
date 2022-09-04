@@ -4,20 +4,20 @@ import BlogTemplate from "templates:BlogTemplate";
 import { Article, jsonToArticle } from "@models:Article";
 import ArticleSummary from "molecules:ArticleSummary";
 import Paginator from "molecules:Paginator";
+
+changeLanguage("en");
+
 export async function getStaticPaths({ paginate }) {
     const allPosts = await Astro.glob("./**/*.md");
     const sortedPosts = allPosts
         .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
         .map((post) => jsonToArticle(post))
         .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-    console.log(sortedPosts);
     return paginate(sortedPosts, {
         pageSize: 5
     });
 }
 const { page } = Astro.props;
-
-changeLanguage("en");
 ---
 
 <BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
