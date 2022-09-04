@@ -70,19 +70,14 @@ const closeMenu = (): void => {
 
 <template>
 	<ul class="menu-list" :class="$generalStore.drawer ? 'block' : 'hidden'" data-cypress="menu">
-		<li class="mb-6 lg:mb-0">
+		<!-- <li class="mb-6 lg:mb-0">
 			<div
 				v-if="!$generalStore.showSide"
 				class="cursor-pointer text-lightest-slate hover:text-gray-600"
 			>
-				<!-- <SvgIcon
-          name="search"
-          class="mt-3 cursor-pointer"
-          @click="openSearchBox()"
-        /> -->
 				Search
 			</div>
-		</li>
+		</li> -->
 		<li>
 			<ol
 				class="order-list mt-8 items-center space-y-6 lg:mt-0 lg:flex lg:w-auto lg:flex-initial lg:space-x-8 lg:space-y-0"
