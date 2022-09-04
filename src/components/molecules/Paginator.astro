@@ -1,34 +1,19 @@
 ---
-const { page } = Astro.props
-console.log(page)
+import { t } from 'i18next'
 
-/*
-start: 0,
-  end: 4,
-  size: 5,
-  total: 7,
-  currentPage: 1,
-  lastPage: 2,
-*/
+const { page } = Astro.props
 ---
 
-<section class="flex items-center justify-between text-xl">
-  {page.url.prev &&
-  <a
-    href={page.url.prev}
-    class="mr-8"
-    data-test="paginator-prev">
-    <span class="squiggle">&larr;</span> Prev
-  </a>
-  }
-  <div class="text-base">
-    {page.currentPage} of {page.lastPage}
-  </div>
-  {page.url.next &&
-  <a
-    href={page.url.next}
-    data-test="paginator-next">
-    Next<span class="squiggle">&rarr;</span>
-  </a>
-  }
+<section class='flex items-center justify-between text-xl'>
+	<a href={page.url.prev} class='mr-8' data-test='paginator-prev' class={!page.url.prev ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}>
+		<span class="squiggle">&larr;</span> Prev
+	</a>
+	<div class='text-base'>
+		{page.currentPage}
+		{t('of')}
+		{page.lastPage}
+	</div>
+	<a href={page.url.next} data-test='paginator-next' class={!page.url.next ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}>
+		Next<span class="squiggle">&rarr;</span>
+	</a>
 </section>
