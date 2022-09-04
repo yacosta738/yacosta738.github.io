@@ -1,0 +1,11 @@
+---
+import { t } from "i18next";
+import BaseTemplate from "templates:BaseTemplate";
+---
+<BaseTemplate>
+    <div class="container-inner mx-auto py-16">
+        <h1 class="text-4xl font-bold mb-16">{t('error404')}</h1>
+        <img class="w-1/2" src="/oops.png" alt={t('error404')}/>
+        <p>{t('message404')}</p>
+      </div>
+</BaseTemplate>
