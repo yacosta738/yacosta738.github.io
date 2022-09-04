@@ -1,6 +1,7 @@
 ---
 import WidgetCard from 'molecules:WidgetCard'
 import { t } from 'i18next'
+import { localizePath } from 'astro-i18next'
 
 export interface Props {
 	tags: { [key: string]: number }
@@ -28,8 +29,12 @@ const textSize = (tag): string => {
 	<div class='tag-cloud-tags'>
 		{
 			allTags.map((tag) => (
-				<a href='/' aria-label={tag} class={`inline-link ${textSize(tag)}`}>
-					<span class="capitalize">{tag}</span>
+				<a
+					href={localizePath(`/blog/tag/${tag}`)}
+					aria-label={tag}
+					class={`inline-link ${textSize(tag)}`}
+				>
+					<span class='capitalize'>{tag}</span>
 				</a>
 			))
 		}
