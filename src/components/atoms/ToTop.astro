@@ -1,0 +1,39 @@
+
+<a id="toTop" class='scroll-top' href='#body'>
+	<svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11 20V7.825l-5.6 5.6L4 12l8-8l8 8l-1.4 1.425l-5.6-5.6V20Z"/></svg>
+</a>
+<script is:inline>
+    let showScrollToTop = false;
+	const onScroll = () => {
+		const currentScrollPosition = window.scrollY || document.documentElement.scrollTop;
+		if (currentScrollPosition < 0) return
+
+		showScrollToTop = currentScrollPosition > 30
+	}
+	window.addEventListener('scroll', onScroll)
+
+    const scrollToTopElement = document.getElementById('toTop')
+    const onScrollToTop = () => {
+        if (showScrollToTop) {
+            scrollToTopElement.classList.remove('invisible')
+        } else {
+            scrollToTopElement.classList.add('invisible')
+        }
+    }
+    setInterval(onScrollToTop, 100)
+</script>
+<style>
+	.scroll-top {
+		position: fixed;
+		right: 30px;
+		bottom: 30px;
+		height: 50px;
+		width: 50px;
+		box-shadow: 0 4px 8px #64ffda;
+		border-radius: 50%;
+		line-height: 1;
+		font-size: 13px;
+		transition: background-color 0.2s ease;
+		@apply z-50 flex cursor-pointer flex-col items-center justify-center bg-light-navy text-center text-green-500;
+	}
+</style>

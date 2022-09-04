@@ -8,6 +8,7 @@ import WidgetWrapper from 'molecules:WidgetWrapper'
 import Navbar from '@components:molecules/Navbar.vue'
 import '../../styles/global.css'
 import { domain } from '@store:constants'
+import ToTop from 'atoms:ToTop'
 
 export interface Props {
 	title: string
@@ -28,7 +29,7 @@ lang = lang || i18next.language
 changeLanguage(lang)
 ---
 
-<html lang={i18next.language}>
+<html lang={i18next.language} class="scroll-smooth">
 	<head>
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
@@ -42,7 +43,7 @@ changeLanguage(lang)
 		/>
 	</head>
 
-	<body
+	<body id="body"
 		class='content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen'
 	>
 		<div class='relative flex flex-col min-h-[100vh]'>
@@ -57,6 +58,7 @@ changeLanguage(lang)
 			<div class='flex flex-col md:flex-row justify-around mt-10 md:mt-24 lg:mt-15'>
 				<main class='container mx-auto basis-2/3'>
 					<slot />
+					<ToTop />
 				</main>
 				<aside class='basis-1/3 w-1/2 md:mr-32'>
 					<slot name='widget'>
