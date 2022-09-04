@@ -8,10 +8,10 @@ export interface Props {
 const { tags } = Astro.props
 
 const allTags = Object.keys(tags)
+const totalCount: number = allTags.reduce((acc, cur) => acc + tags[cur], 0)
 
 const textSize = (tag): string => {
 	const totalCountInPost: number = tags[tag]
-	const totalCount: number = allTags.reduce((acc, cur) => acc + tags[cur], 0)
 	const percent = (totalCountInPost / totalCount) * 100
 	if (percent <= 12.5) return 'text-base'
 	else if (percent > 12.5 && percent <= 25) return 'text-lg'
@@ -29,7 +29,7 @@ const textSize = (tag): string => {
 		{
 			allTags.map((tag) => (
 				<a href='/' aria-label={tag} class={`inline-link ${textSize(tag)}`}>
-					{tag}
+					<span class="capitalize">{tag}</span>
 				</a>
 			))
 		}

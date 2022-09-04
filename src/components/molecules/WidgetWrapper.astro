@@ -26,10 +26,11 @@ const allPosts: Article[] = postsData
 
 const tags: { [key: string]: number } = allPosts.reduce((acc, post) => {
 	post.tags.forEach((tag) => {
-		if (tag in acc) {
-			acc[tag] += 1
+		const tagLower = tag.toLowerCase()
+		if (tagLower in acc) {
+			acc[tagLower] += 1
 		} else {
-			acc[tag] = 1
+			acc[tagLower] = 1
 		}
 	})
 	return acc
@@ -37,10 +38,11 @@ const tags: { [key: string]: number } = allPosts.reduce((acc, post) => {
 
 const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 	post.categories.forEach((category) => {
-		if (category in acc) {
-			acc[category] += 1
+		const categoryLower = category.toLowerCase()
+		if (categoryLower in acc) {
+			acc[categoryLower] += 1
 		} else {
-			acc[category] = 1
+			acc[categoryLower] = 1
 		}
 	})
 	return acc
