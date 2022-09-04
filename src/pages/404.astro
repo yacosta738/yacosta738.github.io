@@ -1,13 +1,19 @@
 ---
-import "i18next" from ;
+import Icon from "astro-icon";
+import { t, changeLanguage } from "i18next";
 import BaseTemplate from "templates:BaseTemplate";
 
 changeLanguage("en");
 ---
+
 <BaseTemplate>
-    <div class="container-inner mx-auto py-16">
-        <h1 class="text-4xl font-bold mb-16">{t('error404')}</h1>
-        <img class="w-1/2" src="/oops.png" alt={t('error404')}/>
-        <p>{t('message404')}</p>
-      </div>
+	<div class='container-inner mx-auto py-16'>
+		<h1 class='text-4xl font-bold mb-16'>{t('error404')}</h1>
+		<img class='w-1/2' src='/oops.png' alt={t('error404')} />
+		<p set:html={t('message404')}></p>
+    <a href="/" class='flex justify-center items-center small-button w-24 mt-24 uppercase'>
+     <Icon name='mdi:arrow-left' class='h-6 mr-2' />  
+      {t('home')}
+    </a>
+	</div>
 </BaseTemplate>
