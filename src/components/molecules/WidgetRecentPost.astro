@@ -5,6 +5,7 @@ import Icon from 'astro-icon'
 import WidgetCard from 'molecules:WidgetCard'
 
 const { pathname } = Astro.url
+const isBlogRoot = pathname.endsWith('/blog')
 
 export interface Props {
 	recentPosts: Article[]
@@ -12,7 +13,7 @@ export interface Props {
 const { recentPosts } = Astro.props
 ---
 
-<WidgetCard title={t('recent-post')}>
+{!isBlogRoot && <WidgetCard title={t('recent-post')}>
 	<ul class='relative my-4 flex list-none flex-col p-0'>
 		{
 			recentPosts
@@ -30,3 +31,4 @@ const { recentPosts } = Astro.props
 		}
 	</ul>
 </WidgetCard>
+}
