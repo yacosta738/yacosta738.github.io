@@ -26,7 +26,7 @@
     "@typescript-eslint/parser": "5.36.1",
     "@vueuse/core": "^9.1.0",
     "astro": "^1.0.6",
-    "astro-i18next": "1.0.0-beta.5",
+    "astro-i18next": "1.0.0-beta.9",
     "astro-icon": "^0.7.3",
     "astro-seo": "^0.6.0",
     "dompurify": "^2.4.0",
