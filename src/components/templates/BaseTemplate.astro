@@ -7,7 +7,7 @@ import Social from 'atoms:Social'
 import Email from 'atoms:Email'
 import AdsBanner from 'atoms:AdsBanner'
 import LanguageSelector from 'atoms:LanguageSelector'
-import Navbar from '@components:molecules/Navbar.vue'
+import Navbar from 'molecules:Navbar'
 import '../../styles/global.css'
 import { domain } from '@store:constants'
 
@@ -38,14 +38,7 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 	>
 		<AdsBanner />
 		<div class='relative flex flex-col min-h-[100vh]'>
-			<Navbar client:load>
-				<div slot='language-selector'>
-					<LanguageSelector
-						showFlag={true}
-						class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
-					/>
-				</div>
-			</Navbar>
+			<Navbar />
 			<div class='flex flex-wrap flex-col md:flex-row justify-around'>
 				<main class='container mx-auto flex-grow mt-8 md:mt-20 lg:mt-15'>
 					<slot />
