@@ -1,0 +1,63 @@
+---
+import { localizePath } from 'astro-i18next'
+import { t } from 'i18next'
+import LanguageSelector from 'atoms:LanguageSelector'
+import { navMenus } from '@models:Menu'
+export interface Props {
+	drawer: boolean
+}
+
+const { drawer } = Astro.props
+---
+
+<ul class='menu-list' data-cypress='menu'>
+	<!-- <li class="mb-6 lg:mb-0">
+        <div
+            v-if="!$generalStore.showSide"
+            class="cursor-pointer text-lightest-slate hover:text-gray-600"
+        >
+            Search
+        </div>
+    </li> -->
+	<li>
+		<ol
+			class={`order-list mt-8 items-center space-y-6 lg:space-y-0 lg:space-x-2 lg:flex ${
+				drawer ? 'flex-col' : 'hidden'
+			}`}
+		>
+			{
+				navMenus.map((menu) => (
+					<li>
+						<a
+							href={localizePath(menu.link)}
+							id={menu.id}
+							data-drawer-dismiss='menu-drawer'
+							aria-controls='menu-drawer'
+						>
+							{t('menus.' + menu.title)}
+						</a>
+					</li>
+				))
+			}
+		</ol>
+	</li>
+	<li>
+		<LanguageSelector
+			showFlag={true}
+			class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
+		/>
+	</li>
+	<li>
+		<a href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>
+			{t('resume')}
+		</a>
+	</li>
+</ul>
+
+<style lang='scss'>
+	.menu-list {
+		@apply mt-8 block w-full flex-grow origin-top-right items-center
+      space-y-6 overflow-y-auto font-bold uppercase tracking-wide lg:mt-0 lg:flex
+      lg:w-auto lg:flex-initial lg:space-x-8 lg:space-y-0;
+	}
+</style>

@@ -1,0 +1,152 @@
+---
+import Menus from 'molecules:Menus'
+import Drawer from 'molecules:Drawer/index'
+---
+
+<header id='navbar-header' class='fixed z-50 w-full'>
+	<nav
+		id='acosta-navbar'
+		class='relative flex w-full flex-wrap items-center justify-between py-2 md:py-4'
+	>
+		<a href='/' class='my-0 border-none py-0'>
+			<img src='/logo.svg' class='my-0 w-12 py-0' alt='logo' />
+		</a>
+
+		<Drawer />
+
+		<div class='hidden lg:block'>
+			<Menus drawer={false} />
+		</div>
+	</nav>
+</header>
+
+<script lang='ts'>
+	let showNavbar = true
+	let scrollDirection = 'DOWN'
+	let lastScrollPosition = 0
+	const navbar = document.getElementById('navbar-header')
+	const navbarClassList = navbar.classList
+	const navbarClassListAdd = navbarClassList.add.bind(navbarClassList)
+	const navbarClassListRemove = navbarClassList.remove.bind(navbarClassList)
+
+	const onScrollEnd = () => {
+		if (showNavbar) {
+			navbarClassListRemove('navbar--hidden')
+		} else {
+			navbarClassListAdd('navbar--hidden')
+		}
+		if (scrollDirection === 'UP' && lastScrollPosition !== 0) {
+			navbarClassListAdd('navbar--show')
+		} else {
+			navbarClassListRemove('navbar--show')
+		}
+	}
+	const onScroll = () => {
+		const currentScrollPosition = window.scrollY || document.documentElement.scrollTop
+		if (currentScrollPosition < 0) return
+
+		showNavbar = currentScrollPosition < lastScrollPosition
+		scrollDirection = currentScrollPosition < lastScrollPosition ? 'UP' : 'DOWN'
+		lastScrollPosition = currentScrollPosition
+
+		onScrollEnd()
+	}
+
+	window.addEventListener('scroll', onScroll)
+
+	const navbarMenu = document.getElementById('navbar-menu')
+	const navbarMenuClassList = navbarMenu.classList
+	const navbarMenuClassListAdd = navbarMenuClassList.add.bind(navbarMenuClassList)
+	const navbarMenuClassListRemove = navbarMenuClassList.remove.bind(navbarMenuClassList)
+	const menuSvg = document.getElementById('menu-svg')
+	const menuSvgClassList = menuSvg.classList
+	const menuSvgClassListAdd = menuSvgClassList.add.bind(menuSvgClassList)
+	const menuSvgClassListRemove = menuSvgClassList.remove.bind(menuSvgClassList)
+
+	let drawer = false
+	const toggleDrawer = () => {
+		if (drawer) {
+			navbarMenuClassListRemove('navbar-menu-close')
+			navbarClassListAdd('navbar-menu-open')
+			navbarMenuClassListAdd('active-menu')
+		} else {
+			navbarMenuClassListAdd('navbar-menu-close')
+			navbarClassListRemove('navbar-menu-open')
+			navbarMenuClassListRemove('active-menu')
+		}
+		drawer = !drawer
+	}
+
+	menuSvg.addEventListener('click', toggleDrawer)
+</script>
+
+<style scoped lang='scss'>
+	.navbar-menu {
+		transition: all 530ms ease-out;
+	}
+
+	.navbar-menu-open {
+		transform: translateX(0%);
+	}
+
+	.navbar-menu-close {
+		transform: translateX(100%);
+	}
+
+	.ham {
+		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+		transition: transform 400ms;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.hamRotate.active-menu {
+		transform: rotate(45deg);
+	}
+
+	.hamRotate180.active-menu {
+		transform: rotate(180deg);
+	}
+
+	.line {
+		fill: none;
+		transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+		stroke: #64ffda;
+		stroke-width: 5.5;
+		stroke-linecap: round;
+	}
+
+	.ham7 {
+		.top {
+			stroke-dasharray: 40 82;
+		}
+
+		.middle {
+			stroke-dasharray: 30 111;
+		}
+
+		.bottom {
+			stroke-dasharray: 20 161;
+		}
+	}
+
+	.ham7.active-menu {
+		.top {
+			stroke-dasharray: 40 82;
+			stroke-dashoffset: -62px;
+		}
+
+		.middle {
+			stroke-dasharray: 40 60;
+			stroke-dashoffset: 23px;
+		}
+
+		.bottom {
+			stroke-dasharray: 40 82;
+			stroke-dashoffset: -82px;
+		}
+	}
+</style>

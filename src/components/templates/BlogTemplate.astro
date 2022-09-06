@@ -3,9 +3,8 @@ import i18next, { t, changeLanguage } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
 import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
-import LanguageSelector from 'atoms:LanguageSelector'
 import WidgetWrapper from 'molecules:WidgetWrapper'
-import Navbar from '@components:molecules/Navbar.vue'
+import Navbar from 'molecules:Navbar'
 import '../../styles/global.css'
 import { domain } from '@store:constants'
 import ToTop from 'atoms:ToTop'
@@ -47,14 +46,7 @@ changeLanguage(lang)
 		class='content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen'
 	>
 		<div class='relative flex flex-col min-h-[100vh]'>
-			<Navbar client:load>
-				<div slot='language-selector'>
-					<LanguageSelector
-						showFlag={true}
-						class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
-					/>
-				</div>
-			</Navbar>
+			<Navbar />
 			<div class='flex flex-col md:flex-row justify-around mt-10 md:mt-24 lg:mt-15'>
 				<main class='container mx-auto basis-2/3'>
 					<slot />

@@ -1,0 +1,60 @@
+---
+import MenuButton from 'atoms:MenuButton'
+import Menus from 'molecules:Menus'
+import { t } from 'i18next'
+
+
+---
+
+<!-- drawer init and toggle -->
+<div class='text-center'>
+	<div class='z-50 block lg:hidden'>
+		<MenuButton openMenu />
+	</div>
+</div>
+
+<!-- drawer component -->
+<div
+	id='menu-drawer'
+	class='fixed z-40 h-screen p-4 overflow-y-auto w-64 bg-light-navy transition-transform right-0 top-0 transform-none lg:hidden'
+	tabindex='-1'
+	aria-labelledby='drawer-label'
+	aria-modal='true'
+	role='dialog'
+>
+	<h5
+		id='drawer-label'
+		class='inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400'
+	>
+		<svg
+			class='w-5 h-5 mr-2'
+			aria-hidden='true'
+			fill='currentColor'
+			viewBox='0 0 20 20'
+			xmlns='http://www.w3.org/2000/svg'
+			><path
+				fill-rule='evenodd'
+				d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
+				clip-rule='evenodd'></path>
+		</svg>
+		{t('name')}
+	</h5>
+	<MenuButton openMenu={false} />
+	<Menus drawer={true} />
+</div>
+
+<script src='./drawer.js'></script>
+
+<style lang='scss'>
+	.navbar-menu {
+		transition: all 530ms ease-out;
+	}
+
+	.navbar-menu-open {
+		transform: translateX(0%);
+	}
+
+	.navbar-menu-close {
+		transform: translateX(100%);
+	}
+</style>
