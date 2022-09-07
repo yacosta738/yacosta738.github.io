@@ -20,7 +20,7 @@ import Drawer from 'molecules:Drawer/index'
 	</nav>
 </header>
 
-<script lang='ts'>
+<script>
 	let showNavbar = true
 	let scrollDirection = 'DOWN'
 	let lastScrollPosition = 0
@@ -54,30 +54,6 @@ import Drawer from 'molecules:Drawer/index'
 
 	window.addEventListener('scroll', onScroll)
 
-	const navbarMenu = document.getElementById('navbar-menu')
-	const navbarMenuClassList = navbarMenu.classList
-	const navbarMenuClassListAdd = navbarMenuClassList.add.bind(navbarMenuClassList)
-	const navbarMenuClassListRemove = navbarMenuClassList.remove.bind(navbarMenuClassList)
-	const menuSvg = document.getElementById('menu-svg')
-	const menuSvgClassList = menuSvg.classList
-	const menuSvgClassListAdd = menuSvgClassList.add.bind(menuSvgClassList)
-	const menuSvgClassListRemove = menuSvgClassList.remove.bind(menuSvgClassList)
-
-	let drawer = false
-	const toggleDrawer = () => {
-		if (drawer) {
-			navbarMenuClassListRemove('navbar-menu-close')
-			navbarClassListAdd('navbar-menu-open')
-			navbarMenuClassListAdd('active-menu')
-		} else {
-			navbarMenuClassListAdd('navbar-menu-close')
-			navbarClassListRemove('navbar-menu-open')
-			navbarMenuClassListRemove('active-menu')
-		}
-		drawer = !drawer
-	}
-
-	menuSvg.addEventListener('click', toggleDrawer)
 </script>
 
 <style scoped lang='scss'>
