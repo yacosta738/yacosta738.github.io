@@ -70,10 +70,10 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 		const isBlogRoot = window?.location?.href?.endsWith('/blog') || window?.location?.href?.endsWith('/blog/')
 		if (isBlogRoot) {
 			console.log('removing category widget')
-			categoryEl?.classList.add('invisible')
+			categoryEl?.classList.add('hidden')
 		} else {
 			console.log('keeping category widget')
-			categoryEl?.classList.remove('invisible')
+			categoryEl?.classList.remove('hidden')
 		}
 	}
 </script>
