@@ -63,14 +63,18 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 	</slot>
 </div>
 
-<script>
+<script is:global>
 	const categoryEl = document.getElementById('categoryWidget')
 	// if the url is /blog or es/blog, remove the category widget
 	if (categoryEl) {
 		const { pathname } = Astro.url
 		const isBlogRoot = pathname.endsWith('/blog')
 		if (isBlogRoot) {
-			categoryEl.remove()
+			console.log('removing category widget')
+			categoryEl?.classList.add('invisible')
+		} else {
+			console.log('keeping category widget')
+			categoryEl?.classList.remove('invisible')
 		}
 	}
 </script>
