@@ -4,7 +4,7 @@ import { email } from "@store:constants";
 ---
 
 <section class="min-h-screen">
-    <div class="flex h-full flex-col items-start">
+    <div class="flex flex-col items-start ">
         <h1 class="my-2 font-mono text-base font-normal text-green-500 md:my-6">
             {t("welcome")}
         </h1>
@@ -20,13 +20,13 @@ import { email } from "@store:constants";
         >
             <!-- {slogan} -->
         </h3>
-        <p class="my-4 text-2xl max-w-none md:max-w-2xl">
+        <p class="text-justify  my-4 text-xl md:text-2xl max-w-none md:max-w-2xl">
             {t("my-self")}
         </p>
         <footer
             class="container mx-auto flex flex-col items-center md:items-start"
         >
-            <a href={`mailto:${email}`} class="big-button my-10">
+            <a href={`mailto:${email}`} class="big-button my-10 animate-pulse">
                 {t("get-in-touch")}
             </a>
         </footer>
