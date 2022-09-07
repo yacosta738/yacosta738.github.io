@@ -51,8 +51,26 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 
 <div class='container mx-auto w-4/5'>
 	<slot name='widget'>
-		{!isBlogRoot && <WidgetRecentPost recentPosts={allPosts.slice(0, 5)} />}
+		{
+			!isBlogRoot && (
+				<div id='categoryWidget'>
+					<WidgetRecentPost recentPosts={allPosts.slice(0, 5)} />
+				</div>
+			)
+		}
 		<WidgetTagCloud tags={tags} />
 		<WidgetCategory categories={categories} />
 	</slot>
 </div>
+
+<script>
+	const categoryEl = document.getElementById('categoryWidget')
+	// if the url is /blog or es/blog, remove the category widget
+	if (categoryEl) {
+		const { pathname } = Astro.url
+		const isBlogRoot = pathname.endsWith('/blog')
+		if (isBlogRoot) {
+			categoryEl.remove()
+		}
+	}
+</script>
