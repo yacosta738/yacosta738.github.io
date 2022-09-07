@@ -25,10 +25,10 @@ const { posts } = Astro.props;
 ---
 
 <BlogTemplate title={`${t('blog')} | ${tag}`} description={t('seo.blog-description')}>
-	<div class='container-inner mx-auto py-16 pl-10'>
+	<div class='tainer mx-auto'>
 		{
 			posts.map((post) => (
-				<article class='mb-20 border-b border-gray-400'>
+				<article class='mb-20 border-b border-gray-400 mx-2 md:mx-24'>
 					<ArticleSummary article={post} />
 				</article>
 			))
