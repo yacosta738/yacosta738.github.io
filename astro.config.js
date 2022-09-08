@@ -6,7 +6,6 @@ import astroI18next from 'astro-i18next'
 import image from '@astrojs/image'
 import vue from '@astrojs/vue'
 
-import netlify from '@astrojs/netlify/functions'
 
 // https://astro.build/config
 export default defineConfig({
@@ -36,7 +35,5 @@ export default defineConfig({
 	markdown: {
 		extendDefaultPlugins: true,
 		remarkPlugins: [remarkReadingTime]
-	},
-	output: 'server',
-	adapter: netlify()
+	}
 })
