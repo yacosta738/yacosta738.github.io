@@ -6,7 +6,6 @@ import astroI18next from 'astro-i18next'
 import image from '@astrojs/image'
 import vue from '@astrojs/vue'
 
-
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
