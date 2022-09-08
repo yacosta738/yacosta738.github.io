@@ -60,7 +60,7 @@
   "recent-post": "Artículos recientes",
   "time-to-read": "Tiempo de lectura . {{timeToRead, number}} min",
   "author": "Autor:",
-  "read": "Leer →",
+  "read": "Leer más →",
   "prev": "← Anterior",
   "next": "Siguiente →",
   "page-of": "Página {currentPage} de {totalPages}",
