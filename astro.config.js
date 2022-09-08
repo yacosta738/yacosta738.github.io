@@ -6,15 +6,19 @@ import astroI18next from 'astro-i18next'
 import image from '@astrojs/image'
 import vue from '@astrojs/vue'
 
+import netlify from '@astrojs/netlify/functions'
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
 	integrations: [
 		sitemap({
 			i18n: {
-				defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
+				defaultLocale: 'en',
+				// All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
 				locales: {
-					en: 'en', // The `defaultLocale` value must present in `locales` keys
+					en: 'en',
+					// The `defaultLocale` value must present in `locales` keys
 					fr: 'es'
 				}
 			}
@@ -32,5 +36,7 @@ export default defineConfig({
 	markdown: {
 		extendDefaultPlugins: true,
 		remarkPlugins: [remarkReadingTime]
-	}
+	},
+	output: 'server',
+	adapter: netlify()
 })
