@@ -1,87 +1,81 @@
 ---
-import { t } from "i18next";
-import { Project } from "@models:Project";
-import { localizePath } from "astro-i18next";
-import ProjectLinks from "molecules:ProjectLinks";
-import ProjectTechList from "molecules:ProjectTechList";
-import { Icon } from "astro-icon";
-import { markdownfy } from "@util:utilities";
+import { t } from 'i18next'
+import { Project } from '@models:Project'
+import { localizePath } from 'astro-i18next'
+import ProjectLinks from 'molecules:ProjectLinks'
+import ProjectTechList from 'molecules:ProjectTechList'
+import { Icon } from 'astro-icon'
+import { markdownfy } from '@util:utilities'
 
-const GRID_LIMIT = 6;
+const GRID_LIMIT = 6
 export interface Props {
-    projects: Project[];
+	projects: Project[]
 }
-const { projects } = Astro.props;
+const { projects } = Astro.props
 
-let showMore: boolean = false;
+let showMore: boolean = false
 
 const projectsToShow = () => {
-    const firstProjects: Project[] = projects
-        ? projects.slice(0, GRID_LIMIT)
-        : [];
-    return showMore ? projects : firstProjects;
-};
+	const firstProjects: Project[] = projects ? projects.slice(0, GRID_LIMIT) : []
+	return showMore ? projects : firstProjects
+}
 ---
 
-<div class="flex flex-col items-center">
-    <div class="mt-10 mb-20 text-center">
-        <h2 class="section-title">{t("project-subtitle")}</h2>
-        <a href={localizePath("/projects/")} class="inline-link"
-            >{t("project-view")}
-        </a>
-    </div>
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {
-            projectsToShow().map((project) => (
-                <div class="style-project-card">
-                    <div class="project-top">
-                        <Icon name="ic:baseline-folder" class="h-10" />
-                        <ProjectLinks project={project} position="center" />
-                    </div>
-                    <div class="text-center text-3xl text-lightest-slate my-2.5 font-bold">
-                        {project?.title}
-                    </div>
-                    <div class="project-description">
-                        <p set:html={markdownfy(project.content)} />
-                    </div>
-                    <ProjectTechList
-                        project={project}
-                        position="start"
-                        showIcon={false}
-                    />
-                </div>
-            ))
-        }
-    </div>
-    {
-        projects.length > 6 && (
-            <a class="big-button m-5" href={localizePath("/projects/")}>
-                {showMore ? t("show-less") : t("show-more")}
-            </a>
-        )
-    }
+<div class='flex flex-col items-center'>
+	<div class='mt-10 mb-20 text-center'>
+		<h2 class='section-title'>{t('project-subtitle')}</h2>
+		<a href={localizePath('/projects/')} class='inline-link'>{t('project-view')}</a>
+	</div>
+	<div class='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
+		{
+			projectsToShow().map((project) => (
+				<div class='style-project-card'>
+					<div class='project-top'>
+						<Icon name='ic:baseline-folder' class='h-10' />
+						<ProjectLinks project={project} position='center' />
+					</div>
+					<div class='text-center text-3xl text-lightest-slate my-2.5 font-bold'>
+						{project?.title}
+					</div>
+					<div class='project-description'>
+						<p set:html={markdownfy(project.content)} />
+					</div>
+					<footer class='absolute bottom-1'>
+						<ProjectTechList project={project} position='start' showIcon={false} />
+					</footer>
+				</div>
+			))
+		}
+	</div>
+	{
+		projects.length > 6 && (
+			<a class='big-button m-5' href={localizePath('/projects/')}>
+				{showMore ? t('show-less') : t('show-more')}
+			</a>
+		)
+	}
 </div>
 
 <style>
-    .style-project-card {
-        @apply w-full max-w-sm max-h-min bg-light-navy rounded-lg border border-lightest-navy shadow-md px-6 py-2 transform hover:-translate-y-2;
-    }
+	.style-project-card {
+		@apply w-full max-w-sm h-108 bg-light-navy rounded-lg border border-lightest-navy shadow-md px-6 py-2 transform hover:-translate-y-2;
+	}
 
-    .section-title {
-        @apply text-center text-3xl text-lightest-slate;
-    }
+	.section-title {
+		@apply text-center text-3xl text-lightest-slate;
+	}
 
-    .project-top {
-        @apply flex justify-between mt-2;
-    }
+	.project-top {
+		@apply flex justify-between mt-2;
+	}
 
-    .project-top svg {
-        color: var(--green);
-        width: 40px;
-        height: 40px;
-    }
+	.project-top svg {
+		color: var(--green);
+		width: 40px;
+		height: 40px;
+	}
 
-    .project-description {
-        @apply text-left;
-    }
+	.project-description {
+		@apply text-left text-lg;
+	}
 </style>
