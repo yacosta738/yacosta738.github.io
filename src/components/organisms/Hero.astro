@@ -9,7 +9,7 @@ import { email } from '@store:constants'
 			{t('welcome')}
 		</h1>
 		<h2 id='generalName' class='text-4xl sm:text-5xl md:text-6xl lg:text-8xl yap-name'>
-			<!-- {t("name")} -->
+			{t("name")}
 		</h2>
 		<h3
 			id='phrase'
@@ -48,18 +48,6 @@ import { email } from '@store:constants'
 		@include typed(
 			$slogan-text-es,
 			1.5,
-			(
-				caret: false,
-				caret-width: 5px,
-				caret-space: 2px,
-				iterations: 0
-			)
-		);
-	}
-	.yap-name {
-		@include typed(
-			'Yuniel Acosta',
-			1,
 			(
 				caret: false,
 				caret-width: 5px,

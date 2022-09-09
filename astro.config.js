@@ -5,10 +5,14 @@ import tailwind from '@astrojs/tailwind'
 import astroI18next from 'astro-i18next'
 import image from '@astrojs/image'
 import vue from '@astrojs/vue'
+import robotsTxt from 'astro-robots-txt'
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
+	experimental: {
+		integrations: true
+	},
 	integrations: [
 		sitemap({
 			i18n: {
@@ -24,7 +28,8 @@ export default defineConfig({
 		tailwind(),
 		vue(),
 		astroI18next(),
-		image()
+		image(),
+		robotsTxt()
 	],
 	vite: {
 		ssr: {

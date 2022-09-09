@@ -16,6 +16,7 @@ specifiers:
   astro: ^1.0.6
   astro-i18next: 1.0.0-beta.5
   astro-icon: ^0.7.3
+  astro-robots-txt: ^0.3.8
   astro-seo: ^0.6.0
   dompurify: ^2.4.0
   eslint: 8.23.0
@@ -57,6 +58,7 @@ devDependencies:
   astro: 1.1.1_sass@1.54.5
   astro-i18next: 1.0.0-beta.5_astro@1.1.1
   astro-icon: 0.7.3
+  astro-robots-txt: 0.3.8
   astro-seo: 0.6.0
   dompurify: 2.4.0
   eslint: 8.23.0
@@ -1969,6 +1971,17 @@ packages:
       svgo: 2.8.0
     dev: true
 
+  /astro-robots-txt/0.3.8:
+    resolution:
+      {
+        integrity: sha512-rx69T8hd79whl4cmGKZCA5KUgWuSU9EKPPqO6RKfIrvDoFpw7sZ/j7EDXWYmT7f+U94oiISNVLnIafmUEkgC5A==
+      }
+    dependencies:
+      deepmerge: 4.2.2
+      valid-filename: 4.0.0
+      zod: 3.18.0
+    dev: true
+
   /astro-seo/0.6.0:
     resolution:
       {
@@ -3797,6 +3810,14 @@ packages:
     engines: { node: ^10.12.0 || >=12.0.0 }
     dependencies:
       flat-cache: 3.0.4
+    dev: true
+
+  /filename-reserved-regex/3.0.0:
+    resolution:
+      {
+        integrity: sha512-hn4cQfU6GOT/7cFHXBqeBg2TbrMBgdD0kcjLhvSQYYwm3s4B6cjvBfb7nBALJLAXqmU5xajSa7X2NnUud/VCdw==
+      }
+    engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
     dev: true
 
   /fill-range/7.0.1:
@@ -8050,6 +8071,16 @@ packages:
       diff: 5.1.0
       kleur: 4.1.5
       sade: 1.8.1
+    dev: true
+
+  /valid-filename/4.0.0:
+    resolution:
+      {
+        integrity: sha512-VEYTpTVPMgO799f2wI7zWf0x2C54bPX6NAfbZ2Z8kZn76p+3rEYCTYVYzMUcVSMvakxMQTriBf24s3+WeXJtEg==
+      }
+    engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
+    dependencies:
+      filename-reserved-regex: 3.0.0
     dev: true
 
   /vfile-location/4.0.1:
