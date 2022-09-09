@@ -1,62 +1,71 @@
 ---
-import i18next,{ t } from "i18next";
-import { email } from "@store:constants";
+import i18next, { t } from 'i18next'
+import { email } from '@store:constants'
 ---
 
-<section class="min-h-screen">
-    <div class="flex flex-col items-start ">
-        <h1 class="my-2 font-mono text-base font-normal text-green-500 md:my-6">
-            {t("welcome")}
-        </h1>
-        <h2
-            id="generalName"
-            class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl"
-        >
-            {t("name")}
-        </h2>
-        <h3
-            id="phrase"
-            class={`text-3xl text-gray-500 sm:text-4xl md:my-2 md:text-5xl lg:text-7xl slogan-${i18next.language}`}
-        >
-            <!-- {slogan} -->
-        </h3>
-        <p class="text-justify  my-4 text-xl md:text-2xl max-w-none md:max-w-2xl">
-            {t("my-self")}
-        </p>
-        <footer
-            class="container mx-auto flex flex-col items-center md:items-start"
-        >
-            <a href={`mailto:${email}`} class="big-button my-10 animate-pulse">
-                {t("get-in-touch")}
-            </a>
-        </footer>
-    </div>
+<section class='min-h-screen'>
+	<div class='flex flex-col items-start'>
+		<h1 class='my-2 font-mono text-base font-normal text-green-500 md:my-6'>
+			{t('welcome')}
+		</h1>
+		<h2 id='generalName' class='text-4xl sm:text-5xl md:text-6xl lg:text-8xl yap-name'>
+			<!-- {t("name")} -->
+		</h2>
+		<h3
+			id='phrase'
+			class={`text-3xl text-gray-500 sm:text-4xl md:my-2 md:text-5xl lg:text-7xl slogan-${i18next.language}`}
+		>
+			<!-- {slogan} -->
+		</h3>
+		<p class='text-justify my-4 text-xl md:text-2xl max-w-none md:max-w-2xl'>
+			{t('my-self')}
+		</p>
+		<footer class='container mx-auto flex flex-col items-center md:items-start'>
+			<a href={`mailto:${email}`} class='big-button my-10 animate-pulse'>
+				{t('get-in-touch')}
+			</a>
+		</footer>
+	</div>
 </section>
 
-<style lang="scss">
-    @import "../../styles/typed.scss";
-    $slogan: "If I cannot do great things, I can do small things in a great way.";
-    $slogan-es: "Si no puedo hacer grandes cosas, hago que las pequeñas sean grandiosas.";
-    .slogan-en {
-        @include typed($slogan,
-        1.5,
-        (
-            caret: false,
-            caret-width: 5px,
-            caret-space: 2px,
-            iterations: 0
-        )
-        );
-    }
-    .slogan-es {
-        @include typed($slogan-es,
-        1.5,
-        (
-            caret-width:5px,
-            caret-space: 2px,
-            iterations: 0
-        )
-        );
-    }
+<style lang='scss'>
+	@import '../../styles/typed.scss';
+	$slogan-text: 'If I cannot do great things, I can do small things in a great way.';
+	$slogan-text-es: 'Si no puedo hacer grandes cosas, hago que las pequeñas sean grandiosas.';
+	.slogan-en {
+		@include typed(
+			$slogan-text,
+			1.5,
+			(
+				caret: false,
+				caret-width: 5px,
+				caret-space: 2px,
+				iterations: 0
+			)
+		);
+	}
+	.slogan-es {
+		@include typed(
+			$slogan-text-es,
+			1.5,
+			(
+				caret: false,
+				caret-width: 5px,
+				caret-space: 2px,
+				iterations: 0
+			)
+		);
+	}
+	.yap-name {
+		@include typed(
+			'Yuniel Acosta',
+			1,
+			(
+				caret: false,
+				caret-width: 5px,
+				caret-space: 2px,
+				iterations: 0
+			)
+		);
+	}
 </style>
-
