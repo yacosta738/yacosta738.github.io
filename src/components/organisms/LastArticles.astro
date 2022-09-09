@@ -25,7 +25,7 @@ const posts: Article[] = postsData
 	<div class='my-2 flex flex-col md:flex-row justify-center justify-items-center content-center gap-4'>
 		{
 			posts.map((post) => (
-				<article class='w-full max-w-sm bg-lightest-navy rounded-lg border border-light-navy shadow-md'>
+				<article class='w-full max-w-sm bg-light-navy rounded-lg border border-lightest-navy shadow-md'>
 					<a href={post.url}>
 						<img class='rounded-t-lg object-cover h-48 w-96' src={post.cover} alt={post.title} />
 					</a>
