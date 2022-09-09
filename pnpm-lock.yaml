@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@astrojs/image': ^0.3.6
+  '@astrojs/rss': ^1.0.0
   '@astrojs/sitemap': ^1.0.0
   '@astrojs/tailwind': ^1.0.0
   '@astrojs/vue': ^1.0.0
@@ -37,6 +38,7 @@ specifiers:
   vue: ^3.2.37
 
 dependencies:
+  '@astrojs/rss': 1.0.0
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
 
@@ -185,6 +187,15 @@ packages:
     dependencies:
       prismjs: 1.29.0
     dev: true
+
+  /@astrojs/rss/1.0.0:
+    resolution:
+      {
+        integrity: sha512-vOPocf/SC0TfHsCwQXupvLGm0y3oIwpRCnnF2igDP3gFSxQEOk4nmsuVTEU2N87hYyX1/5uxbjJhixuSV/L8Cw==
+      }
+    dependencies:
+      fast-xml-parser: 4.0.9
+    dev: false
 
   /@astrojs/sitemap/1.0.0:
     resolution:
@@ -3740,6 +3751,16 @@ packages:
         integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
       }
     dev: true
+
+  /fast-xml-parser/4.0.9:
+    resolution:
+      {
+        integrity: sha512-4G8EzDg2Nb1Qurs3f7BpFV4+jpMVsdgLVuG1Uv8O2OHJfVCg7gcA53obuKbmVqzd4Y7YXVBK05oJG7hzGIdyzg==
+      }
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
+    dev: false
 
   /fastq/1.13.0:
     resolution:
@@ -7496,6 +7517,13 @@ packages:
       }
     engines: { node: '>=8' }
     dev: true
+
+  /strnum/1.0.5:
+    resolution:
+      {
+        integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==
+      }
+    dev: false
 
   /style-to-object/0.3.0:
     resolution:

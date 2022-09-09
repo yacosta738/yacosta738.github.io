@@ -5,8 +5,6 @@ import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import Social from 'atoms:Social'
 import Email from 'atoms:Email'
-import AdsBanner from 'atoms:AdsBanner'
-import LanguageSelector from 'atoms:LanguageSelector'
 import Navbar from 'molecules:Navbar'
 import '../../styles/global.css'
 import { domain } from '@store:constants'
@@ -36,7 +34,6 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 	<body
 		class='content-wrapper bg-background-primary font-sans text-light-slate leading-normal flex flex-col min-h-screen'
 	>
-		<AdsBanner />
 		<div class='relative flex flex-col min-h-[100vh]'>
 			<Navbar />
 			<div class='container mx-auto flex flex-col xl:flex-row mt-24'>
