@@ -20,7 +20,7 @@ const classLinks = () => {
     if (position === "end") {
         return "mr-2";
     } else if (position === "center") {
-        return "mx-1";
+        return "m-1";
     } else {
         return "ml-2";
     }
@@ -36,7 +36,7 @@ const classLinks = () => {
                 class={classLinks()}
                 target="_blank"
             >
-                <Icon name="ion:fork-repo" class="h-8" />
+                <Icon name="ion:fork-repo" class="h-6 md:h-8" />
             </a>
         )
     }
@@ -48,7 +48,7 @@ const classLinks = () => {
                 class={classLinks()}
                 target="_blank"
             >
-                <Icon name="charm:link-external" class="h-8" />
+                <Icon name="charm:link-external" class="h-6 md:h-8" />
             </a>
         )
     }

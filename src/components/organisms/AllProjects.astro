@@ -43,200 +43,64 @@ const projects: Project[] = projectData
 ---
 
 <BaseTemplate>
-  <div class="container mx-auto py-16">
+  <div class="container-inner 2xl:container mx-auto py-16">
     <div>
       <h1 class="big-heading">{t('all-projects')}</h1>
-      <p class="subtitle">
+      <p class="text-2xl text-green-500 font-sans my-5">
         {t('big-list')}
       </p>
     </div>
-    <div class="styled-table-container">
-      <table>
-        <thead>
+    
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs md:text-xl uppercase bg-light-navy">
           <tr>
-            <th>{t("year")}</th>
-            <th>{t("title")}</th>
-            <th class="hide-on-mobile">{t("made-at")}</th>
-            <th class="hide-on-mobile">{t("built-at")}</th>
-            <th>{t("link")}</th>
+              <th scope="col" class="py-3 px-6">
+                {t("year")}
+              </th>
+              <th scope="col" class="py-3 px-6">
+                {t("title")}
+              </th>
+              <th scope="col" class="py-3 px-6 hidden md:table-cell ">
+                {t("made-at")}
+              </th>
+              <th scope="col" class="py-3 px-6 hidden md:table-cell ">
+                {t("built-at")}
+              </th>         
+              <th scope="col" class="py-3 px-6">
+                {t("link")}
+            </th>
           </tr>
-        </thead>
-        <tbody>
-          {
-            projects.map((project) => (
-              <tr>
-                <td class="overline year">
-                  {typeof project.date === "string"
-                    ? new Date(project.date).getFullYear()
-                    : project.date.getFullYear()}
-                </td>
-                <td class="title">{project.title}</td>
-                <td class="company hide-on-mobile">
-                  {project.company ? project.company : t('personal-projects')}
-                </td>
-                <td class="tech hide-on-mobile">
-                  <ProjectTechList
-                    project={project}
-                    position="start"
-                    showIcon={true}
-                  />
-                </td>
-                <td class="links">
-                  <ProjectLinks project={project} position="start" />
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
+      </thead>
+      <tbody>
+        {
+          projects.map((project) => (
+            <tr class="text-xs md:text-xl bg-navy border-b  dark:border-light-navy hover:bg-gray-50 dark:hover:bg-lightest-navy">
+              <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {typeof project.date === "string"
+                  ? new Date(project.date).getFullYear()
+                  : project.date.getFullYear()}
+              </th>
+              <td class="py-4 px-6">{project.title}</td>
+              <td class="py-4 px-6 hidden md:table-cell">
+                {project.company ? project.company : t('personal-projects')}
+              </td>
+              <td class="py-4 px-6 hidden md:table-cell">
+                <ProjectTechList
+                  project={project}
+                  position="start"
+                  showIcon={true}
+                />
+              </td>
+              <td class="py-4 px-6">
+                <ProjectLinks project={project} position="center" />
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+  </table>
+</div>
+
   </div>
 </BaseTemplate>
-
-<style lang="scss">
-  .styled-table-container {
-    table {
-      width: 100%;
-      border-collapse: collapse;
-  
-      .hide-on-mobile {
-        @media (max-width: 768px) {
-          display: none;
-        }
-      }
-  
-      tbody tr {
-        &:hover,
-        &:focus {
-          background-color: var(--light-navy);
-        }
-      }
-  
-      th,
-      td {
-        padding: 10px;
-        text-align: left;
-  
-        &:first-child {
-          padding-left: 20px;
-  
-          @media (max-width: 768px) {
-            padding-left: 10px;
-          }
-        }
-  
-        &:last-child {
-          padding-right: 20px;
-  
-          @media (max-width: 768px) {
-            padding-right: 10px;
-          }
-        }
-  
-        svg {
-          width: 20px;
-          height: 20px;
-        }
-      }
-  
-      tr {
-        cursor: default;
-  
-        td:first-child {
-          border-top-left-radius: var(--border-radius);
-          border-bottom-left-radius: var(--border-radius);
-        }
-  
-        td:last-child {
-          border-top-right-radius: var(--border-radius);
-          border-bottom-right-radius: var(--border-radius);
-        }
-      }
-  
-      td {
-        &.year {
-          padding-right: 20px;
-  
-          @media (max-width: 768px) {
-            padding-right: 10px;
-            font-size: var(--fz-sm);
-          }
-        }
-  
-        &.title {
-          padding-top: 15px;
-          padding-right: 20px;
-          color: var(--lightest-slate);
-          font-size: var(--fz-xl);
-          font-weight: 600;
-          line-height: 1.25;
-        }
-  
-        &.company {
-          font-size: var(--fz-lg);
-          white-space: nowrap;
-        }
-  
-        &.tech {
-          font-size: var(--fz-xxs);
-          font-family: var(--font-mono);
-          line-height: 1.5;
-  
-          .separator {
-            margin: 0 5px;
-          }
-  
-          span {
-            display: inline-block;
-          }
-        }
-  
-        &.links {
-          min-width: 80px;
-  
-          div {
-            display: flex;
-            align-items: center;
-  
-            a {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              flex-shrink: 0;
-            }
-  
-            a + a {
-              margin-left: 10px;
-            }
-          }
-        }
-      }
-    }
-  }
-  
-  .overline {
-    color: var(--green);
-    font-family: var(--font-mono);
-    font-size: var(--fz-md);
-    font-weight: 400;
-  }
-  
-  .subtitle {
-    color: var(--green);
-    margin: 0 0 20px 0;
-    font-size: var(--fz-md);
-    font-family: var(--font-mono);
-    font-weight: 400;
-    line-height: 1.5;
-    @media (max-width: 1080px) {
-      font-size: var(--fz-sm);
-    }
-    @media (max-width: 768px) {
-      font-size: var(--fz-xs);
-    }
-  
-    a {
-      line-height: 1.5;
-    }
-  }
-  </style>
