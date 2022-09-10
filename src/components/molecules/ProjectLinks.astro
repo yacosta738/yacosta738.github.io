@@ -1,6 +1,5 @@
 ---
 import { Project } from "@models:Project";
-import Link from "atoms:Link";
 import { Icon } from "astro-icon";
 export interface Props {
     position: string;
@@ -19,11 +18,11 @@ const classProjectLinks = () => {
 };
 const classLinks = () => {
     if (position === "end") {
-        return "mr-2";
+        return "mr-4";
     } else if (position === "center") {
         return "mx-1";
     } else {
-        return "ml-2";
+        return "ml-4";
     }
 };
 ---
@@ -31,26 +30,26 @@ const classLinks = () => {
 <div class={`project-links ${classProjectLinks()}`}>
     {
         project.repository && (
-            <Link
+            <a
                 href={project.repository}
                 aria-label="GitHub Link"
                 class={classLinks()}
                 target="_blank"
             >
-                <Icon name="ion:fork-repo" class="h-5" />
-            </Link>
+                <Icon name="ion:fork-repo" class="h-8" />
+            </a>
         )
     }
     {
         project.url && (
-            <Link
+            <a
                 href={project.url}
                 aria-label="Project Link"
                 class={classLinks()}
                 target="_blank"
             >
-                <Icon name="charm:link-external" class="h-5" />
-            </Link>
+                <Icon name="charm:link-external" class="h-8" />
+            </a>
         )
     }
 </div>

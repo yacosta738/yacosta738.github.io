@@ -2,8 +2,6 @@
 import MenuButton from 'atoms:MenuButton'
 import Menus from 'molecules:Menus'
 import { t } from 'i18next'
-
-
 ---
 
 <!-- drawer init and toggle -->
@@ -16,7 +14,7 @@ import { t } from 'i18next'
 <!-- drawer component -->
 <div
 	id='menu-drawer'
-	class='fixed z-40 h-screen p-4 overflow-y-auto w-64 bg-light-navy transition-transform right-0 top-0 transform-none lg:hidden'
+	class='fixed z-40 h-screen p-4 overflow-y-auto w-64 bg-light-navy transition-transform right-0 top-0 transform-none lg:hidden invisible'
 	tabindex='-1'
 	aria-labelledby='drawer-label'
 	aria-modal='true'
@@ -45,16 +43,13 @@ import { t } from 'i18next'
 
 <script src='./drawer.js'></script>
 
-<style lang='scss'>
-	.navbar-menu {
-		transition: all 530ms ease-out;
-	}
-
-	.navbar-menu-open {
-		transform: translateX(0%);
-	}
-
-	.navbar-menu-close {
-		transform: translateX(100%);
-	}
-</style>
+<script is:global>
+	document.addEventListener('DOMContentLoaded', () => {
+		const drawer = document.getElementById('menu-drawer')
+		// remove the invisible class after the drawer is loaded to prevent the flash of unstyled content (100ms)
+	
+		setTimeout(() => {
+			drawer.classList.remove('invisible')
+		}, 100)
+	})
+</script>
