@@ -9,6 +9,13 @@ const skills: string[] = [
   'Spring Boot',
   'Java / Kotlin'
 ];
+
+const yearsOfExperience = (): number => {
+  const start = new Date(2017, 8);
+  const end = new Date();
+  const diff = end.getTime() - start.getTime();
+  return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+};
 ---
 
 <section id="about">
@@ -17,7 +24,7 @@ const skills: string[] = [
       <div class="styled-text">
         <div class="styled-text">
           <p class="mb-2 text-justify">
-            { t('bio') }
+            { t('bio', { years: yearsOfExperience() }) }
           </p>
 
           <p>{ t('about-tech') }</p>
