@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="isBlogPath">
 		<svg
 			width="1em"
 			height="1em"
@@ -47,7 +47,7 @@
 					@keyup="performSearch()"
 					@keyup.esc="isOpen = false"
 					autofocus
-					class="w-full border-none outline-none text-xl bg-transparent appearance-none"
+					class="w-full border-none outline-none text-xl bg-transparent appearance-none m-2 rounded"
 				/>
 			</div>
 			<div class="search-wrapper" v-if="query && query !== null">
@@ -77,9 +77,9 @@
 								/>
 								<div class="text-justify m-4 md:mx-10 md:my-5">
 									{{ article.description }}
-									<a :href="localizePath(article.url)" class="font-bold uppercase inline-link"
-										>{{t('read')}}</a
-									>
+									<a :href="localizePath(article.url)" class="font-bold uppercase inline-link">{{
+										t('read')
+									}}</a>
 								</div>
 							</div>
 						</article>
@@ -103,8 +103,8 @@
 </template>
 
 <script setup lang="ts">
-	import { t} from 'i18next'
-import { onMounted, PropType, Ref, ref, watch } from 'vue'
+import { t } from 'i18next'
+import { onMounted, PropType, Ref, ref, watch, computed } from 'vue'
 import Fuse from 'fuse.js'
 import { Article } from '../../models/Article'
 import { localizePath } from '../../util/utilities'
@@ -141,6 +141,8 @@ const performSearch = () => {
 		results.value = []
 	}
 }
+
+const isBlogPath = window?.location?.href?.includes('/blog')
 </script>
 <style lang="scss">
 .search-box-container {
@@ -150,13 +152,13 @@ const performSearch = () => {
 
 .search-box {
 	z-index: 200;
-	@apply bg-navy bg-opacity-70 border-2 border-dark-navy rounded-md p-2
-    absolute top-16 md:top-24 flex items-center justify-center shadow-xl w-3/4 md:w-1/2;
+	@apply bg-navy/70 border-2 border-lightest-navy rounded-md p-2
+    absolute top-14 md:top-24 flex items-center justify-center shadow-xl w-3/4 md:w-1/2;
 }
 
 .search-wrapper {
 	z-index: 200;
-	@apply flex flex-col items-center justify-center shadow-xl mx-2 md:mx-0 md:w-3/4 h-3/4 border-2 border-dark-navy bg-opacity-70 p-10
-    rounded-md bg-navy absolute top-44 bg-blend-soft-light overflow-y-auto;
+	@apply flex flex-col items-center justify-center shadow-xl mx-2 md:mx-0 md:w-3/4 h-3/4 bg-navy/70 border-2 border-lightest-navy p-10
+    rounded-md  absolute top-44 bg-blend-soft-light overflow-y-auto;
 }
 </style>
