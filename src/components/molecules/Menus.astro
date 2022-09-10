@@ -1,24 +1,41 @@
 ---
 import { localizePath } from 'astro-i18next'
-import { t } from 'i18next'
+import i18next, { t } from 'i18next'
 import LanguageSelector from 'atoms:LanguageSelector'
 import { navMenus } from '@models:Menu'
+import Icon from 'astro-icon'
+import SearchBox from '@components:molecules/SearchBox.vue';
+import { Article, jsonToArticle } from '@models:Article'
+import { MarkdownInstance } from 'astro'
 export interface Props {
 	drawer: boolean
 }
 
 const { drawer } = Astro.props
+
+const { pathname } = Astro.url
+const isBlogRoot = pathname.endsWith('/blog')
+
+const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
+	en: Astro.glob('../../pages/blog/**/*.md'),
+	es: Astro.glob('../../pages/es/blog/**/*.md')
+}
+const postsData = i18next.language in articlesFiles ? await articlesFiles[i18next.language] : []
+
+const allPosts: Article[] = postsData
+	.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+	.map((post) => jsonToArticle(post))
+	.sort((a, b) => {
+		let aDate = new Date(a.date)
+		let bDate = new Date(b.date)
+		return bDate.getTime() - aDate.getTime()
+	})
 ---
 
 <ul class='menu-list' data-cypress='menu'>
-	<!-- <li class="mb-6 lg:mb-0">
-        <div
-            v-if="!$generalStore.showSide"
-            class="cursor-pointer text-lightest-slate hover:text-gray-600"
-        >
-            Search
-        </div>
-    </li> -->
+	<li>
+     <SearchBox articles={allPosts} client:visible/>
+    </li>
 	<li>
 		<ol
 			class={`order-list items-center space-y-6 lg:space-y-0 lg:space-x-2 lg:flex ${
@@ -41,11 +58,19 @@ const { drawer } = Astro.props
 			}
 		</ol>
 	</li>
-	<li>
+	<li class="flex justify-start md:justify-between items-center">
 		<LanguageSelector
 			showFlag={true}
 			class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
 		/>
+		<a
+		class='rounded p-2 bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
+		aria-label='RSS Feed'
+		target='_blank'
+		href='/rss.xml'
+	>
+		<Icon name='tabler:rss' class='w-5 h-5' />
+	</a>
 	</li>
 	<li>
 		<a href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>

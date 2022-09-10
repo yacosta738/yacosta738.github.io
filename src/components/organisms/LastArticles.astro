@@ -27,7 +27,7 @@ const posts: Article[] = postsData
 	>
 		{
 			posts.map((post) => (
-				<article class='w-full max-w-sm bg-light-navy rounded-lg border border-lightest-navy shadow-md'>
+				<article class='w-full max-w-sm bg-light-navy rounded-lg border border-lightest-navy shadow-md transform hover:-translate-y-2'>
 					<a href={post.url}>
 						<img class='rounded-t-lg object-cover h-48 w-96' src={post.cover} alt={post.title} />
 						<div class='absolute top-1 right-1 left-1 flex justify-between items-center px-4 rounded-lg rounded-b-none'>

@@ -26,6 +26,7 @@ specifiers:
   eslint-plugin-import: 2.26.0
   eslint-plugin-n: 15.2.5
   eslint-plugin-promise: 6.0.1
+  fuse.js: ^6.6.2
   i18next-fs-backend: ^1.1.5
   locale-emoji: ^0.3.0
   marked: ^4.0.19
@@ -41,6 +42,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.0.0
+  fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
 
@@ -2997,6 +2999,11 @@ packages:
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
+
+  /fuse.js/6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
+    dev: false
 
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
