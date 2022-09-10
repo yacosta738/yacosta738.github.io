@@ -85,7 +85,7 @@ const yearsOfExperience = (): number => {
     
     .styled-pic {
       position: relative;
-      max-width: 300px;
+      max-width: 500px;
     
       .wrapper {
         box-shadow: 0 10px 30px -15px var(--navy-shadow);
@@ -95,7 +95,7 @@ const yearsOfExperience = (): number => {
         width: 100%;
         border-radius: 4px;
         background-color: var(--green);
-        z-index: 1;
+        z-index: 10;
     
         &:hover {
           box-shadow: 0 20px 30px -15px var(--navy-shadow);
@@ -136,6 +136,7 @@ const yearsOfExperience = (): number => {
           mix-blend-mode: multiply;
           filter: grayscale(100%) contrast(1);
           transition: var(--transition);
+          z-index: 2;
         }
     
         &:before {
@@ -161,9 +162,9 @@ const yearsOfExperience = (): number => {
           border-radius: 4px;
           transition: var(--transition);
           border: 2px solid var(--green);
-          top: 20px;
-          left: 20px;
-          z-index: -1;
+          top: 25px;
+          left: 25px;
+          z-index: 1;
         }
       }
     }
