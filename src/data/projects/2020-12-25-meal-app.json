@@ -10,5 +10,5 @@
   "showInProjects": true,
   "featured": false,
   "published": true,
-  "content": "A simple application made in [Flutter](https://flutter.dev/) where a list by categories of the dishes and their ingredients is shown. It allows you to see the details of the dishes and the steps to follow to make them, It also allows you to add favorite foods and filter by ingredients (glucose-free, vegetarian food, etc.)"
+  "content": "A simple application made in [Flutter](https://flutter.dev/) where a list by categories of the dishes and their ingredients is shown. "
 }

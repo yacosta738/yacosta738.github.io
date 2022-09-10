@@ -1,58 +1,64 @@
 ---
-import i18next from "i18next";
-import { Project, ProjectJson } from "@models:Project";
-import { Tech } from "@models:Tech";
-import ProjectsFeatured from "molecules:ProjectsFeatured";
-import ProjectsCommon from "molecules:ProjectsCommon";
-import { urlize } from "@util:utilities";
+import i18next from 'i18next'
+import { Project, ProjectJson } from '@models:Project'
+import { Tech } from '@models:Tech'
+import ProjectsFeatured from 'molecules:ProjectsFeatured'
+import ProjectsCommon from 'molecules:ProjectsCommon'
+import { urlize } from '@util:utilities'
 
-const projectData = await Astro.glob<ProjectJson>(
-    "../../data/projects/**/*.json"
-);
-const techData = await Astro.glob<Tech>("../../data/technologies/**/*.json");
-const tech: { [key: string]: Tech } = {};
-techData.forEach((t) => (tech[t.id] = t));
+const projectData = await Astro.glob<ProjectJson>('../../data/projects/**/*.json')
+const techData = await Astro.glob<Tech>('../../data/technologies/**/*.json')
+const tech: { [key: string]: Tech } = {}
+techData.forEach((t) => (tech[t.id] = t))
 
 const jsonToProject = (json: ProjectJson): Project => {
-    const project: Project = {
-        id: json.id,
-        title: json.title,
-        lang: json.lang,
-        date: json.date,
-        cover: json.cover,
-        repository: json.repository,
-        url: json.url,
-        company: json.company,
-        tech: json.tech.map((t) => tech[urlize(t.toLowerCase())]),
-        showInProjects: json.showInProjects,
-        featured: json.featured,
-        published: json.published,
-        content: json.content,
-    };
-    return project;
-};
+	const project: Project = {
+		id: json.id,
+		title: json.title,
+		lang: json.lang,
+		date: json.date,
+		cover: json.cover,
+		repository: json.repository,
+		url: json.url,
+		company: json.company,
+		tech: json.tech.map((t) => tech[urlize(t.toLowerCase())]),
+		showInProjects: json.showInProjects,
+		featured: json.featured,
+		priority: json.priority || 0,
+		published: json.published,
+		content: json.content
+	}
+	return project
+}
 const projects: Project[] = projectData
-    .filter((project) => project.published && project.lang === i18next.language)
-    .sort((a, b) => {
-        if (a.date > b.date) return -1;
-        if (a.date < b.date) return 1;
-        return 0;
-    })
-    .map((json) => jsonToProject(json));
-const featuredProjects = projects.filter((project) => project.featured);
-const commonProjects = projects.filter((project) => project.showInProjects && !project.featured);
+	.filter((project) => project.published && project.lang === i18next.language)
+	.sort((a, b) => {
+		if (a.date > b.date) return -1
+		if (a.date < b.date) return 1
+		return 0
+	})
+	.map((json) => jsonToProject(json))
+const featuredProjects = projects
+	.filter((project) => project.featured)
+	.sort((a, b) => {
+		if (a.priority > b.priority) return -1
+		if (a.priority < b.priority) return 1
+		return 0
+	})
+const commonProjects = projects
+	.filter((project) => project.showInProjects && !project.featured)
+	.sort((a, b) => {
+		if (a.priority > b.priority) return -1
+		if (a.priority < b.priority) return 1
+		return 0
+	})
 ---
 
-<section id="projects" class="mx-4 md:mx-auto">
-    {
-        featuredProjects && featuredProjects.length > 0 && (
-            <ProjectsFeatured projects={featuredProjects} />
-        )
-    }
-{
-      commonProjects && commonProjects.length > 0 && (
-        <ProjectsCommon projects={commonProjects}
-    />
-    )
-    }
+<section id='projects' class='mx-4 md:mx-auto'>
+	{
+		featuredProjects && featuredProjects.length > 0 && (
+			<ProjectsFeatured projects={featuredProjects} />
+		)
+	}
+	{commonProjects && commonProjects.length > 0 && <ProjectsCommon projects={commonProjects} />}
 </section>

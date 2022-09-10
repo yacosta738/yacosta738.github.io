@@ -9,6 +9,7 @@
   "tech": ["typescript", "react"],
   "showInProjects": true,
   "featured": false,
+  "priority": 0.06,
   "published": true,
   "content": "MAN is a movie search app that helps display and sort all movies available in the TMDB API. This App is build with ReactJS, Tailwindcss, and Typescript. Also, uses Vercel to deploy."
 }

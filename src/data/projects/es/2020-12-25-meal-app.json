@@ -10,5 +10,5 @@
   "showInProjects": true,
   "featured": false,
   "published": true,
-  "content": "Una sencilla aplicación realizada en [Flutter](https://flutter.dev/) donde se muestra un listado por categorías de los platos y sus ingredientes. Te permite ver el detalle de los platos y los pasos a seguir para realizarlos, además te permite añadir comidas favoritas y filtrar por ingredientes (sin glucosa, comida vegetariana, etc.)"
+  "content": "Una sencilla aplicación realizada en [Flutter](https://flutter.dev/) donde se muestra un listado por categorías de los platos y sus ingredientes."
 }

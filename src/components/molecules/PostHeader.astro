@@ -26,12 +26,12 @@ const formatDate = (date: Date | string) => {
     {article.timeToRead && <li class="my-2 whitespace-nowrap mx-1">
       <span>{t('time-to-read', { timeToRead: article.timeToRead })}</span>
     </li>}
-    {article.url && <li class="my-2 whitespace-nowrap mx-1">
+    <!-- {article.url && <li class="my-2 whitespace-nowrap mx-1">
       <a href={localizePath(article.url)} class="flex text-green-500">
         <Icon name="la:comments" class="h-4 mr-1" />
         300
       </a>
-    </li>}
+    </li>} -->
     {article.author && <li class="my-2 whitespace-nowrap mx-1">
       <span class="mr-1">{t('author')}</span>
       <a href={localizePath(urlize(article.author))} class="inline-link">{ article.author }</a>

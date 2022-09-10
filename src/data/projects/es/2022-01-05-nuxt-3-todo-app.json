@@ -1,5 +1,5 @@
 {
-  "title": "Nuxt 3 Todo App",
+  "title": "Nuxt ToDo App",
   "lang": "es",
   "cover": "/uploads/app.png",
   "date": "2022-01-05T03:29:14.163Z",
@@ -9,6 +9,7 @@
   "tech": ["vuejs", "tailwind", "typescript", "vite"],
   "showInProjects": true,
   "featured": false,
+  "priority": 0.05,
   "published": true,
   "content": "Aplicación para gestionar lista de tareas. Permite agregar, marcar como completada y eliminar una tarea. Posee tres vistas principales donde se muestran todas las tareas, las tareas activas y las tareas completadas."
 }
