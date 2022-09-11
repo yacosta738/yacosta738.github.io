@@ -4,7 +4,6 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0c5e5ad4-8565-4a37-b181-b4442505a68b/deploy-status)](https://app.netlify.com/sites/yunielacosta/deploys)
 
-
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
