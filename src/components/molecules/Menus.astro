@@ -4,9 +4,9 @@ import i18next, { t } from 'i18next'
 import LanguageSelector from 'atoms:LanguageSelector'
 import { navMenus } from '@models:Menu'
 import Icon from 'astro-icon'
-import SearchBox from '@components:molecules/SearchBox.vue';
 import { Article, jsonToArticle } from '@models:Article'
 import { MarkdownInstance } from 'astro'
+import Search from '@components:atoms/Search.vue';
 export interface Props {
 	drawer: boolean
 }
@@ -34,7 +34,7 @@ const allPosts: Article[] = postsData
 
 <ul class='menu-list' data-cypress='menu'>
 	<li>
-     <SearchBox articles={allPosts} client:only/>
+     {isBlogRoot && <Search client:only />}
     </li>
 	<li>
 		<ol

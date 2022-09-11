@@ -1,4 +1,6 @@
+import { v4 as uuidv4 } from 'uuid'
 export interface Article {
+	id: string;
 	url: string
 	title: string
 	description: string
@@ -15,6 +17,7 @@ export interface Article {
 
 export const jsonToArticle = (json: any): Article => {
 	return {
+		id: json.id || uuidv4(),
 		url: json.url,
 		title: json.frontmatter.title,
 		description: json.frontmatter.description,

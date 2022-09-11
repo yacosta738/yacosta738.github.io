@@ -71,5 +71,6 @@
   "top": "Tope",
   "error404": "La página no se encuentra (404)",
   "message404": "No se como terminaste aquí, pero la página no existe. O bien, <em>esta</em> página si existe, pero es una página <em>\"Page not found\"</em>...entiendes el punto de vista.",
-  "of": "de"
+  "of": "de",
+  "search-placeholder": "Buscar..."
 }

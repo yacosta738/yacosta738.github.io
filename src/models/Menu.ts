@@ -1,43 +1,43 @@
+import { v4 as uuidv4 } from 'uuid'
 export interface Menu {
 	id: string
 	title: string
 	link: string
 	dataCypress: string
 }
-const idMax = 100
 export const navMenus: Menu[] = [
 	{
-		id: `yap-${Math.floor(Math.random() * idMax)}`,
+		id: uuidv4(),
 		title: 'about',
 		link: '/#about',
 		dataCypress: 'about'
 	},
 	{
-		id: `yap-${Math.floor(Math.random() * idMax)}`,
+		id: uuidv4(),
 		title: 'experience',
 		link: '/#jobs',
 		dataCypress: 'jobs'
 	},
 	{
-		id: `yap-${Math.floor(Math.random() * idMax)}`,
+		id: uuidv4(),
 		title: 'work',
 		link: '/#projects',
 		dataCypress: 'projects'
 	},
 	{
-		id: `yap-${Math.floor(Math.random() * idMax)}`,
+		id: uuidv4(),
 		title: 'last-articles',
 		link: '/#last3articles',
 		dataCypress: 'last3articles'
 	},
 	{
-		id: `yap-${Math.floor(Math.random() * idMax)}`,
+		id: uuidv4(),
 		title: 'contact',
 		link: '/#contact',
 		dataCypress: 'contact'
 	},
 	{
-		id: `yap-${Math.floor(Math.random() * idMax)}`,
+		id: uuidv4(),
 		title: 'blog',
 		link: '/blog',
 		dataCypress: 'blog'

@@ -71,5 +71,6 @@
   "top": "Top",
   "error404": "Page Not Found (404)",
   "message404": "Don't know how you ended up here, but the page doesn't exist. Or well, <em>this</em> page exists, but it's a <em>page not found</em> page...you get the point.",
-  "of": "of"
+  "of": "of",
+  "search-placeholder": "Search..."
 }

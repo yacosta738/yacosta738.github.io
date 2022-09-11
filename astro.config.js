@@ -7,6 +7,7 @@ import image from '@astrojs/image'
 import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 
+import compress from 'astro-compress'
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,7 +31,10 @@ export default defineConfig({
 		vue(),
 		astroI18next(),
 		image(),
-		robotsTxt()
+		robotsTxt(),
+		compress({
+			html: false
+		})
 	],
 	vite: {
 		ssr: {

@@ -48,11 +48,8 @@ const toggleDrawer = () => {
 	updateDrawer(!generalStore.get().drawer)
 }
 
-const toggleSearchModal = () => {
-	generalStore.set({
-		...generalStore.get(),
-		searchModal: !generalStore.get().searchModal
-	})
+const updateSearchModal = (searchModal: boolean) => {
+	generalStore.set({ ...generalStore.get(), searchModal })
 }
 
 export {
@@ -60,6 +57,6 @@ export {
 	updateDrawer,
 	updateShowNavbar,
 	toggleDrawer,
-	toggleSearchModal,
+	updateSearchModal,
 	toggleShowAdsBanner
 }
