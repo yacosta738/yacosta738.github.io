@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon'
+import { jsonToTech, Tech } from '@models:Tech'
+const techData = await Astro.glob('../../data/technologies/**/*.json')
+
+const techs: Tech[] = techData
+	.map((tech) => jsonToTech(tech))
+	.filter((tech) => tech.icon !== undefined && tech.icon !== null)
+---
+
+<div class='absolute inset-0 -z-10'>
+	<div
+		id='icons'
+		class='relative [&>svg]:p-4 [&>svg]:w-24 [&>svg]:h-24 [&>svg]:fill-current [&>svg]:opacity-0 [&>svg]:absolute h-full'
+	>
+		{techs.map((tech) => <Icon name={tech.icon} />)}
+	</div>
+</div>
+<script type='module'>
+	const hero = document.getElementById('icons')
+	const svgs = Array.from(hero.querySelectorAll('svg'))
+
+	const w = window.innerWidth
+	const h = window.innerHeight - 300
+
+	function animateBackgroundIcons() {
+		const availableSvgs = svgs.filter((svg) => !svg.isAnimating)
+		const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)]
+		
+		if (!svgToAnimate) return
+
+		svgToAnimate.addEventListener(
+			'animationend',
+			() => {
+				svgToAnimate.classList.remove('animate-moving-background')
+				svgToAnimate.removeAttribute('style')
+				svgToAnimate.isAnimating = false
+			},
+			{ once: true }
+		)
+
+		svgToAnimate.setAttribute(
+			'style',
+			`top: ${Math.floor(Math.random() * h)}px;
+				left: ${Math.floor(Math.random() * w)}px;`
+		)
+
+		svgToAnimate.classList.add('animate-moving-background')
+		svgToAnimate.isAnimating = true
+	}
+
+	setInterval(animateBackgroundIcons, 1000)
+	animateBackgroundIcons()
+</script>
