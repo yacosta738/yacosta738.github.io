@@ -38,8 +38,8 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 		<div class='relative flex flex-col min-h-[100vh]'>
 			<Navbar />
 			<div class='container mx-auto flex flex-col xl:flex-row mt-24'>
-				<Technologies />
-				<main class='container mx-auto px-2'>
+				<main class='relative w-full overflow-hidden px-2'>
+					<Technologies />
 					<slot />
 				</main>
 			</div>
