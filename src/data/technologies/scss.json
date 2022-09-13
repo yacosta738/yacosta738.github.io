@@ -1,6 +1,6 @@
 {
   "id": "scss",
   "name": "Scss",
-  "icon": "vscode-icons:file-type-scss",
+  "icon": "simple-icons:sass",
   "url": "https://sass-lang.com/"
 }

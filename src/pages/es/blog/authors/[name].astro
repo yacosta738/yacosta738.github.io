@@ -1,0 +1,87 @@
+---
+import { Author, jsonToAuthor } from "@models:Author";
+import Icon from "astro-icon";
+import Card3D from "molecules:Card3D";
+import i18next, { t, changeLanguage } from "i18next";
+import BaseTemplate from "templates:BaseTemplate";
+
+changeLanguage("es");
+
+export async function getStaticPaths() {
+    const authorsData = await Astro.glob("./**/*.json");
+    const authors: Author[] = authorsData
+        .filter((author) => author.lang === i18next.language)
+        .map((author) => jsonToAuthor(author));
+    return authors.map((author) => ({
+        params: {
+            name: author.id
+        },
+        props: {
+            author
+        }
+    }));
+}
+const { name } = Astro.params;
+const { author } = Astro.props;
+---
+
+<BaseTemplate title={`${t('blog')} | ${name}`} description={t('seo.blog-description')}>
+	<section id='about-author' class='container mx-auto'>
+		<div class='flex items-center justify-center'>
+			<Card3D>
+				<a
+					href={`mailto:${author.email}`}
+					class='flex justify-between hover:scale-110 transform transition duration-300 ease-in-out'
+					slot='left-header'
+				>
+					<Icon name='cib:minutemailer' class='w-8 h-8 mx-1 hidden md:block' />
+					{author.email}
+				</a>
+
+			<img slot="right-header"
+			 class="p-1 w-20 h-20 rounded-full ring-2 ring-light-navy dark:ring-lightest-navy" src={author.image} alt={author.name}>
+
+
+				<h1
+					class='pt-10 m-0 mx-auto font-black leading-none text-center text-transparent text-4xl bg-clip-text bg-gradient-to-bl md:bg-gradient-to-br from-green-300 via-green-500 to-light-navy sm:text-[4rem] md:text-7xl'
+					data-atropos-offset='2'
+				>
+					{author.name}
+				</h1>
+
+				<div class='flex items-center justify-center pt-2 sm:pt-4 md:pt-0' data-atropos-offset='5'>
+					<h2
+						class='inline-block w-40 px-3 py-1 text-xs font-bold text-center text-white rounded-full md:w-2/3 md:text-lg bg-dark-navy/90'
+					>
+						{author.rol}
+					</h2>
+				</div>
+
+				<h3
+					data-atropos-offset='5'
+					class='flex flex-col items-center justify-center pt-6 pb-6 text-2xl font-bold text-center md:flex-row'
+				>
+					{
+						author.social.map((social) => (
+							<a
+								href={social.url}
+								target='_blank'
+								rel='noopener noreferrer'
+								class='flex items-center justify-center w-12 h-12 mx-2 text-2xl p-1 rounded-full hover:text-white hover:bg-light-navy/90'
+							>
+								<Icon name={social.icon} />
+							</a>
+						))
+					}
+				</h3>
+
+				<div
+					id='card-icon'
+					class='absolute opacity-30 top-20 -left-32 w-96 h-96 -z-10 contrast-200'
+				>
+					FlavourIcon
+				</div>
+			</Card3D>
+		</div>
+	</section>
+</BaseTemplate>

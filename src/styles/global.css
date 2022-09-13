@@ -6,6 +6,29 @@
 
 @tailwind utilities;
 
+@layer components {
+	.button-ticket {
+		@apply flex items-center w-[5.5rem] h-24 p-4 rounded-lg hover:scale-110 hover:opacity-100 hover:contrast-100 transition-all opacity-60 contrast-75;
+	}
+	.button {
+		transition: var(--transition);
+		outline: 0;
+		@apply cursor-pointer select-none rounded border border-green-500 bg-transparent p-2 text-sm text-green-500 hover:bg-green-900;
+	}
+
+	.resume-button {
+		@apply cursor-pointer select-none rounded border border-green-500 bg-transparent p-2 text-sm capitalize text-green-500 hover:bg-green-900;
+	}
+
+	.small-button {
+		@apply button p-1 font-mono text-sm;
+	}
+
+	.big-button {
+		@apply cursor-pointer select-none rounded border-2 border-green-500 bg-transparent py-4 px-6 font-mono text-lg text-green-500 hover:bg-green-900;
+	}
+}
+
 .content-wrapper > main {
 	background-color: var(--bg-background-primary);
 }
@@ -354,22 +377,4 @@ nav .active {
 	opacity: 1;
 	transform: translateY(0px);
 	transition: opacity 300ms var(--easing), transform 300ms var(--easing);
-}
-
-.button {
-	transition: var(--transition);
-	outline: 0;
-	@apply cursor-pointer select-none rounded border border-green-500 bg-transparent p-2 text-sm text-green-500 hover:bg-green-900;
-}
-
-.resume-button {
-	@apply cursor-pointer select-none rounded border border-green-500 bg-transparent p-2 text-sm capitalize text-green-500 hover:bg-green-900;
-}
-
-.small-button {
-	@apply button p-1 font-mono text-sm;
-}
-
-.big-button {
-	@apply cursor-pointer select-none rounded border-2 border-green-500 bg-transparent py-4 px-6 font-mono text-lg text-green-500 hover:bg-green-900;
 }

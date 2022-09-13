@@ -5,7 +5,6 @@ export interface Tech {
 	url?: string
 }
 
-
 export const jsonToTech = (json: any): Tech => {
 	return {
 		id: json.id,

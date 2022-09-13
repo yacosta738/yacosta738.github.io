@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { inlineLinks } from '@util:utilities'
-import { Job } from '@models:Job'
+import { Job } from '../../../models/Job'
+import { inlineLinks } from '../../../util/utilities'
 
 defineProps({
 	jobs: {

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 export interface Article {
-	id: string;
+	id: string
 	url: string
 	title: string
 	description: string

@@ -1,6 +1,6 @@
 {
   "id": "idea",
   "name": "IntelliJ Idea",
-  "icon": "logos:intellij-idea",
+  "icon": "simple-icons:intellijidea",
   "url": "https://www.jetbrains.com/idea/"
 }
