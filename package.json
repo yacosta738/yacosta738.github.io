@@ -13,7 +13,7 @@
     "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx,.vue",
     "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx,.vue --fix",
     "test": "playwright test --workers=2",
-    "ci": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test'"
+    "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test'"
   },
   "devDependencies": {
     "@astrojs/image": "^0.3.6",
