@@ -88,4 +88,14 @@ const lang = frontmatter.lang || 'en'
 	if (firstParagraph) {
 		firstParagraph.id = 'first-paragraph'
 	}
+
+	const links = document.querySelectorAll('a')
+	links.forEach((link) => {
+		link.target = '_blank'
+		link.rel = 'noopener noreferrer'
+		// add class to external links
+		if (link.hostname !== window.location.hostname) {
+			link.classList.add('inline-link')
+		}
+	})
 </script>
