@@ -92,7 +92,7 @@ onMounted(() => {
 							<span>{{ job.role }}</span>
 							<span class="company">
 								&nbsp;@&nbsp;
-								<a :href="job.url" class="inline-link">
+								<a :href="job.url" target="_blank" class="inline-link">
 									{{ job.company }}
 								</a>
 							</span>
