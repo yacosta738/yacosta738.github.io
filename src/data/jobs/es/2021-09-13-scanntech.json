@@ -9,9 +9,8 @@
   "url": "https://www.scanntech.com",
   "published": true,
   "achievement": [
-    "Capacité a más de 10 miembros del personal en funciones web internas, incluidos los pasos sobre cómo realizar actualizaciones y cambios menores.",
-    "Guié y asistí al equipo de desarrollo durante todo el proceso de implementación de los requisitos de software con las nuevas tecnologías.",
-    "Capacité a más de 15 miembros del personal en arquitectura de microservicios con Kubernetes e Istio.",
-    "Diseñé, implementé y desarrollé una arquitectura de microservicios para el sistema de gestión de reputación online."
+    "Mejoré la ejecución de sincronización de datos de nuestras APIs con las de MMC bajando el tiempo de 40 minutos aproximadamente a 6 minutos.",
+     "Mejora en calidad de código agregando test y buenas prácticas con los principios SOLID.",
+     "Diseñe e implemente el patrón de configuración centralizada para todos los microservicios de la plataforma."
   ]
 }

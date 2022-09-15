@@ -9,9 +9,8 @@
   "url": "https://www.scanntech.com",
   "published": true,
   "achievement": [
-    "Trained over 10 staff members in internal web functions, including steps on how to make minor updates and changes.",
-    "Guided and assisted the development team throughout the process of implementing software requirements with new technologies.",
-    "Trained over 15 staff members in microservices architecture with Kubernetes and Istio.",
-    "Designed, implemented and developed microservice architecture for online reputation management system."
+    "I improved the execution of data synchronization of our APIs with those of MMC, lowering the time from approximately 40 minutes to 6 minutes.",
+    "Improvement in code quality by adding tests and good practices with SOLID principles.",
+    "Design and implement the centralized configuration pattern for all platform microservices."
   ]
 }
