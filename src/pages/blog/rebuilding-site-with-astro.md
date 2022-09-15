@@ -1,5 +1,5 @@
 ---
-date: 2022-09-12
+date: 2022-09-13
 title: "From Gridsome to Nuxt to Astro - Rebuilding with Astro"
 cover: /uploads/rebuild-with-astro.webp
 author: Yuniel Acosta
@@ -10,6 +10,8 @@ description: Astro is an innovative static site generator that focuses on static
 layout: ../../components/templates/BlogPostTemplate.astro
 draft: false
 ---
+
+![Astro is an innovative static site generator that focuses on static generation instead of JS framework. But how much better is it?](/uploads/rebuild-with-astro.webp 'Astro vs Gridsome/Nuxt - Rebuilding with Astro')
 
 I don't remember exactly when I started hearing about [Astro](https://astro.build), one of the latest static site generators to help tackle the problem of building sites with less Javascript. The problem is one we're all familiar with - how can I build a static site (in my case, my personal site) using the languages and tools I know best, while performing at its best? After migrating from [jekyll](https://jekyllrb.com/), I first tried [Hugo](https://gohugo.io/), then [Gridsome](https://gridsome.org/), and most recently [Nuxt](https://nuxtjs.org/). All of these are excellent tools, and I highly recommend them. But one thing that is the same across all of them is that they are tied to their specific framework (React or Vue).
 
@@ -23,25 +25,23 @@ And so, as one does, I decided to rewrite my personal site from Nuxt to Astro.
 
 ## Performance Woes
 
-I should say, before going too much further, that I love Nuxt as a framework. I think it's an amazing tool, and I realize that, as I write this, we are days away from the release of Nuxt 3.
+I must say, before going any further, that I love Nuxt as a framework. I think it is an amazing tool to create websites.
 
 That said, I've been running a number of sites with Nuxt in static site mode, and each of them has some odd quirks that I've never been able to fully work out. One site, a single page in the truest sense with only a bit of reactivity, was constantly reporting Typescript errors in VS Code. This was because the VS Code plugins (either Vetur or Volar) did not recognize that Nuxt's `asyncData` method returned state to the Vue object. This is not Nuxt's fault, but it made things annoying.
 
 A second site (which is purely static assets, almost no JS interaction in the browser) had an issue that when code was updated, any content fetched with [Nuxt's Content module](https://content.nuxtjs.org/) would be missing after the hot module reload finished. I found a workaround, and it's not a huge deal, but it's annoying.
 
-My personal site uses data from multiple sources, including Github and a few podcasts RSS feeds. Using Nuxt, I was doing more data fetching on render than I wanted. This hadn't been an issue with either Gatsby or Gridsome, and I expect that if I had explored `buildModules` more closely I could have found a solution. As it was, some pages had to fetch content on the client, and when that content is split between multiple endpoints, it made things slow.
-
 All of these sites, from the smallest to the largest, had one unifying issue: Lighthouse performance scores were never great. Below are my Lighthouse scores for this site before migrating from Nuxt:
 
 ![Nuxt-based site Lighthouse scores. Performance: 57, Accessibility: 79, Best Practices: 93, SEO: 100](/uploads/nuxt-lighthouse.png)
 
-This was done on my home page, on a fresh instance of Chrome with no plugins installed, in order to get the closest to a clean reading. The home page is loading a handful of images (language icons, my profile image), my latest blog post, and a few SVGs for social icons courtesy of Font Awesome. Data was also being fetched from Github's GraphQL API to get my profile's description, pinned repositories, and a few other details.
+This was done on my home page, on a fresh instance of Chrome with no plugins installed, in order to get the closest to a clean reading. The home page is loading a handful of images (language icons, my profile image), my latest blog post, and a few SVGs for social icons courtesy of Font Awesome.
 
 Here's the breakdown of the performance score:
 
 ![Performance metrics. First contentful paint: 2.0s, Time to Interactive: 6.3s, Speed Index: 2.3s, Total Blocking Time: 150ms, Largest Contentful Paint: 7.4s, Cumulative Layout Shift: 0.47](/uploads/nuxt-performance.png)
 
-Of these scores, the Largest Contentful Paint and Time to Interactive stood out to me the most. This is a mostly static page, with a number of links and one button (to toggle dark mode). Why was Nuxt taking so long to be interactive?
+Of these scores, the Largest Contentful Paint and Time to Interactive stood out to me the most. This is a mostly static page, with several links and a single interactive component to change the details of the companies I've worked for. Why did Nuxt take so long to become interactive?
 
 Looking at my Network requests, it looks to me like Nuxt is mostly fetching Javascript, and then spending its time executing it. I made a few notes to see what I was looking at. On a typical page load, I had:
 
@@ -67,30 +67,58 @@ Here's an example of my main blog page, which renders a list of blog posts. Astr
 
 ```javascript
 ---
-// Import components
-import BaseLayout from '../layouts/BaseLayout.astro'
-import BlogPostPreview from '../components/BlogPostPreview.astro';
+import i18next, { t, changeLanguage } from "i18next";
+import BlogTemplate from "templates:BlogTemplate";
+import { jsonToArticle } from "@models:Article";
+import ArticleSummary from "molecules:ArticleSummary";
+import Paginator from "molecules:Paginator";
+import SearchBox from "@components:molecules/SearchBox.vue";
 
-// Fetch posts
-const allPosts = Astro.fetchContent('./blog/*.md')
-    .filter(post => 
-        new Date(post.date) <= new Date()
-    )
-    .sort((a, b) => 
-        new Date(b.date).valueOf() - new Date(a.date).valueOf()
-    );
+changeLanguage("en");
 
-// Render to HTML
+const allPosts = await Astro.glob("./**/*.md");
+const sortedPosts = allPosts
+    .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+    .map((post) => jsonToArticle(post))
+    .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+export async function getStaticPaths({ paginate }) {
+    const allPosts = await Astro.glob("./**/*.md");
+    const sortedPosts = allPosts
+        .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+        .map((post) => jsonToArticle(post))
+        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+    return paginate(sortedPosts, {
+        pageSize: 5
+    });
+}
+const { page } = Astro.props;
 ---
-<BaseLayout>
-  <div class="flex flex-col lg:flex-row flex-wrap">
-    {allPosts.map(post => (
-      <div class="w-full lg:w-1/2 xl:w-1/3 p-4">
-        <BlogPostPreview item={post} />
-      </div>
-    ))}
-  </div>
-</BaseLayout>
+
+<BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
+	<SearchBox articles={sortedPosts} client:only/>
+	<div class='container mx-auto'>
+		{
+			page.data.map((post) => (
+				<article class='mb-20 border-b border-gray-400 mx-2 md:mx-24'>
+					<ArticleSummary article={post} />
+				</article>
+			))
+		}
+		{
+			page.data.length === 0 && (
+				<div class='container-inner mx-auto py-16 pl-10'>
+					<div class='text-center'>
+						<h1 class='text-3xl font-bold'>{t('no-articles-found')}</h1>
+						<p class='text-gray-600'>{t('try-again')}</p>
+					</div>
+				</div>
+			)
+		}
+		<!-- pagination -->
+		<Paginator page={page} />
+	</div>
+</BlogTemplate>
+
 ```
 
 This may look familiar to someone who has used React before, with just a few oddities (no key on the mapped JSX? Extra dashes between the head and the return?), but it's important to remember that the result of this is pure HTML. No Javascript will ever be parsed on the client from this snippet. These components are all written with Astro's unique syntax, but the same is true when using React, Vue, or anything else: only static HTML and CSS would result from rendering this page.
@@ -99,58 +127,136 @@ But what if you want to load some Javascript? What if you need some client side 
 
 ## Partial Hydration
 
-Astro promotes the concept of [Partial Hydration](https://docs.astro.build/core-concepts/component-hydration). From Astro's documentation:
+Astro promotes the concept of [Partial Hydration](https://docs.astro.build/en/core-concepts/framework-components/#hydrating-interactive-components). From Astro's documentation:
 
 > Astro generates every website with zero client-side JavaScript, by default. Use any frontend UI component that you’d like (React, Svelte, Vue, etc.) and Astro will automatically render it to HTML at build-time and strip away all JavaScript. This keeps every site fast by default.
 >
 > But sometimes, client-side JavaScript is required. This guide shows how interactive components work in Astro using a technique called partial hydration.
 
-Most sites do not need to be fully controlled by Javascript. This concept of partial hydration leans into that. Using my personal site as an example, the only dynamic portion of the site is toggling dark mode. In the Nuxt version of the site, I was reliant on the Nuxt runtime to toggle light and dark mode. To be frank, that's overkill for a static site. I shouldn't have to render an entire SPA just to toggle dark mode, right?
+Most sites do not need to be fully controlled by Javascript. This concept of partial hydration leans into that. Using my personal site as an example, the only dynamic portion of the site is toggling the component "Where I've Worked". In the Nuxt version of the site, I was reliant on the Nuxt runtime to toggle the tabs of this components. To be frank, that's overkill for a static site. I shouldn't have to render an entire SPA just to toggle this tabs, right?
 
 On their page about partial hydration, the Astro docs reference [Jason Miller's blog post on the idea of an Islands Architecture](https://jasonformat.com/islands-architecture/):
 
 > In an “islands” model, server rendering is not a bolt-on optimization aimed at improving SEO or UX. Instead, it is a fundamental part of how pages are delivered to the browser. The HTML returned in response to navigation contains a meaningful and immediately renderable representation of the content the user requested.
 
-Rather than load an entire SPA to handle a small portion of functionality, Vue can target a much smaller section of the DOM, and render only the portion of the application that I need (in this case, a button and some JS to toggle dark mode). Vue supports this usage by default, but in the world of frameworks we tend to forget this. A number of recent episodes of Views on Vue have explored this concept, including [using Vue without an SPA](https://viewsonvue.com/using-vue-with-an-spa-with-ariel-dorol-vue-159) and [building micro frontends](https://viewsonvue.com/building-micro-frontends-with-lawrence-almeida-vue-160). [The Wikimedia Foundation also uses Vue this way](https://lists.wikimedia.org/hyperkitty/list/wikitech-l@lists.wikimedia.org/thread/SOZREBYR36PUNFZXMIUBVAIOQI4N7PDU/), rendering client-side functionality on top of an existing PHP monolith ([listen to my discussion with Eric Gardner](https://viewsonvue.com/adoping-vue-at-wikimedia-with-eric-gardner-vue-165) to learn more).
+Rather than load an entire SPA to handle a small portion of functionality, Vue can target a much smaller section of the DOM, and render only the portion of the application that I need (in this case, a button and some JS to toggle the tabs). Vue supports this usage by default, but in the world of frameworks we tend to forget this. A number of recent episodes of Views on Vue have explored this concept, including [using Vue without an SPA](https://viewsonvue.com/using-vue-with-an-spa-with-ariel-dorol-vue-159) and [building micro frontends](https://viewsonvue.com/building-micro-frontends-with-lawrence-almeida-vue-160). [The Wikimedia Foundation also uses Vue this way](https://lists.wikimedia.org/hyperkitty/list/wikitech-l@lists.wikimedia.org/thread/SOZREBYR36PUNFZXMIUBVAIOQI4N7PDU/).
 
-When viewed in this way, performance is almost a byproduct of following best practices with Astro. For my personal site, I only needed a simple button to toggle dark mode. While I know this could be handled just as easily with vanilla JS, I wanted to try using Vue to build an island of functionality. Here's my Vue component:
+When viewed in this way, performance is almost a byproduct of following best practices with Astro. For my personal site, I only needed a simple component for change the Company information. While I know this could be handled just as easily with vanilla JS, I wanted to try using Vue to build an island of functionality. Here's my Vue component:
 
 ```html
-<template>
-  <button
-    class="dark-mode-button"
-    @click="toggleDarkMode"
-  >
-    {{ isDark ? "🌙" : "☀️" }}
-  </button>
-</template>
+<script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+import { Job } from '../../../models/Job'
+import { inlineLinks } from '../../../util/utilities'
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      isDark: localStorage.getItem("darkMode") === "true",
-    };
-  },
-  methods: {
-    toggleDarkMode() {
-      this.isDark = !this.isDark;
-    },
-  },
-  watch: {
-    isDark() {
-      localStorage.setItem("darkMode", this.isDark);
-      const html = document.querySelector("html");
+defineProps({
+	jobs: {
+		type: Array<Job>,
+		default: () => []
+	}
+})
 
-      if (this.isDark) {
-        html.classList.add("dark");
-      } else {
-        html.classList.remove("dark");
-      }
-    },
-  }
-};
+const jobActiveTabIdKey = 'jobActiveTabId'
+const getActiveTabId = (): number => {
+	if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
+
+	return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) || '0')
+}
+
+const tabId = ref(getActiveTabId())
+
+const activeTabId = computed<number>({
+	get: () => tabId.value,
+	set: (value) => {
+		tabId.value = value
+		localStorage.setItem(jobActiveTabIdKey, value.toString())
+	}
+})
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+const sm = breakpoints.smaller('sm')
+const range = (job: Job): string => {
+	return `${new Date(job.startDate).toDateString()} - ${
+		job.endDate ? new Date(job.endDate).toDateString() : 'Present'
+	}`
+}
+
+onMounted(() => {
+	inlineLinks('styled-tab-content')
+})
 </script>
+
+<template>
+	<section id="jobs" class="styled-jobs-section">
+		<h2 class="numbered-heading">Where I've Worked</h2>
+		<div class="inner">
+			<ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
+				<li v-for="(job, i) in jobs" :key="job.id">
+					<button
+						:id="`tab-${i}`"
+						class="styled-tab-button"
+						:class="{ 'text-green-500': activeTabId === i }"
+						role="tab"
+						:aria-selected="activeTabId === i ? 'true' : 'false'"
+						:aria-controls="`panel-${i}`"
+						:tabIndex="activeTabId === i ? '0' : '-1'"
+						@click="activeTabId = i"
+						@keyup.up.prevent.stop="
+							activeTabId - 1 >= 0 ? (activeTabId -= 1) : (activeTabId = jobs.length - 1)
+						"
+						@keyup.down.prevent.stop="
+							activeTabId + 1 >= jobs.length ? (activeTabId = 0) : (activeTabId += 1)
+						"
+					>
+						<span>{{ job.company }}</span>
+					</button>
+				</li>
+				<div
+					class="styled-high-light"
+					:style="
+						sm
+							? `transform: translateX(calc(${activeTabId} * 120px));`
+							: `transform: translateY(calc(${activeTabId} * 42px));`
+					"
+				></div>
+			</ul>
+			<transition name="fade" mode="out-in">
+				<div>
+					<div
+						v-for="(job, i) in jobs"
+						:id="`panel-${i}`"
+						:key="job.id"
+						class="styled-tab-content"
+						role="tabpanel"
+						:tabIndex="activeTabId === i ? 0 : -1"
+						:aria-labelledby="`tab-${i}`"
+						:aria-hidden="activeTabId !== i"
+						:hidden="activeTabId !== i"
+					>
+						<h3>
+							<span>{{ job.role }}</span>
+							<span class="company">
+								&nbsp;@&nbsp;
+								<a :href="job.url" target="_blank" class="inline-link">
+									{{ job.company }}
+								</a>
+							</span>
+						</h3>
+						<p class="range">
+							{{ range(job) }}
+						</p>
+						<ul>
+							<li v-for="(detail, index) in job.achievement" :key="index">
+								<span>{{ detail }}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</transition>
+		</div>
+	</section>
+</template>
 ```
 
 And here's an example of how I'm using the component:
@@ -158,18 +264,23 @@ And here's an example of how I'm using the component:
 ```javascript
 ---
 // Import the Vue component into an Astro component
-import DarkModeButton from '../components/DarkModeButton.vue'
+import Jobs from "./Jobs.vue";
+import { Job } from "@models:Job";
+import i18next from "i18next";
+const data = await Astro.glob<Job>("../../../data/jobs/**/*.json");
+const jobs = data
+    .filter((job) =>job.published && job.lang === i18next.language)
+    .sort((a: Job, b: Job) => {
+        if (a.startDate > b.startDate) return -1;
+        if (a.startDate < b.startDate) return 1;
+        return 0;
+    });
 ---
-<html lang="en">
-  <body>
-    ... <!-- the rest of my template -->
-    <!-- Display the Vue component -->
-    <DarkModeButton client:only />
-  </body>
-</html>
+
+<Jobs client:only jobs={jobs} />
 ```
 
-Here, I'm using Astro's `client:only` directive. This tells Astro that it should be hydrated on the client, so that the Javascript will be executed. In this case, because the component is accessing the `window` element, I want to make sure it doesn't get executed during buildtime. The best part is that, within the Astro component, it just asks like a normal component that can accept props.
+Here, I'm using Astro's `client:only` directive. This tells Astro that it should be hydrated on the client, so that the Javascript will be executed. In this case, because the component is accessing the `localStorage`, I want to make sure it doesn't get executed during buildtime. The best part is that, within the Astro component, it just asks like a normal component that can accept props.
 
 Astro has a number of renderers, and at the recent [Vue Contributor Days](https://youtu.be/gpTbH469Qog?t=5756), Fred Schott said that first-class Vue support is very important to the Astro team, and that it comes out of the box when working with Astro. You do need to add the renderer to your Astro configuration, but that's all that is required to enable Vue components.
 
@@ -193,6 +304,6 @@ Astro is a relatively new tool for building static sites, but it's already gaini
 
 > This year’s ecosystem innovation award goes to Astro, an innovative Jamstack platform that lets you build faster websites with less client-side JavaScript. They make it possible for developers to build fully functional sites with any framework of their choice or none at all. Astro offers the best of both worlds when it comes to lightweight static sites generators like 11ty and bundle-heavy alternatives like Next and Svelte Kit.
 
-I'm really excited to see where Astro goes in the future. One item on their roadmap is to include server-side rendering, which I'm very excited for personally. I look forward to seeing what else comes out of this very interesting project.
+I'm really excited to see where Astro goes in the future. I look forward to seeing what else comes out of this very interesting project.
 
-Feel free to look at [the repository for this site](https://github.com/lindsaykwardell/lindsaykwardell) to view the code, and compare it against the Nuxt equivalent (in the Git history). If you want to learn more about Astro, check out their site at [astro.build](https://astro.build).
+Feel free to look at [the repository for this site](https://github.com/yacosta738/yacosta738.github.io) to view the code, and compare it against the Nuxt equivalent (in the Git history). If you want to learn more about Astro, check out their site at [astro.build](https://astro.build).

@@ -47,6 +47,7 @@ const calculatePosition = (index: number): string => {
                                     ? project.repository
                                     : "#"
                             }
+                            target="_blank"
                         >
                             {project.cover && (
                                 <img
@@ -171,7 +172,7 @@ const calculatePosition = (index: number): string => {
     .project-description {
         box-shadow: 0 10px 30px -15px var(--navy-shadow);
         transition: var(--transition);
-
+        opacity: 0.8;
         &:hover,
         &:focus {
             box-shadow: 0 20px 30px -15px var(--navy-shadow);
@@ -184,7 +185,6 @@ const calculatePosition = (index: number): string => {
         background-color: var(--light-navy);
         color: var(--light-slate);
         font-size: var(--fz-lg);
-
         @media (max-width: 768px) {
             padding: 20px 0;
             background-color: transparent;
