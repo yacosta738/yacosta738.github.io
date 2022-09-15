@@ -11,7 +11,9 @@
     "i18n:generate": "astro-i18next generate",
     "format": "prettier -w .",
     "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx,.vue",
-    "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx,.vue --fix"
+    "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx,.vue --fix",
+    "test": "playwright test --workers=2",
+    "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test'"
   },
   "devDependencies": {
     "@astrojs/image": "^0.3.6",
@@ -19,6 +21,7 @@
     "@astrojs/tailwind": "^1.0.0",
     "@astrojs/vue": "^1.0.0",
     "@nanostores/vue": "^0.6.0",
+    "@playwright/test": "^1.25.2",
     "@tailwindcss/aspect-ratio": "0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/line-clamp": "^0.4.0",
@@ -41,12 +44,13 @@
     "i18next-fs-backend": "^1.1.5",
     "locale-emoji": "^0.3.0",
     "marked": "^4.0.19",
-    "nanostores": "^0.6.0",
+    "nanostores": "^0.7.0",
     "postcss-nesting": "^10.1.10",
     "postcss-preset-env": "^7.8.0",
     "prettier": "2.7.1",
     "prettier-plugin-astro": "0.5.3",
     "sass": "^1.54.5",
+    "start-server-and-test": "^1.14.0",
     "vue": "^3.2.37"
   },
   "dependencies": {
