@@ -21,7 +21,7 @@ test('test', async ({ page }) => {
 	await page.locator('img[alt="Yuniel Acosta Pérez"]').click()
 
 	// Click text=Where I've Worked
-	await page.locator('text=Where I\'ve Worked').click()
+	await page.locator("text=Where I've Worked").click()
 
 	// Click text=Built by Yuniel Acosta
 	await page.locator('text=Built by Yuniel Acosta').click()

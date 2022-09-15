@@ -1,6 +1,6 @@
 ---
 date: 2022-09-13
-title: "From Gridsome to Nuxt to Astro - Rebuilding with Astro"
+title: 'From Gridsome to Nuxt to Astro - Rebuilding with Astro'
 cover: /uploads/rebuild-with-astro.webp
 author: Yuniel Acosta
 lang: en
@@ -63,7 +63,7 @@ Astro is a framework that is focused primarily on fetching your data from whiche
 
 This way of building a static site feels very comfortable and familiar to me. I started web development in HTML, CSS, and PHP, and avoided Javascript at all costs for many years (both before and after jQuery came onto the scene). Rendering HTML and CSS to the client is what I did, with some logic involved to perform simple tasks like displaying a list of elements or fetching data from a database. Using Astro, it's basically the same thing, just using Javascript instead of PHP.
 
-Here's an example of my main blog page, which renders a list of blog posts. Astro uses a unique syntax that combines the look and feel of Markdown, JSX, and standard HTML. All build time Javascript is handled in a 'frontmatter'-like block at the top of the file, and the static template is built below that. 
+Here's an example of my main blog page, which renders a list of blog posts. Astro uses a unique syntax that combines the look and feel of Markdown, JSX, and standard HTML. All build time Javascript is handled in a 'frontmatter'-like block at the top of the file, and the static template is built below that.
 
 ```javascript
 ---
@@ -145,117 +145,113 @@ When viewed in this way, performance is almost a byproduct of following best pra
 
 ```html
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { Job } from '../../../models/Job'
-import { inlineLinks } from '../../../util/utilities'
+  import { computed, onMounted, ref } from 'vue'
+  import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+  import { Job } from '../../../models/Job'
+  import { inlineLinks } from '../../../util/utilities'
 
-defineProps({
-	jobs: {
-		type: Array<Job>,
-		default: () => []
-	}
-})
+  defineProps({
+    jobs: {
+      type: Array<Job>,
+      default: () => []
+    }
+  })
 
-const jobActiveTabIdKey = 'jobActiveTabId'
-const getActiveTabId = (): number => {
-	if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
+  const jobActiveTabIdKey = 'jobActiveTabId'
+  const getActiveTabId = (): number => {
+    if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
 
-	return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) || '0')
-}
+    return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) || '0')
+  }
 
-const tabId = ref(getActiveTabId())
+  const tabId = ref(getActiveTabId())
 
-const activeTabId = computed<number>({
-	get: () => tabId.value,
-	set: (value) => {
-		tabId.value = value
-		localStorage.setItem(jobActiveTabIdKey, value.toString())
-	}
-})
+  const activeTabId = computed<number>({
+    get: () => tabId.value,
+    set: (value) => {
+      tabId.value = value
+      localStorage.setItem(jobActiveTabIdKey, value.toString())
+    }
+  })
 
-const breakpoints = useBreakpoints(breakpointsTailwind)
-const sm = breakpoints.smaller('sm')
-const range = (job: Job): string => {
-	return `${new Date(job.startDate).toDateString()} - ${
-		job.endDate ? new Date(job.endDate).toDateString() : 'Present'
-	}`
-}
+  const breakpoints = useBreakpoints(breakpointsTailwind)
+  const sm = breakpoints.smaller('sm')
+  const range = (job: Job): string => {
+    return `${new Date(job.startDate).toDateString()} - ${
+      job.endDate ? new Date(job.endDate).toDateString() : 'Present'
+    }`
+  }
 
-onMounted(() => {
-	inlineLinks('styled-tab-content')
-})
+  onMounted(() => {
+    inlineLinks('styled-tab-content')
+  })
 </script>
 
 <template>
-	<section id="jobs" class="styled-jobs-section">
-		<h2 class="numbered-heading">Where I've Worked</h2>
-		<div class="inner">
-			<ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
-				<li v-for="(job, i) in jobs" :key="job.id">
-					<button
-						:id="`tab-${i}`"
-						class="styled-tab-button"
-						:class="{ 'text-green-500': activeTabId === i }"
-						role="tab"
-						:aria-selected="activeTabId === i ? 'true' : 'false'"
-						:aria-controls="`panel-${i}`"
-						:tabIndex="activeTabId === i ? '0' : '-1'"
-						@click="activeTabId = i"
-						@keyup.up.prevent.stop="
+  <section id="jobs" class="styled-jobs-section">
+    <h2 class="numbered-heading">Where I've Worked</h2>
+    <div class="inner">
+      <ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
+        <li v-for="(job, i) in jobs" :key="job.id">
+          <button
+            :id="`tab-${i}`"
+            class="styled-tab-button"
+            :class="{ 'text-green-500': activeTabId === i }"
+            role="tab"
+            :aria-selected="activeTabId === i ? 'true' : 'false'"
+            :aria-controls="`panel-${i}`"
+            :tabIndex="activeTabId === i ? '0' : '-1'"
+            @click="activeTabId = i"
+            @keyup.up.prevent.stop="
 							activeTabId - 1 >= 0 ? (activeTabId -= 1) : (activeTabId = jobs.length - 1)
 						"
-						@keyup.down.prevent.stop="
+            @keyup.down.prevent.stop="
 							activeTabId + 1 >= jobs.length ? (activeTabId = 0) : (activeTabId += 1)
 						"
-					>
-						<span>{{ job.company }}</span>
-					</button>
-				</li>
-				<div
-					class="styled-high-light"
-					:style="
+          >
+            <span>{{ job.company }}</span>
+          </button>
+        </li>
+        <div
+          class="styled-high-light"
+          :style="
 						sm
 							? `transform: translateX(calc(${activeTabId} * 120px));`
 							: `transform: translateY(calc(${activeTabId} * 42px));`
 					"
-				></div>
-			</ul>
-			<transition name="fade" mode="out-in">
-				<div>
-					<div
-						v-for="(job, i) in jobs"
-						:id="`panel-${i}`"
-						:key="job.id"
-						class="styled-tab-content"
-						role="tabpanel"
-						:tabIndex="activeTabId === i ? 0 : -1"
-						:aria-labelledby="`tab-${i}`"
-						:aria-hidden="activeTabId !== i"
-						:hidden="activeTabId !== i"
-					>
-						<h3>
-							<span>{{ job.role }}</span>
-							<span class="company">
-								&nbsp;@&nbsp;
-								<a :href="job.url" target="_blank" class="inline-link">
-									{{ job.company }}
-								</a>
-							</span>
-						</h3>
-						<p class="range">
-							{{ range(job) }}
-						</p>
-						<ul>
-							<li v-for="(detail, index) in job.achievement" :key="index">
-								<span>{{ detail }}</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</transition>
-		</div>
-	</section>
+        ></div>
+      </ul>
+      <transition name="fade" mode="out-in">
+        <div>
+          <div
+            v-for="(job, i) in jobs"
+            :id="`panel-${i}`"
+            :key="job.id"
+            class="styled-tab-content"
+            role="tabpanel"
+            :tabIndex="activeTabId === i ? 0 : -1"
+            :aria-labelledby="`tab-${i}`"
+            :aria-hidden="activeTabId !== i"
+            :hidden="activeTabId !== i"
+          >
+            <h3>
+              <span>{{ job.role }}</span>
+              <span class="company">
+                &nbsp;@&nbsp;
+                <a :href="job.url" target="_blank" class="inline-link"> {{ job.company }} </a>
+              </span>
+            </h3>
+            <p class="range">{{ range(job) }}</p>
+            <ul>
+              <li v-for="(detail, index) in job.achievement" :key="index">
+                <span>{{ detail }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </section>
 </template>
 ```
 

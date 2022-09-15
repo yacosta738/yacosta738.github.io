@@ -50,15 +50,22 @@ const lang = frontmatter.lang || 'en'
 		<div id='markdown-body' class='markdown-body'>
 			<slot />
 		</div>
-		<div class='mb-8 my-8 flex justify-between items-start justify-items-start'>
-			<a href={localizePath('/blog')} class='flex items-center md:items-start justify-center sm:text-center animate-pulse hover:animate-none font-bold uppercase'>
+		<div
+			class='mb-8 my-8 flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start md:justify-items-start'
+		>
+			<a
+				href={localizePath('/blog')}
+				class='flex items-center md:items-start justify-center sm:text-center animate-pulse hover:animate-none font-bold uppercase'
+			>
 				<Icon name='ic:round-arrow-back' class='h-7 mr-1 animate-bounce hover:animate-none' />
 				<span>{t('back-to-block')}</span>
 			</a>
 			<!-- Social Media Share -->
-			<div class='flex items-center justify-center'>
+			<div class='flex items-center justify-center my-3 md:my-0'>
 				<a
-					href={`https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(',')}`}
+					href={`https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(
+						','
+					)}`}
 					target='_blank'
 					rel='noopener noreferrer'
 					class='flex items-center justify-center animate-pulse hover:animate-none'
@@ -80,7 +87,7 @@ const lang = frontmatter.lang || 'en'
 					class='flex items-center justify-center animate-pulse hover:animate-none'
 				>
 					<Icon name='uit:linkedin-alt' class='h-7 mr-2' />
-				</a>			
+				</a>
 				<a
 					href={`https://reddit.com/submit?url=${url}&title=${title}`}
 					target='_blank'
@@ -88,7 +95,7 @@ const lang = frontmatter.lang || 'en'
 					class='flex items-center justify-center animate-pulse hover:animate-none'
 				>
 					<Icon name='ic:baseline-reddit' class='h-7 mr-2' />
-				</a>				
+				</a>
 				<a
 					href={`https://api.whatsapp.com/send?text=${title}%20${url}`}
 					target='_blank'
@@ -96,8 +103,8 @@ const lang = frontmatter.lang || 'en'
 					class='flex items-center justify-center animate-pulse hover:animate-none'
 				>
 					<Icon name='ic:baseline-whatsapp' class='h-7 mr-2' />
-				</a>			
-					<a
+				</a>
+				<a
 					href={`https://t.me/share/url?url=${url}&text=${description}`}
 					target='_blank'
 					rel='noopener noreferrer'

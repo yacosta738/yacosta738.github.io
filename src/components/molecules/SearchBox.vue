@@ -121,7 +121,7 @@ const props = defineProps({
 let fuse: Fuse<Article>
 
 const options = {
-	keys: ['title', 'description', 'content', 'tags', 'categories', 'author'],
+	keys: ['title', 'description', 'content', 'tags', 'categories', 'author']
 }
 watch(isOpen, (value) => {
 	if (value) {

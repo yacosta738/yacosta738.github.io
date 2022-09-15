@@ -34,7 +34,7 @@ export default defineConfig({
 		robotsTxt(),
 		compress({
 			html: false,
-                        css: false
+			css: false
 		})
 	],
 	vite: {

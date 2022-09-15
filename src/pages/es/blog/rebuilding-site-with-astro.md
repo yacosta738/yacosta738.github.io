@@ -1,6 +1,6 @@
 ---
 date: 2022-09-13
-title: "From Gridsome to Nuxt to Astro - Rebuilding with Astro"
+title: 'From Gridsome to Nuxt to Astro - Rebuilding with Astro'
 cover: /uploads/rebuild-with-astro.webp
 author: Yuniel Acosta
 lang: es
@@ -66,7 +66,6 @@ Aquí es donde Astro me llamó la atención. En su página de inicio, dicen:
 Astro es un framework que se enfoca principalmente en obtener sus datos de cualquier fuente o fuentes que use, inyectarlos en una plantilla HTML y crear activos estáticos a partir de ella. Si bien Astro se basa en Javascript, no se enfoca en enviar Javascript al cliente. Todavía se puede incorporar cualquier funcionalidad que desee, ya sea Vanilla JS, React, Vue o cualquier otra cosa.
 
 Esta forma de construir un sitio estático me resulta muy cómoda y familiar. Empecé a desarrollar web en HTML, CSS y PHP, y evité Javascript a toda costa durante muchos años (tanto antes como después de que jQuery apareciera en escena). Renderizar HTML y CSS al cliente es lo que hice, con cierta lógica involucrada para realizar tareas simples como mostrar una lista de elementos o obtener datos de una base de datos. Usando Astro, es básicamente lo mismo, solo usando Javascript en lugar de PHP.
-
 
 Aquí hay un ejemplo de la página principal de mi blog, que muestra una lista de artículos. Astro usa una sintaxis única que combina la apariencia de Markdown, JSX y HTML estándar. Todo el tiempo de compilación de Javascript se maneja en un bloque similar a 'frontmatter' en la parte superior del archivo, y la plantilla estática se construye debajo de eso.
 
@@ -144,123 +143,119 @@ En su página sobre hidratación parcial, los documentos de Astro hacen referenc
 
 > En un modelo de "islas", la representación del servidor no es una optimización adicional destinada a mejorar el SEO o la experiencia de usuario. En cambio, es una parte fundamental de cómo se entregan las páginas al navegador. El código HTML devuelto en respuesta a la navegación contiene una representación significativa e inmediatamente representable del contenido que solicitó el usuario.
 
-En lugar de cargar un SPA completo para manejar una pequeña parte de la funcionalidad, Vue puede apuntar a una sección mucho más pequeña del DOM y mostrar solo la parte de la aplicación que necesito (en este caso, un botón y algo de JS para alternar las pestañas ). Vue soporta este uso de forma predeterminada, pero en el mundo de los frameworks tendemos a olvidarlo. Varios episodios recientes de Views on Vue han explorado este concepto, incluido [usar Vue sin un SPA](https://viewsonvue.com/using-vue-with-an-spa-with-ariel-dorol-vue-159 ) y [construyendo micro frontends](https://viewsonvue.com/building-micro-frontends-with-lawrence-almeida-vue-160). [La Fundación Wikimedia también usa Vue de esta manera](https://lists.wikimedia.org/hyperkitty/list/wikitech-l@lists.wikimedia.org/thread/SOZREBYR36PUNFZXMIUBVAIOQI4N7PDU/).
+En lugar de cargar un SPA completo para manejar una pequeña parte de la funcionalidad, Vue puede apuntar a una sección mucho más pequeña del DOM y mostrar solo la parte de la aplicación que necesito (en este caso, un botón y algo de JS para alternar las pestañas ). Vue soporta este uso de forma predeterminada, pero en el mundo de los frameworks tendemos a olvidarlo. Varios episodios recientes de Views on Vue han explorado este concepto, incluido [usar Vue sin un SPA](https://viewsonvue.com/using-vue-with-an-spa-with-ariel-dorol-vue-159) y [construyendo micro frontends](https://viewsonvue.com/building-micro-frontends-with-lawrence-almeida-vue-160). [La Fundación Wikimedia también usa Vue de esta manera](https://lists.wikimedia.org/hyperkitty/list/wikitech-l@lists.wikimedia.org/thread/SOZREBYR36PUNFZXMIUBVAIOQI4N7PDU/).
 
 Cuando se ve de esta manera, el rendimiento es casi un subproducto de seguir las mejores prácticas con Astro. Para mi sitio personal, solo necesitaba un componente simple para cambiar la información de la empresa. Si bien sé que esto podría manejarse con la misma facilidad con Vanilla JS, quería intentar usar Vue para crear una isla de esta funcionalidad. Aquí está mi componente Vue:
 
 ```html
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { Job } from '../../../models/Job'
-import { inlineLinks } from '../../../util/utilities'
+  import { computed, onMounted, ref } from 'vue'
+  import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+  import { Job } from '../../../models/Job'
+  import { inlineLinks } from '../../../util/utilities'
 
-defineProps({
-	jobs: {
-		type: Array<Job>,
-		default: () => []
-	}
-})
+  defineProps({
+    jobs: {
+      type: Array<Job>,
+      default: () => []
+    }
+  })
 
-const jobActiveTabIdKey = 'jobActiveTabId'
-const getActiveTabId = (): number => {
-	if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
+  const jobActiveTabIdKey = 'jobActiveTabId'
+  const getActiveTabId = (): number => {
+    if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
 
-	return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) || '0')
-}
+    return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) || '0')
+  }
 
-const tabId = ref(getActiveTabId())
+  const tabId = ref(getActiveTabId())
 
-const activeTabId = computed<number>({
-	get: () => tabId.value,
-	set: (value) => {
-		tabId.value = value
-		localStorage.setItem(jobActiveTabIdKey, value.toString())
-	}
-})
+  const activeTabId = computed<number>({
+    get: () => tabId.value,
+    set: (value) => {
+      tabId.value = value
+      localStorage.setItem(jobActiveTabIdKey, value.toString())
+    }
+  })
 
-const breakpoints = useBreakpoints(breakpointsTailwind)
-const sm = breakpoints.smaller('sm')
-const range = (job: Job): string => {
-	return `${new Date(job.startDate).toDateString()} - ${
-		job.endDate ? new Date(job.endDate).toDateString() : 'Present'
-	}`
-}
+  const breakpoints = useBreakpoints(breakpointsTailwind)
+  const sm = breakpoints.smaller('sm')
+  const range = (job: Job): string => {
+    return `${new Date(job.startDate).toDateString()} - ${
+      job.endDate ? new Date(job.endDate).toDateString() : 'Present'
+    }`
+  }
 
-onMounted(() => {
-	inlineLinks('styled-tab-content')
-})
+  onMounted(() => {
+    inlineLinks('styled-tab-content')
+  })
 </script>
 
 <template>
-	<section id="jobs" class="styled-jobs-section">
-		<h2 class="numbered-heading">Where I've Worked</h2>
-		<div class="inner">
-			<ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
-				<li v-for="(job, i) in jobs" :key="job.id">
-					<button
-						:id="`tab-${i}`"
-						class="styled-tab-button"
-						:class="{ 'text-green-500': activeTabId === i }"
-						role="tab"
-						:aria-selected="activeTabId === i ? 'true' : 'false'"
-						:aria-controls="`panel-${i}`"
-						:tabIndex="activeTabId === i ? '0' : '-1'"
-						@click="activeTabId = i"
-						@keyup.up.prevent.stop="
+  <section id="jobs" class="styled-jobs-section">
+    <h2 class="numbered-heading">Where I've Worked</h2>
+    <div class="inner">
+      <ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
+        <li v-for="(job, i) in jobs" :key="job.id">
+          <button
+            :id="`tab-${i}`"
+            class="styled-tab-button"
+            :class="{ 'text-green-500': activeTabId === i }"
+            role="tab"
+            :aria-selected="activeTabId === i ? 'true' : 'false'"
+            :aria-controls="`panel-${i}`"
+            :tabIndex="activeTabId === i ? '0' : '-1'"
+            @click="activeTabId = i"
+            @keyup.up.prevent.stop="
 							activeTabId - 1 >= 0 ? (activeTabId -= 1) : (activeTabId = jobs.length - 1)
 						"
-						@keyup.down.prevent.stop="
+            @keyup.down.prevent.stop="
 							activeTabId + 1 >= jobs.length ? (activeTabId = 0) : (activeTabId += 1)
 						"
-					>
-						<span>{{ job.company }}</span>
-					</button>
-				</li>
-				<div
-					class="styled-high-light"
-					:style="
+          >
+            <span>{{ job.company }}</span>
+          </button>
+        </li>
+        <div
+          class="styled-high-light"
+          :style="
 						sm
 							? `transform: translateX(calc(${activeTabId} * 120px));`
 							: `transform: translateY(calc(${activeTabId} * 42px));`
 					"
-				></div>
-			</ul>
-			<transition name="fade" mode="out-in">
-				<div>
-					<div
-						v-for="(job, i) in jobs"
-						:id="`panel-${i}`"
-						:key="job.id"
-						class="styled-tab-content"
-						role="tabpanel"
-						:tabIndex="activeTabId === i ? 0 : -1"
-						:aria-labelledby="`tab-${i}`"
-						:aria-hidden="activeTabId !== i"
-						:hidden="activeTabId !== i"
-					>
-						<h3>
-							<span>{{ job.role }}</span>
-							<span class="company">
-								&nbsp;@&nbsp;
-								<a :href="job.url" target="_blank" class="inline-link">
-									{{ job.company }}
-								</a>
-							</span>
-						</h3>
-						<p class="range">
-							{{ range(job) }}
-						</p>
-						<ul>
-							<li v-for="(detail, index) in job.achievement" :key="index">
-								<span>{{ detail }}</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</transition>
-		</div>
-	</section>
+        ></div>
+      </ul>
+      <transition name="fade" mode="out-in">
+        <div>
+          <div
+            v-for="(job, i) in jobs"
+            :id="`panel-${i}`"
+            :key="job.id"
+            class="styled-tab-content"
+            role="tabpanel"
+            :tabIndex="activeTabId === i ? 0 : -1"
+            :aria-labelledby="`tab-${i}`"
+            :aria-hidden="activeTabId !== i"
+            :hidden="activeTabId !== i"
+          >
+            <h3>
+              <span>{{ job.role }}</span>
+              <span class="company">
+                &nbsp;@&nbsp;
+                <a :href="job.url" target="_blank" class="inline-link"> {{ job.company }} </a>
+              </span>
+            </h3>
+            <p class="range">{{ range(job) }}</p>
+            <ul>
+              <li v-for="(detail, index) in job.achievement" :key="index">
+                <span>{{ detail }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </section>
 </template>
 ```
 
