@@ -21,6 +21,7 @@ export interface Props {
 		tags: string[]
 	}
 }
+const url = Astro.url
 
 let { frontmatter } = Astro.props
 const title = frontmatter.title || t('seo.title')
@@ -49,15 +50,62 @@ const lang = frontmatter.lang || 'en'
 		<div id='markdown-body' class='markdown-body'>
 			<slot />
 		</div>
-		<div class='mb-8 my-8 flex items-start justify-items-start'>
-			<a href={localizePath('/blog')} class='font-bold uppercase'>
-				<div
-					class='flex items-center md:items-start justify-center sm:text-center animate-pulse hover:animate-none'
-				>
-					<Icon name='ic:round-arrow-back' class='h-7 mr-1 animate-bounce hover:animate-none' />
-					<span>{t('back-to-block')}</span>
-				</div>
+		<div class='mb-8 my-8 flex justify-between items-start justify-items-start'>
+			<a href={localizePath('/blog')} class='flex items-center md:items-start justify-center sm:text-center animate-pulse hover:animate-none font-bold uppercase'>
+				<Icon name='ic:round-arrow-back' class='h-7 mr-1 animate-bounce hover:animate-none' />
+				<span>{t('back-to-block')}</span>
 			</a>
+			<!-- Social Media Share -->
+			<div class='flex items-center justify-center'>
+				<a
+					href={`https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(',')}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='uit:twitter-alt' class='h-7 mr-2' />
+				</a>
+				<a
+					href={`https://www.facebook.com/sharer.php?u=${url}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='ic:round-facebook' class='h-7 mr-2' />
+				</a>
+				<a
+					href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='uit:linkedin-alt' class='h-7 mr-2' />
+				</a>			
+				<a
+					href={`https://reddit.com/submit?url=${url}&title=${title}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='ic:baseline-reddit' class='h-7 mr-2' />
+				</a>				
+				<a
+					href={`https://api.whatsapp.com/send?text=${title}%20${url}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='ic:baseline-whatsapp' class='h-7 mr-2' />
+				</a>			
+					<a
+					href={`https://t.me/share/url?url=${url}&text=${description}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='mdi:telegram' class='h-7 mr-2' />
+				</a>
+			</div>
 		</div>
 		<div class='flex flex-col md:flex-row'>
 			<!--category-->
