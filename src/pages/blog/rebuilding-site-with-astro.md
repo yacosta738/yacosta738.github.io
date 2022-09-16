@@ -6,22 +6,22 @@ author: Yuniel Acosta
 lang: en
 tags: [Gridsome, Astro, Vuejs, Nuxt]
 categories: [Programming, Development]
-description: Astro is an innovative static site generator that focuses on static generation instead of JS framework. But how much better is it?
+description: Astro is an innovative static site generator that focuses on static generation instead of JS framework. But, how much better is it?
 layout: ../../components/templates/BlogPostTemplate.astro
 draft: false
 ---
 
 ![Astro is an innovative static site generator that focuses on static generation instead of JS framework. But how much better is it?](/uploads/rebuild-with-astro.webp 'Astro vs Gridsome/Nuxt - Rebuilding with Astro')
 
-I don't remember exactly when I started hearing about [Astro](https://astro.build), one of the latest static site generators to help tackle the problem of building sites with less Javascript. The problem is one we're all familiar with - how can I build a static site (in my case, my personal site) using the languages and tools I know best, while performing at its best? After migrating from [jekyll](https://jekyllrb.com/), I first tried [Hugo](https://gohugo.io/), then [Gridsome](https://gridsome.org/), and most recently [Nuxt](https://nuxtjs.org/). All of these are excellent tools, and I highly recommend them. But one thing that is the same across all of them is that they are tied to their specific framework (React or Vue).
+I don't remember exactly when I started hearing about [Astro](https://astro.build), one of the latest static site generators to help tackle the problem of building sites with less Javascript. The problem is one we're all familiar with - how can I build a static site (in my case, my personal site) using the languages and tools I know best, while performing at its best? After migrating from [jekyll](https://jekyllrb.com/), I first tried [Hugo](https://gohugo.io/), then [Gridsome](https://gridsome.org/), and most recently [Nuxt](https://nuxtjs.org/). All of these are excellent tools, and I highly recommend them. However, one thing that they all have in common is that they are tied to their specific framework (React or Vue).
 
 Astro does away with that, and it's one of the things that really drew me to the framework. From their site:
 
 > It’s time to accept that the framework wars won’t have a winner — that’s why Astro lets you use any framework you want (or none at all). And if most sites only have islands of interactivity, shouldn’t our tools optimize for that? We’re not the first to ask the question, but we might be the first with an answer for every framework.
 
-This caught my interest. The idea of "framework wars" having a winner never made sense to me. None of these tools - React, Vue, Svelte, Angular - need to be the overall winner to make developers productive. Having a winner at all would mean that innovation is stalled, at best. The fact that Astro allows you to utilize whichever framework is most comfortable means that it can adjust to whatever change comes in the future, and focus more on what it does best: building static assets.
+This caught my interest. The idea of "framework wars" having a winner never made sense to me. None of these tools - React, Vue, Svelte, Angular - need to be the overall winner to make developers productive. Having a winner would mean that innovation is stalled, at best. The fact that Astro allows you to utilize whichever framework is most comfortable, means that it can adjust to whatever change comes in the future, and focus more on what it does best: building static assets.
 
-And so, as one does, I decided to rewrite my personal site from Nuxt to Astro.
+Therefore, I decided to rewrite my personal site from Nuxt to Astro.
 
 ## Performance Woes
 

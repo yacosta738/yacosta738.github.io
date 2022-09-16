@@ -21,7 +21,7 @@ Astro elimina eso, y es una de las cosas que realmente me atrajo del marco. Desd
 
 Esto captó mi interés. La idea de que las "guerras de frameworks" tuvieran un ganador nunca tuvo sentido para mí. Ninguna de estas herramientas (React, Vue, Svelte, Angular) necesita ser el ganador general para que los desarrolladores sean productivos. Tener un ganador significaría que la innovación está estancada, en el mejor de los casos. El hecho de que Astro le permita utilizar el framework que le resulte más cómodo significa que puede adaptarse a cualquier cambio que surja en el futuro y centrarse más en lo que hace mejor: crear activos estáticos.
 
-Y así, como se hace, decidí reescribir mi sitio personal de Nuxt a Astro.
+Por lo tanto, decidí reescribir mi sitio personal de Nuxt a Astro.
 
 ## Problemas de rendimiento
 
