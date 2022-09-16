@@ -12,7 +12,7 @@ cover: /uploads/vue3-typescript.png
 author: Yuniel Acosta
 lang: en
 tags:
-  - VueJS
+  - Vuejs
   - TypeScript
   - Decorators
   - VueX

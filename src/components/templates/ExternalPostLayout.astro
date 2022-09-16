@@ -1,0 +1,9 @@
+---
+import Redirect from '../atoms/Redirect.vue'
+
+const {content} = Astro.props;
+const {link} = content;
+---
+<div>
+  <Redirect client:only url={link} />
+</div>
