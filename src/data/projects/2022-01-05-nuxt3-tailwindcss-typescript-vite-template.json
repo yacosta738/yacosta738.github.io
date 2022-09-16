@@ -5,7 +5,7 @@
   "repository": "https://github.com/yacosta738/nuxt3-tailwindcss-typescript",
   "url": "https://nuxt3-tailwindcss-typescript.vercel.app/",
   "company": "Personal",
-  "tech": ["typescript", "vuejs", "tailwind", "vite"],
+  "tech": ["typescript", "vuejs", "tailwind", "vite", "nuxtjs"],
   "showInProjects": true,
   "featured": false,
   "published": true,

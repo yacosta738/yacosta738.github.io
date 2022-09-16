@@ -111,6 +111,14 @@ const lang = frontmatter.lang || 'en'
 					class='flex items-center justify-center animate-pulse hover:animate-none'
 				>
 					<Icon name='mdi:telegram' class='h-7 mr-2' />
+				</a>	
+				<a
+					href={`mailto:?subject=${title}&body=${description}%20${url}`}
+					target='_blank'
+					rel='noopener noreferrer'
+					class='flex items-center justify-center animate-pulse hover:animate-none'
+				>
+					<Icon name='ic:baseline-email' class='h-7 mr-2' />
 				</a>
 			</div>
 		</div>

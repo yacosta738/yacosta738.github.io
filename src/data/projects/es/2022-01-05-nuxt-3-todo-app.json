@@ -6,7 +6,7 @@
   "repository": "https://github.com/yacosta738/todo-app",
   "url": "https://task-app-acosta.vercel.app/",
   "company": "Personal",
-  "tech": ["vuejs", "tailwind", "typescript", "vite"],
+  "tech": ["vuejs", "tailwind", "typescript", "vite", "nuxtjs"],
   "showInProjects": true,
   "featured": false,
   "priority": 0.05,
