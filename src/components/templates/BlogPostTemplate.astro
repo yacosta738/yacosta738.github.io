@@ -2,6 +2,7 @@
 import { t } from 'i18next'
 import BlogTemplate from 'templates:BlogTemplate'
 import PostHeader from 'molecules:PostHeader'
+import ShareButton from 'atoms:ShareButton'
 import { localizePath } from 'astro-i18next'
 import { Icon } from 'astro-icon'
 import '../../styles/github-markdown.css'
@@ -31,6 +32,48 @@ const ogImageAlt = description || t('seo.ogImageAlt')
 const categories = frontmatter.categories || Array<string>()
 const tags = frontmatter.tags || Array<string>()
 const lang = frontmatter.lang || 'en'
+
+const shareButtons: {
+	title: string
+	url: string
+	icon: string | 'et:global'
+}[] = [
+	{
+		title: 'Twitter',
+		url: `https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(',')}`,
+		icon: 'uit:twitter-alt'
+	},
+	{
+		title: 'Facebook',
+		url: `https://www.facebook.com/sharer.php?u=${url}`,
+		icon: 'ic:round-facebook'
+	},
+	{
+		title: 'LinkedIn',
+		url: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+		icon: 'uit:linkedin-alt'
+	},
+	{
+		title: 'Reddit',
+		url: `https://reddit.com/submit?url=${url}&title=${title}`,
+		icon: 'ic:baseline-reddit'
+	},
+	{
+		title: 'Telegram',
+		url: `https://t.me/share/url?url=${url}&text=${description}`,
+		icon: 'mdi:telegram'
+	},
+	{
+		title: 'WhatsApp',
+		url: `https://api.whatsapp.com/send?text=${title}%20${url}`,
+		icon: 'ic:baseline-whatsapp'
+	},
+	{
+		title: 'Email',
+		url: `mailto:?subject=${title}&body=${description}%20${url}`,
+		icon: 'ic:baseline-email'
+	}
+]
 ---
 
 <BlogTemplate
@@ -62,64 +105,7 @@ const lang = frontmatter.lang || 'en'
 			</a>
 			<!-- Social Media Share -->
 			<div class='flex items-center justify-center my-3 md:my-0'>
-				<a
-					href={`https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(
-						','
-					)}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='uit:twitter-alt' class='h-7 mr-2' />
-				</a>
-				<a
-					href={`https://www.facebook.com/sharer.php?u=${url}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='ic:round-facebook' class='h-7 mr-2' />
-				</a>
-				<a
-					href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='uit:linkedin-alt' class='h-7 mr-2' />
-				</a>
-				<a
-					href={`https://reddit.com/submit?url=${url}&title=${title}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='ic:baseline-reddit' class='h-7 mr-2' />
-				</a>
-				<a
-					href={`https://api.whatsapp.com/send?text=${title}%20${url}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='ic:baseline-whatsapp' class='h-7 mr-2' />
-				</a>
-				<a
-					href={`https://t.me/share/url?url=${url}&text=${description}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='mdi:telegram' class='h-7 mr-2' />
-				</a>	
-				<a
-					href={`mailto:?subject=${title}&body=${description}%20${url}`}
-					target='_blank'
-					rel='noopener noreferrer'
-					class='flex items-center justify-center animate-pulse hover:animate-none'
-				>
-					<Icon name='ic:baseline-email' class='h-7 mr-2' />
-				</a>
+				{shareButtons.map((button) => <ShareButton url={button.url} icon={button.icon} />)}
 			</div>
 		</div>
 		<div class='flex flex-col md:flex-row'>

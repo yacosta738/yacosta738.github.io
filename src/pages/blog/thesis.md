@@ -1,8 +1,8 @@
 ---
-link: "https://dspace.uclv.edu.cu/handle/123456789/9227"
+link: 'https://dspace.uclv.edu.cu/handle/123456789/9227'
 date: 2017-07-10
-title: "Manipulation of spatio-temporal data series using scientific and geographic data formats in R"
-author: "Yuniel Acosta"
+title: 'Manipulation of spatio-temporal data series using scientific and geographic data formats in R'
+author: 'Yuniel Acosta'
 lang: en
 cover: /uploads/thesis.webp
 tags: [R, GIS, GLCF]

@@ -1,17 +1,17 @@
 <template>
-  <div></div>
+	<div></div>
 </template>
 
 <script lang="ts">
 export default {
-  props: {
-    url: {
-      type: String,
-      required: true
-    }
-  },
-  mounted() {
-    window.location.href = this.url;
-  }
+	props: {
+		url: {
+			type: String,
+			required: true
+		}
+	},
+	mounted() {
+		window.location.href = this.url
+	}
 }
 </script>

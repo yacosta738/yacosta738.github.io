@@ -1,0 +1,17 @@
+---
+import { Icon } from 'astro-icon'
+export interface Props {
+	url: string
+	icon: string
+}
+const { url, icon } = Astro.props
+---
+
+<a
+	href={url}
+	target='_blank'
+	rel='noopener noreferrer'
+	class='flex items-center justify-center animate-pulse hover:animate-none'
+>
+	<Icon name={icon} class='h-7 mr-2' />
+</a>
