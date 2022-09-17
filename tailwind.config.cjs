@@ -15,9 +15,20 @@ module.exports = {
 		},
 		extend: {
 			animation: {
+				'bounce-left': 'bounce-left 1s infinite;',
 				'moving-background': 'moving-background 5s ease-in-out'
 			},
 			keyframes: {
+				'bounce-left': {
+					'0%, 100%': {
+						transform: 'translateX(-25%)',
+						'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)'
+					},
+					'50%': {
+						transform: 'translateX(0)',
+						'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)'
+					}
+				},
 				'moving-background': {
 					'0%': {
 						transform: 'translateY(0)',
