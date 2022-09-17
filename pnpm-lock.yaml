@@ -14,7 +14,7 @@ specifiers:
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/parser': 5.36.1
   '@vueuse/core': 9.2.0
-  astro: 1.2.4
+  astro: 1.2.6
   astro-compress: 1.0.8
   astro-i18next: 1.0.0-beta.5
   astro-icon: 0.7.3
@@ -63,9 +63,9 @@ devDependencies:
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/parser': 5.36.1_yqf6kl63nyoq5megxukfnom5rm
   '@vueuse/core': 9.2.0_vue@3.2.39
-  astro: 1.2.4_sass@1.54.9
+  astro: 1.2.6_sass@1.54.9
   astro-compress: 1.0.8
-  astro-i18next: 1.0.0-beta.5_astro@1.2.4
+  astro-i18next: 1.0.0-beta.5_astro@1.2.6
   astro-icon: 0.7.3
   astro-robots-txt: 0.3.9
   astro-seo: 0.6.0
@@ -1587,7 +1587,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.5_astro@1.2.4:
+  /astro-i18next/1.0.0-beta.5_astro@1.2.6:
     resolution: {integrity: sha512-naKQ9lplcg8ZqQf11sgPp/5LulZM0Tv7iphMZA81RpeSWmM8Nv/hhJPphOixMKOLanINdmffIzAbtahMBDk+UQ==}
     hasBin: true
     peerDependencies:
@@ -1595,7 +1595,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.2
       '@proload/plugin-typescript': 0.2.1_@proload+core@0.3.2
-      astro: 1.2.4_sass@1.54.9
+      astro: 1.2.6_sass@1.54.9
       fdir: 5.2.0
       fs-extra: 10.1.0
       i18next: 21.9.1
@@ -1627,8 +1627,8 @@ packages:
     resolution: {integrity: sha512-nR+dJlAyQhX6s0oAmbBqPq3KCZax/zVAerFsclGiJQ2znOkS/7L+RGjziS4M9Q3OQxm3FMfqIKHp9Ns73Q81ww==}
     dev: true
 
-  /astro/1.2.4_sass@1.54.9:
-    resolution: {integrity: sha512-RJAdTDb4mECyAzNjl4RFzEHueHpGqvxPMQAYYd59nK7tCqBYzAde1mThzuEtQglSdGnIP3DXia2XtPzoo9mniQ==}
+  /astro/1.2.6_sass@1.54.9:
+    resolution: {integrity: sha512-u6s5EH6+F/IpNkjJJ2RAKMWmBIOVz4AozjyW7aD0hsiGkVF0VYu7AqNWO3TTG6WQ6c9YbosDpfj+JKTT+S/JhA==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -1657,7 +1657,7 @@ packages:
       es-module-lexer: 0.10.5
       esbuild: 0.14.54
       execa: 6.1.0
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       github-slugger: 1.4.0
       gray-matter: 4.0.3
       html-entities: 2.3.3
@@ -1688,7 +1688,7 @@ packages:
       vfile: 5.3.4
       vite: 3.1.0_sass@1.54.9
       yargs-parser: 21.1.1
-      zod: 3.18.0
+      zod: 3.19.1
     transitivePeerDependencies:
       - less
       - sass
@@ -3223,17 +3223,6 @@ packages:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
 
-  /fast-glob/3.2.11:
-    resolution: {integrity: sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==}
-    engines: {node: '>=8.6.0'}
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.5
-    dev: true
-
   /fast-glob/3.2.12:
     resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
     engines: {node: '>=8.6.0'}
@@ -3497,7 +3486,7 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       ignore: 5.2.0
       merge2: 1.4.1
       slash: 3.0.0
