@@ -1,57 +1,57 @@
 ---
-import Side from "atoms:Side";
-import { socialMedia } from "store/constants";
-import { Icon } from "astro-icon";
+import Side from 'atoms:Side'
+import { socialMedia } from 'store/constants'
+import { Icon } from 'astro-icon'
 ---
 
-<Side show={true} orientation="left">
-    <ul class="social-links">
-        {
-            socialMedia.map((social) => (
-                <li>
-                    <a href={social.url} target="_blank" class="my-1.5">
-                        <Icon name={social.icon} />
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
+<Side show={true} orientation='left'>
+	<ul class='social-links'>
+		{
+			socialMedia.map((social) => (
+				<li>
+					<a id={social.name} href={social.url} target='_blank' class='my-1.5'>
+						<Icon name={social.icon} />
+					</a>
+				</li>
+			))
+		}
+	</ul>
 </Side>
 
 <style>
-    .social-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
+	.social-links {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
 
-    .social-links:after {
-        content: "";
-        display: block;
-        width: 1px;
-        height: 90px;
-        margin: 0 auto;
-        background-color: var(--light-slate);
-    }
+	.social-links:after {
+		content: '';
+		display: block;
+		width: 1px;
+		height: 90px;
+		margin: 0 auto;
+		background-color: var(--light-slate);
+	}
 
-    .social-links li:last-of-type {
-        margin-bottom: 20px;
-    }
+	.social-links li:last-of-type {
+		margin-bottom: 20px;
+	}
 
-    .social-links li a {
-        padding: 2px;
-    }
+	.social-links li a {
+		padding: 2px;
+	}
 
-    .social-links li a:hover,
-    .social-links li a:focus {
-        transform: translateY(-3px);
-    }
+	.social-links li a:hover,
+	.social-links li a:focus {
+		transform: translateY(-3px);
+	}
 
-    .social-links li a svg {
-        width: 20px;
-        height: 20px;
-    }
+	.social-links li a svg {
+		width: 20px;
+		height: 20px;
+	}
 </style>

@@ -8,7 +8,7 @@
   "company": "Personal",
   "tech": ["Vuejs", "Tailwind", "Vite"],
   "showInProjects": false,
-  "featured": true,
+  "featured": false,
   "published": true,
   "content": "Una aplicación meteorológica que utiliza la [API de Metaweather](https://www.metaweather.com/api/). Hecho con [Vue 3](https://v3.vuejs.org/), [Vite](https://vitejs.dev/) y [Tailwindcss](https://tailwindcss.com/)"
 }

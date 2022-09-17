@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import {t} from 'i18next'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { Job } from '../../../models/Job'
 import { inlineLinks } from '../../../util/utilities'
@@ -43,7 +44,7 @@ onMounted(() => {
 
 <template>
 	<section id="jobs" class="styled-jobs-section">
-		<h2 class="numbered-heading">Where I've Worked</h2>
+		<h2 class="numbered-heading">{{t('where-worked')}}</h2>
 		<div class="inner">
 			<ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
 				<li v-for="(job, i) in jobs" :key="job.id">
