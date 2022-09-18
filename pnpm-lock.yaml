@@ -23,7 +23,7 @@ specifiers:
   dompurify: 2.4.0
   eslint: 8.23.1
   eslint-config-standard: 17.0.0
-  eslint-plugin-astro: 0.17.1
+  eslint-plugin-astro: 0.19.0
   eslint-plugin-import: 2.26.0
   eslint-plugin-n: 15.2.5
   eslint-plugin-promise: 6.0.1
@@ -72,7 +72,7 @@ devDependencies:
   dompurify: 2.4.0
   eslint: 8.23.1
   eslint-config-standard: 17.0.0_4nulviyjkaspo7v2xlghuwxbf4
-  eslint-plugin-astro: 0.17.1_eslint@8.23.1
+  eslint-plugin-astro: 0.19.0_eslint@8.23.1
   eslint-plugin-import: 2.26.0_zgfmsumgkl4o3pmroc66ymaehu
   eslint-plugin-n: 15.2.5_eslint@8.23.1
   eslint-plugin-promise: 6.0.1_eslint@8.23.1
@@ -1576,16 +1576,16 @@ packages:
       terser: 5.15.0
     dev: true
 
-  /astro-eslint-parser/0.5.1:
-    resolution: {integrity: sha512-es63TAA7vjgV8aI5pUOXqoxa9JHelqzFSk1qOVSCGkeoAMayrr7BdFt9waVWyXyIcOjTXJlQa1pM832bEaCS2Q==}
+  /astro-eslint-parser/0.6.1:
+    resolution: {integrity: sha512-/VXNGeLDulCbBLOW13KHJ/DeRbo8RvreP8k1f2I4tN+/VHFggJcb6oGTkPkN7etzH1V8aKAwAh80yEVdc59/Pw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     dependencies:
-      '@astrojs/compiler': 0.23.4
+      '@astrojs/compiler': 0.24.0
       '@typescript-eslint/types': 5.36.1
+      astrojs-compiler-sync: 0.2.3_@astrojs+compiler@0.24.0
       debug: 4.3.4
       eslint-visitor-keys: 3.3.0
       espree: 9.4.0
-      synckit: 0.8.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1699,6 +1699,16 @@ packages:
       - supports-color
       - terser
       - ts-node
+    dev: true
+
+  /astrojs-compiler-sync/0.2.3_@astrojs+compiler@0.24.0:
+    resolution: {integrity: sha512-9zh85DrHieEylj7ir0MBmalyClw420oBhxn/NYGRx7xXoepofNuUR6RjY7V4l1kiolhvJ/uWKfZNZcHm7VsY6g==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      '@astrojs/compiler': '>=0.18.0'
+    dependencies:
+      '@astrojs/compiler': 0.24.0
+      synckit: 0.8.4
     dev: true
 
   /autoprefixer/10.4.11_postcss@8.4.16:
@@ -2932,14 +2942,14 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-astro/0.17.1_eslint@8.23.1:
-    resolution: {integrity: sha512-G2S2zAaDokH2v7O+nzcd0iFskGJ1ohANhQpsFwaAqDPyn+GolFl4zSCnoQefLZ+ONEeZkZ8Jp7Imvbo3FI3LOA==}
+  /eslint-plugin-astro/0.19.0_eslint@8.23.1:
+    resolution: {integrity: sha512-XOvTgFlSThgUQwDMjbj9gTu75Sig5IWpseN1hsGputC9tiZ857CrMLK3UimWCwIS6n3hTYYPWIkpcucEU/o0Uw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
       '@typescript-eslint/types': 5.36.1
-      astro-eslint-parser: 0.5.1
+      astro-eslint-parser: 0.6.1
       eslint: 8.23.1
       eslint-utils: 3.0.0_eslint@8.23.1
       postcss: 8.4.16
