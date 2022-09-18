@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@astrojs/image': 0.3.7
+  '@astrojs/image': 0.7.0
   '@astrojs/rss': 1.0.1
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 1.0.1
@@ -51,7 +51,7 @@ dependencies:
   uuid: 9.0.0
 
 devDependencies:
-  '@astrojs/image': 0.3.7
+  '@astrojs/image': 0.7.0
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 1.0.1
   '@astrojs/vue': 1.0.2_sass@1.54.9+vue@3.2.39
@@ -90,6 +90,10 @@ devDependencies:
 
 packages:
 
+  /@altano/tiny-async-pool/1.0.2:
+    resolution: {integrity: sha512-qQzaI0TBUPdpjZ3qo5b2ziQY9MSNpbziH2ZrE5lvtUZL+kn9GwVuVJwoOubaoNkeDB+rqEefnpu1k+oMpOCYiw==}
+    dev: true
+
   /@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==}
     engines: {node: '>=6.0.0'}
@@ -106,15 +110,14 @@ packages:
     resolution: {integrity: sha512-xZ81C/oMfExdF18I1Tyd2BKKzBqO+qYYctSy4iCwH4UWSo/4Y8A8MAzV1hG67uuE7hFRourSl6H5KUbhyChv/A==}
     dev: true
 
-  /@astrojs/image/0.3.7:
-    resolution: {integrity: sha512-A6029ed1ZfhcaZJLnII0XCl29VzeFJp07VqelOGi3yyi7VAXREHZa3bT23V5YQt/goPwKac8gZn2/pgnYPea6Q==}
+  /@astrojs/image/0.7.0:
+    resolution: {integrity: sha512-0P2Q0NbU1Y8iBDsJWes9qME2PHaiLOz8G7iFDJtWB+a42Ur/Awf9kxrBFX19siotR5kCX+9kTqZmhAp73SYRwQ==}
     dependencies:
-      etag: 1.8.1
+      '@altano/tiny-async-pool': 1.0.2
       image-size: 1.0.2
-      mrmime: 1.0.1
+      magic-string: 0.25.9
+      mime: 3.0.0
       sharp: 0.30.7
-      slash: 4.0.0
-      tiny-glob: 0.2.9
     dev: true
 
   /@astrojs/language-server/0.23.0:
@@ -3154,11 +3157,6 @@ packages:
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /etag/1.8.1:
-    resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
-    engines: {node: '>= 0.6'}
     dev: true
 
   /event-stream/3.3.4:
