@@ -32,7 +32,7 @@ specifiers:
   locale-emoji: 0.3.0
   marked: 4.1.0
   mdast-util-to-string: 3.1.0
-  nanostores: 0.6.0
+  nanostores: 0.7.0
   postcss-nesting: 10.2.0
   postcss-preset-env: 7.8.2
   prettier: 2.7.1
@@ -55,7 +55,7 @@ devDependencies:
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 1.0.1
   '@astrojs/vue': 1.0.2_sass@1.54.9+vue@3.2.39
-  '@nanostores/vue': 0.6.0_wn7xrio7tbrvqlls66emozpdau
+  '@nanostores/vue': 0.6.0_hswlafrnslvidkmp33e2xqqycm
   '@playwright/test': 1.25.2
   '@tailwindcss/aspect-ratio': 0.4.2
   '@tailwindcss/forms': 0.5.3
@@ -79,7 +79,7 @@ devDependencies:
   i18next-fs-backend: 1.1.5
   locale-emoji: 0.3.0
   marked: 4.1.0
-  nanostores: 0.6.0
+  nanostores: 0.7.0
   postcss-nesting: 10.2.0_postcss@8.4.16
   postcss-preset-env: 7.8.2_postcss@8.4.16
   prettier: 2.7.1
@@ -771,7 +771,7 @@ packages:
     resolution: {integrity: sha512-4/RWEeXDO6bocPONheFe6gX/oQdP/bEpv0oL4HqjPP5DCenBSt0mHgahppY49N0CpsaqffdwPq+TlX9CYOq2Dw==}
     dev: true
 
-  /@nanostores/vue/0.6.0_wn7xrio7tbrvqlls66emozpdau:
+  /@nanostores/vue/0.6.0_hswlafrnslvidkmp33e2xqqycm:
     resolution: {integrity: sha512-Co53bCDAA2hkBqpeYN975kchX/cTHMdS9qt6inqPGm8QAoB+wCoecxjmde8GSo/Arc6/JmQC5AFJGALYz0QMhw==}
     engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -782,7 +782,7 @@ packages:
       '@vue/devtools-api':
         optional: true
     dependencies:
-      nanostores: 0.6.0
+      nanostores: 0.7.0
       vue: 3.2.39
     dev: true
 
@@ -4689,8 +4689,8 @@ packages:
     hasBin: true
     dev: true
 
-  /nanostores/0.6.0:
-    resolution: {integrity: sha512-CQpKE8wtaJAr66hbg32t0MOAeybzLywU6UsLAX18kyQL/bME+xwhjWpmrvJRBp5kueFy6hs2oHlt3HFpNP+JaA==}
+  /nanostores/0.7.0:
+    resolution: {integrity: sha512-y+ma9MVXuPzXKEXaRYW/iL/xG/HtMwB8fmFcMfUqt5fCNR/na2kDubbZGV4furUMTgmxfySJs0cQjORWhaPDyA==}
     engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     dev: true
 
