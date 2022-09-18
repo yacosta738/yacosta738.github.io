@@ -39,6 +39,8 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: pnpm run test:e2e
+        env:
+          FORMSPREE: ${{ secrets.FORMSPREE }}
       - uses: actions/upload-artifact@v3
         if: always()
         with:
