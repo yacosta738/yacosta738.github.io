@@ -18,7 +18,7 @@
     "devDependencies": {
         "@astrojs/image": "0.7.0",
         "@astrojs/sitemap": "1.0.0",
-        "@astrojs/tailwind": "1.0.1",
+        "@astrojs/tailwind": "2.0.1",
         "@astrojs/vue": "1.0.2",
         "@nanostores/vue": "0.6.0",
         "@playwright/test": "1.25.2",
