@@ -8,7 +8,7 @@ specifiers:
   '@astrojs/vue': 1.0.2
   '@nanostores/vue': 0.6.0
   '@playwright/test': 1.25.2
-  '@tailwindcss/aspect-ratio': 0.4.0
+  '@tailwindcss/aspect-ratio': 0.4.2
   '@tailwindcss/forms': 0.5.3
   '@tailwindcss/line-clamp': 0.4.2
   '@tailwindcss/typography': 0.5.7
@@ -57,7 +57,7 @@ devDependencies:
   '@astrojs/vue': 1.0.2_sass@1.54.9+vue@3.2.39
   '@nanostores/vue': 0.6.0_wn7xrio7tbrvqlls66emozpdau
   '@playwright/test': 1.25.2
-  '@tailwindcss/aspect-ratio': 0.4.0
+  '@tailwindcss/aspect-ratio': 0.4.2
   '@tailwindcss/forms': 0.5.3
   '@tailwindcss/line-clamp': 0.4.2
   '@tailwindcss/typography': 0.5.7
@@ -1072,8 +1072,8 @@ packages:
     dev: true
     optional: true
 
-  /@tailwindcss/aspect-ratio/0.4.0:
-    resolution: {integrity: sha512-WJu0I4PpqNPuutpaA9zDUq2JXR+lorZ7PbLcKNLmb6GL9/HLfC7w3CRsMhJF4BbYd/lkY6CfXOvkYpuGnZfkpQ==}
+  /@tailwindcss/aspect-ratio/0.4.2:
+    resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dev: true
