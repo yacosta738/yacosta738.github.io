@@ -9,19 +9,26 @@ export interface Props {
 const { tags } = Astro.props
 
 const allTags = Object.keys(tags)
-const totalCount: number = allTags.reduce((acc, cur) => acc + tags[cur], 0)
 
-const textSize = (tag): string => {
-	const totalCountInPost: number = tags[tag]
-	const percent = (totalCountInPost / totalCount) * 100
-	if (percent <= 12.5) return 'text-base'
-	else if (percent > 12.5 && percent <= 25) return 'text-lg'
-	else if (percent > 25 && percent <= 37.5) return 'text-xl'
-	else if (percent > 37.5 && percent <= 50) return 'text-2xl'
-	else if (percent > 50 && percent <= 62.5) return 'text-3xl'
-	else if (percent > 62.5 && percent <= 75) return 'text-4xl'
-	else if (percent > 75 && percent <= 87.5) return 'text-5xl'
-	else return 'text-6xl'
+const textSize = (
+	tag,
+	fontSizeClass: string[] = [
+		'text-xs',
+		'text-sm',
+		'text-base',
+		'text-lg',
+		'text-xl',
+		'text-2xl',
+		'text-3xl',
+		'text-4xl'
+	]
+): string => {
+	const max = Math.max(...Object.values(tags))
+	const min = Math.min(...Object.values(tags))
+	const range = max - min
+	const tagCount = tags[tag]
+	const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1))
+	return fontSizeClass[index]
 }
 ---
 
@@ -39,6 +46,7 @@ const textSize = (tag): string => {
 			))
 		}
 	</div>
+	{allTags.length === 0 && <div class='text-center text-gray-500'>{t('noTags')}</div>}
 </WidgetCard>
 
 <style scoped lang='scss'>
