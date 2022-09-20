@@ -14,7 +14,7 @@ specifiers:
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/parser': 5.37.0
   '@vueuse/core': 9.2.0
-  astro: 1.2.6
+  astro: 1.2.7
   astro-compress: 1.0.8
   astro-i18next: 1.0.0-beta.10
   astro-icon: 0.7.3
@@ -63,9 +63,9 @@ devDependencies:
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/parser': 5.37.0_nbcbbd7lfrdtsoifdu7ts5ch5u
   '@vueuse/core': 9.2.0_vue@3.2.39
-  astro: 1.2.6_sass@1.54.9
+  astro: 1.2.7_sass@1.54.9
   astro-compress: 1.0.8
-  astro-i18next: 1.0.0-beta.10_astro@1.2.6
+  astro-i18next: 1.0.0-beta.10_astro@1.2.7
   astro-icon: 0.7.3
   astro-robots-txt: 0.3.9
   astro-seo: 0.6.0
@@ -1392,7 +1392,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.10_astro@1.2.6:
+  /astro-i18next/1.0.0-beta.10_astro@1.2.7:
     resolution: {integrity: sha512-xIJjJOFt2B/ipYszrxxpLWCh2WAgb4sftZApP1AKLBKgTrCLOL4feMZ0jzPCj2yRQ4rBLW0V81cH5Yrfz8hAcg==}
     hasBin: true
     peerDependencies:
@@ -1400,7 +1400,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 1.2.6_sass@1.54.9
+      astro: 1.2.7_sass@1.54.9
       i18next: 21.9.1
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -1426,8 +1426,8 @@ packages:
     resolution: {integrity: sha512-nR+dJlAyQhX6s0oAmbBqPq3KCZax/zVAerFsclGiJQ2znOkS/7L+RGjziS4M9Q3OQxm3FMfqIKHp9Ns73Q81ww==}
     dev: true
 
-  /astro/1.2.6_sass@1.54.9:
-    resolution: {integrity: sha512-u6s5EH6+F/IpNkjJJ2RAKMWmBIOVz4AozjyW7aD0hsiGkVF0VYu7AqNWO3TTG6WQ6c9YbosDpfj+JKTT+S/JhA==}
+  /astro/1.2.7_sass@1.54.9:
+    resolution: {integrity: sha512-Zz0xwf/xL0Vb0I6bd9gZW6CGrn+N7uaTGrcsNt/zCGhQ2nLE/lEqro2QUZeCrxQ8hLrTuXB9KirWOK6gXq+LKA==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -1485,7 +1485,7 @@ packages:
       tsconfig-resolver: 3.0.1
       unist-util-visit: 4.1.1
       vfile: 5.3.4
-      vite: 3.1.0_sass@1.54.9
+      vite: 3.1.3_sass@1.54.9
       yargs-parser: 21.1.1
       zod: 3.19.1
     transitivePeerDependencies:
@@ -6313,8 +6313,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/3.1.0_sass@1.54.9:
-    resolution: {integrity: sha512-YBg3dUicDpDWFCGttmvMbVyS9ydjntwEjwXRj2KBFwSB8SxmGcudo1yb8FW5+M/G86aS8x828ujnzUVdsLjs9g==}
+  /vite/3.1.3_sass@1.54.9:
+    resolution: {integrity: sha512-/3XWiktaopByM5bd8dqvHxRt5EEgRikevnnrpND0gRfNkrMrPaGGexhtLCzv15RcCMtV2CLw+BPas8YFeSG0KA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
