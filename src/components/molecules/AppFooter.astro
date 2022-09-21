@@ -17,7 +17,9 @@ class="container mx-auto flex flex-col lg:flex-row items-center justify-center m
     <ul class="flex flex-wrap relative list-none p-0 md:hidden">
    {socialMedia.map(({ name, icon, url }) => (
         <li class="my-2 text-light-slate font-mono text-3xl whitespace-nowrap mx-1">
-            <Icon name={icon} class="h-8"/>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <Icon name={icon} class="h-8"/>
+            </a>
         </li>
     ))}
     </ul>
