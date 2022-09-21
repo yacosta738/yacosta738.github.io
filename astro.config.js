@@ -33,8 +33,7 @@ export default defineConfig({
 		image(),
 		robotsTxt(),
 		compress({
-			html: false,
-			css: false
+			html: false
 		})
 	],
 	vite: {
