@@ -1,6 +1,6 @@
 {
     "name": "yunielacosta.com",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "private": true,
     "type": "module",
     "scripts": {
@@ -12,23 +12,23 @@
         "format": "prettier -w .",
         "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx,.vue",
         "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx,.vue --fix",
-        "test": "playwright test --workers=2",
+        "test": "playwright test",
         "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test'"
     },
     "devDependencies": {
-        "@astrojs/image": "0.7.0",
+        "@astrojs/image": "0.7.1",
         "@astrojs/sitemap": "1.0.0",
         "@astrojs/tailwind": "2.0.1",
         "@astrojs/vue": "1.0.2",
         "@nanostores/vue": "0.6.0",
-        "@playwright/test": "1.25.2",
+        "@playwright/test": "1.26.0",
         "@tailwindcss/aspect-ratio": "0.4.2",
         "@tailwindcss/forms": "0.5.3",
         "@tailwindcss/line-clamp": "0.4.2",
         "@tailwindcss/typography": "0.5.7",
-        "@typescript-eslint/parser": "5.37.0",
+        "@typescript-eslint/parser": "5.38.0",
         "@vueuse/core": "9.2.0",
-        "astro": "1.2.6",
+        "astro": "1.2.8",
         "astro-compress": "1.0.8",
         "astro-i18next": "1.0.0-beta.10",
         "astro-icon": "0.7.3",
@@ -65,5 +65,5 @@
         "node": "^14.15.0 || >=16.0.0",
         "pnpm": ">=7.0.0"
     },
-    "packageManager": "pnpm@7.12.0"
+    "packageManager": "pnpm@7.12.1"
 }
