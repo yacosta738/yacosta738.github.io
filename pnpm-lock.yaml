@@ -16,7 +16,7 @@ specifiers:
   '@vueuse/core': 9.2.0
   astro: 1.2.8
   astro-compress: 1.0.8
-  astro-i18next: 1.0.0-beta.11
+  astro-i18next: 1.0.0-beta.12
   astro-icon: 0.7.3
   astro-robots-txt: 0.3.9
   astro-seo: 0.6.0
@@ -67,7 +67,7 @@ devDependencies:
   '@vueuse/core': 9.2.0_vue@3.2.39
   astro: 1.2.8_sass@1.55.0
   astro-compress: 1.0.8
-  astro-i18next: 1.0.0-beta.11_astro@1.2.8
+  astro-i18next: 1.0.0-beta.12_astro@1.2.8
   astro-icon: 0.7.3
   astro-robots-txt: 0.3.9
   astro-seo: 0.6.0
@@ -1386,8 +1386,8 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.11_astro@1.2.8:
-    resolution: {integrity: sha512-5sp84rtc9279KD/QQppuK8/nlS4+aDht0Gc9fzWAwIZGwi8lm85VB29J4smWseNH6aFwSJza3/x8ny8AQyYabg==}
+  /astro-i18next/1.0.0-beta.12_astro@1.2.8:
+    resolution: {integrity: sha512-HbBCBuAhs/59HCVkQyiQWFWj1bDHjaQ8Yk55DkwPR2mTfN0yZfLncFnZm8QsprE5/s3p27U80kK7f7K83tdFRg==}
     hasBin: true
     peerDependencies:
       astro: ^1.0.0
