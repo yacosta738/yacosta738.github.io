@@ -24,7 +24,7 @@
   "my-self": "Soy ingeniero de software, entusiasta de la ciencia y la tecnología, especializado en construir aplicaciones web y Móviles.",
   "get-in-touch": "Contácteme",
   "resume": "Currículum",
-  "bio": "Ingeniero de software con aproximadamente {{years, number}} años trabajando en desarrollo de software. Competencia en tecnologías de front-end y back-end. Entusiasta de la tecnología y la ciencia. Tengo experiencia en Arquitectura de Aplicaciones Web, Principios de Diseño de Software y Patrones de Diseño de Software. Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño impulsado por dominios y microservicios. Soy una persona versátil con una amplia gama de habilidades, con muchas ganas de aprender y preparado para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.",
+  "bio": "Ingeniero de software con aproximadamente {{years, number}} años trabajando en desarrollo de software. Especializado en tecnologías de front-end y back-end. Entusiasta de la tecnología y la ciencia. Amplia experiencia en Arquitectura de Aplicaciones Web, Principios de Diseño de Software y Patrones de Diseño de Software. Marcado interés en la programación orientada a objetos, patrones de diseño, programación funcional, diseño impulsado por dominios y microservicios. Persona versátil con una amplia gama de habilidades, muchas ganas de aprender y preparado para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.",
   "about-tech": "Aquí hay algunas tecnologías con las que he trabajado recientemente:",
   "contact": "Contacto",
   "contact-me": "Contácteme",
