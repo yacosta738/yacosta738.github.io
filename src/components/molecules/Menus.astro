@@ -2,7 +2,7 @@
 import { localizePath } from 'astro-i18next'
 import i18next, { t } from 'i18next'
 import LanguageSelector from 'atoms:LanguageSelector'
-import { navMenus } from '@models:Menu'
+import { Menu, navMenus } from '@models:Menu'
 import Icon from 'astro-icon'
 import { Article, jsonToArticle } from '@models:Article'
 import { MarkdownInstance } from 'astro'
@@ -16,20 +16,11 @@ const { drawer } = Astro.props
 const { pathname } = Astro.url
 const isBlogRoot = pathname.endsWith('/blog')
 
-const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
-	en: Astro.glob('../../pages/blog/**/*.md'),
-	es: Astro.glob('../../pages/es/blog/**/*.md')
+const menuLink = (menu: Menu) => {
+	const link = localizePath(menu.link)
+	// if link ends with #id/ then remove / from the end
+	return new RegExp('#[a-zA-Z0-9]+/$').test(link) ? link.slice(0, -1) : link	
 }
-const postsData = i18next.language in articlesFiles ? await articlesFiles[i18next.language] : []
-
-const allPosts: Article[] = postsData
-	.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-	.map((post) => jsonToArticle(post))
-	.sort((a, b) => {
-		let aDate = new Date(a.date)
-		let bDate = new Date(b.date)
-		return bDate.getTime() - aDate.getTime()
-	})
 ---
 
 <ul class='menu-list' data-cypress='menu'>
@@ -46,7 +37,7 @@ const allPosts: Article[] = postsData
 				navMenus.map((menu) => (
 					<li>
 						<a
-							href={localizePath(menu.link)}
+							href={menuLink(menu)}
 							id={menu.id}
 							data-drawer-dismiss='menu-drawer'
 							aria-controls='menu-drawer'
