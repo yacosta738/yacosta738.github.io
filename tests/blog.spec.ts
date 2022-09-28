@@ -13,4 +13,5 @@ test('test blog section', async ({ page }) => {
 
 	await page.locator('text=Back to Blog').click()
 	await expect(page).toHaveURL('http://localhost:3000/blog/')
+	
 })
