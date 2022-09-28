@@ -7,7 +7,7 @@ specifiers:
   '@astrojs/tailwind': 2.0.1
   '@astrojs/vue': 1.0.2
   '@nanostores/vue': 0.6.0
-  '@playwright/test': 1.26.0
+  '@playwright/test': 1.26.1
   '@tailwindcss/aspect-ratio': 0.4.2
   '@tailwindcss/forms': 0.5.3
   '@tailwindcss/line-clamp': 0.4.2
@@ -58,7 +58,7 @@ devDependencies:
   '@astrojs/tailwind': 2.0.1_tailwindcss@3.1.8
   '@astrojs/vue': 1.0.2_sass@1.55.0+vue@3.2.40
   '@nanostores/vue': 0.6.0_ugdr3nhkbdglzogoqip3bqbmwi
-  '@playwright/test': 1.26.0
+  '@playwright/test': 1.26.1
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
@@ -821,13 +821,13 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /@playwright/test/1.26.0:
-    resolution: {integrity: sha512-D24pu1k/gQw3Lhbpc38G5bXlBjGDrH5A52MsrH12wz6ohGDeQ+aZg/JFSEsT/B3G8zlJe/EU4EkJK74hpqsjEg==}
+  /@playwright/test/1.26.1:
+    resolution: {integrity: sha512-bNxyZASVt2adSZ9gbD7NCydzcb5JaI0OR9hc7s+nmPeH604gwp0zp17NNpwXY4c8nvuBGQQ9oGDx72LE+cUWvw==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 17.0.45
-      playwright-core: 1.26.0
+      playwright-core: 1.26.1
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -4726,8 +4726,8 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /playwright-core/1.26.0:
-    resolution: {integrity: sha512-p8huU8eU4gD3VkJd3DA1nA7R3XA6rFvFL+1RYS96cSljCF2yJE9CWEHTPF4LqX8KN9MoWCrAfVKP5381X3CZqg==}
+  /playwright-core/1.26.1:
+    resolution: {integrity: sha512-hzFchhhxnEiPc4qVPs9q2ZR+5eKNifY2hQDHtg1HnTTUuphYCBP8ZRb2si+B1TR7BHirgXaPi48LIye5SgrLAA==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
