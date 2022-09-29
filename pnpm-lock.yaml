@@ -4,7 +4,7 @@ specifiers:
   '@astrojs/image': 0.8.0
   '@astrojs/rss': 1.0.1
   '@astrojs/sitemap': 1.0.0
-  '@astrojs/tailwind': 2.0.1
+  '@astrojs/tailwind': 2.0.2
   '@astrojs/vue': 1.0.2
   '@nanostores/vue': 0.6.0
   '@playwright/test': 1.26.1
@@ -55,7 +55,7 @@ dependencies:
 devDependencies:
   '@astrojs/image': 0.8.0
   '@astrojs/sitemap': 1.0.0
-  '@astrojs/tailwind': 2.0.1_tailwindcss@3.1.8
+  '@astrojs/tailwind': 2.0.2_tailwindcss@3.1.8
   '@astrojs/vue': 1.0.2_sass@1.55.0+vue@3.2.40
   '@nanostores/vue': 0.6.0_ugdr3nhkbdglzogoqip3bqbmwi
   '@playwright/test': 1.26.1
@@ -202,8 +202,8 @@ packages:
       zod: 3.18.0
     dev: true
 
-  /@astrojs/tailwind/2.0.1_tailwindcss@3.1.8:
-    resolution: {integrity: sha512-fvruoVEvx0zQsVY2AVRrhvH25zp6xTF8Wb1Lu43KXLoxU7fHIB1fcTTRP+Qhd4f5EvuTmuPKaKwHmbrv8mTV9A==}
+  /@astrojs/tailwind/2.0.2_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-SDQYqrOLwrRdDzjoSs6Ha2YQzWJlzWnPTZM5t0aWoHukm3JPQg/omDTpiz/XqT4vupYMOsBQZ9WBuNyWVtMrVg==}
     peerDependencies:
       tailwindcss: ^3.0.24
     dependencies:
