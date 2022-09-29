@@ -19,7 +19,7 @@
         "@astrojs/image": "0.8.1",
         "@astrojs/sitemap": "1.0.0",
         "@astrojs/tailwind": "2.0.2",
-        "@astrojs/vue": "1.0.2",
+        "@astrojs/vue": "1.1.0",
         "@nanostores/vue": "0.6.0",
         "@playwright/test": "1.26.1",
         "@tailwindcss/aspect-ratio": "0.4.2",
