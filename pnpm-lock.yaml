@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@astrojs/image': 0.8.0
+  '@astrojs/image': 0.8.1
   '@astrojs/rss': 1.0.1
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 2.0.1
@@ -53,7 +53,7 @@ dependencies:
   uuid: 9.0.0
 
 devDependencies:
-  '@astrojs/image': 0.8.0
+  '@astrojs/image': 0.8.1
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 2.0.1_tailwindcss@3.1.8
   '@astrojs/vue': 1.0.2_sass@1.55.0+vue@3.2.40
@@ -112,13 +112,19 @@ packages:
     resolution: {integrity: sha512-xZ81C/oMfExdF18I1Tyd2BKKzBqO+qYYctSy4iCwH4UWSo/4Y8A8MAzV1hG67uuE7hFRourSl6H5KUbhyChv/A==}
     dev: true
 
-  /@astrojs/image/0.8.0:
-    resolution: {integrity: sha512-9iCamTDMtlF0e+tUurqVG6kfC2iH8BkDCR4g4p8qF1c3YjjeNfI1BKiQjoVSfcC3zP1ZH7CJJqlV7moafyLLzw==}
+  /@astrojs/image/0.8.1:
+    resolution: {integrity: sha512-vlfPFYHt9vpAZwZG4O9flumFM2fNkCKleOucqaDngu7pNHxSpf14j9ywlBNz4JryVehUupeffbVn561kBhhOJQ==}
+    peerDependencies:
+      sharp: '>=0.31.0'
+    peerDependenciesMeta:
+      sharp:
+        optional: true
     dependencies:
       '@altano/tiny-async-pool': 1.0.2
       image-size: 1.0.2
       magic-string: 0.25.9
       mime: 3.0.0
+      slash: 4.0.0
     dev: true
 
   /@astrojs/language-server/0.23.0:
