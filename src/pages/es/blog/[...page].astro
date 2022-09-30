@@ -1,30 +1,30 @@
 ---
-import i18next, { t, changeLanguage } from 'i18next'
-import BlogTemplate from 'templates:BlogTemplate'
-import { jsonToArticle } from '@models:Article'
-import ArticleSummary from 'molecules:ArticleSummary'
-import Paginator from 'molecules:Paginator'
-import SearchBox from '@components:molecules/SearchBox.vue'
+import i18next, { t, changeLanguage } from "i18next";
+import BlogTemplate from "templates:BlogTemplate";
+import { jsonToArticle } from "@models:Article";
+import ArticleSummary from "molecules:ArticleSummary";
+import Paginator from "molecules:Paginator";
+import SearchBox from "@components:molecules/SearchBox.vue";
 
-changeLanguage('es')
+changeLanguage("es");
 
-const allPosts = await Astro.glob('./**/*.md')
+const allPosts = await Astro.glob("./**/*.md");
 const sortedPosts = allPosts
-	.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-	.map((post) => jsonToArticle(post))
-	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+    .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+    .map((post) => jsonToArticle(post))
+    .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 export async function getStaticPaths({ paginate }) {
-	// The getStaticPaths() function executes in its own isolated scope once, before any page loads. Therefore you can’t reference anything from its parent scope, other than file imports. The compiler will warn if you break this requirement.
-	const allPosts = await Astro.glob('./**/*.md')
-	const sortedPosts = allPosts
-		.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-		.map((post) => jsonToArticle(post))
-		.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-	return paginate(sortedPosts, {
-		pageSize: 5
-	})
+    // The getStaticPaths() function executes in its own isolated scope once, before any page loads. Therefore you can’t reference anything from its parent scope, other than file imports. The compiler will warn if you break this requirement.
+    const allPosts = await Astro.glob("./**/*.md");
+    const sortedPosts = allPosts
+        .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+        .map((post) => jsonToArticle(post))
+        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+    return paginate(sortedPosts, {
+        pageSize: 5
+    });
 }
-const { page } = Astro.props
+const { page } = Astro.props;
 ---
 
 <BlogTemplate title={t('blog')} description={t('seo.blog-description')}>

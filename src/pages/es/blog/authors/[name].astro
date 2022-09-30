@@ -1,28 +1,28 @@
 ---
-import { Author, jsonToAuthor } from '@models:Author'
-import Icon from 'astro-icon'
-import Card3D from 'molecules:Card3D'
-import i18next, { t, changeLanguage } from 'i18next'
-import BaseTemplate from 'templates:BaseTemplate'
+import { Author, jsonToAuthor } from "@models:Author";
+import Icon from "astro-icon";
+import Card3D from "molecules:Card3D";
+import i18next, { t, changeLanguage } from "i18next";
+import BaseTemplate from "templates:BaseTemplate";
 
-changeLanguage('es')
+changeLanguage("es");
 
 export async function getStaticPaths() {
-	const authorsData = await Astro.glob('./**/*.json')
-	const authors: Author[] = authorsData
-		.filter((author) => author.lang === i18next.language)
-		.map((author) => jsonToAuthor(author))
-	return authors.map((author) => ({
-		params: {
-			name: author.id
-		},
-		props: {
-			author
-		}
-	}))
+    const authorsData = await Astro.glob("./**/*.json");
+    const authors: Author[] = authorsData
+        .filter((author) => author.lang === i18next.language)
+        .map((author) => jsonToAuthor(author));
+    return authors.map((author) => ({
+        params: {
+            name: author.id
+        },
+        props: {
+            author
+        }
+    }));
 }
-const { name } = Astro.params
-const { author } = Astro.props
+const { name } = Astro.params;
+const { author } = Astro.props;
 ---
 
 <BaseTemplate title={`${t('blog')} | ${name}`} description={t('seo.blog-description')}>
