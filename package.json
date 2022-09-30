@@ -42,7 +42,7 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.3.0",
     "eslint-plugin-promise": "6.0.1",
-    "husky": "^8.0.1",
+    "husky": "8.0.1",
     "i18next-fs-backend": "1.1.5",
     "locale-emoji": "0.3.0",
     "marked": "4.1.0",
