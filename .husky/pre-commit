@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run i18n:generate && npm run format && npm run test:e2e
+echo "Running pre-commit hook 🪝"
+pnpm i &&  pnpm run i18n:generate && pnpm run format #&& pnpm run test:e2e
