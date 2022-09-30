@@ -13,7 +13,7 @@ draft: false
 
 ![6-free-hostings.png](/uploads/6-free-hostings.png)
 
-One of the most common questions we ask ourselves when creating a new project is where we can deploy our prototype. Nowadays there are several alternatives that we can use for free. 
+One of the most common questions we ask ourselves when creating a new project is where we can deploy our prototype. Nowadays there are several alternatives that we can use for free.
 
 Some of these hosts are:
 
@@ -42,7 +42,7 @@ Some of these hosts are:
 
 - The new revolution is here. Take your code as close as possible to the user.
 - With a latency of just 12ms, run your JS, Rust, C and more code.
-- In addition, it comes with a key/value database that allows you to cache or store information.  
+- In addition, it comes with a key/value database that allows you to cache or store information.
 
 🔗 [www.netlify.com](http://www.netlify.com/)
 

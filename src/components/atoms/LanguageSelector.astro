@@ -1,24 +1,26 @@
 ---
-import i18next from "i18next";
-import localeEmoji from "locale-emoji";
-import { localizePath } from "astro-i18next";
+import i18next from 'i18next'
+import localeEmoji from 'locale-emoji'
+import { localizePath } from 'astro-i18next'
 
-const supportedLanguages = i18next.languages;
-const currentLanguage = i18next.language;
+const supportedLanguages = i18next.languages
+const currentLanguage = i18next.language
 
-const { pathname } = Astro.url;
+const { pathname } = Astro.url
 
-const { ...attributes } = Astro.props;
+const { ...attributes } = Astro.props
 ---
 
-<select onchange="location = this.value;" {...attributes}>
-  {supportedLanguages.map((supportedLanguage: string) => {
-    let value = localizePath(pathname, supportedLanguage);
-    const flag = localeEmoji(supportedLanguage);
-    return (
-      <option value={value} selected={supportedLanguage === currentLanguage}>
-        {flag}
-      </option>
-    );
-  })}
+<select onchange='location = this.value;' {...attributes}>
+	{
+		supportedLanguages.map((supportedLanguage: string) => {
+			let value = localizePath(pathname, supportedLanguage)
+			const flag = localeEmoji(supportedLanguage)
+			return (
+				<option value={value} selected={supportedLanguage === currentLanguage}>
+					{flag}
+				</option>
+			)
+		})
+	}
 </select>

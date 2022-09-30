@@ -26,7 +26,7 @@ const techs: Tech[] = techData
 	function animateBackgroundIcons() {
 		const availableSvgs = svgs.filter((svg) => !svg.isAnimating)
 		const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)]
-		
+
 		if (!svgToAnimate) return
 
 		svgToAnimate.addEventListener(

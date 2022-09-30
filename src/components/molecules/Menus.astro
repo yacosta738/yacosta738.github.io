@@ -6,7 +6,7 @@ import { Menu, navMenus } from '@models:Menu'
 import Icon from 'astro-icon'
 import { Article, jsonToArticle } from '@models:Article'
 import { MarkdownInstance } from 'astro'
-import Search from '@components:atoms/Search.vue';
+import Search from '@components:atoms/Search.vue'
 export interface Props {
 	drawer: boolean
 }
@@ -19,14 +19,14 @@ const isBlogRoot = pathname.endsWith('/blog')
 const menuLink = (menu: Menu) => {
 	const link = localizePath(menu.link)
 	// if link ends with #id/ then remove / from the end
-	return new RegExp('#[a-zA-Z0-9]+/$').test(link) ? link.slice(0, -1) : link	
+	return new RegExp('#[a-zA-Z0-9]+/$').test(link) ? link.slice(0, -1) : link
 }
 ---
 
 <ul class='menu-list' data-cypress='menu'>
 	<li>
-     {isBlogRoot && <Search client:only />}
-    </li>
+		{isBlogRoot && <Search client:only />}
+	</li>
 	<li>
 		<ol
 			class={`order-list items-center space-y-6 lg:space-y-0 lg:space-x-2 lg:flex ${
@@ -49,22 +49,22 @@ const menuLink = (menu: Menu) => {
 			}
 		</ol>
 	</li>
-	<li class="flex justify-start md:justify-between items-center">
+	<li class='flex justify-start md:justify-between items-center'>
 		<LanguageSelector
 			showFlag={true}
 			class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
 		/>
 		<a
-		class='rounded p-2 bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
-		aria-label='RSS Feed'
-		target='_blank'
-		href='/rss.xml'
-	>
-		<Icon name='tabler:rss' class='w-5 h-5' />
-	</a>
+			class='rounded p-2 bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
+			aria-label='RSS Feed'
+			target='_blank'
+			href='/rss.xml'
+		>
+			<Icon name='tabler:rss' class='w-5 h-5' />
+		</a>
 	</li>
 	<li>
-		<a id="resume" href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>
+		<a id='resume' href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>
 			{t('resume')}
 		</a>
 	</li>

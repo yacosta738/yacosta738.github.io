@@ -67,7 +67,8 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 	const categoryEl = document.getElementById('categoryWidget')
 	// if the url is /blog or es/blog, remove the category widget
 	if (categoryEl) {
-		const isBlogRoot = window?.location?.href?.endsWith('/blog') || window?.location?.href?.endsWith('/blog/')
+		const isBlogRoot =
+			window?.location?.href?.endsWith('/blog') || window?.location?.href?.endsWith('/blog/')
 		if (isBlogRoot) {
 			console.log('removing category widget')
 			categoryEl?.classList.add('hidden')

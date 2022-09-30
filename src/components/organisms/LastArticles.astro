@@ -31,7 +31,7 @@ const posts: Article[] = postsData
 					<a href={post.url}>
 						<img class='rounded-t-lg object-cover h-48 w-96' src={post.cover} alt={post.title} />
 						<div class='absolute top-1 right-1 left-1 flex justify-between items-center px-4 rounded-lg rounded-b-none'>
-							<span class=''></span>
+							<span class='' />
 							<div class='text-lightest-slate font-regular flex flex-col justify-start items-center text-center bg-light-navy/25 rounded'>
 								<span class='text-3xl leading-0 font-semibold'>{post.timeToRead}</span>
 								<span class='-mt-3 text-xl'>Min</span>
@@ -46,10 +46,10 @@ const posts: Article[] = postsData
 						</a>
 						<p class='mb-3 font-normal line-clamp-4 md:line-clamp-3'>{post.description}</p>
 						<footer class='absolute bottom-1'>
-						<a href={post.url} class='inline-flex items-center py-2 px-3 text-sm font-medium'>
-							{t('read')}
-						</a>
-					</footer>
+							<a href={post.url} class='inline-flex items-center py-2 px-3 text-sm font-medium'>
+								{t('read')}
+							</a>
+						</footer>
 					</div>
 				</article>
 			))

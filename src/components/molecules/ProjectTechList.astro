@@ -1,58 +1,46 @@
 ---
-import { Project } from "@models:Project";
-import { Tech } from "@models:Tech";
-import { Icon } from "astro-icon";
+import { Project } from '@models:Project'
+import { Tech } from '@models:Tech'
+import { Icon } from 'astro-icon'
 
 export interface Props {
-    position: string;
-    showIcon: boolean;
-    project: Project;
+	position: string
+	showIcon: boolean
+	project: Project
 }
 
-const { position, showIcon = true, project } = Astro.props;
+const { position, showIcon = true, project } = Astro.props
 ---
 
 <ul
-    class={`project-tech-list ${
-        position === "end"
-            ? "justify-end"
-            : position === "center"
-            ? "justify-center"
-            : "justify-start"
-    }`}
+	class={`project-tech-list ${
+		position === 'end' ? 'justify-end' : position === 'center' ? 'justify-center' : 'justify-start'
+	}`}
 >
-    {
-        project &&
-            project.tech &&
-            project.tech.map((tech: Tech) => (
-                <li
-                    class="my-2 text-light-slate font-mono text-xs whitespace-nowrap"
-                    class={
-                        position === "end"
-                            ? "ml-3"
-                            : position === "center"
-                            ? "mx-2"
-                            : "mr-3"
-                    }
-                >
-                    {tech?.url != null ? (
-                        <a class="flex" href={tech?.url} target="_blank">
-                            {showIcon && tech?.icon && (
-                                <Icon name={tech?.icon} class="h-4" />
-                            )}
-                            <span class="mx-1">{tech?.name}</span>
-                        </a>
-                    ) : (
-                        <span class="mx-1">{tech?.name}</span>
-                    )}
-                </li>
-            ))
-    }
+	{
+		project &&
+			project.tech &&
+			project.tech.map((tech: Tech) => (
+				<li
+					class='my-2 text-light-slate font-mono text-xs whitespace-nowrap'
+					class={position === 'end' ? 'ml-3' : position === 'center' ? 'mx-2' : 'mr-3'}
+				>
+					{tech?.url != null ? (
+						<a class='flex' href={tech?.url} target='_blank'>
+							{showIcon && tech?.icon && <Icon name={tech?.icon} class='h-4' />}
+							<span class='mx-1'>{tech?.name}</span>
+						</a>
+					) : (
+						<span class='mx-1'>{tech?.name}</span>
+					)}
+				</li>
+			))
+	}
 </ul>
 
 <style>
-    .project-tech-list {
-        z-index: 2;
-        @apply flex flex-wrap relative list-none p-0 my-4;
-    }
+	.project-tech-list {
+		z-index: 2;
+		@apply flex flex-wrap relative list-none p-0 my-4;
+	}
 </style>

@@ -1,61 +1,51 @@
 ---
-import { Project } from "@models:Project";
-import { Icon } from "astro-icon";
+import { Project } from '@models:Project'
+import { Icon } from 'astro-icon'
 export interface Props {
-    position: string;
-    project: Project;
+	position: string
+	project: Project
 }
-const { position, project } = Astro.props;
+const { position, project } = Astro.props
 
 const classProjectLinks = () => {
-    if (position === "end") {
-        return "justify-end";
-    } else if (position === "center") {
-        return "justify-center";
-    } else {
-        return "justify-start";
-    }
-};
+	if (position === 'end') {
+		return 'justify-end'
+	} else if (position === 'center') {
+		return 'justify-center'
+	} else {
+		return 'justify-start'
+	}
+}
 const classLinks = () => {
-    if (position === "end") {
-        return "mr-2";
-    } else if (position === "center") {
-        return "m-1";
-    } else {
-        return "ml-2";
-    }
-};
+	if (position === 'end') {
+		return 'mr-2'
+	} else if (position === 'center') {
+		return 'm-1'
+	} else {
+		return 'ml-2'
+	}
+}
 ---
 
 <div class={`project-links ${classProjectLinks()}`}>
-    {
-        project.repository && (
-            <a
-                href={project.repository}
-                aria-label="GitHub Link"
-                class={classLinks()}
-                target="_blank"
-            >
-                <Icon name="ion:fork-repo" class="h-6 md:h-8" />
-            </a>
-        )
-    }
-    {
-        project.url && (
-            <a
-                href={project.url}
-                aria-label="Project Link"
-                class={classLinks()}
-                target="_blank"
-            >
-                <Icon name="charm:link-external" class="h-6 md:h-8" />
-            </a>
-        )
-    }
+	{
+		project.repository && (
+			<a href={project.repository} aria-label='GitHub Link' class={classLinks()} target='_blank'>
+				<Icon name='ion:fork-repo' class='h-6 md:h-8' />
+			</a>
+		)
+	}
+	{
+		project.url && (
+			<a href={project.url} aria-label='Project Link' class={classLinks()} target='_blank'>
+				<Icon name='charm:link-external' class='h-6 md:h-8' />
+			</a>
+		)
+	}
 </div>
 
 <style>
-    .project-links {
-        @apply relative flex flex-wrap p-0;
-    }
+	.project-links {
+		@apply relative flex flex-wrap p-0;
+	}
 </style>

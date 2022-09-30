@@ -13,7 +13,7 @@ draft: false
 
 ![6-free-hostings.png](/uploads/6-free-hostings.png)
 
-Una de las preguntas más comunes que nos hacemos cuando creamos un nuevo proyecto es donde podemos desplegar nuestro prototipo. Hoy en día existen varias alternativas las cuales podemos usar de forma gratuita. 
+Una de las preguntas más comunes que nos hacemos cuando creamos un nuevo proyecto es donde podemos desplegar nuestro prototipo. Hoy en día existen varias alternativas las cuales podemos usar de forma gratuita.
 
 Algunos de estos hosts son:
 

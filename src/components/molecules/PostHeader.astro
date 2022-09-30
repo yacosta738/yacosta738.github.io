@@ -1,39 +1,55 @@
 ---
-import { t} from 'i18next'
-import { localizePath } from "astro-i18next";
-import { Article } from '@models:Article';
-import { urlize } from '@util:utilities';
+import { t } from 'i18next'
+import { localizePath } from 'astro-i18next'
+import { Article } from '@models:Article'
+import { urlize } from '@util:utilities'
 import { Icon } from 'astro-icon'
 
 export interface Props {
-    article: Article;
+	article: Article
 }
-const {article} = Astro.props;
+const { article } = Astro.props
 
 const formatDate = (date: Date | string) => {
-    if (typeof date === 'string') {
-        date = new Date(date);
-    }
-    return date.toLocaleDateString();
+	if (typeof date === 'string') {
+		date = new Date(date)
+	}
+	return date.toLocaleDateString()
 }
 ---
 
-<ul class="flex flex-col md:flex-row items-center relative list-none p-0 mb-4 text-light-slate font-mono text-sm">
-    {article.date && <li class="my-2 flex items-center whitespace-nowrap mx-1">
-      <Icon name="mdi:calendar-month-outline" class="h-4" />
-      <span class="mx-2">{ formatDate(article.date) }</span>
-    </li>}
-    {article.timeToRead && <li class="my-2 whitespace-nowrap mx-1">
-      <span>{t('time-to-read', { timeToRead: article.timeToRead })}</span>
-    </li>}
-    <!-- {article.url && <li class="my-2 whitespace-nowrap mx-1">
+<ul
+	class='flex flex-col md:flex-row items-center relative list-none p-0 mb-4 text-light-slate font-mono text-sm'
+>
+	{
+		article.date && (
+			<li class='my-2 flex items-center whitespace-nowrap mx-1'>
+				<Icon name='mdi:calendar-month-outline' class='h-4' />
+				<span class='mx-2'>{formatDate(article.date)}</span>
+			</li>
+		)
+	}
+	{
+		article.timeToRead && (
+			<li class='my-2 whitespace-nowrap mx-1'>
+				<span>{t('time-to-read', { timeToRead: article.timeToRead })}</span>
+			</li>
+		)
+	}
+	<!-- {article.url && <li class="my-2 whitespace-nowrap mx-1">
       <a href={localizePath(article.url)} class="flex text-green-500">
         <Icon name="la:comments" class="h-4 mr-1" />
         300
       </a>
     </li>} -->
-    {article.author && <li class="my-2 whitespace-nowrap mx-1">
-      <span class="mr-1">{t('author')}</span>
-      <a href={localizePath(`/blog/authors/${urlize(article.author)}`)} class="inline-link">{ article.author }</a>
-    </li>}
-  </ul>
+	{
+		article.author && (
+			<li class='my-2 whitespace-nowrap mx-1'>
+				<span class='mr-1'>{t('author')}</span>
+				<a href={localizePath(`/blog/authors/${urlize(article.author)}`)} class='inline-link'>
+					{article.author}
+				</a>
+			</li>
+		)
+	}
+</ul>
