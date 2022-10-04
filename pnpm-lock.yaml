@@ -18,7 +18,7 @@ specifiers:
   astro-compress: 1.0.8
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.7.3
-  astro-robots-txt: 0.3.9
+  astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
   dompurify: 2.4.0
   eslint: 8.24.0
@@ -70,7 +70,7 @@ devDependencies:
   astro-compress: 1.0.8
   astro-i18next: 1.0.0-beta.12_astro@1.4.4
   astro-icon: 0.7.3
-  astro-robots-txt: 0.3.9
+  astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
   dompurify: 2.4.0
   eslint: 8.24.0
@@ -1580,8 +1580,8 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-robots-txt/0.3.9:
-    resolution: {integrity: sha512-WH8fExZdhsXAAYiqItmp8owHEcNlfbVygN5tTPoZDUnRdiRp5ojQYX/E4YW+JSX4AzEJeEHBSMNzpPFsZLR41g==}
+  /astro-robots-txt/0.3.10:
+    resolution: {integrity: sha512-fVQOdiVFPgMJEILUFBpNsup3q/RBvYiiecQVyPeWo3Ss+CzjMCkbWBflbFr86+9tTkiX0q1dufNem03QnorJ/w==}
     dependencies:
       deepmerge: 4.2.2
       valid-filename: 4.0.0
