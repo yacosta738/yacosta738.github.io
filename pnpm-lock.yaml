@@ -14,7 +14,7 @@ specifiers:
   '@tailwindcss/typography': 0.5.7
   '@typescript-eslint/parser': 5.39.0
   '@vueuse/core': 9.3.0
-  astro: 1.4.6
+  astro: 1.4.7
   astro-compress: 1.0.11
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.7.3
@@ -66,9 +66,9 @@ devDependencies:
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
   '@typescript-eslint/parser': 5.39.0_vdsfgbufkyw5n7ix4t342ycv6i
   '@vueuse/core': 9.3.0_vue@3.2.40
-  astro: 1.4.6_sass@1.55.0
+  astro: 1.4.7_sass@1.55.0
   astro-compress: 1.0.11
-  astro-i18next: 1.0.0-beta.12_astro@1.4.6
+  astro-i18next: 1.0.0-beta.12_astro@1.4.7
   astro-icon: 0.7.3
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
@@ -1549,7 +1549,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.12_astro@1.4.6:
+  /astro-i18next/1.0.0-beta.12_astro@1.4.7:
     resolution: {integrity: sha512-HbBCBuAhs/59HCVkQyiQWFWj1bDHjaQ8Yk55DkwPR2mTfN0yZfLncFnZm8QsprE5/s3p27U80kK7f7K83tdFRg==}
     hasBin: true
     peerDependencies:
@@ -1557,7 +1557,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 1.4.6_sass@1.55.0
+      astro: 1.4.7_sass@1.55.0
       i18next: 21.9.2
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -1583,8 +1583,8 @@ packages:
     resolution: {integrity: sha512-nR+dJlAyQhX6s0oAmbBqPq3KCZax/zVAerFsclGiJQ2znOkS/7L+RGjziS4M9Q3OQxm3FMfqIKHp9Ns73Q81ww==}
     dev: true
 
-  /astro/1.4.6_sass@1.55.0:
-    resolution: {integrity: sha512-zGi3uCl+VwBYwbmccyo9M4xI68gx+M7jJdP7kFSR3UCdmDbCoCY6u85ixAAjbkMUSNsuxsrBrhH9HW/X5SGTzQ==}
+  /astro/1.4.7_sass@1.55.0:
+    resolution: {integrity: sha512-Vit4megdh1rLdET5+HwQTdiXOjWQNzPNxRbpp08qn/0xw7pxrYD34TqLl7j8lxwrF+ky9WohdQGo7fkBF6P3SQ==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
