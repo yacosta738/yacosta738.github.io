@@ -1,0 +1,13 @@
+{
+  "title": "Food Ordering System",
+  "lang": "es",
+  "date": "2022-08-05",
+  "repository": "https://github.com/yacosta738/food-ordering-system",
+  "company": "Personal",
+  "tech": ["java", "postgresql", "kafka"],
+  "showInProjects": true,
+  "featured": false,
+  "priority": 0.06,
+  "published": true,
+  "content": "Sistema de pedidos de comida que permite a los usuarios pedir comida de restaurantes. Es una arquitectura de microservicios que usa Kafka para comunicarse entre servicios. También usa PostgreSQL como base de datos. Es un trabajo en progreso."
+}
