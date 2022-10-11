@@ -27,7 +27,7 @@
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/line-clamp": "0.4.2",
     "@tailwindcss/typography": "0.5.7",
-    "@typescript-eslint/parser": "5.39.0",
+    "@typescript-eslint/parser": "5.40.0",
     "@vueuse/core": "9.3.0",
     "astro": "1.4.7",
     "astro-compress": "1.0.11",
