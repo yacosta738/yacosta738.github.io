@@ -19,7 +19,7 @@ Resumen de las características de Java 8,9,11,12,13,14,15,16,17,18,19.
 
 Todas las características en una sola publicación.
 
-Características Java 19:
+Características de Java 19:
 
 - Record Patterns (Preview)
 - Linux/RISC-V Port
@@ -29,7 +29,7 @@ Características Java 19:
 - Structured Concurrency (Incubator)
 - Pattern Matching for switch (Third Preview)
 
-Características Java 18:
+Características de Java 18:
 
 - UTF-8 by Default
 - Simple Web Server
