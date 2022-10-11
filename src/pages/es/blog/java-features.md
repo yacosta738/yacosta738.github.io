@@ -10,6 +10,7 @@ categories: [development, programming]
 layout: ../../../components/templates/BlogPostTemplate.astro
 draft: false
 ---
+
 ![java-feactures.png](/uploads/java-feactures.png)
 
 Java es un lenguaje de programación y una plataforma de cómputo que fue lanzado por primera vez por Sun Microsystems en 1995. Hay muchas aplicaciones y sitios web que no funcionarán a menos que tenga Java instalado, y más se crean todos los días. Java es rápido, seguro y confiable. Desde computadoras portátiles hasta centros de datos, consolas de juegos hasta supercomputadoras científicas, teléfonos celulares hasta Internet, Java está en todas partes!
@@ -28,7 +29,6 @@ Características Java 19:
 - Structured Concurrency (Incubator)
 - Pattern Matching for switch (Third Preview)
 
-
 Características Java 18:
 
 - UTF-8 by Default
@@ -39,7 +39,6 @@ Características Java 18:
 - Internet-Address Resolution SPI
 - Foreign Function & Memory API
 - Pattern Matching for switch
-
 
 Características de Java 17 (Soporte a largo plazo):
 
