@@ -40,7 +40,7 @@ export default defineConfig({
 			config: {
 				backend: {
 					name: 'git-gateway',
-					branch: 'main'
+					branch: 'master'
 				},
 				publish_mode: 'editorial_workflow',
 				media_folder: 'public/uploads',
@@ -124,6 +124,20 @@ export default defineConfig({
 							{ label: 'Categoría', name: 'categories', widget: 'list', required: false },
 							{ label: 'Draft', name: 'draft', widget: 'boolean', default: false },
 							{ label: 'Body', name: 'body', widget: 'markdown' }
+						]
+					},
+					{
+						name: 'tech',
+						label: 'Tech',
+						folder: 'src/data/technologies',
+						slug: '{{id}}',
+						create: true,
+						extension: 'json',
+						fields: [
+							{ label: 'ID', name: 'id', widget: 'string' },
+							{ label: 'Name', name: 'name', widget: 'string' },
+							{ label: 'Icon', name: 'icon', widget: 'string' },
+							{ label: 'url', name: 'url', widget: 'string' }
 						]
 					}
 				]
