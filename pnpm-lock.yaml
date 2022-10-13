@@ -15,7 +15,7 @@ specifiers:
   '@typescript-eslint/parser': 5.40.0
   '@vueuse/core': 9.3.0
   astro: 1.4.7
-  astro-compress: 1.0.11
+  astro-compress: 1.0.12
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.7.3
   astro-netlify-cms: 0.2.3
@@ -69,7 +69,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.40.0_vdsfgbufkyw5n7ix4t342ycv6i
   '@vueuse/core': 9.3.0_vue@3.2.40
   astro: 1.4.7_sass@1.55.0
-  astro-compress: 1.0.11
+  astro-compress: 1.0.12
   astro-i18next: 1.0.0-beta.12_astro@1.4.7
   astro-icon: 0.7.3
   astro-robots-txt: 0.3.10
@@ -1973,8 +1973,8 @@ packages:
     dependencies:
       tslib: 2.4.0
 
-  /astro-compress/1.0.11:
-    resolution: {integrity: sha512-0ikkXyFAE1pZE9Wls9kk7QhEdGRyqh7IFWfR+q9aLKPeHJfh/7EO8oDnD68E5PPKL/RbxBjwJEzhhICK9CYj2Q==}
+  /astro-compress/1.0.12:
+    resolution: {integrity: sha512-yn/QUoG7ah+cSUGUsohzHhUot+pNodfInPoIuRC3pdUfw94c4U0HQ2tJv5d+u75LSNqDxn9/W/OIoGqqgZbCDQ==}
     dependencies:
       csso: 5.0.5
       deepmerge-ts: 4.2.2
