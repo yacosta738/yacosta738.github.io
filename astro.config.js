@@ -110,7 +110,7 @@ export default defineConfig({
 								name: 'lang',
 								widget: 'select',
 								options: ['en', 'es'],
-								default: 'en'
+								default: 'es'
 							},
 							{ label: 'Cover', name: 'cover', widget: 'image', required: false },
 							{ label: 'Autor', name: 'author', widget: 'string' },
@@ -198,7 +198,7 @@ export default defineConfig({
 								name: 'lang',
 								widget: 'select',
 								options: ['en', 'es'],
-								default: 'en'
+								default: 'es'
 							},
 							{ label: 'Role', name: 'role', widget: 'string' },
 							{ label: 'Empresa', name: 'company', widget: 'string' },
@@ -277,7 +277,7 @@ export default defineConfig({
 								name: 'lang',
 								widget: 'select',
 								options: ['en', 'es'],
-								default: 'en'
+								default: 'es'
 							},
 							{ label: 'Cover', name: 'cover', widget: 'image' },
 							{ label: 'Fecha', name: 'date', widget: 'datetime' },
