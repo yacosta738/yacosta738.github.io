@@ -41,7 +41,7 @@
     "eslint-plugin-astro": "0.20.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-n": "15.3.0",
-    "eslint-plugin-promise": "6.0.1",
+    "eslint-plugin-promise": "6.1.0",
     "husky": "8.0.1",
     "i18next-fs-backend": "1.1.5",
     "locale-emoji": "0.3.0",
