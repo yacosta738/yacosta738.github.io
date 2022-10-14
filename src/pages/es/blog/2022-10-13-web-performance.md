@@ -23,11 +23,6 @@ categories:
   - development
 draft: true
 ---
-# web optimization
-
-Created: September 23, 2022 10:41 PM
-URL: https://www.linkedin.com/posts/midudev_la-web-performance-es-uno-de-los-temas-m%C3%A1s-activity-6979118479740133376-6rNn?utm_source=share&utm_medium=member_android
-
 EL RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
 
 ### 📡 Time to First Byte (TTFB)
