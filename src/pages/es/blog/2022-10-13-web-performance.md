@@ -30,7 +30,7 @@ El RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu pá
 
 Mide el tiempo desde que el navegador hace la petición de la página hasta que el primer byte es recibido.
 
-ℹ️ Bastante importante, ya que afecta a todas las demás.
+🆗 Bastante importante, ya que afecta a todas las demás.
 
 ✅ <600ms
 
@@ -40,7 +40,7 @@ Se extrae de datos de laboratorio 🧪 y usuarios reales 👨‍👩‍👧‍�
 
 Señala el tiempo que se ha tardado en renderizar cualquier texto o imagen (incluido fondos)
 
-ℹ️ Le dice al usuario si realmente la web funciona y pueda empezar a consumir la web.
+🆗 Le dice al usuario si realmente la web funciona y pueda empezar a consumir la web.
 
 ✅ <1.8s
 
@@ -50,7 +50,7 @@ Datos de laboratorio 🧪 y usuarios reales 👨‍👩‍👧‍👦
 
 El tiempo que tarda en renderizarse la pieza de contenido más grande que está en el viewport.
 
-ℹ️ Es una de las tres Web Vitals de Google.
+🆗 Es una de las tres Web Vitals de Google.
 
 👀 Visualmente impacta mucho al usuario.
 
@@ -62,7 +62,7 @@ Datos de laboratorio 🧪 y usuarios reales 👨‍👩‍👧‍👦
 
 Calcula cómo de rapido el contenido visual se ha renderizado progresivamente en el viewport.
 
-ℹ️No es lo mismo que una página en blanco 3 segundos y se muestre todo de golpe, a hacerlo progresivamente. Se percibe distinto.
+🆗 No es lo mismo que una página en blanco 3 segundos y se muestre todo de golpe, a hacerlo progresivamente. Se percibe distinto.
 
 ✅ <2.5s
 
@@ -72,7 +72,7 @@ Sólo en laboratorio 🧪
 
 Mide el tiempo que tarda en responder la interfaz a la primera interacción del usuario.
 
-ℹ️ Es la Web Vital de interactividad. ¿Sabes cuando haces clic y no responde la web? Pues eso.
+🆗 Es la Web Vital de interactividad. ¿Sabes cuando haces clic y no responde la web? Pues eso.
 
 ✅ <100ms
 
@@ -82,7 +82,7 @@ Fiable en datos de campo de usuarios reales 👨‍👩‍👧‍👦
 
 Suma la duración de las tareas largas (más de 50ms) de JS que han bloqueado el hilo principal después del FCP.
 
-ℹ️ Cuanto más tiempo está bloqueado el hilo, menos usable es la página.
+🆗 Cuanto más tiempo está bloqueado el hilo, menos usable es la página.
 
 ✅ <200ms
 
@@ -92,7 +92,7 @@ Datos de laboratorio 🧪
 
 Mide el máximo FID posible teniendo en cuenta el tiempo que el hilo principal está bloqueado.
 
-ℹ️ Interesante para detectar en pruebas posibles valores del FID.
+🆗 Interesante para detectar en pruebas posibles valores del FID.
 
 ✅ <130ms
 
@@ -102,7 +102,7 @@ Datos de laboratorio 🧪
 
 Mide los saltos que ha dado el layout de tu página mientras se cargaba.
 
-ℹ️ La Web Vital de estabilidad visual. Suele pasar con imágenes y banners de publicidad.
+🆗 La Web Vital de estabilidad visual. Suele pasar con imágenes y banners de publicidad.
 
 ✅ <0.1
 
@@ -112,7 +112,7 @@ Datos de laboratorio 🧪 y usuarios reales 👨‍👩‍👧‍👦
 
 El tiempo que tarda la página en haber mostrado todo el contenido útil, los eventos de los elementos más visibles han sido registrados y la página responde a interacciones en 50ms.
 
-ℹ️ Inestable, mejor mirar el TBT.
+🆗 Inestable, mejor mirar el TBT.
 
 ✅ <3.8s
 
