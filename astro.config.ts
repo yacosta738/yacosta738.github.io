@@ -10,7 +10,7 @@ import NetlifyCMS from 'astro-netlify-cms'
 import { VitePWA } from 'vite-plugin-pwa'
 
 import compress from 'astro-compress'
-import { manifest } from './src/utils/seoConfig.js'
+import { manifest } from './src/utils/seoConfig'
 
 // https://astro.build/config
 export default defineConfig({
@@ -318,9 +318,14 @@ export default defineConfig({
 			VitePWA({
 				registerType: 'autoUpdate',
 				manifest,
+				devOptions: {
+					enabled: true
+				},
 				workbox: {
 					globDirectory: 'dist',
 					globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
+					clientsClaim: true,
+					skipWaiting: true,
 					// Don't fallback on document based (e.g. `/some-page`) requests
 					// This removes an errant console.log message from showing up.
 					navigateFallback: null
