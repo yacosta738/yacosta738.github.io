@@ -315,9 +315,9 @@ export default defineConfig({
 		vue()
 	],
 	vite: {
-		ssr: {
-			external: ['svgo']
-		},
+// 		ssr: {
+// 			external: ['svgo']
+// 		},
 		plugins: [
 			VitePWA({
 				registerType: 'autoUpdate',
