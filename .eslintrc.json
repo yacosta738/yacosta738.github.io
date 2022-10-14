@@ -4,7 +4,12 @@
     "es2022": true,
     "browser": true
   },
-  "extends": ["eslint:recommended", "standard", "plugin:astro/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "plugin:astro/recommended",
+    "plugin:astro/jsx-a11y-strict"
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
@@ -14,6 +19,7 @@
     "no-tabs": "off",
     "indent": ["error", "tab"]
   },
+  "plugins": ["@typescript-eslint"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", ".vue", "*.astro"],
@@ -24,10 +30,14 @@
       "parser": "astro-eslint-parser",
       "parserOptions": {
         "parser": "@typescript-eslint/parser",
-        "extraFileExtensions": [".astro"]
+        "extraFileExtensions": [".astro"],
+        "sourceType": "module"
       },
       "rules": {
         // "astro/no-set-html-directive": "error" // prevent XSS attack
+        "astro/no-set-text-directive": "error",
+        "astro/no-unused-css-selector": "error",
+        "astro/prefer-class-list-directive": "error"
       }
     }
   ]

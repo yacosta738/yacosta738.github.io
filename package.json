@@ -27,7 +27,8 @@
     "@tailwindcss/forms": "0.5.3",
     "@tailwindcss/line-clamp": "0.4.2",
     "@tailwindcss/typography": "0.5.7",
-    "@typescript-eslint/parser": "5.40.0",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
     "@vueuse/core": "9.3.0",
     "astro": "1.4.7",
     "astro-compress": "1.0.12",
@@ -51,8 +52,10 @@
     "postcss-preset-env": "7.8.2",
     "prettier": "2.7.1",
     "prettier-plugin-astro": "0.5.5",
+    "prettier-plugin-tailwindcss": "^0.1.13",
     "sass": "1.55.0",
     "start-server-and-test": "1.14.0",
+    "vite-plugin-pwa": "^0.13.1",
     "vue": "3.2.40"
   },
   "dependencies": {

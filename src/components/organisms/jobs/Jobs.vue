@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { t } from 'i18next'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { Job } from '../../../models/Job'
-import { inlineLinks } from '../../../util/utilities'
+import { inlineLinks } from '../../../utils/utilities'
 
 defineProps({
 	jobs: {

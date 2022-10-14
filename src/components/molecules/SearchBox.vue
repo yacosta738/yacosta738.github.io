@@ -99,7 +99,7 @@ import { t } from 'i18next'
 import { onMounted, PropType, Ref, ref, watch, computed } from 'vue'
 import Fuse from 'fuse.js'
 import { Article } from '../../models/Article'
-import { localizePath } from '../../util/utilities'
+import { localizePath } from '../../utils/utilities'
 import { useStore } from '@nanostores/vue'
 import { generalStore, updateSearchModal } from '../../store'
 const $generalStore = useStore(generalStore)

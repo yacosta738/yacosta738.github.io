@@ -7,8 +7,12 @@ import image from '@astrojs/image'
 import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
+import { VitePWA } from 'vite-plugin-pwa'
 
 import compress from 'astro-compress'
+
+// Helper imports
+import { manifest } from './src/utils/seoConfig'
 
 // https://astro.build/config
 export default defineConfig({
@@ -313,7 +317,20 @@ export default defineConfig({
 	vite: {
 		ssr: {
 			external: ['svgo']
-		}
+		},
+		plugins: [
+			VitePWA({
+				registerType: 'autoUpdate',
+				manifest,
+				workbox: {
+					globDirectory: 'dist',
+					globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
+					// Don't fallback on document based (e.g. `/some-page`) requests
+					// This removes an errant console.log message from showing up.
+					navigateFallback: null
+				}
+			})
+		]
 	},
 	markdown: {
 		extendDefaultPlugins: true,

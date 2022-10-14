@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "Running pre-commit hook 🪝"
-pnpm i &&  pnpm run i18n:generate && pnpm run format && pnpm run test:e2e
+pnpm i &&  pnpm run i18n:generate && pnpm run format #&& pnpm run test:e2e

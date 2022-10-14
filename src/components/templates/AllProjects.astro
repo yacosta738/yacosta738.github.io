@@ -5,7 +5,7 @@ import i18next, { t, changeLanguage } from 'i18next'
 import BaseTemplate from 'templates:BaseTemplate'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
-import { urlize } from '@util:utilities'
+import { urlize } from '@utils:utilities'
 const projectData = await Astro.glob<ProjectJson>('../../data/projects/**/*.json')
 const techData = await Astro.glob<Tech>('../../data/technologies/**/*.json')
 const tech: {
