@@ -10,40 +10,7 @@ import NetlifyCMS from 'astro-netlify-cms'
 import { VitePWA } from 'vite-plugin-pwa'
 
 import compress from 'astro-compress'
-
-import type { ManifestOptions } from 'vite-plugin-pwa'
-
-/**
- * Defines the configuration for PWA webmanifest.
- */
-export const manifest: Partial<ManifestOptions> = {
-	name: 'Yuniel Acosta | Software Engineer',
-	short_name: 'Acosta',
-	description:
-		'Programmer, writer, technology and science enthusiast, specialized in building web applications. Interested in Vue, Typescript, Node.js, Java/Kotlin and Spring Boot.', // Change this to your websites description.
-	theme_color: '#64ffda',
-	background_color: '#0a192f',
-	display: 'minimal-ui',
-	icons: [
-		{
-			src: '/favicons/favicon-192x192.png',
-			sizes: '192x192',
-			type: 'image/png'
-		},
-		{
-			src: '/favicons/favicon-512x512.png',
-			sizes: '512x512',
-			type: 'image/png'
-		},
-		{
-			src: '/favicons/favicon-512x512.png',
-			sizes: '512x512',
-			type: 'image/png',
-			purpose: 'any maskable'
-		}
-	]
-}
-
+import { manifest } from './src/utils/seoConfig.js'
 
 // https://astro.build/config
 export default defineConfig({
@@ -55,10 +22,8 @@ export default defineConfig({
 		sitemap({
 			i18n: {
 				defaultLocale: 'en',
-				// All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
 				locales: {
 					en: 'en',
-					// The `defaultLocale` value must present in `locales` keys
 					fr: 'es'
 				}
 			}
@@ -346,9 +311,9 @@ export default defineConfig({
 		vue()
 	],
 	vite: {
-// 		ssr: {
-// 			external: ['svgo']
-// 		},
+		ssr: {
+			external: ['svgo']
+		},
 		plugins: [
 			VitePWA({
 				registerType: 'autoUpdate',
