@@ -23,7 +23,7 @@ categories:
   - development
 draft: true
 ---
-EL RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
+El RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
 
 ### 📡 Time to First Byte (TTFB)
 
