@@ -21,7 +21,7 @@ tags:
 categories:
   - web
   - development
-draft: true
+draft: false
 ---
 
 El RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
