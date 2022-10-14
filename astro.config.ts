@@ -118,7 +118,7 @@ export default defineConfig({
 								label: 'Layout',
 								name: 'layout',
 								widget: 'hidden',
-								default: '../../components/templates/BlogPostTemplate.astro'
+								default: '../../../components/templates/BlogPostTemplate.astro'
 							},
 							{
 								label: 'Etiquetas',

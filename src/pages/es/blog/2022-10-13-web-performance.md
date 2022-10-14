@@ -12,7 +12,7 @@ date: 2022-10-13T12:33:43.553Z
 lang: es
 cover: https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2019/04/website-speed-test-1.jpg
 author: Yuniel Acosta
-layout: ../../components/templates/BlogPostTemplate.astro
+layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - web
   - html
@@ -23,6 +23,7 @@ categories:
   - development
 draft: true
 ---
+
 El RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
 
 ### 📡 Time to First Byte (TTFB)
