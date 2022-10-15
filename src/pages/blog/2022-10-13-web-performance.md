@@ -8,7 +8,7 @@ description: More important than the speed of your website in milliseconds, is t
   metrics, along with best practices to improve user perception, if not the
   real times.
 date: 2022-10-13T12:33:43.553Z
-lang: es
+lang: en
 cover: https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2019/04/website-speed-test-1.jpg
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
