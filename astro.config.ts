@@ -55,7 +55,7 @@ export default defineConfig({
 						label: 'Posts',
 						folder: 'src/pages/blog',
 						create: true,
-						slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+						slug: '{{slug}}',
 						label_singular: 'Post',
 						fields: [
 							{ label: 'Title', name: 'title', widget: 'string' },
@@ -99,7 +99,7 @@ export default defineConfig({
 						label: 'Artículos',
 						folder: 'src/pages/es/blog',
 						create: true,
-						slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+						slug: '{{slug}}',
 						label_singular: 'Artículo',
 						fields: [
 							{ label: 'Título', name: 'title', widget: 'string' },
