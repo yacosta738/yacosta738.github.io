@@ -23,6 +23,8 @@ categories:
 draft: false
 ---
 
+![background](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2019/04/website-speed-test-1.jpg)
+
 WEB PERFORMANCE is one of the most important topics for the SUCCESS of your page. But almost no one knows the MOST IMPORTANT metrics. I explain them to you. ↓
 
 ### 📡 Time to First Byte (TTFB)
