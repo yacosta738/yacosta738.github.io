@@ -1,15 +1,15 @@
 ---
 title: Web Performance
-description: More important than the speed of your website in milliseconds, is the speed
-  with which users perceive your site. These perceptions are affected by the
-  real-time page load time, the sluggishness, the responsiveness to the user
-  interaction and the smoothness of the scrolling and other animations. In this
-  article, we analyze the various metrics of loading, animation and response
-  metrics, along with best practices to improve user perception, if not the
-  real times.
+description: More important than the speed of your website in milliseconds, is
+  the speed with which users perceive your site. These perceptions are affected
+  by the real-time page load time, the sluggishness, the responsiveness to the
+  user interaction and the smoothness of the scrolling and other animations. In
+  this article, we analyze the various metrics of loading, animation and
+  response metrics, along with best practices to improve user perception, if not
+  the real times.
 date: 2022-10-13T12:33:43.553Z
 lang: en
-cover: https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2019/04/website-speed-test-1.jpg
+cover: public/uploads/wep-performance.jpg
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -22,8 +22,7 @@ categories:
   - development
 draft: false
 ---
-
-![background](https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2019/04/website-speed-test-1.jpg)
+![web performance](public/uploads/wep-performance.jpg "web performance")
 
 WEB PERFORMANCE is one of the most important topics for the SUCCESS of your page. But almost no one knows the MOST IMPORTANT metrics. I explain them to you. ↓
 
