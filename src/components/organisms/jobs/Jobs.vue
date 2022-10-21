@@ -39,6 +39,7 @@ const range = (job: Job): string => {
 
 onMounted(() => {
 	inlineLinks('styled-tab-content')
+	localStorage.setItem(jobActiveTabIdKey, '0')
 })
 </script>
 
