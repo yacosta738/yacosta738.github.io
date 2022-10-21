@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { t } from 'i18next'
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { Job } from '../../../models/Job'
 import { inlineLinks } from '../../../utils/utilities'
 
-defineProps({
+const props = defineProps({
 	jobs: {
 		type: Array<Job>,
 		default: () => []
 	}
 })
-
+const jobsArray = computed(() => props.jobs)
 const jobActiveTabIdKey = 'jobActiveTabId'
 const getActiveTabId = (): number => {
 	if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
@@ -32,14 +32,18 @@ const activeTabId = computed<number>({
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const sm = breakpoints.smaller('sm')
 const range = (job: Job): string => {
-	return `${new Date(job.startDate).toDateString()} - ${
+	const date = job?.startDate ? new Date(job.startDate) : new Date()
+	return `${date.toDateString()} - ${
 		job.endDate ? new Date(job.endDate).toDateString() : 'Present'
 	}`
 }
 
 onMounted(() => {
 	inlineLinks('styled-tab-content')
-	localStorage.setItem(jobActiveTabIdKey, '0')
+	activeTabId.value = 0
+})
+onUnmounted(() => {
+	activeTabId.value = 0
 })
 </script>
 
@@ -48,7 +52,7 @@ onMounted(() => {
 		<h2 class="numbered-heading">{{ t('where-worked') }}</h2>
 		<div class="inner">
 			<ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
-				<li v-for="(job, i) in jobs" :key="job.id">
+				<li v-for="(job, i) in jobsArray" :key="job.id">
 					<button
 						:id="`tab-${i}`"
 						class="styled-tab-button"
@@ -56,7 +60,7 @@ onMounted(() => {
 						role="tab"
 						:aria-selected="activeTabId === i ? 'true' : 'false'"
 						:aria-controls="`panel-${i}`"
-						:tabIndex="activeTabId === i ? '0' : '-1'"
+						:tabIndex="activeTabId === i ? 0 : -1"
 						@click="activeTabId = i"
 						@keyup.up.prevent.stop="
 							activeTabId - 1 >= 0 ? (activeTabId -= 1) : (activeTabId = jobs.length - 1)
@@ -103,7 +107,7 @@ onMounted(() => {
 							{{ range(job) }}
 						</p>
 						<ul>
-							<li v-for="(detail, index) in job.achievement" :key="index">
+							<li v-for="(detail, index) in job?.achievement" :key="index">
 								<span>{{ detail }}</span>
 							</li>
 						</ul>
