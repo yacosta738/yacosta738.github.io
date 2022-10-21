@@ -1,11 +1,9 @@
 ---
 import { localizePath } from 'astro-i18next'
-import i18next, { t } from 'i18next'
+import { t } from 'i18next'
 import LanguageSelector from 'atoms:LanguageSelector'
 import { Menu, navMenus } from '@models:Menu'
 import Icon from 'astro-icon'
-import { Article, jsonToArticle } from '@models:Article'
-import { MarkdownInstance } from 'astro'
 import Search from '@components:atoms/Search.vue'
 export interface Props {
 	drawer: boolean
