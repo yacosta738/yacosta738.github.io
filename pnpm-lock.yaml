@@ -45,7 +45,7 @@ specifiers:
   reading-time: 1.5.0
   sass: 1.55.0
   start-server-and-test: 1.14.0
-  tailwindcss: 3.1.8
+  tailwindcss: 3.2.0
   uuid: 9.0.0
   vite-plugin-pwa: 0.13.1
   vue: 3.2.41
@@ -56,20 +56,20 @@ dependencies:
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
-  tailwindcss: 3.1.8_postcss@8.4.16
+  tailwindcss: 3.2.0_postcss@8.4.16
   uuid: 9.0.0
 
 devDependencies:
   '@astrojs/image': 0.10.0
   '@astrojs/sitemap': 1.0.0
-  '@astrojs/tailwind': 2.1.1_tailwindcss@3.1.8
+  '@astrojs/tailwind': 2.1.1_tailwindcss@3.2.0
   '@astrojs/vue': 1.2.1_lzymzc5l7nfqnayr6apsxsihna
   '@nanostores/vue': 0.6.0_r627q4dwpmfpioilrlqhfzrl3q
   '@playwright/test': 1.27.1
-  '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
-  '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
-  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
-  '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
+  '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.0
+  '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.0
+  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.0
+  '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.0
   '@typescript-eslint/eslint-plugin': 5.40.1_6hlkr4aq6fntzwox6droncjarq
   '@typescript-eslint/parser': 5.40.1_vdsfgbufkyw5n7ix4t342ycv6i
   '@vueuse/core': 9.3.1_vue@3.2.41
@@ -244,7 +244,7 @@ packages:
       zod: 3.18.0
     dev: true
 
-  /@astrojs/tailwind/2.1.1_tailwindcss@3.1.8:
+  /@astrojs/tailwind/2.1.1_tailwindcss@3.2.0:
     resolution: {integrity: sha512-Il6FODtu4AlwadleJS3VWmAOOmeCDKvAo3iof46p4iHtdeWLClyuH9kJXWrlzCS+QOfBSIfXxvwPJ3cbK5COlA==}
     peerDependencies:
       tailwindcss: ^3.0.24
@@ -252,7 +252,7 @@ packages:
       '@proload/core': 0.3.3
       autoprefixer: 10.4.11_postcss@8.4.16
       postcss: 8.4.16
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.0_postcss@8.4.16
     dev: true
 
   /@astrojs/telemetry/1.0.1:
@@ -2196,32 +2196,32 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: true
 
-  /@tailwindcss/aspect-ratio/0.4.2_tailwindcss@3.1.8:
+  /@tailwindcss/aspect-ratio/0.4.2_tailwindcss@3.2.0:
     resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.0_postcss@8.4.16
     dev: true
 
-  /@tailwindcss/forms/0.5.3_tailwindcss@3.1.8:
+  /@tailwindcss/forms/0.5.3_tailwindcss@3.2.0:
     resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.0_postcss@8.4.16
     dev: true
 
-  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.1.8:
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.0:
     resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.0_postcss@8.4.16
     dev: true
 
-  /@tailwindcss/typography/0.5.7_tailwindcss@3.1.8:
+  /@tailwindcss/typography/0.5.7_tailwindcss@3.2.0:
     resolution: {integrity: sha512-JTTSTrgZfp6Ki4svhPA4mkd9nmQ/j9EfE7SbHJ1cLtthKkpW2OxsFXzSmxbhYbEkfNIyAyhle5p4SYyKRbz/jg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -2230,7 +2230,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.0_postcss@8.4.16
     dev: true
 
   /@trysound/sax/0.2.0:
@@ -8648,8 +8648,8 @@ packages:
       postcss: 8.4.16
     dev: true
 
-  /postcss-nested/5.0.6_postcss@8.4.16:
-    resolution: {integrity: sha512-rKqm2Fk0KbA8Vt3AdGN0FB9OBOMDVajMG6ZCf/GoHgdxUJ4sBFp0A/uMIRm+MJUdo33YXEtjqIz8u7DAp8B7DA==}
+  /postcss-nested/6.0.0_postcss@8.4.16:
+    resolution: {integrity: sha512-0DkamqrPcmkBDsLn+vQDIrtkSbNkv5AD/M322ySo9kqFkCIYklym2xEmWkwo+Y3/qZo34tzEPNUw4y7yMCdv5w==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
@@ -10600,8 +10600,8 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /tailwindcss/3.1.8_postcss@8.4.16:
-    resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
+  /tailwindcss/3.2.0_postcss@8.4.16:
+    resolution: {integrity: sha512-ARh/W0uH5UlWIC2nn02V0+5fyF0k6qZliyt4QYic2upOhPUE/Spu1EURNc9txJ3+4j8OEmdigqfDpw4d2tA4vA==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -10624,7 +10624,7 @@ packages:
       postcss-import: 14.1.0_postcss@8.4.16
       postcss-js: 4.0.0_postcss@8.4.16
       postcss-load-config: 3.1.4_postcss@8.4.16
-      postcss-nested: 5.0.6_postcss@8.4.16
+      postcss-nested: 6.0.0_postcss@8.4.16
       postcss-selector-parser: 6.0.10
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
