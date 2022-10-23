@@ -1,13 +1,8 @@
 ---
 title: Cacheando resultados con Spring Boot
-description: Vamos a imaginar una aplicación web, donde por cada petición
-  recibida, debe leer ciertos datos de configuración desde una base de datos.
-  Esos datos no cambiaran normalmente pero nuestra aplicación, en cada petición,
-  debe conectarse, ejecutar las sentencias adecuadas para leer los datos,
-  traerlos por la red, etc. Imaginemos, además, que la base de datos a la que
-  nos conectamos esta saturada o la conexión de red que nos une a la base de
-  datos es inestable. ¿Qué pasaría?. Pues que tendríamos una aplicación lenta
-  por el hecho de leer continuamente unos datos que sabemos que apenas cambian.
+description: Implementar una Cache con Spring es una tarea bastante fácil,
+  debido a la facilidad de implementación. Para ello Spring nos aporta una serie
+  de anotaciones que podremos ver en el resto del tutorial.
 date: 2022-10-21T23:18:16.315Z
 lang: es
 cover: public/uploads/cache.png
@@ -61,7 +56,7 @@ Así, la idea básicamente es que en cada llamada a una función marcada como **
 
 Y ahora, vamos a la práctica:
 
-El proyecto de ejemplo sobre el que está basado este artículo esta en: [](https://github.com/yacosta738/)<https://github.com/yacosta738/tutorials/tree/main/cacheExample>
+El proyecto de ejemplo sobre el que está basado este artículo esta en: <https://github.com/yacosta738/>
 
 Lo primero que se necesita es incluir la siguiente dependencia en nuestro proyecto:
 
@@ -159,13 +154,14 @@ Nos devolverá lo siguiente:
 }
 ```
 
-El campo `interval` el tiempo en milisegundos que le ha costado realizar la consulta. Como se puede ver le ha costado más de medio segundo, pues en la función `getDataCache` de `CacheDataImpl.java` tenemos un sleep de **500** milisegundos.
+El campo `interval` el tiempo en milisegundos que le ha costado realizar la consulta. Como se puede ver le ha costado más de medio segundo, pues en la función `getDataCache` de C`acheDataImpl.java` tenemos un sleep de **500** milisegundos.
 
 Ahora ejecutamos de nuevo la llamada:
 
 ```shell
 curl -s http://localhost:8080/2
 {"interval":1,"httpStatus":"OK","invoiceHeader":{"id":2,"activo":"N","yearFiscal":2019,"numberInvoice":2,"customerId":2}}
+
 ```
 
 Ahora el tiempo que ha tomado la llamada es *1* , porque realmente **Spring** **NO** ha ejecutado el código de la función y simplemente ha devuelto el valor que tenía cacheado.
@@ -181,6 +177,7 @@ curl -s http://localhost:8080/1
 
 curl -s http://localhost:8080/1
 {"interval":503,"httpStatus":"OK","invoiceHeader":{"id":1,"activo":"S","yearFiscal":2019,"numberInvoice":1,"customerId":1}}
+
 ```
 
 Si llamamos a la función `flushcache` limpiaremos la cache y por lo tanto la próxima llamada a la función cacheada deberá ejecutar la función:
@@ -194,6 +191,7 @@ curl -s http://localhost:8080/2
 
 curl -s http://localhost:8080/2
 {"interval":0,"httpStatus":"OK","invoiceHeader":{"id":2,"activo":"N","yearFiscal":2019,"numberInvoice":2,"customerId":2}}
+
 ```
 
 Por último veremos cómo si cambiamos el valor del campo **activo** a **N** , como la función que realiza el cambio está marcada con `@CacheEvict` nos actualizará el valor de la caché, pero en la próxima llamada a la función `getDataCache` se seguirá sin ejecutar el código, devolviendo, sin embargo, el objeto actualizado.
@@ -203,6 +201,7 @@ curl -X PUT   http://localhost:8080/   -H "Content-Type: application/json"   -d 
 
 curl -s http://localhost:8080/2
 {"interval":0,"httpStatus":"OK","invoiceHeader":{"id":2,"activo":"N","yearFiscal":2019,"numberInvoice":2,"customerId":2}}
+
 ```
 
 ### Conclusiones
