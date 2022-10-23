@@ -5,7 +5,7 @@ description: Implementar una Cache con Spring es una tarea bastante fácil,
   de anotaciones que podremos ver en el resto del tutorial.
 date: 2022-10-21T23:18:16.315Z
 lang: es
-cover: public/uploads/cache.png
+cover: /uploads/cache.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -17,13 +17,16 @@ tags:
 categories:
   - development
   - backend
-draft: true
+draft: false
 ---
+
+![background](/uploads/cache.png 'cache')
+
 Vamos a imaginar una aplicación web, donde por cada petición recibida, debe leer ciertos datos de configuración desde una base de datos. Esos datos no cambiarán normalmente pero nuestra aplicación, en cada petición, debe conectarse, ejecutar las sentencias adecuadas para leer los datos, traerlos por la red, etc. Imaginemos, además, que la base de datos a la que nos conectamos está saturada o la conexión de red que nos une a la base de datos es inestable. ¿Qué pasaría?. Pues que tendríamos una aplicación lenta por el hecho de leer continuamente unos datos que sabemos que apenas cambian.
 
 Para solucionar ese problema podríamos utilizar una **[Caché](https://es.wikipedia.org/wiki/Cach%C3%A9_(inform%C3%A1tica))**, pero ¿cómo implementarlo?. En este artículo explicaré como usar una caché básica en **[Spring Boot](https://spring.io/projects/spring-boot)**.
 
-#### Un poco de teoría
+## Un poco de teoría
 
 La caché se aplica sobre funciones, donde para un mismo valor de entrada esperamos un mismo valor de salida. Es por ello que siempre debemos tener al menos un parámetro de entrada y una salida.
 
@@ -48,15 +51,15 @@ int tercerValor=funcionCacheada(1);
 
 Al ejecutar el programa, en la primera línea, **Spring**, ejecutará la función y guardará el resultado que devuelve. En la segunda línea, como no sabe el valor que se debe devolver para la entrada con valor “2” hará lo mismo. Sin embargo en la tercera línea **Spring** detectara que una función marcada con **[@Cacheable](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/Cacheable.html)** con el nombre de cache “**headers**” ya ha sido llamada con el valor “**1**” y no ejecutará la función, simplemente devolverá el valor que en la primera llamada guardo.
 
-El nombre de la caché es importante pues, entre otras cosas, nos permite tener diferentes caches independientes, las cuales podremos, entre otras cosas limpiar, para obligar a **Spring Boot** a ejecutar de nuevo las funciones.
+El nombre de la caché es importante pues, entre otras cosas, nos permite tener diferentes caches independientes, las cuales podremos limpiar para obligar a **Spring Boot** a ejecutar de nuevo las funciones.
 
 Así, la idea básicamente es que en cada llamada a una función marcada como **@Cacheable** se guarda en una tabla interna los resultados para cada llamada, de tal manera que si ya tiene la salida para una entrada, no llama a la función.
 
-#### Práctica
+## Práctica
 
 Y ahora, vamos a la práctica:
 
-El proyecto de ejemplo sobre el que está basado este artículo esta en: <https://github.com/yacosta738/>
+El proyecto de ejemplo sobre el que está basado este artículo esta en:  [Github Repo](https://github.com/yacosta738/tutorials/tree/main/cacheExample)
 
 Lo primero que se necesita es incluir la siguiente dependencia en nuestro proyecto:
 
@@ -83,7 +86,7 @@ public class CacheExampleApplication {
 
 En este ejemplo se leerán unos datos de una base de datos a través de unas peticiones REST.
 
-Los datos como tal se leen en la clase `CacheDataImpl.java` que esta en el paquete `com.profesorp.cacheexample.impl`
+Los datos como tal se leen en la clase `CacheDataImpl.java` que esta en el paquete `org.acosta.cacheexample.impl`
 
 La función que lee los datos es la siguiente:
 
@@ -126,7 +129,7 @@ public  DtoResponse update(DtoRequest dtoRequest)
 
 Por supuesto esta función tiene que devolver un objeto del mismo tipo que el de la marcada con la etiqueta **@Cacheable** y debemos indicarle el valor de entrada, para el que se desea actualizar los datos.
 
-#### Funcionando
+## Funcionando
 
 Para entender mejor la aplicación vamos a arrancarla y realizarle algunas peticiones.
 

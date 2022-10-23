@@ -114,7 +114,7 @@ const shareButtons: {
 				<Icon name='ic:outline-category' class='h-5 mr-2' />
 				{
 					categories.map((category) => (
-						<a href={localizePath(category)} class='inline-link mx-1'>
+						<a href={localizePath(`/blog/category/${category.toLowerCase()}`)} class='inline-link mx-1'>
 							{category}
 						</a>
 					))
@@ -125,7 +125,7 @@ const shareButtons: {
 				<Icon name='clarity:tags-solid-alerted' class='h-5 mr-2' />
 				{
 					tags.map((tag) => (
-						<a href={localizePath(tag)} class='inline-link mx-1'>
+						<a href={localizePath(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
 							{tag}
 						</a>
 					))
