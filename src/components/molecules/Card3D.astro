@@ -1,3 +1,6 @@
+---
+import { Image } from '@astrojs/image/components'
+---
 <div class='atropos p-8 w-full sm:w-[480px] md:w-[800px] md:aspect-[1.91:1]'>
 	<div class='atropos-scale'>
 		<div class='atropos-rotate'>
@@ -13,10 +16,12 @@
 						</slot>
 						<div class='flex items-center justify-center pb-2'>
 							<slot name='right-header'>
-								<img
+								<Image
 									class='p-1 w-20 h-20 rounded-full ring-2 ring-light-navy dark:ring-lightest-navy'
 									src='https://www.yunielacosta.com/assets/images/me.png'
-									alt='Yuniel Acosta's profile picture'
+									alt='Profile picture'
+									height={80}
+									width={80}
 								/>
 							</slot>
 						</div>

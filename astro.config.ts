@@ -30,7 +30,9 @@ export default defineConfig({
 		}),
 		tailwind(),
 		astroI18next(),
-		image(),
+		image({
+			serviceEntryPoint: '@astrojs/image/sharp'
+		}),
 		robotsTxt(),
 		compress({
 			html: false,

@@ -1,5 +1,6 @@
 ---
 import { Author, jsonToAuthor } from "@models:Author";
+import { Image } from '@astrojs/image/components'
 import Icon from "astro-icon";
 import Card3D from "molecules:Card3D";
 import i18next, { t, changeLanguage } from "i18next";
@@ -38,11 +39,13 @@ const { author } = Astro.props;
 					{author.email}
 				</a>
 
-				<img
+				<Image
 					slot='right-header'
 					class='p-1 w-20 h-20 rounded-full ring-2 ring-light-navy dark:ring-lightest-navy'
 					src={author.image}
 					alt={author.name}
+					height={80}
+					width={80}
 				/>
 
 				<h1

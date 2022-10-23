@@ -1,5 +1,6 @@
 ---
 import { t } from 'i18next'
+import { Image } from '@astrojs/image/components'
 import { Project } from '@models:Project'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
@@ -40,7 +41,15 @@ const calculatePosition = (index: number): string => {
 							href={project.url ? project.url : project.repository ? project.repository : '#'}
 							target='_blank'
 						>
-							{project.cover && <img class='img' src={project.cover} alt={project.title} />}
+							{project.cover && (
+								<Image
+									class='img'
+									src={project.cover}
+									alt={project.title}
+									height={630}
+									width={1074}
+								/>
+							)}
 						</a>
 					</div>
 				</div>
