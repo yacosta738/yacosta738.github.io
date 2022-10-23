@@ -24,7 +24,7 @@ draft: false
 
 Vamos a imaginar una aplicación web, donde por cada petición recibida, debe leer ciertos datos de configuración desde una base de datos. Esos datos no cambiarán normalmente pero nuestra aplicación, en cada petición, debe conectarse, ejecutar las sentencias adecuadas para leer los datos, traerlos por la red, etc. Imaginemos, además, que la base de datos a la que nos conectamos está saturada o la conexión de red que nos une a la base de datos es inestable. ¿Qué pasaría?. Pues que tendríamos una aplicación lenta por el hecho de leer continuamente unos datos que sabemos que apenas cambian.
 
-Para solucionar ese problema podríamos utilizar una **[Caché](https://es.wikipedia.org/wiki/Cach%C3%A9_(inform%C3%A1tica))**, pero ¿cómo implementarlo?. En este artículo explicaré como usar una caché básica en **[Spring Boot](https://spring.io/projects/spring-boot)**.
+Para solucionar ese problema podríamos utilizar una **[Caché](<https://es.wikipedia.org/wiki/Cach%C3%A9_(inform%C3%A1tica)>)**, pero ¿cómo implementarlo?. En este artículo explicaré como usar una caché básica en **[Spring Boot](https://spring.io/projects/spring-boot)**.
 
 ## Un poco de teoría
 
@@ -59,7 +59,7 @@ Así, la idea básicamente es que en cada llamada a una función marcada como **
 
 Y ahora, vamos a la práctica:
 
-El proyecto de ejemplo sobre el que está basado este artículo esta en:  [Github Repo](https://github.com/yacosta738/tutorials/tree/main/cacheExample)
+El proyecto de ejemplo sobre el que está basado este artículo esta en: [Github Repo](https://github.com/yacosta738/tutorials/tree/main/cacheExample)
 
 Lo primero que se necesita es incluir la siguiente dependencia en nuestro proyecto:
 
@@ -92,12 +92,12 @@ La función que lee los datos es la siguiente:
 
 ```java
 @Cacheable(cacheNames="headers", condition="#id > 1")
- public DtoResponse getDataCache(int id) {	
+ public DtoResponse getDataCache(int id) {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-		}		
-		DtoResponse requestResponse=new DtoResponse();		
+		}
+		DtoResponse requestResponse=new DtoResponse();
 		Optional<Invoiceheader> invoice=invoiceHeaderRepository.findById(id);
 		..... MAS CODIGO NO IMPORTANTE ...
 	}
@@ -107,8 +107,8 @@ Como se puede ver tenemos la etiqueta **@Cacheable(cacheNames=”headers”, con
 
 Con ella, le estamos indicando a Spring dos cosas.
 
-* Deseamos que cachee el resultado de esta función.
-* Le ponemos como condición, que solo cachee los resultados si el valor de entrada es superior a 1.
+- Deseamos que cachee el resultado de esta función.
+- Le ponemos como condición, que solo cachee los resultados si el valor de entrada es superior a 1.
 
 Más adelante, en la función flushCache, le ponemos la etiqueta **@CacheEvict** la cual limpia la caché indicada. En este caso, además, le indicamos que borre todas las entradas que tengan cacheadas.
 
@@ -145,15 +145,15 @@ Nos devolverá lo siguiente:
 
 ```json
 {
-   "interval":507,
-   "httpStatus":"OK",
-   "invoiceHeader":{
-      "id":2,
-      "activo":"N",
-      "yearFiscal":2019,
-      "numberInvoice":2,
-      "customerId":2
-   }
+  "interval": 507,
+  "httpStatus": "OK",
+  "invoiceHeader": {
+    "id": 2,
+    "activo": "N",
+    "yearFiscal": 2019,
+    "numberInvoice": 2,
+    "customerId": 2
+  }
 }
 ```
 

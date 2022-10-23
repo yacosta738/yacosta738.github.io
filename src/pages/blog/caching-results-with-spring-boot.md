@@ -1,5 +1,5 @@
 ---
-title: Cacheando resultados con Spring Boot
+title: Caching results with Spring Boot
 description: Implementing a Cache with Spring is a fairly easy task,
   due to the ease of implementation. For this Spring provides us with a series
   of annotations that we will see in the rest of the tutorial.
@@ -24,16 +24,13 @@ draft: false
 
 Let's imagine a web application, where for each request received, it must read certain configuration data from a database. These data will not normally change but our application, in each request, must connect, run the appropriate statements to read the data, bring them over the network, etc. Let's imagine, in addition, that the database to which we connect is saturated or the network connection that connects us to the database is unstable. What would happen?. Well, we would have a slow application due to the fact of continuously reading some data that we know that hardly change.
 
-To solve this problem we could use a **[Cache](https://en.wikipedia.org/wiki/Cache_(computing))**, but how to implement it?. In this article I will explain how to use a basic cache in **[Spring Boot](https://spring.io/projects/spring-boot)**.
-
+To solve this problem we could use a **[Cache](<https://en.wikipedia.org/wiki/Cache_(computing)>)**, but how to implement it?. In this article I will explain how to use a basic cache in **[Spring Boot](https://spring.io/projects/spring-boot)**.
 
 ## A little theory
 
 The cache is applied to functions, where for the same input value we expect the same output value. That is why we must always have at least one input parameter and an output.
 
-
 A typical example would be this:
-
 
 ```java
 @Cacheable(cacheNames="headers")
@@ -62,7 +59,7 @@ Thus, the basic idea is that in each call to a function marked as **@Cacheable**
 
 And now, let's get to the practice:
 
-The example project on which this article is based is at:  [Github Repo](https://github.com/yacosta738/tutorials/tree/main/cacheExample)
+The example project on which this article is based is at: [Github Repo](https://github.com/yacosta738/tutorials/tree/main/cacheExample)
 
 The first thing we need is to include the following dependency in our project:
 
@@ -76,7 +73,6 @@ The first thing we need is to include the following dependency in our project:
 Now we can already use the tags that will allow us to use Cache in our application.
 
 The first tag to put is **@EnableCaching**. With this tag we tell Spring to prepare the support to use cache. If we do not put it, it will simply not use it, regardless of whether we later indicate that it caches the results of some functions.
-
 
 ```java
 @SpringBootApplication
@@ -96,12 +92,12 @@ The function that reads the data is the following:
 
 ```java
 @Cacheable(cacheNames="headers", condition="#id > 1")
- public DtoResponse getDataCache(int id) {	
+ public DtoResponse getDataCache(int id) {
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-		}		
-		DtoResponse requestResponse=new DtoResponse();		
+		}
+		DtoResponse requestResponse=new DtoResponse();
 		Optional<Invoiceheader> invoice=invoiceHeaderRepository.findById(id);
 		..... MORE CODE NOT IMPORTANT ...
 	}
@@ -111,8 +107,8 @@ As you can see we have the tag **@Cacheable(cacheNames=”headers”, condition=
 
 With it, we are telling Spring two things.
 
-* We want to cache the result of this function.
-* We put as a condition that it only caches the results if the input value is greater than 1.
+- We want to cache the result of this function.
+- We put as a condition that it only caches the results if the input value is greater than 1.
 
 Later, in the flushCache function, we put the **@CacheEvict** tag which clears the indicated cache. In this case, in addition, we indicate that it deletes all entries that have cached.
 
@@ -122,7 +118,6 @@ public void flushCache() {  }
 ```
 
 In the function `update` we update the database and with the tag **@CachePut** we tell Spring to update the data for the value that is in **dtoRequest.id**
-
 
 ```java
 @CachePut(cacheNames="headers", key="#dtoRequest.id")
@@ -150,15 +145,15 @@ It will return the following:
 
 ```json
 {
-   "interval":507,
-   "httpStatus":"OK",
-   "invoiceHeader":{
-      "id":2,
-      "activo":"N",
-      "yearFiscal":2019,
-      "numberInvoice":2,
-      "customerId":2
-   }
+  "interval": 507,
+  "httpStatus": "OK",
+  "invoiceHeader": {
+    "id": 2,
+    "activo": "N",
+    "yearFiscal": 2019,
+    "numberInvoice": 2,
+    "customerId": 2
+  }
 }
 ```
 
@@ -172,7 +167,7 @@ curl -s http://localhost:8080/2
 
 ```
 
-Now the time it took the call was *1*, because really **Spring** **DOES NOT** run the code of the function and simply returns the value that was cached.
+Now the time it took the call was _1_, because really **Spring** **DOES NOT** run the code of the function and simply returns the value that was cached.
 
 However, if we request the **id** 1 as we have indicated that it does not cache it, it will always run the function and therefore we will have a time greater than 500 milliseconds:
 
@@ -215,6 +210,5 @@ curl -s http://localhost:8080/2
 ## Conclusions
 
 **Spring Boot**, without any difficulty, allows us to cache the results of the functions, however we must bear in mind that this cache is very basic and it is done in memory. However, **Spring Boot** allows us to use external libraries that will allow us to cache on disk, in databases, etc.
-
 
 In [](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html)[boot-features-caching](https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/boot-features-caching.html) you have the different Cache implementations that Spring Boot supports, among which is [EhCache](https://www.ehcache.org/), with which you can define different types of backend for the data, as well as specify data validity times and many more options.
