@@ -10,6 +10,7 @@ description: Vamos a imaginar una aplicación web, donde por cada petición
   por el hecho de leer continuamente unos datos que sabemos que apenas cambian.
 date: 2022-10-21T23:18:16.315Z
 lang: es
+cover: public/uploads/cache.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
