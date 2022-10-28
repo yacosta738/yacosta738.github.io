@@ -32,7 +32,7 @@ specifiers:
   eslint-plugin-promise: 6.1.1
   fuse.js: 6.6.2
   husky: 8.0.1
-  i18next-fs-backend: 1.1.5
+  i18next-fs-backend: 2.0.0
   locale-emoji: 0.3.0
   marked: 4.1.1
   mdast-util-to-string: 3.1.0
@@ -90,7 +90,7 @@ devDependencies:
   eslint-plugin-n: 15.3.0_eslint@8.26.0
   eslint-plugin-promise: 6.1.1_eslint@8.26.0
   husky: 8.0.1
-  i18next-fs-backend: 1.1.5
+  i18next-fs-backend: 2.0.0
   locale-emoji: 0.3.0
   marked: 4.1.1
   nanostores: 0.7.0
@@ -5751,8 +5751,8 @@ packages:
     hasBin: true
     dev: true
 
-  /i18next-fs-backend/1.1.5:
-    resolution: {integrity: sha512-raTel3EfshiUXxR0gvmIoqp75jhkj8+7R1LjB006VZKPTFBbXyx6TlUVhb8Z9+7ahgpFbcQg1QWVOdf/iNzI5A==}
+  /i18next-fs-backend/2.0.0:
+    resolution: {integrity: sha512-zlwzcoUKlveoRt/SxgeP8i/6p1rxwxZ+x0w4sfCTY1zgUlhhnoxBSRX3GjVIsDJm5mky8Hpr//UX93UIknK7yQ==}
     dev: true
 
   /i18next/21.9.2:
