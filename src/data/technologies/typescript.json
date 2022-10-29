@@ -1,6 +1,6 @@
 {
-    "id": "typescript",
-    "name": "Typescript",
-    "icon": "mdi:language-typescript",
-    "url": "https://www.typescriptlang.org/"
+  "id": "typescript",
+  "name": "Typescript",
+  "icon": "mdi:language-typescript",
+  "url": "https://www.typescriptlang.org/"
 }
