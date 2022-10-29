@@ -1,6 +1,7 @@
 ---
 import { t } from 'i18next'
-import { Image } from '@astrojs/image/components';
+import { Image } from '@astrojs/image/components'
+import meImgReference from '../../assets/images/me.png'
 
 const skills: string[] = [
 	'TypeScript',
@@ -36,7 +37,14 @@ const yearsOfExperience = (): number => {
 		</div>
 		<div class='styled-pic'>
 			<div class='wrapper'>
-				<Image src='/assets/images/me.png' alt='Yuniel Acosta Pérez' class='img' width="250" height="350"/>
+				<Image
+					src={meImgReference}
+					alt='Yuniel Acosta Pérez'
+					title='Yuniel Acosta Pérez'
+					class='img'
+					width='250'
+					height='350'
+				/>
 			</div>
 		</div>
 	</div>
