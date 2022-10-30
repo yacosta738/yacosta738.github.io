@@ -7,37 +7,37 @@ export interface Menu {
 }
 export const navMenus: Menu[] = [
 	{
-		id: uuidv4(),
+		id: 'about-' + uuidv4(),
 		title: 'about',
 		link: '/#about',
 		dataCypress: 'about'
 	},
 	{
-		id: uuidv4(),
+		id: 'experience-' + uuidv4(),
 		title: 'experience',
 		link: '/#jobs',
 		dataCypress: 'jobs'
 	},
 	{
-		id: uuidv4(),
+		id: 'projects-' + uuidv4(),
 		title: 'work',
 		link: '/#projects',
 		dataCypress: 'projects'
 	},
 	{
-		id: uuidv4(),
+		id: 'last-articles-' + uuidv4(),
 		title: 'last-articles',
 		link: '/#last3articles',
 		dataCypress: 'last3articles'
 	},
 	{
-		id: uuidv4(),
+		id: 'contact-' + uuidv4(),
 		title: 'contact',
 		link: '/#contact',
 		dataCypress: 'contact'
 	},
 	{
-		id: uuidv4(),
+		id: 'blog-' + uuidv4(),
 		title: 'blog',
 		link: '/blog',
 		dataCypress: 'blog'

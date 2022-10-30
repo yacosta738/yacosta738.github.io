@@ -25,10 +25,12 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 	openGraph={{
 		basic: {
 			title: t('seo.ogTitle'),
-			description: t('seo.description'),
 			type: 'website',
 			image: image ,
 			url: canonicalUrl
+		},
+		optional: {
+			description: t('seo.description'),
 		},
 		image: {
 			alt: ogImageAlt ,
