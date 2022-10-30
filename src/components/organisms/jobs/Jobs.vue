@@ -51,13 +51,12 @@ onUnmounted(() => {
 	<section id="jobs" class="styled-jobs-section">
 		<h2 class="numbered-heading">{{ t('where-worked') }}</h2>
 		<div class="inner">
-			<ul class="styled-tab-list" role="tablist" aria-label="Job tabs">
+			<ul class="styled-tab-list" aria-label="Job tabs">
 				<li v-for="(job, i) in jobsArray" :key="job.id">
 					<button
 						:id="`tab-${i}`"
 						class="styled-tab-button"
 						:class="{ 'text-green-500': activeTabId === i }"
-						role="tab"
 						:aria-selected="activeTabId === i ? 'true' : 'false'"
 						:aria-controls="`panel-${i}`"
 						:tabIndex="activeTabId === i ? 0 : -1"
