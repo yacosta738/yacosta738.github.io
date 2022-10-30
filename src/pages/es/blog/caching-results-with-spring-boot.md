@@ -5,7 +5,7 @@ description: Implementar una Cache con Spring es una tarea bastante fácil,
   de anotaciones que podremos ver en el resto del tutorial.
 date: 2022-10-21T23:18:16.315Z
 lang: es
-cover: /uploads/cache.png
+cover: /uploads/cache.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -20,7 +20,7 @@ categories:
 draft: false
 ---
 
-![background](/uploads/cache.png 'cache')
+![background](/uploads/cache.webp 'cache')
 
 Vamos a imaginar una aplicación web, donde por cada petición recibida, debe leer ciertos datos de configuración desde una base de datos. Esos datos no cambiarán normalmente pero nuestra aplicación, en cada petición, debe conectarse, ejecutar las sentencias adecuadas para leer los datos, traerlos por la red, etc. Imaginemos, además, que la base de datos a la que nos conectamos está saturada o la conexión de red que nos une a la base de datos es inestable. ¿Qué pasaría?. Pues que tendríamos una aplicación lenta por el hecho de leer continuamente unos datos que sabemos que apenas cambian.
 

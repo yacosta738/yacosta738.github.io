@@ -8,7 +8,7 @@ description: I always use Typescript and some decorator libraries on my VueJS
   We will be building a counter component that will allow you to
   increment/decrement a counter.
 date: 2021-05-30T19:54:13.642Z
-cover: /uploads/vue3-typescript.png
+cover: /uploads/vue3-typescript.webp
 author: Yuniel Acosta
 lang: en
 tags:
@@ -22,7 +22,7 @@ categories:
 draft: false
 ---
 
-![vue3+typescript](/uploads/vue3-typescript.png 'Vue 3 with Typescript')
+![vue3+typescript](/uploads/vue3-typescript.webp 'Vue 3 with Typescript')
 
 I always use Typescript and some decorator libraries on my [VueJS](https://vuejs.org/) projects. It has allowed me to use a class syntax for my components and store files which, I feel, is easier to read than the normal VueJS javascript syntax. I'll be going through a step by step process on how to achieve this. We will be building a counter component that will allow you to increment/decrement a counter.
 

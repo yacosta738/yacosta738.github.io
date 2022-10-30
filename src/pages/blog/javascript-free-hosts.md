@@ -1,7 +1,7 @@
 ---
 title: FREE HOSTINGS for WEB projects with JAVASCRIPT
 author: Yuniel Acosta
-cover: /uploads/6-free-hostings.png
+cover: /uploads/6-free-hostings.webp
 date: 2022-09-28
 description: If you are learning how to create web pages and want to try free hosting, I offer you 6 options for you to practice. Although, you can also use them in production.
 lang: en
@@ -11,7 +11,7 @@ layout: ../../components/templates/BlogPostTemplate.astro
 draft: false
 ---
 
-![6-free-hostings.png](/uploads/6-free-hostings.png)
+![6-free-hostings.webp](/uploads/6-free-hostings.webp)
 
 One of the most common questions we ask ourselves when creating a new project is where we can deploy our prototype. Nowadays there are several alternatives that we can use for free.
 

@@ -10,7 +10,7 @@ description: Más importante que la rapidez de su sitio web en milisegundos, es
   tiempos reales.
 date: 2022-10-13T12:33:43.553Z
 lang: es
-cover: /uploads/wep-performance.jpg
+cover: /uploads/wep-performance.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -24,7 +24,7 @@ categories:
 draft: false
 ---
 
-![web performance](/uploads/wep-performance.jpg 'web performance')
+![web performance](/uploads/wep-performance.webp 'web performance')
 
 El RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
 

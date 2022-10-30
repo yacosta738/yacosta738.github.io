@@ -3,7 +3,7 @@ layout: ../../components/templates/BlogPostTemplate.astro
 title: Configure global proxy on linux
 description: In this article I share some tips to configure the internet through a global proxy in GNU/Linux operating systems.
 date: 2020-12-06
-cover: /uploads/configure-proxy-global-on-linux/portada-proxy.jpg
+cover: /uploads/configure-proxy-global-on-linux/portada-proxy.webp
 author: 'Yuniel Acosta'
 lang: en
 tags:
@@ -19,15 +19,15 @@ categories:
 draft: false
 ---
 
-![background](/uploads/configure-proxy-global-on-linux/portada-proxy.jpg)
+![background](/uploads/configure-proxy-global-on-linux/portada-proxy.webp)
 
 In GNU/Linux operating systems when we are behind a proxy server, it can become a bit cumbersome to use programs that do not have their own proxy configuration or commands like **apt-get**, or we simply want to configure it globally. Many of the GNU/Linux distributions use different package managers which are configured in different ways, in addition there are many programs that need their specifications to configure the Internet output through a proxy server. All this process becomes very cumbersome to do in environments where you use a proxy with authentication and it changes from time to time or you use a laptop where you can constantly connect to networks where proxy is not used. Imagine changing all the settings every time you change networks.
 
-![Proxy schema](/uploads/configure-proxy-global-on-linux/proxy-schema.png 'Configure proxy global on linux')
+![Proxy schema](/uploads/configure-proxy-global-on-linux/proxy-schema.webp 'Configure proxy global on linux')
 
 Here are some examples of how to configure proxy in some GNU/Linux distros
 
-![Proxy global](/uploads/configure-proxy-global-on-linux/proxy-global.jpg)
+![Proxy global](/uploads/configure-proxy-global-on-linux/proxy-global.webp)
 
 ## Terminal Proxy Settings
 
@@ -38,7 +38,7 @@ If we want to use a proxy temporarily in the terminal, we execute the following 
     export https_proxy=$http_proxy
 ```
 
-## Setting environment variables for Debian|Ubuntu family distributions:
+## Setting environment variables for Debian|Ubuntu family distributions
 
 Edit file `/etc/environment` with your favorite text editor.
 
@@ -60,7 +60,7 @@ We add the following lines to the file, you must duplicate them in upper and low
     NO_PROXY localhost,127.0.0.1,localaddress,.localdomain.com
 ```
 
-## Setting environment variables for distributions of the RedHat|Fedora|Centos family:
+## Setting environment variables for distributions of the RedHat|Fedora|Centos family
 
 ```shell
     sudo vim /etc/profile.d/proxy.sh
@@ -74,7 +74,7 @@ We modify the necessary parameters
     export ftp_proxy="http://username:password@proxyserver:puerto/"
 ```
 
-## Proxy settings for apt-get, apt, aptitude:
+## Proxy settings for apt-get, apt, aptitude
 
 We create or edit file `/etc/apt/apt.conf`
 
@@ -95,7 +95,7 @@ We add the following lines:
     };
 ```
 
-## Proxy settings for yum:
+## Proxy settings for yum
 
 Edit file `/etc/yum.conf`
 
@@ -107,7 +107,7 @@ Edit file `/etc/yum.conf`
     proxy_password=contraseña
 ```
 
-## Proxy settings for pacman:
+## Proxy settings for pacman
 
 We edit the file `/etc/pacman.conf` and we must uncomment `XferCommand` as follows:
 
@@ -115,7 +115,7 @@ We edit the file `/etc/pacman.conf` and we must uncomment `XferCommand` as follo
     XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
 ```
 
-![pacman.conf.png](/uploads/configure-proxy-global-on-linux/pacman.conf.png)
+![pacman.conf.webp](/uploads/configure-proxy-global-on-linux/pacman.conf.webp)
 
 We save the changes and proceed to edit the configuration file for `wget`, a tool used to download packages.
 
@@ -167,7 +167,7 @@ As you can see, it is very complex to constantly maintain the configuration of a
 
 ## Manual compilation of redsock
 
-To compile redsock we need to clone its repository on GitHub <https://github.com/darkk/redsocks> and follow the instructions in the README.md. ** [libevent-2.0.x](http://libevent.org/)** must be installed on our system, as well as the `gcc` and`clang` compilers. Compilation is as easy as running `make` in the project's root directory.
+To compile redsock we need to clone its repository on GitHub <https://github.com/darkk/redsocks> and follow the instructions in the README.md. **[libevent-2.0.x](http://libevent.org/)** must be installed on our system, as well as the `gcc` and`clang` compilers. Compilation is as easy as running `make` in the project's root directory.
 
 ## Run redsock
 
@@ -379,7 +379,7 @@ The desktop application is a VPN (Virtual Private Network) client. Create an enc
 
 The first thing to do is create an account at [Windscribe](https://windscribe.com/?friend=abhyp2zr) by registering [here](https://windscribe.com/?friend=abhyp2zr). Windscribe gives us 2GB of free monthly consumption, but if we confirm our email this increases 5GB, you can also increase up to 15GB per month if you create a post on twitter by clicking the **_Tweet4Data_** button in your account settings.
 
-![More data](/uploads/configure-proxy-global-on-linux/more-data.png)
+<img src="/uploads/configure-proxy-global-on-linux/more-data.webp" width="5px" height="5px" alt="More Data"/>
 
 ## Install Windscribe
 
@@ -408,6 +408,6 @@ windscribe connect best # Nos conecta al servidor de windscribe con mejor rendim
 
 To consult the help of windscribe we can execute the command `windscribe --help`
 
-![Windscribe Help](/uploads/configure-proxy-global-on-linux/windscribe-help.png)
+![Windscribe Help](/uploads/configure-proxy-global-on-linux/windscribe-help.webp)
 
 These are some options that exist to configure Internet accesses through a proxy in GNU-Linux operating systems. Of all the variants shown in this article my favorite without a doubt is windscribe for all the facilities it offers. I hope it helps you in case you want to have a proxy configured globally in linux.

@@ -33,13 +33,13 @@ Un segundo sitio (que son puramente estáticos, casi sin interacción JS en el n
 
 Todos estos sitios, desde el más pequeño hasta el más grande, tenían un problema unificador: las puntuaciones de rendimiento de Lighthouse nunca fueron excelentes. A continuación se muestran mis puntajes de Lighthouse para este sitio antes de migrar de Nuxt:
 
-![Puntuaciones de Lighthouse del sitio basado en Nuxt. Rendimiento: 57, Accesibilidad: 79, Mejores prácticas: 93, SEO: 100](/uploads/nuxt-lighthouse.png)
+![Puntuaciones de Lighthouse del sitio basado en Nuxt. Rendimiento: 57, Accesibilidad: 79, Mejores prácticas: 93, SEO: 100](/uploads/nuxt-lighthouse.webp)
 
 Esto se hizo en mi página de inicio, en una instancia nueva de Chrome sin complementos instalados, para estar lo más cerca posible de una lectura limpia. La página de inicio está cargando un puñado de imágenes (iconos de idioma, mi imagen de perfil), mi última publicación de blog y algunos SVG para íconos sociales cortesía de Font Awesome.
 
 Aquí está el desglose de la puntuación de rendimiento:
 
-![Métricas de rendimiento. Primera pintura con contenido: 2,0 s, Tiempo de interacción: 6,3 s, Índice de velocidad: 2,3 s, Tiempo total de bloqueo: 150 ms, Pintura con contenido más grande: 7,4 s, Cambio de diseño acumulativo: 0,47](/uploads/nuxt-performance.png)
+![Métricas de rendimiento. Primera pintura con contenido: 2,0 s, Tiempo de interacción: 6,3 s, Índice de velocidad: 2,3 s, Tiempo total de bloqueo: 150 ms, Pintura con contenido más grande: 7,4 s, Cambio de diseño acumulativo: 0,47](/uploads/nuxt-performance.webp)
 
 De estos puntajes, el Largest Contentful Paint y Time to Interactive se destacaron para mí. Esta es una página principalmente estática, con varios enlaces y un solo componente interactivo para cambiar los detalles de las compañias en las que he trabajado. ¿Por qué Nuxt tardó tanto en ser interactivo?
 
@@ -290,11 +290,11 @@ Reescribir mi sitio personal tomó alrededor de una semana. La mayor parte de mi
 
 Después de terminar y poner en producción, ejecuté Lighthouse en la migración finalizada. Aquí están los resultados:
 
-![Puntuaciones de Lighthouse del sitio basado en Astro: Rendimiento: 100, Accesibilidad: 95, Mejores prácticas: 100, SEO: 100](/uploads/astro-lighthouse.png)
+![Puntuaciones de Lighthouse del sitio basado en Astro: Rendimiento: 100, Accesibilidad: 95, Mejores prácticas: 100, SEO: 100](/uploads/astro-lighthouse.webp)
 
 Y aquí están los resultados de rendimiento:
 
-![Métricas de rendimiento. Primera pintura con contenido: 1,6 s, Tiempo de interacción: 1,6 s, Índice de velocidad: 1,6 s, Tiempo total de bloqueo: 0 ms, Pintura con contenido más grande: 1,6 s, Cambio de diseño acumulativo: 0](/uploads/astro-performance.png)
+![Métricas de rendimiento. Primera pintura con contenido: 1,6 s, Tiempo de interacción: 1,6 s, Índice de velocidad: 1,6 s, Tiempo total de bloqueo: 0 ms, Pintura con contenido más grande: 1,6 s, Cambio de diseño acumulativo: 0](/uploads/astro-performance.webp)
 
 ¡Mucho mejor! Debido a que todo se carga como HTML y CSS, en lugar de utilizar un framework de JavaScript para representar la página, todo es mucho más rápido.
 

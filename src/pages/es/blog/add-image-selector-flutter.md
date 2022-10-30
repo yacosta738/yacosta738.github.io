@@ -7,11 +7,11 @@ author: Yuniel Acosta
 lang: es
 tags: [Flutter, Image Picker, Dart]
 categories: [Programming]
-cover: /uploads/portada-add-images-selector-flutter.png
+cover: /uploads/portada-add-images-selector-flutter.webp
 draft: false
 ---
 
-![background](/uploads/portada-add-images-selector-flutter.png)
+![background](/uploads/portada-add-images-selector-flutter.webp)
 
 El selector de imágenes es un componente común que a menudo se necesita para cambiar las fotos de los perfiles de usuario entre muchas otras opciones donde es necesario subir una imagen. Con el fin de proveer a nuestra aplicación de la opción de subir imágenes seleccionadas desde nuestro dispositivo, ya sea en la cámara o la galería, usaremos el [complemento](https://pub.dev/packages/image_picker) hecho por desarrolladores de Flutter.
 

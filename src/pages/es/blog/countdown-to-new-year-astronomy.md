@@ -3,7 +3,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 title: Cuenta regresiva para el nuevo Año
 description: La astronomía y la programación son dos de mis pasiones que en esta ocasión he decidido juntar. Con este objetivo crearemos una web sencilla para llevar la cuenta regresiva de cuantos días faltan hasta el nuevo año simulando el movimiento del planeta tierra.
 date: 2020-12-27
-cover: /uploads/portada.jpg
+cover: /uploads/portada.webp
 author: Yuniel Acosta
 lang: es
 tags:
@@ -16,11 +16,11 @@ categories:
 draft: false
 ---
 
-![background](/uploads/portada.jpg)
+![background](/uploads/portada.webp)
 
 La astronomía y la programación son dos de mis pasiones que en esta ocasión he decidido juntar. Con este objetivo crearemos una web sencilla para llevar la cuenta regresiva de cuantos días faltan hasta el nuevo año simulando el movimiento del planeta tierra. El demo se puede apreciar en el siguiente link <https://yacosta738.github.io/countdown-to-new-year/>
 
-![Example](/uploads/example.png)
+![Example](/uploads/example.webp)
 
 Lo primero es crear un fichero **`style.css`** donde se define el estilo y la órbita de cada planeta:
 

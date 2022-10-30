@@ -33,13 +33,13 @@ A second site (which is purely static assets, almost no JS interaction in the br
 
 All of these sites, from the smallest to the largest, had one unifying issue: Lighthouse performance scores were never great. Below are my Lighthouse scores for this site before migrating from Nuxt:
 
-![Nuxt-based site Lighthouse scores. Performance: 57, Accessibility: 79, Best Practices: 93, SEO: 100](/uploads/nuxt-lighthouse.png)
+![Nuxt-based site Lighthouse scores. Performance: 57, Accessibility: 79, Best Practices: 93, SEO: 100](/uploads/nuxt-lighthouse.webp)
 
 This was done on my home page, on a fresh instance of Chrome with no plugins installed, in order to get the closest to a clean reading. The home page is loading a handful of images (language icons, my profile image), my latest blog post, and a few SVGs for social icons courtesy of Font Awesome.
 
 Here's the breakdown of the performance score:
 
-![Performance metrics. First contentful paint: 2.0s, Time to Interactive: 6.3s, Speed Index: 2.3s, Total Blocking Time: 150ms, Largest Contentful Paint: 7.4s, Cumulative Layout Shift: 0.47](/uploads/nuxt-performance.png)
+![Performance metrics. First contentful paint: 2.0s, Time to Interactive: 6.3s, Speed Index: 2.3s, Total Blocking Time: 150ms, Largest Contentful Paint: 7.4s, Cumulative Layout Shift: 0.47](/uploads/nuxt-performance.webp)
 
 Of these scores, the Largest Contentful Paint and Time to Interactive stood out to me the most. This is a mostly static page, with several links and a single interactive component to change the details of the companies I've worked for. Why did Nuxt take so long to become interactive?
 
@@ -286,11 +286,11 @@ Rewriting my personal site took about a week. Most of my templating was migrated
 
 After I finished and deployed, I ran Lighthouse on the finished migration. Here are the results:
 
-![Astro-based site Lighthouse scores: Performance: 100, Accessibility: 95, Best Practices: 100, SEO: 100](/uploads/astro-lighthouse.png)
+![Astro-based site Lighthouse scores: Performance: 100, Accessibility: 95, Best Practices: 100, SEO: 100](/uploads/astro-lighthouse.webp)
 
 And here's the performance results:
 
-![Performance metrics. First contentful paint: 1.6s, Time to Interactive: 1.6s, Speed Index: 1.6s, Total Blocking Time: 0ms, Largest Contentful Paint: 1.6s, Cumulative Layout Shift: 0](/uploads/astro-performance.png)
+![Performance metrics. First contentful paint: 1.6s, Time to Interactive: 1.6s, Speed Index: 1.6s, Total Blocking Time: 0ms, Largest Contentful Paint: 1.6s, Cumulative Layout Shift: 0](/uploads/astro-performance.webp)
 
 Much better! Because everything is being loaded as HTML and CSS, rather than utilizing a JavaScript framework to render the page, everything is much faster.
 

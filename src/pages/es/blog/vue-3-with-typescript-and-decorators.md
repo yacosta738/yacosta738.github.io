@@ -3,7 +3,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 title: Vue 3 con Typescript y Decoradores
 description: Siempre uso Typescript y algunas bibliotecas de decoradores en mis proyectos de VueJS. Me ha permitido usar una sintaxis de clase para mis componentes y almacenar archivos que, creo, es más fácil de leer que la sintaxis normal de javascript de VueJS. Pasaré por un proceso paso a paso sobre cómo lograr esto. Construiremos un componente de contador que le permitirá incrementar / disminuir un contador.
 date: 2021-05-30T19:54:13.642Z
-cover: /uploads/vue3-typescript.png
+cover: /uploads/vue3-typescript.webp
 author: Yuniel Acosta
 lang: es
 tags:
@@ -17,7 +17,7 @@ categories:
 draft: false
 ---
 
-![vue3+typescript](/uploads/vue3-typescript.png 'Vue 3 with Typescript')
+![vue3+typescript](/uploads/vue3-typescript.webp 'Vue 3 with Typescript')
 
 Siempre uso Typescript y algunas bibliotecas de decoradores en mis proyectos de [VueJS](https://vuejs.org/). Me ha permitido usar una sintaxis de clase para mis componentes y almacenar archivos que, creo, es más fácil de leer que la sintaxis normal de javascript de VueJS. Pasaré por un proceso paso a paso sobre cómo lograr esto. Construiremos un componente de contador que le permitirá incrementar / disminuir un contador.
 

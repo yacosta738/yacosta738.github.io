@@ -8,7 +8,7 @@ description: Angular is one of the most highly recommended frontend frameworks i
   I've been pairing it with NestJS and it's been working really well in multiple
   projects.
 date: 2021-05-22T23:32:13.655Z
-cover: /uploads/nx.png
+cover: /uploads/nx.webp
 author: Yuniel Acosta
 tags:
   - Angular
@@ -20,7 +20,7 @@ categories:
 draft: false
 ---
 
-![nx](/uploads/nx.png 'angular + nestjs + nx')
+![nx](/uploads/nx.webp 'angular + nestjs + nx')
 
 ## Why this post?
 
@@ -77,7 +77,7 @@ The first command will run the default Angular dev-server, compile and serve the
 
 If you open now your browser on [](http://localhost:4200/)<http://localhost:4200>, you should see a page similar to this one:
 
-![localhost:4200](/uploads/localhost.png 'App running in localhost')
+![localhost:4200](/uploads/localhost.webp 'App running in localhost')
 
 If you inspect the network and refresh, you'll see an XHR request to [](http://localhost:4200/api/hello)<http://localhost:4200/api/hello> showing that the proxy has been set up properly.
 

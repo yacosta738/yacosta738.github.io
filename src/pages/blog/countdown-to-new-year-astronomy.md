@@ -6,7 +6,7 @@ description: Astronomy and programming are two of my passions that this time I h
   website to count down how many days until the new year, simulating the
   movement of the planet earth.
 date: 2020-12-27
-cover: /uploads/portada.jpg
+cover: /uploads/portada.webp
 author: Yuniel Acosta
 lang: en
 tags:
@@ -19,11 +19,11 @@ categories:
 draft: false
 ---
 
-![background](/uploads/portada.jpg)
+![background](/uploads/portada.webp)
 
 Astronomy and programming are two of my passions that this time I have decided to join together. With this goal in mind, we will create a simple website to count down how many days until the new year, simulating the movement of the planet earth. The demo can be seen at the following link <https://yacosta738.github.io/countdown-to-new-year/>
 
-![Example](/uploads/example.png)
+![Example](/uploads/example.webp)
 
 The first thing is to create a file ** `style.css`** where the style and orbit of each planet is defined:
 

@@ -1,7 +1,7 @@
 ---
 title: Java Features
 author: Yuniel Acosta
-cover: /uploads/java-feactures.png
+cover: /uploads/java-feactures.webp
 date: 2022-10-10
 description: Java is a programming language and computing platform first released by Sun Microsystems in 1995. There are lots of applications and websites that will not work unless you have Java installed, and more are created every day. Java is fast, secure, and reliable. From laptops to datacenters, game consoles to scientific supercomputers, cell phones to the Internet, Java is everywhere!
 lang: en
@@ -11,7 +11,7 @@ layout: ../../components/templates/BlogPostTemplate.astro
 draft: false
 ---
 
-![java-feactures.png](/uploads/java-feactures.png)
+![java-feactures.webp](/uploads/java-feactures.webp)
 
 Java is a programming language and computing platform first released by Sun Microsystems in 1995. There are lots of applications and websites that will not work unless you have Java installed, and more are created every day. Java is fast, secure, and reliable. From laptops to datacenters, game consoles to scientific supercomputers, cell phones to the Internet, Java is everywhere!
 

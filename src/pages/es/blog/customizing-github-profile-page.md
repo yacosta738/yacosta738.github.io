@@ -3,7 +3,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 title: Personalización de la página de perfil de Github
 description: Puedes personalizar tu perfil para que otras personas puedan tener una mejor idea de quién eres y del trabajo que haces.
 date: 2021-05-11T02:05:59.285Z
-cover: /uploads/acosta-github-profile.png
+cover: /uploads/acosta-github-profile.webp
 author: Yuniel Acosta
 lang: es
 tags:
@@ -28,22 +28,22 @@ Entonces empecemos:
 ### Paso 1: Crea un repositorio
 
 Inicie sesión en [github](https://www.github.com) y cree un nuevo repositorio con el mismo nombre que su nombre de usuario de github. Asegúrese de mantener este repositorio público e inicializarlo con el archivo **README.md** como se muestra en la siguiente captura de pantalla.
-![yacosta738](/uploads/yacosta738.png 'Crear un nuevo repositorio')
+![yacosta738](/uploads/yacosta738.webp 'Crear un nuevo repositorio')
 
 ### Paso 2: Edite el archivo README.md
 
 Una vez creado el repositorio, abra el archivo **README.md** y comience a editarlo. Puede agregar cualquier cosa en este archivo, por ejemplo, el enlace de su perfil de Twitter, el enlace de su perfil de LinkedIn, etc. También puede agregar su biografía o descripción sobre su interés, pasatiempos, tecnologías que le gustan, etc., como puede ver en la captura de pantalla a continuación.
-![readme.md](/uploads/edit-readme.png 'Editar el archivo README.md')
+![readme.md](/uploads/edit-readme.webp 'Editar el archivo README.md')
 
 ### Paso 3: Commit el archivo README.md
 
 Cuando haya terminado de realizar el cambio y esté listo, obtenga una vista previa de los cambios y asegúrese de confirmarlos.
-![commit readme](/uploads/commited.png 'Commit el archivo README.md')
+![commit readme](/uploads/commited.webp 'Commit el archivo README.md')
 
 ### Paso 4: Verifica tus cambios en tu perfil de Github
 
 Último paso es ir a la página de su perfil de github y verificar que los cambios aparezcan allí.
-![acosta github profile](/uploads/acosta-github-profile.png 'Verifica tus cambios en tu perfil de Githu')
+![acosta github profile](/uploads/acosta-github-profile.webp 'Verifica tus cambios en tu perfil de Githu')
 
 Puede utilizar esta herramienta para generar su perfil **Readme.md** sin codificar [gh-profile-readme-generator](https://rahuldkjain.github.io/gh-profile-readme-generator/)
 

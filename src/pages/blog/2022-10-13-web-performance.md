@@ -9,7 +9,7 @@ description: More important than the speed of your website in milliseconds, is
   the real times.
 date: 2022-10-13T12:33:43.553Z
 lang: en
-cover: /uploads/wep-performance.jpg
+cover: /uploads/wep-performance.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -23,7 +23,7 @@ categories:
 draft: false
 ---
 
-![web performance](/uploads/wep-performance.jpg 'web performance')
+![web performance](/uploads/wep-performance.webp 'web performance')
 
 WEB PERFORMANCE is one of the most important topics for the SUCCESS of your page. But almost no one knows the MOST IMPORTANT metrics. I explain them to you. ↓
 

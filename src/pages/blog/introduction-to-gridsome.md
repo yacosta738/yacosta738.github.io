@@ -6,12 +6,12 @@ author: Yuniel Acosta
 lang: en
 tags: ['frontend', 'gridsome', 'Vuejs']
 categories: [Development]
-cover: /uploads/gridsome-portada.png
+cover: /uploads/gridsome-portada.webp
 layout: ../../components/templates/BlogPostTemplate.astro
 draft: false
 ---
 
-![background](/uploads/gridsome-portada.png)
+![background](/uploads/gridsome-portada.webp)
 
 Gridsome is a Vue.js-powered, modern site generator for building the fastest possible websites for any Headless CMS, APIs or Markdown-files. Gridsome makes it easy and fun for developers to create fast, beautiful websites without needing to become a performance expert.
 
@@ -45,7 +45,7 @@ You should have basic knowledge about HTML, CSS, [Vue.js](https://vuejs.org) and
 
 Gridsome requires **Node.js** and recommends **Yarn**. [How to setup](https://gridsome.org/docs/#prerequisites)
 
-![background](/uploads/gridsome-stack.png)
+![background](/uploads/gridsome-stack.webp)
 
 ### 1. Install Gridsome CLI tool
 

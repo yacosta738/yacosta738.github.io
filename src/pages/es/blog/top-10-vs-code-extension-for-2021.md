@@ -8,7 +8,7 @@ description: Visual Studio Code is one of the most widely used code editors in 
   These tools are designed to improve the developer experience and make your job
   easier in various ways.
 date: 2021-05-25T02:23:12.784Z
-cover: /uploads/visual-studio-code.jpg
+cover: /uploads/visual-studio-code.webp
 author: Yuniel Acosta
 lang: es
 tags:
@@ -22,7 +22,7 @@ categories:
 draft: false
 ---
 
-![Top-Ten-Code-Extensions-of-2021](/uploads/visual-studio-code.jpg 'top 10 vs code extensions')
+![Top-Ten-Code-Extensions-of-2021](/uploads/visual-studio-code.webp 'top 10 vs code extensions')
 
 Visual Studio Code es uno de los editores de códigos más utilizados en la comunidad de desarrolladores. Una de las razones de la popularidad de VS Code es sus muchas extensiones que aceleran el proceso de desarrollo.
 
@@ -63,11 +63,11 @@ En el ejemplo anterior, solo hay texto dentro de las etiquetas, pero en una apli
 
 Por ejemplo, considere el siguiente fragmento de código:
 
-![Bracket-Pair-Colorizer-Code-Snippet](/uploads/bracket-pair-colorizer-code-snippet.png 'Fragmento de código bracket pair colorizer')
+![Bracket-Pair-Colorizer-Code-Snippet](/uploads/bracket-pair-colorizer-code-snippet.webp 'Fragmento de código bracket pair colorizer')
 
 A primera vista, es bastante difícil diferenciar entre diferentes bloques de código en el código, pero la extensión de `Bracket Pair Colorizer` colorea los paréntesis y corchetes correspondientes para facilitar la navegación y accesibilidad.
 
-![Bracket-Pair-Colorizer-Extension-Example](/uploads/bracket-pair-colorizer-extension-example.png 'Ejemplo de la extensión bracket pair colorizer')
+![Bracket-Pair-Colorizer-Extension-Example](/uploads/bracket-pair-colorizer-extension-example.webp 'Ejemplo de la extensión bracket pair colorizer')
 
 ## 3. Snippets
 
@@ -102,7 +102,7 @@ Puede utilizar cualquiera de los siguientes caracteres después de una doble bar
 - `//` para tachado
 - `TODO` para tareas pendientes
 
-![Better-Comments-VS-Code-Extension-Example](/uploads/better-comments-vs-code-extension-example.png) "Ejemplo de la extensión better comments de vs code")
+![Better-Comments-VS-Code-Extension-Example](/uploads/better-comments-vs-code-extension-example.webp) "Ejemplo de la extensión better comments de vs code")
 
 ## 5. Markdown All in One
 
@@ -120,7 +120,7 @@ Tener íconos descriptivos puede ayudarlo a diferenciar entre archivos y carpeta
 
 Aquí hay una comparación entre dos pestañas de VS Code. Uno tiene iconos, el otro no.
 
-![VS-Code-Tabs-Comparison](/uploads/vs-code-tabs-comparison.png 'Comparación entre dos pestañas de vs code')
+![VS-Code-Tabs-Comparison](/uploads/vs-code-tabs-comparison.webp 'Comparación entre dos pestañas de vs code')
 
 Hay muchas extensiones de iconos entre las que puede elegir. Las colecciones de iconos populares incluyen:
 
@@ -135,7 +135,7 @@ Hay muchas extensiones de iconos entre las que puede elegir. Las colecciones de 
 
 Consideren el siguiente bloque de código:
 
-![Prettier-Demo-Code-Example](/uploads/prettier-code-formatter-example.png 'Ejemplo de demo con prettier')
+![Prettier-Demo-Code-Example](/uploads/prettier-code-formatter-example.webp 'Ejemplo de demo con prettier')
 
 Es posible que observe algunos problemas de formato con este código, que incluyen:
 
@@ -154,7 +154,7 @@ Puede configurar esta extensión para que se adapte a sus necesidades de formato
 
 [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost) es una extensión que muestra un tamaño estimado de los paquetes importados en el código. Cuando se trabaja en un proyecto, es importante no comprometer la experiencia del usuario al importar paquetes pesados. Una forma de evitar esto es realizar un seguimiento del tamaño de las dependencias adicionales en su código.
 
-![Import-Cost-Extension-Example](/uploads/import-cost-extension-example.png 'Ejemplo de la extensión import cost')
+![Import-Cost-Extension-Example](/uploads/import-cost-extension-example.webp 'Ejemplo de la extensión import cost')
 
 Cuando la importación es demasiado grande, Import Cost le advierte mostrando el tamaño en rojo. Puede configurar qué tamaño debe considerarse pequeño, mediano o grande.
 
@@ -180,11 +180,11 @@ Una de las mejores características de esta extensión es la capacidad de visual
 
 A continuación se muestra una captura de pantalla de los documentos del [ejemplo de React](https://finalspaceapi.com/docs/react) de la [API de Final Space](https://finalspaceapi.com/).
 
-![React-Example-Final-Space-Api](/uploads/react-example-final-space-api.png 'ejemplo de react  usando final space api')
+![React-Example-Final-Space-Api](/uploads/react-example-final-space-api.webp 'ejemplo de react  usando final space api')
 
 A continuación, se muestra una versión ampliada de la autoría del código:
 
-![Code-Authorship-Expanded-Version](/uploads/code-authorship-expanded-version.png 'code authorship expanded version')
+![Code-Authorship-Expanded-Version](/uploads/code-authorship-expanded-version.webp 'code authorship expanded version')
 
 Esta es solo una de las muchas [características de la extensión GitLens](https://gitlens.amod.io/#features). Otras características notables incluyen:
 

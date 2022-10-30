@@ -7,7 +7,7 @@ description: Angular es uno de los frameworks frontend más recomendados en la
   fullStack, solo cubre la mitad de los requisitos. Desde hace un tiempo, lo he
   emparejado con NestJS y ha funcionado muy bien en varios proyectos.
 date: 2021-05-22T23:32:13.655Z
-cover: /uploads/nx.png
+cover: /uploads/nx.webp
 author: Yuniel Acosta
 tags:
   - Angular
@@ -19,7 +19,7 @@ categories:
 draft: false
 ---
 
-![nx](/uploads/nx.png 'angular + nestjs + nx')
+![nx](/uploads/nx.webp 'angular + nestjs + nx')
 
 ## ¿Por qué esta publicación?
 
@@ -76,7 +76,7 @@ El primer comando ejecutará el servidor de desarrollo Angular predeterminado, c
 
 Si abre ahora su navegador en [](http://localhost:4200/)<http://localhost:4200>, debería ver una página similar a esta:
 
-![localhost:4200](/uploads/localhost.png 'App corriendo en localhost')
+![localhost:4200](/uploads/localhost.webp 'App corriendo en localhost')
 
 Si inspecciona la red y actualiza, verá una solicitud XHR a [](http://localhost:4200/api/hello)<http://localhost:4200/api/hello> mostrando que el proxy ha sido configurado correctamente.
 

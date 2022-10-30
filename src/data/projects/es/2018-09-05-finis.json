@@ -2,7 +2,7 @@
   "date": "2018-09-05",
   "title": "Finis",
   "lang": "es",
-  "cover": "/uploads/cover-finis.png",
+  "cover": "/uploads/cover-finis.webp",
   "company": "Desoft",
   "tech": ["angular", "typescript", "lumen", "php", "postgresql"],
   "showInProjects": true,

@@ -8,7 +8,7 @@ description: Visual Studio Code is one of the most widely used code editors in 
   These tools are designed to improve the developer experience and make your job
   easier in various ways.
 date: 2021-05-25T02:23:12.784Z
-cover: /uploads/visual-studio-code.jpg
+cover: /uploads/visual-studio-code.webp
 author: Yuniel Acosta
 lang: en
 tags:
@@ -22,7 +22,7 @@ categories:
 draft: false
 ---
 
-![Top-Ten-Code-Extensions-of-2021](/uploads/visual-studio-code.jpg 'top 10 vs code extensions')
+![Top-Ten-Code-Extensions-of-2021](/uploads/visual-studio-code.webp 'top 10 vs code extensions')
 
 Visual Studio Code is one of the most widely used code editors in the developer community. One of the reasons for VS Code’s popularity is its many extensions that speed up the development process.
 
@@ -63,11 +63,11 @@ In the above example there is only text inside the tags, but in a real applicati
 
 For example, consider the following code snippet:
 
-![Bracket-Pair-Colorizer-Code-Snippet](/uploads/bracket-pair-colorizer-code-snippet.png 'bracket pair colorizer code snippet')
+![Bracket-Pair-Colorizer-Code-Snippet](/uploads/bracket-pair-colorizer-code-snippet.webp 'bracket pair colorizer code snippet')
 
 At first glance, it’s quite hard to differentiate between different code blocks in the code, but the `Bracket Pair Colorizer` extension colors the corresponding parenthesis and brackets for easy navigation and accessibility.
 
-![Bracket-Pair-Colorizer-Extension-Example](/uploads/bracket-pair-colorizer-extension-example.png 'bracket pair colorizer extension example')
+![Bracket-Pair-Colorizer-Extension-Example](/uploads/bracket-pair-colorizer-extension-example.webp 'bracket pair colorizer extension example')
 
 ## 3. Snippets
 
@@ -102,7 +102,7 @@ You can use either of the following characters after double forward slash (`//`)
 - `//` for strikethrough
 - `TODO` for to-dos
 
-![Better-Comments-VS-Code-Extension-Example](/uploads/better-comments-vs-code-extension-example.png 'better comments vs code extension example')
+![Better-Comments-VS-Code-Extension-Example](/uploads/better-comments-vs-code-extension-example.webp 'better comments vs code extension example')
 
 ## 5. Markdown All in One
 
@@ -120,7 +120,7 @@ Having descriptive icons can help you differentiate between files and folders. I
 
 Here is a comparison between two VS Code tabs. One has icons, the other does not.
 
-![VS-Code-Tabs-Comparison](/uploads/vs-code-tabs-comparison.png 'vs code tabs comparison')
+![VS-Code-Tabs-Comparison](/uploads/vs-code-tabs-comparison.webp 'vs code tabs comparison')
 
 There are many icons extension that you can choose from. Popular icon collections include:
 
@@ -135,7 +135,7 @@ There are many icons extension that you can choose from. Popular icon collection
 
 Consider the following code block:
 
-![Prettier-Demo-Code-Example](/uploads/prettier-code-formatter-example.png 'prettier demo code example')
+![Prettier-Demo-Code-Example](/uploads/prettier-code-formatter-example.webp 'prettier demo code example')
 
 You may notice a handful of formatting issues with this code, including:
 
@@ -154,7 +154,7 @@ You can configure this extension further to suit your formatting needs and even 
 
 [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost) is an extension that shows you an estimated size of the import package in your code. When working on a project, it’s important not to compromise the user experience by importing heft packages. One way to avoid this is to keep track of the size of additional dependencies in your code.
 
-![Import-Cost-Extension-Example](/uploads/import-cost-extension-example.png 'import cost extension example')
+![Import-Cost-Extension-Example](/uploads/import-cost-extension-example.webp 'import cost extension example')
 
 When the import is too large, Import Cost warns you by displaying the size in red. You can configure what size should be considered small, medium, or large.
 
@@ -180,11 +180,11 @@ One of the best features of this extension is the ability to visualize code auth
 
 Below is a screenshot from the [React example](https://finalspaceapi.com/docs/react) docs of the [Final Space API](https://finalspaceapi.com/).
 
-![React-Example-Final-Space-Api](/uploads/react-example-final-space-api.png 'react example final space api')
+![React-Example-Final-Space-Api](/uploads/react-example-final-space-api.webp 'react example final space api')
 
 Here’s an expanded version of the code authorship:
 
-![Code-Authorship-Expanded-Version](/uploads/code-authorship-expanded-version.png 'code authorship expanded version')
+![Code-Authorship-Expanded-Version](/uploads/code-authorship-expanded-version.webp 'code authorship expanded version')
 
 This is just one of the many [features of GitLens extension](https://gitlens.amod.io/#features). Other notable features include:
 
