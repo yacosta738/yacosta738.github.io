@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon'
+import { t } from 'i18next'
 import { socialMedia } from 'store/constants'
 
 const portfolioTechIcon = [
@@ -16,18 +17,18 @@ const portfolioTechIcon = [
 			{
 				socialMedia.map(({ name, icon, url }) => (
 					<li class='my-2 text-light-slate font-mono text-3xl whitespace-nowrap mx-1'>
-						<a href={url} target='_blank' rel='noopener noreferrer'>
+						<a href={url} target='_blank' rel='noopener noreferrer' aria-label={name}>
 							<Icon name={icon} class='h-8' />
 						</a>
 					</li>
 				))
 			}
 		</ul>
-		<p class='text-sm text-lightest-slate font-mono' v-text='$t('built-by')'>
-			Built by Yuniel Acosta
+		<p class='text-sm text-lightest-slate font-mono'>
+			{t('built-by')}
 		</p>
-		<p class='text-xs text-light-slate font-mono my-2' v-text='$t('design-by')'>
-			Design based on Brittany Chiang portfolio
+		<p class='text-xs text-light-slate font-mono my-2'>
+			{t('design-by')}
 		</p>
 		<ul class='flex flex-wrap relative list-none p-0'>
 			{

@@ -12,7 +12,7 @@ export interface Props {
 const { drawer } = Astro.props
 
 const { pathname } = Astro.url
-const isBlogRoot = pathname.endsWith('/blog')
+const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/')
 
 const menuLink = (menu: Menu) => {
 	const link = localizePath(menu.link)
@@ -21,7 +21,7 @@ const menuLink = (menu: Menu) => {
 }
 ---
 
-<ul class='menu-list' data-cypress='menu'>
+<ul class='menu-list'>
 	<li>
 		{isBlogRoot && <Search client:only />}
 	</li>
@@ -36,7 +36,7 @@ const menuLink = (menu: Menu) => {
 					<li>
 						<a
 							href={menuLink(menu)}
-							id={menu.id}
+							id={drawer ? `drawer-${menu.id}` : `nav-${menu.id}`}
 							data-drawer-dismiss='menu-drawer'
 						>
 							{t('menus.' + menu.title)}
@@ -61,7 +61,7 @@ const menuLink = (menu: Menu) => {
 		</a>
 	</li>
 	<li>
-		<a id='resume' href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>
+		<a id={drawer ? 'drawer-resume':'nav-resume'} href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>
 			{t('resume')}
 		</a>
 	</li>

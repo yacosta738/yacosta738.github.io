@@ -9,7 +9,7 @@ import { Icon } from 'astro-icon'
 		{
 			socialMedia.map((social) => (
 				<li>
-					<a id={social.name} href={social.url} target='_blank' class='my-1.5'>
+					<a id={social.name} href={social.url} target='_blank' class='my-1.5' aria-label={social.name}>
 						<Icon name={social.icon} />
 					</a>
 				</li>

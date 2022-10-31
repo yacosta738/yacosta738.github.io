@@ -57,8 +57,6 @@ onUnmounted(() => {
 						:id="`tab-${i}`"
 						class="styled-tab-button"
 						:class="{ 'text-green-500': activeTabId === i }"
-						:aria-selected="activeTabId === i ? 'true' : 'false'"
-						:aria-controls="`panel-${i}`"
 						:tabIndex="activeTabId === i ? 0 : -1"
 						@click="activeTabId = i"
 						@keyup.up.prevent.stop="
@@ -71,14 +69,14 @@ onUnmounted(() => {
 						<span>{{ job.company }}</span>
 					</button>
 				</li>
-				<div
+				<li
 					class="styled-high-light"
 					:style="
 						sm
 							? `transform: translateX(calc(${activeTabId} * 120px));`
 							: `transform: translateY(calc(${activeTabId} * 42px));`
 					"
-				></div>
+				></li>
 			</ul>
 			<transition name="fade" mode="out-in">
 				<div>
@@ -90,7 +88,6 @@ onUnmounted(() => {
 						role="tabpanel"
 						:tabIndex="activeTabId === i ? 0 : -1"
 						:aria-labelledby="`tab-${i}`"
-						:aria-hidden="activeTabId !== i"
 						:hidden="activeTabId !== i"
 					>
 						<h3>

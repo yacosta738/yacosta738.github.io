@@ -20,13 +20,12 @@ import { t } from 'i18next'
 	aria-modal='true'
 	role='dialog'
 >
-	<h5
+	<h3
 		id='drawer-label'
 		class='inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400'
 	>
 		<svg
 			class='w-5 h-5 mr-2'
-			aria-hidden='true'
 			fill='currentColor'
 			viewBox='0 0 20 20'
 			xmlns='http://www.w3.org/2000/svg'
@@ -36,7 +35,7 @@ import { t } from 'i18next'
 				clip-rule='evenodd'></path>
 		</svg>
 		{t('name')}
-	</h5>
+	</h3>
 	<MenuButton openMenu={false} />
 	<Menus drawer={true} />
 </div>
