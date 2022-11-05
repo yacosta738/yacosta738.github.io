@@ -40,4 +40,4 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: format with Prettier
-        run: npm run format
+        run: pnpm run build format
