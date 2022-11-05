@@ -39,7 +39,7 @@
     "dompurify": "2.4.0",
     "eslint": "8.26.0",
     "eslint-config-standard": "17.0.0",
-    "eslint-plugin-astro": "0.20.0",
+    "eslint-plugin-astro": "0.21.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-n": "15.3.0",
