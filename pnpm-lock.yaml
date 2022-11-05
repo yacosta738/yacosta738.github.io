@@ -19,7 +19,7 @@ specifiers:
   astro-compress: 1.0.12
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
-  astro-netlify-cms: 0.3.1
+  astro-netlify-cms: 0.3.3
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
   dompurify: 2.4.0
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.0.3
-  astro-netlify-cms: 0.3.1_juhb4garonkwbohkfnnzt5g35e
+  astro-netlify-cms: 0.3.3_juhb4garonkwbohkfnnzt5g35e
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -3099,8 +3099,8 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.3.1_juhb4garonkwbohkfnnzt5g35e:
-    resolution: {integrity: sha512-YwWYeIh5tv3dP6cCKT+yZAqPmv5lgohzf/iWtJ9xTJBN9vVtlQiHR3FiiG2M7Uc02ji7f2QzWpiFKfOuXd7hWw==}
+  /astro-netlify-cms/0.3.3_juhb4garonkwbohkfnnzt5g35e:
+    resolution: {integrity: sha512-Q5jokT947DXzqLD0j3/7mlwZ/I9qrV26Vv4Gr8hYP9sEknjdGThLgy+XTbKpotjrlUWn/+Tyi3lvXmPEG2WzHg==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
