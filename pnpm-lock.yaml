@@ -48,7 +48,7 @@ specifiers:
   start-server-and-test: 1.14.0
   tailwindcss: 3.2.1
   uuid: 9.0.0
-  vite-plugin-pwa: 0.13.1
+  vite-plugin-pwa: 0.13.3
   vue: 3.2.41
 
 dependencies:
@@ -101,7 +101,7 @@ devDependencies:
   prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
   sass: 1.55.0
   start-server-and-test: 1.14.0
-  vite-plugin-pwa: 0.13.1_3bowiggcnrfgb4q2iavuqqt6vu
+  vite-plugin-pwa: 0.13.3_3bowiggcnrfgb4q2iavuqqt6vu
   vue: 3.2.41
 
 packages:
@@ -2176,6 +2176,16 @@ packages:
 
   /@rollup/plugin-replace/2.4.2_rollup@2.79.1:
     resolution: {integrity: sha512-IGcu+cydlUMZ5En85jxHH4qj2hta/11BHq95iHEyb2sbgiN0eCdzvUcHw5gt9pBL5lTi4JDYJ1acCoMGpTvEZg==}
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.79.1
+      magic-string: 0.25.9
+      rollup: 2.79.1
+    dev: true
+
+  /@rollup/plugin-replace/4.0.0_rollup@2.79.1:
+    resolution: {integrity: sha512-+rumQFiaNac9y64OHtkHGmdjm7us9bo1PlbgQfdihQtuNxzjpaB064HbRnewUOggLQxVCCyINfStkgmBeQpv1g==}
     peerDependencies:
       rollup: ^1.20.0 || ^2.0.0
     dependencies:
@@ -11333,13 +11343,14 @@ packages:
       unist-util-stringify-position: 3.0.2
       vfile-message: 3.1.2
 
-  /vite-plugin-pwa/0.13.1_3bowiggcnrfgb4q2iavuqqt6vu:
-    resolution: {integrity: sha512-NR3dIa+o2hzlzo4lF4Gu0cYvoMjSw2DdRc6Epw1yjmCqWaGuN86WK9JqZie4arNlE1ZuWT3CLiMdiX5wcmmUmg==}
+  /vite-plugin-pwa/0.13.3_3bowiggcnrfgb4q2iavuqqt6vu:
+    resolution: {integrity: sha512-cjWXpZ7slAY14OKz7M8XdgTIi9wjf6OD6NkhiMAc+ogxnbUrecUwLdRtfGPCPsN2ftut5gaN1jTghb11p6IQAA==}
     peerDependencies:
       vite: ^3.1.0
       workbox-build: ^6.5.4
       workbox-window: ^6.5.4
     dependencies:
+      '@rollup/plugin-replace': 4.0.0_rollup@2.79.1
       debug: 4.3.4
       fast-glob: 3.2.12
       pretty-bytes: 6.0.0
