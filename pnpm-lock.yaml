@@ -22,7 +22,7 @@ specifiers:
   astro-netlify-cms: 0.3.3
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
-  dompurify: 2.4.0
+  dompurify: 2.4.1
   eslint: 8.26.0
   eslint-config-standard: 17.0.0
   eslint-plugin-astro: 0.21.0
@@ -81,7 +81,7 @@ devDependencies:
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
-  dompurify: 2.4.0
+  dompurify: 2.4.1
   eslint: 8.26.0
   eslint-config-standard: 17.0.0_43wwz2xsig5yhgcv2rleettsby
   eslint-plugin-astro: 0.21.0_eslint@8.26.0
@@ -4161,8 +4161,8 @@ packages:
       domelementtype: 2.3.0
     dev: true
 
-  /dompurify/2.4.0:
-    resolution: {integrity: sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA==}
+  /dompurify/2.4.1:
+    resolution: {integrity: sha512-ewwFzHzrrneRjxzmK6oVz/rZn9VWspGFRDb4/rRtIsM1n36t9AKma/ye8syCpcw+XJ25kOK/hOG7t1j2I2yBqA==}
 
   /domutils/2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
@@ -7900,7 +7900,7 @@ packages:
     dependencies:
       '@emotion/core': 10.3.1_react@17.0.2
       '@emotion/styled': 10.3.0_gfrer23gq2rp2t523t6qbxrx6m
-      dompurify: 2.4.0
+      dompurify: 2.4.1
       immutable: 3.8.2
       is-hotkey: 0.2.0
       lodash: 4.17.21
