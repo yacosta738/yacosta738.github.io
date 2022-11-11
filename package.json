@@ -42,7 +42,7 @@
     "eslint-plugin-astro": "0.21.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
-    "eslint-plugin-n": "15.3.0",
+    "eslint-plugin-n": "15.5.1",
     "eslint-plugin-promise": "6.1.1",
     "husky": "8.0.1",
     "i18next-fs-backend": "2.0.0",
