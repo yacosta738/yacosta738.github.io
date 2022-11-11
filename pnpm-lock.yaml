@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@astrojs/image': 0.11.0
+  '@astrojs/image': 0.11.4
   '@astrojs/rss': 1.0.3
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 2.1.1
@@ -62,7 +62,7 @@ dependencies:
   uuid: 9.0.0
 
 devDependencies:
-  '@astrojs/image': 0.11.0_sharp@0.31.1
+  '@astrojs/image': 0.11.4_sharp@0.31.1
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 2.1.1_tailwindcss@3.2.1
   '@astrojs/vue': 1.2.1_rlv7zhfwuockvkhpvxwykywpua
@@ -139,8 +139,8 @@ packages:
   /@astrojs/compiler/0.29.9:
     resolution: {integrity: sha512-/oMQ0z3CJzGg6sv51tQTiHf/ETVsEu8ObN9OA7zs937dQx9Uo4SToYfdw3C4hf6olrLiADuDUsbkKSRe6fLSgA==}
 
-  /@astrojs/image/0.11.0_sharp@0.31.1:
-    resolution: {integrity: sha512-cWmqig0t4ndb+4v4YwuKJObpU9zWOVsNdEmvoEPPJUgtrrJzaxJYSRBe+pbvjP0xe+cQIk6fOKAq5lchK8VBzQ==}
+  /@astrojs/image/0.11.4_sharp@0.31.1:
+    resolution: {integrity: sha512-5+ryBMs0pzHXOlB0ZbI/KR8LFIpNw/yTelxV/Au7WtgnRbxDBwBDVmUKZr6vhTwqMpSif8YM32t84ayIGJJdMA==}
     peerDependencies:
       sharp: '>=0.31.0'
     peerDependenciesMeta:
@@ -155,6 +155,7 @@ packages:
       mime: 3.0.0
       sharp: 0.31.1
       slash: 4.0.0
+      web-streams-polyfill: 3.2.1
     dev: true
 
   /@astrojs/language-server/0.26.2:
