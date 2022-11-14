@@ -4,7 +4,7 @@ specifiers:
   '@astrojs/image': 0.11.0
   '@astrojs/rss': 1.0.3
   '@astrojs/sitemap': 1.0.0
-  '@astrojs/tailwind': 2.1.1
+  '@astrojs/tailwind': 2.1.2
   '@astrojs/vue': 1.2.1
   '@nanostores/vue': 0.6.1
   '@playwright/test': 1.27.1
@@ -64,7 +64,7 @@ dependencies:
 devDependencies:
   '@astrojs/image': 0.11.0_sharp@0.31.1
   '@astrojs/sitemap': 1.0.0
-  '@astrojs/tailwind': 2.1.1_tailwindcss@3.2.4
+  '@astrojs/tailwind': 2.1.2_tailwindcss@3.2.4
   '@astrojs/vue': 1.2.1_rlv7zhfwuockvkhpvxwykywpua
   '@nanostores/vue': 0.6.1_jk34uo2ankiycdtmw46ipynpdy
   '@playwright/test': 1.27.1
@@ -255,14 +255,14 @@ packages:
       zod: 3.18.0
     dev: true
 
-  /@astrojs/tailwind/2.1.1_tailwindcss@3.2.4:
-    resolution: {integrity: sha512-Il6FODtu4AlwadleJS3VWmAOOmeCDKvAo3iof46p4iHtdeWLClyuH9kJXWrlzCS+QOfBSIfXxvwPJ3cbK5COlA==}
+  /@astrojs/tailwind/2.1.2_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-nIrlT+WWp/Wv2VQ29Nvncq608E+j3qB9k1f7yiAjY2ijxizZo4OnQzdRPQcIjIZHL5YxPtzbcoSP2u3v+Domqw==}
     peerDependencies:
       tailwindcss: ^3.0.24
     dependencies:
       '@proload/core': 0.3.3
-      autoprefixer: 10.4.11_postcss@8.4.16
-      postcss: 8.4.16
+      autoprefixer: 10.4.11_postcss@8.4.18
+      postcss: 8.4.18
       tailwindcss: 3.2.4_postcss@8.4.18
     dev: true
 
@@ -3239,22 +3239,6 @@ packages:
   /at-least-node/1.0.0:
     resolution: {integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==}
     engines: {node: '>= 4.0.0'}
-    dev: true
-
-  /autoprefixer/10.4.11_postcss@8.4.16:
-    resolution: {integrity: sha512-5lHp6DgRodxlBLSkzHOTcufWFflH1ewfy2hvFQyjrblBFlP/0Yh4O/Wrg4ow8WRlN3AAUFFLAQwX8hTptzqVHg==}
-    engines: {node: ^10 || ^12 || >=14}
-    hasBin: true
-    peerDependencies:
-      postcss: ^8.1.0
-    dependencies:
-      browserslist: 4.21.4
-      caniuse-lite: 1.0.30001400
-      fraction.js: 4.2.0
-      normalize-range: 0.1.2
-      picocolors: 1.0.0
-      postcss: 8.4.16
-      postcss-value-parser: 4.2.0
     dev: true
 
   /autoprefixer/10.4.11_postcss@8.4.18:
@@ -8841,15 +8825,6 @@ packages:
 
   /postcss-value-parser/4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
-
-  /postcss/8.4.16:
-    resolution: {integrity: sha512-ipHE1XBvKzm5xI7hiHCZJCSugxvsdq2mPnsq5+UF+VHCjiBvtDrlxJfMBToWaP9D5XlgNmcFGqoHmUn0EYEaRQ==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.4
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-    dev: true
 
   /postcss/8.4.18:
     resolution: {integrity: sha512-Wi8mWhncLJm11GATDaQKobXSNEYGUHeQLiQqDFG1qQ5UTDPTEvKw0Xt5NsTpktGTwLps3ByrWsBrG0rB8YQ9oA==}
