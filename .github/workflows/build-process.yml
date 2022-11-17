@@ -40,4 +40,4 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Test build App
-        run: pnpm run build 
+        run: pnpm run build
