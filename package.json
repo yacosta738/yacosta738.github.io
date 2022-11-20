@@ -57,7 +57,7 @@
     "sass": "1.55.0",
     "start-server-and-test": "1.14.0",
     "vite-plugin-pwa": "0.13.3",
-    "vue": "3.2.41"
+    "vue": "3.2.45"
   },
   "dependencies": {
     "@astrojs/rss": "1.0.3",
