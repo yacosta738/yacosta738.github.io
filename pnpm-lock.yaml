@@ -19,7 +19,7 @@ specifiers:
   astro-compress: 1.0.12
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
-  astro-netlify-cms: 0.3.3
+  astro-netlify-cms: 0.3.4
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
   dompurify: 2.4.1
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.0.3
-  astro-netlify-cms: 0.3.3_pbofn4ls3ywhvwuj7byxg6josa
+  astro-netlify-cms: 0.3.4_pbofn4ls3ywhvwuj7byxg6josa
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -2309,7 +2309,7 @@ packages:
   /@types/hoist-non-react-statics/3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 17.0.52
+      '@types/react': 18.0.25
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -2368,7 +2368,7 @@ packages:
     resolution: {integrity: sha512-7FkurKcS1k0FHZEtdbbgN8Oc6b+stGSfZYjQGicofJ0j4U0qIn/jaSvnP2pLwZKiai3/17xqqxkkrxTgN8UNbQ==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 17.0.52
+      '@types/react': 18.0.25
       hoist-non-react-statics: 3.3.2
       redux: 4.2.0
     dev: false
@@ -3149,8 +3149,8 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.3.3_pbofn4ls3ywhvwuj7byxg6josa:
-    resolution: {integrity: sha512-Q5jokT947DXzqLD0j3/7mlwZ/I9qrV26Vv4Gr8hYP9sEknjdGThLgy+XTbKpotjrlUWn/+Tyi3lvXmPEG2WzHg==}
+  /astro-netlify-cms/0.3.4_pbofn4ls3ywhvwuj7byxg6josa:
+    resolution: {integrity: sha512-Q1CqMNeskYusl8m0R9iZ2K+TPzdkDccIKdeJtqbZ07SYejK97GX4BvgTvomoa4geMjGgJTsSpnCM5HSm+ahm/Q==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
