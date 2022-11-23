@@ -38,7 +38,7 @@ specifiers:
   mdast-util-to-string: 3.1.0
   nanostores: 0.7.1
   postcss-nesting: 10.2.0
-  postcss-preset-env: 7.8.2
+  postcss-preset-env: 7.8.3
   prettier: 2.8.0
   prettier-plugin-astro: 0.7.0
   prettier-plugin-tailwindcss: 0.1.13
@@ -95,7 +95,7 @@ devDependencies:
   marked: 4.2.3
   nanostores: 0.7.1
   postcss-nesting: 10.2.0_postcss@8.4.19
-  postcss-preset-env: 7.8.2_postcss@8.4.19
+  postcss-preset-env: 7.8.3_postcss@8.4.19
   prettier: 2.8.0
   prettier-plugin-astro: 0.7.0
   prettier-plugin-tailwindcss: 0.1.13_prettier@2.8.0
@@ -8702,8 +8702,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-preset-env/7.8.2_postcss@8.4.19:
-    resolution: {integrity: sha512-rSMUEaOCnovKnwc5LvBDHUDzpGP+nrUeWZGWt9M72fBvckCi45JmnJigUr4QG4zZeOHmOCNCZnd2LKDvP++ZuQ==}
+  /postcss-preset-env/7.8.3_postcss@8.4.19:
+    resolution: {integrity: sha512-T1LgRm5uEVFSEF83vHZJV2z19lHg4yJuZ6gXZZkqVsqv63nlr6zabMH3l4Pc01FQCyfWVrh2GaUeCVy9Po+Aag==}
     engines: {node: ^12 || ^14 || >=16}
     peerDependencies:
       postcss: ^8.2
