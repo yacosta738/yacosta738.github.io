@@ -29,7 +29,7 @@
     "@tailwindcss/typography": "0.5.8",
     "@typescript-eslint/eslint-plugin": "5.42.1",
     "@typescript-eslint/parser": "5.42.1",
-    "@vueuse/core": "9.4.0",
+    "@vueuse/core": "9.6.0",
     "astro": "1.6.10",
     "astro-compress": "1.0.12",
     "astro-i18next": "1.0.0-beta.12",
