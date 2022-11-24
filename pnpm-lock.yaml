@@ -15,7 +15,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.44.0
   '@typescript-eslint/parser': 5.44.0
   '@vueuse/core': 9.6.0
-  astro: 1.6.10
+  astro: 1.6.11
   astro-compress: 1.1.10
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.0.3
-  astro-netlify-cms: 0.3.4_s6d7e7obyaz4rtyazoyieete4e
+  astro-netlify-cms: 0.3.4_oyu33vghltj6we6pppk5v7hfcu
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -75,9 +75,9 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.44.0_xweyveqnfveccvpxdpbbnp7sza
   '@typescript-eslint/parser': 5.44.0_zksrc6ykdxhogxjbhb5axiabwi
   '@vueuse/core': 9.6.0_vue@3.2.45
-  astro: 1.6.10_sass@1.56.1
+  astro: 1.6.11_sass@1.56.1
   astro-compress: 1.1.10
-  astro-i18next: 1.0.0-beta.12_astro@1.6.10
+  astro-i18next: 1.0.0-beta.12_astro@1.6.11
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
@@ -3082,7 +3082,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.12_astro@1.6.10:
+  /astro-i18next/1.0.0-beta.12_astro@1.6.11:
     resolution: {integrity: sha512-HbBCBuAhs/59HCVkQyiQWFWj1bDHjaQ8Yk55DkwPR2mTfN0yZfLncFnZm8QsprE5/s3p27U80kK7f7K83tdFRg==}
     hasBin: true
     peerDependencies:
@@ -3090,7 +3090,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 1.6.10_sass@1.56.1
+      astro: 1.6.11_sass@1.56.1
       i18next: 21.10.0
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -3104,14 +3104,14 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.3.4_s6d7e7obyaz4rtyazoyieete4e:
+  /astro-netlify-cms/0.3.4_oyu33vghltj6we6pppk5v7hfcu:
     resolution: {integrity: sha512-Q1CqMNeskYusl8m0R9iZ2K+TPzdkDccIKdeJtqbZ07SYejK97GX4BvgTvomoa4geMjGgJTsSpnCM5HSm+ahm/Q==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
       '@astrojs/react': 1.2.2_4q7zw7glt6lzv22422bu2pbnzm
       '@types/react': 17.0.52
-      astro: 1.6.10_sass@1.56.1
+      astro: 1.6.11_sass@1.56.1
       netlify-cms-app: 2.15.72_hwxq4abf2cu57octx46gmzc4lm
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -3139,8 +3139,8 @@ packages:
     resolution: {integrity: sha512-nR+dJlAyQhX6s0oAmbBqPq3KCZax/zVAerFsclGiJQ2znOkS/7L+RGjziS4M9Q3OQxm3FMfqIKHp9Ns73Q81ww==}
     dev: true
 
-  /astro/1.6.10_sass@1.56.1:
-    resolution: {integrity: sha512-W/ZGROkCKsDicpiXB82n8EkY6I0/12wdXS80NGaBdIUR1jZZxdN+0YMmdz+C2kYbjlo45KUsXpC/Tej+5KQYSQ==}
+  /astro/1.6.11_sass@1.56.1:
+    resolution: {integrity: sha512-T0xb0U0FOrqXxl87x4mjpufhf0b47RMPIu8WWK+2ODrRZkPj1sr24alh3Y/PLSyiWSqoGZF7xzQ6hzt0jDCyVQ==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
