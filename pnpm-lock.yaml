@@ -16,7 +16,7 @@ specifiers:
   '@typescript-eslint/parser': 5.42.1
   '@vueuse/core': 9.4.0
   astro: 1.6.10
-  astro-compress: 1.0.12
+  astro-compress: 1.1.10
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.3.4
@@ -76,7 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.42.1_wyqvi574yv7oiwfeinomdzmc3m
   '@vueuse/core': 9.4.0_vue@3.2.45
   astro: 1.6.10_sass@1.55.0
-  astro-compress: 1.0.12
+  astro-compress: 1.1.10
   astro-i18next: 1.0.0-beta.12_astro@1.6.10
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
@@ -2049,6 +2049,19 @@ packages:
       vue: 3.2.45
     dev: true
 
+  /@nikolarhristov/pipeline/0.0.2:
+    resolution: {integrity: sha512-E4CxzjaKT1bd3aclF1ieR4QW0wyl1n6ZXSZ5TYx7JEtAJehj8ygThluXPnYcBAXMThZmKK535yB8f59YszoSzQ==}
+    dependencies:
+      critters: 0.0.16
+      csso: 5.0.5
+      deepmerge-ts: 4.2.2
+      fast-glob: 3.2.12
+      html-minifier-terser: 7.1.0
+      sharp: 0.31.2
+      svgo: 3.0.2
+      terser: 5.15.1
+    dev: true
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -3048,16 +3061,10 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /astro-compress/1.0.12:
-    resolution: {integrity: sha512-yn/QUoG7ah+cSUGUsohzHhUot+pNodfInPoIuRC3pdUfw94c4U0HQ2tJv5d+u75LSNqDxn9/W/OIoGqqgZbCDQ==}
+  /astro-compress/1.1.10:
+    resolution: {integrity: sha512-1RNkXToF7t9qWoWStb17F1IHWa7GOopONM96hkdP5tJfMR0z4ZMl/zld9Uu4Xsc76PbEhsyDmUjkfg+Z2TqyJA==}
     dependencies:
-      csso: 5.0.5
-      deepmerge-ts: 4.2.2
-      fast-glob: 3.2.12
-      html-minifier-terser: 7.0.0
-      sharp: 0.31.1
-      svgo: 2.8.0
-      terser: 5.15.1
+      '@nikolarhristov/pipeline': 0.0.2
     dev: true
 
   /astro-eslint-parser/0.9.0:
@@ -3790,6 +3797,17 @@ packages:
       object-assign: 4.1.1
     dev: false
 
+  /critters/0.0.16:
+    resolution: {integrity: sha512-JwjgmO6i3y6RWtLYmXwO5jMd+maZt8Tnfu7VVISmEWyQqfLpB8soBswf8/2bu6SBXxtKA68Al3c+qIG1ApT68A==}
+    dependencies:
+      chalk: 4.1.2
+      css-select: 4.3.0
+      parse5: 6.0.1
+      parse5-htmlparser2-tree-adapter: 6.0.1
+      postcss: 8.4.19
+      pretty-bytes: 5.6.0
+    dev: true
+
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -3842,6 +3860,16 @@ packages:
       css-what: 6.1.0
       domhandler: 4.3.1
       domutils: 2.8.0
+      nth-check: 2.1.1
+    dev: true
+
+  /css-select/5.1.0:
+    resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 6.1.0
+      domhandler: 5.0.3
+      domutils: 3.0.1
       nth-check: 2.1.1
     dev: true
 
@@ -4102,6 +4130,14 @@ packages:
       entities: 2.2.0
     dev: true
 
+  /dom-serializer/2.0.0:
+    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      entities: 4.4.0
+    dev: true
+
   /dom-walk/0.1.2:
     resolution: {integrity: sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==}
     dev: false
@@ -4117,6 +4153,13 @@ packages:
       domelementtype: 2.3.0
     dev: true
 
+  /domhandler/5.0.3:
+    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
+    engines: {node: '>= 4'}
+    dependencies:
+      domelementtype: 2.3.0
+    dev: true
+
   /dompurify/2.4.1:
     resolution: {integrity: sha512-ewwFzHzrrneRjxzmK6oVz/rZn9VWspGFRDb4/rRtIsM1n36t9AKma/ye8syCpcw+XJ25kOK/hOG7t1j2I2yBqA==}
 
@@ -4126,6 +4169,14 @@ packages:
       dom-serializer: 1.4.1
       domelementtype: 2.3.0
       domhandler: 4.3.1
+    dev: true
+
+  /domutils/3.0.1:
+    resolution: {integrity: sha512-z08c1l761iKhDFtfXO04C7kTdPBLi41zwOZl00WS8b5eiaebNpY00HKbztwBq+e3vyqWNwWF3mP9YLUeqIrF+Q==}
+    dependencies:
+      dom-serializer: 2.0.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
     dev: true
 
   /dot-case/3.0.4:
@@ -5692,8 +5743,8 @@ packages:
   /html-escaper/3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
-  /html-minifier-terser/7.0.0:
-    resolution: {integrity: sha512-Adqk0b/pWKIQiGvEAuzPKpBKNHiwblr3QSGS7TTr6v+xXKV9AI2k4vWW+6Oytt6Z5SeBnfvYypKOnz8r75pz3Q==}
+  /html-minifier-terser/7.1.0:
+    resolution: {integrity: sha512-BvPO2S7Ip0Q5qt+Y8j/27Vclj6uHC6av0TMoDn7/bJPhMWHI2UtR2e/zEgJn3/qYAmxumrGp9q4UHurL6mtW9Q==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -8318,6 +8369,12 @@ packages:
       unist-util-modify-children: 3.1.0
       unist-util-visit-children: 2.0.1
 
+  /parse5-htmlparser2-tree-adapter/6.0.1:
+    resolution: {integrity: sha512-qPuWvbLgvDGilKc5BoicRovlT4MtYT6JfJyBOMDsKoiT+GiuP5qyrPCnR9HcPECIJJmZh5jRndyNThnhhb/vlA==}
+    dependencies:
+      parse5: 6.0.1
+    dev: true
+
   /parse5/5.1.1:
     resolution: {integrity: sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==}
     dev: false
@@ -10059,6 +10116,21 @@ packages:
       tar-fs: 2.1.1
       tunnel-agent: 0.6.0
 
+  /sharp/0.31.2:
+    resolution: {integrity: sha512-DUdNVEXgS5A97cTagSLIIp8dUZ/lZtk78iNVZgHdHbx1qnQR7JAHY0BnXnwwH39Iw+VKhO08CTYhIg0p98vQ5Q==}
+    engines: {node: '>=14.15.0'}
+    requiresBuild: true
+    dependencies:
+      color: 4.2.3
+      detect-libc: 2.0.1
+      node-addon-api: 5.0.0
+      prebuild-install: 7.1.1
+      semver: 7.3.8
+      simple-get: 4.0.1
+      tar-fs: 2.1.1
+      tunnel-agent: 0.6.0
+    dev: true
+
   /shebang-command/2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
     engines: {node: '>=8'}
@@ -10558,6 +10630,19 @@ packages:
       csso: 4.2.0
       picocolors: 1.0.0
       stable: 0.1.8
+    dev: true
+
+  /svgo/3.0.2:
+    resolution: {integrity: sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      '@trysound/sax': 0.2.0
+      commander: 7.2.0
+      css-select: 5.1.0
+      css-tree: 2.2.1
+      csso: 5.0.5
+      picocolors: 1.0.0
     dev: true
 
   /symbol-observable/1.2.0:
