@@ -16,7 +16,7 @@ specifiers:
   '@typescript-eslint/parser': 5.44.0
   '@vueuse/core': 9.6.0
   astro: 1.6.11
-  astro-compress: 1.1.10
+  astro-compress: 1.1.11
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.3.4
@@ -76,7 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.44.0_zksrc6ykdxhogxjbhb5axiabwi
   '@vueuse/core': 9.6.0_vue@3.2.45
   astro: 1.6.11_sass@1.56.1
-  astro-compress: 1.1.10
+  astro-compress: 1.1.11
   astro-i18next: 1.0.0-beta.12_astro@1.6.11
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
@@ -2049,8 +2049,8 @@ packages:
       vue: 3.2.45
     dev: true
 
-  /@nikolarhristov/pipeline/0.0.2:
-    resolution: {integrity: sha512-E4CxzjaKT1bd3aclF1ieR4QW0wyl1n6ZXSZ5TYx7JEtAJehj8ygThluXPnYcBAXMThZmKK535yB8f59YszoSzQ==}
+  /@nikolarhristov/pipeline/0.0.6:
+    resolution: {integrity: sha512-OQTD2pbG3KXy1S3DsXyj8HALfL/Zn+k/+iVnIPUiS7emjrPkc+rO7XzWD2FDWuK3sI97qPXE8yfxJmXn6tp37w==}
     dependencies:
       critters: 0.0.16
       csso: 5.0.5
@@ -2059,7 +2059,7 @@ packages:
       html-minifier-terser: 7.1.0
       sharp: 0.31.2
       svgo: 3.0.2
-      terser: 5.15.1
+      terser: 5.16.0
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -3061,10 +3061,10 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /astro-compress/1.1.10:
-    resolution: {integrity: sha512-1RNkXToF7t9qWoWStb17F1IHWa7GOopONM96hkdP5tJfMR0z4ZMl/zld9Uu4Xsc76PbEhsyDmUjkfg+Z2TqyJA==}
+  /astro-compress/1.1.11:
+    resolution: {integrity: sha512-jeG/lgxJLh1AUu0A7qzWXDweZEAhpsWth/a2wvFy1aIw6euLlBU4FP+N+adsLG8PaN2YiWaeCcGonPwM4Cksjg==}
     dependencies:
-      '@nikolarhristov/pipeline': 0.0.2
+      '@nikolarhristov/pipeline': 0.0.6
     dev: true
 
   /astro-eslint-parser/0.9.0:
@@ -5754,7 +5754,7 @@ packages:
       entities: 4.4.0
       param-case: 3.0.4
       relateurl: 0.2.7
-      terser: 5.15.1
+      terser: 5.16.0
     dev: true
 
   /html-tags/3.2.0:
@@ -9931,7 +9931,7 @@ packages:
       jest-worker: 26.6.2
       rollup: 2.79.1
       serialize-javascript: 4.0.0
-      terser: 5.15.1
+      terser: 5.16.0
     dev: true
 
   /rollup/2.79.1:
@@ -10727,8 +10727,8 @@ packages:
       unique-string: 2.0.0
     dev: true
 
-  /terser/5.15.1:
-    resolution: {integrity: sha512-K1faMUvpm/FBxjBXud0LWVAGxmvoPbZbfTCYbSgaaYQaIXI3/TdI7a7ZGA73Zrou6Q8Zmz3oeUTsp/dj+ag2Xw==}
+  /terser/5.16.0:
+    resolution: {integrity: sha512-KjTV81QKStSfwbNiwlBXfcgMcOloyuRdb62/iLFPGBcVNF4EXjhdYBhYHmbJpiBrVxZhDvltE11j+LBQUxEEJg==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
