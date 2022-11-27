@@ -41,7 +41,7 @@ specifiers:
   postcss-preset-env: 7.8.3
   prettier: 2.8.0
   prettier-plugin-astro: 0.7.0
-  prettier-plugin-tailwindcss: 0.1.13
+  prettier-plugin-tailwindcss: 0.2.0
   reading-time: 1.5.0
   sass: 1.56.1
   sharp: 0.31.1
@@ -98,7 +98,7 @@ devDependencies:
   postcss-preset-env: 7.8.3_postcss@8.4.19
   prettier: 2.8.0
   prettier-plugin-astro: 0.7.0
-  prettier-plugin-tailwindcss: 0.1.13_prettier@2.8.0
+  prettier-plugin-tailwindcss: 0.2.0_prettier@2.8.0
   sass: 1.56.1
   start-server-and-test: 1.14.0
   vite-plugin-pwa: 0.13.3_ncfuj3sngaz4xbo7yyj2tfhvju
@@ -8904,8 +8904,8 @@ packages:
       sass-formatter: 0.7.5
       synckit: 0.8.4
 
-  /prettier-plugin-tailwindcss/0.1.13_prettier@2.8.0:
-    resolution: {integrity: sha512-/EKQURUrxLu66CMUg4+1LwGdxnz8of7IDvrSLqEtDqhLH61SAlNNUSr90UTvZaemujgl3OH/VHg+fyGltrNixw==}
+  /prettier-plugin-tailwindcss/0.2.0_prettier@2.8.0:
+    resolution: {integrity: sha512-Ruqig/mdWCSpqdq9WK44nrmqM4BFWTzBPhPGwC5NK3coV9eZntEQPB84MGZbjAg0XQU02jVRHXNRPREBzxvM+A==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
