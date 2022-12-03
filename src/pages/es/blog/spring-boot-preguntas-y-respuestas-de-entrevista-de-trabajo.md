@@ -1,5 +1,6 @@
 ---
-title: Spring Boot preguntas y respuestas de entrevista de trabajo
+title: "Cómo prepararse para una entrevista de trabajo con Spring Boot:
+  preguntas y respuestas"
 description: El artículo ofrece una serie de preguntas y respuestas sobre el
   marco de desarrollo de aplicaciones Spring Boot. Se abordan temas como la
   definición de Spring Boot, sus diferencias con otras soluciones de desarrollo
