@@ -16,7 +16,7 @@ specifiers:
   '@typescript-eslint/parser': 5.44.0
   '@vueuse/core': 9.6.0
   astro: 1.6.12
-  astro-compress: 1.1.11
+  astro-compress: 1.1.17
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.3.4
@@ -76,7 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.44.0_zksrc6ykdxhogxjbhb5axiabwi
   '@vueuse/core': 9.6.0_vue@3.2.45
   astro: 1.6.12_sass@1.56.1
-  astro-compress: 1.1.11
+  astro-compress: 1.1.17
   astro-i18next: 1.0.0-beta.12_astro@1.6.12
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
@@ -2049,9 +2049,12 @@ packages:
       vue: 3.2.45
     dev: true
 
-  /@nikolarhristov/pipeline/0.0.6:
-    resolution: {integrity: sha512-OQTD2pbG3KXy1S3DsXyj8HALfL/Zn+k/+iVnIPUiS7emjrPkc+rO7XzWD2FDWuK3sI97qPXE8yfxJmXn6tp37w==}
+  /@nikolarhristov/pipeline/0.0.12:
+    resolution: {integrity: sha512-LEVBD2AC3l/QRXxwqB24TbShxpt3rGQcUyxPE4pIqCuJWl/8AvIWy8QcK3F7OvF4XlIG/tQ2piN1PcKZ/bPvJQ==}
     dependencies:
+      '@types/csso': 5.0.0
+      '@types/html-minifier-terser': 7.0.0
+      '@types/sharp': 0.31.0
       critters: 0.0.16
       csso: 5.0.5
       deepmerge-ts: 4.2.2
@@ -2059,7 +2062,7 @@ packages:
       html-minifier-terser: 7.1.0
       sharp: 0.31.2
       svgo: 3.0.2
-      terser: 5.16.0
+      terser: 5.16.1
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -2292,6 +2295,16 @@ packages:
     dependencies:
       '@babel/types': 7.20.2
 
+  /@types/css-tree/2.0.0:
+    resolution: {integrity: sha512-mY2sXRLBnUPMYw6mkOT+6dABeaNxAEKZz6scE9kQPNJx8fKe1fOsm8Honl7+xFYe6TKX8WNk2+7oMp2vBArJ9Q==}
+    dev: true
+
+  /@types/csso/5.0.0:
+    resolution: {integrity: sha512-EMrCTGpXRUsbFfZBzn2jcW6Sqg8kxWXkJcpvAGYSEzFqAJ2THDJSwiMeS2fPUw+0p6RQNT/n8F/skEc9hUBc0g==}
+    dependencies:
+      '@types/css-tree': 2.0.0
+    dev: true
+
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -2328,6 +2341,10 @@ packages:
 
   /@types/html-escaper/3.0.0:
     resolution: {integrity: sha512-OcJcvP3Yk8mjYwf/IdXZtTE1tb/u0WF0qa29ER07ZHCYUBZXSN29Z1mBS+/96+kNMGTFUAbSz9X+pHmHpZrTCw==}
+
+  /@types/html-minifier-terser/7.0.0:
+    resolution: {integrity: sha512-hw3bhStrg5e3FQT8qZKCJTrzt/UbEaunU1xRWJ+aNOTmeBMvE3S4Ml2HiiNnZgL8izu0LFVkHUoPFXL1s5QNpQ==}
+    dev: true
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
@@ -2423,6 +2440,12 @@ packages:
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/sharp/0.31.0:
+    resolution: {integrity: sha512-nwivOU101fYInCwdDcH/0/Ru6yIRXOpORx25ynEOc6/IakuCmjOAGpaO5VfUl4QkDtUC6hj+Z2eCQvgXOioknw==}
+    dependencies:
+      '@types/node': 18.11.9
     dev: true
 
   /@types/trusted-types/2.0.2:
@@ -3061,10 +3084,10 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /astro-compress/1.1.11:
-    resolution: {integrity: sha512-jeG/lgxJLh1AUu0A7qzWXDweZEAhpsWth/a2wvFy1aIw6euLlBU4FP+N+adsLG8PaN2YiWaeCcGonPwM4Cksjg==}
+  /astro-compress/1.1.17:
+    resolution: {integrity: sha512-VYZZdTndFqICu5sNKsIk1kOq+fc878AIJQa+1dQPVilKCSOi2Jb62IHVpRESvKyvCzDq4ddDEHo3MpAkKvuUMw==}
     dependencies:
-      '@nikolarhristov/pipeline': 0.0.6
+      '@nikolarhristov/pipeline': 0.0.12
     dev: true
 
   /astro-eslint-parser/0.9.0:
@@ -5754,7 +5777,7 @@ packages:
       entities: 4.4.0
       param-case: 3.0.4
       relateurl: 0.2.7
-      terser: 5.16.0
+      terser: 5.16.1
     dev: true
 
   /html-tags/3.2.0:
@@ -9932,7 +9955,7 @@ packages:
       jest-worker: 26.6.2
       rollup: 2.79.1
       serialize-javascript: 4.0.0
-      terser: 5.16.0
+      terser: 5.16.1
     dev: true
 
   /rollup/2.79.1:
@@ -10728,8 +10751,8 @@ packages:
       unique-string: 2.0.0
     dev: true
 
-  /terser/5.16.0:
-    resolution: {integrity: sha512-KjTV81QKStSfwbNiwlBXfcgMcOloyuRdb62/iLFPGBcVNF4EXjhdYBhYHmbJpiBrVxZhDvltE11j+LBQUxEEJg==}
+  /terser/5.16.1:
+    resolution: {integrity: sha512-xvQfyfA1ayT0qdK47zskQgRZeWLoOQ8JQ6mIgRGVNwZKdQMU+5FkCBjmv4QjcrTzyZquRw2FVtlJSRUmMKQslw==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
