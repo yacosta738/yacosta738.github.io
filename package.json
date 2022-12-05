@@ -55,7 +55,7 @@
     "prettier-plugin-astro": "0.7.0",
     "prettier-plugin-tailwindcss": "0.2.0",
     "sass": "1.56.1",
-    "start-server-and-test": "1.14.0",
+    "start-server-and-test": "1.15.0",
     "vite-plugin-pwa": "0.13.3",
     "vue": "3.2.45"
   },
