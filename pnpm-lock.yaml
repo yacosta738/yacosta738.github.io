@@ -16,7 +16,7 @@ specifiers:
   '@typescript-eslint/parser': 5.45.1
   '@vueuse/core': 9.6.0
   astro: 1.6.12
-  astro-compress: 1.1.17
+  astro-compress: 1.1.18
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.3.4
@@ -76,7 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.45.1_6rep66rojmwsn4bfraotajskeu
   '@vueuse/core': 9.6.0_vue@3.2.45
   astro: 1.6.12_sass@1.56.1
-  astro-compress: 1.1.17
+  astro-compress: 1.1.18
   astro-i18next: 1.0.0-beta.12_astro@1.6.12
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
@@ -2049,8 +2049,8 @@ packages:
       vue: 3.2.45
     dev: true
 
-  /@nikolarhristov/pipeline/0.0.12:
-    resolution: {integrity: sha512-LEVBD2AC3l/QRXxwqB24TbShxpt3rGQcUyxPE4pIqCuJWl/8AvIWy8QcK3F7OvF4XlIG/tQ2piN1PcKZ/bPvJQ==}
+  /@nikolarhristov/pipeline/0.1.0:
+    resolution: {integrity: sha512-kxrVA9uXidzQIC1AUSWhnG8JskTiAXpRqBbovCR7zlSdexFm6qb5TtP1dXj+nW3zHwMKTHTt7b+G1MjLnHFniA==}
     dependencies:
       '@types/csso': 5.0.0
       '@types/html-minifier-terser': 7.0.0
@@ -3084,10 +3084,10 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /astro-compress/1.1.17:
-    resolution: {integrity: sha512-VYZZdTndFqICu5sNKsIk1kOq+fc878AIJQa+1dQPVilKCSOi2Jb62IHVpRESvKyvCzDq4ddDEHo3MpAkKvuUMw==}
+  /astro-compress/1.1.18:
+    resolution: {integrity: sha512-/691T3/hxPbaxoatsNG3JUuUA7jj6+qQqWyqU4kAaFBNEV6lms6pmv1DECM8qaOx47pLZe7VeuXGkb8tOS2x9g==}
     dependencies:
-      '@nikolarhristov/pipeline': 0.0.12
+      '@nikolarhristov/pipeline': 0.1.0
     dev: true
 
   /astro-eslint-parser/0.9.0:
