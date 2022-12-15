@@ -16,7 +16,7 @@ specifiers:
   '@typescript-eslint/parser': 5.46.0
   '@vueuse/core': 9.6.0
   astro: 1.6.15
-  astro-compress: 1.1.18
+  astro-compress: 1.1.22
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.3.4
@@ -76,7 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.46.0_6rep66rojmwsn4bfraotajskeu
   '@vueuse/core': 9.6.0_vue@3.2.45
   astro: 1.6.15_sass@1.56.1
-  astro-compress: 1.1.18
+  astro-compress: 1.1.22
   astro-i18next: 1.0.0-beta.12_astro@1.6.15
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
@@ -2052,8 +2052,8 @@ packages:
       vue: 3.2.45
     dev: true
 
-  /@nikolarhristov/pipeline/0.1.0:
-    resolution: {integrity: sha512-kxrVA9uXidzQIC1AUSWhnG8JskTiAXpRqBbovCR7zlSdexFm6qb5TtP1dXj+nW3zHwMKTHTt7b+G1MjLnHFniA==}
+  /@nikolarhristov/pipeline/0.1.7:
+    resolution: {integrity: sha512-ImQX3HW9VqL6koGyR8zkTUWFGcASiAooULyfN+9IdKyPo1eje0uTe3eogNErzvd2okKYXsrONNwIvpccaywuiA==}
     dependencies:
       '@types/csso': 5.0.0
       '@types/html-minifier-terser': 7.0.0
@@ -3101,10 +3101,10 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /astro-compress/1.1.18:
-    resolution: {integrity: sha512-/691T3/hxPbaxoatsNG3JUuUA7jj6+qQqWyqU4kAaFBNEV6lms6pmv1DECM8qaOx47pLZe7VeuXGkb8tOS2x9g==}
+  /astro-compress/1.1.22:
+    resolution: {integrity: sha512-8gcYqN8nOC/JwH6dxcoLHTQQaAQNe7tS/yd4uc3dmO93n684ZdMXuPfr6KvjkQEOTEuYYS/lqkC8gjObVtFN1g==}
     dependencies:
-      '@nikolarhristov/pipeline': 0.1.0
+      '@nikolarhristov/pipeline': 0.1.7
     dev: true
 
   /astro-eslint-parser/0.9.0:
@@ -6511,18 +6511,18 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
-  /magic-string/0.27.0:
-    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.14
-
   /magic-string/0.26.7:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
     dependencies:
       sourcemap-codec: 1.4.8
     dev: true
+
+  /magic-string/0.27.0:
+    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
 
   /map-stream/0.1.0:
     resolution: {integrity: sha512-CkYQrPYZfWnu/DAmVCpTSX/xHpKZ80eKh2lAkyA6AJTef6bW+6JpbQZN5rofum7da+SyN1bi5ctTm+lTfcCW3g==}
