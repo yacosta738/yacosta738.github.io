@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon'
 import '../../styles/github-markdown.css'
 
 import { domain } from '@store:constants'
+import { jsonToArticle } from '@models:Article'
 export interface Props {
 	frontmatter: {
 		title: string
@@ -93,7 +94,7 @@ const theme = "icy-dark"
 		>
 			{frontmatter.title}
 		</h1>
-		<PostHeader article={frontmatter} />
+		<PostHeader article={jsonToArticle(frontmatter)} />
 		<div id='markdown-body' class='markdown-body'>
 			<slot />
 		</div>
