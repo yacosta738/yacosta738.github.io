@@ -25,7 +25,7 @@ specifiers:
   dompurify: 2.4.1
   eslint: 8.29.0
   eslint-config-standard: 17.0.0
-  eslint-plugin-astro: 0.21.0
+  eslint-plugin-astro: 0.21.1
   eslint-plugin-import: 2.26.0
   eslint-plugin-jsx-a11y: 6.6.1
   eslint-plugin-n: 15.6.0
@@ -84,7 +84,7 @@ devDependencies:
   dompurify: 2.4.1
   eslint: 8.29.0
   eslint-config-standard: 17.0.0_wnkmxhw54rcoqx42l6oqxte7qq
-  eslint-plugin-astro: 0.21.0_eslint@8.29.0
+  eslint-plugin-astro: 0.21.1_eslint@8.29.0
   eslint-plugin-import: 2.26.0_jx43xxcguvnqqmtmaaygwl7cmu
   eslint-plugin-jsx-a11y: 6.6.1_eslint@8.29.0
   eslint-plugin-n: 15.6.0_eslint@8.29.0
@@ -2578,11 +2578,6 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/types/5.43.0:
-    resolution: {integrity: sha512-jpsbcD0x6AUvV7tyOlyvon0aUsQpF8W+7TpJntfCUWU1qaIKu2K34pMwQKSzQH8ORgUrGYY6pVIh1Pi8TNeteg==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dev: true
-
   /@typescript-eslint/types/5.46.0:
     resolution: {integrity: sha512-wHWgQHFB+qh6bu0IAPAJCdeCdI0wwzZnnWThlmHNY01XJ9Z97oKqKOzWYpR2I83QmshhQJl6LDM9TqMiMwJBTw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -4797,19 +4792,19 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-astro/0.21.0_eslint@8.29.0:
-    resolution: {integrity: sha512-7pEhTfYT+tlOMOSmQV77TNgCeuFZgqSAqJPTHh6LYlwLqYyBQLURc5RRtlQqCJkufSh4Fan4nsV3LXCT/vjpCA==}
+  /eslint-plugin-astro/0.21.1_eslint@8.29.0:
+    resolution: {integrity: sha512-gzT9R0b/Hl5sks8/WSMTlzu2VC7vdd99MnBYkq61Mk1zBWQ+C9MAuHeTcU72sFmR5XJX56NNURY6H+cN2StRcA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=7.0.0'
     dependencies:
-      '@typescript-eslint/types': 5.43.0
+      '@jridgewell/sourcemap-codec': 1.4.14
+      '@typescript-eslint/types': 5.46.0
       astro-eslint-parser: 0.9.0
       eslint: 8.29.0
       eslint-utils: 3.0.0_eslint@8.29.0
       postcss: 8.4.19
       postcss-selector-parser: 6.0.10
-      sourcemap-codec: 1.4.8
     transitivePeerDependencies:
       - supports-color
     dev: true
