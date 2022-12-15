@@ -18,7 +18,7 @@ export interface Article {
 export const jsonToArticle = (json: any): Article => {
 	const frontmatter = json.frontmatter
 	let content = ''
-	// check if json has rawContent() 
+	// check if json has rawContent()
 	// if it does, it means it's a markdown file
 	if (json.rawContent) {
 		content = json.rawContent()
