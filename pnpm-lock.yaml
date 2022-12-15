@@ -15,7 +15,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.46.0
   '@typescript-eslint/parser': 5.46.0
   '@vueuse/core': 9.6.0
-  astro: 1.6.13
+  astro: 1.6.15
   astro-compress: 1.1.18
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.0.3
-  astro-netlify-cms: 0.3.4_f5imsqbzjhq4dnxzylghuzhahm
+  astro-netlify-cms: 0.3.4_sa7twdm7npthzutprcxd5xlkve
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -75,9 +75,9 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.46.0_n7n63azcqnbofthrfowdttpxiq
   '@typescript-eslint/parser': 5.46.0_6rep66rojmwsn4bfraotajskeu
   '@vueuse/core': 9.6.0_vue@3.2.45
-  astro: 1.6.13_sass@1.56.1
+  astro: 1.6.15_sass@1.56.1
   astro-compress: 1.1.18
-  astro-i18next: 1.0.0-beta.12_astro@1.6.13
+  astro-i18next: 1.0.0-beta.12_astro@1.6.15
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
@@ -131,6 +131,9 @@ packages:
 
   /@astrojs/compiler/0.29.15:
     resolution: {integrity: sha512-vicPD8oOPNkcFZvz71Uz/nJcadovurUQ3L0yMZNPb6Nn6T1nHhlSHt5nAKaurB2pYU9DrxOFWZS2/RdV+JsWmQ==}
+
+  /@astrojs/compiler/0.31.0:
+    resolution: {integrity: sha512-V8/Re/wXgXTZzpfWs4KZBLU5dRhnO6kSd4e3vObGuj+HFGHjaD11wws1zvaC9cXLQyQsM5CSrGagFGYlRZKvVQ==}
 
   /@astrojs/image/0.12.1_sharp@0.31.1:
     resolution: {integrity: sha512-7pBUPCw7/FPwfEntx+mGjhdwpaWXNHwRVcTK71rpf+c2yb8iIesRS9r26U7lGozTzXUROh1y1ftA82ziuqYF6Q==}
@@ -3105,7 +3108,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.12_astro@1.6.13:
+  /astro-i18next/1.0.0-beta.12_astro@1.6.15:
     resolution: {integrity: sha512-HbBCBuAhs/59HCVkQyiQWFWj1bDHjaQ8Yk55DkwPR2mTfN0yZfLncFnZm8QsprE5/s3p27U80kK7f7K83tdFRg==}
     hasBin: true
     peerDependencies:
@@ -3113,7 +3116,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 1.6.13_sass@1.56.1
+      astro: 1.6.15_sass@1.56.1
       i18next: 21.10.0
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -3127,14 +3130,14 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.3.4_f5imsqbzjhq4dnxzylghuzhahm:
+  /astro-netlify-cms/0.3.4_sa7twdm7npthzutprcxd5xlkve:
     resolution: {integrity: sha512-Q1CqMNeskYusl8m0R9iZ2K+TPzdkDccIKdeJtqbZ07SYejK97GX4BvgTvomoa4geMjGgJTsSpnCM5HSm+ahm/Q==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
       '@astrojs/react': 1.2.2_4q7zw7glt6lzv22422bu2pbnzm
       '@types/react': 17.0.52
-      astro: 1.6.13_sass@1.56.1
+      astro: 1.6.15_sass@1.56.1
       netlify-cms-app: 2.15.72_hwxq4abf2cu57octx46gmzc4lm
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -3162,12 +3165,12 @@ packages:
     resolution: {integrity: sha512-nR+dJlAyQhX6s0oAmbBqPq3KCZax/zVAerFsclGiJQ2znOkS/7L+RGjziS4M9Q3OQxm3FMfqIKHp9Ns73Q81ww==}
     dev: true
 
-  /astro/1.6.13_sass@1.56.1:
-    resolution: {integrity: sha512-26Ip+7iCdHiK4FQokEWNYTcVDkJ76KLwlzUsuzLck8QBiUFQQUm9fs5nITHDI06k1EYfODYPH81xqZavXlC3Hg==}
+  /astro/1.6.15_sass@1.56.1:
+    resolution: {integrity: sha512-FT60PalffV0bCNxqEHadRzb+Rd3g3lYxV3fR9+bZ2CRlbSfC3UdoaLDh5wC6gJiz91caH1R0XiYaV0WT2Zg91g==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
-      '@astrojs/compiler': 0.29.15
+      '@astrojs/compiler': 0.31.0
       '@astrojs/language-server': 0.28.3
       '@astrojs/markdown-remark': 1.1.3
       '@astrojs/telemetry': 1.0.1
@@ -3199,7 +3202,7 @@ packages:
       html-escaper: 3.0.3
       import-meta-resolve: 2.1.0
       kleur: 4.1.5
-      magic-string: 0.25.9
+      magic-string: 0.27.0
       mime: 3.0.0
       ora: 6.1.2
       path-browserify: 1.0.1
@@ -6492,6 +6495,13 @@ packages:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
       sourcemap-codec: 1.4.8
+    dev: true
+
+  /magic-string/0.27.0:
+    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
 
   /map-stream/0.1.0:
     resolution: {integrity: sha512-CkYQrPYZfWnu/DAmVCpTSX/xHpKZ80eKh2lAkyA6AJTef6bW+6JpbQZN5rofum7da+SyN1bi5ctTm+lTfcCW3g==}
@@ -10390,6 +10400,7 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    dev: true
 
   /space-separated-tokens/1.1.5:
     resolution: {integrity: sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==}
