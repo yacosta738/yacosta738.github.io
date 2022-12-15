@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon'
 import '../../styles/github-markdown.css'
 
 import { domain } from '@store:constants'
+import { jsonToArticle } from '@models:Article'
 export interface Props {
 	frontmatter: {
 		title: string
@@ -74,6 +75,10 @@ const shareButtons: {
 		icon: 'ic:baseline-email'
 	}
 ]
+
+const repo = "yacosta738/blog.yap.comments"
+const label = "Comment"
+const theme = "icy-dark"
 ---
 
 <BlogTemplate
@@ -89,7 +94,7 @@ const shareButtons: {
 		>
 			{frontmatter.title}
 		</h1>
-		<PostHeader article={frontmatter} />
+		<PostHeader article={jsonToArticle(frontmatter)} />
 		<div id='markdown-body' class='markdown-body'>
 			<slot />
 		</div>
@@ -131,6 +136,17 @@ const shareButtons: {
 					))
 				}
 			</div>
+		</div>
+		<!-- Comment Section -->
+		<div class='flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start md:justify-items-start'>
+			<script src="https://utteranc.es/client.js"
+					repo={repo}
+					issue-term="pathname"
+					label={label}
+					theme{theme}
+					crossorigin="anonymous"
+					async>
+			</script>
 		</div>
 	</article>
 </BlogTemplate>
