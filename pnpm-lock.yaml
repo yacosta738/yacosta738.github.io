@@ -19,7 +19,7 @@ specifiers:
   astro-compress: 1.1.18
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
-  astro-netlify-cms: 0.3.4
+  astro-netlify-cms: 0.4.0
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
   dompurify: 2.4.1
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.0.3
-  astro-netlify-cms: 0.3.4_sa7twdm7npthzutprcxd5xlkve
+  astro-netlify-cms: 0.4.0_sa7twdm7npthzutprcxd5xlkve
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -3149,8 +3149,8 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.3.4_sa7twdm7npthzutprcxd5xlkve:
-    resolution: {integrity: sha512-Q1CqMNeskYusl8m0R9iZ2K+TPzdkDccIKdeJtqbZ07SYejK97GX4BvgTvomoa4geMjGgJTsSpnCM5HSm+ahm/Q==}
+  /astro-netlify-cms/0.4.0_sa7twdm7npthzutprcxd5xlkve:
+    resolution: {integrity: sha512-ok0O2T3sIEItp2FHbPQit3zUGMCzfML6oEPT8rG87sPPEiVYPxTAvdRbXXuVznE1j6NQLo7sz6EDHABrtms02A==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
@@ -6516,18 +6516,18 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
-  /magic-string/0.27.0:
-    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.4.14
-
   /magic-string/0.26.7:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
     dependencies:
       sourcemap-codec: 1.4.8
     dev: true
+
+  /magic-string/0.27.0:
+    resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.14
 
   /map-stream/0.1.0:
     resolution: {integrity: sha512-CkYQrPYZfWnu/DAmVCpTSX/xHpKZ80eKh2lAkyA6AJTef6bW+6JpbQZN5rofum7da+SyN1bi5ctTm+lTfcCW3g==}
