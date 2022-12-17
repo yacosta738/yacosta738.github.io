@@ -20,14 +20,14 @@ const Default = {
 }
 
 class Drawer {
-	constructor (targetEl = null, options) {
+	constructor(targetEl = null, options) {
 		this._targetEl = targetEl
 		this._options = { ...Default, ...options }
 		this._visible = false
 		this._init()
 	}
 
-	_init () {
+	_init() {
 		// set initial accessibility attributes
 		if (this._targetEl) {
 			this._targetEl.setAttribute('aria-hidden', 'true')
@@ -43,11 +43,11 @@ class Drawer {
 		this.hide()
 	}
 
-	isVisible () {
+	isVisible() {
 		return this._visible
 	}
 
-	hide () {
+	hide() {
 		// based on the edge option show placement classes
 		if (this._options.edge) {
 			this._getPlacementClasses(this._options.placement + '-edge').active.map((c) => {
@@ -86,7 +86,7 @@ class Drawer {
 		this._options.onHide(this)
 	}
 
-	show () {
+	show() {
 		if (this._options.edge) {
 			this._getPlacementClasses(this._options.placement + '-edge').active.map((c) => {
 				this._targetEl.classList.add(c)
@@ -124,7 +124,7 @@ class Drawer {
 		this._options.onShow(this)
 	}
 
-	toggle () {
+	toggle() {
 		if (this.isVisible()) {
 			this.hide()
 		} else {
@@ -132,7 +132,7 @@ class Drawer {
 		}
 	}
 
-	_createBackdrop () {
+	_createBackdrop() {
 		if (!this._visible) {
 			const backdropEl = document.createElement('div')
 			backdropEl.setAttribute('drawer-backdrop', '')
@@ -144,50 +144,50 @@ class Drawer {
 		}
 	}
 
-	_destroyBackdropEl () {
+	_destroyBackdropEl() {
 		if (this._visible) {
 			document.querySelector('[drawer-backdrop]').remove()
 		}
 	}
 
-	_getPlacementClasses (placement) {
+	_getPlacementClasses(placement) {
 		switch (placement) {
-		case 'top':
-			return {
-				base: ['top-0', 'left-0', 'right-0'],
-				active: ['transform-none'],
-				inactive: ['-translate-y-full']
-			}
-		case 'right':
-			return {
-				base: ['right-0', 'top-0'],
-				active: ['transform-none'],
-				inactive: ['translate-x-full']
-			}
-		case 'bottom':
-			return {
-				base: ['bottom-0', 'left-0', 'right-0'],
-				active: ['transform-none'],
-				inactive: ['translate-y-full']
-			}
-		case 'left':
-			return {
-				base: ['left-0', 'top-0'],
-				active: ['transform-none'],
-				inactive: ['-translate-x-full']
-			}
-		case 'bottom-edge':
-			return {
-				base: ['left-0', 'top-0'],
-				active: ['transform-none'],
-				inactive: ['translate-y-full', this._options.edgeOffset]
-			}
-		default:
-			return {
-				base: ['left-0', 'top-0'],
-				active: ['transform-none'],
-				inactive: ['-translate-x-full']
-			}
+			case 'top':
+				return {
+					base: ['top-0', 'left-0', 'right-0'],
+					active: ['transform-none'],
+					inactive: ['-translate-y-full']
+				}
+			case 'right':
+				return {
+					base: ['right-0', 'top-0'],
+					active: ['transform-none'],
+					inactive: ['translate-x-full']
+				}
+			case 'bottom':
+				return {
+					base: ['bottom-0', 'left-0', 'right-0'],
+					active: ['transform-none'],
+					inactive: ['translate-y-full']
+				}
+			case 'left':
+				return {
+					base: ['left-0', 'top-0'],
+					active: ['transform-none'],
+					inactive: ['-translate-x-full']
+				}
+			case 'bottom-edge':
+				return {
+					base: ['left-0', 'top-0'],
+					active: ['transform-none'],
+					inactive: ['translate-y-full', this._options.edgeOffset]
+				}
+			default:
+				return {
+					base: ['left-0', 'top-0'],
+					active: ['transform-none'],
+					inactive: ['-translate-x-full']
+				}
 		}
 	}
 }
@@ -203,7 +203,7 @@ export const getDrawerInstance = (id, instances) => {
 
 export const drawerInstances = []
 
-function initDrawer () {
+function initDrawer() {
 	document.querySelectorAll('[data-drawer-target]').forEach((triggerEl) => {
 		// mandatory
 		const targetEl = document.getElementById(triggerEl.getAttribute('data-drawer-target'))
@@ -223,11 +223,9 @@ function initDrawer () {
 		} else {
 			drawer = new Drawer(targetEl, {
 				placement: placement || Default.placement,
-				bodyScrolling: bodyScrolling
-					? bodyScrolling === 'true'
-					: Default.bodyScrolling,
-				backdrop: backdrop ? (backdrop === 'true') : Default.backdrop,
-				edge: edge ? (edge === 'true') : Default.edge,
+				bodyScrolling: bodyScrolling ? bodyScrolling === 'true' : Default.bodyScrolling,
+				backdrop: backdrop ? backdrop === 'true' : Default.backdrop,
+				edge: edge ? edge === 'true' : Default.edge,
 				edgeOffset: edgeOffset || Default.edgeOffset
 			})
 			drawerInstances.push({
