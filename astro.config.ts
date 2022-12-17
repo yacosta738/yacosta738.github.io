@@ -35,7 +35,7 @@ export default defineConfig({
 		}),
 		robotsTxt(),
 		compress({
-			html: false,
+			html: true,
 			css: false
 		}),
 		NetlifyCMS({
