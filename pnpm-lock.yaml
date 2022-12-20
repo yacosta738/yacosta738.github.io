@@ -19,7 +19,7 @@ specifiers:
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
-  astro-netlify-cms: 0.4.0
+  astro-netlify-cms: 0.5.0
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.0
   dompurify: 2.4.1
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 1.2.1
-  astro-netlify-cms: 0.4.0_h66pn6x3udeopyfvmexlfsvnne
+  astro-netlify-cms: 0.5.0_pk222n7d52ghhgeoukxzxfhy6e
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -219,25 +219,6 @@ packages:
     engines: {node: ^14.18.0 || >=16.12.0}
     dependencies:
       prismjs: 1.29.0
-
-  /@astrojs/react/1.2.2_4q7zw7glt6lzv22422bu2pbnzm:
-    resolution: {integrity: sha512-ab9fYvzkC74J7N+M3DWQuZgwu7sYjW0aLO3sEAdCX/jZZz+0BhrqS8m9QjtGJyQK/niF4tgJjpPfadopxKc56g==}
-    engines: {node: ^14.18.0 || >=16.12.0}
-    peerDependencies:
-      '@types/react': ^17.0.50 || ^18.0.21
-      '@types/react-dom': ^17.0.17 || ^18.0.6
-      react: ^17.0.2 || ^18.0.0
-      react-dom: ^17.0.2 || ^18.0.0
-    dependencies:
-      '@babel/core': 7.20.2
-      '@babel/plugin-transform-react-jsx': 7.19.0_@babel+core@7.20.2
-      '@types/react': 17.0.52
-      '@types/react-dom': 18.0.9
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /@astrojs/rss/1.2.1:
     resolution: {integrity: sha512-ZgCunS6ECuPpxBznBYE+ONf23rcp+OWZ5IyDKFAcVZCWEq8Bh0rVYa9p8u6cU9WOTK56JRQTuwcVZYndmExNtw==}
@@ -2394,12 +2375,6 @@ packages:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: false
 
-  /@types/react-dom/18.0.9:
-    resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
-    dependencies:
-      '@types/react': 18.0.25
-    dev: false
-
   /@types/react-redux/7.1.24:
     resolution: {integrity: sha512-7FkurKcS1k0FHZEtdbbgN8Oc6b+stGSfZYjQGicofJ0j4U0qIn/jaSvnP2pLwZKiai3/17xqqxkkrxTgN8UNbQ==}
     dependencies:
@@ -3133,12 +3108,11 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.4.0_h66pn6x3udeopyfvmexlfsvnne:
-    resolution: {integrity: sha512-ok0O2T3sIEItp2FHbPQit3zUGMCzfML6oEPT8rG87sPPEiVYPxTAvdRbXXuVznE1j6NQLo7sz6EDHABrtms02A==}
+  /astro-netlify-cms/0.5.0_pk222n7d52ghhgeoukxzxfhy6e:
+    resolution: {integrity: sha512-zBICXduZ+yBiHTpWETt/IUMK2jvwPFML2ck+dyzshDoIepMsn1R9RWFhQJviGmwgDlDbE/5yxNNMBvBYTZqY/Q==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
-      '@astrojs/react': 1.2.2_4q7zw7glt6lzv22422bu2pbnzm
       '@types/react': 17.0.52
       astro: 1.7.1_sass@1.57.0
       netlify-cms-app: 2.15.72_hwxq4abf2cu57octx46gmzc4lm
@@ -3150,7 +3124,6 @@ packages:
       - '@babel/core'
       - '@types/hoist-non-react-statics'
       - '@types/node'
-      - '@types/react-dom'
       - graphql
       - react-native
       - supports-color
