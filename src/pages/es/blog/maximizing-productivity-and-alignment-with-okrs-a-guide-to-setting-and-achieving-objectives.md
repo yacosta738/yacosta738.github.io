@@ -1,6 +1,6 @@
 ---
-title: 'Maximizar la Productividad y el Alineamiento con OKRs: Una Guía para
-  Establecer y Lograr Objetivos'
+title: "Maximizar la Productividad y el Alineamiento con OKRs: Una Guía para
+  Establecer y Lograr Objetivos"
 description: En este artículo, exploramos los beneficios y las mejores prácticas
   de utilizar Objetivos y Resultados Clave (OKRs) como marco de establecimiento
   de metas. Los OKRs proporcionan una estructura clara y enfoque para equipos e
@@ -19,16 +19,10 @@ cover: /uploads/okrs.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
-  - OKRs
-  - alignment
-  - goal-setting
-  - key results
   - objectives
   - organization
   - productivity
 categories:
-  - business
-  - goal-setting
   - management
   - productivity
 draft: false
