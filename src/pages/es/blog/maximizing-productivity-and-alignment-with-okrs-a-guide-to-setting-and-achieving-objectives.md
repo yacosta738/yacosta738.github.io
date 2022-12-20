@@ -1,6 +1,6 @@
 ---
-title: "Maximizar la Productividad y el Alineamiento con OKRs: Una Guía para
-  Establecer y Lograr Objetivos"
+title: 'Maximizar la Productividad y el Alineamiento con OKRs: Una Guía para
+  Establecer y Lograr Objetivos'
 description: En este artículo, exploramos los beneficios y las mejores prácticas
   de utilizar Objetivos y Resultados Clave (OKRs) como marco de establecimiento
   de metas. Los OKRs proporcionan una estructura clara y enfoque para equipos e
@@ -33,7 +33,8 @@ categories:
   - productivity
 draft: false
 ---
-![OKRs](/uploads/okrs.webp "OKRs")
+
+![OKRs](/uploads/okrs.webp 'OKRs')
 
 Los Objetivos y Resultados Clave (OKRs) son un marco de establecimiento de metas que ha ganado popularidad en los últimos años como una forma de establecer y seguir el progreso hacia objetivos específicos y medibles. Los OKRs proporcionan una estructura clara y enfoque para equipos e individuos, lo que les ayuda a alinear sus esfuerzos con los objetivos más amplios de la organización.
 

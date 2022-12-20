@@ -1,6 +1,6 @@
 ---
-title: "Maximizing Productivity and Alignment with OKRs: A Guide to Setting and
-  Achieving Objectives"
+title: 'Maximizing Productivity and Alignment with OKRs: A Guide to Setting and
+  Achieving Objectives'
 description: In this article, we explore the benefits and best practices of
   using Objectives and Key Results (OKRs) as a goal-setting framework. OKRs
   provide a clear structure and focus for teams and individuals, helping them to
@@ -31,7 +31,8 @@ categories:
   - productivity
 draft: false
 ---
-![OKRs](/uploads/okrs.webp "OKRs")
+
+![OKRs](/uploads/okrs.webp 'OKRs')
 
 Objectives and Key Results (OKRs) is a goal-setting framework that has gained popularity in recent years as a way to set and track progress towards specific, measurable objectives. OKRs provide a clear structure and focus for teams and individuals, helping them to align their efforts with the larger goals of the organization.
 
