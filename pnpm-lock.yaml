@@ -43,7 +43,7 @@ specifiers:
   prettier-plugin-astro: 0.7.0
   prettier-plugin-tailwindcss: 0.2.1
   reading-time: 1.5.0
-  sass: 1.57.0
+  sass: 1.57.1
   sharp: 0.31.1
   start-server-and-test: 1.15.2
   tailwindcss: 3.2.4
@@ -75,7 +75,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.47.0_5u3jvyfb72rymd44dmiw2z5cbe
   '@typescript-eslint/parser': 5.47.0_d6qaxtm4z57fslwcbi4d5wrunu
   '@vueuse/core': 9.7.0_vue@3.2.45
-  astro: 1.7.2_sass@1.57.0
+  astro: 1.7.2_sass@1.57.1
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12_astro@1.7.2
   astro-icon: 0.8.0
@@ -99,7 +99,7 @@ devDependencies:
   prettier: 2.8.1
   prettier-plugin-astro: 0.7.0
   prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.1
-  sass: 1.57.0
+  sass: 1.57.1
   start-server-and-test: 1.15.2
   vite-plugin-pwa: 0.14.0_x7bmrdf5vv7jofix4vzvx6ucm4
   vue: 3.2.45
@@ -2606,7 +2606,7 @@ packages:
       '@babel/core': 7.20.2
       '@babel/plugin-transform-typescript': 7.20.2_@babel+core@7.20.2
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.2
-      vite: 3.2.5_sass@1.57.0
+      vite: 3.2.5_sass@1.57.1
       vue: 3.2.45
     transitivePeerDependencies:
       - supports-color
@@ -2619,7 +2619,7 @@ packages:
       vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 3.2.5_sass@1.57.0
+      vite: 3.2.5_sass@1.57.1
       vue: 3.2.45
     dev: true
 
@@ -3094,7 +3094,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 1.7.2_sass@1.57.0
+      astro: 1.7.2_sass@1.57.1
       i18next: 21.10.0
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -3114,7 +3114,7 @@ packages:
       astro: ^1.0.0
     dependencies:
       '@types/react': 17.0.52
-      astro: 1.7.2_sass@1.57.0
+      astro: 1.7.2_sass@1.57.1
       netlify-cms-app: 2.15.72_hwxq4abf2cu57octx46gmzc4lm
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -3141,7 +3141,7 @@ packages:
     resolution: {integrity: sha512-eszmxiycjfLcmoRyB8x5lCrWAwcSHs1i5riR1a5JbyJI8OQAl9tn1JvWFRuZvNH483CFdfNCczirnc805t/soA==}
     dev: true
 
-  /astro/1.7.2_sass@1.57.0:
+  /astro/1.7.2_sass@1.57.1:
     resolution: {integrity: sha512-svgkfJUBcNzWV9YeoAGv+T96HjSK1j1xy1CbUA4JALU99WEvmJ1tFZBSrd1+m5xW9MuNOleSViGTfXhHfUaH9A==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
@@ -3203,7 +3203,7 @@ packages:
       typescript: 4.8.4
       unist-util-visit: 4.1.1
       vfile: 5.3.5
-      vite: 3.2.5_sass@1.57.0
+      vite: 3.2.5_sass@1.57.1
       vitefu: 0.2.1_vite@3.2.5
       yargs-parser: 21.1.1
       zod: 3.19.1
@@ -10031,8 +10031,8 @@ packages:
     dependencies:
       suf-log: 2.5.3
 
-  /sass/1.57.0:
-    resolution: {integrity: sha512-IZNEJDTK1cF5B1cGA593TPAV/1S0ysUDxq9XHjX/+SMy0QfUny+nfUsq5ZP7wWSl4eEf7wDJcEZ8ABYFmh3m/w==}
+  /sass/1.57.1:
+    resolution: {integrity: sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -11382,14 +11382,14 @@ packages:
       fast-glob: 3.2.12
       pretty-bytes: 6.0.0
       rollup: 3.7.3
-      vite: 3.2.5_sass@1.57.0
+      vite: 3.2.5_sass@1.57.1
       workbox-build: 6.5.4
       workbox-window: 6.5.4
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/3.2.5_sass@1.57.0:
+  /vite/3.2.5_sass@1.57.1:
     resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -11418,7 +11418,7 @@ packages:
       postcss: 8.4.19
       resolve: 1.22.1
       rollup: 2.79.1
-      sass: 1.57.0
+      sass: 1.57.1
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -11430,7 +11430,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 3.2.5_sass@1.57.0
+      vite: 3.2.5_sass@1.57.1
 
   /vscode-css-languageservice/6.1.1:
     resolution: {integrity: sha512-7d2NCq2plT0njAKmGZ11uof95y2fwbgq8QuToE3kX9uYQfVmejHX2/lFGKbK5AV5+Ja0L80UZoU0QspwqMKMHA==}
