@@ -1,6 +1,5 @@
 ---
-title: "Maximizing Productivity and Alignment with OKRs: A Guide to Setting and
-  Achieving Objectives"
+title: "OKRs: Boosting Productivity and Alignment"
 description: In this article, we explore the benefits and best practices of
   using Objectives and Key Results (OKRs) as a goal-setting framework. OKRs
   provide a clear structure and focus for teams and individuals, helping them to
