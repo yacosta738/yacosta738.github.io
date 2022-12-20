@@ -11,9 +11,9 @@ description: In this article, we explore the benefits and best practices of
   communication and involving all relevant stakeholders in the process of
   setting and achieving OKRs. This article provides a comprehensive guide to
   implementing OKRs in your organization to maximize productivity and alignment.
-date: 2022-12-20T01:31:00.744Z
+date: 2022-12-20
 lang: en
-cover: public/uploads/okrs.png
+cover: /uploads/okrs.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -31,7 +31,7 @@ categories:
   - productivity
 draft: false
 ---
-![OKRs](public/uploads/okrs.png "OKRs")
+![OKRs](/uploads/okrs.webp "OKRs")
 
 Objectives and Key Results (OKRs) is a goal-setting framework that has gained popularity in recent years as a way to set and track progress towards specific, measurable objectives. OKRs provide a clear structure and focus for teams and individuals, helping them to align their efforts with the larger goals of the organization.
 
