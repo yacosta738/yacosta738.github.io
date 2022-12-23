@@ -14,7 +14,7 @@ specifiers:
   '@tailwindcss/typography': 0.5.8
   '@typescript-eslint/eslint-plugin': 5.47.0
   '@typescript-eslint/parser': 5.47.0
-  '@vueuse/core': 9.7.0
+  '@vueuse/core': 9.8.2
   astro: 1.7.2
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12
@@ -74,7 +74,7 @@ devDependencies:
   '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   '@typescript-eslint/eslint-plugin': 5.47.0_5u3jvyfb72rymd44dmiw2z5cbe
   '@typescript-eslint/parser': 5.47.0_d6qaxtm4z57fslwcbi4d5wrunu
-  '@vueuse/core': 9.7.0_vue@3.2.45
+  '@vueuse/core': 9.8.2_vue@3.2.45
   astro: 1.7.2_sass@1.57.1
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12_astro@1.7.2
@@ -2737,24 +2737,24 @@ packages:
     resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
     dev: true
 
-  /@vueuse/core/9.7.0_vue@3.2.45:
-    resolution: {integrity: sha512-/AGY/t7jJPxCyRoVTygNKoroTiCvRaaZIW+yeSlBCnI7QRpQ9cvXNTdNaSl3GvSyFbn83+XwZwEZvI1OpQfeGw==}
+  /@vueuse/core/9.8.2_vue@3.2.45:
+    resolution: {integrity: sha512-aWiCmcYIpPt7xjuqYiceODEMHchDYthrJ4AqI+FXPZrR23PZOqdiktbUVyQl2kGlR3H4i9UJ/uimQrwhz9UouQ==}
     dependencies:
       '@types/web-bluetooth': 0.0.16
-      '@vueuse/metadata': 9.7.0
-      '@vueuse/shared': 9.7.0_vue@3.2.45
+      '@vueuse/metadata': 9.8.2
+      '@vueuse/shared': 9.8.2_vue@3.2.45
       vue-demi: 0.13.11_vue@3.2.45
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
     dev: true
 
-  /@vueuse/metadata/9.7.0:
-    resolution: {integrity: sha512-M7WsAgw28FNtTH0bzsGuHEtJOPJqPpyeHS6PHq+8UesLgNjZ9waMAntiUrgUQlxt09M4i2lH7y9sRi0jkfeXGA==}
+  /@vueuse/metadata/9.8.2:
+    resolution: {integrity: sha512-N4E/BKS+9VsUeD4WLVRU1J2kCOLh+iikBcMtipFcTyL204132vDYHs27zLAVabJYGnhC0dIVGdhg9pbOZiY2TQ==}
     dev: true
 
-  /@vueuse/shared/9.7.0_vue@3.2.45:
-    resolution: {integrity: sha512-pwmt1y3TJ2s5KqWmkv9ZKEV59GwuZQZk8XLiU+hGswz0jej318ozbea9E4A/A50ksyM26swSFr7sZ9llNPsZHg==}
+  /@vueuse/shared/9.8.2_vue@3.2.45:
+    resolution: {integrity: sha512-ACjrPQzowd5dnabNJt9EoGVobco9/ENiA5qP53vjiuxndlJYuc/UegwhXC7KdQbPX4F45a50+45K3g1wNqOzmA==}
     dependencies:
       vue-demi: 0.13.11_vue@3.2.45
     transitivePeerDependencies:
