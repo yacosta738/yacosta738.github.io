@@ -15,7 +15,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.47.1
   '@typescript-eslint/parser': 5.47.1
   '@vueuse/core': 9.9.0
-  astro: 1.7.2
+  astro: 1.8.0
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
@@ -53,7 +53,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 2.0.0
-  astro-netlify-cms: 0.5.0_n7l5ruvnuygxirk77naishwhau
+  astro-netlify-cms: 0.5.0_m6pxldjh5aczjbvmldthnjosxe
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.0
   reading-time: 1.5.0
@@ -75,9 +75,9 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.47.1_hqpbwylj7sze6yxftk5ty5owty
   '@typescript-eslint/parser': 5.47.1_d6qaxtm4z57fslwcbi4d5wrunu
   '@vueuse/core': 9.9.0_vue@3.2.45
-  astro: 1.7.2_sass@1.57.1
+  astro: 1.8.0_sass@1.57.1
   astro-compress: 1.1.23
-  astro-i18next: 1.0.0-beta.12_astro@1.7.2
+  astro-i18next: 1.0.0-beta.12_astro@1.8.0
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
   astro-seo: 0.6.1
@@ -171,8 +171,8 @@ packages:
       vscode-languageserver-types: 3.17.2
       vscode-uri: 3.0.6
 
-  /@astrojs/markdown-remark/1.1.3:
-    resolution: {integrity: sha512-6MDuQXbrp2fZBYBIqD+0jvSqYAukiMTte6oLNHiEYsLf3KIMlVAZj6dDgUJakgL7cQ4fmzWb0HUqzVpxAsasLw==}
+  /@astrojs/markdown-remark/1.2.0:
+    resolution: {integrity: sha512-Cb+uhSuukyfERknfJ8K4iJLeKJaiZWi1BTwPS4fzw0bc9kGKe5VeTRzd2E25+vaMnRTk0tN/y6QfYEMMN3Q97g==}
     dependencies:
       '@astrojs/micromark-extension-mdx-jsx': 1.0.3
       '@astrojs/prism': 1.0.2
@@ -3086,7 +3086,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.12_astro@1.7.2:
+  /astro-i18next/1.0.0-beta.12_astro@1.8.0:
     resolution: {integrity: sha512-HbBCBuAhs/59HCVkQyiQWFWj1bDHjaQ8Yk55DkwPR2mTfN0yZfLncFnZm8QsprE5/s3p27U80kK7f7K83tdFRg==}
     hasBin: true
     peerDependencies:
@@ -3094,7 +3094,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 1.7.2_sass@1.57.1
+      astro: 1.8.0_sass@1.57.1
       i18next: 21.10.0
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -3108,13 +3108,13 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.5.0_n7l5ruvnuygxirk77naishwhau:
+  /astro-netlify-cms/0.5.0_m6pxldjh5aczjbvmldthnjosxe:
     resolution: {integrity: sha512-zBICXduZ+yBiHTpWETt/IUMK2jvwPFML2ck+dyzshDoIepMsn1R9RWFhQJviGmwgDlDbE/5yxNNMBvBYTZqY/Q==}
     peerDependencies:
       astro: ^1.0.0
     dependencies:
       '@types/react': 17.0.52
-      astro: 1.7.2_sass@1.57.1
+      astro: 1.8.0_sass@1.57.1
       netlify-cms-app: 2.15.72_hwxq4abf2cu57octx46gmzc4lm
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -3141,14 +3141,14 @@ packages:
     resolution: {integrity: sha512-eszmxiycjfLcmoRyB8x5lCrWAwcSHs1i5riR1a5JbyJI8OQAl9tn1JvWFRuZvNH483CFdfNCczirnc805t/soA==}
     dev: true
 
-  /astro/1.7.2_sass@1.57.1:
-    resolution: {integrity: sha512-svgkfJUBcNzWV9YeoAGv+T96HjSK1j1xy1CbUA4JALU99WEvmJ1tFZBSrd1+m5xW9MuNOleSViGTfXhHfUaH9A==}
+  /astro/1.8.0_sass@1.57.1:
+    resolution: {integrity: sha512-MZIJveOC1OCIA0w2XmxjDtKviAEuYdF142DVq0VApInE1lm+CvAoyMgJs0a1h4mydD2vgQZpTjPhYKJIdxDjOA==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
     dependencies:
       '@astrojs/compiler': 0.31.0
       '@astrojs/language-server': 0.28.3
-      '@astrojs/markdown-remark': 1.1.3
+      '@astrojs/markdown-remark': 1.2.0
       '@astrojs/telemetry': 1.0.1
       '@astrojs/webapi': 1.1.1
       '@babel/core': 7.20.2
@@ -3162,6 +3162,7 @@ packages:
       '@types/babel__core': 7.1.20
       '@types/html-escaper': 3.0.0
       '@types/yargs-parser': 21.0.0
+      acorn: 8.8.1
       boxen: 6.2.1
       ci-info: 3.6.1
       common-ancestor-path: 1.0.1
@@ -3171,6 +3172,7 @@ packages:
       devalue: 4.2.0
       diff: 5.1.0
       es-module-lexer: 1.1.0
+      estree-walker: 3.0.1
       execa: 6.1.0
       fast-glob: 3.2.12
       github-slugger: 1.5.0
@@ -5020,6 +5022,9 @@ packages:
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
+
+  /estree-walker/3.0.1:
+    resolution: {integrity: sha512-woY0RUD87WzMBUiZLx8NsYr23N5BKsOMZHhu2hoNRVh6NXGfoiT1KOL8G3UHlJAnEDGmfa5ubNA/AacfG+Kb0g==}
 
   /esutils/2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
