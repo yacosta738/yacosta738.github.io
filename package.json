@@ -44,7 +44,7 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-n": "15.6.0",
     "eslint-plugin-promise": "6.1.1",
-    "husky": "8.0.2",
+    "husky": "8.0.3",
     "i18next-fs-backend": "2.1.1",
     "locale-emoji": "0.3.0",
     "marked": "4.2.5",
