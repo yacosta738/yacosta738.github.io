@@ -40,7 +40,7 @@ specifiers:
   postcss-nesting: 10.2.0
   postcss-preset-env: 7.8.3
   prettier: 2.8.1
-  prettier-plugin-astro: 0.7.0
+  prettier-plugin-astro: 0.7.1
   prettier-plugin-tailwindcss: 0.2.1
   reading-time: 1.5.0
   sass: 1.57.1
@@ -97,7 +97,7 @@ devDependencies:
   postcss-nesting: 10.2.0_postcss@8.4.19
   postcss-preset-env: 7.8.3_postcss@8.4.19
   prettier: 2.8.1
-  prettier-plugin-astro: 0.7.0
+  prettier-plugin-astro: 0.7.1
   prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.1
   sass: 1.57.1
   start-server-and-test: 1.15.2
@@ -131,9 +131,13 @@ packages:
 
   /@astrojs/compiler/0.29.15:
     resolution: {integrity: sha512-vicPD8oOPNkcFZvz71Uz/nJcadovurUQ3L0yMZNPb6Nn6T1nHhlSHt5nAKaurB2pYU9DrxOFWZS2/RdV+JsWmQ==}
+    dev: true
 
   /@astrojs/compiler/0.31.0:
     resolution: {integrity: sha512-V8/Re/wXgXTZzpfWs4KZBLU5dRhnO6kSd4e3vObGuj+HFGHjaD11wws1zvaC9cXLQyQsM5CSrGagFGYlRZKvVQ==}
+
+  /@astrojs/compiler/0.31.3:
+    resolution: {integrity: sha512-WbA05QH5xkdaJ3XtzDuYOjtqsip2InW5rk156sSdaHs5qN2NroUHbzWZthHJwmNAAjQSGXVIj+O6jQj81zzX/Q==}
 
   /@astrojs/image/0.12.1_sharp@0.31.3:
     resolution: {integrity: sha512-7pBUPCw7/FPwfEntx+mGjhdwpaWXNHwRVcTK71rpf+c2yb8iIesRS9r26U7lGozTzXUROh1y1ftA82ziuqYF6Q==}
@@ -161,7 +165,7 @@ packages:
       '@vscode/emmet-helper': 2.8.4
       events: 3.3.0
       prettier: 2.8.1
-      prettier-plugin-astro: 0.7.0
+      prettier-plugin-astro: 0.7.1
       source-map: 0.7.4
       vscode-css-languageservice: 6.1.1
       vscode-html-languageservice: 5.0.2
@@ -8923,11 +8927,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-astro/0.7.0:
-    resolution: {integrity: sha512-ehCUx7MqHWvkHwUmxxAWLsL35pFaCTM5YXQ8xjG/1W6dY2yBhvEks+2aCfjeI5zmMrZNCXkiMQtpznSlLSLrxw==}
-    engines: {node: ^14.15.0 || >=16.0.0, npm: '>=6.14.0'}
+  /prettier-plugin-astro/0.7.1:
+    resolution: {integrity: sha512-ySeyXHIXNZpbqZCcj8eoWl6z2UDHYl6DPgN7z9E1HElG8aVlC2WQNjfcpcSBuF4jwwo+HHi44pun/Hlr+h8OsA==}
+    engines: {node: ^14.15.0 || >=16.0.0, pnpm: '>=7.14.0'}
+    requiresBuild: true
     dependencies:
-      '@astrojs/compiler': 0.29.15
+      '@astrojs/compiler': 0.31.3
       prettier: 2.8.1
       sass-formatter: 0.7.5
       synckit: 0.8.4
