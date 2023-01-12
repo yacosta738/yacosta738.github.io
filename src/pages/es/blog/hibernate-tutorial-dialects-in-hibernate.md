@@ -1,5 +1,5 @@
 ---
-title: "Hibernate Tutorial: Dialects in Hibernate"
+title: "Tutorial Hibernate: Dialects en Hibernate"
 description: Hibernate requiere la configuración de un dialecto SQL para generar
   las declaraciones SQL apropiadas para el tipo de base de datos especificado.
   El paquete org.hibernate.dialect contiene muchas clases Dialect para varios
@@ -17,7 +17,7 @@ tags:
 categories:
   - development
   - backend
-draft: true
+draft: false
 ---
 ![Your relational data. Objectively. - Hibernate ORM](https://hibernate.org/images/hibernate-logo.svg)
 
