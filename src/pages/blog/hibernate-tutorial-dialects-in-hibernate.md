@@ -5,7 +5,7 @@ description: Hibernate requires the configuration of a SQL dialect in order to
   org.hibernate.dialect package contains many Dialect classes for various RDBMS.
 date: 2023-01-12T17:20:31.160Z
 lang: en
-cover: public/uploads/hibernate.webp
+cover: /uploads/hibernate.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
