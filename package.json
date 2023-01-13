@@ -36,7 +36,7 @@
     "astro-icon": "0.8.0",
     "astro-robots-txt": "0.3.10",
     "astro-seo": "0.6.1",
-    "dompurify": "2.4.1",
+    "dompurify": "2.4.3",
     "eslint": "8.31.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-astro": "0.21.1",
