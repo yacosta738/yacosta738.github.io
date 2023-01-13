@@ -20,7 +20,7 @@ specifiers:
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.5.0
-  astro-robots-txt: 0.3.10
+  astro-robots-txt: 0.3.11
   astro-seo: 0.6.1
   dompurify: 2.4.3
   eslint: 8.31.0
@@ -79,7 +79,7 @@ devDependencies:
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12_astro@1.9.2
   astro-icon: 0.8.0
-  astro-robots-txt: 0.3.10
+  astro-robots-txt: 0.3.11
   astro-seo: 0.6.1
   dompurify: 2.4.3
   eslint: 8.31.0
@@ -3130,12 +3130,12 @@ packages:
       - supports-color
     dev: false
 
-  /astro-robots-txt/0.3.10:
-    resolution: {integrity: sha512-fVQOdiVFPgMJEILUFBpNsup3q/RBvYiiecQVyPeWo3Ss+CzjMCkbWBflbFr86+9tTkiX0q1dufNem03QnorJ/w==}
+  /astro-robots-txt/0.3.11:
+    resolution: {integrity: sha512-UmIOU6zLusFSPBQjl8vozlfE1fkxLuXDhaT7ZOalsE8Ee4c/ua8OWexcx9Z4d2rZZ8/pywuL28LeG0Sjaq5m3w==}
     dependencies:
       deepmerge: 4.2.2
       valid-filename: 4.0.0
-      zod: 3.19.1
+      zod: 3.20.2
     dev: true
 
   /astro-seo/0.6.1:
@@ -11847,6 +11847,10 @@ packages:
 
   /zod/3.19.1:
     resolution: {integrity: sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA==}
+
+  /zod/3.20.2:
+    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
+    dev: true
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
