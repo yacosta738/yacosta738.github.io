@@ -16,7 +16,7 @@ specifiers:
   '@typescript-eslint/parser': 5.48.1
   '@vueuse/core': 9.10.0
   astro: 1.9.2
-  astro-compress: 1.1.23
+  astro-compress: 1.1.25
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.5.0
@@ -76,7 +76,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.48.1_hxm4ti6flr4ebpn5txq2vx72t4
   '@vueuse/core': 9.10.0_vue@3.2.45
   astro: 1.9.2_sass@1.57.1
-  astro-compress: 1.1.23
+  astro-compress: 1.1.25
   astro-i18next: 1.0.0-beta.12_astro@1.9.2
   astro-icon: 0.8.0
   astro-robots-txt: 0.3.10
@@ -2424,8 +2424,8 @@ packages:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
     dev: true
 
-  /@types/sharp/0.31.0:
-    resolution: {integrity: sha512-nwivOU101fYInCwdDcH/0/Ru6yIRXOpORx25ynEOc6/IakuCmjOAGpaO5VfUl4QkDtUC6hj+Z2eCQvgXOioknw==}
+  /@types/sharp/0.31.1:
+    resolution: {integrity: sha512-5nWwamN9ZFHXaYEincMSuza8nNfOof8nmO+mcI+Agx1uMUk4/pQnNIcix+9rLPXzKrm1pS34+6WRDbDV0Jn7ag==}
     dependencies:
       '@types/node': 18.11.9
     dev: true
@@ -3066,10 +3066,18 @@ packages:
     dependencies:
       tslib: 2.4.1
 
-  /astro-compress/1.1.23:
-    resolution: {integrity: sha512-F2oAtIhwEzqZwq168vpI3D3sxFXAIRhh4Do0Sgd55A2ElAhDjPszzw7ZQ7u69D6jrGZjTI3MugZcOC09z707fA==}
+  /astro-compress/1.1.25:
+    resolution: {integrity: sha512-67AZL1cQ/GF0bEEOpzSRzJiHVHUExSy0mCt3kbh4maWP5ikdBmv4I4BlFhlBWOmS/POukSwtxHbkP2l9bALdbQ==}
     dependencies:
-      files-pipeline: 0.0.1
+      '@types/csso': 5.0.0
+      '@types/html-minifier-terser': 7.0.0
+      '@types/sharp': 0.31.1
+      csso: 5.0.5
+      files-pipeline: 0.0.2
+      html-minifier-terser: 7.1.0
+      sharp: 0.31.3
+      svgo: 3.0.2
+      terser: 5.16.1
     dev: true
 
   /astro-eslint-parser/0.9.0:
@@ -3801,17 +3809,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
     dev: false
-
-  /critters/0.0.16:
-    resolution: {integrity: sha512-JwjgmO6i3y6RWtLYmXwO5jMd+maZt8Tnfu7VVISmEWyQqfLpB8soBswf8/2bu6SBXxtKA68Al3c+qIG1ApT68A==}
-    dependencies:
-      chalk: 4.1.2
-      css-select: 4.3.0
-      parse5: 6.0.1
-      parse5-htmlparser2-tree-adapter: 6.0.1
-      postcss: 8.4.19
-      pretty-bytes: 5.6.0
-    dev: true
 
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -5198,20 +5195,11 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /files-pipeline/0.0.1:
-    resolution: {integrity: sha512-QmIYklS5CsQfjOuO2aQYtwD5zvuQlMo7bx6oC9mxQZg7pDKkkKTNfMkRMOsBTSc3xeL1DzyuGVrMQZRAyrqHGA==}
+  /files-pipeline/0.0.2:
+    resolution: {integrity: sha512-e5BHeSXczwD+6PEy+CLhoYd9NSZkn6gK+QyGwgzdufO4qq0KWKMbVE53lwyw/gKYSbKMe2AgUvVp5N4VrA3OTw==}
     dependencies:
-      '@types/csso': 5.0.0
-      '@types/html-minifier-terser': 7.0.0
-      '@types/sharp': 0.31.0
-      critters: 0.0.16
-      csso: 5.0.5
       deepmerge-ts: 4.2.2
       fast-glob: 3.2.12
-      html-minifier-terser: 7.1.0
-      sharp: 0.31.2
-      svgo: 3.0.2
-      terser: 5.16.1
     dev: true
 
   /fill-range/7.0.1:
@@ -8401,12 +8389,6 @@ packages:
       unist-util-modify-children: 3.1.0
       unist-util-visit-children: 2.0.1
 
-  /parse5-htmlparser2-tree-adapter/6.0.1:
-    resolution: {integrity: sha512-qPuWvbLgvDGilKc5BoicRovlT4MtYT6JfJyBOMDsKoiT+GiuP5qyrPCnR9HcPECIJJmZh5jRndyNThnhhb/vlA==}
-    dependencies:
-      parse5: 6.0.1
-    dev: true
-
   /parse5/5.1.1:
     resolution: {integrity: sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==}
     dev: false
@@ -10142,21 +10124,6 @@ packages:
   /shallowequal/1.1.0:
     resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
     dev: false
-
-  /sharp/0.31.2:
-    resolution: {integrity: sha512-DUdNVEXgS5A97cTagSLIIp8dUZ/lZtk78iNVZgHdHbx1qnQR7JAHY0BnXnwwH39Iw+VKhO08CTYhIg0p98vQ5Q==}
-    engines: {node: '>=14.15.0'}
-    requiresBuild: true
-    dependencies:
-      color: 4.2.3
-      detect-libc: 2.0.1
-      node-addon-api: 5.0.0
-      prebuild-install: 7.1.1
-      semver: 7.3.8
-      simple-get: 4.0.1
-      tar-fs: 2.1.1
-      tunnel-agent: 0.6.0
-    dev: true
 
   /sharp/0.31.3:
     resolution: {integrity: sha512-XcR4+FCLBFKw1bdB+GEhnUNXNXvnt0tDo4WsBsraKymuo/IAuPuCBVAL2wIkUw2r/dwFW5Q5+g66Kwl2dgDFVg==}
