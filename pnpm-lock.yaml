@@ -34,7 +34,7 @@ specifiers:
   husky: 8.0.3
   i18next-fs-backend: 2.1.1
   locale-emoji: 0.3.0
-  marked: 4.2.5
+  marked: 4.2.12
   mdast-util-to-string: 3.1.0
   nanostores: 0.7.1
   postcss-nesting: 10.2.0
@@ -92,7 +92,7 @@ devDependencies:
   husky: 8.0.3
   i18next-fs-backend: 2.1.1
   locale-emoji: 0.3.0
-  marked: 4.2.5
+  marked: 4.2.12
   nanostores: 0.7.1
   postcss-nesting: 10.2.0_postcss@8.4.19
   postcss-preset-env: 7.8.3_postcss@8.4.19
@@ -6540,8 +6540,8 @@ packages:
   /markdown-table/3.0.2:
     resolution: {integrity: sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA==}
 
-  /marked/4.2.5:
-    resolution: {integrity: sha512-jPueVhumq7idETHkb203WDD4fMA3yV9emQ5vLwop58lu8bTclMghBWcYAavlDqIEMaisADinV1TooIFCfqOsYQ==}
+  /marked/4.2.12:
+    resolution: {integrity: sha512-yr8hSKa3Fv4D3jdZmtMMPghgVt6TWbk86WQaWhDloQjRSQhMMYCAro7jP7VDJrjjdV8pxVxMssXS8B8Y5DZ5aw==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: true
