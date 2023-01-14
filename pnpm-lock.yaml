@@ -39,7 +39,7 @@ specifiers:
   nanostores: 0.7.1
   postcss-nesting: 10.2.0
   postcss-preset-env: 7.8.3
-  prettier: 2.8.2
+  prettier: 2.8.3
   prettier-plugin-astro: 0.7.2
   prettier-plugin-tailwindcss: 0.2.1
   reading-time: 1.5.0
@@ -96,9 +96,9 @@ devDependencies:
   nanostores: 0.7.1
   postcss-nesting: 10.2.0_postcss@8.4.19
   postcss-preset-env: 7.8.3_postcss@8.4.19
-  prettier: 2.8.2
+  prettier: 2.8.3
   prettier-plugin-astro: 0.7.2
-  prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.2
+  prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
   sass: 1.57.1
   start-server-and-test: 1.15.2
   vite-plugin-pwa: 0.14.1_x7bmrdf5vv7jofix4vzvx6ucm4
@@ -161,7 +161,7 @@ packages:
     dependencies:
       '@vscode/emmet-helper': 2.8.4
       events: 3.3.0
-      prettier: 2.8.2
+      prettier: 2.8.3
       prettier-plugin-astro: 0.7.2
       source-map: 0.7.4
       vscode-css-languageservice: 6.1.1
@@ -8932,21 +8932,21 @@ packages:
     engines: {node: ^14.15.0 || >=16.0.0, pnpm: '>=7.14.0'}
     dependencies:
       '@astrojs/compiler': 0.31.3
-      prettier: 2.8.2
+      prettier: 2.8.3
       sass-formatter: 0.7.5
       synckit: 0.8.4
 
-  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.2:
+  /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.3:
     resolution: {integrity: sha512-aIO8IguumORyRsmT+E7JfJ3A9FEoyhqZR7Au7TBOege3VZkgMvHJMkufeYp4zjnDK2iq4ktkvGMNOQR9T8lisQ==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       prettier: '>=2.2.0'
     dependencies:
-      prettier: 2.8.2
+      prettier: 2.8.3
     dev: true
 
-  /prettier/2.8.2:
-    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
+  /prettier/2.8.3:
+    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
 
