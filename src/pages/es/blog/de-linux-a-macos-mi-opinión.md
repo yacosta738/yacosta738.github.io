@@ -38,7 +38,7 @@ Ahora hablemos de las herramientas que usaba en Linux y ahora uso en MacOS, así
 
 Listas de herramientas que utilizo en mi día a día:
 
-1. Lista de Tools en mis dotfiles
+1. Herramientas de terminal configuradas en mis dotfiles
 
    1. [`exa`](https://the.exa.website/) u**na sustitución moderna para `ls`.**
    2. [`fzf`](https://github.com/junegunn/fzf) es un buscador difuso de línea de comandos de uso general.
