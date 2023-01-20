@@ -24,7 +24,9 @@ draft: false
 
 Hace varios meses, comencé a usar MacOS como mi sistema operativo principal. Para mi sorpresa, la transición desde Linux, especialmente desde [Archlinux](https://archlinux.org/), no fue tan sencilla como pensaba. Antes de usar MacOS, tenía la idea de que era fácil de usar para usuarios expertos y aquellos que no se llevan bien con la tecnología.
 
-Mi primera sorpresa fue que operaciones básicas como cortar archivos no vienen por defecto. Existe una alternativa, agregando esa función a Finder, pero considero que esa operación básica debería estar contemplada. El segundo problema al que me enfrenté rápidamente fue que no soporta la escritura en sistema de archivos NTFS de Microsoft. Esto complicaba modificar archivos en mis discos duros extraíbles o memorias USB, incluso en las últimas versiones del sistema operativo. Existen diversos programas que implementan esta característica, pero la mayoría son de pago.
+Mi primera sorpresa fue que las operaciones básicas como cortar archivos no eran muy claras para mí. Después de investigar y de que un amigo me dijo que esta operación se hacía con `cmd + option + v`, fue bastante frustrante durante mis primeros días de usar el sistema operativo.
+
+El segundo problema al que me enfrenté rápidamente fue que no soporta la escritura en sistema de archivos NTFS de Microsoft. Esto complicaba modificar archivos en mis discos duros extraíbles o memorias USB, incluso en las últimas versiones del sistema operativo. Existen diversos programas que implementan esta característica, pero la mayoría son de pago.
 
 Tercero, el sistema de ventanas no tiene la facilidad para acomodar a gusto cada ventana en el escritorio, como sí tiene Windows y todos los entornos de escritorio de las distintas distros GNU/Linux. Afortunadamente, existe una herramienta llamada [Rectangle](https://rectangleapp.com/) que nos permite acomodar las ventanas de forma simple mediante atajos.
 
