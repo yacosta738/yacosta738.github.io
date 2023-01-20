@@ -43,11 +43,11 @@ Lists of tools I use daily:
 
    1. [`exa`](https://the.exa.website/) a **modern substitute for `ls`.**
    2. [`fzf`](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy searcher.
-   3. `fd` is a program to find entries in your file system. It is a simple, fast, easy to use alternative to `find`.
+   3. `fd` is a program to find entries in your file system. It is a simple, fast, easy-to-use alternative to `find`.
    4. [bat](https://github.com/sharkdp/bat) is an alternative to `cat` that supports syntax highlighting for a large number of programming and markup languages.
    5. `zoxide` is a smarter `cd` command, inspired by `z` and `autojump`.
    6. The [thefuck](https://github.com/nvbn/thefuck) application is great, inspired by a [tweet from @liamosaur](https://twitter.com/liamosaur/status/506975850596536320), which corrects errors in previous console commands.
-   7. `prettyping` is a wrapper around the standard `ping` tool with the goal of making the output more beautiful, more colorful, more compact, and easier to read.
+   7. `prettyping` is a wrapper around the standard `ping` tool to make the output more beautiful, more colorful, more compact, and easier to read.
    8. [`starship`](https://starship.rs/) is a cross-command line. The minimal, fast, and customizable command line for any shell!
    9. [`btop`](https://github.com/aristocratos/btop) resource monitor that shows usage and statistics for the processor, memory, disks, network, and processes.[`du-dust`](https://github.com/bootandy/dust) Una versión más intuitiva de du en rust
    10. `sl` Cure your bad habit of typing badly.
@@ -74,4 +74,4 @@ Lists of tools I use daily:
 
 ### Conclusions
 
-In conclusion, macOS is a very robust operating system, with robust security, excellent performance, and a wide range of tools to meet the needs of users. When I switched from Linux to macOS, it wasn't as easy as I expected, but with use and time, I have learned to adapt my dotfiles and to find equivalent tools to perform the same tasks I used to do in Linux. The macOS ecosystem is also full of third-party applications that can help you complete even more tasks, such as audio and video editing, graphic design, web development, etc. These applications ensure that macOS remains a first-class operating system for Mac users.
+In conclusion, macOS is a very robust operating system, with robust security, excellent performance, and a wide range of tools to meet users' needs. When I switched from Linux to macOS, it wasn't as easy as I expected, but with use and time, I have learned to adapt my dotfiles and to find equivalent tools to perform the same tasks I used to do in Linux. The macOS ecosystem is also full of third-party applications that can help you complete even more tasks, such as audio and video editing, graphic design, web development, etc. These applications ensure that macOS remains a first-class operating system for Mac users.
