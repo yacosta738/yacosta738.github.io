@@ -19,11 +19,13 @@ categories:
   - OS
 draft: false
 ---
-![https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80](https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80)
+![https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80](https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80 "macos")
 
 Several months ago, I started using MacOS as my main operating system. To my surprise, the transition from Linux, especially from [Archlinux](https://archlinux.org/), was not as easy as I thought. Before using MacOS, I had the idea that it was easy to use for both expert users and those who don't get along with technology.
 
-My first surprise was that basic operations such as cutting files do not come by default. There is an alternative, adding that function to Finder, but I consider that this basic operation should be contemplated. The second problem I quickly faced was that it does not support writing in Microsoft NTFS file system. This complicated modifying files on my removable hard drives or USB memories, even in the latest versions of the operating system. There are various programs that implement this feature, but most of them are paid.
+My first surprise was that basic operations like cutting files weren't very clear to me. After researching and a friend telling me that this operation was done with cmd + option + v, it was quite frustrating during my first days of using the operating system.
+
+The second problem I quickly faced was that it does not support writing in Microsoft NTFS file system. This complicated modifying files on my removable hard drives or USB memories, even in the latest versions of the operating system. There are various programs that implement this feature, but most of them are paid.
 
 Third, the window system does not have the facility to arrange each window to your liking on the desktop, as Windows and all the desktop environments of the different GNU/Linux distros do. Fortunately, there is a tool called [Rectangle](https://rectangleapp.com/) that allows us to arrange the windows in a simple way using shortcuts.
 
