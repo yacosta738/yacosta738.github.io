@@ -5,12 +5,13 @@
   "company": "Scanntech",
   "location": "Montevideo, Uruguay",
   "startDate": "2021-09-13",
-  "endDate": "",
+  "endDate": "2022-10-04",
   "url": "https://www.scanntech.com",
   "published": true,
   "achievement": [
     "I improved the execution of data synchronization of our APIs with those of MMC, lowering the time from approximately 40 minutes to 6 minutes.",
     "Improvement in code quality by adding tests and good practices with SOLID principles.",
-    "Design and implement the centralized configuration pattern for all platform microservices."
+    "Design and implement the centralized configuration pattern for all platform microservices.",
+    "Implemented a continuous integration system using Gitlab CI to ensure fast and reliable delivery of updated code, improving the efficiency of the development team and reducing errors in the final product delivery."
   ]
 }

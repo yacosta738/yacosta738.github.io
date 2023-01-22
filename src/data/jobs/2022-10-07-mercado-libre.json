@@ -1,0 +1,14 @@
+{
+  "title": "Software Engineer en Mercado Libre",
+  "lang": "en",
+  "role": "Software Engineer",
+  "company": "Mercado Libre",
+  "location": "Montevideo, Uruguay",
+  "startDate": "2022-10-07",
+  "endDate": "",
+  "url": "https://www.mercadolibre.com.uy",
+  "published": true,
+  "achievement": [
+    "Developed and maintained internal APIs for malicious behavior detection, improving security and preventing potential threats"
+  ]
+}
