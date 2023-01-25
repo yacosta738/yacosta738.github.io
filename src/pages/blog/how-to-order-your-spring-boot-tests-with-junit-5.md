@@ -43,7 +43,7 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
        }
    }
    ```
-2. The second one uses @DataJpaTest to spin up an H2 database and the associated repositories:
+2. The second one uses `@DataJpaTest` to spin up an H2 database and the associated repositories:
 
    ```java
    @DataJpaTest
@@ -59,7 +59,7 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
        }
    }
    ```
-3. The third one uses @WebMvcTest, which utilizes MockMvc for testing controllers.
+3. The third one uses `@WebMvcTest`, which utilizes MockMvc for testing controllers.
 
    ```java
    @WebMvcTest(UserController.class)
@@ -80,7 +80,7 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
        }
    }
    ```
-4. The last one uses @SpringBootTest to start the full Spring context.
+4. The last one uses `@SpringBootTest` to start the full Spring context.
 
    ```java
    @SpringBootTest
@@ -93,11 +93,11 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
    }
    ```
 
-If we run the tests in the project using JUnit 5.7.0, we cannot be certain of the order in which they will execute. This is unfortunate, as it is illogical to run integration tests before ensuring the unit tests are successful.
+If we run the tests in the project using JUnit `5.7.0`, we cannot be certain of the order in which they will execute. This is unfortunate, as it is illogical to run integration tests before ensuring the unit tests are successful.
 
 We can make this deterministic by using a major version of JUnit, such as `5.8.0` or the latest `5.9.2`.
 
-With Spring Boot 2.7.8 or the most recent version 3.0.2, we get JUnit 5.9.2 out of the box. To upgrade to the latest version, we can specify the following property in the pom.xml:
+With Spring Boot `2.7.8` or the most recent version `3.0.2`, we get JUnit `5.9.2` out of the box. To upgrade to the latest version, we can specify the following property in the pom.xml:
 
 ```xml
 <project ...>
