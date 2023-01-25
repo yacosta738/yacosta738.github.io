@@ -19,7 +19,8 @@ categories:
   - development
 draft: true
 ---
-![junit5 spring boot](/uploads/junit5-spring-boot.webp "junit5 spring boot")
+
+![junit5 spring boot](/uploads/junit5-spring-boot.webp 'junit5 spring boot')
 
 JUnit 5.9.2 allows for ordering test classes in an arbitrary manner. This blog article will show how to use this feature to order Spring Boot tests from unit tests to full integration tests, so that the faster tests run first.
 
@@ -43,6 +44,7 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
        }
    }
    ```
+
 2. The second one uses `@DataJpaTest` to spin up an H2 database and the associated repositories:
 
    ```java
@@ -59,6 +61,7 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
        }
    }
    ```
+
 3. The third one uses `@WebMvcTest`, which utilizes MockMvc for testing controllers.
 
    ```java
@@ -80,6 +83,7 @@ As an example, let's take a basic Spring Boot application that uses Spring Data 
        }
    }
    ```
+
 4. The last one uses `@SpringBootTest` to start the full Spring context.
 
    ```java
