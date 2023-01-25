@@ -7,7 +7,7 @@ description: This post shows how to use the JUnit 5 feature to order test
   predetermined order.
 date: 2023-01-25T21:56:01.410Z
 lang: en
-cover: public/uploads/junit5-spring-boot.webp
+cover: /uploads/junit5-spring-boot.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -19,7 +19,7 @@ categories:
   - development
 draft: true
 ---
-![junit5 spring boot](public/uploads/junit5-spring-boot.webp "junit5 spring boot")
+![junit5 spring boot](/uploads/junit5-spring-boot.webp "junit5 spring boot")
 
 JUnit 5.9.2 allows for ordering test classes in an arbitrary manner. This blog article will show how to use this feature to order Spring Boot tests from unit tests to full integration tests, so that the faster tests run first.
 

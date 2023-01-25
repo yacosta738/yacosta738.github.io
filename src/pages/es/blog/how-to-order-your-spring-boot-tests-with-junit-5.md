@@ -1,5 +1,5 @@
 ---
-title: How to Order Your Spring Boot Tests with JUnit 5
+title: Cómo ordenar sus pruebas de Spring Boot con JUnit 5
 description: Esta publicación muestra cómo usar la característica de JUnit 5
   para ordenar las clases de pruebas. Esto permite ejecutar pruebas automáticas
   de Spring Boot desde pruebas unitarias hasta pruebas de integración completas,
@@ -8,7 +8,7 @@ description: Esta publicación muestra cómo usar la característica de JUnit 5
   predeterminado.
 date: 2023-01-25T22:16:55.497Z
 lang: es
-cover: public/uploads/junit5-spring-boot.webp
+cover: /uploads/junit5-spring-boot.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -20,7 +20,7 @@ categories:
   - development
 draft: true
 ---
-![junit5 spring boot](public/uploads/junit5-spring-boot.webp "junit5 spring boot")
+![junit5 spring boot](/uploads/junit5-spring-boot.webp "junit5 spring boot")
 
 JUnit 5.9.2 admite ordenar las clases de prueba de una manera arbitraria. En este artículo de blog se mostrará cómo usar esta característica para ordenar las pruebas de Spring Boot desde pruebas unitarias hasta pruebas de integración completas, para que las pruebas más rápidas se ejecuten primero.
 
