@@ -1,13 +1,21 @@
 ---
+title: De Gridsome a Nuxt a Astro - Reconstruyendo con Astro
+description: Astro es un innovador generador de sitios estáticos que se enfoca
+  en la generación estática en lugar de los frameworks JS. Pero, ¿cuánto mejor
+  es?
 date: 2022-09-13
-title: 'From Gridsome to Nuxt to Astro - Rebuilding with Astro'
+lang: es
 cover: /uploads/rebuild-with-astro.webp
 author: Yuniel Acosta
-lang: es
-tags: [Gridsome, Astro, Vuejs, Nuxt]
-categories: [Programming, Development]
-description: Astro es un innovador generador de sitios estáticos que se enfoca en la generación estática en lugar de los frameworks JS. Pero, ¿cuánto mejor es?
 layout: ../../../components/templates/BlogPostTemplate.astro
+tags:
+  - Gridsome
+  - Astro
+  - Vuejs
+  - Nuxt
+categories:
+  - Programming
+  - Development
 draft: false
 ---
 
