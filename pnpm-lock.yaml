@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@astrojs/image': 0.13.0
-  '@astrojs/rss': 2.0.0
+  '@astrojs/rss': 2.1.0
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 2.1.3
   '@astrojs/vue': 1.2.2
@@ -52,7 +52,7 @@ specifiers:
   vue: 3.2.45
 
 dependencies:
-  '@astrojs/rss': 2.0.0
+  '@astrojs/rss': 2.1.0
   astro-netlify-cms: 0.5.2_dtpfaiotcx4soatovzszltd3v4
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.1
@@ -222,10 +222,11 @@ packages:
     dependencies:
       prismjs: 1.29.0
 
-  /@astrojs/rss/2.0.0:
-    resolution: {integrity: sha512-qXsmyq2HhnKRA85US6GLelT47VLhdtS0bNq88umqfB2uneB9vWHSLnOJjhN9rv0mUSQjsFYytF4IEznfmNnpkQ==}
+  /@astrojs/rss/2.1.0:
+    resolution: {integrity: sha512-PrqtIDDAyu4MyIvhBZEQhftui5fqyO9JPvOe4QnVDhErMIYWXd0pVPpqdnE0SKZ5xykMkphYPAQdWDr7VeCzBg==}
     dependencies:
       fast-xml-parser: 4.0.11
+      kleur: 4.1.5
     dev: false
 
   /@astrojs/sitemap/1.0.0:
