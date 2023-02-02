@@ -17,7 +17,8 @@ categories:
   - development
 draft: false
 ---
-![Singleton pattern](/uploads/singleton-pattern.webp "Singleton pattern")
+
+![Singleton pattern](/uploads/singleton-pattern.webp 'Singleton pattern')
 
 The Singleton pattern is a software design pattern that restricts the instantiation of a class to one object. It is a useful technique when only a single instance of a class is required, such as for a configuration manager or for a logging class. This pattern is also useful for limiting the resources that are consumed by an application.
 

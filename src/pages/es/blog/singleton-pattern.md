@@ -18,7 +18,8 @@ categories:
   - development
 draft: false
 ---
-![Singleton pattern](/uploads/singleton-pattern.webp "Singleton pattern")
+
+![Singleton pattern](/uploads/singleton-pattern.webp 'Singleton pattern')
 
 El patrón Singleton es un patrón de diseño de software que restringe la instanciación de una clase a un solo objeto. Es una técnica útil cuando solo se requiere una instancia de una clase, como para un administrador de configuración o para una clase de registro de logs. Este patrón también es útil para limitar los recursos que consume una aplicación.
 

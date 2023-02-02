@@ -20,7 +20,8 @@ categories:
   - development
 draft: false
 ---
-![maximizing java code performance](/uploads/maximizing-java-code-performance.webp "maximizing java code performance")
+
+![maximizing java code performance](/uploads/maximizing-java-code-performance.webp 'maximizing java code performance')
 
 ## **1. Avoid Use Of Multiple If-else Statements**
 
@@ -28,15 +29,14 @@ Excessive use of conditional statements can negatively impact the performance of
 
 The sample is provided below as an example to avoid:
 
- **Example:**  
+**Example:**
 
-  ```java
-    if(condition1){
-        if (condition2) {
-    			if (condition3 || condition4) { execute ..}        
-    			else { execute..}
-  ```
-    
+```java
+  if(condition1){
+      if (condition2) {
+  			if (condition3 || condition4) { execute ..}
+  			else { execute..}
+```
 
 <aside>
  🗒️ Note: Above sample is to be avoided and use this as follows:
@@ -82,19 +82,17 @@ I suggest using **[PMD](https://pmd.github.io/), [FindBugs](https://plugins.jetb
 When iterating through any collection, get the size of the collection before the loop and never get it during the iteration. The following example should be avoided:
 
 **Example:**
-    
-    
-  ```java
-    List<String> empListData = getEmpData();
-    for (int i = 0; i < empListData.size(); i++){
-    	// execute code ..
-    }
-  ```
-    
+
+```java
+  List<String> empListData = getEmpData();
+  for (int i = 0; i < empListData.size(); i++){
+  	// execute code ..
+  }
+```
 
 <aside>
 
- 🗒️ Note: Above sample is to be avoided and use this as follows:
+🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
 List<String> empListData= getEmpData();
@@ -173,10 +171,10 @@ static ArrayList removeDuplicates(ArrayList list) {
 
 The table below illustrates the time difference between our original code and the modified code:
 
-| List Size | 100 | 1000 | 10000 | 100000 |
-| --- | --- | --- | --- | --- |
+| List Size     | 100  | 1000 | 10000  | 100000   |
+| ------------- | ---- | ---- | ------ | -------- |
 | Original Code | 0 ms | 5 ms | 171 ms | 49820 ms |
-| Modified Code | 0 ms | 1 ms | 7 ms | 28 ms |
+| Modified Code | 0 ms | 1 ms | 7 ms   | 28 ms    |
 
 ## 10. Using PreparedStatement instead of Statement
 
@@ -186,15 +184,13 @@ We use **JDBC API** and classes to execute `SQL` queries through the application
 
 ## 11. Select Required Columns in a Query
 
-When retrieving data from the database, we should use `SELECT` queries to only get the necessary columns for further processing or displaying on the front end. Selecting too many columns can cause a delay in query execution at the database end and increase network traffic from the database to the application, which should be avoided. **It is best to avoid using the asterisk (“*”) when selecting data from the database.** As an example of what should be avoided, see the sample below:
+When retrieving data from the database, we should use `SELECT` queries to only get the necessary columns for further processing or displaying on the front end. Selecting too many columns can cause a delay in query execution at the database end and increase network traffic from the database to the application, which should be avoided. **It is best to avoid using the asterisk (“\*”) when selecting data from the database.** As an example of what should be avoided, see the sample below:
 
- **Example:**
-    
-    
-  ```sql
-    select * from employee where emp_id = 100;
-  ```
-    
+**Example:**
+
+```sql
+  select * from employee where emp_id = 100;
+```
 
 <aside>
  🗒️ Note: Above sample is to be avoided and use this as follows:
@@ -212,13 +208,11 @@ Logging is an essential part of any application and must be implemented efficien
 It is recommended to keep the logging level at higher levels such as `DEBUG` and `ERROR`, rather than `INFO`. An example of what should be avoided is provided below:
 
 **Example:**
-    
-    
- ```java
-    Logger.debug("Employee info : " + emp.toString());
-    Logger.info("Method called for setting employee data:" + emp.getData());
-  ```
-    
+
+```java
+   Logger.debug("Employee info : " + emp.toString());
+   Logger.info("Method called for setting employee data:" + emp.getData());
+```
 
 <aside>
  🗒️ Note: Above sample is to be avoided and use this as follows:

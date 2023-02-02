@@ -22,7 +22,8 @@ categories:
   - development
 draft: false
 ---
-![maximizing java code performance](/uploads/maximizing-java-code-performance.webp "maximizing java code performance")
+
+![maximizing java code performance](/uploads/maximizing-java-code-performance.webp 'maximizing java code performance')
 
 ## **1. Evite el uso de múltiples declaraciones if-else**
 
@@ -31,15 +32,13 @@ El uso excesivo de declaraciones condicionales puede tener un impacto negativo e
 El ejemplo se proporciona a continuación como un ejemplo para evitar.
 
 **Ejemplo:**
-    
-    
-  ```java
-    if(condition1){
-        if (condition2) {
-    			if (condition3 || condition4) { execute ..}        
-    			else { execute..}
-  ```
-    
+
+```java
+  if(condition1){
+      if (condition2) {
+  			if (condition3 || condition4) { execute ..}
+  			else { execute..}
+```
 
 <aside>
  🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
@@ -85,15 +84,13 @@ Sugiero el uso de los plugins **[PMD](https://pmd.github.io/), [FindBugs](https:
 Cuando itere a través de cualquier colección, obtenga el tamaño de la colección antes del bucle y nunca obténgalo durante la iteración. El siguiente ejemplo debe evitarse:
 
 **Ejemplo:**
-    
-    
-  ```java
-    List<String> empListData = getEmpData();
-    for (int i = 0; i < empListData.size(); i++){
-    	// execute code ..
-    }
-  ```
-    
+
+```java
+  List<String> empListData = getEmpData();
+  for (int i = 0; i < empListData.size(); i++){
+  	// execute code ..
+  }
+```
 
 <aside>
 🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
@@ -134,7 +131,7 @@ Ciertas clases actúan como contenedores de datos dentro de la aplicación, como
 
 Deberíamos usar el [patrón **Singleton**](/es/blog/singleton-pattern) siempre que sea posible para crear una única instancia de un objeto y reutilizarla cuando sea necesario, o clonar el objeto en lugar de crear uno nuevo.
 
-## 9. Usa "****contains****" con precaución en tus aplicaciones de Java.
+## 9. Usa "\***\*contains\*\***" con precaución en tus aplicaciones de Java.
 
 `Listas`, `ArrayLists` y `Vectores` todos tienen un método `contains` que permite a los programadores verificar si una colección ya tiene un objeto similar. Cuando se itera a través de una muestra grande, a menudo es necesario encontrar una lista de objetos únicos. El código para esto podría verse así:
 
@@ -175,10 +172,10 @@ static ArrayList removeDuplicates(ArrayList list) {
 
 La tabla a continuación ilustra la diferencia de tiempo entre nuestro código original y el código modificado:
 
-| List Size | 100 | 1000 | 10000 | 100000 |
-| --- | --- | --- | --- | --- |
+| List Size     | 100  | 1000 | 10000  | 100000   |
+| ------------- | ---- | ---- | ------ | -------- |
 | Original Code | 0 ms | 5 ms | 171 ms | 49820 ms |
-| Modified Code | 0 ms | 1 ms | 7 ms | 28 ms |
+| Modified Code | 0 ms | 1 ms | 7 ms   | 28 ms    |
 
 ## 10. Usar PreparedStatement en lugar de Statement
 
@@ -188,14 +185,13 @@ El objeto **`Statement`** por otro lado se compila y ejecuta cada vez que se lla
 
 ## 11. Seleccionar columnas requeridas en una consulta
 
-Al recuperar datos de la base de datos, debemos usar consultas `SELECT` para obtener solo las columnas necesarias para un procesamiento posterior o para mostrar en el front end. Seleccionar demasiadas columnas puede causar un retraso en la ejecución de la consulta en el lado de la base de datos y aumentar el tráfico de red desde la base de datos hasta la aplicación, lo que debe evitarse. **Es mejor evitar usar el asterisco (“*”) al seleccionar datos de la base de datos.** Como ejemplo de lo que debe evitarse, vea el ejemplo a continuación:
+Al recuperar datos de la base de datos, debemos usar consultas `SELECT` para obtener solo las columnas necesarias para un procesamiento posterior o para mostrar en el front end. Seleccionar demasiadas columnas puede causar un retraso en la ejecución de la consulta en el lado de la base de datos y aumentar el tráfico de red desde la base de datos hasta la aplicación, lo que debe evitarse. **Es mejor evitar usar el asterisco (“\*”) al seleccionar datos de la base de datos.** Como ejemplo de lo que debe evitarse, vea el ejemplo a continuación:
 
 **Ejemplo:**
-    
+
 ```sql
     select * from employee where emp_id = 100;
 ```
-    
 
 <aside>
 💡 Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
@@ -215,13 +211,11 @@ El registro de logs es una parte esencial de cualquier aplicación y debe implem
 Se recomienda mantener el nivel de logs en niveles más altos como `DEBUG` y `ERROR`, en lugar de `INFO`. A continuación se proporciona un ejemplo de lo que se debe evitar:
 
 **Ejemplo:**
-    
-    
+
 ```java
     Logger.debug("Employee info : " + emp.toString());
     Logger.info("Method called for setting employee data:" + emp.getData());
 ```
-    
 
 <aside>
 💡 Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
