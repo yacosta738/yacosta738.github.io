@@ -317,7 +317,8 @@ export default defineConfig({
 		plugins: []
 	},
 	markdown: {
-		extendDefaultPlugins: true,
+		smartypants: false,
+		gfm: false,
 		remarkPlugins: [remarkReadingTime]
 	}
 })
