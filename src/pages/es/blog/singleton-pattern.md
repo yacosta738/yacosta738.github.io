@@ -1,5 +1,5 @@
 ---
-title: Singleton pattern
+title: SPatrón Singleton
 description: El patrón Singleton es un patrón de diseño de software que
   restringe la instanciación de una clase a un solo objeto, proporcionando
   beneficios como estado global, configuración de ajustes y pruebas
