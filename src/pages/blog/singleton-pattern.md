@@ -7,7 +7,7 @@ description: The Singleton pattern is a software design pattern that restricts
   code needed to maintain a single instance of an object.
 date: 2023-02-02T16:53:55.243Z
 lang: en
-cover: public/uploads/singleton-pattern.png
+cover: /uploads/singleton-pattern.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -15,9 +15,9 @@ tags:
 categories:
   - architecture
   - development
-draft: true
+draft: false
 ---
-![Singleton pattern](public/uploads/singleton-pattern.png "Singleton pattern")
+![Singleton pattern](/uploads/singleton-pattern.webp "Singleton pattern")
 
 The Singleton pattern is a software design pattern that restricts the instantiation of a class to one object. It is a useful technique when only a single instance of a class is required, such as for a configuration manager or for a logging class. This pattern is also useful for limiting the resources that are consumed by an application.
 

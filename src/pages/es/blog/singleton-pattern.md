@@ -8,7 +8,7 @@ description: El patrón Singleton es un patrón de diseño de software que
   instancia de un objeto.
 date: 2023-02-02T16:59:31.360Z
 lang: es
-cover: public/uploads/singleton-pattern.png
+cover: /uploads/singleton-pattern.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -16,9 +16,9 @@ tags:
 categories:
   - architecture
   - development
-draft: true
+draft: false
 ---
-![Singleton pattern](public/uploads/singleton-pattern.png "Singleton pattern")
+![Singleton pattern](/uploads/singleton-pattern.webp "Singleton pattern")
 
 El patrón Singleton es un patrón de diseño de software que restringe la instanciación de una clase a un solo objeto. Es una técnica útil cuando solo se requiere una instancia de una clase, como para un administrador de configuración o para una clase de registro de logs. Este patrón también es útil para limitar los recursos que consume una aplicación.
 

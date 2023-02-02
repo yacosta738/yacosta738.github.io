@@ -12,7 +12,7 @@ description: Este documento proporciona quince consejos invaluables para mejorar
   ejecuten a la velocidad máxima.
 date: 2023-02-02T16:39:17.873Z
 lang: es
-cover: public/uploads/maximizing-java-code-performance.png
+cover: /uploads/maximizing-java-code-performance.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -20,9 +20,9 @@ tags:
   - Performance
 categories:
   - development
-draft: true
+draft: false
 ---
-![maximizing java code performance](public/uploads/maximizing-java-code-performance.png "maximizing java code performance")
+![maximizing java code performance](/uploads/maximizing-java-code-performance.webp "maximizing java code performance")
 
 ## **1. Evite el uso de múltiples declaraciones if-else**
 
@@ -30,19 +30,19 @@ El uso excesivo de declaraciones condicionales puede tener un impacto negativo e
 
 El ejemplo se proporciona a continuación como un ejemplo para evitar.
 
-- **Ejemplo:**
+**Ejemplo:**
     
     
-    ```java
+  ```java
     if(condition1){
         if (condition2) {
     			if (condition3 || condition4) { execute ..}        
     			else { execute..}
-    ```
+  ```
     
 
 <aside>
-<img src="https://www.notion.so/icons/clipping_gray.svg" alt="https://www.notion.so/icons/clipping_gray.svg" width="40px" /> Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
+ 🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
 
 ```java
 **boolean result = (condition1 && condition2) && (condition3 || condition4)**
@@ -63,7 +63,7 @@ String query = str1 + str2 + str3;
 ```
 
 <aside>
-<img src="https://www.notion.so/icons/clipping_gray.svg" alt="https://www.notion.so/icons/clipping_gray.svg" width="40px" /> Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
+🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
 
 ```java
 StringBuilder strBuilder = new StringBuilder(“”);
@@ -84,19 +84,19 @@ Sugiero el uso de los plugins **[PMD](https://pmd.github.io/), [FindBugs](https:
 
 Cuando itere a través de cualquier colección, obtenga el tamaño de la colección antes del bucle y nunca obténgalo durante la iteración. El siguiente ejemplo debe evitarse:
 
-- **Ejemplo:**
+**Ejemplo:**
     
     
-    ```java
+  ```java
     List<String> empListData = getEmpData();
     for (int i = 0; i < empListData.size(); i++){
     	// execute code ..
     }
-    ```
+  ```
     
 
 <aside>
-<img src="https://www.notion.so/icons/clipping_gray.svg" alt="https://www.notion.so/icons/clipping_gray.svg" width="40px" /> Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
+🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
 
 ```java
 List<String> empListData= getEmpData();
@@ -132,7 +132,7 @@ La procedimiento almacenado tiene una ventaja en la transferencia de datos y el 
 
 Ciertas clases actúan como contenedores de datos dentro de la aplicación, como objetos de **conexión DB** o objetos de sesión para el usuario después del inicio de sesión. Estos objetos son pesados y su creación debe evitarse varias veces, ya que usan muchos recursos. Para mejorar el rendimiento de la aplicación, deberíamos **reutilizar** estos objetos en lugar de crearlos, ya que esto reducirá el uso de memoria.
 
-Deberíamos usar el [patrón **Singleton**](https://www.notion.so/Singleton-pattern-3e244f1550ca4becbbcb4098d7748034) siempre que sea posible para crear una única instancia de un objeto y reutilizarla cuando sea necesario, o clonar el objeto en lugar de crear uno nuevo.
+Deberíamos usar el [patrón **Singleton**](/es/blog/singleton-pattern) siempre que sea posible para crear una única instancia de un objeto y reutilizarla cuando sea necesario, o clonar el objeto en lugar de crear uno nuevo.
 
 ## 9. Usa "****contains****" con precaución en tus aplicaciones de Java.
 
@@ -190,12 +190,11 @@ El objeto **`Statement`** por otro lado se compila y ejecuta cada vez que se lla
 
 Al recuperar datos de la base de datos, debemos usar consultas `SELECT` para obtener solo las columnas necesarias para un procesamiento posterior o para mostrar en el front end. Seleccionar demasiadas columnas puede causar un retraso en la ejecución de la consulta en el lado de la base de datos y aumentar el tráfico de red desde la base de datos hasta la aplicación, lo que debe evitarse. **Es mejor evitar usar el asterisco (“*”) al seleccionar datos de la base de datos.** Como ejemplo de lo que debe evitarse, vea el ejemplo a continuación:
 
-- Ejemplo**:**
+**Ejemplo:**
     
-    
-    ```sql
+```sql
     select * from employee where emp_id = 100;
-    ```
+```
     
 
 <aside>
@@ -215,13 +214,13 @@ El registro de logs es una parte esencial de cualquier aplicación y debe implem
 
 Se recomienda mantener el nivel de logs en niveles más altos como `DEBUG` y `ERROR`, en lugar de `INFO`. A continuación se proporciona un ejemplo de lo que se debe evitar:
 
-- **Ejemplo:**
+**Ejemplo:**
     
     
-    ```java
+```java
     Logger.debug("Employee info : " + emp.toString());
     Logger.info("Method called for setting employee data:" + emp.getData());
-    ```
+```
     
 
 <aside>

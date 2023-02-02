@@ -10,7 +10,7 @@ description: This document provides fifteen invaluable tips for improving the
   applications run at maximum speed.
 date: 2023-02-02T16:28:19.185Z
 lang: en
-cover: public/uploads/maximizing-java-code-performance.png
+cover: /uploads/maximizing-java-code-performance.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -18,9 +18,9 @@ tags:
   - Performance
 categories:
   - development
-draft: true
+draft: false
 ---
-![maximizing java code performance](public/uploads/maximizing-java-code-performance.png "maximizing java code performance")
+![maximizing java code performance](/uploads/maximizing-java-code-performance.webp "maximizing java code performance")
 
 ## **1. Avoid Use Of Multiple If-else Statements**
 
@@ -28,19 +28,18 @@ Excessive use of conditional statements can negatively impact the performance of
 
 The sample is provided below as an example to avoid:
 
-- **Example:**
-    
-    
-    ```java
+ **Example:**  
+
+  ```java
     if(condition1){
         if (condition2) {
     			if (condition3 || condition4) { execute ..}        
     			else { execute..}
-    ```
+  ```
     
 
 <aside>
-<img src="https://www.notion.so/icons/clipping_gray.svg" alt="https://www.notion.so/icons/clipping_gray.svg" width="40px" /> Note: Above sample is to be avoided and use this as follows:
+ 🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
 **boolean result = (condition1 && condition2) && (condition3 || condition4)**
@@ -61,7 +60,7 @@ String query = str1 + str2 + str3;
 ```
 
 <aside>
-<img src="https://www.notion.so/icons/clipping_gray.svg" alt="https://www.notion.so/icons/clipping_gray.svg" width="40px" /> Note: Above sample is to be avoided and use this as follows:
+ 🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
 StringBuilder strBuilder = new StringBuilder(“”);
@@ -82,19 +81,20 @@ I suggest using **[PMD](https://pmd.github.io/), [FindBugs](https://plugins.jetb
 
 When iterating through any collection, get the size of the collection before the loop and never get it during the iteration. The following example should be avoided:
 
-- **Example:**
+**Example:**
     
     
-    ```java
+  ```java
     List<String> empListData = getEmpData();
     for (int i = 0; i < empListData.size(); i++){
     	// execute code ..
     }
-    ```
+  ```
     
 
 <aside>
-💡 Note: Above sample is to be avoided and use this as follows:
+
+ 🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
 List<String> empListData= getEmpData();
@@ -130,7 +130,7 @@ The stored procedure has an advantage in data transfer and network traffic, as i
 
 Certain classes act as data holders within the application, such as **DB connection** objects or session objects for the user after login. These objects are heavy and their creation should be avoided multiple times, as they use a lot of resources. To improve application performance, we should **reuse** these objects instead of creating them, as this will reduce memory usage.
 
-We should use the **[Singleton pattern](https://www.notion.so/Singleton-pattern-9f937e76a1ef410d8a451f165e317798)** whenever possible to create a single instance of an object and reuse it when needed, or clone the object instead of creating a new one.
+We should use the **[Singleton pattern](/blog/singleton-pattern)** whenever possible to create a single instance of an object and reuse it when needed, or clone the object instead of creating a new one.
 
 ## 9. Use “contains” with caution in your Java applications
 
@@ -188,16 +188,16 @@ We use **JDBC API** and classes to execute `SQL` queries through the application
 
 When retrieving data from the database, we should use `SELECT` queries to only get the necessary columns for further processing or displaying on the front end. Selecting too many columns can cause a delay in query execution at the database end and increase network traffic from the database to the application, which should be avoided. **It is best to avoid using the asterisk (“*”) when selecting data from the database.** As an example of what should be avoided, see the sample below:
 
-- **Example:**
+ **Example:**
     
     
-    ```sql
+  ```sql
     select * from employee where emp_id = 100;
-    ```
+  ```
     
 
 <aside>
-💡 Note: Above sample is to be avoided and use this as follows:
+ 🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```sql
 select emp_name, emp_age, emp_gender, emp_occupation, emp_address from employee where emp_id = 100;
@@ -211,17 +211,17 @@ Logging is an essential part of any application and must be implemented efficien
 
 It is recommended to keep the logging level at higher levels such as `DEBUG` and `ERROR`, rather than `INFO`. An example of what should be avoided is provided below:
 
-- **Example:**
+**Example:**
     
     
-    ```java
+ ```java
     Logger.debug("Employee info : " + emp.toString());
     Logger.info("Method called for setting employee data:" + emp.getData());
-    ```
+  ```
     
 
 <aside>
-💡 Note: Above sample is to be avoided and use this as follows:
+ 🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
 Logger.debug("Employee info : " + emp.getName() + " : login ID : " + emp.getLoginId());
