@@ -43,6 +43,8 @@ specifiers:
   prettier-plugin-astro: 0.8.0
   prettier-plugin-tailwindcss: 0.2.1
   reading-time: 1.5.0
+  rehype-accessible-emojis: ^0.3.2
+  remark-toc: ^8.0.1
   sass: 1.57.1
   sharp: 0.31.3
   start-server-and-test: 1.15.3
@@ -56,6 +58,7 @@ dependencies:
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.1
   reading-time: 1.5.0
+  remark-toc: 8.0.1
   sharp: 0.31.3
   tailwindcss: 3.2.4_postcss@8.4.21
   uuid: 9.0.0
@@ -98,6 +101,7 @@ devDependencies:
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
   prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
+  rehype-accessible-emojis: 0.3.2
   sass: 1.57.1
   start-server-and-test: 1.15.3
   vue: 3.2.45
@@ -1495,6 +1499,10 @@ packages:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
       '@types/ms': 0.7.31
+
+  /@types/extend/3.0.1:
+    resolution: {integrity: sha512-R1g/VyKFFI2HLC1QGAeTtCBWCo6n75l41OnsVYNbmKG+kempOESaodf6BeJyUM3Q0rKa/NQcTHbB2+66lNnxLw==}
+    dev: false
 
   /@types/hast/2.3.4:
     resolution: {integrity: sha512-wLEm0QvaoawEDoTRwzTXp4b4jpwiJDvR5KMnFnVodm3scufTlBOWRD6N1OBf9TZMhjlNsSfcO5V+7AF4+Vy+9g==}
@@ -4367,6 +4375,10 @@ packages:
     engines: {node: '>= 0.6.0'}
     dev: false
 
+  /gemoji/4.2.1:
+    resolution: {integrity: sha512-V9lUpRSn+KQGavZx8Pk+6mxG3kaz21ae2kTCXuT36KaRPNgYU8eHtj/RcUCNFVvmwppsYYz3nnNS9lmcP5kTsg==}
+    dev: true
+
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
@@ -4605,7 +4617,6 @@ packages:
 
   /hast-util-is-element/1.1.0:
     resolution: {integrity: sha512-oUmNua0bFbdrD/ELDSSEadRVtWZOf3iF6Lbv81naqsIV99RnSCieTbWuWCY8BAeEfKJTKl0gRdokv+dELutHGQ==}
-    dev: false
 
   /hast-util-is-element/2.1.2:
     resolution: {integrity: sha512-thjnlGAnwP8ef/GSO1Q8BfVk2gundnc2peGQqEg2kUt/IqesiGg/5mSwN2fE7nLzy61pg88NG6xV+UrGOrx9EA==}
@@ -5736,6 +5747,18 @@ packages:
     resolution: {integrity: sha512-tGvhT94e+cVnQt8JWE9/b3cUQZWS732TJxXHktvP+BYo62PpYD53Ls/6cC60rW21dW+txxiM4zMdc6abASvZKA==}
     dependencies:
       '@types/mdast': 3.0.10
+
+  /mdast-util-toc/6.1.1:
+    resolution: {integrity: sha512-Er21728Kow8hehecK2GZtb7Ny3omcoPUVrmObiSUwmoRYVZaXLR751QROEFjR8W/vAQdHMLj49Lz20J55XaNpw==}
+    dependencies:
+      '@types/extend': 3.0.1
+      '@types/mdast': 3.0.10
+      extend: 3.0.2
+      github-slugger: 2.0.0
+      mdast-util-to-string: 3.1.1
+      unist-util-is: 5.1.1
+      unist-util-visit: 4.1.1
+    dev: false
 
   /mdn-data/2.0.14:
     resolution: {integrity: sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==}
@@ -8530,6 +8553,15 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /rehype-accessible-emojis/0.3.2:
+    resolution: {integrity: sha512-kChZo+EZsuFQYHUPu6kOZFjDrG7UtQdGxkrCvHBVo9ariKPL6S68QdPVxLxwcAtZSRZIXZhDuTJHgIM8KW24Qw==}
+    dependencies:
+      emoji-regex: 8.0.0
+      gemoji: 4.2.1
+      hast-util-is-element: 1.1.0
+      unist-util-flatmap: 1.0.0
+    dev: true
+
   /rehype-minify-whitespace/4.0.5:
     resolution: {integrity: sha512-QC3Z+bZ5wbv+jGYQewpAAYhXhzuH/TVRx7z08rurBmh9AbG8Nu8oJnvs9LWj43Fd/C7UIhXoQ7Wddgt+ThWK5g==}
     dependencies:
@@ -8699,6 +8731,14 @@ packages:
       stringify-entities: 1.3.2
       unherit: 1.1.3
       xtend: 4.0.2
+    dev: false
+
+  /remark-toc/8.0.1:
+    resolution: {integrity: sha512-7he2VOm/cy13zilnOTZcyAoyoolV26ULlon6XyCFU+vG54Z/LWJnwphj/xKIDLOt66QmJUgTyUvLVHi2aAElyg==}
+    dependencies:
+      '@types/mdast': 3.0.10
+      mdast-util-toc: 6.1.1
+      unified: 10.1.2
     dev: false
 
   /repeat-string/1.6.1:
@@ -9806,6 +9846,10 @@ packages:
     dependencies:
       unist-util-is: 4.1.0
     dev: false
+
+  /unist-util-flatmap/1.0.0:
+    resolution: {integrity: sha512-IG32jcKJlhARCYT2LsYPJWdoXYkzz3ESAdl1aa2hn9Auh+cgUmU6wgkII4yCc/1GgeWibRdELdCZh/p3QKQ1dQ==}
+    dev: true
 
   /unist-util-generated/1.1.6:
     resolution: {integrity: sha512-cln2Mm1/CZzN5ttGK7vkoGw+RZ8VcUH6BtGbq98DDtRGquAAOXig1mrBQYelOwMXYS8rK+vZDyyojSjp7JX+Lg==}

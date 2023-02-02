@@ -44,7 +44,7 @@ El ejemplo se proporciona a continuación como un ejemplo para evitar.
  🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
 
 ```java
-**boolean result = (condition1 && condition2) && (condition3 || condition4)**
+boolean result = (condition1 && condition2) && (condition3 || condition4)
 ```
 
 </aside>
@@ -93,7 +93,7 @@ Cuando itere a través de cualquier colección, obtenga el tamaño de la colecci
 ```
 
 <aside>
-🗒️ Nota: El ejemplo anterior debe evitarse y usarse de la siguiente manera:
+ 🗒️ Nota:  El ejemplo anterior debe evitarse y usarse de la siguiente manera:
 
 ```java
 List<String> empListData= getEmpData();

@@ -54,6 +54,7 @@
     "prettier": "2.8.3",
     "prettier-plugin-astro": "0.8.0",
     "prettier-plugin-tailwindcss": "0.2.1",
+    "rehype-accessible-emojis": "^0.3.2",
     "sass": "1.57.1",
     "start-server-and-test": "1.15.3",
     "vue": "3.2.45"
@@ -64,6 +65,7 @@
     "fuse.js": "6.6.2",
     "mdast-util-to-string": "3.1.1",
     "reading-time": "1.5.0",
+    "remark-toc": "^8.0.1",
     "sharp": "0.31.3",
     "tailwindcss": "3.2.4",
     "uuid": "9.0.0"

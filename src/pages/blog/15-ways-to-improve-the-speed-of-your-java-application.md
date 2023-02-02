@@ -42,7 +42,7 @@ The sample is provided below as an example to avoid:
  🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
-**boolean result = (condition1 && condition2) && (condition3 || condition4)**
+boolean result = (condition1 && condition2) && (condition3 || condition4)
 ```
 
 </aside>
@@ -91,8 +91,7 @@ When iterating through any collection, get the size of the collection before the
 ```
 
 <aside>
-
-🗒️ Note: Above sample is to be avoided and use this as follows:
+ 🗒️ Note: Above sample is to be avoided and use this as follows:
 
 ```java
 List<String> empListData= getEmpData();
