@@ -40,7 +40,7 @@ specifiers:
   postcss-nesting: 10.2.0
   postcss-preset-env: 7.8.3
   prettier: 2.8.3
-  prettier-plugin-astro: 0.7.2
+  prettier-plugin-astro: 0.8.0
   prettier-plugin-tailwindcss: 0.2.1
   reading-time: 1.5.0
   sass: 1.57.1
@@ -97,7 +97,7 @@ devDependencies:
   postcss-nesting: 10.2.0_postcss@8.4.19
   postcss-preset-env: 7.8.3_postcss@8.4.19
   prettier: 2.8.3
-  prettier-plugin-astro: 0.7.2
+  prettier-plugin-astro: 0.8.0
   prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
   sass: 1.57.1
   start-server-and-test: 1.15.3
@@ -12490,6 +12490,16 @@ packages:
       prettier: 2.8.3
       sass-formatter: 0.7.5
       synckit: 0.8.4
+
+  /prettier-plugin-astro/0.8.0:
+    resolution: {integrity: sha512-kt9wk33J7HvFGwFaHb8piwy4zbUmabC8Nu+qCw493jhe96YkpjscqGBPy4nJ9TPy9pd7+kEx1zM81rp+MIdrXg==}
+    engines: {node: ^14.15.0 || >=16.0.0, pnpm: '>=7.14.0'}
+    dependencies:
+      '@astrojs/compiler': 1.0.1
+      prettier: 2.8.3
+      sass-formatter: 0.7.5
+      synckit: 0.8.4
+    dev: true
 
   /prettier-plugin-tailwindcss/0.2.1_prettier@2.8.3:
     resolution:
