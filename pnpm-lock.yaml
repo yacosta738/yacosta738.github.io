@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@astrojs/image': 0.13.0
   '@astrojs/rss': 2.0.0
-  '@astrojs/sitemap': 1.0.0
+  '@astrojs/sitemap': 1.0.1
   '@astrojs/tailwind': 3.0.1
   '@astrojs/vue': 1.2.2
   '@nanostores/vue': 0.6.1
@@ -63,7 +63,7 @@ dependencies:
 
 devDependencies:
   '@astrojs/image': 0.13.0_astro@1.9.2+sharp@0.31.3
-  '@astrojs/sitemap': 1.0.0
+  '@astrojs/sitemap': 1.0.1
   '@astrojs/tailwind': 3.0.1_owmtmib7y2aso3vfpzrh7ooooi
   '@astrojs/vue': 1.2.2_sdwkmm6edw77nggtvpkie4pima
   '@nanostores/vue': 0.6.1_tnmprsfnlyw4kcmtay2p7ledhm
@@ -228,11 +228,11 @@ packages:
       fast-xml-parser: 4.0.11
     dev: false
 
-  /@astrojs/sitemap/1.0.0:
-    resolution: {integrity: sha512-42GxuF5FP7RaKXZrwGLBLOX3hPv+Wl7ExJC43O0J5e34ojJkLeKf7QfwN1UwrJlqH0Ywi0Fm4/xGe482G09+wg==}
+  /@astrojs/sitemap/1.0.1:
+    resolution: {integrity: sha512-qexepZPH6/dLToI/njxr2FjvyxJU0HBAnQRNzEggF0ok811oSNC6su1DkyW2VKp0TNPbWoujuSbcb1yFOjnAqA==}
     dependencies:
       sitemap: 7.1.1
-      zod: 3.19.1
+      zod: 3.20.2
     dev: true
 
   /@astrojs/tailwind/3.0.1_owmtmib7y2aso3vfpzrh7ooooi:
