@@ -56,7 +56,6 @@
     "prettier-plugin-tailwindcss": "0.2.1",
     "sass": "1.57.1",
     "start-server-and-test": "1.15.3",
-    "vite-plugin-pwa": "0.14.1",
     "vue": "3.2.45"
   },
   "dependencies": {
