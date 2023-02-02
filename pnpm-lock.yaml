@@ -37,7 +37,7 @@ specifiers:
   marked: 4.2.12
   mdast-util-to-string: 3.1.1
   nanostores: 0.7.1
-  postcss-nesting: 10.2.0
+  postcss-nesting: 11.1.0
   postcss-preset-env: 7.8.3
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
@@ -96,7 +96,7 @@ devDependencies:
   locale-emoji: 0.3.0
   marked: 4.2.12
   nanostores: 0.7.1
-  postcss-nesting: 10.2.0_postcss@8.4.19
+  postcss-nesting: 11.1.0_postcss@8.4.19
   postcss-preset-env: 7.8.3_postcss@8.4.19
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
@@ -9257,6 +9257,17 @@ packages:
     engines: {node: ^12 || ^14 || >=16}
     peerDependencies:
       postcss: ^8.2
+    dependencies:
+      '@csstools/selector-specificity': 2.0.2_45y636a2vqremknoajyxd5nkzy
+      postcss: 8.4.19
+      postcss-selector-parser: 6.0.10
+    dev: true
+
+  /postcss-nesting/11.1.0_postcss@8.4.19:
+    resolution: {integrity: sha512-TVBCeKlUmMyX3sNeSg10yATb2XmAoosp0E1zdlpjrD+L2FrQPmrRTxlRFQh/R0Y4WlQ0butfDwRhzlYuj7y/TA==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss: ^8.4
     dependencies:
       '@csstools/selector-specificity': 2.0.2_45y636a2vqremknoajyxd5nkzy
       postcss: 8.4.19
