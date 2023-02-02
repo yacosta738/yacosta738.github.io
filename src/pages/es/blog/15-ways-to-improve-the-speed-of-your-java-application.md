@@ -1,5 +1,5 @@
 ---
-title: 15 Ways To Improve The Speed of Your Java Application
+title: 15 formas de mejorar la velocidad de su aplicación de Java
 description: Este documento proporciona quince consejos invaluables para mejorar
   la velocidad de las aplicaciones de Java y optimizar el código para un
   rendimiento máximo. La optimización de la arquitectura y la utilización de los
