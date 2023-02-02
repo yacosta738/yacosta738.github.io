@@ -36,7 +36,9 @@ specifiers:
   locale-emoji: 0.3.0
   marked: 4.2.12
   mdast-util-to-string: 3.1.1
-  nanostores: 0.7.1
+  nanostores: 0.7.2
+  postcss-nesting: 10.2.0
+  postcss-preset-env: 7.8.3
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
   prettier-plugin-tailwindcss: 0.2.1
@@ -93,7 +95,9 @@ devDependencies:
   i18next-fs-backend: 2.1.1
   locale-emoji: 0.3.0
   marked: 4.2.12
-  nanostores: 0.7.1
+  nanostores: 0.7.2
+  postcss-nesting: 10.2.0_postcss@8.4.19
+  postcss-preset-env: 7.8.3_postcss@8.4.19
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
   prettier-plugin-tailwindcss: 0.2.1_prettier@2.8.3
@@ -2397,7 +2401,7 @@ packages:
     resolution: {integrity: sha512-HPnRdYO0WjFjRTSwO3frz1wKaU649OBFPX3Zo/2WZvuRi6zMiRGui8SnPQiQABgqCf8YikDe5t3HViTVw1WUzA==}
     dev: false
 
-  /@nanostores/vue/0.6.1_tnmprsfnlyw4kcmtay2p7ledhm:
+  /@nanostores/vue/0.6.1_ynetsjkw622a6xpby5yxmqj2ui:
     resolution: {integrity: sha512-YYFcgpqrne+0xNlhAfxBX1pgtD8NsLQDsAD/SrKaZulR2qnaQ6YwWR7YKXNzWPiuvSyKD71Hv6p6FYnHyivFzA==}
     engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     peerDependencies:
@@ -2408,7 +2412,7 @@ packages:
       '@vue/devtools-api':
         optional: true
     dependencies:
-      nanostores: 0.7.1
+      nanostores: 0.7.2
       vue: 3.2.45
     dev: true
 
@@ -7848,8 +7852,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  /nanostores/0.7.1:
-    resolution: {integrity: sha512-7HenoVpZOjRudHCmAVWKloBTk3+Ozw49KuRWq/pNlEIIVS3x9dID+I5z3Rhjxl1muhHwv4dFhpT+0FebT9jvaA==}
+  /nanostores/0.7.2:
+    resolution: {integrity: sha512-Gi6QyppoEktYgKdQf3O/UZ05BSD5m3J1f0KSyV9+vvKC3lfKfPmC8MFifUypg9vfHVIBGBjIvvKIX4Jkm5CgrA==}
     engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     dev: true
 
