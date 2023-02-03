@@ -5,6 +5,6 @@
       "matchPackageNames": ["npm"],
       "schedule": ["after 9pm on sunday"]
     }
-  ]
+  ],
   "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"]
 }
