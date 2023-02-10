@@ -20,6 +20,9 @@ categories:
   - Tooling
 draft: true
 ---
+![5 Must-Have Tools for 2023](public/uploads/5-must-have-tools-for-2023.png "5 Must-Have Tools for 2023")
+
+\
 This 2023 is the dawn of a new era with AI and tools that make life easier and more convenient. From smart photo editing to AI-powered copywriting, the possibilities are endless! With the right tools in your corner, you can make the most of your time and effort.
 
 It seems ChatGPT is disrupting the Internet. Now, Google could be the one to be disrupted. Welcome to [You.com](http://you.com/), the first app to combine ChatGPT and Google. We are only just at the beginning of 2023!
