@@ -1,6 +1,6 @@
 ---
-title: "5 herramientas imprescindibles para 2023: desde la edición inteligente
-  de fotos hasta la escritura de copias impulsada por IA"
+title: '5 herramientas imprescindibles para 2023: desde la edición inteligente
+  de fotos hasta la escritura de copias impulsada por IA'
 description: Este artículo es una gran recurso para cualquiera que busque
   aprovechar al máximo su tiempo y esfuerzo en 2023. Cubre cinco herramientas
   poderosas que pueden ayudarlo a maximizar su productividad y hacer el trabajo
@@ -21,8 +21,8 @@ categories:
   - Tooling
 draft: false
 ---
-![5 Must-Have Tools for 2023](/uploads/5-must-have-tools-for-2023.png "5 Must-Have Tools for 2023")
 
+![5 Must-Have Tools for 2023](/uploads/5-must-have-tools-for-2023.png '5 Must-Have Tools for 2023')
 
 Esta 2023 es el amanecer de una nueva era con IA y herramientas que hacen la vida más fácil y conveniente. ¡Desde la edición inteligente de fotos hasta la escritura de copias impulsada por IA, las posibilidades son infinitas! Con las herramientas adecuadas a tu lado, puedes aprovechar al máximo tu tiempo y esfuerzo.
 
