@@ -5,20 +5,24 @@ import { email } from '@store:constants'
 
 <section class='min-h-screen'>
 	<div class='flex flex-col items-start'>
-		<h1 class='my-2 font-mono text-base font-normal text-green-500 md:my-6'>
+		<h1 class='font-mono text-base font-normal text-green-500'>
 			{t('welcome')}
 		</h1>
-		<h2 id='generalName' class='text-4xl sm:text-5xl md:text-6xl lg:text-8xl yap-name'>
+		<h2 id='generalName' class='text-3xl sm:text-4xl md:text-5xl lg:text-7xl yap-name'>
 			{t('name')}
 		</h2>
 		<h3
 			id='phrase'
-			class={`text-3xl text-gray-500 sm:text-4xl md:my-2 md:text-5xl lg:text-7xl slogan-${i18next.language}`}
+			class={`text-3xl text-gray-500 sm:text-3xl md:my-2 md:text-4xl lg:text-5xl slogan-${i18next.language}`}
 		>
 			<span hidden>{t('slogan')}</span>
 		</h3>
-		<p id='my-self' class='text-justify my-4 text-xl md:text-2xl max-w-none md:max-w-2xl'>
+		<p id='my-self' class='text-justify my-1 text-xl md:text-xl max-w-none md:max-w-3xl'>
 			{t('my-self')}
+
+			<span class={`typed-text-${i18next.language}`}>
+				<span hidden>SOLID Principles, Clean Architecture, Design Patterns, Microservices</span>
+			</span>
 		</p>
 		<footer class='container mx-auto flex flex-col items-center md:items-start'>
 			<a href={`mailto:${email}`} class='big-button my-10 animate-pulse'>
@@ -55,5 +59,24 @@ import { email } from '@store:constants'
 				iterations: 0
 			)
 		);
+	}
+
+	.typed-text-en {
+		padding: 0 0 0 3px;
+		&::before { font-weight: 800; }
+		@include typed(
+			"SOLID Principles", "Clean Architecture", "Design Patterns", "Microservices",
+			1.5,
+			(caret-width: 2px, caret-space: 2px)
+		);	
+	}	
+	.typed-text-es {
+		padding: 0 0 0 3px;
+		&::before { font-weight: 800; }
+		@include typed(
+			"Principios SOLID", "Arquitectura Limpia", "Patrones de Diseño", "Microservicios",
+			1.5,
+			(caret-width: 2px, caret-space: 2px)
+		);	
 	}
 </style>
