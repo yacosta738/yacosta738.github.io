@@ -31,7 +31,7 @@
     "@typescript-eslint/parser": "5.49.0",
     "@vueuse/core": "9.11.0",
     "astro": "2.0.6",
-    "astro-compress": "1.1.23",
+    "astro-compress": "1.1.32",
     "astro-i18next": "1.0.0-beta.12",
     "astro-icon": "0.8.0",
     "astro-robots-txt": "0.3.11",
