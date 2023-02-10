@@ -21,6 +21,9 @@ categories:
   - Tooling
 draft: true
 ---
+![5 Must-Have Tools for 2023](public/uploads/5-must-have-tools-for-2023.png "5 Must-Have Tools for 2023")
+
+\
 Esta 2023 es el amanecer de una nueva era con IA y herramientas que hacen la vida más fácil y conveniente. ¡Desde la edición inteligente de fotos hasta la escritura de copias impulsada por IA, las posibilidades son infinitas! Con las herramientas adecuadas a tu lado, puedes aprovechar al máximo tu tiempo y esfuerzo.
 
 Parece que ChatGPT está cambiando Internet. Ahora, Google podría ser el que se vea afectado. ¡Bienvenido a [You.com](http://you.com/), la primera aplicación que combina ChatGPT y Google. ¡Apenas estamos al comienzo de 2023!
