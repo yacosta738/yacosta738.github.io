@@ -1,6 +1,6 @@
 ---
-title: "5 Must-Have Tools for 2023: From Smart Photo Editing to AI-Powered
-  Copywriting"
+title: "5 herramientas imprescindibles para 2023: desde la edición inteligente
+  de fotos hasta la escritura de copias impulsada por IA"
 description: Este artículo es una gran recurso para cualquiera que busque
   aprovechar al máximo su tiempo y esfuerzo en 2023. Cubre cinco herramientas
   poderosas que pueden ayudarlo a maximizar su productividad y hacer el trabajo
