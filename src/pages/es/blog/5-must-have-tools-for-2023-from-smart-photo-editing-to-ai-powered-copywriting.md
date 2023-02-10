@@ -11,7 +11,7 @@ description: Este artículo es una gran recurso para cualquiera que busque
   herramientas destacadas en este artículo.
 date: 2023-02-10T15:19:45.365Z
 lang: es
-cover: public/uploads/5-must-have-tools-for-2023.png
+cover: /uploads/5-must-have-tools-for-2023.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:

@@ -10,7 +10,7 @@ description: This article is a great resource for anyone looking to make the
   featured in this article.
 date: 2023-02-10T15:12:23.179Z
 lang: en
-cover: public/uploads/5-must-have-tools-for-2023.png
+cover: /uploads/5-must-have-tools-for-2023.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
