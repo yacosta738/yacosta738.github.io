@@ -74,7 +74,7 @@ Lists of tools I use daily:
 3. The Linux terminal used [Alacritty](https://github.com/alacritty/alacritty), written in Rust, so it can also be used on macOS. However, there is a better alternative called [Warp](https://www.warp.dev/), which, despite being written in Rust, only has support for macOS at the moment. This tool is one of the most impressive terminals of recent years. Its slogan is "the terminal of the 21st century" and it is, as it looks like an IDE, plus it uses Artificial Intelligence to suggest when you have made a mistake or how to execute a command.
 4. On Linux, I used [Ulauncher](https://ulauncher.io/) to improve my daily productivity on the computer. Custom extensions and scripts allowed me to be much more efficient. macOS, things changed with the arrival of [Raycast](https://www.raycast.com/), written in Rust, and, for now, only available for macOS. [Raycast](https://www.raycast.com/) far surpasses [Ulauncher](https://ulauncher.io/), offering better performance, as well as extensions for almost everything, with excellent support. Since I started using it, I haven't had any problems, unlike [Ulauncher](https://ulauncher.io/) on Linux, which occasionally presented some incompatibility with some of its extensions.
 5. I discovered [Rectangle](https://rectangleapp.com/) for the macOS ecosystem since the window management of macOS is not as good as in other operating systems. This tool meets the needs and deficiencies of MacOS for window management.
-6. Rocket is only available for macOS and allows us to use emojis directly when writing using a trigger such as ( :check →✅ ).
+6. Rocket is only available for macOS and allows us to use emojis directly when writing using a trigger such as (:check).
 
 ### Conclusions
 
