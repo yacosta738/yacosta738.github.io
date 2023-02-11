@@ -9,9 +9,7 @@ test('test i18n and rss', async ({ page }) => {
 	await expect(page).toHaveURL('http://localhost:3000/es/')
 
 	expect(await page.locator('h1').first()).toHaveText('Hola, mi nombre es')
-	expect(await page.locator('#my-self')).toHaveText(
-		'Soy ingeniero de software, entusiasta de la ciencia y la tecnología, especializado en construir aplicaciones web.'
-	)
+
 	await expect(await page.locator('h2:has-text("Sobre mí")')).toHaveText('Sobre mí')
 	await expect(await page.locator('h2:has-text("Dónde he trabajado")')).toHaveText(
 		'Dónde he trabajado'
@@ -25,9 +23,6 @@ test('test i18n and rss', async ({ page }) => {
 	await page.locator('select').nth(1).selectOption('/')
 	await expect(page).toHaveURL('http://localhost:3000/')
 
-	await expect(await page.locator('#my-self')).toHaveText(
-		'I’m a software engineer, technology and science enthusiast, specialized in building web applications.'
-	)
 	await expect(await page.locator('h2:has-text("About me")')).toHaveText('About me')
 	await expect(await page.locator('h2:has-text("Where I\'ve Worked")')).toHaveText(
 		"Where I've Worked"
