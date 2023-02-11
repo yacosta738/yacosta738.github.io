@@ -51,7 +51,7 @@
     "nanostores": "0.7.2",
     "postcss-nesting": "11.1.0",
     "postcss-preset-env": "7.8.3",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "prettier-plugin-astro": "0.8.0",
     "prettier-plugin-tailwindcss": "0.2.1",
     "rehype-accessible-emojis": "^0.3.2",
