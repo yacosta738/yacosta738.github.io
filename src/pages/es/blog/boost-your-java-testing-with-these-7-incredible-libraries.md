@@ -7,7 +7,7 @@ description: Este artículo proporciona una descripción general de 7 biblioteca
   reducir el tiempo de prueba y garantizar la calidad del código.
 date: 2023-02-15T13:46:25.916Z
 lang: es
-cover: public/uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif
+cover: /uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -17,11 +17,10 @@ tags:
 categories:
   - testing
   - development
-draft: true
+draft: false
 ---
-![¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!](public/uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif "¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!")
+![¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!](/uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif "¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!")
 
-\
 Si estás buscando mejorar tus pruebas unitarias e integración en Java, ¡tengo buenas noticias para ti! Esta es una excelente oportunidad para aumentar la velocidad y la calidad de tus pruebas. En este artículo le proporcionaré una visión general de 7 bibliotecas útiles que puede usar para mejorar su proceso de pruebas. Estas bibliotecas le ayudarán a simplificar el proceso de desarrollo, reducir el tiempo de prueba y garantizar que su código sea de alta calidad. Algunas de estas bibliotecas le permiten vincular sus pruebas para facilitar la identificación de puntos débiles en su código, otras le permiten escribir pruebas unitarias con menos líneas de código y algunas incluso le permiten realizar pruebas de integración de manera eficiente. En última instancia, estas bibliotecas le permitirán aprovechar al máximo el tiempo que dedica a escribir pruebas y optimizar su código para que sea más robusto. Si estás listo para mejorar tus pruebas unitarias e integración en Java, ¡sigue leyendo!
 
 Hablaremos de las siguientes bibliotecas:
