@@ -1,5 +1,5 @@
 ---
-title: Boost Your Java Testing with These 7 Incredible Libraries
+title: ¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!
 description: Este artículo proporciona una descripción general de 7 bibliotecas
   útiles para mejorar las pruebas unitarias e de integración en Java, tales como
   AssertJ, Awaitility, Mockito, Wiser, Memoryfilesystem, WireMock y
