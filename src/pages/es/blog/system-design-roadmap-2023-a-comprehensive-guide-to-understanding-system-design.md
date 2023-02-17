@@ -1,6 +1,6 @@
 ---
-title: "System Design Roadmap 2023: A Comprehensive Guide to Understanding
-  System Design"
+title: "Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el
+  Diseño de Sistemas."
 description: Esta guía completa proporciona una visión general de los
   fundamentos del diseño de sistemas y describe aspectos clave como rendimiento
   frente a escalabilidad, latencia frente a rendimiento, disponibilidad frente a
