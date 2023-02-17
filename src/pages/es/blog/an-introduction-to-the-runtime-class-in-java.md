@@ -1,5 +1,5 @@
 ---
-title: An Introduction to the Runtime Class in Java
+title: Introducción a la clase Runtime en Java
 description: La clase Runtime en Java proporciona una forma para que los
   desarrolladores interactúen con el entorno de ejecución y controlen la
   ejecución de la JVM. En este artículo, exploramos los métodos y
