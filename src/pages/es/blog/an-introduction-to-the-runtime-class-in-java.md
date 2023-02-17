@@ -10,7 +10,7 @@ description: La clase Runtime en Java proporciona una forma para que los
   construir aplicaciones Java sólidas, eficientes y escalables.
 date: 2023-02-19T01:08:10.172Z
 lang: es
-cover: public/uploads/runtime-code.jpeg
+cover: /uploads/runtime-code.jpeg
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -18,7 +18,7 @@ tags:
   - jvm
 categories:
   - development
-draft: true
+draft: false
 ---
 La clase Runtime de Java proporciona una forma para que los desarrolladores interactúen con el entorno de tiempo de ejecución. La clase Runtime es una clase [singleton](https://www.yunielacosta.com/es/blog/singleton-pattern/) que proporciona una interfaz con el sistema operativo subyacente. La clase proporciona métodos para interactuar con el sistema operativo, como ejecutar comandos, administrar la memoria y apagar la JVM.
 
