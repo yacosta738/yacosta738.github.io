@@ -49,7 +49,7 @@
     "locale-emoji": "0.3.0",
     "marked": "4.2.12",
     "nanostores": "0.7.2",
-    "postcss-nesting": "11.1.0",
+    "postcss-nesting": "11.2.1",
     "postcss-preset-env": "7.8.3",
     "prettier": "2.8.4",
     "prettier-plugin-astro": "0.8.0",
