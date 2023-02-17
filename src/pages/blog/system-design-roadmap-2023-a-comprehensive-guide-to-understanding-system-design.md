@@ -10,16 +10,16 @@ description: This comprehensive guide provides an overview of the fundamentals
   tutorials, blogs, and podcasts to further your understanding of system design.
 date: 2023-02-17T00:36:19.145Z
 lang: en
-cover: public/uploads/system-design-roadmap-2023.png
+cover: /uploads/system-design-roadmap-2023.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
   - system design
 categories:
   - system design
-draft: true
+draft: false
 ---
-![System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design](public/uploads/system-design-roadmap-2023.png "System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design")
+![System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design](/uploads/system-design-roadmap-2023.png "System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design")
 
 As a software developer, learning system design is crucial for career growth and preparing for more senior roles or coding interviews. System design refers to the process of defining, creating, and designing systems that meet the specific objectives and requirements of an organization. In this article, we'll go over what you need to know about system design, including its key aspects, and provide some resources to get started.
 
