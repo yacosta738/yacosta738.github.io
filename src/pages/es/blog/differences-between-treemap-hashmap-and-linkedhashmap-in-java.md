@@ -16,7 +16,8 @@ categories:
   - development
 draft: false
 ---
-![Diferencias entre TreeMap, HashMap y LinkedHashMap en Java](/uploads/map-diagram.png "Diferencias entre TreeMap, HashMap y LinkedHashMap en Java")
+
+![Diferencias entre TreeMap, HashMap y LinkedHashMap en Java](/uploads/map-diagram.png 'Diferencias entre TreeMap, HashMap y LinkedHashMap en Java')
 
 Java ofrece tres clases que implementan la interfaz Map: HashMap, LinkedHashMap y TreeMap. Cada una de estas clases tiene sus propias características que las hacen adecuadas para diferentes casos de uso. Además, Java también ofrece la interfaz SortedMap, que extiende la interfaz Map y proporciona métodos adicionales para trabajar con mapas ordenados. En este artículo, nos centraremos en las diferencias entre TreeMap, HashMap y LinkedHashMap en Java.
 

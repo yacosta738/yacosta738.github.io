@@ -19,19 +19,20 @@ categories:
   - development
 draft: false
 ---
-![¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!](/uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif "¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!")
+
+![¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!](/uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif '¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!')
 
 Si estás buscando mejorar tus pruebas unitarias e integración en Java, ¡tengo buenas noticias para ti! Esta es una excelente oportunidad para aumentar la velocidad y la calidad de tus pruebas. En este artículo le proporcionaré una visión general de 7 bibliotecas útiles que puede usar para mejorar su proceso de pruebas. Estas bibliotecas le ayudarán a simplificar el proceso de desarrollo, reducir el tiempo de prueba y garantizar que su código sea de alta calidad. Algunas de estas bibliotecas le permiten vincular sus pruebas para facilitar la identificación de puntos débiles en su código, otras le permiten escribir pruebas unitarias con menos líneas de código y algunas incluso le permiten realizar pruebas de integración de manera eficiente. En última instancia, estas bibliotecas le permitirán aprovechar al máximo el tiempo que dedica a escribir pruebas y optimizar su código para que sea más robusto. Si estás listo para mejorar tus pruebas unitarias e integración en Java, ¡sigue leyendo!
 
 Hablaremos de las siguientes bibliotecas:
 
-* AssertJ
-* Awaitility
-* Mockito
-* Wiser
-* Memoryfilesystem
-* WireMock
-* Testcontainers
+- AssertJ
+- Awaitility
+- Mockito
+- Wiser
+- Memoryfilesystem
+- WireMock
+- Testcontainers
 
 Examinemos cada uno con más detalle.
 
@@ -85,7 +86,7 @@ verify(mockedList).add("one");
 verify(mockedList).clear();
 ```
 
-### \***\*Wiser\****
+### \***\*Wiser\*\***
 
 Mantener tu código cerca de producción y no depender únicamente de mocks es una estrategia viable. Por ejemplo, cuando se envían correos electrónicos, no es necesario crear mocks de todo el código de correo electrónico o enviarlos realmente a través de Gmail o Amazon SES. En su lugar, puedes utilizar un pequeño servidor SMTP embebido en Java llamado Wiser.
 

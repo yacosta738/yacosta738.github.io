@@ -1,6 +1,6 @@
 ---
-title: "System Design Roadmap 2023: A Comprehensive Guide to Understanding
-  System Design"
+title: 'System Design Roadmap 2023: A Comprehensive Guide to Understanding
+  System Design'
 description: This comprehensive guide provides an overview of the fundamentals
   of system design and outlines key aspects such as performance vs scalability,
   latency vs throughput, availability vs consistency, available patterns,
@@ -19,7 +19,8 @@ categories:
   - system design
 draft: false
 ---
-![System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design](/uploads/system-design-roadmap-2023.png "System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design")
+
+![System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design](/uploads/system-design-roadmap-2023.png 'System Design Roadmap 2023: A Comprehensive Guide to Understanding System Design')
 
 As a software developer, learning system design is crucial for career growth and preparing for more senior roles or coding interviews. System design refers to the process of defining, creating, and designing systems that meet the specific objectives and requirements of an organization. In this article, we'll go over what you need to know about system design, including its key aspects, and provide some resources to get started.
 
