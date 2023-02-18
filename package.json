@@ -55,7 +55,7 @@
     "prettier-plugin-astro": "0.8.0",
     "prettier-plugin-tailwindcss": "0.2.3",
     "rehype-accessible-emojis": "^0.3.2",
-    "sass": "1.58.2",
+    "sass": "1.58.3",
     "start-server-and-test": "1.15.4",
     "vue": "3.2.47"
   },
