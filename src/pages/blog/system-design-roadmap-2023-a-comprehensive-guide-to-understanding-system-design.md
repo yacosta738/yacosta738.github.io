@@ -14,7 +14,8 @@ cover: /uploads/system-design-roadmap-2023.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
-  - system design, architecture
+  - system design
+  - architecture
 categories:
   - Software Development
 draft: false

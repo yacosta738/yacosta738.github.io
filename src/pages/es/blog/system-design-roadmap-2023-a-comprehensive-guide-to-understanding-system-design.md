@@ -16,6 +16,7 @@ author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - diseño de sistemas
+  - arquitectura
 categories:
   - Desarrollo de software
 draft: false
