@@ -9,6 +9,8 @@
   "url": "https://www.mercadolibre.com.uy",
   "published": true,
   "achievement": [
-    "Desarrollé y mantuve APIs internas para detección de comportamiento malicioso, mejorando seguridad y preveniendo posibles amenazas"
+    "Desarrollé y mantuve APIs internas para detectar comportamiento malicioso, mejorando la seguridad y previniendo posibles amenazas. También implementé políticas y evaluadores para detectar y prevenir el uso malintencionado durante los procesos de registro e inicio de sesión en MercadoLibre.com y MercadoPago.com",
+    "Colaboré con equipos interfuncionales para diseñar e implementar soluciones de software escalables y eficientes para operaciones de comercio electrónico",
+    "Realicé pruebas y análisis exhaustivos para garantizar la confiabilidad y el rendimiento de las aplicaciones de software, minimizando el tiempo de inactividad y mejorando la experiencia del usuario"
   ]
 }
