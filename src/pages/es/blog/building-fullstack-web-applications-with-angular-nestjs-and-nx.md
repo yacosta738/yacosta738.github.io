@@ -15,7 +15,7 @@ tags:
   - Nx
   - TypeScript
 categories:
-  - Programming
+  - Desarrollo de software
 draft: false
 ---
 

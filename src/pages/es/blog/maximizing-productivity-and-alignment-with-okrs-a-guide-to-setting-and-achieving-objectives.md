@@ -18,12 +18,9 @@ cover: /uploads/okrs.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
-  - objectives
-  - organization
-  - productivity
+  - okrs
 categories:
-  - management
-  - productivity
+  - Productividad
 draft: false
 ---
 

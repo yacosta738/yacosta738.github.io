@@ -16,9 +16,8 @@ tags:
   - TypeScript
   - Decorators
   - VueX
-  - Components
 categories:
-  - Programming
+  - Software Development
 draft: false
 ---
 

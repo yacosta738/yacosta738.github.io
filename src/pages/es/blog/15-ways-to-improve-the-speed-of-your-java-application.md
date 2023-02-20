@@ -17,9 +17,8 @@ author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - Java
-  - Performance
 categories:
-  - development
+  - Desarrollo de software
 draft: false
 ---
 

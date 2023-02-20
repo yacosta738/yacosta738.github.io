@@ -15,8 +15,7 @@ tags:
   - kotlin
   - testing
 categories:
-  - testing
-  - development
+  - Desarrollo de software
 draft: false
 ---
 

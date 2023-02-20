@@ -5,8 +5,8 @@ date: 2020-12-18
 description: El selector de imágenes es un componente común que a menudo necesitamos para los perfiles de usuario y otras cosas. Cómo agregar un selector de imágenes para aletear para seleccionar imágenes de la galería o la cámara.
 author: Yuniel Acosta
 lang: es
-tags: [Flutter, Image Picker, Dart]
-categories: [Programming]
+tags: [Flutter, Dart]
+categories: [Desarrollo de software]
 cover: /uploads/portada-add-images-selector-flutter.webp
 draft: false
 ---

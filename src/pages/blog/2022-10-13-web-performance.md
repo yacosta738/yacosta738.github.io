@@ -13,13 +13,11 @@ cover: /uploads/wep-performance.webp
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
-  - web
   - html
   - javascript
-  - TTFB
+  - typescript
 categories:
-  - web
-  - development
+  - Software Development
 draft: false
 ---
 

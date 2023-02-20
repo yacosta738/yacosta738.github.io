@@ -5,7 +5,7 @@ description: Gridsome is a Vue.js-powered, modern site generator for building th
 author: Yuniel Acosta
 lang: en
 tags: ['frontend', 'gridsome', 'Vuejs']
-categories: [Development]
+categories: [Software Development]
 cover: /uploads/gridsome-portada.webp
 layout: ../../components/templates/BlogPostTemplate.astro
 draft: false

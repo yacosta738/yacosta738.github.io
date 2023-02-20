@@ -14,11 +14,11 @@ lang: es
 tags:
   - VS Code
   - IDE
-  - Text Editor
-  - extensions
+  - Editor de texto
+  - extensiones
   - plugins
 categories:
-  - Tooling
+  - Sistemas operativos y herramientas
 draft: false
 ---
 

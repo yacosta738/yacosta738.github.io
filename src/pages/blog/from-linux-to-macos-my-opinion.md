@@ -16,7 +16,7 @@ tags:
   - Linux
   - macOS
 categories:
-  - OS
+  - Operating Systems and Tools
 draft: false
 ---
 

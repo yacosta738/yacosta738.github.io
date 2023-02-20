@@ -9,13 +9,9 @@ lang: en
 tags:
   - Proxy
   - Linux
-  - Windscribe
-  - Proxifier
   - VPN
-  - Redsock
-  - Proxychains
 categories:
-  - Tooling
+  - Operating Systems and Tools
 draft: false
 ---
 

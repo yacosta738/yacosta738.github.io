@@ -17,10 +17,8 @@ tags:
   - web
   - html
   - javascript
-  - TTFB
 categories:
-  - web
-  - development
+  - Desarrollo de software
 draft: false
 ---
 
