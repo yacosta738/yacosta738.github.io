@@ -14,10 +14,10 @@ cover: /uploads/5-must-have-tools-for-2023.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
-  - Artificial Intelligence
+  - AI
 categories:
   - Artificial Intelligence
-  - Tooling
+  - Operating Systems and Tools
 draft: false
 ---
 

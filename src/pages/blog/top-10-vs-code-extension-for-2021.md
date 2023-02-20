@@ -18,7 +18,7 @@ tags:
   - extensions
   - plugins
 categories:
-  - Tooling
+  - Operating Systems and Tools
 draft: false
 ---
 

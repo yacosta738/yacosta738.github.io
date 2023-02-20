@@ -16,7 +16,7 @@ tags:
   - java
   - jvm
 categories:
-  - development
+  - Software Development
 draft: false
 ---
 

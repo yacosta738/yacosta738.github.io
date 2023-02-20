@@ -9,12 +9,9 @@ author: Yuniel Acosta
 lang: en
 tags:
   - Github
-  - User Profile
-  - markdown
-  - gh
+  - Markdown
 categories:
-  - Github
-  - Development
+  - Software Development
 draft: false
 ---
 

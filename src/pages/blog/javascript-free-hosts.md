@@ -6,7 +6,7 @@ date: 2022-09-28
 description: If you are learning how to create web pages and want to try free hosting, I offer you 6 options for you to practice. Although, you can also use them in production.
 lang: en
 tags: [angular, astro, javascript, react, typescript, vuejs]
-categories: [development, frontend, programming]
+categories: [Software Development]
 layout: ../../components/templates/BlogPostTemplate.astro
 draft: false
 ---

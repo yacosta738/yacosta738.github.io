@@ -20,8 +20,7 @@ tags:
   - organization
   - productivity
 categories:
-  - management
-  - productivity
+  - Productivity
 draft: false
 ---
 

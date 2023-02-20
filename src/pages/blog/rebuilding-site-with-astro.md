@@ -5,7 +5,7 @@ cover: /uploads/rebuild-with-astro.webp
 author: Yuniel Acosta
 lang: en
 tags: [Gridsome, Astro, Vuejs, Nuxt]
-categories: [Programming, Development]
+categories: [Software Development]
 description: Astro is an innovative static site generator that focuses on static generation instead of JS framework. But, how much better is it?
 layout: ../../components/templates/BlogPostTemplate.astro
 draft: false

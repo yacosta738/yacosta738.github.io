@@ -12,7 +12,7 @@ tags:
   - HTML
   - CSS
 categories:
-  - Programming
+  - Desarrollo de software
 draft: false
 ---
 

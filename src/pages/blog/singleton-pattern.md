@@ -13,8 +13,7 @@ layout: ../../components/templates/BlogPostTemplate.astro
 tags:
   - Design pattern
 categories:
-  - architecture
-  - development
+  - Software Development
 draft: false
 ---
 

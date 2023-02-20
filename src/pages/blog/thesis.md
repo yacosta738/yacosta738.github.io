@@ -6,7 +6,7 @@ author: 'Yuniel Acosta'
 lang: en
 cover: /uploads/thesis.webp
 tags: [R, GIS, GLCF]
-categories: [Programming]
+categories: [Software Development]
 description: This case study allowed the creation of archives in formats of spatiotemporal scientific data that can be used by several institutions that conduct research on the use of the soils. The tools developed are based on free software and can be used in different areas of application.
 layout: '../../components/templates/ExternalPostLayout.astro'
 draft: false

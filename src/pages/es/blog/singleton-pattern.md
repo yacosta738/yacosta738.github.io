@@ -12,10 +12,9 @@ cover: /uploads/singleton-pattern.webp
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
-  - Design pattern
+  - patrones de diseño
 categories:
-  - architecture
-  - development
+  - Desarrollo de software
 draft: false
 ---
 
