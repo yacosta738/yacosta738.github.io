@@ -8,7 +8,7 @@ description: Este artículo proporciona una visión general de algunos de los
   habilidades en Java y convertirse en un mejor desarrollador.
 date: 2023-02-22T19:52:36.634Z
 lang: es
-cover: public/uploads/java-developers-check-out-these-github-repositories-.png
+cover: /uploads/java-developers-check-out-these-github-repositories-.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -17,7 +17,7 @@ categories:
   - Desarrollo de Software
 draft: true
 ---
-![Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!](public/uploads/java-developers-check-out-these-github-repositories-.png "Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!")
+![Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!](/uploads/java-developers-check-out-these-github-repositories-.png "Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!")
 
 Java es amado por su robusta comunidad y su amplia gama de recursos disponibles. Para ilustrar este punto, estoy enumerando algunos de mis repositorios favoritos de Java en GitHub. Estos son repositorios que uso regularmente, y espero que los encuentres tan útiles como yo.
 
