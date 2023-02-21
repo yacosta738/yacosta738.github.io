@@ -7,7 +7,7 @@ description: This article provides an overview of some of the best GitHub
   looking to strengthen their Java skills and become a better developer.
 date: 2023-02-22T19:49:09.902Z
 lang: en
-cover: public/uploads/java-developers-check-out-these-github-repositories-.png
+cover: /uploads/java-developers-check-out-these-github-repositories-.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -16,7 +16,7 @@ categories:
   - Software Development
 draft: true
 ---
-![Java Developers: Check Out These GitHub Repositories!](public/uploads/java-developers-check-out-these-github-repositories-.png "Java Developers: Check Out These GitHub Repositories!")
+![Java Developers: Check Out These GitHub Repositories!](/uploads/java-developers-check-out-these-github-repositories-.png "Java Developers: Check Out These GitHub Repositories!")
 
 Java is beloved for its robust community and its wide range of available resources. To illustrate this point, I'm listing some of my favorite Java repositories on GitHub. These are repositories I use regularly, and I hope you find them as useful as I do.
 
