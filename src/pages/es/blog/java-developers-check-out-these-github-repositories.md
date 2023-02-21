@@ -15,7 +15,7 @@ tags:
   - Java
 categories:
   - Desarrollo de Software
-draft: true
+draft: false
 ---
 ![Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!](/uploads/java-developers-check-out-these-github-repositories-.png "Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!")
 
