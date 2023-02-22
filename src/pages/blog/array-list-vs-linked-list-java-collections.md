@@ -43,7 +43,7 @@ Let’s discuss these time complexities:
 * `Iterator.remove()` is **\*O(n)**.*
 * `ListIterator.add(E element)` is **\*O(n)**.*
 
-![ArrayList.png](public/uploads/arraylist.png)
+![ArrayList.png](public/uploads/arraylist.png "ArrayList")
 
 ## **LinkedList<E>:**
 
@@ -53,7 +53,7 @@ Let’s discuss these time complexities:
 * `Iterator.remove()` is O(1). **\*One of the main benefits of `LinkedList<E>`** .*
 * `ListIterator.add(E element)` is O(1). **\*One of the main benefits of `LinkedList<E>`** .*
 
-![LinkedList.png](public/uploads/linkedlist.png)
+![LinkedList.png](public/uploads/linkedlist.png "LinkedList")
 
 ## **Which One Takes More Memory?**
 
