@@ -5,7 +5,7 @@ description: This article compares the ArrayList and LinkedList data structures
   various operations of these two data structures. Additionally, it discusses
   the memory usage differences between the two and provides guidance on when to
   use each one based on specific use cases.
-date: 2023-02-22T12:42:35.461Z
+date: 2023-02-22T21:42:35.461Z
 lang: en
 cover: /uploads/array-list-vs-linked-list-java-collections.png
 author: Yuniel Acosta
