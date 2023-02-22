@@ -7,7 +7,7 @@ description: Este artículo compara las estructuras de datos ArrayList y
   orientación sobre cuándo usar cada una según casos de uso específicos.
 date: 2023-02-22T12:51:48.976Z
 lang: es
-cover: public/uploads/array-list-vs-linked-list-java-collections.png
+cover: /uploads/array-list-vs-linked-list-java-collections.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -18,7 +18,7 @@ categories:
   - Desarrollo de Software
 draft: true
 ---
-![Lista de array vs. lista enlazada de colecciones de Java](public/uploads/array-list-vs-linked-list-java-collections.png "Lista de array vs. lista enlazada de colecciones de Java")
+![Lista de array vs. lista enlazada de colecciones de Java](/uploads/array-list-vs-linked-list-java-collections.png "Lista de array vs. lista enlazada de colecciones de Java")
 
 En la programación informática, la elección de la estructura de datos puede influir significativamente en la eficiencia y el rendimiento de un algoritmo. Dos estructuras de datos populares en Java son ArrayList y LinkedList. Aunque ambas implementan la interfaz List, difieren en cómo almacenan y manipulan los datos. ArrayList es una implementación de una matriz redimensionable, mientras que LinkedList es una lista doblemente enlazada. Cada estructura tiene sus propias ventajas y desventajas, por lo que es importante entender estas diferencias para seleccionar la adecuada para una tarea particular. En este artículo, compararemos ArrayList y LinkedList en términos de sus complejidades de tiempo para varias operaciones y su uso de memoria. También discutiremos escenarios en los que cada estructura es más adecuada.
 
