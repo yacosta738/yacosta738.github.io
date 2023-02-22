@@ -7,7 +7,7 @@ description: This article compares the ArrayList and LinkedList data structures
   use each one based on specific use cases.
 date: 2023-02-22T12:42:35.461Z
 lang: en
-cover: public/uploads/array-list-vs-linked-list-java-collections.png
+cover: /uploads/array-list-vs-linked-list-java-collections.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -18,7 +18,7 @@ categories:
   - Software Development
 draft: true
 ---
-![Array list vs linked list java collections](public/uploads/array-list-vs-linked-list-java-collections.png "Array list vs linked list java collections")
+![Array list vs linked list java collections](/uploads/array-list-vs-linked-list-java-collections.png "Array list vs linked list java collections")
 
 In computer programming, the choice of data structure can significantly influence the efficiency and performance of an algorithm. Two popular data structures in Java are the ArrayList and the LinkedList. Although both implement the List interface, they differ in how they store and manipulate data. The ArrayList is an implementation of a resizable array, while the LinkedList is a doubly-linked list. Each structure has its own advantages and disadvantages, so it's important to understand these differences in order to select the right one for a particular task. In this article, we'll compare the ArrayList and LinkedList in terms of their time complexities for various operations and their memory usage. We'll also discuss scenarios in which each structure is most suitable.
 
