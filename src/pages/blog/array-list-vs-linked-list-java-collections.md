@@ -16,7 +16,7 @@ tags:
   - jvm
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![Array list vs linked list java collections](/uploads/array-list-vs-linked-list-java-collections.png "Array list vs linked list java collections")
 
