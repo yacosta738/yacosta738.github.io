@@ -1,5 +1,5 @@
 ---
-title: Array list vs linked list java collections
+title: Lista de array vs. lista enlazada de colecciones de Java
 description: Este artículo compara las estructuras de datos ArrayList y
   LinkedList en Java. Explica las diferencias en la implementación y complejidad
   temporal para varias operaciones de estas dos estructuras de datos. Además, se
