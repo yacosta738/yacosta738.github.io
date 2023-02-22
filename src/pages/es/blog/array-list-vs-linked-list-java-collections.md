@@ -16,7 +16,7 @@ tags:
   - jvm
 categories:
   - Desarrollo de Software
-draft: true
+draft: false
 ---
 ![Lista de array vs. lista enlazada de colecciones de Java](/uploads/array-list-vs-linked-list-java-collections.png "Lista de array vs. lista enlazada de colecciones de Java")
 
