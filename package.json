@@ -17,7 +17,7 @@
     "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test'"
   },
   "devDependencies": {
-    "@astrojs/image": "0.15.0",
+    "@astrojs/image": "0.15.1",
     "@astrojs/sitemap": "1.1.0",
     "@astrojs/tailwind": "3.0.1",
     "@astrojs/vue": "2.0.1",
