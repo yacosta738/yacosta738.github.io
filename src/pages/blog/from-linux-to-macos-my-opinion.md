@@ -19,7 +19,6 @@ categories:
   - Operating Systems and Tools
 draft: false
 ---
-
 ![https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80](https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80 'macos')
 
 Several months ago, I started using macOS as my main operating system. To my surprise, the transition from Linux, especially from [Archlinux](https://archlinux.org/), was not as easy as I thought. Before using MacOS, I had the idea that it was easy to use for both expert users and those who don't get along with technology.
@@ -53,7 +52,6 @@ Lists of tools I use daily:
    9. [`btop`](https://github.com/aristocratos/btop) resource monitor that shows usage and statistics for the processor, memory, disks, network, and processes.[`du-dust`](https://github.com/bootandy/dust) Una versión más intuitiva de du en rust
    10. `sl` Cure your bad habit of typing badly.
    11. `tldr` helps you summarize any text into concise and easy-to-digest content so you can free yourself from excess information.
-
 2. Software development tools
 
    1. Integrated Development Environments and Text Editors
@@ -61,7 +59,6 @@ Lists of tools I use daily:
       1. The JetBrains family (Intellij and Fleet).
       2. VS Code
       3. Neovim with the theme [NvChad](https://nvchad.com/).
-
    2. Docker (Colima)
    3. Rust
    4. Java/Kotlin
@@ -70,8 +67,7 @@ Lists of tools I use daily:
    7. Notion
    8. [Sdkman](https://sdkman.io/)
    9. [fnm](https://github.com/Schniz/fnm)
-
-3. The Linux terminal used [Alacritty](https://github.com/alacritty/alacritty), written in Rust, so it can also be used on macOS. However, there is a better alternative called [Warp](https://www.warp.dev/), which, despite being written in Rust, only has support for macOS at the moment. This tool is one of the most impressive terminals of recent years. Its slogan is "the terminal of the 21st century" and it is, as it looks like an IDE, plus it uses Artificial Intelligence to suggest when you have made a mistake or how to execute a command.
+3. The Linux terminal used [Alacritty](https://github.com/alacritty/alacritty), written in Rust, so it can also be used on macOS. However, there is a better alternative called [Warp](https://app.warp.dev/referral/26QGQ6), which, despite being written in Rust, only has support for macOS at the moment. This tool is one of the most impressive terminals of recent years. Its slogan is "the terminal of the 21st century" and it is, as it looks like an IDE, plus it uses Artificial Intelligence to suggest when you have made a mistake or how to execute a command.
 4. On Linux, I used [Ulauncher](https://ulauncher.io/) to improve my daily productivity on the computer. Custom extensions and scripts allowed me to be much more efficient. macOS, things changed with the arrival of [Raycast](https://www.raycast.com/), written in Rust, and, for now, only available for macOS. [Raycast](https://www.raycast.com/) far surpasses [Ulauncher](https://ulauncher.io/), offering better performance, as well as extensions for almost everything, with excellent support. Since I started using it, I haven't had any problems, unlike [Ulauncher](https://ulauncher.io/) on Linux, which occasionally presented some incompatibility with some of its extensions.
 5. I discovered [Rectangle](https://rectangleapp.com/) for the macOS ecosystem since the window management of macOS is not as good as in other operating systems. This tool meets the needs and deficiencies of MacOS for window management.
 6. Rocket is only available for macOS and allows us to use emojis directly when writing using a trigger such as (:check).
