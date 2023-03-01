@@ -1,5 +1,6 @@
 ---
-title: "[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code"
+title: "[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin
+  Modificar el Código."
 description: El artículo explica el principio de diseño Open-Closed (OCP) en el
   contexto de los principios SOLID. Este principio establece que una clase debe
   estar abierta para la extensión pero cerrada para la modificación, lo que
