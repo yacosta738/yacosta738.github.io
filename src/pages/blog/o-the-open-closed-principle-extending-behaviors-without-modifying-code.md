@@ -8,7 +8,7 @@ description: In the article "The Single Responsibility Principle," the author
   understandable code.
 date: 2023-03-01T18:13:14.418Z
 lang: en
-cover: public/uploads/open-closed-principle.png
+cover: /uploads/open-closed-principle.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -18,7 +18,7 @@ categories:
   - Software Development
 draft: true
 ---
-![[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code](public/uploads/open-closed-principle.png "[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code")
+![[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code](/uploads/open-closed-principle.png "[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code")
 
 The Open-Closed Principle (OCP) is a fundamental principle of the SOLID design principles. It promotes the idea that a class should be designed to be open for extension but closed for modification. This means that the behavior of a class should be easily extendable without changing the existing code. By adhering to this principle, developers can create code that is more flexible, maintainable, and easier to scale.
 
