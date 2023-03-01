@@ -1,5 +1,5 @@
 ---
-title: "[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code"
+title: "[O] The Open-Closed Principle"
 description: In the article "The Single Responsibility Principle," the author
   discusses the importance of designing classes with only one responsibility or
   job. The article provides an example of violating this principle and then
