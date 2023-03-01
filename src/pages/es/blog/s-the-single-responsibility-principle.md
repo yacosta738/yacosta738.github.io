@@ -16,7 +16,7 @@ tags:
   - solid
 categories:
   - desarrollo de software
-draft: true
+draft: false
 ---
 ![[S] El Principio de Responsabilidad Única](/uploads/single-responsibility-principle.png "[S] El Principio de Responsabilidad Única")
 
