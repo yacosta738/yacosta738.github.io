@@ -15,7 +15,7 @@ tags:
   - solid
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![[S] The Single Responsibility Principle](/uploads/single-responsibility-principle.png "[S] The Single Responsibility Principle")
 
