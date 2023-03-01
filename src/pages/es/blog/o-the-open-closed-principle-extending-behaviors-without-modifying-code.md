@@ -17,7 +17,7 @@ tags:
   - solid
 categories:
   - desarrollo de software
-draft: true
+draft: false
 ---
 ![[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin Modificar el Código.](/uploads/open-closed-principle.png "[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin Modificar el Código.")
 
