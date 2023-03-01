@@ -16,7 +16,7 @@ tags:
   - solid
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code](/uploads/open-closed-principle.png "[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code")
 
