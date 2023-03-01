@@ -20,7 +20,6 @@ categories:
   - Sistemas operativos y herramientas
 draft: false
 ---
-
 ![macos](https://images.unsplash.com/photo-1620121692029-d088224ddc74?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80 'macos')
 
 Hace varios meses, comencé a usar MacOS como mi sistema operativo principal. Para mi sorpresa, la transición desde Linux, especialmente desde [Archlinux](https://archlinux.org/), no fue tan sencilla como pensaba. Antes de usar MacOS, tenía la idea de que era fácil de usar para usuarios expertos y aquellos que no se llevan bien con la tecnología.
@@ -55,7 +54,6 @@ Listas de herramientas que utilizo en mi día a día:
    10. [`du-dust`](https://github.com/bootandy/dust) Una versión más intuitiva de du en rust
    11. `sl` Cura tu mal hábito de tipear mal.
    12. `tldr` Esto te ayuda a resumir cualquier texto en contenido conciso y fácil de digerir para que te liberes del exceso de información.
-
 2. Herramientas para el desarrollo de software
 
    1. IDEs y Editores de texto
@@ -63,7 +61,6 @@ Listas de herramientas que utilizo en mi día a día:
       1. La familia de JetBrains (Intellij y Fleet)
       2. VS Code
       3. Neovim con el tema [NvChad](https://nvchad.com/)
-
    2. Docker (Colima)
    3. Rust
    4. Java/Kotlin
@@ -72,8 +69,7 @@ Listas de herramientas que utilizo en mi día a día:
    7. Notion
    8. [Sdkman](https://sdkman.io/)
    9. [fnm](https://github.com/Schniz/fnm)
-
-3. La terminal en Linux usaba [Alacritty](https://github.com/alacritty/alacritty), que está escrita en Rust, por lo que en MacOS también se puede usar. Sin embargo, existe una mejor alternativa llamada [Warp](https://www.warp.dev/), que a pesar de estar escrita en Rust, solo tiene soporte para MacOS por el momento. Esta herramienta es una de las que más me ha llamado la atención de las terminales de los últimos años. Su eslogan es "la terminal del siglo XXI" y literalmente es así, pues parece un IDE, además de que usa Inteligencia Artificial para sugerirte cuándo te has equivocado o cómo ejecutar un comando.
+3. La terminal en Linux usaba [Alacritty](https://github.com/alacritty/alacritty), que está escrita en Rust, por lo que en MacOS también se puede usar. Sin embargo, existe una mejor alternativa llamada [Warp](https://app.warp.dev/referral/26QGQ6), que a pesar de estar escrita en Rust, solo tiene soporte para MacOS por el momento. Esta herramienta es una de las que más me ha llamado la atención de las terminales de los últimos años. Su eslogan es "la terminal del siglo XXI" y literalmente es así, pues parece un IDE, además de que usa Inteligencia Artificial para sugerirte cuándo te has equivocado o cómo ejecutar un comando.
 4. En Linux, usaba [Ulauncher](https://ulauncher.io/) para mejorar mi productividad diaria frente al ordenador. Las extensiones y scripts personalizados me permitían ser mucho más eficiente. Con MacOS, la cosa cambió con la llegada de [Raycast](https://www.raycast.com/), escrito en Rust y, por ahora, solo disponible para MacOS. [Raycast](https://www.raycast.com/) supera con creces a [Ulauncher](https://ulauncher.io/), ofreciendo un mejor rendimiento, así como extensiones para casi todo, con un excelente soporte. Desde que lo uso, no he tenido ningún problema, a diferencia de [Ulauncher](https://ulauncher.io/) en Linux, que, de vez en cuando, presentaba alguna incompatibilidad con algunas de sus extensiones.
 5. Descubrí [Rectangle](https://rectangleapp.com/) para el ecosistema de MacOS, ya que la gestión de ventanas de MacOS no es tan buena como en otros sistemas operativos. Esta herramienta satisface las necesidades y deficiencias de MacOS para la gestión de ventanas.
 6. [Rocket](https://matthewpalmer.net/rocket/) solo está disponible para macOS y nos permite usar emojis directamente al escribir usando un desencadenador como (:check).
