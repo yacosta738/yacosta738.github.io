@@ -20,7 +20,7 @@ draft: false
 
 ![Your relational data. Objectively. - Hibernate ORM](https://hibernate.org/images/hibernate-logo.svg)
 
-The [dialect](<(https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects)>) specifies the type of database used in hibernate so that hibernate generates the appropriate type of SQL statements. For connecting any hibernate application with the database, it is required to provide the configuration of SQL dialect.
+The [dialect](https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/session-configuration.html#configuration-optional-dialects) specifies the type of database used in hibernate so that hibernate generates the appropriate type of SQL statements. For connecting any hibernate application with the database, it is required to provide the configuration of SQL dialect.
 
 > Always set the `hibernate.dialect` property to the correct `org.hibernate.dialect.Dialect` subclass for your database. If you specify a dialect, Hibernate will use sensible defaults for some of the other properties listed above. This means that you will not have to specify them manually.
 
