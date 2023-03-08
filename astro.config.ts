@@ -8,7 +8,6 @@ import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
-import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis'
 
 import compress from 'astro-compress'
 
@@ -249,9 +248,9 @@ export default defineConfig({
 								name: 'tech',
 								widget: 'relation',
 								collection: 'tech',
-								searchFields: ['name'],
-								valueField: 'name',
-								displayFields: ['name']
+								search_fields: ['name'],
+								value_field: 'name',
+								display_fields: ['name']
 							},
 							{
 								label: 'Show in projects',
@@ -291,9 +290,9 @@ export default defineConfig({
 								name: 'tech',
 								widget: 'relation',
 								collection: 'tech',
-								searchFields: ['name'],
-								valueField: 'name',
-								displayFields: ['name']
+								search_fields: ['name'],
+								value_field: 'name',
+								display_fields: ['name']
 							},
 							{
 								label: 'Mostrar en proyectos',
@@ -319,7 +318,7 @@ export default defineConfig({
 		plugins: []
 	},
 	markdown: {
-		remarkPlugins: [remarkToc, rehypeAccessibleEmojis, remarkReadingTime],
+		remarkPlugins: [remarkToc, remarkReadingTime],
 		gfm: true
 	}
 })
