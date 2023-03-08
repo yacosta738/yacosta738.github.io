@@ -8,7 +8,7 @@
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```
+```shell
 drwxr-xr-x    - acosta 10 Sep 10:30 .
 .rw-r--r--  303 acosta 31 Aug 09:25 ├── astro-i18next.config.js
 .rw-r--r--  994 acosta  9 Sep 19:01 ├── astro.config.js
