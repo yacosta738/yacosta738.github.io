@@ -14,7 +14,7 @@ tags:
   - Kotlin
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![[L] The Liskov Substitution Principle](/uploads/liskov-substitution-principle.png "[L] The Liskov Substitution Principle")
 
