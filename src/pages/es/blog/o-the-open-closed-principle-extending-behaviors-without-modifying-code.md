@@ -1,5 +1,5 @@
 ---
-title: "[O] El Principio Abierto-Cerrado"
+title: '[O] El Principio Abierto-Cerrado'
 description: El artículo trata sobre el Principio Abierto-Cerrado (OCP, por sus
   siglas en inglés), que es un principio fundamental de los principios de diseño
   SOLID. El OCP promueve la idea de que una clase debe diseñarse para ser
@@ -19,7 +19,8 @@ categories:
   - desarrollo de software
 draft: false
 ---
-![[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin Modificar el Código.](/uploads/open-closed-principle.png "[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin Modificar el Código.")
+
+![[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin Modificar el Código.](/uploads/open-closed-principle.png '[O] El Principio Abierto-Cerrado (OCP): Extender Comportamientos sin Modificar el Código.')
 
 El Principio Abierto-Cerrado (OCP) es un principio fundamental de los principios de diseño SOLID. Promueve la idea de que una clase debe ser diseñada para ser abierta a la extensión pero cerrada a la modificación. Esto significa que el comportamiento de una clase debe ser fácilmente extensible sin cambiar el código existente. Al adherirse a este principio, los desarrolladores pueden crear código más flexible, mantenible y escalable.
 

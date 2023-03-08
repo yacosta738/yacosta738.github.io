@@ -44,7 +44,7 @@ Debe tener conocimientos básicos sobre HTML, CSS, [Vue.js](https://vuejs.org) y
 
 Gridsome requiere **Node.js** y recomienda **Yarn**. [Cómo configurar](https://gridsome.org/docs/#prerequisites)
 
-![background](/uploads/gridsome-stack.webp)
+![background](/uploads/gridsome-stack.png)
 
 ### 1. Instalar la herramienta CLI de Gridsome
 
