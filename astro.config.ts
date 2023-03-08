@@ -249,9 +249,9 @@ export default defineConfig({
 								name: 'tech',
 								widget: 'relation',
 								collection: 'tech',
-								searchFields: ['name'],
-								valueField: 'name',
-								displayFields: ['name']
+								search_fields: ['name'],
+								value_field: 'name',
+								display_fields: ['name']
 							},
 							{
 								label: 'Show in projects',
@@ -291,9 +291,9 @@ export default defineConfig({
 								name: 'tech',
 								widget: 'relation',
 								collection: 'tech',
-								searchFields: ['name'],
-								valueField: 'name',
-								displayFields: ['name']
+								search_fields: ['name'],
+								value_field: 'name',
+								display_fields: ['name']
 							},
 							{
 								label: 'Mostrar en proyectos',
