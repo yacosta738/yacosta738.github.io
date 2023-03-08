@@ -1,10 +1,19 @@
 ---
+import BlogTemplate from 'templates:BlogTemplate'
 import Redirect from '../atoms/Redirect.vue'
 
 const { content } = Astro.props
-const { link } = content
+const { title, description, cover, lang, link } = content
+const ogImageAlt = title
 ---
-
-<div>
-	<Redirect client:only url={link} />
-</div>
+<BlogTemplate
+	title={title}
+	description={description}
+	image={cover}
+	ogImageAlt={ogImageAlt}
+	lang={lang}
+>
+	<div>
+		<Redirect client:only url={link} />
+	</div>
+</BlogTemplate>
