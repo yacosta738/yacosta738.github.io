@@ -7,16 +7,16 @@ description: The Liskov substitution principle is a fundamental rule in software
   predictability.
 date: 2023-03-08T20:53:25.904Z
 lang: en
-cover: public/uploads/liskov-substitution-principle.png
+cover: /uploads/liskov-substitution-principle.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
   - Kotlin
 categories:
   - Software Development
-draft: true
+draft: false
 ---
-![[L] The Liskov Substitution Principle](public/uploads/liskov-substitution-principle.png "[L] The Liskov Substitution Principle")
+![[L] The Liskov Substitution Principle](/uploads/liskov-substitution-principle.png "[L] The Liskov Substitution Principle")
 
 The Liskov substitution principle (LSP) is the third principle of the SOLID design principles. It states that subtypes should be substitutable for their base types. Specifically, objects of a superclass should be able to be replaced with objects of a subclass without altering the correctness of the program. This principle helps to ensure that objects of a subclass can be used interchangeably with objects of the superclass, without introducing any unexpected behavior.
 
