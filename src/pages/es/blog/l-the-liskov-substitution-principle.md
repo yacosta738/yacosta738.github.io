@@ -1,5 +1,5 @@
 ---
-title: "[L] El principio de sustitución de Liskov"
+title: '[L] El principio de sustitución de Liskov'
 description: El principio de sustitución de Liskov es una regla fundamental en
   el desarrollo de software que asegura la intercambiabilidad de objetos de una
   subclase con los de una superclase. No seguir esta regla puede llevar a
@@ -16,7 +16,8 @@ categories:
   - Software Development
 draft: false
 ---
-![[L] The Liskov Substitution Principle](/uploads/liskov-substitution-principle.png "[L] The Liskov Substitution Principle")
+
+![[L] The Liskov Substitution Principle](/uploads/liskov-substitution-principle.png '[L] The Liskov Substitution Principle')
 
 El principio de sustitución de Liskov (LSP) es el tercer principio de los principios de diseño SOLID. Se establece que los subtipos deben ser sustituibles por sus tipos base. Específicamente, los objetos de una superclase deben poder ser reemplazados por objetos de una subclase sin alterar la corrección del programa. Este principio ayuda a garantizar que los objetos de una subclase puedan ser utilizados de forma intercambiable con los objetos de la superclase, sin introducir ningún comportamiento inesperado.
 
