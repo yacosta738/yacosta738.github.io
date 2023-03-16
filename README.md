@@ -3,6 +3,7 @@
 [![Github Pages Astro CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0c5e5ad4-8565-4a37-b181-b4442505a68b/deploy-status)](https://app.netlify.com/sites/yunielacosta/deploys)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 
 ## 🚀 Project Structure
 
