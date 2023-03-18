@@ -8,7 +8,7 @@ description: Este artículo discute el Principio de Inversión de Dependencias
   Kotlin para crear una base de código más adaptable y mantenible.
 date: 2023-03-18T11:10:29.501Z
 lang: es
-cover: public/uploads/dependency-inversion-principle.png
+cover: /uploads/dependency-inversion-principle.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -18,7 +18,7 @@ categories:
   - desarrollo de software
 draft: true
 ---
-![Principio de Inversión de Dependencias](public/uploads/dependency-inversion-principle.png "Principio de Inversión de Dependencias")
+![Principio de Inversión de Dependencias](/uploads/dependency-inversion-principle.png "Principio de Inversión de Dependencias")
 
 
 El Principio de Inversión de Dependencias (DIP) es el quinto principio de los principios de diseño SOLID. Este principio establece que los módulos de alto nivel no deben depender de los módulos de bajo nivel, sino que ambos deben depender de abstracciones. Esto significa que una clase debe depender de abstracciones en lugar de implementaciones específicas. Este principio promueve un diseño en el que los módulos de alto nivel, como la lógica de negocios, no están fuertemente acoplados a los módulos de bajo nivel, como la capa de acceso a datos. Esto hace que el código sea más flexible y más fácil de mantener.
