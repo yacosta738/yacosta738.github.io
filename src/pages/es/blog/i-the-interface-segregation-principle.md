@@ -15,7 +15,7 @@ tags:
   - solid
 categories:
   - desarrollo de software
-draft: true
+draft: false
 ---
 ![Principio de Segregación de Interfaces](/uploads/interface-segregation-principle.png "Principio de Segregación de Interfaces")
 
