@@ -1,5 +1,5 @@
 ---
-title: "[I] The Interface Segregation Principle"
+title: "[I] Principio de Segregación de Interfaces"
 description: Este artículo explica el Principio de Segregación de Interfaces
   (ISP), un principio de diseño SOLID. ISP establece que una clase solo debe
   implementar los métodos que necesita. El artículo da un ejemplo de una mala
