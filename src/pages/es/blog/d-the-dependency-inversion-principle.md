@@ -1,5 +1,5 @@
 ---
-title: "[D] The Dependency Inversion Principle"
+title: "[D] El Principio de Inversión de Dependencias"
 description: Este artículo discute el Principio de Inversión de Dependencias
   (DIP), el quinto principio de los principios de diseño SOLID. DIP promueve un
   diseño en el que los módulos de alto nivel no están estrechamente acoplados a
