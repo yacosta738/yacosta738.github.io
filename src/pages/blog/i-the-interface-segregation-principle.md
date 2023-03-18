@@ -15,7 +15,7 @@ tags:
   - solid
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![Interface Segregation Principle](/uploads/interface-segregation-principle.png "Interface Segregation Principle")
 
