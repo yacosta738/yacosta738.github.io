@@ -16,7 +16,7 @@ tags:
   - solid
 categories:
   - desarrollo de software
-draft: true
+draft: false
 ---
 ![Principio de Inversión de Dependencias](/uploads/dependency-inversion-principle.png "Principio de Inversión de Dependencias")
 
