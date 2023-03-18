@@ -16,7 +16,7 @@ tags:
   - solid
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![Dependency Inversion Principle](/uploads/dependency-inversion-principle.png "Dependency Inversion Principle")
 
