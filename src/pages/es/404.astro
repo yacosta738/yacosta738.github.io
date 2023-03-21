@@ -1,20 +1,23 @@
 ---
-import Icon from "astro-icon";
-import { Image } from "@astrojs/image/components";
-import { t, changeLanguage } from "i18next";
-import { localizePath } from "astro-i18next";
-import BaseTemplate from "templates:BaseTemplate";
+import Icon from 'astro-icon'
+import { Image } from '@astrojs/image/components'
+import { t, changeLanguage } from 'i18next'
+import { localizePath } from 'astro-i18next'
+import BaseTemplate from 'templates:BaseTemplate'
 
-changeLanguage("es");
+changeLanguage('es')
 ---
 
 <BaseTemplate title={t('error404')}>
 	<div class='container-inner mx-auto py-16'>
-		<h1 class='text-4xl font-bold mb-16'>{t('error404')}</h1>
+		<h1 class='mb-16 text-4xl font-bold'>{t('error404')}</h1>
 		<Image class='w-1/2' src='/oops.webp' alt={t('error404')} height={300} width={300} />
-		<p set:html={t('message404')}></p>
-		<a href={localizePath('/')} class='flex justify-center items-center small-button w-24 mt-24 uppercase'>
-			<Icon name='mdi:arrow-left' class='h-6 mr-2' />
+		<p set:html={t('message404')} />
+		<a
+			href={localizePath('/')}
+			class='small-button mt-24 flex w-24 items-center justify-center uppercase'
+		>
+			<Icon name='mdi:arrow-left' class='mr-2 h-6' />
 			{t('home')}
 		</a>
 	</div>

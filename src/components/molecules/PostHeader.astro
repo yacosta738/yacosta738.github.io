@@ -19,11 +19,11 @@ const formatDate = (date: Date | string) => {
 ---
 
 <ul
-	class='flex flex-col md:flex-row items-center relative list-none p-0 mb-4 text-light-slate font-mono text-sm'
+	class='relative mb-4 flex list-none flex-col items-center p-0 font-mono text-sm text-light-slate md:flex-row'
 >
 	{
 		article.date && (
-			<li class='my-2 flex items-center whitespace-nowrap mx-1'>
+			<li class='my-2 mx-1 flex items-center whitespace-nowrap'>
 				<Icon name='mdi:calendar-month-outline' class='h-4' />
 				<span class='mx-2'>{formatDate(article.date)}</span>
 			</li>
@@ -31,7 +31,7 @@ const formatDate = (date: Date | string) => {
 	}
 	{
 		article.timeToRead && (
-			<li class='my-2 whitespace-nowrap mx-1'>
+			<li class='my-2 mx-1 whitespace-nowrap'>
 				<span>{t('time-to-read', { timeToRead: article.timeToRead })}</span>
 			</li>
 		)
@@ -44,7 +44,7 @@ const formatDate = (date: Date | string) => {
     </li>} -->
 	{
 		article.author && (
-			<li class='my-2 whitespace-nowrap mx-1'>
+			<li class='my-2 mx-1 whitespace-nowrap'>
 				<span class='mr-1'>{t('author')}</span>
 				<a href={localizePath(`/blog/authors/${urlize(article.author)}`)} class='inline-link'>
 					{article.author}

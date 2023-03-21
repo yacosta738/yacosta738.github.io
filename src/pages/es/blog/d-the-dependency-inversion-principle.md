@@ -1,5 +1,5 @@
 ---
-title: "[D] El Principio de Inversión de Dependencias"
+title: '[D] El Principio de Inversión de Dependencias'
 description: Este artículo discute el Principio de Inversión de Dependencias
   (DIP), el quinto principio de los principios de diseño SOLID. DIP promueve un
   diseño en el que los módulos de alto nivel no están estrechamente acoplados a
@@ -18,8 +18,8 @@ categories:
   - desarrollo de software
 draft: false
 ---
-![Principio de Inversión de Dependencias](/uploads/dependency-inversion-principle.png "Principio de Inversión de Dependencias")
 
+![Principio de Inversión de Dependencias](/uploads/dependency-inversion-principle.png 'Principio de Inversión de Dependencias')
 
 El Principio de Inversión de Dependencias (DIP) es el quinto principio de los principios de diseño SOLID. Este principio establece que los módulos de alto nivel no deben depender de los módulos de bajo nivel, sino que ambos deben depender de abstracciones. Esto significa que una clase debe depender de abstracciones en lugar de implementaciones específicas. Este principio promueve un diseño en el que los módulos de alto nivel, como la lógica de negocios, no están fuertemente acoplados a los módulos de bajo nivel, como la capa de acceso a datos. Esto hace que el código sea más flexible y más fácil de mantener.
 

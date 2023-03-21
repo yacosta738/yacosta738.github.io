@@ -46,22 +46,27 @@ const menuLink = (menu: Menu) => {
 			}
 		</ol>
 	</li>
-	<li class='flex justify-start md:justify-between items-center'>
+	<li class='flex items-center justify-start md:justify-between'>
 		<LanguageSelector
 			showFlag={true}
 			class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
 		/>
 		<a
-			class='rounded p-2 bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
+			class='rounded bg-transparent p-2 text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
 			aria-label='RSS Feed'
 			target='_blank'
 			href='/rss.xml'
 		>
-			<Icon name='tabler:rss' class='w-5 h-5' />
+			<Icon name='tabler:rss' class='h-5 w-5' />
 		</a>
 	</li>
 	<li>
-		<a id={drawer ? 'drawer-resume':'nav-resume'} href='/files/yuniel_acosta_cv.pdf' target='_blank' class='resume-button'>
+		<a
+			id={drawer ? 'drawer-resume' : 'nav-resume'}
+			href='/files/yuniel_acosta_cv.pdf'
+			target='_blank'
+			class='resume-button'
+		>
 			{t('resume')}
 		</a>
 	</li>

@@ -34,7 +34,7 @@ const projectsToShow = () => {
 						<Icon name='ic:baseline-folder' class='h-10' />
 						<ProjectLinks project={project} position='center' />
 					</div>
-					<div class='text-center text-3xl text-lightest-slate my-2.5 font-bold'>
+					<div class='my-2.5 text-center text-3xl font-bold text-lightest-slate'>
 						{project?.title}
 					</div>
 					<div class='project-description'>
@@ -58,7 +58,7 @@ const projectsToShow = () => {
 
 <style>
 	.style-project-card {
-		@apply w-full max-w-sm h-108 bg-light-navy rounded-lg border border-lightest-navy shadow-md px-6 py-2 transform hover:-translate-y-2;
+		@apply h-108 w-full max-w-sm transform rounded-lg border border-lightest-navy bg-light-navy px-6 py-2 shadow-md hover:-translate-y-2;
 	}
 
 	.section-title {
@@ -66,7 +66,7 @@ const projectsToShow = () => {
 	}
 
 	.project-top {
-		@apply flex justify-between mt-2;
+		@apply mt-2 flex justify-between;
 	}
 
 	.project-top svg {

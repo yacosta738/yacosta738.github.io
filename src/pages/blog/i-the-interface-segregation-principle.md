@@ -1,5 +1,5 @@
 ---
-title: "[I] The Interface Segregation Principle"
+title: '[I] The Interface Segregation Principle'
 description: This article explains the Interface Segregation Principle (ISP), a
   SOLID design principle. ISP says that a class should only implement the
   methods it needs. The article gives an example of a bad practice that violates
@@ -17,7 +17,8 @@ categories:
   - Software Development
 draft: false
 ---
-![Interface Segregation Principle](/uploads/interface-segregation-principle.png "Interface Segregation Principle")
+
+![Interface Segregation Principle](/uploads/interface-segregation-principle.png 'Interface Segregation Principle')
 
 ISP (Interface Segregation Principle) is the fourth principle of the SOLID design principles. It states that a class should not be forced to implement interfaces it does not use, meaning that a class should not be forced to implement methods it does not need. This principle encourages creating small, specific interfaces that are tailored to the needs of specific classes, rather than creating large, general interfaces that require classes to implement many methods they do not need.
 

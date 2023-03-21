@@ -1,5 +1,5 @@
 ---
-title: "[I] Principio de Segregación de Interfaces"
+title: '[I] Principio de Segregación de Interfaces'
 description: Este artículo explica el Principio de Segregación de Interfaces
   (ISP), un principio de diseño SOLID. ISP establece que una clase solo debe
   implementar los métodos que necesita. El artículo da un ejemplo de una mala
@@ -17,7 +17,8 @@ categories:
   - desarrollo de software
 draft: false
 ---
-![Principio de Segregación de Interfaces](/uploads/interface-segregation-principle.png "Principio de Segregación de Interfaces")
+
+![Principio de Segregación de Interfaces](/uploads/interface-segregation-principle.png 'Principio de Segregación de Interfaces')
 
 ISP (Principio de Segregación de Interfaces) es el cuarto principio de los principios de diseño SOLID. Este principio establece que una clase no debería ser forzada a implementar interfaces que no usa, lo que significa que una clase no debería ser forzada a implementar métodos que no necesita. Este principio fomenta la creación de interfaces pequeñas y específicas que se adapten a las necesidades de clases específicas, en lugar de crear interfaces grandes y generales que requieran que las clases implementen muchos métodos que no necesitan.
 

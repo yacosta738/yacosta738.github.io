@@ -1,5 +1,5 @@
 ---
-title: "[D] The Dependency Inversion Principle"
+title: '[D] The Dependency Inversion Principle'
 description: This article discusses the Dependency Inversion Principle (DIP),
   the fifth principle of the SOLID design principles. DIP promotes a design
   where high-level modules are not tightly coupled to low-level modules, making
@@ -18,7 +18,8 @@ categories:
   - Software Development
 draft: false
 ---
-![Dependency Inversion Principle](/uploads/dependency-inversion-principle.png "Dependency Inversion Principle")
+
+![Dependency Inversion Principle](/uploads/dependency-inversion-principle.png 'Dependency Inversion Principle')
 
 The Dependency Inversion Principle (DIP) is the fifth principle of the SOLID design principles. It states that high-level modules should not depend on low-level modules, but both should depend on abstractions. This means that a class should depend on abstractions rather than on specific implementations. This principle promotes a design where high-level modules, such as the business logic, are not tightly coupled to low-level modules, such as the data access layer. This makes the code more flexible and easier to maintain.
 

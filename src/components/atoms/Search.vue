@@ -1,9 +1,9 @@
 <template>
 	<div
-		class="flex items-center cursor-pointer rounded-md p-2 bg-transparent hover:scale-125"
+		class="flex cursor-pointer items-center rounded-md bg-transparent p-2 hover:scale-125"
 		@click="updateSearchModal(true)"
 	>
-		<span class="block md:hidden mr-2">search</span>
+		<span class="mr-2 block md:hidden">search</span>
 		<svg width="1em" height="1em" viewBox="0 0 24 24">
 			<path
 				fill="currentColor"

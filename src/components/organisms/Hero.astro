@@ -8,7 +8,7 @@ import { email } from '@store:constants'
 		<h1 class='font-mono text-base font-normal text-green-500'>
 			{t('welcome')}
 		</h1>
-		<h2 id='generalName' class='my-2 text-5xl sm:text-4xl md:text-5xl lg:text-7xl yap-name'>
+		<h2 id='generalName' class='yap-name my-2 text-5xl sm:text-4xl md:text-5xl lg:text-7xl'>
 			{t('name')}
 		</h2>
 		<h3
@@ -17,7 +17,7 @@ import { email } from '@store:constants'
 		>
 			<span hidden>{t('slogan')}</span>
 		</h3>
-		<p id='my-self' class='text-justify my-4 text-md md:text-xl max-w-none md:max-w-3xl'>
+		<p id='my-self' class='text-md my-4 max-w-none text-justify md:max-w-3xl md:text-xl'>
 			{t('my-self')}
 
 			<span class={`typed-text-${i18next.language}`}>
@@ -63,20 +63,36 @@ import { email } from '@store:constants'
 
 	.typed-text-en {
 		padding: 0 0 0 3px;
-		&::before { font-weight: 800; }
+		&::before {
+			font-weight: 800;
+		}
 		@include typed(
-			"SOLID Principles", "Clean Architecture", "Design Patterns", "Microservices",
+			'SOLID Principles',
+			'Clean Architecture',
+			'Design Patterns',
+			'Microservices',
 			1.5,
-			(caret-width: 2px, caret-space: 2px)
-		);	
-	}	
+			(
+				caret-width: 2px,
+				caret-space: 2px
+			)
+		);
+	}
 	.typed-text-es {
 		padding: 0 0 0 3px;
-		&::before { font-weight: 800; }
+		&::before {
+			font-weight: 800;
+		}
 		@include typed(
-			"Principios SOLID", "Arquitectura Limpia", "Patrones de Diseño", "Microservicios",
+			'Principios SOLID',
+			'Arquitectura Limpia',
+			'Patrones de Diseño',
+			'Microservicios',
 			1.5,
-			(caret-width: 2px, caret-space: 2px)
-		);	
+			(
+				caret-width: 2px,
+				caret-space: 2px
+			)
+		);
 	}
 </style>

@@ -11,7 +11,7 @@ const techs: Tech[] = techData
 <div class='inset-0 -z-10'>
 	<div
 		id='icons'
-		class='relative [&>svg]:p-4 [&>svg]:w-24 [&>svg]:h-24 [&>svg]:fill-current [&>svg]:opacity-0 [&>svg]:absolute h-full'
+		class='relative h-full [&>svg]:absolute [&>svg]:h-24 [&>svg]:w-24 [&>svg]:fill-current [&>svg]:p-4 [&>svg]:opacity-0'
 	>
 		{techs.map((tech) => <Icon name={tech.icon} />)}
 	</div>

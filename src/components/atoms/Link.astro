@@ -2,6 +2,6 @@
 const { ...attributes } = Astro.props
 ---
 
-<a class='hover:underline hover:font-bold no-underline decoration-green-500' {...attributes}
+<a class='no-underline decoration-green-500 hover:font-bold hover:underline' {...attributes}
 	><slot />
 </a>

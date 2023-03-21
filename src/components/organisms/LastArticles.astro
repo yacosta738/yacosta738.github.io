@@ -21,26 +21,26 @@ const posts: Article[] = postsData
 	.slice(0, maxNumberOfPosts)
 ---
 
-<section id='last3articles' class='flex flex-col justify-center items-center content-center'>
+<section id='last3articles' class='flex flex-col content-center items-center justify-center'>
 	<h2 class='numbered-heading'>{t('menus.last-articles')}</h2>
 	<div
-		class='my-2 mx-4 md:mx-auto flex flex-col md:flex-row justify-center justify-items-center content-center gap-4'
+		class='my-2 mx-4 flex flex-col content-center justify-center justify-items-center gap-4 md:mx-auto md:flex-row'
 	>
 		{
 			posts.map((post) => (
-				<article class='w-full max-w-sm bg-light-navy rounded-lg border border-lightest-navy shadow-md transform hover:-translate-y-2'>
+				<article class='w-full max-w-sm transform rounded-lg border border-lightest-navy bg-light-navy shadow-md hover:-translate-y-2'>
 					<a href={post.url}>
 						<Image
-							class='rounded-t-lg object-fill h-48 w-96'
+							class='h-48 w-96 rounded-t-lg object-fill'
 							src={post.cover}
 							alt={post.title}
 							height={400}
 							width={1000}
 						/>
-						<div class='absolute top-1 right-1 left-1 flex justify-between items-center px-4 rounded-lg rounded-b-none'>
+						<div class='absolute top-1 right-1 left-1 flex items-center justify-between rounded-lg rounded-b-none px-4'>
 							<span class='' />
-							<div class='text-lightest-slate font-regular flex flex-col justify-start items-center text-center bg-light-navy/25 rounded'>
-								<span class='text-3xl leading-0 font-semibold'>{post.timeToRead}</span>
+							<div class='font-regular flex flex-col items-center justify-start rounded bg-light-navy/25 text-center text-lightest-slate'>
+								<span class='leading-0 text-3xl font-semibold'>{post.timeToRead}</span>
 								<span class='-mt-3 text-xl'>Min</span>
 							</div>
 						</div>

@@ -76,9 +76,9 @@ const shareButtons: {
 	}
 ]
 
-const repo = "yacosta738/blog.yap.comments"
-const label = "Comment"
-const theme = "icy-dark"
+const repo = 'yacosta738/blog.yap.comments'
+const label = 'Comment'
+const theme = 'icy-dark'
 ---
 
 <BlogTemplate
@@ -88,9 +88,9 @@ const theme = "icy-dark"
 	ogImageAlt={ogImageAlt}
 	lang={lang}
 >
-	<article class='mx-2 md:mx-8 lg:mx-24 md:px-2'>
+	<article class='mx-2 md:mx-8 md:px-2 lg:mx-24'>
 		<h1
-			class='mt-10 md:mt-0 text-center md:text-justify text-2xl md:text-4xl font-bold leading-tight md:tracking-wider'
+			class='mt-10 text-center text-2xl font-bold leading-tight md:mt-0 md:text-justify md:text-4xl md:tracking-wider'
 		>
 			{frontmatter.title}
 		</h1>
@@ -99,35 +99,38 @@ const theme = "icy-dark"
 			<slot />
 		</div>
 		<div
-			class='mb-8 my-8 flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start md:justify-items-start'
+			class='my-8 mb-8 flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
 		>
 			<a
 				href={localizePath('/blog')}
-				class='flex items-center md:items-start justify-center sm:text-center animate-pulse hover:animate-none font-bold uppercase'
+				class='flex animate-pulse items-center justify-center font-bold uppercase hover:animate-none sm:text-center md:items-start'
 			>
-				<Icon name='ic:round-arrow-back' class='h-7 mr-1 animate-bounce-left hover:animate-none' />
+				<Icon name='ic:round-arrow-back' class='mr-1 h-7 animate-bounce-left hover:animate-none' />
 				<span>{t('back-to-block')}</span>
 			</a>
 			<!-- Social Media Share -->
-			<div class='flex items-center justify-center my-3 md:my-0'>
+			<div class='my-3 flex items-center justify-center md:my-0'>
 				{shareButtons.map((button) => <ShareButton url={button.url} icon={button.icon} />)}
 			</div>
 		</div>
 		<div class='flex flex-col md:flex-row'>
 			<!--category-->
-			<div class='flex items-center justify-center mb-8 text-sm mx-1'>
-				<Icon name='ic:outline-category' class='h-5 mr-2' />
+			<div class='mx-1 mb-8 flex items-center justify-center text-sm'>
+				<Icon name='ic:outline-category' class='mr-2 h-5' />
 				{
 					categories.map((category) => (
-						<a href={localizePath(`/blog/category/${category.toLowerCase()}`)} class='inline-link mx-1'>
+						<a
+							href={localizePath(`/blog/category/${category.toLowerCase()}`)}
+							class='inline-link mx-1'
+						>
 							{category}
 						</a>
 					))
 				}
 			</div>
 			<!-- tags -->
-			<div class='flex items-center justify-center mb-8 text-sm mx-1'>
-				<Icon name='clarity:tags-solid-alerted' class='h-5 mr-2' />
+			<div class='mx-1 mb-8 flex items-center justify-center text-sm'>
+				<Icon name='clarity:tags-solid-alerted' class='mr-2 h-5' />
 				{
 					tags.map((tag) => (
 						<a href={localizePath(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
@@ -138,22 +141,25 @@ const theme = "icy-dark"
 			</div>
 		</div>
 		<!-- Comment Section -->
-		<div class='flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start md:justify-items-start'>
-			<script src="https://utteranc.es/client.js"
-					repo={repo}
-					issue-term="pathname"
-					label={label}
-					theme{theme}
-					crossorigin="anonymous"
-					async>
-			</script>
+		<div
+			class='flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
+		>
+			<script
+				src='https://utteranc.es/client.js'
+				repo={repo}
+				issue-term='pathname'
+				label={label}
+				{theme}
+				crossorigin='anonymous'
+				async
+			></script>
 		</div>
 	</article>
 </BlogTemplate>
 
 <style is:global>
 	#first-paragraph {
-		@apply first-letter:text-7xl first-letter:font-bold first-letter:text-white first-letter:mr-3 first-letter:float-left;
+		@apply first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:font-bold first-letter:text-white;
 	}
 </style>
 

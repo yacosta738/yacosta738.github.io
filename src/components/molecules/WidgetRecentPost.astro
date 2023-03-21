@@ -13,22 +13,23 @@ export interface Props {
 const { recentPosts } = Astro.props
 ---
 
-{!isBlogRoot && <WidgetCard title={t('recent-post')}>
-	<ul class='relative my-4 flex list-none flex-col p-0'>
-		{
-			recentPosts
-			.filter((article) => article.url !== pathname)
-			.map((article) => (
-				<li class='my-2 flex flex-row font-mono text-base text-light-slate'>
-					<div class='flex flex-row items-center justify-center'>
-						<a href={article.url} class='inline-link flex items-center justify-center'>
-							<Icon name='zondicons:cheveron-right' class='h-6' />
-							<p class='pl-2'>{article.title}</p>
-						</a>
-					</div>
-				</li>
-			))
-		}
-	</ul>
-</WidgetCard>
+{
+	!isBlogRoot && (
+		<WidgetCard title={t('recent-post')}>
+			<ul class='relative my-4 flex list-none flex-col p-0'>
+				{recentPosts
+					.filter((article) => article.url !== pathname)
+					.map((article) => (
+						<li class='my-2 flex flex-row font-mono text-base text-light-slate'>
+							<div class='flex flex-row items-center justify-center'>
+								<a href={article.url} class='inline-link flex items-center justify-center'>
+									<Icon name='zondicons:cheveron-right' class='h-6' />
+									<p class='pl-2'>{article.title}</p>
+								</a>
+							</div>
+						</li>
+					))}
+			</ul>
+		</WidgetCard>
+	)
 }

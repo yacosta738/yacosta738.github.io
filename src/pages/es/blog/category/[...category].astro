@@ -1,34 +1,34 @@
 ---
-import i18next, { t, changeLanguage } from "i18next";
-import { jsonToArticle } from "@models:Article";
-import BlogTemplate from "templates:BlogTemplate";
-import ArticleSummary from "molecules:ArticleSummary";
+import i18next, { t, changeLanguage } from 'i18next'
+import { jsonToArticle } from '@models:Article'
+import BlogTemplate from 'templates:BlogTemplate'
+import ArticleSummary from 'molecules:ArticleSummary'
 
-changeLanguage("es");
+changeLanguage('es')
 
 export async function getStaticPaths() {
-    const postsData = await Astro.glob("../**/*.md");
-    const allPosts = postsData
-        .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-        .map((post) => jsonToArticle(post))
-        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-    const categories = allPosts.map((post) => post.categories).flat();
-    return categories.map((category) => {
-        return {
-            params: { category: category.toLowerCase() },
-            props: { posts: allPosts.filter((post) => post.categories.includes(category)) }
-        };
-    });
+	const postsData = await Astro.glob('../**/*.md')
+	const allPosts = postsData
+		.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+		.map((post) => jsonToArticle(post))
+		.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
+	const categories = allPosts.map((post) => post.categories).flat()
+	return categories.map((category) => {
+		return {
+			params: { category: category.toLowerCase() },
+			props: { posts: allPosts.filter((post) => post.categories.includes(category)) }
+		}
+	})
 }
-const { category } = Astro.params;
-const { posts } = Astro.props;
+const { category } = Astro.params
+const { posts } = Astro.props
 ---
 
 <BlogTemplate title={`${t('blog')} | ${category}`} description={t('seo.blog-description')}>
 	<div class='container mx-auto'>
 		{
 			posts.map((post) => (
-				<article class='mb-20 border-b border-gray-400 mx-2 md:mx-24'>
+				<article class='mx-2 mb-20 border-b border-gray-400 md:mx-24'>
 					<ArticleSummary article={post} />
 				</article>
 			))

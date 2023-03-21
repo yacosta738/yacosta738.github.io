@@ -1,5 +1,5 @@
 ---
-title: "[L] El principio de sustitución de Liskov"
+title: '[L] El principio de sustitución de Liskov'
 description: El principio de sustitución de Liskov es una regla fundamental en
   el desarrollo de software que asegura la intercambiabilidad de objetos de una
   subclase con los de una superclase. No seguir esta regla puede llevar a

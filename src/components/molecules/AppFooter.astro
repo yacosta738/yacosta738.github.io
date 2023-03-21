@@ -11,12 +11,12 @@ const portfolioTechIcon = [
 ]
 ---
 
-<footer class='container mx-auto flex flex-col lg:flex-row items-center justify-center m-5'>
+<footer class='container m-5 mx-auto flex flex-col items-center justify-center lg:flex-row'>
 	<div class='flex flex-col items-center'>
-		<ul class='flex flex-wrap relative list-none p-0 md:hidden'>
+		<ul class='relative flex list-none flex-wrap p-0 md:hidden'>
 			{
 				socialMedia.map(({ name, icon, url }) => (
-					<li class='my-2 text-light-slate font-mono text-3xl whitespace-nowrap mx-1'>
+					<li class='my-2 mx-1 whitespace-nowrap font-mono text-3xl text-light-slate'>
 						<a href={url} target='_blank' rel='noopener noreferrer' aria-label={name}>
 							<Icon name={icon} class='h-8' />
 						</a>
@@ -24,16 +24,22 @@ const portfolioTechIcon = [
 				))
 			}
 		</ul>
-		<p class='text-sm text-lightest-slate font-mono'>
-			{t('built-by')} <a href='https://www.yunielacosta.com' target='_blank' rel='noopener noreferrer' class='text-light-slate'>Yuniel Acosta</a>
+		<p class='font-mono text-sm text-lightest-slate'>
+			{t('built-by')}
+			<a
+				href='https://www.yunielacosta.com'
+				target='_blank'
+				rel='noopener noreferrer'
+				class='text-light-slate'>Yuniel Acosta</a
+			>
 		</p>
-		<p class='text-xs text-light-slate font-mono my-2'>
+		<p class='my-2 font-mono text-xs text-light-slate'>
 			{t('design-by')}
 		</p>
-		<ul class='flex flex-wrap relative list-none p-0'>
+		<ul class='relative flex list-none flex-wrap p-0'>
 			{
 				portfolioTechIcon.map((icon) => (
-					<li class='my-2 text-light-slate font-mono text-xs whitespace-nowrap mx-1'>
+					<li class='my-2 mx-1 whitespace-nowrap font-mono text-xs text-light-slate'>
 						<Icon name={icon} class='h-4' />
 					</li>
 				))

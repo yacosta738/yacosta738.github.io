@@ -26,14 +26,14 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 		basic: {
 			title: t('seo.ogTitle'),
 			type: 'website',
-			image: image ,
+			image: image,
 			url: canonicalUrl
 		},
 		optional: {
-			description: t('seo.description'),
+			description: t('seo.description')
 		},
 		image: {
-			alt: ogImageAlt ,
+			alt: ogImageAlt,
 			width: 1200,
 			height: 630,
 			type: 'image/jpeg'
@@ -58,7 +58,7 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 		} catch (error) {}
 	})
 	let previousTitle = document.title
-	let titleTextAlt = {'en': "Don't go! Come back! 😥", 'es': "¡No te vayas! ¡Vuelve! 😥"}
+	let titleTextAlt = { en: "Don't go! Come back! 😥", es: '¡No te vayas! ¡Vuelve! 😥' }
 
 	window.addEventListener('blur', () => {
 		previousTitle = document.title

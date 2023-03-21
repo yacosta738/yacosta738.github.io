@@ -17,4 +17,4 @@ fi
 
 echo "Using package manager: $PACKAGE_MANAGER"
 
-$PACKAGE_MANAGER i && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format
+$PACKAGE_MANAGER i --force && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format

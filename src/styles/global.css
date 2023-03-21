@@ -8,7 +8,7 @@
 
 @layer components {
 	.button-ticket {
-		@apply flex items-center w-[5.5rem] h-24 p-4 rounded-lg hover:scale-110 hover:opacity-100 hover:contrast-100 transition-all opacity-60 contrast-75;
+		@apply flex h-24 w-[5.5rem] items-center rounded-lg p-4 opacity-60 contrast-75 transition-all hover:scale-110 hover:opacity-100 hover:contrast-100;
 	}
 	.button {
 		transition: var(--transition);
@@ -259,7 +259,7 @@ a:focus {
 	@apply text-green-500;
 }
 a.inline-link {
-	@apply text-green-500 hover:underline hover:underline-offset-2 hover:font-bold hover:text-green-600;
+	@apply text-green-500 hover:font-bold hover:text-green-600 hover:underline hover:underline-offset-2;
 }
 main {
 	counter-reset: section;

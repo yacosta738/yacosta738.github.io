@@ -22,7 +22,7 @@ const { position, showIcon = true, project } = Astro.props
 			project.tech &&
 			project.tech.map((tech: Tech) => (
 				<li
-					class='my-2 text-light-slate font-mono text-xs whitespace-nowrap'
+					class='my-2 whitespace-nowrap font-mono text-xs text-light-slate'
 					class={position === 'end' ? 'ml-3' : position === 'center' ? 'mx-2' : 'mr-3'}
 				>
 					{tech?.url != null ? (
@@ -41,6 +41,6 @@ const { position, showIcon = true, project } = Astro.props
 <style>
 	.project-tech-list {
 		z-index: 2;
-		@apply flex flex-wrap relative list-none p-0 my-4;
+		@apply relative my-4 flex list-none flex-wrap p-0;
 	}
 </style>

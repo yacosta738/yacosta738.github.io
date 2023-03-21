@@ -41,17 +41,17 @@ const projects: Project[] = projectData
 ---
 
 <BaseTemplate>
-	<div class='container-inner 2xl:container mx-auto py-16'>
+	<div class='container-inner mx-auto py-16 2xl:container'>
 		<div>
 			<h1 class='big-heading'>{t('all-projects')}</h1>
-			<p class='text-xl md:text-2xl text-green-500 font-sans my-5'>
+			<p class='my-5 font-sans text-xl text-green-500 md:text-2xl'>
 				{t('big-list')}
 			</p>
 		</div>
 
-		<div class='overflow-x-auto relative shadow-md sm:rounded-lg'>
-			<table class='w-full text-sm text-left border-2 border-light-navy'>
-				<thead class='text-xs md:text-xl uppercase bg-light-navy'>
+		<div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
+			<table class='w-full border-2 border-light-navy text-left text-sm'>
+				<thead class='bg-light-navy text-xs uppercase md:text-xl'>
 					<tr>
 						<th scope='col' class='py-3 px-6'>
 							{t('year')}
@@ -59,13 +59,13 @@ const projects: Project[] = projectData
 						<th scope='col' class='py-3 px-6'>
 							{t('title')}
 						</th>
-						<th scope='col' class='py-3 px-6 hidden md:table-cell'>
+						<th scope='col' class='hidden py-3 px-6 md:table-cell'>
 							{t('made-at')}
 						</th>
-						<th scope='col' class='py-3 px-6 hidden md:table-cell'>
+						<th scope='col' class='hidden py-3 px-6 md:table-cell'>
 							{t('built-at')}
 						</th>
-						<th scope='col' class='py-3 px-6 flex justify-center'>
+						<th scope='col' class='flex justify-center py-3 px-6'>
 							{t('link')}
 						</th>
 					</tr>
@@ -73,17 +73,17 @@ const projects: Project[] = projectData
 				<tbody>
 					{
 						projects.map((project) => (
-							<tr class='text-xs md:text-xl bg-navy border-b  dark:border-light-navy hover:bg-gray-50 dark:hover:bg-lightest-navy'>
-								<th scope='row' class='py-4 px-6 font-medium  whitespace-nowrap'>
+							<tr class='border-b bg-navy text-xs hover:bg-gray-50  dark:border-light-navy dark:hover:bg-lightest-navy md:text-xl'>
+								<th scope='row' class='whitespace-nowrap py-4 px-6  font-medium'>
 									{typeof project.date === 'string'
 										? new Date(project.date).getFullYear()
 										: project.date.getFullYear()}
 								</th>
 								<td class='py-4 px-6'>{project.title}</td>
-								<td class='py-4 px-6 hidden md:table-cell'>
+								<td class='hidden py-4 px-6 md:table-cell'>
 									{project.company ? project.company : t('personal-projects')}
 								</td>
-								<td class='py-4 px-6 hidden md:table-cell'>
+								<td class='hidden py-4 px-6 md:table-cell'>
 									<ProjectTechList project={project} position='start' showIcon={true} />
 								</td>
 								<td class='py-4 px-6'>
