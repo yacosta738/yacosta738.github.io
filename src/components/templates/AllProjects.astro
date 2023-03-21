@@ -40,7 +40,12 @@ const projects: Project[] = projectData
 	.map((json) => jsonToProject(json))
 ---
 
-<BaseTemplate>
+<BaseTemplate
+title={t('projects.title')}
+description={t('projects.description')}
+image='https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+ogImageAlt={t('projects.ogImageAlt')}
+>
 	<div class='container-inner mx-auto py-16 2xl:container'>
 		<div>
 			<h1 class='big-heading'>{t('all-projects')}</h1>

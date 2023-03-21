@@ -6,6 +6,11 @@
     "ogImageAlt": "Yuniel Acosta | Software Engineer - Interested in object-oriented programming, design patterns, functional programming, domain-driven design, and microservices. I am a versatile person with wide-ranging skills, eager to learn, and ready to face new and tough challenges in or out of my country.",
     "blog-description": "Blog about programming and web technologies, scalable, high availability and tips to be more productive."
   },
+  "projects":{
+    "title":"Yuniel's projects",
+    "description": "A big list of things I've worked on",
+    "ogImageAlt": "Here you can find all my projects"
+  },
   "navigation": {
     "home": "Home",
     "about": "About"
