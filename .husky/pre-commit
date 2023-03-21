@@ -3,4 +3,18 @@
 
 echo "Running pre-commit hook 🪝"
 
-pnpm i &&  pnpm run i18n:generate && pnpm run format
+PACKAGE_MANAGER=""
+if command -v yarn >/dev/null 2>&1; then
+  PACKAGE_MANAGER="yarn"
+elif command -v pnpm >/dev/null 2>&1; then
+  PACKAGE_MANAGER="pnpm"
+elif command -v npm >/dev/null 2>&1; then
+  PACKAGE_MANAGER="npm"
+else
+  echo "No se encontró ningún manejador de paquetes instalado."
+  exit 1
+fi
+
+echo "Using package manager: $PACKAGE_MANAGER"
+
+$PACKAGE_MANAGER i && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format
