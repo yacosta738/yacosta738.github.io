@@ -1,13 +1,10 @@
 ---
 title: De Linux a macOS. Mi opinión
-description: Después de pasar de Linux a MacOS, me encontré con algunas
-  limitaciones como la falta de funciones básicas como cortar archivos, la
-  imposibilidad de escribir en el sistema de archivos NTFS, la dificultad para
-  acomodar a gusto cada ventana en el escritorio, la imposibilidad de crear un
-  fichero desde el explorador de archivos y la ausencia de Docker nativo en
-  MacOS. Sin embargo, se destaca el rendimiento, el ecosistema totalmente
-  integrado, la gran variedad de software disponible y la integración con los
-  diversos ecosistemas de desarrollo.
+description: Después de cambiar de Linux a MacOS, encontré algunas limitaciones
+  como la falta de funciones básicas como cortar archivos y la dificultad para
+  organizar las ventanas en el escritorio. Sin embargo, destaca el rendimiento,
+  el ecosistema completamente integrado y la gran variedad de software
+  disponible.
 date: 2023-01-19T17:48:28.127Z
 lang: es
 cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=4800
