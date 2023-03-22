@@ -1,13 +1,11 @@
 ---
-title: Web Performance
-description: Más importante que la rapidez de su sitio web en milisegundos, es
-  la rapidez con la que los usuarios perciben su sitio. Estas percepciones se
-  ven afectadas por el tiempo real de carga de la página, el ralentí, la
-  capacidad de respuesta a la interacción del usuario y la suavidad del
-  desplazamiento y otras animaciones. En este artículo, analizamos las diversas
-  métricas de carga, animación y métricas de capacidad de respuesta, junto con
-  las mejores prácticas para mejorar la percepción del usuario, si no los
-  tiempos reales.
+title: Rendimiento Web
+description: La percepción del usuario sobre la velocidad del sitio es más
+  importante que el tiempo de carga en milisegundos. En este artículo,
+  analizamos varias métricas y mejores prácticas para mejorar la percepción del
+  usuario. La suavidad del desplazamiento y las animaciones, el tiempo de carga
+  en tiempo real y la capacidad de respuesta a la interacción del usuario
+  afectan la percepción.
 date: 2022-10-13T12:33:43.553Z
 lang: es
 cover: /uploads/wep-performance.webp
