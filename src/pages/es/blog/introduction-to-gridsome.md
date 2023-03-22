@@ -1,28 +1,35 @@
 ---
 title: Introducción a Gridsome
+description: Gridsome es un generador de sitios web estáticos con tecnología
+  Vue.js para crear los sitios web lo más rápido posible para cualquier CMS, API
+  o archivos Markdown. Gridsome hace que sea fácil y divertido para los
+  desarrolladores crear sitios web hermosos y rápidos sin necesidad de
+  convertirse en un experto en rendimiento.
 date: 2019-04-08
-description: Gridsome es un generador de sitios web estáticos con tecnología Vue.js para crear los sitios web lo más rápido posible para cualquier CMS, API o archivos Markdown. Gridsome hace que sea fácil y divertido para los desarrolladores crear sitios web hermosos y rápidos sin necesidad de convertirse en un experto en rendimiento.
-author: Yuniel Acosta
 lang: es
-tags: ['frontend', 'gridsome', 'Vuejs']
-categories: [Desarrollo de software]
 cover: /uploads/gridsome-portada.webp
+author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
+tags:
+  - frontend
+  - gridsome
+  - Vuejs
+categories:
+  - Desarrollo de software
 draft: false
 ---
-
-![background](/uploads/gridsome-portada.webp)
+![Introducción a Gridsome](/uploads/gridsome-portada.webp "Introducción a Gridsome")
 
 Gridsome es un generador de sitios web estáticos con tecnología Vue.js para crear los sitios web lo más rápido posible para cualquier CMS, API o archivos Markdown. Gridsome hace que sea fácil y divertido para los desarrolladores crear sitios web hermosos y rápidos sin necesidad de convertirse en un experto en rendimiento.
 
 ### ¿Por qué Gridsome?
 
-- **Complementos de fuente de datos** - Úselo para cualquier CMS, API o archivos Markdown populares sin cabeza.
-- **Enrutamiento de páginas basado en archivos** - Cree y administre rápidamente rutas con archivos.
-- **Gestión de datos centralizada** - Extraiga datos en una capa de datos GraphQL local y unificada.
-- **Vue.js para frontend**: un framework de front-end ligero y accesible.
-- **Código optimizado automáticamente**: obtenga la división de código y la optimización de activos de forma inmediata.
-- **Generación de archivos estáticos** - Implemente de forma segura en cualquier CDN o alojamiento web estático.
+* **Complementos de fuente de datos** - Úselo para cualquier CMS, API o archivos Markdown populares sin cabeza.
+* **Enrutamiento de páginas basado en archivos** - Cree y administre rápidamente rutas con archivos.
+* **Gestión de datos centralizada** - Extraiga datos en una capa de datos GraphQL local y unificada.
+* **Vue.js para frontend**: un framework de front-end ligero y accesible.
+* **Código optimizado automáticamente**: obtenga la división de código y la optimización de activos de forma inmediata.
+* **Generación de archivos estáticos** - Implemente de forma segura en cualquier CDN o alojamiento web estático.
 
 [Aprenda más de cómo Gridsome funciona](https://gridsome.org/docs/#how-it-works)
 
@@ -66,6 +73,6 @@ Usando npm:
 1. Cree componentes `.vue` en el directorio `/pages` para crear rutas de página.
 2. Utilice `gridsome build` para generar archivos estáticos en una carpeta `/dist`
 
-- [Cómo funciona](https://gridsome.org/docs/#how-it-works)
-- [Cómo funcionan las páginas](https://gridsome.org/docs/pages/)
-- [Cómo implementar](https://gridsome.org/docs/deployment/)
+* [Cómo funciona](https://gridsome.org/docs/#how-it-works)
+* [Cómo funcionan las páginas](https://gridsome.org/docs/pages/)
+* [Cómo implementar](https://gridsome.org/docs/deployment/)
