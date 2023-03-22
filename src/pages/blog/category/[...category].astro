@@ -24,7 +24,7 @@ const { category } = Astro.params
 const { posts } = Astro.props
 ---
 
-<BlogTemplate title={`${t('blog')} | ${category}`} description={`${t('seo.blog-description')} ${tag}`}>
+<BlogTemplate title={`${t('blog')} | ${category}`} description={`${t('seo.blog-description')} ${category}`}>
 	<div class='container mx-auto'>
 		{
 			posts.map((post) => (
