@@ -1,14 +1,13 @@
 ---
-layout: ../../components/templates/BlogPostTemplate.astro
 title: Countdown to new year
-description: Astronomy and programming are two of my passions that this time I have
-  decided to join together. With this objective in mind, we will create a simple
-  website to count down how many days until the new year, simulating the
-  movement of the planet earth.
+description: Combining my passions for astronomy and programming, I'm creating a
+  website to countdown the days until the new year, with a simulation of the
+  earth's movement.
 date: 2020-12-27
+lang: en
 cover: /uploads/portada.webp
 author: Yuniel Acosta
-lang: en
+layout: ../../components/templates/BlogPostTemplate.astro
 tags:
   - JavaScript
   - TypeScript
