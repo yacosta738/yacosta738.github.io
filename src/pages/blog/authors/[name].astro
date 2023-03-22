@@ -26,7 +26,7 @@ const { name } = Astro.params
 const { author } = Astro.props
 ---
 
-<BaseTemplate title={`${t('blog')} | ${name}`} description={t('seo.blog-description')}>
+<BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('seo.blog-description')} ${name}`}>
 	<section id='about-author' class='container mx-auto'>
 		<div class='flex items-center justify-center'>
 			<Card3D>
