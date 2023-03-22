@@ -1,12 +1,9 @@
 ---
 title: From Linux to macOS. My opinion
-description: After switching from Linux to MacOS, I found some limitations such
-  as the lack of basic functions like cutting files, the inability to write to
-  the NTFS file system, the difficulty to arrange each window on the desktop to
-  my liking, the inability to create a file from the file explorer and the
-  absence of native Docker on MacOS. However, performance, the fully integrated
-  ecosystem, the great variety of available software and the integration with
-  the various development ecosystems stand out.
+description: Switching from Linux to MacOS has limitations, such as lacking
+  basic functions like cutting files and difficulty arranging windows on the
+  desktop. But MacOS offers performance, a fully integrated ecosystem, and great
+  software variety.
 date: 2023-01-19T19:15:02.655Z
 lang: en
 cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=6000
