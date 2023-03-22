@@ -3,7 +3,7 @@
   "packageRules": [
     {
       "matchPackageNames": ["npm"],
-      "schedule": ["after 9pm on sunday"]
+      "schedule": "every 1st day of the month"
     }
   ],
   "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"]
