@@ -1,12 +1,10 @@
 ---
 title: Web Performance
-description: More important than the speed of your website in milliseconds, is
-  the speed with which users perceive your site. These perceptions are affected
-  by the real-time page load time, the sluggishness, the responsiveness to the
-  user interaction and the smoothness of the scrolling and other animations. In
-  this article, we analyze the various metrics of loading, animation and
-  response metrics, along with best practices to improve user perception, if not
-  the real times.
+description: User perception of website speed is more important than load time
+  in milliseconds. In this article, we analyze various metrics and best
+  practices to improve user perception. Smoothness of scrolling and animations,
+  real-time page load, and responsiveness to user interaction all affect
+  perception.
 date: 2022-10-13T12:33:43.553Z
 lang: en
 cover: /uploads/wep-performance.webp
