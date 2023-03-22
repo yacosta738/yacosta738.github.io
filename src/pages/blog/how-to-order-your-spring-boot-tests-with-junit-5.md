@@ -1,10 +1,9 @@
 ---
 title: How to Order Your Spring Boot Tests with JUnit 5
-description: This post shows how to use the JUnit 5 feature to order test
-  classes. This allows for running Spring Boot automated tests from unit tests
-  to full integration tests, with the fastest tests running first. We explain
-  how to configure JUnit with a ClassOrderer to ensure that each execution has a
-  predetermined order.
+description: Learn how to use JUnit 5's feature for ordering test classes to run
+  Spring Boot automated tests from unit to integration tests, with the fastest
+  tests running first. Configure JUnit with a ClassOrderer for a predetermined
+  order.
 date: 2023-01-25T21:56:01.410Z
 lang: en
 cover: /uploads/junit5-spring-boot.webp
