@@ -1,15 +1,13 @@
 ---
-layout: ../../components/templates/BlogPostTemplate.astro
 title: Building FullStack Web app with Angular, NestJS and Nx
-lang: en
-description: Angular is one of the most highly recommended frontend frameworks in
-  the software industry. However, if you want to create a full-stack
-  web-application, it only covers half of the requirements. For a while now,
-  I've been pairing it with NestJS and it's been working really well in multiple
-  projects.
+description: Angular is a top frontend framework, but to create full-stack apps,
+  you need more. NestJS pairs well with Angular for complete web app
+  development.
 date: 2021-05-22T23:32:13.655Z
+lang: en
 cover: /uploads/nx.webp
 author: Yuniel Acosta
+layout: ../../components/templates/BlogPostTemplate.astro
 tags:
   - Angular
   - NestJS
