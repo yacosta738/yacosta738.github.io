@@ -1,10 +1,9 @@
 ---
 title: Boost Your Java Testing with These 7 Incredible Libraries
-description: This article provides an overview of 7 useful libraries to improve
-  unit and integration testing in Java, such as AssertJ, Awaitility, Mockito,
-  Wiser, Memoryfilesystem, WireMock, and Testcontainers, which can help to
-  simplify the development process, reduce testing time, and ensure code
-  quality.
+description: "Discover 7 Java libraries for better unit and integration testing:
+  AssertJ, Awaitility, Mockito, Wiser, Memoryfilesystem, WireMock, and
+  Testcontainers. Simplify development, reduce testing time, and ensure code
+  quality."
 date: 2023-02-15T13:40:04.973Z
 lang: en
 cover: /uploads/boost-your-java-testing-with-these-7-incredible-libraries.gif
