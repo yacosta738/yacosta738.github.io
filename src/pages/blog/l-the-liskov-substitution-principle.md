@@ -1,8 +1,7 @@
 ---
-title: '[L] The Liskov Substitution Principle'
-description: The Liskov substitution principle is a fundamental rule in software
-  development that ensures the interchangeability of objects of a subclass with
-  those of a superclass. Failing to adhere to this rule can lead to unexpected
+title: "[L] The Liskov Substitution Principle"
+description: The Liskov substitution principle ensures that subclass objects can
+  be used interchangeably with those of the superclass, preventing unexpected
   program errors. Adhering to this rule simplifies code management and increases
   predictability.
 date: 2023-03-08T20:53:25.904Z
