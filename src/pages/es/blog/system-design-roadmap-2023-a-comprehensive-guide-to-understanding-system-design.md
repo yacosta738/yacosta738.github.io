@@ -1,14 +1,11 @@
 ---
-title: 'Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el
-  Diseño de Sistemas.'
-description: Esta guía completa proporciona una visión general de los
-  fundamentos del diseño de sistemas y describe aspectos clave como rendimiento
-  frente a escalabilidad, latencia frente a rendimiento, disponibilidad frente a
-  coherencia, patrones disponibles, trabajos en segundo plano, balanceadores de
-  carga, caché, programación asíncrona, patrones de arquitectura, patrones de
-  comunicación y parámetros de monitorización. Además, este blog incluye
-  recursos útiles como libros, cursos, tutoriales, blogs y podcasts para mejorar
-  su comprensión del diseño de sistemas.
+title: "Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el
+  Diseño de Sistemas."
+description: Esta guía cubre los conceptos básicos del diseño de sistemas,
+  incluyendo rendimiento, escalabilidad, latencia, rendimiento, consistencia,
+  disponibilidad, trabajos en segundo plano, equilibradores de carga,
+  almacenamiento en caché y monitoreo. También recomienda recursos para aprender
+  más, como libros, cursos, tutoriales y podcasts.
 date: 2023-02-17T00:47:44.121Z
 lang: es
 cover: /uploads/system-design-roadmap-2023.png
