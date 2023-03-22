@@ -47,7 +47,7 @@
     "husky": "8.0.3",
     "i18next-fs-backend": "2.1.1",
     "locale-emoji": "0.3.0",
-    "marked": "4.2.12",
+    "marked": "4.3.0",
     "nanostores": "0.7.4",
     "postcss-nesting": "11.2.1",
     "postcss-preset-env": "7.8.3",
