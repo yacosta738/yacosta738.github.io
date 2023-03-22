@@ -1,10 +1,8 @@
 ---
 title: Array list vs linked list java collections
-description: This article compares the ArrayList and LinkedList data structures
-  in Java. It explains the differences in implementation and time complexity for
-  various operations of these two data structures. Additionally, it discusses
-  the memory usage differences between the two and provides guidance on when to
-  use each one based on specific use cases.
+description: Compare ArrayList and LinkedList data structures in Java. Explore
+  their differences in implementation, time complexity, memory usage, and
+  guidance on when to use each based on use cases.
 date: 2023-02-22T21:42:35.461Z
 lang: en
 cover: /uploads/array-list-vs-linked-list-java-collections.png
