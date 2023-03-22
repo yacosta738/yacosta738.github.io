@@ -1,13 +1,10 @@
 ---
-title: '[O] The Open-Closed Principle'
-description: This article discusses the Open-Closed Principle (OCP), which is a
-  fundamental principle of the SOLID design principles. The OCP promotes the
-  idea that a class should be designed to be open for extension but closed for
-  modification. This article provides an example of how violating the OCP can
-  lead to inflexible code, and then illustrates how to adhere to the OCP by
-  defining an interface and creating separate classes for each shape. By
-  adhering to the OCP, developers can create code that is more flexible,
-  maintainable, and easier to scale.
+title: "[O] The Open-Closed Principle"
+description: This article explains the Open-Closed Principle (OCP) of SOLID
+  design, which advises creating flexible and maintainable code by keeping
+  classes open to extension but closed to modification. It uses an example to
+  show how to adhere to the OCP by defining an interface and creating separate
+  classes for each shape.
 date: 2023-03-01T18:13:14.418Z
 lang: en
 cover: /uploads/open-closed-principle.png
