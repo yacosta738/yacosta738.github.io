@@ -1,16 +1,13 @@
 ---
-layout: ../../components/templates/BlogPostTemplate.astro
 title: Vue 3 with Typescript and Decorators
-description: I always use Typescript and some decorator libraries on my VueJS
-  projects. It has allowed me to use a class syntax for my components and store
-  files which, I feel, is easier to read than the normal VueJS javascript
-  syntax. I'll be going through a step by step process on how to achieve this.
-  We will be building a counter component that will allow you to
-  increment/decrement a counter.
+description: I use Typescript and decorator libraries for VueJS. This allows me
+  to use a class syntax that's easier to read. I'll show you how to build a
+  counter component that can increment and decrement.
 date: 2021-05-30T19:54:13.642Z
+lang: en
 cover: /uploads/vue3-typescript.webp
 author: Yuniel Acosta
-lang: en
+layout: ../../components/templates/BlogPostTemplate.astro
 tags:
   - Vuejs
   - TypeScript
