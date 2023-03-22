@@ -1,11 +1,9 @@
 ---
-title: '[S] El Principio de Responsabilidad Única'
-description: El principio de responsabilidad única (SRP) es un principio clave
-  de diseño que promueve el código modular y mantenible. Este principio
-  establece que cada clase debe tener solo una responsabilidad o tarea que
-  realizar. Esta publicación de blog explica la importancia del principio SRP y
-  proporciona ejemplos de cómo adherirse a él en el código, lo que resulta en un
-  código más mantenible y comprensible.
+title: "[S] El Principio de Responsabilidad Única"
+description: El Principio de Responsabilidad Única (SRP) es un principio de
+  diseño que promueve el código mantenible. Establece que cada clase debe tener
+  solo una tarea. Esta publicación explica su importancia con ejemplos de
+  código, lo que resulta en un código más comprensible y mantenible.
 date: 2023-03-01T17:38:53.409Z
 lang: es
 cover: /uploads/single-responsibility-principle.png
