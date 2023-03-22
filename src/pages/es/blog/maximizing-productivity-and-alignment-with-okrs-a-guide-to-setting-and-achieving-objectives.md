@@ -1,17 +1,10 @@
 ---
-title: 'OKRs: Aumentar la productividad y la alineación'
-description: En este artículo, exploramos los beneficios y las mejores prácticas
-  de utilizar Objetivos y Resultados Clave (OKRs) como marco de establecimiento
-  de metas. Los OKRs proporcionan una estructura clara y enfoque para equipos e
-  individuos, lo que les ayuda a alinear sus esfuerzos con los objetivos más
-  amplios de la organización. Al establecer objetivos SMART y hacer un
-  seguimiento del progreso hacia su logro, los equipos pueden aumentar su
-  productividad y trabajar hacia los objetivos que impulsarán el éxito de la
-  organización. También discutimos la importancia de la comunicación efectiva y
-  la participación de todos los interesados relevantes en el proceso de
-  establecimiento y logro de OKRs. Este artículo proporciona una guía completa
-  para implementar OKRs en su organización para maximizar la productividad y el
-  alineamiento.
+title: "OKRs: Aumentar la productividad y la alineación"
+description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
+  (OKRs) puede alinear los esfuerzos del equipo e individuales con los objetivos
+  de una organización, aumentar la productividad y impulsar el éxito. También
+  destaca la importancia de una comunicación efectiva y la participación de los
+  interesados. El artículo sirve como guía para implementar OKRs.
 date: 2022-12-20T01:46:12.468Z
 lang: es
 cover: /uploads/okrs.webp
