@@ -1,11 +1,13 @@
 ---
-layout: ../../../components/templates/BlogPostTemplate.astro
 title: Cuenta regresiva para el nuevo Año
-description: La astronomía y la programación son dos de mis pasiones que en esta ocasión he decidido juntar. Con este objetivo crearemos una web sencilla para llevar la cuenta regresiva de cuantos días faltan hasta el nuevo año simulando el movimiento del planeta tierra.
+description: Combinando mis pasiones por la astronomía y la programación, estoy
+  creando un sitio web para hacer la cuenta regresiva de los días hasta el año
+  nuevo, con una simulación del movimiento de la Tierra.
 date: 2020-12-27
+lang: es
 cover: /uploads/portada.webp
 author: Yuniel Acosta
-lang: es
+layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - JavaScript
   - TypeScript
