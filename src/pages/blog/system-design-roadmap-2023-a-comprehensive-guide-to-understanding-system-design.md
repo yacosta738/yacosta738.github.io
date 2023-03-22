@@ -1,13 +1,10 @@
 ---
-title: 'System Design Roadmap 2023: A Comprehensive Guide to Understanding
-  System Design'
-description: This comprehensive guide provides an overview of the fundamentals
-  of system design and outlines key aspects such as performance vs scalability,
-  latency vs throughput, availability vs consistency, available patterns,
-  background jobs, load balancers, caching, asynchronous programming,
-  architecture patterns, communication patterns, and monitoring parameters.
-  Additionally, this blog includes helpful resources such as books, courses,
-  tutorials, blogs, and podcasts to further your understanding of system design.
+title: "System Design Roadmap 2023: A Comprehensive Guide to Understanding
+  System Design"
+description: This guide covers system design basics, including performance,
+  scalability, latency, throughput, consistency, availability, background jobs,
+  load balancers, caching, and monitoring. It also recommends resources for
+  further learning, such as books, courses, tutorials, and podcasts.
 date: 2023-02-17T00:36:19.145Z
 lang: en
 cover: /uploads/system-design-roadmap-2023.png
