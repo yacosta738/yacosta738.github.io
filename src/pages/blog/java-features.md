@@ -1,13 +1,18 @@
 ---
 title: Java Features
-author: Yuniel Acosta
-cover: /uploads/java-feactures.webp
+description: Java is a fast, secure, and versatile programming language used in
+  a wide range of applications and websites. From laptops to datacenters, game
+  consoles to scientific supercomputers, Java is everywhere!
 date: 2022-10-10
-description: Java is a programming language and computing platform first released by Sun Microsystems in 1995. There are lots of applications and websites that will not work unless you have Java installed, and more are created every day. Java is fast, secure, and reliable. From laptops to datacenters, game consoles to scientific supercomputers, cell phones to the Internet, Java is everywhere!
 lang: en
-tags: [java, jvm]
-categories: [Software Development]
+cover: /uploads/java-feactures.webp
+author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
+tags:
+  - java
+  - jvm
+categories:
+  - Software Development
 draft: false
 ---
 
