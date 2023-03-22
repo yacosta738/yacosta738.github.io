@@ -1,10 +1,9 @@
 ---
-title: '[S] The Single Responsibility Principle'
-description: The Single Responsibility Principle (SRP) is a key design principle
-  that promotes modular and maintainable code. It states that each class should
-  have only one responsibility or job to do. This blog post explains the
-  importance of the SRP principle and provides examples of how to adhere to it
-  in code, resulting in more maintainable and understandable code.
+title: "[S] The Single Responsibility Principle"
+description: The Single Responsibility Principle (SRP) is a design principle
+  promoting maintainable code. It states that each class should have only one
+  job. This post explains its importance with code examples, resulting in more
+  understandable and maintainable code.
 date: 2023-03-01T17:33:58.405Z
 lang: en
 cover: /uploads/single-responsibility-principle.png
