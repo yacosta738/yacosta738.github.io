@@ -1,15 +1,10 @@
 ---
-title: 'OKRs: Boosting Productivity and Alignment'
-description: In this article, we explore the benefits and best practices of
-  using Objectives and Key Results (OKRs) as a goal-setting framework. OKRs
-  provide a clear structure and focus for teams and individuals, helping them to
-  align their efforts with the larger goals of the organization. By setting
-  SMART objectives and tracking progress towards achieving them, teams can
-  increase their productivity and work towards the goals that will drive the
-  success of the organization. We also discuss the importance of effective
-  communication and involving all relevant stakeholders in the process of
-  setting and achieving OKRs. This article provides a comprehensive guide to
-  implementing OKRs in your organization to maximize productivity and alignment.
+title: "OKRs: Boosting Productivity and Alignment"
+description: This article discusses how using Objectives and Key Results (OKRs)
+  can align team and individual efforts with an organization's goals, boost
+  productivity, and drive success. It also highlights the importance of
+  effective communication and stakeholder involvement. The article serves as a
+  guide to implementing OKRs.
 date: 2022-12-20
 lang: en
 cover: /uploads/okrs.webp
