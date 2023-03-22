@@ -1,13 +1,19 @@
 ---
 title: Características de Java
-author: Yuniel Acosta
-cover: /uploads/java-feactures.webp
+description: Java es un lenguaje de programación rápido, seguro y versátil
+  utilizado en una amplia variedad de aplicaciones y sitios web. Desde laptops
+  hasta supercomputadoras científicas, consolas de juegos y más, ¡Java está en
+  todas partes!
 date: 2022-10-10
-description: Java es un lenguaje de programación y una plataforma de cómputo que fue lanzado por primera vez por Sun Microsystems en 1995. Hay muchas aplicaciones y sitios web que no funcionarán a menos que tenga Java instalado, y más se crean todos los días. Java es rápido, seguro y confiable. Desde computadoras portátiles hasta centros de datos, consolas de juegos hasta supercomputadoras científicas, teléfonos celulares hasta Internet, Java está en todas partes!
 lang: es
-tags: [java, jvm]
-categories: [Desarrollo de software]
+cover: /uploads/java-feactures.webp
+author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
+tags:
+  - java
+  - jvm
+categories:
+  - Desarrollo de software
 draft: false
 ---
 
