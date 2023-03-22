@@ -1,13 +1,8 @@
 ---
 title: Introducción a la clase Runtime en Java
-description: La clase Runtime en Java proporciona una forma para que los
-  desarrolladores interactúen con el entorno de ejecución y controlen la
-  ejecución de la JVM. En este artículo, exploramos los métodos y
-  funcionalidades proporcionados por la clase Runtime, como la gestión de
-  memoria, la ejecución de comandos en el sistema operativo y el apagado de la
-  JVM. Proporcionamos ejemplos de código para demostrar cómo utilizar estas
-  características y discutimos los beneficios de utilizar la clase Runtime para
-  construir aplicaciones Java sólidas, eficientes y escalables.
+description: "Explora la clase Runtime de Java: controla la ejecución de la JVM,
+  gestiona la memoria y ejecuta comandos del SO. Ejemplos y beneficios para
+  construir aplicaciones sólidas y eficientes."
 date: 2023-02-19T01:08:10.172Z
 lang: es
 cover: /uploads/runtime-code.jpeg
