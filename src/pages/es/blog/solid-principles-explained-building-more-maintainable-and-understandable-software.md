@@ -6,7 +6,7 @@ description: "Aprende los principios SOLID de POO: SRP, OCP, LSP, ISP y DIP.
   entender, evitando problemas comunes."
 date: 2023-03-23T13:34:44.591Z
 lang: es
-cover: public/uploads/solid-principles-explained.png
+cover: /uploads/solid-principles-explained.png
 author: Yuniel Acosta
 layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
@@ -15,7 +15,7 @@ categories:
   - Desarrollo de Software
 draft: true
 ---
-![Principios SOLID explicados](public/uploads/solid-principles-explained.png "Principios SOLID explicados")
+![Principios SOLID explicados](/uploads/solid-principles-explained.png "Principios SOLID explicados")
 
 En lo que respecta a escribir software utilizando programación orientada a objetos (OOP), es esencial tener en cuenta los principios SOLID. SOLID es un acrónimo que representa cinco principios de diseño que ayudan a que los diseños de software sean más comprensibles, flexibles y mantenibles.
 
