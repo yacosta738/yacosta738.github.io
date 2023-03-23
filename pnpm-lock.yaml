@@ -21,7 +21,7 @@ specifiers:
   astro-icon: 0.8.0
   astro-netlify-cms: 0.5.3
   astro-robots-txt: 0.4.1
-  astro-seo: 0.7.1
+  astro-seo: 0.7.2
   dompurify: 3.0.1
   eslint: 8.36.0
   eslint-config-standard: 17.0.0
@@ -82,7 +82,7 @@ devDependencies:
   astro-i18next: 1.0.0-beta.12_astro@2.1.5
   astro-icon: 0.8.0
   astro-robots-txt: 0.4.1
-  astro-seo: 0.7.1
+  astro-seo: 0.7.2
   dompurify: 3.0.1
   eslint: 8.36.0
   eslint-config-standard: 17.0.0_htxjg2emk4phzexndh6sfdkv2u
@@ -2293,8 +2293,8 @@ packages:
       zod: 3.21.4
     dev: true
 
-  /astro-seo/0.7.1:
-    resolution: {integrity: sha512-8Yo1nQrl2iB5zj+VUAHrvGIck8bZ4WAmXQgJOeF9FuAZGQD5qK6DtSZaRbpBXsFfZYHA6tE8pjs3btHhLbC1zQ==}
+  /astro-seo/0.7.2:
+    resolution: {integrity: sha512-YnSqj4E6vbF7wRk3gcxOPHBjenhfgaINEJlTsnu4sovAyfyGEdQksbioYKoZ+vERRDaYvEricfSzC6fc9lieww==}
     dev: true
 
   /astro/2.1.5_sass@1.59.3+sharp@0.31.3:
