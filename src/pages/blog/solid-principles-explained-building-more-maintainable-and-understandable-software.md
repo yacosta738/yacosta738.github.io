@@ -6,7 +6,7 @@ description: "Learn the SOLID principles of OOP: SRP, OCP, LSP, ISP, and DIP.
   avoiding common problems."
 date: 2023-03-23T13:26:43.750Z
 lang: en
-cover: public/uploads/solid-principles-explained.png
+cover: /uploads/solid-principles-explained.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -15,7 +15,7 @@ categories:
   - Software Development
 draft: true
 ---
-![SOLID Principles Explained](public/uploads/solid-principles-explained.png "SOLID Principles Explained")
+![SOLID Principles Explained](/uploads/solid-principles-explained.png "SOLID Principles Explained")
 
 When it comes to writing software using object-oriented programming (OOP), it's essential to keep in mind the SOLID principles. SOLID is an acronym that stands for five design principles that help make software designs more understandable, flexible, and maintainable.
 
