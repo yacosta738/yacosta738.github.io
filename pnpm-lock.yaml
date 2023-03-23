@@ -20,7 +20,7 @@ specifiers:
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
   astro-netlify-cms: 0.5.3
-  astro-robots-txt: 0.4.0
+  astro-robots-txt: 0.4.1
   astro-seo: 0.7.1
   dompurify: 3.0.1
   eslint: 8.36.0
@@ -81,7 +81,7 @@ devDependencies:
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12_astro@2.1.5
   astro-icon: 0.8.0
-  astro-robots-txt: 0.4.0
+  astro-robots-txt: 0.4.1
   astro-seo: 0.7.1
   dompurify: 3.0.1
   eslint: 8.36.0
@@ -2283,8 +2283,8 @@ packages:
       - supports-color
     dev: false
 
-  /astro-robots-txt/0.4.0:
-    resolution: {integrity: sha512-tzZUnSXNC5gtSaLvF/LGC0A6cxt7lW5J0tuuQfM84/Vj2/dIdsvxHUp1JI1APhdpwP6TvH05aJnJFnGHn/pZlQ==}
+  /astro-robots-txt/0.4.1:
+    resolution: {integrity: sha512-YujWFocCHcOA+sDlaiqVsUH7eeHDOn9WrtsyT7KPW3JOHn1dZB1KwoshsPGTJiZ0PeeAqPcHOz+M9xjzc/tjsQ==}
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
