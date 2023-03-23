@@ -1,6 +1,6 @@
 ---
-title: "SOLID Principles Explained: Building More Maintainable and
-  Understandable Software"
+title: "Principios SOLID explicados: construyendo software más mantenible y
+  comprensible"
 description: "Aprende los principios SOLID de POO: SRP, OCP, LSP, ISP y DIP.
   Estas directrices ayudan a crear diseños de software flexibles y fáciles de
   entender, evitando problemas comunes."
@@ -13,7 +13,7 @@ tags:
   - solid
 categories:
   - Desarrollo de Software
-draft: true
+draft: false
 ---
 ![Principios SOLID explicados](/uploads/solid-principles-explained.png "Principios SOLID explicados")
 
