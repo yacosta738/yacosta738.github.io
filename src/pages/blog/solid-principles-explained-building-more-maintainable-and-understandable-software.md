@@ -13,7 +13,7 @@ tags:
   - solid
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![SOLID Principles Explained](/uploads/solid-principles-explained.png "SOLID Principles Explained")
 
