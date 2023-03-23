@@ -7,7 +7,7 @@ specifiers:
   '@astrojs/tailwind': 3.1.1
   '@astrojs/vue': 2.1.0
   '@nanostores/vue': 0.7.0
-  '@playwright/test': 1.31.2
+  '@playwright/test': 1.32.0
   '@tailwindcss/aspect-ratio': 0.4.2
   '@tailwindcss/forms': 0.5.3
   '@tailwindcss/line-clamp': 0.4.2
@@ -69,7 +69,7 @@ devDependencies:
   '@astrojs/tailwind': 3.1.1_abn63hxpww4cnl7d6wt4twjp3u
   '@astrojs/vue': 2.1.0_aro3uk3q6i3amvk4rpqethsica
   '@nanostores/vue': 0.7.0_5k5a5xuqaffd2s4dm6vugcn64i
-  '@playwright/test': 1.31.2
+  '@playwright/test': 1.32.0
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.7
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.7
@@ -1345,13 +1345,13 @@ packages:
       tiny-glob: 0.2.9
       tslib: 2.5.0
 
-  /@playwright/test/1.31.2:
-    resolution: {integrity: sha512-BYVutxDI4JeZKV1+ups6dt5WiqKhjBtIYowyZIJ3kBDmJgsuPKsqqKNIMFbUePLSCmp2cZu+BDL427RcNKTRYw==}
+  /@playwright/test/1.32.0:
+    resolution: {integrity: sha512-zOdGloaF0jeec7hqoLqM5S3L2rR4WxMJs6lgiAeR70JlH7Ml54ZPoIIf3X7cvnKde3Q9jJ/gaxkFh8fYI9s1rg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.15.5
-      playwright-core: 1.31.2
+      playwright-core: 1.32.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -1568,7 +1568,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.15.5
     dev: true
 
   /@types/scheduler/0.16.2:
@@ -7405,8 +7405,8 @@ packages:
     dependencies:
       find-up: 4.1.0
 
-  /playwright-core/1.31.2:
-    resolution: {integrity: sha512-a1dFgCNQw4vCsG7bnojZjDnPewZcw7tZUNFN0ZkcLYKj+mPmXvg4MpaaKZ5SgqPsOmqIf2YsVRkgqiRDxD+fDQ==}
+  /playwright-core/1.32.0:
+    resolution: {integrity: sha512-Z9Ij17X5Z3bjpp6XKujGBp9Gv4eViESac9aDmwgQFUEJBW0K80T21m/Z+XJQlu4cNsvPygw33b6V1Va6Bda5zQ==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
