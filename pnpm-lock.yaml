@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@astrojs/image': 0.16.1
+  '@astrojs/image': 0.16.2
   '@astrojs/rss': 2.3.1
   '@astrojs/sitemap': 1.2.1
   '@astrojs/tailwind': 3.1.1
@@ -64,7 +64,7 @@ dependencies:
   uuid: 9.0.0
 
 devDependencies:
-  '@astrojs/image': 0.16.1_astro@2.1.5+sharp@0.31.3
+  '@astrojs/image': 0.16.2_astro@2.1.5+sharp@0.31.3
   '@astrojs/sitemap': 1.2.1
   '@astrojs/tailwind': 3.1.1_abn63hxpww4cnl7d6wt4twjp3u
   '@astrojs/vue': 2.1.0_aro3uk3q6i3amvk4rpqethsica
@@ -125,10 +125,10 @@ packages:
   /@astrojs/compiler/1.2.2:
     resolution: {integrity: sha512-S5UfaoYPgdKjxXjHq9jwHfNJJYZq77WRGgT6bQRmccGI/3dC/TakDW2nITNhju6kvRK1I8GI7ZHFJnVfA9cyhg==}
 
-  /@astrojs/image/0.16.1_astro@2.1.5+sharp@0.31.3:
-    resolution: {integrity: sha512-NI5wscxJC0qmvAqnNT79vucQcBP1ZzhVMd8iqy/bhjoccxEgFFvqLIUa88Tf/br3eyhHfN95FDIqNTOs4K3HSg==}
+  /@astrojs/image/0.16.2_astro@2.1.5+sharp@0.31.3:
+    resolution: {integrity: sha512-MWIPEgc2vbiNgbl0cmHYbaAZeXDNlFg5BAn0jQ4fQYYs8r44Fwr7p1DDwdZICc02EAKjAh6fLPFndBCkGA4+Qw==}
     peerDependencies:
-      astro: ^2.1.3
+      astro: ^2.1.6
       sharp: '>=0.31.0'
     peerDependenciesMeta:
       sharp:
