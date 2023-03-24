@@ -15,7 +15,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': 5.56.0
   '@typescript-eslint/parser': 5.56.0
   '@vueuse/core': 9.13.0
-  astro: 2.1.5
+  astro: 2.1.6
   astro-compress: 1.1.23
   astro-i18next: 1.0.0-beta.12
   astro-icon: 0.8.0
@@ -54,7 +54,7 @@ specifiers:
 
 dependencies:
   '@astrojs/rss': 2.3.1
-  astro-netlify-cms: 0.5.3_astro@2.1.5+graphql@15.8.0
+  astro-netlify-cms: 0.5.3_astro@2.1.6+graphql@15.8.0
   fuse.js: 6.6.2
   mdast-util-to-string: 3.1.1
   reading-time: 1.5.0
@@ -64,10 +64,10 @@ dependencies:
   uuid: 9.0.0
 
 devDependencies:
-  '@astrojs/image': 0.16.1_astro@2.1.5+sharp@0.31.3
+  '@astrojs/image': 0.16.1_astro@2.1.6+sharp@0.31.3
   '@astrojs/sitemap': 1.2.1
-  '@astrojs/tailwind': 3.1.1_abn63hxpww4cnl7d6wt4twjp3u
-  '@astrojs/vue': 2.1.0_aro3uk3q6i3amvk4rpqethsica
+  '@astrojs/tailwind': 3.1.1_7pxhldtqxqapdoi4tql47ep6su
+  '@astrojs/vue': 2.1.0_svdmas3ilmqu6yc6ql3nk5bteu
   '@nanostores/vue': 0.7.0_5k5a5xuqaffd2s4dm6vugcn64i
   '@playwright/test': 1.32.0
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.7
@@ -77,9 +77,9 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.56.0_2hcjazgfnbtq42tcc73br2vup4
   '@typescript-eslint/parser': 5.56.0_j4766f7ecgqbon3u7zlxn5zszu
   '@vueuse/core': 9.13.0_vue@3.2.47
-  astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+  astro: 2.1.6_sass@1.60.0+sharp@0.31.3
   astro-compress: 1.1.23
-  astro-i18next: 1.0.0-beta.12_astro@2.1.5
+  astro-i18next: 1.0.0-beta.12_astro@2.1.6
   astro-icon: 0.8.0
   astro-robots-txt: 0.4.1
   astro-seo: 0.7.2
@@ -125,7 +125,7 @@ packages:
   /@astrojs/compiler/1.2.2:
     resolution: {integrity: sha512-S5UfaoYPgdKjxXjHq9jwHfNJJYZq77WRGgT6bQRmccGI/3dC/TakDW2nITNhju6kvRK1I8GI7ZHFJnVfA9cyhg==}
 
-  /@astrojs/image/0.16.1_astro@2.1.5+sharp@0.31.3:
+  /@astrojs/image/0.16.1_astro@2.1.6+sharp@0.31.3:
     resolution: {integrity: sha512-NI5wscxJC0qmvAqnNT79vucQcBP1ZzhVMd8iqy/bhjoccxEgFFvqLIUa88Tf/br3eyhHfN95FDIqNTOs4K3HSg==}
     peerDependencies:
       astro: ^2.1.3
@@ -135,7 +135,7 @@ packages:
         optional: true
     dependencies:
       '@altano/tiny-async-pool': 1.0.2
-      astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+      astro: 2.1.6_sass@1.60.0+sharp@0.31.3
       http-cache-semantics: 4.1.1
       image-size: 1.0.2
       kleur: 4.1.5
@@ -161,13 +161,13 @@ packages:
       vscode-languageserver-types: 3.17.3
       vscode-uri: 3.0.7
 
-  /@astrojs/markdown-remark/2.1.2_astro@2.1.5:
+  /@astrojs/markdown-remark/2.1.2_astro@2.1.6:
     resolution: {integrity: sha512-rYkmFEv2w7oEk6ZPgxHkhWzwcxSUGc1vJU0cbCu5sHF8iFNnc1cmMsjXWa5DrU5sCEf8VVYE1iFlbbnFzvHQJw==}
     peerDependencies:
       astro: ^2.1.5
     dependencies:
       '@astrojs/prism': 2.1.1
-      astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+      astro: 2.1.6_sass@1.60.0+sharp@0.31.3
       github-slugger: 1.5.0
       import-meta-resolve: 2.2.2
       rehype-raw: 6.1.1
@@ -203,14 +203,14 @@ packages:
       zod: 3.21.4
     dev: true
 
-  /@astrojs/tailwind/3.1.1_abn63hxpww4cnl7d6wt4twjp3u:
+  /@astrojs/tailwind/3.1.1_7pxhldtqxqapdoi4tql47ep6su:
     resolution: {integrity: sha512-Wx/ZtVnmtfqHWGVzvUEYZm8rufVKVgDIef0q6fzwUxoT1EpTTwBkTbpnzooogewMLOh2eTscasGe3Ih2HC1wVA==}
     peerDependencies:
       astro: ^2.1.3
       tailwindcss: ^3.0.24
     dependencies:
       '@proload/core': 0.3.3
-      astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+      astro: 2.1.6_sass@1.60.0+sharp@0.31.3
       autoprefixer: 10.4.14_postcss@8.4.21
       postcss: 8.4.21
       postcss-load-config: 4.0.1_postcss@8.4.21
@@ -234,7 +234,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/vue/2.1.0_aro3uk3q6i3amvk4rpqethsica:
+  /@astrojs/vue/2.1.0_svdmas3ilmqu6yc6ql3nk5bteu:
     resolution: {integrity: sha512-cHOE8m5Dtb2Unb4Oi0P6Bl3KcMmOMDlblkpqmdEeESnyhRZGuTWE0jLQlcGASMxcHgE851tByDKxcKC3PuPfoA==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
@@ -245,7 +245,7 @@ packages:
       '@vitejs/plugin-vue-jsx': 3.0.1_vite@4.2.1+vue@3.2.47
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.21.3
       '@vue/compiler-sfc': 3.2.47
-      astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+      astro: 2.1.6_sass@1.60.0+sharp@0.31.3
       vue: 3.2.47
     transitivePeerDependencies:
       - '@babel/core'
@@ -2241,7 +2241,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next/1.0.0-beta.12_astro@2.1.5:
+  /astro-i18next/1.0.0-beta.12_astro@2.1.6:
     resolution: {integrity: sha512-HbBCBuAhs/59HCVkQyiQWFWj1bDHjaQ8Yk55DkwPR2mTfN0yZfLncFnZm8QsprE5/s3p27U80kK7f7K83tdFRg==}
     hasBin: true
     peerDependencies:
@@ -2249,7 +2249,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1_@proload+core@0.3.3
-      astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+      astro: 2.1.6_sass@1.60.0+sharp@0.31.3
       i18next: 21.10.0
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -2263,13 +2263,13 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms/0.5.3_astro@2.1.5+graphql@15.8.0:
+  /astro-netlify-cms/0.5.3_astro@2.1.6+graphql@15.8.0:
     resolution: {integrity: sha512-X/PVNoHxW1VPrJwbCB9Kp8FX9qrqjJmABB7Bg3jsbQEMoLk0sgIlFvWPCJI/zg8/QjaN6wDcxay9Qp1+8fMdgA==}
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta
     dependencies:
       '@types/react': 17.0.53
-      astro: 2.1.5_sass@1.60.0+sharp@0.31.3
+      astro: 2.1.6_sass@1.60.0+sharp@0.31.3
       netlify-cms-app: 2.15.72_glormouzkak2uyjoqs4fbwebxy
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -2297,8 +2297,8 @@ packages:
     resolution: {integrity: sha512-YnSqj4E6vbF7wRk3gcxOPHBjenhfgaINEJlTsnu4sovAyfyGEdQksbioYKoZ+vERRDaYvEricfSzC6fc9lieww==}
     dev: true
 
-  /astro/2.1.5_sass@1.60.0+sharp@0.31.3:
-    resolution: {integrity: sha512-NFHFkf3DkyV/9FQ9uMxXx9KP9a6nBOMDd9OC9SWgCwTJc2+Cm4oL94BnKmZ2SNR124pSoKimnaBkZncTYmIVwA==}
+  /astro/2.1.6_sass@1.60.0+sharp@0.31.3:
+    resolution: {integrity: sha512-CQg5WsQhjx28/BWnrBN9doZSK/2OWF+VJlierkEnRSYeiSrhUfsCW33RBKtrBPEHp5pHWTlAU6pQkJ4FQht0Sw==}
     engines: {node: '>=16.12.0', npm: '>=6.14.0'}
     hasBin: true
     peerDependencies:
@@ -2309,7 +2309,7 @@ packages:
     dependencies:
       '@astrojs/compiler': 1.2.2
       '@astrojs/language-server': 0.28.3
-      '@astrojs/markdown-remark': 2.1.2_astro@2.1.5
+      '@astrojs/markdown-remark': 2.1.2_astro@2.1.6
       '@astrojs/telemetry': 2.1.0
       '@astrojs/webapi': 2.1.0
       '@babel/core': 7.21.3
