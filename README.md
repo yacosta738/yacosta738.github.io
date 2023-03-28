@@ -62,16 +62,16 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
-| `npm run format`       | Format your code with Prettier                     |
-| `npm run lint:eslint`  | Lint your code with ESLint                         |
-| `npm run lint:eslint:fix` | Lint and fix your code with ESLint              |
-| `npm run test`         | Run your tests with Playwright                     |
-| `npm run test:e2e`     | Run your end-to-end tests with Playwright          |
+| Command                   | Action                                             |
+| :------------------------ | :------------------------------------------------- |
+| `npm install`             | Installs dependencies                              |
+| `npm run dev`             | Starts local dev server at `localhost:3000`        |
+| `npm run build`           | Build your production site to `./dist/`            |
+| `npm run preview`         | Preview your build locally, before deploying       |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro preview` |
+| `npm run astro --help`    | Get help using the Astro CLI                       |
+| `npm run format`          | Format your code with Prettier                     |
+| `npm run lint:eslint`     | Lint your code with ESLint                         |
+| `npm run lint:eslint:fix` | Lint and fix your code with ESLint                 |
+| `npm run test`            | Run your tests with Playwright                     |
+| `npm run test:e2e`        | Run your end-to-end tests with Playwright          |
