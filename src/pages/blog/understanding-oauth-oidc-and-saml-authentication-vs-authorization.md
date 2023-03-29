@@ -13,7 +13,7 @@ tags:
   - Security
 categories:
   - Software Development
-draft: true
+draft: false
 ---
 ![Understanding OAuth, OIDC, and SAML: Authentication vs Authorization](/uploads/understanding-oauth-oidc-and-saml.png "Understanding OAuth, OIDC, and SAML: Authentication vs Authorization")
 
