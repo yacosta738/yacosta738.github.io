@@ -61,8 +61,10 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 	let titleTextAlt = { en: "Don't go! Come back! 😥", es: '¡No te vayas! ¡Vuelve! 😥' }
 
 	window.addEventListener('blur', () => {
-		previousTitle = document.title
-		document.title = titleTextAlt[document.documentElement.lang]
+		setTimeout(() => {
+			previousTitle = document.title
+			document.title = titleTextAlt[document.documentElement.lang]
+		}, 10000);
 	})
 
 	window.addEventListener('focus', () => {
