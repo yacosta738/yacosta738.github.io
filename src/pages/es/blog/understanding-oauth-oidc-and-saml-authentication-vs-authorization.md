@@ -1,5 +1,5 @@
 ---
-title: "Understanding OAuth, OIDC, and SAML: Authentication vs Authorization"
+title: "Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización"
 description: Este artículo explica las diferencias entre OAuth, OIDC y SAML,
   describiendo sus características y aplicaciones únicas. Al desglosar estos
   estándares, los lectores pueden tomar decisiones informadas sobre cuál usar
