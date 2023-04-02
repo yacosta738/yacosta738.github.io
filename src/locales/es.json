@@ -6,8 +6,8 @@
     "ogImageAlt": "Yuniel Acosta | Ingeniero de Software - Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño dirigido por dominios y microservicios. Soy una persona versátil con amplias habilidades, con muchas ganas de aprender y lista para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.",
     "blog-description": "Blog sobre programación y tecnologías web, escalables, de alta disponibilidad y tips para ser mas productivos."
   },
-  "projects":{
-    "title":"Proyectos de Yuniel",
+  "projects": {
+    "title": "Proyectos de Yuniel",
     "description": "Una lista extensa de cosas en las que he trabajado",
     "ogImageAlt": "Aquí puedes encontrar todos mis proyectos"
   },

@@ -1,5 +1,5 @@
 ---
-title: "[L] The Liskov Substitution Principle"
+title: '[L] The Liskov Substitution Principle'
 description: The Liskov substitution principle ensures that subclass objects can
   be used interchangeably with those of the superclass, preventing unexpected
   program errors. Adhering to this rule simplifies code management and increases

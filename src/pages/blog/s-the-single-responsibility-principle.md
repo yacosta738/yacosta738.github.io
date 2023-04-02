@@ -1,5 +1,5 @@
 ---
-title: "[S] The Single Responsibility Principle"
+title: '[S] The Single Responsibility Principle'
 description: The Single Responsibility Principle (SRP) is a design principle
   promoting maintainable code. It states that each class should have only one
   job. This post explains its importance with code examples, resulting in more

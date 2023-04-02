@@ -1,5 +1,5 @@
 ---
-title: "Java Developers: Check Out These GitHub Repositories!"
+title: 'Java Developers: Check Out These GitHub Repositories!'
 description: Discover some of the best GitHub repositories for Java developers
   in this article. Learn about data structures, algorithms, Spring framework,
   coding style tools and more to enhance your skills.

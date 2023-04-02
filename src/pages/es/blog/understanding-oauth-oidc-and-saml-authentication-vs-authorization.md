@@ -1,5 +1,5 @@
 ---
-title: "Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización"
+title: 'Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización'
 description: Este artículo explica las diferencias entre OAuth, OIDC y SAML,
   describiendo sus características y aplicaciones únicas. Al desglosar estos
   estándares, los lectores pueden tomar decisiones informadas sobre cuál usar
@@ -15,7 +15,8 @@ categories:
   - Desarrollo de Software
 draft: false
 ---
-![Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización](/uploads/understanding-oauth-oidc-and-saml.png "Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización")
+
+![Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización](/uploads/understanding-oauth-oidc-and-saml.png 'Comprendiendo OAuth, OIDC y SAML: Autenticación vs Autorización')
 
 Si alguna vez te has preguntado cuál es la diferencia entre OAuth, OIDC y SAML, te lo aclararemos. Primero, necesitamos definir autenticación y autorización. La autenticación es el proceso de verificar la identidad de un usuario o dispositivo, mientras que la autorización es el proceso de determinar lo que un usuario o dispositivo está autorizado a hacer, después de que se establece su identidad.
 

@@ -1,6 +1,6 @@
 ---
-title: "5 herramientas imprescindibles para 2023: desde la edición inteligente
-  de fotos hasta la escritura de copias impulsada por IA"
+title: '5 herramientas imprescindibles para 2023: desde la edición inteligente
+  de fotos hasta la escritura de copias impulsada por IA'
 description: Maximiza tu productividad en 2023 con cinco herramientas poderosas
   presentadas en este artículo. Desde edición inteligente de fotos hasta
   redacción impulsada por inteligencia artificial, estas herramientas

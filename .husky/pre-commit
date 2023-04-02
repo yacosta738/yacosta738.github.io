@@ -3,7 +3,7 @@
 
 echo "Running pre-commit hook 🪝"
 
-PACKAGE_MANAGER=""
+# Determinar el manejador de paquetes utilizado
 if command -v yarn >/dev/null 2>&1; then
   PACKAGE_MANAGER="yarn"
 elif command -v pnpm >/dev/null 2>&1; then
@@ -17,4 +17,10 @@ fi
 
 echo "Using package manager: $PACKAGE_MANAGER"
 
-$PACKAGE_MANAGER i && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format
+# Instalar dependencias, generar traducciones y formatear código
+if $PACKAGE_MANAGER install && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format; then
+  exit 0
+else
+  echo "Error: failed to run pre-commit hook"
+  exit 1
+fi

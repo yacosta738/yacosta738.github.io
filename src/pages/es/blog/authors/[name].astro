@@ -26,7 +26,7 @@ const { name } = Astro.params
 const { author } = Astro.props
 ---
 
-<BaseTemplate title={`${t('blog')} | ${name}`} description={t('seo.blog-description')}>
+<BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('seo.blog-description')} ${name}`}>
 	<section id='about-author' class='container mx-auto'>
 		<div class='flex items-center justify-center'>
 			<Card3D>
@@ -65,7 +65,7 @@ const { author } = Astro.props
 
 				<h3
 					data-atropos-offset='5'
-					class='flex flex-col items-center justify-center pt-6 pb-6 text-center text-2xl font-bold md:flex-row'
+					class='flex flex-col items-center justify-center pb-6 pt-6 text-center text-2xl font-bold md:flex-row'
 				>
 					{
 						author.social.map((social) => (
@@ -83,7 +83,7 @@ const { author } = Astro.props
 
 				<div
 					id='card-icon'
-					class='absolute top-20 -left-32 -z-10 h-96 w-96 opacity-30 contrast-200'
+					class='absolute -left-32 top-20 -z-10 h-96 w-96 opacity-30 contrast-200'
 				>
 					FlavourIcon
 				</div>

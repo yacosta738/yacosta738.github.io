@@ -1,6 +1,6 @@
 ---
-title: "Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el
-  Diseño de Sistemas."
+title: 'Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el
+  Diseño de Sistemas.'
 description: Esta guía cubre los conceptos básicos del diseño de sistemas,
   incluyendo rendimiento, escalabilidad, latencia, rendimiento, consistencia,
   disponibilidad, trabajos en segundo plano, equilibradores de carga,

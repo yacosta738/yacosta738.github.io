@@ -1,5 +1,5 @@
 ---
-title: "OKRs: Boosting Productivity and Alignment"
+title: 'OKRs: Boosting Productivity and Alignment'
 description: This article discusses how using Objectives and Key Results (OKRs)
   can align team and individual efforts with an organization's goals, boost
   productivity, and drive success. It also highlights the importance of
