@@ -17,19 +17,20 @@ categories:
   - Software Development
 draft: false
 ---
-![Introduction to Gridsome](/uploads/gridsome-portada.webp "Introduction to Gridsome")
+
+![Introduction to Gridsome](/uploads/gridsome-portada.webp 'Introduction to Gridsome')
 
 Gridsome is a Vue.js-powered, modern site generator for building the fastest possible websites for any Headless CMS, APIs or Markdown-files. Gridsome makes it easy and fun for developers to create fast, beautiful websites without needing to become a performance expert.
 
 ### Why Gridsome?
 
-* **Local development with hot-reloading** - See code changes in real-time.
-* **Data source plugins** - Use it for any popular Headless CMSs, APIs or Markdown-files.
-* **File-based page routing** - Quickly create and manage routes with files.
-* **Centralized data management** - Pull data into a local, unified GraphQL data layer.
-* **Vue.js for frontend** - A lightweight and approachable front-end framework.
-* **Auto-optimized code** - Get code-splitting and asset optimization out-of-the-box.
-* **Static files generation** - Deploy securely to any CDN or static web host.
+- **Local development with hot-reloading** - See code changes in real-time.
+- **Data source plugins** - Use it for any popular Headless CMSs, APIs or Markdown-files.
+- **File-based page routing** - Quickly create and manage routes with files.
+- **Centralized data management** - Pull data into a local, unified GraphQL data layer.
+- **Vue.js for frontend** - A lightweight and approachable front-end framework.
+- **Auto-optimized code** - Get code-splitting and asset optimization out-of-the-box.
+- **Static files generation** - Deploy securely to any CDN or static web host.
 
 [Learn more about how Gridsome works](https://gridsome.org/docs/#how-it-works)
 
@@ -73,6 +74,6 @@ Using npm:
 1. Create `.vue` components in the `/pages` directory to create page routes.
 2. Use `gridsome build` to generate static files in a `/dist` folder
 
-* [How it works](https://gridsome.org/docs/#how-it-works)
-* [How Pages work](https://gridsome.org/docs/pages/)
-* [How to deploy](https://gridsome.org/docs/deployment/)
+- [How it works](https://gridsome.org/docs/#how-it-works)
+- [How Pages work](https://gridsome.org/docs/pages/)
+- [How to deploy](https://gridsome.org/docs/deployment/)

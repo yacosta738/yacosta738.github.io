@@ -1,5 +1,5 @@
 ---
-title: "[O] El Principio Abierto-Cerrado"
+title: '[O] El Principio Abierto-Cerrado'
 description: Este artículo explica el principio Abierto-Cerrado (OCP) del diseño
   SOLID, el cual aconseja crear código flexible y mantenible manteniendo las
   clases abiertas a la extensión pero cerradas a la modificación. Utiliza un

@@ -24,7 +24,7 @@ const posts: Article[] = postsData
 <section id='last3articles' class='flex flex-col content-center items-center justify-center'>
 	<h2 class='numbered-heading'>{t('menus.last-articles')}</h2>
 	<div
-		class='my-2 mx-4 flex flex-col content-center justify-center justify-items-center gap-4 md:mx-auto md:flex-row'
+		class='mx-4 my-2 flex flex-col content-center justify-center justify-items-center gap-4 md:mx-auto md:flex-row'
 	>
 		{
 			posts.map((post) => (
@@ -37,7 +37,7 @@ const posts: Article[] = postsData
 							height={400}
 							width={1000}
 						/>
-						<div class='absolute top-1 right-1 left-1 flex items-center justify-between rounded-lg rounded-b-none px-4'>
+						<div class='absolute left-1 right-1 top-1 flex items-center justify-between rounded-lg rounded-b-none px-4'>
 							<span class='' />
 							<div class='font-regular flex flex-col items-center justify-start rounded bg-light-navy/25 text-center text-lightest-slate'>
 								<span class='leading-0 text-3xl font-semibold'>{post.timeToRead}</span>
@@ -53,7 +53,7 @@ const posts: Article[] = postsData
 						</a>
 						<p class='mb-3 font-normal line-clamp-4 md:line-clamp-3'>{post.description}</p>
 						<footer class='absolute bottom-1'>
-							<a href={post.url} class='inline-flex items-center py-1 px-3 text-sm font-medium'>
+							<a href={post.url} class='inline-flex items-center px-3 py-1 text-sm font-medium'>
 								{t('read')}
 							</a>
 						</footer>

@@ -1,6 +1,6 @@
 ---
-title: "5 Must-Have Tools for 2023: From Smart Photo Editing to AI-Powered
-  Copywriting"
+title: '5 Must-Have Tools for 2023: From Smart Photo Editing to AI-Powered
+  Copywriting'
 description: Maximize your productivity in 2023 with five powerful tools
   highlighted in this article. From smart photo editing to AI-powered
   copywriting, these tools simplify tasks and keep you ahead in the digital age.

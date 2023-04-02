@@ -24,7 +24,7 @@ const { tag } = Astro.params
 const { posts } = Astro.props
 ---
 
-<BlogTemplate title={`${t('blog')} | ${tag}`} description={t('seo.blog-description')}>
+<BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('seo.blog-description')} ${tag}`}>
 	<div class='tainer mx-auto'>
 		{
 			posts.map((post) => (

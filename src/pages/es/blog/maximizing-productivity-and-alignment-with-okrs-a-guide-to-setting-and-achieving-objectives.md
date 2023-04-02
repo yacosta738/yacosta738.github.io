@@ -1,5 +1,5 @@
 ---
-title: "OKRs: Aumentar la productividad y la alineación"
+title: 'OKRs: Aumentar la productividad y la alineación'
 description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
   (OKRs) puede alinear los esfuerzos del equipo e individuales con los objetivos
   de una organización, aumentar la productividad y impulsar el éxito. También

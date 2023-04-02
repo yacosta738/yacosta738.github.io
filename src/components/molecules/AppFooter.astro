@@ -16,7 +16,7 @@ const portfolioTechIcon = [
 		<ul class='relative flex list-none flex-wrap p-0 md:hidden'>
 			{
 				socialMedia.map(({ name, icon, url }) => (
-					<li class='my-2 mx-1 whitespace-nowrap font-mono text-3xl text-light-slate'>
+					<li class='mx-1 my-2 whitespace-nowrap font-mono text-3xl text-light-slate'>
 						<a href={url} target='_blank' rel='noopener noreferrer' aria-label={name}>
 							<Icon name={icon} class='h-8' />
 						</a>
@@ -39,7 +39,7 @@ const portfolioTechIcon = [
 		<ul class='relative flex list-none flex-wrap p-0'>
 			{
 				portfolioTechIcon.map((icon) => (
-					<li class='my-2 mx-1 whitespace-nowrap font-mono text-xs text-light-slate'>
+					<li class='mx-1 my-2 whitespace-nowrap font-mono text-xs text-light-slate'>
 						<Icon name={icon} class='h-4' />
 					</li>
 				))

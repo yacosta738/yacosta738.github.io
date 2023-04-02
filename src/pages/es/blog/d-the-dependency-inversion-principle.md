@@ -1,5 +1,5 @@
 ---
-title: "[D] El Principio de Inversión de Dependencias"
+title: '[D] El Principio de Inversión de Dependencias'
 description: Este artículo explora el Principio de Inversión de Dependencias
   (DIP) en los principios de diseño SOLID, resaltando los beneficios de crear un
   código flexible y fácil de mantener. Proporciona un ejemplo en Kotlin para
