@@ -93,9 +93,8 @@ onUnmounted(() => {
 						<h3>
 							<span>{{ job.role }}</span>
 							<span class="company">
-								&nbsp;@&nbsp;
 								<a :href="job.url" target="_blank" class="inline-link">
-									{{ job.company }}
+									&nbsp;@&nbsp;{{ job.company }}
 								</a>
 							</span>
 						</h3>

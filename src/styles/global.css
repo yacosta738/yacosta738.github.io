@@ -82,7 +82,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	background-color: var(--navy);
 	color: var(--slate);
-	font-family: var(--font-sans);
 	font-size: 20px;
 	line-height: 1.3;
 }
