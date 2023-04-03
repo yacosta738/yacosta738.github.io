@@ -15,7 +15,7 @@ tags:
   - CORS
 categories:
   - Desarrollo de Software
-draft: true
+draft: false
 ---
 ![CORS](/uploads/cors.png "CORS")
 
