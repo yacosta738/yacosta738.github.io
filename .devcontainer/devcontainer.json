@@ -30,6 +30,8 @@
     "esbenp.prettier-vscode",
     "rvest.vs-code-prettier-eslint",
     "Vue.vscode-typescript-vue-plugin",
+    "vivaxy.vscode-conventional-commits",
+    "EditorConfig.EditorConfig",
     "Vue.volar"
   ],
 
