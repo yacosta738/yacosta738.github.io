@@ -13,11 +13,11 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 ---
 
 <div class='flex flex-col'>
-	<h2 class='text-center text-3xl font-bold tracking-wider md:text-justify md:text-4xl'>
+	<h2 class='text-center text-3xl font-bold md:text-justify md:text-4xl'>
 		<a href={localizePath(article.url)} class='inline-link'>{article.title}</a>
 	</h2>
 	{!hidePostHeaderInSmallScreen && <PostHeader article={article} />}
-	<div class='mb-16 flex flex-col items-center justify-center lg:flex-row'>
+	<div class='mb-16 flex flex-col justify-center lg:flex-row'>
 		{
 			article.cover && (
 				<Image
@@ -29,7 +29,7 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 				/>
 			)
 		}
-		<div class='m-4 text-justify md:mx-10 md:my-5'>
+		<div class='mx-4 text-justify md:mx-10 md:my-5'>
 			<span class='line-clamp-7'>{article.description}</span>
 			<a href={localizePath(article.url)} class='inline-link font-bold uppercase'>{t('read')}</a>
 		</div>
