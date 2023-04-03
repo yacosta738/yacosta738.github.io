@@ -7,7 +7,7 @@ description: This article explains CORS (Cross-Origin Resource Sharing) - a
   for building modern web applications that require cross-domain requests.
 date: 2023-04-03T08:00:13.456Z
 lang: en
-cover: public/uploads/understanding-cors-in-web-development.png
+cover: /uploads/understanding-cors-in-web-development.png
 author: Yuniel Acosta
 layout: ../../components/templates/BlogPostTemplate.astro
 tags:
@@ -16,7 +16,7 @@ categories:
   - Software Development
 draft: true
 ---
-![CORS](public/uploads/cors.png "CORS")
+![CORS](/uploads/cors.png "CORS")
 
 ## Understanding CORS
 
