@@ -8,7 +8,7 @@ export interface Props {
 	image: string
 	ogImageAlt: string
 }
-const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 const { href: canonicalUrl } = Astro.url
 let { title, description, image, ogImageAlt } = Astro.props
 
