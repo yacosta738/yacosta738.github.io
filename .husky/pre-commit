@@ -18,9 +18,9 @@ fi
 echo "Using package manager: $PACKAGE_MANAGER"
 
 # Instalar dependencias, generar traducciones y formatear código
- if $PACKAGE_MANAGER install && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format; then
+if $PACKAGE_MANAGER install && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format; then
    exit 0
- else
+else
    echo "Error: failed to run pre-commit hook"
    exit 1
 fi

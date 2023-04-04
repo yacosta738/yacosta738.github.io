@@ -190,7 +190,7 @@ h6 {
 	content: '0' counter(section) '.';
 	margin-right: 10px;
 	color: var(--green);
-	font-family: var(--font-mono);
+	/* font-family: var(--font-mono); */
 	font-size: clamp(16px, 3vw, 20px);
 	font-weight: 400;
 }
