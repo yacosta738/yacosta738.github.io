@@ -11,7 +11,7 @@ tags:
   - Linux
   - VPN
 categories:
-  - Sistemas operativos y herramientas
+  - SO & Herramientas
 draft: false
 ---
 

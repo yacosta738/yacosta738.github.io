@@ -13,7 +13,7 @@ tags:
   - Linux
   - macOS
 categories:
-  - Operating Systems and Tools
+  - OS & Tools
 draft: false
 ---
 

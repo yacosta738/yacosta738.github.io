@@ -13,7 +13,7 @@ tags:
   - AI
 categories:
   - Artificial Intelligence
-  - Operating Systems and Tools
+  - OS & Tools
 draft: false
 ---
 

@@ -14,7 +14,7 @@ tags:
   - IA
 categories:
   - Inteligencia Artificial
-  - Sistemas operativos y herramientas
+  - SO & Herramientas
 draft: false
 ---
 

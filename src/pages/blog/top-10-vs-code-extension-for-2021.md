@@ -16,7 +16,7 @@ tags:
   - extensions
   - plugins
 categories:
-  - Operating Systems and Tools
+  - OS & Tools
 draft: false
 ---
 
