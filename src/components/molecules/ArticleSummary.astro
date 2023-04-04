@@ -13,7 +13,7 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 ---
 
 <div class='flex flex-col'>
-	<h2 class='text-center text-3xl font-bold md:text-justify md:text-4xl'>
+	<h2 class='text-center text-3xl md:text-left md:text-4xl'>
 		<a href={localizePath(article.url)} class='inline-link'>{article.title}</a>
 	</h2>
 	{!hidePostHeaderInSmallScreen && <PostHeader article={article} />}
