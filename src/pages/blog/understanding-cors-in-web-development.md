@@ -16,7 +16,8 @@ categories:
   - Software Development
 draft: false
 ---
-![CORS](/uploads/cors.png "CORS")
+
+![CORS](/uploads/cors.png 'CORS')
 
 ## Understanding CORS
 

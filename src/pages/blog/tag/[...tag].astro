@@ -1,27 +1,27 @@
 ---
-import i18next, { t, changeLanguage } from 'i18next'
-import { jsonToArticle } from '@models:Article'
-import BlogTemplate from 'templates:BlogTemplate'
-import ArticleSummary from 'molecules:ArticleSummary'
+import i18next, { t, changeLanguage } from "i18next";
+import { jsonToArticle } from "@models:Article";
+import BlogTemplate from "templates:BlogTemplate";
+import ArticleSummary from "molecules:ArticleSummary";
 
-changeLanguage('en')
+changeLanguage("en");
 
 export async function getStaticPaths() {
-	const postsData = await Astro.glob('../**/*.md')
-	const allPosts = postsData
-		.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-		.map((post) => jsonToArticle(post))
-		.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-	const tags = allPosts.map((post) => post.tags).flat()
-	return tags.map((tag) => {
-		return {
-			params: { tag: tag.toLowerCase() },
-			props: { posts: allPosts.filter((post) => post.tags.includes(tag)) }
-		}
-	})
+    const postsData = await Astro.glob("../**/*.md");
+    const allPosts = postsData
+        .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+        .map((post) => jsonToArticle(post))
+        .sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+    const tags = allPosts.map((post) => post.tags).flat();
+    return tags.map((tag) => {
+        return {
+            params: { tag: tag.toLowerCase() },
+            props: { posts: allPosts.filter((post) => post.tags.includes(tag)) }
+        };
+    });
 }
-const { tag } = Astro.params
-const { posts } = Astro.props
+const { tag } = Astro.params;
+const { posts } = Astro.props;
 ---
 
 <BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('seo.blog-description')} ${tag}`}>

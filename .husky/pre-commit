@@ -3,24 +3,24 @@
 
 echo "Running pre-commit hook 🪝"
 
-# Determinar el manejador de paquetes utilizado
-if command -v yarn >/dev/null 2>&1; then
-  PACKAGE_MANAGER="yarn"
-elif command -v pnpm >/dev/null 2>&1; then
-  PACKAGE_MANAGER="pnpm"
+# Determine the package manager being used
+if command -v pnpm >/dev/null 2>&1; then
+PACKAGE_MANAGER="pnpm"
+elif command -v yarn >/dev/null 2>&1; then
+PACKAGE_MANAGER="yarn"
 elif command -v npm >/dev/null 2>&1; then
-  PACKAGE_MANAGER="npm"
+PACKAGE_MANAGER="npm"
 else
-  echo "No se encontró ningún manejador de paquetes instalado."
-  exit 1
+echo "No package manager found installed."
+exit 1
 fi
 
 echo "Using package manager: $PACKAGE_MANAGER"
 
-# Instalar dependencias, generar traducciones y formatear código
+# Install dependencies, generate translations, and format code
 if $PACKAGE_MANAGER install && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format; then
-   exit 0
+	exit 0
 else
-   echo "Error: failed to run pre-commit hook"
-   exit 1
+	echo "Error: failed to run pre-commit hook"
+	exit 1
 fi
