@@ -9,5 +9,5 @@
   "featured": false,
   "priority": 0.06,
   "published": true,
-  "content": "Sistema de pedidos de comida que permite a los usuarios pedir comida de restaurantes. Es una arquitectura de microservicios que usa Kafka para comunicarse entre servicios. También usa PostgreSQL como base de datos. Es un trabajo en progreso."
+  "content": "Este es un sistema de pedidos de comida que utiliza una arquitectura de microservicios con Kafka para la comunicación entre servicios y PostgreSQL como base de datos. Es un trabajo en progreso."
 }
