@@ -15,11 +15,9 @@
     "telemetry.enableTelemetry": false,
     "redhat.telemetry.enabled": false,
     "vulnCost.sendStatistics": false,
-
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.formatOnSave": true,
-
     "files.insertFinalNewline": true
   },
 
@@ -36,7 +34,7 @@
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
+  "forwardPorts": [3000, 8081],
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "pnpm install",

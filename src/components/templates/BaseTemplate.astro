@@ -1,6 +1,7 @@
 ---
 import i18next, { t } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
+import GoogleAnalytics from 'atoms:GoogleAnalytics'
 import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import Social from 'atoms:Social'
@@ -24,6 +25,7 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 		<meta name='viewport' content='width=device-width' />
 		<HeadSEO title={title} description={description} image={image} ogImageAlt={ogImageAlt} />
 		<HeadHrefLangs />
+		<GoogleAnalytics />
 	</head>
 
 	<body
