@@ -1,6 +1,7 @@
 ---
 import i18next, { t, changeLanguage } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
+import GoogleAnalytics from 'atoms:GoogleAnalytics'
 import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import WidgetWrapper from 'molecules:WidgetWrapper'
@@ -35,13 +36,7 @@ changeLanguage(lang)
 		<meta name='viewport' content='width=device-width' />
 		<HeadSEO title={title} description={description} image={image} ogImageAlt={ogImageAlt} />
 		<HeadHrefLangs />
-		<!-- Fonts -->
-		<link rel='preconnect' href='https://fonts.gstatic.com' />
-		<link
-			rel='preload'
-			href='https://fonts.googleapis.com/css?family=Lato|Rokkitt|Fira+Sans&display=swap'
-			as='style'
-		/>
+		<GoogleAnalytics />
 	</head>
 
 	<body

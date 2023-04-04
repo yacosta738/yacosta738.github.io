@@ -15,11 +15,9 @@
     "telemetry.enableTelemetry": false,
     "redhat.telemetry.enabled": false,
     "vulnCost.sendStatistics": false,
-
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.formatOnSave": true,
-
     "files.insertFinalNewline": true
   },
 
