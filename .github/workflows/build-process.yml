@@ -1,4 +1,4 @@
-name: Test Build Process
+name: Test Build Process && Linter
 
 on: push
 
@@ -39,5 +39,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Test build App
-        run: pnpm run build
+      - name: App format & Test build App
+        run: pnpm run format && pnpm run build
