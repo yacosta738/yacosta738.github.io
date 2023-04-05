@@ -77,6 +77,7 @@ All commands are run from the root of the project, from a terminal:
 | `npm run test:e2e`        | Run your end-to-end tests with Playwright          |
 
 ## :beers: My Social Links
+
 [LinkedIn](https://www.linkedin.com/in/yacosta738/)
 
 [Twitter](https://twitter.com/yacosta738)
