@@ -31,8 +31,8 @@ devDependencies:
     specifier: 2.3.2
     version: 2.3.2
   '@astrojs/sitemap':
-    specifier: 1.2.1
-    version: 1.2.1
+    specifier: 1.2.2
+    version: 1.2.2
   '@astrojs/tailwind':
     specifier: 3.1.1
     version: 3.1.1(astro@2.1.9)(tailwindcss@3.3.1)
@@ -256,8 +256,8 @@ packages:
       kleur: 4.1.5
     dev: true
 
-  /@astrojs/sitemap@1.2.1:
-    resolution: {integrity: sha512-nlKP1qc1ENZ61w+ep5RdsObjYWso4QdLGC5WyzssnKkgVDijHT61s/tHFfBWHhxqdjcw4x1V1um/eSQZPDTR3Q==}
+  /@astrojs/sitemap@1.2.2:
+    resolution: {integrity: sha512-rjgFEPzETMVYgOMECIFP2vCkwzF9nLB31/6XWN548IeU/IlFgYR28RbsGTIjUElDak/9AF3jzjtzyldAZger3Q==}
     dependencies:
       sitemap: 7.1.1
       zod: 3.21.4
@@ -1704,7 +1704,7 @@ packages:
   /@types/sax@1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.15.11
     dev: true
 
   /@types/scheduler@0.16.3:
