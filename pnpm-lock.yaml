@@ -25,8 +25,8 @@ dependencies:
 
 devDependencies:
   '@astrojs/image':
-    specifier: 0.16.4
-    version: 0.16.4(astro@2.1.9)(sharp@0.32.0)
+    specifier: 0.16.5
+    version: 0.16.5(astro@2.1.9)(sharp@0.32.0)
   '@astrojs/rss':
     specifier: 2.3.2
     version: 2.3.2
@@ -182,10 +182,10 @@ packages:
     resolution: {integrity: sha512-VxSj3gh/UTB/27rkRCT7SvyGjWtuxUO7Jf7QqDduch7j/gr/uA5P/Q5I/4zIIrZjy2yQAKyKLoox2QI2mM/BSA==}
     dev: true
 
-  /@astrojs/image@0.16.4(astro@2.1.9)(sharp@0.32.0):
-    resolution: {integrity: sha512-oNTzECuUEQxrWZ5YZlQOd6vr/KfdMF5vLi7EarduG6mUfqmbHkbOA3LVM1hpcKA8IFp5iadNWn99teS8ZcIFRg==}
+  /@astrojs/image@0.16.5(astro@2.1.9)(sharp@0.32.0):
+    resolution: {integrity: sha512-pps2fXTcPqUJOaATgrXT2eQwYJeW2fmd+QuQLqBiiIQHaECNugHCt/MwBi9skn+195VcFtYM3eCTjvmRrx4fPQ==}
     peerDependencies:
-      astro: ^2.1.9
+      astro: ^2.2.0
       sharp: '>=0.31.0'
     peerDependenciesMeta:
       sharp:
