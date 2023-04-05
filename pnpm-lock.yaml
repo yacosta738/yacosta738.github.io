@@ -4,6 +4,12 @@ dependencies:
   '@astrojs/rss':
     specifier: 2.3.2
     version: 2.3.2
+  astro-google-analytics:
+    specifier: ^1.0.3
+    version: 1.0.3
+  astro-google-fonts-optimizer:
+    specifier: ^0.2.2
+    version: 0.2.2
   astro-netlify-cms:
     specifier: 0.5.3
     version: 0.5.3(astro@2.1.9)(graphql@15.8.0)
@@ -3084,6 +3090,20 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-google-analytics@1.0.3:
+    resolution:
+      {
+        integrity: sha512-5bD7jA15yxVaUFVVEFG6KKMphYJ4AKP4+HSqCVBpTBnqh8LL0giTdAHpG9KJs3JaFbGQUTWP5Pqt8+twz7f55Q==
+      }
+    dev: false
+
+  /astro-google-fonts-optimizer@0.2.2:
+    resolution:
+      {
+        integrity: sha512-YQxp/ExF3NzUomAGuu1VKecO7/ETRnhnE50gqwAqfpbGPZFj4MYa4XxK1ukBg3R63QmKuE5uurOiKmXiLzttuw==
+      }
+    dev: false
 
   /astro-i18next@1.0.0-beta.12(astro@2.1.9):
     resolution:

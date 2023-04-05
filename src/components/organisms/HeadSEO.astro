@@ -2,13 +2,14 @@
 import { domain } from '@store:constants'
 import { SEO } from 'astro-seo'
 import { t } from 'i18next'
+import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
 export interface Props {
 	title: string
 	description: string
 	image: string
 	ogImageAlt: string
 }
-const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
+
 const { href: canonicalUrl } = Astro.url
 let { title, description, image, ogImageAlt } = Astro.props
 
@@ -44,20 +45,7 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 />
 
  <!-- Google Font -->
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
- {
-	 // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
-	 // include google-site-verification tag in the heading
-	 // Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
-	 googleSiteVerification && (
-		 <meta
-			 name="google-site-verification"
-			 content={googleSiteVerification}
-		 />
-	 )
- }
+ <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" />
 
 <script>
 	document.addEventListener('DOMContentLoaded', function () {

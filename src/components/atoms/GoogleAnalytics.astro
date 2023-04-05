@@ -1,12 +1,17 @@
 ---
+import { GoogleAnalytics } from 'astro-google-analytics'
 const GOOGLE_ANALYTICS = import.meta.env.GOOGLE_ANALYTICS
+const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 ---
-<!-- Google tag (gtag.js) -->
-<script async src=`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS}`></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', GOOGLE_ANALYTICS);
-</script>
+{
+	// If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
+	// include google-site-verification tag in the heading
+	// Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
+	googleSiteVerification && (
+		<meta
+			name="google-site-verification"
+			content={googleSiteVerification}
+		/>
+	)
+}
+<GoogleAnalytics id={GOOGLE_ANALYTICS} />

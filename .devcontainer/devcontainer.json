@@ -30,6 +30,7 @@
     "Vue.vscode-typescript-vue-plugin",
     "vivaxy.vscode-conventional-commits",
     "EditorConfig.EditorConfig",
+    "bradlc.vscode-tailwindcss",
     "Vue.volar"
   ],
 
