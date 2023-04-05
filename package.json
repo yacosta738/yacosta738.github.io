@@ -30,6 +30,10 @@
     "@typescript-eslint/eslint-plugin": "5.57.1",
     "@typescript-eslint/parser": "5.57.1",
     "@vueuse/core": "9.13.0",
+    "@astrojs/rss": "2.3.2",
+    "astro-google-analytics": "^1.0.3",
+    "astro-google-fonts-optimizer": "^0.2.2",
+    "astro-netlify-cms": "0.5.3",
     "astro": "2.1.9",
     "astro-compress": "1.1.23",
     "astro-i18next": "1.0.0-beta.12",
@@ -60,10 +64,6 @@
     "vue": "3.2.47"
   },
   "dependencies": {
-    "@astrojs/rss": "2.3.2",
-    "astro-google-analytics": "^1.0.3",
-    "astro-google-fonts-optimizer": "^0.2.2",
-    "astro-netlify-cms": "0.5.3",
     "fuse.js": "6.6.2",
     "mdast-util-to-string": "3.2.0",
     "reading-time": "1.5.0",
