@@ -32,7 +32,9 @@ export default defineConfig({
 		}),
 		robotsTxt(),
 		critters(),
-		compress(),
+		compress({
+			CSS: false
+		}),
 		NetlifyCMS({
 			config: {
 				backend: {
