@@ -1,4 +1,5 @@
 ---
+import { GoogleAnalytics } from 'astro-google-analytics'
 const GOOGLE_ANALYTICS = import.meta.env.GOOGLE_ANALYTICS
 const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 ---
@@ -13,12 +14,4 @@ const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 		/>
 	)
 }
-<!-- Google tag (gtag.js) -->
-<script async src=`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS}`></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', GOOGLE_ANALYTICS);
-</script>
+<GoogleAnalytics id={GOOGLE_ANALYTICS} />
