@@ -34,7 +34,12 @@ export default defineConfig({
 		compress({
 			css: false
 		}),
-		critters(),
+		critters({
+			exclude: [
+				'index.html',
+				(file: string) => file === './dist/index.html'
+			]
+		}),
 		NetlifyCMS({
 			config: {
 				backend: {
