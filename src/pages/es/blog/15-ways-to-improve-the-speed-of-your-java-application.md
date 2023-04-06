@@ -14,7 +14,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - Java
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 
