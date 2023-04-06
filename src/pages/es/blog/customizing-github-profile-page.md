@@ -10,7 +10,7 @@ tags:
   - Github
   - Markdown
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

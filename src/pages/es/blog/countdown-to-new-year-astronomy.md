@@ -14,7 +14,7 @@ tags:
   - HTML
   - CSS
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

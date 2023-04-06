@@ -14,7 +14,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - CORS
 categories:
-  - Desarrollo de Software
+  - Software Development
 draft: false
 ---
 

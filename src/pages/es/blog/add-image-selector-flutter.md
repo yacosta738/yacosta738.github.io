@@ -6,7 +6,7 @@ description: El selector de imágenes es un componente común que a menudo neces
 author: Yuniel Acosta
 lang: es
 tags: [Flutter, Dart]
-categories: [Desarrollo de software]
+categories: [Software Development]
 cover: /uploads/portada-add-images-selector-flutter.webp
 draft: false
 ---

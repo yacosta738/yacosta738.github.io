@@ -12,7 +12,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - Seguridad
 categories:
-  - Desarrollo de Software
+  - Software Development
 draft: false
 ---
 

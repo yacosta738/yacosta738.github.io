@@ -13,7 +13,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - okrs
 categories:
-  - Productividad
+  - Productivity
 draft: false
 ---
 

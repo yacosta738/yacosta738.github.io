@@ -14,7 +14,7 @@ tags:
   - Vuejs
   - Nuxt
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

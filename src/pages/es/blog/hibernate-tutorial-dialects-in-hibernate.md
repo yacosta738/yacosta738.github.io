@@ -15,7 +15,7 @@ tags:
   - kotlin
   - orm
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

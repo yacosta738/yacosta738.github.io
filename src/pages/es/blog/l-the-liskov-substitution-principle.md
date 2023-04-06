@@ -13,7 +13,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - Kotlin
 categories:
-  - Desarrollo de Software
+  - Software Development
 draft: false
 ---
 

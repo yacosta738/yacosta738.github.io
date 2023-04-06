@@ -14,7 +14,7 @@ tags:
   - kotlin
   - solid
 categories:
-  - desarrollo de software
+  - Software Development
 draft: false
 ---
 

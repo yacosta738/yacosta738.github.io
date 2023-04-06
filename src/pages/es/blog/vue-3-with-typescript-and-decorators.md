@@ -14,7 +14,7 @@ tags:
   - Decorators
   - VueX
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

@@ -15,7 +15,7 @@ tags:
   - diseño de sistemas
   - arquitectura
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

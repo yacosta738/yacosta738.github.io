@@ -12,7 +12,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - solid
 categories:
-  - Desarrollo de Software
+  - Software Development
 draft: false
 ---
 

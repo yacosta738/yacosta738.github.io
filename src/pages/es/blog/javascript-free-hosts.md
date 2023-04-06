@@ -6,7 +6,7 @@ date: 2022-09-28
 description: Si estás aprendiendo a crear páginas web y quieres probar en un hosting gratuito, te presentamos 6 opciones para que practiques. Aunque también los puedes usar en producción.
 lang: es
 tags: [angular, astro, javascript, react, typescript, vuejs]
-categories: [Desarrollo de software]
+categories: [Software Development]
 layout: ../../../components/templates/BlogPostTemplate.astro
 draft: false
 ---

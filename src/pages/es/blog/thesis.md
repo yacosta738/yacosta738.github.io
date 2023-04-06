@@ -6,7 +6,7 @@ author: 'Yuniel Acosta'
 lang: es
 cover: /uploads/thesis.webp
 tags: [R, GIS, GLCF]
-categories: [Desarrollo de software]
+categories: [Software Development]
 description: Este caso de estudio permitió crear archivos en formatos de datos científicos espacio-temporales que pueden ser utilizados por diversas instituciones que realicen investigaciones sobre el uso de los suelos. Las herramientas desarrolladas están basadas en software libre y pueden ser utilizadas en diferentes áreas de aplicación.
 layout: '../../../components/templates/ExternalPostLayout.astro'
 draft: false

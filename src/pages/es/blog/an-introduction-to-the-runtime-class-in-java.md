@@ -12,7 +12,7 @@ tags:
   - java
   - jvm
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

@@ -13,7 +13,7 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - patrones de diseño
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 

@@ -13,8 +13,8 @@ layout: ../../../components/templates/BlogPostTemplate.astro
 tags:
   - IA
 categories:
-  - Inteligencia Artificial
-  - SO & Herramientas
+  - Artificial Intelligence
+  - OS & Tools
 draft: false
 ---
 

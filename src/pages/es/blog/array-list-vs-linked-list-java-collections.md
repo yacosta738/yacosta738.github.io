@@ -13,7 +13,7 @@ tags:
   - Kotlin
   - jvm
 categories:
-  - Desarrollo de Software
+  - Software Development
 draft: false
 ---
 

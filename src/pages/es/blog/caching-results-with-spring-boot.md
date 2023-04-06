@@ -15,7 +15,7 @@ tags:
   - Kotlin
   - Cache
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 
