@@ -39,8 +39,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: App format
+      - name: App format 📸
         run: pnpm run format
 
-      - name: Test build App
+      - name: Test build App 🏗️
         run: pnpm run build
