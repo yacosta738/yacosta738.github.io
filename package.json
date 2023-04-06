@@ -1,6 +1,6 @@
 {
   "name": "yunielacosta.com",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -36,6 +36,7 @@
     "astro-netlify-cms": "0.5.3",
     "astro": "2.2.0",
     "astro-compress": "1.1.23",
+    "astro-critters": "1.1.31",
     "astro-i18next": "1.0.0-beta.12",
     "astro-icon": "0.8.0",
     "astro-robots-txt": "0.4.1",
@@ -64,6 +65,7 @@
     "vue": "3.2.47"
   },
   "dependencies": {
+    "astro-netlify-cms": "0.5.3",
     "fuse.js": "6.6.2",
     "mdast-util-to-string": "3.2.0",
     "reading-time": "1.5.0",

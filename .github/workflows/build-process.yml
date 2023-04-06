@@ -1,4 +1,4 @@
-name: Lint
+name: Test Build Process && Linter
 
 on: push
 
@@ -14,13 +14,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - uses: pnpm/action-setup@v2.2.4
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: 8
           run_install: false
 
       - name: Get pnpm store directory
@@ -39,5 +39,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Test build App
+      - name: App format 📸
+        run: pnpm run format
+
+      - name: Test build App 🏗️
         run: pnpm run build

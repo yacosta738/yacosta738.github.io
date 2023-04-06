@@ -5,14 +5,14 @@ echo "Running pre-commit hook 🪝"
 
 # Determine the package manager being used
 if command -v pnpm >/dev/null 2>&1; then
-PACKAGE_MANAGER="pnpm"
+	PACKAGE_MANAGER="pnpm"
 elif command -v yarn >/dev/null 2>&1; then
-PACKAGE_MANAGER="yarn"
+	PACKAGE_MANAGER="yarn"
 elif command -v npm >/dev/null 2>&1; then
-PACKAGE_MANAGER="npm"
+	PACKAGE_MANAGER="npm"
 else
-echo "No package manager found installed."
-exit 1
+	echo "No package manager found installed."
+	exit 1
 fi
 
 echo "Using package manager: $PACKAGE_MANAGER"

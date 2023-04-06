@@ -10,13 +10,11 @@ import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
 
 import compress from 'astro-compress'
+import critters from 'astro-critters'
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
-	experimental: {
-		integrations: true
-	},
 	integrations: [
 		sitemap({
 			i18n: {
@@ -33,10 +31,8 @@ export default defineConfig({
 			serviceEntryPoint: '@astrojs/image/sharp'
 		}),
 		robotsTxt(),
-		compress({
-			html: true,
-			css: false
-		}),
+		compress(),
+		critters(),
 		NetlifyCMS({
 			config: {
 				backend: {
