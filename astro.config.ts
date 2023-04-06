@@ -21,7 +21,7 @@ export default defineConfig({
 				defaultLocale: 'en',
 				locales: {
 					en: 'en',
-					fr: 'es'
+					es: 'es'
 				}
 			}
 		}),
@@ -94,7 +94,7 @@ export default defineConfig({
 								allow_add: true,
 								default: ['IT']
 							},
-							{ label: 'Draft', name: 'draft', widget: 'boolean', default: false },
+							{ label: 'Draft', name: 'draft', widget: 'boolean', default: true },
 							{ label: 'Body', name: 'body', widget: 'markdown' }
 						]
 					},
@@ -138,7 +138,7 @@ export default defineConfig({
 								allow_add: true,
 								default: ['IT']
 							},
-							{ label: 'Draft', name: 'draft', widget: 'boolean', default: false },
+							{ label: 'Draft', name: 'draft', widget: 'boolean', default: true },
 							{ label: 'Body', name: 'body', widget: 'markdown' }
 						]
 					},
