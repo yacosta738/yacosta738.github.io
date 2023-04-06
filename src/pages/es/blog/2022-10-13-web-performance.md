@@ -16,7 +16,7 @@ tags:
   - html
   - javascript
 categories:
-  - Desarrollo de software
+  - Software Development
 draft: false
 ---
 
