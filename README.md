@@ -79,11 +79,7 @@ All commands are run from the root of the project, from a terminal:
 ## :beers: My Social Links
 
 [LinkedIn](https://www.linkedin.com/in/yacosta738/)
-
 [Twitter](https://twitter.com/yacosta738)
-
 [Portfolio & Blog](https://www.yunielacosta.com/)
-
 [GitHub](https://github.com/yacosta738)
-
 [Instagram](https://www.instagram.com/yacosta738)
