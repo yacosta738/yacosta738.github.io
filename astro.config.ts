@@ -31,7 +31,7 @@ export default defineConfig({
 			serviceEntryPoint: '@astrojs/image/sharp'
 		}),
 		robotsTxt(),
-		compress(),
+// 		compress(),
 		critters(),
 		NetlifyCMS({
 			config: {
