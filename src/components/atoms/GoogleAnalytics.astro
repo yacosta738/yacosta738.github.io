@@ -16,9 +16,9 @@ const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 }
 
 <link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
-<script>
+<script define:vars={{GOOGLE_ANALYTICS}}>
   window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', `${GOOGLE_ANALYTICS}`, 'auto');
+  ga('create', GOOGLE_ANALYTICS, 'auto');
   ga('send', 'pageview');
 </script>
 <!-- Google Font -->
