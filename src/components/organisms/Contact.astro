@@ -1,5 +1,7 @@
 ---
 import { t } from 'i18next'
+import { Image } from '@astrojs/image/components'
+import contactSvg from '../../assets/images/contact.svg'
 ---
 
 <section id='contact' class='mx-4 md:mx-auto'>
@@ -19,7 +21,13 @@ import { t } from 'i18next'
 				</div>
 			</div>
 			<div class='mt-8 text-center'>
-				<img src='../assets/images/contact.svg' alt='Contact me' width="1096" height="575">
+				<Image
+				src={contactSvg}
+				alt='Contact me'
+				title='Contact me'
+				width={1096}
+				height={575}
+			/>
 			</div>
 		</div>
 		<form id='contact-form' class='mx-auto' method='POST' action={import.meta.env.FORMSPREE}>
