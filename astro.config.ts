@@ -35,10 +35,7 @@ export default defineConfig({
 			css: false
 		}),
 		critters({
-			exclude: [
-				'index.html',
-				(file: string) => file === './dist/index.html'
-			]
+			exclude: ['index.html', (file: string) => file === './dist/index.html']
 		}),
 		NetlifyCMS({
 			config: {

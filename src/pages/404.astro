@@ -1,20 +1,21 @@
 ---
-import Icon from 'astro-icon'
-import { Image } from '@astrojs/image/components'
-import { localizePath } from 'astro-i18next'
+import Icon from "astro-icon";
+import { Image } from "@astrojs/image/components";
+import { localizePath } from "astro-i18next";
+import i18next, { t, changeLanguage } from "i18next";
+import HeadSEO from "organisms:HeadSEO";
+import Social from "atoms:Social";
+import Email from "atoms:Email";
+import { HeadHrefLangs } from "astro-i18next/components";
+import AppFooter from "molecules:AppFooter";
+import Navbar from "molecules:Navbar";
+import Technologies from "molecules:Technologies";
+import "../styles/global.css";
 
-import i18next, { t } from 'i18next'
-import HeadSEO from 'organisms:HeadSEO'
-import Social from 'atoms:Social'
-import Email from 'atoms:Email'
-import { HeadHrefLangs } from 'astro-i18next/components'
-import AppFooter from 'molecules:AppFooter'
-import Navbar from 'molecules:Navbar'
-import Technologies from 'molecules:Technologies'
-import '../styles/global.css'
+changeLanguage("en");
 
-const description = "This is an error 404 page indicating that the requested page could not be found on the website. The page may have been removed or the URL may be incorrect."
-const ogImageAlt = "An image of a cartoon character with a surprised expression holding a sign that says 'Oops!'. The image represents the error 404 page of the website."
+const description = "This is an error 404 page indicating that the requested page could not be found on the website. The page may have been removed or the URL may be incorrect.";
+const ogImageAlt = "An image of a cartoon character with a surprised expression holding a sign that says 'Oops!'. The image represents the error 404 page of the website.";
 ---
 
 <html lang={i18next.language}>
