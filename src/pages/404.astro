@@ -5,6 +5,8 @@ import { localizePath } from 'astro-i18next'
 
 import i18next, { t } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
+import Social from 'atoms:Social'
+import Email from 'atoms:Email'
 import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import Navbar from 'molecules:Navbar'
@@ -45,6 +47,8 @@ const ogImageAlt = "An image of a cartoon character with a surprised expression 
 					</div>
 				</main>
 			</div>
+			<Social />
+			<Email />
 		</div>
 		<AppFooter />
 	</body>
