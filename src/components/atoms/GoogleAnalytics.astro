@@ -1,5 +1,5 @@
 ---
-import { GoogleAnalytics } from 'astro-google-analytics'
+import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
 const GOOGLE_ANALYTICS = import.meta.env.GOOGLE_ANALYTICS
 const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 ---
@@ -14,4 +14,13 @@ const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 		/>
 	)
 }
-<GoogleAnalytics id={GOOGLE_ANALYTICS} />
+
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', `${GOOGLE_ANALYTICS}`, 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- Google Font -->
+<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" />
+<script async src='https://www.google-analytics.com/analytics.js' />

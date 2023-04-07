@@ -8,7 +8,7 @@ test('test home page basic elements', async ({ page }) => {
 	await page.locator('text=Hi, my name is').click()
 
 	// Click h2:has-text("Yuniel Acosta.")
-	await page.locator('h2:has-text("Yuniel Acosta")').click()
+	await page.locator('h1:has-text("Yuniel Acosta")').click()
 
 	// Click #phrase
 	await page.locator('#phrase').click()
