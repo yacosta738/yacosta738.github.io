@@ -33,7 +33,7 @@
     "@astrojs/rss": "2.3.2",
     "astro-google-fonts-optimizer": "^0.2.2",
     "astro-netlify-cms": "0.5.3",
-    "astro": "2.2.0",
+    "astro": "2.2.1",
     "astro-compress": "1.1.23",
     "astro-critters": "1.1.31",
     "astro-i18next": "1.0.0-beta.12",
