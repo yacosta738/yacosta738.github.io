@@ -3,7 +3,9 @@
   "packageRules": [
     {
       "matchPackageNames": ["npm"],
-      "schedule": "every 1st day of the month"
+			"matchUpdateTypes": ["patch", "minor"],
+			"automerge": true,
+      "schedule": ["after 5pm on Friday"]
     }
   ],
   "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"],
