@@ -6,5 +6,6 @@
       "schedule": "every 1st day of the month"
     }
   ],
-  "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"]
+  "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"],
+	"nodeVersion": ">=18"
 }
