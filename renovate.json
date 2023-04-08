@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "packageRules": [
     {
-      "matchPackageNames": ["npm"],
+      "matchPackageNames": ["npm", "astro", "node"],
 			"matchUpdateTypes": ["patch", "minor"],
 			"automerge": true,
       "schedule": ["after 5pm on Friday"]
