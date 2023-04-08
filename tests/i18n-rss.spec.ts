@@ -3,12 +3,12 @@ import { test, expect } from '@playwright/test'
 test('test i18n and rss', async ({ page }) => {
 	await page.goto('http://localhost:3000/')
 
-	await expect(await page.locator('h2').first()).toHaveText('Hi, my name is')
+	await expect(await page.locator('p').first()).toHaveText('Hi, my name is')
 
 	await page.locator('select').nth(1).selectOption('/es/')
 	await expect(page).toHaveURL('http://localhost:3000/es/')
 
-	expect(await page.locator('h2').first()).toHaveText('Hola, mi nombre es')
+	expect(await page.locator('p').first()).toHaveText('Hola, mi nombre es')
 
 	await expect(await page.locator('h2:has-text("Sobre mí")')).toHaveText('Sobre mí')
 	await expect(await page.locator('h2:has-text("Dónde he trabajado")')).toHaveText(

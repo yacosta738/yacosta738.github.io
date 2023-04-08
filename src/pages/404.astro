@@ -1,24 +1,56 @@
 ---
 import Icon from "astro-icon";
 import { Image } from "@astrojs/image/components";
-import { t, changeLanguage } from "i18next";
 import { localizePath } from "astro-i18next";
-import BaseTemplate from "templates:BaseTemplate";
+import i18next, { t, changeLanguage } from "i18next";
+import HeadSEO from "organisms:HeadSEO";
+import Social from "atoms:Social";
+import Email from "atoms:Email";
+import { HeadHrefLangs } from "astro-i18next/components";
+import AppFooter from "molecules:AppFooter";
+import Navbar from "molecules:Navbar";
+import Technologies from "molecules:Technologies";
+import "../styles/global.css";
 
 changeLanguage("en");
+
+const description = "This is an error 404 page indicating that the requested page could not be found on the website. The page may have been removed or the URL may be incorrect.";
+const ogImageAlt = "An image of a cartoon character with a surprised expression holding a sign that says 'Oops!'. The image represents the error 404 page of the website.";
 ---
 
-<BaseTemplate title={t('error404')}>
-	<div class='container-inner mx-auto py-16'>
-		<h1 class='mb-16 text-4xl font-bold'>{t('error404')}</h1>
-		<Image class='w-1/2' src='/oops.webp' alt={t('error404')} height={300} width={300} />
-		<p set:html={t('message404')} />
-		<a
-			href={localizePath('/')}
-			class='small-button mt-24 flex w-24 items-center justify-center uppercase'
-		>
-			<Icon name='mdi:arrow-left' class='mr-2 h-6' />
-			{t('home')}
-		</a>
-	</div>
-</BaseTemplate>
+<html lang={i18next.language}>
+	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width' />
+		<HeadSEO title={t('error404')} description={description} image='/oops.webp' ogImageAlt={ogImageAlt} />
+		<HeadHrefLangs />
+	</head>
+
+	<body
+		class='content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono'
+	>
+		<div class='relative flex min-h-[100vh] flex-col'>
+			<Navbar />
+			<div class='container mx-auto mt-7 flex flex-col xl:flex-row'>
+				<main class='relative w-full overflow-hidden px-2'>
+					<Technologies />
+					<div class='container-inner mx-auto py-16'>
+						<h1 class='mb-16 text-4xl font-bold'>{t('error404')}</h1>
+						<Image class='w-1/2' src='/oops.webp' alt={t('error404')} height={300} width={300} />
+						<p set:html={t('message404')} />
+						<a
+							href={localizePath('/')}
+							class='small-button mt-24 flex w-24 items-center justify-center uppercase'
+						>
+							<Icon name='mdi:arrow-left' class='mr-2 h-6' />
+							{t('home')}
+						</a>
+					</div>
+				</main>
+			</div>
+			<Social />
+			<Email />
+		</div>
+		<AppFooter />
+	</body>
+</html>

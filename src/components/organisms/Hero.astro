@@ -5,18 +5,18 @@ import { email } from '@store:constants'
 
 <section class='min-h-screen'>
 	<div class='flex flex-col items-start'>
-		<h2 class='font-mono text-base font-normal text-green-500'>
+		<p class='font-mono text-base font-normal text-green-500'>
 			{t('welcome')}
-		</h2>
+		</p>
 		<h1 id='generalName' class='yap-name my-2 text-5xl sm:text-4xl md:text-5xl lg:text-7xl'>
 			{t('name')}
 		</h1>
-		<h3
+		<h2
 			id='phrase'
 			class={`text-3xl text-gray-500 sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl slogan-${i18next.language}`}
 		>
 			<span hidden>{t('slogan')}</span>
-		</h3>
+		</h2>
 		<p id='my-self' class='text-md my-4 max-w-none text-justify md:max-w-3xl md:text-xl'>
 			{t('my-self')}
 
