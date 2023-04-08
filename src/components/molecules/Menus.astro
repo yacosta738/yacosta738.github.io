@@ -38,7 +38,7 @@ const menuLink = (menu: Menu) => {
 							href={menuLink(menu)}
 							id={drawer ? `drawer-${menu.id}` : `nav-${menu.id}`}
 							data-drawer-dismiss='menu-drawer'
-							tabindex={drawer ? 0 : -1}
+							tabindex={drawer ? -1 : 0}
 						>
 							{t('menus.' + menu.title)}
 						</a>
@@ -51,14 +51,14 @@ const menuLink = (menu: Menu) => {
 		<LanguageSelector
 			showFlag={true}
 			class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
-			tabindex={drawer ? 0 : -1}
+			tabindex={drawer ? -1 : 0}
 		/>
 		<a
 			class='rounded bg-transparent p-2 text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
 			aria-label='RSS Feed'
 			target='_blank'
 			href='/rss.xml'
-			tabindex={drawer ? 0 : -1}
+			tabindex={drawer ? -1 : 0}
 		>
 			<Icon name='tabler:rss' class='h-5 w-5' />
 		</a>
@@ -69,7 +69,7 @@ const menuLink = (menu: Menu) => {
 			href='/files/yuniel_acosta_cv.pdf'
 			target='_blank'
 			class='resume-button'
-			tabindex={drawer ? 0 : -1}
+			tabindex={drawer ? -1 : 0}
 		>
 			{t('resume')}
 		</a>
