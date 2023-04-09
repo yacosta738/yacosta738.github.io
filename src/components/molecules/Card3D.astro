@@ -1,5 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components'
+
 ---
 
 <div class='atropos md:aspect-[1.91:1] w-full p-8 sm:w-[480px] md:w-[800px]'>
@@ -13,28 +13,17 @@ import { Image } from '@astrojs/image/components'
 				>
 					<div class='flex flex-col-reverse justify-between sm:flex-row'>
 						<slot name='left-header'>
-							<div>yunielacosta@gmail.com</div>
+							
 						</slot>
 						<div class='flex items-center justify-center pb-2'>
 							<slot name='right-header'>
-								<Image
-									class='h-20 w-20 rounded-full p-1 ring-2 ring-light-navy dark:ring-lightest-navy'
-									src='https://www.yunielacosta.com/uploads/me.webp'
-									alt='Profile picture'
-									height={80}
-									width={80}
-								/>
+						
 							</slot>
 						</div>
 					</div>
 
 					<slot>
-						<h1
-							class='m-0 mx-auto bg-gradient-to-r from-green-300 via-green-500 to-light-navy bg-clip-text pt-10 text-center text-4xl font-black leading-none text-transparent sm:text-[4rem] md:text-7xl'
-							data-atropos-offset='2'
-						>
-							Yuniel Acosta
-						</h1>
+						
 					</slot>
 				</div>
 			</div>
