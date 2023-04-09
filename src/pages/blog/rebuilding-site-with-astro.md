@@ -95,7 +95,7 @@ const { page } = Astro.props;
 ---
 
 <BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
-	<SearchBox articles={sortedPosts} client:only/>
+	<SearchBox articles={sortedPosts} client:visible/>
 	<div class='container mx-auto'>
 		{
 			page.data.map((post) => (
@@ -272,10 +272,10 @@ const jobs = data
     });
 ---
 
-<Jobs client:only jobs={jobs} />
+<Jobs client:visible jobs={jobs} />
 ```
 
-Here, I'm using Astro's `client:only` directive. This tells Astro that it should be hydrated on the client, so that the Javascript will be executed. In this case, because the component is accessing the `localStorage`, I want to make sure it doesn't get executed during buildtime. The best part is that, within the Astro component, it just asks like a normal component that can accept props.
+Here, I'm using Astro's `client:visible` directive. This tells Astro that it should be hydrated on the client, so that the Javascript will be executed. In this case, because the component is accessing the `localStorage`, I want to make sure it doesn't get executed during buildtime. The best part is that, within the Astro component, it just asks like a normal component that can accept props.
 
 Astro has a number of renderers, and at the recent [Vue Contributor Days](https://youtu.be/gpTbH469Qog?t=5756), Fred Schott said that first-class Vue support is very important to the Astro team, and that it comes out of the box when working with Astro. You do need to add the renderer to your Astro configuration, but that's all that is required to enable Vue components.
 

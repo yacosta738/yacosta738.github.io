@@ -106,7 +106,7 @@ const { page } = Astro.props;
 ---
 
 <BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
-	<SearchBox articles={sortedPosts} client:only/>
+	<SearchBox articles={sortedPosts} client:visible/>
 	<div class='container mx-auto'>
 		{
 			page.data.map((post) => (
@@ -283,10 +283,10 @@ const jobs = data
     });
 ---
 
-<Jobs client:only jobs={jobs} />
+<Jobs client:visible jobs={jobs} />
 ```
 
-Aquí, estoy usando la directiva `client:only` de Astro. Esto le dice a Astro que debe hidratar el componente en el cliente, para que se ejecute Javascript. En este caso, debido a que el componente está accediendo a `localStorage`, quiero asegurarme de que no se ejecute durante el tiempo de compilación. La mejor parte es que, dentro del componente Astro, solo pregunta como un componente normal que puede aceptar propiedades.
+Aquí, estoy usando la directiva `client:visible` de Astro. Esto le dice a Astro que debe hidratar el componente en el cliente, para que se ejecute Javascript. En este caso, debido a que el componente está accediendo a `localStorage`, quiero asegurarme de que no se ejecute durante el tiempo de compilación. La mejor parte es que, dentro del componente Astro, solo pregunta como un componente normal que puede aceptar propiedades.
 
 Astro tiene varios renderizadores, y en el reciente evento los [Días de los Vue contribuidores](https://youtu.be/gpTbH469Qog?t=5756), Fred Schott dijo que el soporte de Vue de primera clase es muy importante para el equipo de Astro, y que es 'out of the box' cuando se trabaja con Astro. Debe agregar el renderizador a su configuración de Astro, pero eso es todo lo que se requiere para habilitar los componentes de Vue.
 

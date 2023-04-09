@@ -28,7 +28,7 @@ const { page } = Astro.props;
 ---
 
 <BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
-	<SearchBox articles={sortedPosts} client:only />
+	<SearchBox articles={sortedPosts} client:visible />
 	<div class='container mx-auto'>
 		{
 			page.data.map((post) => (
