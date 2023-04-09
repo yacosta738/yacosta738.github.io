@@ -22,7 +22,7 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 			article.cover && (
 				<Picture
 					alt={article.title}
-					class='border border-green-500 object-fill'
+					class='border border-green-500 object-fill lg:w-1/3'
 					src={article.cover}
 					widths={[200, 500, 1000]}
 					aspectRatio='4:3'
