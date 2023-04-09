@@ -1,7 +1,7 @@
 ---
 import { Author, jsonToAuthor } from "@models:Author";
 import Icon from "astro-icon";
-import { Image } from "@astrojs/image/components";
+import { Picture } from "@astrojs/image/components";
 import Card3D from "molecules:Card3D";
 import i18next, { t, changeLanguage } from "i18next";
 import BaseTemplate from "templates:BaseTemplate";
@@ -39,11 +39,16 @@ const { author } = Astro.props;
 					{author.email}
 				</a>
 
-				<Image
+				<Picture
 					slot='right-header'
 					class='h-20 w-20 rounded-full p-1 ring-2 ring-light-navy dark:ring-lightest-navy'
 					src={author.image}
 					alt={author.name}
+					widths={[200, 400, 800]}
+					aspectRatio='16:9'
+					fit='fill'
+					background='#0A192F'
+					sizes="(max-width: 800px) 100vw, 800px"
 					height={80}
 					width={80}
 				/>
