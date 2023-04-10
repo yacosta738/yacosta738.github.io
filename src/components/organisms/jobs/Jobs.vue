@@ -11,7 +11,9 @@ const props = defineProps({
 		default: () => []
 	}
 })
-const jobsArray = computed(() => props.jobs.map(job => ({ ...job, id: job?.id ?? randomInt(1, 999999) })))
+const jobsArray = computed(() =>
+	props.jobs.map((job) => ({ ...job, id: job?.id ?? randomInt(1, 999999) }))
+)
 const jobActiveTabIdKey = 'jobActiveTabId'
 const getActiveTabId = (): number => {
 	if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
@@ -79,32 +81,32 @@ onUnmounted(() => {
 				></li>
 			</ul>
 			<div
-					v-for="(job, i) in jobsArray"
-					:id="`panel-${i}`"
-					:key="`tab-id-${job.id}`"
-					class="styled-tab-content"
-					role="tabpanel"
-					:tabIndex="activeTabId === i ? 0 : -1"
-					:aria-labelledby="`tab-${i}`"
-					:hidden="activeTabId !== i"
-				>
-					<h3>
-						<span>{{ job.role }}</span>
-						<span class="company">
-							<a :href="job.url" target="_blank" class="inline-link">
-								&nbsp;@&nbsp;{{ job.company }}
-							</a>
-						</span>
-					</h3>
-					<p class="range" :key="`range-${job.id}`">
-						{{ range(job) }}
-					</p>
-					<ul>
-						<li v-for="(detail, index) in job?.achievement" :key="index">
-							<span>{{ detail }}</span>
-						</li>
-					</ul>
-				</div>
+				v-for="(job, i) in jobsArray"
+				:id="`panel-${i}`"
+				:key="`tab-id-${job.id}`"
+				class="styled-tab-content"
+				role="tabpanel"
+				:tabIndex="activeTabId === i ? 0 : -1"
+				:aria-labelledby="`tab-${i}`"
+				:hidden="activeTabId !== i"
+			>
+				<h3>
+					<span>{{ job.role }}</span>
+					<span class="company">
+						<a :href="job.url" target="_blank" class="inline-link">
+							&nbsp;@&nbsp;{{ job.company }}
+						</a>
+					</span>
+				</h3>
+				<p class="range" :key="`range-${job.id}`">
+					{{ range(job) }}
+				</p>
+				<ul>
+					<li v-for="(detail, index) in job?.achievement" :key="index">
+						<span>{{ detail }}</span>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</section>
 </template>
