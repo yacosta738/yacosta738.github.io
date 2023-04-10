@@ -1,5 +1,4 @@
 ---
-import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer'
 const GOOGLE_ANALYTICS = import.meta.env.GOOGLE_ANALYTICS
 const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
 ---
@@ -21,6 +20,4 @@ const googleSiteVerification = import.meta.env.GOOGLE_SITE_VERIFICATION
   ga('create', GOOGLE_ANALYTICS, 'auto');
   ga('send', 'pageview');
 </script>
-<!-- Google Font -->
-<GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" />
 <script async src='https://www.google-analytics.com/analytics.js' />
