@@ -1,20 +1,40 @@
 ---
-import BlogTemplate from 'templates:BlogTemplate'
 import Redirect from '../atoms/Redirect.vue'
-
+import HeadSEO from 'organisms:HeadSEO'
+import { HeadHrefLangs } from 'astro-i18next/components'
+import AppFooter from 'molecules:AppFooter'
+import WidgetWrapper from 'molecules:WidgetWrapper'
+import Navbar from 'molecules:Navbar'
 const { content } = Astro.props
 const { title, description, cover, lang, link } = content
 const ogImageAlt = title
 ---
 
-<BlogTemplate
-	title={title}
-	description={description}
-	image={cover}
-	ogImageAlt={ogImageAlt}
-	lang={lang}
->
-	<div>
-		<Redirect client:only url={link} />
-	</div>
-</BlogTemplate>
+<html lang={lang} class='scroll-smooth'>
+	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width' />
+		<HeadSEO title={title} description={description} image={cover} ogImageAlt={ogImageAlt} />
+		<HeadHrefLangs />
+	</head>
+
+	<body
+		id='body'
+		class='content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono'
+	>
+		<div class='relative flex min-h-[100vh] flex-col'>
+			<Navbar />
+			<div class='container mx-auto mt-24 flex flex-col xl:flex-row'>
+				<main class='relative w-full overflow-hidden xl:basis-4/5'>
+					<Redirect client:only='vue' url={link} />
+				</main>
+				<aside class='xl:basis-1/5'>
+					<slot name='widget'>
+						<WidgetWrapper />
+					</slot>
+				</aside>
+			</div>
+		</div>
+		<AppFooter />
+	</body>
+</html>
