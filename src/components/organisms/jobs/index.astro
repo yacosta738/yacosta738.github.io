@@ -12,4 +12,4 @@ const jobs = data
 	})
 ---
 
-<Jobs client:idle jobs={jobs} />
+{jobs.length > 0 && <Jobs client:only='vue' jobs={jobs} />}

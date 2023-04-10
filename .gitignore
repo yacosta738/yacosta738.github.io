@@ -26,3 +26,6 @@ pnpm-debug.log*
 /test-results/
 /playwright-report/
 /playwright/.cache/
+C:/Users/ylaz/.docker/buildx/.buildNodeID
+C:/Users/ylaz/.docker/buildx/.lock
+C:/Users/ylaz/.docker/buildx/current
