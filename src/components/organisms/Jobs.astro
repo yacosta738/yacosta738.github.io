@@ -45,17 +45,16 @@ const range = (job: Job): string => {
 							aria-labelledby={`tab-${i}`}
 							hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
 						>
-							<h3>
+							<h4>
 								<span>{job.role}</span>
 								<span class='company'>
 									<a href={job.url} target='_blank' class='inline-link'>
 										&nbsp;@&nbsp;{job.company}
 									</a>
 								</span>
-							</h3>
-							<p class='range' id={`range-${job.id}`}>
-								{range(job)}
-							</p>
+							</h4>
+								<p class='range' id={`range-${job.id}`}>{range(job)}</p>
+								<p class='range mb-4'>{job.location}</p>
 							<ul>
 								{job?.achievement?.map((detail, index) => (
 									<li id={`id-${index}`}>
@@ -235,8 +234,6 @@ const range = (job: Job): string => {
 			margin-left: 25px;
 		}
 	}
-</style>
-<style lang='scss' scoped>
 	.styled-tab-content {
 		width: 100%;
 		height: auto;
@@ -281,7 +278,6 @@ const range = (job: Job): string => {
 		}
 
 		.range {
-			margin-bottom: 30px;
 			color: var(--light-slate);
 			font-family: var(--font-mono);
 			font-size: var(--fz-xs);
