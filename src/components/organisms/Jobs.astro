@@ -12,7 +12,7 @@ const jobs: Job[] = data
 const range = (job: Job): string => {
 	const date = job?.startDate ? new Date(job.startDate) : new Date()
 	return `${date.toDateString()} - ${
-		job.endDate ? new Date(job.endDate).toDateString() : 'Present'
+		job.endDate ? new Date(job.endDate).toDateString() : job.lang === 'en'? 'Present': 'Presente'
 	}`
 }
 ---
