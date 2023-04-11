@@ -2,12 +2,16 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-	content: ['./public/**/*.html', './src/**/*.{astro,js,jsx,ts,tsx,vue}'],
+	content: ['./public/**/*.html',
+		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+		'./node_modules/flowbite/**/*.js'
+	],
 	plugins: [
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/line-clamp'),
-		require('@tailwindcss/aspect-ratio')
+		require('@tailwindcss/aspect-ratio'),
+		require('flowbite/plugin')
 	],
 	theme: {
 		container: {
