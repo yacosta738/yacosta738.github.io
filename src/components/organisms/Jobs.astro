@@ -1,6 +1,7 @@
 ---
 import { Job } from '@models:Job'
 import i18next, { t } from 'i18next'
+import { Sprite } from 'astro-icon'
 const data = await Astro.glob<Job>('../../data/jobs/**/*.json')
 const jobs: Job[] = data
 	.filter((job) => job.published && job.lang === i18next.language)
@@ -12,12 +13,11 @@ const jobs: Job[] = data
 const range = (job: Job): string => {
 	const date = job?.startDate ? new Date(job.startDate) : new Date()
 	return `${date.toDateString()} - ${
-		job.endDate ? new Date(job.endDate).toDateString() : job.lang === 'en'? 'Present': 'Presente'
+		job.endDate ? new Date(job.endDate).toDateString() : job.lang === 'en' ? 'Present' : 'Presente'
 	}`
 }
 ---
 
-<!-- {jobs.length > 0 && <Jobs client:only='vue' jobs={jobs} />} -->
 <astro-jobs>
 	<section id='jobs' class='styled-jobs-section'>
 		<h2 class='numbered-heading'>{t('where-worked')}</h2>
@@ -38,31 +38,42 @@ const range = (job: Job): string => {
 			{
 				jobs.length > 0 &&
 					jobs.map((job, i) => (
-						<div
-							id={`panel-${i}`}
-							class='styled-tab-content'
-							role='tabpanel'
-							aria-labelledby={`tab-${i}`}
-							hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
-						>
-							<h4>
-								<span>{job.role}</span>
-								<span class='company'>
-									<a href={job.url} target='_blank' class='inline-link'>
-										&nbsp;@&nbsp;{job.company}
-									</a>
-								</span>
-							</h4>
-								<p class='range' id={`range-${job.id}`}>{range(job)}</p>
-								<p class='range mb-4'>{job.location}</p>
-							<ul>
-								{job?.achievement?.map((detail, index) => (
-									<li id={`id-${index}`}>
-										<span>{detail}</span>
-									</li>
-								))}
-							</ul>
-						</div>
+						<Sprite.Provider>
+							<div
+								id={`panel-${i}`}
+								class='styled-tab-content'
+								role='tabpanel'
+								aria-labelledby={`tab-${i}`}
+								hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
+							>
+								<div class='flex flex-row'>
+									<div class='basis-1/5'>
+										<Sprite size={48} name={job.icon} />
+									</div>
+									<div class='m-2'>
+										<h4>
+											<span>{job.role}</span>
+											<span class='company'>
+												<a href={job.url} target='_blank' class='inline-link'>
+													&nbsp;@&nbsp;{job.company}
+												</a>
+											</span>
+										</h4>
+										<p class='range' id={`range-${job.id}`}>
+											{range(job)}
+										</p>
+										<p class='range mb-4'>{job.location}</p>
+										<ul>
+											{job?.achievement?.map((detail, index) => (
+												<li id={`id-${index}`}>
+													<span>{detail}</span>
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							</div>
+						</Sprite.Provider>
 					))
 			}
 		</div>

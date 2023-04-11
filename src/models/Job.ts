@@ -6,6 +6,7 @@ export interface Job {
 	startDate?: Date | string
 	endDate?: Date | string
 	company?: string
+	icon?: string
 	location?: string
 	url?: string
 	published: boolean
