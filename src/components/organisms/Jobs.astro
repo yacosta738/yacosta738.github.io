@@ -1,0 +1,290 @@
+---
+import { Job } from '@models:Job'
+import i18next, { t } from 'i18next'
+const data = await Astro.glob<Job>('../../data/jobs/**/*.json')
+const jobs: Job[] = data
+	.filter((job) => job.published && job.lang === i18next.language)
+	.sort((a: Job, b: Job) => {
+		if (a.startDate > b.startDate) return -1
+		if (a.startDate < b.startDate) return 1
+		return 0
+	})
+const range = (job: Job): string => {
+	const date = job?.startDate ? new Date(job.startDate) : new Date()
+	return `${date.toDateString()} - ${
+		job.endDate ? new Date(job.endDate).toDateString() : 'Present'
+	}`
+}
+---
+
+<!-- {jobs.length > 0 && <Jobs client:only='vue' jobs={jobs} />} -->
+<astro-jobs>
+	<section id='jobs' class='styled-jobs-section'>
+		<h2 class='numbered-heading'>{t('where-worked')}</h2>
+		<div class='inner'>
+			<ul class='styled-tab-list' aria-label='Job tabs'>
+				{
+					jobs.length > 0 &&
+						jobs.map((job, i) => (
+							<li>
+								<button id={`tab-${i}`} class='styled-tab-button'>
+									<span>{job.company}</span>
+								</button>
+							</li>
+						))
+				}
+				<div id='job-indicator' class='styled-high-light'></div>
+			</ul>
+			{
+				jobs.length > 0 &&
+					jobs.map((job, i) => (
+						<div
+							id={`panel-${i}`}
+							class='styled-tab-content'
+							role='tabpanel'
+							aria-labelledby={`tab-${i}`}
+							hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
+						>
+							<h3>
+								<span>{job.role}</span>
+								<span class='company'>
+									<a href={job.url} target='_blank' class='inline-link'>
+										&nbsp;@&nbsp;{job.company}
+									</a>
+								</span>
+							</h3>
+							<p class='range' id={`range-${job.id}`}>
+								{range(job)}
+							</p>
+							<ul>
+								{job?.achievement?.map((detail, index) => (
+									<li id={`id-${index}`}>
+										<span>{detail}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+			}
+		</div>
+	</section>
+</astro-jobs>
+
+<script>
+	class AstroJobs extends HTMLElement {
+		constructor() {
+			super()
+			const jobActiveTabIdKey = 'jobActiveTabId'
+			const getActiveTabId = (): number => {
+				if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
+
+				return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) ?? '0')
+			}
+			const jobIndicator = this.querySelector('#job-indicator') as HTMLDivElement
+			let activeTabId = getActiveTabId()
+			const buttons = this.querySelectorAll('button')
+			const panels = this.querySelectorAll('.styled-tab-content') as NodeListOf<HTMLDivElement>
+			buttons.forEach((button, i) => {
+				button.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)
+				button.addEventListener('click', () => {
+					activeTabId = i
+					localStorage.setItem(jobActiveTabIdKey, `${i}`)
+					const sm = screen.width < 768
+					jobIndicator.style.transform = sm
+						? `translateX(calc(${activeTabId} * 120px))`
+						: `translateY(calc(${activeTabId} * 42px))`
+					button.classList.toggle('text-green-500', activeTabId === i)
+					panels.forEach((panel, i) => {
+						panel.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)
+						panel.hidden = activeTabId !== i
+					})
+				})
+			})
+		}
+	}
+
+	customElements.define('astro-jobs', AstroJobs)
+</script>
+
+<style lang='scss' scoped>
+	.styled-jobs-section {
+		max-width: 700px;
+
+		.inner {
+			display: flex;
+
+			@media (max-width: 600px) {
+				display: block;
+				max-width: 320px;
+			}
+		}
+	}
+
+	.styled-tab-list {
+		position: relative;
+		z-index: 3;
+		width: max-content;
+		padding: 0;
+		margin: 0;
+		list-style: none inside none;
+		@media (max-width: 600px) {
+			display: flex;
+			overflow-x: auto;
+			width: calc(100% + 100px);
+			margin-left: -50px;
+			margin-bottom: 30px;
+		}
+		@media (max-width: 480px) {
+			width: calc(100% + 50px);
+			margin-left: -25px;
+			::-webkit-scrollbar {
+				width: 1px;
+				height: 1px;
+			}
+		}
+
+		li {
+			&:first-of-type {
+				@media (max-width: 600px) {
+					margin-left: 50px;
+				}
+				@media (max-width: 480px) {
+					margin-left: 25px;
+				}
+			}
+
+			&:last-of-type {
+				@media (max-width: 600px) {
+					padding-right: 50px;
+				}
+				@media (max-width: 480px) {
+					padding-right: 25px;
+				}
+			}
+		}
+	}
+
+	.styled-tab-button {
+		display: inline-block;
+		text-decoration: none;
+		text-decoration-skip-ink: auto;
+		color: inherit;
+		position: relative;
+		transition: var(--transition);
+		cursor: pointer;
+
+		&:hover,
+		&:active,
+		&:focus {
+			color: var(--green);
+			outline: 0;
+		}
+
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: var(--tab-height);
+		padding: 0 20px 2px;
+		border-left: 2px solid var(--lightest-navy);
+		background-color: transparent;
+		font-family: var(--font-mono);
+		font-size: var(--fz-xs);
+		text-align: left;
+		white-space: nowrap;
+
+		@media (max-width: 768px) {
+			padding: 0 15px 2px;
+		}
+		@media (max-width: 600px) {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-width: 120px;
+			padding: 0 15px;
+			border-left: 0;
+			border-bottom: 2px solid var(--lightest-navy);
+			text-align: center;
+		}
+
+		&:hover,
+		&:focus {
+			background-color: var(--light-navy);
+		}
+	}
+
+	.styled-high-light {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		width: 2px;
+		height: var(--tab-height);
+		border-radius: var(--border-radius);
+		background: var(--green);
+		transition-delay: 0.1s;
+
+		@media (max-width: 600px) {
+			top: auto;
+			bottom: 0;
+			width: 100%;
+			max-width: var(--tab-width);
+			height: 2px;
+			margin-left: 50px;
+		}
+		@media (max-width: 480px) {
+			margin-left: 25px;
+		}
+	}
+</style>
+<style lang='scss' scoped>
+	.styled-tab-content {
+		width: 100%;
+		height: auto;
+		padding-top: 10px;
+		padding-left: 30px;
+
+		@media (max-width: 768px) {
+			padding-left: 20px;
+		}
+		@media (max-width: 600px) {
+			padding-left: 0;
+		}
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			font-size: var(--fz-lg);
+
+			li {
+				position: relative;
+				padding-left: 30px;
+				margin-bottom: 10px;
+
+				&:before {
+					content: '▹';
+					position: absolute;
+					left: 0;
+					color: var(--green);
+				}
+			}
+		}
+
+		h3 {
+			margin-bottom: 5px;
+			font-size: var(--fz-xxl);
+			font-weight: 500;
+
+			.company {
+				color: var(--green);
+			}
+		}
+
+		.range {
+			margin-bottom: 30px;
+			color: var(--light-slate);
+			font-family: var(--font-mono);
+			font-size: var(--fz-xs);
+		}
+	}
+</style>
