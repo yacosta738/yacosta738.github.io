@@ -1,17 +1,22 @@
 {
   "title": "Senior Software Engineer en GFT",
   "lang": "es",
-  "role": "Analista de Sistema | Ingeniero de Software Senior",
   "company": "GFT",
   "icon": "gft",
   "location": "València, España",
-  "startDate": "2023-03-14",
-  "endDate": "",
   "url": "https://www.gft.com/",
   "published": true,
-  "achievement": [
-    "Reunir y analizar los requisitos comerciales para sistemas de software y diseñar soluciones de software que se adhieran a estándares de codificación y mejores prácticas.",
-    "Realizar pruebas y brindar liderazgo técnico para garantizar que el software cumpla con los requisitos funcionales y de rendimiento.",
-    "Colaborar con las partes interesadas para desarrollar cronogramas de proyectos, comunicar el estado del proyecto e identificar riesgos y problemas que puedan afectar la entrega del proyecto."
-  ]
+	"createDate":"2023-03-14",
+	"roles": [
+		{
+			"role": "Analista de Sistema | Ingeniero de Software Senior (L4)",
+			"startDate": "2023-03-14",
+			"endDate": "",
+			"achievements": [
+				"Reunir y analizar los requisitos comerciales para sistemas de software y diseñar soluciones de software que se adhieran a estándares de codificación y mejores prácticas.",
+				"Realizar pruebas y brindar liderazgo técnico para garantizar que el software cumpla con los requisitos funcionales y de rendimiento.",
+				"Colaborar con las partes interesadas para desarrollar cronogramas de proyectos, comunicar el estado del proyecto e identificar riesgos y problemas que puedan afectar la entrega del proyecto."
+			]
+		}
+	]
 }

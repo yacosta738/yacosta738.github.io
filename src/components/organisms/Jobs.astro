@@ -1,19 +1,19 @@
 ---
-import { Job } from '@models:Job'
+import { Job, Role } from '@models:Job'
 import i18next, { t } from 'i18next'
 import { Sprite } from 'astro-icon'
 const data = await Astro.glob<Job>('../../data/jobs/**/*.json')
 const jobs: Job[] = data
 	.filter((job) => job.published && job.lang === i18next.language)
 	.sort((a: Job, b: Job) => {
-		if (a.startDate > b.startDate) return -1
-		if (a.startDate < b.startDate) return 1
-		return 0
+		const aDate = a?.createDate ? new Date(a.createDate) : new Date()
+		const bDate = b?.createDate ? new Date(b.createDate) : new Date()
+		return bDate.getTime() - aDate.getTime()
 	})
-const range = (job: Job): string => {
-	const date = job?.startDate ? new Date(job.startDate) : new Date()
+const range = (rol: Role): string => {
+	const date = rol?.startDate ? new Date(rol.startDate) : new Date()
 	return `${date.toDateString()} - ${
-		job.endDate ? new Date(job.endDate).toDateString() : job.lang === 'en' ? 'Present' : 'Presente'
+		rol.endDate ? new Date(rol.endDate).toDateString() : t('current')
 	}`
 }
 ---
@@ -37,7 +37,7 @@ const range = (job: Job): string => {
 			</ul>
 			{
 				jobs.length > 0 &&
-					jobs.map((job, i) => (
+					jobs.map((job: Job, i) => (
 						<Sprite.Provider>
 							<div
 								id={`panel-${i}`}
@@ -51,25 +51,34 @@ const range = (job: Job): string => {
 										<Sprite size={48} name={job.icon} />
 									</div>
 									<div class='mx-2 px-2'>
-										<h4>
-											<span>{job.role}</span>
+										{
+											job.roles?.sort((a: Role, b: Role) => {
+												const aDate = a?.startDate ? new Date(a.startDate) : new Date()
+												const bDate = b?.startDate ? new Date(b.startDate) : new Date()
+												return bDate.getTime() - aDate.getTime()
+											})
+											.map(rol => (
+											<h4>
+											<span>{rol.role}</span>
 											<span class='company'>
 												<a href={job.url} target='_blank' class='inline-link'>
 													&nbsp;@&nbsp;{job.company}
 												</a>
 											</span>
 										</h4>
-										<p class='range' id={`range-${job.id}`}>
-											{range(job)}
-										</p>
+										<time class='range' id={`range-${job.id}`}>
+											{range(rol)}
+										</time>
 										<p class='range mb-4'>{job.location}</p>
 										<ul>
-											{job?.achievement?.map((detail, index) => (
+											{rol?.achievements?.map((detail, index) => (
 												<li id={`id-${index}`}>
 													<span>{detail}</span>
 												</li>
 											))}
 										</ul>
+											))
+										}
 									</div>
 								</div>
 							</div>
