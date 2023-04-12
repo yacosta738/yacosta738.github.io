@@ -6,39 +6,39 @@
   "location": "Ciego de \u00c1vila, Cuba",
   "url": "https://www.desoft.cu",
   "published": true,
-	"createDate": "2017-09-01",
+  "createDate": "2017-09-01",
   "roles": [
-		{
-			"role": "Web developer",
-			"startDate": "2017-09-01",
-			"endDate": "2017-12-31",
-			"achievements": [
-				"Developed websites interfaces built with HTML, CSS, JavaScript",
-				"Developed and fixed issues and mistakes for internal and client websites that mainly use HTML, CSS, JavaScript, Typescript, Angular and Vuejs.",
-				"Manually tested sites in various browsers and mobile devices to ensure cross-browser compatibility and responsiveness."
-			]
-		},
-		{
-			"role": "FullStack Developer",
-			"startDate": "2018-01-01",
-			"endDate": "2020-08-09",
-			"achievements": [
-				"Developed dynamic and interactive website that ensured high traffic, pages views, and user experience, resulting in 40% increase in sales revenue.",
-				"Designed processes for cleanup and performance improvement that minimized downtime by 13%.",
-				"Fixed bugs from existing websites and implemented enhancements that significantly improved web functionality and speed.",
-				"Developed APIs for internal communication between different systems."
-			]
-		},
-		{
-			"role": "Software Architect",
-			"startDate": "2020-08-21",
-			"endDate": "2021-09-01",
-			"achievements": [
-				"Trained over 10 staff members in internal web functions, including steps on how to make minor updates and changes.",
-				"Guided and assisted the development team throughout the process of implementing software requirements with new technologies.",
-				"Trained over 15 staff members in microservices architecture with Kubernetes and Istio.",
-				"Designed, implemented and developed microservice architecture for online reputation management system."
-			]
-		}
-	]
+    {
+      "role": "Web developer",
+      "startDate": "2017-09-01",
+      "endDate": "2017-12-31",
+      "achievements": [
+        "Developed websites interfaces built with HTML, CSS, JavaScript",
+        "Developed and fixed issues and mistakes for internal and client websites that mainly use HTML, CSS, JavaScript, Typescript, Angular and Vuejs.",
+        "Manually tested sites in various browsers and mobile devices to ensure cross-browser compatibility and responsiveness."
+      ]
+    },
+    {
+      "role": "FullStack Developer",
+      "startDate": "2018-01-01",
+      "endDate": "2020-08-09",
+      "achievements": [
+        "Developed dynamic and interactive website that ensured high traffic, pages views, and user experience, resulting in 40% increase in sales revenue.",
+        "Designed processes for cleanup and performance improvement that minimized downtime by 13%.",
+        "Fixed bugs from existing websites and implemented enhancements that significantly improved web functionality and speed.",
+        "Developed APIs for internal communication between different systems."
+      ]
+    },
+    {
+      "role": "Software Architect",
+      "startDate": "2020-08-21",
+      "endDate": "2021-09-01",
+      "achievements": [
+        "Trained over 10 staff members in internal web functions, including steps on how to make minor updates and changes.",
+        "Guided and assisted the development team throughout the process of implementing software requirements with new technologies.",
+        "Trained over 15 staff members in microservices architecture with Kubernetes and Istio.",
+        "Designed, implemented and developed microservice architecture for online reputation management system."
+      ]
+    }
+  ]
 }
