@@ -39,7 +39,7 @@ const range = (rol: Role): string => {
 				jobs.length > 0 &&
 					jobs.map((job: Job, i) => (
 						<Sprite.Provider>
-							<div
+								<div
 								id={`panel-${i}`}
 								class='styled-tab-content'
 								role='tabpanel'
@@ -51,37 +51,46 @@ const range = (rol: Role): string => {
 										<Sprite size={48} name={job.icon} />
 									</div>
 									<div class='mx-2 px-2'>
-										{
+										<job-details>
+											{
 											job.roles?.sort((a: Role, b: Role) => {
 												const aDate = a?.startDate ? new Date(a.startDate) : new Date()
 												const bDate = b?.startDate ? new Date(b.startDate) : new Date()
 												return bDate.getTime() - aDate.getTime()
 											})
-											.map(rol => (
+											.map((rol, i) => (
 											<h4>
 											<span>{rol.role}</span>
-											<span class='company'>
-												<a href={job.url} target='_blank' class='inline-link'>
-													&nbsp;@&nbsp;{job.company}
-												</a>
-											</span>
+												{
+													i === 0 && <span class='company'>
+													<a href={job.url} target='_blank' class='inline-link'>
+														&nbsp;@&nbsp;{job.company}
+													</a>
+												</span>
+											}
 										</h4>
-										<time class='range' id={`range-${job.id}`}>
-											{range(rol)}
-										</time>
-										<p class='range mb-4'>{job.location}</p>
+										<div>
+												<time class='range' id={`range-${job.id}`}>
+														{range(rol)}
+												</time>
+												{i ===0 && <p class='range mb-4'>{job.location}</p>}
+										</div>
 										<ul>
-											{rol?.achievements?.map((detail, index) => (
-												<li id={`id-${index}`}>
-													<span>{detail}</span>
-												</li>
-											))}
+											{
+													rol?.achievements?.map((detail, index) => (
+															<li id={`achievement-${index}`} class={`${job?.roles?.length > 1 && index !== 0 ? 'hidden' : ''}`}>
+																	{detail}
+															</li>			
+												))
+										 }
 										</ul>
 											))
 										}
+										</job-details>
 									</div>
 								</div>
 							</div>
+							
 						</Sprite.Provider>
 					))
 			}
@@ -119,10 +128,18 @@ const range = (rol: Role): string => {
 					})
 				})
 			})
+			
 		}
 	}
-
+	class RoleDetails extends HTMLElement {
+		constructor() {
+			super()
+			const ul = this.querySelector('ul') as HTMLUListElement
+			const lis = ul.querySelectorAll('li')
+		}
+	}
 	customElements.define('astro-jobs', AstroJobs)
+	customElements.define('role-details', RoleDetails)
 </script>
 
 <style lang='scss' scoped>
@@ -287,7 +304,7 @@ const range = (rol: Role): string => {
 			}
 		}
 
-		h3 {
+		h4 {
 			margin-bottom: 5px;
 			font-size: var(--fz-xxl);
 			font-weight: 500;
