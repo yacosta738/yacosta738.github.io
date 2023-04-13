@@ -15,25 +15,11 @@ const { rol, hasMultipleRoles } = Astro.props
 			{rol?.achievements?.map((detail, index) => (
 				<li
 					id={`achievement-${index}`}
-					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500
-											${hasMultipleRoles && index !== 0 ? 'hidden' : ''}`}
+					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500`}
 				>
 					{detail}
-					<span id='show-more' class='text-green-500 cursor-pointer'>
-						{hasMultipleRoles ? 'Ver más' : ''}
-					</span>
 				</li>
 			))}
 		</ul>
 	)
 }
-
-<script>
-	const showMore = document.querySelector('#show-more')
-	showMore.addEventListener('click', () => {
-		const achievements = document.querySelectorAll('[id^="achievement-"]')
-		achievements.forEach((achievement) => {
-			achievement.classList.remove('hidden')
-		})
-	})
-</script>
