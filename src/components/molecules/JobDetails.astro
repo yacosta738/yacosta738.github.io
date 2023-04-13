@@ -1,0 +1,57 @@
+---
+import { Job, Role } from '@models:Job'
+import { t } from 'i18next'
+import { Sprite } from 'astro-icon'
+
+export interface Props {
+	job: Job
+}
+
+const { job } = Astro.props
+
+const range = (rol: Role): string => {
+	const date = rol?.startDate ? new Date(rol.startDate) : new Date()
+	return `${date.toDateString()} - ${
+		rol.endDate ? new Date(rol.endDate).toDateString() : t('current')
+	}`
+}
+---
+<Sprite.Provider>
+	<div class='flex space-x-4'>
+		<div class='flex-shrink-0'>
+			<Sprite size={48} name={job.icon} />
+		</div>
+		{
+			job?.roles?.length > 1 ?
+			<div class='flex-1'>
+			<div class='flex items-center justify-between text-light-slate'>
+				<h3 class='text-2xl font-semibold'>
+					<a href={job.url} target='_blank' class='inline-link'>
+						{job.company}
+					</a>
+				</h3>
+				<small class='text-sm'>Hybrid 🚀</small>
+			</div>
+			<small class='text-sm text-light-slate'>{job.location}</small>
+		</div>
+		:
+		<div class='flex-1'>
+			{job?.roles[0]?.role && (
+				<h3 class='text-2xl font-semibold'>
+					{job?.roles[0]?.role}
+					<a href={job.url} target='_blank' class='inline-link'>
+						&nbsp;@&nbsp;{job.company}
+					</a>
+				</h3>
+				<div class="flex flex-col items-start justify-center mb-4">
+					<time class='text-sm text-light-slate' id={`range-${job.id}`}>
+						{range(job?.roles[0])}
+					</time>
+					<small class='text-sm text-light-slate'>{job.location}</small>
+				</div>
+			)}
+		</div>
+		}
+	</div>
+</Sprite.Provider>
+

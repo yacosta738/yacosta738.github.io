@@ -1,0 +1,26 @@
+---
+import { Role } from '@models:Job'
+
+export interface Props {
+	rol: Role
+	hasMultipleRoles: boolean
+}
+
+const { rol, hasMultipleRoles } = Astro.props
+---
+
+{
+	(
+		<ul class='p-0 m-0 list-none list-inside text-[18px]'>
+			{rol?.achievements?.map((detail, index) => (
+				<li
+					id={`achievement-${index}`}
+					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500
+											${hasMultipleRoles && index !== 0 ? 'hidden' : ''}`}
+				>
+					{detail}
+				</li>
+			))}
+		</ul>
+	)
+}

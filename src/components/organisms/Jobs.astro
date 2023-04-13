@@ -1,7 +1,9 @@
 ---
-import { Job, Role } from '@models:Job'
+import { Job } from '@models:Job'
 import i18next, { t } from 'i18next'
-import { Sprite } from 'astro-icon'
+import JobDetails from 'molecules:JobDetails'
+import RoleDetails from 'molecules:RoleDetails'
+
 const data = await Astro.glob<Job>('../../data/jobs/**/*.json')
 const jobs: Job[] = data
 	.filter((job) => job.published && job.lang === i18next.language)
@@ -10,12 +12,6 @@ const jobs: Job[] = data
 		const bDate = b?.createDate ? new Date(b.createDate) : new Date()
 		return bDate.getTime() - aDate.getTime()
 	})
-const range = (rol: Role): string => {
-	const date = rol?.startDate ? new Date(rol.startDate) : new Date()
-	return `${date.toDateString()} - ${
-		rol.endDate ? new Date(rol.endDate).toDateString() : t('current')
-	}`
-}
 ---
 
 <astro-jobs>
@@ -36,63 +32,18 @@ const range = (rol: Role): string => {
 				<div id='job-indicator' class='styled-high-light'></div>
 			</ul>
 			{
-				jobs.length > 0 &&
-					jobs.map((job: Job, i) => (
-						<Sprite.Provider>
-								<div
-								id={`panel-${i}`}
-								class='styled-tab-content'
-								role='tabpanel'
-								aria-labelledby={`tab-${i}`}
-								hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
-							>
-								<div class='flex flex-row'>
-									<div class='basis-1/5'>
-										<Sprite size={48} name={job.icon} />
-									</div>
-									<div class='mx-2 px-2'>
-										<job-details>
-											{
-											job.roles?.sort((a: Role, b: Role) => {
-												const aDate = a?.startDate ? new Date(a.startDate) : new Date()
-												const bDate = b?.startDate ? new Date(b.startDate) : new Date()
-												return bDate.getTime() - aDate.getTime()
-											})
-											.map((rol, i) => (
-											<h4>
-											<span>{rol.role}</span>
-												{
-													i === 0 && <span class='company'>
-													<a href={job.url} target='_blank' class='inline-link'>
-														&nbsp;@&nbsp;{job.company}
-													</a>
-												</span>
-											}
-										</h4>
-										<div>
-												<time class='range' id={`range-${job.id}`}>
-														{range(rol)}
-												</time>
-												{i ===0 && <p class='range mb-4'>{job.location}</p>}
-										</div>
-										<ul>
-											{
-													rol?.achievements?.map((detail, index) => (
-															<li id={`achievement-${index}`} class={`${job?.roles?.length > 1 && index !== 0 ? 'hidden' : ''}`}>
-																	{detail}
-															</li>			
-												))
-										 }
-										</ul>
-											))
-										}
-										</job-details>
-									</div>
-								</div>
-							</div>
-							
-						</Sprite.Provider>
-					))
+				jobs.map((job: Job, i) => (
+					<div
+						id={`panel-${i}`}
+						class='w-full h-auto pt-2.5 pl-7'
+						role='tabpanel'
+						aria-labelledby={`tab-${i}`}
+						hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
+					>
+						<JobDetails job={job} />
+						<RoleDetails roles={job?.roles ?? []} />
+					</div>
+				))
 			}
 		</div>
 	</section>
@@ -111,7 +62,7 @@ const range = (rol: Role): string => {
 			const jobIndicator = this.querySelector('#job-indicator') as HTMLDivElement
 			let activeTabId = getActiveTabId()
 			const buttons = this.querySelectorAll('button')
-			const panels = this.querySelectorAll('.styled-tab-content') as NodeListOf<HTMLDivElement>
+			const panels = document.querySelectorAll('[id^="panel-"]') as NodeListOf<HTMLDivElement>
 			buttons.forEach((button, i) => {
 				button.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)
 				button.addEventListener('click', () => {
@@ -128,18 +79,9 @@ const range = (rol: Role): string => {
 					})
 				})
 			})
-			
-		}
-	}
-	class RoleDetails extends HTMLElement {
-		constructor() {
-			super()
-			const ul = this.querySelector('ul') as HTMLUListElement
-			const lis = ul.querySelectorAll('li')
 		}
 	}
 	customElements.define('astro-jobs', AstroJobs)
-	customElements.define('role-details', RoleDetails)
 </script>
 
 <style lang='scss' scoped>
@@ -269,55 +211,6 @@ const range = (rol: Role): string => {
 		}
 		@media (max-width: 480px) {
 			margin-left: 25px;
-		}
-	}
-	.styled-tab-content {
-		width: 100%;
-		height: auto;
-		padding-top: 10px;
-		padding-left: 30px;
-
-		@media (max-width: 768px) {
-			padding-left: 20px;
-		}
-		@media (max-width: 600px) {
-			padding-left: 0;
-		}
-
-		ul {
-			padding: 0;
-			margin: 0;
-			list-style: none;
-			font-size: var(--fz-lg);
-
-			li {
-				position: relative;
-				padding-left: 30px;
-				margin-bottom: 10px;
-
-				&:before {
-					content: '▹';
-					position: absolute;
-					left: 0;
-					color: var(--green);
-				}
-			}
-		}
-
-		h4 {
-			margin-bottom: 5px;
-			font-size: var(--fz-xxl);
-			font-weight: 500;
-
-			.company {
-				color: var(--green);
-			}
-		}
-
-		.range {
-			color: var(--light-slate);
-			font-family: var(--font-mono);
-			font-size: var(--fz-xs);
 		}
 	}
 </style>
