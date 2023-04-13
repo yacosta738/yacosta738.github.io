@@ -1,20 +1,13 @@
 ---
 import { Job, Role } from '@models:Job'
-import { t } from 'i18next'
 import { Sprite } from 'astro-icon'
+import { range } from '@utils:role-range'
 
 export interface Props {
 	job: Job
 }
 
 const { job } = Astro.props
-
-const range = (rol: Role): string => {
-	const date = rol?.startDate ? new Date(rol.startDate) : new Date()
-	return `${date.toDateString()} - ${
-		rol.endDate ? new Date(rol.endDate).toDateString() : t('current')
-	}`
-}
 ---
 <Sprite.Provider>
 	<div class='flex space-x-4'>
