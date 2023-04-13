@@ -8,6 +8,8 @@ export interface Props {
 }
 
 const { job } = Astro.props
+
+const hasMultipleRoles = job?.roles?.length > 1
 ---
 <Sprite.Provider>
 	<div class='flex space-x-4'>
@@ -15,20 +17,17 @@ const { job } = Astro.props
 			<Sprite size={48} name={job.icon} />
 		</div>
 		{
-			job?.roles?.length > 1 ?
-			<div class='flex-1'>
-			<div class='flex items-center justify-between text-light-slate'>
+			hasMultipleRoles ?
+(			<div class='flex-1'>
 				<h3 class='text-2xl font-semibold'>
 					<a href={job.url} target='_blank' class='inline-link'>
 						{job.company}
 					</a>
 				</h3>
-				<small class='text-sm'>Hybrid 🚀</small>
-			</div>
 			<small class='text-sm text-light-slate'>{job.location}</small>
 		</div>
-		:
-		<div class='flex-1'>
+		):
+		(<div class='flex-1'>
 			{job?.roles[0]?.role && (
 				<h3 class='text-2xl font-semibold'>
 					{job?.roles[0]?.role}
@@ -43,7 +42,7 @@ const { job } = Astro.props
 					<small class='text-sm text-light-slate'>{job.location}</small>
 				</div>
 			)}
-		</div>
+		</div>)
 		}
 	</div>
 </Sprite.Provider>
