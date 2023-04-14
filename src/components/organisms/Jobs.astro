@@ -15,9 +15,9 @@ const jobs: Job[] = data
 ---
 
 <astro-jobs>
-	<section id='jobs' class='styled-jobs-section'>
+	<section id='jobs' class='flex flex-col items-center justify-center max-w-screen-md'>
 		<h2 class='numbered-heading'>{t('where-worked')}</h2>
-		<div class='inner'>
+		<div class='flex md:flex-row flex-col max-w-sm md:max-w-max'>
 			<ul class='styled-tab-list' aria-label='Job tabs'>
 				{
 					jobs.length > 0 &&
@@ -35,7 +35,7 @@ const jobs: Job[] = data
 				jobs.map((job: Job, i) => (
 					<div
 						id={`panel-${i}`}
-						class='w-full h-auto pt-2.5 pl-7'
+						class='w-full h-auto pt-1 px-2 md:pt-2.5 md:pl-7'
 						role='tabpanel'
 						aria-labelledby={`tab-${i}`}
 						hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
@@ -85,19 +85,6 @@ const jobs: Job[] = data
 </script>
 
 <style lang='scss' scoped>
-	.styled-jobs-section {
-		max-width: 700px;
-
-		.inner {
-			display: flex;
-
-			@media (max-width: 600px) {
-				display: block;
-				max-width: 320px;
-			}
-		}
-	}
-
 	.styled-tab-list {
 		position: relative;
 		z-index: 3;
