@@ -1,12 +1,13 @@
 ---
-import { Role } from '@models:Job'
+import { Role, IRole } from '@models:Job'
 
 export interface Props {
-	rol: Role
+	role: IRole
 	hasMultipleRoles: boolean
 }
 
-const { rol, hasMultipleRoles } = Astro.props
+const { role, hasMultipleRoles } = Astro.props
+const rol = new Role(role)
 ---
 
 {
@@ -14,8 +15,10 @@ const { rol, hasMultipleRoles } = Astro.props
 		<ul class='p-0 m-0 list-none list-inside text-[18px]'>
 			{rol?.achievements?.map((detail, index) => (
 				<li
-					id={`achievement-${index}`}
-					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500`}
+					id={`rol-${rol?.getIdentifier()}-achievement-${index}`}
+					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500 ${
+						hasMultipleRoles ? 'hidden' : ''
+					}`}
 				>
 					{detail}
 				</li>
@@ -23,3 +26,19 @@ const { rol, hasMultipleRoles } = Astro.props
 		</ul>
 	)
 }
+
+{hasMultipleRoles && <button id={`rol-${rol.getIdentifier()}-show-achievements`} class='text-green-500'>Show Achievements</button>}
+
+<script define:vars={{ rol }}>
+	// select the buttons and the lists
+	const showAchievementsButton = document.getElementById(`rol-${rol.id}-show-achievements`)
+	// select all the achievements lists for this role by using the role id pattern in the id
+	const achievementsLists = document.querySelectorAll(`[id^='rol-${rol.id}-achievement-']`)
+	// add a click event listener to the button
+	showAchievementsButton?.addEventListener('click', () => {
+		// toggle the hidden class on all the achievements lists
+		achievementsLists?.forEach((list) => list.classList.toggle('hidden'))
+		// toggle the text of the button
+		showAchievementsButton.innerText = showAchievementsButton.innerText === 'Show Achievements' ? 'Hide Achievements' : 'Show Achievements'
+	})
+</script>

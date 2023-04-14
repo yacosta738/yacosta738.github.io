@@ -1,17 +1,17 @@
 ---
-import { Job } from '@models:Job'
+import { IJob, Job } from '@models:Job'
 import i18next, { t } from 'i18next'
 import JobDetails from 'molecules:JobDetails'
 import RoleDetails from 'molecules:RoleDetails'
 
-const data = await Astro.glob<Job>('../../data/jobs/**/*.json')
+const data = await Astro.glob<IJob>('../../data/jobs/**/*.json')
 const jobs: Job[] = data
 	.filter((job) => job.published && job.lang === i18next.language)
-	.sort((a: Job, b: Job) => {
+	.sort((a: IJob, b: IJob) => {
 		const aDate = a?.createDate ? new Date(a.createDate) : new Date()
 		const bDate = b?.createDate ? new Date(b.createDate) : new Date()
 		return bDate.getTime() - aDate.getTime()
-	})
+	}).map((job) => new Job(job))
 ---
 
 <astro-jobs>
@@ -32,7 +32,7 @@ const jobs: Job[] = data
 				<div id='job-indicator' class='styled-high-light'></div>
 			</ul>
 			{
-				jobs.map((job: Job, i) => (
+				jobs.map((job: IJob, i) => (
 					<div
 						id={`panel-${i}`}
 						class='w-full h-auto pt-1 px-2 md:pt-2.5 md:pl-7'
@@ -61,7 +61,7 @@ const jobs: Job[] = data
 			}
 			const jobIndicator = this.querySelector('#job-indicator') as HTMLDivElement
 			let activeTabId = getActiveTabId()
-			const buttons = this.querySelectorAll('button')
+			const buttons = this.querySelectorAll('[id^="tab-"]') as NodeListOf<HTMLButtonElement>
 			const panels = document.querySelectorAll('[id^="panel-"]') as NodeListOf<HTMLDivElement>
 			buttons.forEach((button, i) => {
 				button.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)

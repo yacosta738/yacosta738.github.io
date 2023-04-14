@@ -1,7 +1,7 @@
 import { t } from 'i18next'
-import { Role } from '../models/Job'
+import { IRole } from '../models/Job'
 
-export const range = (rol: Role): string => {
+export const range = (rol: IRole): string => {
 	const date = rol?.startDate ? new Date(rol.startDate) : new Date()
 	return `${date.toDateString()} - ${
 		rol.endDate ? new Date(rol.endDate).toDateString() : t('current')

@@ -1,10 +1,10 @@
 ---
-import { Job, Role } from '@models:Job'
+import { IJob } from '@models:Job'
 import { Sprite } from 'astro-icon'
 import { range } from '@utils:role-range'
 
 export interface Props {
-	job: Job
+	job: IJob
 }
 
 const { job } = Astro.props
