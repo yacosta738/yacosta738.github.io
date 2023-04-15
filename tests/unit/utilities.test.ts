@@ -28,4 +28,3 @@ test('urlize author name', () => {
 	expect(url).toBe('yuniel-acosta')
 	assert.equal(url, 'yuniel-acosta')
 })
-
