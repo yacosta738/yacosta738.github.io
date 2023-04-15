@@ -1,6 +1,6 @@
 import { assert, expect, test } from 'vitest'
-import { IRole, Role } from '../src/models/Job'
-import { range } from '../src/utils/role-range'
+import { IRole, Role } from '../../src/models/Job'
+import { range } from '../../src/utils/role-range'
 
 const role: IRole = new Role({
 	role: 'Senior Software Engineer',

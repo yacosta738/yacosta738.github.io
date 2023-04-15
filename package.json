@@ -13,8 +13,10 @@
     "format": "prettier -w .",
     "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx,.vue --debug",
     "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx,.vue --fix --debug",
-    "test": "vitest && playwright test",
-    "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test'"
+		"test": "npx -y concurrently \"npm run test:unit\" \"npm run test:e2e\"",
+    "test:unit": "vitest",
+    "test:playwright": "playwright test",
+    "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test:playwright'"
   },
   "devDependencies": {
     "@astrojs/image": "0.16.5",
