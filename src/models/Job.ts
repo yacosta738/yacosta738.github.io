@@ -1,5 +1,5 @@
 import { randomInt } from '../utils/utilities'
-
+const MAX_ID = 1000000
 export interface IRole {
 	role?: string
 	startDate?: Date | string
@@ -9,7 +9,7 @@ export interface IRole {
 }
 
 export interface IJob {
-	id?: string
+	id?: number
 	title?: string
 	lang?: string
 	company?: string
@@ -22,7 +22,7 @@ export interface IJob {
 }
 
 export class Role implements IRole {
-	id: number = randomInt(1, 1000000)
+	id: number = randomInt(1, MAX_ID)
 	role: string = ''
 	startDate?: Date | string
 	endDate?: Date | string
@@ -36,7 +36,7 @@ export class Role implements IRole {
 }
 
 export class Job implements IJob {
-	id?: string
+	id: number = randomInt(1, MAX_ID)
 	title: string = ''
 	lang: string = 'en'
 	company: string = ''

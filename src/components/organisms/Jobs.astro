@@ -21,9 +21,9 @@ const jobs: Job[] = data
 			<ul class='styled-tab-list' aria-label='Job tabs'>
 				{
 					jobs.length > 0 &&
-						jobs.map((job, i) => (
+						jobs.map((job) => (
 							<li>
-								<button id={`tab-${i}`} class='styled-tab-button'>
+								<button id={`tab-${job.id}`} class='styled-tab-button'>
 									<span>{job.company}</span>
 								</button>
 							</li>
@@ -34,10 +34,10 @@ const jobs: Job[] = data
 			{
 				jobs.map((job: IJob, i) => (
 					<div
-						id={`panel-${i}`}
+						id={`panel-${job.id}`}
 						class='w-full h-auto pt-1 px-2 md:pt-2.5 md:pl-7'
 						role='tabpanel'
-						aria-labelledby={`tab-${i}`}
+						aria-labelledby={`tab-${job.id}`}
 						hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
 					>
 						<JobDetails job={job} />

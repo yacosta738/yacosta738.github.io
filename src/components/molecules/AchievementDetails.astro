@@ -1,5 +1,6 @@
 ---
 import { Role, IRole } from '@models:Job'
+import { Icon } from 'astro-icon'
 
 export interface Props {
 	role: IRole
@@ -27,7 +28,17 @@ const rol = new Role(role)
 	)
 }
 
-{hasMultipleRoles && <button id={`rol-${rol.getIdentifier()}-show-achievements`} class='text-green-500'>Show Achievements</button>}
+{
+	hasMultipleRoles && (
+		<button id={`rol-${rol.getIdentifier()}-show-achievements`} class='text-green-500 text-[12px]'>
+			<Icon
+				id={`rol-${rol.getIdentifier()}-view-show`}
+				name='ph:dots-three-outline-bold'
+				class='w-4 h-4 mr-1'
+			/>
+		</button>
+	)
+}
 
 <script define:vars={{ rol }}>
 	// select the buttons and the lists
@@ -38,7 +49,7 @@ const rol = new Role(role)
 	showAchievementsButton?.addEventListener('click', () => {
 		// toggle the hidden class on all the achievements lists
 		achievementsLists?.forEach((list) => list.classList.toggle('hidden'))
-		// toggle the text of the button
-		showAchievementsButton.innerText = showAchievementsButton.innerText === 'Show Achievements' ? 'Hide Achievements' : 'Show Achievements'
+		// reverse the hidden class on the icons to show the correct one when the button is clicked
+		showAchievementsButton?.classList.toggle('hidden')
 	})
 </script>
