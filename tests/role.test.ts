@@ -11,12 +11,12 @@ const role: IRole = new Role({
 
 test('range role dates', () => {
 	const rangeDate = range(role)
-	expect(rangeDate).toBe('Sat Jan 01 2022 - Sat Dec 31 2022')
-	assert.equal(rangeDate, 'Sat Jan 01 2022 - Sat Dec 31 2022')
+	expect(rangeDate).toBe('Wed Jan 01 2020 - Thu Dec 31 2020')
+	assert.equal(rangeDate, 'Wed Jan 01 2020 - Thu Dec 31 2020')
 })
 
 test('range role dates with no end date', () => {
 	const rangeDate = range({ ...role, endDate: '' })
-	expect(rangeDate).toBe('Sat Jan 01 2022 - Present')
-	assert.equal(rangeDate, 'Sat Jan 01 2022 - Present')
+	expect(rangeDate).toBe('Wed Jan 01 2020 - Present')
+	assert.equal(rangeDate, 'Wed Jan 01 2020 - Present')
 })
