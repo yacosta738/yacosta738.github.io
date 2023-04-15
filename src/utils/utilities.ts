@@ -10,6 +10,7 @@ export const randomInt = (min: number, max: number) => {
 
 export const inlineLinks = (className: string) => {
 	const elements = Array.from(document.querySelectorAll(className))
+	// eslint-disable-next-line no-array-constructor
 	const allLinks = new Array<HTMLElement[]>()
 	elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))))
 	if (allLinks.length > 0) {
