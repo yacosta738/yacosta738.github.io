@@ -56,7 +56,7 @@
     "locale-emoji": "0.3.0",
     "marked": "4.3.0",
     "mdast-util-to-string": "3.2.0",
-    "nanostores": "0.7.4",
+    "nanostores": "0.8.0",
     "postcss-nesting": "11.2.2",
     "postcss-preset-env": "7.8.3",
     "prettier": "2.8.7",
