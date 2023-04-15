@@ -3,10 +3,11 @@
   "packageRules": [
     {
       "matchPackageNames": ["npm", "astro", "node"],
-			"matchUpdateTypes": ["patch", "minor"],
-			"automerge": true,
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true,
       "schedule": ["after 5pm on Friday"]
     }
   ],
-  "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"]
+  "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"],
+  "nodeVersion": ">=18"
 }

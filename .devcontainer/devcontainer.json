@@ -31,6 +31,8 @@
     "vivaxy.vscode-conventional-commits",
     "EditorConfig.EditorConfig",
     "bradlc.vscode-tailwindcss",
+    "ms-playwright.playwright",
+    "eamodio.gitlens",
     "Vue.volar"
   ],
 

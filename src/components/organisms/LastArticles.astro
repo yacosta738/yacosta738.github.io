@@ -1,6 +1,6 @@
 ---
 import i18next, { t } from 'i18next'
-import { Picture } from '@astrojs/image/components'
+import { Image } from '@astrojs/image/components'
 import { Article, jsonToArticle } from '@models:Article'
 import { MarkdownInstance } from 'astro'
 
@@ -30,15 +30,10 @@ const posts: Article[] = postsData
 			posts.map((post) => (
 				<article class='w-full max-w-sm transform rounded-lg border border-lightest-navy bg-light-navy shadow-md hover:-translate-y-2'>
 					<a href={post.url}>
-						<Picture
+						<Image
 							class='h-48 w-96 rounded-t-lg object-fill'
 							src={post.cover}
 							alt={post.title}
-							widths={[200, 400, 800]}
-							aspectRatio='16:9'
-							fit='fill'
-							background='#0A192F'
-							sizes="(max-width: 800px) 100vw, 800px"
 							height={400}
 							width={1000}
 						/>

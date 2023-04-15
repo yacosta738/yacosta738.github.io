@@ -1,0 +1,55 @@
+---
+import { Role, IRole } from '@models:Job'
+import { Icon } from 'astro-icon'
+
+export interface Props {
+	role: IRole
+	hasMultipleRoles: boolean
+}
+
+const { role, hasMultipleRoles } = Astro.props
+const rol = new Role(role)
+---
+
+{
+	(
+		<ul class='p-0 m-0 list-none list-inside text-[18px]'>
+			{rol?.achievements?.map((detail, index) => (
+				<li
+					id={`rol-${rol?.getIdentifier()}-achievement-${index}`}
+					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500 ${
+						hasMultipleRoles ? 'hidden' : ''
+					}`}
+				>
+					{detail}
+				</li>
+			))}
+		</ul>
+	)
+}
+
+{
+	hasMultipleRoles && (
+		<button id={`rol-${rol.getIdentifier()}-show-achievements`} class='text-green-500 text-[12px]'>
+			<Icon
+				id={`rol-${rol.getIdentifier()}-view-show`}
+				name='ph:dots-three-outline-bold'
+				class='w-4 h-4 mr-1'
+			/>
+		</button>
+	)
+}
+
+<script define:vars={{ rol }}>
+	// select the buttons and the lists
+	const showAchievementsButton = document.getElementById(`rol-${rol.id}-show-achievements`)
+	// select all the achievements lists for this role by using the role id pattern in the id
+	const achievementsLists = document.querySelectorAll(`[id^='rol-${rol.id}-achievement-']`)
+	// add a click event listener to the button
+	showAchievementsButton?.addEventListener('click', () => {
+		// toggle the hidden class on all the achievements lists
+		achievementsLists?.forEach((list) => list.classList.toggle('hidden'))
+		// reverse the hidden class on the icons to show the correct one when the button is clicked
+		showAchievementsButton?.classList.toggle('hidden')
+	})
+</script>

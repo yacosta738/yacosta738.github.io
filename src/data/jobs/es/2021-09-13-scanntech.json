@@ -1,17 +1,23 @@
 {
-  "endDate": "2022-11-03T23:00:00.000Z",
+  "title": "Senior Software Engineer en Scanntech",
+  "company": "Scanntech",
+  "icon": "scanntech",
   "lang": "es",
   "published": true,
   "url": "https://www.scanntech.com",
-  "achievement": [
-    "Mejoré la ejecución de sincronización de datos de nuestras APIs con las de MMC bajando el tiempo de 40 minutos aproximadamente a 6 minutos.",
-    "Mejora en calidad de código agregando test y buenas prácticas con los principios SOLID.",
-    "Diseñe e implemente el patrón de configuración centralizada para todos los microservicios de la plataforma.",
-    "Implementé un sistema de integración continua utilizando Gitlab CI para garantizar una entrega rápida y confiable de código actualizado, mejorando la eficiencia del equipo de desarrollo y reduciendo los errores en la entrega final del producto."
-  ],
-  "startDate": "2021-09-13",
   "location": "Montevideo, Uruguay",
-  "role": "Senior Software Engineer",
-  "title": "Senior Software Engineer en Scanntech",
-  "company": "Scanntech"
+  "createDate": "2021-09-13",
+  "roles": [
+    {
+      "role": "Senior Software Engineer",
+      "startDate": "2021-09-13",
+      "endDate": "2022-11-03T23:00:00.000Z",
+      "achievements": [
+        "Mejoré la ejecución de sincronización de datos de nuestras APIs con las de MMC bajando el tiempo de 40 minutos aproximadamente a 6 minutos.",
+        "Mejora en calidad de código agregando test y buenas prácticas con los principios SOLID.",
+        "Diseñe e implemente el patrón de configuración centralizada para todos los microservicios de la plataforma.",
+        "Implementé un sistema de integración continua utilizando Gitlab CI para garantizar una entrega rápida y confiable de código actualizado, mejorando la eficiencia del equipo de desarrollo y reduciendo los errores en la entrega final del producto."
+      ]
+    }
+  ]
 }

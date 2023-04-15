@@ -9,6 +9,7 @@ import Email from 'atoms:Email'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
 import '../../styles/global.css'
+import '../../styles/fonts.css'
 import { domain } from '@store:constants'
 
 let { title, description, image, ogImageAlt } = Astro.props
@@ -26,8 +27,6 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 		<HeadSEO title={title} description={description} image={image} ogImageAlt={ogImageAlt} />
 		<HeadHrefLangs />
 		<GoogleAnalytics />
-		<script src='../../utils/title-change.js' />
-		<script src='../../utils/geeky-console.js' />
 	</head>
 
 	<body
@@ -45,5 +44,7 @@ ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 			<Email />
 		</div>
 		<AppFooter />
+		<script src='../../utils/title-change.js'></script>
+		<script src='../../utils/geeky-console.js'></script>
 	</body>
 </html>
