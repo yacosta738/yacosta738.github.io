@@ -1,6 +1,6 @@
 ---
 import { t } from 'i18next'
-import { Image } from '@astrojs/image/components'
+import { Picture } from '@astrojs/image/components'
 import { localizePath } from 'astro-i18next'
 import { Article } from '@models:Article'
 import PostHeader from 'molecules:PostHeader'
@@ -18,18 +18,25 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 	</h2>
 	{!hidePostHeaderInSmallScreen && <PostHeader article={article} />}
 	<div class='mb-16 flex flex-col justify-center lg:flex-row'>
-		{
-			article.cover && (
-				<Image
-					alt={article.title}
-					class='border border-green-500 object-fill lg:h-60 lg:w-1/3'
-					src={article.cover}
-					height={400}
-					width={1000}
-				/>
-			)
-		}
-		<div class='mx-4 text-justify md:mx-10 md:my-5'>
+		<div class='lg:w-2/5'>
+			{
+				article.cover && (
+					<Picture
+						alt={article.title}
+						class='border border-green-500'
+						src={article.cover}
+						widths={[200, 500, 800]}
+						aspectRatio="4:3"
+						fit='fill'
+						background='#0A192F'
+						sizes="(max-width: 800px) 100vw, 800px"
+						height={400}
+						width={1000}
+					/>
+				)
+			}
+		</div>
+		<div class='mx-4 text-justify md:mx-10 md:my-5 lg:w-3/5'>
 			<span class='line-clamp-7'>{article.description}</span>
 			<a href={localizePath(article.url)} class='inline-link font-bold uppercase'>{t('read')}</a>
 		</div>
