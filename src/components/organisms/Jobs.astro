@@ -11,7 +11,8 @@ const jobs: Job[] = data
 		const aDate = a?.createDate ? new Date(a.createDate) : new Date()
 		const bDate = b?.createDate ? new Date(b.createDate) : new Date()
 		return bDate.getTime() - aDate.getTime()
-	}).map((job) => new Job(job))
+	})
+	.map((job) => new Job(job))
 ---
 
 <astro-jobs>
@@ -29,7 +30,7 @@ const jobs: Job[] = data
 							</li>
 						))
 				}
-				<div id='job-indicator' class='styled-high-light'></div>
+				<li><div id='job-indicator' class='styled-high-light'></div></li>
 			</ul>
 			{
 				jobs.map((job: IJob, i) => (
