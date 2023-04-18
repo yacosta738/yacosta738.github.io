@@ -77,6 +77,8 @@
   "error404": "La página no se encuentra (404)",
   "message404": "No se como terminaste aquí, pero la página no existe. O bien, <em>esta</em> página si existe, pero es una página <em>\"Page not found\"</em>...entiendes el punto de vista.",
   "of": "de",
+	"search-title": "Buscar artículos",
+	"search-result": "resultados.",
   "search-placeholder": "Buscar...",
   "built-by": "Construido por ",
   "design-by": "Diseño basado en el portafolio de Chiang portfolio",

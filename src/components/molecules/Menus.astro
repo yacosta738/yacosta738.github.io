@@ -4,7 +4,7 @@ import { t } from 'i18next'
 import LanguageSelector from 'atoms:LanguageSelector'
 import { Menu, navMenus } from '@models:Menu'
 import Icon from 'astro-icon'
-import Search from '@components:atoms/Search.vue'
+import Search from 'molecules:Search'
 export interface Props {
 	drawer: boolean
 }
@@ -22,9 +22,6 @@ const menuLink = (menu: Menu) => {
 ---
 
 <ul class='menu-list'>
-	<li>
-		{isBlogRoot && <Search client:only />}
-	</li>
 	<li>
 		<ol
 			class={`order-list items-center space-y-6 lg:space-y-0 lg:space-x-2 lg:flex ${
@@ -62,6 +59,7 @@ const menuLink = (menu: Menu) => {
 		>
 			<Icon name='tabler:rss' class='h-5 w-5' />
 		</a>
+		{isBlogRoot && <Search />}
 	</li>
 	<li>
 		<a
