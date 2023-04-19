@@ -1,0 +1,37 @@
+---
+import { Icon } from 'astro-icon'
+---
+
+<!-- Modal toggle -->
+<button
+	id="searchButton"
+	data-modal-target='searchModal'
+	data-modal-toggle='searchModal'
+	class='rounded bg-transparent p-2 text-green-500 hover:border-green-500 hover:bg-green-900'
+	type='button'
+>
+	<Icon name='ic:twotone-search' class='h-4 w-4' />
+</button>
+
+<script>
+	import { Modal } from 'flowbite'
+
+	// select the two elements that we'll work with
+	const $buttonElement: HTMLElement | null = document.querySelector('#searchButton')
+	const $modalElement: HTMLElement | null = document.querySelector('#searchModal')
+
+	const $results: HTMLElement | null = document.querySelector('#article-results') as HTMLElement
+	const $textSearch: HTMLInputElement | null = document.querySelector('#textSearch') as HTMLInputElement
+
+	// create a new modal component
+	const modal = new Modal($modalElement)
+
+	// toggle the visibility of the modal when clicking on the button
+	if ($buttonElement) {
+		$buttonElement.addEventListener('click', () => {
+			modal.toggle()
+			$results.innerHTML = ''
+			$textSearch.value = ''
+		})
+	}
+</script>

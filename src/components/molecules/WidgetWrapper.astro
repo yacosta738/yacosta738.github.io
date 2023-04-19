@@ -13,6 +13,7 @@ const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, an
 	en: Astro.glob('../../pages/blog/**/*.md'),
 	es: Astro.glob('../../pages/es/blog/**/*.md')
 }
+
 const postsData = i18next.language in articlesFiles ? await articlesFiles[i18next.language] : []
 
 const allPosts: Article[] = postsData
@@ -49,7 +50,7 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 }, {})
 ---
 
-<div class='container mx-auto w-4/5'>
+<div id='widget-wrapper' class='container mx-auto w-4/5 sticky top-24'>
 	<slot name='widget'>
 		{
 			!isBlogRoot && (
@@ -70,11 +71,23 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 		const isBlogRoot =
 			window?.location?.href?.endsWith('/blog') || window?.location?.href?.endsWith('/blog/')
 		if (isBlogRoot) {
-			console.log('removing category widget')
 			categoryEl?.classList.add('hidden')
 		} else {
-			console.log('keeping category widget')
 			categoryEl?.classList.remove('hidden')
 		}
 	}
+	window.addEventListener('scroll', () => {
+		const navbar = document.getElementById('navbar-header')
+		const widgetWrapper = document.getElementById('widget-wrapper')
+		// if navbar is not null and navbar has 'navbar--show' class, add 'top-24' to widgetWrapper, else add 'top-2'
+		if (navbar && widgetWrapper) {
+			if (navbar.classList.contains('navbar--show')) {
+				widgetWrapper.classList.remove('top-4')
+				widgetWrapper.classList.add('top-24')
+			} else {
+				widgetWrapper.classList.remove('top-24')
+				widgetWrapper.classList.add('top-4')
+			}
+		}
+	})
 </script>
