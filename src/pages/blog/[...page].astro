@@ -4,7 +4,7 @@ import BlogTemplate from "templates:BlogTemplate";
 import { jsonToArticle } from "@models:Article";
 import ArticleSummary from "molecules:ArticleSummary";
 import Paginator from "molecules:Paginator";
-import SearchBox from "@components:molecules/SearchBox.vue";
+import SearchBox from "molecules:SearchBox";
 
 changeLanguage("en");
 
@@ -28,7 +28,7 @@ const { page } = Astro.props;
 ---
 
 <BlogTemplate title={t('blog')} description={t('seo.blog-description')}>
-	<SearchBox articles={sortedPosts} client:only />
+	<SearchBox articles={sortedPosts} />
 	<div class='container mx-auto'>
 		{
 			page.data.map((post) => (

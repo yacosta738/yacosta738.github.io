@@ -1,0 +1,134 @@
+---
+import { t } from 'i18next'
+import { Article } from '@models:Article'
+import { Icon } from 'astro-icon'
+interface Props {
+	articles: Array<Article>
+}
+const { articles = [] } = Astro.props
+
+const jsonArticles = JSON.stringify(articles)
+---
+
+<search-box data-articles={jsonArticles}>
+	<!-- Main modal -->
+	<div
+		id='searchModal'
+		tabindex='-1'
+		aria-hidden='true'
+		class='fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-full bg-navy/95 backdrop-blur-xl'
+	>
+		<div class='relative w-full max-w-6xl max-h-full'>
+			<!-- Modal content -->
+			<div class='relative rounded-lg shadow border-lightest-navy bg-light-navy/95'>
+				<!-- Modal header -->
+				<div
+					class='flex items-start justify-between p-4 m-4 border-b rounded-t dark:border-gray-600'
+				>
+					<h3 class='text-5xl font-semibold text-light-slate'>{t('search-title')}</h3>
+					<button
+						type='button'
+						class='bg-transparent text-green-500 hover:border-green-500 hover:bg-green-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center'
+						data-modal-hide='searchModal'
+					>
+						<svg
+							aria-hidden='true'
+							class='w-5 h-5'
+							fill='currentColor'
+							viewBox='0 0 20 20'
+							xmlns='http://www.w3.org/2000/svg'
+							><path
+								fill-rule='evenodd'
+								d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+								clip-rule='evenodd'></path></svg
+						>
+						<span class='sr-only'>Close modal</span>
+					</button>
+				</div>
+				<!-- Modal body -->
+				<div class='p-6 space-y-6'>
+					<div class='flex items-center justify-between'>
+						<form class="mx-2 w-full">
+							<label for='search' class='mb-2 text-sm font-medium text-gray-900 sr-only'
+								>Search</label
+							>
+							<div class='relative'>
+								<div class='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+									<Icon name='ic:twotone-search' class='h-4 w-4' />
+								</div>
+								<input
+									type='search'
+									id='textSearch'
+									class='block w-full p-4 pl-10 text-sm border rounded-lg bg-lightest-navy border-lightest-slate placeholder-gray-400 text-light-slate focus:ring-green-500 focus:border-green-500'
+									placeholder={t('search-placeholder')}
+									required
+								/>
+							</div>
+						</form>
+						<p class='text-right w-1/5'>
+							<span id='itemFoundText'>0</span>
+							{t('search-result')}
+						</p>
+					</div>
+
+					<div id='article-results'></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</search-box>
+
+<script>
+	import Fuse from 'fuse.js'
+	import { Article } from '@models:Article'
+
+	const textInputDelay = (fn, ms) => {
+		let timer: NodeJS.Timeout
+		return function (...args) {
+			clearTimeout(timer)
+			timer = setTimeout(fn.bind(this, ...args), ms || 0)
+		}
+	}
+
+	const options = {
+		keys: ['title', 'description', 'content', 'tags', 'categories', 'author']
+	}
+
+	class SearchBox extends HTMLElement {
+		constructor() {
+			super()
+
+			// Read the articles from the data attribute.
+			const articles: Array<Article> = this.dataset.articles
+				? JSON.parse(this.dataset.articles)
+				: []
+			const results = this.querySelector('#article-results') as HTMLElement
+			const search = async () => {
+				let text = (this.querySelector('#textSearch') as HTMLInputElement).value
+				const fuse = new Fuse<Article>(articles, options)
+				const res = fuse.search(text)
+				let html = ''
+				const itemFoundText = this.querySelector('#itemFoundText') as HTMLElement
+				if (res.length) {
+					itemFoundText.innerHTML = `${res?.length ?? 0}`
+					res.forEach((item) => {
+						html += `
+					<div class="flex flex-col space-y-2 mb-2 p-2 border rounded border-green-500">
+						<a href="${item.item.url}" class="text-lg font-semibold text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300">${item.item.title}</a>
+						<p class="text-sm text-gray-500 dark:text-gray-400">${item.item.description}</p>
+				 </div>
+				`
+					})
+				} else {
+					itemFoundText.innerHTML = '0'
+					html = `<p class="text-lg font-semibold text-gray-500 dark:text-gray-400">No results found</p>`
+				}
+				results.innerHTML = html
+			}
+			search()
+			document.getElementById('textSearch').onkeyup = textInputDelay(search, 300)
+		}
+	}
+
+	customElements.define('search-box', SearchBox)
+</script>
