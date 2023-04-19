@@ -1,6 +1,7 @@
 name: Test Build Process && Linter
 
-on: push
+on:
+  push:
 
 jobs:
   run-linters:
@@ -39,20 +40,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: App format 📸
-        run: pnpm run format
-
-			- name: App lint 🧹		
-			  run: pnpm run lint:eslint:fix
-				
-			- name: Get branch name
-				id: branch-name
-				run: echo ${{ github.head_ref }}
-			- name: Commit and Push changes
-				uses: stefanzweifel/git-auto-commit-action@v4
-				with:
-					commit_message: Update code formatting
-					branch: ${{ steps.branch-name.outputs }}
-				env:
-					GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-			- run: git push origin ${{ steps.branch-name.outputs }}
+      - name: App format 📸 && build 🏗
+        run: pnpm run format && pnpm run build
