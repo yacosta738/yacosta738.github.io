@@ -1,5 +1,0 @@
-{
-  "main": "dist/react-toggled.cjs.js",
-  "jsnext:main": "dist/react-toggled.esm.js",
-  "module": "dist/react-toggled.esm.js"
-}

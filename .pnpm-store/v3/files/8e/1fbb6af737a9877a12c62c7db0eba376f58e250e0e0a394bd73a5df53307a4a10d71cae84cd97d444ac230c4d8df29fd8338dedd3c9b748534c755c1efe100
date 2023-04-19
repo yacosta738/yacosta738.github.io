@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkol_mapbox_style=self.webpackChunkol_mapbox_style||[]).push([[366],{3327:(s,e,o)=>{o(9789),(0,o(5955).nn)("map"," https://demo.tegola.io/styles/hot-osm.json")}},s=>{s(s.s=3327)}]);
-//# sourceMappingURL=tilejson-vectortile.js.map

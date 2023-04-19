@@ -1,1 +1,0 @@
-{"version":3,"file":"point.d.ts","sourceRoot":"","sources":["../../packages/slate/src/classes/queries/point.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAQ,KAAK,EAAE,QAAQ,EAAE,MAAM,OAAO,CAAA;AAGrD,cAAM,YAAY;IAChB;;;OAGG;IAEH,cAAc,CACZ,IAAI,EAAE,MAAM,EACZ,KAAK,EAAE,KAAK,EACZ,OAAO,GAAE;QAAE,QAAQ,CAAC,EAAE,UAAU,GAAG,SAAS,GAAG,IAAI,CAAA;KAAO,GACzD,QAAQ;CAWZ;AAED,eAAe,YAAY,CAAA"}

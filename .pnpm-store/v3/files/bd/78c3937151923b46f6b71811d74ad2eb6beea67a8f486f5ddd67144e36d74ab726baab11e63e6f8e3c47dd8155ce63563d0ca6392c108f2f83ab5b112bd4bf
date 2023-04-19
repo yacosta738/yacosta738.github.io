@@ -1,7 +1,0 @@
-{
-  "main": "dist/react-select.cjs.js",
-  "module": "dist/react-select.esm.js",
-  "preconstruct": {
-    "source": "../src/Async"
-  }
-}

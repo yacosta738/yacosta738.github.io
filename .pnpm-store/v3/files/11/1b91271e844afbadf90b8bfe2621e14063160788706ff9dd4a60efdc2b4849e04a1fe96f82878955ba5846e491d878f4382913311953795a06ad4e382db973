@@ -1,5 +1,0 @@
-[34m@astrojs/vue:build: [0mcache hit, replaying output [2m680494d61780665a[0m
-[34m@astrojs/vue:build: [0m
-[34m@astrojs/vue:build: [0m> @astrojs/vue@2.1.1 build /home/runner/work/astro/astro/packages/integrations/vue
-[34m@astrojs/vue:build: [0m> astro-scripts build "src/index.ts" && astro-scripts build "src/editor.cts" --force-cjs --no-clean-dist && tsc
-[34m@astrojs/vue:build: [0m

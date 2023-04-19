@@ -1,1 +1,0 @@
-{"version":3,"file":"path.d.ts","sourceRoot":"","sources":["../../packages/slate/src/classes/queries/path.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,IAAI,EAAE,OAAO,EAAE,MAAM,OAAO,CAAA;AAG7C,cAAM,WAAW;IACf;;;OAGG;IAEH,aAAa,CACX,IAAI,EAAE,MAAM,EACZ,IAAI,EAAE,IAAI,EACV,OAAO,GAAE;QAAE,QAAQ,CAAC,EAAE,UAAU,GAAG,SAAS,GAAG,IAAI,CAAA;KAAO,GACzD,OAAO;CAWX;AAED,eAAe,WAAW,CAAA"}
