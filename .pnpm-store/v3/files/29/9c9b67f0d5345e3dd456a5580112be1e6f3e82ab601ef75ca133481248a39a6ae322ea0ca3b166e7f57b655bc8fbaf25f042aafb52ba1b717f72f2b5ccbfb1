@@ -1,0 +1,32 @@
+{
+  "name": "locale-emoji",
+  "version": "0.3.0",
+  "description": "Convert a locale id string (LCID) to a unicode regional indicator symbol.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "update-defaults": "node update-defaults.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/10xjs/locale-emoji.git"
+  },
+  "keywords": [
+    "emoji",
+    "flag",
+    "locale",
+    "country",
+    "code"
+  ],
+  "author": "Neal Granger <neal@nealg.com>",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/10xjs/locale-emoji/issues"
+  },
+  "homepage": "https://github.com/10xjs/locale-emoji#readme",
+  "devDependencies": {
+    "cldr-core": "^31.0.1",
+    "coveralls": "^2.11.16",
+    "jest": "^21.1.0"
+  }
+}

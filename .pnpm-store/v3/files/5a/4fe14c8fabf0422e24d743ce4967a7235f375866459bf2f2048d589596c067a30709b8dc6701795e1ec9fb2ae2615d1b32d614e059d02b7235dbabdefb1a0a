@@ -1,0 +1,11 @@
+.DS_Store
+*.log
+examples
+test
+coverage
+_book
+book.json
+docs
+demo
+dist
+dist_demo

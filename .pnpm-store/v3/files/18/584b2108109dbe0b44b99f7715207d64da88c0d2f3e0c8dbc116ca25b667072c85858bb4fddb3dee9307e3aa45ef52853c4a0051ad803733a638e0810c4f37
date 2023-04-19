@@ -1,0 +1,45 @@
+{
+  "name": "astro-netlify-cms",
+  "version": "0.5.3",
+  "description": "Add Netlify CMS’s admin dashboard to your Astro project",
+  "repository": "delucis/astro-netlify-cms",
+  "homepage": "https://github.com/delucis/astro-netlify-cms",
+  "author": "delucis",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./cms": "./dist/cms.js",
+    "./identity-widget": "./dist/identity-widget.js",
+    "./vite-plugin-admin-dashboard": "./dist/vite-plugin-admin-dashboard.js",
+    "./admin-dashboard.astro": "./admin-dashboard.astro"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "prepack": "tsc",
+    "test:smoke": "tsc && cd demo && npm ci && npm run build",
+    "test": "npm run test:smoke"
+  },
+  "keywords": [
+    "astro-component",
+    "cms",
+    "astro",
+    "netlify-cms"
+  ],
+  "dependencies": {
+    "@types/react": "^17.0.50",
+    "netlify-cms-app": "^2.15.66",
+    "netlify-cms-proxy-server": "^1.3.23",
+    "netlify-identity-widget": "^1.9.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "peerDependencies": {
+    "astro": "^1.0.0 || ^2.0.0-beta"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.0",
+    "astro": "^1.5.2"
+  }
+}

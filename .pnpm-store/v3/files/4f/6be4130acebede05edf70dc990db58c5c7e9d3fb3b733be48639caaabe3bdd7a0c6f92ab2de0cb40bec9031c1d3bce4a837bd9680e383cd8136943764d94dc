@@ -1,0 +1,27 @@
+{
+  "name": "topbar",
+  "main": "topbar.js",
+  "version": "0.1.4",
+  "description": "Tiny & beautiful site-wide progress indicator",
+  "homepage": "http://buunguyen.github.io/topbar",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:buunguyen/topbar.git"
+  },
+  "keywords": [
+    "progress",
+    "indicator",
+    "loading",
+    "responsive",
+    "loading"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Buu Nguyen",
+    "email": "buunguyen@gmail.com"
+  },  
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}

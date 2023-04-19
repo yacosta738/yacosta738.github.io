@@ -1,0 +1,3 @@
+node_modules
+*.log
+demo/demo-bundle.js

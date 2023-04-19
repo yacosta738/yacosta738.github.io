@@ -1,0 +1,18 @@
+export { Editor, EditorConstructor, EditorPlugin } from './classes/editor';
+export { PathRef } from './classes/path-ref';
+export { PointRef } from './classes/point-ref';
+export { RangeRef } from './classes/range-ref';
+export * from './interfaces/change';
+export * from './interfaces/element';
+export * from './interfaces/fragment';
+export * from './interfaces/location';
+export * from './interfaces/mark';
+export * from './interfaces/node';
+export * from './interfaces/operation';
+export * from './interfaces/path';
+export * from './interfaces/point';
+export * from './interfaces/range';
+export * from './interfaces/string';
+export * from './interfaces/text';
+export * from './interfaces/value';
+//# sourceMappingURL=index.d.ts.map

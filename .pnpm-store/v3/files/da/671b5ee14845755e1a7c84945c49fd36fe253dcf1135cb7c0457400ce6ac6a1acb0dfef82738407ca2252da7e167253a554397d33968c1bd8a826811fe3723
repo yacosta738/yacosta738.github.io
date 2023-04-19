@@ -1,0 +1,1 @@
+{"version":3,"file":"text.d.ts","sourceRoot":"","sources":["../packages/slate-react/src/components/text.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAkC,MAAM,OAAO,CAAA;AACtD,OAAO,EAAE,KAAK,EAAE,OAAO,EAAQ,IAAI,IAAI,SAAS,EAAE,MAAM,OAAO,CAAA;AAU/D,OAAO,EACL,qBAAqB,EACrB,qBAAqB,EACrB,eAAe,EAChB,MAAM,UAAU,CAAA;AAuKjB,QAAA,MAAM,YAAY;;;;;;;;;kBAwBhB,CAAA;AAEF,eAAe,YAAY,CAAA"}

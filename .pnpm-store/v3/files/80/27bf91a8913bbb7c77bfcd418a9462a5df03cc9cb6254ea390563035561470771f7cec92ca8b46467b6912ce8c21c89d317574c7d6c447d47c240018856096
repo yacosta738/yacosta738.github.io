@@ -1,0 +1,5 @@
+[36m@astrojs/rss:build: [0mcache hit, replaying output [2mb8ce3e73845a02f2[0m
+[36m@astrojs/rss:build: [0m
+[36m@astrojs/rss:build: [0m> @astrojs/rss@2.3.2 build /home/runner/work/astro/astro/packages/astro-rss
+[36m@astrojs/rss:build: [0m> astro-scripts build "src/**/*.ts" && tsc
+[36m@astrojs/rss:build: [0m

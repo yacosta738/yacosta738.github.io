@@ -1,0 +1,1 @@
+{"version":3,"file":"events.d.ts","sourceRoot":"","sources":["../packages/slate-react/src/plugin/events.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,GAAG,CAAA;AAE/B,MAAM,CAAC,OAAO,OAAO,iBAAiB;IACpC;;OAEG;IAEH,OAAO,CAAC,IAAI,EAAE,WAAW,EAAE,KAAK,EAAE,GAAG;CAkBtC"}

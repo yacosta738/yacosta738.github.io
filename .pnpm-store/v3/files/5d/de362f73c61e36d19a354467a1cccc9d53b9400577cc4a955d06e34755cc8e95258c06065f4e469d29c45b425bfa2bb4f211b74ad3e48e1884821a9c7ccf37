@@ -1,0 +1,47 @@
+{
+  "name": "rehype-accessible-emojis",
+  "version": "0.3.2",
+  "description": "Rehype plugin to make emojis accessible, wrapping emojis in <span> with image role and the emojis name in aria-label>",
+  "author": "CanRau <cansrau@gmail.com> (https://www.canrau.com)",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GaiAma/Coding4GaiAma.git",
+    "directory": "packages/rehype-accessible-emojis"
+  },
+  "homepage": "https://github.com/GaiAma/Coding4GaiAma/tree/master/packages/rehype-accessible-emojis#readme",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "yarn build --watch",
+    "prepublish": "yarn build"
+  },
+  "dependencies": {
+    "emoji-regex": "^8.0.0",
+    "gemoji": "^4.2.1",
+    "hast-util-is-element": "^1.0.3",
+    "unist-util-flatmap": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.6",
+    "@types/unist": "^2.0.3",
+    "typescript": "^3.7.4"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "mdx",
+    "remark",
+    "rehype",
+    "markdown",
+    "accessibility",
+    "accessible",
+    "wai-aria",
+    "aria-label",
+    "emoji",
+    "gemoji",
+    "unist",
+    "a11y"
+  ]
+}

@@ -74,7 +74,8 @@
     "vue": "3.2.47"
   },
   "dependencies": {
-    "astro-netlify-cms": "0.5.3"
+    "astro-netlify-cms": "0.5.3",
+    "build": "^0.1.4"
   },
   "engines": {
     "node": "^14.15.0 || >=16.0.0",

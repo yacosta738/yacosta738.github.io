@@ -1,0 +1,1 @@
+var f=async(e,n)=>{const s=new Set;if(typeof e<"u")if(e instanceof Array||e instanceof Set)for(const t of e)s.add(t);else s.add(e);for(const t of s)for(const o of n)switch(!0){case typeof t=="string":{(o[0].match(t)||o[1].match(t))&&n.delete(o[0]);break}case typeof t=="function":{const i=t;(i(o[0])||i(o[1]))&&n.delete(o[0])}}return n};export{f as default};

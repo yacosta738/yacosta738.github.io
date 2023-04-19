@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Content Manager</title>
+    <meta
+      name="description"
+      content="Admin dashboard for managing website content"
+    />
+    <script>
+      import options from 'virtual:astro-netlify-cms/user-config';
+      import initCMS from './dist/cms';
+      initCMS(options);
+    </script>
+    <style is:global>
+      /* Workaround for https://github.com/netlify/netlify-cms/issues/5092 */
+      [data-slate-editor] {
+        -webkit-user-modify: read-write !important;
+      }
+    </style>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>focus-group demo</title>
+
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="A demo of focus-group">
+
+</head>
+<body>
+  <h1>focus-group demo</h1>
+
+  <p>
+    <span style="font-size:2em;vertical-align:middle;">☜</span>
+    <a href="https://github.com/davidtheclark/focus-group" style="vertical-align:middle;">Return to the repository</a>
+  </p>
+
+  <h2>The states</h2>
+
+  In this example, <code>stringSearch</code> is on, so you can search by typing once focus is within the group.
+
+  The default letter keys apply: down moves forward through the group, and up moves back.
+
+  All the list items have a -1 tabindex, so do not receive focus just by tabbing through. And if you hit tab while moving through, focus will leave the group.
+
+  <ul>
+    <li class="state" tabindex="-1">Alabama</li>
+    <li class="state" tabindex="-1">Alaska</li>
+    <li class="state" tabindex="-1">Arizona</li>
+    <li class="state" tabindex="-1">Arkansas</li>
+    <li class="state" tabindex="-1">California</li>
+    <li class="state" tabindex="-1">Colorado</li>
+    <li class="state" tabindex="-1">Connecticut</li>
+    <li class="state" tabindex="-1">Delaware</li>
+    <li class="state" tabindex="-1">Florida</li>
+    <li class="state" tabindex="-1">Georgia</li>
+    <li class="state" tabindex="-1">Hawaii</li>
+    <li class="state" tabindex="-1">Idaho</li>
+    <li class="state" tabindex="-1">Illinois</li>
+    <li class="state" tabindex="-1">Indiana</li>
+    <li class="state" tabindex="-1">Iowa</li>
+    <li class="state" tabindex="-1">Kansas</li>
+    <li class="state" tabindex="-1">Kentucky</li>
+    <li class="state" tabindex="-1">Louisiana</li>
+    <li class="state" tabindex="-1">Maine</li>
+    <li class="state" tabindex="-1">Maryland</li>
+    <li class="state" tabindex="-1">Massachusetts</li>
+    <li class="state" tabindex="-1">Michigan</li>
+    <li class="state" tabindex="-1">Minnesota</li>
+    <li class="state" tabindex="-1">Mississippi</li>
+    <li class="state" tabindex="-1">Missouri</li>
+    <li class="state" tabindex="-1">Montana</li>
+    <li class="state" tabindex="-1">Nebraska</li>
+    <li class="state" tabindex="-1">Nevada</li>
+    <li class="state" tabindex="-1">New Hampshire</li>
+    <li class="state" tabindex="-1">New Jersey</li>
+    <li class="state" tabindex="-1">New Mexico</li>
+    <li class="state" tabindex="-1">New York</li>
+    <li class="state" tabindex="-1">North Carolina</li>
+    <li class="state" tabindex="-1">North Dakota</li>
+    <li class="state" tabindex="-1">Ohio</li>
+    <li class="state" tabindex="-1">Oklahoma</li>
+    <li class="state" tabindex="-1">Oregon</li>
+    <li class="state" tabindex="-1">Pennsylvania</li>
+    <li class="state" tabindex="-1">Rhode Island</li>
+    <li class="state" tabindex="-1">South Carolina</li>
+    <li class="state" tabindex="-1">South Dakota</li>
+    <li class="state" tabindex="-1">Tennessee</li>
+    <li class="state" tabindex="-1">Texas</li>
+    <li class="state" tabindex="-1">Utah</li>
+    <li class="state" tabindex="-1">Vermont</li>
+    <li class="state" tabindex="-1">Virginia</li>
+    <li class="state" tabindex="-1">Washington</li>
+    <li class="state" tabindex="-1">West Virginia</li>
+    <li class="state" tabindex="-1">Wisconsin</li>
+    <li class="state" tabindex="-1">Wyoming</li>
+  </ul>
+
+  <h2>Women's rights activists</h2>
+
+  In this example, the focus-group's members are all links, so they do receive focus when tabbing through. But all the arrows are active in making navigation through the list easier. So is <code>searchString</code>.
+
+  Additionally,
+  <ul>
+    <li>
+      <code>wrap</code> is on, so when navigating with the arrows focus will wrap around from bottom to top and top to bottom.
+    </li>
+    <li>
+      Left and right arrows also navigate.
+    </li>
+    <li>
+      Cmd+J goes to first and Cmd+K goes to last.
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#" class="wra">Addams, Jane</a></li>
+    <li><a href="#" class="wra">Anthony, Susan</a></li>
+    <li><a href="#" class="wra">Blackwell, Alice Stone</a></li>
+    <li><a href="#" class="wra">Blackwell, Antoinette Brown</a></li>
+    <li><a href="#" class="wra">Blackwell, Henry Browne</a></li>
+    <li><a href="#" class="wra">Bloomer, Amelia</a></li>
+    <li><a href="#" class="wra">Helen Gurley Brown</a></li>
+    <li><a href="#" class="wra">Burns, Lucy</a></li>
+    <li><a href="#" class="wra">Ceballos, Jacqueline</a></li>
+    <li><a href="#" class="wra">Catt, Carrie Chapman</a></li>
+    <li><a href="#" class="wra">Channing, William Henry</a></li>
+    <li><a href="#" class="wra">Downer, Carol</a></li>
+    <li><a href="#" class="wra">Freeman, Elisabeth</a></li>
+    <li><a href="#" class="wra">Friedan, Betty</a></li>
+  </ul>
+
+  <p>
+    <span style="font-size:2em;vertical-align:middle;">☜</span>
+    <a href="https://github.com/davidtheclark/focus-group" style="vertical-align:middle;">Return to the repository</a>
+  </p>
+
+  <script src="demo-bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "name": "react-virtualized-auto-sizer",
+  "version": "1.0.15",
+  "description": "Standalone version of the AutoSizer component from react-virtualized",
+  "author": "Brian Vaughn <brian.david.vaughn@gmail.com> (https://github.com/bvaughn/)",
+  "contributors": [
+    "Brian Vaughn <brian.david.vaughn@gmail.com> (https://github.com/bvaughn/)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bvaughn/react-virtualized-auto-sizer.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "virtual",
+    "window",
+    "windowed",
+    "list",
+    "scrolling",
+    "infinite",
+    "virtualized",
+    "table",
+    "grid",
+    "spreadsheet"
+  ],
+  "source": "src/index.ts",
+  "main": "dist/react-virtualized-auto-sizer.js",
+  "module": "dist/react-virtualized-auto-sizer.module.js",
+  "types": "dist/react-virtualized-auto-sizer.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clear": "npm run clear:parcel-cache & npm run clear:builds & npm run clear:node_modules",
+    "clear:builds": "rm -rf ./dist",
+    "clear:parcel-cache": "rm -rf ./.parcel-cache",
+    "clear:node_modules": "rm -rf ./node_modules",
+    "prerelease": "rm -rf ./.parcel-cache && parcel build",
+    "prettier": "prettier --write \"**/*.{css,html,js,json,jsx,ts,tsx}\"",
+    "prettier:ci": "prettier --check \"**/*.{css,html,js,json,jsx,ts,tsx}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "typescript": "tsc --noEmit",
+    "typescript:watch": "tsc --noEmit --watch"
+  },
+  "lint-staged": {
+    "{example,src}/**/*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.js": "eslint --max-warnings 0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/helper-create-class-features-plugin": "^7.21.4",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+    "@parcel/core": "^2.8.3",
+    "@parcel/packager-ts": "^2.8.3",
+    "@parcel/transformer-typescript-types": "^2.8.3",
+    "@types/jest": "^26.0.15",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "jest": "^29.4.3",
+    "jest-environment-jsdom": "^29.4.3",
+    "parcel": "^2.8.3",
+    "prettier": "^2.8.6",
+    "react": "^18",
+    "react-dom": "^18",
+    "ts-jest": "^29.0.5",
+    "typescript": "^4.1.2"
+  },
+  "peerDependencies": {
+    "react": "^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0-rc",
+    "react-dom": "^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0-rc"
+  }
+}

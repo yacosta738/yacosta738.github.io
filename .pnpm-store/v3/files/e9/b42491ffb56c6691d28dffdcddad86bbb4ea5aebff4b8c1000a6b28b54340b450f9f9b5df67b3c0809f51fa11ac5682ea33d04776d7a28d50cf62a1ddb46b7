@@ -1,0 +1,36 @@
+{
+	"name": "files-pipe",
+	"version": "0.0.2",
+	"type": "module",
+	"description": "🧪 Pipe for files.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Lightrix/files-pipe.git"
+	},
+	"homepage": "https://github.com/Lightrix/files-pipe#readme",
+	"bugs": {
+		"url": "https://github.com/Lightrix/files-pipe/issues"
+	},
+	"license": "MIT",
+	"private": false,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"keywords": [
+		"files",
+		"pipe"
+	],
+	"scripts": {
+		"build": "lightrix build src/**/*.ts"
+	},
+	"dependencies": {
+		"deepmerge-ts": "5.1.0",
+		"fast-glob": "3.2.12"
+	},
+	"devDependencies": {
+		"@lightrix/config": "0.0.9",
+		"@lightrix/scripts": "0.1.7"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

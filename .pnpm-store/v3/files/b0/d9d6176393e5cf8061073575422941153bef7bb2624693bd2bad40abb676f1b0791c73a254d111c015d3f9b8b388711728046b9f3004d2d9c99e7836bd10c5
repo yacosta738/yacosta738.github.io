@@ -1,0 +1,1 @@
+{"version":3,"file":"value.d.ts","sourceRoot":"","sources":["../../packages/slate/src/classes/queries/value.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAS,MAAM,OAAO,CAAA;AAErC,cAAM,cAAc;IAClB;;OAEG;IAEH,UAAU,CAAC,IAAI,EAAE,MAAM;IAYvB;;OAEG;IAEH,WAAW,CAAC,IAAI,EAAE,MAAM;IAYxB;;OAEG;IAEH,UAAU,CAAC,IAAI,EAAE,MAAM;CAGxB;AAED,eAAe,cAAc,CAAA"}

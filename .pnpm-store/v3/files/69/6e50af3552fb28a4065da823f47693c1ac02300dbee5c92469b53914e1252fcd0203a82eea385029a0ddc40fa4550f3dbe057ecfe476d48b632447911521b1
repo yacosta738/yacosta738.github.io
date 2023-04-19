@@ -1,0 +1,1 @@
+{"version":3,"file":"leaf.d.ts","sourceRoot":"","sources":["../packages/slate-react/src/interfaces/leaf.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,OAAO,CAAA;AAEnC,MAAM,WAAW,IAAI;IACnB,IAAI,EAAE,MAAM,CAAA;IACZ,KAAK,EAAE,IAAI,EAAE,CAAA;IACb,WAAW,EAAE,KAAK,EAAE,CAAA;IACpB,WAAW,EAAE,KAAK,EAAE,CAAA;CACrB"}

@@ -1,0 +1,45 @@
+{
+  "name": "react-topbar-progress-indicator",
+  "version": "4.1.1",
+  "description": "topbar progress indicator React component",
+  "keywords": [
+    "react",
+    "topbar",
+    "progress",
+    "progressbar",
+    "loading",
+    "loader",
+    "indicator"
+  ],
+  "author": "Maxime Thirouin",
+  "license": "MIT",
+  "repository": "https://github.com/MoOx/react-topbar-progress-indicator.git",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "dependencies": {
+    "topbar": "^0.1.3"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.105.2",
+    "husky": "^3.0.3",
+    "jest": "^24.9.0",
+    "npmpub": "^5.0.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-test-renderer": "^16.9.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "scripts": {
+    "test": "flow src && jest src",
+    "release": "npmpub"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}

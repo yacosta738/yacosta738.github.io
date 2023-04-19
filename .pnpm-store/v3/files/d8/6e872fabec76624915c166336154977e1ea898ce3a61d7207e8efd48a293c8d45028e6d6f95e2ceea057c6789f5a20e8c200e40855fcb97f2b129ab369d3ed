@@ -1,0 +1,1 @@
+import{fileURLToPath as a}from"url";import i from"../apply-to.js";var r=async(e,n)=>{const o=await i(await i(e,t=>t instanceof URL?a(t):t),t=>t.endsWith("/")?t:`${t}/`);if(o instanceof Map)for(const[t,s]of o)n.set(t,s);else n.set(o,o);return n};export{r as default};

@@ -1,0 +1,48 @@
+{
+  "name": "@emmetio/scanner",
+  "version": "1.0.2",
+  "description": "Scans given text character-by-character",
+  "main": "./scanner.cjs",
+  "module": "./scanner.js",
+  "types": "./scanner.d.ts",
+  "type": "module",
+  "exports": {
+    "import": "./scanner.js",
+    "require": "./scanner.cjs"
+  },
+  "scripts": {
+    "test": "mocha",
+    "build": "rollup -c",
+    "clean": "rm -f ./scanner.* ./*.d.ts",
+    "prepublishOnly": "npm test && npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmetio/stream-reader.git"
+  },
+  "keywords": [
+    "emmet",
+    "stream",
+    "scanner"
+  ],
+  "author": "Sergey Chikuyonok <serge.che@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emmetio/emmet/issues"
+  },
+  "homepage": "https://github.com/emmetio/emmet#readme",
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^10.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.11.18",
+    "mocha": "^10.2.0",
+    "rollup": "^3.9.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "mocha": {
+    "loader": "ts-node/esm",
+    "spec": "./test/*.ts"
+  },
+  "gitHead": "406e38e35d0a7fc4ef4dab85a2fd3559b2531f66"
+}

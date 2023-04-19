@@ -1,0 +1,89 @@
+{
+  "name": "gemoji",
+  "version": "4.2.1",
+  "description": "GitHub emoji: gemoji",
+  "license": "MIT",
+  "keywords": [
+    "gemoji",
+    "emoji",
+    "unicode",
+    "name",
+    "shortcode",
+    "tag",
+    "alias",
+    "name"
+  ],
+  "repository": "wooorm/gemoji",
+  "bugs": "https://github.com/wooorm/gemoji/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "files": [
+    "index.js",
+    "index.json"
+  ],
+  "devDependencies": {
+    "browserify": "^16.0.0",
+    "esmangle": "^1.0.0",
+    "mdast-zone": "^3.0.0",
+    "nyc": "^11.0.0",
+    "prettier": "^1.12.1",
+    "remark-cli": "^5.0.0",
+    "remark-lint-table-pipe-alignment": "^1.0.0",
+    "remark-preset-wooorm": "^4.0.0",
+    "request": "^2.75.0",
+    "tape": "^4.6.0",
+    "unist-builder": "^1.0.2",
+    "xo": "^0.20.0"
+  },
+  "scripts": {
+    "generate": "node script/crawl-data && node script/build-data",
+    "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",
+    "build-bundle": "browserify index.js --bare -s gemoji > gemoji.js",
+    "build-mangle": "esmangle gemoji.js > gemoji.min.js",
+    "build": "npm run build-bundle && npm run build-mangle",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test.js",
+    "test": "npm run generate && npm run format && npm run build && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
+  "xo": {
+    "prettier": true,
+    "esnext": false,
+    "rules": {
+      "no-var": "off",
+      "prefer-arrow-callback": "off",
+      "guard-for-in": "off"
+    },
+    "ignores": [
+      "gemoji.js"
+    ]
+  },
+  "remarkConfig": {
+    "settings": {
+      "paddedTable": false
+    },
+    "plugins": [
+      "preset-wooorm",
+      [
+        "remark-lint-table-pipe-alignment",
+        false
+      ],
+      "./script/build-support"
+    ]
+  }
+}

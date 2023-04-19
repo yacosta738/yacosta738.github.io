@@ -1,0 +1,51 @@
+{
+  "name": "focus-group",
+  "version": "0.3.1",
+  "description": "Create a group of nodes with special focusing powers",
+  "main": "index.js",
+  "scripts": {
+    "demo-bundle": "browserify demo/index.js -o demo/demo-bundle.js",
+    "demo-watch": "watchify demo/index.js -d -v -o demo/demo-bundle.js",
+    "demo-dev": "npm run demo-watch & http-server demo",
+    "test-dev": "karma start",
+    "test": "karma start --single-run --browsers PhantomJS --reporters progress,coverage,coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidtheclark/focus-group.git"
+  },
+  "keywords": [
+    "focus",
+    "accessibility",
+    "a11y",
+    "arrows",
+    "keyboard",
+    "navigation",
+    "aria"
+  ],
+  "author": "David Clark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidtheclark/focus-group/issues"
+  },
+  "homepage": "https://github.com/davidtheclark/focus-group#readme",
+  "devDependencies": {
+    "browserify": "13.0.0",
+    "browserify-istanbul": "0.2.1",
+    "d3-queue": "2.0.2",
+    "eslint": "^3.0.1",
+    "http-server": "0.8.5",
+    "karma": "0.13.19",
+    "karma-browserify": "5.0.1",
+    "karma-chrome-launcher": "0.2.2",
+    "karma-coverage": "0.5.3",
+    "karma-coveralls": "1.1.2",
+    "karma-mocha": "0.2.1",
+    "karma-phantomjs-launcher": "1.0.0",
+    "mocha": "2.4.5",
+    "phantomjs-prebuilt": "2.1.3",
+    "power-assert": "1.2.0",
+    "simulant": "0.2.0",
+    "watchify": "3.7.0"
+  }
+}

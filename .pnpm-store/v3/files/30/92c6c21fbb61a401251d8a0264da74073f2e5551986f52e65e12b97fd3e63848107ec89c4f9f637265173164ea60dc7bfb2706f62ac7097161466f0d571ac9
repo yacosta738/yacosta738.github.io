@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "skipLibCheck": true
+  },
+  "include": ["integration/**/*.ts"]
+}

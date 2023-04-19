@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tap-listener demo</title>
+  <meta name="description" content="A demo of tap-listener">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .counterContainer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #eee;
+      padding: 0 1em;
+    }
+    .counter {
+      font-size: 3em;
+      font-weight: bold;
+    }
+    .scrollArea {
+      background: pink;
+      height: 1000px;
+    }
+  </style>
+</head>
+<body>
+  <h1>tap-listener demo</h1>
+
+  <p>
+    This library's purpose is to distinguish on touch devices between
+    taps and non-taps (e.g. scrolls and drags) in situations where
+    the "click" event will not work.
+  </p>
+
+  <p>
+    <strong>If you find anything wrong in this demo, please file a bugs
+    <a href="https://github.com/davidtheclark/tap-listener">back in the repo</a>.</strong>
+  </p>
+
+  <p>
+    Click this button to initiate the tap listener:
+  </p>
+
+  <p>
+    <button id="init">
+      Go!
+    </button>
+  </p>
+
+  <p>
+    Every time you tap (or click), the number at the bottom of the screen should increment.
+    When you touch-scroll or -drag, it should not.
+  </p>
+
+  <p>
+    Also, try clicking this button to remove the tap listener:
+  </p>
+
+  <p>
+    <button id="remove">
+      Stop!
+    </button>
+  </p>
+
+  <p class="scrollArea">
+    And here is a lot of space to try scrolling in.
+    (Scrolls should not cause tap events.)
+  </p>
+
+  <div class="counterContainer">
+    tap count:
+    <span id="count" class="counter">
+      0
+    </span>
+  </div>
+
+  <script src="demo-bundle.js"></script>
+</body>
