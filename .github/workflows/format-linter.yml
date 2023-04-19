@@ -43,16 +43,8 @@ jobs:
       - name: App format 📸
         run: pnpm run format
 
-      - name: Get branch name
-        id: branch-name
-        run: echo ${{ github.head_ref }}
-
-      - name: Commit and Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
         with:
-          commit_message: Update code formatting
-          branch: ${{ steps.branch-name.outputs }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: git push origin ${{ steps.branch-name.outputs }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: Format repo 📄
