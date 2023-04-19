@@ -43,9 +43,6 @@ jobs:
       - name: App format 📸
         run: pnpm run format
 
-      - name: App lint 🧹
-        run: pnpm run lint:eslint:fix
-
       - name: Get branch name
         id: branch-name
         run: echo ${{ github.head_ref }}
