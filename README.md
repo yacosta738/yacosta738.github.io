@@ -15,6 +15,20 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=yacosta738_yacosta738.github.io)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 
+Welcome to my little corner of the internet! This is where I store all my achievements and experiences after becoming a developer. From the first line of code I wrote to my most recent projects, this portfolio serves as a record of my journey in this field.
+
+In addition to showcasing my work, I also like to share my thoughts and insights through articles that I write and publish here. Whether it's about the latest trends in technology or a personal reflection on my growth as a developer, I hope you find something here that sparks your interest.
+
+Thank you for taking the time to visit my portfolio. Feel free to explore and get in touch if you have any questions or would like to collaborate on a project.
+
+## :beers: My Social Links
+
+:globe_with_meridians: [LinkedIn](https://www.linkedin.com/in/yacosta738/)
+:globe_with_meridians: [Twitter](https://twitter.com/yacosta738)
+:globe_with_meridians: [Portfolio & Blog](https://www.yunielacosta.com/)
+:globe_with_meridians: [GitHub](https://github.com/yacosta738)
+:globe_with_meridians: [Instagram](https://www.instagram.com/yacosta738)
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
@@ -75,11 +89,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run lint:eslint:fix` | Lint and fix your code with ESLint                 |
 | `npm run test`            | Run your tests with Playwright                     |
 | `npm run test:e2e`        | Run your end-to-end tests with Playwright          |
-
-## :beers: My Social Links
-
-:globe_with_meridians: [LinkedIn](https://www.linkedin.com/in/yacosta738/)
-:globe_with_meridians: [Twitter](https://twitter.com/yacosta738)
-:globe_with_meridians: [Portfolio & Blog](https://www.yunielacosta.com/)
-:globe_with_meridians: [GitHub](https://github.com/yacosta738)
-:globe_with_meridians: [Instagram](https://www.instagram.com/yacosta738)
