@@ -1,4 +1,4 @@
-name: Test Build Process && Linter
+name: Test Build Process
 
 on:
   push:
