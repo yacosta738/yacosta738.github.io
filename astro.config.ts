@@ -8,9 +8,12 @@ import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
+import { VitePWA } from 'vite-plugin-pwa'
 
 import compress from 'astro-compress'
 import critters from 'astro-critters'
+
+import { manifest } from './src/utils/pwa'
 
 // https://astro.build/config
 export default defineConfig({
@@ -354,7 +357,19 @@ export default defineConfig({
 		ssr: {
 			external: ['svgo']
 		},
-		plugins: []
+		plugins: [
+			VitePWA({
+				registerType: 'autoUpdate',
+				manifest,
+				workbox: {
+					globDirectory: 'dist',
+					globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
+					// Don't fallback on document based (e.g. `/some-page`) requests
+					// This removes an errant console.log message from showing up.
+					navigateFallback: null
+				}
+			})
+		]
 	},
 	markdown: {
 		remarkPlugins: [remarkToc, remarkReadingTime],
