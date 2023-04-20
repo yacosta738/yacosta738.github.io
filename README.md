@@ -29,6 +29,7 @@ Thank you for taking the time to visit my portfolio. Feel free to explore and ge
 :globe_with_meridians: [GitHub](https://github.com/yacosta738)
 :globe_with_meridians: [Instagram](https://www.instagram.com/yacosta738)
 
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
