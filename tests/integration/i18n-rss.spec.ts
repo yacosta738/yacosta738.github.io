@@ -18,7 +18,7 @@ test('test i18n and rss', async ({ page }) => {
 	await expect(await page.locator('h2:has-text("Últimos artículos")')).toHaveText(
 		'Últimos artículos'
 	)
-	await expect(await page.locator('h2:has-text("Contácteme")')).toHaveText('Contácteme')
+	await expect(await page.locator('h2:has-text("Contáctame")')).toHaveText('Contáctame')
 
 	await page.locator('select').nth(1).selectOption('/')
 	await expect(page).toHaveURL('http://localhost:3000/')
