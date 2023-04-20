@@ -154,6 +154,48 @@ export default defineConfig({
 						]
 					},
 					{
+						name: 'roles',
+						label: 'Roles',
+						folder: 'src/data/jobs/roles',
+						slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+						create: true,
+						extension: 'json',
+						fields: [
+							{ label: 'Role', name: 'role', widget: 'string' },
+							{ label: 'Start Date', name: 'startDate', widget: 'datetime' },
+							{ label: 'End Date', name: 'endDate', widget: 'datetime', required: false },
+							{
+								label: 'Achievement',
+								name: 'achievement',
+								widget: 'list',
+								allow_add: true,
+								max: 4,
+								label_singular: 'Achievement'
+							}
+						]
+					},
+					{
+						name: 'roles_es',
+						label: 'Roles',
+						folder: 'src/data/jobs/roles/es',
+						slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+						create: true,
+						extension: 'json',
+						fields: [
+							{ label: 'Rol', name: 'role', widget: 'string' },
+							{ label: 'Fecha de Inicio', name: 'startDate', widget: 'datetime' },
+							{ label: 'Fecha de Fin', name: 'endDate', widget: 'datetime', required: false },
+							{
+								label: 'Logros',
+								name: 'achievement',
+								widget: 'list',
+								allow_add: true,
+								max: 4,
+								label_singular: 'Logro'
+							}
+						]
+					},
+					{
 						name: 'jobs',
 						label: 'Jobs',
 						folder: 'src/data/jobs',
@@ -169,19 +211,20 @@ export default defineConfig({
 								options: ['en', 'es'],
 								default: 'en'
 							},
-							{ label: 'Role', name: 'role', widget: 'string' },
 							{ label: 'Company', name: 'company', widget: 'string' },
-							{ label: 'Start Date', name: 'startDate', widget: 'datetime' },
-							{ label: 'End Date', name: 'endDate', widget: 'datetime', required: false },
 							{ label: 'URL', name: 'url', widget: 'string', required: false },
+							{ label: 'Icon', name: 'icon', widget: 'string' },
+							{ label: 'Location', name: 'location', widget: 'string' },
+							{ label: 'Create Date', name: 'createDate', widget: 'datetime' },
 							{ label: 'Published', name: 'published', widget: 'boolean', default: true },
 							{
-								label: 'Achievement',
-								name: 'achievement',
-								widget: 'list',
-								allow_add: true,
-								max: 4,
-								label_singular: 'Achievement'
+								label: 'Roles',
+								name: 'roles',
+								widget: 'relation',
+								collection: 'roles',
+								search_fields: ['role'],
+								value_field: 'role',
+								display_fields: ['role']
 							}
 						]
 					},
@@ -201,24 +244,20 @@ export default defineConfig({
 								options: ['en', 'es'],
 								default: 'es'
 							},
-							{ label: 'Role', name: 'role', widget: 'string' },
 							{ label: 'Empresa', name: 'company', widget: 'string' },
-							{ label: 'Fecha de inicio', name: 'startDate', widget: 'datetime' },
-							{
-								label: 'Fecha de finalización',
-								name: 'endDate',
-								widget: 'datetime',
-								required: false
-							},
 							{ label: 'URL', name: 'url', widget: 'string', required: false },
+							{ label: 'Icono', name: 'icon', widget: 'string' },
+							{ label: 'Ubicación', name: 'location', widget: 'string' },
+							{ label: 'Fecha de Creación', name: 'createDate', widget: 'datetime' },
 							{ label: 'Publicado', name: 'published', widget: 'boolean', default: true },
 							{
-								label: 'Logros',
-								name: 'achievement',
-								widget: 'list',
-								allow_add: true,
-								max: 4,
-								label_singular: 'Logro'
+								label: 'Roles',
+								name: 'roles',
+								widget: 'relation',
+								collection: 'roles_es',
+								search_fields: ['role'],
+								value_field: 'role',
+								display_fields: ['role']
 							}
 						]
 					},
