@@ -2,6 +2,7 @@
 import { domain } from '@store:constants'
 import { SEO } from 'astro-seo'
 import { t } from 'i18next'
+import { pwaInfo } from 'virtual:pwa-info';
 export interface Props {
 	title: string
 	description: string
@@ -18,13 +19,18 @@ image = image ? `${domain}${image}` : `${domain}/uploads/me.webp`
 ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
 ---
 
-<!-- <link rel='icon' type='image/x-icon' href='/favicons/favicon.ico' /> -->
+<!-- PWA SECTION -->
 
 <link rel="icon" type="image/x-icon" href="/favicons/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
 <link rel="manifest" href="/favicons/site.webmanifest">
+<meta name="msapplication-TileColor" content="#0a192f">
+<meta name="theme-color" content="#64ffda">
+{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+<script src="/src/utils/pwa.ts"></script>
+
 <SEO
 	title={title}
 	description={description}
