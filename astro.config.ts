@@ -14,18 +14,20 @@ import critters from 'astro-critters'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://yunielacosta.com/',
+	site: 'https://yunielacosta.com',
 	integrations: [
 		AstroPWA({
 			mode: 'production',
-			base: '/',
-			scope: '/',
+			base: 'https://yunielacosta.com',
+			scope: 'https://yunielacosta.com',
 			includeAssets: ['favicons/favicon.ico'],
 			registerType: 'autoUpdate',
 			manifest: {
 				name: 'Yuniel Acosta',
 				short_name: 'YAP',
 				theme_color: '#64ffda',
+				start_url: '/',
+				description: 'Yuniel Acosta Personal Website',
 				icons: [
 					{
 						src: 'android-chrome-192x192.png',
@@ -33,12 +35,12 @@ export default defineConfig({
 						type: 'image/png'
 					},
 					{
-						src: '/android-chrome-512x512.png',
+						src: 'android-chrome-512x512.png',
 						sizes: '512x512',
 						type: 'image/png'
 					},
 					{
-						src: '/android-chrome-512x512.png',
+						src: 'android-chrome-512x512.png',
 						sizes: '512x512',
 						type: 'image/png',
 						purpose: 'any maskable'
