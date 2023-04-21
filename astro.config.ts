@@ -8,17 +8,52 @@ import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
-import { VitePWA } from 'vite-plugin-pwa'
-
+import AstroPWA from '@vite-pwa/astro'
 import compress from 'astro-compress'
 import critters from 'astro-critters'
-
-import { manifest } from './src/utils/pwa'
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
 	integrations: [
+		AstroPWA({
+			mode: 'development',
+			base: '/',
+			scope: '/',
+			includeAssets: ['favicon.svg'],
+			registerType: 'autoUpdate',
+			manifest: {
+				name: 'Astro PWA',
+				short_name: 'Astro PWA',
+				theme_color: '#ffffff',
+				icons: [
+					{
+						src: 'pwa-192x192.png',
+						sizes: '192x192',
+						type: 'image/png'
+					},
+					{
+						src: 'pwa-512x512.png',
+						sizes: '512x512',
+						type: 'image/png'
+					},
+					{
+						src: 'pwa-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'any maskable'
+					}
+				]
+			},
+			workbox: {
+				navigateFallback: '/404',
+				globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}']
+			},
+			devOptions: {
+				enabled: true,
+				navigateFallbackAllowlist: [/^\/404$/]
+			}
+		}),
 		sitemap({
 			i18n: {
 				defaultLocale: 'en',
@@ -357,19 +392,7 @@ export default defineConfig({
 		ssr: {
 			external: ['svgo']
 		},
-		plugins: [
-			VitePWA({
-				registerType: 'autoUpdate',
-				manifest,
-				workbox: {
-					globDirectory: 'dist',
-					globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
-					// Don't fallback on document based (e.g. `/some-page`) requests
-					// This removes an errant console.log message from showing up.
-					navigateFallback: null
-				}
-			})
-		]
+		plugins: []
 	},
 	markdown: {
 		remarkPlugins: [remarkToc, remarkReadingTime],

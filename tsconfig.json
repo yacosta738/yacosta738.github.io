@@ -1,4 +1,5 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     // Enable top-level await, and other modern ESM features.
     "target": "ESNext",
@@ -9,7 +10,7 @@
     // Enable stricter transpilation for better output.
     "isolatedModules": true,
     // Add type definitions for our Vite runtime.
-    "types": ["vite/client", "@astrojs/image/client"],
+    "types": ["vite/client", "@astrojs/image/client", "vite-plugin-pwa/info"],
     "paths": {
       "@store:*": ["store/*"],
       "@components:*": ["components/*"],
@@ -22,7 +23,5 @@
       "organisms:*": ["components/organisms/*.astro"],
       "templates:*": ["components/templates/*.astro"]
     }
-  },
-  "include": ["src/**/*.astro"],
-  "exclude": ["dist"]
+  }
 }
