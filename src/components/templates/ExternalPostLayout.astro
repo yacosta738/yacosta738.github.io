@@ -1,4 +1,6 @@
 ---
+import '../../styles/global.css'
+import '../../styles/fonts.css'
 import Redirect from '../atoms/Redirect.vue'
 import HeadSEO from 'organisms:HeadSEO'
 import { HeadHrefLangs } from 'astro-i18next/components'
@@ -8,8 +10,6 @@ import Navbar from 'molecules:Navbar'
 const { content } = Astro.props
 const { title, description, cover, lang, link } = content
 const ogImageAlt = title
-import '../../styles/global.css'
-import '../../styles/fonts.css'
 ---
 
 <html lang={lang} class='scroll-smooth'>
