@@ -58,8 +58,8 @@ devDependencies:
     specifier: 1.1.23
     version: 1.1.23
   astro-critters:
-    specifier: 1.1.32
-    version: 1.1.32
+    specifier: 1.1.33
+    version: 1.1.33
   astro-i18next:
     specifier: 1.0.0-beta.12
     version: 1.0.0-beta.12(astro@2.3.0)
@@ -3521,11 +3521,11 @@ packages:
       files-pipeline: 0.0.1
     dev: true
 
-  /astro-critters@1.1.32:
-    resolution: {integrity: sha512-8IKeHW+xSYcpubDVRBLSazVyM0TDEUWjC5Us4Rkp5gRcB0dJrNuCN0htJBlzNvPtjyw0JlQvrayTsFsQRoqvSQ==}
+  /astro-critters@1.1.33:
+    resolution: {integrity: sha512-I61lx1hegwpH8xEWJQs7BFVUbFwelNDT+kA1o7LaNzDojib8q6tQ8qHo4sGrWf+0W5p65fk6xAIhd2UzkzNe9Q==}
     dependencies:
       critters: 0.0.16
-      files-pipe: 0.0.2
+      files-pipe: 0.0.3
     dev: true
 
   /astro-eslint-parser@0.13.3:
@@ -5655,8 +5655,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /files-pipe@0.0.2:
-    resolution: {integrity: sha512-KypLRoASuRfRjtoBDt+6zPRqcifianKmcG63kkm0DXiyjujZ7N6QU1affT0LC455GHk060twOM+yIUM/OQwhMA==}
+  /files-pipe@0.0.3:
+    resolution: {integrity: sha512-6yWKK5MhB8U38HxYtudRXHA/2ssyQ77xvG7AgLGGj8Gf+jySkKUi51mO5PrJTBZLRhnYnXbfAWfMprAb6E7fAA==}
     dependencies:
       deepmerge-ts: 5.1.0
       fast-glob: 3.2.12
