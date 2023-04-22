@@ -8,6 +8,6 @@ registerSW({
 	},
 	onOfflineReady () {
 		// eslint-disable-next-line no-console
-		console.log('PWA application ready to work offline')
+		console.log('PWA application ready to work offline 😄')
 	}
 })

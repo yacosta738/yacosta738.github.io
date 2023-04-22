@@ -1,4 +1,6 @@
 ---
+import '../../styles/global.css'
+import '../../styles/fonts.css'
 import i18next, { t, changeLanguage } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
 import GoogleAnalytics from 'atoms:GoogleAnalytics'
@@ -7,26 +9,15 @@ import AppFooter from 'molecules:AppFooter'
 import WidgetWrapper from 'molecules:WidgetWrapper'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
-import '../../styles/global.css'
-import '../../styles/fonts.css'
-import { domain } from '@store:constants'
 import ToTop from 'atoms:ToTop'
-
-export interface Props {
-	title: string
-	description?: string
-	image?: string
-	ogImageAlt?: string
-	lang?: string
-}
 
 let { title, description, image, ogImageAlt, lang } = Astro.props
 
-title = title || t('seo.title')
-description = description || t('seo.description')
-image = image ? `${domain}${image}` : `${domain}/uploads/me.webp`
-ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
-lang = lang || i18next.language
+title = title ?? t('seo.title')
+description = description ?? t('seo.description')
+image = image ?? '/uploads/me.webp'
+ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
+lang = lang ?? i18next.language
 
 changeLanguage(lang)
 ---

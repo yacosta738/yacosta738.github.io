@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+		"build:docker": "pnpm run build && docker build -t yap .",
     "preview": "astro preview",
     "prepare": "husky install",
     "i18n:generate": "astro-i18next generate",
