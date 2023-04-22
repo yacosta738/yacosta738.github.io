@@ -1,4 +1,6 @@
 ---
+import '../../styles/global.css'
+import '../../styles/fonts.css'
 import i18next, { t } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
 import GoogleAnalytics from 'atoms:GoogleAnalytics'
@@ -8,16 +10,13 @@ import Social from 'atoms:Social'
 import Email from 'atoms:Email'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
-import '../../styles/global.css'
-import '../../styles/fonts.css'
-import { domain } from '@store:constants'
 
 let { title, description, image, ogImageAlt } = Astro.props
 
-title = title || t('seo.title')
-description = description || t('seo.description')
-image = image ? `${domain}${image}` : `${domain}/uploads/me.webp`
-ogImageAlt = ogImageAlt || t('seo.ogImageAlt')
+title = title ?? t('seo.title')
+description = description ?? t('seo.description')
+image = image ?? '/uploads/me.webp'
+ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
 ---
 
 <html lang={i18next.language}>
