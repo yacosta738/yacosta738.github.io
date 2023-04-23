@@ -58,8 +58,8 @@ devDependencies:
     specifier: 1.1.23
     version: 1.1.23
   astro-critters:
-    specifier: 1.1.33
-    version: 1.1.33
+    specifier: 1.1.34
+    version: 1.1.34
   astro-i18next:
     specifier: 1.0.0-beta.12
     version: 1.0.0-beta.12(astro@2.3.0)
@@ -2382,6 +2382,22 @@ packages:
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
     dev: false
 
+  /@lightrix/config@0.0.11:
+    resolution: {integrity: sha512-1SCGXI/9L6ktYplKxjHMMa0fz+ZvRAfZVTkOClfIGoPDhXEoGxjSeigdgMXEapjSVIUODxSMQa7OWCFZEGeAcg==}
+    dev: true
+
+  /@lightrix/scripts@1.0.3:
+    resolution: {integrity: sha512-HmF03AWJJeW+J6neuUMuRoxE2gJgu1lE3aJnEmKu29q6X39km1+OWydM/6rxUpWlIxkca5PVC7hUS3iKzGWt6Q==}
+    hasBin: true
+    dependencies:
+      '@lightrix/config': 0.0.11
+      commander: 10.0.1
+      deepmerge-ts: 5.1.0
+      esbuild: 0.17.17
+      fast-glob: 3.2.12
+      typescript: 5.0.4
+    dev: true
+
   /@ljharb/has-package-exports-patterns@0.0.2:
     resolution: {integrity: sha512-4/RWEeXDO6bocPONheFe6gX/oQdP/bEpv0oL4HqjPP5DCenBSt0mHgahppY49N0CpsaqffdwPq+TlX9CYOq2Dw==}
 
@@ -3521,11 +3537,13 @@ packages:
       files-pipeline: 0.0.1
     dev: true
 
-  /astro-critters@1.1.33:
-    resolution: {integrity: sha512-I61lx1hegwpH8xEWJQs7BFVUbFwelNDT+kA1o7LaNzDojib8q6tQ8qHo4sGrWf+0W5p65fk6xAIhd2UzkzNe9Q==}
+  /astro-critters@1.1.34:
+    resolution: {integrity: sha512-f3iQQ4r/JRNaI421Lybq6NQTJ2WW72hRtgFhhVtsWWyVPWxwB+1PJVVvAOFCm8rND0Cjf8u2uxdW5f+BrflniQ==}
     dependencies:
+      '@lightrix/config': 0.0.11
+      '@lightrix/scripts': 1.0.3
       critters: 0.0.16
-      files-pipe: 0.0.3
+      files-pipe: 0.0.4
     dev: true
 
   /astro-eslint-parser@0.13.3:
@@ -4192,6 +4210,11 @@ packages:
 
   /comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
+
+  /commander@10.0.1:
+    resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
+    engines: {node: '>=14'}
+    dev: true
 
   /commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
@@ -5655,9 +5678,11 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /files-pipe@0.0.3:
-    resolution: {integrity: sha512-6yWKK5MhB8U38HxYtudRXHA/2ssyQ77xvG7AgLGGj8Gf+jySkKUi51mO5PrJTBZLRhnYnXbfAWfMprAb6E7fAA==}
+  /files-pipe@0.0.4:
+    resolution: {integrity: sha512-8vCSuNn9GsjepceObjeBHAAWgfA7DsBKDLmjbP/gSiWce/x8Hw/cefsgRTP9TJKL0pNgdfliG44s5kaLRjqQ+w==}
     dependencies:
+      '@lightrix/config': 0.0.11
+      '@lightrix/scripts': 1.0.3
       deepmerge-ts: 5.1.0
       fast-glob: 3.2.12
     dev: true
