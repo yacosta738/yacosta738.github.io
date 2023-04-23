@@ -10,6 +10,7 @@ import Social from 'atoms:Social'
 import Email from 'atoms:Email'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
+import ReloadPrompt from 'molecules:ReloadPrompt'
 
 let { title, description, image, ogImageAlt } = Astro.props
 
@@ -45,5 +46,6 @@ ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
 		<AppFooter />
 		<script src='../../utils/title-change.js'></script>
 		<script src='../../utils/geeky-console.js'></script>
+		<ReloadPrompt />
 	</body>
 </html>

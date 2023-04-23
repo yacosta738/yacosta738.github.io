@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranches": ["develop"],
+  "baseBranches": ["master"],
   "packageRules": [
     {
       "matchPackageNames": ["npm", "astro", "node"],
