@@ -108,7 +108,7 @@ export default defineConfig({
 			},
 			devOptions: {
 				enabled: true,
-				navigateFallbackAllowlist: [/^\/_astro\//]
+				navigateFallbackAllowlist: [/^\/404$/]
 			}
 		}),
 		sitemap({

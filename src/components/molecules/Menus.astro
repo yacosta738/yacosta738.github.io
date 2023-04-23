@@ -16,8 +16,8 @@ const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/')
 
 const menuLink = (menu: Menu) => {
 	const link = localizePath(menu.link)
-	// if link ends with #id/ then remove / from the end
-	return new RegExp('#[a-zA-Z0-9]+/$').test(link) ? link.slice(0, -1) : link
+	// if link ends with / then remove / from the end
+	return link.endsWith('/') ? link.slice(0, -1) : link
 }
 ---
 
