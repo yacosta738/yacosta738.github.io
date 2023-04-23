@@ -9,7 +9,9 @@ import AppFooter from 'molecules:AppFooter'
 import WidgetWrapper from 'molecules:WidgetWrapper'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
+import ReloadPrompt from 'molecules:ReloadPrompt'
 import ToTop from 'atoms:ToTop'
+
 
 let { title, description, image, ogImageAlt, lang } = Astro.props
 
@@ -53,5 +55,6 @@ changeLanguage(lang)
 		<AppFooter />
 		<script src='../../utils/title-change.js'></script>
 		<script src='../../utils/geeky-console.js'></script>
+		<ReloadPrompt />
 	</body>
 </html>

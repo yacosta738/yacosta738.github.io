@@ -42,8 +42,69 @@ export default defineConfig({
 				]
 			},
 			workbox: {
-				navigateFallback: '/',
-				globPatterns: ['**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}']
+				navigateFallback: '/404',
+				globPatterns: ['**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+				globIgnores: ['**/node_modules/**', '**/dist/**', '**/public/**', '**/src/pages/**'],
+				runtimeCaching: [
+					{
+						// blog posts Network First (Network Falling Back to Cache). Cache is updated when user visits the page.
+						urlPattern: /^blog\/.*/i,
+						handler: 'NetworkFirst',
+						options: {
+							cacheName: 'blog-cache',
+							expiration: {
+								maxEntries: 10,
+								maxAgeSeconds: 60 * 60 * 24 * 1 // <== 1 day
+							},
+							cacheableResponse: {
+								statuses: [0, 200]
+							}
+						}
+					},
+					// cache favicons and images
+					{
+						urlPattern: /\.(?:png|gif|jpg|jpeg|svg|ico|webp)$/i,
+						handler: 'CacheFirst',
+						options: {
+							cacheName: 'images-cache',
+							expiration: {
+								maxEntries: 10,
+								maxAgeSeconds: 60 * 60 * 24 * 3 // <== 3 days
+							},
+							cacheableResponse: {
+								statuses: [0, 200]
+							}
+						}
+					},
+					{
+						urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+						handler: 'CacheFirst',
+						options: {
+							cacheName: 'google-fonts-cache',
+							expiration: {
+								maxEntries: 10,
+								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+							},
+							cacheableResponse: {
+								statuses: [0, 200]
+							}
+						}
+					},
+					{
+						urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+						handler: 'CacheFirst',
+						options: {
+							cacheName: 'gstatic-fonts-cache',
+							expiration: {
+								maxEntries: 10,
+								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+							},
+							cacheableResponse: {
+								statuses: [0, 200]
+							}
+						}
+					}
+				]
 			},
 			devOptions: {
 				enabled: true,
