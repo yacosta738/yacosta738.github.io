@@ -1,7 +1,7 @@
 ---
 import { t } from 'i18next'
-import { localizePath } from 'astro-i18next'
-import { Article } from '@models:Article'
+import { localizeUrl } from '@utils:utilities'
+import type { Article } from '@models:Article'
 import { urlize } from '@utils:utilities'
 import { Icon } from 'astro-icon'
 
@@ -36,17 +36,11 @@ const formatDate = (date: Date | string) => {
 			</li>
 		)
 	}
-	<!-- {article.url && <li class="my-2 whitespace-nowrap mx-1">
-      <a href={localizePath(article.url)} class="flex text-green-500">
-        <Icon name="la:comments" class="h-4 mr-1" />
-        300
-      </a>
-    </li>} -->
 	{
 		article.author && (
 			<li class='mx-1 my-2 whitespace-nowrap'>
 				<span class='mr-1'>{t('author')}</span>
-				<a href={localizePath(`/blog/authors/${urlize(article.author)}`)} class='inline-link'>
+				<a href={localizeUrl(`/blog/authors/${urlize(article.author)}`)} class='inline-link'>
 					{article.author}
 				</a>
 			</li>

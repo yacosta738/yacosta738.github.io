@@ -1,8 +1,8 @@
 ---
 import { t } from 'i18next'
 import { Image } from '@astrojs/image/components'
-import { localizePath } from 'astro-i18next'
-import { Article } from '@models:Article'
+import { localizeUrl } from '@utils:utilities'
+import type { Article } from '@models:Article'
 import PostHeader from 'molecules:PostHeader'
 
 export interface Props {
@@ -14,7 +14,7 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 
 <div class='flex flex-col'>
 	<h2 class='text-center text-3xl md:text-left md:text-4xl'>
-		<a href={localizePath(article.url)} class='inline-link'>{article.title}</a>
+		<a href={localizeUrl(article.url)} class='inline-link'>{article.title}</a>
 	</h2>
 	{!hidePostHeaderInSmallScreen && <PostHeader article={article} />}
 	<div class='mb-16 flex flex-col justify-center lg:flex-row'>
@@ -31,7 +31,7 @@ const { article, hidePostHeaderInSmallScreen = false } = Astro.props
 		}
 		<div class='mx-4 text-justify md:mx-10 md:my-5'>
 			<span class='line-clamp-7'>{article.description}</span>
-			<a href={localizePath(article.url)} class='inline-link font-bold uppercase'>{t('read')}</a>
+			<a href={localizeUrl(article.url)} class='inline-link font-bold uppercase'>{t('read')}</a>
 		</div>
 	</div>
 </div>

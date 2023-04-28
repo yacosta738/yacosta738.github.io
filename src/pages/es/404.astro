@@ -1,7 +1,7 @@
 ---
 import Icon from "astro-icon";
 import { Image } from "@astrojs/image/components";
-import { localizePath } from "astro-i18next";
+import { localizeUrl } from "@utils:utilities";
 import i18next, { t, changeLanguage } from "i18next";
 import HeadSEO from "organisms:HeadSEO";
 import Social from "atoms:Social";
@@ -39,7 +39,7 @@ const ogImageAlt = "An image of a cartoon character with a surprised expression 
 						<Image class='w-1/2' src='/oops.webp' alt={t('error404')} height={300} width={300} />
 						<p set:html={t('message404')} />
 						<a
-							href={localizePath('/')}
+							href={localizeUrl('/')}
 							class='small-button mt-24 flex w-24 items-center justify-center uppercase'
 						>
 							<Icon name='mdi:arrow-left' class='mr-2 h-6' />
