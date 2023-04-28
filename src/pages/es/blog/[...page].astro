@@ -1,7 +1,7 @@
 ---
 import i18next, { t, changeLanguage } from "i18next";
 import BlogTemplate from "templates:BlogTemplate";
-import { jsonToArticle } from "@models:Article";
+import { Article, jsonToArticle } from "@models:Article";
 import ArticleSummary from "molecules:ArticleSummary";
 import Paginator from "molecules:Paginator";
 import SearchBox from "molecules:SearchBox";
@@ -31,7 +31,7 @@ const { page } = Astro.props;
 	<SearchBox articles={sortedPosts} />
 	<div class='container mx-auto'>
 		{
-			page.data.map((post) => (
+			page.data.map((post: Article) => (
 				<article class='mx-2 mb-20 border-b border-gray-400 md:mx-24'>
 					<ArticleSummary article={post} />
 				</article>

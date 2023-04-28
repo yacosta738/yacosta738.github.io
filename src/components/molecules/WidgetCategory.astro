@@ -2,7 +2,7 @@
 import Icon from 'astro-icon'
 import WidgetCard from 'molecules:WidgetCard'
 import { t } from 'i18next'
-import { localizePath } from 'astro-i18next'
+import { localizeUrl } from '@utils:utilities'
 
 export interface Props {
 	categories: { [key: string]: number }
@@ -16,7 +16,7 @@ const allCategories = Object.keys(categories)
 		{
 			allCategories.map((category) => (
 				<li class='my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate'>
-					<a href={localizePath(`/blog/category/${category}`)} class='inline-link'>
+					<a href={localizeUrl(`/blog/category/${category}`)} class='inline-link'>
 						<div class='flex items-center justify-center'>
 							<Icon name='zondicons:cheveron-right' class='h-6' />
 							<span>{category}</span>

@@ -3,7 +3,7 @@ import { t } from 'i18next'
 import BlogTemplate from 'templates:BlogTemplate'
 import PostHeader from 'molecules:PostHeader'
 import ShareButton from 'atoms:ShareButton'
-import { localizePath } from 'astro-i18next'
+import { localizeUrl } from '@utils:utilities'
 import { Icon } from 'astro-icon'
 import '../../styles/github-markdown.css'
 
@@ -102,7 +102,7 @@ const theme = 'icy-dark'
 			class='my-8 mb-8 flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
 		>
 			<a
-				href={localizePath('/blog')}
+				href={localizeUrl('/blog')}
 				class='flex animate-pulse items-center justify-center font-bold uppercase hover:animate-none sm:text-center md:items-start'
 			>
 				<Icon name='ic:round-arrow-back' class='mr-1 h-7 animate-bounce-left hover:animate-none' />
@@ -120,7 +120,7 @@ const theme = 'icy-dark'
 				{
 					categories.map((category) => (
 						<a
-							href={localizePath(`/blog/category/${category.toLowerCase()}`)}
+							href={localizeUrl(`/blog/category/${category.toLowerCase()}`)}
 							class='inline-link mx-1'
 						>
 							{category}
@@ -133,7 +133,7 @@ const theme = 'icy-dark'
 				<Icon name='clarity:tags-solid-alerted' class='mr-2 h-5' />
 				{
 					tags.map((tag) => (
-						<a href={localizePath(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
+						<a href={localizeUrl(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
 							{tag}
 						</a>
 					))

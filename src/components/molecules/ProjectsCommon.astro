@@ -1,7 +1,7 @@
 ---
 import { t } from 'i18next'
-import { Project } from '@models:Project'
-import { localizePath } from 'astro-i18next'
+import type { Project } from '@models:Project'
+import { localizeUrl } from '@utils:utilities'
 import ProjectLinks from 'molecules:ProjectLinks'
 import ProjectTechList from 'molecules:ProjectTechList'
 import { Icon } from 'astro-icon'
@@ -24,7 +24,7 @@ const projectsToShow = () => {
 <div class='flex flex-col items-center'>
 	<div class='mb-20 mt-10 text-center'>
 		<h2 class='section-title'>{t('project-subtitle')}</h2>
-		<a href={localizePath('/projects/')} class='inline-link'>{t('project-view')}</a>
+		<a href={localizeUrl('/projects/')} class='inline-link'>{t('project-view')}</a>
 	</div>
 	<div class='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
 		{
@@ -38,7 +38,7 @@ const projectsToShow = () => {
 						{project?.title}
 					</div>
 					<div class='project-description'>
-						<p set:html={markdownfy(project.content)} />
+						<p set:html={markdownfy(project.content ?? '')} />
 					</div>
 					<footer class='absolute bottom-1'>
 						<ProjectTechList project={project} position='start' showIcon={false} />
@@ -49,7 +49,7 @@ const projectsToShow = () => {
 	</div>
 	{
 		projects.length > 6 && (
-			<a class='big-button m-5' href={localizePath('/projects/')}>
+			<a class='big-button m-5' href={localizeUrl('/projects/')}>
 				{showMore ? t('show-less') : t('show-more')}
 			</a>
 		)
