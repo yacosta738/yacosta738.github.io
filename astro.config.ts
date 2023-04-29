@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config'
+// @ts-ignore
 import { remarkReadingTime } from './remark-reading-time.mjs'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
@@ -47,14 +48,14 @@ export default defineConfig({
 				globIgnores: ['**/node_modules/**', '**/dist/**', '**/public/**', '**/src/pages/**'],
 				runtimeCaching: [
 					{
-						// blog posts Network First (Network Falling Back to Cache). Cache is updated when user visits the page.
-						urlPattern: /^blog\/.*/i,
+						// every url must be NetworkFirst and cache for 1 day
+						urlPattern: /.*/,
 						handler: 'NetworkFirst',
 						options: {
-							cacheName: 'blog-cache',
+							cacheName: 'offline-cache',
 							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 1 // <== 1 day
+								maxEntries: 200,
+								maxAgeSeconds: 60 * 60 * 24 // <== 1 day
 							},
 							cacheableResponse: {
 								statuses: [0, 200]

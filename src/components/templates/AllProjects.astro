@@ -78,7 +78,7 @@ const projects: Project[] = projectData
 				<tbody>
 					{
 						projects.map((project) => (
-							<tr class='border-b bg-navy text-xs hover:bg-gray-50  dark:border-light-navy dark:hover:bg-lightest-navy md:text-xl'>
+							<tr class='border-b border-lightest-navy bg-navy text-xs hover:bg-lightest-navy dark:border-light-navy dark:hover:bg-lightest-navy md:text-xl'>
 								<th scope='row' class='whitespace-nowrap px-6 py-4  font-medium'>
 									{typeof project.date === 'string'
 										? new Date(project.date).getFullYear()
