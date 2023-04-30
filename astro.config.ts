@@ -48,14 +48,41 @@ export default defineConfig({
 				globIgnores: ['**/node_modules/**', '**/dist/**', '**/public/**', '**/src/pages/**'],
 				runtimeCaching: [
 					{
-						// every url must be NetworkFirst and cache for 1 day
-						urlPattern: /.*/,
+						// blog posts Network First (Network Falling Back to Cache). Cache is updated when user visits the page.
+						urlPattern: /^blog\/.*/i,
 						handler: 'NetworkFirst',
 						options: {
-							cacheName: 'offline-cache',
+							cacheName: 'blog-cache',
 							expiration: {
-								maxEntries: 200,
+								maxEntries: 10,
 								maxAgeSeconds: 60 * 60 * 24 // <== 1 day
+							},
+							cacheableResponse: {
+								statuses: [0, 200]
+							}
+						}
+					},
+					// cache blog posts images
+					{
+						urlPattern: /^blog\/.*\.(?:png|gif|jpg|jpeg|svg|ico|webp)$/i,
+						handler: 'CacheFirst',
+						options: {
+							cacheName: 'blog-images-cache',
+							expiration: {
+								maxEntries: 10,
+								maxAgeSeconds: 60 * 60 * 24 * 3 // <== 3 days
+							}
+						}
+					},
+					// cache every file from the public folder
+					{
+						urlPattern: /^\/public\/.*/i,
+						handler: 'CacheFirst',
+						options: {
+							cacheName: 'public-cache',
+							expiration: {
+								maxEntries: 10,
+								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
 							},
 							cacheableResponse: {
 								statuses: [0, 200]

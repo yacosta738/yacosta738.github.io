@@ -1,5 +1,5 @@
 ---
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import BlogTemplate from 'templates:BlogTemplate'
 import PostHeader from 'molecules:PostHeader'
 import ShareButton from 'atoms:ShareButton'
@@ -26,10 +26,10 @@ export interface Props {
 const url = Astro.url
 
 let { frontmatter } = Astro.props
-const title = frontmatter.title || t('seo.title')
-const description = frontmatter.description || t('seo.description')
+const title = frontmatter.title
+const description = frontmatter.description
 const image = frontmatter.cover ? frontmatter.cover : `${domain}/uploads/me.webp`
-const ogImageAlt = description || t('seo.ogImageAlt')
+const ogImageAlt = description
 const categories = frontmatter.categories || Array<string>()
 const tags = frontmatter.tags || Array<string>()
 const lang = frontmatter.lang || 'en'
@@ -79,6 +79,8 @@ const shareButtons: {
 const repo = 'yacosta738/blog.yap.comments'
 const label = 'Comment'
 const theme = 'icy-dark'
+
+setDefaultNamespace('blog')
 ---
 
 <BlogTemplate
@@ -102,7 +104,7 @@ const theme = 'icy-dark'
 			class='my-8 mb-8 flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
 		>
 			<a
-				href={localizeUrl('/blog')}
+				href={localizeUrl('/blog', lang)}
 				class='flex animate-pulse items-center justify-center font-bold uppercase hover:animate-none sm:text-center md:items-start'
 			>
 				<Icon name='ic:round-arrow-back' class='mr-1 h-7 animate-bounce-left hover:animate-none' />

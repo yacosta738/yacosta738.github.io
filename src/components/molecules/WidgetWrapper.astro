@@ -4,7 +4,7 @@ import WidgetRecentPost from 'molecules:WidgetRecentPost'
 import WidgetCategory from 'molecules:WidgetCategory'
 import WidgetTagCloud from 'molecules:WidgetTagCloud'
 import { Article, jsonToArticle } from '@models:Article'
-import { MarkdownInstance } from 'astro'
+import type { MarkdownInstance } from 'astro'
 
 const { pathname } = Astro.url
 const isBlogRoot = pathname.endsWith('/blog')

@@ -1,13 +1,13 @@
 ---
-import i18next, { t, changeLanguage } from "i18next";
-import { jsonToArticle } from "@models:Article";
+import i18next, { t, changeLanguage, setDefaultNamespace } from "i18next";
+import { Article, jsonToArticle } from "@models:Article";
 import BlogTemplate from "templates:BlogTemplate";
 import ArticleSummary from "molecules:ArticleSummary";
 
 changeLanguage("es");
 
 export async function getStaticPaths() {
-    const postsData = await Astro.glob("../**/*.md");
+    const postsData = await Astro.glob("../../**/*.md");
     const allPosts = postsData
         .filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
         .map((post) => jsonToArticle(post))
@@ -20,11 +20,16 @@ export async function getStaticPaths() {
         };
     });
 }
+interface Props {
+    tag: string;
+    posts: Article[];
+}
 const { tag } = Astro.params;
 const { posts } = Astro.props;
+setDefaultNamespace("blog");
 ---
 
-<BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('seo.blog-description')} ${tag}`}>
+<BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('blog-description')} ${tag}`}>
 	<div class='tainer mx-auto'>
 		{
 			posts.map((post) => (

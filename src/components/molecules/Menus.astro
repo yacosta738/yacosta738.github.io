@@ -1,6 +1,6 @@
 ---
-import { t } from 'i18next'
-import LanguageSelector from 'atoms:LanguageSelector'
+import { t, setDefaultNamespace } from 'i18next'
+import { LanguageSelector } from "astro-i18next/components";
 import { Menu, navMenus } from '@models:Menu'
 import Icon from 'astro-icon'
 import Search from 'molecules:Search'
@@ -13,6 +13,7 @@ const { drawer } = Astro.props
 
 const { pathname } = Astro.url
 const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/')
+setDefaultNamespace('common')
 ---
 
 <ul class='menu-list'>
@@ -63,7 +64,7 @@ const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/')
 			class='resume-button'
 			tabindex={drawer ? -1 : 0}
 		>
-			{t('resume')}
+			{t('menus.resume')}
 		</a>
 	</li>
 </ul>

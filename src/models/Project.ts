@@ -1,4 +1,4 @@
-import { Tech } from './Tech'
+import type { Tech } from './Tech'
 
 export interface ProjectJson {
 	id?: string

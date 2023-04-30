@@ -1,6 +1,6 @@
 ---
-import { t } from 'i18next'
-import { Article } from '@models:Article'
+import { t, setDefaultNamespace } from 'i18next'
+import type { Article } from '@models:Article'
 import Icon from 'astro-icon'
 import WidgetCard from 'molecules:WidgetCard'
 
@@ -11,6 +11,7 @@ export interface Props {
 	recentPosts: Article[]
 }
 const { recentPosts } = Astro.props
+setDefaultNamespace('blog')
 ---
 
 {

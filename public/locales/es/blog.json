@@ -1,0 +1,26 @@
+{
+  "blog": "Blog Posts",
+  "blog-description": "Blog sobre programación y tecnologías web, escalables, de alta disponibilidad y tips para ser mas productivos.",
+  "no-articles-found": "No se encontraron artículos",
+  "try-again": "Intenta buscar otra cosa.",
+  "tags": "Etiquetas",
+  "categories": "Categorías",
+  "recent-post": "Artículos recientes",
+  "time-to-read": "Tiempo de lectura . {{timeToRead, number}} min",
+  "author": "Autor:",
+  "read": "Leer más →",
+  "prev": "← Anterior",
+  "next": "Siguiente →",
+  "page-of": "Página {currentPage} de {totalPages}",
+  "back-to-block": "Regresar al Blog",
+  "buy-me-a-coffee": "Cómprame un café!",
+  "comments": "Mostrar los comentarios",
+  "tag-title": "Etiqueta: {tag}",
+  "category-title": "Categoría: {category}",
+  "top": "Tope",
+  "search": {
+    "search-title": "Buscar artículos",
+    "search-result": "resultados.",
+    "search-placeholder": "Buscar..."
+  }
+}

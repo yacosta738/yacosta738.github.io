@@ -1,6 +1,6 @@
 ---
 import { IJob, Job } from '@models:Job'
-import i18next, { t } from 'i18next'
+import i18next, { t, setDefaultNamespace } from 'i18next'
 import JobDetails from 'molecules:JobDetails'
 import RoleDetails from 'molecules:RoleDetails'
 
@@ -13,6 +13,8 @@ const jobs: Job[] = data
 		return bDate.getTime() - aDate.getTime()
 	})
 	.map((job) => new Job(job))
+
+	setDefaultNamespace('projects')
 ---
 
 <astro-jobs>
