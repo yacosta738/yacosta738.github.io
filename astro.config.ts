@@ -13,6 +13,8 @@ import AstroPWA from '@vite-pwa/astro'
 import compress from 'astro-compress'
 import critters from 'astro-critters'
 
+import { manifest, workbox } from './src/plugins/pwa'
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
@@ -23,117 +25,8 @@ export default defineConfig({
 			scope: '/',
 			includeAssets: ['favicon.ico'],
 			registerType: 'autoUpdate',
-			manifest: {
-				name: 'Yuniel Acosta',
-				short_name: 'YAP',
-				theme_color: '#64ffda',
-				start_url: '/',
-				description: 'Yuniel Acosta Personal Website',
-				icons: [
-					{
-						src: 'android-chrome-192x192.png',
-						sizes: '192x192',
-						type: 'image/png'
-					},
-					{
-						src: 'android-chrome-512x512.png',
-						sizes: '512x512',
-						type: 'image/png'
-					}
-				]
-			},
-			workbox: {
-				navigateFallback: '/404',
-				globPatterns: ['**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-				globIgnores: ['**/node_modules/**', '**/dist/**', '**/public/**', '**/src/pages/**'],
-				runtimeCaching: [
-					{
-						// blog posts Network First (Network Falling Back to Cache). Cache is updated when user visits the page.
-						urlPattern: /^blog\/.*/i,
-						handler: 'NetworkFirst',
-						options: {
-							cacheName: 'blog-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 // <== 1 day
-							},
-							cacheableResponse: {
-								statuses: [0, 200]
-							}
-						}
-					},
-					// cache blog posts images
-					{
-						urlPattern: /^blog\/.*\.(?:png|gif|jpg|jpeg|svg|ico|webp)$/i,
-						handler: 'CacheFirst',
-						options: {
-							cacheName: 'blog-images-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 3 // <== 3 days
-							}
-						}
-					},
-					// cache every file from the public folder
-					{
-						urlPattern: /^\/public\/.*/i,
-						handler: 'CacheFirst',
-						options: {
-							cacheName: 'public-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
-							},
-							cacheableResponse: {
-								statuses: [0, 200]
-							}
-						}
-					},
-					// cache favicons and images
-					{
-						urlPattern: /\.(?:png|gif|jpg|jpeg|svg|ico|webp)$/i,
-						handler: 'CacheFirst',
-						options: {
-							cacheName: 'images-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 3 // <== 3 days
-							},
-							cacheableResponse: {
-								statuses: [0, 200]
-							}
-						}
-					},
-					{
-						urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-						handler: 'CacheFirst',
-						options: {
-							cacheName: 'google-fonts-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
-							},
-							cacheableResponse: {
-								statuses: [0, 200]
-							}
-						}
-					},
-					{
-						urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
-						handler: 'CacheFirst',
-						options: {
-							cacheName: 'gstatic-fonts-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
-							},
-							cacheableResponse: {
-								statuses: [0, 200]
-							}
-						}
-					}
-				]
-			},
+			manifest,
+			workbox,
 			devOptions: {
 				enabled: true,
 				navigateFallbackAllowlist: [/^\/404$/]
