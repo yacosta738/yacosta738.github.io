@@ -1,5 +1,5 @@
 ---
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { Image } from '@astrojs/image/components'
 import meImgReference from '../../assets/images/me.webp'
 
@@ -18,10 +18,11 @@ const yearsOfExperience = (): number => {
 	const diff = end.getTime() - start.getTime()
 	return Math.floor(diff / (1000 * 60 * 60 * 24 * 365))
 }
+setDefaultNamespace('about')
 ---
 
 <section id='about'>
-	<h2 class='numbered-heading'>{t('menus.about')}</h2>
+	<h2 class='numbered-heading'>{t('about-me')}</h2>
 	<div class='inner'>
 		<div class='styled-text'>
 			<div class='styled-text'>

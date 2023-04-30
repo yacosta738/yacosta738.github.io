@@ -1,6 +1,6 @@
 ---
-import { t } from 'i18next'
-import { Article } from '@models:Article'
+import { t, setDefaultNamespace } from 'i18next'
+import type { Article } from '@models:Article'
 import { Icon } from 'astro-icon'
 interface Props {
 	articles: Array<Article>
@@ -8,6 +8,8 @@ interface Props {
 const { articles = [] } = Astro.props
 
 const jsonArticles = JSON.stringify(articles)
+
+setDefaultNamespace('blog')
 ---
 
 <search-box data-articles={jsonArticles}>
@@ -25,7 +27,7 @@ const jsonArticles = JSON.stringify(articles)
 				<div
 					class='flex items-start justify-between p-4 m-4 border-b rounded-t dark:border-gray-600'
 				>
-					<h3 class='text-5xl font-semibold text-light-slate'>{t('search-title')}</h3>
+					<h3 class='text-5xl font-semibold text-light-slate'>{t('search.search-title')}</h3>
 					<button
 						type='button'
 						class='bg-transparent text-green-500 hover:border-green-500 hover:bg-green-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center'
@@ -60,14 +62,14 @@ const jsonArticles = JSON.stringify(articles)
 									type='search'
 									id='textSearch'
 									class='block w-full p-4 pl-10 text-sm border rounded-lg bg-lightest-navy border-lightest-slate placeholder-gray-400 text-light-slate focus:ring-green-500 focus:border-green-500'
-									placeholder={t('search-placeholder')}
+									placeholder={t('search.search-placeholder')}
 									required
 								/>
 							</div>
 						</form>
 						<p class='text-right w-1/5'>
 							<span id='itemFoundText'>0</span>
-							{t('search-result')}
+							{t('search.search-result')}
 						</p>
 					</div>
 

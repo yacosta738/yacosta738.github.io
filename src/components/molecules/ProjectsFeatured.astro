@@ -1,7 +1,7 @@
 ---
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { Picture } from '@astrojs/image/components'
-import { Project } from '@models:Project'
+import type { Project } from '@models:Project'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
 import { markdownfy } from '@utils:utilities'
@@ -13,6 +13,7 @@ const { projects } = Astro.props
 const calculatePosition = (index: number): string => {
 	return index % 2 === 0 ? 'end' : 'start'
 }
+setDefaultNamespace('projects')
 ---
 
 <div>
@@ -27,7 +28,7 @@ const calculatePosition = (index: number): string => {
 						<div
 							id='project-description'
 							class='project-description'
-							set:html={markdownfy(project.content)}
+							set:html={markdownfy(project.content ?? '')}
 						/>
 						<ProjectTechList
 							project={project}
@@ -50,7 +51,7 @@ const calculatePosition = (index: number): string => {
 									fit='fill'
 									background='#0A192F'
 									sizes="(max-width: 800px) 100vw, 800px"
-									alt={project.title}
+									alt={project.title ?? ''}
 									height={630}
 									width={1074}
 								/>

@@ -1,6 +1,6 @@
 ---
 import WidgetCard from 'molecules:WidgetCard'
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { localizeUrl } from '@utils:utilities'
 
 export interface Props {
@@ -30,6 +30,8 @@ const textSize = (
 	const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1))
 	return fontSizeClass[index]
 }
+
+setDefaultNamespace('blog')
 ---
 
 <WidgetCard title={t('tags')}>

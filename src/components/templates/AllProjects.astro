@@ -1,7 +1,7 @@
 ---
-import { Project, ProjectJson } from '@models:Project'
-import { Tech } from '@models:Tech'
-import i18next, { t, changeLanguage } from 'i18next'
+import type { Project, ProjectJson } from '@models:Project'
+import type { Tech } from '@models:Tech'
+import i18next, { t, setDefaultNamespace } from 'i18next'
 import BaseTemplate from 'templates:BaseTemplate'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
@@ -22,7 +22,7 @@ const jsonToProject = (json: ProjectJson): Project => {
 		repository: json.repository,
 		url: json.url,
 		company: json.company,
-		tech: json.tech.map((t) => tech[urlize(t.toLowerCase())]),
+		tech: json?.tech?.map((t) => tech[urlize(t.toLowerCase())]),
 		showInProjects: json.showInProjects,
 		featured: json.featured,
 		published: json.published,
@@ -32,12 +32,10 @@ const jsonToProject = (json: ProjectJson): Project => {
 }
 const projects: Project[] = projectData
 	.filter((project) => project.published && project.lang === i18next.language)
-	.sort((a, b) => {
-		if (a.date > b.date) return -1
-		if (a.date < b.date) return 1
-		return 0
-	})
+	.sort((a, b) => (new Date(b.date ?? 0)).getTime() - (new Date(a.date ?? 0)).getTime())
 	.map((json) => jsonToProject(json))
+
+	setDefaultNamespace('projects')
 ---
 
 <BaseTemplate
@@ -82,7 +80,7 @@ const projects: Project[] = projectData
 								<th scope='row' class='whitespace-nowrap px-6 py-4  font-medium'>
 									{typeof project.date === 'string'
 										? new Date(project.date).getFullYear()
-										: project.date.getFullYear()}
+										: project?.date?.getFullYear()}
 								</th>
 								<td class='px-6 py-4'>{project.title}</td>
 								<td class='hidden px-6 py-4 md:table-cell'>

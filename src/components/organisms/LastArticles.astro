@@ -1,8 +1,8 @@
 ---
-import i18next, { t } from 'i18next'
+import i18next, { t, setDefaultNamespace } from 'i18next'
 import { Image } from '@astrojs/image/components'
 import { Article, jsonToArticle } from '@models:Article'
-import { MarkdownInstance } from 'astro'
+import type { MarkdownInstance } from 'astro'
 
 const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
 	en: Astro.glob('../../pages/blog/**/*.md'),
@@ -19,6 +19,8 @@ const posts: Article[] = postsData
 		return bDate.getTime() - aDate.getTime()
 	})
 	.slice(0, maxNumberOfPosts)
+
+	setDefaultNamespace('common')
 ---
 
 <section id='last3articles' class='flex flex-col content-center items-center justify-center'>

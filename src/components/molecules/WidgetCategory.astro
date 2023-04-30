@@ -1,7 +1,7 @@
 ---
 import Icon from 'astro-icon'
 import WidgetCard from 'molecules:WidgetCard'
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { localizeUrl } from '@utils:utilities'
 
 export interface Props {
@@ -9,6 +9,7 @@ export interface Props {
 }
 const { categories } = Astro.props
 const allCategories = Object.keys(categories)
+setDefaultNamespace('blog')
 ---
 
 <WidgetCard title={t('categories')}>

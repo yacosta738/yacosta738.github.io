@@ -1,7 +1,8 @@
 ---
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { Image } from '@astrojs/image/components'
 import contactSvg from '../../assets/images/contact.svg'
+setDefaultNamespace('contact')
 ---
 
 <section id='contact' class='mx-4 md:mx-auto'>

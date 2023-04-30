@@ -3,13 +3,13 @@ import { Author, jsonToAuthor } from "@models:Author";
 import Icon from "astro-icon";
 import { Image } from "@astrojs/image/components";
 import Card3D from "molecules:Card3D";
-import i18next, { t, changeLanguage } from "i18next";
+import i18next, { t, changeLanguage, setDefaultNamespace } from "i18next";
 import BaseTemplate from "templates:BaseTemplate";
 
 changeLanguage("es");
 
 export async function getStaticPaths() {
-    const authorsData = await Astro.glob("./**/*.json");
+    const authorsData = await Astro.glob("../**/*.json");
     const authors: Author[] = authorsData
         .filter((author) => author.lang === i18next.language)
         .map((author) => jsonToAuthor(author));
@@ -24,9 +24,10 @@ export async function getStaticPaths() {
 }
 const { name } = Astro.params;
 const { author } = Astro.props;
+setDefaultNamespace("blog");
 ---
 
-<BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('seo.blog-description')} ${name}`}>
+<BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('blog-description')} ${name}`}>
 	<section id='about-author' class='container mx-auto'>
 		<div class='flex items-center justify-center'>
 			<Card3D>

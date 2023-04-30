@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon'
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { socialMedia } from 'store/constants'
 
 const portfolioTechIcon = [
@@ -9,6 +9,7 @@ const portfolioTechIcon = [
 	'simple-icons:tailwindcss',
 	'simple-icons:netlify'
 ]
+setDefaultNamespace('common')
 ---
 
 <footer class='container m-5 mx-auto flex flex-col items-center justify-center lg:flex-row'>

@@ -1,5 +1,5 @@
 ---
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { localizeUrl } from '@utils:utilities'
 import type { Article } from '@models:Article'
 import { urlize } from '@utils:utilities'
@@ -16,6 +16,7 @@ const formatDate = (date: Date | string) => {
 	}
 	return date.toLocaleDateString()
 }
+setDefaultNamespace('blog')
 ---
 
 <ul

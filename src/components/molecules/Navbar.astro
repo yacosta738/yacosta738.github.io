@@ -26,7 +26,7 @@ import { localizeUrl } from '@utils:utilities'
 	let scrollDirection = 'DOWN'
 	let lastScrollPosition = 0
 	const navbar = document.getElementById('navbar-header')
-	const navbarClassList = navbar.classList
+	const navbarClassList: DOMTokenList = navbar?.classList ?? new DOMTokenList()
 	const navbarClassListAdd = navbarClassList.add.bind(navbarClassList)
 	const navbarClassListRemove = navbarClassList.remove.bind(navbarClassList)
 
