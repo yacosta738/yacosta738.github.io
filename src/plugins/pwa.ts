@@ -22,7 +22,9 @@ export const manifest = {
 
 export const workbox: Partial<GenerateSWOptions> = {
 	navigateFallback: '/404',
-	globPatterns: ['**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	globPatterns: [
+		'**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue,webmanifest,pdf,xml,json,txt,csv}'
+	],
 	globIgnores: ['**/node_modules/**', '**/dist/**'],
 	runtimeCaching: [
 		{
@@ -48,10 +50,7 @@ export const workbox: Partial<GenerateSWOptions> = {
 				cacheName: 'files-cache',
 				expiration: {
 					maxEntries: 50,
-					maxAgeSeconds: 60 * 60 * 24 // <== 1 day
-				},
-				cacheableResponse: {
-					statuses: [0, 200]
+					maxAgeSeconds: 60 * 60 * 24 * 7 // <== 7 days
 				}
 			}
 		},
@@ -98,5 +97,7 @@ export const workbox: Partial<GenerateSWOptions> = {
 				}
 			}
 		}
-	]
+	],
+	skipWaiting: true,
+	clientsClaim: true
 }
