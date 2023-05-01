@@ -1,101 +1,93 @@
+---
+import Icon from 'astro-icon'
+---
 <script>
 	import { registerSW } from 'virtual:pwa-register'
 
-window.addEventListener('load', () => {
-	const pwaToast = document.querySelector<HTMLDivElement>('#pwa-toast')!
-	const pwaToastMessage = pwaToast.querySelector<HTMLDivElement>('.message #toast-message')!
-	const pwaCloseBtn = pwaToast.querySelector<HTMLButtonElement>('#pwa-close')!
-	const pwaRefreshBtn = pwaToast.querySelector<HTMLButtonElement>('#pwa-refresh')!
+	window.addEventListener('load', () => {
+		const pwaToast = document.querySelector<HTMLDivElement>('#pwa-toast')!
+		const pwaToastMessage = pwaToast.querySelector<HTMLDivElement>('.message #toast-message')!
+		const pwaCloseBtn = pwaToast.querySelector<HTMLButtonElement>('#pwa-close')!
+		const pwaRefreshBtn = pwaToast.querySelector<HTMLButtonElement>('#pwa-refresh')!
 
-	let refreshSW: ((reloadPage?: boolean) => Promise<void>) | undefined
+		let refreshSW: ((reloadPage?: boolean) => Promise<void>) | undefined
 
-	const refreshCallback = () => refreshSW?.(true)
+		const refreshCallback = () => refreshSW?.(true)
 
-	const hidePwaToast = (raf = false) => {
-		if (raf) {
-			requestAnimationFrame(() => hidePwaToast(false))
-			return
+		const hidePwaToast = (raf = false) => {
+			if (raf) {
+				requestAnimationFrame(() => hidePwaToast(false))
+				return
+			}
+			if (pwaToast.classList.contains('refresh')) {
+				pwaRefreshBtn.removeEventListener('click', refreshCallback)
+			}
+
+			pwaToast.classList.remove('show', 'refresh')
 		}
-		if (pwaToast.classList.contains('refresh')) { pwaRefreshBtn.removeEventListener('click', refreshCallback) }
+		const showPwaToast = (offline: boolean) => {
+			if (!offline) {
+				pwaRefreshBtn.addEventListener('click', refreshCallback)
+			}
+			requestAnimationFrame(() => {
+				hidePwaToast(false)
+				if (!offline) {
+					pwaToast.classList.add('refresh')
+				}
+				pwaToast.classList.add('show')
+			})
+		}
 
-		pwaToast.classList.remove('show', 'refresh')
-	}
-	const showPwaToast = (offline: boolean) => {
-		if (!offline) { pwaRefreshBtn.addEventListener('click', refreshCallback) }
-		requestAnimationFrame(() => {
-			hidePwaToast(false)
-			if (!offline) { pwaToast.classList.add('refresh') }
-			pwaToast.classList.add('show')
+		pwaCloseBtn.addEventListener('click', () => hidePwaToast(true))
+
+		refreshSW = registerSW({
+			immediate: true,
+			onOfflineReady() {
+				pwaToastMessage.innerHTML = 'App ready to work offline'
+				showPwaToast(true)
+			},
+			onNeedRefresh() {
+				pwaToastMessage.innerHTML = 'New content available, click on reload button to update'
+				showPwaToast(false)
+			},
+			onRegisteredSW(swScriptUrl) {
+				// eslint-disable-next-line no-console
+				console.log('SW registered: ', swScriptUrl)
+			}
 		})
-	}
-
-	pwaCloseBtn.addEventListener('click', () => hidePwaToast(true))
-
-	refreshSW = registerSW({
-		immediate: true,
-		onOfflineReady () {
-			pwaToastMessage.innerHTML = 'App ready to work offline'
-			showPwaToast(true)
-		},
-		onNeedRefresh () {
-			pwaToastMessage.innerHTML = 'New content available, click on reload button to update'
-			showPwaToast(false)
-		},
-		onRegisteredSW (swScriptUrl) {
-			// eslint-disable-next-line no-console
-			console.log('SW registered: ', swScriptUrl)
-		}
 	})
-})
-
 </script>
-<div
-    id="pwa-toast"
-    role="alert"
-    aria-labelledby="toast-message"
->
-    <div class="message">
-      <span id="toast-message"></span>
-    </div>
-    <button id="pwa-refresh">
-      Reload
-    </button>
-    <button id="pwa-close">
-      Close
-    </button>
+<div id='pwa-toast' role='alert' aria-labelledby='toast-message'>
+	<Icon name='tabler:info-hexagon-filled' class='h-5 w-5' />
+	<div class='message'>
+		<span id='toast-message'></span>
+	</div>
+	<button id='pwa-refresh'> Reload</button>
+	<button id='pwa-close'> Close</button>
 </div>
 
 <style>
-#pwa-toast {
-  visibility: hidden;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  margin: 16px;
-  padding: 12px;
-  border: 1px solid #8885;
-  border-radius: 4px;
-  z-index: 1;
-  text-align: left;
-  box-shadow: 3px 4px 5px 0 #8885;
-}
-#pwa-toast .message {
-  margin-bottom: 8px;
-}
-#pwa-toast button {
-  border: 1px solid #8885;
-  outline: none;
-  margin-right: 5px;
-  border-radius: 2px;
-  padding: 3px 10px;
-}
-#pwa-toast.show {
-  visibility: visible;
-}
-button#pwa-refresh {
-  display: none;
-}
-#pwa-toast.show.refresh button#pwa-refresh {
-  display: inline-block;
-}
+	#pwa-toast {
+		@apply hidden fixed right-0 bottom-0 m-4 p-3 border border-lightest-navy rounded-md shadow-md z-10 text-left;
+	}
+
+	#pwa-toast .message {
+		@apply mb-2;
+	}
+
+	#pwa-toast button {
+		@apply border border-lightest-navy rounded-md mr-2 px-3 py-1 outline-none;
+	}
+
+	#pwa-toast.show {
+		@apply visible;
+	}
+
+	button#pwa-refresh {
+		@apply hidden;
+	}
+
+	#pwa-toast.show.refresh button#pwa-refresh {
+		@apply inline-block;
+	}
 </style>
