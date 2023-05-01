@@ -1,4 +1,4 @@
-import { GenerateSWOptions } from 'workbox-build'
+import type { GenerateSWOptions } from 'workbox-build'
 
 export const manifest = {
 	name: 'Yuniel Acosta',
@@ -23,7 +23,7 @@ export const manifest = {
 export const workbox: Partial<GenerateSWOptions> = {
 	navigateFallback: '/404',
 	globPatterns: ['**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-	globIgnores: ['**/node_modules/**', '**/dist/**', '**/public/**', '**/src/pages/**'],
+	globIgnores: ['**/node_modules/**', '**/dist/**'],
 	runtimeCaching: [
 		{
 			urlPattern: /^.*$/,
