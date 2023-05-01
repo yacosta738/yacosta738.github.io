@@ -26,24 +26,13 @@ export const workbox: Partial<GenerateSWOptions> = {
 	globIgnores: ['**/node_modules/**', '**/dist/**'],
 	runtimeCaching: [
 		{
-			urlPattern: /^.*$/,
-			handler: 'NetworkFirst',
-			options: {
-				cacheName: 'runtime-cache',
-				expiration: {
-					maxEntries: 1000,
-					maxAgeSeconds: 60 * 60 * 24 // <== 1 day
-				}
-			}
-		},
-		{
 			// blog posts Network First (Network Falling Back to Cache). Cache is updated when user visits the page.
 			urlPattern: /^blog\/.*/i,
 			handler: 'NetworkFirst',
 			options: {
 				cacheName: 'blog-cache',
 				expiration: {
-					maxEntries: 10,
+					maxEntries: 1000,
 					maxAgeSeconds: 60 * 60 * 24 // <== 1 day
 				},
 				cacheableResponse: {
@@ -60,21 +49,6 @@ export const workbox: Partial<GenerateSWOptions> = {
 				expiration: {
 					maxEntries: 50,
 					maxAgeSeconds: 60 * 60 * 24 // <== 1 day
-				},
-				cacheableResponse: {
-					statuses: [0, 200]
-				}
-			}
-		},
-		// cache every file from the public folder
-		{
-			urlPattern: /^\/public\/.*/i,
-			handler: 'CacheFirst',
-			options: {
-				cacheName: 'public-cache',
-				expiration: {
-					maxEntries: 100,
-					maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
 				},
 				cacheableResponse: {
 					statuses: [0, 200]
