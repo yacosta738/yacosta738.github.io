@@ -10,8 +10,8 @@ devDependencies:
     specifier: 0.16.6
     version: 0.16.6(astro@2.3.2)(sharp@0.32.1)
   '@astrojs/rss':
-    specifier: 2.4.0
-    version: 2.4.0
+    specifier: 2.4.1
+    version: 2.4.1
   '@astrojs/sitemap':
     specifier: 1.2.2
     version: 1.2.2
@@ -269,8 +269,8 @@ packages:
     dependencies:
       prismjs: 1.29.0
 
-  /@astrojs/rss@2.4.0:
-    resolution: {integrity: sha512-cbSgrNUCmwfzXTEqfK/6vk+Ut5auHnIpv6Z5e5JaiDPUX7vcn3175nFBj68ujcb5HGY0rQ9ohGY4a4VX3ScmDg==}
+  /@astrojs/rss@2.4.1:
+    resolution: {integrity: sha512-c+j6Dwxc/t50/v7xhM88RKbxh9SjaQMw0IdLeeOqQAdcLT2Me7nUUWwx0BbPnu6RO0YxT5Up1Sl/OdrA60tfSw==}
     dependencies:
       fast-xml-parser: 4.2.2
       kleur: 4.1.5
