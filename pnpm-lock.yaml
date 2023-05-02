@@ -7,8 +7,8 @@ dependencies:
 
 devDependencies:
   '@astrojs/image':
-    specifier: 0.16.6
-    version: 0.16.6(astro@2.3.2)(sharp@0.32.1)
+    specifier: 0.16.7
+    version: 0.16.7(astro@2.3.2)(sharp@0.32.1)
   '@astrojs/rss':
     specifier: 2.4.0
     version: 2.4.0
@@ -205,10 +205,10 @@ packages:
   /@astrojs/compiler@1.3.2:
     resolution: {integrity: sha512-W/2Mdsq75ruK31dPVlXLdvAoknYDcm6+zXiFToSzQWI7wZqqR+51XTFgx90ojYbefk7z4VOJSVtZBz2pA82F5A==}
 
-  /@astrojs/image@0.16.6(astro@2.3.2)(sharp@0.32.1):
-    resolution: {integrity: sha512-/MJ0aByhuNAT7VeMwXVjS0e5IH8MxsYeEnymOJ0/1VBmZFmcbtb1nUeLE0uO3EV3kNYGRJtwGyald8YJ9ncW4A==}
+  /@astrojs/image@0.16.7(astro@2.3.2)(sharp@0.32.1):
+    resolution: {integrity: sha512-8X1DnMh3lUTA7BNt7dF0rfWTXNwvLoPWWXtLi+TdO3CW1SvdY9LJRuCEWwHfnKzcQ0EC2TfLwjukpbtJuCRxjw==}
     peerDependencies:
-      astro: ^2.2.2
+      astro: ^2.3.4
       sharp: '>=0.31.0'
     peerDependenciesMeta:
       sharp:
