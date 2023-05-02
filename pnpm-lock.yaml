@@ -112,8 +112,8 @@ devDependencies:
     specifier: 0.3.0
     version: 0.3.0
   marked:
-    specifier: 4.3.0
-    version: 4.3.0
+    specifier: 5.0.0
+    version: 5.0.0
   mdast-util-to-string:
     specifier: 3.2.0
     version: 3.2.0
@@ -7377,9 +7377,9 @@ packages:
   /markdown-table@3.0.3:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
 
-  /marked@4.3.0:
-    resolution: {integrity: sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==}
-    engines: {node: '>= 12'}
+  /marked@5.0.0:
+    resolution: {integrity: sha512-YQ6+L9l/NSBDjFgCQQebmTCc62EUdZ5RpIZ7A/FmC8IYMB5s7Cz8sT7imuMAkbIL4CvXpQLdW45fpK5UwiU7DA==}
+    engines: {node: '>= 18'}
     hasBin: true
     dev: true
 
