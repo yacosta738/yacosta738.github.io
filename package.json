@@ -20,7 +20,7 @@
     "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test:playwright'"
   },
   "devDependencies": {
-    "@astrojs/image": "0.16.6",
+    "@astrojs/image": "0.16.7",
     "@astrojs/rss": "2.4.1",
     "@astrojs/sitemap": "1.3.0",
     "@astrojs/tailwind": "3.1.2",
