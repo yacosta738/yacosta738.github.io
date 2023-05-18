@@ -73,7 +73,7 @@
     "tailwindcss": "3.3.2",
     "uuid": "9.0.0",
     "vitest": "^0.31.0",
-    "vue": "3.2.47",
+    "vue": "3.3.4",
     "workbox-window": "^6.5.4"
   },
   "dependencies": {
