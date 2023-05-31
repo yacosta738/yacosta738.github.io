@@ -74,7 +74,7 @@
     "uuid": "9.0.0",
     "vitest": "^0.31.0",
     "vue": "3.3.4",
-    "workbox-window": "^6.5.4"
+    "workbox-window": "^7.0.0"
   },
   "dependencies": {
     "astro-netlify-cms": "0.5.3"
