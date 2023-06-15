@@ -60,7 +60,7 @@
     "mdast-util-to-string": "3.2.0",
     "nanostores": "0.9.2",
     "postcss-nesting": "11.3.0",
-    "postcss-preset-env": "8.4.2",
+    "postcss-preset-env": "8.5.0",
     "prettier": "2.8.8",
     "prettier-plugin-astro": "0.10.0",
     "prettier-plugin-tailwindcss": "0.3.0",
