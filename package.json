@@ -57,7 +57,7 @@
     "i18next-fs-backend": "2.1.5",
     "locale-emoji": "0.3.0",
     "marked": "5.1.1",
-    "mdast-util-to-string": "3.2.0",
+    "mdast-util-to-string": "4.0.0",
     "nanostores": "0.9.3",
     "postcss-nesting": "12.0.0",
     "postcss-preset-env": "9.0.0",
