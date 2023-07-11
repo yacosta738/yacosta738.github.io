@@ -42,7 +42,7 @@
     "astro-icon": "0.8.1",
     "astro-netlify-cms": "0.5.3",
     "astro-robots-txt": "0.5.0",
-    "astro-seo": "0.7.4",
+    "astro-seo": "0.7.5",
     "dompurify": "3.0.4",
     "eslint": "8.44.0",
     "eslint-config-standard": "17.1.0",
