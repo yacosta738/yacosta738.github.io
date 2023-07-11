@@ -63,7 +63,7 @@
     "postcss-preset-env": "9.0.0",
     "prettier": "3.0.0",
     "prettier-plugin-astro": "0.10.0",
-    "prettier-plugin-tailwindcss": "0.3.0",
+    "prettier-plugin-tailwindcss": "0.4.0",
     "reading-time": "1.5.0",
     "rehype-accessible-emojis": "^0.3.2",
     "remark-toc": "^8.0.1",
