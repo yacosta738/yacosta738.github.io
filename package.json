@@ -22,7 +22,7 @@
   "devDependencies": {
     "@astrojs/image": "0.17.2",
     "@astrojs/rss": "2.4.3",
-    "@astrojs/sitemap": "1.4.0",
+    "@astrojs/sitemap": "2.0.0",
     "@astrojs/tailwind": "4.0.0",
     "@astrojs/vue": "2.2.1",
     "@nanostores/vue": "0.10.0",
