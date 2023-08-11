@@ -92,7 +92,10 @@ body {
   margin-left: 0.5%;
   margin-top: 0.5%;
   border-radius: 100%;
-  box-shadow: 0 0 10em 5em #ff66006b, 0 0 100px 50px #ff66006b inset, 0 0 10px 5px #ffcc00f2;
+  box-shadow:
+    0 0 10em 5em #ff66006b,
+    0 0 100px 50px #ff66006b inset,
+    0 0 10px 5px #ffcc00f2;
 }
 
 .orbit.orbit-sun:after {
@@ -577,7 +580,7 @@ const countDown = setInterval(function () {
 Por último se crea un fichero **`index.html`** que contendrá todo el código html de nuestra página web. El documento html comienza con la definición del tipo de documento seguido por el lenguaje de la página, en la sección del encabezado encontramos el título, algunos metadatos así como la importación de los estilos de la página. En el cuerpo del documento hacemos usos de las clases creadas previamente para poder visualizar los planetas y sus órbitas. Al final importamos el fichero javascript creado con anterioridad:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

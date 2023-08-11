@@ -548,12 +548,8 @@ $__typed-id: 0;
 				#{$iterations}
 				forwards;
 		} @else {
-			animation: #{$animation-name}
-					#{$dur-total}s
-					linear
-					#{$animation-delay}s
-					#{$iterations}
-					forwards,
+			animation:
+				#{$animation-name} #{$dur-total}s linear #{$animation-delay}s #{$iterations} forwards,
 				#{$animation-name}-final
 					#{str-length($final-string) *
 					$dur-char-fwd}s

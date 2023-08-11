@@ -92,7 +92,10 @@ body {
   margin-left: 0.5%;
   margin-top: 0.5%;
   border-radius: 100%;
-  box-shadow: 0 0 10em 5em #ff66006b, 0 0 100px 50px #ff66006b inset, 0 0 10px 5px #ffcc00f2;
+  box-shadow:
+    0 0 10em 5em #ff66006b,
+    0 0 100px 50px #ff66006b inset,
+    0 0 10px 5px #ffcc00f2;
 }
 
 .orbit.orbit-sun:after {
@@ -577,7 +580,7 @@ const countDown = setInterval(function () {
 Finally, a file **`index.html`** is created that will contain all the html code for our website. The html document begins with the definition of the document type followed by the language of the page, in the header section we find the title, some metadata as well as the import of the page styles. In the body of the document we make use of the classes created previously to be able to visualize the planets and their orbits. At the end we import the previously created javascript file:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
