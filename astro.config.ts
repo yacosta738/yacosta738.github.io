@@ -10,7 +10,7 @@ import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
 import AstroPWA from '@vite-pwa/astro'
-import compress from 'astro-compress'
+import Compress from 'astro-compress'
 import critters from 'astro-critters'
 
 import { manifest, workbox } from './src/plugins/pwa'
@@ -48,7 +48,7 @@ export default defineConfig({
 			serviceEntryPoint: '@astrojs/image/sharp'
 		}),
 		robotsTxt(),
-		compress({
+		Compress({
 			css: false
 		}),
 		critters({
