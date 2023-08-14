@@ -1,9 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "baseBranches": ["master"],
+	"timezone": "Europe/Madrid",
+  "schedule": "before 5am every weekday",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": "after 10pm on sunday"
+  },
   "packageRules": [
     {
-      "matchPackageNames": ["npm", "astro", "node"],
+      "matchPackageNames": ["npm", "pnpm", "astro", "node"],
       "matchUpdateTypes": ["patch", "minor"],
       "automerge": true,
       "schedule": ["after 5pm on Friday"]
