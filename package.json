@@ -20,7 +20,7 @@
     "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test:playwright'"
   },
   "devDependencies": {
-		"@astrojs/image": "0.18.0",
+    "@astrojs/image": "0.18.0",
     "@astrojs/rss": "3.0.0",
     "@astrojs/sitemap": "3.0.0",
     "@astrojs/tailwind": "5.0.0",
@@ -35,8 +35,8 @@
     "@typescript-eslint/parser": "6.5.0",
     "@vite-pwa/astro": "^0.1.1",
     "@vueuse/core": "10.4.1",
-		"astro": "2.10.7",
-		"astro-compress": "1.1.23",
+    "astro": "2.10.7",
+    "astro-compress": "1.1.23",
     "astro-critters": "2.0.11",
     "astro-i18next": "1.0.0-beta.21",
     "astro-icon": "0.8.1",
