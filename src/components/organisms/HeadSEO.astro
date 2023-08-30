@@ -1,6 +1,6 @@
 ---
 import { SEO } from 'astro-seo'
-import { t } from 'i18next'
+import { t, setDefaultNamespace } from 'i18next'
 import { pwaInfo } from 'virtual:pwa-info';
 export interface Props {
 	title: string
@@ -8,7 +8,7 @@ export interface Props {
 	image: string
 	ogImageAlt: string
 }
-
+setDefaultNamespace('common')
 const { href: canonicalUrl } = Astro.url
 let { title, description, image, ogImageAlt } = Astro.props
 
