@@ -12,13 +12,12 @@ import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
 import ReloadPrompt from 'molecules:ReloadPrompt'
 
+setDefaultNamespace('common')
 let { title, description, image, ogImageAlt } = Astro.props
-
 title = title ?? t('seo.title')
 description = description ?? t('seo.description')
 image = image ?? '/uploads/me.webp'
 ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
-setDefaultNamespace('common')
 ---
 
 <html lang={i18next.language}>
