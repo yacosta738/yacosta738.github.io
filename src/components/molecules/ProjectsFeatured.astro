@@ -1,6 +1,6 @@
 ---
 import { t, setDefaultNamespace } from 'i18next'
-import { Picture } from '@astrojs/image/components'
+import { Image } from 'astro:assets';
 import type { Project } from '@models:Project'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
@@ -43,15 +43,11 @@ setDefaultNamespace('projects')
 							target='_blank'
 						>
 							{project.cover && (
-								<Picture
+								<Image
 									class='img'
 									src={project.cover}
-									widths={[200, 400, 1074]}
-									aspectRatio='16:9'
-									fit='fill'
-									background='#0A192F'
-									sizes="(max-width: 800px) 100vw, 800px"
 									alt={project.title ?? ''}
+									title={project.title ?? ''}
 									height={630}
 									width={1074}
 								/>

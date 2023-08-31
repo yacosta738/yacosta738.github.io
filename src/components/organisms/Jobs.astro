@@ -41,7 +41,7 @@ const jobs: Job[] = data
 						class='w-full h-auto pt-1 px-2 md:pt-2.5 md:pl-7'
 						role='tabpanel'
 						aria-labelledby={`tab-${job.id}`}
-						hidden={Number.parseInt(localStorage.getItem('jobActiveTabId') ?? '0') !== i}
+						hidden={i !== 0}
 					>
 						<JobDetails job={job} />
 						<RoleDetails roles={job?.roles ?? []} />
@@ -56,21 +56,14 @@ const jobs: Job[] = data
 	class AstroJobs extends HTMLElement {
 		constructor() {
 			super()
-			const jobActiveTabIdKey = 'jobActiveTabId'
-			const getActiveTabId = (): number => {
-				if (!localStorage.getItem(jobActiveTabIdKey)) localStorage.setItem(jobActiveTabIdKey, '0')
-
-				return Number.parseInt(localStorage.getItem(jobActiveTabIdKey) ?? '0')
-			}
 			const jobIndicator = this.querySelector('#job-indicator') as HTMLDivElement
-			let activeTabId = getActiveTabId()
+			let activeTabId = 0
 			const buttons = this.querySelectorAll('[id^="tab-"]') as NodeListOf<HTMLButtonElement>
 			const panels = document.querySelectorAll('[id^="panel-"]') as NodeListOf<HTMLDivElement>
 			buttons.forEach((button, i) => {
 				button.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)
 				button.addEventListener('click', () => {
 					activeTabId = i
-					localStorage.setItem(jobActiveTabIdKey, `${i}`)
 					const sm = screen.width < 768
 					jobIndicator.style.transform = sm
 						? `translateX(calc(${activeTabId} * 120px))`

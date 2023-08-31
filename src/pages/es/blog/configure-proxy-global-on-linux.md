@@ -111,7 +111,7 @@ Editamos el fichero `/etc/pacman.conf` y debemos descomentar `XferCommand` de la
     XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
 ```
 
-![pacman.conf.webp](../images/configure-proxy-global-on-linux/pacman.conf.webp)
+![pacman.conf.webp](/uploads/configure-proxy-global-on-linux/pacman.conf.webp)
 
 Guardamos los cambios y procedemos a editar el fichero de configuración para `wget`, herramienta utilizada para la descarga de paquetes.
 
@@ -379,7 +379,7 @@ La aplicación de escritorio es un cliente VPN (Virtual Private Network). Crea u
 
 Lo primero que se tiene que hacer es crear una cuenta en [Windscribe](https://windscribe.com/?friend=abhyp2zr) registrándose [aquí](https://windscribe.com/?friend=abhyp2zr). Windscribe nos da 2GB de consumo mensual gratis, pero si confirmamos nuestro correo electrónico este aumenta 5GB, además puedes aumentar hasta 15GB mensuales si creas un post en twitter dando en el botón _**Tweet4Data**_ en la configuración de tu cuenta.
 
-![More data](../images/configure-proxy-global-on-linux/more-data.webp)
+![More data](/uploads/configure-proxy-global-on-linux/more-data.webp)
 
 ## Instalar Windscribe
 
@@ -408,7 +408,7 @@ windscribe connect best # Nos conecta al servidor de windscribe con mejor rendim
 
 Para consultar la ayuda de windscribe podemos ejecutar el comando `windscribe --help`
 
-![Windscribe Help](../images/configure-proxy-global-on-linux/windscribe-help.webp)
+![Windscribe Help](/uploads/configure-proxy-global-on-linux/windscribe-help.webp)
 
 Estas son algunas de las opciones que existen para configurar la salida a internet a través de un proxy en sistemas operativos GNU/Linux. De todas las variantes mostradas en este artículo mi favorita sin dudas es windscribe por todas las facilidades que ofrece.
 
