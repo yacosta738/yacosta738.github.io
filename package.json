@@ -75,9 +75,5 @@
     "vue": "3.3.4",
     "workbox-window": "^7.0.0"
   },
-  "engines": {
-    "node": "^14.15.0 || >=16.0.0",
-    "pnpm": ">=7.0.0"
-  },
   "packageManager": "pnpm@8.6.12"
 }
