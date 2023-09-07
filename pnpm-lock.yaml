@@ -9,10 +9,10 @@ devDependencies:
     version: 3.0.0
   '@astrojs/tailwind':
     specifier: 5.0.0
-    version: 5.0.0(astro@3.0.8)(tailwindcss@3.3.3)
+    version: 5.0.0(astro@3.0.10)(tailwindcss@3.3.3)
   '@astrojs/vue':
     specifier: 3.0.0
-    version: 3.0.0(@babel/core@7.22.10)(astro@3.0.8)(vite@4.4.9)(vue@3.3.4)
+    version: 3.0.0(@babel/core@7.22.10)(astro@3.0.10)(vite@4.4.9)(vue@3.3.4)
   '@nanostores/vue':
     specifier: 0.10.0
     version: 0.10.0(nanostores@0.9.3)(vue@3.3.4)
@@ -39,13 +39,13 @@ devDependencies:
     version: 6.6.0(eslint@8.48.0)(typescript@5.1.6)
   '@vite-pwa/astro':
     specifier: ^0.1.2
-    version: 0.1.2(astro@3.0.8)(vite-plugin-pwa@0.16.4)
+    version: 0.1.2(astro@3.0.10)(vite-plugin-pwa@0.16.4)
   '@vueuse/core':
     specifier: 10.4.1
     version: 10.4.1(vue@3.3.4)
   astro:
-    specifier: 3.0.8
-    version: 3.0.8(sass@1.66.1)
+    specifier: 3.0.10
+    version: 3.0.10(sass@1.66.1)
   astro-compress:
     specifier: 1.1.23
     version: 1.1.23
@@ -54,13 +54,13 @@ devDependencies:
     version: 2.0.11
   astro-i18next:
     specifier: 1.0.0-beta.21
-    version: 1.0.0-beta.21(astro@3.0.8)
+    version: 1.0.0-beta.21(astro@3.0.10)
   astro-icon:
     specifier: 0.8.1
     version: 0.8.1
   astro-netlify-cms:
     specifier: 0.5.4
-    version: 0.5.4(astro@3.0.8)(graphql@15.8.0)
+    version: 0.5.4(astro@3.0.10)(graphql@15.8.0)
   astro-robots-txt:
     specifier: 0.5.0
     version: 0.5.0
@@ -107,8 +107,8 @@ devDependencies:
     specifier: 0.3.0
     version: 0.3.0
   marked:
-    specifier: 8.0.0
-    version: 8.0.0
+    specifier: 8.0.1
+    version: 8.0.1
   mdast-util-to-string:
     specifier: 4.0.0
     version: 4.0.0
@@ -228,7 +228,7 @@ packages:
       }
     dev: true
 
-  /@astrojs/markdown-remark@3.0.0(astro@3.0.8):
+  /@astrojs/markdown-remark@3.0.0(astro@3.0.10):
     resolution:
       {
         integrity: sha512-s8I49Je4++ImgYAgwL32HgN8m6we2qz3RtBpN4AjObMODPwDylmzUHZksD8Toy31q/P59ED3MuwphqOGm9l03w==
@@ -237,7 +237,7 @@ packages:
       astro: ^3.0.0
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 3.0.8(sass@1.66.1)
+      astro: 3.0.10(sass@1.66.1)
       github-slugger: 2.0.0
       import-meta-resolve: 3.0.0
       rehype-raw: 6.1.1
@@ -284,7 +284,7 @@ packages:
       zod: 3.21.1
     dev: true
 
-  /@astrojs/tailwind@5.0.0(astro@3.0.8)(tailwindcss@3.3.3):
+  /@astrojs/tailwind@5.0.0(astro@3.0.10)(tailwindcss@3.3.3):
     resolution:
       {
         integrity: sha512-bMZZNNm/SW+ijUKMQDhdiuNWDdR3CubEKUHb2Ran4Arx1ikWn/kKIkFDXUV+MUnsLa7s19x9VMRlARRyKbqMkQ==
@@ -293,7 +293,7 @@ packages:
       astro: ^3.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 3.0.8(sass@1.66.1)
+      astro: 3.0.10(sass@1.66.1)
       autoprefixer: 10.4.15(postcss@8.4.29)
       postcss: 8.4.29
       postcss-load-config: 4.0.1(postcss@8.4.29)
@@ -321,7 +321,7 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/vue@3.0.0(@babel/core@7.22.10)(astro@3.0.8)(vite@4.4.9)(vue@3.3.4):
+  /@astrojs/vue@3.0.0(@babel/core@7.22.10)(astro@3.0.10)(vite@4.4.9)(vue@3.3.4):
     resolution:
       {
         integrity: sha512-C3PSSznvgs9lZLz3e4VZOV3rRV+OekSELkA5wcrh2zgQiemYs8fnLo7S25ZMhM/xrqMbNxUKGjYZngH7NdIvsg==
@@ -335,7 +335,7 @@ packages:
       '@vitejs/plugin-vue-jsx': 3.0.2(vite@4.4.9)(vue@3.3.4)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.22.10)
       '@vue/compiler-sfc': 3.3.4
-      astro: 3.0.8(sass@1.66.1)
+      astro: 3.0.10(sass@1.66.1)
       vue: 3.3.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -4270,7 +4270,7 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@vite-pwa/astro@0.1.2(astro@3.0.8)(vite-plugin-pwa@0.16.4):
+  /@vite-pwa/astro@0.1.2(astro@3.0.10)(vite-plugin-pwa@0.16.4):
     resolution:
       {
         integrity: sha512-k4sqPQwNLEgOsnPe5ymHyL3SR39r5OujOs2t30h9L15aN22UqZA6bhUdWyv2glDPGHs1TH5dnO1Cm7I8yVysvA==
@@ -4279,7 +4279,7 @@ packages:
       astro: ^1.6.0 || ^2.0.0 || ^3.0.0
       vite-plugin-pwa: '>=0.16.3 <1'
     dependencies:
-      astro: 3.0.8(sass@1.66.1)
+      astro: 3.0.10(sass@1.66.1)
       vite-plugin-pwa: 0.16.4(vite@4.4.9)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
@@ -5074,7 +5074,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next@1.0.0-beta.21(astro@3.0.8):
+  /astro-i18next@1.0.0-beta.21(astro@3.0.10):
     resolution:
       {
         integrity: sha512-1YPqwexumHpK/d9afEoi52CBFTu6k4MYv/oHjsaAasZDvFClU6U5VPttC/OgZcXRYggCM6ee2LOnyHqlmXOeLA==
@@ -5085,7 +5085,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
-      astro: 3.0.8(sass@1.66.1)
+      astro: 3.0.10(sass@1.66.1)
       i18next: 22.5.1
       i18next-browser-languagedetector: 7.1.0
       i18next-fs-backend: 2.1.5
@@ -5108,7 +5108,7 @@ packages:
       svgo: 2.8.0
     dev: true
 
-  /astro-netlify-cms@0.5.4(astro@3.0.8)(graphql@15.8.0):
+  /astro-netlify-cms@0.5.4(astro@3.0.10)(graphql@15.8.0):
     resolution:
       {
         integrity: sha512-yRHTX6ml0HtEKp6OLJiOjV4g5h8EacsQhA1IIn4cYj4pF5R/JOzFKSEqoo9IeewYhmlIXlnfbryk789gZbTqQw==
@@ -5117,7 +5117,7 @@ packages:
       astro: ^1.0.0 || ^2.0.0-beta || ^3.0.0-beta
     dependencies:
       '@types/react': 17.0.64
-      astro: 3.0.8(sass@1.66.1)
+      astro: 3.0.10(sass@1.66.1)
       netlify-cms-app: 2.15.72(@types/react@17.0.64)(graphql@15.8.0)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -5148,17 +5148,17 @@ packages:
       }
     dev: true
 
-  /astro@3.0.8(sass@1.66.1):
+  /astro@3.0.10(sass@1.66.1):
     resolution:
       {
-        integrity: sha512-behNlLMlT8yWLlVvKKB2ufbSwxiqYUKqw31LSQx+lNQ8/lBvxemyjSBDMlBbGVCWEfg67B2bqWIrCweHSWb01Q==
+        integrity: sha512-LxLlFksTUn3B3Xi3KBirRBg1QI8t2lvOijfODor1OSpAnlEZUzToyLxbdzR2dBVLF5reAoi7LJNKsQouPnMXlg==
       }
     engines: { node: '>=18.14.1', npm: '>=6.14.0' }
     hasBin: true
     dependencies:
       '@astrojs/compiler': 2.0.1
       '@astrojs/internal-helpers': 0.2.0
-      '@astrojs/markdown-remark': 3.0.0(astro@3.0.8)
+      '@astrojs/markdown-remark': 3.0.0(astro@3.0.10)
       '@astrojs/telemetry': 3.0.1
       '@babel/core': 7.22.10
       '@babel/generator': 7.22.10
@@ -5193,13 +5193,12 @@ packages:
       ora: 7.0.1
       p-limit: 4.0.0
       path-to-regexp: 6.2.1
-      preferred-pm: 3.0.3
+      preferred-pm: 3.1.2
       prompts: 2.4.2
       rehype: 12.0.1
       resolve: 1.22.4
       semver: 7.5.4
       server-destroy: 1.0.1
-      sharp: 0.32.5
       shiki: 0.14.3
       string-width: 6.1.0
       strip-ansi: 7.1.0
@@ -5209,9 +5208,11 @@ packages:
       vfile: 5.3.7
       vite: 4.4.9(@types/node@20.5.0)(sass@1.66.1)
       vitefu: 0.2.4(vite@4.4.9)
-      which-pm: 2.0.0
+      which-pm: 2.1.1
       yargs-parser: 21.1.1
       zod: 3.21.1
+    optionalDependencies:
+      sharp: 0.32.5
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -10385,10 +10386,10 @@ packages:
       }
     dev: true
 
-  /marked@8.0.0:
+  /marked@8.0.1:
     resolution:
       {
-        integrity: sha512-RI/D5csFVreNrFchdKFSdV38GDHJdD7OdmbNWYzGvApPb0A9pyypgfHC/FBH4ugmRE8cr7yg/TH7tu8585eMhA==
+        integrity: sha512-eEbeEb/mJwh+sNLEhHOWtxMgjN/NEwZUBs1nkiIH2sTQTq07KmPMQ48ihyvo5+Ya56spVOPhunfGr6406crCVA==
       }
     engines: { node: '>= 16' }
     hasBin: true
@@ -13678,10 +13679,10 @@ packages:
       tunnel-agent: 0.6.0
     dev: true
 
-  /preferred-pm@3.0.3:
+  /preferred-pm@3.1.2:
     resolution:
       {
-        integrity: sha512-+wZgbxNES/KlJs9q40F/1sfOd/j7f1O9JaHcW5Dsn3aUUOZg3L2bjpVUcKV2jvtElYfoTuQiNeMfQJ4kwUAhCQ==
+        integrity: sha512-nk7dKrcW8hfCZ4H6klWcdRknBOXWzNQByJ0oJyX97BOupsYD+FzLS4hflgEu/uPUEHZCuRfMxzCBsuWd7OzT8Q==
       }
     engines: { node: '>=10' }
     dependencies:
@@ -17905,6 +17906,17 @@ packages:
     resolution:
       {
         integrity: sha512-Lhs9Pmyph0p5n5Z3mVnN0yWcbQYUAD7rbQUiMsQxOJ3T57k7RFe35SUwWMf7dsbDZks1uOmw4AecB/JMDj3v/w==
+      }
+    engines: { node: '>=8.15' }
+    dependencies:
+      load-yaml-file: 0.2.0
+      path-exists: 4.0.0
+    dev: true
+
+  /which-pm@2.1.1:
+    resolution:
+      {
+        integrity: sha512-xzzxNw2wMaoCWXiGE8IJ9wuPMU+EYhFksjHxrRT8kMT5SnocBPRg69YAMtyV4D12fP582RA+k3P8H9J5EMdIxQ==
       }
     engines: { node: '>=8.15' }
     dependencies:
