@@ -12,7 +12,7 @@ export interface Props {
 const { drawer } = Astro.props
 
 const { pathname } = Astro.url
-const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/')
+const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/blog\/\w+/)
 setDefaultNamespace('common')
 ---
 
