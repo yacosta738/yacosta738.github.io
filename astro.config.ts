@@ -15,7 +15,7 @@ import critters from 'astro-critters'
 import { manifest, workbox } from './src/plugins/pwa'
 import { config } from './src/plugins/netlify-cms'
 
-const DEV_PORT = 3000
+const DEV_PORT: number = 3000
 
 // https://astro.build/config
 export default defineConfig({
