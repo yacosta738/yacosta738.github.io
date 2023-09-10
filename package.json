@@ -40,7 +40,7 @@
     "astro-i18next": "1.0.0-beta.21",
     "astro-icon": "0.8.1",
     "astro-netlify-cms": "0.5.4",
-    "astro-robots-txt": "0.5.0",
+    "astro-robots-txt": "1.0.0",
     "astro-seo": "0.8.0",
     "dompurify": "3.0.5",
     "eslint": "8.48.0",
