@@ -1,6 +1,6 @@
 ---
 import type { IJob } from '@models:Job'
-import { Sprite } from 'astro-icon'
+import { Icon } from 'astro-icon/components'
 import { range } from '@utils:role-range'
 
 export interface Props {
@@ -16,10 +16,9 @@ const getFirstRole = (job: IJob) => {
 }
 
 ---
-<Sprite.Provider>
 	<div class='flex space-x-4'>
 		<div class='flex-shrink-0'>
-			<Sprite size={48} name={job.icon} />
+			<Icon size={48} title={job.company} name={job.icon}/>
 		</div>
 		{
 			hasMultipleRoles ?
@@ -53,5 +52,4 @@ const getFirstRole = (job: IJob) => {
 		</div>)
 		}
 	</div>
-</Sprite.Provider>
 

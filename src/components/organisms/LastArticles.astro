@@ -1,7 +1,7 @@
 ---
 import i18next, { t, setDefaultNamespace } from 'i18next'
 import { Image } from 'astro:assets';
-import { Article, jsonToArticle } from '@models:Article'
+import { type Article, jsonToArticle } from '@models:Article'
 import type { MarkdownInstance } from 'astro'
 
 const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
