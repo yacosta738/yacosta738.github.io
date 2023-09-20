@@ -17,6 +17,7 @@
     "test": "npx -y concurrently \"npm run test:unit\" \"npm run test:e2e\"",
     "test:unit": "vitest",
     "test:playwright": "playwright test",
+    "test:playwright:ui": "playwright test --ui",
     "test:e2e": "start-server-and-test 'pnpm run start' http://localhost:3000 'pnpm run test:playwright'"
   },
   "devDependencies": {

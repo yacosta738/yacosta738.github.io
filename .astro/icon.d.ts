@@ -37707,10 +37707,6 @@ declare module 'astro-icon' {
 		| "akar-icons:youtube-fill"
 		| "akar-icons:zoom-fill"
 		| "akar-icons:zoom-in"
-		| "akar-icons:zoom-out"
-		| "desoft"
-		| "gft"
-		| "meli"
-		| "scanntech";
+		| "akar-icons:zoom-out";
 
   }
