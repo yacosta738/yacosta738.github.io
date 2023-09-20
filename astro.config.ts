@@ -11,6 +11,7 @@ import remarkToc from 'remark-toc'
 import AstroPWA from '@vite-pwa/astro'
 import Compress from 'astro-compress'
 import critters from 'astro-critters'
+import icon from 'astro-icon'
 
 import { manifest, workbox } from './src/plugins/pwa'
 import { config } from './src/plugins/netlify-cms'
@@ -59,7 +60,24 @@ export default defineConfig({
 		NetlifyCMS({
 			config
 		}),
-		vue()
+		vue(),
+		icon({
+			iconDir: 'src/icons',
+			include: {
+				mdi: ['*'],
+				uit: ['*'],
+				'simple-icons': ['*'],
+				ph: ['*'],
+				ri: ['*'],
+				ic: ['*'],
+				charm: ['*'],
+				cib: ['*'],
+				ion: ['*'],
+				clarity: ['*'],
+				teenyicons: ['*'],
+				'akar-icons': ['*']
+			}
+		})
 	],
 	vite: {
 		ssr: {

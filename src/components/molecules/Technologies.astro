@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon'
-import { jsonToTech, Tech } from '@models:Tech'
+import { Icon } from 'astro-icon/components'
+import { jsonToTech, type Tech } from '@models:Tech'
 const techData = await Astro.glob('../../data/technologies/**/*.json')
 
 const techs: Tech[] = techData
