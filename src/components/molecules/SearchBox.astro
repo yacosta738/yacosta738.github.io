@@ -51,7 +51,7 @@ setDefaultNamespace('blog')
 				<div class='p-6 space-y-6'>
 					<div class='flex items-center justify-between'>
 						<form class="mx-2 w-full">
-							<label for='search' class='mb-2 text-sm font-medium text-gray-900 sr-only'
+							<label for='textSearch' class='mb-2 text-sm font-medium text-gray-900 sr-only'
 								>Search</label
 							>
 							<div class='relative'>
@@ -82,15 +82,30 @@ setDefaultNamespace('blog')
 
 <script>
 	import Fuse from 'fuse.js'
-	import { Article } from '@models:Article'
+
+	interface Article {
+		id: string
+		url: string
+		title: string
+		description: string
+		date: string | Date
+		cover: string
+		author: string
+		timeToRead: number
+		lang: string
+		tags: string[]
+		categories: string[]
+		draft: boolean
+		content: string
+	}
 
 	const textInputDelay = (fn, ms) => {
-		let timer: NodeJS.Timeout
-		return function (...args) {
-			clearTimeout(timer)
-			timer = setTimeout(fn.bind(this, ...args), ms || 0)
-		}
-	}
+		let timer: ReturnType<typeof setTimeout>;
+		return function (...args: any[]) {
+			clearTimeout(timer);
+			timer = setTimeout(fn.bind(this, ...args), ms || 0);
+		};
+	};
 
 	const options = {
 		keys: ['title', 'description', 'content', 'tags', 'categories', 'author']
@@ -99,20 +114,19 @@ setDefaultNamespace('blog')
 	class SearchBox extends HTMLElement {
 		constructor() {
 			super()
-
 			// Read the articles from the data attribute.
 			const articles: Array<Article> = this.dataset.articles
 				? JSON.parse(this.dataset.articles)
 				: []
 			const results = this.querySelector('#article-results') as HTMLElement
+			const itemFoundText = this.querySelector('#itemFoundText') as HTMLElement
 			const search = async () => {
 				let text = (this.querySelector('#textSearch') as HTMLInputElement).value
 				const fuse = new Fuse<Article>(articles, options)
 				const res = fuse.search(text)
 				let html = ''
-				const itemFoundText = this.querySelector('#itemFoundText') as HTMLElement
 				if (res.length) {
-					itemFoundText.innerHTML = `${res?.length ?? 0}`
+					itemFoundText.innerHTML = `${res?.length ?? 0} / ${articles.length} `
 					res.forEach((item) => {
 						html += `
 					<div class="flex flex-col space-y-2 mb-2 p-2 border rounded border-green-500">
@@ -122,13 +136,23 @@ setDefaultNamespace('blog')
 				`
 					})
 				} else {
-					itemFoundText.innerHTML = '0'
+					itemFoundText.innerHTML = '0 '
 					html = `<p class="text-lg font-semibold text-gray-500 dark:text-gray-400">No results found</p>`
 				}
 				results.innerHTML = html
 			}
 			search()
-			document.getElementById('textSearch').onkeyup = textInputDelay(search, 300)
+			const searchInput = document.getElementById('textSearch')
+			searchInput && searchInput.addEventListener('keyup', textInputDelay(search, 500))
+			// clear search input on modal close
+			const modal = document.getElementById("searchModal");
+			// if have aria-hidden='true' means modal is closed and we can clear the input
+			const closeButton = modal.querySelector('[data-modal-hide="searchModal"]');
+			closeButton.addEventListener('click', () => {
+				(searchInput as HTMLInputElement).value = ''
+				results.innerHTML = ''
+				itemFoundText.innerHTML = '0 '
+			})
 		}
 	}
 

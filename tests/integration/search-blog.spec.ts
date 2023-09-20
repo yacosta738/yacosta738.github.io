@@ -1,17 +1,14 @@
-import { test } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
 test('test search box in blog', async ({ page }) => {
-	await page.goto('http://localhost:3000/')
-	await page.getByRole('link', { name: '0" counter(item) ". Blog' }).click()
+	await page.goto('http://localhost:3000/blog')
 	await page.getByRole('button').click()
-	await page.fill('[placeholder="Search..."]', '')
-	await page.type('[placeholder="Search..."]', 'vuejs')
-	await page
-		.getByText('Vue 3 with Typescript and Decorators I use Typescript and decorator libraries fo')
-		.click()
-	await page.getByRole('link', { name: 'Vue 3 with Typescript and Decorators' }).click()
-	await page.getByRole('link', { name: 'Back to Blog' }).click()
-	await page.getByRole('button').click()
+	await page.getByPlaceholder('Search...').click()
+	await page.getByPlaceholder('Search...').fill('vuejs')
+	// get text of #itemFoundText and check if it is equal to '1 item found'
+	await page.waitForSelector('#itemFoundText')
+	const itemFoundText = await page.$eval('#itemFoundText', (el) => el.textContent)
+	expect(itemFoundText).toBeDefined()
 	await page.getByPlaceholder('Search...').click()
 	await page.getByPlaceholder('Search...').fill('kotlin')
 	await page.getByRole('button', { name: 'Close modal' }).click()
