@@ -13,10 +13,10 @@ devDependencies:
     version: 3.0.0
   '@astrojs/tailwind':
     specifier: 5.0.0
-    version: 5.0.0(astro@3.1.1)(tailwindcss@3.3.3)
+    version: 5.0.0(astro@3.1.2)(tailwindcss@3.3.3)
   '@astrojs/vue':
     specifier: 3.0.0
-    version: 3.0.0(@babel/core@7.22.10)(astro@3.1.1)(vite@4.4.9)(vue@3.3.4)
+    version: 3.0.0(@babel/core@7.22.10)(astro@3.1.2)(vite@4.4.9)(vue@3.3.4)
   '@iconify-json/akar-icons':
     specifier: ^1.1.19
     version: 1.1.19
@@ -79,13 +79,13 @@ devDependencies:
     version: 6.7.2(eslint@8.49.0)(typescript@5.1.6)
   '@vite-pwa/astro':
     specifier: ^0.1.3
-    version: 0.1.3(astro@3.1.1)(vite-plugin-pwa@0.16.5)
+    version: 0.1.3(astro@3.1.2)(vite-plugin-pwa@0.16.5)
   '@vueuse/core':
     specifier: 10.4.1
     version: 10.4.1(vue@3.3.4)
   astro:
-    specifier: 3.1.1
-    version: 3.1.1(sass@1.67.0)
+    specifier: 3.1.2
+    version: 3.1.2(sass@1.67.0)
   astro-compress:
     specifier: 2.0.15
     version: 2.0.15
@@ -94,13 +94,13 @@ devDependencies:
     version: 2.0.11
   astro-i18next:
     specifier: 1.0.0-beta.21
-    version: 1.0.0-beta.21(astro@3.1.1)
+    version: 1.0.0-beta.21(astro@3.1.2)
   astro-icon:
     specifier: 1.0.0-next.2
     version: 1.0.0-next.2
   astro-netlify-cms:
     specifier: 0.5.4
-    version: 0.5.4(astro@3.1.1)(graphql@15.8.0)
+    version: 0.5.4(astro@3.1.2)(graphql@15.8.0)
   astro-robots-txt:
     specifier: 1.0.0
     version: 1.0.0
@@ -263,13 +263,13 @@ packages:
     resolution: {integrity: sha512-NQ4ppp1CM0HNkKbJNM4saVSfmUYzGlRalF6wx7F6T/MYHYSWGuojY89/oFTy4t8VlOGUCUijlsVNNeziWaUo5g==}
     dev: true
 
-  /@astrojs/markdown-remark@3.2.0(astro@3.1.1):
+  /@astrojs/markdown-remark@3.2.0(astro@3.1.2):
     resolution: {integrity: sha512-jigyLfefUZPKgVmmraCkVpdUuFH1R3SrpgQO13axsgwLDBgkggaQpNR5Ag4O9PDualeBtbdt30aYSfvnBKx9Hg==}
     peerDependencies:
       astro: ^3.1.0
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 3.1.1(sass@1.67.0)
+      astro: 3.1.2(sass@1.67.0)
       github-slugger: 2.0.0
       import-meta-resolve: 3.0.0
       mdast-util-definitions: 6.0.0
@@ -308,13 +308,13 @@ packages:
       zod: 3.21.1
     dev: true
 
-  /@astrojs/tailwind@5.0.0(astro@3.1.1)(tailwindcss@3.3.3):
+  /@astrojs/tailwind@5.0.0(astro@3.1.2)(tailwindcss@3.3.3):
     resolution: {integrity: sha512-bMZZNNm/SW+ijUKMQDhdiuNWDdR3CubEKUHb2Ran4Arx1ikWn/kKIkFDXUV+MUnsLa7s19x9VMRlARRyKbqMkQ==}
     peerDependencies:
       astro: ^3.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 3.1.1(sass@1.67.0)
+      astro: 3.1.2(sass@1.67.0)
       autoprefixer: 10.4.15(postcss@8.4.29)
       postcss: 8.4.29
       postcss-load-config: 4.0.1(postcss@8.4.29)
@@ -323,8 +323,8 @@ packages:
       - ts-node
     dev: true
 
-  /@astrojs/telemetry@3.0.1:
-    resolution: {integrity: sha512-7zJMuikRDQ0LLLivteu0+y4pqdgznrChFiRrY3qmKlOEkLWD1T3u1a5M970lvpErP7Vgh4P298JBPjv8LTj+sw==}
+  /@astrojs/telemetry@3.0.2:
+    resolution: {integrity: sha512-ef+jqCkqopCzjGfsMsr+8p56Nj6F9ZzouWcWZt+dKsqbRccI3c8K3jfkLcdq4AyfFZtKBDB6N4ZuI68g33oiOg==}
     engines: {node: '>=18.14.1'}
     dependencies:
       ci-info: 3.8.0
@@ -339,7 +339,7 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/vue@3.0.0(@babel/core@7.22.10)(astro@3.1.1)(vite@4.4.9)(vue@3.3.4):
+  /@astrojs/vue@3.0.0(@babel/core@7.22.10)(astro@3.1.2)(vite@4.4.9)(vue@3.3.4):
     resolution: {integrity: sha512-C3PSSznvgs9lZLz3e4VZOV3rRV+OekSELkA5wcrh2zgQiemYs8fnLo7S25ZMhM/xrqMbNxUKGjYZngH7NdIvsg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -350,7 +350,7 @@ packages:
       '@vitejs/plugin-vue-jsx': 3.0.2(vite@4.4.9)(vue@3.3.4)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.22.10)
       '@vue/compiler-sfc': 3.3.4
-      astro: 3.1.1(sass@1.67.0)
+      astro: 3.1.2(sass@1.67.0)
       vue: 3.3.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -3441,13 +3441,13 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@vite-pwa/astro@0.1.3(astro@3.1.1)(vite-plugin-pwa@0.16.5):
+  /@vite-pwa/astro@0.1.3(astro@3.1.2)(vite-plugin-pwa@0.16.5):
     resolution: {integrity: sha512-NVJ49DU+sUi9yt0TC16LQaBak8nM0hUDu8j3C277bL5SC4aYN/0fzv5uwWzSJ38XbY0NQFA9dvfIbKsPmk88eg==}
     peerDependencies:
       astro: ^1.6.0 || ^2.0.0 || ^3.0.0
       vite-plugin-pwa: '>=0.16.5 <1'
     dependencies:
-      astro: 3.1.1(sass@1.67.0)
+      astro: 3.1.2(sass@1.67.0)
       vite-plugin-pwa: 0.16.5(vite@4.4.9)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
@@ -4036,7 +4036,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next@1.0.0-beta.21(astro@3.1.1):
+  /astro-i18next@1.0.0-beta.21(astro@3.1.2):
     resolution: {integrity: sha512-1YPqwexumHpK/d9afEoi52CBFTu6k4MYv/oHjsaAasZDvFClU6U5VPttC/OgZcXRYggCM6ee2LOnyHqlmXOeLA==}
     hasBin: true
     peerDependencies:
@@ -4044,7 +4044,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
-      astro: 3.1.1(sass@1.67.0)
+      astro: 3.1.2(sass@1.67.0)
       i18next: 22.5.1
       i18next-browser-languagedetector: 7.1.0
       i18next-fs-backend: 2.2.0
@@ -4066,13 +4066,13 @@ packages:
       - supports-color
     dev: true
 
-  /astro-netlify-cms@0.5.4(astro@3.1.1)(graphql@15.8.0):
+  /astro-netlify-cms@0.5.4(astro@3.1.2)(graphql@15.8.0):
     resolution: {integrity: sha512-yRHTX6ml0HtEKp6OLJiOjV4g5h8EacsQhA1IIn4cYj4pF5R/JOzFKSEqoo9IeewYhmlIXlnfbryk789gZbTqQw==}
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta || ^3.0.0-beta
     dependencies:
       '@types/react': 17.0.64
-      astro: 3.1.1(sass@1.67.0)
+      astro: 3.1.2(sass@1.67.0)
       netlify-cms-app: 2.15.72(@types/react@17.0.64)(graphql@15.8.0)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -4097,15 +4097,15 @@ packages:
     resolution: {integrity: sha512-7gq6lhibCM8FuzZIJlbLLWP5EJ9KL2/4XqeFrAg9O6ZK2xMFxJ5ubKf+a0VJwwTu8W8Xr421CmpiXu6Hq7n/7Q==}
     dev: true
 
-  /astro@3.1.1(sass@1.67.0):
-    resolution: {integrity: sha512-KLtzCcLiQEsoWHJO0vQ5QZ/9/80P3cUuBeIkl87YezRkzs3Am0kuzfeGLumb6OOcrR2W0AZGlVlS0ub+q/yiaA==}
+  /astro@3.1.2(sass@1.67.0):
+    resolution: {integrity: sha512-9rlKyk6Qmw50Pc188+ey7JAEYBsJGh5an46AXGPMHIdEkH6YOc4b2z9Rr+TNF8QmM/U+C2ZQFRVQyCKU4i8/pg==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
       '@astrojs/compiler': 2.1.0
       '@astrojs/internal-helpers': 0.2.0
-      '@astrojs/markdown-remark': 3.2.0(astro@3.1.1)
-      '@astrojs/telemetry': 3.0.1
+      '@astrojs/markdown-remark': 3.2.0(astro@3.1.2)
+      '@astrojs/telemetry': 3.0.2
       '@babel/core': 7.22.10
       '@babel/generator': 7.22.10
       '@babel/parser': 7.22.10
