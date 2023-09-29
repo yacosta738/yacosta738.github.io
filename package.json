@@ -55,7 +55,7 @@
     "astro-netlify-cms": "0.5.4",
     "astro-robots-txt": "1.0.0",
     "astro-seo": "0.8.0",
-    "dompurify": "3.0.5",
+    "dompurify": "3.0.6",
     "eslint": "8.50.0",
     "eslint-config-standard": "17.1.0",
     "eslint-plugin-astro": "0.29.0",
