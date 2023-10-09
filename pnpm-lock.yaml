@@ -15,8 +15,8 @@ devDependencies:
     specifier: 5.0.1
     version: 5.0.1(astro@3.2.3)(tailwindcss@3.3.3)
   '@astrojs/vue':
-    specifier: 3.0.0
-    version: 3.0.0(@babel/core@7.23.0)(astro@3.2.3)(vite@4.4.9)(vue@3.3.4)
+    specifier: 3.0.1
+    version: 3.0.1(@babel/core@7.23.0)(astro@3.2.3)(vite@4.4.9)(vue@3.3.4)
   '@iconify-json/akar-icons':
     specifier: ^1.1.19
     version: 1.1.19
@@ -334,11 +334,11 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/vue@3.0.0(@babel/core@7.23.0)(astro@3.2.3)(vite@4.4.9)(vue@3.3.4):
-    resolution: {integrity: sha512-C3PSSznvgs9lZLz3e4VZOV3rRV+OekSELkA5wcrh2zgQiemYs8fnLo7S25ZMhM/xrqMbNxUKGjYZngH7NdIvsg==}
+  /@astrojs/vue@3.0.1(@babel/core@7.23.0)(astro@3.2.3)(vite@4.4.9)(vue@3.3.4):
+    resolution: {integrity: sha512-qXn99sQ60zUPoHsMXGt43IySMKN5VXZz5VJlTKqkXG+CFV9DOWw0+syj/5iYKZSouH3nyNNb5a9uAkdz+X6Cew==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
-      astro: ^3.0.0
+      astro: ^3.2.3
       vue: ^3.2.30
     dependencies:
       '@vitejs/plugin-vue': 4.3.4(vite@4.4.9)(vue@3.3.4)
