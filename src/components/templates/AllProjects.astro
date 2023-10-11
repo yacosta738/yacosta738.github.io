@@ -13,7 +13,7 @@ const tech: {
 } = {}
 techData.forEach((t) => (tech[t.id] = t))
 const jsonToProject = (json: ProjectJson): Project => {
-	const project: Project = {
+	return {
 		id: json.id,
 		title: json.title,
 		lang: json.lang,
@@ -28,7 +28,6 @@ const jsonToProject = (json: ProjectJson): Project => {
 		published: json.published,
 		content: json.content
 	}
-	return project
 }
 const projects: Project[] = projectData
 	.filter((project) => project.published && project.lang === i18next.language)

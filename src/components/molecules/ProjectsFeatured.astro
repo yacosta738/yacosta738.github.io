@@ -27,7 +27,7 @@ setDefaultNamespace('projects')
 						<h3 class='project-title'>{project.title}</h3>
 						<div
 							id='project-description'
-							class='project-description'
+							class='project-description [text-wrap:balance]'
 							set:html={markdownfy(project.content ?? '')}
 						/>
 						<ProjectTechList
