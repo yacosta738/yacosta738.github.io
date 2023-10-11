@@ -15,7 +15,9 @@ setDefaultNamespace('blog')
 
 <div class='flex flex-col'>
 	<h2 class='text-center text-3xl md:text-left md:text-4xl'>
-		<a href={localizeUrl(article.url)} class='inline-link'>{article.title}</a>
+		<a href={localizeUrl(article.url)} class='inline-link'
+		transition:name=`article-title-${article.url}`
+		>{article.title}</a>
 	</h2>
 	{!hidePostHeaderInSmallScreen && <PostHeader article={article} />}
 	<div class='mb-16 flex flex-col justify-center lg:flex-row'>
@@ -27,12 +29,17 @@ setDefaultNamespace('blog')
 					src={article.cover}
 					height={400}
 					width={1000}
+					transition:name=`article-image-${article.url}`
 				/>
 			)
 		}
 		<div class='mx-4 text-justify md:mx-10 md:my-5'>
-			<span class='line-clamp-7'>{article.description}</span>
-			<a href={localizeUrl(article.url)} class='inline-link font-bold uppercase'>{t('read')}</a>
+			<span class='line-clamp-7'
+			transition:name=`article-description-${article.url}`
+			>{article.description}</span>
+			<a href={localizeUrl(article.url)} class='inline-link font-bold uppercase'
+			transition:name=`article-read-button-${article.url}`
+			>{t('read')}</a>
 		</div>
 	</div>
 </div>

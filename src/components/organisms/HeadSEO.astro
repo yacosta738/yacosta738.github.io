@@ -2,6 +2,7 @@
 import { SEO } from 'astro-seo'
 import { t, setDefaultNamespace } from 'i18next'
 import { pwaInfo } from 'virtual:pwa-info';
+import { ViewTransitions } from "astro:transitions"
 export interface Props {
 	title: string
 	description: string
@@ -51,3 +52,4 @@ ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
 	}}
 	twitter={{ card: 'summary_large_image', creator: '@yacosta738' }}
 />
+<ViewTransitions />
