@@ -38,6 +38,7 @@ const posts: Article[] = postsData
 							alt={post.title}
 							height={400}
 							width={1000}
+							transition:name=`article-image-${post.url}`
 						/>
 						<div class='absolute left-1 right-1 top-1 flex items-center justify-between rounded-lg rounded-b-none px-4'>
 							<span class='' />
@@ -49,13 +50,19 @@ const posts: Article[] = postsData
 					</a>
 					<div class='relative h-64 p-5'>
 						<a href={post.url}>
-							<h3 class='mb-1 text-2xl font-bold tracking-tight text-lightest-slate line-clamp-3'>
+							<h3 class='mb-1 text-2xl font-bold tracking-tight text-lightest-slate line-clamp-3'
+							transition:name=`article-title-${post.url}`
+							>
 								{post.title}
 							</h3>
 						</a>
-						<p class='mb-3 font-normal line-clamp-4 md:line-clamp-3'>{post.description}</p>
+						<p class='mb-3 font-normal line-clamp-4 md:line-clamp-3'
+						transition:name=`article-description-${post.url}`
+						>{post.description}</p>
 						<footer class='absolute bottom-1'>
-							<a href={post.url} class='inline-flex items-center px-3 py-1 text-sm font-medium'>
+							<a href={post.url} class='inline-flex items-center px-3 py-1 text-sm font-medium'
+							transition:name=`article-read-button-${post.url}`
+							>
 								{t('read')}
 							</a>
 						</footer>
