@@ -39,7 +39,7 @@ setDefaultNamespace('projects')
 					<div class='my-2.5 text-center text-3xl font-bold text-lightest-slate'>
 						{project?.title}
 					</div>
-					<div class='project-description'>
+					<div class='project-description [text-wrap:balance]'>
 						<p set:html={markdownfy(project.content ?? '')} />
 					</div>
 					<footer class='absolute bottom-1'>

@@ -5,7 +5,7 @@ description: This article explains CORS (Cross-Origin Resource Sharing) - a
   XMLHttpRequests to another domain. It covers what CORS is, why it's important,
   and how it works. The article emphasizes the importance of understanding CORS
   for building modern web applications that require cross-domain requests.
-date: 2023-10-11T08:00:13.456Z
+date: 2023-04-03T08:06:22.454Z
 lang: en
 cover: /uploads/understanding-cors-in-web-development.png
 author: Yuniel Acosta
