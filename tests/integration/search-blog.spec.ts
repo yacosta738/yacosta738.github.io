@@ -12,5 +12,5 @@ test('test search box in blog', async ({ page }) => {
 	await page.getByPlaceholder('Search...').click()
 	await page.getByPlaceholder('Search...').fill('kotlin')
 	await page.getByRole('button', { name: 'Close modal' }).click()
-	await page.getByRole('link', { name: 'acosta-logo' }).click()
+	await page.getByRole('link', { name: 'yuniel acosta portfolio logo' }).click()
 })
