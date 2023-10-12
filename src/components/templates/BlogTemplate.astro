@@ -12,22 +12,19 @@ import ReloadPrompt from 'molecules:ReloadPrompt'
 import ToTop from 'atoms:ToTop'
 
 
-let { title, description, image, ogImageAlt, lang } = Astro.props
+const { title, description, image, ogImageAlt, lang } = Astro.props
 
-title = title ?? t('seo.title')
-description = description ?? t('seo.description')
-image = image ?? '/uploads/me.webp'
-ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
-lang = lang ?? i18next.language
-
-changeLanguage(lang)
+changeLanguage(lang ?? i18next.language)
 ---
 
 <html lang={i18next.language} class='scroll-smooth'>
 	<head>
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
-		<HeadSEO title={title} description={description} image={image} ogImageAlt={ogImageAlt} />
+		<HeadSEO title={title ?? t('seo.title')}
+						 description={description ?? t('seo.description')}
+						 image={image ?? '/uploads/me.webp'}
+						 ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')} />
 		<HeadHrefLangs />
 		<GoogleAnalytics />
 	</head>

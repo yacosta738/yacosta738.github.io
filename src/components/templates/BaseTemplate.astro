@@ -12,18 +12,17 @@ import Technologies from 'molecules:Technologies'
 import ReloadPrompt from 'molecules:ReloadPrompt'
 
 setDefaultNamespace('common')
-let { title, description, image, ogImageAlt } = Astro.props
-title = title ?? t('seo.title')
-description = description ?? t('seo.description')
-image = image ?? '/uploads/me.webp'
-ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
+const { title, description, image, ogImageAlt } = Astro.props
 ---
 
 <html lang={i18next.language}>
 	<head>
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
-		<HeadSEO title={title} description={description} image={image} ogImageAlt={ogImageAlt} />
+		<HeadSEO title={title ?? t('seo.title')}
+						 description={description ?? t('seo.description')}
+						 image={image ?? '/uploads/me.webp'}
+						 ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')} />
 		<HeadHrefLangs />
 		<GoogleAnalytics />
 	</head>
