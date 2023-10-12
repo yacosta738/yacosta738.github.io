@@ -11,12 +11,8 @@ export interface Props {
 }
 setDefaultNamespace('common')
 const { href: canonicalUrl } = Astro.url
-let { title, description, image, ogImageAlt } = Astro.props
-
-title = title ?? t('seo.title')
-description = description ?? t('seo.description')
-image = image ?? '/uploads/me.webp'
-ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
+const { title, description, image, ogImageAlt } = Astro.props
+const imageExtension = image?.split('.').pop()
 ---
 
 
@@ -30,24 +26,24 @@ ogImageAlt = ogImageAlt ?? t('seo.ogImageAlt')
 
 
 <SEO
-	title={title}
-	description={description}
+	title={title ?? t('seo.title')}
+	description={description ?? t('seo.description')}
 	canonical={canonicalUrl}
 	openGraph={{
 		basic: {
-			title: t('seo.ogTitle'),
+			title: title ?? t('seo.ogTitle'),
 			type: 'website',
-			image: image,
+			image: image ?? '/uploads/me.webp',
 			url: canonicalUrl
 		},
 		optional: {
-			description: t('seo.description') ?? undefined,
+			description: description ?? t('seo.description'),
 		},
 		image: {
-			alt: ogImageAlt,
+			alt: ogImageAlt ?? t('seo.ogImageAlt'),
 			width: 1200,
 			height: 630,
-			type: 'image/jpeg'
+			type: `image/${imageExtension}`
 		}
 	}}
 	twitter={{ card: 'summary_large_image', creator: '@yacosta738' }}
