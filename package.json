@@ -88,5 +88,5 @@
     "vue": "3.3.4",
     "workbox-window": "^7.0.0"
   },
-  "packageManager": "pnpm@8.8.0"
+  "packageManager": "pnpm@8.9.2"
 }
