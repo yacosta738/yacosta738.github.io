@@ -55,7 +55,7 @@ devDependencies:
     version: 1.1.5
   '@nanostores/vue':
     specifier: 0.10.0
-    version: 0.10.0(nanostores@0.9.3)(vue@3.3.4)
+    version: 0.10.0(nanostores@0.9.4)(vue@3.3.4)
   '@playwright/test':
     specifier: 1.39.0
     version: 1.39.0
@@ -153,8 +153,8 @@ devDependencies:
     specifier: 4.0.0
     version: 4.0.0
   nanostores:
-    specifier: 0.9.3
-    version: 0.9.3
+    specifier: 0.9.4
+    version: 0.9.4
   postcss-nesting:
     specifier: 12.0.1
     version: 12.0.1(postcss@8.4.30)
@@ -2831,7 +2831,7 @@ packages:
     resolution: {integrity: sha512-HPnRdYO0WjFjRTSwO3frz1wKaU649OBFPX3Zo/2WZvuRi6zMiRGui8SnPQiQABgqCf8YikDe5t3HViTVw1WUzA==}
     dev: true
 
-  /@nanostores/vue@0.10.0(nanostores@0.9.3)(vue@3.3.4):
+  /@nanostores/vue@0.10.0(nanostores@0.9.4)(vue@3.3.4):
     resolution: {integrity: sha512-832RAUbzRfHPs1CdqVEwfvgB2+RD/INji4Zo8bUSEfRO2pQRMMeq479gydnohGpRaa0oNwlfKo7TGFXCghq/1g==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
@@ -2845,7 +2845,7 @@ packages:
       '@vue/devtools-api':
         optional: true
     dependencies:
-      nanostores: 0.9.3
+      nanostores: 0.9.4
       vue: 3.3.4
     dev: true
 
@@ -8607,8 +8607,8 @@ packages:
     hasBin: true
     dev: true
 
-  /nanostores@0.9.3:
-    resolution: {integrity: sha512-KobZjcVyNndNrb5DAjfs0WG0lRcZu5Q1BOrfTOxokFLi25zFrWPjg+joXC6kuDqNfSt9fQwppyjUBkRPtsL+8w==}
+  /nanostores@0.9.4:
+    resolution: {integrity: sha512-BVFzKt6K5P8tYQLL7MItqcev7jpspA5pIjv+Ck3k6wBnUlwCJcpkGTIinj4APvx8SvdP9fXDGoMRCTY6DO/9QA==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     dev: true
 
