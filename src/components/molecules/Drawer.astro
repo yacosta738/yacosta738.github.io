@@ -50,6 +50,7 @@ setDefaultNamespace('hero')
 				document.getElementById(DRAWER_MENU_BUTTON_ID)
 			const $menuDrawerElement: HTMLElement | null = this.querySelector(`#${identifier}`)
 
+			const classListDrawerMenuButton: string[] = ['active-menu', 'z-[100]', 'absolute', 'top-0', 'right-0']
 			// options with default values
 			const options: DrawerOptions = {
 				placement: 'right',
@@ -59,12 +60,12 @@ setDefaultNamespace('hero')
 				edgeOffset: '',
 				backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-30',
 				onHide: () => {
-					$drawerMenuButtonElement?.classList.remove('active-menu', 'z-[100]')
+					$drawerMenuButtonElement?.classList.remove(...classListDrawerMenuButton)
 					$drawerMenuButtonElement?.removeAttribute('data-drawer-dismiss')
 					$drawerMenuButtonElement?.setAttribute('data-drawer-show', $menuDrawerElement?.id)
 				},
 				onShow: () => {
-					$drawerMenuButtonElement?.classList.add('active-menu', 'z-[100]')
+					$drawerMenuButtonElement?.classList.add(...classListDrawerMenuButton)
 					$drawerMenuButtonElement?.removeAttribute('data-drawer-show')
 					$drawerMenuButtonElement?.setAttribute('data-drawer-dismiss', $menuDrawerElement?.id)
 				},
