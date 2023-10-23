@@ -85,7 +85,7 @@
     "tailwindcss": "3.3.3",
     "uuid": "9.0.1",
     "vitest": "^0.34.6",
-    "vue": "3.3.4",
+    "vue": "3.3.6",
     "workbox-window": "^7.0.0"
   },
   "packageManager": "pnpm@8.9.2"
