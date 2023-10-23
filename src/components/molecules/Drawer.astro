@@ -2,7 +2,7 @@
 import MenuButton from 'atoms:MenuButton'
 import Menus from 'molecules:Menus'
 import { t, setDefaultNamespace } from 'i18next'
-import { DRAWER_BUTTON_BOX, DRAWER_MENU_ID, DRAWER_MENU_LABEL } from '@store:constants';
+import { DRAWER_BUTTON_BOX, DRAWER_MENU_ID, DRAWER_MENU_LABEL } from '@store:constants'
 setDefaultNamespace('hero')
 ---
 
@@ -40,10 +40,11 @@ setDefaultNamespace('hero')
 
 <script>
 	import { DRAWER_BUTTON_BOX, DRAWER_MENU_BUTTON_ID, DRAWER_MENU_ID } from '@store:constants'
-import { Drawer } from 'flowbite'
+	import { Drawer } from 'flowbite'
 	import type { DrawerOptions, DrawerInterface } from 'flowbite'
 	// select the two elements that we'll work with
-	const $drawerMenuButtonElement: HTMLElement | null = document.getElementById(DRAWER_MENU_BUTTON_ID)
+	const $drawerMenuButtonElement: HTMLElement | null =
+		document.getElementById(DRAWER_MENU_BUTTON_ID)
 	const $menuDrawerElement: HTMLElement | null = document.getElementById(DRAWER_MENU_ID)
 	const $drawerButtonBoxElement: HTMLElement | null = document.getElementById(DRAWER_BUTTON_BOX)
 

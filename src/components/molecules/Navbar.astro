@@ -2,9 +2,16 @@
 import Menus from 'molecules:Menus'
 import Drawer from 'molecules:Drawer'
 import { localizeUrl } from '@utils:utilities'
+import { NAVBAR_HEADER } from '@store:constants'
+interface Props {
+	id?: string
+}
+
+const { id } = Astro.props
+const navbarHeaderId = `${NAVBAR_HEADER}-${id ?? crypto.randomUUID()}`
 ---
 
-<header id='navbar-header' class='fixed z-50 w-full'>
+<header id={navbarHeaderId} class='fixed z-50 w-full'>
 	<nav
 		id='acosta-navbar'
 		class='relative flex w-full flex-wrap items-center justify-between py-2 md:py-4'
@@ -21,12 +28,12 @@ import { localizeUrl } from '@utils:utilities'
 	</nav>
 </header>
 
-<script>
+<script define:vars={{ navbarHeaderId }}>
 	let showNavbar = true
 	let scrollDirection = 'DOWN'
 	let lastScrollPosition = 0
-	const navbar = document.getElementById('navbar-header')
-	const navbarClassList: DOMTokenList = navbar?.classList ?? new DOMTokenList()
+	const navbar = document.getElementById(navbarHeaderId)
+	const navbarClassList = navbar?.classList ?? new DOMTokenList()
 	const navbarClassListAdd = navbarClassList.add.bind(navbarClassList)
 	const navbarClassListRemove = navbarClassList.remove.bind(navbarClassList)
 
@@ -89,7 +96,9 @@ import { localizeUrl } from '@utils:utilities'
 
 	.line {
 		fill: none;
-		transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+		transition:
+			stroke-dasharray 400ms,
+			stroke-dashoffset 400ms;
 		stroke: #64ffda;
 		stroke-width: 5.5;
 		stroke-linecap: round;

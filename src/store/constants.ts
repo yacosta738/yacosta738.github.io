@@ -12,6 +12,8 @@ export const DRAWER_MENU_BUTTON_ID = 'drawer-menu-button'
 export const DRAWER_MENU_LABEL = 'drawer-menu-label'
 export const DRAWER_BUTTON_BOX = 'drawer-button-box'
 
+export const NAVBAR_HEADER = 'navbar-header'
+
 export const socialMedia: SocialMedia[] = [
 	{
 		name: 'GitHub',
