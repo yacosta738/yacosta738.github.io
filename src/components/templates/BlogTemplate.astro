@@ -1,56 +1,26 @@
 ---
-import '../../styles/global.css'
 import i18next, { t, changeLanguage } from 'i18next'
-import HeadSEO from 'organisms:HeadSEO'
-import GoogleAnalytics from 'atoms:GoogleAnalytics'
-import { HeadHrefLangs } from 'astro-i18next/components'
-import AppFooter from 'molecules:AppFooter'
 import WidgetWrapper from 'molecules:WidgetWrapper'
-import Navbar from 'molecules:Navbar'
-import Technologies from 'molecules:Technologies'
-import ReloadPrompt from 'molecules:ReloadPrompt'
 import ToTop from 'atoms:ToTop'
+import BaseTemplate from 'templates:BaseTemplate'
 
 
 const { title, description, image, ogImageAlt, lang } = Astro.props
 
 changeLanguage(lang ?? i18next.language)
 ---
-
-<html lang={i18next.language} class='scroll-smooth'>
-	<head>
-		<meta charset='utf-8' />
-		<meta name='viewport' content='width=device-width' />
-		<HeadSEO title={title ?? t('seo.title')}
-						 description={description ?? t('seo.description')}
-						 image={image ?? '/uploads/me.webp'}
-						 ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')} />
-		<HeadHrefLangs />
-		<GoogleAnalytics />
-	</head>
-
-	<body
-		id='body'
-		class='content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono'
-	>
-		<div class='relative flex min-h-[100vh] flex-col'>
-			<Navbar />
-			<div class='container mx-auto mt-24 flex flex-col xl:flex-row'>
-				<main class='relative w-full overflow-hidden xl:basis-4/5'>
- 					<Technologies />
-					<slot />
-					<ToTop />
-				</main>
-				<aside class='xl:basis-1/5 sticky'>
-					<slot name='widget'>
-						<WidgetWrapper />
-					</slot>
-				</aside>
-			</div>
-		</div>
-		<AppFooter />
-		<script src='../../utils/title-change.js'></script>
-		<script src='../../utils/geeky-console.js'></script>
-		<ReloadPrompt />
-	</body>
-</html>
+<BaseTemplate 
+	title={title}
+	description={description}
+	image={image}
+	ogImageAlt={ogImageAlt}
+	lang={lang}
+>
+	<slot />
+	<ToTop slot="footer"/>
+	<aside class='xl:basis-1/5 sticky' slot="aside">
+		<slot name='widget'>
+			<WidgetWrapper />
+		</slot>
+	</aside>
+</BaseTemplate>
