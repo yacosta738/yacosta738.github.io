@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 export interface Menu {
 	id: string
 	title: string
@@ -7,37 +6,37 @@ export interface Menu {
 }
 export const navMenus: Menu[] = [
 	{
-		id: 'about-' + uuidv4(),
+		id: 'about-' + crypto.randomUUID(),
 		title: 'about',
 		link: '/#about',
 		dataCypress: 'about'
 	},
 	{
-		id: 'experience-' + uuidv4(),
+		id: 'experience-' + crypto.randomUUID(),
 		title: 'experience',
 		link: '/#jobs',
 		dataCypress: 'jobs'
 	},
 	{
-		id: 'projects-' + uuidv4(),
+		id: 'projects-' + crypto.randomUUID(),
 		title: 'work',
 		link: '/#projects',
 		dataCypress: 'projects'
 	},
 	{
-		id: 'last-articles-' + uuidv4(),
+		id: 'last-articles-' + crypto.randomUUID(),
 		title: 'last-articles',
 		link: '/#last3articles',
 		dataCypress: 'last3articles'
 	},
 	{
-		id: 'contact-' + uuidv4(),
+		id: 'contact-' + crypto.randomUUID(),
 		title: 'contact',
 		link: '/#contact',
 		dataCypress: 'contact'
 	},
 	{
-		id: 'blog-' + uuidv4(),
+		id: 'blog-' + crypto.randomUUID(),
 		title: 'blog',
 		link: '/blog',
 		dataCypress: 'blog'
