@@ -1,59 +1,31 @@
 ---
-interface Props {
-	openMenu: boolean
+import { DRAWER_MENU_BUTTON_ID } from '@store:constants';
+
+interface Props{
+	drawerTarget: string;
 }
-const { openMenu } = Astro.props
+const { drawerTarget } = Astro.props
 ---
 
-{
-	openMenu && (
-		<svg
-			id='open-menu-drawer'
-			type='button'
-			data-drawer-target='menu-drawer'
-			data-drawer-show='menu-drawer'
-			data-drawer-placement='right'
-			class='ham hamRotate ham7'
-			viewBox='0 0 100 100'
-			width='60'
-		>
-			<path
-				class='line top'
-				d='m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013'
-			/>
-			<path class='line middle' d='m 70,50 h -40' />
-			<path
-				class='line bottom'
-				d='m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40'
-			/>
-			<span class='sr-only'>Close menu</span>
-		</svg>
-	)
-}
-
-{
-	!openMenu && (
-		<svg
-			id='close-menu-drawer'
-			type='button'
-			data-drawer-dismiss='menu-drawer'
-			class='ham hamRotate ham7 absolute right-2 top-1 p-1'
-			viewBox='0 0 100 100'
-			width='60'
-		>
-			<path
-				class='line top'
-				d='m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013'
-			/>
-			<path class='line middle' d='m 70,50 h -40' />
-			<path
-				class='line bottom'
-				d='m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40'
-			/>
-			<span class='sr-only'>Close menu</span>
-		</svg>
-	)
-}
+<svg
+	id={DRAWER_MENU_BUTTON_ID}
+	type='button'
+	data-drawer-target={drawerTarget}
+	data-drawer-placement='right'
+	class='ham hamRotate ham7'
+	viewBox='0 0 100 100'
+	width='60'
+>
+	<path
+		class='line top'
+		d='m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013'></path>
+	<path class='line middle' d='m 70,50 h -40'></path>
+	<path
+		class='line bottom'
+		d='m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40'
+	></path>
+	<span class='sr-only'>Open or Close menu</span>
+</svg>
 
 <style lang='scss'>
 	.ham {
@@ -76,7 +48,9 @@ const { openMenu } = Astro.props
 
 	.line {
 		fill: none;
-		transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+		transition:
+			stroke-dasharray 400ms,
+			stroke-dashoffset 400ms;
 		stroke: #64ffda;
 		stroke-width: 5.5;
 		stroke-linecap: round;

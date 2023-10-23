@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 export interface Article {
 	id: string
 	url: string
@@ -24,7 +23,7 @@ export const jsonToArticle = (json: any): Article => {
 		content = json.rawContent()
 	}
 	return {
-		id: json.id || uuidv4(),
+		id: json.id || crypto.randomUUID(),
 		url: json.url,
 		title: frontmatter?.title || json.title,
 		description: frontmatter?.description || json.description,

@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 devDependencies:
   '@astrojs/rss':
     specifier: 3.0.0
@@ -13,10 +9,10 @@ devDependencies:
     version: 3.0.2
   '@astrojs/tailwind':
     specifier: 5.0.2
-    version: 5.0.2(astro@3.3.2)(tailwindcss@3.3.3)
+    version: 5.0.2(astro@3.3.3)(tailwindcss@3.3.3)
   '@astrojs/vue':
-    specifier: 3.0.1
-    version: 3.0.1(@babel/core@7.23.2)(astro@3.3.2)(vite@4.5.0)(vue@3.3.6)
+    specifier: 3.0.2
+    version: 3.0.2(@babel/core@7.23.2)(astro@3.3.3)(vite@4.5.0)(vue@3.3.6)
   '@iconify-json/akar-icons':
     specifier: ^1.1.19
     version: 1.1.19
@@ -45,8 +41,8 @@ devDependencies:
     specifier: ^1.1.12
     version: 1.1.12
   '@iconify-json/simple-icons':
-    specifier: ^1.1.75
-    version: 1.1.75
+    specifier: ^1.1.76
+    version: 1.1.76
   '@iconify-json/teenyicons':
     specifier: ^1.1.6
     version: 1.1.6
@@ -68,9 +64,6 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: 0.5.10
     version: 0.5.10(tailwindcss@3.3.3)
-  '@types/uuid':
-    specifier: ^9.0.5
-    version: 9.0.6
   '@typescript-eslint/eslint-plugin':
     specifier: 6.8.0
     version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2)
@@ -79,13 +72,13 @@ devDependencies:
     version: 6.8.0(eslint@8.52.0)(typescript@5.2.2)
   '@vite-pwa/astro':
     specifier: ^0.1.3
-    version: 0.1.3(astro@3.3.2)(vite-plugin-pwa@0.16.5)
+    version: 0.1.3(astro@3.3.3)(vite-plugin-pwa@0.16.5)
   '@vueuse/core':
     specifier: 10.5.0
     version: 10.5.0(vue@3.3.6)
   astro:
-    specifier: 3.3.2
-    version: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+    specifier: 3.3.3
+    version: 3.3.3(sass@1.69.4)(typescript@5.2.2)
   astro-compress:
     specifier: 2.0.15
     version: 2.0.15
@@ -94,13 +87,13 @@ devDependencies:
     version: 2.0.11
   astro-i18next:
     specifier: 1.0.0-beta.21
-    version: 1.0.0-beta.21(astro@3.3.2)
+    version: 1.0.0-beta.21(astro@3.3.3)
   astro-icon:
     specifier: 1.0.0-next.2
     version: 1.0.0-next.2
   astro-netlify-cms:
     specifier: 0.5.4
-    version: 0.5.4(astro@3.3.2)(graphql@15.8.0)
+    version: 0.5.4(astro@3.3.3)(graphql@15.8.0)
   astro-robots-txt:
     specifier: 1.0.0
     version: 1.0.0
@@ -115,13 +108,13 @@ devDependencies:
     version: 8.52.0
   eslint-config-standard:
     specifier: 17.1.0
-    version: 17.1.0(eslint-plugin-import@2.28.1)(eslint-plugin-n@16.2.0)(eslint-plugin-promise@6.1.1)(eslint@8.52.0)
+    version: 17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.2.0)(eslint-plugin-promise@6.1.1)(eslint@8.52.0)
   eslint-plugin-astro:
     specifier: 0.29.1
     version: 0.29.1(eslint@8.52.0)
   eslint-plugin-import:
-    specifier: 2.28.1
-    version: 2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
+    specifier: 2.29.0
+    version: 2.29.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
   eslint-plugin-jsx-a11y:
     specifier: 6.7.1
     version: 6.7.1(eslint@8.52.0)
@@ -191,9 +184,6 @@ devDependencies:
   tailwindcss:
     specifier: 3.3.3
     version: 3.3.3
-  uuid:
-    specifier: 9.0.1
-    version: 9.0.1
   vitest:
     specifier: ^0.34.6
     version: 0.34.6(sass@1.69.4)
@@ -259,13 +249,13 @@ packages:
     resolution: {integrity: sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==}
     dev: true
 
-  /@astrojs/markdown-remark@3.3.0(astro@3.3.2):
+  /@astrojs/markdown-remark@3.3.0(astro@3.3.3):
     resolution: {integrity: sha512-ezFzEiZygc/ASe2Eul9v1yrTbNGqSbR348UGNXQ4Dtkx8MYRwfiBfmPm6VnEdfIGkW+bi5qIUReKfc7mPVUkIg==}
     peerDependencies:
       astro: ^3.3.0
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+      astro: 3.3.3(sass@1.69.4)(typescript@5.2.2)
       github-slugger: 2.0.0
       import-meta-resolve: 3.0.0
       mdast-util-definitions: 6.0.0
@@ -304,13 +294,13 @@ packages:
       zod: 3.21.1
     dev: true
 
-  /@astrojs/tailwind@5.0.2(astro@3.3.2)(tailwindcss@3.3.3):
+  /@astrojs/tailwind@5.0.2(astro@3.3.3)(tailwindcss@3.3.3):
     resolution: {integrity: sha512-oXqeqmBlkQmsltrsU9nEWeXOtrZIAHW8dcmX7BCdrjzPnU6dPwWzAwhddNQ9ihKiWwsLnlbwQZIo2CDigcZlIA==}
     peerDependencies:
       astro: ^3.2.4
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+      astro: 3.3.3(sass@1.69.4)(typescript@5.2.2)
       autoprefixer: 10.4.16(postcss@8.4.31)
       postcss: 8.4.31
       postcss-load-config: 4.0.1(postcss@8.4.31)
@@ -334,18 +324,18 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/vue@3.0.1(@babel/core@7.23.2)(astro@3.3.2)(vite@4.5.0)(vue@3.3.6):
-    resolution: {integrity: sha512-qXn99sQ60zUPoHsMXGt43IySMKN5VXZz5VJlTKqkXG+CFV9DOWw0+syj/5iYKZSouH3nyNNb5a9uAkdz+X6Cew==}
+  /@astrojs/vue@3.0.2(@babel/core@7.23.2)(astro@3.3.3)(vite@4.5.0)(vue@3.3.6):
+    resolution: {integrity: sha512-rU1VX0PyPOJLX8kI8yL92zCuLAURdrZe9FsPMna/QqoHoIVZAZO5EDPbRVKAFczsZQq1PjfZRFZk7H9qizcNGg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
-      astro: ^3.2.3
+      astro: ^3.3.3
       vue: ^3.2.30
     dependencies:
       '@vitejs/plugin-vue': 4.4.0(vite@4.5.0)(vue@3.3.6)
       '@vitejs/plugin-vue-jsx': 3.0.2(vite@4.5.0)(vue@3.3.6)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.23.2)
       '@vue/compiler-sfc': 3.3.6
-      astro: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+      astro: 3.3.3(sass@1.69.4)(typescript@5.2.2)
       vue: 3.3.6(typescript@5.2.2)
     transitivePeerDependencies:
       - '@babel/core'
@@ -2688,8 +2678,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/simple-icons@1.1.75:
-    resolution: {integrity: sha512-oGVandyvqMtBb7iq33Lx5YnH0SBkCE6LwpWPM0vjsIRSwXYpw5fxsSs3jfyikOr4Fwr8G24GjSsb53AC+lgGBQ==}
+  /@iconify-json/simple-icons@1.1.76:
+    resolution: {integrity: sha512-jZEMvkMfD5tTadFJIOIxKE4cTVXslrktWEiMJV6HaABi9qw02zS7bzrllR1YtGPxzniKkq2UVg/dKS6lliIxVA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -3257,10 +3247,6 @@ packages:
     resolution: {integrity: sha512-ue/hDUpPjC85m+PM9OQDMZr3LywT+CT6mPsQq8OJtCLiERkGRcQUFvu9XASF5XWqyZFXbf15lvb3JFJ4dRLWPg==}
     dev: true
 
-  /@types/uuid@9.0.6:
-    resolution: {integrity: sha512-BT2Krtx4xaO6iwzwMFUYvWBWkV2pr37zD68Vmp1CDV196MzczBRxuEpD6Pr395HAgebC/co7hOphs53r8V7jew==}
-    dev: true
-
   /@types/vfile-message@2.0.0:
     resolution: {integrity: sha512-GpTIuDpb9u4zIO165fUy9+fXcULdD8HFRNli04GehoMVbeNq7D6OBnqSmg3lxZnC+UvgUhEWKxdKiwYUkGltIw==}
     deprecated: This is a stub types definition. vfile-message provides its own type definitions, so you do not need this installed.
@@ -3448,13 +3434,13 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@vite-pwa/astro@0.1.3(astro@3.3.2)(vite-plugin-pwa@0.16.5):
+  /@vite-pwa/astro@0.1.3(astro@3.3.3)(vite-plugin-pwa@0.16.5):
     resolution: {integrity: sha512-NVJ49DU+sUi9yt0TC16LQaBak8nM0hUDu8j3C277bL5SC4aYN/0fzv5uwWzSJ38XbY0NQFA9dvfIbKsPmk88eg==}
     peerDependencies:
       astro: ^1.6.0 || ^2.0.0 || ^3.0.0
       vite-plugin-pwa: '>=0.16.5 <1'
     dependencies:
-      astro: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+      astro: 3.3.3(sass@1.69.4)(typescript@5.2.2)
       vite-plugin-pwa: 0.16.5(vite@4.5.0)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
@@ -4040,7 +4026,7 @@ packages:
       - supports-color
     dev: true
 
-  /astro-i18next@1.0.0-beta.21(astro@3.3.2):
+  /astro-i18next@1.0.0-beta.21(astro@3.3.3):
     resolution: {integrity: sha512-1YPqwexumHpK/d9afEoi52CBFTu6k4MYv/oHjsaAasZDvFClU6U5VPttC/OgZcXRYggCM6ee2LOnyHqlmXOeLA==}
     hasBin: true
     peerDependencies:
@@ -4048,7 +4034,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
-      astro: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+      astro: 3.3.3(sass@1.69.4)(typescript@5.2.2)
       i18next: 22.5.1
       i18next-browser-languagedetector: 7.1.0
       i18next-fs-backend: 2.2.0
@@ -4070,13 +4056,13 @@ packages:
       - supports-color
     dev: true
 
-  /astro-netlify-cms@0.5.4(astro@3.3.2)(graphql@15.8.0):
+  /astro-netlify-cms@0.5.4(astro@3.3.3)(graphql@15.8.0):
     resolution: {integrity: sha512-yRHTX6ml0HtEKp6OLJiOjV4g5h8EacsQhA1IIn4cYj4pF5R/JOzFKSEqoo9IeewYhmlIXlnfbryk789gZbTqQw==}
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta || ^3.0.0-beta
     dependencies:
       '@types/react': 17.0.69
-      astro: 3.3.2(sass@1.69.4)(typescript@5.2.2)
+      astro: 3.3.3(sass@1.69.4)(typescript@5.2.2)
       netlify-cms-app: 2.15.72(@types/react@17.0.69)(graphql@15.8.0)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -4101,14 +4087,14 @@ packages:
     resolution: {integrity: sha512-7gq6lhibCM8FuzZIJlbLLWP5EJ9KL2/4XqeFrAg9O6ZK2xMFxJ5ubKf+a0VJwwTu8W8Xr421CmpiXu6Hq7n/7Q==}
     dev: true
 
-  /astro@3.3.2(sass@1.69.4)(typescript@5.2.2):
-    resolution: {integrity: sha512-uyimGY0p1gYXKAZe3/RCfbqNbuwpEvPkTKF5TE63Glb9ZgeLUBXu+ZlsG4LIMxCQ40p5F0D5+zuNJdH+om2PQQ==}
+  /astro@3.3.3(sass@1.69.4)(typescript@5.2.2):
+    resolution: {integrity: sha512-FZkv5nJfa2KADzwo8m6fytWzzhO3Uw/EOvxmBT2E1OW/dWUgIKbZd59TY3816gZl3le5Ct5amSAkaxcQghbUZA==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
       '@astrojs/compiler': 2.2.1
       '@astrojs/internal-helpers': 0.2.1
-      '@astrojs/markdown-remark': 3.3.0(astro@3.3.2)
+      '@astrojs/markdown-remark': 3.3.0(astro@3.3.3)
       '@astrojs/telemetry': 3.0.3
       '@babel/core': 7.23.2
       '@babel/generator': 7.23.0
@@ -5756,7 +5742,7 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /eslint-config-standard@17.1.0(eslint-plugin-import@2.28.1)(eslint-plugin-n@16.2.0)(eslint-plugin-promise@6.1.1)(eslint@8.52.0):
+  /eslint-config-standard@17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.2.0)(eslint-plugin-promise@6.1.1)(eslint@8.52.0):
     resolution: {integrity: sha512-IwHwmaBNtDK4zDHQukFDW5u/aTb8+meQWZvNFWkiGmbWjD6bqyuSSBxxXKkCftCUzc1zwCH2m/baCNDLGmuO5Q==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -5766,7 +5752,7 @@ packages:
       eslint-plugin-promise: ^6.0.0
     dependencies:
       eslint: 8.52.0
-      eslint-plugin-import: 2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
+      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)
       eslint-plugin-n: 16.2.0(eslint@8.52.0)
       eslint-plugin-promise: 6.1.1(eslint@8.52.0)
     dev: true
@@ -5838,8 +5824,8 @@ packages:
       eslint: 8.52.0
     dev: true
 
-  /eslint-plugin-import@2.28.1(@typescript-eslint/parser@6.8.0)(eslint@8.52.0):
-    resolution: {integrity: sha512-9I9hFlITvOV55alzoKBI+K9q74kv0iKMeY6av5+umsNwayt59fz692daGyjR+oStBQgx6nwR9rXldDev3Clw+A==}
+  /eslint-plugin-import@2.29.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0):
+    resolution: {integrity: sha512-QPOO5NO6Odv5lpoTkddtutccQjysJuFxoPS7fAHO+9m9udNHvTCPSAMW9zGAYj8lAIdr40I8yPCdUYrncXtrwg==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -5858,7 +5844,7 @@ packages:
       eslint: 8.52.0
       eslint-import-resolver-node: 0.3.9
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.8.0)(eslint-import-resolver-node@0.3.9)(eslint@8.52.0)
-      has: 1.0.4
+      hasown: 2.0.0
       is-core-module: 2.13.1
       is-glob: 4.0.3
       minimatch: 3.1.2
@@ -8781,7 +8767,7 @@ packages:
       netlify-cms-backend-test: 2.11.3(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(netlify-cms-lib-util@2.15.1)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react@17.0.2)(uuid@3.4.0)
       netlify-cms-core: 2.55.2(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(@types/react@17.0.69)(immutable@3.8.2)(lodash@4.17.21)(moment@2.29.4)(netlify-cms-editor-component-image@2.7.0)(netlify-cms-lib-auth@2.4.2)(netlify-cms-lib-util@2.15.1)(netlify-cms-lib-widgets@1.8.1)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)
       netlify-cms-editor-component-image: 2.7.0(react@17.0.2)
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-lib-widgets: 1.8.1(immutable@3.8.2)(lodash@4.17.21)(moment@2.29.4)
       netlify-cms-locales: 1.39.0
@@ -8791,7 +8777,7 @@ packages:
       netlify-cms-widget-colorstring: 1.1.2(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react@17.0.2)
       netlify-cms-widget-date: 2.6.3(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(moment@2.29.4)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-widget-datetime: 2.7.4(@emotion/core@10.3.1)(moment@2.29.4)(netlify-cms-widget-date@2.6.3)(react@17.0.2)
-      netlify-cms-widget-file: 2.12.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)(uuid@9.0.1)
+      netlify-cms-widget-file: 2.12.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)(uuid@3.4.0)
       netlify-cms-widget-image: 2.8.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(netlify-cms-widget-file@2.12.1)(prop-types@15.8.1)(react@17.0.2)
       netlify-cms-widget-list: 2.10.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(lodash@4.17.21)(netlify-cms-lib-widgets@1.8.1)(netlify-cms-ui-default@2.15.5)(netlify-cms-widget-object@2.7.2)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)
       netlify-cms-widget-map: 1.5.1(@emotion/core@10.3.1)(lodash@4.17.21)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-immutable-proptypes@2.2.0)(react@17.0.2)
@@ -8834,7 +8820,7 @@ packages:
       immutable: 3.8.2
       js-base64: 3.7.5
       lodash: 4.17.21
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
       prop-types: 15.8.1
@@ -8861,7 +8847,7 @@ packages:
       immutable: 3.8.2
       js-base64: 3.7.5
       lodash: 4.17.21
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
       prop-types: 15.8.1
@@ -8895,7 +8881,7 @@ packages:
       netlify-cms-backend-bitbucket: 2.14.0(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(lodash@4.17.21)(netlify-cms-lib-auth@2.4.2)(netlify-cms-lib-util@2.15.1)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react@17.0.2)
       netlify-cms-backend-github: 2.14.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(netlify-cms-lib-auth@2.4.2)(netlify-cms-lib-util@2.15.1)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react@17.0.2)
       netlify-cms-backend-gitlab: 2.13.0(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(graphql@15.8.0)(immutable@3.8.2)(lodash@4.17.21)(netlify-cms-lib-auth@2.4.2)(netlify-cms-lib-util@2.15.1)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react@17.0.2)
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
       prop-types: 15.8.1
@@ -8925,7 +8911,7 @@ packages:
       graphql-tag: 2.12.6(graphql@15.8.0)
       js-base64: 3.7.5
       lodash: 4.17.21
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
       prop-types: 15.8.1
@@ -8955,7 +8941,7 @@ packages:
       immutable: 3.8.2
       js-base64: 3.7.5
       lodash: 4.17.21
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
       prop-types: 15.8.1
@@ -9044,7 +9030,7 @@ packages:
       lodash: 4.17.21
       moment: 2.29.4
       netlify-cms-editor-component-image: 2.7.0(react@17.0.2)
-      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1)
+      netlify-cms-lib-auth: 2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0)
       netlify-cms-lib-util: 2.15.1(immutable@3.8.2)(lodash@4.17.21)
       netlify-cms-lib-widgets: 1.8.1(immutable@3.8.2)(lodash@4.17.21)(moment@2.29.4)
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
@@ -9098,7 +9084,7 @@ packages:
       react: 17.0.2
     dev: true
 
-  /netlify-cms-lib-auth@2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@9.0.1):
+  /netlify-cms-lib-auth@2.4.2(immutable@3.8.2)(lodash@4.17.21)(uuid@3.4.0):
     resolution: {integrity: sha512-Ygq6qhYndgyxIHtWZ09dMGh6FgBnsEpaSUryvTholvAK4smRJMkOjlwZTSoblM82k/hE7hl/PD8EVIozafVcXg==}
     peerDependencies:
       immutable: ^3.7.6
@@ -9107,7 +9093,7 @@ packages:
     dependencies:
       immutable: 3.8.2
       lodash: 4.17.21
-      uuid: 9.0.1
+      uuid: 3.4.0
     dev: true
 
   /netlify-cms-lib-util@2.15.1(immutable@3.8.2)(lodash@4.17.21):
@@ -9271,7 +9257,7 @@ packages:
       - moment
     dev: true
 
-  /netlify-cms-widget-file@2.12.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)(uuid@9.0.1):
+  /netlify-cms-widget-file@2.12.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)(uuid@3.4.0):
     resolution: {integrity: sha512-u80aN3X0xSi+LoxJrvjRR5q1xPjR4daDxiyhtXutiA8qg2/kerYOftdAWhsZ2aMyIpvXMPasNCqpcic+wnknBA==}
     peerDependencies:
       '@emotion/core': ^10.0.35
@@ -9293,7 +9279,7 @@ packages:
       react: 17.0.2
       react-immutable-proptypes: 2.2.0(immutable@3.8.2)
       react-sortable-hoc: 2.0.0(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
-      uuid: 9.0.1
+      uuid: 3.4.0
     transitivePeerDependencies:
       - react-dom
     dev: true
@@ -9313,7 +9299,7 @@ packages:
       '@emotion/styled': 10.3.0(@emotion/core@10.3.1)(react@17.0.2)
       immutable: 3.8.2
       netlify-cms-ui-default: 2.15.5(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(lodash@4.17.21)(prop-types@15.8.1)(react-dom@17.0.2)(react@17.0.2)
-      netlify-cms-widget-file: 2.12.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)(uuid@9.0.1)
+      netlify-cms-widget-file: 2.12.1(@emotion/core@10.3.1)(@emotion/styled@10.3.0)(immutable@3.8.2)(netlify-cms-ui-default@2.15.5)(prop-types@15.8.1)(react-dom@17.0.2)(react-immutable-proptypes@2.2.0)(react@17.0.2)(uuid@3.4.0)
       prop-types: 15.8.1
       react: 17.0.2
     dev: true
@@ -13172,11 +13158,6 @@ packages:
     hasBin: true
     dev: true
 
-  /uuid@9.0.1:
-    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
-    hasBin: true
-    dev: true
-
   /uvu@0.5.6:
     resolution: {integrity: sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==}
     engines: {node: '>=8'}
@@ -13871,3 +13852,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
