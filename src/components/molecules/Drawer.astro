@@ -2,79 +2,84 @@
 import MenuButton from 'atoms:MenuButton'
 import Menus from 'molecules:Menus'
 import { t, setDefaultNamespace } from 'i18next'
-import { DRAWER_BUTTON_BOX, DRAWER_MENU_ID, DRAWER_MENU_LABEL } from '@store:constants'
+import { DRAWER_MENU_ID, DRAWER_MENU_LABEL } from '@store:constants'
 setDefaultNamespace('hero')
 ---
+<drawer-menu data-identifier={DRAWER_MENU_ID} class="block lg:hidden">
+	<!-- drawer init and toggle -->
+		<MenuButton drawerTarget={DRAWER_MENU_ID} />
 
-<!-- drawer init and toggle -->
-<div id={DRAWER_BUTTON_BOX} class='z-50 block lg:hidden'>
-	<MenuButton />
-</div>
-
-<!-- drawer component -->
-<div
-	id={DRAWER_MENU_ID}
-	class='fixed top-0 right-0 z-40 h-screen w-64 p-4 overflow-y-auto transition-transform translate-x-full bg-light-navy'
-	tabindex='-1'
-	aria-labelledby={DRAWER_MENU_LABEL}
->
-	<h5
-		id='drawer-label'
-		class='mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400'
+	<!-- drawer component -->
+	<div
+		id={DRAWER_MENU_ID}
+		class='fixed top-0 right-0 z-40 h-screen w-64 p-4 overflow-y-auto transition-transform translate-x-full bg-light-navy'
+		tabindex='-1'
+		aria-labelledby={DRAWER_MENU_LABEL}
 	>
-		<svg
-			class='mr-2 h-5 w-5'
-			fill='currentColor'
-			viewBox='0 0 20 20'
-			xmlns='http://www.w3.org/2000/svg'
+		<h5
+			id='drawer-label'
+			class='mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400'
+		>
+			<svg
+				class='mr-2 h-5 w-5'
+				fill='currentColor'
+				viewBox='0 0 20 20'
+				xmlns='http://www.w3.org/2000/svg'
 			><path
 				fill-rule='evenodd'
 				d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
 				clip-rule='evenodd'></path>
-		</svg>
-		{t('name')}
-	</h5>
-	<!-- <MenuButton openMenu={false} /> -->
-	<Menus drawer={true} />
-</div>
+			</svg>
+			{t('name')}
+		</h5>
+		<Menus drawer={true} />
+	</div>
+</drawer-menu>
 
 <script>
-	import { DRAWER_BUTTON_BOX, DRAWER_MENU_BUTTON_ID, DRAWER_MENU_ID } from '@store:constants'
+	import { DRAWER_MENU_BUTTON_ID } from '@store:constants'
 	import { Drawer } from 'flowbite'
 	import type { DrawerOptions, DrawerInterface } from 'flowbite'
-	// select the two elements that we'll work with
-	const $drawerMenuButtonElement: HTMLElement | null =
-		document.getElementById(DRAWER_MENU_BUTTON_ID)
-	const $menuDrawerElement: HTMLElement | null = document.getElementById(DRAWER_MENU_ID)
-	const $drawerButtonBoxElement: HTMLElement | null = document.getElementById(DRAWER_BUTTON_BOX)
 
-	// options with default values
-	const options: DrawerOptions = {
-		placement: 'right',
-		backdrop: true,
-		bodyScrolling: false,
-		edge: false,
-		edgeOffset: '',
-		backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-30',
-		onHide: () => {
-			$drawerMenuButtonElement?.classList.remove('active-menu')
-			$drawerMenuButtonElement?.removeAttribute('data-drawer-dismiss')
-			$drawerMenuButtonElement?.setAttribute('data-drawer-show', DRAWER_MENU_ID)
-			$drawerButtonBoxElement?.classList.replace('z-[100]', 'z-50')
-		},
-		onShow: () => {
-			$drawerMenuButtonElement?.classList.add('active-menu')
-			$drawerMenuButtonElement?.removeAttribute('data-drawer-show')
-			$drawerMenuButtonElement?.setAttribute('data-drawer-dismiss', DRAWER_MENU_ID)
-			$drawerButtonBoxElement?.classList.replace('z-50', 'z-[100]')
-		},
-		onToggle: () => {
-			$drawerMenuButtonElement?.classList.toggle('active-menu')
+	class DrawerMenu extends HTMLElement {
+		constructor () {
+			super()
+			const identifier = this.dataset.identifier
+			// select the two elements that we'll work with
+			const $drawerMenuButtonElement: HTMLElement | null =
+				document.getElementById(DRAWER_MENU_BUTTON_ID)
+			const $menuDrawerElement: HTMLElement | null = this.querySelector(`#${identifier}`)
+
+			// options with default values
+			const options: DrawerOptions = {
+				placement: 'right',
+				backdrop: true,
+				bodyScrolling: false,
+				edge: false,
+				edgeOffset: '',
+				backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-30',
+				onHide: () => {
+					$drawerMenuButtonElement?.classList.remove('active-menu', 'z-[100]')
+					$drawerMenuButtonElement?.removeAttribute('data-drawer-dismiss')
+					$drawerMenuButtonElement?.setAttribute('data-drawer-show', $menuDrawerElement?.id)
+				},
+				onShow: () => {
+					$drawerMenuButtonElement?.classList.add('active-menu', 'z-[100]')
+					$drawerMenuButtonElement?.removeAttribute('data-drawer-show')
+					$drawerMenuButtonElement?.setAttribute('data-drawer-dismiss', $menuDrawerElement?.id)
+				},
+				onToggle: () => {
+					$drawerMenuButtonElement?.classList.toggle('active-menu')
+				}
+			}
+			if ($menuDrawerElement) {
+				// create a new modal instance
+				const menuDrawer: DrawerInterface = new Drawer($menuDrawerElement, options)
+
+				// toggle the visibility of the modal when clicking on the button
+				$drawerMenuButtonElement?.addEventListener('click', () => menuDrawer.toggle())
+			}
 		}
 	}
-	// create a new modal instance
-	const menuDrawer: DrawerInterface = new Drawer($menuDrawerElement, options)
-
-	// toggle the visibility of the modal when clicking on the button
-	$drawerMenuButtonElement?.addEventListener('click', () => menuDrawer.toggle())
+	customElements.define('drawer-menu', DrawerMenu)
 </script>

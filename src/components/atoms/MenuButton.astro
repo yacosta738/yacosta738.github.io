@@ -1,11 +1,16 @@
 ---
-import { DRAWER_MENU_BUTTON_ID, DRAWER_MENU_ID } from '@store:constants';
+import { DRAWER_MENU_BUTTON_ID } from '@store:constants';
+
+interface Props{
+	drawerTarget: string;
+}
+const { drawerTarget } = Astro.props
 ---
 
 <svg
 	id={DRAWER_MENU_BUTTON_ID}
 	type='button'
-	data-drawer-target={DRAWER_MENU_ID}
+	data-drawer-target={drawerTarget}
 	data-drawer-placement='right'
 	class='ham hamRotate ham7'
 	viewBox='0 0 100 100'
