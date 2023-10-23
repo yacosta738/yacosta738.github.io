@@ -7,6 +7,11 @@ export interface SocialMedia {
 export const email = 'yunielacosta738@gmail.com'
 export const domain = 'https://yunielacosta.com'
 
+export const DRAWER_MENU_ID = 'drawer-menu'
+export const DRAWER_MENU_BUTTON_ID = 'drawer-menu-button'
+export const DRAWER_MENU_LABEL = 'drawer-menu-label'
+export const DRAWER_BUTTON_BOX = 'drawer-button-box'
+
 export const socialMedia: SocialMedia[] = [
 	{
 		name: 'GitHub',
