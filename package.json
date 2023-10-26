@@ -47,7 +47,7 @@
     "@vite-pwa/astro": "^0.1.3",
     "@vueuse/core": "10.5.0",
     "astro": "3.3.3",
-    "astro-compress": "2.1.5",
+    "astro-compress": "2.1.6",
     "astro-critters": "2.0.11",
     "astro-i18next": "1.0.0-beta.21",
     "astro-icon": "1.0.0-next.2",

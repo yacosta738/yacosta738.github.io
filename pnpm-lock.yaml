@@ -84,8 +84,8 @@ devDependencies:
     specifier: 3.3.3
     version: 3.3.3(sass@1.69.4)(typescript@5.2.2)
   astro-compress:
-    specifier: 2.1.5
-    version: 2.1.5
+    specifier: 2.1.6
+    version: 2.1.6
   astro-critters:
     specifier: 2.0.11
     version: 2.0.11
@@ -3171,6 +3171,12 @@ packages:
       undici-types: 5.25.3
     dev: true
 
+  /@types/node@20.8.9:
+    resolution: {integrity: sha512-UzykFsT3FhHb1h7yD4CA4YhBHq545JC0YnEz41xkipN88eKQtL6rSgocL5tbAP6Ola9Izm/Aw4Ora8He4x0BHg==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
+
   /@types/parse-json@4.0.1:
     resolution: {integrity: sha512-3YmXzzPAdOTVljVMkTMBdBEvlOLg2cDQaDhnnhT3nT9uDbnJzjWhKlzb+desT12Y7tGqaN6d+AbozcKzyL36Ng==}
     dev: true
@@ -4046,18 +4052,18 @@ packages:
     resolution: {integrity: sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==}
     dev: true
 
-  /astro-compress@2.1.5:
-    resolution: {integrity: sha512-aoqGm2zbv8LMTl8tktiyV/BfTs4GrKb7SFYQ6Fuv7BqpYkn33yrxs0Qz+CFpXL72YUGmQuWw3vuUi5IA3S4BzA==}
+  /astro-compress@2.1.6:
+    resolution: {integrity: sha512-tr9JrAA3Un4PAkR5lSZk7P+SU2d1uA5o/2nQ/9FCQ+fSBzuIsLyqr+Ea8IEvxHPKKelQI2LyXUCt+s4qFzJ0HA==}
     dependencies:
       '@types/csso': 5.0.2
       '@types/html-minifier-terser': 7.0.1
       csso: 5.0.5
-      files-pipe: 2.1.1
+      files-pipe: 2.1.2
       html-minifier-terser: 7.2.0
       sharp: 0.32.6
       svgo: 3.0.2
       terser: 5.22.0
-      typescript-esbuild: 0.2.25
+      typescript-esbuild: 0.3.1
     dev: true
 
   /astro-critters@2.0.11:
@@ -6314,10 +6320,10 @@ packages:
       fast-glob: 3.3.1
     dev: true
 
-  /files-pipe@2.1.1:
-    resolution: {integrity: sha512-grvkOxmaPpu7EHI4BeFpVAuZiNfbaftmKhy8ly5/miUCNYkIfrqiQB+ZG9jGrdlefYqM3MiFfE9GUw7g7sGd/A==}
+  /files-pipe@2.1.2:
+    resolution: {integrity: sha512-QWmVUJ4swy7Jan9x3VPUVjoGdUw+YZRY4j5AaqArOdRF5lX8vgIPdD+OzUqWzJ/pvjHY2zU43b5s2lb1hiSNlA==}
     dependencies:
-      '@types/node': 20.8.7
+      '@types/node': 20.8.9
       deepmerge-ts: 5.1.0
       fast-glob: 3.3.1
     dev: true
@@ -12935,11 +12941,11 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /typescript-esbuild@0.2.25:
-    resolution: {integrity: sha512-sOpKewLkTFG7ebqSTZNsHdnvoZ7X8jy7F1NjBYAdwiVfKFOR7fLuweYd17hRUTqcAf2wp28BJNqJ6c3WLgrMfw==}
+  /typescript-esbuild@0.3.1:
+    resolution: {integrity: sha512-ZJwbrzS8Jv2OTAPbFEvD85CbjRLVYbjUV51JPn3THe/bbh2pY+P9UVVZ8QUvHag8kpqEwgrdhVhYgrdgUkC/lw==}
     hasBin: true
     dependencies:
-      '@types/node': 20.8.7
+      '@types/node': 20.8.9
       commander: 11.1.0
       deepmerge-ts: 5.1.0
       esbuild: 0.19.5
@@ -12952,17 +12958,11 @@ packages:
       typedoc-plugin-remove-references: 0.0.6
       typedoc-plugin-rename-defaults: 0.6.7(typedoc@0.25.2)
       typedoc-plugin-zod: 1.1.0(typedoc@0.25.2)
-      typescript: 5.3.0-dev.20231021
+      typescript: 5.2.2
     dev: true
 
   /typescript@5.2.2:
     resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-    dev: true
-
-  /typescript@5.3.0-dev.20231021:
-    resolution: {integrity: sha512-Q9le8GTluHWR1d6lo8anl5+ImJrZ9KApSpM4yEkDIMVcKueCC6q+Wz/kDL6FXPcO8odWHhDQD4vImed7KDp9Fw==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
@@ -12982,6 +12982,10 @@ packages:
 
   /undici-types@5.25.3:
     resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
+    dev: true
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
   /unherit@1.1.3:
