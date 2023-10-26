@@ -63,7 +63,7 @@
     "eslint-plugin-n": "16.2.0",
     "eslint-plugin-promise": "6.1.1",
     "flowbite": "^1.8.1",
-    "fuse.js": "6.6.2",
+    "fuse.js": "7.0.0",
     "husky": "8.0.3",
     "i18next-fs-backend": "2.2.0",
     "locale-emoji": "0.3.0",
