@@ -84,8 +84,8 @@ devDependencies:
     specifier: 3.4.3
     version: 3.4.3(sass@1.69.5)(typescript@5.2.2)
   astro-compress:
-    specifier: 2.2.0
-    version: 2.2.0
+    specifier: 2.2.3
+    version: 2.2.3
   astro-critters:
     specifier: 2.0.11
     version: 2.0.11
@@ -4012,8 +4012,8 @@ packages:
     resolution: {integrity: sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==}
     dev: true
 
-  /astro-compress@2.2.0:
-    resolution: {integrity: sha512-vyWyjQY5hoIym5GdjFiV6bBNfjGHCWmn9eGMpgZ3QCmspIUyDa83WDJN1Gb4jTIRimnrDtDrSrMYBLKPVDrmWQ==}
+  /astro-compress@2.2.3:
+    resolution: {integrity: sha512-aU4yiTOsnrFdMQnfzxL3bxTCaa/4vIvGXR8e+Ngxr6jpZvzV1pOy7hIthzmt4vjHe6m4VfRSZwtc3/x16/fJcQ==}
     dependencies:
       '@types/csso': 5.0.2
       '@types/html-minifier-terser': 7.0.1
@@ -4023,7 +4023,7 @@ packages:
       lightningcss: 1.22.0
       sharp: 0.32.6
       svgo: 3.0.2
-      terser: 5.22.0
+      terser: 5.24.0
       typescript-esbuild: 0.3.1
     dev: true
 
@@ -7052,7 +7052,7 @@ packages:
       entities: 4.5.0
       param-case: 3.0.4
       relateurl: 0.2.7
-      terser: 5.22.0
+      terser: 5.24.0
     dev: true
 
   /html-tags@3.3.1:
@@ -12775,6 +12775,17 @@ packages:
 
   /terser@5.22.0:
     resolution: {integrity: sha512-hHZVLgRA2z4NWcN6aS5rQDc+7Dcy58HOf2zbYwmFcQ+ua3h6eEFf5lIDKTzbWwlazPyOZsFQO8V80/IjVNExEw==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      '@jridgewell/source-map': 0.3.5
+      acorn: 8.11.2
+      commander: 2.20.3
+      source-map-support: 0.5.21
+    dev: true
+
+  /terser@5.24.0:
+    resolution: {integrity: sha512-ZpGR4Hy3+wBEzVEnHvstMvqpD/nABNelQn/z2r0fjVWGQsN3bpOLzQlqDxmb4CDZnXq5lpjnQ+mHQLAOpfM5iw==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
