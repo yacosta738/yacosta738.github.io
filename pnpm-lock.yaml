@@ -144,8 +144,8 @@ devDependencies:
     specifier: 0.3.0
     version: 0.3.0
   marked:
-    specifier: 9.1.4
-    version: 9.1.4
+    specifier: 9.1.5
+    version: 9.1.5
   mdast-util-to-string:
     specifier: 4.0.0
     version: 4.0.0
@@ -8026,8 +8026,8 @@ packages:
     hasBin: true
     dev: true
 
-  /marked@9.1.4:
-    resolution: {integrity: sha512-Mq83CCaClhXqhf8sLQ57c1unNelHEuFadK36ga+GeXR4FeT/5ssaC5PaCRVqMA74VYorzYRqdAaxxteIanh3Kw==}
+  /marked@9.1.5:
+    resolution: {integrity: sha512-14QG3shv8Kg/xc0Yh6TNkMj90wXH9mmldi5941I2OevfJ/FQAFLEwtwU2/FfgSAOMlWHrEukWSGQf8MiVYNG2A==}
     engines: {node: '>= 16'}
     hasBin: true
     dev: true
