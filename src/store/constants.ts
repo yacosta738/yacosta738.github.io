@@ -10,8 +10,9 @@ export const domain = 'https://yunielacosta.com'
 export const DRAWER_MENU_ID = `drawer-menu-${crypto.randomUUID()}`
 export const DRAWER_MENU_BUTTON_ID = 'drawer-menu-button'
 export const DRAWER_MENU_LABEL = 'drawer-menu-label'
-
 export const NAVBAR_HEADER = 'navbar-header'
+export const SEARCH_BUTTON_ID = `search-button-${crypto.randomUUID()}`
+export const SEARCH_MODAL_ID = `search-modal-${crypto.randomUUID()}`
 
 export const socialMedia: SocialMedia[] = [
 	{

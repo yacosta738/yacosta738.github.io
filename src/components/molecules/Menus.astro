@@ -4,6 +4,7 @@ import { LanguageSelector } from 'astro-i18next/components'
 import { type Menu, navMenus } from '@models:Menu'
 import { Icon } from 'astro-icon/components'
 import { localizeUrl } from '@utils:utilities'
+import {SEARCH_BUTTON_ID, SEARCH_MODAL_ID} from '@store:constants'
 export interface Props {
 	drawer: boolean
 }
@@ -57,9 +58,9 @@ setDefaultNamespace('common')
 		{
 			isBlogRoot && (
 				<button
-					id='searchButton'
-					data-modal-target='searchModal'
-					data-modal-toggle='searchModal'
+					id={SEARCH_BUTTON_ID}
+					data-modal-target={SEARCH_MODAL_ID}
+					data-modal-toggle={SEARCH_MODAL_ID}
 					class='rounded bg-transparent p-2 text-green-500 hover:border-green-500 hover:bg-green-900'
 					type='button'
 				>
