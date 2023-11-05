@@ -1,9 +1,8 @@
 ---
 import { t, setDefaultNamespace } from 'i18next'
-import { LanguageSelector } from "astro-i18next/components";
+import { LanguageSelector } from 'astro-i18next/components'
 import { type Menu, navMenus } from '@models:Menu'
-import Icon from 'astro-icon'
-import Search from 'molecules:Search'
+import { Icon } from 'astro-icon/components'
 import { localizeUrl } from '@utils:utilities'
 export interface Props {
 	drawer: boolean
@@ -12,7 +11,8 @@ export interface Props {
 const { drawer } = Astro.props
 
 const { pathname } = Astro.url
-const isBlogRoot = pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/blog\/\w+/)
+const isBlogRoot =
+	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/blog\/\w+/)
 setDefaultNamespace('common')
 ---
 
@@ -29,7 +29,7 @@ setDefaultNamespace('common')
 						<a
 							href={localizeUrl(menu.link)}
 							id={drawer ? `drawer-${menu.id}` : `nav-${menu.id}`}
-							// data-drawer-dismiss='drawer-menu'
+							data-drawer-dismiss='drawer-menu'
 							tabindex={drawer ? -1 : 0}
 						>
 							{t('menus.' + menu.title)}
@@ -39,7 +39,7 @@ setDefaultNamespace('common')
 			}
 		</ol>
 	</li>
-	<li class='flex items-center justify-start md:justify-between'>
+	<li class='flex items-center justify-center md:justify-between'>
 		<LanguageSelector
 			showFlag={true}
 			class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
@@ -54,7 +54,19 @@ setDefaultNamespace('common')
 		>
 			<Icon name='mdi:rss' class='h-5 w-5' />
 		</a>
-		{isBlogRoot && <Search />}
+		{
+			isBlogRoot && (
+				<button
+					id='searchButton'
+					data-modal-target='searchModal'
+					data-modal-toggle='searchModal'
+					class='rounded bg-transparent p-2 text-green-500 hover:border-green-500 hover:bg-green-900'
+					type='button'
+				>
+					<Icon name='ic:twotone-search' class='h-4 w-4' />
+				</button>
+			)
+		}
 	</li>
 	<li>
 		<a

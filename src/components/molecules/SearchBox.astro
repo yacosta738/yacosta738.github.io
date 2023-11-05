@@ -1,13 +1,15 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
+import i18next, { t, setDefaultNamespace } from "i18next";
 import type { Article } from '@models:Article'
 import { Icon } from 'astro-icon/components'
-interface Props {
-	articles: Array<Article>
-}
-const { articles = [] } = Astro.props
+import { jsonToArticle } from '../../models/Article'
+const allPosts = await Astro.glob("/src/pages/blog/**/*.md");
+const sortedPosts = allPosts
+.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
+.map((post) => jsonToArticle(post))
+.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 
-const jsonArticles = JSON.stringify(articles)
+const jsonArticles = JSON.stringify(sortedPosts)
 
 setDefaultNamespace('blog')
 ---
@@ -82,6 +84,7 @@ setDefaultNamespace('blog')
 
 <script>
 	import Fuse from 'fuse.js'
+	import { Modal } from 'flowbite'
 
 	interface Article {
 		id: string
@@ -99,7 +102,7 @@ setDefaultNamespace('blog')
 		content: string
 	}
 
-	const textInputDelay = (fn, ms) => {
+	const textInputDelay = (fn: Function, ms:number) => {
 		let timer: ReturnType<typeof setTimeout>;
 		return function (...args: any[]) {
 			clearTimeout(timer);
@@ -114,14 +117,22 @@ setDefaultNamespace('blog')
 	class SearchBox extends HTMLElement {
 		constructor() {
 			super()
+			this.id = 'search-box'
+
+			// select the two elements that we'll work with
+			const $buttonElement: HTMLElement | null = this.querySelector('#searchButton')
+			const $modalElement: HTMLElement | null = this.querySelector('#searchModal')
+			const $textSearch: HTMLInputElement | null = this.querySelector('#textSearch') as HTMLInputElement
+
+
 			// Read the articles from the data attribute.
 			const articles: Array<Article> = this.dataset.articles
 				? JSON.parse(this.dataset.articles)
 				: []
-			const results = this.querySelector('#article-results') as HTMLElement
+			const $results = this.querySelector('#article-results') as HTMLElement
 			const itemFoundText = this.querySelector('#itemFoundText') as HTMLElement
 			const search = async () => {
-				let text = (this.querySelector('#textSearch') as HTMLInputElement).value
+				let text = $textSearch?.value ?? ''
 				const fuse = new Fuse<Article>(articles, options)
 				const res = fuse.search(text)
 				let html = ''
@@ -139,20 +150,29 @@ setDefaultNamespace('blog')
 					itemFoundText.innerHTML = '0 '
 					html = `<p class="text-lg font-semibold text-gray-500 dark:text-gray-400">No results found</p>`
 				}
-				results.innerHTML = html
+				$results.innerHTML = html
 			}
 			search()
 			const searchInput = document.getElementById('textSearch')
 			searchInput && searchInput.addEventListener('keyup', textInputDelay(search, 500))
-			// clear search input on modal close
-			const modal = document.getElementById("searchModal");
+			// create a new modal component
+			const modal = new Modal($modalElement)
 			// if have aria-hidden='true' means modal is closed and we can clear the input
-			const closeButton = modal.querySelector('[data-modal-hide="searchModal"]');
-			closeButton.addEventListener('click', () => {
+			const $closeButton = this.querySelector('[data-modal-hide="searchModal"]');
+			$closeButton?.addEventListener('click', () => {
 				(searchInput as HTMLInputElement).value = ''
-				results.innerHTML = ''
+				$results.innerHTML = ''
 				itemFoundText.innerHTML = '0 '
 			})
+
+			// toggle the visibility of the modal when clicking on the button
+			if ($buttonElement) {
+				$buttonElement.addEventListener('click', () => {
+					modal.toggle()
+					$results.innerHTML = ''
+					$textSearch.value = ''
+				})
+			}
 		}
 	}
 
