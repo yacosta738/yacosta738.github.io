@@ -60,7 +60,7 @@
     "eslint-plugin-astro": "0.29.1",
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-jsx-a11y": "6.8.0",
-    "eslint-plugin-n": "16.2.0",
+    "eslint-plugin-n": "16.3.1",
     "eslint-plugin-promise": "6.1.1",
     "flowbite": "^2.0.0",
     "fuse.js": "7.0.0",
