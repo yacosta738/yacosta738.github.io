@@ -24,7 +24,7 @@
     "@astrojs/rss": "3.0.0",
     "@astrojs/sitemap": "3.0.3",
     "@astrojs/tailwind": "5.0.2",
-    "@astrojs/vue": "3.0.3",
+    "@astrojs/vue": "3.0.4",
     "@iconify-json/akar-icons": "^1.1.20",
     "@iconify-json/charm": "^1.1.9",
     "@iconify-json/cib": "^1.1.5",
