@@ -40,7 +40,7 @@ setDefaultNamespace('hero')
 <script>
 	import { DRAWER_MENU_BUTTON_ID, DRAWER_MENU_BUTTON_BOX_ID } from '@store:constants'
 	import { Drawer } from 'flowbite'
-	import type { DrawerOptions, DrawerInterface } from 'flowbite'
+	import type { DrawerOptions, DrawerInterface, InstanceOptions } from 'flowbite'
 
 	class DrawerMenu extends HTMLElement {
 		constructor() {
@@ -55,12 +55,7 @@ setDefaultNamespace('hero')
 			)
 			const $menuDrawerElement: HTMLElement | null = this.querySelector(`#${identifier}`)
 
-			const classListDrawerMenuButtonBox: string[] = [
-				'z-[100]',
-				'absolute',
-				'top-0',
-				'right-0'
-			]
+			const classListDrawerMenuButtonBox: string[] = ['z-[100]', 'absolute', 'top-0', 'right-0']
 
 			const fallbackMenuDrawerId = 'drawer-menu-fallback'
 			// options with default values
@@ -91,20 +86,33 @@ setDefaultNamespace('hero')
 					$drawerMenuButtonElement?.classList.toggle('active-menu')
 				}
 			}
+			const instanceOptions: InstanceOptions = {
+				id: identifier,
+				override: true
+			}
+
 			if ($menuDrawerElement) {
 				// create a new modal instance
-				const menuDrawer: DrawerInterface = new Drawer($menuDrawerElement, options)
-
+				const menuDrawer: DrawerInterface = new Drawer($menuDrawerElement, options, instanceOptions)
 				// toggle the visibility of the modal when clicking on the button
 				$drawerMenuButtonElement?.addEventListener('click', () => menuDrawer.toggle())
+				document.addEventListener('menu-link-clicked', (e) => {
+					// listen for event menu-link-clicked to close the drawer
+					if (e instanceof CustomEvent) {
+						const { detail } = e
+						if (detail.dismiss === identifier) {
+							menuDrawer.hide()
+						}
+					}
+				})
 			}
 		}
 
 		private onShowDrawer(
-			$drawerMenuButtonElement:  HTMLElement | null,
-			$drawerMenuButtonBoxElement:  HTMLElement | null,
+			$drawerMenuButtonElement: HTMLElement | null,
+			$drawerMenuButtonBoxElement: HTMLElement | null,
 			classListDrawerMenuButton: string[],
-			$menuDrawerElement:  HTMLElement | null,
+			$menuDrawerElement: HTMLElement | null,
 			fallbackMenuDrawerId: string
 		) {
 			$drawerMenuButtonElement?.classList.add('active-menu')
@@ -120,7 +128,7 @@ setDefaultNamespace('hero')
 			$drawerMenuButtonElement: HTMLElement | null,
 			$drawerMenuButtonBoxElement: HTMLElement | null,
 			classListDrawerMenuButton: string[],
-			$menuDrawerElement:  HTMLElement | null,
+			$menuDrawerElement: HTMLElement | null,
 			fallbackMenuDrawerId: string
 		) {
 			$drawerMenuButtonElement?.classList.remove('active-menu')
