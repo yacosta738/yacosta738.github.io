@@ -138,8 +138,8 @@ devDependencies:
     specifier: 8.0.3
     version: 8.0.3
   i18next-fs-backend:
-    specifier: 2.2.0
-    version: 2.2.0
+    specifier: 2.3.0
+    version: 2.3.0
   locale-emoji:
     specifier: 0.3.0
     version: 0.3.0
@@ -4078,7 +4078,7 @@ packages:
       astro: 3.5.3(sass@1.69.5)(typescript@5.2.2)
       i18next: 22.5.1
       i18next-browser-languagedetector: 7.2.0
-      i18next-fs-backend: 2.2.0
+      i18next-fs-backend: 2.3.0
       i18next-http-backend: 2.4.1
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
@@ -7152,8 +7152,8 @@ packages:
       '@babel/runtime': 7.23.2
     dev: true
 
-  /i18next-fs-backend@2.2.0:
-    resolution: {integrity: sha512-VOPHhdDX0M/csRqEw+9Ectpf6wvTIg1MZDfAHxc3JKnAlJz7fcZSAKAeyDohOq0xuLx57esYpJopIvBaRb0Bag==}
+  /i18next-fs-backend@2.3.0:
+    resolution: {integrity: sha512-N0SS2WojoVIh2x/QkajSps8RPKzXqryZsQh12VoFY4cLZgkD+62EPY2fY+ZjkNADu8xA5I5EadQQXa8TXBKN3w==}
     dev: true
 
   /i18next-http-backend@2.4.1:
