@@ -65,7 +65,7 @@
     "flowbite": "^2.0.0",
     "fuse.js": "7.0.0",
     "husky": "8.0.3",
-    "i18next-fs-backend": "2.2.0",
+    "i18next-fs-backend": "2.3.0",
     "locale-emoji": "0.3.0",
     "marked": "9.1.5",
     "mdast-util-to-string": "4.0.0",
