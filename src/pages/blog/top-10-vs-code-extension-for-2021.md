@@ -53,7 +53,7 @@ In the above example there is only text inside the tags, but in a real applicati
 
 ## 2. Bracket Pair Colorizer
 
-[Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer) is an extension that matches corresponding brackets with the same color. Having nested components, functions, objects, etc., in a file, can become confusing with multiple parentheses, brackets, etc.
+Bracket Pair Colorizer is an extension that matches corresponding brackets with the same color. Having nested components, functions, objects, etc., in a file, can become confusing with multiple parentheses, brackets, etc.
 
 ![Bracket-Pair-Colorizer-Example](/uploads/bracket-pair-colorizer-example.gif 'bracket pair colorizzer example')
 
@@ -125,7 +125,6 @@ There are many icons extension that you can choose from. Popular icon collection
 - [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
 - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 - [Material Theme Icons](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme-icons)
-- [Simple icons](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.vscode-simple-icons)
 
 ## 7. Prettier
 
@@ -176,7 +175,7 @@ The TabNine website with install instructions and other information is [here](h
 
 One of the best features of this extension is the ability to visualize code authorship via Git blame annotations and code lens.
 
-Below is a screenshot from the [React example](https://finalspaceapi.com/docs/react) docs of the [Final Space API](https://finalspaceapi.com/).
+Below is a screenshot from the React example docs of the [Final Space API](https://finalspaceapi.com/).
 
 ![React-Example-Final-Space-Api](/uploads/react-example-final-space-api.webp 'react example final space api')
 
