@@ -54,7 +54,7 @@ En el ejemplo anterior, solo hay texto dentro de las etiquetas, pero en una apli
 
 ## 2. Bracket Pair Colorizer
 
-[Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer) es una extensión que colorea con el mismo color los corchetes correspondientes. Tener componentes anidados, funciones, objetos, etc., etc., en un archivo, pueden confundirse con múltiples paréntesis, corchetes, etc.
+Bracket Pair Colorizer es una extensión que colorea con el mismo color los corchetes correspondientes. Tener componentes anidados, funciones, objetos, etc., etc., en un archivo, pueden confundirse con múltiples paréntesis, corchetes, etc.
 
 ![Bracket-Pair-Colorizer-Example](/uploads/bracket-pair-colorizer-example.gif 'Ejemplo bracket pair colorizzer')
 
@@ -126,7 +126,6 @@ Hay muchas extensiones de iconos entre las que puede elegir. Las colecciones de 
 - [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
 - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 - [Material Theme Icons](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme-icons)
-- [Simple icons](https://marketplace.visualstudio.com/items?itemName=LaurentTreguier.vscode-simple-icons)
 
 ## 7. Prettier
 
@@ -177,7 +176,7 @@ El sitio web de TabNine con instrucciones de instalación y otra información se
 
 Una de las mejores características de esta extensión es la capacidad de visualizar la autoría del código a través de anotaciones de Git blame y code lens.
 
-A continuación se muestra una captura de pantalla de los documentos del [ejemplo de React](https://finalspaceapi.com/docs/react) de la [API de Final Space](https://finalspaceapi.com/).
+A continuación se muestra una captura de pantalla de los documentos del ejemplo de React de la [API de Final Space](https://finalspaceapi.com/).
 
 ![React-Example-Final-Space-Api](/uploads/react-example-final-space-api.webp 'ejemplo de react  usando final space api')
 

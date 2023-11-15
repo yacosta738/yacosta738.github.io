@@ -159,7 +159,7 @@ As you can see, it is very complex to constantly maintain the configuration of a
 - Debian: [redsocks](http://packages.debian.org/search?searchon=names&keywords=redsocks)
 - Gentoo (zugaina overlay): [redsocks](http://gpo.zugaina.org/net-proxy/redsocks)
 - Gentoo: [redsocks](https://packages.gentoo.org/packages/net-proxy/redsocks)
-- Ubuntu: [redsocks](http://packages.ubuntu.com/search?searchon=names&keywords=redsocks)
+- Ubuntu: [redsocks](https://packages.ubuntu.com/search?searchon=names&keywords=redsocks)
 
 ## Manual compilation of redsock
 
@@ -288,7 +288,7 @@ The next tool I want to show you is Proxychains
 
 ## Install proxychains
 
-Proxychains is available with [pkgsrc](https://github.com/haad/proxychains/blob/master/www.pkgsrc.org) for everyone who uses it on Linux, NetBSD, FreeBSD, OpenBSD, DragonFlyBSD or Mac OS X You just need to install [pkgsrc-wip](http://pkgsrc-wip.sourceforge.net/) and run `make install` in the`wip/proxychains` directory
+Proxychains is available with [pkgsrc](https://github.com/haad/proxychains) for everyone who uses it on Linux, NetBSD, FreeBSD, OpenBSD, DragonFlyBSD or Mac OS X You just need to install pkgsrc-wip and run `make install` in the`wip/proxychains` directory
 
 ### Install proxychains from source code
 
@@ -306,10 +306,10 @@ Clone the GitHub source code and run the following commands:
 
 ---
 
-- Archlinux/Manjaro: [proxychains-ng/](https://www.archlinux.org/packages/community/x86_64/proxychains-ng/)
+- Archlinux/Manjaro: [proxychains-ng/](https://archlinux.org/packages/?sort=&q=proxychains-ng&maintainer=&flagged=)
 - Debian: [proxychains](https://packages.debian.org/search?keywords=proxychains)
-- Gentoo: [proxychains](https://packages.gentoo.org/packages/net-proxy/proxychains)
-- Fedora: [proxychains-ng](https://fedora.pkgs.org/32/fedora-x86_64/proxychains-ng-4.13-5.fc32.x86_64.rpm.html)
+- Gentoo: [proxychains](https://packages.gentoo.org/packages/net-misc/proxychains)
+- Fedora: [proxychains-ng](https://pkgs.org/download/proxychains-ng)
 - Ubuntu: [proxychains](http://packages.ubuntu.com/search?searchon=names&keywords=proxychains)
 
 ## Setting
