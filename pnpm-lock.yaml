@@ -114,8 +114,8 @@ devDependencies:
     specifier: 17.1.0
     version: 17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.3.1)(eslint-plugin-promise@6.1.1)(eslint@8.54.0)
   eslint-plugin-astro:
-    specifier: 0.29.1
-    version: 0.29.1(eslint@8.54.0)
+    specifier: 0.30.0
+    version: 0.30.0(eslint@8.54.0)
   eslint-plugin-import:
     specifier: 2.29.0
     version: 2.29.0(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)
@@ -6423,8 +6423,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-astro@0.29.1(eslint@8.54.0):
-    resolution: {integrity: sha512-ffuUc7zFz8HavaAVaS5iRUzWqBf3/YbrFWUhx0GxXW3gVtnbri5UyvkN8EMOkZWkNXG1zqD2y9dlEsAezhbC0w==}
+  /eslint-plugin-astro@0.30.0(eslint@8.54.0):
+    resolution: {integrity: sha512-LDbbs836SiHqhuiuAF4CPqSSWsfa7R8vfX5lckphCUD/kBFIsobViI8fuTyMktQ9isCg+Q86LIQAHTFl3PWKTA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=7.0.0'
@@ -6434,6 +6434,7 @@ packages:
       '@typescript-eslint/types': 5.62.0
       astro-eslint-parser: 0.16.0
       eslint: 8.54.0
+      eslint-compat-utils: 0.1.2(eslint@8.54.0)
       postcss: 8.4.31
       postcss-selector-parser: 6.0.13
     transitivePeerDependencies:
