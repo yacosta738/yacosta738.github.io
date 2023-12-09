@@ -1,7 +1,6 @@
 ---
 import { SEO } from 'astro-seo'
 import { t, setDefaultNamespace } from 'i18next'
-import { pwaInfo } from 'virtual:pwa-info';
 import { ViewTransitions } from "astro:transitions"
 export interface Props {
 	title: string
@@ -22,7 +21,6 @@ const imageExtension = image?.split('.').pop()
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="msapplication-TileColor" content="#0a192f">
 <meta name="theme-color" content="#64ffda">
-{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 
 
 <SEO
@@ -47,5 +45,11 @@ const imageExtension = image?.split('.').pop()
 		}
 	}}
 	twitter={{ card: 'summary_large_image', creator: '@yacosta738' }}
+	extend={{
+		meta: [
+			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
+			{ name: 'author', content: 'Yuniel Acosta Pérez' }
+		]
+	}}
 />
 <ViewTransitions />

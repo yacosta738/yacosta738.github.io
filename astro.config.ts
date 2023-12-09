@@ -8,12 +8,10 @@ import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
-import AstroPWA from '@vite-pwa/astro'
 import Compress from 'astro-compress'
 import critters from 'astro-critters'
 import icon from 'astro-icon'
 
-import { manifest, workbox } from './src/plugins/pwa'
 import { config } from './src/plugins/netlify-cms'
 
 const DEV_PORT: number = 3000
@@ -26,19 +24,6 @@ export default defineConfig({
 		port: DEV_PORT
 	},
 	integrations: [
-		AstroPWA({
-			mode: 'production',
-			base: '/',
-			scope: '/',
-			includeAssets: ['favicon.ico'],
-			registerType: 'autoUpdate',
-			manifest,
-			workbox,
-			devOptions: {
-				enabled: true,
-				navigateFallbackAllowlist: [/^\/404$/]
-			}
-		}),
 		sitemap({
 			i18n: {
 				defaultLocale: 'en',

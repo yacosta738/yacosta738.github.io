@@ -9,7 +9,6 @@ import Social from 'atoms:Social'
 import Email from 'atoms:Email'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
-import ReloadPrompt from 'molecules:ReloadPrompt'
 
 setDefaultNamespace('common')
 const { title, description, image, ogImageAlt } = Astro.props
@@ -49,6 +48,5 @@ const { title, description, image, ogImageAlt } = Astro.props
 		<AppFooter />
 		<script src='../../utils/title-change.js'></script>
 		<script src='../../utils/geeky-console.js'></script>
-		<ReloadPrompt />
 	</body>
 </html>
