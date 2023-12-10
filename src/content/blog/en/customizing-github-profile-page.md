@@ -1,5 +1,4 @@
 ---
-
 title: Customizing Github Profile Page
 description: 'You can customize your profile so that other people can get a better
   sense of who you are and the work you do. '

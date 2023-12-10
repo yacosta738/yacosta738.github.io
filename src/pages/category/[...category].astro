@@ -7,22 +7,22 @@ import ArticleSummary from "molecules:ArticleSummary";
 
 changeLanguage("en");
 
-export async function getStaticPaths () {
-  const publishedBlogEntriesPromises = (await getCollection("blog", ({ data }) => {
-    return !data.draft && data.lang === i18next.language;
-  })).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
-  const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
-  const uniqueCategories = [...new Set(publishedBlogEntries.map((post) => post.categories).flat())];
-  return uniqueCategories.map((category) => {
-    return {
-      params: { category: category.toLowerCase() },
-      props: { posts: publishedBlogEntries.filter((post) => post.categories.includes(category)) }
-    };
-  });
+export async function getStaticPaths() {
+    const publishedBlogEntriesPromises = (await getCollection("blog", ({ data }) => {
+        return !data.draft && data.lang === i18next.language;
+    })).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+    const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+    const uniqueCategories = [...new Set(publishedBlogEntries.map((post) => post.categories).flat())];
+    return uniqueCategories.map((category) => {
+        return {
+            params: { category: category.toLowerCase() },
+            props: { posts: publishedBlogEntries.filter((post) => post.categories.includes(category)) }
+        };
+    });
 }
 interface Props {
-  tag: string;
-  posts: Article[];
+    tag: string;
+    posts: Article[];
 }
 const { category } = Astro.params;
 const { posts } = Astro.props;

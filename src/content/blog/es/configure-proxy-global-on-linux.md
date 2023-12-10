@@ -1,5 +1,4 @@
 ---
-
 title: Configurar proxy global en linux
 description: En este artículo comparto algunos consejos para configurar Internet a través de un proxy global en los sistemas operativos GNU/Linux.
 date: 2020-12-06

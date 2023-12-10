@@ -1,9 +1,9 @@
 ---
 import i18next, { t, changeLanguage, setDefaultNamespace } from "i18next";
 import { getCollection } from "astro:content";
-import BlogPostTemplate from "../../components/templates/BlogPostTemplate.astro";
+import BlogPostTemplate from "../../../components/templates/BlogPostTemplate.astro";
 
-changeLanguage("en");
+changeLanguage("es");
 
 export async function getStaticPaths() {
     const publishedBlogEntries = await getCollection("blog", ({ data }) => {

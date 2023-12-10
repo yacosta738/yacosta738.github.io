@@ -1,22 +1,22 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import i18next, { t, changeLanguage, setDefaultNamespace } from "i18next";
 import { type Article, jsonToArticle } from "@models:Article";
 import BlogTemplate from "templates:BlogTemplate";
 import ArticleSummary from "molecules:ArticleSummary";
 
-changeLanguage("en");
+changeLanguage("es");
 
 export async function getStaticPaths() {
     const publishedBlogEntriesPromises = (await getCollection("blog", ({ data }) => {
         return !data.draft && data.lang === i18next.language;
     })).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
     const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
-    const uniqueTags = [...new Set(publishedBlogEntries.map((post) => post.tags).flat())];
-    return uniqueTags.map((tag) => {
+    const uniqueCategories = [...new Set(publishedBlogEntries.map((post) => post.categories).flat())];
+    return uniqueCategories.map((category) => {
         return {
-            params: { tag: tag.toLowerCase() },
-            props: { posts: publishedBlogEntries.filter((post) => post.tags.includes(tag)) }
+            params: { category: category.toLowerCase() },
+            props: { posts: publishedBlogEntries.filter((post) => post.categories.includes(category)) }
         };
     });
 }
@@ -24,13 +24,16 @@ interface Props {
     tag: string;
     posts: Article[];
 }
-const { tag } = Astro.params;
+const { category } = Astro.params;
 const { posts } = Astro.props;
 setDefaultNamespace("blog");
 ---
 
-<BlogTemplate title={`${t("blog")} | ${tag}`} description={`${t("blog-description")} ${tag}`}>
-  <div class="tainer mx-auto">
+<BlogTemplate
+  title={`${t("blog")} | ${category}`}
+  description={`${t("blog-description")} ${category}`}
+>
+  <div class="container mx-auto">
     {
       posts.map((post) => (
         <article class="mx-2 mb-20 border-b border-gray-400 md:mx-24">

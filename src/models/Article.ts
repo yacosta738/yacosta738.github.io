@@ -25,7 +25,7 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 	if (json.data) {
 		content = json.body
 	}
-	const urlPrefix:string = '/posts/'
+	const urlPrefix: string = '/posts/'
 	return {
 		id: json.id || crypto.randomUUID(),
 		url: `${urlPrefix}${json.slug}`,

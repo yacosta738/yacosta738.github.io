@@ -5,7 +5,7 @@ import { type Article, jsonToArticle } from "@models:Article";
 import BlogTemplate from "templates:BlogTemplate";
 import ArticleSummary from "molecules:ArticleSummary";
 
-changeLanguage("en");
+changeLanguage("es");
 
 export async function getStaticPaths() {
     const publishedBlogEntriesPromises = (await getCollection("blog", ({ data }) => {

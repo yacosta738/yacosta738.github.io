@@ -14,7 +14,7 @@ export const GET = async (context) => {
 			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
 		site: context.site,
 		items: blog
-		// .filter((post) => !post.frontmatter.draft)
+			// .filter((post) => !post.frontmatter.draft)
 			.map((post) => ({
 				link: `/blog/${post.slug}/`,
 				title: post.data.title,
@@ -24,4 +24,3 @@ export const GET = async (context) => {
 		stylesheet: '/rss/styles.xsl'
 	})
 }
-

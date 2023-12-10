@@ -1,5 +1,4 @@
 ---
-
 title: Add an image picker in flutter
 date: 2020-12-18
 description: The image picker is a common component that we often need for user profiles and other things. How to add an image picker to flutter to select images from gallery or camera
