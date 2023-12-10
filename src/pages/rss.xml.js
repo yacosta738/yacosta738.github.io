@@ -1,25 +1,23 @@
 import rss from '@astrojs/rss'
 import { getCollection } from 'astro:content'
-
-// const posts = await pagesGlobToRssItems(
-// 	import.meta.glob('./blog/*.{md,mdx}')
-// )
-// const posts = Object.values(postImportResult)
+import { jsonToArticle } from '@models:Article'
 
 export const GET = async (context) => {
-	const blog = await getCollection('blog')
+	const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
+		return !data.draft
+	})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry))
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
 	return rss({
 		title: 'YAP’s  Blog',
 		description:
 			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
 		site: context.site,
-		items: blog
-			// .filter((post) => !post.frontmatter.draft)
+		items: publishedBlogEntries
 			.map((post) => ({
-				link: `/blog/${post.slug}/`,
-				title: post.data.title,
-				pubDate: post.data.date,
-				description: post.data.description
+				link: post.url,
+				title: post.title,
+				pubDate: post.date,
+				description: post.description
 			})),
 		stylesheet: '/rss/styles.xsl'
 	})
