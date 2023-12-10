@@ -36,7 +36,7 @@ export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 					label: 'Layout',
 					name: 'layout',
 					widget: 'hidden',
-					default: '../../components/templates/BlogPostTemplate.astro'
+					default: '../../../components/templates/BlogPostTemplate.astro'
 				},
 				{
 					label: 'Tags',

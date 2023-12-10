@@ -1,0 +1,45 @@
+---
+import i18next, { t, changeLanguage, setDefaultNamespace } from "i18next";
+import { getCollection, getEntry } from 'astro:content'
+import BlogTemplate from "templates:BlogTemplate";
+import { type Article, jsonToArticle } from "@models:Article";
+import ArticleSummary from "molecules:ArticleSummary";
+// import Paginator from "molecules:Paginator";
+import SearchBox from "molecules:SearchBox";
+
+changeLanguage("en");
+setDefaultNamespace("blog");
+const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === i18next.language;
+	})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+
+	const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+---
+
+<BlogTemplate title={t('blog')} description={t('blog-description')}>
+	<SearchBox  />
+	<div class='container mx-auto'>
+		{
+			sortedPublishedBlogEntries.map(article => (
+				<article class='mx-2 mb-20 border-b border-gray-400 md:mx-24'>
+					<ArticleSummary article={article} />
+				</article>
+			))
+		}
+		{
+			sortedPublishedBlogEntries.length === 0 && (
+				<div class='container-inner mx-auto py-16 pl-10'>
+					<div class='text-center'>
+						<h1 class='text-3xl font-bold'>{t('no-articles-found')}</h1>
+						<p class='text-gray-600'>{t('try-again')}</p>
+					</div>
+				</div>
+			)
+		}
+		<!-- pagination -->
+			<!-- <Paginator page={publishedBlogEntries} /> -->
+	</div>
+</BlogTemplate>

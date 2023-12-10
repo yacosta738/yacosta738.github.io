@@ -37,7 +37,7 @@ export default defineConfig({
 		astroI18next(),
 		robotsTxt(),
 		Compress({
-			css: false
+			CSS: false
 		}),
 		critters({
 			exclude: ['index.html', (file: string) => file === './dist/index.html']

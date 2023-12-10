@@ -3,15 +3,19 @@ import i18next, { t, setDefaultNamespace } from 'i18next'
 import { Icon } from 'astro-icon/components'
 import { jsonToArticle } from '../../models/Article'
 import {SEARCH_MODAL_ID, SEARCH_BUTTON_ID} from '@store:constants'
+import { getCollection } from 'astro:content';
 
 
-const allPosts = await Astro.glob('/src/pages/**/*.md')
-const sortedPosts = allPosts
-.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-.map((post) => jsonToArticle(post))
-.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === i18next.language;
+	})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
-const jsonArticles = JSON.stringify(sortedPosts)
+	const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+
+const jsonArticles = JSON.stringify(sortedPublishedBlogEntries)
 
 setDefaultNamespace('blog')
 ---

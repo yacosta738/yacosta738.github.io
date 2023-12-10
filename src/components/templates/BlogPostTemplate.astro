@@ -1,5 +1,6 @@
 ---
 import { t, setDefaultNamespace } from 'i18next'
+import type { CollectionEntry } from 'astro:content'
 import BlogTemplate from 'templates:BlogTemplate'
 import PostHeader from 'molecules:PostHeader'
 import ShareButton from 'atoms:ShareButton'
@@ -10,29 +11,18 @@ import '../../styles/github-markdown.css'
 import { domain } from '@store:constants'
 import { jsonToArticle } from '@models:Article'
 export interface Props {
-	frontmatter: {
-		title: string
-		description: string
-		lang: string
-		date: string
-		cover: string
-		timeToRead: number
-		url: string
-		author: string
-		categories: string[]
-		tags: string[]
-	}
+	post: CollectionEntry<'blog'>;
 }
 const url = Astro.url
 
-let { frontmatter } = Astro.props
-const title = frontmatter.title
-const description = frontmatter.description
-const image = frontmatter.cover ? frontmatter.cover : `${domain}/uploads/me.webp`
+let { post } = Astro.props
+const title = post.data.title
+const description = post.data.description
+const image = post.data.cover ? post.data.cover : `${domain}/uploads/me.webp`
 const ogImageAlt = description
-const categories = frontmatter.categories || Array<string>()
-const tags = frontmatter.tags || Array<string>()
-const lang = frontmatter.lang || 'en'
+const categories = post.data.categories || Array<string>()
+const tags = post.data.tags || Array<string>()
+const lang = post.data.lang || 'en'
 
 const shareButtons: {
 	title: string
@@ -80,6 +70,7 @@ const repo = 'yacosta738/blog.yap.comments'
 const label = 'Comment'
 const theme = 'icy-dark'
 
+const article = await jsonToArticle(post)
 setDefaultNamespace('blog')
 ---
 
@@ -94,9 +85,9 @@ setDefaultNamespace('blog')
 		<h1
 			class='mt-10 text-center text-2xl font-bold leading-tight md:mt-0 md:text-justify md:text-4xl md:tracking-wider'
 		>
-			{frontmatter.title}
+			{article.title}
 		</h1>
-		<PostHeader article={jsonToArticle(frontmatter)} />
+		<PostHeader article={ article } />
 		<div id='markdown-body' class='markdown-body'>
 			<slot />
 		</div>

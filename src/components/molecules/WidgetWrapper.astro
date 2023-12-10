@@ -1,24 +1,20 @@
 ---
+import { getCollection } from 'astro:content'
 import i18next from 'i18next'
 import WidgetRecentPost from 'molecules:WidgetRecentPost'
 import WidgetCategory from 'molecules:WidgetCategory'
 import WidgetTagCloud from 'molecules:WidgetTagCloud'
 import { type Article, jsonToArticle } from '@models:Article'
-import type { MarkdownInstance } from 'astro'
 
 const { pathname } = Astro.url
 const isBlogRoot = pathname.endsWith('/blog')
 
-const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
-	en: Astro.glob('../../pages/blog/**/*.md'),
-	es: Astro.glob('../../pages/es/blog/**/*.md')
-}
+const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
+	return !data.draft && data.lang === i18next.language;
+})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
-const postsData = i18next.language in articlesFiles ? await articlesFiles[i18next.language] : []
-
-const allPosts: Article[] = postsData
-	.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-	.map((post) => jsonToArticle(post))
+const allPosts: Article[] = publishedBlogEntries
 	.sort((a, b) => {
 		let aDate = new Date(a.date)
 		let bDate = new Date(b.date)
