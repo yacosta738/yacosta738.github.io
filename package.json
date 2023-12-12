@@ -67,7 +67,7 @@
     "husky": "8.0.3",
     "i18next-fs-backend": "2.3.1",
     "locale-emoji": "0.3.0",
-    "marked": "11.0.0",
+    "marked": "11.1.0",
     "mdast-util-to-string": "4.0.0",
     "nanostores": "0.9.5",
     "postcss-nesting": "12.0.1",
