@@ -1,13 +1,16 @@
 ---
-import i18next, { t, setDefaultNamespace } from 'i18next'
 import { Icon } from 'astro-icon/components'
 import { jsonToArticle } from '../../models/Article'
 import {SEARCH_MODAL_ID, SEARCH_BUTTON_ID} from '@store:constants'
 import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
-		return !data.draft && data.lang === i18next.language;
+		return !data.draft && data.lang === lang;
 	})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
 	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
@@ -16,8 +19,6 @@ const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => 
 	});
 
 const jsonArticles = JSON.stringify(sortedPublishedBlogEntries)
-
-setDefaultNamespace('blog')
 ---
 
 <search-box data-identifier={SEARCH_MODAL_ID} data-triggerId={SEARCH_BUTTON_ID} data-articles={jsonArticles}>
@@ -35,7 +36,7 @@ setDefaultNamespace('blog')
 				<div
 					class="flex items-start justify-between p-4 m-4 border-b rounded-t dark:border-gray-600"
 				>
-					<h3 class="text-5xl font-semibold text-light-slate">{t('search.search-title')}</h3>
+					<h3 class="text-5xl font-semibold text-light-slate">{t('search.searchTitle')}</h3>
 					<button
 						type="button"
 						class="bg-transparent text-green-500 hover:border-green-500 hover:bg-green-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
@@ -72,14 +73,14 @@ setDefaultNamespace('blog')
 									type="search"
 									id="textSearch"
 									class="block w-full p-4 pl-10 text-sm border rounded-lg bg-lightest-navy border-lightest-slate placeholder-gray-400 text-light-slate focus:ring-green-500 focus:border-green-500"
-									placeholder={t('search.search-placeholder')}
+									placeholder={t('search.searchPlaceholder')}
 									required
 								/>
 							</div>
 						</form>
 						<p class="text-right w-1/5">
 							<span id="itemFoundText">0</span>
-							{t('search.search-result')}
+							{t('search.searchResult')}
 						</p>
 					</div>
 
@@ -132,8 +133,8 @@ setDefaultNamespace('blog')
 			const searchModalId = this.dataset.identifier
 
 			// select the two elements that we'll work with
-			const $buttonElement: HTMLElement | null = this.querySelector(searchButtonId)
-			const $modalElement: HTMLElement | null = this.querySelector(searchModalId)
+			const $buttonElement: HTMLElement | null = this.querySelector(searchButtonId ?? '') as HTMLElement
+			const $modalElement: HTMLElement | null = this.querySelector(searchModalId ?? '') as HTMLElement
 			const $textSearch: HTMLInputElement | null = this.querySelector('#textSearch') as HTMLInputElement
 
 

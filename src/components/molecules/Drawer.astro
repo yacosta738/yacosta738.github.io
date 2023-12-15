@@ -1,9 +1,10 @@
 ---
 import MenuButton from 'atoms:MenuButton'
 import Menus from 'molecules:Menus'
-import { t, setDefaultNamespace } from 'i18next'
 import { DRAWER_MENU_ID, DRAWER_MENU_LABEL } from '@store:constants'
-setDefaultNamespace('hero')
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <drawer-menu data-identifier={DRAWER_MENU_ID} class='lg:hidden'>

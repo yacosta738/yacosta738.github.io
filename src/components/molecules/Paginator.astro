@@ -1,8 +1,10 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
-
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n:utils";
 const { page } = Astro.props
-setDefaultNamespace('blog')
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 ---
 
 <section class='flex items-center justify-between text-xl mx-1 px-1'>

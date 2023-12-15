@@ -1,101 +1,62 @@
-<div class='loader-body'>
-	<div class='loader'>
-		<div class='inner one'></div>
-		<div class='inner two'></div>
-		<div class='inner three'></div>
-	</div>
+<div class='loader'>
+	<div style='--i: 1'></div>
+	<div style='--i: 2'></div>
+	<div style='--i: 3'></div>
+	<div style='--i: 4'></div>
 </div>
 
-<script>
-	const loader = document.querySelector('.loader-body')
-	document.onreadystatechange = function () {
-		if (document.readyState !== 'complete') {
-			loader.classList.add('block')
-			loader.classList.remove('hidden')
-		} else {
-			loader.classList.remove('block')
-			loader.classList.add('hidden')
-		}
-	}
-</script>
-
 <style lang='scss'>
-	.loader-body {
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		width: 100%;
-		height: 100vh;
-		background-image: radial-gradient(circle farthest-corner at center, #112240 0%, #0a192f 100%);
-		z-index: 99;
-		transition: var(--transition);
-	}
-
 	.loader {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.loader::before {
+		content: '';
+		background: rgba(255, 255, 255, 0);
+		backdrop-filter: blur(8px);
 		position: absolute;
-		top: calc(50% - 32px);
-		left: calc(50% - 32px);
-		width: 64px;
-		height: 64px;
+		width: 140px;
+		height: 55px;
+		z-index: 20;
+		border-radius: 0 0 10px 10px;
+		border: 1px solid rgba(255, 255, 255, 0.274);
+		border-top: none;
+		box-shadow: 0 15px 20px rgba(0, 0, 0, 0.082);
+		animation: anim2 2s infinite;
+	}
+
+	.loader div {
+		background: rgb(228, 228, 228);
 		border-radius: 50%;
-		perspective: 800px;
+		width: 25px;
+		height: 25px;
+		z-index: -1;
+		animation: anim 2s infinite linear;
+		animation-delay: calc(-0.3s * var(--i));
+		transform: translateY(5px);
+		margin: 0.2em;
 	}
 
-	.inner {
-		position: absolute;
-		box-sizing: border-box;
-		width: 100%;
-		height: 100%;
-		border-radius: 50%;
-	}
-
-	.inner.one {
-		left: 0;
-		top: 0;
-		animation: rotate-one 1s linear infinite;
-		border-bottom: 3px solid #64ffda;
-	}
-
-	.inner.two {
-		right: 0;
-		top: 0;
-		animation: rotate-two 1s linear infinite;
-		border-right: 3px solid #64ffda;
-	}
-
-	.inner.three {
-		right: 0;
-		bottom: 0;
-		animation: rotate-three 1s linear infinite;
-		border-top: 3px solid #64ffda;
-	}
-
-	@keyframes rotate-one {
-		0% {
-			transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-		}
+	@keyframes anim {
+		0%,
 		100% {
-			transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+			transform: translateY(5px);
+		}
+		50% {
+			transform: translateY(-65px);
 		}
 	}
 
-	@keyframes rotate-two {
-		0% {
-			transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-		}
+	@keyframes anim2 {
+		0%,
 		100% {
-			transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+			transform: rotate(-10deg);
 		}
-	}
-
-	@keyframes rotate-three {
-		0% {
-			transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-		}
-		100% {
-			transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+		50% {
+			transform: rotate(10deg);
 		}
 	}
 </style>

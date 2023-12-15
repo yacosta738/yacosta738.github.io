@@ -1,7 +1,9 @@
 ---
-import i18next, { t, setDefaultNamespace } from 'i18next'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 import { email } from '@store:constants'
-setDefaultNamespace('hero')
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <section class='min-h-screen'>
@@ -14,20 +16,20 @@ setDefaultNamespace('hero')
 		</h1>
 		<h2
 			id='phrase'
-			class={`text-3xl text-gray-500 sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl [text-wrap:balance] slogan-${i18next.language}`}
+			class={`text-3xl text-gray-500 sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl [text-wrap:balance] slogan-${lang}`}
 		>
 			<span hidden>{t('slogan')}</span>
 		</h2>
 		<p id='my-self' class='text-md my-4 max-w-none text-justify md:max-w-3xl md:text-xl'>
-			{t('my-self')}
+			{t('mySelf')}
 
-			<span class={`typed-text-${i18next.language}`}>
+			<span class={`typed-text-${lang}`}>
 				<span hidden>SOLID Principles, Clean Architecture, Design Patterns, Microservices</span>
 			</span>
 		</p>
 		<footer class='container mx-auto flex flex-col items-center md:items-start'>
 			<a href={`mailto:${email}`} class='big-button my-10 animate-pulse'>
-				👋🏻 {t('get-in-touch')}
+				👋🏻  {t('getInTouch')}
 			</a>
 		</footer>
 	</div>

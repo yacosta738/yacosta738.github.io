@@ -1,20 +1,22 @@
 ---
 import '../../styles/global.css'
-import i18next, { t, setDefaultNamespace } from 'i18next'
 import HeadSEO from 'organisms:HeadSEO'
 import GoogleAnalytics from 'atoms:GoogleAnalytics'
-import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import Social from 'atoms:Social'
 import Email from 'atoms:Email'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 
-setDefaultNamespace('common')
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const { title, description, image, ogImageAlt } = Astro.props
 ---
 
-<html lang={i18next.language} class='scroll-smooth'>
+<html lang={lang} class='scroll-smooth'>
 	<head>
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
@@ -22,7 +24,6 @@ const { title, description, image, ogImageAlt } = Astro.props
 						 description={description ?? t('seo.description')}
 						 image={image ?? '/uploads/me.webp'}
 						 ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')} />
-		<HeadHrefLangs />
 		<GoogleAnalytics />
 	</head>
 

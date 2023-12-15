@@ -1,15 +1,18 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 import Icon from 'astro-icon'
 import WidgetCard from 'molecules:WidgetCard'
-import { t, setDefaultNamespace } from 'i18next'
-import { localizeUrl } from '@utils:utilities'
 
 export interface Props {
 	categories: { [key: string]: number }
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const { categories } = Astro.props
 const allCategories = Object.keys(categories)
-setDefaultNamespace('blog')
 ---
 
 <WidgetCard title={t('categories')}>
@@ -17,7 +20,7 @@ setDefaultNamespace('blog')
 		{
 			allCategories.map((category) => (
 				<li class='my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate'>
-					<a href={localizeUrl(`/blog/category/${category}`)} class='inline-link'>
+					<a href={translatePath(`/categories/${category}`)} class='inline-link'>
 						<div class='flex items-center justify-center'>
 							<Icon name='zondicons:cheveron-right' class='h-6' />
 							<span>{category}</span>

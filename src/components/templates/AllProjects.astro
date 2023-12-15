@@ -1,11 +1,11 @@
 ---
 import type { Project, ProjectJson } from '@models:Project'
 import type { Tech } from '@models:Tech'
-import i18next, { t, setDefaultNamespace } from 'i18next'
 import BaseTemplate from 'templates:BaseTemplate'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
 import { urlize } from '@utils:utilities'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 const projectData = await Astro.glob<ProjectJson>('../../data/projects/**/*.json')
 const techData = await Astro.glob<Tech>('../../data/technologies/**/*.json')
 const tech: {
@@ -29,12 +29,15 @@ const jsonToProject = (json: ProjectJson): Project => {
 		content: json.content
 	}
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const projects: Project[] = projectData
-	.filter((project) => project.published && project.lang === i18next.language)
+	.filter((project) => project.published && project.lang === lang)
 	.sort((a, b) => (new Date(b.date ?? 0)).getTime() - (new Date(a.date ?? 0)).getTime())
 	.map((json) => jsonToProject(json))
-
-	setDefaultNamespace('projects')
 ---
 
 <BaseTemplate
@@ -45,9 +48,9 @@ const projects: Project[] = projectData
 >
 	<div class='container-inner mx-auto py-16 2xl:container'>
 		<div>
-			<h1 class='big-heading'>{t('all-projects')}</h1>
+			<h1 class='big-heading'>{t('allProjects')}</h1>
 			<p class='my-5 font-sans text-xl text-green-500 md:text-2xl'>
-				{t('big-list')}
+				{t('bigList')}
 			</p>
 		</div>
 
@@ -62,10 +65,10 @@ const projects: Project[] = projectData
 							{t('title')}
 						</th>
 						<th scope='col' class='hidden px-6 py-3 md:table-cell'>
-							{t('made-at')}
+							{t('madeAt')}
 						</th>
 						<th scope='col' class='hidden px-6 py-3 md:table-cell'>
-							{t('built-at')}
+							{t('builtAt')}
 						</th>
 						<th scope='col' class='flex justify-center px-6 py-3'>
 							{t('link')}
@@ -83,7 +86,7 @@ const projects: Project[] = projectData
 								</th>
 								<td class='px-6 py-4'>{project.title}</td>
 								<td class='hidden px-6 py-4 md:table-cell'>
-									{project.company ? project.company : t('personal-projects')}
+									{project.company ? project.company : t('personalProjects')}
 								</td>
 								<td class='hidden px-6 py-4 md:table-cell'>
 									<ProjectTechList project={project} position='start' showIcon={true} />

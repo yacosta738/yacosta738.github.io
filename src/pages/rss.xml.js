@@ -9,17 +9,22 @@ export const GET = async (context) => {
 		})
 	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry))
 	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
+
+	const language = 'en'
+
 	return rss({
-		title: 'YAP’s  Blog',
+		title: 'Yuniel Acosta’s  Blog',
 		description:
 			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
 		site: context.site,
-		items: publishedBlogEntries.map((post) => ({
-			link: post.url,
-			title: post.title,
-			pubDate: post.date,
-			description: post.description
-		})),
+		items: publishedBlogEntries
+			.filter((post) => post.lang === language)
+			.map((post) => ({
+				link: `posts/${post.url}`,
+				title: post.title,
+				pubDate: post.date,
+				description: post.description
+			})),
 		stylesheet: '/rss/styles.xsl'
 	})
 }

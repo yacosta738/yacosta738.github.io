@@ -1,7 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { t, setDefaultNamespace } from 'i18next'
 import { socialMedia } from 'store/constants'
+import { getLangFromUrl, useTranslations } from '@i18n:index'
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const portfolioTechIcon = [
 	'mdi:vuejs',
@@ -9,7 +12,6 @@ const portfolioTechIcon = [
 	'simple-icons:tailwindcss',
 	'simple-icons:netlify'
 ]
-setDefaultNamespace('common')
 ---
 
 <footer class='container m-5 mx-auto flex flex-col items-center justify-center lg:flex-row'>
@@ -26,7 +28,7 @@ setDefaultNamespace('common')
 			}
 		</ul>
 		<p class='font-mono text-sm text-lightest-slate'>
-			{t('built-by')}
+			{t('builtBy')}
 			<a
 				href='https://www.yunielacosta.com'
 				target='_blank'
@@ -35,7 +37,7 @@ setDefaultNamespace('common')
 			>
 		</p>
 		<p class='my-2 font-mono text-xs text-light-slate'>
-			{t('design-by')}
+			{t('designBy')}
 		</p>
 		<ul class='relative flex list-none flex-wrap p-0'>
 			{

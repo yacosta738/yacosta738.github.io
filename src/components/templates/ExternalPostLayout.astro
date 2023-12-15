@@ -1,13 +1,18 @@
 ---
 import '../../styles/global.css'
-import Redirect from '../atoms/Redirect.vue'
 import HeadSEO from 'organisms:HeadSEO'
-import { HeadHrefLangs } from 'astro-i18next/components'
 import AppFooter from 'molecules:AppFooter'
 import WidgetWrapper from 'molecules:WidgetWrapper'
 import Navbar from 'molecules:Navbar'
-const { content } = Astro.props
-const { title, description, cover, lang, link } = content
+import Loader from 'atoms:Loader'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props
+const { title, description, cover, lang, link } = post.data
 const ogImageAlt = title
 ---
 
@@ -16,7 +21,12 @@ const ogImageAlt = title
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
 		<HeadSEO title={title} description={description} image={cover} ogImageAlt={ogImageAlt} />
-		<HeadHrefLangs />
+		{post.data.isExternalLink ? (
+			<meta 
+				http-equiv="refresh" 
+				content={ `0; url=${ post.data.link }` } 
+			/>
+		) : null}
 	</head>
 
 	<body
@@ -27,7 +37,9 @@ const ogImageAlt = title
 			<Navbar />
 			<div class='container mx-auto mt-24 flex flex-col xl:flex-row'>
 				<main class='relative w-full overflow-hidden xl:basis-4/5'>
-					<Redirect client:only='vue' url={link} />
+					<div class="min-h-screen flex justify-center items-center">
+						<Loader />
+					</div>
 				</main>
 				<aside class='xl:basis-1/5'>
 					<slot name='widget'>

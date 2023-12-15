@@ -1,10 +1,14 @@
 ---
-import i18next from 'i18next'
 import type { Project, ProjectJson } from '@models:Project'
 import type { Tech } from '@models:Tech'
 import ProjectsFeatured from 'molecules:ProjectsFeatured'
 import ProjectsCommon from 'molecules:ProjectsCommon'
 import { urlize } from '@utils:utilities'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const projectData: ProjectJson[] = await Astro.glob<ProjectJson>('../../data/projects/**/*.json') ?? []
 const techData = await Astro.glob<Tech>('../../data/technologies/**/*.json')
@@ -33,7 +37,7 @@ const jsonToProject = (json: ProjectJson): Project => {
 const sortByPriority =  (b: Project, a: Project) => Math.sign((b.priority || 0) - (a.priority || 0))
 
 const projects: Project[] = projectData
-	.filter((project) => project.published && project.lang === i18next.language)
+	.filter((project) => project.published && project.lang === lang)
 	.sort((a, b) => (new Date(b.date ?? 0)).getTime() - (new Date(a.date ?? 0)).getTime())
 	.map((json) => jsonToProject(json))
 const featuredProjects = projects

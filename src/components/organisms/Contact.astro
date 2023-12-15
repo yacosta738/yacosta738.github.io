@@ -1,8 +1,10 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
 import { Image } from 'astro:assets';
 import contactSvg from '../../assets/images/contact.svg'
-setDefaultNamespace('contact')
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <section id='contact' class='mx-4 md:mx-auto'>
@@ -11,14 +13,14 @@ setDefaultNamespace('contact')
 	>
 		<div class='flex flex-col justify-between'>
 			<div>
-				<h2 class='numbered-heading'>{t('contact-me')}</h2>
+				<h2 class='numbered-heading'>{t('contactMe')}</h2>
 				<h3
 					class='text-center text-4xl font-bold leading-tight text-lightest-slate md:text-left lg:text-5xl'
 				>
-					{t('lets-talk')}
+					{t('letsTalk')}
 				</h3>
 				<div class='mt-8 text-center text-light-slate md:text-left [text-wrap:balance]'>
-					{t('contact-description')}
+					{t('contactDescription')}
 				</div>
 			</div>
 			<div class='mt-8 text-center'>
@@ -34,7 +36,7 @@ setDefaultNamespace('contact')
 		<form id='contact-form' class='mx-auto' method='POST' action={import.meta.env.FORMSPREE}>
 			<div>
 				<span class='text-sm font-bold uppercase text-lightest-slate'>
-					{t('your-full-name')}
+					{t('yourFullName')}
 				</span>
 				<input
 					id='form-name'
@@ -47,7 +49,7 @@ setDefaultNamespace('contact')
 			</div>
 			<div class='mt-8'>
 				<span class='text-sm font-bold uppercase text-lightest-slate'>
-					{t('your-email')}
+					{t('yourEmail')}
 				</span>
 				<input
 					id='form-email'
@@ -65,7 +67,7 @@ setDefaultNamespace('contact')
 				<input
 					id='form-subject'
 					class='focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none'
-					placeholder='John it is time to start your new project'
+					placeholder={t('subjectPlaceholder')}
 					name='subject'
 					spellcheck='true'
 					required
@@ -78,7 +80,7 @@ setDefaultNamespace('contact')
 				</span>
 				<textarea
 					id='form-message'
-					placeholder='I think that success depends on communication and focus on the goal. I would like to work with you on your project.'
+					placeholder={t('messagePlaceholder')}
 					name='message'
 					required
 					spellcheck='true'
@@ -87,7 +89,7 @@ setDefaultNamespace('contact')
 			</div>
 			<div class='mt-8'>
 				<button class='big-button w-full' type='submit' value='Send Message'>
-					{t('send-message')}
+					{t('sendMessage')}
 				</button>
 			</div>
 		</form>

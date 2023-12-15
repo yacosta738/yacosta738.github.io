@@ -1,23 +1,27 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
 import { Image } from 'astro:assets';
 import type { Project } from '@models:Project'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
 import { markdownfy } from '@utils:utilities'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 
 export interface Props {
 	projects: Project[]
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const { projects } = Astro.props
 const calculatePosition = (index: number): string => {
 	return index % 2 === 0 ? 'end' : 'start'
 }
-setDefaultNamespace('projects')
 ---
 
 <div>
-	<h2 class='numbered-heading'>{t('project-title')}</h2>
+	<h2 class='numbered-heading'>{t('projectTitle')}</h2>
 	<div>
 		{
 			projects.map((project, index) => (

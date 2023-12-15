@@ -1,6 +1,5 @@
 ---
-import i18next, { t, setDefaultNamespace } from 'i18next'
-import { localizeUrl } from '@utils:utilities'
+import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils'
 import type { Article } from '@models:Article'
 import { urlize } from '@utils:utilities'
 import { Icon } from 'astro-icon/components'
@@ -10,32 +9,33 @@ export interface Props {
 }
 const { article } = Astro.props
 
+const lang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(lang)
+const t = useTranslations(lang)
+
 const DAYS_BEFORE_FULL_DATE = 3 * 24 * 60 * 60 * 1000
 const formatDateRelativeToNow = (date: Date) => {
-	const rtfEn = new Intl.RelativeTimeFormat("en");
-	const rtfEs = new Intl.RelativeTimeFormat("es");
-	const rtf = i18next.language === "es" ? rtfEs : rtfEn;
-	const daysDiff = Math.round((date.getTime() - Date.now()) / 1000 / 60 / 60 / 24);
-	return rtf.format(daysDiff, "day");
-};
+	const rtf = new Intl.RelativeTimeFormat(lang)
+	const daysDiff = Math.round((date.getTime() - Date.now()) / 1000 / 60 / 60 / 24)
+	return rtf.format(daysDiff, 'day')
+}
 
 const formatDate = (date: Date | string) => {
-	if (typeof date === "string") {
-		date = new Date(date);
+	if (typeof date === 'string') {
+		date = new Date(date)
 	}
 
 	// if the date is 3 days ago or more, show the full date instead of the relative date
 	if (date.getTime() < Date.now() - DAYS_BEFORE_FULL_DATE) {
-		return date.toLocaleDateString(i18next.language, {
-			year: "numeric",
-			month: "long",
-			day: "numeric"
-		});
+		return date.toLocaleDateString('en', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		})
 	} else {
-		return formatDateRelativeToNow(date);
+		return formatDateRelativeToNow(date)
 	}
-};
-setDefaultNamespace('blog')
+}
 ---
 
 <ul
@@ -52,7 +52,7 @@ setDefaultNamespace('blog')
 	{
 		article.timeToRead && (
 			<li class='mx-1 my-2 whitespace-nowrap'>
-				<span>{t('time-to-read', { timeToRead: article.timeToRead })}</span>
+				<span>{t('timeToRead', { timeToRead: article.timeToRead })}</span>
 			</li>
 		)
 	}
@@ -60,7 +60,7 @@ setDefaultNamespace('blog')
 		article.author && (
 			<li class='mx-1 my-2 whitespace-nowrap'>
 				<span class='mr-1'>{t('author')}</span>
-				<a href={localizeUrl(`/blog/authors/${urlize(article.author)}`)} class='inline-link'>
+				<a href={translatePath(`/authors/${urlize(article.author)}`)} class='inline-link'>
 					{article.author}
 				</a>
 			</li>

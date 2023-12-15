@@ -1,23 +1,25 @@
 ---
-import { getCollection } from "astro:content";
-import { type Author, jsonToAuthor } from "@models:Author";
-import Icon from "astro-icon";
-import { Image } from "astro:assets";
-import Card3D from "molecules:Card3D";
-import i18next, { t, changeLanguage, setDefaultNamespace } from "i18next";
-import BaseTemplate from "templates:BaseTemplate";
+import { getCollection } from 'astro:content'
+import { type Author, jsonToAuthor } from '@models:Author'
+import Icon from 'astro-icon'
+import { Image } from 'astro:assets'
+import Card3D from 'molecules:Card3D'
+import BaseTemplate from 'templates:BaseTemplate'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 
-changeLanguage("en");
+const authors = await getCollection('authors')
+const { name } = Astro.params
+const { author } = Astro.props
 
-const authors = await getCollection("authors");
-const { name } = Astro.params;
-const { author } = Astro.props;
-const postAuthor = authors.map((author) => jsonToAuthor(author))
-    .find((author) => author.lang === i18next.language && author.name === name);
-setDefaultNamespace("blog");
----
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
 
-<BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('blog-description')} ${name}`}>
+const postAuthor = authors
+	.map((author) => jsonToAuthor(author))
+	.find((author) => author.lang === lang && author.name === name)
+
+;<BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('blogDescription')} ${name}`}>
 	<section id='about-author' class='container mx-auto'>
 		<div class='flex items-center justify-center'>
 			<Card3D>
@@ -47,9 +49,7 @@ setDefaultNamespace("blog");
 				</h1>
 
 				<div class='flex items-center justify-center pt-2 sm:pt-4 md:pt-0' data-atropos-offset='5'>
-					<h2
-						class='inline-block w-40 rounded-full bg-dark-navy/90 px-3 py-1 text-center text-xs font-bold text-white md:w-2/3 md:text-lg'
-					>
+					<h2 class='inline-block w-40 rounded-full bg-dark-navy/90 px-3 py-1 text-center text-xs font-bold text-white md:w-2/3 md:text-lg'>
 						{author.rol}
 					</h2>
 				</div>
@@ -58,18 +58,16 @@ setDefaultNamespace("blog");
 					data-atropos-offset='5'
 					class='flex flex-col items-center justify-center pb-6 pt-6 text-center text-2xl font-bold md:flex-row'
 				>
-					{
-						author.social.map((social) => (
-							<a
-								href={social.url}
-								target='_blank'
-								rel='noopener noreferrer'
-								class='mx-2 flex h-12 w-12 items-center justify-center rounded-full p-1 text-2xl hover:bg-light-navy/90 hover:text-white'
-							>
-								<Icon name={social.icon} />
-							</a>
-						))
-					}
+					{author.social.map((social) => (
+						<a
+							href={social.url}
+							target='_blank'
+							rel='noopener noreferrer'
+							class='mx-2 flex h-12 w-12 items-center justify-center rounded-full p-1 text-2xl hover:bg-light-navy/90 hover:text-white'
+						>
+							<Icon name={social.icon} />
+						</a>
+					))}
 				</h3>
 
 				<div
@@ -82,3 +80,4 @@ setDefaultNamespace("blog");
 		</div>
 	</section>
 </BaseTemplate>
+---

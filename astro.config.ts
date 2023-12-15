@@ -1,9 +1,7 @@
 import { defineConfig } from 'astro/config'
-// @ts-ignore
 import { remarkReadingTime } from './remark-reading-time.mjs'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import astroI18next from 'astro-i18next'
 import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
@@ -23,6 +21,10 @@ export default defineConfig({
 		/* Dev. server only */
 		port: DEV_PORT
 	},
+	i18n: {
+		defaultLocale: 'en',
+		locales: ['es', 'en']
+	},
 	integrations: [
 		sitemap({
 			i18n: {
@@ -34,7 +36,6 @@ export default defineConfig({
 			}
 		}),
 		tailwind(),
-		astroI18next(),
 		robotsTxt(),
 		Compress({
 			CSS: false

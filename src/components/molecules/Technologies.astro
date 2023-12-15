@@ -18,7 +18,7 @@ const techs: Tech[] = techData
 </div>
 <script type='module'>
 	const hero = document.getElementById('icons')
-	const svgs = Array.from(hero.querySelectorAll('svg'))
+	const svgs = Array.from(hero?.querySelectorAll('svg') ?? [])
 
 	const w = window.innerWidth
 	const h = window.innerHeight - 300

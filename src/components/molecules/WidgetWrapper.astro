@@ -1,16 +1,20 @@
 ---
 import { getCollection } from 'astro:content'
-import i18next from 'i18next'
 import WidgetRecentPost from 'molecules:WidgetRecentPost'
 import WidgetCategory from 'molecules:WidgetCategory'
 import WidgetTagCloud from 'molecules:WidgetTagCloud'
 import { type Article, jsonToArticle } from '@models:Article'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 
 const { pathname } = Astro.url
 const isBlogRoot = pathname.endsWith('/blog')
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
-	return !data.draft && data.lang === i18next.language;
+	return !data.draft && data.lang === lang;
 })).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
 const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
@@ -21,7 +25,7 @@ const allPosts: Article[] = publishedBlogEntries
 		return bDate.getTime() - aDate.getTime()
 	})
 
-const tags: { [key: string]: number } = allPosts.reduce((acc, post) => {
+const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
 	post.tags.forEach((tag) => {
 		const tagLower = tag.toLowerCase()
 		if (tagLower in acc) {
@@ -33,7 +37,7 @@ const tags: { [key: string]: number } = allPosts.reduce((acc, post) => {
 	return acc
 }, {})
 
-const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
+const categories: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
 	post.categories.forEach((category) => {
 		const categoryLower = category.toLowerCase()
 		if (categoryLower in acc) {

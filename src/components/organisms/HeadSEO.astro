@@ -1,6 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 import { SEO } from 'astro-seo'
-import { t, setDefaultNamespace } from 'i18next'
 import { ViewTransitions } from "astro:transitions"
 export interface Props {
 	title: string
@@ -8,7 +8,10 @@ export interface Props {
 	image: string
 	ogImageAlt: string
 }
-setDefaultNamespace('common')
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const { href: canonicalUrl } = Astro.url
 const { title, description, image, ogImageAlt } = Astro.props
 const imageExtension = image?.split('.').pop()

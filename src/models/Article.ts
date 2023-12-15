@@ -20,15 +20,12 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 	const article = json.data
 	const { remarkPluginFrontmatter } = await json.render()
 	let content = ''
-	// check if json has rawContent()
-	// if it does, it means it's a markdown file
 	if (json.data) {
 		content = json.body
 	}
-	const urlPrefix: string = '/posts/'
 	return {
 		id: json.id || crypto.randomUUID(),
-		url: `${urlPrefix}${json.slug}`,
+		url: json.slug,
 		title: article?.title,
 		description: article?.description,
 		date: article?.date,

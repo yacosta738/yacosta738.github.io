@@ -1,25 +1,27 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 import { type IJob, Job } from '@models:Job'
-import i18next, { t, setDefaultNamespace } from 'i18next'
 import JobDetails from 'molecules:JobDetails'
 import RoleDetails from 'molecules:RoleDetails'
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const data = await Astro.glob<IJob>('../../data/jobs/**/*.json')
 const jobs: Job[] = data
-	.filter((job) => job.published && job.lang === i18next.language)
+	.filter((job) => job.published && job.lang === lang)
 	.sort((a: IJob, b: IJob) => {
 		const aDate = a?.createDate ? new Date(a.createDate) : new Date()
 		const bDate = b?.createDate ? new Date(b.createDate) : new Date()
 		return bDate.getTime() - aDate.getTime()
 	})
 	.map((job) => new Job(job))
-
-	setDefaultNamespace('projects')
 ---
 
 <astro-jobs>
 	<section id='jobs' class='flex flex-col items-center justify-center max-w-screen-md'>
-		<h2 class='numbered-heading'>{t('where-worked')}</h2>
+		<h2 class='numbered-heading'>{t('whereWorked')}</h2>
 		<div class='flex md:flex-row flex-col max-w-sm md:max-w-max'>
 			<ul class='styled-tab-list' aria-label='Job tabs'>
 				{

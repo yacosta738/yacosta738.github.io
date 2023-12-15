@@ -1,0 +1,58 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { type Article, jsonToArticle } from '@models:Article'
+import BlogTemplate from 'templates:BlogTemplate'
+import ArticleSummary from 'molecules:ArticleSummary'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+
+interface Props {
+	tag: string
+	posts: Article[]
+}
+
+export async function getStaticPaths() {
+	const publishedBlogEntriesPromises: Promise<Article>[] = (
+		await getCollection('blog', ({ data }) => {
+			return !data.draft
+		})
+	).map(async (publishedBlogEntry: CollectionEntry<'blog'>) => await jsonToArticle(publishedBlogEntry))
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
+	const uniqueTags = [...new Set(publishedBlogEntries.map((post) => post.tags).flat())]
+	return uniqueTags.map((tag) => {
+		return {
+			params: { tag: tag.toLowerCase() },
+			props: { posts: publishedBlogEntries.filter((post) => post.tags.includes(tag)) }
+		}
+	})
+}
+
+const { tag } = Astro.params
+const { posts } = Astro.props
+const tagPosts = posts.filter((post) => post.lang === lang)
+---
+
+<BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('blogDescription')} ${tag}`}>
+	<div class='tainer mx-auto'>
+		{
+			tagPosts.map((post) => (
+				<article class='mx-2 mb-20 border-b border-gray-400 md:mx-24'>
+					<ArticleSummary article={post} />
+				</article>
+			))
+		}
+		{
+			tagPosts.length === 0 && (
+				<div class='container-inner mx-auto py-16 pl-10'>
+					<div class='text-center'>
+						<h1 class='text-3xl font-bold'>{t('noArticlesFound')}</h1>
+						<p class='text-gray-600'>{t('tryAgain')}</p>
+					</div>
+				</div>
+			)
+		}
+	</div>
+</BlogTemplate>

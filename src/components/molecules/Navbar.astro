@@ -1,14 +1,17 @@
 ---
 import Menus from 'molecules:Menus'
 import Drawer from 'molecules:Drawer'
-import { localizeUrl } from '@utils:utilities'
 import { NAVBAR_HEADER } from '@store:constants'
+import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils'
 interface Props {
 	id?: string
 }
 
 const { id } = Astro.props
 const navbarHeaderId = `${NAVBAR_HEADER}-${id ?? crypto.randomUUID()}`
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 ---
 
 <header id={navbarHeaderId} class='fixed z-50 w-full'>
@@ -16,7 +19,7 @@ const navbarHeaderId = `${NAVBAR_HEADER}-${id ?? crypto.randomUUID()}`
 		id='acosta-navbar'
 		class='relative flex w-full flex-wrap items-center justify-between py-2 md:py-4'
 	>
-		<a href={localizeUrl('/')} class='border-none'>
+		<a href={translatePath('/', lang)} class='border-none'>
 			<img src='/logo.svg' class='w-10' alt='yuniel acosta portfolio logo' height='10' width='10' />
 		</a>
 

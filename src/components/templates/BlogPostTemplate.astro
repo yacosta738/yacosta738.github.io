@@ -1,15 +1,14 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
 import type { CollectionEntry } from 'astro:content'
 import BlogTemplate from 'templates:BlogTemplate'
 import PostHeader from 'molecules:PostHeader'
 import ShareButton from 'atoms:ShareButton'
-import { localizeUrl } from '@utils:utilities'
 import { Icon } from 'astro-icon/components'
 import '../../styles/github-markdown.css'
 
 import { domain } from '@store:constants'
 import { jsonToArticle } from '@models:Article'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 export interface Props {
 	post: CollectionEntry<'blog'>;
 }
@@ -22,7 +21,10 @@ const image = post.data.cover ? post.data.cover : `${domain}/uploads/me.webp`
 const ogImageAlt = description
 const categories = post.data.categories || Array<string>()
 const tags = post.data.tags || Array<string>()
-const lang = post.data.lang || 'en'
+const lang = post.data.lang || getLangFromUrl(Astro.url)
+
+const t = useTranslations(lang as "en" | "es");
+const translatePath = useTranslatedPath(lang as "en" | "es");
 
 const shareButtons: {
 	title: string
@@ -71,7 +73,6 @@ const label = 'Comment'
 const theme = 'icy-dark'
 
 const article = await jsonToArticle(post)
-setDefaultNamespace('blog')
 ---
 
 <BlogTemplate
@@ -95,11 +96,11 @@ setDefaultNamespace('blog')
 			class='my-8 mb-8 flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
 		>
 			<a
-				href={localizeUrl('/blog', lang)}
+				href={translatePath('/blog', lang)}
 				class='flex animate-pulse items-center justify-center font-bold uppercase hover:animate-none sm:text-center md:items-start'
 			>
 				<Icon name='ic:round-arrow-back' class='mr-1 h-7 animate-bounce-left hover:animate-none' />
-				<span>{t('back-to-block')}</span>
+				<span>{t('backToBlock')}</span>
 			</a>
 			<!-- Social Media Share -->
 			<div class='my-3 flex items-center justify-center md:my-0'>
@@ -113,7 +114,7 @@ setDefaultNamespace('blog')
 				{
 					categories.map((category) => (
 						<a
-							href={localizeUrl(`/blog/category/${category.toLowerCase()}`)}
+							href={translatePath(`/blog/category/${category.toLowerCase()}`)}
 							class='inline-link mx-1'
 						>
 							{category}
@@ -126,7 +127,7 @@ setDefaultNamespace('blog')
 				<Icon name='clarity:tags-solid-alerted' class='mr-2 h-5' />
 				{
 					tags.map((tag) => (
-						<a href={localizeUrl(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
+						<a href={translatePath(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
 							{tag}
 						</a>
 					))

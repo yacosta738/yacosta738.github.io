@@ -1,7 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 import WidgetCard from 'molecules:WidgetCard'
-import { t, setDefaultNamespace } from 'i18next'
-import { localizeUrl } from '@utils:utilities'
 
 export interface Props {
 	tags: { [key: string]: number }
@@ -30,8 +29,9 @@ const textSize = (
 	const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1))
 	return fontSizeClass[index]
 }
-
-setDefaultNamespace('blog')
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <WidgetCard title={t('tags')}>
@@ -39,7 +39,7 @@ setDefaultNamespace('blog')
 		{
 			allTags.map((tag) => (
 				<a
-					href={localizeUrl(`/blog/tag/${tag}`)}
+					href={translatePath(`/tags/${tag}`)}
 					aria-label={tag}
 					class={`inline-link ${textSize(tag)}`}
 				>

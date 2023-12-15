@@ -13,6 +13,8 @@ const blogCollection = defineCollection({
 		author: z.string().default('Anonymous'),
 		tags: z.array(z.string()),
 		categories: z.array(z.string()),
+		isExternalLink: z.boolean().default(false),
+		link: z.string().optional(),
 		draft: z.boolean()
 	})
 })
@@ -20,7 +22,6 @@ const blogCollection = defineCollection({
 const authors = defineCollection({
 	type: 'data',
 	schema: z.object({
-		id: z.string(),
 		name: z.string(),
 		image: z.string(),
 		rol: z.string(),
