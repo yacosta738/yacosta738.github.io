@@ -25,7 +25,7 @@ export const navMenus: Menu[] = [
 	},
 	{
 		id: 'last-articles-' + crypto.randomUUID(),
-		title: 'last-articles',
+		title: 'lastArticles',
 		link: '/#last3articles',
 		dataCypress: 'last3articles'
 	},

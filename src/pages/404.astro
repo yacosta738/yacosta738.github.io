@@ -1,24 +1,44 @@
 ---
-import Icon from "astro-icon";
-import { Image } from "astro:assets";
-import HeadSEO from "organisms:HeadSEO";
-import Social from "atoms:Social";
-import Email from "atoms:Email";
-import AppFooter from "molecules:AppFooter";
-import Navbar from "molecules:Navbar";
-import Technologies from "molecules:Technologies";
-import "../styles/global.css";
-import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n:utils";
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+import Icon from 'astro-icon'
+import { Image } from 'astro:assets'
+import HeadSEO from 'organisms:HeadSEO'
+import Social from 'atoms:Social'
+import Email from 'atoms:Email'
+import AppFooter from 'molecules:AppFooter'
+import Navbar from 'molecules:Navbar'
+import Technologies from 'molecules:Technologies'
+import '../styles/global.css'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { type Article, jsonToArticle } from '@models:Article'
+import { getCollection, type CollectionEntry } from 'astro:content'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+const publishedBlogEntriesPromises: Promise<Article>[] = (
+	await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === lang
+	})
+).map(
+	async (publishedBlogEntry: CollectionEntry<'blog'>) => await jsonToArticle(publishedBlogEntry)
+)
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
+const lastPublishedBlogEntry = publishedBlogEntries
+	.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime()
+	})
+	.slice(0, 5)
 ---
 
 <html lang={lang}>
 	<head>
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
-		<HeadSEO title={t('error404')} description={t('notFoundDescription')} image='/oops.webp' ogImageAlt={t('notFoundOgImageAlt')} />
+		<HeadSEO
+			title={t('error404')}
+			description={t('notFound.notFoundDescription')}
+			image='/oops.webp'
+			ogImageAlt={t('notFound.notFoundOgImageAlt')}
+		/>
 	</head>
 
 	<body
@@ -33,12 +53,28 @@ const translatePath = useTranslatedPath(lang);
 						<h1 class='mb-16 text-4xl font-bold'>{t('error404')}</h1>
 						<Image class='w-1/2' src='/oops.webp' alt={t('error404')} height={300} width={300} />
 						<p set:html={t('message404')} />
+						{
+							lastPublishedBlogEntry.length > 0 && (
+								<>
+									<h2 class='mt-16 mb-8 text-2xl font-bold'>{t('notFound.maybeYouAreInterestedIn')}</h2>
+									<ul class='list-disc list-inside'>
+										{lastPublishedBlogEntry.map((article: Article) => (
+											<li class='mb-4'>
+												<a href={`/posts/${article.url}/`} class='underline'>
+													{article.title}
+												</a>
+											</li>
+										))}
+									</ul>
+								</>
+							)
+						}
 						<a
 							href={translatePath('/')}
 							class='small-button mt-24 flex w-24 items-center justify-center uppercase'
 						>
 							<Icon name='mdi:arrow-left' class='mr-2 h-6' />
-							Home
+							{t('home')}
 						</a>
 					</div>
 				</main>

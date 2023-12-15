@@ -3,7 +3,7 @@ import { getCollection, getEntry } from 'astro:content'
 import BlogTemplate from 'templates:BlogTemplate'
 import { type Article, jsonToArticle } from '@models:Article'
 import ArticleSummary from 'molecules:ArticleSummary'
-// import Paginator from "molecules:Paginator";
+import Paginator from "molecules:Paginator";
 import SearchBox from 'molecules:SearchBox'
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 
@@ -11,29 +11,34 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 const translatePath = useTranslatedPath(lang)
 
-const publishedBlogEntriesPromises = (
+export async function getStaticPaths({ paginate }) {
+	const publishedBlogEntriesPromises = (
 	await getCollection('blog', ({ data }) => {
-		return !data.draft && data.lang === lang
+		return !data.draft && data.lang === 'en'
 	})
 ).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry))
 const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
 const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
 	return new Date(b.date).getTime() - new Date(a.date).getTime()
 })
+return paginate(sortedPublishedBlogEntries, {pageSize: 5})
+}
+
+const { page } = Astro.props;
 ---
 
 <BlogTemplate title={t('blog')} description={t('blogDescription')}>
 	<!-- <SearchBox /> -->
 	<div class='container mx-auto'>
 		{
-			sortedPublishedBlogEntries.map((article) => (
+			page.data.map((article) => (
 				<article class='mx-2 mb-20 border-b border-gray-400 md:mx-24'>
 					<ArticleSummary article={article} />
 				</article>
 			))
 		}
 		{
-			sortedPublishedBlogEntries.length === 0 && (
+			page.data.length === 0 && (
 				<div class='container-inner mx-auto py-16 pl-10'>
 					<div class='text-center'>
 						<h1 class='text-3xl font-bold'>{t('noArticlesFound')}</h1>
@@ -43,6 +48,6 @@ const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
 			)
 		}
 		<!-- pagination -->
-		<!-- <Paginator page={publishedBlogEntries} /> -->
+			<Paginator page={page} />
 	</div>
 </BlogTemplate>
