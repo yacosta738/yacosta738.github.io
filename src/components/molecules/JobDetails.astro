@@ -9,10 +9,10 @@ export interface Props {
 
 const { job } = Astro.props
 
-const hasMultipleRoles = (job?.roles?.length ?? 0) > 1;
+const hasMultipleRoles = (job?.roles?.length ?? 0) > 1
 
 const getFirstRole = (job: IJob) => {
-	return job?.roles?.[0] ?? undefined;
+	return job?.roles?.[0] ?? undefined
 }
 
 ---
@@ -21,21 +21,22 @@ const getFirstRole = (job: IJob) => {
 			<Icon size={48} title={job.company} name={job.icon}/>
 		</div>
 		{
-			hasMultipleRoles ?
-(			
-			<div class='flex-1'>
-				<div class="flex flex-col items-start justify-center mb-4">
-					<h3 class='text-2xl font-semibold'>
-						<a href={job.url} target='_blank' class='inline-link'>
-							{job.company}
-						</a>
-					</h3>
-					<small class='text-sm text-light-slate'>{job.location}</small>
-				</div>
-		</div>
-		):(
-			<div class='flex-1'>
-			{getFirstRole(job)?.role && (
+			hasMultipleRoles
+				? (
+					<div class='flex-1'>
+						<div class="flex flex-col items-start justify-center mb-4">
+							<h3 class='text-2xl font-semibold'>
+								<a href={job.url} target='_blank' class='inline-link'>
+									{job.company}
+								</a>
+							</h3>
+							<small class='text-sm text-light-slate'>{job.location}</small>
+						</div>
+					</div>
+				)
+				: (
+					<div class='flex-1'>
+						{getFirstRole(job)?.role && (
 				<h3 class='text-2xl font-semibold'>
 					{getFirstRole(job)?.role}
 					<a href={job.url} target='_blank' class='inline-link'>
@@ -48,8 +49,8 @@ const getFirstRole = (job: IJob) => {
 					</time>
 					<small class='text-sm text-light-slate'>{job.location}</small>
 				</div>
-			)}
-		</div>)
+						)}
+					</div>)
 		}
 	</div>
 

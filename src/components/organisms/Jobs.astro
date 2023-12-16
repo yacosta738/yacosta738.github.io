@@ -1,17 +1,16 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 import { type IJob, Job, jsonToJob } from '@models:Job'
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'
 import JobDetails from 'molecules:JobDetails'
 import RoleDetails from 'molecules:RoleDetails'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
-const jobsCollection =await getCollection('jobs')
+const jobsCollection = await getCollection('jobs')
 const jobs: Job[] = jobsCollection
-.map((job) => jsonToJob(job))
+	.map((job) => jsonToJob(job))
 	.filter((job) => job.published && job.lang === lang)
 	.sort((a: IJob, b: IJob) => {
 		const aDate = a?.createDate ? new Date(a.createDate) : new Date()

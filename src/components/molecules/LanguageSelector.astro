@@ -19,7 +19,7 @@ const { showFlag = false, showLabel = true, ...attributes } = Astro.props
 <select onchange='location = this.value;' {...attributes}>
 	{
 		supportedLanguages.map(([lang, label]) => {
-			let value = translatePath('/', lang)
+			const value = translatePath('/', lang)
 			const flag = showFlag ? emojiFlags[lang as keyof typeof emojiFlags] : ''
 			const langLabel = showLabel ? label : showFlag ? '' : lang
 

@@ -4,24 +4,22 @@ import WidgetRecentPost from 'molecules:WidgetRecentPost'
 import WidgetCategory from 'molecules:WidgetCategory'
 import WidgetTagCloud from 'molecules:WidgetTagCloud'
 import { type Article, jsonToArticle } from '@models:Article'
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { getLangFromUrl } from '@i18n:utils'
 
 const { pathname } = Astro.url
 const isBlogRoot = pathname.endsWith('/blog')
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
 
 const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
-	return !data.draft && data.lang === lang;
-})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
-const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+	return !data.draft && data.lang === lang
+})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry))
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
 
 const allPosts: Article[] = publishedBlogEntries
 	.sort((a, b) => {
-		let aDate = new Date(a.date)
-		let bDate = new Date(b.date)
+		const aDate = new Date(a.date)
+		const bDate = new Date(b.date)
 		return bDate.getTime() - aDate.getTime()
 	})
 

@@ -1,9 +1,8 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 import { email } from '@store:constants'
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <section class='min-h-screen'>
@@ -16,14 +15,14 @@ const translatePath = useTranslatedPath(lang);
 		</h1>
 		<h2
 			id='phrase'
-			class={`text-3xl text-gray-500 sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl [text-wrap:balance] slogan-${lang}`}
+			class:list={`text-3xl text-gray-500 sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl [text-wrap:balance] slogan-${lang}`}
 		>
 			<span hidden>{t('slogan')}</span>
 		</h2>
 		<p id='my-self' class='text-md my-4 max-w-none text-justify md:max-w-3xl md:text-xl'>
 			{t('mySelf')}
 
-			<span class={`typed-text-${lang}`}>
+			<span class:list={`typed-text-${lang}`}>
 				<span hidden>SOLID Principles, Clean Architecture, Design Patterns, Microservices</span>
 			</span>
 		</p>

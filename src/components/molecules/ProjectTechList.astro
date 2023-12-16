@@ -13,7 +13,7 @@ const { position, showIcon = true, project } = Astro.props
 ---
 
 <ul
-	class={`project-tech-list ${
+	class:list={`project-tech-list ${
 		position === 'end' ? 'justify-end' : position === 'center' ? 'justify-center' : 'justify-start'
 	}`}
 >
@@ -23,16 +23,18 @@ const { position, showIcon = true, project } = Astro.props
 			project.tech.map((tech: Tech) => (
 				<li
 					class='my-2 whitespace-nowrap font-mono text-xs text-light-slate'
-					class={position === 'end' ? 'ml-3' : position === 'center' ? 'mx-2' : 'mr-3'}
+					class:list={position === 'end' ? 'ml-3' : position === 'center' ? 'mx-2' : 'mr-3'}
 				>
-					{tech?.url != null ? (
-						<a class='flex' href={tech?.url} target='_blank'>
-							{showIcon && tech?.icon && <Icon name={tech?.icon} class='h-4' />}
+					{tech?.url != null
+						? (
+							<a class='flex' href={tech?.url} target='_blank'>
+								{showIcon && tech?.icon && <Icon name={tech?.icon} class='h-4' />}
+								<span class='mx-1'>{tech?.name}</span>
+							</a>
+						)
+						: (
 							<span class='mx-1'>{tech?.name}</span>
-						</a>
-					) : (
-						<span class='mx-1'>{tech?.name}</span>
-					)}
+						)}
 				</li>
 			))
 	}

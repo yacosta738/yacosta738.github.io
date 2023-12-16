@@ -1,16 +1,15 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 import { SEO } from 'astro-seo'
-import { ViewTransitions } from "astro:transitions"
+import { ViewTransitions } from 'astro:transitions'
 export interface Props {
 	title: string
 	description: string
 	image: string
 	ogImageAlt: string
 }
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const { href: canonicalUrl } = Astro.url
 const { title, description, image, ogImageAlt } = Astro.props
@@ -38,7 +37,7 @@ const imageExtension = image?.split('.').pop()
 			url: canonicalUrl
 		},
 		optional: {
-			description: description ?? t('seo.description'),
+			description: description ?? t('seo.description')
 		},
 		image: {
 			alt: ogImageAlt ?? t('seo.ogImageAlt'),

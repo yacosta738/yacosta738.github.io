@@ -4,12 +4,12 @@ import BlogPostTemplate from '@components:templates/BlogPostTemplate.astro'
 import ExternalPostLayout from '@components:templates/ExternalPostLayout.astro'
 
 
-export async function getStaticPaths() {
+export async function getStaticPaths () {
 	const publishedBlogEntries = await getCollection('blog', ({ data }) => {
 		return !data.draft
 	})
 	return publishedBlogEntries.map((entry) => ({
-		params: { slug: entry.slug }, props: { entry },
+		params: { slug: entry.slug }, props: { entry }
 	}))
 }
 const { entry } = Astro.props
@@ -18,7 +18,9 @@ const isExternalLink = entry.data.isExternalLink
 ---
 
 {
-isExternalLink ? <ExternalPostLayout post={entry} /> : <BlogPostTemplate post={entry}>
-	<Content />
-</BlogPostTemplate>
+	isExternalLink
+		? <ExternalPostLayout post={entry} />
+		: <BlogPostTemplate post={entry}>
+			<Content />
+		</BlogPostTemplate>
 }

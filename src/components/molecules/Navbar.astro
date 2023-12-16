@@ -9,8 +9,8 @@ interface Props {
 
 const { id } = Astro.props
 const navbarHeaderId = `${NAVBAR_HEADER}-${id ?? crypto.randomUUID()}`
-const lang = getLangFromUrl(Astro.url);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(lang)
 const t = useTranslations(lang);
 ---
 

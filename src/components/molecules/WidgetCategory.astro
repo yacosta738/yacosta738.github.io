@@ -1,15 +1,15 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
-import {Icon} from 'astro-icon/components'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { Icon } from 'astro-icon/components'
 import WidgetCard from 'molecules:WidgetCard'
 
 export interface Props {
 	categories: { [key: string]: number }
 }
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
 
 const { categories } = Astro.props
 const allCategories = Object.keys(categories)

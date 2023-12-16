@@ -2,7 +2,7 @@
 let previousTitle = document.title
 
 // Define alternative title text for each language
-let titleTextAlt = { en: "Don't go! Come back! 😥", es: '¡No te vayas! ¡Vuelve! 😥' }
+const titleTextAlt = { en: "Don't go! Come back! 😥", es: '¡No te vayas! ¡Vuelve! 😥' }
 
 // Declare a variable to hold the ID of the timeout task
 let timeoutId

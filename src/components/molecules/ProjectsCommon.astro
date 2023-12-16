@@ -12,11 +12,11 @@ export interface Props {
 }
 const { projects } = Astro.props
 
-let showMore: boolean = false
+const showMore: boolean = false
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
 
 const projectsToShow = () => {
 	const firstProjects: Project[] = projects ? projects.slice(0, GRID_LIMIT) : []

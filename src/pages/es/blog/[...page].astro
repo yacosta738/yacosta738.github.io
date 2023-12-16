@@ -1,27 +1,26 @@
 ---
-import { getCollection, getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import BlogTemplate from 'templates:BlogTemplate'
-import { type Article, jsonToArticle } from '@models:Article'
+import { jsonToArticle } from '@models:Article'
 import ArticleSummary from 'molecules:ArticleSummary'
-import Paginator from "molecules:Paginator";
+import Paginator from 'molecules:Paginator'
 import SearchBox from 'molecules:SearchBox'
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
-const translatePath = useTranslatedPath(lang)
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths ({ paginate }) {
 	const publishedBlogEntriesPromises = (
-	await getCollection('blog', ({ data }) => {
-		return !data.draft && data.lang === 'es'
+		await getCollection('blog', ({ data }) => {
+			return !data.draft && data.lang === 'es'
+		})
+	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry))
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
+	const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime()
 	})
-).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry))
-const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
-const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
-	return new Date(b.date).getTime() - new Date(a.date).getTime()
-})
-return paginate(sortedPublishedBlogEntries, {pageSize: 5})
+	return paginate(sortedPublishedBlogEntries, { pageSize: 5 })
 }
 
 const { page } = Astro.props;
@@ -48,6 +47,6 @@ const { page } = Astro.props;
 			)
 		}
 		<!-- pagination -->
-			<Paginator page={page} />
+		<Paginator page={page} />
 	</div>
 </BlogTemplate>

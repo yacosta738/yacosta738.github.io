@@ -1,22 +1,16 @@
 ---
-import { getCollection } from "astro:content";
-import { type Author, jsonToAuthor } from "@models:Author";
-import Icon from "astro-icon";
-import { Image } from "astro:assets";
-import Card3D from "molecules:Card3D";
-import BaseTemplate from "templates:BaseTemplate";
-import { getLangFromUrl, useTranslations, useTranslatedPath } from "@i18n:utils";
+import { Icon } from 'astro-icon/components'
+import { Image } from 'astro:assets'
+import Card3D from 'molecules:Card3D'
+import BaseTemplate from 'templates:BaseTemplate'
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 
-const authors = await getCollection("authors");
-const { name } = Astro.params;
-const { author } = Astro.props;
+const { name } = Astro.params
+const { author } = Astro.props
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
-
-const postAuthor = authors.map((author) => jsonToAuthor(author))
-    .find((author) => author.lang === lang && author.name === name);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
 
 <BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('blogDescription')} ${name}`}>
 	<section id='about-author' class='container mx-auto'>

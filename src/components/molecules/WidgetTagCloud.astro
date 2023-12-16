@@ -29,8 +29,8 @@ const textSize = (
 	const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1))
 	return fontSizeClass[index]
 }
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 const translatePath = useTranslatedPath(lang);
 ---
 
@@ -41,7 +41,7 @@ const translatePath = useTranslatedPath(lang);
 				<a
 					href={translatePath(`/tags/${tag}`)}
 					aria-label={tag}
-					class={`inline-link ${textSize(tag)}`}
+					class:list={`inline-link ${textSize(tag)}`}
 				>
 					<span class='capitalize'>{tag}</span>
 				</a>

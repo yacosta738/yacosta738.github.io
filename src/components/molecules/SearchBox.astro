@@ -1,90 +1,94 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { jsonToArticle } from '../../models/Article'
-import {SEARCH_MODAL_ID, SEARCH_BUTTON_ID} from '@store:constants'
-import { getCollection } from 'astro:content';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import { SEARCH_MODAL_ID, SEARCH_BUTTON_ID } from '@store:constants'
+import { getCollection } from 'astro:content'
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
-const publishedBlogEntriesPromises = (await getCollection('blog', ({ data }) => {
-		return !data.draft && data.lang === lang;
-	})).map(async publishedBlogEntry => await jsonToArticle(publishedBlogEntry));
-	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+const publishedBlogEntriesPromises = (
+	await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === lang
+	})
+).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry))
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
 
-	const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
-		return new Date(b.date).getTime() - new Date(a.date).getTime();
-	});
+const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
+	return new Date(b.date).getTime() - new Date(a.date).getTime()
+})
 
 const jsonArticles = JSON.stringify(sortedPublishedBlogEntries)
 ---
 
-<search-box data-identifier={SEARCH_MODAL_ID} data-triggerId={SEARCH_BUTTON_ID} data-articles={jsonArticles}>
+<search-box
+	data-identifier={SEARCH_MODAL_ID}
+	data-triggerId={SEARCH_BUTTON_ID}
+	data-articles={jsonArticles}
+>
 	<!-- Main modal -->
 	<div
 		id={SEARCH_MODAL_ID}
-		tabindex="-1"
-		aria-hidden="true"
-		class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-full bg-navy/95 backdrop-blur-xl"
+		tabindex='-1'
+		aria-hidden='true'
+		class='fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-full bg-navy/95 backdrop-blur-xl'
 	>
-		<div class="relative w-full max-w-6xl max-h-full">
+		<div class='relative w-full max-w-6xl max-h-full'>
 			<!-- Modal content -->
-			<div class="relative rounded-lg shadow border-lightest-navy bg-light-navy/95">
+			<div class='relative rounded-lg shadow border-lightest-navy bg-light-navy/95'>
 				<!-- Modal header -->
 				<div
-					class="flex items-start justify-between p-4 m-4 border-b rounded-t dark:border-gray-600"
+					class='flex items-start justify-between p-4 m-4 border-b rounded-t dark:border-gray-600'
 				>
-					<h3 class="text-5xl font-semibold text-light-slate">{t('search.searchTitle')}</h3>
+					<h3 class='text-5xl font-semibold text-light-slate'>{t('search.searchTitle')}</h3>
 					<button
-						type="button"
-						class="bg-transparent text-green-500 hover:border-green-500 hover:bg-green-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+						type='button'
+						class='bg-transparent text-green-500 hover:border-green-500 hover:bg-green-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center'
 						data-modal-hide={SEARCH_MODAL_ID}
 					>
 						<svg
-							aria-hidden="true"
-							class="w-5 h-5"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden='true'
+							class='w-5 h-5'
+							fill='currentColor'
+							viewBox='0 0 20 20'
+							xmlns='http://www.w3.org/2000/svg'
 						>
 							<path
-								fill-rule="evenodd"
-								d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-								clip-rule="evenodd"></path>
-						</svg
-						>
-						<span class="sr-only">Close modal</span>
+								fill-rule='evenodd'
+								d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+								clip-rule='evenodd'></path>
+						</svg>
+						<span class='sr-only'>Close modal</span>
 					</button>
 				</div>
 				<!-- Modal body -->
-				<div class="p-6 space-y-6">
-					<div class="flex items-center justify-between">
-						<form class="mx-2 w-full">
-							<label for="textSearch" class="mb-2 text-sm font-medium text-gray-900 sr-only"
+				<div class='p-6 space-y-6'>
+					<div class='flex items-center justify-between'>
+						<form class='mx-2 w-full'>
+							<label for='textSearch' class='mb-2 text-sm font-medium text-gray-900 sr-only'
 							>Search</label
 							>
-							<div class="relative">
-								<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-									<Icon name="ic:twotone-search" class="h-4 w-4"/>
+							<div class='relative'>
+								<div class='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+									<Icon name='ic:twotone-search' class='h-4 w-4' />
 								</div>
 								<input
-									type="search"
-									id="textSearch"
-									class="block w-full p-4 pl-10 text-sm border rounded-lg bg-lightest-navy border-lightest-slate placeholder-gray-400 text-light-slate focus:ring-green-500 focus:border-green-500"
+									type='search'
+									id='textSearch'
+									class='block w-full p-4 pl-10 text-sm border rounded-lg bg-lightest-navy border-lightest-slate placeholder-gray-400 text-light-slate focus:ring-green-500 focus:border-green-500'
 									placeholder={t('search.searchPlaceholder')}
 									required
 								/>
 							</div>
 						</form>
-						<p class="text-right w-1/5">
-							<span id="itemFoundText">0</span>
+						<p class='text-right w-1/5'>
+							<span id='itemFoundText'>0</span>
 							{t('search.searchResult')}
 						</p>
 					</div>
 
-					<div id="article-results"></div>
+					<div id='article-results'></div>
 				</div>
 			</div>
 		</div>
@@ -133,10 +137,15 @@ const jsonArticles = JSON.stringify(sortedPublishedBlogEntries)
 			const searchModalId = this.dataset.identifier
 
 			// select the two elements that we'll work with
-			const $buttonElement: HTMLElement | null = this.querySelector(searchButtonId ?? '') as HTMLElement
-			const $modalElement: HTMLElement | null = this.querySelector(searchModalId ?? '') as HTMLElement
-			const $textSearch: HTMLInputElement | null = this.querySelector('#textSearch') as HTMLInputElement
-
+			const $buttonElement: HTMLElement | null = this.querySelector(
+				searchButtonId ?? ''
+			) as HTMLElement
+			const $modalElement: HTMLElement | null = this.querySelector(
+				searchModalId ?? ''
+			) as HTMLElement
+			const $textSearch: HTMLInputElement | null = this.querySelector(
+				'#textSearch'
+			) as HTMLInputElement
 
 			// Read the articles from the data attribute.
 			const articles: Array<Article> = this.dataset.articles
@@ -175,21 +184,21 @@ const jsonArticles = JSON.stringify(sortedPublishedBlogEntries)
 				backdropClasses: 'bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-40',
 				closable: true,
 				onHide: () => {
-					console.log('modal is hidden');
+					console.log('modal is hidden')
 				},
 				onShow: () => {
-					console.log('modal is shown');
+					console.log('modal is shown')
 				},
 				onToggle: () => {
-					console.log('modal has been toggled');
+					console.log('modal has been toggled')
 				}
-			};
+			}
 			// create a new modal component
-			const modal = new Modal($modalElement, modalOptions);
+			const modal = new Modal($modalElement, modalOptions)
 			// if have aria-hidden='true' means modal is closed and we can clear the input
 			const $closeButton = this.querySelector(`[data-modal-hide="${searchModalId}"]`)
 			$closeButton?.addEventListener('click', () => {
-				(searchInput as HTMLInputElement).value = ''
+				;(searchInput as HTMLInputElement).value = ''
 				$results.innerHTML = ''
 				itemFoundText.innerHTML = '0 '
 			})

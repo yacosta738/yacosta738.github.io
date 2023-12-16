@@ -1,18 +1,17 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from 'astro:assets'
 import type { Project } from '@models:Project'
 import ProjectTechList from 'molecules:ProjectTechList'
 import ProjectLinks from 'molecules:ProjectLinks'
 import { markdownfy } from '@utils:utilities'
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 
 export interface Props {
 	projects: Project[]
 }
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const { projects } = Astro.props
 const calculatePosition = (index: number): string => {

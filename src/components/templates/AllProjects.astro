@@ -7,8 +7,8 @@ import { getLangFromUrl, useTranslations } from '@i18n:utils'
 import { getCollection } from 'astro:content'
 const projectData = await getCollection('projects')
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const projects: Project[] = (await Promise.all(projectData.map((project) => jsonToProject(project))))
 	.filter((project) => project.published && project.lang === lang)

@@ -7,11 +7,10 @@ import Social from 'atoms:Social'
 import Email from 'atoms:Email'
 import Navbar from 'molecules:Navbar'
 import Technologies from 'molecules:Technologies'
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const { title, description, image, ogImageAlt } = Astro.props
 ---
@@ -20,27 +19,30 @@ const { title, description, image, ogImageAlt } = Astro.props
 	<head>
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
-		<HeadSEO title={title ?? t('seo.title')}
-						 description={description ?? t('seo.description')}
-						 image={image ?? '/uploads/me.webp'}
-						 ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')} />
+		<HeadSEO
+			title={title ?? t('seo.title')}
+			description={description ?? t('seo.description')}
+			image={image ?? '/uploads/me.webp'}
+			ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')}
+		/>
 		<GoogleAnalytics />
 	</head>
 
-	<body id="body"
+	<body
+		id='body'
 		class='content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono'
 	>
 		<div class='relative flex min-h-[100vh] flex-col'>
 			<Navbar />
 			<div class='container mx-auto mt-24 flex flex-col xl:flex-row'>
 				<main class='relative w-full overflow-hidden px-2'>
-					<slot name="header">
-							<Technologies />
+					<slot name='header'>
+						<Technologies />
 					</slot>
 					<slot />
-					<slot name="footer" />
+					<slot name='footer' />
 				</main>
-				<slot name="aside">
+				<slot name='aside'>
 					<Social />
 					<Email />
 				</slot>

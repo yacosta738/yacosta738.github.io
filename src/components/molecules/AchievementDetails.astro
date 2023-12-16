@@ -18,7 +18,7 @@ const MAX_ACHIEVEMENTS: number = 2
 			{rol?.achievements?.map((detail, index) => (
 				<li
 					id={`rol-${rol?.getIdentifier()}-achievement-${index}`}
-					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500 [text-wrap:balance] ${
+					class:list={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500 [text-wrap:balance] ${
 						hasMultipleRoles && index <= MAX_ACHIEVEMENTS ? 'hidden' : ''
 					}`}
 				>

@@ -27,17 +27,17 @@ const classLinks = () => {
 }
 ---
 
-<div class={`project-links ${classProjectLinks()}`}>
+<div class:list={`project-links ${classProjectLinks()}`}>
 	{
 		project.repository && (
-			<a href={project.repository} aria-label='GitHub Link' class={classLinks()} target='_blank'>
+			<a href={project.repository} aria-label='GitHub Link' class:list={classLinks()} target='_blank'>
 				<Icon name='ion:fork-repo' class='h-6 md:h-8' />
 			</a>
 		)
 	}
 	{
 		project.url && (
-			<a href={project.url} aria-label='Project Link' class={classLinks()} target='_blank'>
+			<a href={project.url} aria-label='Project Link' class:list={classLinks()} target='_blank'>
 				<Icon name='charm:link-external' class='h-6 md:h-8' />
 			</a>
 		)

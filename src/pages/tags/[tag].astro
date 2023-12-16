@@ -3,18 +3,17 @@ import { getCollection, type CollectionEntry } from 'astro:content'
 import { type Article, jsonToArticle } from '@models:Article'
 import BlogTemplate from 'templates:BlogTemplate'
 import ArticleSummary from 'molecules:ArticleSummary'
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
-const translatePath = useTranslatedPath(lang)
 
 interface Props {
 	tag: string
 	posts: Article[]
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths () {
 	const publishedBlogEntriesPromises: Promise<Article>[] = (
 		await getCollection('blog', ({ data }) => {
 			return !data.draft

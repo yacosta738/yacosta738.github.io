@@ -5,10 +5,10 @@ import ProjectsCommon from 'molecules:ProjectsCommon'
 import { getLangFromUrl } from '@i18n:utils'
 import { getCollection } from 'astro:content'
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url)
 
 const projectData = await getCollection('projects')
-const sortByPriority =  (b: Project, a: Project) => Math.sign((b.priority || 0) - (a.priority || 0))
+const sortByPriority = (b: Project, a: Project) => Math.sign((b.priority || 0) - (a.priority || 0))
 
 const projects: Project[] = (await Promise.all(projectData.map((project) => jsonToProject(project))))
 	.filter((project) => project.published && project.lang === lang)

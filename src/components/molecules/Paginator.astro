@@ -1,9 +1,8 @@
 ---
-import { getLangFromUrl, useTranslatedPath, useTranslations } from "@i18n:utils";
+import { getLangFromUrl, useTranslations } from '@i18n:utils'
 const { page } = Astro.props
 
-const lang = getLangFromUrl(Astro.url);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang);
 ---
 
@@ -12,7 +11,7 @@ const t = useTranslations(lang);
 		href={page.url.prev}
 		class='mr-8'
 		data-test='paginator-prev'
-		class={!page.url.prev ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}
+		class:list={!page.url.prev ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}
 	>
 		<span class='squiggle'>&larr;</span> Prev
 	</a>
@@ -24,7 +23,7 @@ const t = useTranslations(lang);
 	<a
 		href={page.url.next}
 		data-test='paginator-next'
-		class={!page.url.next ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}
+		class:list={!page.url.next ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}
 	>
 		Next<span class='squiggle'>&rarr;</span>
 	</a>

@@ -1,19 +1,18 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from 'astro:assets'
 import type { Article } from '@models:Article'
 import PostHeader from 'molecules:PostHeader'
-import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:index';
+import { getLangFromUrl, useTranslations } from '@i18n:index'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 export interface Props {
 	article: Article
 	hidePostHeaderInSmallScreen?: boolean
 }
 const { article, hidePostHeaderInSmallScreen = false } = Astro.props
-const url =`/posts/${article.url}/`
+const url = `/posts/${article.url}/`
 ---
 
 <div class='flex flex-col'>
@@ -38,10 +37,10 @@ const url =`/posts/${article.url}/`
 		}
 		<div class='mx-4 text-justify md:mx-10 md:my-5'>
 			<p class='line-clamp-7 [text-wrap:balance]'
-			transition:name={`article-description-${article.url}`}
+				transition:name={`article-description-${article.url}`}
 			>{article.description}</p>
 			<a href={url} class='inline-link font-bold uppercase'
-			transition:name={`article-read-button-${article.url}`}
+				transition:name={`article-read-button-${article.url}`}
 			>{t('read')}</a>
 		</div>
 	</div>

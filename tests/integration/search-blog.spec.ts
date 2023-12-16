@@ -1,4 +1,4 @@
-import { test, expect, locator } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
 test('test search box in blog', async ({ page }) => {
 	await page.goto('http://localhost:3000/blog')

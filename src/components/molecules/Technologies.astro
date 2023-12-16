@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { jsonToTech, type Tech } from '@models:Tech'
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'
 const techData = await getCollection('technologies')
 
 const techs: Tech[] = techData
@@ -24,7 +24,7 @@ const techs: Tech[] = techData
 	const w = window.innerWidth
 	const h = window.innerHeight - 300
 
-	function animateBackgroundIcons() {
+	function animateBackgroundIcons () {
 		const availableSvgs = svgs.filter((svg) => !svg.isAnimating)
 		const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)]
 
