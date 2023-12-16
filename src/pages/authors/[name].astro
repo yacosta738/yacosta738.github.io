@@ -4,6 +4,23 @@ import { Image } from 'astro:assets'
 import Card3D from 'molecules:Card3D'
 import BaseTemplate from 'templates:BaseTemplate'
 import { getLangFromUrl, useTranslations } from '@i18n:utils'
+import { type Author, jsonToAuthor } from '@models:Author'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths () {
+	const authorsData = await getCollection('authors')
+	const authors: Author[] = authorsData
+		.map((author) => jsonToAuthor(author))
+		.filter((author) => author.lang === 'en')
+	return authors.map((author) => ({
+		params: {
+			name: author.id
+		},
+		props: {
+			author
+		}
+	}))
+}
 
 const { name } = Astro.params
 const { author } = Astro.props
