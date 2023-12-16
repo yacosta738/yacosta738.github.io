@@ -30,7 +30,7 @@ export class Role implements IRole {
 	endDate?: Date | string
 	achievements: string[] = []
 
-	constructor (data: Partial<IRole> = {}) {
+	constructor(data: Partial<IRole> = {}) {
 		Object.assign(this, data)
 	}
 
@@ -49,7 +49,7 @@ export class Job implements IJob {
 	roles: IRole[] = []
 	createDate?: Date | string
 
-	constructor (data: Partial<IJob> = {}) {
+	constructor(data: Partial<IJob> = {}) {
 		Object.assign(this, data)
 	}
 }
