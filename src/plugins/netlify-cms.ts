@@ -22,6 +22,8 @@ export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 			fields: [
 				{ label: 'Title', name: 'title', widget: 'string' },
 				{ label: 'Description', name: 'description', widget: 'string' },
+				{ label: 'Link', name: 'link', widget: 'string', required: false },
+				{ label: 'External Link', name: 'isExternalLink', widget: 'boolean', required: false },
 				{ label: 'Date', name: 'date', widget: 'datetime' },
 				{
 					label: 'Language',
@@ -32,12 +34,6 @@ export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 				},
 				{ label: 'Cover', name: 'cover', widget: 'image', required: false },
 				{ label: 'Author', name: 'author', widget: 'string' },
-				{
-					label: 'Layout',
-					name: 'layout',
-					widget: 'hidden',
-					default: '../../../components/templates/BlogPostTemplate.astro'
-				},
 				{
 					label: 'Tags',
 					name: 'tags',
@@ -66,6 +62,8 @@ export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 			fields: [
 				{ label: 'Título', name: 'title', widget: 'string' },
 				{ label: 'Descripción', name: 'description', widget: 'string' },
+				{ label: 'Enlace', name: 'link', widget: 'string', required: false },
+				{ label: 'Enlace Externo', name: 'isExternalLink', widget: 'boolean', required: false },
 				{ label: 'Fecha', name: 'date', widget: 'datetime' },
 				{
 					label: 'Idioma',
@@ -76,12 +74,6 @@ export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 				},
 				{ label: 'Cover', name: 'cover', widget: 'image', required: false },
 				{ label: 'Autor', name: 'author', widget: 'string' },
-				{
-					label: 'Layout',
-					name: 'layout',
-					widget: 'hidden',
-					default: '../../../components/templates/BlogPostTemplate.astro'
-				},
 				{
 					label: 'Etiquetas',
 					name: 'tags',

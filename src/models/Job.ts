@@ -1,3 +1,5 @@
+import { type CollectionEntry } from 'astro:content'
+
 import { randomInt } from '../utils/utilities'
 const MAX_ID = 1000000
 export interface IRole {
@@ -28,7 +30,7 @@ export class Role implements IRole {
 	endDate?: Date | string
 	achievements: string[] = []
 
-	constructor(data: Partial<IRole> = {}) {
+	constructor (data: Partial<IRole> = {}) {
 		Object.assign(this, data)
 	}
 
@@ -47,7 +49,29 @@ export class Job implements IJob {
 	roles: IRole[] = []
 	createDate?: Date | string
 
-	constructor(data: Partial<IJob> = {}) {
+	constructor (data: Partial<IJob> = {}) {
 		Object.assign(this, data)
+	}
+}
+
+export const jsonToJob = (json: CollectionEntry<'jobs'>): IJob => {
+	return {
+		id: json.id || randomInt(1, MAX_ID),
+		title: json.data?.title,
+		lang: json.data?.lang,
+		company: json.data?.company,
+		icon: json.data?.icon,
+		location: json.data?.location,
+		url: json.data?.url,
+		published: json.data?.published,
+		createDate: json.data?.createDate,
+		roles: json.data?.roles?.map((role) => {
+			return new Role({
+				role: role.role,
+				startDate: role.startDate,
+				endDate: role.endDate,
+				achievements: role.achievements
+			})
+		})
 	}
 }

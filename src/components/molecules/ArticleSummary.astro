@@ -32,16 +32,16 @@ const url =`/posts/${article.url}/`
 					src={article.cover}
 					height={400}
 					width={1000}
-					transition:name=`article-image-${article.url}`
+					transition:name={`article-image-${article.url}`}
 				/>
 			)
 		}
 		<div class='mx-4 text-justify md:mx-10 md:my-5'>
 			<p class='line-clamp-7 [text-wrap:balance]'
-			transition:name=`article-description-${article.url}`
+			transition:name={`article-description-${article.url}`}
 			>{article.description}</p>
 			<a href={url} class='inline-link font-bold uppercase'
-			transition:name=`article-read-button-${article.url}`
+			transition:name={`article-read-button-${article.url}`}
 			>{t('read')}</a>
 		</div>
 	</div>

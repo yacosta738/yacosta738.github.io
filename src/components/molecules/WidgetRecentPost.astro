@@ -1,7 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
 import type { Article } from '@models:Article'
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import WidgetCard from 'molecules:WidgetCard'
 
 const { pathname } = Astro.url
@@ -25,8 +25,8 @@ const translatePath = useTranslatedPath(lang);
 					.map((article) => (
 						<li class='my-2 flex flex-row font-mono text-base text-light-slate'>
 							<div class='flex flex-row items-center justify-center'>
+								<Icon name='mdi:chevron-right' class='h-5 w-5 mr-1' />
 								<a href={`/posts/${article.url}/`} class='inline-link flex items-center justify-center'>
-									<Icon name='zondicons:cheveron-right' class='h-6' />
 									<p class='pl-2'>{article.title}</p>
 								</a>
 							</div>

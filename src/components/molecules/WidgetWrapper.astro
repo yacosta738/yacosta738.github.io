@@ -64,7 +64,7 @@ const categories: { [key: string]: number } = allPosts.reduce((acc: { [key: stri
 	</slot>
 </div>
 
-<script is:global>
+<script>
 	const categoryEl = document.getElementById('categoryWidget')
 	// if the url is /blog or es/blog, remove the category widget
 	if (categoryEl) {

@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config'
 import { remarkReadingTime } from './remark-reading-time.mjs'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import vue from '@astrojs/vue'
 import robotsTxt from 'astro-robots-txt'
 import NetlifyCMS from 'astro-netlify-cms'
 import remarkToc from 'remark-toc'
@@ -46,7 +45,6 @@ export default defineConfig({
 		NetlifyCMS({
 			config
 		}),
-		vue(),
 		icon({
 			iconDir: 'src/icons',
 			include: {

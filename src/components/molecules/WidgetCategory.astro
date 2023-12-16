@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
-import Icon from 'astro-icon'
+import {Icon} from 'astro-icon/components'
 import WidgetCard from 'molecules:WidgetCard'
 
 export interface Props {
@@ -20,9 +20,9 @@ const allCategories = Object.keys(categories)
 		{
 			allCategories.map((category) => (
 				<li class='my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate'>
+					<Icon name='mdi:chevron-right' class='h-5 w-5 mr-1' />
 					<a href={translatePath(`/categories/${category}`)} class='inline-link'>
 						<div class='flex items-center justify-center'>
-							<Icon name='zondicons:cheveron-right' class='h-6' />
 							<span>{category}</span>
 						</div>
 					</a>
