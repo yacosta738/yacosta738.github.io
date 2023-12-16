@@ -49,12 +49,14 @@ const jobs = defineCollection({
 		url: z.string(),
 		published: z.boolean(),
 		createDate: z.string().datetime(),
-		roles: z.array(z.object({
-			role: z.string(),
-			startDate: z.string().datetime(),
-			endDate: z.string().datetime().optional(),
-			achievements: z.array(z.string())
-		}))
+		roles: z.array(
+			z.object({
+				role: z.string(),
+				startDate: z.string().datetime(),
+				endDate: z.string().datetime().optional(),
+				achievements: z.array(z.string())
+			})
+		)
 	})
 })
 
