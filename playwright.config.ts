@@ -1,5 +1,5 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
+import type { PlaywrightTestConfig } from '@playwright/test';
+import { devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
 		 * Maximum time expect() should wait for the condition to be met.
 		 * For example in `await expect(locator).toHaveText();`
 		 */
-		timeout: 5000
+		timeout: 5000,
 	},
 	/* Run tests in files in parallel */
 	fullyParallel: true,
@@ -39,7 +39,7 @@ const config: PlaywrightTestConfig = {
 		// baseURL: 'http://localhost:3000',
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-		trace: 'on-first-retry'
+		trace: 'on-first-retry',
 	},
 
 	/* Configure projects for major browsers */
@@ -47,9 +47,9 @@ const config: PlaywrightTestConfig = {
 		{
 			name: 'chromium',
 			use: {
-				...devices['Desktop Chrome']
-			}
-		}
+				...devices['Desktop Chrome'],
+			},
+		},
 
 		// {
 		// 	name: 'firefox',
@@ -92,7 +92,7 @@ const config: PlaywrightTestConfig = {
 		//     channel: 'chrome',
 		//   },
 		// },
-	]
+	],
 
 	/* Folder for test artifacts such as screenshots, videos, traces, etc. */
 	// outputDir: 'test-results/',
@@ -102,6 +102,6 @@ const config: PlaywrightTestConfig = {
 	//   command: 'npm run start',
 	//   port: 3000,
 	// },
-}
+};
 
-export default config
+export default config;

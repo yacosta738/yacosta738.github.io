@@ -1,13 +1,13 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
-import WidgetCard from 'molecules:WidgetCard'
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import WidgetCard from 'molecules:WidgetCard';
 
 export interface Props {
-	tags: { [key: string]: number }
+	tags: { [key: string]: number };
 }
-const { tags } = Astro.props
+const { tags } = Astro.props;
 
-const allTags = Object.keys(tags)
+const allTags = Object.keys(tags);
 
 const textSize = (
 	tag: string,
@@ -19,23 +19,23 @@ const textSize = (
 		'text-xl',
 		'text-2xl',
 		'text-3xl',
-		'text-4xl'
+		'text-4xl',
 	]
 ): string => {
-	const max = Math.max(...Object.values(tags))
-	const min = Math.min(...Object.values(tags))
-	const range = max - min
-	const tagCount = tags[tag]
-	const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1))
-	return fontSizeClass[index]
-}
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+	const max = Math.max(...Object.values(tags));
+	const min = Math.min(...Object.values(tags));
+	const range = max - min;
+	const tagCount = tags[tag];
+	const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1));
+	return fontSizeClass[index];
+};
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 ---
 
 <WidgetCard title={t('tags')}>
-	<div class='tag-cloud-tags'>
+	<div class="tag-cloud-tags">
 		{
 			allTags.map((tag) => (
 				<a
@@ -43,15 +43,15 @@ const translatePath = useTranslatedPath(lang);
 					aria-label={tag}
 					class:list={`inline-link ${textSize(tag)}`}
 				>
-					<span class='capitalize'>{tag}</span>
+					<span class="capitalize">{tag}</span>
 				</a>
 			))
 		}
 	</div>
-	{allTags.length === 0 && <div class='text-center text-gray-500'>{t('noTags')}</div>}
+	{allTags.length === 0 && <div class="text-center text-gray-500">{t('noTags')}</div>}
 </WidgetCard>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 	.tag-cloud-tags {
 		display: block;
 		margin: 0;

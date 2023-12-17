@@ -1,29 +1,27 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils'
-import { SEO } from 'astro-seo'
-import { ViewTransitions } from 'astro:transitions'
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { SEO } from 'astro-seo';
+import { ViewTransitions } from 'astro:transitions';
 export interface Props {
-	title: string
-	description: string
-	image: string
-	ogImageAlt: string
+	title: string;
+	description: string;
+	image: string;
+	ogImageAlt: string;
 }
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-const { href: canonicalUrl } = Astro.url
-const { title, description, image, ogImageAlt } = Astro.props
-const imageExtension = image?.split('.').pop()
+const { href: canonicalUrl } = Astro.url;
+const { title, description, image, ogImageAlt } = Astro.props;
+const imageExtension = image?.split('.').pop();
 ---
 
-
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="msapplication-TileColor" content="#0a192f">
-<meta name="theme-color" content="#64ffda">
-
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="msapplication-TileColor" content="#0a192f" />
+<meta name="theme-color" content="#64ffda" />
 
 <SEO
 	title={title ?? t('seo.title')}
@@ -34,24 +32,24 @@ const imageExtension = image?.split('.').pop()
 			title: title ?? t('seo.ogTitle'),
 			type: 'website',
 			image: image ?? '/uploads/me.webp',
-			url: canonicalUrl
+			url: canonicalUrl,
 		},
 		optional: {
-			description: description ?? t('seo.description')
+			description: description ?? t('seo.description'),
 		},
 		image: {
 			alt: ogImageAlt ?? t('seo.ogImageAlt'),
 			width: 1200,
 			height: 630,
-			type: `image/${imageExtension}`
-		}
+			type: `image/${imageExtension}`,
+		},
 	}}
 	twitter={{ card: 'summary_large_image', creator: '@yacosta738' }}
 	extend={{
 		meta: [
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ name: 'author', content: 'Yuniel Acosta Pérez' }
-		]
+			{ name: 'author', content: 'Yuniel Acosta Pérez' },
+		],
 	}}
 />
 <ViewTransitions />

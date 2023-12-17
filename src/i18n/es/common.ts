@@ -5,7 +5,7 @@ export default {
 			'Programador, escritor, entusiasta de la ciencia y la tecnología, especializado en construir aplicaciones web. Interesado en  Vue, Typescript, Node.js, Java/Kotlin y Spring Boot.',
 		ogTitle: 'Yuniel Acosta',
 		ogImageAlt:
-			'Yuniel Acosta | Ingeniero de Software - Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño dirigido por dominios y microservicios. Soy una persona versátil con amplias habilidades, con muchas ganas de aprender y lista para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.'
+			'Yuniel Acosta | Ingeniero de Software - Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño dirigido por dominios y microservicios. Soy una persona versátil con amplias habilidades, con muchas ganas de aprender y lista para enfrentar nuevos y difíciles desafíos dentro o fuera de mi país.',
 	},
 	menus: {
 		about: 'Sobre mí',
@@ -14,7 +14,7 @@ export default {
 		lastArticles: 'Últimos artículos',
 		contact: 'Contacto',
 		blog: 'Blog',
-		resume: 'Currículum'
+		resume: 'Currículum',
 	},
 	read: 'Leer →',
 	home: 'Inicio',
@@ -25,5 +25,5 @@ export default {
 	builtBy: 'Construido por ',
 	designBy: 'Diseño basado en el portafolio de Chiang portfolio',
 	current: 'Presente',
-	noTags: 'No hay etiquetas'
-}
+	noTags: 'No hay etiquetas',
+};

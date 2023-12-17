@@ -1,26 +1,26 @@
 ---
-import { type Menu, navMenus } from '@models:Menu'
-import { Icon } from 'astro-icon/components'
-import { SEARCH_BUTTON_ID, SEARCH_MODAL_ID, DRAWER_MENU_ID } from '@store:constants'
-import LanguageSelector from './LanguageSelector.astro'
-import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils'
+import { type Menu, navMenus } from '@models:Menu';
+import { Icon } from 'astro-icon/components';
+import { SEARCH_BUTTON_ID, SEARCH_MODAL_ID, DRAWER_MENU_ID } from '@store:constants';
+import LanguageSelector from './LanguageSelector.astro';
+import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils';
 export interface Props {
-	drawer: boolean
+	drawer: boolean;
 }
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
-const translatePath = useTranslatedPath(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
-const { drawer } = Astro.props
+const { drawer } = Astro.props;
 
-const { pathname } = Astro.url
+const { pathname } = Astro.url;
 const isBlogRoot =
-	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/blog\/\w+/)
+	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/blog\/\w+/);
 ---
 
 <menu-list data-menus={navMenus}>
-	<ul class='menu-list'>
+	<ul class="menu-list">
 		<li>
 			<ol
 				class:list={`order-list items-center space-y-6 lg:space-y-0 lg:space-x-2 lg:flex ${
@@ -43,21 +43,21 @@ const isBlogRoot =
 				}
 			</ol>
 		</li>
-		<li class='flex items-center justify-center md:justify-between'>
+		<li class="flex items-center justify-center md:justify-between">
 			<LanguageSelector
 				showFlag={true}
-				class='cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
+				class="cursor-pointer select-none rounded border-b border-transparent bg-transparent text-sm text-green-500 hover:border-green-500 hover:bg-green-900"
 				tabindex={drawer ? -1 : 0}
 			/>
 
 			<a
-				class='rounded bg-transparent p-2 text-sm text-green-500 hover:border-green-500 hover:bg-green-900'
-				aria-label='RSS Feed'
-				target='_blank'
+				class="rounded bg-transparent p-2 text-sm text-green-500 hover:border-green-500 hover:bg-green-900"
+				aria-label="RSS Feed"
+				target="_blank"
 				href={translatePath('/rss.xml')}
 				tabindex={drawer ? -1 : 0}
 			>
-				<Icon name='mdi:rss' class='h-5 w-5' />
+				<Icon name="mdi:rss" class="h-5 w-5" />
 			</a>
 			{
 				isBlogRoot && (
@@ -65,10 +65,10 @@ const isBlogRoot =
 						id={SEARCH_BUTTON_ID}
 						data-modal-target={SEARCH_MODAL_ID}
 						data-modal-toggle={SEARCH_MODAL_ID}
-						class='rounded bg-transparent p-2 text-green-500 hover:border-green-500 hover:bg-green-900'
-						type='button'
+						class="rounded bg-transparent p-2 text-green-500 hover:border-green-500 hover:bg-green-900"
+						type="button"
 					>
-						<Icon name='ic:twotone-search' class='h-4 w-4' />
+						<Icon name="ic:twotone-search" class="h-4 w-4" />
 					</button>
 				)
 			}
@@ -76,9 +76,9 @@ const isBlogRoot =
 		<li>
 			<a
 				id={drawer ? 'drawer-resume' : 'nav-resume'}
-				href='/files/yuniel_acosta_cv.pdf'
-				target='_blank'
-				class='resume-button'
+				href="/files/yuniel_acosta_cv.pdf"
+				target="_blank"
+				class="resume-button"
 				tabindex={drawer ? -1 : 0}
 			>
 				{t('menus.resume')}
@@ -91,26 +91,26 @@ const isBlogRoot =
 	// When clicking on a link in the drawer menu emit a dismiss event to close the drawer
 	class MenuList extends HTMLElement {
 		constructor() {
-			super()
+			super();
 			this.addEventListener('click', (e) => {
-				const target = e.target as HTMLElement
-				const dismiss = target.dataset.drawerDismiss
+				const target = e.target as HTMLElement;
+				const dismiss = target.dataset.drawerDismiss;
 				if (dismiss) {
 					document.dispatchEvent(
 						new CustomEvent('menu-link-clicked', {
 							detail: {
-								dismiss
-							}
+								dismiss,
+							},
 						})
-					)
+					);
 				}
-			})
+			});
 		}
 	}
-	customElements.define('menu-list', MenuList)
+	customElements.define('menu-list', MenuList);
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 	.menu-list {
 		@apply mt-8 block w-full flex-grow origin-top-right items-center
       space-y-6 overflow-y-auto font-bold uppercase tracking-wide lg:mt-0 lg:flex

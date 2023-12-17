@@ -1,15 +1,15 @@
-import { type SocialMedia } from '../store/constants'
-import { type CollectionEntry } from 'astro:content'
+import { type SocialMedia } from '../store/constants';
+import { type CollectionEntry } from 'astro:content';
 
 export interface Author {
-	id: string
-	name: string
-	image: string
-	rol: string
-	bio: string
-	email: string
-	lang: string
-	social: SocialMedia[]
+	id: string;
+	name: string;
+	image: string;
+	rol: string;
+	bio: string;
+	email: string;
+	lang: string;
+	social: SocialMedia[];
 }
 
 export const jsonToAuthor = (json: CollectionEntry<'authors'>): Author => {
@@ -21,6 +21,6 @@ export const jsonToAuthor = (json: CollectionEntry<'authors'>): Author => {
 		bio: json.data.bio,
 		email: json.data.email,
 		lang: json.data.lang,
-		social: json.data.social
-	}
-}
+		social: json.data.social,
+	};
+};

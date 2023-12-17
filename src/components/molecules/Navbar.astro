@@ -1,72 +1,71 @@
 ---
-import Menus from 'molecules:Menus'
-import Drawer from 'molecules:Drawer'
-import { NAVBAR_HEADER } from '@store:constants'
-import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils'
+import Menus from 'molecules:Menus';
+import Drawer from 'molecules:Drawer';
+import { NAVBAR_HEADER } from '@store:constants';
+import { getLangFromUrl, useTranslatedPath } from '@i18n:utils';
 interface Props {
-	id?: string
+	id?: string;
 }
 
-const { id } = Astro.props
-const navbarHeaderId = `${NAVBAR_HEADER}-${id ?? crypto.randomUUID()}`
-const lang = getLangFromUrl(Astro.url)
-const translatePath = useTranslatedPath(lang)
-const t = useTranslations(lang);
+const { id } = Astro.props;
+const navbarHeaderId = `${NAVBAR_HEADER}-${id ?? crypto.randomUUID()}`;
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 ---
 
-<header id={navbarHeaderId} class='fixed z-50 w-full'>
+<header id={navbarHeaderId} class="fixed z-50 w-full">
 	<nav
-		id='acosta-navbar'
-		class='relative flex w-full flex-wrap items-center justify-between py-2 md:py-4'
+		id="acosta-navbar"
+		class="relative flex w-full flex-wrap items-center justify-between py-2 md:py-4"
 	>
-		<a href={translatePath('/', lang)} class='border-none'>
-			<img src='/logo.svg' class='w-10' alt='yuniel acosta portfolio logo' height='10' width='10' />
+		<a href={translatePath('/', lang)} class="border-none">
+			<img src="/logo.svg" class="w-10" alt="yuniel acosta portfolio logo" height="10" width="10" />
 		</a>
 
 		<Drawer />
 
-		<div class='hidden lg:block'>
+		<div class="hidden lg:block">
 			<Menus drawer={false} />
 		</div>
 	</nav>
 </header>
 
 <script define:vars={{ navbarHeaderId }}>
-	let showNavbar = true
-	let scrollDirection = 'DOWN'
-	let lastScrollPosition = 0
-	const navbar = document.getElementById(navbarHeaderId)
-	const navbarClassList = navbar?.classList ?? new DOMTokenList()
-	const navbarClassListAdd = navbarClassList.add.bind(navbarClassList)
-	const navbarClassListRemove = navbarClassList.remove.bind(navbarClassList)
+	let showNavbar = true;
+	let scrollDirection = 'DOWN';
+	let lastScrollPosition = 0;
+	const navbar = document.getElementById(navbarHeaderId);
+	const navbarClassList = navbar?.classList ?? new DOMTokenList();
+	const navbarClassListAdd = navbarClassList.add.bind(navbarClassList);
+	const navbarClassListRemove = navbarClassList.remove.bind(navbarClassList);
 
 	const onScrollEnd = () => {
 		if (showNavbar) {
-			navbarClassListRemove('navbar--hidden')
+			navbarClassListRemove('navbar--hidden');
 		} else {
-			navbarClassListAdd('navbar--hidden')
+			navbarClassListAdd('navbar--hidden');
 		}
 		if (scrollDirection === 'UP' && lastScrollPosition !== 0) {
-			navbarClassListAdd('navbar--show')
+			navbarClassListAdd('navbar--show');
 		} else {
-			navbarClassListRemove('navbar--show')
+			navbarClassListRemove('navbar--show');
 		}
-	}
+	};
 	const onScroll = () => {
-		const currentScrollPosition = window.scrollY || document.documentElement.scrollTop
-		if (currentScrollPosition < 0) return
+		const currentScrollPosition = window.scrollY || document.documentElement.scrollTop;
+		if (currentScrollPosition < 0) return;
 
-		showNavbar = currentScrollPosition < lastScrollPosition
-		scrollDirection = currentScrollPosition < lastScrollPosition ? 'UP' : 'DOWN'
-		lastScrollPosition = currentScrollPosition
+		showNavbar = currentScrollPosition < lastScrollPosition;
+		scrollDirection = currentScrollPosition < lastScrollPosition ? 'UP' : 'DOWN';
+		lastScrollPosition = currentScrollPosition;
 
-		onScrollEnd()
-	}
+		onScrollEnd();
+	};
 
-	window.addEventListener('scroll', onScroll)
+	window.addEventListener('scroll', onScroll);
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 	.navbar-menu {
 		transition: all 530ms ease-out;
 	}

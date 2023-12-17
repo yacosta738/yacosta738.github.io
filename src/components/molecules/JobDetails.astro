@@ -1,56 +1,56 @@
 ---
-import type { IJob } from '@models:Job'
-import { Icon } from 'astro-icon/components'
-import { range } from '@utils:role-range'
+import type { IJob } from '@models:Job';
+import { Icon } from 'astro-icon/components';
+import { range } from '@utils:role-range';
 
 export interface Props {
-	job: IJob
+	job: IJob;
 }
 
-const { job } = Astro.props
+const { job } = Astro.props;
 
-const hasMultipleRoles = (job?.roles?.length ?? 0) > 1
+const hasMultipleRoles = (job?.roles?.length ?? 0) > 1;
 
 const getFirstRole = (job: IJob) => {
-	return job?.roles?.[0] ?? undefined
-}
-
+	return job?.roles?.[0] ?? undefined;
+};
 ---
-	<div class='flex space-x-4'>
-		<div class='flex-shrink-0'>
-			<Icon size={48} title={job.company} name={job.icon}/>
-		</div>
-		{
-			hasMultipleRoles
-				? (
-					<div class='flex-1'>
-						<div class="flex flex-col items-start justify-center mb-4">
-							<h3 class='text-2xl font-semibold'>
-								<a href={job.url} target='_blank' class='inline-link'>
-									{job.company}
-								</a>
-							</h3>
-							<small class='text-sm text-light-slate'>{job.location}</small>
-						</div>
-					</div>
-				)
-				: (
-					<div class='flex-1'>
-						{getFirstRole(job)?.role && (
-				<h3 class='text-2xl font-semibold'>
-					{getFirstRole(job)?.role}
-					<a href={job.url} target='_blank' class='inline-link'>
-						&nbsp;@&nbsp;{job.company}
-					</a>
-				</h3>
-				<div class="flex flex-col items-start justify-center mb-4">
-					<time class='text-sm text-light-slate' id={`range-${job.id}`}>
-						{range(getFirstRole(job))}
-					</time>
-					<small class='text-sm text-light-slate'>{job.location}</small>
-				</div>
-						)}
-					</div>)
-		}
-	</div>
 
+<div class="flex space-x-4">
+	<div class="flex-shrink-0">
+		<Icon size={48} title={job.company} name={job.icon} />
+	</div>
+	{
+		hasMultipleRoles ? (
+			<div class="flex-1">
+				<div class="flex flex-col items-start justify-center mb-4">
+					<h3 class="text-2xl font-semibold">
+						<a href={job.url} target="_blank" class="inline-link">
+							{job.company}
+						</a>
+					</h3>
+					<small class="text-sm text-light-slate">{job.location}</small>
+				</div>
+			</div>
+		) : (
+			<div class="flex-1">
+				{getFirstRole(job)?.role && (
+					<>
+						<h3 class="text-2xl font-semibold">
+							{getFirstRole(job)?.role}
+							<a href={job.url} target="_blank" class="inline-link">
+								&nbsp;@&nbsp;{job.company}
+							</a>
+						</h3>
+						<div class="flex flex-col items-start justify-center mb-4">
+							<time class="text-sm text-light-slate" id={`range-${job.id}`}>
+								{range(getFirstRole(job))}
+							</time>
+							<small class="text-sm text-light-slate">{job.location}</small>
+						</div>
+					</>
+				)}
+			</div>
+		)
+	}
+</div>

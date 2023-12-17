@@ -1,27 +1,27 @@
-import type { CollectionEntry } from 'astro:content'
+import type { CollectionEntry } from 'astro:content';
 
 export interface Article {
-	id: string
-	url: string
-	title: string
-	description: string
-	date: string | Date
-	cover: string
-	author: string
-	timeToRead: number
-	lang: string
-	tags: string[]
-	categories: string[]
-	draft: boolean
-	content: string
+	id: string;
+	url: string;
+	title: string;
+	description: string;
+	date: string | Date;
+	cover: string;
+	author: string;
+	timeToRead: number;
+	lang: string;
+	tags: string[];
+	categories: string[];
+	draft: boolean;
+	content: string;
 }
 
 export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Article> => {
-	const article = json.data
-	const { remarkPluginFrontmatter } = await json.render()
-	let content = ''
+	const article = json.data;
+	const { remarkPluginFrontmatter } = await json.render();
+	let content = '';
 	if (json.data) {
-		content = json.body
+		content = json.body;
 	}
 	return {
 		id: json.id || crypto.randomUUID(),
@@ -36,6 +36,6 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 		tags: article?.tags,
 		categories: article?.categories,
 		draft: article?.draft,
-		content
-	}
-}
+		content,
+	};
+};

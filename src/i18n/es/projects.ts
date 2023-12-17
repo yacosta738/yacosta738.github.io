@@ -2,7 +2,7 @@ export default {
 	projects: {
 		title: 'Proyectos de Yuniel',
 		description: 'Una lista extensa de cosas en las que he trabajado',
-		ogImageAlt: 'Aquí puedes encontrar todos mis proyectos'
+		ogImageAlt: 'Aquí puedes encontrar todos mis proyectos',
 	},
 	whereWorked: 'Dónde he trabajado',
 	projectTitle: 'Cosas que he construido',
@@ -18,5 +18,5 @@ export default {
 	showLess: 'Mostrar menos',
 	showMore: 'Mostrar más',
 	viewAll: 'Ver Todos',
-	personalProjects: 'Proyectos Personales'
-}
+	personalProjects: 'Proyectos Personales',
+};

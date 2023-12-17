@@ -1,50 +1,50 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { Image } from 'astro:assets'
-import Card3D from 'molecules:Card3D'
-import BaseTemplate from 'templates:BaseTemplate'
-import { getLangFromUrl, useTranslations } from '@i18n:utils'
-import { type Author, jsonToAuthor } from '@models:Author'
-import { getCollection } from 'astro:content'
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import Card3D from 'molecules:Card3D';
+import BaseTemplate from 'templates:BaseTemplate';
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { type Author, jsonToAuthor } from '@models:Author';
+import { getCollection } from 'astro:content';
 
-export async function getStaticPaths () {
-	const authorsData = await getCollection('authors')
+export async function getStaticPaths() {
+	const authorsData = await getCollection('authors');
 	const authors: Author[] = authorsData
 		.map((author) => jsonToAuthor(author))
-		.filter((author) => author.lang === 'en')
+		.filter((author) => author.lang === 'en');
 	return authors.map((author) => ({
 		params: {
-			name: author.id
+			name: author.id,
 		},
 		props: {
-			author
-		}
-	}))
+			author,
+		},
+	}));
 }
 
-const { name } = Astro.params
-const { author } = Astro.props
+const { name } = Astro.params;
+const { author } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <BaseTemplate title={`${t('blog')} | ${name}`} description={`${t('blogDescription')} ${name}`}>
-	<section id='about-author' class='container mx-auto'>
-		<div class='flex items-center justify-center'>
+	<section id="about-author" class="container mx-auto">
+		<div class="flex items-center justify-center">
 			<Card3D>
 				<a
 					href={`mailto:${author.email}`}
-					class='flex transform justify-between transition duration-300 ease-in-out hover:scale-110'
-					slot='left-header'
+					class="flex transform justify-between transition duration-300 ease-in-out hover:scale-110"
+					slot="left-header"
 				>
-					<Icon name='cib:minutemailer' class='mx-1 hidden h-8 w-8 md:block' />
+					<Icon name="cib:minutemailer" class="mx-1 hidden h-8 w-8 md:block" />
 					{author.email}
 				</a>
 
 				<Image
-					slot='right-header'
-					class='h-20 w-20 rounded-full p-1 ring-2 ring-light-navy dark:ring-lightest-navy'
+					slot="right-header"
+					class="h-20 w-20 rounded-full p-1 ring-2 ring-light-navy dark:ring-lightest-navy"
 					src={author.image}
 					alt={author.name}
 					height={80}
@@ -52,31 +52,31 @@ const t = useTranslations(lang)
 				/>
 
 				<h1
-					class='m-0 mx-auto bg-gradient-to-bl from-green-300 via-green-500 to-light-navy bg-clip-text pt-10 text-center text-4xl font-black leading-none text-transparent sm:text-[4rem] md:bg-gradient-to-br md:text-7xl'
-					data-atropos-offset='2'
+					class="m-0 mx-auto bg-gradient-to-bl from-green-300 via-green-500 to-light-navy bg-clip-text pt-10 text-center text-4xl font-black leading-none text-transparent sm:text-[4rem] md:bg-gradient-to-br md:text-7xl"
+					data-atropos-offset="2"
 				>
 					{author.name}
 				</h1>
 
-				<div class='flex items-center justify-center pt-2 sm:pt-4 md:pt-0' data-atropos-offset='5'>
+				<div class="flex items-center justify-center pt-2 sm:pt-4 md:pt-0" data-atropos-offset="5">
 					<h2
-						class='inline-block w-40 rounded-full bg-dark-navy/90 px-3 py-1 text-center text-xs font-bold text-white md:w-2/3 md:text-lg'
+						class="inline-block w-40 rounded-full bg-dark-navy/90 px-3 py-1 text-center text-xs font-bold text-white md:w-2/3 md:text-lg"
 					>
 						{author.rol}
 					</h2>
 				</div>
 
 				<h3
-					data-atropos-offset='5'
-					class='flex flex-col items-center justify-center pb-6 pt-6 text-center text-2xl font-bold md:flex-row'
+					data-atropos-offset="5"
+					class="flex flex-col items-center justify-center pb-6 pt-6 text-center text-2xl font-bold md:flex-row"
 				>
 					{
 						author.social.map((social) => (
 							<a
 								href={social.url}
-								target='_blank'
-								rel='noopener noreferrer'
-								class='mx-2 flex h-12 w-12 items-center justify-center rounded-full p-1 text-2xl hover:bg-light-navy/90 hover:text-white'
+								target="_blank"
+								rel="noopener noreferrer"
+								class="mx-2 flex h-12 w-12 items-center justify-center rounded-full p-1 text-2xl hover:bg-light-navy/90 hover:text-white"
 							>
 								<Icon name={social.icon} />
 							</a>
@@ -85,8 +85,8 @@ const t = useTranslations(lang)
 				</h3>
 
 				<div
-					id='card-icon'
-					class='absolute -left-32 top-20 -z-10 h-96 w-96 opacity-30 contrast-200'
+					id="card-icon"
+					class="absolute -left-32 top-20 -z-10 h-96 w-96 opacity-30 contrast-200"
 				>
 					FlavourIcon
 				</div>

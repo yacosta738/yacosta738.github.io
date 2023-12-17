@@ -1,4 +1,4 @@
-import { defineCollection, reference, z } from 'astro:content'
+import { defineCollection, reference, z } from 'astro:content';
 
 const blogCollection = defineCollection({
 	type: 'content',
@@ -15,9 +15,9 @@ const blogCollection = defineCollection({
 		categories: z.array(z.string()),
 		isExternalLink: z.boolean().default(false),
 		link: z.string().optional(),
-		draft: z.boolean()
-	})
-})
+		draft: z.boolean(),
+	}),
+});
 
 const authors = defineCollection({
 	type: 'data',
@@ -32,11 +32,11 @@ const authors = defineCollection({
 			z.object({
 				name: z.string(),
 				url: z.string(),
-				icon: z.string()
+				icon: z.string(),
 			})
-		)
-	})
-})
+		),
+	}),
+});
 
 const jobs = defineCollection({
 	type: 'data',
@@ -54,11 +54,11 @@ const jobs = defineCollection({
 				role: z.string(),
 				startDate: z.string().datetime(),
 				endDate: z.string().datetime().optional(),
-				achievements: z.array(z.string())
+				achievements: z.array(z.string()),
 			})
-		)
-	})
-})
+		),
+	}),
+});
 
 const technologies = defineCollection({
 	type: 'data',
@@ -66,9 +66,9 @@ const technologies = defineCollection({
 		id: z.string(),
 		name: z.string(),
 		icon: z.string().optional(),
-		url: z.string()
-	})
-})
+		url: z.string(),
+	}),
+});
 
 const projects = defineCollection({
 	type: 'data',
@@ -85,14 +85,14 @@ const projects = defineCollection({
 		featured: z.boolean().default(false),
 		priority: z.number().default(0),
 		published: z.boolean().default(false),
-		content: z.string()
-	})
-})
+		content: z.string(),
+	}),
+});
 
 export const collections = {
 	blog: blogCollection,
 	authors,
 	jobs,
 	technologies,
-	projects
-}
+	projects,
+};

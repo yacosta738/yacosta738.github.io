@@ -1,30 +1,30 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils'
-const { page } = Astro.props
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+const { page } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url)
+const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class='flex items-center justify-between text-xl mx-1 px-1'>
+<section class="flex items-center justify-between text-xl mx-1 px-1">
 	<a
 		href={page.url.prev}
-		class='mr-8'
-		data-test='paginator-prev'
+		class="mr-8"
+		data-test="paginator-prev"
 		class:list={!page.url.prev ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}
 	>
-		<span class='squiggle'>&larr;</span> Prev
+		<span class="squiggle">&larr;</span> Prev
 	</a>
-	<div class='text-base'>
+	<div class="text-base">
 		{page.currentPage}
 		{t('of')}
 		{page.lastPage}
 	</div>
 	<a
 		href={page.url.next}
-		data-test='paginator-next'
+		data-test="paginator-next"
 		class:list={!page.url.next ? 'cursor-not-allowed select-none disabled:opacity-75' : ''}
 	>
-		Next<span class='squiggle'>&rarr;</span>
+		Next<span class="squiggle">&rarr;</span>
 	</a>
 </section>

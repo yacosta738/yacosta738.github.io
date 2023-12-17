@@ -1,4 +1,4 @@
-import type { CmsCollection } from 'netlify-cms-core'
+import type { CmsCollection } from 'netlify-cms-core';
 export const collections: CmsCollection[] = [
 	// Content collections
 	{
@@ -12,9 +12,9 @@ export const collections: CmsCollection[] = [
 			{ label: 'ID', name: 'id', widget: 'string' },
 			{ label: 'Name', name: 'name', widget: 'string' },
 			{ label: 'Icon', name: 'icon', widget: 'string' },
-			{ label: 'url', name: 'url', widget: 'string' }
-		]
-	}
-]
+			{ label: 'url', name: 'url', widget: 'string' },
+		],
+	},
+];
 
-export default collections
+export default collections;

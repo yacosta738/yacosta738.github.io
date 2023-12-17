@@ -1,11 +1,11 @@
-import type { CmsConfig } from 'netlify-cms-core'
-import cmsConfigCommon from './netlify-cms-common'
-import cmsConfigEn from './netlify-cms-en'
-import cmsConfigEs from './netlify-cms-es'
+import type { CmsConfig } from 'netlify-cms-core';
+import cmsConfigCommon from './netlify-cms-common';
+import cmsConfigEn from './netlify-cms-en';
+import cmsConfigEs from './netlify-cms-es';
 export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 	backend: {
 		name: 'git-gateway',
-		branch: 'master'
+		branch: 'master',
 	},
 	publish_mode: 'editorial_workflow',
 	media_folder: 'public/uploads',
@@ -17,6 +17,6 @@ export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
 		// Content collections
 		...cmsConfigCommon,
 		...cmsConfigEn,
-		...cmsConfigEs
-	]
-}
+		...cmsConfigEs,
+	],
+};

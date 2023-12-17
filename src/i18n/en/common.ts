@@ -5,7 +5,7 @@ export default {
 			'Programmer, writer, technology and science enthusiast, specialized in building web applications. Interested in Vue, Typescript, Node.js, Java/Kotlin and Spring Boot.',
 		ogTitle: 'Yuniel Acosta',
 		ogImageAlt:
-			'Yuniel Acosta | Software Engineer - Interested in object-oriented programming, design patterns, functional programming, domain-driven design, and microservices. I am a versatile person with wide-ranging skills, eager to learn, and ready to face new and tough challenges in or out of my country.'
+			'Yuniel Acosta | Software Engineer - Interested in object-oriented programming, design patterns, functional programming, domain-driven design, and microservices. I am a versatile person with wide-ranging skills, eager to learn, and ready to face new and tough challenges in or out of my country.',
 	},
 	menus: {
 		about: 'About',
@@ -14,7 +14,7 @@ export default {
 		lastArticles: 'Last Articles',
 		contact: 'Contact',
 		blog: 'Blog',
-		resume: 'Resume'
+		resume: 'Resume',
 	},
 	read: 'Read →',
 	home: 'Home',
@@ -25,5 +25,5 @@ export default {
 	builtBy: 'Built by ',
 	designBy: 'Design based on Brittany Chiang portfolio',
 	current: 'Present',
-	noTags: 'No tags'
-}
+	noTags: 'No tags',
+};

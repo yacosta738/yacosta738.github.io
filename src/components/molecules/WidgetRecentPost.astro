@@ -1,32 +1,35 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils'
-import type { Article } from '@models:Article'
-import { Icon } from 'astro-icon/components'
-import WidgetCard from 'molecules:WidgetCard'
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import type { Article } from '@models:Article';
+import { Icon } from 'astro-icon/components';
+import WidgetCard from 'molecules:WidgetCard';
 
-const { pathname } = Astro.url
-const isBlogRoot = pathname.endsWith('/blog')
+const { pathname } = Astro.url;
+const isBlogRoot = pathname.endsWith('/blog');
 
 export interface Props {
-	recentPosts: Article[]
+	recentPosts: Article[];
 }
-const { recentPosts } = Astro.props
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const { recentPosts } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 {
 	!isBlogRoot && (
 		<WidgetCard title={t('recentPost')}>
-			<ul class='relative my-4 flex list-none flex-col p-0'>
+			<ul class="relative my-4 flex list-none flex-col p-0">
 				{recentPosts
 					.filter((article) => article.url !== pathname)
 					.map((article) => (
-						<li class='my-2 flex flex-row font-mono text-base text-light-slate'>
-							<div class='flex flex-row items-center justify-center'>
-								<Icon name='mdi:chevron-right' class='h-5 w-5 mr-1' />
-								<a href={`/posts/${article.url}/`} class='inline-link flex items-center justify-center'>
-									<p class='pl-2'>{article.title}</p>
+						<li class="my-2 flex flex-row font-mono text-base text-light-slate">
+							<div class="flex flex-row items-center justify-center">
+								<Icon name="mdi:chevron-right" class="h-5 w-5 mr-1" />
+								<a
+									href={`/posts/${article.url}/`}
+									class="inline-link flex items-center justify-center"
+								>
+									<p class="pl-2">{article.title}</p>
 								</a>
 							</div>
 						</li>

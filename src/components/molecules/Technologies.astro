@@ -1,55 +1,55 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { jsonToTech, type Tech } from '@models:Tech'
-import { getCollection } from 'astro:content'
-const techData = await getCollection('technologies')
+import { Icon } from 'astro-icon/components';
+import { jsonToTech, type Tech } from '@models:Tech';
+import { getCollection } from 'astro:content';
+const techData = await getCollection('technologies');
 
 const techs: Tech[] = techData
 	.map((tech) => jsonToTech(tech))
-	.filter((tech) => tech.icon !== undefined && tech.icon !== null)
+	.filter((tech) => tech.icon !== undefined && tech.icon !== null);
 ---
 
-<div class='inset-0 -z-10'>
+<div class="inset-0 -z-10">
 	<div
-		id='icons'
-		class='relative h-full [&>svg]:absolute [&>svg]:h-24 [&>svg]:w-24 [&>svg]:fill-current [&>svg]:p-4 [&>svg]:opacity-0'
+		id="icons"
+		class="relative h-full [&>svg]:absolute [&>svg]:h-24 [&>svg]:w-24 [&>svg]:fill-current [&>svg]:p-4 [&>svg]:opacity-0"
 	>
 		{techs.map((tech) => <Icon name={tech.icon} />)}
 	</div>
 </div>
-<script type='module'>
-	const hero = document.getElementById('icons')
-	const svgs = Array.from(hero?.querySelectorAll('svg') ?? [])
+<script type="module">
+	const hero = document.getElementById('icons');
+	const svgs = Array.from(hero?.querySelectorAll('svg') ?? []);
 
-	const w = window.innerWidth
-	const h = window.innerHeight - 300
+	const w = window.innerWidth;
+	const h = window.innerHeight - 300;
 
-	function animateBackgroundIcons () {
-		const availableSvgs = svgs.filter((svg) => !svg.isAnimating)
-		const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)]
+	function animateBackgroundIcons() {
+		const availableSvgs = svgs.filter((svg) => !svg.isAnimating);
+		const svgToAnimate = availableSvgs[Math.floor(Math.random() * availableSvgs.length)];
 
-		if (!svgToAnimate) return
+		if (!svgToAnimate) return;
 
 		svgToAnimate.addEventListener(
 			'animationend',
 			() => {
-				svgToAnimate.classList.remove('animate-moving-background')
-				svgToAnimate.removeAttribute('style')
-				svgToAnimate.isAnimating = false
+				svgToAnimate.classList.remove('animate-moving-background');
+				svgToAnimate.removeAttribute('style');
+				svgToAnimate.isAnimating = false;
 			},
 			{ once: true }
-		)
+		);
 
 		svgToAnimate.setAttribute(
 			'style',
 			`top: ${Math.floor(Math.random() * h)}px;
 				left: ${Math.floor(Math.random() * w)}px;`
-		)
+		);
 
-		svgToAnimate.classList.add('animate-moving-background')
-		svgToAnimate.isAnimating = true
+		svgToAnimate.classList.add('animate-moving-background');
+		svgToAnimate.isAnimating = true;
 	}
 
-	setInterval(animateBackgroundIcons, 1000)
-	animateBackgroundIcons()
+	setInterval(animateBackgroundIcons, 1000);
+	animateBackgroundIcons();
 </script>

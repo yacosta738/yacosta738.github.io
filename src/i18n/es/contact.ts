@@ -12,5 +12,5 @@ export default {
 	message: 'Mensaje',
 	messagePlaceholder:
 		'Creo que el éxito depende de la comunicación y el enfoque en el objetivo. Me gustaría trabajar contigo en tu proyecto.',
-	sendMessage: 'Enviar Mensaje'
-}
+	sendMessage: 'Enviar Mensaje',
+};

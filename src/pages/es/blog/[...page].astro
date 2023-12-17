@@ -1,26 +1,26 @@
 ---
-import { getCollection } from 'astro:content'
-import BlogTemplate from 'templates:BlogTemplate'
-import { jsonToArticle } from '@models:Article'
-import ArticleSummary from 'molecules:ArticleSummary'
-import Paginator from 'molecules:Paginator'
-import SearchBox from 'molecules:SearchBox'
-import { getLangFromUrl, useTranslations } from '@i18n:utils'
+import { getCollection } from 'astro:content';
+import BlogTemplate from 'templates:BlogTemplate';
+import { jsonToArticle } from '@models:Article';
+import ArticleSummary from 'molecules:ArticleSummary';
+import Paginator from 'molecules:Paginator';
+import SearchBox from 'molecules:SearchBox';
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-export async function getStaticPaths ({ paginate }) {
+export async function getStaticPaths({ paginate }) {
 	const publishedBlogEntriesPromises = (
 		await getCollection('blog', ({ data }) => {
-			return !data.draft && data.lang === 'es'
+			return !data.draft && data.lang === 'es';
 		})
-	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry))
-	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises)
+	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 	const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
-		return new Date(b.date).getTime() - new Date(a.date).getTime()
-	})
-	return paginate(sortedPublishedBlogEntries, { pageSize: 5 })
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+	return paginate(sortedPublishedBlogEntries, { pageSize: 5 });
 }
 
 const { page } = Astro.props;
@@ -28,20 +28,20 @@ const { page } = Astro.props;
 
 <BlogTemplate title={t('blog')} description={t('blogDescription')}>
 	<SearchBox />
-	<div class='container mx-auto'>
+	<div class="container mx-auto">
 		{
 			page.data.map((article) => (
-				<article class='mx-2 mb-20 border-b border-gray-400 md:mx-24'>
+				<article class="mx-2 mb-20 border-b border-gray-400 md:mx-24">
 					<ArticleSummary article={article} />
 				</article>
 			))
 		}
 		{
 			page.data.length === 0 && (
-				<div class='container-inner mx-auto py-16 pl-10'>
-					<div class='text-center'>
-						<h1 class='text-3xl font-bold'>{t('noArticlesFound')}</h1>
-						<p class='text-gray-600'>{t('tryAgain')}</p>
+				<div class="container-inner mx-auto py-16 pl-10">
+					<div class="text-center">
+						<h1 class="text-3xl font-bold">{t('noArticlesFound')}</h1>
+						<p class="text-gray-600">{t('tryAgain')}</p>
 					</div>
 				</div>
 			)

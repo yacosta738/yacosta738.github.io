@@ -22,6 +22,6 @@ export default {
 	search: {
 		searchTitle: 'Buscar artículos',
 		searchResult: 'resultados.',
-		searchPlaceholder: 'Buscar...'
-	}
-}
+		searchPlaceholder: 'Buscar...',
+	},
+};

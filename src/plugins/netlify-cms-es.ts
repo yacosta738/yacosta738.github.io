@@ -1,4 +1,4 @@
-import type { CmsCollection } from 'netlify-cms-core'
+import type { CmsCollection } from 'netlify-cms-core';
 export const collections: CmsCollection[] = [
 	// Content collections
 	{
@@ -19,7 +19,7 @@ export const collections: CmsCollection[] = [
 				name: 'lang',
 				widget: 'select',
 				options: ['en', 'es'],
-				default: 'es'
+				default: 'es',
 			},
 			{ label: 'Cover', name: 'cover', widget: 'image', required: false },
 			{ label: 'Autor', name: 'author', widget: 'string' },
@@ -28,18 +28,18 @@ export const collections: CmsCollection[] = [
 				name: 'tags',
 				widget: 'list',
 				allow_add: true,
-				default: ['IT']
+				default: ['IT'],
 			},
 			{
 				label: 'Categories',
 				name: 'categories',
 				widget: 'list',
 				allow_add: true,
-				default: ['IT']
+				default: ['IT'],
 			},
 			{ label: 'Draft', name: 'draft', widget: 'boolean', default: true },
-			{ label: 'Body', name: 'body', widget: 'markdown' }
-		]
+			{ label: 'Body', name: 'body', widget: 'markdown' },
+		],
 	},
 	{
 		name: 'roles_es',
@@ -58,9 +58,9 @@ export const collections: CmsCollection[] = [
 				widget: 'list',
 				allow_add: true,
 				max: 4,
-				label_singular: 'Logro'
-			}
-		]
+				label_singular: 'Logro',
+			},
+		],
 	},
 	{
 		name: 'jobs_es',
@@ -76,7 +76,7 @@ export const collections: CmsCollection[] = [
 				name: 'lang',
 				widget: 'select',
 				options: ['en', 'es'],
-				default: 'es'
+				default: 'es',
 			},
 			{ label: 'Empresa', name: 'company', widget: 'string' },
 			{ label: 'URL', name: 'url', widget: 'string', required: false },
@@ -91,9 +91,9 @@ export const collections: CmsCollection[] = [
 				collection: 'roles_es',
 				search_fields: ['role'],
 				value_field: 'role',
-				display_fields: ['role']
-			}
-		]
+				display_fields: ['role'],
+			},
+		],
 	},
 	{
 		name: 'projects_es',
@@ -109,7 +109,7 @@ export const collections: CmsCollection[] = [
 				name: 'lang',
 				widget: 'select',
 				options: ['en', 'es'],
-				default: 'es'
+				default: 'es',
 			},
 			{ label: 'Cover', name: 'cover', widget: 'image' },
 			{ label: 'Fecha', name: 'date', widget: 'datetime' },
@@ -123,20 +123,20 @@ export const collections: CmsCollection[] = [
 				collection: 'tech',
 				search_fields: ['name'],
 				value_field: 'name',
-				display_fields: ['name']
+				display_fields: ['name'],
 			},
 			{
 				label: 'Mostrar en proyectos',
 				name: 'showInProjects',
 				widget: 'boolean',
-				default: false
+				default: false,
 			},
 			{ label: 'Destacado', name: 'featured', widget: 'boolean', default: false },
 			{ label: 'Prioridad', name: 'priority', widget: 'number', default: 0 },
 			{ label: 'Publicado', name: 'published', widget: 'boolean', default: true },
-			{ label: 'Contenido', name: 'content', widget: 'markdown' }
-		]
-	}
-]
+			{ label: 'Contenido', name: 'content', widget: 'markdown' },
+		],
+	},
+];
 
-export default collections
+export default collections;

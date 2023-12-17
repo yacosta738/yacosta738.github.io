@@ -1,51 +1,50 @@
 ---
-import type { Project } from '@models:Project'
-import ProjectLinks from 'molecules:ProjectLinks'
-import ProjectTechList from 'molecules:ProjectTechList'
-import { Icon } from 'astro-icon/components'
-import { markdownfy } from '@utils:utilities'
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils'
+import type { Project } from '@models:Project';
+import ProjectLinks from 'molecules:ProjectLinks';
+import ProjectTechList from 'molecules:ProjectTechList';
+import { Icon } from 'astro-icon/components';
+import { markdownfy } from '@utils:utilities';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 
-const GRID_LIMIT = 6
+const GRID_LIMIT = 6;
 export interface Props {
-	projects: Project[]
+	projects: Project[];
 }
-const { projects } = Astro.props
+const { projects } = Astro.props;
 
-const showMore: boolean = false
+const showMore: boolean = false;
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
-const translatePath = useTranslatedPath(lang)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const projectsToShow = () => {
-	const firstProjects: Project[] = projects ? projects.slice(0, GRID_LIMIT) : []
-	return showMore ? projects : firstProjects
-}
-
+	const firstProjects: Project[] = projects ? projects.slice(0, GRID_LIMIT) : [];
+	return showMore ? projects : firstProjects;
+};
 ---
 
-<div class='flex flex-col items-center'>
-	<div class='mb-20 mt-10 text-center'>
-		<h2 class='section-title'>{t('projectSubtitle')}</h2>
-		<a href={translatePath('/projects/')} class='inline-link'>{t('projectView')}</a>
+<div class="flex flex-col items-center">
+	<div class="mb-20 mt-10 text-center">
+		<h2 class="section-title">{t('projectSubtitle')}</h2>
+		<a href={translatePath('/projects/')} class="inline-link">{t('projectView')}</a>
 	</div>
-	<div class='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
 		{
 			projectsToShow().map((project) => (
-				<div class='style-project-card'>
-					<div class='project-top'>
-						<Icon name='ic:baseline-folder' class='h-10' />
-						<ProjectLinks project={project} position='center' />
+				<div class="style-project-card">
+					<div class="project-top">
+						<Icon name="ic:baseline-folder" class="h-10" />
+						<ProjectLinks project={project} position="center" />
 					</div>
-					<div class='my-2.5 text-center text-3xl font-bold text-lightest-slate'>
+					<div class="my-2.5 text-center text-3xl font-bold text-lightest-slate">
 						{project?.title}
 					</div>
-					<div class='project-description [text-wrap:balance]'>
+					<div class="project-description [text-wrap:balance]">
 						<p set:html={markdownfy(project.content ?? '')} />
 					</div>
-					<footer class='absolute bottom-1'>
-						<ProjectTechList project={project} position='start' showIcon={false} />
+					<footer class="absolute bottom-1">
+						<ProjectTechList project={project} position="start" showIcon={false} />
 					</footer>
 				</div>
 			))
@@ -53,7 +52,7 @@ const projectsToShow = () => {
 	</div>
 	{
 		projects.length > 6 && (
-			<a class='big-button m-5' href={translatePath('/projects/')}>
+			<a class="big-button m-5" href={translatePath('/projects/')}>
 				{showMore ? t('showLess') : t('showMore')}
 			</a>
 		)

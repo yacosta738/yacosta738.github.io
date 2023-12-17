@@ -1,28 +1,28 @@
-import { defineConfig } from 'astro/config'
-import { remarkReadingTime } from './remark-reading-time.mjs'
-import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
-import robotsTxt from 'astro-robots-txt'
-import NetlifyCMS from 'astro-netlify-cms'
-import remarkToc from 'remark-toc'
-import Compress from 'astro-compress'
-import critters from 'astro-critters'
-import icon from 'astro-icon'
+import { defineConfig } from 'astro/config';
+import { remarkReadingTime } from './remark-reading-time.mjs';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import robotsTxt from 'astro-robots-txt';
+import NetlifyCMS from 'astro-netlify-cms';
+import remarkToc from 'remark-toc';
+import Compress from 'astro-compress';
+import critters from 'astro-critters';
+import icon from 'astro-icon';
 
-import { config } from './src/plugins/netlify-cms'
+import { config } from './src/plugins/netlify-cms';
 
-const DEV_PORT: number = 3000
+const DEV_PORT: number = 3000;
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
 	server: {
 		/* Dev. server only */
-		port: DEV_PORT
+		port: DEV_PORT,
 	},
 	i18n: {
 		defaultLocale: 'en',
-		locales: ['es', 'en']
+		locales: ['es', 'en'],
 	},
 	integrations: [
 		sitemap({
@@ -30,20 +30,20 @@ export default defineConfig({
 				defaultLocale: 'en',
 				locales: {
 					en: 'en',
-					es: 'es'
-				}
-			}
+					es: 'es',
+				},
+			},
 		}),
 		tailwind(),
 		robotsTxt(),
 		Compress({
-			CSS: false
+			CSS: false,
 		}),
 		critters({
-			exclude: ['index.html', (file: string) => file === './dist/index.html']
+			exclude: ['index.html', (file: string) => file === './dist/index.html'],
 		}),
 		NetlifyCMS({
-			config
+			config,
 		}),
 		icon({
 			iconDir: 'src/icons',
@@ -59,18 +59,18 @@ export default defineConfig({
 				ion: ['*'],
 				clarity: ['*'],
 				teenyicons: ['*'],
-				'akar-icons': ['*']
-			}
-		})
+				'akar-icons': ['*'],
+			},
+		}),
 	],
 	vite: {
 		ssr: {
-			external: ['svgo']
+			external: ['svgo'],
 		},
-		plugins: []
+		plugins: [],
 	},
 	markdown: {
 		remarkPlugins: [remarkToc, remarkReadingTime],
-		gfm: true
-	}
-})
+		gfm: true,
+	},
+});

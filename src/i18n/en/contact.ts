@@ -12,5 +12,5 @@ export default {
 	message: 'Message',
 	messagePlaceholder:
 		'I think that success depends on communication and focus on the goal. I would like to work with you on your project.',
-	sendMessage: 'Send Message'
-}
+	sendMessage: 'Send Message',
+};

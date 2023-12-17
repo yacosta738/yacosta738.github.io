@@ -22,6 +22,6 @@ export default {
 	search: {
 		searchTitle: 'Search articles',
 		searchResult: 'results.',
-		searchPlaceholder: 'Search...'
-	}
-}
+		searchPlaceholder: 'Search...',
+	},
+};
