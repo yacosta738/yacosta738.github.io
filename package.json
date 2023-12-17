@@ -2,6 +2,7 @@
   "name": "yunielacosta.com",
   "version": "1.0.7",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
