@@ -122,8 +122,12 @@ const jsonArticles = JSON.stringify(sortedPublishedBlogEntries);
 			const searchModalId = this.dataset.identifier;
 
 			// select the two elements that we'll work with
-			const $buttonElement: HTMLElement | null = this.querySelector(`#${searchButtonId}`) as HTMLElement;
-			const $modalElement: HTMLElement | null = this.querySelector(`#${searchModalId}`) as HTMLElement;
+			const $buttonElement: HTMLElement | null = this.querySelector(
+				`#${searchButtonId}`
+			) as HTMLElement;
+			const $modalElement: HTMLElement | null = this.querySelector(
+				`#${searchModalId}`
+			) as HTMLElement;
 			const $textSearch: HTMLInputElement | null = this.querySelector(
 				'#textSearch'
 			) as HTMLInputElement;

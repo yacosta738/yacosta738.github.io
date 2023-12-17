@@ -7,7 +7,7 @@ export interface SocialMedia {
 export const email = 'yunielacosta738@gmail.com';
 export const domain = 'https://yunielacosta.com';
 
-const uuid = crypto.randomUUID()
+const uuid = crypto.randomUUID();
 
 export const DRAWER_MENU_ID = `drawer-menu-${uuid}`;
 export const DRAWER_MENU_BUTTON_ID = 'drawer-menu-button';
