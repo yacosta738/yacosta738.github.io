@@ -55,6 +55,14 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      - name: Save build cache
+        uses: actions/cache/save@v3
+        if: always()
+        with:
+          path: dist
+          key: cache-build-${{ github.sha }}
+          restore-keys: cache-build-
+
       - name: Restore lychee cache
         id: restore-cache
         uses: actions/cache/restore@v3
@@ -75,3 +83,35 @@ jobs:
         with:
           path: .lycheecache
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Restore build cache
+        uses: actions/cache@v2
+        with:
+          path: dist
+          key: cache-build-${{ github.sha }}
+          restore-keys: cache-build-    
+
+      - name: Install Tools & Dependencies
+        uses: ./.github/actions/install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Tests
+        run: pnpm run test
+        env:
+          FORMSPREE: ${{ secrets.FORMSPREE }}
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
