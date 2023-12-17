@@ -55,7 +55,6 @@ const isBlogRoot =
 				aria-label="RSS Feed"
 				target="_blank"
 				href={translatePath('/rss.xml')}
-				tabindex={drawer ? -1 : 0}
 			>
 				<Icon name="mdi:rss" class="h-5 w-5" />
 			</a>
@@ -70,6 +69,7 @@ const isBlogRoot =
 					>
 						<Icon name="ic:twotone-search" class="h-4 w-4" />
 					</button>
+					
 				)
 			}
 		</li>
@@ -79,7 +79,6 @@ const isBlogRoot =
 				href="/files/yuniel_acosta_cv.pdf"
 				target="_blank"
 				class="resume-button"
-				tabindex={drawer ? -1 : 0}
 			>
 				{t('menus.resume')}
 			</a>

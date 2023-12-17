@@ -122,12 +122,8 @@ const jsonArticles = JSON.stringify(sortedPublishedBlogEntries);
 			const searchModalId = this.dataset.identifier;
 
 			// select the two elements that we'll work with
-			const $buttonElement: HTMLElement | null = this.querySelector(
-				searchButtonId ?? ''
-			) as HTMLElement;
-			const $modalElement: HTMLElement | null = this.querySelector(
-				searchModalId ?? ''
-			) as HTMLElement;
+			const $buttonElement: HTMLElement | null = this.querySelector(`#${searchButtonId}`) as HTMLElement;
+			const $modalElement: HTMLElement | null = this.querySelector(`#${searchModalId}`) as HTMLElement;
 			const $textSearch: HTMLInputElement | null = this.querySelector(
 				'#textSearch'
 			) as HTMLInputElement;
@@ -178,26 +174,28 @@ const jsonArticles = JSON.stringify(sortedPublishedBlogEntries);
 					console.log('modal has been toggled');
 				},
 			};
-			// create a new modal component
-			const modal = new Modal($modalElement, modalOptions);
-			// if have aria-hidden='true' means modal is closed and we can clear the input
-			const $closeButton = this.querySelector(`[data-modal-hide="${searchModalId}"]`);
-			$closeButton?.addEventListener('click', () => {
-				(searchInput as HTMLInputElement).value = '';
-				$results.innerHTML = '';
-				itemFoundText.innerHTML = '0 ';
-			});
 
-			// toggle the visibility of the modal when clicking on the button
-			if ($buttonElement) {
-				$buttonElement.addEventListener('click', () => {
-					modal.toggle();
+			if ($modalElement) {
+				// create a new modal component
+				const modal = new Modal($modalElement, modalOptions);
+				// if have aria-hidden='true' means modal is closed and we can clear the input
+				const $closeButton = this.querySelector(`[data-modal-hide="${searchModalId}"]`);
+				$closeButton?.addEventListener('click', () => {
+					(searchInput as HTMLInputElement).value = '';
 					$results.innerHTML = '';
-					$textSearch.value = '';
+					itemFoundText.innerHTML = '0 ';
 				});
+
+				// toggle the visibility of the modal when clicking on the button
+				if ($buttonElement) {
+					$buttonElement.addEventListener('click', () => {
+						modal.toggle();
+						$results.innerHTML = '';
+						$textSearch.value = '';
+					});
+				}
 			}
 		}
 	}
-
 	customElements.define('search-box', SearchBox);
 </script>
