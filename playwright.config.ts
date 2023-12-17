@@ -102,7 +102,6 @@ const config: PlaywrightTestConfig = {
 		command: 'npm run preview',
 		timeout: 120 * 1000,
 		reuseExistingServer: !process.env.CI,
-		port: 3000,
 	},
 };
 
