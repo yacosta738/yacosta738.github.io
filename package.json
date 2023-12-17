@@ -13,7 +13,7 @@
     "format": "prettier --write . --plugin=prettier-plugin-astro",
     "lint:eslint": "eslint . --ext .js,.astro,.ts,.tsx,.vue --debug",
     "lint:eslint:fix": "eslint . --ext .js,.astro,.ts,.tsx,.vue --fix --debug",
-    "test": "npx -y concurrently \"npm run test:unit\" \"npm run test:e2e\"",
+    "test": "npx -y concurrently \"pnpm run test:unit\" \"pnpm run test:e2e\"",
     "test:unit": "vitest",
     "test:playwright": "playwright test",
     "test:playwright:ui": "playwright test --ui",
