@@ -49,15 +49,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Install Tools & Dependencies
+        uses: ./.github/actions/install
       
       - name: ⚙️ Build
         run: pnpm run build
         env:
           FORMSPREE: ${{ secrets.FORMSPREE }}
-
-      - name: Install Tools & Dependencies
-        uses: ./.github/actions/install
-    
+          
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
     
