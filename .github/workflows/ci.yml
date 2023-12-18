@@ -105,7 +105,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Tests
-        run: pnpm run test
+        run: pnpm run build && pnpm run test
         env:
           FORMSPREE: ${{ secrets.FORMSPREE }}
 
