@@ -26,6 +26,7 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
+        cache: pnpm
 
     - name: Setup PNPM
       uses: pnpm/action-setup@v2.4.0
@@ -56,7 +57,7 @@ runs:
     - name: Install dependencies
       shell: bash
       working-directory: ${{ inputs.cwd }}
-      run: pnpm install --frozen-lockfile --prefer-offline
+      run: pnpm install
       env:
         # Other environment variables
         HUSKY: '0' # By default do not run HUSKY install
