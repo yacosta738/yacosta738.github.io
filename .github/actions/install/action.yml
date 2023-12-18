@@ -6,8 +6,6 @@ runs:
   steps:
     - name: Setup PNPM
       uses: pnpm/action-setup@v2.4.0
-      with:
-          version: latest
 
     - name: Setup Node
       uses: actions/setup-node@v4
