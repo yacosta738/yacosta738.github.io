@@ -42,26 +42,43 @@ jobs:
 
       - name: Run Check
         run: pnpm run lint:eslint
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: ⚙️ Build
+        run: pnpm run build
+        env:
+          FORMSPREE: ${{ secrets.FORMSPREE }}
+
+      - name: Install Tools & Dependencies
+        uses: ./.github/actions/install
+    
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+    
+      - name: 🧪 Run Tests
+        run:  pnpm run test
+        env:
+          FORMSPREE: ${{ secrets.FORMSPREE }}
+    
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+      
   linkcheck:
     name: Check Links
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Install Tools & Dependencies
-        uses: ./.github/actions/install
-      
-      - name: Build
-        run: pnpm run build
-
-      - name: Save build cache
-        uses: actions/cache/save@v3
-        if: always()
-        with:
-          path: dist
-          key: cache-build-${{ github.sha }}
-          restore-keys: cache-build-
 
       - name: Restore lychee cache
         id: restore-cache
@@ -75,6 +92,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1.8.0
         with:
           args: "--base . --cache --max-cache-age 1d ."
+          output: /tmp/lychee-report.md
           fail: true
       
       - name: Save lychee cache
@@ -83,35 +101,9 @@ jobs:
         with:
           path: .lycheecache
           key: ${{ steps.restore-cache.outputs.cache-primary-key }}
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       
-      - name: Restore build cache
-        uses: actions/cache@v2
+      - name: PR comment with file
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          path: dist
-          key: cache-build-${{ github.sha }}
-          restore-keys: cache-build-    
-
-      - name: Install Tools & Dependencies
-        uses: ./.github/actions/install
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Tests
-        run: pnpm run build && pnpm run test
-        env:
-          FORMSPREE: ${{ secrets.FORMSPREE }}
-
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+            filePath: /tmp/lychee-report.md
+            reactions: eyes

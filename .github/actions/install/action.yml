@@ -1,31 +1,63 @@
 name: Install Tools & Dependencies
 description: Installs pnpm, Node.js & package dependencies
 
+inputs:
+  enable-corepack:
+    description: 'Enable corepack'
+    required: false
+    default: 'false'
+  cwd:
+    description: "Changes node's process.cwd() if the project is not located on the root. Default to process.cwd()"
+    required: false
+    default: '.'
+
 runs:
   using: composite
   steps:
-    - name: Setup PNPM
-      uses: pnpm/action-setup@v2.4.0
-
+    - name: ⚙️ Enable Corepack
+      if: ${{ inputs.enable-corepack == 'true' }}
+      shell: bash
+      working-directory: ${{ inputs.cwd }}
+      run: |
+        corepack enable
+        echo "corepack enabled" 
+    
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
         cache: pnpm
 
-    - name: Get pnpm store directory
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2.4.0
+      if: ${{ inputs.enable-corepack == 'false' }}
+      with:
+        run_install: false
+
+    - name: Expose pnpm config(s) through "$GITHUB_OUTPUT"
+      id: pnpm-config
       shell: bash
       run: |
-        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+    - name: Cache rotation keys
+      id: cache-rotation
+      shell: bash
+      run: |
+        echo "YEAR_MONTH=$(/bin/date -u "+%Y%m")" >> $GITHUB_OUTPUT
 
     - uses: actions/cache@v3
       name: Setup pnpm cache
       with:
-        path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        path: ${{ steps.pnpm-config.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-cache-${{ steps.cache-rotation.outputs.YEAR_MONTH }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-pnpm-store-
-          
+          ${{ runner.os }}-pnpm-store-cache-${{ steps.cache-rotation.outputs.YEAR_MONTH }}-
+
     - name: Install dependencies
-      run: pnpm install
       shell: bash
+      working-directory: ${{ inputs.cwd }}
+      run: pnpm install --frozen-lockfile --prefer-offline
+      env:
+        # Other environment variables
+        HUSKY: '0' # By default do not run HUSKY install
