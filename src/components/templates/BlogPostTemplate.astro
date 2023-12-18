@@ -1,86 +1,78 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
-import BlogTemplate from 'templates:BlogTemplate'
-import PostHeader from 'molecules:PostHeader'
-import ShareButton from 'atoms:ShareButton'
-import { localizeUrl } from '@utils:utilities'
-import { Icon } from 'astro-icon/components'
-import '../../styles/github-markdown.css'
+import type { CollectionEntry } from 'astro:content';
+import BlogTemplate from 'templates:BlogTemplate';
+import PostHeader from 'molecules:PostHeader';
+import ShareButton from 'atoms:ShareButton';
+import { Icon } from 'astro-icon/components';
+import '../../styles/github-markdown.css';
 
-import { domain } from '@store:constants'
-import { jsonToArticle } from '@models:Article'
+import { domain } from '@store:constants';
+import { jsonToArticle } from '@models:Article';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 export interface Props {
-	frontmatter: {
-		title: string
-		description: string
-		lang: string
-		date: string
-		cover: string
-		timeToRead: number
-		url: string
-		author: string
-		categories: string[]
-		tags: string[]
-	}
+	post: CollectionEntry<'blog'>;
 }
-const url = Astro.url
+const url = Astro.url;
 
-let { frontmatter } = Astro.props
-const title = frontmatter.title
-const description = frontmatter.description
-const image = frontmatter.cover ? frontmatter.cover : `${domain}/uploads/me.webp`
-const ogImageAlt = description
-const categories = frontmatter.categories || Array<string>()
-const tags = frontmatter.tags || Array<string>()
-const lang = frontmatter.lang || 'en'
+const { post } = Astro.props;
+const title = post.data.title;
+const description = post.data.description;
+const image = post.data.cover ? post.data.cover : `${domain}/uploads/me.webp`;
+const ogImageAlt = description;
+const categories = post.data.categories || [];
+const tags = post.data.tags || [];
+const lang = post.data.lang || getLangFromUrl(Astro.url);
+
+const t = useTranslations(lang as 'en' | 'es');
+const translatePath = useTranslatedPath(lang as 'en' | 'es');
 
 const shareButtons: {
-	title: string
-	url: string
-	icon: string | 'et:global'
+	title: string;
+	url: string;
+	icon: string | 'et:global';
 }[] = [
 	{
 		title: 'Twitter',
 		url: `https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(',')}`,
-		icon: 'uit:twitter-alt'
+		icon: 'uit:twitter-alt',
 	},
 	{
 		title: 'Facebook',
 		url: `https://www.facebook.com/sharer.php?u=${url}`,
-		icon: 'ic:round-facebook'
+		icon: 'ic:round-facebook',
 	},
 	{
 		title: 'LinkedIn',
 		url: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-		icon: 'uit:linkedin-alt'
+		icon: 'uit:linkedin-alt',
 	},
 	{
 		title: 'Reddit',
 		url: `https://reddit.com/submit?url=${url}&title=${title}`,
-		icon: 'ic:baseline-reddit'
+		icon: 'ic:baseline-reddit',
 	},
 	{
 		title: 'Telegram',
 		url: `https://t.me/share/url?url=${url}&text=${description}`,
-		icon: 'mdi:telegram'
+		icon: 'mdi:telegram',
 	},
 	{
 		title: 'WhatsApp',
 		url: `https://api.whatsapp.com/send?text=${title}%20${url}`,
-		icon: 'ic:baseline-whatsapp'
+		icon: 'ic:baseline-whatsapp',
 	},
 	{
 		title: 'Email',
 		url: `mailto:?subject=${title}&body=${description}%20${url}`,
-		icon: 'ic:baseline-email'
-	}
-]
+		icon: 'ic:baseline-email',
+	},
+];
 
-const repo = 'yacosta738/blog.yap.comments'
-const label = 'Comment'
-const theme = 'icy-dark'
+const repo = 'yacosta738/blog.yap.comments';
+const label = 'Comment';
+const theme = 'icy-dark';
 
-setDefaultNamespace('blog')
+const article = await jsonToArticle(post);
 ---
 
 <BlogTemplate
@@ -90,40 +82,40 @@ setDefaultNamespace('blog')
 	ogImageAlt={ogImageAlt}
 	lang={lang}
 >
-	<article class='mx-2 md:mx-8 md:px-2 lg:mx-24'>
+	<article class="mx-2 md:mx-8 md:px-2 lg:mx-24">
 		<h1
-			class='mt-10 text-center text-2xl font-bold leading-tight md:mt-0 md:text-justify md:text-4xl md:tracking-wider'
+			class="mt-10 text-center text-2xl font-bold leading-tight md:mt-0 md:text-justify md:text-4xl md:tracking-wider"
 		>
-			{frontmatter.title}
+			{article.title}
 		</h1>
-		<PostHeader article={jsonToArticle(frontmatter)} />
-		<div id='markdown-body' class='markdown-body'>
+		<PostHeader article={article} />
+		<div id="markdown-body" class="markdown-body">
 			<slot />
 		</div>
 		<div
-			class='my-8 mb-8 flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
+			class="my-8 mb-8 flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start"
 		>
 			<a
-				href={localizeUrl('/blog', lang)}
-				class='flex animate-pulse items-center justify-center font-bold uppercase hover:animate-none sm:text-center md:items-start'
+				href={translatePath('/blog', lang)}
+				class="flex animate-pulse items-center justify-center font-bold uppercase hover:animate-none sm:text-center md:items-start"
 			>
-				<Icon name='ic:round-arrow-back' class='mr-1 h-7 animate-bounce-left hover:animate-none' />
-				<span>{t('back-to-block')}</span>
+				<Icon name="ic:round-arrow-back" class="mr-1 h-7 animate-bounce-left hover:animate-none" />
+				<span>{t('backToBlock')}</span>
 			</a>
 			<!-- Social Media Share -->
-			<div class='my-3 flex items-center justify-center md:my-0'>
+			<div class="my-3 flex items-center justify-center md:my-0">
 				{shareButtons.map((button) => <ShareButton url={button.url} icon={button.icon} />)}
 			</div>
 		</div>
-		<div class='flex flex-col md:flex-row'>
+		<div class="flex flex-col md:flex-row">
 			<!--category-->
-			<div class='mx-1 mb-8 flex items-center justify-center text-sm'>
-				<Icon name='ic:outline-category' class='mr-2 h-5' />
+			<div class="mx-1 mb-8 flex items-center justify-center text-sm">
+				<Icon name="ic:outline-category" class="mr-2 h-5" />
 				{
 					categories.map((category) => (
 						<a
-							href={localizeUrl(`/blog/category/${category.toLowerCase()}`)}
-							class='inline-link mx-1'
+							href={translatePath(`/blog/category/${category.toLowerCase()}`)}
+							class="inline-link mx-1"
 						>
 							{category}
 						</a>
@@ -131,11 +123,11 @@ setDefaultNamespace('blog')
 				}
 			</div>
 			<!-- tags -->
-			<div class='mx-1 mb-8 flex items-center justify-center text-sm'>
-				<Icon name='clarity:tags-solid-alerted' class='mr-2 h-5' />
+			<div class="mx-1 mb-8 flex items-center justify-center text-sm">
+				<Icon name="clarity:tags-solid-alerted" class="mr-2 h-5" />
 				{
 					tags.map((tag) => (
-						<a href={localizeUrl(`/blog/tag/${tag.toLowerCase()}`)} class='inline-link mx-1'>
+						<a href={translatePath(`/blog/tag/${tag.toLowerCase()}`)} class="inline-link mx-1">
 							{tag}
 						</a>
 					))
@@ -144,17 +136,16 @@ setDefaultNamespace('blog')
 		</div>
 		<!-- Comment Section -->
 		<div
-			class='flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start'
+			class="flex flex-col items-center justify-center md:flex-row md:items-start md:justify-between md:justify-items-start"
 		>
 			<script
-				src='https://utteranc.es/client.js'
+				src="https://utteranc.es/client.js"
 				repo={repo}
-				issue-term='pathname'
+				issue-term="pathname"
 				label={label}
 				{theme}
-				crossorigin='anonymous'
-				async
-			></script>
+				crossorigin="anonymous"
+				async></script>
 		</div>
 	</article>
 </BlogTemplate>
@@ -166,30 +157,30 @@ setDefaultNamespace('blog')
 </style>
 
 <script is:inline>
-	const paragraphs = document.querySelectorAll('p')
+	const paragraphs = document.querySelectorAll('p');
 
-	const firstParagraph = Array.from(paragraphs).find((p) => p.textContent.trim().length > 0)
+	const firstParagraph = Array.from(paragraphs).find((p) => p.textContent.trim().length > 0);
 
 	if (firstParagraph) {
-		firstParagraph.id = 'first-paragraph'
+		firstParagraph.id = 'first-paragraph';
 	}
 
 	// add target blank to all links that are not internal and not mailto links in the div with id markdown-body
 	const isExternalLink = (link) => {
-		const href = link.href
+		const href = link.href;
 		if (window.location.host === link.host) {
-			return false
+			return false;
 		}
 		if (href.startsWith('mailto')) {
-			return false
+			return false;
 		}
-		return true
-	}
-	const links = document.querySelectorAll('#markdown-body a')
+		return true;
+	};
+	const links = document.querySelectorAll('#markdown-body a');
 	links.forEach((link) => {
 		if (isExternalLink(link)) {
-			link.target = '_blank'
-			link.classList.add('inline-link')
+			link.target = '_blank';
+			link.classList.add('inline-link');
 		}
-	})
+	});
 </script>

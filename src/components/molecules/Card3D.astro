@@ -2,25 +2,25 @@
 import { Image } from 'astro:assets';
 ---
 
-<div class='atropos md:aspect-[1.91:1] w-full p-8 sm:w-[480px] md:w-[800px]'>
-	<div class='atropos-scale'>
-		<div class='atropos-rotate'>
+<div class="atropos md:aspect-[1.91:1] w-full p-8 sm:w-[480px] md:w-[800px]">
+	<div class="atropos-scale">
+		<div class="atropos-rotate">
 			<div
-				class='atropos-inner relative flex flex-col rounded-md border-2 border-[color:var(--border-card)] bg-[color:var(--background-card)] p-2 shadow-2xl backdrop-blur-sm transition-all duration-700'
+				class="atropos-inner relative flex flex-col rounded-md border-2 border-[color:var(--border-card)] bg-[color:var(--background-card)] p-2 shadow-2xl backdrop-blur-sm transition-all duration-700"
 			>
 				<div
-					class='atropos-inner relative flex flex-col rounded-md border-4 border-[color:var(--border-card)] bg-[color:var(--background-card)] p-4 shadow-2xl backdrop-blur-sm transition-all duration-700'
+					class="atropos-inner relative flex flex-col rounded-md border-4 border-[color:var(--border-card)] bg-[color:var(--background-card)] p-4 shadow-2xl backdrop-blur-sm transition-all duration-700"
 				>
-					<div class='flex flex-col-reverse justify-between sm:flex-row'>
-						<slot name='left-header'>
+					<div class="flex flex-col-reverse justify-between sm:flex-row">
+						<slot name="left-header">
 							<div>yunielacosta@gmail.com</div>
 						</slot>
-						<div class='flex items-center justify-center pb-2'>
-							<slot name='right-header'>
+						<div class="flex items-center justify-center pb-2">
+							<slot name="right-header">
 								<Image
-									class='h-20 w-20 rounded-full p-1 ring-2 ring-light-navy dark:ring-lightest-navy'
-									src='https://www.yunielacosta.com/uploads/me.webp'
-									alt='Profile picture'
+									class="h-20 w-20 rounded-full p-1 ring-2 ring-light-navy dark:ring-lightest-navy"
+									src="https://www.yunielacosta.com/uploads/me.webp"
+									alt="Profile picture"
 									height={80}
 									width={80}
 								/>
@@ -30,8 +30,8 @@ import { Image } from 'astro:assets';
 
 					<slot>
 						<h1
-							class='m-0 mx-auto bg-gradient-to-r from-green-300 via-green-500 to-light-navy bg-clip-text pt-10 text-center text-4xl font-black leading-none text-transparent sm:text-[4rem] md:text-7xl'
-							data-atropos-offset='2'
+							class="m-0 mx-auto bg-gradient-to-r from-green-300 via-green-500 to-light-navy bg-clip-text pt-10 text-center text-4xl font-black leading-none text-transparent sm:text-[4rem] md:text-7xl"
+							data-atropos-offset="2"
 						>
 							Yuniel Acosta
 						</h1>
@@ -145,43 +145,43 @@ import { Image } from 'astro:assets';
 	}
 </style>
 
-<script type='module'>
+<script type="module">
 	// @ts-nocheck
 	/* eslint-disable */
 	!(function (t, e) {
 		'object' == typeof exports && 'undefined' != typeof module
 			? (module.exports = e())
 			: 'function' == typeof define && define.amd
-			? define(e)
-			: ((t = 'undefined' != typeof globalThis ? globalThis : t || self).Atropos = e())
+				? define(e)
+				: ((t = 'undefined' != typeof globalThis ? globalThis : t || self).Atropos = e());
 	})(this, function () {
-		'use strict'
+		'use strict';
 		function t() {
 			return (t =
 				Object.assign ||
 				function (t) {
 					for (var e = 1; e < arguments.length; e++) {
-						var o = arguments[e]
-						for (var a in o) Object.prototype.hasOwnProperty.call(o, a) && (t[a] = o[a])
+						var o = arguments[e];
+						for (var a in o) Object.prototype.hasOwnProperty.call(o, a) && (t[a] = o[a]);
 					}
-					return t
-				}).apply(this, arguments)
+					return t;
+				}).apply(this, arguments);
 		}
 		var e = function (t, e) {
-				return t.querySelector(e)
+				return t.querySelector(e);
 			},
 			o = function (t) {
-				void 0 === t && (t = {})
-				var e = {}
+				void 0 === t && (t = {});
+				var e = {};
 				return (
 					Object.keys(t).forEach(function (o) {
-						void 0 !== t[o] && (e[o] = t[o])
+						void 0 !== t[o] && (e[o] = t[o]);
 					}),
 					e
-				)
-			}
+				);
+			};
 		return function (a) {
-			void 0 === a && (a = {})
+			void 0 === a && (a = {});
 			var n,
 				r,
 				i,
@@ -219,48 +219,48 @@ import { Image } from 'astro:assets';
 							highlight: !0,
 							onEnter: null,
 							onLeave: null,
-							onRotate: null
+							onRotate: null,
 						},
 						o(a || {})
 					),
 					destroyed: !1,
-					isActive: !1
+					isActive: !1,
 				},
 				M = g.params,
-				x = []
+				x = [];
 			!(function t() {
 				v = requestAnimationFrame(function () {
 					x.forEach(function (t) {
-						if ('function' == typeof t) t()
+						if ('function' == typeof t) t();
 						else {
 							var e = t.element,
 								o = t.prop,
-								a = t.value
-							e.style[o] = a
+								a = t.value;
+							e.style[o] = a;
 						}
 					}),
 						x.splice(0, x.length),
-						t()
-				})
-			})()
+						t();
+				});
+			})();
 			var w,
 				O = function (t, e) {
-					x.push({ element: t, prop: 'transitionDuration', value: e })
+					x.push({ element: t, prop: 'transitionDuration', value: e });
 				},
 				b = function (t, e) {
-					x.push({ element: t, prop: 'transitionTimingFunction', value: e })
+					x.push({ element: t, prop: 'transitionTimingFunction', value: e });
 				},
 				T = function (t, e) {
-					x.push({ element: t, prop: 'transform', value: e })
+					x.push({ element: t, prop: 'transform', value: e });
 				},
 				X = function (t, e) {
-					x.push({ element: t, prop: 'opacity', value: e })
+					x.push({ element: t, prop: 'opacity', value: e });
 				},
 				Y = function (t, e, o, a) {
-					return t.addEventListener(e, o, a)
+					return t.addEventListener(e, o, a);
 				},
 				_ = function (t, e, o, a) {
-					return t.removeEventListener(e, o, a)
+					return t.removeEventListener(e, o, a);
 				},
 				L = function (t) {
 					var e = t.rotateXPercentage,
@@ -269,41 +269,41 @@ import { Image } from 'astro:assets';
 						n = void 0 === a ? 0 : a,
 						r = t.duration,
 						i = t.opacityOnly,
-						s = t.easeOut
-					;(function (t, e) {
-						return t.querySelectorAll(e)
+						s = t.easeOut;
+					(function (t, e) {
+						return t.querySelectorAll(e);
 					})(m, '[data-atropos-offset], [data-atropos-opacity]').forEach(function (t) {
-						O(t, r), b(t, s ? 'ease-out' : '')
+						O(t, r), b(t, s ? 'ease-out' : '');
 						var e = (function (t) {
 							if (t.dataset.atroposOpacity && 'string' == typeof t.dataset.atroposOpacity)
 								return t.dataset.atroposOpacity.split(';').map(function (t) {
-									return parseFloat(t)
-								})
-						})(t)
-						if (0 === o && 0 === n) i || T(t, 'translate3d(0, 0, 0)'), e && X(t, e[0])
+									return parseFloat(t);
+								});
+						})(t);
+						if (0 === o && 0 === n) i || T(t, 'translate3d(0, 0, 0)'), e && X(t, e[0]);
 						else {
-							var a = parseFloat(t.dataset.atroposOffset) / 100
+							var a = parseFloat(t.dataset.atroposOffset) / 100;
 							if (
 								(Number.isNaN(a) || i || T(t, 'translate3d(' + -n * -a + '%, ' + o * -a + '%, 0)'),
 								e)
 							) {
 								var c = e[0],
 									u = e[1],
-									p = Math.max(Math.abs(o), Math.abs(n))
-								X(t, c + ((u - c) * p) / 100)
+									p = Math.max(Math.abs(o), Math.abs(n));
+								X(t, c + ((u - c) * p) / 100);
 							}
 						}
-					})
+					});
 				},
 				A = function (t, e) {
-					var o = m !== y
+					var o = m !== y;
 					if (
 						(s || (s = m.getBoundingClientRect()),
 						o && !c && (c = y.getBoundingClientRect()),
 						void 0 === t && void 0 === e)
 					) {
-						var a = o ? c : s
-						;(t = a.left + a.width / 2), (e = a.top + a.height / 2)
+						var a = o ? c : s;
+						(t = a.left + a.width / 2), (e = a.top + a.height / 2);
 					}
 					var r,
 						i = 0,
@@ -312,7 +312,7 @@ import { Image } from 'astro:assets';
 						d = l.top,
 						f = l.left,
 						v = l.width,
-						h = l.height
+						h = l.height;
 					if (o) {
 						var g = c,
 							w = g.top,
@@ -322,29 +322,29 @@ import { Image } from 'astro:assets';
 							E = v / 2 + (f - Y),
 							R = h / 2 + (d - w),
 							I = t - Y,
-							P = e - w
-						;(u = ((M.rotateYMax * (I - E)) / (_ - v / 2)) * -1),
+							P = e - w;
+						(u = ((M.rotateYMax * (I - E)) / (_ - v / 2)) * -1),
 							(i = (M.rotateXMax * (P - R)) / (A - h / 2)),
-							(r = t - f + 'px ' + (e - d) + 'px')
+							(r = t - f + 'px ' + (e - d) + 'px');
 					} else {
 						var j = v / 2,
 							D = h / 2,
 							F = t - f,
-							C = e - d
-						;(u = ((M.rotateYMax * (F - j)) / (v / 2)) * -1),
-							(i = (M.rotateXMax * (C - D)) / (h / 2))
+							C = e - d;
+						(u = ((M.rotateYMax * (F - j)) / (v / 2)) * -1),
+							(i = (M.rotateXMax * (C - D)) / (h / 2));
 					}
-					;(i = Math.min(Math.max(-i, -M.rotateXMax), M.rotateXMax)),
+					(i = Math.min(Math.max(-i, -M.rotateXMax), M.rotateXMax)),
 						M.rotateXInvert && (i = -i),
 						(u = Math.min(Math.max(-u, -M.rotateYMax), M.rotateYMax)),
-						M.rotateYInvert && (u = -u)
+						M.rotateYInvert && (u = -u);
 					var S,
 						k,
 						q = (i / M.rotateXMax) * 100,
 						N = (u / M.rotateYMax) * 100,
 						B = (o ? (N / 100) * M.stretchX : 0) * (M.rotateYInvert ? -1 : 1),
 						Z = (o ? (q / 100) * M.stretchY : 0) * (M.rotateXInvert ? -1 : 1),
-						z = o ? (Math.max(Math.abs(q), Math.abs(N)) / 100) * M.stretchZ : 0
+						z = o ? (Math.max(Math.abs(q), Math.abs(N)) / 100) * M.stretchZ : 0;
 					T(
 						n,
 						'translate3d(' +
@@ -371,13 +371,13 @@ import { Image } from 'astro:assets';
 							rotateXPercentage: q,
 							rotateYPercentage: N,
 							duration: M.duration + 'ms',
-							easeOut: !0
+							easeOut: !0,
 						}),
-						'function' == typeof M.onRotate && M.onRotate(i, u)
+						'function' == typeof M.onRotate && M.onRotate(i, u);
 				},
 				E = function () {
 					x.push(function () {
-						return m.classList.add('atropos-active')
+						return m.classList.add('atropos-active');
 					}),
 						O(n, M.duration + 'ms'),
 						b(n, 'ease-out'),
@@ -385,7 +385,7 @@ import { Image } from 'astro:assets';
 						O(r, M.duration + 'ms'),
 						b(r, 'ease-out'),
 						u && (O(u, M.duration + 'ms'), b(u, 'ease-out')),
-						(g.isActive = !0)
+						(g.isActive = !0);
 				},
 				R = function (t) {
 					if (
@@ -401,32 +401,32 @@ import { Image } from 'astro:assets';
 							(f = t.clientY),
 							M.alwaysActive)
 						)
-							return (s = void 0), void (c = void 0)
-						E(), 'function' == typeof M.onEnter && M.onEnter()
+							return (s = void 0), void (c = void 0);
+						E(), 'function' == typeof M.onEnter && M.onEnter();
 					}
 				},
 				I = function (t) {
-					!1 === l && t.cancelable && t.preventDefault()
+					!1 === l && t.cancelable && t.preventDefault();
 				},
 				P = function (t) {
 					if (M.rotate && g.isActive) {
 						if ('mouse' !== t.pointerType) {
-							if (!M.rotateTouch) return
-							t.preventDefault()
+							if (!M.rotateTouch) return;
+							t.preventDefault();
 						}
 						var e = t.clientX,
 							o = t.clientY,
 							a = e - d,
-							n = o - f
+							n = o - f;
 						if ('string' == typeof M.rotateTouch && (0 !== a || 0 !== n) && void 0 === l) {
 							if (a * a + n * n >= 25) {
-								var r = (180 * Math.atan2(Math.abs(n), Math.abs(a))) / Math.PI
-								l = 'scroll-y' === M.rotateTouch ? r > 45 : 90 - r > 45
+								var r = (180 * Math.atan2(Math.abs(n), Math.abs(a))) / Math.PI;
+								l = 'scroll-y' === M.rotateTouch ? r > 45 : 90 - r > 45;
 							}
 							!1 === l &&
-								(m.classList.add('atropos-rotate-touch'), t.cancelable && t.preventDefault())
+								(m.classList.add('atropos-rotate-touch'), t.cancelable && t.preventDefault());
 						}
-						;('mouse' !== t.pointerType && l) || A(e, o)
+						('mouse' !== t.pointerType && l) || A(e, o);
 					}
 				},
 				j = function (t) {
@@ -447,9 +447,9 @@ import { Image } from 'astro:assets';
 								A(),
 								'function' == typeof M.onRotate && M.onRotate(0, 0),
 								void ('function' == typeof M.onLeave && M.onLeave())
-							)
+							);
 						x.push(function () {
-							return m.classList.remove('atropos-active')
+							return m.classList.remove('atropos-active');
 						}),
 							O(r, M.duration + 'ms'),
 							b(r, ''),
@@ -462,16 +462,16 @@ import { Image } from 'astro:assets';
 							L({ duration: M.duration + 'ms' }),
 							(g.isActive = !1),
 							'function' == typeof M.onRotate && M.onRotate(0, 0),
-							'function' == typeof M.onLeave && M.onLeave()
+							'function' == typeof M.onLeave && M.onLeave();
 					}
 				},
 				D = function (t) {
-					var e = t.target
-					!y.contains(e) && e !== y && g.isActive && j()
-				}
+					var e = t.target;
+					!y.contains(e) && e !== y && g.isActive && j();
+				};
 			return (
 				(g.destroy = function () {
-					;(g.destroyed = !0),
+					(g.destroyed = !0),
 						cancelAnimationFrame(v),
 						_(document, 'click', D),
 						_(y, 'pointerdown', R),
@@ -481,7 +481,7 @@ import { Image } from 'astro:assets';
 						_(y, 'pointerleave', j),
 						_(y, 'pointerup', j),
 						_(y, 'lostpointercapture', j),
-						delete m.__atropos__
+						delete m.__atropos__;
 				}),
 				'string' == typeof m && (m = e(document, m)),
 				m &&
@@ -501,11 +501,11 @@ import { Image } from 'astro:assets';
 						w && n.appendChild(u)),
 					M.highlight &&
 						(function () {
-							var t
-							;(p = e(m, '.atropos-highlight')) ||
+							var t;
+							(p = e(m, '.atropos-highlight')) ||
 								((p = document.createElement('span')).classList.add('atropos-highlight'), (t = !0)),
 								T(p, 'translate3d(0,0,0)'),
-								t && i.appendChild(p)
+								t && i.appendChild(p);
 						})(),
 					M.rotateTouch &&
 						('string' == typeof M.rotateTouch
@@ -522,14 +522,14 @@ import { Image } from 'astro:assets';
 					Y(y, 'lostpointercapture', j),
 					M.alwaysActive && (E(), A())),
 				g
-			)
-		}
-	}) /* eslint-enable */
+			);
+		};
+	}); /* eslint-enable */
 	/* eslint-enable */
 
 	window.Atropos({
 		el: '.atropos',
 		activeOffset: 120,
-		shadowScale: 5
-	})
+		shadowScale: 5,
+	});
 </script>

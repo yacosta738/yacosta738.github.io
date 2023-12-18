@@ -1,18 +1,17 @@
 {
   "printWidth": 100,
-  "semi": false,
+  "semi": true,
   "singleQuote": true,
-  "jsxSingleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "none",
+  "trailingComma": "es5",
   "useTabs": true,
+  "plugins": ["prettier-plugin-astro"],
   "overrides": [
     {
-      "files": ["*.json", "*.md", "*.toml", "*.yml"],
+      "files": [".*", "*.json", "*.md", "*.mdx", "*.toml", "*.yml"],
       "options": {
         "useTabs": false
       }
     }
-  ],
-  "endOfLine": "lf"
+  ]
 }

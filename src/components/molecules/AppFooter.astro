@@ -1,47 +1,49 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { t, setDefaultNamespace } from 'i18next'
-import { socialMedia } from 'store/constants'
+import { Icon } from 'astro-icon/components';
+import { socialMedia } from 'store/constants';
+import { getLangFromUrl, useTranslations } from '@i18n:index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const portfolioTechIcon = [
 	'mdi:vuejs',
 	'simple-icons:astro',
 	'simple-icons:tailwindcss',
-	'simple-icons:netlify'
-]
-setDefaultNamespace('common')
+	'simple-icons:netlify',
+];
 ---
 
-<footer class='container m-5 mx-auto flex flex-col items-center justify-center lg:flex-row'>
-	<div class='flex flex-col items-center'>
-		<ul class='relative flex list-none flex-wrap p-0 md:hidden'>
+<footer class="container m-5 mx-auto flex flex-col items-center justify-center lg:flex-row">
+	<div class="flex flex-col items-center">
+		<ul class="relative flex list-none flex-wrap p-0 md:hidden">
 			{
 				socialMedia.map(({ name, icon, url }) => (
-					<li class='mx-1 my-2 whitespace-nowrap font-mono text-3xl text-light-slate'>
-						<a href={url} target='_blank' rel='noopener noreferrer' aria-label={name}>
-							<Icon name={icon} class='h-8' />
+					<li class="mx-1 my-2 whitespace-nowrap font-mono text-3xl text-light-slate">
+						<a href={url} target="_blank" rel="noopener noreferrer" aria-label={name}>
+							<Icon name={icon} class="h-8" />
 						</a>
 					</li>
 				))
 			}
 		</ul>
-		<p class='font-mono text-sm text-lightest-slate'>
-			{t('built-by')}
+		<p class="font-mono text-sm text-lightest-slate">
+			{t('builtBy')}
 			<a
-				href='https://www.yunielacosta.com'
-				target='_blank'
-				rel='noopener noreferrer'
-				class='text-light-slate'>Yuniel Acosta</a
+				href="https://www.yunielacosta.com"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-light-slate">Yuniel Acosta</a
 			>
 		</p>
-		<p class='my-2 font-mono text-xs text-light-slate'>
-			{t('design-by')}
+		<p class="my-2 font-mono text-xs text-light-slate">
+			{t('designBy')}
 		</p>
-		<ul class='relative flex list-none flex-wrap p-0'>
+		<ul class="relative flex list-none flex-wrap p-0">
 			{
 				portfolioTechIcon.map((icon) => (
-					<li class='mx-1 my-2 whitespace-nowrap font-mono text-xs text-light-slate'>
-						<Icon name={icon} class='h-4' />
+					<li class="mx-1 my-2 whitespace-nowrap font-mono text-xs text-light-slate">
+						<Icon name={icon} class="h-4" />
 					</li>
 				))
 			}

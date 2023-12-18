@@ -1,33 +1,36 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
 import { Image } from 'astro:assets';
-import type { Project } from '@models:Project'
-import ProjectTechList from 'molecules:ProjectTechList'
-import ProjectLinks from 'molecules:ProjectLinks'
-import { markdownfy } from '@utils:utilities'
+import type { Project } from '@models:Project';
+import ProjectTechList from 'molecules:ProjectTechList';
+import ProjectLinks from 'molecules:ProjectLinks';
+import { markdownfy } from '@utils:utilities';
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
 
 export interface Props {
-	projects: Project[]
+	projects: Project[];
 }
-const { projects } = Astro.props
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { projects } = Astro.props;
 const calculatePosition = (index: number): string => {
-	return index % 2 === 0 ? 'end' : 'start'
-}
-setDefaultNamespace('projects')
+	return index % 2 === 0 ? 'end' : 'start';
+};
 ---
 
 <div>
-	<h2 class='numbered-heading'>{t('project-title')}</h2>
+	<h2 class="numbered-heading">{t('projectTitle')}</h2>
 	<div>
 		{
 			projects.map((project, index) => (
-				<div class='styled-project'>
-					<div class='project-content'>
-						<p class='project-overline'>Featured Project</p>
-						<h3 class='project-title'>{project.title}</h3>
+				<div class="styled-project">
+					<div class="project-content">
+						<p class="project-overline">Featured Project</p>
+						<h3 class="project-title">{project.title}</h3>
 						<div
-							id='project-description'
-							class='project-description [text-wrap:balance]'
+							id="project-description"
+							class="project-description [text-wrap:balance]"
 							set:html={markdownfy(project.content ?? '')}
 						/>
 						<ProjectTechList
@@ -37,14 +40,14 @@ setDefaultNamespace('projects')
 						/>
 						<ProjectLinks project={project} position={calculatePosition(index)} />
 					</div>
-					<div class='project-image'>
+					<div class="project-image">
 						<a
 							href={project.url ? project.url : project.repository ? project.repository : '#'}
-							target='_blank'
+							target="_blank"
 						>
 							{project.cover && (
 								<Image
-									class='img'
+									class="img"
 									src={project.cover}
 									alt={project.title ?? ''}
 									title={project.title ?? ''}
@@ -60,7 +63,7 @@ setDefaultNamespace('projects')
 	</div>
 </div>
 
-<style lang='scss'>
+<style lang="scss">
 	.styled-project {
 		display: grid;
 		grid-gap: 10px;

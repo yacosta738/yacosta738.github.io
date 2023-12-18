@@ -1,25 +1,24 @@
 ---
-import i18next, { t, changeLanguage } from 'i18next'
-import WidgetWrapper from 'molecules:WidgetWrapper'
-import ToTop from 'atoms:ToTop'
-import BaseTemplate from 'templates:BaseTemplate'
+import WidgetWrapper from 'molecules:WidgetWrapper';
+import ToTop from 'atoms:ToTop';
+import BaseTemplate from 'templates:BaseTemplate';
+import SearchBox from 'molecules:SearchBox';
 
-
-const { title, description, image, ogImageAlt, lang } = Astro.props
-
-changeLanguage(lang ?? i18next.language)
+const { title, description, image, ogImageAlt, lang } = Astro.props;
 ---
-<BaseTemplate 
+
+<BaseTemplate
 	title={title}
 	description={description}
 	image={image}
 	ogImageAlt={ogImageAlt}
 	lang={lang}
 >
+	<SearchBox />
 	<slot />
-	<ToTop slot="footer"/>
-	<aside class='xl:basis-1/5 sticky' slot="aside">
-		<slot name='widget'>
+	<ToTop slot="footer" />
+	<aside class="2xl:basis-1/3 xl:basic-1/3 lg:basis-1/2 sticky" slot="aside">
+		<slot name="widget">
 			<WidgetWrapper />
 		</slot>
 	</aside>

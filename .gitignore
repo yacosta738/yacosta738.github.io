@@ -2,6 +2,7 @@
 dist/
 dev-dist/
 .output/
+.astro/
 
 # dependencies
 node_modules/
@@ -21,10 +22,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 /.idea/
-/.vscode/
 
 # Local Netlify folder
 .netlify
 /test-results/
 /playwright-report/
 /playwright/.cache/
+

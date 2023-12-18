@@ -1,60 +1,62 @@
 ---
-import i18next from 'i18next'
-import WidgetRecentPost from 'molecules:WidgetRecentPost'
-import WidgetCategory from 'molecules:WidgetCategory'
-import WidgetTagCloud from 'molecules:WidgetTagCloud'
-import { type Article, jsonToArticle } from '@models:Article'
-import type { MarkdownInstance } from 'astro'
+import { getCollection } from 'astro:content';
+import WidgetRecentPost from 'molecules:WidgetRecentPost';
+import WidgetCategory from 'molecules:WidgetCategory';
+import WidgetTagCloud from 'molecules:WidgetTagCloud';
+import { type Article, jsonToArticle } from '@models:Article';
+import { getLangFromUrl } from '@i18n:utils';
 
-const { pathname } = Astro.url
-const isBlogRoot = pathname.endsWith('/blog')
+const { pathname } = Astro.url;
+const isBlogRoot = pathname.endsWith('/blog');
 
-const articlesFiles: { [key: string]: Promise<MarkdownInstance<Record<string, any>>[]> } = {
-	en: Astro.glob('../../pages/blog/**/*.md'),
-	es: Astro.glob('../../pages/es/blog/**/*.md')
-}
+const lang = getLangFromUrl(Astro.url);
 
-const postsData = i18next.language in articlesFiles ? await articlesFiles[i18next.language] : []
-
-const allPosts: Article[] = postsData
-	.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-	.map((post) => jsonToArticle(post))
-	.sort((a, b) => {
-		let aDate = new Date(a.date)
-		let bDate = new Date(b.date)
-		return bDate.getTime() - aDate.getTime()
+const publishedBlogEntriesPromises = (
+	await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === lang;
 	})
+).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
-const tags: { [key: string]: number } = allPosts.reduce((acc, post) => {
+const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
+	const aDate = new Date(a.date);
+	const bDate = new Date(b.date);
+	return bDate.getTime() - aDate.getTime();
+});
+
+const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
 	post.tags.forEach((tag) => {
-		const tagLower = tag.toLowerCase()
+		const tagLower = tag.toLowerCase();
 		if (tagLower in acc) {
-			acc[tagLower] += 1
+			acc[tagLower] += 1;
 		} else {
-			acc[tagLower] = 1
+			acc[tagLower] = 1;
 		}
-	})
-	return acc
-}, {})
+	});
+	return acc;
+}, {});
 
-const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
-	post.categories.forEach((category) => {
-		const categoryLower = category.toLowerCase()
-		if (categoryLower in acc) {
-			acc[categoryLower] += 1
-		} else {
-			acc[categoryLower] = 1
-		}
-	})
-	return acc
-}, {})
+const categories: { [key: string]: number } = allPosts.reduce(
+	(acc: { [key: string]: number }, post) => {
+		post.categories.forEach((category) => {
+			const categoryLower = category.toLowerCase();
+			if (categoryLower in acc) {
+				acc[categoryLower] += 1;
+			} else {
+				acc[categoryLower] = 1;
+			}
+		});
+		return acc;
+	},
+	{}
+);
 ---
 
-<div id='widget-wrapper' class='container mx-auto w-4/5 sticky top-24'>
-	<slot name='widget'>
+<div id="widget-wrapper" class="container mx-auto w-4/5 sticky top-24">
+	<slot name="widget">
 		{
 			!isBlogRoot && (
-				<div id='categoryWidget'>
+				<div id="categoryWidget">
 					<WidgetRecentPost recentPosts={allPosts.slice(0, 5)} />
 				</div>
 			)
@@ -64,30 +66,30 @@ const categories: { [key: string]: number } = allPosts.reduce((acc, post) => {
 	</slot>
 </div>
 
-<script is:global>
-	const categoryEl = document.getElementById('categoryWidget')
+<script>
+	const categoryEl = document.getElementById('categoryWidget');
 	// if the url is /blog or es/blog, remove the category widget
 	if (categoryEl) {
 		const isBlogRoot =
-			window?.location?.href?.endsWith('/blog') || window?.location?.href?.endsWith('/blog/')
+			window?.location?.href?.endsWith('/blog') || window?.location?.href?.endsWith('/blog/');
 		if (isBlogRoot) {
-			categoryEl?.classList.add('hidden')
+			categoryEl?.classList.add('hidden');
 		} else {
-			categoryEl?.classList.remove('hidden')
+			categoryEl?.classList.remove('hidden');
 		}
 	}
 	window.addEventListener('scroll', () => {
-		const navbar = document.getElementById('navbar-header')
-		const widgetWrapper = document.getElementById('widget-wrapper')
+		const navbar = document.getElementById('navbar-header');
+		const widgetWrapper = document.getElementById('widget-wrapper');
 		// if navbar is not null and navbar has 'navbar--show' class, add 'top-24' to widgetWrapper, else add 'top-2'
 		if (navbar && widgetWrapper) {
 			if (navbar.classList.contains('navbar--show')) {
-				widgetWrapper.classList.remove('top-4')
-				widgetWrapper.classList.add('top-24')
+				widgetWrapper.classList.remove('top-4');
+				widgetWrapper.classList.add('top-24');
 			} else {
-				widgetWrapper.classList.remove('top-24')
-				widgetWrapper.classList.add('top-4')
+				widgetWrapper.classList.remove('top-24');
+				widgetWrapper.classList.add('top-4');
 			}
 		}
-	})
+	});
 </script>

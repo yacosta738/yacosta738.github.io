@@ -1,41 +1,43 @@
 ---
-import '../../styles/global.css'
-import i18next, { t, setDefaultNamespace } from 'i18next'
-import HeadSEO from 'organisms:HeadSEO'
-import GoogleAnalytics from 'atoms:GoogleAnalytics'
-import { HeadHrefLangs } from 'astro-i18next/components'
-import AppFooter from 'molecules:AppFooter'
-import Social from 'atoms:Social'
-import Email from 'atoms:Email'
-import Navbar from 'molecules:Navbar'
-import Technologies from 'molecules:Technologies'
-import ReloadPrompt from 'molecules:ReloadPrompt'
+import '../../styles/global.css';
+import HeadSEO from 'organisms:HeadSEO';
+import GoogleAnalytics from 'atoms:GoogleAnalytics';
+import AppFooter from 'molecules:AppFooter';
+import Social from 'atoms:Social';
+import Email from 'atoms:Email';
+import Navbar from 'molecules:Navbar';
+import Technologies from 'molecules:Technologies';
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
 
-setDefaultNamespace('common')
-const { title, description, image, ogImageAlt } = Astro.props
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { title, description, image, ogImageAlt } = Astro.props;
 ---
 
-<html lang={i18next.language} class='scroll-smooth'>
+<html lang={lang} class="scroll-smooth">
 	<head>
-		<meta charset='utf-8' />
-		<meta name='viewport' content='width=device-width' />
-		<HeadSEO title={title ?? t('seo.title')}
-						 description={description ?? t('seo.description')}
-						 image={image ?? '/uploads/me.webp'}
-						 ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')} />
-		<HeadHrefLangs />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<HeadSEO
+			title={title ?? t('seo.title')}
+			description={description ?? t('seo.description')}
+			image={image ?? '/uploads/me.webp'}
+			ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')}
+		/>
 		<GoogleAnalytics />
 	</head>
 
-	<body id="body"
-		class='content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono'
+	<body
+		id="body"
+		class="content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono"
 	>
-		<div class='relative flex min-h-[100vh] flex-col'>
+		<div class="relative flex min-h-[100vh] flex-col">
 			<Navbar />
-			<div class='container mx-auto mt-24 flex flex-col xl:flex-row'>
-				<main class='relative w-full overflow-hidden px-2'>
+			<div class="container mx-auto mt-24 flex flex-col xl:flex-row">
+				<main class="relative w-full overflow-hidden px-2">
 					<slot name="header">
-							<Technologies />
+						<Technologies />
 					</slot>
 					<slot />
 					<slot name="footer" />
@@ -47,8 +49,7 @@ const { title, description, image, ogImageAlt } = Astro.props
 			</div>
 		</div>
 		<AppFooter />
-		<script src='../../utils/title-change.js'></script>
-		<script src='../../utils/geeky-console.js'></script>
-		<ReloadPrompt />
+		<script src="../../utils/title-change.js"></script>
+		<script src="../../utils/geeky-console.js"></script>
 	</body>
 </html>

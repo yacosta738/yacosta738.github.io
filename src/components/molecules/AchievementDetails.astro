@@ -1,24 +1,24 @@
 ---
-import { Role, type IRole } from '@models:Job'
-import { Icon } from 'astro-icon/components'
+import { Role, type IRole } from '@models:Job';
+import { Icon } from 'astro-icon/components';
 
 export interface Props {
-	role: IRole
-	hasMultipleRoles: boolean
+	role: IRole;
+	hasMultipleRoles: boolean;
 }
 
-const { role, hasMultipleRoles } = Astro.props
-const rol = new Role(role)
-const MAX_ACHIEVEMENTS: number = 2
+const { role, hasMultipleRoles } = Astro.props;
+const rol = new Role(role);
+const MAX_ACHIEVEMENTS: number = 2;
 ---
 
 {
 	(
-		<ul class='p-0 m-0 list-none list-inside text-[18px]'>
+		<ul class="p-0 m-0 list-none list-inside text-[18px]">
 			{rol?.achievements?.map((detail, index) => (
 				<li
 					id={`rol-${rol?.getIdentifier()}-achievement-${index}`}
-					class={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500 [text-wrap:balance] ${
+					class:list={`relative pl-7 mb-2 before:content-['▹'] before:absolute before:left-0 before:text-green-500 [text-wrap:balance] ${
 						hasMultipleRoles && index <= MAX_ACHIEVEMENTS ? 'hidden' : ''
 					}`}
 				>
@@ -31,11 +31,11 @@ const MAX_ACHIEVEMENTS: number = 2
 
 {
 	hasMultipleRoles && (
-		<button id={`rol-${rol.getIdentifier()}-show-achievements`} class='text-green-500 text-[12px]'>
+		<button id={`rol-${rol.getIdentifier()}-show-achievements`} class="text-green-500 text-[12px]">
 			<Icon
 				id={`rol-${rol.getIdentifier()}-view-show`}
-				name='ph:dots-three-outline-bold'
-				class='w-5 h-5 mr-1 animate-bounce hover:animate-none'
+				name="ph:dots-three-outline-bold"
+				class="w-5 h-5 mr-1 animate-bounce hover:animate-none"
 			/>
 		</button>
 	)
@@ -43,14 +43,14 @@ const MAX_ACHIEVEMENTS: number = 2
 
 <script define:vars={{ rol }}>
 	// select the buttons and the lists
-	const showAchievementsButton = document.getElementById(`rol-${rol.id}-show-achievements`)
+	const showAchievementsButton = document.getElementById(`rol-${rol.id}-show-achievements`);
 	// select all the achievements lists for this role by using the role id pattern in the id
-	const achievementsLists = document.querySelectorAll(`[id^='rol-${rol.id}-achievement-']`)
+	const achievementsLists = document.querySelectorAll(`[id^='rol-${rol.id}-achievement-']`);
 	// add a click event listener to the button
 	showAchievementsButton?.addEventListener('click', () => {
 		// toggle the hidden class on all the achievements lists
-		achievementsLists?.forEach((list) => list.classList.remove('hidden'))
+		achievementsLists?.forEach((list) => list.classList.remove('hidden'));
 		// reverse the hidden class on the icons to show the correct one when the button is clicked
-		showAchievementsButton?.classList.toggle('hidden')
-	})
+		showAchievementsButton?.classList.toggle('hidden');
+	});
 </script>

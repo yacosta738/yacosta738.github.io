@@ -1,40 +1,45 @@
 ---
-import { Role, type IRole } from '@models:Job'
-import { range } from '@utils:role-range'
-import AchievementDetails from 'molecules:AchievementDetails'
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { Role, type IRole } from '@models:Job';
+import { range } from '@utils:role-range';
+import AchievementDetails from 'molecules:AchievementDetails';
 
 export interface Props {
-	roles: IRole[]
+	roles: IRole[];
 }
 
-const { roles = [] } = Astro.props
+const { roles = [] } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const rolesOrdered: Role[] =
 	[...roles]
 		?.sort((a, b) => {
-			const aDate = new Date(a.startDate ?? Date.now())
-			const bDate = new Date(b.startDate ?? Date.now())
-			return bDate.getTime() - aDate.getTime()
+			const aDate = new Date(a.startDate ?? Date.now());
+			const bDate = new Date(b.startDate ?? Date.now());
+			return bDate.getTime() - aDate.getTime();
 		})
-		.map((role) => new Role(role)) ?? roles.map((role) => new Role(role))
+		.map((role) => new Role(role)) ?? roles.map((role) => new Role(role));
 
-const hasMultipleRoles = rolesOrdered.length > 1
+const hasMultipleRoles = rolesOrdered.length > 1;
+const present: string = t('current');
 ---
 
 {
 	hasMultipleRoles ? (
-		<ol class='relative border-l border-green-500 dark:border-gray-700 mx-4 px-4'>
-			{rolesOrdered.map((rol, i) => (
-				<li class='mb-10 ml-8'>
-					<div class='absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 -left-1.5 border border-light-slate' />
+		<ol class="relative border-l border-green-500 dark:border-gray-700 mx-4 px-4">
+			{rolesOrdered.map((rol) => (
+				<li class="mb-10 ml-8">
+					<div class="absolute w-3 h-3 bg-green-500 rounded-full mt-1.5 -left-1.5 border border-light-slate" />
 					<h3>{rol.role}</h3>
-					<time class='text-sm text-light-slate'>{range(rol)}</time>
+					<time class="text-sm text-light-slate">{range(rol, present)}</time>
 					<AchievementDetails role={rol} hasMultipleRoles={hasMultipleRoles} />
 				</li>
 			))}
 		</ol>
 	) : (
-		<div class='flex flex-col items-center justify-center md:px-14'>
+		<div class="flex flex-col items-center justify-center md:px-14">
 			<AchievementDetails role={rolesOrdered[0]} hasMultipleRoles={hasMultipleRoles} />
 		</div>
 	)
