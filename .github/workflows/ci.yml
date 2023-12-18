@@ -107,3 +107,4 @@ jobs:
         with:
             filePath: /tmp/lychee-report.md
             reactions: eyes
+            comment_tag: lychee-report
