@@ -1,36 +1,43 @@
 ---
-import '../../styles/global.css'
-import Redirect from '../atoms/Redirect.vue'
-import HeadSEO from 'organisms:HeadSEO'
-import { HeadHrefLangs } from 'astro-i18next/components'
-import AppFooter from 'molecules:AppFooter'
-import WidgetWrapper from 'molecules:WidgetWrapper'
-import Navbar from 'molecules:Navbar'
-const { content } = Astro.props
-const { title, description, cover, lang, link } = content
-const ogImageAlt = title
+import '../../styles/global.css';
+import HeadSEO from 'organisms:HeadSEO';
+import AppFooter from 'molecules:AppFooter';
+import WidgetWrapper from 'molecules:WidgetWrapper';
+import Navbar from 'molecules:Navbar';
+import Loader from 'atoms:Loader';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, cover, lang, link } = post.data;
+const ogImageAlt = title;
 ---
 
-<html lang={lang} class='scroll-smooth'>
+<html lang={lang} class="scroll-smooth">
 	<head>
-		<meta charset='utf-8' />
-		<meta name='viewport' content='width=device-width' />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
 		<HeadSEO title={title} description={description} image={cover} ogImageAlt={ogImageAlt} />
-		<HeadHrefLangs />
+		{post.data.isExternalLink ? <meta http-equiv="refresh" content={`0; url=${link}`} /> : null}
 	</head>
 
 	<body
-		id='body'
-		class='content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono'
+		id="body"
+		class="content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono"
 	>
-		<div class='relative flex min-h-[100vh] flex-col'>
+		<div class="relative flex min-h-[100vh] flex-col">
 			<Navbar />
-			<div class='container mx-auto mt-24 flex flex-col xl:flex-row'>
-				<main class='relative w-full overflow-hidden xl:basis-4/5'>
-					<Redirect client:only='vue' url={link} />
+			<div class="container mx-auto mt-24 flex flex-col xl:flex-row">
+				<main class="relative w-full overflow-hidden xl:basis-4/5">
+					<div class="min-h-screen flex justify-center items-center">
+						<Loader />
+					</div>
 				</main>
-				<aside class='xl:basis-1/5'>
-					<slot name='widget'>
+				<aside class="xl:basis-1/5">
+					<slot name="widget">
 						<WidgetWrapper />
 					</slot>
 				</aside>

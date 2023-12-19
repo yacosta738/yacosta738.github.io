@@ -1,93 +1,88 @@
 ---
-import { t, setDefaultNamespace } from 'i18next'
 import { Image } from 'astro:assets';
-import contactSvg from '../../assets/images/contact.svg'
-setDefaultNamespace('contact')
+import contactSvg from '../../assets/images/contact.svg';
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section id='contact' class='mx-4 md:mx-auto'>
+<section id="contact" class="mx-4 md:mx-auto">
 	<div
-		class='mx-auto grid grid-cols-1 gap-8 rounded-lg bg-light-navy px-4 py-16 text-light-slate shadow-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32'
+		class="mx-auto grid grid-cols-1 gap-8 rounded-lg bg-light-navy px-4 py-16 text-light-slate shadow-lg md:grid-cols-2 md:px-12 lg:px-16 xl:px-32"
 	>
-		<div class='flex flex-col justify-between'>
+		<div class="flex flex-col justify-between">
 			<div>
-				<h2 class='numbered-heading'>{t('contact-me')}</h2>
+				<h2 class="numbered-heading">{t('contactMe')}</h2>
 				<h3
-					class='text-center text-4xl font-bold leading-tight text-lightest-slate md:text-left lg:text-5xl'
+					class="text-center text-4xl font-bold leading-tight text-lightest-slate md:text-left lg:text-5xl"
 				>
-					{t('lets-talk')}
+					{t('letsTalk')}
 				</h3>
-				<div class='mt-8 text-center text-light-slate md:text-left [text-wrap:balance]'>
-					{t('contact-description')}
+				<div class="mt-8 text-center text-light-slate md:text-left [text-wrap:balance]">
+					{t('contactDescription')}
 				</div>
 			</div>
-			<div class='mt-8 text-center'>
-				<Image
-				src={contactSvg}
-				alt='Contact me'
-				title='Contact me'
-				width={1096}
-				height={575}
-			/>
+			<div class="mt-8 text-center">
+				<Image src={contactSvg} alt="Contact me" title="Contact me" width={1096} height={575} />
 			</div>
 		</div>
-		<form id='contact-form' class='mx-auto' method='POST' action={import.meta.env.FORMSPREE}>
+		<form id="contact-form" class="mx-auto" method="POST" action={import.meta.env.FORMSPREE}>
 			<div>
-				<span class='text-sm font-bold uppercase text-lightest-slate'>
-					{t('your-full-name')}
+				<span class="text-sm font-bold uppercase text-lightest-slate">
+					{t('yourFullName')}
 				</span>
 				<input
-					id='form-name'
-					class='focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none'
-					name='name'
+					id="form-name"
+					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
+					name="name"
 					required
-					type='text'
-					placeholder='John Doe'
+					type="text"
+					placeholder="John Doe"
 				/>
 			</div>
-			<div class='mt-8'>
-				<span class='text-sm font-bold uppercase text-lightest-slate'>
-					{t('your-email')}
+			<div class="mt-8">
+				<span class="text-sm font-bold uppercase text-lightest-slate">
+					{t('yourEmail')}
 				</span>
 				<input
-					id='form-email'
-					class='focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none'
-					placeholder='jhondoe@gmail.com'
-					name='email'
+					id="form-email"
+					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
+					placeholder="jhondoe@gmail.com"
+					name="email"
 					required
-					type='email'
+					type="email"
 				/>
 			</div>
-			<div class='mt-8'>
-				<span class='text-sm font-bold uppercase text-lightest-slate'>
+			<div class="mt-8">
+				<span class="text-sm font-bold uppercase text-lightest-slate">
 					{t('subject')}
 				</span>
 				<input
-					id='form-subject'
-					class='focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none'
-					placeholder='John it is time to start your new project'
-					name='subject'
-					spellcheck='true'
+					id="form-subject"
+					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
+					placeholder={t('subjectPlaceholder')}
+					name="subject"
+					spellcheck="true"
 					required
-					type='text'
+					type="text"
 				/>
 			</div>
-			<div class='mt-8'>
-				<span class='text-sm font-bold uppercase text-lightest-slate'>
+			<div class="mt-8">
+				<span class="text-sm font-bold uppercase text-lightest-slate">
 					{t('message')}
 				</span>
 				<textarea
-					id='form-message'
-					placeholder='I think that success depends on communication and focus on the goal. I would like to work with you on your project.'
-					name='message'
+					id="form-message"
+					placeholder={t('messagePlaceholder')}
+					name="message"
 					required
-					spellcheck='true'
-					class='focus:shadow-outline mt-2 h-32 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none'
+					spellcheck="true"
+					class="focus:shadow-outline mt-2 h-32 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
 				></textarea>
 			</div>
-			<div class='mt-8'>
-				<button class='big-button w-full' type='submit' value='Send Message'>
-					{t('send-message')}
+			<div class="mt-8">
+				<button class="big-button w-full" type="submit" value="Send Message">
+					{t('sendMessage')}
 				</button>
 			</div>
 		</form>

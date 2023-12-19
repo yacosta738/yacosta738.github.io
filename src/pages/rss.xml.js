@@ -1,21 +1,30 @@
-import rss from '@astrojs/rss'
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import { jsonToArticle } from '@models:Article';
 
-const postImportResult = import.meta.glob('./blog/**/*.md', { eager: true })
-const posts = Object.values(postImportResult)
+export const GET = async (context) => {
+	const publishedBlogEntriesPromises = (
+		await getCollection('blog', ({ data }) => {
+			return !data.draft;
+		})
+	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
-export const get = () =>
-	rss({
-		title: 'YAP’s  Blog',
+	const language = 'en';
+
+	return rss({
+		title: 'Yuniel Acosta’s  Blog',
 		description:
 			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
-		site: import.meta.env.SITE,
-		items: posts
-			.filter((post) => !post.frontmatter.draft)
+		site: context.site,
+		items: publishedBlogEntries
+			.filter((post) => post.lang === language)
 			.map((post) => ({
-				link: post.url,
-				title: post.frontmatter.title,
-				pubDate: new Date(post.frontmatter.date),
-				description: post.frontmatter.description
+				link: `posts/${post.url}`,
+				title: post.title,
+				pubDate: post.date,
+				description: post.description,
 			})),
-		stylesheet: '/rss/styles.xsl'
-	})
+		stylesheet: '/rss/styles.xsl',
+	});
+};

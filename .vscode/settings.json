@@ -1,0 +1,4 @@
+{
+  "conventionalCommits.scopes": ["core"],
+  "recommendations": ["dbaeumer.vscode-eslint", "astro-build.astro-vscode", "unifiedjs.vscode-mdx"]
+}

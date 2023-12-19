@@ -1,45 +1,48 @@
 ---
-import { type IJob, Job } from '@models:Job'
-import i18next, { t, setDefaultNamespace } from 'i18next'
-import JobDetails from 'molecules:JobDetails'
-import RoleDetails from 'molecules:RoleDetails'
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { type IJob, Job, jsonToJob } from '@models:Job';
+import { getCollection } from 'astro:content';
+import JobDetails from 'molecules:JobDetails';
+import RoleDetails from 'molecules:RoleDetails';
 
-const data = await Astro.glob<IJob>('../../data/jobs/**/*.json')
-const jobs: Job[] = data
-	.filter((job) => job.published && job.lang === i18next.language)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const jobsCollection = await getCollection('jobs');
+const jobs: Job[] = jobsCollection
+	.map((job) => jsonToJob(job))
+	.filter((job) => job.published && job.lang === lang)
 	.sort((a: IJob, b: IJob) => {
-		const aDate = a?.createDate ? new Date(a.createDate) : new Date()
-		const bDate = b?.createDate ? new Date(b.createDate) : new Date()
-		return bDate.getTime() - aDate.getTime()
+		const aDate = a?.createDate ? new Date(a.createDate) : new Date();
+		const bDate = b?.createDate ? new Date(b.createDate) : new Date();
+		return bDate.getTime() - aDate.getTime();
 	})
-	.map((job) => new Job(job))
-
-	setDefaultNamespace('projects')
+	.map((job) => new Job(job));
 ---
 
 <astro-jobs>
-	<section id='jobs' class='flex flex-col items-center justify-center max-w-screen-md'>
-		<h2 class='numbered-heading'>{t('where-worked')}</h2>
-		<div class='flex md:flex-row flex-col max-w-sm md:max-w-max'>
-			<ul class='styled-tab-list' aria-label='Job tabs'>
+	<section id="jobs" class="flex flex-col items-center justify-center max-w-screen-md">
+		<h2 class="numbered-heading">{t('whereWorked')}</h2>
+		<div class="flex md:flex-row flex-col max-w-sm md:max-w-max">
+			<ul class="styled-tab-list" aria-label="Job tabs">
 				{
 					jobs.length > 0 &&
 						jobs.map((job) => (
 							<li>
-								<button id={`tab-${job.id}`} class='styled-tab-button'>
+								<button id={`tab-${job.id}`} class="styled-tab-button">
 									<span>{job.company}</span>
 								</button>
 							</li>
 						))
 				}
-				<li><div id='job-indicator' class='styled-high-light'></div></li>
+				<li><div id="job-indicator" class="styled-high-light"></div></li>
 			</ul>
 			{
 				jobs.map((job: IJob, i) => (
 					<div
 						id={`panel-${job.id}`}
-						class='w-full h-auto pt-1 px-2 md:pt-2.5 md:pl-7'
-						role='tabpanel'
+						class="w-full h-auto pt-1 px-2 md:pt-2.5 md:pl-7"
+						role="tabpanel"
 						aria-labelledby={`tab-${job.id}`}
 						hidden={i !== 0}
 					>
@@ -53,34 +56,35 @@ const jobs: Job[] = data
 </astro-jobs>
 
 <script>
+	/*global NodeListOf*/
 	class AstroJobs extends HTMLElement {
 		constructor() {
-			super()
-			const jobIndicator = this.querySelector('#job-indicator') as HTMLDivElement
-			let activeTabId = 0
-			const buttons = this.querySelectorAll('[id^="tab-"]') as NodeListOf<HTMLButtonElement>
-			const panels = document.querySelectorAll('[id^="panel-"]') as NodeListOf<HTMLDivElement>
+			super();
+			const jobIndicator = this.querySelector('#job-indicator') as HTMLDivElement;
+			let activeTabId = 0;
+			const buttons = this.querySelectorAll('[id^="tab-"]');
+			const panels = document.querySelectorAll('[id^="panel-"]') as NodeListOf<HTMLDivElement>;
 			buttons.forEach((button, i) => {
-				button.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)
+				button.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`);
 				button.addEventListener('click', () => {
-					activeTabId = i
-					const sm = screen.width < 768
+					activeTabId = i;
+					const sm = screen.width < 768;
 					jobIndicator.style.transform = sm
 						? `translateX(calc(${activeTabId} * 120px))`
-						: `translateY(calc(${activeTabId} * 42px))`
-					button.classList.toggle('text-green-500', activeTabId === i)
-					panels.forEach((panel, i) => {
-						panel.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`)
-						panel.hidden = activeTabId !== i
-					})
-				})
-			})
+						: `translateY(calc(${activeTabId} * 42px))`;
+					button.classList.toggle('text-green-500', activeTabId === i);
+					panels.forEach((panel: HTMLDivElement, i) => {
+						panel.setAttribute('tabIndex', `${activeTabId === i ? 0 : -1}`);
+						panel.hidden = activeTabId !== i;
+					});
+				});
+			});
 		}
 	}
-	customElements.define('astro-jobs', AstroJobs)
+	customElements.define('astro-jobs', AstroJobs);
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 	.styled-tab-list {
 		position: relative;
 		z-index: 3;

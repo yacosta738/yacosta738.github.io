@@ -1,36 +1,44 @@
-import { localizePath } from 'astro-i18next'
 // import DOMPurify from 'dompurify';
-import { marked } from 'marked'
-
-export const randomInt = (min: number, max: number) => {
-	min = Math.ceil(min)
-	max = Math.floor(max)
-	return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-export const inlineLinks = (className: string) => {
-	const elements = Array.from(document.querySelectorAll(className))
-	// eslint-disable-next-line no-array-constructor
-	const allLinks = new Array<HTMLElement[]>()
-	elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))))
-	if (allLinks.length > 0) {
-		allLinks.forEach((links) => {
-			links.forEach((link) => link.classList.add('inline-link'))
-		})
-	}
-}
+import { marked } from 'marked';
 
 /**
- * markdownfy the string
- * @param {string} str String to markdownfy
- * @returns {string}
+ * Generates a random integer between the specified minimum and maximum values.
+ * @param min The minimum value.
+ * @param max The maximum value.
+ * @returns The generated random integer.
  */
-export const markdownfy = (str: string): string => marked.parse(str)
+export const randomInt = (min: number, max: number) => {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
-export const urlize = (term: string): string => term.trim().toLowerCase().replace(/\s+/g, '-')
+/**
+ * Adds the 'inline-link' class to all anchor elements within elements matching the specified class name.
+ * @param className The class name of the elements to search for.
+ */
+export const inlineLinks = (className: string) => {
+	const elements = Array.from(document.querySelectorAll(className));
+	// eslint-disable-next-line no-array-constructor
+	const allLinks = new Array<HTMLElement[]>();
+	elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))));
+	if (allLinks.length > 0) {
+		allLinks.forEach((links) => {
+			links.forEach((link) => link.classList.add('inline-link'));
+		});
+	}
+};
 
-export const localizeUrl = (path: string = '/', locale: string | null = null): string => {
-	const link = localizePath(path, locale)
-	// if link ends with / then remove / from the end of the link. If the url is just / then return /
-	return link?.endsWith('/') && link !== '/' ? link.slice(0, -1) : link
-}
+/**
+ * Converts a string to markdown format using the 'marked' library.
+ * @param str The input string to be converted.
+ * @returns A promise that resolves to the converted markdown string.
+ */
+export const markdownfy = async (str: string): Promise<string> => await marked.parse(str);
+
+/**
+ * Converts a term to a URL-friendly format.
+ * @param term The term to be converted.
+ * @returns The URLized term.
+ */
+export const urlize = (term: string): string => term.trim().toLowerCase().replace(/\s+/g, '-');

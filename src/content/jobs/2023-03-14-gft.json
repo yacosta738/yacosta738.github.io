@@ -1,0 +1,21 @@
+{
+  "title": "Senior Software Engineer in GFT",
+  "lang": "en",
+  "company": "GFT",
+  "icon": "gft",
+  "location": "València, Spain",
+  "url": "https://www.gft.com/",
+  "published": true,
+  "createDate": "2023-03-14T15:12:23.179Z",
+  "roles": [
+    {
+      "role": "System Analyst | Senior Software Engineer (L4)",
+      "startDate": "2023-03-14T15:12:23.179Z",
+      "achievements": [
+        "Gather and analyze business requirements for software systems and design software solutions that adhere to coding standards and best practices.",
+        "Conduct testing and provide technical leadership to ensure software meets functional and performance requirements.",
+        "Collaborate with stakeholders to develop project timelines, communicate project status, and identify risks and issues that may impact project delivery."
+      ]
+    }
+  ]
+}

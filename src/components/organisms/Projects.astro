@@ -1,50 +1,29 @@
 ---
-import i18next from 'i18next'
-import type { Project, ProjectJson } from '@models:Project'
-import type { Tech } from '@models:Tech'
-import ProjectsFeatured from 'molecules:ProjectsFeatured'
-import ProjectsCommon from 'molecules:ProjectsCommon'
-import { urlize } from '@utils:utilities'
+import { jsonToProject, type Project } from '@models:Project';
+import ProjectsFeatured from 'molecules:ProjectsFeatured';
+import ProjectsCommon from 'molecules:ProjectsCommon';
+import { getLangFromUrl } from '@i18n:utils';
+import { getCollection } from 'astro:content';
 
-const projectData: ProjectJson[] = await Astro.glob<ProjectJson>('../../data/projects/**/*.json') ?? []
-const techData = await Astro.glob<Tech>('../../data/technologies/**/*.json')
-const tech: { [key: string]: Tech } = {}
-techData.forEach((t) => (tech[t.id] = t))
+const lang = getLangFromUrl(Astro.url);
 
-const jsonToProject = (json: ProjectJson): Project => {
-	const project: Project = {
-		id: json.id,
-		title: json.title,
-		lang: json.lang,
-		date: json.date,
-		cover: json.cover,
-		repository: json.repository,
-		url: json.url,
-		company: json.company,
-		tech: json?.tech?.map((t) => tech[urlize(t.toLowerCase())]),
-		showInProjects: json.showInProjects,
-		featured: json.featured,
-		priority: json.priority || 0,
-		published: json.published,
-		content: json.content
-	}
-	return project
-}
-const sortByPriority =  (b: Project, a: Project) => Math.sign((b.priority || 0) - (a.priority || 0))
+const projectData = await getCollection('projects');
+const sortByPriority = (b: Project, a: Project) => Math.sign((b.priority || 0) - (a.priority || 0));
 
-const projects: Project[] = projectData
-	.filter((project) => project.published && project.lang === i18next.language)
-	.sort((a, b) => (new Date(b.date ?? 0)).getTime() - (new Date(a.date ?? 0)).getTime())
-	.map((json) => jsonToProject(json))
+const projects: Project[] = (
+	await Promise.all(projectData.map((project) => jsonToProject(project)))
+)
+	.filter((project) => project.published && project.lang === lang)
+	.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
 const featuredProjects = projects
 	.filter((project) => project.featured)
-	.sort((a, b) => sortByPriority(b, a))
+	.sort((a, b) => sortByPriority(b, a));
 const commonProjects = projects
 	.filter((project) => project.showInProjects && !project.featured)
-	.sort((a, b) => sortByPriority(b, a))
+	.sort((a, b) => sortByPriority(b, a));
 ---
 
-<section id='projects' class='mx-4 md:mx-auto'>
+<section id="projects" class="mx-4 md:mx-auto">
 	{
 		featuredProjects && featuredProjects.length > 0 && (
 			<ProjectsFeatured projects={featuredProjects} />

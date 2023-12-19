@@ -2,14 +2,14 @@ name: SonarCloud analysis
 
 on:
   workflow_run:
-    workflows: ['Playwright Tests']
-    branches: ['master', 'main', 'develop']
+    workflows: ['CI']
+    branches: ['main']
     types:
       - completed
   push:
-    branches: ['master', 'main', 'develop']
+    branches: ['main']
   pull_request:
-    branches: ['master', 'main', 'develop']
+    branches: ['main']
   workflow_dispatch:
 
 permissions:

@@ -1,66 +1,50 @@
-import { defineConfig } from 'astro/config'
-// @ts-ignore
-import { remarkReadingTime } from './remark-reading-time.mjs'
-import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
-import astroI18next from 'astro-i18next'
-import vue from '@astrojs/vue'
-import robotsTxt from 'astro-robots-txt'
-import NetlifyCMS from 'astro-netlify-cms'
-import remarkToc from 'remark-toc'
-import AstroPWA from '@vite-pwa/astro'
-import Compress from 'astro-compress'
-import critters from 'astro-critters'
-import icon from 'astro-icon'
+import { defineConfig } from 'astro/config';
+import { remarkReadingTime } from './remark-reading-time.mjs';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+import robotsTxt from 'astro-robots-txt';
+import NetlifyCMS from 'astro-netlify-cms';
+import remarkToc from 'remark-toc';
+import Compress from 'astro-compress';
+import critters from 'astro-critters';
+import icon from 'astro-icon';
 
-import { manifest, workbox } from './src/plugins/pwa'
-import { config } from './src/plugins/netlify-cms'
+import { config } from './src/plugins/netlify-cms';
 
-const DEV_PORT: number = 3000
+const DEV_PORT: number = 3000;
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
 	server: {
 		/* Dev. server only */
-		port: DEV_PORT
+		port: DEV_PORT,
+	},
+	i18n: {
+		defaultLocale: 'en',
+		locales: ['es', 'en'],
 	},
 	integrations: [
-		AstroPWA({
-			mode: 'production',
-			base: '/',
-			scope: '/',
-			includeAssets: ['favicon.ico'],
-			registerType: 'autoUpdate',
-			manifest,
-			workbox,
-			devOptions: {
-				enabled: true,
-				navigateFallbackAllowlist: [/^\/404$/]
-			}
-		}),
 		sitemap({
 			i18n: {
 				defaultLocale: 'en',
 				locales: {
 					en: 'en',
-					es: 'es'
-				}
-			}
+					es: 'es',
+				},
+			},
 		}),
 		tailwind(),
-		astroI18next(),
 		robotsTxt(),
 		Compress({
-			css: false
+			CSS: false,
 		}),
 		critters({
-			exclude: ['index.html', (file: string) => file === './dist/index.html']
+			exclude: ['index.html', (file: string) => file === './dist/index.html'],
 		}),
 		NetlifyCMS({
-			config
+			config,
 		}),
-		vue(),
 		icon({
 			iconDir: 'src/icons',
 			include: {
@@ -75,18 +59,18 @@ export default defineConfig({
 				ion: ['*'],
 				clarity: ['*'],
 				teenyicons: ['*'],
-				'akar-icons': ['*']
-			}
-		})
+				'akar-icons': ['*'],
+			},
+		}),
 	],
 	vite: {
 		ssr: {
-			external: ['svgo']
+			external: ['svgo'],
 		},
-		plugins: []
+		plugins: [],
 	},
 	markdown: {
 		remarkPlugins: [remarkToc, remarkReadingTime],
-		gfm: true
-	}
-})
+		gfm: true,
+	},
+});

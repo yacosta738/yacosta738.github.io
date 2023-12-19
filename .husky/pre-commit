@@ -18,7 +18,7 @@ fi
 echo "Using package manager: $PACKAGE_MANAGER"
 
 # Install dependencies, generate translations, and format code
-if $PACKAGE_MANAGER install && $PACKAGE_MANAGER run i18n:generate && $PACKAGE_MANAGER run format; then
+if $PACKAGE_MANAGER install && $PACKAGE_MANAGER run format && $PACKAGE_MANAGER run lint:eslint:fix; then
 	exit 0
 else
 	echo "Error: failed to run pre-commit hook"

@@ -1,22 +1,32 @@
 ---
-import i18next, { t, setDefaultNamespace } from 'i18next'
-import { Icon } from 'astro-icon/components'
-import { jsonToArticle } from '../../models/Article'
-import {SEARCH_MODAL_ID, SEARCH_BUTTON_ID} from '@store:constants'
+import { Icon } from 'astro-icon/components';
+import { jsonToArticle } from '../../models/Article';
+import { SEARCH_MODAL_ID, SEARCH_BUTTON_ID } from '@store:constants';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, useTranslations } from '@i18n:utils';
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
-const allPosts = await Astro.glob('/src/pages/**/*.md')
-const sortedPosts = allPosts
-.filter((post) => !post.frontmatter.draft && post.frontmatter.lang === i18next.language)
-.map((post) => jsonToArticle(post))
-.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+const publishedBlogEntriesPromises = (
+	await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === lang;
+	})
+).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
-const jsonArticles = JSON.stringify(sortedPosts)
+const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
+	return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
 
-setDefaultNamespace('blog')
+const jsonArticles = JSON.stringify(sortedPublishedBlogEntries);
 ---
 
-<search-box data-identifier={SEARCH_MODAL_ID} data-triggerId={SEARCH_BUTTON_ID} data-articles={jsonArticles}>
+<search-box
+	data-identifier={SEARCH_MODAL_ID}
+	data-triggerId={SEARCH_BUTTON_ID}
+	data-articles={jsonArticles}
+>
 	<!-- Main modal -->
 	<div
 		id={SEARCH_MODAL_ID}
@@ -31,7 +41,7 @@ setDefaultNamespace('blog')
 				<div
 					class="flex items-start justify-between p-4 m-4 border-b rounded-t dark:border-gray-600"
 				>
-					<h3 class="text-5xl font-semibold text-light-slate">{t('search.search-title')}</h3>
+					<h3 class="text-5xl font-semibold text-light-slate">{t('search.searchTitle')}</h3>
 					<button
 						type="button"
 						class="bg-transparent text-green-500 hover:border-green-500 hover:bg-green-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
@@ -48,8 +58,7 @@ setDefaultNamespace('blog')
 								fill-rule="evenodd"
 								d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
 								clip-rule="evenodd"></path>
-						</svg
-						>
+						</svg>
 						<span class="sr-only">Close modal</span>
 					</button>
 				</div>
@@ -58,24 +67,24 @@ setDefaultNamespace('blog')
 					<div class="flex items-center justify-between">
 						<form class="mx-2 w-full">
 							<label for="textSearch" class="mb-2 text-sm font-medium text-gray-900 sr-only"
-							>Search</label
+								>Search</label
 							>
 							<div class="relative">
 								<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-									<Icon name="ic:twotone-search" class="h-4 w-4"/>
+									<Icon name="ic:twotone-search" class="h-4 w-4" />
 								</div>
 								<input
 									type="search"
 									id="textSearch"
 									class="block w-full p-4 pl-10 text-sm border rounded-lg bg-lightest-navy border-lightest-slate placeholder-gray-400 text-light-slate focus:ring-green-500 focus:border-green-500"
-									placeholder={t('search.search-placeholder')}
+									placeholder={t('search.searchPlaceholder')}
 									required
 								/>
 							</div>
 						</form>
 						<p class="text-right w-1/5">
 							<span id="itemFoundText">0</span>
-							{t('search.search-result')}
+							{t('search.searchResult')}
 						</p>
 					</div>
 
@@ -87,82 +96,72 @@ setDefaultNamespace('blog')
 </search-box>
 
 <script>
-	import Fuse from 'fuse.js'
-	import { Modal } from 'flowbite'
-	import type { ModalOptions } from 'flowbite'
-
-	interface Article {
-		id: string
-		url: string
-		title: string
-		description: string
-		date: string | Date
-		cover: string
-		author: string
-		timeToRead: number
-		lang: string
-		tags: string[]
-		categories: string[]
-		draft: boolean
-		content: string
-	}
+	import Fuse from 'fuse.js';
+	import { type Article } from '@models:Article';
+	import { Modal } from 'flowbite';
+	import type { ModalOptions } from 'flowbite';
 
 	const textInputDelay = (fn: Function, ms: number) => {
-		let timer: ReturnType<typeof setTimeout>
+		let timer: ReturnType<typeof setTimeout>;
 		return function (...args: any[]) {
-			clearTimeout(timer)
-			timer = setTimeout(fn.bind(this, ...args), ms || 0)
-		}
-	}
+			clearTimeout(timer);
+			timer = setTimeout(fn.bind(this, ...args), ms || 0);
+		};
+	};
 
 	const options = {
-		keys: ['title', 'description', 'content', 'tags', 'categories', 'author']
-	}
+		keys: ['title', 'description', 'content', 'tags', 'categories', 'author'],
+	};
 
 	class SearchBox extends HTMLElement {
 		constructor() {
-			super()
-			this.id = 'search-box'
+			super();
+			this.id = 'search-box';
 
-			const searchButtonId = this.dataset.triggerid
-			const searchModalId = this.dataset.identifier
+			const searchButtonId = this.dataset.triggerid;
+			const searchModalId = this.dataset.identifier;
 
 			// select the two elements that we'll work with
-			const $buttonElement: HTMLElement | null = this.querySelector(searchButtonId)
-			const $modalElement: HTMLElement | null = this.querySelector(searchModalId)
-			const $textSearch: HTMLInputElement | null = this.querySelector('#textSearch') as HTMLInputElement
-
+			const $buttonElement: HTMLElement | null = this.querySelector(
+				`#${searchButtonId}`
+			) as HTMLElement;
+			const $modalElement: HTMLElement | null = this.querySelector(
+				`#${searchModalId}`
+			) as HTMLElement;
+			const $textSearch: HTMLInputElement | null = this.querySelector(
+				'#textSearch'
+			) as HTMLInputElement;
 
 			// Read the articles from the data attribute.
 			const articles: Array<Article> = this.dataset.articles
 				? JSON.parse(this.dataset.articles)
-				: []
-			const $results = this.querySelector('#article-results') as HTMLElement
-			const itemFoundText = this.querySelector('#itemFoundText') as HTMLElement
+				: [];
+			const $results = this.querySelector('#article-results') as HTMLElement;
+			const itemFoundText = this.querySelector('#itemFoundText') as HTMLElement;
 			const search = async () => {
-				let text = $textSearch?.value ?? ''
-				const fuse = new Fuse<Article>(articles, options)
-				const res = fuse.search(text)
-				let html = ''
+				let text = $textSearch?.value ?? '';
+				const fuse = new Fuse<Article>(articles, options);
+				const res = fuse.search(text);
+				let html = '';
 				if (res.length) {
-					itemFoundText.innerHTML = `${res?.length ?? 0} / ${articles.length} `
+					itemFoundText.innerHTML = `${res?.length ?? 0} / ${articles.length} `;
 					res.forEach((item) => {
 						html += `
 					<div class="flex flex-col space-y-2 mb-2 p-2 border rounded border-green-500">
 						<a href="${item.item.url}" class="text-lg font-semibold text-green-500 hover:text-green-600 dark:text-green-400 dark:hover:text-green-300">${item.item.title}</a>
 						<p class="text-sm text-gray-500 dark:text-gray-400">${item.item.description}</p>
 				 </div>
-				`
-					})
+				`;
+					});
 				} else {
-					itemFoundText.innerHTML = '0 '
-					html = `<p class="text-lg font-semibold text-gray-500 dark:text-gray-400">No results found</p>`
+					itemFoundText.innerHTML = '0 ';
+					html = `<p class="text-lg font-semibold text-gray-500 dark:text-gray-400">No results found</p>`;
 				}
-				$results.innerHTML = html
-			}
-			search()
-			const searchInput = document.getElementById('textSearch')
-			searchInput && searchInput.addEventListener('keyup', textInputDelay(search, 500))
+				$results.innerHTML = html;
+			};
+			search();
+			const searchInput = document.getElementById('textSearch');
+			searchInput && searchInput.addEventListener('keyup', textInputDelay(search, 500));
 			// options with default values
 			const modalOptions: ModalOptions = {
 				placement: 'bottom-right',
@@ -177,28 +176,30 @@ setDefaultNamespace('blog')
 				},
 				onToggle: () => {
 					console.log('modal has been toggled');
-				}
+				},
 			};
-			// create a new modal component
-			const modal = new Modal($modalElement, modalOptions);
-			// if have aria-hidden='true' means modal is closed and we can clear the input
-			const $closeButton = this.querySelector(`[data-modal-hide="${searchModalId}"]`)
-			$closeButton?.addEventListener('click', () => {
-				(searchInput as HTMLInputElement).value = ''
-				$results.innerHTML = ''
-				itemFoundText.innerHTML = '0 '
-			})
 
-			// toggle the visibility of the modal when clicking on the button
-			if ($buttonElement) {
-				$buttonElement.addEventListener('click', () => {
-					modal.toggle()
-					$results.innerHTML = ''
-					$textSearch.value = ''
-				})
+			if ($modalElement) {
+				// create a new modal component
+				const modal = new Modal($modalElement, modalOptions);
+				// if have aria-hidden='true' means modal is closed and we can clear the input
+				const $closeButton = this.querySelector(`[data-modal-hide="${searchModalId}"]`);
+				$closeButton?.addEventListener('click', () => {
+					(searchInput as HTMLInputElement).value = '';
+					$results.innerHTML = '';
+					itemFoundText.innerHTML = '0 ';
+				});
+
+				// toggle the visibility of the modal when clicking on the button
+				if ($buttonElement) {
+					$buttonElement.addEventListener('click', () => {
+						modal.toggle();
+						$results.innerHTML = '';
+						$textSearch.value = '';
+					});
+				}
 			}
 		}
 	}
-
-	customElements.define('search-box', SearchBox)
+	customElements.define('search-box', SearchBox);
 </script>

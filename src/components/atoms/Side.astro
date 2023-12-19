@@ -1,16 +1,16 @@
 ---
 export interface Props {
-	show: boolean
-	orientation: string
+	show: boolean;
+	orientation: string;
 }
 
-const { orientation, show } = Astro.props
+const { orientation, show } = Astro.props;
 ---
 
 {
 	show && (
 		<div
-			class={`fixed bottom-0 z-10 hidden w-10 text-gray-500 lg:block ${
+			class:list={`fixed bottom-0 z-10 hidden w-10 text-gray-500 lg:block ${
 				orientation === 'left'
 					? 'right-auto md:left-5 lg:left-10'
 					: 'left-auto md:right-5 lg:right-10 '
