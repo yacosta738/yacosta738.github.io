@@ -587,7 +587,7 @@ Por último se crea un fichero **`index.html`** que contendrá todo el código h
     <title>Countdown to New Year</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
