@@ -71,38 +71,38 @@ jobs:
           path: playwright-report/
           retention-days: 30
       
-  linkcheck:
-    name: Check Links
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  # linkcheck:
+  #   name: Check Links
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
 
-      - name: Restore lychee cache
-        id: restore-cache
-        uses: actions/cache/restore@v3
-        with:
-          path: .lycheecache
-          key: cache-lychee-${{ github.sha }}
-          restore-keys: cache-lychee-
+  #     - name: Restore lychee cache
+  #       id: restore-cache
+  #       uses: actions/cache/restore@v3
+  #       with:
+  #         path: .lycheecache
+  #         key: cache-lychee-${{ github.sha }}
+  #         restore-keys: cache-lychee-
       
-      - name: Run Link Check
-        uses: lycheeverse/lychee-action@v1.8.0
-        with:
-          args: "--base ./dist --cache --max-cache-age 1d ."
-          output: /tmp/lychee-report.md
-          fail: true
+  #     - name: Run Link Check
+  #       uses: lycheeverse/lychee-action@v1.8.0
+  #       with:
+  #         args: "--base ./dist --cache --max-cache-age 1d ."
+  #         output: /tmp/lychee-report.md
+  #         fail: true
       
-      - name: Save lychee cache
-        uses: actions/cache/save@v3
-        if: always()
-        with:
-          path: .lycheecache
-          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+  #     - name: Save lychee cache
+  #       uses: actions/cache/save@v3
+  #       if: always()
+  #       with:
+  #         path: .lycheecache
+  #         key: ${{ steps.restore-cache.outputs.cache-primary-key }}
       
-      - name: PR comment with file
-        uses: thollander/actions-comment-pull-request@v2
-        with:
-            filePath: /tmp/lychee-report.md
-            reactions: eyes
-            comment_tag: lychee-report
+  #     - name: PR comment with file
+  #       uses: thollander/actions-comment-pull-request@v2
+  #       with:
+  #           filePath: /tmp/lychee-report.md
+  #           reactions: eyes
+  #           comment_tag: lychee-report

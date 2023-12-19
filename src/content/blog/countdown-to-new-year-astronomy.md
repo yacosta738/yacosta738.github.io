@@ -24,7 +24,7 @@ Astronomy and programming are two of my passions that this time I have decided t
 
 ![Example](/uploads/example.webp)
 
-The first thing is to create a file ** `style.css`** where the style and orbit of each planet is defined:
+The first thing is to create a file **`style.css`** where the style and orbit of each planet is defined:
 
 ```css
 html {
@@ -587,7 +587,7 @@ Finally, a file **`index.html`** is created that will contain all the html code 
     <title>Countdown to New Year</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
