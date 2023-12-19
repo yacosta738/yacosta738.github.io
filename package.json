@@ -1,6 +1,6 @@
 {
   "name": "yunielacosta.com",
-  "version": "1.0.8",
+  "version": "1.0.7",
   "private": true,
   "type": "module",
   "scripts": {
@@ -80,5 +80,5 @@
     "vitest": "^1.0.4",
     "workbox-window": "^7.0.0"
   },
-  "packageManager": ">=pnpm@8.11.0"
+  "packageManager": "pnpm@8.11.0"
 }
