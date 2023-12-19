@@ -89,7 +89,7 @@ jobs:
       - name: Run Link Check
         uses: lycheeverse/lychee-action@v1.8.0
         with:
-          args: "--base dist --cache --max-cache-age 1d ."
+          args: "--base ./dist --cache --max-cache-age 1d ."
           output: /tmp/lychee-report.md
           fail: true
       
