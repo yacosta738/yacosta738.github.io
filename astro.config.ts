@@ -76,5 +76,5 @@ export default defineConfig({
 	image: {
 		domains: ['avatars.githubusercontent.com', 'yunielacosta.com'],
 		service: sharpImageService(),
-	}
+	},
 });
