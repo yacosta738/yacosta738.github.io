@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import contactSvg from '../../assets/images/contact.png';
+import contactImage from '../../assets/images/contact.png';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -23,7 +23,7 @@ const t = useTranslations(lang);
 				</div>
 			</div>
 			<div class="mt-8 text-center">
-				<Image src={contactSvg} alt="Contact me" title="Contact me" width={1096} height={575} />
+				<Image src={contactImage} alt="Contact me" title="Contact me" />
 			</div>
 		</div>
 		<form id="contact-form" class="mx-auto" method="POST" action={import.meta.env.FORMSPREE}>

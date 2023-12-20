@@ -57,7 +57,7 @@
     "eslint-plugin-astro": "0.31.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsx-a11y": "6.8.0",
-    "eslint-plugin-n": "16.4.0",
+    "eslint-plugin-n": "16.5.0",
     "eslint-plugin-promise": "6.1.1",
     "flowbite": "^2.2.1",
     "fuse.js": "7.0.0",
@@ -77,7 +77,7 @@
     "sass": "1.69.5",
     "sharp": "0.33.1",
     "tailwindcss": "3.4.0",
-    "vitest": "^1.0.4",
+    "vitest": "^1.1.0",
     "workbox-window": "^7.0.0"
   },
   "packageManager": "pnpm@8.11.0"

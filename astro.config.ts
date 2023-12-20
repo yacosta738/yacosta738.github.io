@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, sharpImageService } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
@@ -73,4 +73,8 @@ export default defineConfig({
 		remarkPlugins: [remarkToc, remarkReadingTime],
 		gfm: true,
 	},
+	image: {
+		domains: ['avatars.githubusercontent.com', 'yunielacosta.com'],
+		service: sharpImageService(),
+	}
 });
