@@ -25,8 +25,15 @@ jobs:
         env:
           FORMSPREE: ${{ secrets.FORMSPREE }}
 
+  # Deploy job
   deploy:
+    # Add a dependency to the build job
     needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
     runs-on: ubuntu-latest
     environment:
       name: github-pages
