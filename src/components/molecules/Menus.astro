@@ -1,7 +1,8 @@
 ---
 import { type Menu, navMenus } from '@models:Menu';
 import { Icon } from 'astro-icon/components';
-import { SEARCH_BUTTON_ID, SEARCH_MODAL_ID, DRAWER_MENU_ID } from '@store:constants';
+import Search  from 'molecules:Search';
+import { DRAWER_MENU_ID } from '@store:constants';
 import LanguageSelector from './LanguageSelector.astro';
 import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils';
 export interface Props {
@@ -59,17 +60,7 @@ const isBlogRoot =
 				<Icon name="mdi:rss" class="h-5 w-5" />
 			</a>
 			{
-				isBlogRoot && (
-					<button
-						id={SEARCH_BUTTON_ID}
-						data-modal-target={SEARCH_MODAL_ID}
-						data-modal-toggle={SEARCH_MODAL_ID}
-						class="rounded bg-transparent p-2 text-green-500 hover:border-green-500 hover:bg-green-900"
-						type="button"
-					>
-						<Icon name="ic:twotone-search" class="h-4 w-4" />
-					</button>
-				)
+				isBlogRoot && (<Search />)
 			}
 		</li>
 		<li>

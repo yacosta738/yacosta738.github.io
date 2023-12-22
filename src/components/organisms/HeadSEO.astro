@@ -23,6 +23,9 @@ const imageExtension = image?.split('.').pop();
 <meta name="msapplication-TileColor" content="#0a192f" />
 <meta name="theme-color" content="#64ffda" />
 
+<!-- Algolia docsearch language facet -->
+<meta name="docsearch:language" content={lang} />
+
 <SEO
 	title={title ?? t('seo.title')}
 	description={description ?? t('seo.description')}

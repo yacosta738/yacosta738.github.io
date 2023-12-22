@@ -14,8 +14,6 @@ export const DRAWER_MENU_BUTTON_ID = 'drawer-menu-button';
 export const DRAWER_MENU_BUTTON_BOX_ID = 'drawer-menu-button-box';
 export const DRAWER_MENU_LABEL = 'drawer-menu-label';
 export const NAVBAR_HEADER = 'navbar-header';
-export const SEARCH_BUTTON_ID = `search-button-${uuid}`;
-export const SEARCH_MODAL_ID = `search-modal-${uuid}`;
 
 export const socialMedia: SocialMedia[] = [
 	{

@@ -5,12 +5,8 @@ import tailwind from '@astrojs/tailwind';
 import robotsTxt from 'astro-robots-txt';
 import NetlifyCMS from 'astro-netlify-cms';
 import remarkToc from 'remark-toc';
-import Compress from 'astro-compress';
-import critters from 'astro-critters';
 import icon from 'astro-icon';
-
 import { config } from './src/plugins/netlify-cms';
-
 const DEV_PORT: number = 3000;
 
 // https://astro.build/config
@@ -36,12 +32,6 @@ export default defineConfig({
 		}),
 		tailwind(),
 		robotsTxt(),
-		Compress({
-			CSS: false,
-		}),
-		critters({
-			exclude: ['index.html', (file: string) => file === './dist/index.html'],
-		}),
 		NetlifyCMS({
 			config,
 		}),

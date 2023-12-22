@@ -1,5 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "exclude": ["dist"],
   "compilerOptions": {
     "strict": true,
     // Enable top-level await, and other modern ESM features.
@@ -14,7 +15,7 @@
     "strictNullChecks": true,
     "allowJs": true,
     // Add type definitions for our Vite runtime.
-    "types": ["vite/client", "@astrojs/image/client"],
+    "types": ["vite/client"],
     "paths": {
       "@store:*": ["store/*"],
       "@components:*": ["components/*"],
@@ -27,6 +28,8 @@
       "molecules:*": ["components/molecules/*.astro"],
       "organisms:*": ["components/organisms/*.astro"],
       "templates:*": ["components/templates/*.astro"]
-    }
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
   }
 }

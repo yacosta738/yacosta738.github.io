@@ -16,6 +16,11 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=yacosta738_yacosta738.github.io)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yacosta738/yacosta738.github.io)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/yacosta738/yacosta738.github.io)
+[![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://pr.new/github.com/yacosta738/yacosta738.github.io)
+
 Welcome to my little corner of the internet! This is where I store all my achievements and experiences after becoming a developer. From the first line of code I wrote to my most recent projects, this portfolio serves as a record of my journey in this field.
 
 In addition to showcasing my work, I also like to share my thoughts and insights through articles that I write and publish here. Whether it's about the latest trends in technology or a personal reflection on my growth as a developer, I hope you find something here that sparks your interest.
