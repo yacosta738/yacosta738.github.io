@@ -1,7 +1,7 @@
 ---
 import { type Menu, navMenus } from '@models:Menu';
 import { Icon } from 'astro-icon/components';
-import Search  from 'molecules:Search';
+import Search from 'molecules:Search';
 import { DRAWER_MENU_ID } from '@store:constants';
 import LanguageSelector from './LanguageSelector.astro';
 import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils';
@@ -59,9 +59,7 @@ const isBlogRoot =
 			>
 				<Icon name="mdi:rss" class="h-5 w-5" />
 			</a>
-			{
-				isBlogRoot && (<Search />)
-			}
+			{isBlogRoot && <Search />}
 		</li>
 		<li>
 			<a

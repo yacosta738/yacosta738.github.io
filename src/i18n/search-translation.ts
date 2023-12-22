@@ -1,6 +1,5 @@
 import type docsearch from '@docsearch/js';
 
-
 type ModalTranslations = NonNullable<Parameters<typeof docsearch>[0]['translations']>['modal'];
 
 export interface DocSearchTranslation {
@@ -21,4 +20,3 @@ export interface DocSearchTranslation {
 
 /** Helper to type check a dictionary of DocSearch string translations. */
 export const DocSearchDictionary = (dict: DocSearchTranslation) => dict;
-
