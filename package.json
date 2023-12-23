@@ -23,7 +23,7 @@
   "devDependencies": {
     "@astrojs/rss": "4.0.1",
     "@astrojs/sitemap": "3.0.3",
-    "@astrojs/tailwind": "5.0.3",
+    "@astrojs/tailwind": "5.0.4",
     "@docsearch/css": "^3.5.1",
     "@iconify-json/akar-icons": "^1.1.23",
     "@iconify-json/charm": "^1.1.12",
