@@ -59,7 +59,7 @@ const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 <script>
 	import type Fuse from 'fuse.js';
 	import type { Article } from '@models:Article';
-import type { DocSearchTranslation } from '@i18n:search-translation';
+	import type { DocSearchTranslation } from '@i18n:search-translation';
 	const platform = navigator.userAgentData.platform;
 	class DocSearch extends HTMLElement {
 		private textInputDelay(fn: Function, ms: number) {

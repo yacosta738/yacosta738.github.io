@@ -1,4 +1,4 @@
-import {DocSearchDictionary} from '../search-translation';
+import { DocSearchDictionary } from '../search-translation';
 
 export default DocSearchDictionary({
 	button: 'Search',
