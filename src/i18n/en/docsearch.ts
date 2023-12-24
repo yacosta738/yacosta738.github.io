@@ -1,12 +1,33 @@
-import { DocSearchDictionary } from '../search-translation';
+import {DocSearchDictionary} from '../search-translation';
 
 export default DocSearchDictionary({
 	button: 'Search',
-	placeholder: 'Search docs',
-	shortcutLabel: 'Press / to search',
-	resultsFooterLede: 'Looking for an Astro integration or theme? Need more help?',
-	resultsFooterIntegrations: 'Astro integrations directory',
-	resultsFooterThemes: 'Astro themes showcase',
-	resultsFooterDiscord: 'Join us on Discord',
-	modal: {},
+	modal: {
+		searchBox: {
+			placeholder: 'Search articles and documentation',
+		},
+		startScreen: {
+			recentSearchesTitle: 'Recent',
+			noRecentSearchesText: 'No recent searches',
+			saveRecentSearchButtonTitle: 'Save this search',
+			removeRecentSearchButtonTitle: 'Remove this search from history',
+			favoriteSearchesTitle: 'Favorites',
+			removeFavoriteSearchButtonTitle: 'Remove this search from favorites',
+		},
+		errorScreen: {
+			titleText: 'Unable to retrieve results',
+			helpText: 'You may want to check your network connection.',
+		},
+		footer: {
+			shortcutLabel: 'to search',
+			closeText: 'to close',
+			closeKeyAriaLabel: 'Escape key',
+		},
+		noResultsScreen: {
+			noResultsText: 'No results for',
+			suggestedQueryText: 'Try searching for',
+			reportMissingResultsText: 'Think this query should return results?',
+			reportMissingResultsLinkText: 'Let us know.',
+		},
+	},
 });

@@ -17,7 +17,7 @@ const { drawer } = Astro.props;
 
 const { pathname } = Astro.url;
 const isBlogRoot =
-	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/blog\/\w+/);
+	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/posts\/\w+/);
 ---
 
 <menu-list data-menus={navMenus}>
@@ -52,7 +52,7 @@ const isBlogRoot =
 			/>
 
 			<a
-				class="rounded bg-transparent p-2 text-sm text-green-500 hover:border-green-500 hover:bg-green-900"
+				class="lg:rounded rounded-full border border-green-500 lg:border-none bg-transparent mx-3 p-2 text-sm text-green-500 hover:border-green-500 hover:bg-green-900"
 				aria-label="RSS Feed"
 				target="_blank"
 				href={translatePath('/rss.xml')}

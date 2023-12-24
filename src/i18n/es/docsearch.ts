@@ -2,18 +2,9 @@ import { DocSearchDictionary } from '../search-translation';
 
 export default DocSearchDictionary({
 	button: 'Buscar',
-	placeholder: 'Buscar en la documentación',
-	shortcutLabel: 'Presiona / para buscar',
-	resultsFooterLede: '¿Buscas una integración o tema de Astro? ¿Necesitas más ayuda?',
-	resultsFooterIntegrations: 'Directorio de integraciones de Astro',
-	resultsFooterThemes: 'Galeria de temas de Astro',
-	resultsFooterDiscord: 'Únete a nosotros en Discord',
 	modal: {
 		searchBox: {
-			resetButtonTitle: 'Borrar la consulta de búsqueda',
-			resetButtonAriaLabel: 'Borrar la consulta de búsqueda',
-			cancelButtonText: 'Cancelar',
-			cancelButtonAriaLabel: 'Cancelar',
+			placeholder: 'Buscar artículos y documentación',
 		},
 		startScreen: {
 			recentSearchesTitle: 'Recientes',
@@ -28,14 +19,9 @@ export default DocSearchDictionary({
 			helpText: 'Es posible que desees verificar tu conexión de red.',
 		},
 		footer: {
-			selectText: 'para seleccionar',
-			selectKeyAriaLabel: 'Tecla de entrada',
-			navigateText: 'para navegar',
-			navigateUpKeyAriaLabel: 'Flecha hacia arriba',
-			navigateDownKeyAriaLabel: 'Flecha hacia abajo',
+			shortcutLabel: 'para buscar',
 			closeText: 'para cerrar',
 			closeKeyAriaLabel: 'Tecla de escape',
-			searchByText: 'Búsqueda por',
 		},
 		noResultsScreen: {
 			noResultsText: 'No hay resultados para',
