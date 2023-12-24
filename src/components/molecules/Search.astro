@@ -1,15 +1,38 @@
 ---
-import '@docsearch/css/dist/modal.css';
 import { getDocSearchStrings } from '@i18n:search';
 import './variables.css';
+import { getCollection } from 'astro:content';
+import { jsonToArticle } from '@models:Article';
+import { getLangFromUrl } from '@i18n:index';
+import type { DocSearchTranslation } from '@i18n:search-translation';
 
-const docSearchStrings = getDocSearchStrings(Astro);
+const lang = getLangFromUrl(Astro.url);
+
+const publishedBlogEntriesPromises = (
+	await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === lang;
+	})
+).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+const sortedPublishedBlogEntries = publishedBlogEntries.sort((a, b) => {
+	return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
+
+const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 ---
 
-<sl-doc-search data-translations={JSON.stringify(docSearchStrings)}>
-	<button type="button" class="DocSearch DocSearch-Button" aria-label={docSearchStrings.button}>
-		<span class="DocSearch-Button-Container">
-			<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
+<sl-doc-search
+	data-translations={JSON.stringify(docSearchStrings)}
+	data-articles={JSON.stringify(sortedPublishedBlogEntries)}
+>
+	<button
+		id="search-button"
+		type="button"
+		class="text-light-slate flex justify-between items-center border border-green-500 rounded-full p-2"
+		aria-label={docSearchStrings.button}
+	>
+		<span class="flex justify-between items-center lg:mx-1">
+			<svg width="20" height="20" class="size-4 m-0.5" viewBox="0 0 20 20">
 				<path
 					d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
 					stroke="currentColor"
@@ -18,121 +41,241 @@ const docSearchStrings = getDocSearchStrings(Astro);
 					stroke-linecap="round"
 					stroke-linejoin="round"></path>
 			</svg>
-			<span class="DocSearch-Button-Placeholder">{docSearchStrings.button}</span>
+			<span class="hidden lg:flex">
+				<span class="text-sm">{docSearchStrings.button}</span>
+				<kbd
+					class="ml-1 px-1 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded"
+					>⌘</kbd
+				>
+				<kbd
+					class="px-1 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded"
+					>K</kbd
+				>
+			</span>
 		</span>
-		<span class="DocSearch-Button-Keys"></span>
 	</button>
 </sl-doc-search>
 
 <script>
+	import type Fuse from 'fuse.js';
+	import type { Article } from '@models:Article';
+	import type { DocSearchTranslation } from '@i18n:search-translation';
+	const platform = navigator.userAgentData.platform;
 	class DocSearch extends HTMLElement {
+		private textInputDelay(fn: Function, ms: number) {
+			let timer: ReturnType<typeof setTimeout>;
+			return function (...args: any[]) {
+				clearTimeout(timer);
+				timer = setTimeout(fn.bind(this, ...args), ms || 0);
+			};
+		}
+
 		constructor() {
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
-				const { default: docsearch } = await import('@docsearch/js');
+				const { default: Fuse } = await import('fuse.js');
+				window.dispatchEvent(new CustomEvent('fuseLoaded', { detail: Fuse }));
 				const translations = JSON.parse(this.dataset.translations || '{}');
-				docsearch({
-					container: 'sl-doc-search',
-					appId: 'QI0BGJ0O1W',
-					indexName: 'yunielacosta',
-					apiKey: 'ba9bb2c6979626993f7c5d05f30b44af',
-					searchParameters: { facetFilters: [[`lang:${location.pathname.split('/')[1]}`]] },
-					insights: true,
-					getMissingResultsUrl: ({ query }: { query: string }) =>
-						`https://github.com/yacosta738/yacosta738.github.io/issues/new?title=Missing+results+for+query+%22${encodeURIComponent(
-							query
-						)}%22`,
-					transformItems: (items) => {
-						return items.map((item) => {
-							// We transform the absolute URL into a relative URL to
-							// work better on localhost, preview URLS.
-							const url = new URL(item.url);
-							if (url.hash === '#overview') url.hash = '';
-							return {
-								...item,
-								url: url.href.replace(url.origin, ''),
-							};
-						});
-					},
-					placeholder: translations.placeholder,
-					translations: {
-						...translations,
-						button: {
-							buttonText: translations.button,
-							buttonAriaLabel: translations.button,
-						},
-					},
+				const articles = JSON.parse(this.dataset.articles || '[]');
+
+				const fuse = new Fuse<Article>(articles, {
+					keys: ['title', 'description', 'author', 'tags', 'categories', 'content'],
+					includeMatches: true,
+					threshold: 0.3,
+					useExtendedSearch: true,
+				});
+
+				const searchButton = this.querySelector('#search-button');
+
+				searchButton?.addEventListener('click', () => {
+					if (!document.querySelector('#search-modal-box')) {
+						this.createSearchModalDialog(translations, fuse);
+					}
+				});
+
+				// global search shortcut (cmd+k) in mac and (ctrl+k) in windows
+				window.addEventListener('keydown', (event) => {
+					const metaKey = platform === 'macOS' ? event.metaKey : event.ctrlKey;
+					if (event.key === 'k' && metaKey) {
+						// create search modal dialog if it doesn't exist
+						if (!document.querySelector('#search-modal-box')) {
+							this.createSearchModalDialog(translations, fuse);
+						}
+					}
 				});
 			});
+		}
+
+		private createSearchModalDialog(translations: Record<string, any>, fuse: Fuse<Article>) {
+			const modal = document.createElement('dialog');
+			modal.setAttribute('open', '');
+			modal.innerHTML = `
+					<div id="search-modal-box" class="fixed inset-0 bg-navy bg-opacity-80 flex justify-center items-center p-4 z-[100]">
+						<div class="bg-lightest-navy border-light-navy rounded-lg w-full max-w-4xl max-h-[60%]  overflow-auto">
+							<div class="flex flex-col">
+								<div class="p-4">
+									<label for="search-input" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+									<div class="relative">
+											<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+													<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+															<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+													</svg>
+											</div>
+											<input type="search" id="search-input" class="block caret-green-500 w-full p-4 ps-10 text-sm text-light-slate border border-gray-300 rounded-lg bg-navy/50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" 
+											placeholder="${translations?.modal?.searchBox?.placeholder}" required>
+											<kbd class="absolute end-2.5 bottom-2.5 px-2 py-1.5 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded-lg">Esc</kbd>
+								</div>
+													
+								</div>
+								<div class="p-4 text-light-slate  overflow-y-auto">
+									<div class="text-light-slate font-semibold mb-2">${
+										translations?.modal?.startScreen?.recentSearchesTitle
+									}</div>
+									<ul id="results" class="space-y-2">
+										<li>${translations?.modal?.startScreen?.noRecentSearchesText}</li>
+									</ul>
+								</div>
+								<div class="bg-navy/50 p-4 border-t border-light-slate/50 text-sm text-light-slate w-full h-full">
+									<span>
+									<kbd class="px-2 py-1.5 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded-lg">${
+										platform === 'macOS' ? '⌘' : 'Ctrl'
+									}</kbd>
+									+
+									<kbd class="px-2 py-1.5 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded-lg">K</kbd>
+									${translations?.modal?.footer?.shortcutLabel}
+									</span>
+									<span class="mx-2"><kbd class="px-2 py-1.5 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded-lg">Esc</kbd> ${
+										translations?.modal?.footer?.closeText
+									}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					`;
+
+			document.body.appendChild(modal);
+
+			const searchInput = document.getElementById('search-input') as HTMLInputElement;
+			const resultsContainer = document.getElementById('results') ?? document.createElement('ul');
+			const searchModalBox = document.getElementById('search-modal-box');
+
+			searchInput?.focus();
+			const search = async () => {
+				this.searchArticles(searchInput, fuse, resultsContainer, translations);
+			};
+			searchInput?.addEventListener('input', this.textInputDelay(search, 500));
+
+			searchInput?.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') {
+					modal.remove();
+				}
+			});
+
+			// remove modal on click outside of modal
+			searchModalBox?.addEventListener('click', (event) => {
+				if (event.target === searchModalBox) {
+					modal.remove();
+				}
+			});
+		}
+
+		private searchArticles(
+			searchInput: HTMLInputElement,
+			fuse: Fuse<Article>,
+			resultsContainer: HTMLElement,
+			translations?: DocSearchTranslation
+		) {
+			const query = searchInput.value.toLowerCase();
+
+			const results = fuse.search(query);
+
+			resultsContainer.innerHTML = ''; // Clear results
+			if (results.length > 0) {
+				results.forEach((result) => {
+					const { item } = result;
+
+					const listItem = document.createElement('li');
+					listItem.innerHTML = `
+						<li class="p-4 my-2 border border-green-500 cursor-pointer">
+						<div class="flex items-center justify-between">
+							<div class="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-500 mr-2"
+              >
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <a href="/posts/${item.url}">${item.title}</a>
+            </div>
+            <div class="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-500 mr-2"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-500"
+              >
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                <line x1="3" x2="21" y1="9" y2="9"></line>
+                <path d="m9 16 3-3 3 3"></path>
+              </svg>
+            </div>
+						</div>
+						<p class="p-1 m-2">${item.description}</p>
+						<div class="flex justify-start items-center">
+						${item.tags
+							.map(
+								(tag) =>
+									`<span class="flex justify-between items-center text-xs text-green-500 bg-lightest-navy border border-lightest-navy rounded-full px-2 py-1 mr-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="m12 18l-4.2 1.8q-1 .425-1.9-.162T5 17.975V5q0-.825.588-1.412T7 3h10q.825 0 1.413.588T19 5v12.975q0 1.075-.9 1.663t-1.9.162zm0-2.2l5 2.15V5H7v12.95zM12 5H7h10z"/></svg>${tag}</span>`
+							)
+							.join('')}
+						${item.categories
+							.map(
+								(category) =>
+									`<span class="flex justify-between items-center text-xs text-green-500 bg-lightest-navy border border-lightest-navy rounded-full px-2 py-1 mr-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M7.885 10.23L12 3.463l4.115 6.769zm9.606 11q-1.558 0-2.64-1.08q-1.082-1.083-1.082-2.64q0-1.56 1.082-2.65q1.082-1.09 2.64-1.09t2.649 1.09q1.09 1.09 1.09 2.65q0 1.557-1.09 2.64q-1.09 1.08-2.65 1.08m-13.72-.5v-6.46h6.46v6.46z"/></svg>${category}</span>`
+							)
+							.join('')}
+						</div>
+          </li>
+						`;
+					resultsContainer.appendChild(listItem);
+					listItem.addEventListener('click', () => {
+						window.location.href = `/posts/${item.url}`;
+					});
+				});
+			} else {
+				resultsContainer.innerHTML = `<li>${translations?.modal?.startScreen?.noRecentSearchesText}</li>`;
+			}
 		}
 	}
 
 	customElements.define('sl-doc-search', DocSearch);
 </script>
-
-<style is:global>
-	.DocSearch-Button {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		border: 0;
-		background-color: transparent;
-		color: var(--sl-color-gray-1);
-		cursor: pointer;
-		height: 2.5rem;
-		font-size: var(--sl-text-xl);
-	}
-	.DocSearch-Button-Container {
-		display: contents;
-	}
-	.DocSearch-Search-Icon {
-		width: 0.875em;
-		height: 0.875em;
-		stroke-width: 0.125rem;
-	}
-	.DocSearch-Button-Placeholder,
-	.DocSearch-Button-Keys,
-	.DocSearch-Button-Key {
-		display: none;
-	}
-
-	@media (min-width: 50rem) {
-		sl-doc-search {
-			width: 100%;
-		}
-
-		.DocSearch-Button {
-			border: 1px solid var(--sl-color-gray-5);
-			border-radius: 0.5rem;
-			padding-inline-start: 0.75rem;
-			padding-inline-end: 1rem;
-			background-color: var(--sl-color-black);
-			color: var(--sl-color-gray-2);
-			font-size: var(--sl-text-sm);
-			width: 100%;
-			max-width: 22rem;
-		}
-		.DocSearch-Button:hover {
-			border-color: var(--sl-color-gray-2);
-			color: var(--sl-color-white);
-		}
-
-		.DocSearch-Button-Placeholder,
-		.DocSearch-Button-Keys {
-			display: flex;
-		}
-		.DocSearch-Button-Keys {
-			margin-inline-start: auto;
-		}
-		.DocSearch-Button-Keys::before {
-			content: '';
-			width: 1em;
-			height: 1em;
-			-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Zm3 15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10Z'%3E%3C/path%3E%3Cpath d='M15.293 6.707a1 1 0 1 1 1.414 1.414l-8.485 8.486a1 1 0 0 1-1.414-1.415l8.485-8.485Z'%3E%3C/path%3E%3C/svg%3E");
-			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Zm3 15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10Z'%3E%3C/path%3E%3Cpath d='M15.293 6.707a1 1 0 1 1 1.414 1.414l-8.485 8.486a1 1 0 0 1-1.414-1.415l8.485-8.485Z'%3E%3C/path%3E%3C/svg%3E");
-			-webkit-mask-size: 100%;
-			mask-size: 100%;
-			background-color: currentColor;
-		}
-	}
-</style>

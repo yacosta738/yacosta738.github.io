@@ -1,6 +1,6 @@
-import type docsearch from '@docsearch/js';
-
-type ModalTranslations = NonNullable<Parameters<typeof docsearch>[0]['translations']>['modal'];
+type ModalTranslations = {
+	[key: string]: string | object | ModalTranslations;
+};
 
 export interface DocSearchTranslation {
 	// These two keys are Astro-specific and apply to the search box in the header.
