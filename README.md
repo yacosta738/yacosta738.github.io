@@ -16,11 +16,11 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=yacosta738_yacosta738.github.io)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 
-
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yacosta738/yacosta738.github.io)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/github/yacosta738/yacosta738.github.io)
 [![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://pr.new/github.com/yacosta738/yacosta738.github.io)
 
+![yap-readme.png](docs%2Fimages%2Fyap-readme.png)
 Welcome to my little corner of the internet! This is where I store all my achievements and experiences after becoming a developer. From the first line of code I wrote to my most recent projects, this portfolio serves as a record of my journey in this field.
 
 In addition to showcasing my work, I also like to share my thoughts and insights through articles that I write and publish here. Whether it's about the latest trends in technology or a personal reflection on my growth as a developer, I hope you find something here that sparks your interest.
@@ -40,36 +40,54 @@ Thank you for taking the time to visit my portfolio. Feel free to explore and ge
 Inside of your Astro project, you'll see the following folders and files:
 
 ```shell
-drwxr-xr-x    - acosta 10 Sep 10:30 .
-.rw-r--r--  303 acosta 31 Aug 09:25 ├── astro-i18next.config.ts
-.rw-r--r--  994 acosta  9 Sep 19:01 ├── astro.config.js
-.rw-r--r--   32 acosta 30 Aug 15:53 ├── netlify.toml
-.rw-r--r-- 1.7k acosta  9 Sep 18:59 ├── package.json
-.rw-r--r-- 230k acosta  9 Sep 20:03 ├── pnpm-lock.yaml
-drwxr-xr-x    - acosta  9 Sep 19:11 ├── public
-drwxr-xr-x    - acosta 29 Aug 13:39 │  ├── assets
-.rw-r--r-- 4.3k acosta 21 Aug 17:08 │  ├── favicon.ico
-drwxr-xr-x    - acosta 29 Aug 13:39 │  ├── files
-.rwxr-xr-x 9.0k acosta 21 Aug 17:08 │  ├── logo.svg
-.rwxr-xr-x  68k acosta 21 Aug 17:08 │  ├── oops.png
-drwxr-xr-x    - acosta  9 Sep 09:36 │  ├── rss
-drwxr-xr-x    - acosta  9 Sep 16:49 │  ├── uploads
-.rwxrwxrwx  79k acosta 15 Jul 19:36 │  └── you-are-the-best.png
-.rw-r--r-- 2.0k acosta  8 Sep 21:11 ├── README.md
-.rw-r--r--  429 acosta  2 Sep 13:12 ├── remark-reading-time.mjs
-.rw-r--r--  619 acosta 21 Aug 17:08 ├── SECURITY.md
-drwxr-xr-x    - acosta 29 Aug 13:39 ├── src
-drwxr-xr-x    - acosta 29 Aug 13:39 │  ├── components
-drwxr-xr-x    - acosta 30 Aug 17:15 │  ├── data
-.rw-r--r--  160 acosta 31 Aug 09:25 │  ├── env.d.ts
-drwxr-xr-x    - acosta 29 Aug 13:39 │  ├── locales
-drwxr-xr-x    - acosta  7 Sep 18:18 │  ├── models
-drwxr-xr-x    - acosta  9 Sep 09:28 │  ├── pages
-drwxr-xr-x    - acosta 29 Aug 13:39 │  ├── store
-drwxr-xr-x    - acosta  3 Sep 13:05 │  ├── styles
-drwxr-xr-x    - acosta 29 Aug 13:39 │  └── util
-.rw-r--r-- 1.7k acosta 31 Aug 09:25 ├── tailwind.config.cjs
-.rw-r--r--  971 acosta 31 Aug 07:11 └── tsconfig.json
+drwxr-xr-x     - acosta 25 Dec 10:43 .
+.rw-r--r--  1.4k acosta 23 Dec 09:28 ├── astro.config.ts
+.rw-r--r--   374 acosta  5 Nov 14:11 ├── Dockerfile
+drwxr-xr-x     - acosta 25 Dec 10:41 ├── docs
+drwxr-xr-x     - acosta 25 Dec 10:41 │  └── images
+.rw-r--r--    32 acosta  5 Nov 14:11 ├── netlify.toml
+.rw-r--r--  2.8k acosta 23 Dec 16:15 ├── package.json
+.rw-r--r--@ 2.6k acosta 18 Dec 20:15 ├── playwright.config.ts
+.rw-r--r--  518k acosta 25 Dec 10:09 ├── pnpm-lock.yaml
+drwxr-xr-x     - acosta 18 Dec 20:15 ├── public
+.rw-r--r--   13k acosta  5 Nov 14:11 │  ├── android-chrome-192x192.png
+.rw-r--r--   47k acosta  5 Nov 14:11 │  ├── android-chrome-512x512.png
+.rw-r--r--   12k acosta  5 Nov 14:11 │  ├── apple-touch-icon.png
+.rw-r--r--   336 acosta  5 Nov 14:11 │  ├── browserconfig.xml
+.rw-r--r--   559 acosta  5 Nov 14:11 │  ├── favicon-16x16.png
+.rw-r--r--  1.5k acosta  5 Nov 14:11 │  ├── favicon-32x32.png
+.rw-r--r--  9.3k acosta  5 Nov 14:11 │  ├── favicon.ico
+drwxr-xr-x     - acosta  5 Nov 14:11 │  ├── files
+drwxr-xr-x     - acosta  5 Nov 14:11 │  ├── fonts
+.rw-r--r--@  253 acosta  5 Nov 14:11 │  ├── humans.txt
+.rw-r--r--   12k acosta  5 Nov 14:11 │  ├── logo.svg
+.rw-r--r--   20k acosta  5 Nov 14:11 │  ├── oops.webp
+drwxr-xr-x     - acosta  5 Nov 14:11 │  ├── rss
+drwxr-xr-x     - acosta  5 Nov 14:11 │  ├── uploads
+.rw-r--r--   19k acosta  5 Nov 14:11 │  └── you-are-the-best.webp
+.rw-r--r--@ 7.8k acosta 25 Dec 10:43 ├── README.md
+.rw-r--r--@  508 acosta 18 Dec 20:15 ├── remark-reading-time.mjs
+.rw-r--r--@  541 acosta 18 Dec 20:15 ├── renovate.json
+.rw-r--r--   619 acosta  5 Nov 14:11 ├── SECURITY.md
+drwxr-xr-x     - acosta 20 Dec 15:36 ├── src
+drwxr-xr-x     - acosta 20 Dec 15:36 │  ├── assets
+drwxr-xr-x     - acosta  5 Nov 14:11 │  ├── components
+drwxr-xr-x@    - acosta 18 Dec 20:15 │  ├── content
+.rw-r--r--@  453 acosta 22 Dec 17:05 │  ├── env.d.ts
+drwxr-xr-x@    - acosta 23 Dec 16:17 │  ├── i18n
+drwxr-xr-x     - acosta  5 Nov 14:11 │  ├── icons
+drwxr-xr-x     - acosta 18 Dec 20:15 │  ├── models
+drwxr-xr-x     - acosta 18 Dec 20:15 │  ├── pages
+drwxr-xr-x     - acosta 18 Dec 20:15 │  ├── plugins
+drwxr-xr-x     - acosta 18 Dec 20:15 │  ├── store
+drwxr-xr-x     - acosta 24 Dec 12:08 │  ├── styles
+drwxr-xr-x     - acosta 18 Dec 20:15 │  └── utils
+.rw-r--r--@ 2.4k acosta 18 Dec 20:15 ├── tailwind.config.cjs
+drwxr-xr-x     - acosta  5 Nov 14:11 ├── tests
+drwxr-xr-x     - acosta 24 Dec 16:35 │  ├── integration
+drwxr-xr-x     - acosta 18 Dec 20:15 │  └── unit
+.rw-r--r--@ 1.2k acosta 21 Dec 17:08 ├── tsconfig.json
+.rw-r--r--@  252 acosta 18 Dec 20:15 └── vitest.config.ts
 ```
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
