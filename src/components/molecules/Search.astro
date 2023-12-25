@@ -85,12 +85,12 @@ const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 					threshold: 0.3,
 					useExtendedSearch: true,
 				});
-				
+
 				window?.dispatchEvent(new CustomEvent('fuseLoaded', { detail: fuse }));
 
 				this.initSearchComponent(translations, fuse);
 			});
-			
+
 			window.addEventListener('fuseLoaded', (event) => {
 				const fuse = (event as CustomEvent).detail as Fuse<Article>;
 				const translations = JSON.parse(this.dataset.translations || '{}');
