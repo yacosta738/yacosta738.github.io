@@ -16,7 +16,7 @@ categories:
 draft: false
 ---
 
-La clase Runtime de Java proporciona una forma para que los desarrolladores interactúen con el entorno de tiempo de ejecución. La clase Runtime es una clase [singleton](https://www.yunielacosta.com/es/blog/singleton-pattern/) que proporciona una interfaz con el sistema operativo subyacente. La clase proporciona métodos para interactuar con el sistema operativo, como ejecutar comandos, administrar la memoria y apagar la JVM.
+La clase Runtime de Java proporciona una forma para que los desarrolladores interactúen con el entorno de tiempo de ejecución. La clase Runtime es una clase [singleton](https://www.yunielacosta.com/posts/es/singleton-pattern/) que proporciona una interfaz con el sistema operativo subyacente. La clase proporciona métodos para interactuar con el sistema operativo, como ejecutar comandos, administrar la memoria y apagar la JVM.
 
 The main purpose of the [Runtime class](https://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html) is to provide information about the runtime environment and control the execution of the JVM. For example, it provides methods to get the amount of free memory, the total memory allocated, and the maximum amount of memory that can be allocated. It also provides methods for getting the number of available processors and the JRE version being used.
 
