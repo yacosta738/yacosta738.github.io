@@ -50,8 +50,8 @@ jobs:
               n4t5u/${{ env.IMAGE_NAME }}
               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       
-      - name: Build the container image
-        run: pnpm run build:docker     
+#      - name: Build the container image
+#        run: pnpm run build:docker     
 
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
