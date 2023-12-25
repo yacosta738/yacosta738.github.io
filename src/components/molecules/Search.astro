@@ -22,13 +22,15 @@ const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 ---
 
 <sl-doc-search
+	id="doc-search"
 	data-translations={JSON.stringify(docSearchStrings)}
 	data-articles={JSON.stringify(sortedPublishedBlogEntries)}
 >
 	<button
 		id="search-button"
 		type="button"
-		class="text-light-slate flex justify-between items-center border border-green-500 rounded-full p-2"
+		class="text-green-500 lg:text-light-slate flex justify-between items-center rounded p-2 hover:border-green-500 hover:bg-green-900
+           lg:border lg:border-green-500 md:rounded-full"
 		aria-label={docSearchStrings.button}
 	>
 		<span class="flex justify-between items-center lg:mx-1">
@@ -74,7 +76,6 @@ const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 			super();
 			window.addEventListener('DOMContentLoaded', async () => {
 				const { default: Fuse } = await import('fuse.js');
-				window.dispatchEvent(new CustomEvent('fuseLoaded', { detail: Fuse }));
 				const translations = JSON.parse(this.dataset.translations || '{}');
 				const articles = JSON.parse(this.dataset.articles || '[]');
 
@@ -84,25 +85,43 @@ const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 					threshold: 0.3,
 					useExtendedSearch: true,
 				});
+				
+				window?.dispatchEvent(new CustomEvent('fuseLoaded', { detail: fuse }));
 
-				const searchButton = this.querySelector('#search-button');
+				this.initSearchComponent(translations, fuse);
+			});
+			
+			window.addEventListener('fuseLoaded', (event) => {
+				const fuse = (event as CustomEvent).detail as Fuse<Article>;
+				const translations = JSON.parse(this.dataset.translations || '{}');
+				const searchInput = document.getElementById('search-input') as HTMLInputElement;
+				const resultsContainer = document.getElementById('results') ?? document.createElement('ul');
+				this.searchArticles(searchInput, fuse, resultsContainer, translations);
+			});
+		}
 
-				searchButton?.addEventListener('click', () => {
+		private initSearchComponent(translations: Record<string, any>, fuse: Fuse<Article>) {
+			const searchButton = this.querySelector('#search-button');
+
+			searchButton?.addEventListener('click', () => {
+				if (!document.querySelector('#search-modal-box')) {
+					this.createSearchModalDialog(translations, fuse);
+				}
+			});
+			searchButton?.addEventListener('touchend', () => {
+				if (!document.querySelector('#search-modal-box')) {
+					this.createSearchModalDialog(translations, fuse);
+				}
+			});
+			// global search shortcut (cmd+k) in mac and (ctrl+k) in windows
+			window.addEventListener('keydown', (event) => {
+				const metaKey = platform === 'macOS' ? event.metaKey : event.ctrlKey;
+				if (event.key === 'k' && metaKey) {
+					// create search modal dialog if it doesn't exist
 					if (!document.querySelector('#search-modal-box')) {
 						this.createSearchModalDialog(translations, fuse);
 					}
-				});
-
-				// global search shortcut (cmd+k) in mac and (ctrl+k) in windows
-				window.addEventListener('keydown', (event) => {
-					const metaKey = platform === 'macOS' ? event.metaKey : event.ctrlKey;
-					if (event.key === 'k' && metaKey) {
-						// create search modal dialog if it doesn't exist
-						if (!document.querySelector('#search-modal-box')) {
-							this.createSearchModalDialog(translations, fuse);
-						}
-					}
-				});
+				}
 			});
 		}
 
