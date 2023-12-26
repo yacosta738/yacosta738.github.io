@@ -20,6 +20,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   FORMSPREE: ${{ secrets.FORMSPREE }}
+  PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
   
 jobs:
   build:
@@ -30,11 +31,17 @@ jobs:
 
       - name: Install Tools & Dependencies
         uses: ./.github/actions/install
-        
+      
+      - name: 🔍 PBOT_GITHUB_TOKEN
+        if: env.PBOT_GITHUB_TOKEN == ''
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV     
+
       - name: Create Release 🚀
         uses: ridedott/release-me-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
         with:
           release-branches: '["main"]'
           node-module: true
@@ -79,7 +86,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ env.PBOT_GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta

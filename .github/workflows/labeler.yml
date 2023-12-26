@@ -2,14 +2,23 @@ name: labeler
 
 on: [pull_request]
 
+env:
+  PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}      
+
 jobs:
   labeler:
     runs-on: ubuntu-latest
     name: Label the PR size
     steps:
+      - name: 🔍 PBOT_GITHUB_TOKEN
+        if: env.PBOT_GITHUB_TOKEN == ''
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV    
+
       - uses: codelytv/pr-size-labeler@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
           xs_label: size/xs
           xs_max_size: '10'
           s_label: size/s
