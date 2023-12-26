@@ -6,10 +6,19 @@ on:
       - closed
   workflow_dispatch:
 
+env:
+  PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}    
+    
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+      - name: 🔍 PBOT_GITHUB_TOKEN
+        if: env.PBOT_GITHUB_TOKEN == ''
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV    
+
       - name: Check out code
         uses: actions/checkout@v4
 
@@ -32,4 +41,4 @@ jobs:
           done
           echo "Done"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
