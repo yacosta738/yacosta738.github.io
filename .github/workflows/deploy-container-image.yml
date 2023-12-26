@@ -48,7 +48,7 @@ jobs:
         run: pnpm run build # build:docker     
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        uses: docker/build-push-action@9f6f8c940b91232557f8699b21341a08624a8dce
         with:
           context: .
           file: ./Dockerfile
