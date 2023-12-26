@@ -39,12 +39,9 @@ jobs:
         run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV     
 
       - name: Create Release 🚀
-        uses: ridedott/release-me-action@master
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
-        with:
-          release-branches: '["main"]'
-          node-module: true
           
       - name: Install, build, and upload your site
         uses: withastro/action@v1
@@ -54,7 +51,9 @@ jobs:
         # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
         env:
           FORMSPREE: ${{ secrets.FORMSPREE }}
-          
+     
+    outputs:
+        revnumber: ${{ env.revnumber }}     
   deploy:
     needs: build
     runs-on: ubuntu-latest
