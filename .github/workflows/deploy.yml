@@ -98,11 +98,16 @@ jobs:
             n4t5u/${{ env.IMAGE_NAME }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha
+            latest
+            ${{ github.sha }}
+            ${{ github.sha }}-${{ github.run_number }}
+          labels: |
+            org.opencontainers.image.source= ${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.created=${{ github.run_id }}
+            org.opencontainers.image.authors=${{ github.actor }}
+
+
       - name: Build the container image
         run: pnpm run build # build:docker     
 
