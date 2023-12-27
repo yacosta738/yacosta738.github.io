@@ -38,7 +38,12 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV     
 
-      - name: Create Release 🚀
+      - name: 🧩 Add plugin for conventional commits
+        run: pnpm install conventional-changelog-conventionalcommits @semantic-release/exec
+        working-directory: ./.github/workflows
+
+      - name: 🚀 🟣 Release to GitHub
+        working-directory: ./.github/workflows
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
