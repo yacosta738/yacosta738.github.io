@@ -73,6 +73,9 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+    
+      - name: Install Tools & Dependencies
+        uses: ./.github/actions/install
 
       - name: Log in to Docker Hub
         uses: docker/login-action@3d58c274f17dffee475a5520cbe67f0a882c4dbb
