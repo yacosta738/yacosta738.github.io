@@ -9,7 +9,6 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=bugs)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
