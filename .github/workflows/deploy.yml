@@ -95,7 +95,6 @@ jobs:
         uses: docker/metadata-action@9dc751fe249ad99385a2583ee0d084c400eee04e
         with:
           images: |
-            n4t5u/${{ env.IMAGE_NAME }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             latest
