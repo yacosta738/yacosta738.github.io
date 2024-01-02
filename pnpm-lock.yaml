@@ -146,8 +146,8 @@ devDependencies:
     specifier: 0.3.0
     version: 0.3.0
   marked:
-    specifier: 11.1.0
-    version: 11.1.0
+    specifier: 11.1.1
+    version: 11.1.1
   mdast-util-to-string:
     specifier: 4.0.0
     version: 4.0.0
@@ -8688,8 +8688,8 @@ packages:
       supports-hyperlinks: 3.0.0
     dev: true
 
-  /marked@11.1.0:
-    resolution: {integrity: sha512-fvKJWAPEafVj1dwGwcPI5mBB/0pvViL6NlCbNDG1HOIRwwAU/jeMoFxfbRLuirO1wRH7m4yPvBqD/O1wyWvayw==}
+  /marked@11.1.1:
+    resolution: {integrity: sha512-EgxRjgK9axsQuUa/oKMx5DEY8oXpKJfk61rT5iY3aRlgU6QJtUcxU5OAymdhCvWvhYcd9FKmO5eQoX8m9VGJXg==}
     engines: {node: '>= 18'}
     hasBin: true
     dev: true
