@@ -81,7 +81,7 @@
   },
   "dependencies": {
     "fuse.js": "^7.0.0",
-    "sass": "1.69.5",
+    "sass": "1.69.6",
     "sharp": "0.33.1"
   },
   "packageManager": "pnpm@8.12.1"
