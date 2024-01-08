@@ -98,8 +98,8 @@ devDependencies:
     specifier: 2.0.11
     version: 2.0.11
   astro-icon:
-    specifier: 1.0.0-next.2
-    version: 1.0.0-next.2
+    specifier: 1.0.2
+    version: 1.0.2
   astro-netlify-cms:
     specifier: 0.5.4
     version: 0.5.4(astro@4.0.8)(graphql@15.8.0)
@@ -3336,7 +3336,7 @@ packages:
   /@types/cheerio@0.22.35:
     resolution: {integrity: sha512-yD57BchKRvTV+JD53UZ6PD8KWY5g5rvvMLRnZR3EQBCZXiDT/HR+pKpMzFGlWNhFrXlo7VPZXtKvIEwZkAWOIA==}
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
     dev: true
 
   /@types/css-tree@2.3.4:
@@ -3468,7 +3468,7 @@ packages:
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
     dev: true
 
   /@types/sax@1.2.7:
@@ -3488,7 +3488,7 @@ packages:
   /@types/tar@6.1.10:
     resolution: {integrity: sha512-60ZO+W0tRKJ3ggdzJKp75xKVlNogKYMqGvr2bMH/+k3T0BagfYTnbmVDFMJB1BFttz6yRgP5MDGP27eh7brrqw==}
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
       minipass: 4.2.8
     dev: true
 
@@ -3522,7 +3522,7 @@ packages:
   /@types/vfile@3.0.2:
     resolution: {integrity: sha512-b3nLFGaGkJ9rzOcuXRfHkZMdjsawuDD0ENL9fzTophtBg8FJHSGbH7daXkEpcwy3v7Xol3pAvsmlYyFhR4pqJw==}
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
       '@types/unist': 3.0.2
       '@types/vfile-message': 2.0.0
     dev: true
@@ -3535,7 +3535,7 @@ packages:
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==}
     requiresBuild: true
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
     dev: true
     optional: true
 
@@ -3859,7 +3859,7 @@ packages:
   /@wry/context@0.4.4:
     resolution: {integrity: sha512-LrKVLove/zw6h2Md/KZyWxIkFM6AoyKp71OqpH9Hiip1csjPVoD3tPxlbQUNxEnHENks3UGgNpSBCAfq9KWuag==}
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
       tslib: 1.14.1
     dev: true
 
@@ -4295,8 +4295,8 @@ packages:
       - supports-color
     dev: true
 
-  /astro-icon@1.0.0-next.2:
-    resolution: {integrity: sha512-LruCSCnTX16w5p8G+afyRqL8i4SKDVbaEvs7d5wudahum+7pibuFDp//LvKL+QBTLctEzoS/o0387yuOAKli6A==}
+  /astro-icon@1.0.2:
+    resolution: {integrity: sha512-MGgnjxHnI50bBWasBdt0pw/S9lWharfxhUv1sP2Vj1/KDaT/Cz35ZdlBgb4DKtfzQZREIJN2eQGqmVbvLq5p3w==}
     dependencies:
       '@iconify/tools': 3.0.7
       '@iconify/types': 2.0.0
@@ -7766,7 +7766,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.10.5
+      '@types/node': 20.10.6
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
