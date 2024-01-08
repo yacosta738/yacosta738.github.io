@@ -53,7 +53,7 @@
     "astro-robots-txt": "1.0.0",
     "astro-seo": "0.8.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
-    "dompurify": "3.0.6",
+    "dompurify": "3.0.8",
     "eslint": "8.56.0",
     "eslint-config-standard": "17.1.0",
     "eslint-plugin-astro": "0.31.0",
