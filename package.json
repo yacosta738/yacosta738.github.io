@@ -84,5 +84,5 @@
     "sass": "1.69.7",
     "sharp": "0.33.1"
   },
-  "packageManager": "pnpm@8.14.0"
+  "packageManager": "pnpm@8.14.1"
 }
