@@ -15,5 +15,11 @@
       "schedule": ["after 5pm on Friday"]
     }
   ],
-  "extends": ["config:base", ":assignee(arg0)", ":reviewer(arg0)"]
+  "extends": [
+    "config:recommended",
+    "group:all",
+    "config:base", 
+    ":assignee(arg0)", 
+    ":reviewer(arg0)"
+  ]
 }
