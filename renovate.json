@@ -18,8 +18,8 @@
   "extends": [
     "config:recommended",
     "group:all",
-    "config:base", 
-    ":assignee(arg0)", 
+    "config:base",
+    ":assignee(arg0)",
     ":reviewer(arg0)"
   ]
 }
