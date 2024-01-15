@@ -114,12 +114,6 @@ module.exports = {
 					900: '#1a202c',
 				},
 			},
-			fontFamily: {
-				mono: ['Alkatra', 'monospace'],
-			},
 		},
-	},
-	variants: {
-		extend: {},
 	},
 };

@@ -80,6 +80,7 @@
     "workbox-window": "^7.0.0"
   },
   "dependencies": {
+    "astro-font": "^0.0.72",
     "fuse.js": "^7.0.0",
     "sass": "1.69.7",
     "sharp": "0.33.2"
