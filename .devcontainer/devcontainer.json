@@ -6,8 +6,8 @@
     "dockerfile": "Dockerfile",
     // Update 'VARIANT' to pick a Node version: 14, 16, 18
     "args": {
-      "VARIANT": "18"
-    }
+      "VARIANT": "18",
+    },
   },
 
   // Set *default* container specific settings.json values on container create.
@@ -18,7 +18,7 @@
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.formatOnSave": true,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
   },
 
   // Add the IDs of extensions you want installed when the container is created.
@@ -33,7 +33,7 @@
     "bradlc.vscode-tailwindcss",
     "ms-playwright.playwright",
     "eamodio.gitlens",
-    "Vue.volar"
+    "Vue.volar",
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -43,5 +43,5 @@
   "postCreateCommand": "pnpm install",
 
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "node"
+  "remoteUser": "node",
 }
