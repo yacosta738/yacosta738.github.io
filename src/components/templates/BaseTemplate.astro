@@ -1,4 +1,6 @@
 ---
+import { join } from "node:path";
+import { AstroFont } from "astro-font";
 import '../../styles/global.css';
 import HeadSEO from 'organisms:HeadSEO';
 import GoogleAnalytics from 'atoms:GoogleAnalytics';
@@ -26,6 +28,39 @@ const { title, description, image, ogImageAlt } = Astro.props;
 			ogImageAlt={ogImageAlt ?? t('seo.ogImageAlt')}
 		/>
 		<GoogleAnalytics />
+		<AstroFont
+		  config={[
+			{
+			  name: "Alkatra",
+			  src: [
+				{
+				  style: 'normal',
+				  weight: '400',
+				  path: join(process.cwd(), 'public', 'fonts', 'alkatra-v3-latin-regular.eot')
+				},
+				{
+				  style: 'normal',
+				  weight: '400',
+				  path: join(process.cwd(), 'public', 'fonts', 'alkatra-v3-latin-regular.woff2')
+				},
+				{
+				  style: 'normal',
+				  weight: '400',
+				  path: join(process.cwd(), 'public', 'fonts', 'alkatra-v3-latin-regular.woff')
+				},
+				{
+				  style: 'normal',
+				  weight: '400',
+				  path: join(process.cwd(), 'public', 'fonts', 'alkatra-v3-latin-regular.ttf')
+				},
+			  ],
+			  preload: false,
+			  display: "swap",
+			  selector: ".font-mono",
+			  fallback: "sans-serif",
+			},
+		  ]}
+		/>
 	</head>
 
 	<body
