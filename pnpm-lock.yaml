@@ -24,7 +24,7 @@ devDependencies:
     version: 3.0.5
   '@astrojs/tailwind':
     specifier: 5.1.0
-    version: 5.1.0(astro@4.2.5)(tailwindcss@3.4.1)
+    version: 5.1.0(astro@4.2.6)(tailwindcss@3.4.1)
   '@iconify-json/akar-icons':
     specifier: ^1.1.23
     version: 1.1.23
@@ -84,13 +84,13 @@ devDependencies:
     version: 6.19.1(eslint@8.56.0)(typescript@5.3.3)
   '@vite-pwa/astro':
     specifier: ^0.2.0
-    version: 0.2.0(astro@4.2.5)(vite-plugin-pwa@0.17.4)
+    version: 0.2.0(astro@4.2.6)(vite-plugin-pwa@0.17.4)
   '@vueuse/core':
     specifier: 10.7.2
     version: 10.7.2(vue@3.4.13)
   astro:
-    specifier: 4.2.5
-    version: 4.2.5(sass@1.70.0)(typescript@5.3.3)
+    specifier: 4.2.6
+    version: 4.2.6(sass@1.70.0)(typescript@5.3.3)
   astro-compress:
     specifier: 2.2.8
     version: 2.2.8
@@ -98,11 +98,11 @@ devDependencies:
     specifier: 2.0.11
     version: 2.0.11
   astro-icon:
-    specifier: 1.0.2
-    version: 1.0.2
+    specifier: 1.0.3
+    version: 1.0.3
   astro-netlify-cms:
     specifier: 0.5.4
-    version: 0.5.4(astro@4.2.5)(graphql@15.8.0)
+    version: 0.5.4(astro@4.2.6)(graphql@15.8.0)
   astro-robots-txt:
     specifier: 1.0.0
     version: 1.0.0
@@ -146,8 +146,8 @@ devDependencies:
     specifier: 0.3.0
     version: 0.3.0
   marked:
-    specifier: 11.1.1
-    version: 11.1.1
+    specifier: 11.2.0
+    version: 11.2.0
   mdast-util-to-string:
     specifier: 4.0.0
     version: 4.0.0
@@ -289,13 +289,13 @@ packages:
       zod: 3.22.4
     dev: true
 
-  /@astrojs/tailwind@5.1.0(astro@4.2.5)(tailwindcss@3.4.1):
+  /@astrojs/tailwind@5.1.0(astro@4.2.6)(tailwindcss@3.4.1):
     resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.2.5(sass@1.70.0)(typescript@5.3.3)
+      astro: 4.2.6(sass@1.70.0)(typescript@5.3.3)
       autoprefixer: 10.4.16(postcss@8.4.33)
       postcss: 8.4.33
       postcss-load-config: 4.0.2(postcss@8.4.33)
@@ -3690,13 +3690,13 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@vite-pwa/astro@0.2.0(astro@4.2.5)(vite-plugin-pwa@0.17.4):
+  /@vite-pwa/astro@0.2.0(astro@4.2.6)(vite-plugin-pwa@0.17.4):
     resolution: {integrity: sha512-1MBNbRo9I9fp9sUSoaQfI/xHVDRKRoUsWETDJMVoKoctZYfm4fZgb7EN76WJdejW/vup+3+uoFlDMCnca+vZzA==}
     peerDependencies:
       astro: ^1.6.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
       vite-plugin-pwa: '>=0.17.3 <1'
     dependencies:
-      astro: 4.2.5(sass@1.70.0)(typescript@5.3.3)
+      astro: 4.2.6(sass@1.70.0)(typescript@5.3.3)
       vite-plugin-pwa: 0.17.4(vite@5.0.12)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
@@ -4277,8 +4277,8 @@ packages:
       - supports-color
     dev: true
 
-  /astro-icon@1.0.2:
-    resolution: {integrity: sha512-MGgnjxHnI50bBWasBdt0pw/S9lWharfxhUv1sP2Vj1/KDaT/Cz35ZdlBgb4DKtfzQZREIJN2eQGqmVbvLq5p3w==}
+  /astro-icon@1.0.3:
+    resolution: {integrity: sha512-CgSodrhqVeZbeG6y9chx0W0eGFxyUINFncEhqb+Cn9jixrjqF7M0DS7q6UipEQ+TlirbdSSu7MkE9gxI1osqvA==}
     dependencies:
       '@iconify/tools': 3.0.7
       '@iconify/types': 2.0.0
@@ -4287,13 +4287,13 @@ packages:
       - supports-color
     dev: true
 
-  /astro-netlify-cms@0.5.4(astro@4.2.5)(graphql@15.8.0):
+  /astro-netlify-cms@0.5.4(astro@4.2.6)(graphql@15.8.0):
     resolution: {integrity: sha512-yRHTX6ml0HtEKp6OLJiOjV4g5h8EacsQhA1IIn4cYj4pF5R/JOzFKSEqoo9IeewYhmlIXlnfbryk789gZbTqQw==}
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta || ^3.0.0-beta
     dependencies:
       '@types/react': 17.0.74
-      astro: 4.2.5(sass@1.70.0)(typescript@5.3.3)
+      astro: 4.2.6(sass@1.70.0)(typescript@5.3.3)
       netlify-cms-app: 2.15.72(@types/react@17.0.74)(graphql@15.8.0)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -4318,8 +4318,8 @@ packages:
     resolution: {integrity: sha512-7gq6lhibCM8FuzZIJlbLLWP5EJ9KL2/4XqeFrAg9O6ZK2xMFxJ5ubKf+a0VJwwTu8W8Xr421CmpiXu6Hq7n/7Q==}
     dev: true
 
-  /astro@4.2.5(sass@1.70.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-V6CrBVFTiskCYV80ax9bimZR5Nkq7Jm3WJ06YBOWTVF3QYns1jvq98JV+zEb+CiA4TUl8aChI3Mm1DN/OoAbCg==}
+  /astro@4.2.6(sass@1.70.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-k5i8pEI2r45JTkoE0I4JyhOH/dZFpjUA4AONbRd9Gr1LtnGOhKHDftiYOrRLUGx91q7BzoW3DOk+h4yZM4yC3g==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -8286,7 +8286,7 @@ packages:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
     dev: true
 
-  /marked-terminal@6.2.0(marked@11.1.1):
+  /marked-terminal@6.2.0(marked@11.2.0):
     resolution: {integrity: sha512-ubWhwcBFHnXsjYNsu+Wndpg0zhY4CahSpPlA70PlO0rR9r2sZpkyU+rkCsOWH+KMEkx847UpALON+HWgxowFtw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -8296,13 +8296,13 @@ packages:
       cardinal: 2.1.1
       chalk: 5.3.0
       cli-table3: 0.6.3
-      marked: 11.1.1
+      marked: 11.2.0
       node-emoji: 2.1.3
       supports-hyperlinks: 3.0.0
     dev: true
 
-  /marked@11.1.1:
-    resolution: {integrity: sha512-EgxRjgK9axsQuUa/oKMx5DEY8oXpKJfk61rT5iY3aRlgU6QJtUcxU5OAymdhCvWvhYcd9FKmO5eQoX8m9VGJXg==}
+  /marked@11.2.0:
+    resolution: {integrity: sha512-HR0m3bvu0jAPYiIvLUUQtdg1g6D247//lvcekpHO1WMvbwDlwSkZAX9Lw4F4YHE1T0HaaNve0tuAWuV1UJ6vtw==}
     engines: {node: '>= 18'}
     hasBin: true
     dev: true
@@ -12415,8 +12415,8 @@ packages:
       hosted-git-info: 7.0.1
       import-from-esm: 1.3.3
       lodash-es: 4.17.21
-      marked: 11.1.1
-      marked-terminal: 6.2.0(marked@11.1.1)
+      marked: 11.2.0
+      marked-terminal: 6.2.0(marked@11.2.0)
       micromatch: 4.0.5
       p-each-series: 3.0.0
       p-reduce: 3.0.0
