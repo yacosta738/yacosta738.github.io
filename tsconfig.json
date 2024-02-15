@@ -27,9 +27,9 @@
       "atoms:*": ["components/atoms/*.astro"],
       "molecules:*": ["components/molecules/*.astro"],
       "organisms:*": ["components/organisms/*.astro"],
-      "templates:*": ["components/templates/*.astro"],
+      "templates:*": ["components/templates/*.astro"]
     },
     "jsx": "react-jsx",
-    "jsxImportSource": "preact",
-  },
+    "jsxImportSource": "preact"
+  }
 }
