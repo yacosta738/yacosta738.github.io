@@ -21,7 +21,7 @@
     "test:e2e": "pnpm run test:playwright"
   },
   "devDependencies": {
-    "@astrojs/rss": "4.0.4",
+    "@astrojs/rss": "4.0.5",
     "@astrojs/sitemap": "3.0.5",
     "@astrojs/tailwind": "5.1.0",
     "@iconify-json/akar-icons": "^1.1.23",
@@ -45,9 +45,9 @@
     "@typescript-eslint/parser": "6.20.0",
     "@vite-pwa/astro": "^0.2.0",
     "@vueuse/core": "10.7.2",
-    "astro": "4.3.2",
-    "astro-compress": "2.2.9",
-    "astro-critters": "2.0.11",
+    "astro": "4.3.7",
+    "astro-compress": "2.2.10",
+    "astro-critters": "2.1.1",
     "astro-icon": "1.1.0",
     "astro-netlify-cms": "0.5.4",
     "astro-robots-txt": "1.0.0",
@@ -62,14 +62,14 @@
     "eslint-plugin-n": "16.6.2",
     "eslint-plugin-promise": "6.1.1",
     "flowbite": "^2.2.1",
-    "husky": "9.0.10",
+    "husky": "9.0.11",
     "locale-emoji": "0.3.0",
-    "marked": "11.2.0",
+    "marked": "12.0.0",
     "mdast-util-to-string": "4.0.0",
     "nanostores": "0.9.5",
     "postcss-nesting": "12.0.2",
     "postcss-preset-env": "9.3.0",
-    "prettier": "3.2.4",
+    "prettier": "3.2.5",
     "prettier-plugin-astro": "0.13.0",
     "prettier-plugin-tailwindcss": "0.5.11",
     "reading-time": "1.5.0",
@@ -84,5 +84,5 @@
     "sass": "1.70.0",
     "sharp": "0.33.2"
   },
-  "packageManager": "pnpm@8.15.1"
+  "packageManager": "pnpm@8.15.2"
 }
