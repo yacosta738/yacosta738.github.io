@@ -45,7 +45,7 @@
     "@typescript-eslint/parser": "7.0.1",
     "@vite-pwa/astro": "^0.2.0",
     "@vueuse/core": "10.7.2",
-    "astro": "4.3.7",
+    "astro": "4.4.0",
     "astro-compress": "2.2.10",
     "astro-critters": "2.1.1",
     "astro-icon": "1.1.0",
@@ -81,8 +81,8 @@
   },
   "dependencies": {
     "fuse.js": "^7.0.0",
-    "sass": "1.70.0",
+    "sass": "1.71.0",
     "sharp": "0.33.2"
   },
-  "packageManager": "pnpm@8.15.2"
+  "packageManager": "pnpm@8.15.3"
 }
