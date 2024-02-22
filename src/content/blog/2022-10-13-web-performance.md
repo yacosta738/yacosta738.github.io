@@ -115,7 +115,7 @@ The time it takes for the page to have displayed all the useful content, the eve
 
 Laboratory data 🧪
 
-Data that you extract with [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=es) or similar tools from your machine or a prepared machine.
+Data that you extract with [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) or similar tools from your machine or a prepared machine.
 
 Field data with real users 👨‍👩‍👧‍👦
 
