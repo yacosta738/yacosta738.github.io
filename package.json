@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/rss": "4.0.5",
-    "@astrojs/sitemap": "3.1.0",
+    "@astrojs/sitemap": "3.1.1",
     "@astrojs/tailwind": "5.1.0",
     "@iconify-json/akar-icons": "^1.1.23",
     "@iconify-json/charm": "^1.1.12",
@@ -45,7 +45,7 @@
     "@typescript-eslint/parser": "7.0.2",
     "@vite-pwa/astro": "^0.3.0",
     "@vueuse/core": "10.8.0",
-    "astro": "4.4.1",
+    "astro": "4.4.3",
     "astro-compress": "2.2.10",
     "astro-critters": "2.1.1",
     "astro-icon": "1.1.0",
