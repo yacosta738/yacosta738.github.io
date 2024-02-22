@@ -1,4 +1,4 @@
-type ModalTranslations = {
+export type ModalTranslations = {
 	[key: string]: string | object | ModalTranslations;
 };
 

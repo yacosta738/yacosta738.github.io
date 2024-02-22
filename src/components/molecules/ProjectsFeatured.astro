@@ -30,7 +30,7 @@ const calculatePosition = (index: number): string => {
 						<h3 class="project-title">{project.title}</h3>
 						<div
 							id="project-description"
-							class="project-description [text-wrap:balance]"
+							class="project-description text-balance"
 							set:html={markdownfy(project.content ?? '')}
 						/>
 						<ProjectTechList

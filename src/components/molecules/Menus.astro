@@ -1,7 +1,6 @@
 ---
 import { type Menu, navMenus } from '@models:Menu';
 import { Icon } from 'astro-icon/components';
-import Search from 'molecules:Search';
 import { DRAWER_MENU_ID } from '@store:constants';
 import LanguageSelector from './LanguageSelector.astro';
 import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils';
@@ -15,9 +14,9 @@ const translatePath = useTranslatedPath(lang);
 
 const { drawer } = Astro.props;
 
-const { pathname } = Astro.url;
-const isBlogRoot =
-	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/posts\/\w+/);
+// const { pathname } = Astro.url;
+// const isBlogRoot =
+// 	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/posts\/\w+/);
 ---
 
 <menu-list data-menus={navMenus}>
@@ -59,7 +58,7 @@ const isBlogRoot =
 			>
 				<Icon name="mdi:rss" class="h-5 w-5" />
 			</a>
-			{isBlogRoot && <Search />}
+			<!--{isBlogRoot && <Search />}-->
 		</li>
 		<li>
 			<a
