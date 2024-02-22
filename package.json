@@ -80,6 +80,7 @@
     "workbox-window": "^7.0.0"
   },
   "dependencies": {
+    "@astrojs/ts-plugin": "^1.5.3",
     "fuse.js": "^7.0.0",
     "sass": "1.71.1",
     "sharp": "0.33.2"

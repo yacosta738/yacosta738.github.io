@@ -1,17 +1,14 @@
 import { type CollectionEntry } from 'astro:content';
-
-import { randomInt } from '../utils/utilities';
-const MAX_ID = 1000000;
 export interface IRole {
 	role?: string;
 	startDate?: Date | string;
 	endDate?: Date | string;
 	achievements?: string[];
-	getIdentifier: () => number;
+	getIdentifier: () => string;
 }
 
 export interface IJob {
-	id?: number;
+	id?: string;
 	title?: string;
 	lang?: string;
 	company?: string;
@@ -24,7 +21,7 @@ export interface IJob {
 }
 
 export class Role implements IRole {
-	id: number = randomInt(1, MAX_ID);
+	id: string = crypto.randomUUID();
 	role: string = '';
 	startDate?: Date | string;
 	endDate?: Date | string;
@@ -34,11 +31,11 @@ export class Role implements IRole {
 		Object.assign(this, data);
 	}
 
-	public getIdentifier: () => number = () => this.id ?? randomInt(1, 1000000);
+	public getIdentifier: () => string = () => this.id ?? crypto.randomUUID();
 }
 
 export class Job implements IJob {
-	id: number = randomInt(1, MAX_ID);
+	id: string = crypto.randomUUID();
 	title: string = '';
 	lang: string = 'en';
 	company: string = '';
@@ -56,7 +53,7 @@ export class Job implements IJob {
 
 export const jsonToJob = (json: CollectionEntry<'jobs'>): IJob => {
 	return {
-		id: json.id || randomInt(1, MAX_ID),
+		id: json.id || crypto.randomUUID(),
 		title: json.data?.title,
 		lang: json.data?.lang,
 		company: json.data?.company,

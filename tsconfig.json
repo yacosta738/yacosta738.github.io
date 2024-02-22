@@ -1,5 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/base",
   "exclude": ["dist"],
   "compilerOptions": {
     "strict": true,
@@ -14,6 +14,7 @@
     // Enable strict null checks, which are good for avoiding bugs.
     "strictNullChecks": true,
     "allowJs": true,
+    "verbatimModuleSyntax": true,
     // Add type definitions for our Vite runtime.
     "types": ["vite/client"],
     "paths": {
@@ -29,6 +30,11 @@
       "organisms:*": ["components/organisms/*.astro"],
       "templates:*": ["components/templates/*.astro"]
     },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   }

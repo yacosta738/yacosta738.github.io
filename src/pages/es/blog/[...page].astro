@@ -1,15 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogTemplate from 'templates:BlogTemplate';
-import { jsonToArticle } from '@models:Article';
+import { jsonToArticle, type Article } from '@models:Article';
 import ArticleSummary from 'molecules:ArticleSummary';
 import Paginator from 'molecules:Paginator';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import type { /*InferGetStaticParamsType,*/ InferGetStaticPropsType, GetStaticPaths } from 'astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-export async function getStaticPaths({ paginate }) {
+export const getStaticPaths = (async ({ paginate }) => {
 	const publishedBlogEntriesPromises = (
 		await getCollection('blog', ({ data }) => {
 			return !data.draft && data.lang === 'es';
@@ -20,7 +21,10 @@ export async function getStaticPaths({ paginate }) {
 		return new Date(b.date).getTime() - new Date(a.date).getTime();
 	});
 	return paginate(sortedPublishedBlogEntries, { pageSize: 5 });
-}
+}) satisfies GetStaticPaths;
+
+// type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page } = Astro.props;
 ---
@@ -28,7 +32,7 @@ const { page } = Astro.props;
 <BlogTemplate title={t('blog')} description={t('blogDescription')}>
 	<div class="container mx-auto">
 		{
-			page.data.map((article) => (
+			page.data.map((article: Article) => (
 				<article class="mx-2 mb-20 border-b border-gray-400 md:mx-24">
 					<ArticleSummary article={article} />
 				</article>
