@@ -3,6 +3,8 @@ import Menus from 'molecules:Menus';
 import Drawer from 'molecules:Drawer';
 import { NAVBAR_HEADER } from '@store:constants';
 import { getLangFromUrl, useTranslatedPath } from '@i18n:utils';
+import Search from './Search/index.astro';
+
 interface Props {
 	id?: string;
 }
@@ -21,10 +23,9 @@ const translatePath = useTranslatedPath(lang);
 		<a href={translatePath('/', lang)} class="border-none">
 			<img src="/logo.svg" class="w-10" alt="yuniel acosta portfolio logo" height="10" width="10" />
 		</a>
-
 		<Drawer />
-
-		<div class="hidden lg:block">
+		<div class="hidden lg:flex lg:justify-between lg:items-center">
+			<Search />
 			<Menus drawer={false} />
 		</div>
 	</nav>

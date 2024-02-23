@@ -13,10 +13,6 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 const { drawer } = Astro.props;
-
-// const { pathname } = Astro.url;
-// const isBlogRoot =
-// 	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/posts\/\w+/);
 ---
 
 <menu-list data-menus={navMenus}>
@@ -58,7 +54,6 @@ const { drawer } = Astro.props;
 			>
 				<Icon name="mdi:rss" class="h-5 w-5" />
 			</a>
-			<!--{isBlogRoot && <Search />}-->
 		</li>
 		<li>
 			<a

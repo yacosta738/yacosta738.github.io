@@ -3,19 +3,14 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "strict": true,
-    // Enable top-level await, and other modern ESM features.
     "target": "ESNext",
     "module": "ESNext",
-    // Enable node-style module resolution, for things like npm package imports.
     "moduleResolution": "node",
-    "baseUrl": "src" /* Base directory to resolve non-absolute module names. */,
-    // Enable stricter transpilation for better output.
+    "baseUrl": "/Users/acosta/Dev/yacosta738.github.io/src",
     "isolatedModules": true,
-    // Enable strict null checks, which are good for avoiding bugs.
     "strictNullChecks": true,
     "allowJs": true,
     "verbatimModuleSyntax": true,
-    // Add type definitions for our Vite runtime.
     "types": ["vite/client"],
     "paths": {
       "@store:*": ["store/*"],
@@ -35,7 +30,7 @@
         "name": "@astrojs/ts-plugin"
       }
     ],
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "preact"
   }
 }

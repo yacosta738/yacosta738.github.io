@@ -116,6 +116,7 @@ El tiempo que tarda la página en haber mostrado todo el contenido útil, los ev
 
 Datos de laboratorio 🧪
 
+
 Los datos que extraes con [Lighthouse](https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=es) o herramientas similares desde tu máquina o una máquina preparada.
 
 Datos de campo con usuarios reales 👨‍👩‍👧‍👦

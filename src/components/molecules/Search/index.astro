@@ -1,0 +1,37 @@
+---
+import { getDocSearchStrings } from '@i18n:search';
+import { getCollection } from 'astro:content';
+import { jsonToArticle, type Article } from '@models:Article';
+import { getLangFromUrl } from '@i18n:index';
+import type { DocSearchTranslation } from '@i18n:search-translation';
+import Search from './Search.vue';
+
+const { pathname } = Astro.url;
+const isBlogRoot =
+	pathname.endsWith('/blog') || pathname.endsWith('/blog/') || pathname.match(/\/posts\/\w+/);
+
+const lang = getLangFromUrl(Astro.url);
+
+const publishedBlogEntriesPromises = (
+	await getCollection('blog', ({ data }) => {
+		return !data.draft && data.lang === lang;
+	})
+).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+const sortedPublishedBlogEntries: Awaited<Article>[] = publishedBlogEntries.sort((a, b) => {
+	return new Date(b.date).getTime() - new Date(a.date).getTime();
+});
+
+const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
+---
+
+{
+	isBlogRoot && (
+		<Search
+			client:only="vue"
+			id="search-articles"
+			articles={sortedPublishedBlogEntries}
+			translations={docSearchStrings}
+		/>
+	)
+}
