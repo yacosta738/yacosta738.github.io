@@ -2,20 +2,15 @@
   "extends": "astro/tsconfigs/base",
   "exclude": ["dist"],
   "compilerOptions": {
+    "moduleResolution": "Node",
     "strict": true,
-    // Enable top-level await, and other modern ESM features.
-    "target": "ESNext",
-    "module": "ESNext",
-    // Enable node-style module resolution, for things like npm package imports.
-    "moduleResolution": "node",
-    "baseUrl": "src" /* Base directory to resolve non-absolute module names. */,
-    // Enable stricter transpilation for better output.
-    "isolatedModules": true,
-    // Enable strict null checks, which are good for avoiding bugs.
+    "target": "esnext",
+    "module": "esnext",
     "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "allowJs": true,
-    "verbatimModuleSyntax": true,
-    // Add type definitions for our Vite runtime.
+    "baseUrl": "src",
     "types": ["vite/client"],
     "paths": {
       "@store:*": ["store/*"],
@@ -23,8 +18,7 @@
       "@models:*": ["models/*"],
       "@utils:*": ["utils/*"],
       "@i18n:*": ["i18n/*"],
-      "@/*": ["src/*"],
-      "~/*": ["src/*"],
+      "@/*": ["*"],
       "atoms:*": ["components/atoms/*.astro"],
       "molecules:*": ["components/molecules/*.astro"],
       "organisms:*": ["components/organisms/*.astro"],
@@ -35,7 +29,7 @@
         "name": "@astrojs/ts-plugin"
       }
     ],
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "preact"
   }
 }
