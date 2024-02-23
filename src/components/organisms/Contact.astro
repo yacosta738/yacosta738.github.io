@@ -28,9 +28,9 @@ const t = useTranslations(lang);
 		</div>
 		<form id="contact-form" class="mx-auto" method="POST" action={import.meta.env.FORMSPREE}>
 			<div>
-				<span class="text-sm font-bold uppercase text-lightest-slate">
+				<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
 					{t('yourFullName')}
-				</span>
+				</label>
 				<input
 					id="form-name"
 					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
@@ -41,9 +41,9 @@ const t = useTranslations(lang);
 				/>
 			</div>
 			<div class="mt-8">
-				<span class="text-sm font-bold uppercase text-lightest-slate">
+				<label for="form-email" class="text-sm font-bold uppercase text-lightest-slate">
 					{t('yourEmail')}
-				</span>
+				</label>
 				<input
 					id="form-email"
 					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
@@ -54,9 +54,9 @@ const t = useTranslations(lang);
 				/>
 			</div>
 			<div class="mt-8">
-				<span class="text-sm font-bold uppercase text-lightest-slate">
+				<label for="form-subject" class="text-sm font-bold uppercase text-lightest-slate">
 					{t('subject')}
-				</span>
+				</label>
 				<input
 					id="form-subject"
 					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
@@ -68,9 +68,9 @@ const t = useTranslations(lang);
 				/>
 			</div>
 			<div class="mt-8">
-				<span class="text-sm font-bold uppercase text-lightest-slate">
+				<label for="form-message" class="text-sm font-bold uppercase text-lightest-slate">
 					{t('message')}
-				</span>
+				</label>
 				<textarea
 					id="form-message"
 					placeholder={t('messagePlaceholder')}
