@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { jsonToArticle, type Article } from '@models:Article';
 import { getLangFromUrl } from '@i18n:index';
 import type { DocSearchTranslation } from '@i18n:search-translation';
+// @ts-expect-error
 import Search from './Search.vue';
 
 const { pathname } = Astro.url;

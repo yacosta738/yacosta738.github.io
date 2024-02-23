@@ -43,7 +43,9 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         extraFileExtensions: ['.astro'],
       },
-      rules: {},
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'off',
+      },
     },
     {
       files: ['*.ts', '*.mts'],

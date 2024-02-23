@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, defineProps, type PropType, ref } from 'vue';
 import SearchTrigger from './SearchTrigger.vue';
+import SearchResults from './SearchResults.vue';
 import type { Article } from '@models:Article.ts';
-import type { DocSearchTranslation } from '@i18n:search-translation.ts';
+import type { DocSearchTranslation, ModalTranslations } from '@i18n:search-translation.ts';
 import { useFuse } from '@vueuse/integrations/useFuse';
 import type { UseFuseOptions } from '@vueuse/integrations';
-import SearchResults from './SearchResults.vue';
-import Modal from '@components:molecules/Modal/Modal.vue';
+import Modal from '../Modal/Modal.vue';
 
 const props = defineProps({
 	id: {
@@ -56,19 +56,26 @@ const isShowModal = ref(false);
 function closeModal() {
 	isShowModal.value = false;
 }
+
+const modal = ref(props.translations.modal);
+const searchBox = ref(modal.value?.searchBox);
+
 function showModal() {
-	console.log(`SHOW MODAL`);
 	isShowModal.value = true;
 }
+const getModalTranslations = (value: ModalTranslations, key: string): string => {
+	if (!value) return '';
+	return value[key].toString();
+};
 </script>
 
 <template>
 	<SearchTrigger :target="id" :text="translations.button" @toggle="showModal" />
 	<!-- Main modal -->
-	<modal v-if="isShowModal" @close="closeModal">
+	<Modal v-if="isShowModal" @close="closeModal">
 		<template #header>
 			<h3 class="text-xl font-semibold">
-				{{ translations?.modal?.searchBox?.placeholder }}
+				{{ getModalTranslations(searchBox as ModalTranslations, 'placeholder') }}
 			</h3>
 		</template>
 		<template #body>
@@ -99,7 +106,7 @@ function showModal() {
 								v-model="searchString"
 								type="search"
 								class="block caret-green-500 w-full p-4 ps-10 text-sm text-light-slate border border-gray-300 rounded-lg bg-navy/50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-								:placeholder="translations?.modal?.searchBox?.placeholder"
+								:placeholder="getModalTranslations(searchBox as ModalTranslations, 'placeholder')"
 								required
 							/>
 							<kbd
@@ -110,7 +117,9 @@ function showModal() {
 					</div>
 					<SearchResults
 						:results="results"
-						:no-recent-searches-text="translations?.modal?.startScreen?.noRecentSearchesText"
+						:no-recent-searches-text="
+							getModalTranslations(modal?.startScreen as ModalTranslations, 'noRecentSearchesText')
+						"
 					/>
 				</div>
 			</div>
@@ -127,17 +136,17 @@ function showModal() {
 					class="px-2 py-1.5 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded-lg"
 					>K</kbd
 				>
-				{{ translations?.modal?.footer?.shortcutLabel }}
+				{{ getModalTranslations(modal?.footer as ModalTranslations, 'shortcutLabel') }}
 			</span>
 			<span class="mx-2"
 				><kbd
 					class="px-2 py-1.5 text-xs font-semibold text-light-slate bg-lightest-navy border border-light-navy rounded-lg"
 					>Esc</kbd
 				>
-				{{ translations?.modal?.footer?.closeText }}
+				{{ getModalTranslations(modal?.footer as ModalTranslations, 'closeText') }}
 			</span>
 		</template>
-	</modal>
+	</Modal>
 </template>
 
 <style scoped></style>

@@ -8,6 +8,7 @@ import remarkToc from 'remark-toc';
 import icon from 'astro-icon';
 import { config } from './src/plugins/netlify-cms';
 import vue from '@astrojs/vue';
+
 const DEV_PORT: number = 3000;
 
 // https://astro.build/config
