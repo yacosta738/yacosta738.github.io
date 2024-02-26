@@ -88,5 +88,5 @@
     "sharp": "0.33.2",
     "vue": "^3.4.19"
   },
-  "packageManager": "pnpm@8.15.3"
+  "packageManager": "pnpm@8.15.4"
 }
