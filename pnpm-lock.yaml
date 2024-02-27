@@ -10,7 +10,7 @@ dependencies:
     version: 1.5.3
   '@astrojs/vue':
     specifier: ^4.0.8
-    version: 4.0.8(@babel/core@7.23.9)(astro@4.4.4)(vite@5.1.4)(vue@3.4.20)
+    version: 4.0.8(@babel/core@7.23.9)(astro@4.4.5)(vite@5.1.4)(vue@3.4.20)
   '@vueuse/integrations':
     specifier: ^10.8.0
     version: 10.8.0(fuse.js@7.0.0)(vue@3.4.20)
@@ -36,7 +36,7 @@ devDependencies:
     version: 3.1.1
   '@astrojs/tailwind':
     specifier: 5.1.0
-    version: 5.1.0(astro@4.4.4)(tailwindcss@3.4.1)
+    version: 5.1.0(astro@4.4.5)(tailwindcss@3.4.1)
   '@iconify-json/akar-icons':
     specifier: ^1.1.23
     version: 1.1.23
@@ -63,10 +63,10 @@ devDependencies:
     version: 1.1.11
   '@iconify-json/ri':
     specifier: ^1.1.19
-    version: 1.1.19
+    version: 1.1.20
   '@iconify-json/simple-icons':
     specifier: ^1.1.92
-    version: 1.1.92
+    version: 1.1.93
   '@iconify-json/teenyicons':
     specifier: ^1.1.9
     version: 1.1.9
@@ -96,25 +96,25 @@ devDependencies:
     version: 7.1.0(eslint@8.57.0)(typescript@5.3.3)
   '@vite-pwa/astro':
     specifier: ^0.3.0
-    version: 0.3.0(astro@4.4.4)(vite-plugin-pwa@0.19.0)
+    version: 0.3.0(astro@4.4.5)(vite-plugin-pwa@0.19.0)
   '@vueuse/core':
     specifier: 10.8.0
     version: 10.8.0(vue@3.4.20)
   astro:
-    specifier: 4.4.4
-    version: 4.4.4(sass@1.71.1)(typescript@5.3.3)
+    specifier: 4.4.5
+    version: 4.4.5(sass@1.71.1)(typescript@5.3.3)
   astro-compress:
-    specifier: 2.2.10
-    version: 2.2.10
+    specifier: 2.2.11
+    version: 2.2.11
   astro-critters:
-    specifier: 2.1.1
-    version: 2.1.1
+    specifier: 2.1.2
+    version: 2.1.2
   astro-icon:
     specifier: 1.1.0
     version: 1.1.0
   astro-netlify-cms:
     specifier: 0.5.4
-    version: 0.5.4(astro@4.4.4)(graphql@15.8.0)
+    version: 0.5.4(astro@4.4.5)(graphql@15.8.0)
   astro-robots-txt:
     specifier: 1.0.0
     version: 1.0.0
@@ -167,8 +167,8 @@ devDependencies:
     specifier: 0.10.0
     version: 0.10.0
   postcss-nesting:
-    specifier: 12.0.3
-    version: 12.0.3(postcss@8.4.35)
+    specifier: 12.0.4
+    version: 12.0.4(postcss@8.4.35)
   postcss-preset-env:
     specifier: 9.4.0
     version: 9.4.0(postcss@8.4.35)
@@ -343,13 +343,13 @@ packages:
       zod: 3.22.4
     dev: true
 
-  /@astrojs/tailwind@5.1.0(astro@4.4.4)(tailwindcss@3.4.1):
+  /@astrojs/tailwind@5.1.0(astro@4.4.5)(tailwindcss@3.4.1):
     resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.4.4(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.5(sass@1.71.1)(typescript@5.3.3)
       autoprefixer: 10.4.17(postcss@8.4.35)
       postcss: 8.4.35
       postcss-load-config: 4.0.2(postcss@8.4.35)
@@ -383,7 +383,7 @@ packages:
       vscode-languageserver-textdocument: 1.0.11
     dev: false
 
-  /@astrojs/vue@4.0.8(@babel/core@7.23.9)(astro@4.4.4)(vite@5.1.4)(vue@3.4.20):
+  /@astrojs/vue@4.0.8(@babel/core@7.23.9)(astro@4.4.5)(vite@5.1.4)(vue@3.4.20):
     resolution: {integrity: sha512-RnNA4wFy4HvQxU4vswH3c6sa7Br1F/JVzWdQvHYLP4CEe5OZ6yhEqxAUUo3LDkF+sNn23XznFLOPqZak6ziBwg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -394,7 +394,7 @@ packages:
       '@vitejs/plugin-vue-jsx': 3.1.0(vite@5.1.4)(vue@3.4.20)
       '@vue/babel-plugin-jsx': 1.2.1(@babel/core@7.23.9)
       '@vue/compiler-sfc': 3.4.19
-      astro: 4.4.4(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.5(sass@1.71.1)(typescript@5.3.3)
       vue: 3.4.20(typescript@5.3.3)
     transitivePeerDependencies:
       - '@babel/core'
@@ -2770,14 +2770,14 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/ri@1.1.19:
-    resolution: {integrity: sha512-S9usTucQOY//J3LGIGZ+A6i8AYGCStDcLKjmWzI2UPnWJo+Xd5dESMQGkhOI5BlG3W4AtH6RmiXcpbPy3krmjQ==}
+  /@iconify-json/ri@1.1.20:
+    resolution: {integrity: sha512-yScIGjLFBCJKWKskQTWRjNI2Awoq+VRDkRxEsCQvSfdz41n+xkRtFG2K6J1OVI90ClRHfjFC8VJ2+WzxxyFjTQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/simple-icons@1.1.92:
-    resolution: {integrity: sha512-y92iNGu31r/rCHOJfjLLx8UJxMxit1XLKKPlDZZOZMUwWwnsZv2jm1WEzqiN30BVP+Nr4/dcAT5qTvaoGR+HQQ==}
+  /@iconify-json/simple-icons@1.1.93:
+    resolution: {integrity: sha512-rPsEIJlNZQJekCy5Qj6QHhrCJyCF0UAAql5PEz+B8iNvEn/BDyqq2zgpfxsU2KQn2NdCui8xnjZiuyTc5nwIqw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -3791,7 +3791,7 @@ packages:
     resolution: {integrity: sha512-b3nLFGaGkJ9rzOcuXRfHkZMdjsawuDD0ENL9fzTophtBg8FJHSGbH7daXkEpcwy3v7Xol3pAvsmlYyFhR4pqJw==}
     dependencies:
       '@types/node': 20.11.20
-      '@types/unist': 2.0.10
+      '@types/unist': 3.0.2
       '@types/vfile-message': 2.0.0
     dev: true
 
@@ -3966,7 +3966,7 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  /@vite-pwa/astro@0.3.0(astro@4.4.4)(vite-plugin-pwa@0.19.0):
+  /@vite-pwa/astro@0.3.0(astro@4.4.5)(vite-plugin-pwa@0.19.0):
     resolution: {integrity: sha512-2fH9ifzMW8dmeydJ6SuttLR5FCDvSoaTpyxblasR6icsJbR1he4igJhauw4jvmQXOb99Psl+bsBSoUwsdSnSJA==}
     peerDependencies:
       '@vite-pwa/assets-generator': ^0.2.4
@@ -3976,7 +3976,7 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      astro: 4.4.4(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.5(sass@1.71.1)(typescript@5.3.3)
       vite-plugin-pwa: 0.19.0(vite@5.1.4)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
@@ -4721,8 +4721,8 @@ packages:
     resolution: {integrity: sha512-OH/2E5Fg20h2aPrbe+QL8JZQFko0YZaF+j4mnQ7BGhfavO7OpSLa8a0y9sBwomHdSbkhTS8TQNayBfnW5DwbvQ==}
     dev: true
 
-  /astro-compress@2.2.10:
-    resolution: {integrity: sha512-JjoEQ5mSrsskoccb81XaAp0Z/J6uYlw9jyVnLHmX4sslyO0a3SKYmLzTIyb+ayGmDar2R8yEKolm4oXtaKC3+w==}
+  /astro-compress@2.2.11:
+    resolution: {integrity: sha512-cXN8FI0txjhteYRQjcXJby1EVHQvPA6oqt2ep1Z0MUfXcrn+F0AQA59vFGEt/pTnzmqp0R6TgrBxK1ZRDAR6Hg==}
     dependencies:
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
@@ -4730,14 +4730,14 @@ packages:
       files-pipe: 2.1.8
       html-minifier-terser: 7.2.0
       kleur: 4.1.5
-      lightningcss: 1.23.0
+      lightningcss: 1.24.0
       sharp: 0.33.2
       svgo: 3.2.0
-      terser: 5.27.0
+      terser: 5.28.1
     dev: true
 
-  /astro-critters@2.1.1:
-    resolution: {integrity: sha512-wUkUJ0NO3WZIp0X7oumg7x6yVBqrzkhYJryjSNgovdUIRD6+LoCiq5x01lEN+nSWHPrj1XVAYTKDugtQ9j1nfg==}
+  /astro-critters@2.1.2:
+    resolution: {integrity: sha512-RaQRJqTMcUGYqerZkq5qI1XTdea5UIB3qP/4ltAiv/XgKkaJOVGpdE/zJLXq8iBSRw5H0pAjKwZHF8MQTndi0g==}
     dependencies:
       critters: 0.0.20
       files-pipe: 2.1.8
@@ -4771,13 +4771,13 @@ packages:
       - supports-color
     dev: true
 
-  /astro-netlify-cms@0.5.4(astro@4.4.4)(graphql@15.8.0):
+  /astro-netlify-cms@0.5.4(astro@4.4.5)(graphql@15.8.0):
     resolution: {integrity: sha512-yRHTX6ml0HtEKp6OLJiOjV4g5h8EacsQhA1IIn4cYj4pF5R/JOzFKSEqoo9IeewYhmlIXlnfbryk789gZbTqQw==}
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta || ^3.0.0-beta
     dependencies:
       '@types/react': 17.0.75
-      astro: 4.4.4(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.5(sass@1.71.1)(typescript@5.3.3)
       netlify-cms-app: 2.15.72(@types/react@17.0.75)(graphql@15.8.0)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -4808,8 +4808,8 @@ packages:
       - typescript
     dev: true
 
-  /astro@4.4.4(sass@1.71.1)(typescript@5.3.3):
-    resolution: {integrity: sha512-EZrDTN888w4sFKqavGsHu8jSaymyxNwnoqIq5NKlMG9WNU/Xn4Yn41pUdBuAOrgNzRp1NyXXhhV6GV1pN71V2Q==}
+  /astro@4.4.5(sass@1.71.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-ccat42P5qr281JExywVsK/BLeKgwSL+oLxJP195s4Wvj3nL32djw+WNJNctuDDTJ5XWgvPdHZjBtSDNO5OgagQ==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -7579,7 +7579,7 @@ packages:
       entities: 4.5.0
       param-case: 3.0.4
       relateurl: 0.2.7
-      terser: 5.27.0
+      terser: 5.28.1
     dev: true
 
   /html-tags@3.3.1:
@@ -8352,8 +8352,8 @@ packages:
       immediate: 3.0.6
     dev: true
 
-  /lightningcss-darwin-arm64@1.23.0:
-    resolution: {integrity: sha512-kl4Pk3Q2lnE6AJ7Qaij47KNEfY2/UXRZBT/zqGA24B8qwkgllr/j7rclKOf1axcslNXvvUdztjo4Xqh39Yq1aA==}
+  /lightningcss-darwin-arm64@1.24.0:
+    resolution: {integrity: sha512-rTNPkEiynOu4CfGdd5ZfVOQe2gd2idfQd4EfX1l2ZUUwd+2SwSdbb7cG4rlwfnZckbzCAygm85xkpekRE5/wFw==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [darwin]
@@ -8361,8 +8361,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-darwin-x64@1.23.0:
-    resolution: {integrity: sha512-KeRFCNoYfDdcolcFXvokVw+PXCapd2yHS1Diko1z1BhRz/nQuD5XyZmxjWdhmhN/zj5sH8YvWsp0/lPLVzqKpg==}
+  /lightningcss-darwin-x64@1.24.0:
+    resolution: {integrity: sha512-4KCeF2RJjzp9xdGY8zIH68CUtptEg8uz8PfkHvsIdrP4t9t5CIgfDBhiB8AmuO75N6SofdmZexDZIKdy9vA7Ww==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [darwin]
@@ -8370,8 +8370,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-freebsd-x64@1.23.0:
-    resolution: {integrity: sha512-xhnhf0bWPuZxcqknvMDRFFo2TInrmQRWZGB0f6YoAsZX8Y+epfjHeeOIGCfAmgF0DgZxHwYc8mIR5tQU9/+ROA==}
+  /lightningcss-freebsd-x64@1.24.0:
+    resolution: {integrity: sha512-FJAYlek1wXuVTsncNU0C6YD41q126dXcIUm97KAccMn9C4s/JfLSqGWT2gIzAblavPFkyGG2gIADTWp3uWfN1g==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [freebsd]
@@ -8379,8 +8379,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-linux-arm-gnueabihf@1.23.0:
-    resolution: {integrity: sha512-fBamf/bULvmWft9uuX+bZske236pUZEoUlaHNBjnueaCTJ/xd8eXgb0cEc7S5o0Nn6kxlauMBnqJpF70Bgq3zg==}
+  /lightningcss-linux-arm-gnueabihf@1.24.0:
+    resolution: {integrity: sha512-N55K6JqzMx7C0hYUu1YmWqhkHwzEJlkQRMA6phY65noO0I1LOAvP4wBIoFWrzRE+O6zL0RmXJ2xppqyTbk3sYw==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm]
     os: [linux]
@@ -8388,8 +8388,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-linux-arm64-gnu@1.23.0:
-    resolution: {integrity: sha512-RS7sY77yVLOmZD6xW2uEHByYHhQi5JYWmgVumYY85BfNoVI3DupXSlzbw+b45A9NnVKq45+oXkiN6ouMMtTwfg==}
+  /lightningcss-linux-arm64-gnu@1.24.0:
+    resolution: {integrity: sha512-MqqUB2TpYtFWeBvvf5KExDdClU3YGLW5bHKs50uKKootcvG9KoS7wYwd5UichS+W3mYLc5yXUPGD1DNWbLiYKw==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -8397,8 +8397,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-linux-arm64-musl@1.23.0:
-    resolution: {integrity: sha512-cU00LGb6GUXCwof6ACgSMKo3q7XYbsyTj0WsKHLi1nw7pV0NCq8nFTn6ZRBYLoKiV8t+jWl0Hv8KkgymmK5L5g==}
+  /lightningcss-linux-arm64-musl@1.24.0:
+    resolution: {integrity: sha512-5wn4d9tFwa5bS1ao9mLexYVJdh3nn09HNIipsII6ZF7z9ZA5J4dOEhMgKoeCl891axTGTUYd8Kxn+Hn3XUSYRQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -8406,8 +8406,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-linux-x64-gnu@1.23.0:
-    resolution: {integrity: sha512-q4jdx5+5NfB0/qMbXbOmuC6oo7caPnFghJbIAV90cXZqgV8Am3miZhC4p+sQVdacqxfd+3nrle4C8icR3p1AYw==}
+  /lightningcss-linux-x64-gnu@1.24.0:
+    resolution: {integrity: sha512-3j5MdTh+LSDF3o6uDwRjRUgw4J+IfDCVtdkUrJvKxL79qBLUujXY7CTe5X3IQDDLKEe/3wu49r8JKgxr0MfjbQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
@@ -8415,8 +8415,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-linux-x64-musl@1.23.0:
-    resolution: {integrity: sha512-G9Ri3qpmF4qef2CV/80dADHKXRAQeQXpQTLx7AiQrBYQHqBjB75oxqj06FCIe5g4hNCqLPnM9fsO4CyiT1sFSQ==}
+  /lightningcss-linux-x64-musl@1.24.0:
+    resolution: {integrity: sha512-HI+rNnvaLz0o36z6Ki0gyG5igVGrJmzczxA5fznr6eFTj3cHORoR/j2q8ivMzNFR4UKJDkTWUH5LMhacwOHWBA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
@@ -8424,8 +8424,8 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss-win32-x64-msvc@1.23.0:
-    resolution: {integrity: sha512-1rcBDJLU+obPPJM6qR5fgBUiCdZwZLafZM5f9kwjFLkb/UBNIzmae39uCSmh71nzPCTXZqHbvwu23OWnWEz+eg==}
+  /lightningcss-win32-x64-msvc@1.24.0:
+    resolution: {integrity: sha512-oeije/t7OZ5N9vSs6amyW/34wIYoBCpE6HUlsSKcP2SR1CVgx9oKEM00GtQmtqNnYiMIfsSm7+ppMb4NLtD5vg==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [win32]
@@ -8433,21 +8433,21 @@ packages:
     dev: true
     optional: true
 
-  /lightningcss@1.23.0:
-    resolution: {integrity: sha512-SEArWKMHhqn/0QzOtclIwH5pXIYQOUEkF8DgICd/105O+GCgd7jxjNod/QPnBCSWvpRHQBGVz5fQ9uScby03zA==}
+  /lightningcss@1.24.0:
+    resolution: {integrity: sha512-y36QEEDVx4IM7/yIZNsZJMRREIu26WzTsauIysf5s76YeCmlSbRZS7aC97IGPuoFRnyZ5Wx43OBsQBFB5Ne7ng==}
     engines: {node: '>= 12.0.0'}
     dependencies:
       detect-libc: 1.0.3
     optionalDependencies:
-      lightningcss-darwin-arm64: 1.23.0
-      lightningcss-darwin-x64: 1.23.0
-      lightningcss-freebsd-x64: 1.23.0
-      lightningcss-linux-arm-gnueabihf: 1.23.0
-      lightningcss-linux-arm64-gnu: 1.23.0
-      lightningcss-linux-arm64-musl: 1.23.0
-      lightningcss-linux-x64-gnu: 1.23.0
-      lightningcss-linux-x64-musl: 1.23.0
-      lightningcss-win32-x64-msvc: 1.23.0
+      lightningcss-darwin-arm64: 1.24.0
+      lightningcss-darwin-x64: 1.24.0
+      lightningcss-freebsd-x64: 1.24.0
+      lightningcss-linux-arm-gnueabihf: 1.24.0
+      lightningcss-linux-arm64-gnu: 1.24.0
+      lightningcss-linux-arm64-musl: 1.24.0
+      lightningcss-linux-x64-gnu: 1.24.0
+      lightningcss-linux-x64-musl: 1.24.0
+      lightningcss-win32-x64-msvc: 1.24.0
     dev: true
 
   /lilconfig@2.1.0:
@@ -11191,8 +11191,8 @@ packages:
       postcss-selector-parser: 6.0.15
     dev: true
 
-  /postcss-nesting@12.0.3(postcss@8.4.35):
-    resolution: {integrity: sha512-yrtMRPFNkfZMv9ikBvZ/Eh3RxhpMBKQ3KzD7LCY8+jYVlgju/Mdcxi4JY8bW2Y7ISXw8GTLuF/o+kFtp+yaVfQ==}
+  /postcss-nesting@12.0.4(postcss@8.4.35):
+    resolution: {integrity: sha512-WuCe0KnP4vKjLZK8VNoUWKL8ZLOv/5jiM94mHcI3VszLropHwmjotdUyP/ObzqZpXuQKP2Jf9R12vIHKFSStKw==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -11298,7 +11298,7 @@ packages:
       postcss-image-set-function: 6.0.3(postcss@8.4.35)
       postcss-lab-function: 6.0.10(postcss@8.4.35)
       postcss-logical: 7.0.1(postcss@8.4.35)
-      postcss-nesting: 12.0.3(postcss@8.4.35)
+      postcss-nesting: 12.0.4(postcss@8.4.35)
       postcss-opacity-percentage: 2.0.0(postcss@8.4.35)
       postcss-overflow-shorthand: 5.0.1(postcss@8.4.35)
       postcss-page-break: 3.0.4(postcss@8.4.35)
@@ -13627,17 +13627,6 @@ packages:
       temp-dir: 3.0.0
       type-fest: 2.19.0
       unique-string: 3.0.0
-    dev: true
-
-  /terser@5.27.0:
-    resolution: {integrity: sha512-bi1HRwVRskAjheeYl291n3JC4GgO/Ty4z1nVs5AAsmonJulGxpSektecnNedrwK9C7vpvVtcX3cw00VSLt7U2A==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      '@jridgewell/source-map': 0.3.5
-      acorn: 8.11.3
-      commander: 2.20.3
-      source-map-support: 0.5.21
     dev: true
 
   /terser@5.28.1:
