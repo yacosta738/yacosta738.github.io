@@ -36,7 +36,7 @@
     "@iconify-json/simple-icons": "^1.1.92",
     "@iconify-json/teenyicons": "^1.1.9",
     "@iconify-json/uit": "^1.1.8",
-    "@playwright/test": "1.41.2",
+    "@playwright/test": "1.42.0",
     "@semantic-release/exec": "^6.0.3",
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/forms": "0.5.7",
