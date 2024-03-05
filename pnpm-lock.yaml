@@ -10,7 +10,7 @@ dependencies:
     version: 1.5.3
   '@astrojs/vue':
     specifier: ^4.0.8
-    version: 4.0.8(@babel/core@7.24.0)(astro@4.4.8)(vite@5.1.4)(vue@3.4.21)
+    version: 4.0.8(@babel/core@7.24.0)(astro@4.4.11)(vite@5.1.5)(vue@3.4.21)
   '@vueuse/integrations':
     specifier: ^10.8.0
     version: 10.9.0(fuse.js@7.0.0)(vue@3.4.21)
@@ -36,7 +36,7 @@ devDependencies:
     version: 3.1.1
   '@astrojs/tailwind':
     specifier: 5.1.0
-    version: 5.1.0(astro@4.4.8)(tailwindcss@3.4.1)
+    version: 5.1.0(astro@4.4.11)(tailwindcss@3.4.1)
   '@iconify-json/akar-icons':
     specifier: ^1.1.23
     version: 1.1.23
@@ -66,7 +66,7 @@ devDependencies:
     version: 1.1.20
   '@iconify-json/simple-icons':
     specifier: ^1.1.92
-    version: 1.1.93
+    version: 1.1.94
   '@iconify-json/teenyicons':
     specifier: ^1.1.9
     version: 1.1.9
@@ -96,13 +96,13 @@ devDependencies:
     version: 7.1.0(eslint@8.57.0)(typescript@5.3.3)
   '@vite-pwa/astro':
     specifier: ^0.3.0
-    version: 0.3.0(astro@4.4.8)(vite-plugin-pwa@0.19.2)
+    version: 0.3.0(astro@4.4.11)(vite-plugin-pwa@0.19.2)
   '@vueuse/core':
     specifier: 10.9.0
     version: 10.9.0(vue@3.4.21)
   astro:
-    specifier: 4.4.8
-    version: 4.4.8(sass@1.71.1)(typescript@5.3.3)
+    specifier: 4.4.11
+    version: 4.4.11(sass@1.71.1)(typescript@5.3.3)
   astro-compress:
     specifier: 2.2.11
     version: 2.2.11
@@ -114,13 +114,13 @@ devDependencies:
     version: 1.1.0
   astro-netlify-cms:
     specifier: 0.5.4
-    version: 0.5.4(astro@4.4.8)(graphql@15.8.0)
+    version: 0.5.4(astro@4.4.11)(graphql@15.8.0)
   astro-robots-txt:
     specifier: 1.0.0
     version: 1.0.0
   astro-seo:
-    specifier: 0.8.2
-    version: 0.8.2(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3)
+    specifier: 0.8.3
+    version: 0.8.3(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3)
   conventional-changelog-conventionalcommits:
     specifier: ^7.0.2
     version: 7.0.2
@@ -343,13 +343,13 @@ packages:
       zod: 3.22.4
     dev: true
 
-  /@astrojs/tailwind@5.1.0(astro@4.4.8)(tailwindcss@3.4.1):
+  /@astrojs/tailwind@5.1.0(astro@4.4.11)(tailwindcss@3.4.1):
     resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.4.8(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.11(sass@1.71.1)(typescript@5.3.3)
       autoprefixer: 10.4.18(postcss@8.4.35)
       postcss: 8.4.35
       postcss-load-config: 4.0.2(postcss@8.4.35)
@@ -383,18 +383,18 @@ packages:
       vscode-languageserver-textdocument: 1.0.11
     dev: false
 
-  /@astrojs/vue@4.0.8(@babel/core@7.24.0)(astro@4.4.8)(vite@5.1.4)(vue@3.4.21):
+  /@astrojs/vue@4.0.8(@babel/core@7.24.0)(astro@4.4.11)(vite@5.1.5)(vue@3.4.21):
     resolution: {integrity: sha512-RnNA4wFy4HvQxU4vswH3c6sa7Br1F/JVzWdQvHYLP4CEe5OZ6yhEqxAUUo3LDkF+sNn23XznFLOPqZak6ziBwg==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       astro: ^4.0.0
       vue: ^3.2.30
     dependencies:
-      '@vitejs/plugin-vue': 4.6.2(vite@5.1.4)(vue@3.4.21)
-      '@vitejs/plugin-vue-jsx': 3.1.0(vite@5.1.4)(vue@3.4.21)
+      '@vitejs/plugin-vue': 4.6.2(vite@5.1.5)(vue@3.4.21)
+      '@vitejs/plugin-vue-jsx': 3.1.0(vite@5.1.5)(vue@3.4.21)
       '@vue/babel-plugin-jsx': 1.2.1(@babel/core@7.24.0)
       '@vue/compiler-sfc': 3.4.21
-      astro: 4.4.8(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.11(sass@1.71.1)(typescript@5.3.3)
       vue: 3.4.21(typescript@5.3.3)
     transitivePeerDependencies:
       - '@babel/core'
@@ -2776,8 +2776,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/simple-icons@1.1.93:
-    resolution: {integrity: sha512-rPsEIJlNZQJekCy5Qj6QHhrCJyCF0UAAql5PEz+B8iNvEn/BDyqq2zgpfxsU2KQn2NdCui8xnjZiuyTc5nwIqw==}
+  /@iconify-json/simple-icons@1.1.94:
+    resolution: {integrity: sha512-2UwwbEJeZ/aMpACG/dZoOhNszKFO+IjcRCbYB+lMqd+6fA5ewykRy63IP8//UdviazOPamGJ/XbNBJH/o1YFdQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -3791,7 +3791,7 @@ packages:
     resolution: {integrity: sha512-b3nLFGaGkJ9rzOcuXRfHkZMdjsawuDD0ENL9fzTophtBg8FJHSGbH7daXkEpcwy3v7Xol3pAvsmlYyFhR4pqJw==}
     dependencies:
       '@types/node': 20.11.24
-      '@types/unist': 2.0.10
+      '@types/unist': 3.0.2
       '@types/vfile-message': 2.0.0
     dev: true
 
@@ -3966,7 +3966,7 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  /@vite-pwa/astro@0.3.0(astro@4.4.8)(vite-plugin-pwa@0.19.2):
+  /@vite-pwa/astro@0.3.0(astro@4.4.11)(vite-plugin-pwa@0.19.2):
     resolution: {integrity: sha512-2fH9ifzMW8dmeydJ6SuttLR5FCDvSoaTpyxblasR6icsJbR1he4igJhauw4jvmQXOb99Psl+bsBSoUwsdSnSJA==}
     peerDependencies:
       '@vite-pwa/assets-generator': ^0.2.4
@@ -3976,11 +3976,11 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      astro: 4.4.8(sass@1.71.1)(typescript@5.3.3)
-      vite-plugin-pwa: 0.19.2(vite@5.1.4)(workbox-build@7.0.0)(workbox-window@7.0.0)
+      astro: 4.4.11(sass@1.71.1)(typescript@5.3.3)
+      vite-plugin-pwa: 0.19.2(vite@5.1.5)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
-  /@vitejs/plugin-vue-jsx@3.1.0(vite@5.1.4)(vue@3.4.21):
+  /@vitejs/plugin-vue-jsx@3.1.0(vite@5.1.5)(vue@3.4.21):
     resolution: {integrity: sha512-w9M6F3LSEU5kszVb9An2/MmXNxocAnUb3WhRr8bHlimhDrXNt6n6D2nJQR3UXpGlZHh/EsgouOHCsM8V3Ln+WA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -3990,20 +3990,20 @@ packages:
       '@babel/core': 7.24.0
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.24.0)
       '@vue/babel-plugin-jsx': 1.2.1(@babel/core@7.24.0)
-      vite: 5.1.4(sass@1.71.1)
+      vite: 5.1.5(sass@1.71.1)
       vue: 3.4.21(typescript@5.3.3)
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@vitejs/plugin-vue@4.6.2(vite@5.1.4)(vue@3.4.21):
+  /@vitejs/plugin-vue@4.6.2(vite@5.1.5)(vue@3.4.21):
     resolution: {integrity: sha512-kqf7SGFoG+80aZG6Pf+gsZIVvGSCKE98JbiWqcCV9cThtg91Jav0yvYFC9Zb+jKetNGF6ZKeoaxgZfND21fWKw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 5.1.4(sass@1.71.1)
+      vite: 5.1.5(sass@1.71.1)
       vue: 3.4.21(typescript@5.3.3)
     dev: false
 
@@ -4734,13 +4734,13 @@ packages:
       - supports-color
     dev: true
 
-  /astro-netlify-cms@0.5.4(astro@4.4.8)(graphql@15.8.0):
+  /astro-netlify-cms@0.5.4(astro@4.4.11)(graphql@15.8.0):
     resolution: {integrity: sha512-yRHTX6ml0HtEKp6OLJiOjV4g5h8EacsQhA1IIn4cYj4pF5R/JOzFKSEqoo9IeewYhmlIXlnfbryk789gZbTqQw==}
     peerDependencies:
       astro: ^1.0.0 || ^2.0.0-beta || ^3.0.0-beta
     dependencies:
       '@types/react': 17.0.76
-      astro: 4.4.8(sass@1.71.1)(typescript@5.3.3)
+      astro: 4.4.11(sass@1.71.1)(typescript@5.3.3)
       netlify-cms-app: 2.15.72(@types/react@17.0.76)(graphql@15.8.0)(react-dom@17.0.2)(react@17.0.2)
       netlify-cms-proxy-server: 1.3.24
       netlify-identity-widget: 1.9.2
@@ -4761,8 +4761,8 @@ packages:
       zod: 3.22.4
     dev: true
 
-  /astro-seo@0.8.2(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3):
-    resolution: {integrity: sha512-9hu+2y0QboOShFly9r+LcasfEOsWFhV5GKzsfnPG4kbNm9mqXuEP7YrUt7XrEA7rJOzC1DInOV+cIT+7zBasBQ==}
+  /astro-seo@0.8.3(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3):
+    resolution: {integrity: sha512-gQeEh0U2yyVM0iyU8DTORK6hXMy5WH2wufrkUuNOKjI3LnYLniqgDxm1LZPQDuD6b4OHabVOi/5L88A9POCcCQ==}
     dependencies:
       '@astrojs/check': 0.5.6(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3)
     transitivePeerDependencies:
@@ -4771,8 +4771,8 @@ packages:
       - typescript
     dev: true
 
-  /astro@4.4.8(sass@1.71.1)(typescript@5.3.3):
-    resolution: {integrity: sha512-jAAfzvgHOfuZmqJjnSDownVNuWKYmsGkrFqecEppHarMA/cZ5QIboW6GQHZ8eGZQdtYRCjON3h4i64XFZfuwSg==}
+  /astro@4.4.11(sass@1.71.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-mJ1k67xzAJO1vTTpATe76uSWhOgiEj3Id7narE6X2rMMOBjR8vJM+9Cmv/Wbpot6uMwFo780skUowlMptK96fQ==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -6779,8 +6779,8 @@ packages:
       escape-string-regexp: 1.0.5
     dev: true
 
-  /figures@6.0.1:
-    resolution: {integrity: sha512-0oY/olScYD4IhQ8u//gCPA4F3mlTn2dacYmiDm/mbDQvpmLjV4uH+zhsQ5IyXRyvqkvtUkXkNdGvg5OFJTCsuQ==}
+  /figures@6.1.0:
+    resolution: {integrity: sha512-d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==}
     engines: {node: '>=18'}
     dependencies:
       is-unicode-supported: 2.0.0
@@ -10719,7 +10719,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.23.5
       index-to-position: 0.1.2
-      type-fest: 4.10.3
+      type-fest: 4.11.0
     dev: true
 
   /parse-latin@5.0.1:
@@ -12055,7 +12055,7 @@ packages:
     dependencies:
       find-up-simple: 1.0.0
       read-pkg: 9.0.1
-      type-fest: 4.10.3
+      type-fest: 4.11.0
     dev: true
 
   /read-pkg@9.0.1:
@@ -12065,7 +12065,7 @@ packages:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.0
       parse-json: 8.1.0
-      type-fest: 4.10.3
+      type-fest: 4.11.0
       unicorn-magic: 0.1.0
     dev: true
 
@@ -12655,7 +12655,7 @@ packages:
       debug: 4.3.4
       env-ci: 11.0.0
       execa: 8.0.1
-      figures: 6.0.1
+      figures: 6.1.0
       find-versions: 5.1.0
       get-stream: 6.0.1
       git-log-parser: 1.2.0
@@ -13819,8 +13819,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /type-fest@4.10.3:
-    resolution: {integrity: sha512-JLXyjizi072smKGGcZiAJDCNweT8J+AuRxmPZ1aG7TERg4ijx9REl8CNhbr36RV4qXqL1gO1FF9HL8OkVmmrsA==}
+  /type-fest@4.11.0:
+    resolution: {integrity: sha512-DPsoHKtnCUqqoB5Y4OPyat7ObSLz1XOkhHTmz+gOkz2p1xs+BBneTvHWriTwc313eozfBWh8b45EpaV3ZrrPPQ==}
     engines: {node: '>=16'}
     dev: true
 
@@ -14465,7 +14465,7 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-pwa@0.19.2(vite@5.1.4)(workbox-build@7.0.0)(workbox-window@7.0.0):
+  /vite-plugin-pwa@0.19.2(vite@5.1.5)(workbox-build@7.0.0)(workbox-window@7.0.0):
     resolution: {integrity: sha512-LSQJFPxCAQYbRuSyc9EbRLRqLpaBA9onIZuQFomfUYjWSgHuQLonahetDlPSC9zsxmkSEhQH8dXZN8yL978h3w==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -14480,7 +14480,7 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.1.4(sass@1.71.1)
+      vite: 5.1.5(sass@1.71.1)
       workbox-build: 7.0.0
       workbox-window: 7.0.0
     transitivePeerDependencies:
@@ -14489,6 +14489,41 @@ packages:
 
   /vite@5.1.4(sass@1.71.1):
     resolution: {integrity: sha512-n+MPqzq+d9nMVTKyewqw6kSt+R3CkvF9QAKY8obiQn8g1fwTscKxyfaYnC632HtBXAQGc1Yjomphwn1dtwGAHg==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: 0.19.12
+      postcss: 8.4.35
+      rollup: 4.12.0
+      sass: 1.71.1
+    optionalDependencies:
+      fsevents: 2.3.3
+
+  /vite@5.1.5(sass@1.71.1):
+    resolution: {integrity: sha512-BdN1xh0Of/oQafhU+FvopafUp6WaYenLU/NFoL5WyJL++GxkNfieKzBhM24H3HVsPQrlAqB7iJYTHabzaRed5Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
