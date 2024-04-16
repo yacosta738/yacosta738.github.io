@@ -112,3 +112,5 @@ All commands are run from the root of the project, from a terminal:
 | `npm run lint:eslint:fix` | Lint and fix your code with ESLint                 |
 | `npm run test`            | Run your tests with Playwright                     |
 | `npm run test:e2e`        | Run your end-to-end tests with Playwright          |
+
+![Alt](https://repobeats.axiom.co/api/embed/e814d9379628a6c98c24408834f6394ec8ea0c07.svg "Repobeats analytics image")
