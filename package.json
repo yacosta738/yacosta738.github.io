@@ -21,8 +21,8 @@
     "test:e2e": "pnpm run test:playwright"
   },
   "devDependencies": {
-    "@astrojs/rss": "4.0.5",
-    "@astrojs/sitemap": "3.1.1",
+    "@astrojs/rss": "4.0.7",
+    "@astrojs/sitemap": "3.1.6",
     "@astrojs/tailwind": "5.1.0",
     "@iconify-json/akar-icons": "^1.1.23",
     "@iconify-json/charm": "^1.1.12",
@@ -45,7 +45,7 @@
     "@typescript-eslint/parser": "7.3.1",
     "@vite-pwa/astro": "^0.3.0",
     "@vueuse/core": "10.9.0",
-    "astro": "4.5.2",
+    "astro": "4.11.3",
     "astro-compress": "2.2.14",
     "astro-critters": "2.1.4",
     "astro-icon": "1.1.0",
