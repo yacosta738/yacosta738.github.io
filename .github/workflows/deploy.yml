@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
           
       - name: Install, build, and upload your site
-        uses: withastro/action@v2
+        uses: withastro/action@v3
         with:
           # path: . # The root location of your Astro project inside the repository. (optional)
           # node-version: 18 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)
@@ -93,7 +93,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@232fc64e3a4e54539e087c5976439ea54be0959d
+        uses: docker/metadata-action@70b2cdc6480c1a8b86edf1777157f8f437de2166
         with:
           images: |
             n4t5u/yacosta738.github.io
@@ -113,7 +113,7 @@ jobs:
         run: pnpm run build # build:docker     
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@2a7db1d68aab1a514ba647f39bcde60888a1753f
+        uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75
         with:
           context: .
           file: ./Dockerfile
