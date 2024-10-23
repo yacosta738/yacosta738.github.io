@@ -46,7 +46,7 @@
     "@vite-pwa/astro": "^0.4.3",
     "@vueuse/core": "11.1.0",
     "astro": "4.16.7",
-    "astro-compress": "2.3.3",
+    "astro-compress": "2.3.4",
     "astro-critters": "2.2.0",
     "astro-icon": "1.1.1",
     "astro-netlify-cms": "0.5.4",
