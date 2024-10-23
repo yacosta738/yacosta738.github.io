@@ -6,7 +6,6 @@ const currentLanguage = getLangFromUrl(url);
 const translatePath = useTranslatedPath(currentLanguage);
 const supportedLanguages = Object.entries(allLanguages);
 
- 
 export interface Props extends astroHTML.JSX.SelectHTMLAttributes {
 	showFlag?: boolean;
 	showLabel?: boolean;
