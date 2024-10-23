@@ -54,7 +54,7 @@
     "astro-seo": "0.8.4",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "dompurify": "3.1.7",
-    "eslint": "^8.56.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^1.0.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
