@@ -35,7 +35,7 @@ export default defineConfig({
 		tailwind(),
 		robotsTxt(),
 		NetlifyCMS({
-			config: cmsConfig
+			config: cmsConfig,
 		}),
 		icon({
 			iconDir: 'src/icons',

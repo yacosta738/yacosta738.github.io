@@ -8,7 +8,7 @@ export const collections: CmsCollection[] = [
 		create: true,
 		slug: '{{slug}}',
 		label_singular: 'Post',
-		filter: {field: "lang", value: "en"},
+		filter: { field: 'lang', value: 'en' },
 		fields: [
 			{ label: 'Title', name: 'title', widget: 'string' },
 			{ label: 'Description', name: 'description', widget: 'string' },
@@ -71,7 +71,7 @@ export const collections: CmsCollection[] = [
 		slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
 		create: true,
 		extension: 'json',
-		filter: {field: "lang", value: "en"},
+		filter: { field: 'lang', value: 'en' },
 		fields: [
 			{ label: 'Title', name: 'title', widget: 'string' },
 			{
@@ -105,7 +105,7 @@ export const collections: CmsCollection[] = [
 		slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
 		create: true,
 		extension: 'json',
-		filter: {field: "lang", value: "en"},
+		filter: { field: 'lang', value: 'en' },
 		fields: [
 			{ label: 'Title', name: 'title', widget: 'string' },
 			{

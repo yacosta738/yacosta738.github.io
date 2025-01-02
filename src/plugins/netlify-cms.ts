@@ -12,11 +12,7 @@ const config: CmsConfig = {
 	publish_mode: 'editorial_workflow',
 	media_folder: 'public/images',
 	public_folder: '/images',
-	collections: [
-		...commonCollections,
-		...enCollections,
-		...esCollections,
-	],
+	collections: [...commonCollections, ...enCollections, ...esCollections],
 };
 
 export default config;

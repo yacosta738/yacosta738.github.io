@@ -8,7 +8,7 @@ export const collections: CmsCollection[] = [
 		create: true,
 		slug: '{{slug}}',
 		label_singular: 'Post',
-		filter: {field: "lang", value: "es"},
+		filter: { field: 'lang', value: 'es' },
 		fields: [
 			{ label: 'Título', name: 'title', widget: 'string' },
 			{ label: 'Descripción', name: 'description', widget: 'string' },
