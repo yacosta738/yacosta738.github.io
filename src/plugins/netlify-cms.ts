@@ -1,22 +1,22 @@
 import type { CmsConfig } from 'netlify-cms-core';
-import cmsConfigCommon from './netlify-cms-common';
-import cmsConfigEn from './netlify-cms-en';
-import cmsConfigEs from './netlify-cms-es';
-export const config: Omit<CmsConfig, 'load_config_file' | 'local_backend'> = {
+import { collections as enCollections } from './netlify-cms-en';
+import { collections as esCollections } from './netlify-cms-es';
+import { collections as commonCollections } from './netlify-cms-common';
+
+const config: CmsConfig = {
 	backend: {
 		name: 'git-gateway',
-		branch: 'master',
+		branch: 'main',
 	},
+	local_backend: true,
 	publish_mode: 'editorial_workflow',
-	media_folder: 'public/uploads',
-	public_folder: 'public/uploads',
-	site_url: 'https://yunielacosta.com',
-	display_url: 'https://yunielacosta.com',
-	logo_url: 'https://yunielacosta.com/logo.svg',
+	media_folder: 'public/images',
+	public_folder: '/images',
 	collections: [
-		// Content collections
-		...cmsConfigCommon,
-		...cmsConfigEn,
-		...cmsConfigEs,
+		...commonCollections,
+		...enCollections,
+		...esCollections,
 	],
 };
+
+export default config;

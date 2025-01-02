@@ -2,12 +2,13 @@ import type { CmsCollection } from 'netlify-cms-core';
 export const collections: CmsCollection[] = [
 	// Content collections
 	{
-		name: 'posts',
-		label: 'Posts',
+		name: 'posts-en',
+		label: 'Posts (English)',
 		folder: 'src/content/blog',
 		create: true,
 		slug: '{{slug}}',
 		label_singular: 'Post',
+		filter: {field: "lang", value: "en"},
 		fields: [
 			{ label: 'Title', name: 'title', widget: 'string' },
 			{ label: 'Description', name: 'description', widget: 'string' },
@@ -20,6 +21,7 @@ export const collections: CmsCollection[] = [
 				widget: 'select',
 				options: ['en', 'es'],
 				default: 'en',
+				required: true,
 			},
 			{ label: 'Cover', name: 'cover', widget: 'image', required: false },
 			{ label: 'Author', name: 'author', widget: 'string' },
@@ -63,12 +65,13 @@ export const collections: CmsCollection[] = [
 		],
 	},
 	{
-		name: 'jobs',
-		label: 'Jobs',
+		name: 'jobs-en',
+		label: 'Jobs (English)',
 		folder: 'src/content/jobs',
 		slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
 		create: true,
 		extension: 'json',
+		filter: {field: "lang", value: "en"},
 		fields: [
 			{ label: 'Title', name: 'title', widget: 'string' },
 			{
@@ -96,12 +99,13 @@ export const collections: CmsCollection[] = [
 		],
 	},
 	{
-		name: 'projects',
-		label: 'Projects',
+		name: 'projects-en',
+		label: 'Projects (English)',
 		folder: 'src/content/projects',
 		slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
 		create: true,
 		extension: 'json',
+		filter: {field: "lang", value: "en"},
 		fields: [
 			{ label: 'Title', name: 'title', widget: 'string' },
 			{
