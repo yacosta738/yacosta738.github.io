@@ -2,12 +2,13 @@ import type { CmsCollection } from 'netlify-cms-core';
 export const collections: CmsCollection[] = [
 	// Content collections
 	{
-		name: 'posts_es',
-		label: 'Artículos',
-		folder: 'src/content/blog/es',
+		name: 'posts-es',
+		label: 'Posts (Español)',
+		folder: 'src/content/blog',
 		create: true,
 		slug: '{{slug}}',
-		label_singular: 'Artículo',
+		label_singular: 'Post',
+		filter: { field: 'lang', value: 'es' },
 		fields: [
 			{ label: 'Título', name: 'title', widget: 'string' },
 			{ label: 'Descripción', name: 'description', widget: 'string' },
@@ -20,6 +21,7 @@ export const collections: CmsCollection[] = [
 				widget: 'select',
 				options: ['en', 'es'],
 				default: 'es',
+				required: true,
 			},
 			{ label: 'Cover', name: 'cover', widget: 'image', required: false },
 			{ label: 'Autor', name: 'author', widget: 'string' },

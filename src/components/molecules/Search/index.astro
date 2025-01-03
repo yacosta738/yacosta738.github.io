@@ -5,7 +5,7 @@ import { jsonToArticle, type Article } from '@models:Article';
 import { getLangFromUrl } from '@i18n:index';
 import type { DocSearchTranslation } from '@i18n:search-translation';
 // @ts-expect-error
-import Search from './Search.vue';
+import SearchBox from './SearchBox.vue';
 
 const { pathname } = Astro.url;
 const isBlogRoot =
@@ -28,7 +28,7 @@ const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 
 {
 	isBlogRoot && (
-		<Search
+		<SearchBox
 			client:only="vue"
 			id="search-articles"
 			articles={sortedPublishedBlogEntries}

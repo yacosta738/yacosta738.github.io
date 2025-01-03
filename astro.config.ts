@@ -6,7 +6,7 @@ import robotsTxt from 'astro-robots-txt';
 import NetlifyCMS from 'astro-netlify-cms';
 import remarkToc from 'remark-toc';
 import icon from 'astro-icon';
-import { config } from './src/plugins/netlify-cms';
+import cmsConfig from './src/plugins/netlify-cms';
 import vue from '@astrojs/vue';
 
 const DEV_PORT: number = 3000;
@@ -35,7 +35,7 @@ export default defineConfig({
 		tailwind(),
 		robotsTxt(),
 		NetlifyCMS({
-			config,
+			config: cmsConfig,
 		}),
 		icon({
 			iconDir: 'src/icons',
