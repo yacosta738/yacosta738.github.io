@@ -93,7 +93,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@d31acd50653ded455ab8972a1eb9a656b0aef94a
+        uses: docker/metadata-action@906ecf0fc0a80f9110f79d9e6c04b1080f4a2621
         with:
           images: |
             n4t5u/yacosta738.github.io
@@ -113,7 +113,7 @@ jobs:
         run: pnpm run build # build:docker     
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@5e99dacf67635c4f273e532b9266ddb609b3025a
+        uses: docker/build-push-action@7e094594beda23fc8f21fa31049f4b203e51096b
         with:
           context: .
           file: ./Dockerfile
