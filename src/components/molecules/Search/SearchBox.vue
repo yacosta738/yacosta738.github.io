@@ -153,6 +153,6 @@ const getModalTranslations = (value: ModalTranslations, key: string): string => 
 
 <script lang="ts">
 export default {
-	name: 'SearchBox'
-}
+	name: 'SearchBox',
+};
 </script>
