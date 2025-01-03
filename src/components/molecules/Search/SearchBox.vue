@@ -148,4 +148,3 @@ const getModalTranslations = (value: ModalTranslations, key: string): string => 
 		</template>
 	</Modal>
 </template>
-
