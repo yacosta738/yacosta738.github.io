@@ -21,9 +21,9 @@
     "test:e2e": "pnpm run test:playwright"
   },
   "devDependencies": {
-    "@astrojs/rss": "4.0.9",
+    "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "3.2.1",
-    "@astrojs/tailwind": "5.1.2",
+    "@astrojs/tailwind": "5.1.4",
     "@iconify-json/akar-icons": "^1.2.1",
     "@iconify-json/charm": "^1.2.1",
     "@iconify-json/cib": "^1.2.1",
@@ -82,7 +82,7 @@
   },
   "dependencies": {
     "@astrojs/ts-plugin": "^1.10.3",
-    "@astrojs/vue": "^4.5.2",
+    "@astrojs/vue": "^5.0.0",
     "@vueuse/integrations": "^11.1.0",
     "fuse.js": "^7.0.0",
     "globals": "^15.11.0",
