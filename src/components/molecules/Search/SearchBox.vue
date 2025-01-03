@@ -150,3 +150,9 @@ const getModalTranslations = (value: ModalTranslations, key: string): string => 
 </template>
 
 <style scoped></style>
+
+<script lang="ts">
+export default {
+	name: 'SearchBox'
+}
+</script>
