@@ -45,7 +45,7 @@
     "@typescript-eslint/parser": "8.11.0",
     "@vite-pwa/astro": "^0.4.3",
     "@vueuse/core": "11.1.0",
-    "astro": "4.16.7",
+    "astro": "4.16.18",
     "astro-compress": "2.3.5",
     "astro-critters": "2.2.0",
     "astro-icon": "1.1.1",
