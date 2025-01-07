@@ -14,12 +14,12 @@ const projectData = await getCollection('projects');
 const projects: Project[] = (
 	await Promise.all(
 		projectData
-			.filter(project => {
+			.filter((project) => {
 				const slugParts = project.id.split('/');
 				const projectLang = slugParts[0]; // 'en' or 'es' from the folder structure
 				return projectLang === lang;
 			})
-			.map(project => jsonToProject(project))
+			.map((project) => jsonToProject(project))
 	)
 )
 	.filter((project) => project.published)
