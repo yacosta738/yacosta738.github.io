@@ -10,6 +10,11 @@ const t = useTranslations(lang);
 
 const jobsCollection = await getCollection('jobs');
 const jobs: Job[] = jobsCollection
+	.filter((job) => {
+		const slugParts = job.id.split('/');
+		const jobLang = slugParts[0]; // 'en' or 'es' from the folder structure
+		return jobLang === lang;
+	})
 	.map((job) => jsonToJob(job))
 	.filter((job) => job.published)
 	.sort((a: IJob, b: IJob) => {
