@@ -11,7 +11,20 @@ const publishedBlogEntries = await getCollection('blog', ({ data }) => {
 	return !data.draft;
 });
 
-const postsPromises: Promise<Article>[] = publishedBlogEntries.map((post) => jsonToArticle(post));
+// Process posts to include language information
+const processedPosts = publishedBlogEntries.map((post) => {
+	const slugParts = post.slug.split('/');
+	const lang = slugParts[0] === 'es' ? 'es' : 'en';
+	return {
+		...post,
+		lang,
+	};
+});
+
+// Filter posts by current language
+const filteredPosts = processedPosts.filter((post) => post.lang === lang);
+
+const postsPromises: Promise<Article>[] = filteredPosts.map((post) => jsonToArticle(post));
 
 const posts: Article[] = await Promise.all(postsPromises);
 
