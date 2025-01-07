@@ -21,14 +21,14 @@ export const getStaticPaths = (async ({ paginate }) => {
 		const lang = slugParts[0] === 'es' ? 'es' : 'en';
 		return {
 			...post,
-			lang
+			lang,
 		};
 	});
 
 	// Filter for Spanish posts (those with 'es/' prefix)
 	const spanishPosts = processedPosts
-		.filter(post => post.lang === 'es')
-		.map(post => jsonToArticle(post));
+		.filter((post) => post.lang === 'es')
+		.map((post) => jsonToArticle(post));
 
 	const sortedPosts = (await Promise.all(spanishPosts)).sort((a, b) => {
 		return new Date(b.date).getTime() - new Date(a.date).getTime();
