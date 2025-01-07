@@ -9,7 +9,7 @@ export interface Article {
 	cover: string;
 	author: string;
 	timeToRead: number;
-	
+
 	tags: string[];
 	categories: string[];
 	draft: boolean;
