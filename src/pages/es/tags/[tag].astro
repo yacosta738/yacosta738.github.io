@@ -1,9 +1,10 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { type Article, jsonToArticle } from '@models:Article';
 import BlogTemplate from 'templates:BlogTemplate';
 import ArticleSummary from 'molecules:ArticleSummary';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import type { GetStaticPaths } from 'astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -13,23 +14,37 @@ interface Props {
 	posts: Article[];
 }
 
-export async function getStaticPaths() {
-	const publishedBlogEntriesPromises: Promise<Article>[] = (
-		await getCollection('blog', ({ data }) => {
-			return !data.draft;
-		})
-	).map(
-		async (publishedBlogEntry: CollectionEntry<'blog'>) => await jsonToArticle(publishedBlogEntry)
-	);
-	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
-	const uniqueTags = [...new Set(publishedBlogEntries.map((post) => post.tags).flat())];
-	return uniqueTags.map((tag) => {
+export const getStaticPaths = (async () => {
+	const allPosts = await getCollection('blog', ({ data }) => {
+		return !data.draft;
+	});
+
+	const processedPosts = allPosts.map((post) => {
+		const slugParts = post.slug.split('/');
+		const lang = slugParts[0] === 'es' ? 'es' : 'en';
 		return {
-			params: { tag: tag.toLowerCase() },
-			props: { posts: publishedBlogEntries.filter((post) => post.tags.includes(tag)) },
+			...post,
+			lang,
 		};
 	});
-}
+
+	// Filter for Spanish posts only
+	const spanishPosts = processedPosts.filter((post) => post.lang === 'es');
+
+	// Get unique tags
+	const tags = [...new Set(spanishPosts.flatMap((post) => post.data.tags || []))];
+
+	return tags.map((tag) => {
+		const filteredPosts = spanishPosts
+			.filter((post) => post.data.tags?.includes(tag))
+			.map((post) => jsonToArticle(post));
+
+		return {
+			params: { tag },
+			props: { posts: filteredPosts, tag },
+		};
+	});
+}) satisfies GetStaticPaths;
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
@@ -37,7 +52,7 @@ const tagPosts = posts;
 ---
 
 <BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('blogDescription')} ${tag}`}>
-	<div class="tainer mx-auto">
+	<div class="container mx-auto">
 		{
 			tagPosts.map((post) => (
 				<article class="mx-2 mb-20 border-b border-gray-400 md:mx-24">

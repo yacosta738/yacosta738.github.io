@@ -15,7 +15,6 @@ export const getStaticPaths = (async ({ paginate }) => {
 		return !data.draft;
 	});
 
-	// Process posts to extract language from slug
 	const processedPosts = allPosts.map((post) => {
 		const slugParts = post.slug.split('/');
 		const lang = slugParts[0] === 'es' ? 'es' : 'en';
