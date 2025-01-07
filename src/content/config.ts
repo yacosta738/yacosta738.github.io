@@ -4,10 +4,10 @@ const blogCollection = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
-		
+
 		description: z.string(),
 		date: z.date(),
-		
+
 		cover: z.string(),
 		// Reference a single author from the `authors` collection by `id`
 		// author: reference('authors'),
@@ -28,7 +28,7 @@ const authors = defineCollection({
 		rol: z.string(),
 		bio: z.string(),
 		email: z.string(),
-		
+
 		social: z.array(
 			z.object({
 				name: z.string(),
@@ -43,7 +43,7 @@ const jobs = defineCollection({
 	type: 'data',
 	schema: z.object({
 		title: z.string(),
-		
+
 		company: z.string(),
 		icon: z.string(),
 		location: z.string(),
@@ -75,7 +75,7 @@ const projects = defineCollection({
 	type: 'data',
 	schema: z.object({
 		title: z.string(),
-		
+
 		cover: z.string().optional(),
 		date: z.string().datetime(),
 		repository: z.string().optional(),

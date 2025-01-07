@@ -10,10 +10,6 @@
   "priority": 0,
   "published": true,
   "content": "Este es un sistema de pedidos de comida que utiliza una arquitectura de microservicios con Kafka para la comunicación entre servicios y PostgreSQL como base de datos. Es un trabajo en progreso.",
-  
-  "tech": [
-    "java",
-    "postgresql",
-    "kafka"
-  ]
+
+  "tech": ["java", "postgresql", "kafka"]
 }

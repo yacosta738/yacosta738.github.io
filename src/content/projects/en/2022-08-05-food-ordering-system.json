@@ -10,9 +10,5 @@
   "priority": 0,
   "published": true,
   "content": "This is a food ordering system that uses a microservice architecture with Kafka for inter-service communication and PostgreSQL as a database. It's a work in progress.",
-  "tech": [
-    "java",
-    "postgresql",
-    "kafka"
-  ]
+  "tech": ["java", "postgresql", "kafka"]
 }

@@ -3,93 +3,93 @@ local_backend: true
 logo_url: /logo.svg
 
 backend:
-    name: "github"
-    repo: yacosta738/yacosta738.github.io
-    branch: main
-    base_url: https://yunielacosta.com
-    automatic_deployments: false
+  name: 'github'
+  repo: yacosta738/yacosta738.github.io
+  branch: main
+  base_url: https://yunielacosta.com
+  automatic_deployments: false
 
 publish_mode: editorial_workflow
 
-media_folder: "public/images"
-public_folder: "/images"
+media_folder: 'public/images'
+public_folder: '/images'
 
 i18n:
-  structure: "multiple_folders"
-  locales: ["en", "es"]
-  default_locale: "en"
+  structure: 'multiple_folders'
+  locales: ['en', 'es']
+  default_locale: 'en'
 
 collections:
-  - name: "tech"
-    label: "Tech"
-    folder: "src/content/technologies"
+  - name: 'tech'
+    label: 'Tech'
+    folder: 'src/content/technologies'
     create: true
-    extension: "json"
-    slug: "{{id}}"
+    extension: 'json'
+    slug: '{{id}}'
     fields:
-      - {label: "ID", name: "id", widget: "string"}
-      - {label: "Name", name: "name", widget: "string"}
-      - {label: "Icon", name: "icon", widget: "string"}
-      - {label: "url", name: "url", widget: "string"}
+      - { label: 'ID', name: 'id', widget: 'string' }
+      - { label: 'Name', name: 'name', widget: 'string' }
+      - { label: 'Icon', name: 'icon', widget: 'string' }
+      - { label: 'url', name: 'url', widget: 'string' }
 
-  - name: "posts"
+  - name: 'posts'
     i18n: true
-    label: "Blog Posts"
-    folder: "src/content/blog"
+    label: 'Blog Posts'
+    folder: 'src/content/blog'
     create: true
-    slug: "{{slug}}"
+    slug: '{{slug}}'
     fields:
-      - name: "title"
-        widget: "string"
-        label: "Title"
+      - name: 'title'
+        widget: 'string'
+        label: 'Title'
         i18n: true
-      - name: "description"
-        widget: "string"
-        label: "Description"
+      - name: 'description'
+        widget: 'string'
+        label: 'Description'
         i18n: true
-      - name: "link"
-        widget: "string"
-        label: "Link"
+      - name: 'link'
+        widget: 'string'
+        label: 'Link'
         required: false
         i18n: true
-      - name: "isExternalLink"
-        widget: "boolean"
-        label: "External Link"
+      - name: 'isExternalLink'
+        widget: 'boolean'
+        label: 'External Link'
         required: false
-        i18n: "duplicate"
-      - name: "date"
-        widget: "datetime"
-        label: "Date"
-        i18n: "duplicate"
-      - name: "cover"
-        widget: "image"
-        label: "Cover"
+        i18n: 'duplicate'
+      - name: 'date'
+        widget: 'datetime'
+        label: 'Date'
+        i18n: 'duplicate'
+      - name: 'cover'
+        widget: 'image'
+        label: 'Cover'
         required: false
-        i18n: "duplicate"
-      - name: "author"
-        widget: "string"
-        label: "Author"
-        i18n: "duplicate"
-      - name: "tags"
-        widget: "list"
-        label: "Tags"
+        i18n: 'duplicate'
+      - name: 'author'
+        widget: 'string'
+        label: 'Author'
+        i18n: 'duplicate'
+      - name: 'tags'
+        widget: 'list'
+        label: 'Tags'
         allow_add: true
-        default: ["IT"]
+        default: ['IT']
         i18n: true
-      - name: "categories"
-        widget: "list"
-        label: "Categories"
+      - name: 'categories'
+        widget: 'list'
+        label: 'Categories'
         allow_add: true
-        default: ["IT"]
+        default: ['IT']
         i18n: true
-      - name: "draft"
-        widget: "boolean"
-        label: "Draft"
+      - name: 'draft'
+        widget: 'boolean'
+        label: 'Draft'
         default: true
-        i18n: "duplicate"
-      - name: "body"
-        widget: "markdown"
-        label: "Body"
+        i18n: 'duplicate'
+      - name: 'body'
+        widget: 'markdown'
+        label: 'Body'
         i18n: true
 
   # - name: "roles"
@@ -106,11 +106,11 @@ collections:
   #     - {label: "Start Date", name: "startDate", widget: "datetime", i18n: "duplicate"}
   #     - {label: "End Date", name: "endDate", widget: "datetime", required: false, i18n: "duplicate"}
   #     - {
-  #         label: "Achievements", 
-  #         name: "achievements", 
-  #         widget: "list", 
-  #         allow_add: true, 
-  #         max: 4, 
+  #         label: "Achievements",
+  #         name: "achievements",
+  #         widget: "list",
+  #         allow_add: true,
+  #         max: 4,
   #         i18n: true,
   #         field: {
   #           label: "Achievement",
@@ -119,64 +119,106 @@ collections:
   #         }
   #       }
 
-  - name: "jobs"
+  - name: 'jobs'
     i18n: true
-    label: "Jobs"
-    folder: "src/content/jobs"
+    label: 'Jobs'
+    folder: 'src/content/jobs'
     create: true
-    extension: "json"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: 'json'
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - {label: "Title", name: "title", widget: "string", i18n: true}
-      - {label: "Company", name: "company", widget: "string", i18n: true}
-      - {label: "URL", name: "url", widget: "string", required: false, i18n: "duplicate"}
-      - {label: "Icon", name: "icon", widget: "string", i18n: "duplicate"}
-      - {label: "Location", name: "location", widget: "string", i18n: true}
-      - {label: "Create Date", name: "createDate", widget: "datetime", i18n: "duplicate"}
-      - {label: "Published", name: "published", widget: "boolean", default: true, i18n: "duplicate"}
+      - { label: 'Title', name: 'title', widget: 'string', i18n: true }
+      - { label: 'Company', name: 'company', widget: 'string', i18n: true }
+      - { label: 'URL', name: 'url', widget: 'string', required: false, i18n: 'duplicate' }
+      - { label: 'Icon', name: 'icon', widget: 'string', i18n: 'duplicate' }
+      - { label: 'Location', name: 'location', widget: 'string', i18n: true }
+      - { label: 'Create Date', name: 'createDate', widget: 'datetime', i18n: 'duplicate' }
       - {
-          label: "Roles",
-          name: "roles",
-          widget: "list",
-          summary: "{{fields.role}} at {{fields.startDate}}",
-          label_singular: "Role",
-          fields: [
-            { label: "Role", name: "role", widget: "string", i18n: true },
-            { label: "Start Date", name: "startDate", widget: "datetime", i18n: "duplicate" },
-            { label: "End Date", name: "endDate", widget: "datetime", required: false, i18n: "duplicate" },
-            {
-              label: "Achievements",
-              name: "achievements",
-              widget: "list",
-              allow_add: true,
-              max: 4,
-              i18n: true,
-              field: {
-                label: "Achievement",
-                name: "achievement",
-                widget: "string"
-              }
-            }
-          ]
+          label: 'Published',
+          name: 'published',
+          widget: 'boolean',
+          default: true,
+          i18n: 'duplicate',
+        }
+      - {
+          label: 'Roles',
+          name: 'roles',
+          widget: 'list',
+          summary: '{{fields.role}} at {{fields.startDate}}',
+          label_singular: 'Role',
+          fields:
+            [
+              { label: 'Role', name: 'role', widget: 'string', i18n: true },
+              { label: 'Start Date', name: 'startDate', widget: 'datetime', i18n: 'duplicate' },
+              {
+                label: 'End Date',
+                name: 'endDate',
+                widget: 'datetime',
+                required: false,
+                i18n: 'duplicate',
+              },
+              {
+                label: 'Achievements',
+                name: 'achievements',
+                widget: 'list',
+                allow_add: true,
+                max: 4,
+                i18n: true,
+                field: { label: 'Achievement', name: 'achievement', widget: 'string' },
+              },
+            ],
         }
 
-  - name: "projects"
+  - name: 'projects'
     i18n: true
-    label: "Projects"
-    folder: "src/content/projects"
+    label: 'Projects'
+    folder: 'src/content/projects'
     create: true
-    extension: "json"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: 'json'
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - {label: "Title", name: "title", widget: "string", i18n: true}
-      - {label: "Cover", name: "cover", widget: "image", i18n: "duplicate"}
-      - {label: "Date", name: "date", widget: "datetime", i18n: "duplicate"}
-      - {label: "Repository", name: "repository", widget: "string", required: false, i18n: "duplicate"}
-      - {label: "URL", name: "url", widget: "string", required: false, i18n: "duplicate"}
-      - {label: "Company", name: "company", widget: "string", required: false, i18n: true}
-      - {label: "Technologies", name: "tech", widget: "relation", collection: "tech", search_fields: ["name"], value_field: "name", display_fields: ["name"], i18n: "duplicate"}
-      - {label: "Show in projects", name: "showInProjects", widget: "boolean", default: false, i18n: "duplicate"}
-      - {label: "Featured", name: "featured", widget: "boolean", default: false, i18n: "duplicate"}
-      - {label: "Priority", name: "priority", widget: "number", default: 0, i18n: "duplicate"}
-      - {label: "Published", name: "published", widget: "boolean", default: true, i18n: "duplicate"}
-      - {label: "Content", name: "content", widget: "markdown", i18n: true} 
+      - { label: 'Title', name: 'title', widget: 'string', i18n: true }
+      - { label: 'Cover', name: 'cover', widget: 'image', i18n: 'duplicate' }
+      - { label: 'Date', name: 'date', widget: 'datetime', i18n: 'duplicate' }
+      - {
+          label: 'Repository',
+          name: 'repository',
+          widget: 'string',
+          required: false,
+          i18n: 'duplicate',
+        }
+      - { label: 'URL', name: 'url', widget: 'string', required: false, i18n: 'duplicate' }
+      - { label: 'Company', name: 'company', widget: 'string', required: false, i18n: true }
+      - {
+          label: 'Technologies',
+          name: 'tech',
+          widget: 'relation',
+          collection: 'tech',
+          search_fields: ['name'],
+          value_field: 'name',
+          display_fields: ['name'],
+          i18n: 'duplicate',
+        }
+      - {
+          label: 'Show in projects',
+          name: 'showInProjects',
+          widget: 'boolean',
+          default: false,
+          i18n: 'duplicate',
+        }
+      - {
+          label: 'Featured',
+          name: 'featured',
+          widget: 'boolean',
+          default: false,
+          i18n: 'duplicate',
+        }
+      - { label: 'Priority', name: 'priority', widget: 'number', default: 0, i18n: 'duplicate' }
+      - {
+          label: 'Published',
+          name: 'published',
+          widget: 'boolean',
+          default: true,
+          i18n: 'duplicate',
+        }
+      - { label: 'Content', name: 'content', widget: 'markdown', i18n: true }

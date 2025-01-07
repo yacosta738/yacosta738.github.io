@@ -17,13 +17,12 @@ export const GET = async (context) => {
 		description:
 			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
 		site: context.site,
-		items: publishedBlogEntries
-			.map((post) => ({
-				link: `posts/${post.url}`,
-				title: post.title,
-				pubDate: post.date,
-				description: post.description,
-			})),
+		items: publishedBlogEntries.map((post) => ({
+			link: `posts/${post.url}`,
+			title: post.title,
+			pubDate: post.date,
+			description: post.description,
+		})),
 		stylesheet: '/rss/styles.xsl',
 	});
 };

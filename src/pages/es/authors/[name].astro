@@ -9,8 +9,7 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
 	const authorsData = await getCollection('authors');
-	const authors: Author[] = authorsData
-		.map((author) => jsonToAuthor(author));
+	const authors: Author[] = authorsData.map((author) => jsonToAuthor(author));
 	return authors.map((author) => ({
 		params: {
 			name: author.id.split('/').pop(),
