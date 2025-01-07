@@ -1,11 +1,11 @@
 {
   "title": "Desarrollador Web en Desoft",
   "company": "Desoft",
-  "icon": "desoft",
-  "location": "Ciego de \u00c1vila, Cuba",
   "url": "https://www.desoft.cu",
-  "published": true,
+  "icon": "desoft",
+  "location": "Ciego de Ávila, Cuba",
   "createDate": "2017-09-01T15:12:23.179Z",
+  "published": true,
   "roles": [
     {
       "role": "Desarrollador Web",

@@ -8,7 +8,6 @@ export interface Author {
 	rol: string;
 	bio: string;
 	email: string;
-	lang: string;
 	social: SocialMedia[];
 }
 

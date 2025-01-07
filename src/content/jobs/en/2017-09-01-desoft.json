@@ -1,11 +1,11 @@
 {
   "title": "Software Developer",
   "company": "Desoft",
+  "url": "https://www.desoft.cu",
   "icon": "desoft",
   "location": "Ciego de Ávila, Cuba",
-  "url": "https://www.desoft.cu",
-  "published": true,
   "createDate": "2017-09-01T15:12:23.179Z",
+  "published": true,
   "roles": [
     {
       "role": "Web developer",

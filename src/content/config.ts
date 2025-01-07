@@ -1,3 +1,4 @@
+import { glob } from 'astro/loaders';
 import { defineCollection, reference, z } from 'astro:content';
 
 const blogCollection = defineCollection({
@@ -11,7 +12,7 @@ const blogCollection = defineCollection({
 		cover: z.string(),
 		// Reference a single author from the `authors` collection by `id`
 		// author: reference('authors'),
-		author: z.string().default('Anonymous'),
+		author: z.string().default('Yuniel Acosta'),
 		tags: z.array(z.string()),
 		categories: z.array(z.string()),
 		isExternalLink: z.boolean().default(false),
@@ -21,14 +22,13 @@ const blogCollection = defineCollection({
 });
 
 const authors = defineCollection({
-	type: 'data',
+	loader: glob({ pattern: '**/[^_]*.json', base: "./authors" }),
 	schema: z.object({
 		name: z.string(),
 		image: z.string(),
 		rol: z.string(),
 		bio: z.string(),
 		email: z.string(),
-
 		social: z.array(
 			z.object({
 				name: z.string(),

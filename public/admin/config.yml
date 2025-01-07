@@ -222,3 +222,22 @@ collections:
           i18n: 'duplicate',
         }
       - { label: 'Content', name: 'content', widget: 'markdown', i18n: true }
+
+  - name: 'authors'
+    i18n: true
+    label: 'Authors'
+    folder: 'src/content/authors'
+    create: true
+    extension: 'json'
+    slug: '{{name}}'
+    fields:
+      - { label: 'Name', name: 'name', widget: 'string', i18n: 'duplicate' }
+      - { label: 'Image', name: 'image', widget: 'image', i18n: 'duplicate' }
+      - { label: 'Role', name: 'rol', widget: 'string', i18n: true }
+      - { label: 'Bio', name: 'bio', widget: 'text', i18n: true }
+      - { label: 'Email', name: 'email', widget: 'string', i18n: 'duplicate' }
+      - { label: 'Social', name: 'social', widget: 'list', i18n: true, fields: [
+          { label: 'Name', name: 'name', widget: 'string', i18n: true },
+          { label: 'URL', name: 'url', widget: 'string', i18n: 'duplicate' },
+          { label: 'Icon', name: 'icon', widget: 'string', i18n: 'duplicate' }
+        ] }
