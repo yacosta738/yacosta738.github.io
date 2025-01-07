@@ -8,14 +8,20 @@ import { getLangFromUrl } from '@i18n:utils';
 
 const { pathname } = Astro.url;
 const isBlogRoot = pathname.endsWith('/blog');
-
 const lang = getLangFromUrl(Astro.url);
 
 const publishedBlogEntriesPromises = (
 	await getCollection('blog', ({ data }) => {
 		return !data.draft;
 	})
-).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+)
+	.filter((entry) => {
+		const slugParts = entry.slug.split('/');
+		const entryLang = slugParts[0] === 'es' ? 'es' : 'en';
+		return entryLang === lang;
+	})
+	.map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+
 const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
 const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
