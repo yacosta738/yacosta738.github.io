@@ -18,14 +18,16 @@ const publishedBlogEntriesPromises = (
 	await getCollection('blog', ({ data }) => {
 		return !data.draft;
 	})
-).map(async (publishedBlogEntry) => {
-	const slugParts = publishedBlogEntry.slug.split('/');
-	const entryLang = slugParts[0] === 'es' ? 'es' : 'en';
-	if (entryLang === lang) {
-		return await jsonToArticle(publishedBlogEntry);
-	}
-	return null;
-}).filter(Boolean);
+)
+	.map(async (publishedBlogEntry) => {
+		const slugParts = publishedBlogEntry.slug.split('/');
+		const entryLang = slugParts[0] === 'es' ? 'es' : 'en';
+		if (entryLang === lang) {
+			return await jsonToArticle(publishedBlogEntry);
+		}
+		return null;
+	})
+	.filter(Boolean);
 const publishedBlogEntries = (await Promise.all(publishedBlogEntriesPromises)).filter(
 	(entry): entry is Article => entry !== null
 );
