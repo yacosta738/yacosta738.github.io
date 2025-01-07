@@ -7,8 +7,8 @@ description: Este artículo explica CORS (Compartición de Recursos de Origen
   hincapié en la importancia de comprender CORS para construir aplicaciones web
   modernas que requieren solicitudes entre dominios.
 date: 2023-04-03T08:06:22.454Z
-lang: es
-cover: /uploads/understanding-cors-in-web-development.png
+
+cover: /images/understanding-cors-in-web-development.png
 author: Yuniel Acosta
 
 tags:
@@ -18,7 +18,7 @@ categories:
 draft: false
 ---
 
-![CORS](/uploads/cors.png 'CORS')
+![CORS](/images/cors.png 'CORS')
 
 ## Comprendiendo CORS
 

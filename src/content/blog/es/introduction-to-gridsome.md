@@ -6,8 +6,8 @@ description: Gridsome es un generador de sitios web estáticos con tecnología
   desarrolladores crear sitios web hermosos y rápidos sin necesidad de
   convertirse en un experto en rendimiento.
 date: 2019-04-08
-lang: es
-cover: /uploads/gridsome-portada.webp
+
+cover: /images/gridsome-portada.webp
 author: Yuniel Acosta
 
 tags:
@@ -19,7 +19,7 @@ categories:
 draft: false
 ---
 
-![Introducción a Gridsome](/uploads/gridsome-portada.webp 'Introducción a Gridsome')
+![Introducción a Gridsome](/images/gridsome-portada.webp 'Introducción a Gridsome')
 
 Gridsome es un generador de sitios web estáticos con tecnología Vue.js para crear los sitios web lo más rápido posible para cualquier CMS, API o archivos Markdown. Gridsome hace que sea fácil y divertido para los desarrolladores crear sitios web hermosos y rápidos sin necesidad de convertirse en un experto en rendimiento.
 
@@ -52,7 +52,7 @@ Debe tener conocimientos básicos sobre HTML, CSS, [Vue.js](https://vuejs.org) y
 
 Gridsome requiere **Node.js** y recomienda **Yarn**. [Cómo configurar](https://gridsome.org/docs/#prerequisites)
 
-![background](/uploads/gridsome-stack.png)
+![background](/images/gridsome-stack.png)
 
 ### 1. Instalar la herramienta CLI de Gridsome
 

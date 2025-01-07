@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 const jobsCollection = await getCollection('jobs');
 const jobs: Job[] = jobsCollection
 	.map((job) => jsonToJob(job))
-	.filter((job) => job.published && job.lang === lang)
+	.filter((job) => job.published)
 	.sort((a: IJob, b: IJob) => {
 		const aDate = a?.createDate ? new Date(a.createDate) : new Date();
 		const bDate = b?.createDate ? new Date(b.createDate) : new Date();

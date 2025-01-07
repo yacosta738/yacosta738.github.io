@@ -16,7 +16,7 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 const publishedBlogEntriesPromises: Promise<Article>[] = (
 	await getCollection('blog', ({ data }) => {
-		return !data.draft && data.lang === lang;
+		return !data.draft;
 	})
 ).map(
 	async (publishedBlogEntry: CollectionEntry<'blog'>) => await jsonToArticle(publishedBlogEntry)

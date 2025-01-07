@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const { posts } = Astro.props;
-const categoryPosts = posts.filter((post) => post.lang === lang);
+const categoryPosts = posts;
 ---
 
 <BlogTemplate

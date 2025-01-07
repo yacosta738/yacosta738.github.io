@@ -4,8 +4,8 @@ description: Compara las estructuras de datos ArrayList y LinkedList en Java.
   Explora sus diferencias en implementación, complejidad temporal, uso de
   memoria y orientación sobre cuándo utilizar cada una en casos específicos.
 date: 2023-02-22T21:42:00.000Z
-lang: es
-cover: /uploads/array-list-vs-linked-list-java-collections.png
+
+cover: /images/array-list-vs-linked-list-java-collections.png
 author: Yuniel Acosta
 
 tags:
@@ -17,7 +17,7 @@ categories:
 draft: false
 ---
 
-![Lista de array vs. lista enlazada de colecciones de Java](/uploads/array-list-vs-linked-list-java-collections.png 'Lista de array vs. lista enlazada de colecciones de Java')
+![Lista de array vs. lista enlazada de colecciones de Java](/images/array-list-vs-linked-list-java-collections.png 'Lista de array vs. lista enlazada de colecciones de Java')
 
 En la programación informática, la elección de la estructura de datos puede influir significativamente en la eficiencia y el rendimiento de un algoritmo. Dos estructuras de datos populares en Java son ArrayList y LinkedList. Aunque ambas implementan la interfaz List, difieren en cómo almacenan y manipulan los datos. ArrayList es una implementación de una matriz redimensionable, mientras que LinkedList es una lista doblemente enlazada. Cada estructura tiene sus propias ventajas y desventajas, por lo que es importante entender estas diferencias para seleccionar la adecuada para una tarea particular. En este artículo, compararemos ArrayList y LinkedList en términos de sus complejidades de tiempo para varias operaciones y su uso de memoria. También discutiremos escenarios en los que cada estructura es más adecuada.
 
@@ -42,7 +42,7 @@ Discutamos estas complejidades de tiempo:
 - El método `Iterator.remove()` es **_O(n)_**.
 - El método `ListIterator.add(E element)` es **_O(n)_**.
 
-![ArrayList.png](/uploads/arraylist.png 'ArrayList')
+![ArrayList.png](/images/arraylist.png 'ArrayList')
 
 ## **LinkedList<E>:**
 
@@ -52,7 +52,7 @@ Discutamos estas complejidades de tiempo:
 - El método `Iterator.remove()` es O(1). **_Uno de los principales beneficios de `LinkedList<E>`_**.
 - El método `ListIterator.add(E element)` es O(1). _Uno de los principales beneficios de `LinkedList<E>`_.
 
-![LinkedList.png](/uploads/linkedlist.png 'LinkedList')
+![LinkedList.png](/images/linkedlist.png 'LinkedList')
 
 ## ¿Cuál ocupa más memoria?
 

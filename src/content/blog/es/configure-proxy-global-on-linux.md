@@ -2,9 +2,9 @@
 title: Configurar proxy global en linux
 description: En este artículo comparto algunos consejos para configurar Internet a través de un proxy global en los sistemas operativos GNU/Linux.
 date: 2020-12-06
-cover: /uploads/configure-proxy-global-on-linux/portada-proxy.webp
+cover: /images/portada-proxy.webp
 author: 'Yuniel Acosta'
-lang: es
+
 tags:
   - Proxy
   - Linux
@@ -14,15 +14,15 @@ categories:
 draft: false
 ---
 
-![background](/uploads/configure-proxy-global-on-linux/portada-proxy.webp)
+![background](/images/portada-proxy.webp)
 
 En los sistemas operativos GNU/Linux cuando estamos detrás de un servidor proxy, puede resultar un poco engorroso usar programas que no tienen su propia configuración de proxy o comandos como **apt-get**, o simplemente queremos configurar el proxy global para que toda la computadora use internet. Muchas de las distribuciones GNU/Linux utilizan diferentes administradores de paquetes que se configuran de diferentes formas, además hay muchos programas que necesitan sus especificaciones para configurar la salida de Internet a través de un servidor proxy. Todo este proceso se vuelve muy engorroso de hacer en entornos donde usas un proxy con autenticación y cambia de vez en cuando o usas un portátil donde constantemente puedes configurar un proxy global en los sistemas operativos GNU/Linux conectarte a redes donde está el proxy no utilizado. Imagina cambiar todas las configuraciones cada vez que cambias de red.
 
-![Proxy schema](/uploads/configure-proxy-global-on-linux/proxy-schema.webp 'Configure proxy global on linux')
+![Proxy schema](/images/proxy-schema.webp 'Configure proxy global on linux')
 
 A continuación veremos como configurar un proxy en algunas de las distros GNU/Linux
 
-![Proxy global](/uploads/configure-proxy-global-on-linux/proxy-global.webp)
+![Proxy global](/images/proxy-global.webp)
 
 ## Configurar proxy en la terminal
 
@@ -110,7 +110,7 @@ Editamos el fichero `/etc/pacman.conf` y debemos descomentar `XferCommand` de la
     XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
 ```
 
-![pacman.conf.webp](/uploads/configure-proxy-global-on-linux/pacman.conf.webp)
+![pacman.conf.webp](/images/pacman.conf.webp)
 
 Guardamos los cambios y procedemos a editar el fichero de configuración para `wget`, herramienta utilizada para la descarga de paquetes.
 
@@ -378,7 +378,7 @@ La aplicación de escritorio es un cliente VPN (Virtual Private Network). Crea u
 
 Lo primero que se tiene que hacer es crear una cuenta en [Windscribe](https://windscribe.com/?friend=abhyp2zr) registrándose [aquí](https://windscribe.com/?friend=abhyp2zr). Windscribe nos da 2GB de consumo mensual gratis, pero si confirmamos nuestro correo electrónico este aumenta 5GB, además puedes aumentar hasta 15GB mensuales si creas un post en twitter dando en el botón _**Tweet4Data**_ en la configuración de tu cuenta.
 
-![More data](/uploads/configure-proxy-global-on-linux/more-data.webp)
+![More data](/images/more-data.webp)
 
 ## Instalar Windscribe
 
@@ -407,7 +407,7 @@ windscribe connect best # Nos conecta al servidor de windscribe con mejor rendim
 
 Para consultar la ayuda de windscribe podemos ejecutar el comando `windscribe --help`
 
-![Windscribe Help](/uploads/configure-proxy-global-on-linux/windscribe-help.webp)
+![Windscribe Help](/images/windscribe-help.webp)
 
 Estas son algunas de las opciones que existen para configurar la salida a internet a través de un proxy en sistemas operativos GNU/Linux. De todas las variantes mostradas en este artículo mi favorita sin dudas es windscribe por todas las facilidades que ofrece.
 

@@ -5,8 +5,8 @@ description: Java es un lenguaje de programación rápido, seguro y versátil
   hasta supercomputadoras científicas, consolas de juegos y más, ¡Java está en
   todas partes!
 date: 2022-10-10
-lang: es
-cover: /uploads/java-feactures.webp
+
+cover: /images/java-feactures.webp
 author: Yuniel Acosta
 
 tags:
@@ -17,7 +17,7 @@ categories:
 draft: false
 ---
 
-![java-feactures.webp](/uploads/java-feactures.webp)
+![java-feactures.webp](/images/java-feactures.webp)
 
 Java es un lenguaje de programación y una plataforma de cómputo que fue lanzado por primera vez por Sun Microsystems en 1995. Hay muchas aplicaciones y sitios web que no funcionarán a menos que tenga Java instalado, y más se crean todos los días. Java es rápido, seguro y confiable. Desde computadoras portátiles hasta centros de datos, consolas de juegos hasta supercomputadoras científicas, teléfonos celulares hasta Internet, Java está en todas partes!
 

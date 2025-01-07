@@ -6,8 +6,8 @@ description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
   destaca la importancia de una comunicación efectiva y la participación de los
   interesados. El artículo sirve como guía para implementar OKRs.
 date: 2022-12-20T01:46:12.468Z
-lang: es
-cover: /uploads/okrs.webp
+
+cover: /images/okrs.webp
 author: Yuniel Acosta
 
 tags:
@@ -17,7 +17,7 @@ categories:
 draft: false
 ---
 
-![OKRs](/uploads/okrs.webp 'OKRs')
+![OKRs](/images/okrs.webp 'OKRs')
 
 Los Objetivos y Resultados Clave (OKRs) son un marco de establecimiento de metas que ha ganado popularidad en los últimos años como una forma de establecer y seguir el progreso hacia objetivos específicos y medibles. Los OKRs proporcionan una estructura clara y enfoque para equipos e individuos, lo que les ayuda a alinear sus esfuerzos con los objetivos más amplios de la organización.
 

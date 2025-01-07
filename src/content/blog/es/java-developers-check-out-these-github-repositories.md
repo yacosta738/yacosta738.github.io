@@ -5,8 +5,8 @@ description: Descubre en este artículo algunos de los mejores repositorios de
   algoritmos, el framework Spring, herramientas de estilo de codificación y más
   para mejorar tus habilidades.
 date: 2023-02-22T19:52:36.634Z
-lang: es
-cover: /uploads/java-developers-check-out-these-github-repositories-.png
+
+cover: /images/java-developers-check-out-these-github-repositories-.png
 author: Yuniel Acosta
 
 tags:
@@ -16,7 +16,7 @@ categories:
 draft: false
 ---
 
-![Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!](/uploads/java-developers-check-out-these-github-repositories-.png 'Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!')
+![Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!](/images/java-developers-check-out-these-github-repositories-.png 'Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!')
 
 Java es amado por su robusta comunidad y su amplia gama de recursos disponibles. Para ilustrar este punto, estoy enumerando algunos de mis repositorios favoritos de Java en GitHub. Estos son repositorios que uso regularmente, y espero que los encuentres tan útiles como yo.
 

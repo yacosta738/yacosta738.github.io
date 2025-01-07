@@ -5,8 +5,8 @@ description: Hibernate requiere la configuración de un dialecto SQL para genera
   El paquete org.hibernate.dialect contiene muchas clases Dialect para varios
   RDBMS.
 date: 2023-01-12T17:35:05.150Z
-lang: es
-cover: /uploads/hibernate.webp
+
+cover: /images/hibernate.webp
 author: Yuniel Acosta
 
 tags:

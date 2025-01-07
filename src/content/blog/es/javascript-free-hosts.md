@@ -1,17 +1,17 @@
 ---
 title: HOSTINGS GRATUITOS para proyectos WEB con JAVASCRIPT
 author: Yuniel Acosta
-cover: /uploads/6-free-hostings.webp
+cover: /images/6-free-hostings.webp
 date: 2022-09-28
 description: Si estás aprendiendo a crear páginas web y quieres probar en un hosting gratuito, te presentamos 6 opciones para que practiques. Aunque también los puedes usar en producción.
-lang: es
+
 tags: [angular, astro, javascript, react, typescript, vuejs]
 categories: [Software Development]
 
 draft: false
 ---
 
-![6-free-hostings.webp](/uploads/6-free-hostings.webp)
+![6-free-hostings.webp](/images/6-free-hostings.webp)
 
 Una de las preguntas más comunes que nos hacemos cuando creamos un nuevo proyecto es donde podemos desplegar nuestro prototipo. Hoy en día existen varias alternativas las cuales podemos usar de forma gratuita.
 

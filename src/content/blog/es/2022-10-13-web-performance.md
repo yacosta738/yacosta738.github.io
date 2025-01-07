@@ -7,8 +7,8 @@ description: La percepción del usuario sobre la velocidad del sitio es más
   en tiempo real y la capacidad de respuesta a la interacción del usuario
   afectan la percepción.
 date: 2022-10-13T12:33:43.553Z
-lang: es
-cover: /uploads/wep-performance.webp
+
+cover: /images/wep-performance.webp
 author: Yuniel Acosta
 
 tags:
@@ -20,7 +20,7 @@ categories:
 draft: false
 ---
 
-![web performance](/uploads/wep-performance.webp 'web performance')
+![web performance](/images/wep-performance.webp 'web performance')
 
 El RENDIMIENTO WEB es uno de los temas más importantes para el ÉXITO de tu página. Pero casi nadie conoce las métricas MÁS IMPORTANTES. Te las explico. ↓
 

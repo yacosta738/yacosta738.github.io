@@ -1,12 +1,11 @@
 {
   "title": "Senior Software Engineer en GFT",
-  "lang": "es",
   "company": "GFT",
+  "url": "https://www.gft.com/",
   "icon": "gft",
   "location": "València, España",
-  "url": "https://www.gft.com/",
-  "published": true,
   "createDate": "2023-03-14T15:12:23.179Z",
+  "published": true,
   "roles": [
     {
       "role": "Analista de Sistema | Ingeniero de Software Senior (L4)",

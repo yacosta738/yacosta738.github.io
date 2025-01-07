@@ -3,13 +3,11 @@ import { remarkReadingTime } from './remark-reading-time.mjs';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import robotsTxt from 'astro-robots-txt';
-import NetlifyCMS from 'astro-netlify-cms';
 import remarkToc from 'remark-toc';
 import icon from 'astro-icon';
-import cmsConfig from './src/plugins/netlify-cms';
 import vue from '@astrojs/vue';
 
-const DEV_PORT: number = 3000;
+const DEV_PORT: number = 4321;
 
 // https://astro.build/config
 export default defineConfig({
@@ -34,9 +32,6 @@ export default defineConfig({
 		}),
 		tailwind(),
 		robotsTxt(),
-		NetlifyCMS({
-			config: cmsConfig,
-		}),
 		icon({
 			iconDir: 'src/icons',
 			include: {

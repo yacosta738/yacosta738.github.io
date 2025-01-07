@@ -13,7 +13,7 @@ const t = useTranslations(lang);
 const projects: Project[] = (
 	await Promise.all(projectData.map((project) => jsonToProject(project)))
 )
-	.filter((project) => project.published && project.lang === lang)
+	.filter((project) => project.published)
 	.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
 ---
 

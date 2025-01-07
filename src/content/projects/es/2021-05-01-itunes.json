@@ -1,7 +1,7 @@
 {
   "title": "Motor de búsqueda de música iTunes",
-  "lang": "es",
-  "cover": "/uploads/itunes_desktop_movil.webp",
+  
+  "cover": "/images/itunes_desktop_movil.webp",
   "date": "2021-05-01T20:50:35.024Z",
   "repository": "https://github.com/yacosta738/itunes-search-music",
   "url": "https://itunes-search-music.vercel.app/",

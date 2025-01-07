@@ -8,7 +8,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const publishedBlogEntries = await getCollection('blog', ({ data }) => {
-	return !data.draft && data.lang === lang;
+	return !data.draft;
 });
 
 const postsPromises: Promise<Article>[] = publishedBlogEntries.map((post) => jsonToArticle(post));

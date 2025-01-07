@@ -13,7 +13,7 @@ const sortByPriority = (b: Project, a: Project) => Math.sign((b.priority || 0) -
 const projects: Project[] = (
 	await Promise.all(projectData.map((project) => jsonToProject(project)))
 )
-	.filter((project) => project.published && project.lang === lang)
+	.filter((project) => project.published)
 	.sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
 const featuredProjects = projects
 	.filter((project) => project.featured)

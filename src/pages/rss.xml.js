@@ -18,7 +18,6 @@ export const GET = async (context) => {
 			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
 		site: context.site,
 		items: publishedBlogEntries
-			.filter((post) => post.lang === language)
 			.map((post) => ({
 				link: `posts/${post.url}`,
 				title: post.title,

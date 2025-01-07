@@ -17,11 +17,11 @@ const url = Astro.url;
 const { post } = Astro.props;
 const title = post.data.title;
 const description = post.data.description;
-const image = post.data.cover ? post.data.cover : `${domain}/uploads/me.webp`;
+const image = post.data.cover ? post.data.cover : `${domain}/images/me.webp`;
 const ogImageAlt = description;
 const categories = post.data.categories || [];
 const tags = post.data.tags || [];
-const lang = post.data.lang || getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
 
 const t = useTranslations(lang as 'en' | 'es');
 const translatePath = useTranslatedPath(lang as 'en' | 'es');

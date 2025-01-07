@@ -1,7 +1,7 @@
 {
   "title": "React ToDo App",
-  "lang": "es",
-  "cover": "/uploads/todos-react.webp",
+  
+  "cover": "/images/todos-react.webp",
   "date": "2021-06-14T16:46:27.482Z",
   "repository": "https://github.com/yacosta738/react-todos-app",
   "url": "https://yacosta738.github.io/react-todos-app",

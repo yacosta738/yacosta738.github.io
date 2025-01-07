@@ -13,7 +13,7 @@ const t = useTranslations(lang);
 export const getStaticPaths = (async ({ paginate }) => {
 	const publishedBlogEntriesPromises = (
 		await getCollection('blog', ({ data }) => {
-			return !data.draft && data.lang === 'en';
+			return !data.draft;
 		})
 	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
 	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);

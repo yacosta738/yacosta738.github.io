@@ -5,8 +5,8 @@ description: Angular es uno de los frameworks front-end más recomendados, pero
   completa. NestJS se complementa bien con Angular para un desarrollo completo
   de aplicaciones web.
 date: 2021-05-22T23:32:13.655Z
-lang: es
-cover: /uploads/nx.webp
+
+cover: /images/nx.webp
 author: Yuniel Acosta
 
 tags:
@@ -19,7 +19,7 @@ categories:
 draft: false
 ---
 
-![nx](/uploads/nx.webp 'angular + nestjs + nx')
+![nx](/images/nx.webp 'angular + nestjs + nx')
 
 ## ¿Por qué esta publicación?
 
@@ -76,7 +76,7 @@ El primer comando ejecutará el servidor de desarrollo Angular predeterminado, c
 
 Si abre ahora su navegador en [](http://localhost:4200/)<http://localhost:4200>, debería ver una página similar a esta:
 
-![localhost:4200](/uploads/localhost.webp 'App corriendo en localhost')
+![localhost:4200](/images/localhost.webp 'App corriendo en localhost')
 
 Si inspecciona la red y actualiza, verá una solicitud XHR a [](http://localhost:4200/api/hello)<http://localhost:4200/api/hello> mostrando que el proxy ha sido configurado correctamente.
 

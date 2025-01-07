@@ -5,8 +5,8 @@ description: Aprende cómo usar la función de ordenación de clases de prueba d
   unitarias hasta pruebas de integración, con las pruebas más rápidas primero.
   Configura JUnit con un ClassOrderer para un orden preestablecido.
 date: 2023-01-25T22:16:55.497Z
-lang: es
-cover: /uploads/junit5-spring-boot.webp
+
+cover: /images/junit5-spring-boot.webp
 author: Yuniel Acosta
 
 tags:
@@ -19,7 +19,7 @@ categories:
 draft: false
 ---
 
-![junit5 spring boot](/uploads/junit5-spring-boot.webp 'junit5 spring boot')
+![junit5 spring boot](/images/junit5-spring-boot.webp 'junit5 spring boot')
 
 JUnit 5.9.2 admite ordenar las clases de prueba de una manera arbitraria. En este artículo de blog se mostrará cómo usar esta característica para ordenar las pruebas de Spring Boot desde pruebas unitarias hasta pruebas de integración completas, para que las pruebas más rápidas se ejecuten primero.
 

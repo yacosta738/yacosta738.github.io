@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const tagPosts = posts.filter((post) => post.lang === lang);
+const tagPosts = posts;
 ---
 
 <BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('blogDescription')} ${tag}`}>

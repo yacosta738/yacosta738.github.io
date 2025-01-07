@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/base",
   "exclude": ["dist"],
   "compilerOptions": {
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "strict": true,
     "target": "esnext",
     "module": "esnext",

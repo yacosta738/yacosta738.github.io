@@ -20,7 +20,6 @@ export const jsonToAuthor = (json: CollectionEntry<'authors'>): Author => {
 		rol: json.data.rol,
 		bio: json.data.bio,
 		email: json.data.email,
-		lang: json.data.lang,
 		social: json.data.social,
 	};
 };

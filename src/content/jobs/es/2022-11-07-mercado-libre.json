@@ -1,12 +1,11 @@
 {
   "title": "Software Engineer en Mercado Libre",
-  "lang": "es",
   "company": "Mercado Libre",
+  "url": "https://www.mercadolibre.com.uy",
   "icon": "meli",
   "location": "Montevideo, Uruguay",
-  "url": "https://www.mercadolibre.com.uy",
-  "published": true,
   "createDate": "2022-11-07T15:12:23.179Z",
+  "published": true,
   "roles": [
     {
       "role": "Software Engineer",

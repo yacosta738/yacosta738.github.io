@@ -7,8 +7,8 @@ description: Esta guía cubre los conceptos básicos del diseño de sistemas,
   almacenamiento en caché y monitoreo. También recomienda recursos para aprender
   más, como libros, cursos, tutoriales y podcasts.
 date: 2023-02-17T00:47:44.121Z
-lang: es
-cover: /uploads/system-design-roadmap-2023.png
+
+cover: /images/system-design-roadmap-2023.png
 author: Yuniel Acosta
 
 tags:
@@ -19,7 +19,7 @@ categories:
 draft: false
 ---
 
-![Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el Diseño de Sistemas.](/uploads/system-design-roadmap-2023.png 'Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el Diseño de Sistemas.')
+![Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el Diseño de Sistemas.](/images/system-design-roadmap-2023.png 'Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el Diseño de Sistemas.')
 
 Como desarrollador de software, aprender el diseño de sistemas es crucial para el crecimiento profesional y para prepararse para roles más senior o entrevistas de codificación. El diseño de sistemas se refiere al proceso de definir, crear y diseñar sistemas que cumplan con los objetivos y requisitos específicos de una organización. En este artículo, repasaremos lo que necesitas saber sobre el diseño de sistemas, incluyendo sus aspectos clave, y proporcionaremos algunos recursos para comenzar.
 

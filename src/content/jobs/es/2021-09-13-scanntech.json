@@ -1,12 +1,11 @@
 {
   "title": "Senior Software Engineer en Scanntech",
   "company": "Scanntech",
-  "icon": "scanntech",
-  "lang": "es",
-  "published": true,
   "url": "https://www.scanntech.com",
+  "icon": "scanntech",
   "location": "Montevideo, Uruguay",
   "createDate": "2021-09-13T15:12:23.179Z",
+  "published": true,
   "roles": [
     {
       "role": "Senior Software Engineer",

@@ -32,7 +32,6 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 		cover: article?.cover,
 		author: article?.author,
 		timeToRead: remarkPluginFrontmatter?.minutesRead || 0,
-		lang: article?.lang,
 		tags: article?.tags,
 		categories: article?.categories,
 		draft: article?.draft,
