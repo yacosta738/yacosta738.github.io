@@ -239,17 +239,18 @@ collections:
                 label: 'Platform',
                 name: 'platform',
                 widget: 'select',
-                options: [
-                  { label: 'GitHub', value: 'github' },
-                  { label: 'LinkedIn', value: 'linkedin' },
-                  { label: 'X (Twitter)', value: 'twitter' }
-                ],
-                i18n: 'duplicate'
+                options:
+                  [
+                    { label: 'GitHub', value: 'github' },
+                    { label: 'LinkedIn', value: 'linkedin' },
+                    { label: 'X (Twitter)', value: 'twitter' },
+                  ],
+                i18n: 'duplicate',
               },
-              { label: 'Handle/ID', name: 'handle', widget: 'string', i18n: 'duplicate' }
+              { label: 'Handle/ID', name: 'handle', widget: 'string', i18n: 'duplicate' },
             ],
         }
-    
+
   - name: categories
     label: Categories
     label_singular: Category
@@ -269,7 +270,7 @@ collections:
           max: 1000,
           step: 1,
         }
-  
+
   - name: tags
     label: Tags
     label_singular: Tag
@@ -277,4 +278,4 @@ collections:
     create: true
     i18n: true
     fields:
-      - { name: title, label: Title, widget: string, i18n: true }  
+      - { name: title, label: Title, widget: string, i18n: true }
