@@ -1,0 +1,21 @@
+{
+  "name": "Example Person",
+  "image": "/images/acosta-github-profile.webp",
+  "rol": "Example Role",
+  "bio": "Example Bio etc",
+  "email": "test@gmail.com",
+  "social": [
+    {
+      "platform": "github",
+      "handle": "example"
+    },
+    {
+      "platform": "linkedin",
+      "handle": "example"
+    },
+    {
+      "platform": "twitter",
+      "handle": "example"
+    }
+  ]
+}

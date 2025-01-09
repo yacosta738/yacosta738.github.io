@@ -6,10 +6,8 @@ description: The Singleton pattern restricts a class's instantiation to one
   the class and reduces the amount of code needed to maintain a single instance
   of an object.
 date: 2023-02-02T16:53:55.243Z
-
 cover: /images/singleton-pattern.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Design pattern
 categories:

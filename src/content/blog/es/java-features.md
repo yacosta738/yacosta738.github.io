@@ -7,7 +7,7 @@ description: Java es un lenguaje de programación rápido, seguro y versátil
 date: 2022-10-10
 
 cover: /images/java-feactures.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - java

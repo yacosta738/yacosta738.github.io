@@ -5,7 +5,7 @@ link: ''
 isExternalLink: false
 date: 2025-01-05T16:25:00
 cover: /images/Java- A Decade of Evolution (2014-2023).jpg
-author: Yuniel Acosta
+author: es/yuniel-acosta
 tags:
   - IT
 categories:

@@ -6,10 +6,8 @@ description: This guide covers system design basics, including performance,
   load balancers, caching, and monitoring. It also recommends resources for
   further learning, such as books, courses, tutorials, and podcasts.
 date: 2023-02-17T00:36:19.145Z
-
 cover: /images/system-design-roadmap-2023.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - system design
   - architecture

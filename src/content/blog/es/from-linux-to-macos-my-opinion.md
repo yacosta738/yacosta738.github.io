@@ -8,7 +8,7 @@ description: Después de cambiar de Linux a MacOS, encontré algunas limitacione
 date: 2023-01-19T17:48:28.127Z
 
 cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=4800
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Linux

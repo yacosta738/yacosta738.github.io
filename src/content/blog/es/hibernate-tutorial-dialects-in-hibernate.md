@@ -7,7 +7,7 @@ description: Hibernate requiere la configuración de un dialecto SQL para genera
 date: 2023-01-12T17:35:05.150Z
 
 cover: /images/hibernate.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - java

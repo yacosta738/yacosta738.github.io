@@ -1,13 +1,11 @@
 ---
 title: FREE HOSTINGS for WEB projects with JAVASCRIPT
-author: Yuniel Acosta
+author: en/yuniel-acosta
 cover: /images/6-free-hostings.webp
 date: 2022-09-28
 description: If you are learning how to create web pages and want to try free hosting, I offer you 6 options for you to practice. Although, you can also use them in production.
-
 tags: [angular, astro, javascript, react, typescript, vuejs]
 categories: [Software Development]
-
 draft: false
 ---
 

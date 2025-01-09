@@ -1,5 +1,5 @@
 {
-  "name": "Yuniel Acosta Pérez",
+  "name": "Yuniel Acosta",
   "image": "/images/me.webp",
   "rol": "Senior Software Engineer",
   "bio": "Soy una persona muy extrovertida y curiosa, apasionado por la codificación, el espacio, la naturaleza y los deportes. Disfruto creando software asombroso, ya sean sitios web o aplicaciones. Mi objetivo es siempre producir productos que ofrezcan un alto rendimiento. Estoy interesado en nuevas oportunidades en especial en proyectos grandes y ambiciosos.",
@@ -8,17 +8,21 @@
     {
       "name": "github",
       "url": "https://www.github.com/yacosta738",
-      "icon": "uit:github-alt"
+      "icon": "uit:github-alt",
+      "handle": "yacosta738"
     },
     {
       "name": "linkedin",
       "url": "https://www.linkedin.com/in/yacosta738",
-      "icon": "uit:linkedin-alt"
+      "icon": "uit:linkedin-alt",
+      "handle": "yacosta738"
     },
     {
       "name": "twitter",
       "url": "https://www.twitter.com/yacosta738",
-      "icon": "uit:twitter-alt"
+      "icon": "uit:twitter-alt",
+      "handle": "yacosta738"
     }
-  ]
+  ],
+  "slug": "yuniel-acosta"
 }

@@ -4,10 +4,8 @@ description: Uso Typescript y bibliotecas de decoradores para VueJS. Esto me
   permite utilizar una sintaxis de clase más fácil de leer. Te mostraré cómo
   construir un componente de contador que pueda incrementar y decrementar.
 date: 2021-05-30T19:54:13.642Z
-
 cover: /images/vue3-typescript.webp
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - Vuejs
   - TypeScript

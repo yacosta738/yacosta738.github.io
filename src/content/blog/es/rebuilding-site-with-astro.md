@@ -4,10 +4,8 @@ description: Astro es un innovador generador de sitios estáticos que se enfoca
   en la generación estática en lugar de los frameworks JS. Pero, ¿cuánto mejor
   es?
 date: 2022-09-13
-
 cover: /images/rebuild-with-astro.webp
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - Gridsome
   - Astro

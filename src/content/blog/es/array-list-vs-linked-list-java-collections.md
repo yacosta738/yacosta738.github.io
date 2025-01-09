@@ -6,7 +6,7 @@ description: Compara las estructuras de datos ArrayList y LinkedList en Java.
 date: 2023-02-22T21:42:00.000Z
 
 cover: /images/array-list-vs-linked-list-java-collections.png
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Java

@@ -5,14 +5,10 @@ const blogCollection = defineCollection({
 	type: 'content',
 	schema: z.object({
 		title: z.string(),
-
 		description: z.string(),
 		date: z.date(),
-
 		cover: z.string(),
-		// Reference a single author from the `authors` collection by `id`
-		// author: reference('authors'),
-		author: z.string().default('Yuniel Acosta'),
+		author: reference('authors'),
 		tags: z.array(z.string()),
 		categories: z.array(z.string()),
 		isExternalLink: z.boolean().default(false),
@@ -43,7 +39,6 @@ const jobs = defineCollection({
 	type: 'data',
 	schema: z.object({
 		title: z.string(),
-
 		company: z.string(),
 		icon: z.string(),
 		location: z.string(),
@@ -75,7 +70,6 @@ const projects = defineCollection({
 	type: 'data',
 	schema: z.object({
 		title: z.string(),
-
 		cover: z.string().optional(),
 		date: z.string().datetime(),
 		repository: z.string().optional(),

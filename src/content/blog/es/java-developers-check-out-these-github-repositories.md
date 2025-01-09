@@ -7,7 +7,7 @@ description: Descubre en este artículo algunos de los mejores repositorios de
 date: 2023-02-22T19:52:36.634Z
 
 cover: /images/java-developers-check-out-these-github-repositories-.png
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Java

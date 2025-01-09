@@ -4,10 +4,8 @@ description: I use Typescript and decorator libraries for VueJS. This allows me
   to use a class syntax that's easier to read. I'll show you how to build a
   counter component that can increment and decrement.
 date: 2021-05-30T19:54:13.642Z
-
 cover: /images/vue3-typescript.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Vuejs
   - TypeScript

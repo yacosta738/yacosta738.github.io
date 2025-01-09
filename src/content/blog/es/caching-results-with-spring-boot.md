@@ -6,7 +6,7 @@ description: Implementar una Cache con Spring es una tarea bastante fácil,
 date: 2022-10-21T23:18:16.315Z
 
 cover: /images/cache.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Spring

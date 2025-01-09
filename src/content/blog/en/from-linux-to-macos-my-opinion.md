@@ -5,10 +5,8 @@ description: Switching from Linux to MacOS has limitations, such as lacking
   desktop. But MacOS offers performance, a fully integrated ecosystem, and great
   software variety.
 date: 2023-01-19T19:15:02.655Z
-
 cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=6000
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Linux
   - macOS

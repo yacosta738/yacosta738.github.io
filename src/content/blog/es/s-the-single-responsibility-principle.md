@@ -5,10 +5,8 @@ description: El Principio de Responsabilidad Única (SRP) es un principio de
   solo una tarea. Esta publicación explica su importancia con ejemplos de
   código, lo que resulta en un código más comprensible y mantenible.
 date: 2023-03-01T17:38:53.409Z
-
 cover: /images/single-responsibility-principle.png
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - kotlin
   - solid

@@ -1,0 +1,13 @@
+{
+  "name": "Juan",
+  "image": "/images/array-list-vs-linked-list-java-collections.png",
+  "rol": "Lost",
+  "bio": "fas jhasjb fras",
+  "email": "juan@gmail.com",
+  "social": [
+    {
+      "platform": "github",
+      "handle": "juan"
+    }
+  ]
+}

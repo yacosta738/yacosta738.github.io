@@ -7,7 +7,7 @@ description: Este artículo discute las diferencias entre TreeMap, HashMap y
 date: 2023-02-18T12:56:56.911Z
 
 cover: /images/map.png
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - java

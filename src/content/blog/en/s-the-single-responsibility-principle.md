@@ -5,10 +5,8 @@ description: The Single Responsibility Principle (SRP) is a design principle
   job. This post explains its importance with code examples, resulting in more
   understandable and maintainable code.
 date: 2023-03-01T17:33:58.405Z
-
 cover: /images/single-responsibility-principle.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - kotlin
   - solid

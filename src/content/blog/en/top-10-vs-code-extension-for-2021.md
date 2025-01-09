@@ -5,10 +5,8 @@ description: Visual Studio Code is a popular code editor among developers
   10 VS Code extensions for web developers to improve their experience and make
   their job easier in various ways in 2021.
 date: 2021-05-25T02:23:12.784Z
-
 cover: /images/visual-studio-code.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - VS Code
   - IDE

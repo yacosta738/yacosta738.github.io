@@ -5,10 +5,8 @@ description: 'Discover 7 Java libraries for better unit and integration testing:
   Testcontainers. Simplify development, reduce testing time, and ensure code
   quality.'
 date: 2023-02-15T13:40:04.973Z
-
 cover: /images/boost-your-java-testing-with-these-7-incredible-libraries.gif
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - java
   - kotlin

@@ -8,7 +8,7 @@ description: Gridsome es un generador de sitios web estáticos con tecnología
 date: 2019-04-08
 
 cover: /images/gridsome-portada.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - frontend

@@ -6,9 +6,8 @@ description: Get fifteen tips to speed up your Java applications and optimize
   algorithms ensure applications run efficiently. Configure your systems for
   optimal performance. Implement these tips for maximum speed.
 date: 2023-02-02T16:28:19.185Z
-
 cover: /images/maximizing-java-code-performance.webp
-author: Yuniel Acosta
+author: en/yuniel-acosta
 tags:
   - Java
 categories:

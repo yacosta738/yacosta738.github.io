@@ -6,10 +6,8 @@ description: Maximiza tu productividad en 2023 con cinco herramientas poderosas
   redacción impulsada por inteligencia artificial, estas herramientas
   simplifican tareas y te mantienen adelante en la era digital.
 date: 2023-02-10T15:19:45.365Z
-
 cover: /images/5-must-have-tools-for-2023.png
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - IA
 categories:

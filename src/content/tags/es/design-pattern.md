@@ -1,0 +1,4 @@
+---
+title: patrones de diseño
+---
+

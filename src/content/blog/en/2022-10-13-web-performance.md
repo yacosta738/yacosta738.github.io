@@ -6,10 +6,8 @@ description: User perception of website speed is more important than load time
   real-time page load, and responsiveness to user interaction all affect
   perception.
 date: 2022-10-13T12:33:43.553Z
-
 cover: /images/wep-performance.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - html
   - javascript

@@ -4,10 +4,8 @@ description: Java is a fast, secure, and versatile programming language used in
   a wide range of applications and websites. From laptops to datacenters, game
   consoles to scientific supercomputers, Java is everywhere!
 date: 2022-10-10
-
 cover: /images/java-feactures.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - java
   - jvm

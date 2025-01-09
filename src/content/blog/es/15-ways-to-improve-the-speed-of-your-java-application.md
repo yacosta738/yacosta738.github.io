@@ -9,7 +9,7 @@ description: Obtén quince consejos para acelerar tus aplicaciones de Java y
 date: 2023-02-02T16:39:17.873Z
 
 cover: /images/maximizing-java-code-performance.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Java

@@ -60,8 +60,8 @@ const formatDate = (date: Date | string) => {
 		article.author && (
 			<li class="mx-1 my-2 whitespace-nowrap">
 				<span class="mr-1">{t('author')}</span>
-				<a href={translatePath(`/authors/${urlize(article.author)}`)} class="inline-link">
-					{article.author}
+				<a href={translatePath(`/authors/${urlize(article.author.name)}`)} class="inline-link">
+					{article.author.name}
 				</a>
 			</li>
 		)

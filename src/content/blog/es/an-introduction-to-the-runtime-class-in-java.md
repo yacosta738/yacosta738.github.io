@@ -6,7 +6,7 @@ description: 'Explora la clase Runtime de Java: controla la ejecución de la JVM
 date: 2023-02-19T01:08:10.172Z
 
 cover: /images/runtime-code.jpeg
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - java

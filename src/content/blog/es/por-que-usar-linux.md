@@ -2,7 +2,7 @@
 link: 'https://binarycoffee.dev/post/por-que-usar-linux-10-distribuciones-recomendadas-para-todos-los-usuariosougyn'
 date: 2023-04-06
 title: 'Por qué usar Linux: 10 distribuciones recomendadas para todos los usuarios.'
-author: 'Yuniel Acosta'
+author: es/yuniel-acosta
 cover: '/images/Linux_distro_logos_and_Tux_8f832d7cbc.png'
 tags: [Linux]
 categories: [OS & Tools]

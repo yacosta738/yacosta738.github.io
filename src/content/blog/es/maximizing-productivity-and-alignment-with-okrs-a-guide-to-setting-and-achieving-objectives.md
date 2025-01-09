@@ -6,9 +6,8 @@ description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
   destaca la importancia de una comunicación efectiva y la participación de los
   interesados. El artículo sirve como guía para implementar OKRs.
 date: 2022-12-20T01:46:12.468Z
-
 cover: /images/okrs.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - okrs

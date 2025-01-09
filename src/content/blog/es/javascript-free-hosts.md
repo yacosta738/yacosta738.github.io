@@ -1,6 +1,6 @@
 ---
 title: HOSTINGS GRATUITOS para proyectos WEB con JAVASCRIPT
-author: Yuniel Acosta
+author: es/yuniel-acosta
 cover: /images/6-free-hostings.webp
 date: 2022-09-28
 description: Si estás aprendiendo a crear páginas web y quieres probar en un hosting gratuito, te presentamos 6 opciones para que practiques. Aunque también los puedes usar en producción.

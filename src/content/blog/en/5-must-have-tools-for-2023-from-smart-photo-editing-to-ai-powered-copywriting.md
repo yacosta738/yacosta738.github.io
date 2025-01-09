@@ -5,9 +5,8 @@ description: Maximize your productivity in 2023 with five powerful tools
   highlighted in this article. From smart photo editing to AI-powered
   copywriting, these tools simplify tasks and keep you ahead in the digital age.
 date: 2023-02-10T15:12:23.179Z
-
 cover: /images/5-must-have-tools-for-2023.png
-author: Yuniel Acosta
+author: en/yuniel-acosta
 tags:
   - AI
 categories:

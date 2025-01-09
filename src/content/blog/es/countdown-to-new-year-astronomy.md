@@ -6,7 +6,7 @@ description: Combinando mis pasiones por la astronomía y la programación, esto
 date: 2020-12-27
 
 cover: /images/portada.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - JavaScript

@@ -7,7 +7,7 @@ description: Aprende cómo usar la función de ordenación de clases de prueba d
 date: 2023-01-25T22:16:55.497Z
 
 cover: /images/junit5-spring-boot.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - junit5

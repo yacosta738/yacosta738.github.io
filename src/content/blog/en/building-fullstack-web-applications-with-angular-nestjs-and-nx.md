@@ -4,10 +4,8 @@ description: Angular is a top frontend framework, but to create full-stack apps,
   you need more. NestJS pairs well with Angular for complete web app
   development.
 date: 2021-05-22T23:32:13.655Z
-
 cover: /images/nx.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Angular
   - NestJS

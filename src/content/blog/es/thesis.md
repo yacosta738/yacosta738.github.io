@@ -2,8 +2,7 @@
 link: 'https://dspace.uclv.edu.cu/handle/123456789/9227'
 date: 2017-07-10
 title: 'Manipulación de series de datos Espacio-Temporales mediante el uso de formatos de datos científicos y geográficos en R'
-author: 'Yuniel Acosta'
-
+author: es/yuniel-acosta
 cover: /images/thesis.webp
 tags: [R, GIS, GLCF]
 categories: [Software Development]

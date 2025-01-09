@@ -5,10 +5,8 @@ description: The Liskov substitution principle ensures that subclass objects can
   program errors. Adhering to this rule simplifies code management and increases
   predictability.
 date: 2023-03-08T20:53:25.904Z
-
 cover: /images/liskov-substitution-principle.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Kotlin
 categories:

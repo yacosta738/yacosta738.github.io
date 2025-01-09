@@ -1,0 +1,13 @@
+{
+  "name": "dd",
+  "image": "/images/5-must-have-tools-for-2023.png",
+  "rol": "asda",
+  "bio": "dasdasda",
+  "email": "as@test.com",
+  "social": [
+    {
+      "platform": "github",
+      "handle": "as"
+    }
+  ]
+}

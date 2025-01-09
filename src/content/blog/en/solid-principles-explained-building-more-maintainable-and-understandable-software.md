@@ -5,10 +5,8 @@ description: 'Learn the SOLID principles of OOP: SRP, OCP, LSP, ISP, and DIP.
   These guidelines help create flexible and easy-to-understand software designs,
   avoiding common problems.'
 date: 2023-03-23T13:26:43.750Z
-
 cover: /images/solid-principles-explained.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - solid
 categories:

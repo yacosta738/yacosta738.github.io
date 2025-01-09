@@ -1,4 +1,6 @@
+import type { Author } from '@models:Author';
 import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 
 export interface Article {
 	id: string;
@@ -7,9 +9,8 @@ export interface Article {
 	description: string;
 	date: string | Date;
 	cover: string;
-	author: string;
+	author: Author;
 	timeToRead: number;
-
 	tags: string[];
 	categories: string[];
 	draft: boolean;
@@ -23,6 +24,11 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 	if (json.data) {
 		content = json.body;
 	}
+
+	// Fetch the full author data
+	const authorEntry = await getEntry('authors', article.author.id);
+	const author = authorEntry.data as Author;
+
 	return {
 		id: json.id || crypto.randomUUID(),
 		url: json.slug,
@@ -30,7 +36,7 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 		description: article?.description,
 		date: article?.date,
 		cover: article?.cover,
-		author: article?.author,
+		author,
 		timeToRead: remarkPluginFrontmatter?.minutesRead || 0,
 		tags: article?.tags,
 		categories: article?.categories,

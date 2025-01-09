@@ -9,7 +9,7 @@ description: La percepción del usuario sobre la velocidad del sitio es más
 date: 2022-10-13T12:33:43.553Z
 
 cover: /images/wep-performance.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - web

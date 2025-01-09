@@ -6,9 +6,8 @@ description: El principio de sustitución de Liskov es una regla fundamental en
   provocar errores inesperados en el programa. Seguir esta regla simplifica la
   gestión del código y aumenta la predictibilidad.
 date: 2023-03-08T20:56:23.626Z
-
 cover: /images/liskov-substitution-principle.png
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Kotlin

@@ -5,10 +5,8 @@ description: Learn how to use JUnit 5's feature for ordering test classes to run
   tests running first. Configure JUnit with a ClassOrderer for a predetermined
   order.
 date: 2023-01-25T21:56:01.410Z
-
 cover: /images/junit5-spring-boot.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - junit5
   - spring boot

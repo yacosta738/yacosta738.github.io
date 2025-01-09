@@ -6,10 +6,8 @@ description: This article explains the Open-Closed Principle (OCP) of SOLID
   show how to adhere to the OCP by defining an interface and creating separate
   classes for each shape.
 date: 2023-03-01T18:13:14.418Z
-
 cover: /images/open-closed-principle.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - kotlin
   - solid

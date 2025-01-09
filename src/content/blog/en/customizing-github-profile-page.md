@@ -4,8 +4,7 @@ description: 'You can customize your profile so that other people can get a bett
   sense of who you are and the work you do. '
 date: 2021-05-11T02:05:59.285Z
 cover: /images/acosta-github-profile.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Github
   - Markdown

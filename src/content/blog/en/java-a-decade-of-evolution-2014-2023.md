@@ -4,9 +4,8 @@ description: Discover the incredible transformation of Java from 2014 to 2023. E
 link: ''
 isExternalLink: false
 date: 2025-01-05T16:25:00
-
 cover: /images/Java- A Decade of Evolution (2014-2023).jpg
-author: Yuniel Acosta
+author: en/yuniel-acosta
 tags:
   - IT
 categories:

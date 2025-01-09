@@ -8,6 +8,14 @@ backend:
   branch: main
   base_url: https://yunielacosta.com
   automatic_deployments: false
+  accept_roles:
+    - admin
+    - editor
+
+slug:
+  encoding: 'ascii'
+  clean_accents: true
+  sanitize_replacement: '-'
 
 publish_mode: editorial_workflow
 
@@ -37,7 +45,7 @@ collections:
     label: 'Blog Posts'
     folder: 'src/content/blog'
     create: true
-    slug: '{{slug}}'
+    slug: '{{title | localize}}'
     fields:
       - name: 'title'
         widget: 'string'
@@ -67,21 +75,33 @@ collections:
         required: false
         i18n: 'duplicate'
       - name: 'author'
-        widget: 'string'
-        label: 'Author'
+        widget: 'relation'
+        collection: 'authors'
+        search_fields: ['name']
+        value_field: '{{slug}}'
+        display_fields: ['name']
         i18n: 'duplicate'
-      - name: 'tags'
-        widget: 'list'
-        label: 'Tags'
-        allow_add: true
-        default: ['IT']
-        i18n: true
-      - name: 'categories'
-        widget: 'list'
-        label: 'Categories'
-        allow_add: true
-        default: ['IT']
-        i18n: true
+      - {
+          name: 'tags',
+          label: 'Tags',
+          widget: 'relation',
+          i18n: 'duplicate',
+          required: false,
+          collection: 'tags',
+          value_field: '{{slug}}',
+          search_fields: ['title'],
+          multiple: true,
+        }
+      - {
+          name: category,
+          label: Category,
+          widget: relation,
+          i18n: duplicate,
+          collection: categories,
+          value_field: '{{slug}}',
+          search_fields: ['title'],
+          multiple: true,
+        }
       - name: 'draft'
         widget: 'boolean'
         label: 'Draft'
@@ -91,33 +111,6 @@ collections:
         widget: 'markdown'
         label: 'Body'
         i18n: true
-
-  # - name: "roles"
-  #   i18n: true
-  #   label: "Roles"
-  #   folder: "src/content/roles"
-  #   create: true
-  #   extension: "json"
-  #   slug: "{{jobId}}-{{role}}"
-  #   fields:
-  #     - {label: "ID", name: "id", widget: "string"}
-  #     - {label: "Job ID", name: "jobId", widget: "string"}
-  #     - {label: "Role", name: "role", widget: "string", i18n: true}
-  #     - {label: "Start Date", name: "startDate", widget: "datetime", i18n: "duplicate"}
-  #     - {label: "End Date", name: "endDate", widget: "datetime", required: false, i18n: "duplicate"}
-  #     - {
-  #         label: "Achievements",
-  #         name: "achievements",
-  #         widget: "list",
-  #         allow_add: true,
-  #         max: 4,
-  #         i18n: true,
-  #         field: {
-  #           label: "Achievement",
-  #           name: "achievement",
-  #           widget: "string"
-  #         }
-  #       }
 
   - name: 'jobs'
     i18n: true
@@ -229,7 +222,6 @@ collections:
     folder: 'src/content/authors'
     create: true
     extension: 'json'
-    slug: '{{name}}'
     fields:
       - { label: 'Name', name: 'name', widget: 'string', i18n: 'duplicate' }
       - { label: 'Image', name: 'image', widget: 'image', i18n: 'duplicate' }
@@ -237,14 +229,52 @@ collections:
       - { label: 'Bio', name: 'bio', widget: 'text', i18n: true }
       - { label: 'Email', name: 'email', widget: 'string', i18n: 'duplicate' }
       - {
-          label: 'Social',
+          label: 'Social Media',
           name: 'social',
           widget: 'list',
           i18n: true,
           fields:
             [
-              { label: 'Name', name: 'name', widget: 'string', i18n: true },
-              { label: 'URL', name: 'url', widget: 'string', i18n: 'duplicate' },
-              { label: 'Icon', name: 'icon', widget: 'string', i18n: 'duplicate' },
+              {
+                label: 'Platform',
+                name: 'platform',
+                widget: 'select',
+                options: [
+                  { label: 'GitHub', value: 'github' },
+                  { label: 'LinkedIn', value: 'linkedin' },
+                  { label: 'X (Twitter)', value: 'twitter' }
+                ],
+                i18n: 'duplicate'
+              },
+              { label: 'Handle/ID', name: 'handle', widget: 'string', i18n: 'duplicate' }
             ],
         }
+    
+  - name: categories
+    label: Categories
+    label_singular: Category
+    folder: src/content/categories
+    create: true
+    i18n: true
+    fields:
+      - { name: title, label: Title, widget: string, i18n: true }
+      - {
+          name: order,
+          label: Order,
+          widget: number,
+          i18n: duplicate,
+          required: false,
+          value_type: int,
+          min: -1000,
+          max: 1000,
+          step: 1,
+        }
+  
+  - name: tags
+    label: Tags
+    label_singular: Tag
+    folder: src/content/tags
+    create: true
+    i18n: true
+    fields:
+      - { name: title, label: Title, widget: string, i18n: true }  

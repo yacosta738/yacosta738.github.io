@@ -6,10 +6,8 @@ description: This article explains CORS (Cross-Origin Resource Sharing) - a
   and how it works. The article emphasizes the importance of understanding CORS
   for building modern web applications that require cross-domain requests.
 date: 2023-04-03T08:06:22.454Z
-
 cover: /images/understanding-cors-in-web-development.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - CORS
 categories:

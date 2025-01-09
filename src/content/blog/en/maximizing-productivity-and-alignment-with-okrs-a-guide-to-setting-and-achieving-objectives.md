@@ -6,10 +6,8 @@ description: This article discusses how using Objectives and Key Results (OKRs)
   effective communication and stakeholder involvement. The article serves as a
   guide to implementing OKRs.
 date: 2022-12-20
-
 cover: /images/okrs.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - objectives
   - organization

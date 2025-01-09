@@ -7,7 +7,7 @@ description: Angular es uno de los frameworks front-end más recomendados, pero
 date: 2021-05-22T23:32:13.655Z
 
 cover: /images/nx.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Angular

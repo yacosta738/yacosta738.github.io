@@ -7,10 +7,8 @@ description: Esta guía cubre los conceptos básicos del diseño de sistemas,
   almacenamiento en caché y monitoreo. También recomienda recursos para aprender
   más, como libros, cursos, tutoriales y podcasts.
 date: 2023-02-17T00:47:44.121Z
-
 cover: /images/system-design-roadmap-2023.png
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - diseño de sistemas
   - arquitectura

@@ -6,10 +6,8 @@ description: Visual Studio Code es un popular editor de código entre los
   mejorarán su experiencia y les facilitarán el trabajo de diversas maneras en
   2021.
 date: 2021-05-25T02:23:12.784Z
-
 cover: /images/visual-studio-code.webp
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - VS Code
   - IDE

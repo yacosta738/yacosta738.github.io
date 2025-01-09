@@ -4,10 +4,8 @@ description: "Explore Java's Runtime class: control JVM execution, manage
   memory, and execute OS commands. Examples and benefits for building robust and
   efficient apps."
 date: 2023-02-19T01:01:06.248Z
-
 cover: /images/runtime-code.jpeg
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - java
   - jvm

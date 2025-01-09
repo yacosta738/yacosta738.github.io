@@ -6,10 +6,8 @@ description: El patrón Singleton restringe la instanciación de una clase a un
   acceso para la instancia de la clase y reduce la cantidad de código necesaria
   para mantener una única instancia de un objeto.
 date: 2023-02-02T16:59:31.360Z
-
 cover: /images/singleton-pattern.webp
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - patrones de diseño
 categories:

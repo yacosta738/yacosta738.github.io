@@ -4,10 +4,8 @@ description: Combining my passions for astronomy and programming, I'm creating a
   website to countdown the days until the new year, with a simulation of the
   earth's movement.
 date: 2020-12-27
-
 cover: /images/portada.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - JavaScript
   - TypeScript

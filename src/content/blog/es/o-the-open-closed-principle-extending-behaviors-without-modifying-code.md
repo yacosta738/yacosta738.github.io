@@ -6,9 +6,8 @@ description: Este artículo explica el principio Abierto-Cerrado (OCP) del dise�
   ejemplo para mostrar cómo adherirse al OCP definiendo una interfaz y creando
   clases separadas para cada forma.
 date: 2023-03-01T18:18:15.659Z
-
 cover: /images/open-closed-principle.png
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - kotlin

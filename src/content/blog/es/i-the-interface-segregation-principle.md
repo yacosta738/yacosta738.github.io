@@ -8,7 +8,7 @@ description: Este artículo explica el Principio de Segregación de Interfaces
 date: 2023-03-17T10:52:46.179Z
 
 cover: /images/interface-segregation-principle.png
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - kotlin

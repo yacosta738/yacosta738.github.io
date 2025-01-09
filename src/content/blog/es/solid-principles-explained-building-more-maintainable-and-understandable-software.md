@@ -5,10 +5,8 @@ description: 'Aprende los principios SOLID de POO: SRP, OCP, LSP, ISP y DIP.
   Estas directrices ayudan a crear diseños de software flexibles y fáciles de
   entender, evitando problemas comunes.'
 date: 2023-03-23T13:34:44.591Z
-
 cover: /images/solid-principles-explained.png
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - solid
 categories:

@@ -5,10 +5,8 @@ description: 'Descubre 7 bibliotecas de Java para mejorar las pruebas de unidad
   y Testcontainers. Simplifica el desarrollo, reduce el tiempo de pruebas y
   asegura la calidad del código.'
 date: 2023-02-15T13:46:25.916Z
-
 cover: /images/boost-your-java-testing-with-these-7-incredible-libraries.gif
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - java
   - kotlin

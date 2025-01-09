@@ -5,10 +5,8 @@ description: Este artículo explica las diferencias entre OAuth, OIDC y SAML,
   estándares, los lectores pueden tomar decisiones informadas sobre cuál usar
   para sus necesidades de autenticación y autorización.
 date: 2023-03-29T08:59:08.027Z
-
 cover: /images/understanding-oauth-oidc-and-saml.png
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - Seguridad
 categories:

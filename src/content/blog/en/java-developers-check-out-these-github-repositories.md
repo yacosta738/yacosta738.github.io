@@ -4,10 +4,8 @@ description: Discover some of the best GitHub repositories for Java developers
   in this article. Learn about data structures, algorithms, Spring framework,
   coding style tools and more to enhance your skills.
 date: 2023-02-22T19:49:09.902Z
-
 cover: /images/java-developers-check-out-these-github-repositories-.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Java
 categories:

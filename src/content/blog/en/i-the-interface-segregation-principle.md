@@ -6,10 +6,8 @@ description: This article explains the Interface Segregation Principle (ISP), a
   ISP and a better practice that follows it by creating small, specific
   interfaces for each class.
 date: 2023-03-17T10:46:22.279Z
-
 cover: /images/interface-segregation-principle.png
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - kotlin
   - solid

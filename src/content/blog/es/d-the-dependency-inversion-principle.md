@@ -1,14 +1,10 @@
 ---
 title: '[D] El Principio de Inversión de Dependencias'
-description: Este artículo explora el Principio de Inversión de Dependencias
-  (DIP) en los principios de diseño SOLID, resaltando los beneficios de crear un
-  código flexible y fácil de mantener. Proporciona un ejemplo en Kotlin para
-  implementar DIP y lograr una base de código adaptable.
-date: 2023-03-18T11:10:29.501Z
-
+description: Este artículo explora el Principio de Inversión de Dependencias (DIP) en los principios de diseño SOLID, resaltando los beneficios de crear un código flexible y fácil de mantener. Proporciona un ejemplo en Kotlin para implementar DIP y lograr una base de código adaptable.
+isExternalLink: false
+date: 2023-03-18T12:07:00
 cover: /images/dependency-inversion-principle.png
-author: Yuniel Acosta
-
+author: es/yuniel-acosta
 tags:
   - kotlin
   - solid
@@ -16,7 +12,6 @@ categories:
   - Software Development
 draft: false
 ---
-
 ![Principio de Inversión de Dependencias](/images/dependency-inversion-principle.png 'Principio de Inversión de Dependencias')
 
 El Principio de Inversión de Dependencias (DIP) es el quinto principio de los principios de diseño SOLID. Este principio establece que los módulos de alto nivel no deben depender de los módulos de bajo nivel, sino que ambos deben depender de abstracciones. Esto significa que una clase debe depender de abstracciones en lugar de implementaciones específicas. Este principio promueve un diseño en el que los módulos de alto nivel, como la lógica de negocios, no están fuertemente acoplados a los módulos de bajo nivel, como la capa de acceso a datos. Esto hace que el código sea más flexible y más fácil de mantener.
@@ -31,10 +26,9 @@ class Order {
         database.save("orders", "order_data")
     }
 }
-
 ```
 
-En este ejemplo, la clase **`Order`** tiene una dependencia en una implementación específica de un módulo de bajo nivel, a saber, la clase **`MySQLDatabase`**. Esto viola el Principio de Inversión de Dependencia (DIP), porque la clase **`Order`** está fuertemente acoplada a una implementación específica de la clase **MySQLDatabase**. Si queremos cambiar la base de datos a PostgreSQL o cualquier otra base de datos, también tendríamos que modificar la clase **`Order`**.
+En este ejemplo, la clase `**Order**` tiene una dependencia en una implementación específica de un módulo de bajo nivel, a saber, la clase `**MySQLDatabase**`. Esto viola el Principio de Inversión de Dependencia (DIP), porque la clase `**Order**` está fuertemente acoplada a una implementación específica de la clase **MySQLDatabase**. Si queremos cambiar la base de datos a PostgreSQL o cualquier otra base de datos, también tendríamos que modificar la clase `**Order**`.
 
 Una práctica mejor sería crear una abstracción para el módulo de bajo nivel y hacer que el módulo de alto nivel dependa de la abstracción.
 
@@ -64,7 +58,6 @@ class Order {
         database.save("orders", "order_data")
     }
 }
-
 ```
 
 La clase `Order` depende de la abstracción proporcionada por la interfaz `Database`, en lugar de una implementación específica de un módulo de bajo nivel. Este enfoque cumple con el Principio de Inversión de Dependencia (DIP), lo que hace que el código sea más flexible y mantenible. Con este diseño, es posible cambiar a una base de datos diferente creando una nueva implementación de la interfaz `Database` e inyectándola en la clase `Order`.

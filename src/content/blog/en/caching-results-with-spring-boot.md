@@ -4,10 +4,8 @@ description: Implementing a Cache with Spring is a fairly easy task,
   due to the ease of implementation. For this Spring provides us with a series
   of annotations that we will see in the rest of the tutorial.
 date: 2022-10-21T23:18:16.315Z
-
 cover: /images/cache.webp
-author: Yuniel Acosta
-
+author: en/yuniel-acosta
 tags:
   - Spring
   - Spring Boot

@@ -3,7 +3,7 @@ title: Personalización de la página de perfil de Github
 description: Puedes personalizar tu perfil para que otras personas puedan tener una mejor idea de quién eres y del trabajo que haces.
 date: 2021-05-11T02:05:59.285Z
 cover: /images/acosta-github-profile.webp
-author: Yuniel Acosta
+author: es/yuniel-acosta
 
 tags:
   - Github
