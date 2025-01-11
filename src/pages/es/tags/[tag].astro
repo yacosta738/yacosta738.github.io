@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { type Article, jsonToArticle } from '@models:Article';
 import BlogTemplate from 'templates:BlogTemplate';
 import ArticleSummary from 'molecules:ArticleSummary';
@@ -9,46 +9,29 @@ import type { GetStaticPaths } from 'astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-interface Props {
-	tag: string;
-	posts: Article[];
-}
-
-export const getStaticPaths = (async () => {
-	const allPosts = await getCollection('blog', ({ data }) => {
-		return !data.draft;
-	});
-
-	const processedPosts = allPosts.map((post) => {
-		const slugParts = post.slug.split('/');
-		const lang = slugParts[0] === 'es' ? 'es' : 'en';
-		return {
-			...post,
-			lang,
-		};
-	});
-
-	// Filter for Spanish posts only
-	const spanishPosts = processedPosts.filter((post) => post.lang === 'es');
-
-	// Get unique tags
-	const tags = [...new Set(spanishPosts.flatMap((post) => post.data.tags || []))];
-
-	return tags.map((tag) => {
-		const filteredPosts = spanishPosts
-			.filter((post) => post.data.tags?.includes(tag))
-			.map((post) => jsonToArticle(post));
-
-		return {
-			params: { tag },
-			props: { posts: filteredPosts, tag },
-		};
-	});
-}) satisfies GetStaticPaths;
+export const getStaticPaths: GetStaticPaths = async () => {
+	const tags:  CollectionEntry<'tags'>[] = await getCollection('tags');
+	return tags.map(tag => ({
+		params: { tag: tag.data.title }
+	}));
+};
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
-const tagPosts = posts;
+
+const [tags, blogPosts] = await Promise.all([
+	getCollection('tags'),
+	getCollection('blog', ({ data }) => !data.draft),
+]);
+
+const currentTag = tags.find((t) => t.data.title === tag);
+const posts: Article[] = currentTag
+	? await Promise.all(
+			blogPosts
+				.filter((post) => post.data.tags?.some((t) => t.slug === currentTag.slug))
+				.map(jsonToArticle)
+		)
+	: [];
+const tagPosts: Article[] = posts;
 ---
 
 <BlogTemplate title={`${t('blog')} | ${tag}`} description={`${t('blogDescription')} ${tag}`}>

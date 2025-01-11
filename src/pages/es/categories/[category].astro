@@ -9,46 +9,30 @@ import type { GetStaticPaths } from 'astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-interface Props {
-	tag: string;
-	posts: Article[];
-}
-
-export const getStaticPaths = (async () => {
-	const allPosts = await getCollection('blog', ({ data }) => {
-		return !data.draft;
-	});
-
-	const processedPosts = allPosts.map((post) => {
-		const slugParts = post.slug.split('/');
-		const lang = slugParts[0] === 'es' ? 'es' : 'en';
-		return {
-			...post,
-			lang,
-		};
-	});
-
-	// Filter for Spanish posts only
-	const spanishPosts = processedPosts.filter((post) => post.lang === 'es');
-
-	// Get unique categories
-	const categories = [...new Set(spanishPosts.flatMap((post) => post.data.categories || []))];
-
-	return categories.map((category) => {
-		const filteredPosts = spanishPosts
-			.filter((post) => post.data.categories?.includes(category))
-			.map((post) => jsonToArticle(post));
-
-		return {
-			params: { category },
-			props: { posts: filteredPosts, category },
-		};
-	});
-}) satisfies GetStaticPaths;
+export const getStaticPaths: GetStaticPaths = async () => {
+	const categories: CollectionEntry<'categories'>[] = await getCollection('categories');
+	return categories.map(category => ({
+		params: { category: category.data.title },
+	}));
+};
 
 const { category } = Astro.params;
-const { posts } = Astro.props;
-const categoryPosts = posts;
+
+const [categories, blogPosts] = await Promise.all([
+	getCollection('categories'),
+	getCollection('blog', ({ data }) => !data.draft),
+]);
+
+const currentCategory = categories.find((cat) => cat.data.title === category);
+const posts: Article[] = currentCategory
+	? await Promise.all(
+			blogPosts
+				.filter((post) => post.data.categories?.some((cat) => cat.slug === currentCategory.slug))
+				.map(jsonToArticle)
+		)
+	: [];
+	
+const categoryPosts: Article[] = posts;
 ---
 
 <BlogTemplate
