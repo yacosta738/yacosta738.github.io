@@ -106,5 +106,5 @@ export const collections = {
 	technologies,
 	projects,
 	tags,
-	categories
+	categories,
 };

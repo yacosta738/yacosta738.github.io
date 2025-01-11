@@ -38,14 +38,18 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 		cover: article?.cover,
 		author,
 		timeToRead: remarkPluginFrontmatter?.minutesRead || 0,
-		tags: await Promise.all(article?.tags.map(async (tag) => {
-			const tagEntry = await getEntry('tags', tag.slug);
-			return tagEntry;
-		})),
-		categories: await Promise.all(article?.categories.map(async (category) => {
-			const categoryEntry = await getEntry('categories', category.slug);
-			return categoryEntry;
-		})),
+		tags: await Promise.all(
+			article?.tags.map(async (tag) => {
+				const tagEntry = await getEntry('tags', tag.slug);
+				return tagEntry;
+			})
+		),
+		categories: await Promise.all(
+			article?.categories.map(async (category) => {
+				const categoryEntry = await getEntry('categories', category.slug);
+				return categoryEntry;
+			})
+		),
 		draft: article?.draft,
 		content,
 	};
