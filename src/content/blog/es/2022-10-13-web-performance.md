@@ -7,16 +7,14 @@ description: La percepción del usuario sobre la velocidad del sitio es más
   en tiempo real y la capacidad de respuesta a la interacción del usuario
   afectan la percepción.
 date: 2022-10-13T12:33:43.553Z
-
 cover: /images/wep-performance.webp
 author: es/yuniel-acosta
-
 tags:
-  - web
-  - html
-  - javascript
+  - es/web
+  - es/html
+  - es/javascript
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

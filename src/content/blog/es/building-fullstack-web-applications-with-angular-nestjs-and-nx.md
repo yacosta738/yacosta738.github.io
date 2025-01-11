@@ -5,17 +5,15 @@ description: Angular es uno de los frameworks front-end más recomendados, pero
   completa. NestJS se complementa bien con Angular para un desarrollo completo
   de aplicaciones web.
 date: 2021-05-22T23:32:13.655Z
-
 cover: /images/nx.webp
 author: es/yuniel-acosta
-
 tags:
-  - Angular
-  - NestJS
-  - Nx
-  - TypeScript
+  - es/angular
+  - es/nestjs
+  - es/nx
+  - es/typescript
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

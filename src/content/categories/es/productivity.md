@@ -1,6 +1,5 @@
 ---
 title: productividad
-order: null
-excludeFromFAQ: true
+order: 2
 ---
 

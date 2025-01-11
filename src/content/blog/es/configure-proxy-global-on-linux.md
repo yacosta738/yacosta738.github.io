@@ -4,13 +4,12 @@ description: En este artículo comparto algunos consejos para configurar Interne
 date: 2020-12-06
 cover: /images/portada-proxy.webp
 author: es/yuniel-acosta
-
 tags:
-  - Proxy
-  - Linux
-  - VPN
+  - es/proxy
+  - es/linux
+  - es/vpn
 categories:
-  - OS & Tools
+  - es/tools
 draft: false
 ---
 

@@ -8,11 +8,12 @@ description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
 date: 2022-12-20T01:46:12.468Z
 cover: /images/okrs.webp
 author: es/yuniel-acosta
-
 tags:
-  - okrs
+  - es/objectives
+  - es/organization
+  - es/productivity
 categories:
-  - Productivity
+  - es/productivity
 draft: false
 ---
 

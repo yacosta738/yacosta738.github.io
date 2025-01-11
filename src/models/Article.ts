@@ -11,8 +11,8 @@ export interface Article {
 	cover: string;
 	author: Author;
 	timeToRead: number;
-	tags: string[];
-	categories: string[];
+	tags: CollectionEntry<'tags'>[];
+	categories: CollectionEntry<'categories'>[];
 	draft: boolean;
 	content: string;
 }
@@ -38,8 +38,14 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 		cover: article?.cover,
 		author,
 		timeToRead: remarkPluginFrontmatter?.minutesRead || 0,
-		tags: article?.tags,
-		categories: article?.categories,
+		tags: await Promise.all(article?.tags.map(async (tag) => {
+			const tagEntry = await getEntry('tags', tag.slug);
+			return tagEntry;
+		})),
+		categories: await Promise.all(article?.categories.map(async (category) => {
+			const categoryEntry = await getEntry('categories', category.slug);
+			return categoryEntry;
+		})),
 		draft: article?.draft,
 		content,
 	};

@@ -6,10 +6,10 @@ date: 2023-03-18T12:07:00
 cover: /images/dependency-inversion-principle.png
 author: es/yuniel-acosta
 tags:
-  - kotlin
-  - solid
+  - es/kotlin
+  - es/solid
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 ![Principio de Inversión de Dependencias](/images/dependency-inversion-principle.png 'Principio de Inversión de Dependencias')

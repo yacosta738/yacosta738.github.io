@@ -6,10 +6,10 @@ date: 2021-05-11T02:05:59.285Z
 cover: /images/acosta-github-profile.webp
 author: en/yuniel-acosta
 tags:
-  - Github
-  - Markdown
+  - en/github
+  - en/markdown
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

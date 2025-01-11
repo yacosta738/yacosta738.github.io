@@ -7,10 +7,10 @@ date: 2023-03-18T12:07:00
 cover: /images/dependency-inversion-principle.png
 author: en/yuniel-acosta
 tags:
-  - kotlin
-  - solid
+  - en/kotlin
+  - en/solid
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 ![Dependency Inversion Principle](/images/dependency-inversion-principle.png 'Dependency Inversion Principle')

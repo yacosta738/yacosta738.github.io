@@ -9,11 +9,26 @@ const blogCollection = defineCollection({
 		date: z.date(),
 		cover: z.string(),
 		author: reference('authors'),
-		tags: z.array(z.string()),
-		categories: z.array(z.string()),
+		tags: z.array(reference('tags')),
+		categories: z.array(reference('categories')),
 		isExternalLink: z.boolean().default(false),
 		link: z.string().optional(),
 		draft: z.boolean(),
+	}),
+});
+
+const tags = defineCollection({
+	loader: glob({ pattern: '**/[^_]*.md', base: './tags' }),
+	schema: z.object({
+		title: z.string(),
+	}),
+});
+
+const categories = defineCollection({
+	loader: glob({ pattern: '**/[^_]*.md', base: './categories' }),
+	schema: z.object({
+		title: z.string(),
+		order: z.number().optional(),
 	}),
 });
 
@@ -90,4 +105,6 @@ export const collections = {
 	jobs,
 	technologies,
 	projects,
+	tags,
+	categories
 };

@@ -8,9 +8,9 @@ date: 2023-03-08T20:53:25.904Z
 cover: /images/liskov-substitution-principle.png
 author: en/yuniel-acosta
 tags:
-  - Kotlin
+  - en/kotlin
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

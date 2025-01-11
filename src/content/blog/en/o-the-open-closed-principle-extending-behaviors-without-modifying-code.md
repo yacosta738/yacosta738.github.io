@@ -9,10 +9,10 @@ date: 2023-03-01T18:13:14.418Z
 cover: /images/open-closed-principle.png
 author: en/yuniel-acosta
 tags:
-  - kotlin
-  - solid
+  - en/kotlin
+  - en/solid
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

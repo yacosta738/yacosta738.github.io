@@ -9,9 +9,9 @@ date: 2023-04-03T08:06:22.454Z
 cover: /images/understanding-cors-in-web-development.png
 author: en/yuniel-acosta
 tags:
-  - CORS
+  - en/cors
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

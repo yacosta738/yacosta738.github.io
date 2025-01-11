@@ -7,12 +7,12 @@ date: 2022-09-13
 cover: /images/rebuild-with-astro.webp
 author: es/yuniel-acosta
 tags:
-  - Gridsome
-  - Astro
-  - Vuejs
-  - Nuxt
+  - es/gridsome
+  - es/astro
+  - es/vuejs
+  - es/nuxt
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

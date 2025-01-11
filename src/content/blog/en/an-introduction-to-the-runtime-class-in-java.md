@@ -7,10 +7,10 @@ date: 2023-02-19T01:01:06.248Z
 cover: /images/runtime-code.jpeg
 author: en/yuniel-acosta
 tags:
-  - java
-  - jvm
+  - en/java
+  - en/jvm
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

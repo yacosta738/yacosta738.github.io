@@ -8,11 +8,11 @@ date: 2023-02-15T13:40:04.973Z
 cover: /images/boost-your-java-testing-with-these-7-incredible-libraries.gif
 author: en/yuniel-acosta
 tags:
-  - java
-  - kotlin
-  - testing
+  - en/java
+  - en/kotlin
+  - en/testing
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

@@ -26,6 +26,9 @@ i18n:
   structure: 'multiple_folders'
   locales: ['en', 'es']
   default_locale: 'en'
+  canonical_slug:
+    key: defaultLocaleVersion
+    value: 'en/{{slug}}'
 
 collections:
   - name: 'tech'
@@ -93,8 +96,8 @@ collections:
           multiple: true,
         }
       - {
-          name: category,
-          label: Category,
+          name: categories,
+          label: Categories,
           widget: relation,
           i18n: duplicate,
           collection: categories,

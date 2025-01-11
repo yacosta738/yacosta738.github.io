@@ -7,13 +7,13 @@ date: 2022-10-21T23:18:16.315Z
 cover: /images/cache.webp
 author: en/yuniel-acosta
 tags:
-  - Spring
-  - Spring Boot
-  - Java
-  - Kotlin
-  - Cache
+  - en/spring
+  - en/spring-boot
+  - en/java
+  - en/kotlin
+  - en/cache
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

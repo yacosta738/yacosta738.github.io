@@ -9,6 +9,7 @@ import '../../styles/github-markdown.css';
 import { domain } from '@store:constants';
 import { jsonToArticle } from '@models:Article';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import { getCollection } from 'astro:content';
 export interface Props {
 	post: CollectionEntry<'blog'>;
 }
@@ -19,8 +20,18 @@ const title = post.data.title;
 const description = post.data.description;
 const image = post.data.cover ? post.data.cover : `${domain}/images/me.webp`;
 const ogImageAlt = description;
-const categories = post.data.categories || [];
-const tags = post.data.tags || [];
+const categoriesCollection = post.data.categories || [];
+const tagsCollection = post.data.tags || [];
+
+const categories = await getCollection('categories')
+	.then((categories) =>
+		categories.filter((category) => categoriesCollection.some((cat) => cat.slug === category.slug))
+	)
+	.then((categories) => categories.map((category) => category.data.title));
+
+const tags = await getCollection('tags')
+	.then((tags) => tags.filter((tag) => tagsCollection.some((t) => t.slug === tag.slug)))
+	.then((tags) => tags.map((tag) => tag.data.title));
 const lang = getLangFromUrl(Astro.url);
 
 const t = useTranslations(lang as 'en' | 'es');

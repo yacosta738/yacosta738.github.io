@@ -5,14 +5,12 @@ description: Descubre en este artículo algunos de los mejores repositorios de
   algoritmos, el framework Spring, herramientas de estilo de codificación y más
   para mejorar tus habilidades.
 date: 2023-02-22T19:52:36.634Z
-
 cover: /images/java-developers-check-out-these-github-repositories-.png
 author: es/yuniel-acosta
-
 tags:
-  - Java
+  - es/java
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

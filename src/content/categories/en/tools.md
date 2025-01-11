@@ -1,5 +1,5 @@
 ---
 title: os & tools
-excludeFromFAQ: true
+order: 11
 ---
 

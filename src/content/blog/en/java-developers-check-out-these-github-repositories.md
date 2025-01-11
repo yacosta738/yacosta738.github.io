@@ -7,9 +7,9 @@ date: 2023-02-22T19:49:09.902Z
 cover: /images/java-developers-check-out-these-github-repositories-.png
 author: en/yuniel-acosta
 tags:
-  - Java
+  - en/java
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

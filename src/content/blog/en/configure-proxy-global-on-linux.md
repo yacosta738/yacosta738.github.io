@@ -5,11 +5,11 @@ date: 2020-12-06
 cover: /images/portada-proxy.webp
 author: en/yuniel-acosta
 tags:
-  - Proxy
-  - Linux
-  - VPN
+  - en/proxy
+  - en/linux
+  - en/vpn
 categories:
-  - OS & Tools
+  - en/tools
 draft: false
 ---
 

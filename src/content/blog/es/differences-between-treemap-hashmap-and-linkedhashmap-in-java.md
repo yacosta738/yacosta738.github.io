@@ -10,10 +10,10 @@ cover: /images/map.png
 author: es/yuniel-acosta
 
 tags:
-  - java
-  - kotlin
+  - es/java
+  - es/kotlin
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

@@ -8,11 +8,11 @@ date: 2019-04-08
 cover: /images/gridsome-portada.webp
 author: en/yuniel-acosta
 tags:
-  - frontend
-  - gridsome
-  - Vuejs
+  - en/frontend
+  - en/gridsome
+  - en/vuejs
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

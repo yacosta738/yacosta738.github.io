@@ -7,14 +7,12 @@ description: Obtén quince consejos para acelerar tus aplicaciones de Java y
   las aplicaciones se ejecuten sin problemas. Configura tus sistemas para un
   rendimiento óptimo. Implementa estos consejos para una velocidad máxima.
 date: 2023-02-02T16:39:17.873Z
-
 cover: /images/maximizing-java-code-performance.webp
 author: es/yuniel-acosta
-
 tags:
-  - Java
+  - es/java
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

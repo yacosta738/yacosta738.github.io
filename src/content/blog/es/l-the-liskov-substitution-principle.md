@@ -8,11 +8,10 @@ description: El principio de sustitución de Liskov es una regla fundamental en
 date: 2023-03-08T20:56:23.626Z
 cover: /images/liskov-substitution-principle.png
 author: es/yuniel-acosta
-
 tags:
-  - Kotlin
+  - es/kotlin
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

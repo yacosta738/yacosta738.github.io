@@ -10,12 +10,12 @@ cover: /images/hibernate.webp
 author: es/yuniel-acosta
 
 tags:
-  - java
-  - sql
-  - kotlin
-  - orm
+  - es/java
+  - es/sql
+  - es/kotlin
+  - es/orm
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

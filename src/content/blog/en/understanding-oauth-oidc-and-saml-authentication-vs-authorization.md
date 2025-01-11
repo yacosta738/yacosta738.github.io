@@ -8,9 +8,9 @@ date: 2023-03-29T08:55:38.428Z
 cover: /images/understanding-oauth-oidc-and-saml.png
 author: en/yuniel-acosta
 tags:
-  - Security
+  - en/security
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

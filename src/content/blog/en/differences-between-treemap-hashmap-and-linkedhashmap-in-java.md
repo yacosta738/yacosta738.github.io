@@ -5,15 +5,13 @@ description: This article discusses the differences between TreeMap, HashMap,
   each of these classes to help you choose the right implementation of the Map
   interface for your project.
 date: 2023-02-18T12:44:57.666Z
-
 cover: /images/map.png
 author: en/yuniel-acosta
-
 tags:
-  - java
-  - kotlin
+  - en/java
+  - en/kotlin
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

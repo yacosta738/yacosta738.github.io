@@ -8,12 +8,12 @@ date: 2023-01-25T21:56:01.410Z
 cover: /images/junit5-spring-boot.webp
 author: en/yuniel-acosta
 tags:
-  - junit5
-  - spring boot
-  - java
-  - kotlin
+  - en/junit5
+  - en/spring-boot
+  - en/java
+  - en/kotlin
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

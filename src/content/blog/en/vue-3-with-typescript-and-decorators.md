@@ -7,12 +7,12 @@ date: 2021-05-30T19:54:13.642Z
 cover: /images/vue3-typescript.webp
 author: en/yuniel-acosta
 tags:
-  - Vuejs
-  - TypeScript
-  - Decorators
-  - VueX
+  - en/vuejs
+  - en/typescript
+  - en/decorators
+  - en/vuex
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

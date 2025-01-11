@@ -8,9 +8,9 @@ date: 2023-03-23T13:34:44.591Z
 cover: /images/solid-principles-explained.png
 author: es/yuniel-acosta
 tags:
-  - solid
+  - es/solid
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

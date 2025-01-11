@@ -30,32 +30,24 @@ const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
 	return bDate.getTime() - aDate.getTime();
 });
 
-const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
-	post.tags.forEach((tag) => {
-		const tagLower = tag.toLowerCase();
-		if (tagLower in acc) {
-			acc[tagLower] += 1;
-		} else {
-			acc[tagLower] = 1;
-		}
-	});
-	return acc;
-}, {});
+const tagsCollection = allPosts.flatMap(post => post.tags);
+const categoriesCollection = allPosts.flatMap(post => post.categories);
 
-const categories: { [key: string]: number } = allPosts.reduce(
-	(acc: { [key: string]: number }, post) => {
-		post.categories.forEach((category) => {
-			const categoryLower = category.toLowerCase();
-			if (categoryLower in acc) {
-				acc[categoryLower] += 1;
-			} else {
-				acc[categoryLower] = 1;
-			}
-		});
+const tags: { [key: string]: number } = await getCollection('tags')
+	.then((tags) => tags.filter((tag) => tagsCollection.some((t) => t.slug === tag.slug)))
+	.then((tags) => tags.reduce((acc: { [key: string]: number }, tag) => {
+		const tagLower = tag.data.title.toLowerCase();
+		acc[tagLower] = (acc[tagLower] || 0) + 1;
 		return acc;
-	},
-	{}
-);
+	}, {}));
+
+const categories: { [key: string]: number } = await getCollection('categories')
+	.then((categories) => categories.filter((category) => categoriesCollection.some((cat) => cat.slug === category.slug)))
+	.then((categories) => categories.reduce((acc: { [key: string]: number }, category) => {
+		const categoryLower = category.data.title.toLowerCase();
+		acc[categoryLower] = (acc[categoryLower] || 0) + 1;
+		return acc;
+	}, {}));
 ---
 
 <div id="widget-wrapper" class="container mx-auto w-4/5 sticky top-24">

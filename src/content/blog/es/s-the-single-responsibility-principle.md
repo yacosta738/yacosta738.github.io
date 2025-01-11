@@ -8,10 +8,10 @@ date: 2023-03-01T17:38:53.409Z
 cover: /images/single-responsibility-principle.png
 author: es/yuniel-acosta
 tags:
-  - kotlin
-  - solid
+  - es/kotlin
+  - es/solid
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

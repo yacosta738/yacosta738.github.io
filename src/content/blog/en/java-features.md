@@ -7,10 +7,10 @@ date: 2022-10-10
 cover: /images/java-feactures.webp
 author: en/yuniel-acosta
 tags:
-  - java
-  - jvm
+  - en/java
+  - en/jvm
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

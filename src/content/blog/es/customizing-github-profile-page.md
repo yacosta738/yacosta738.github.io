@@ -4,12 +4,11 @@ description: Puedes personalizar tu perfil para que otras personas puedan tener 
 date: 2021-05-11T02:05:59.285Z
 cover: /images/acosta-github-profile.webp
 author: es/yuniel-acosta
-
 tags:
-  - Github
-  - Markdown
+  - es/github
+  - es/markdown
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

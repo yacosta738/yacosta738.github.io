@@ -9,9 +9,9 @@ date: 2023-02-02T16:28:19.185Z
 cover: /images/maximizing-java-code-performance.webp
 author: en/yuniel-acosta
 tags:
-  - Java
+  - en/java
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

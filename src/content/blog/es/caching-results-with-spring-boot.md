@@ -9,13 +9,13 @@ cover: /images/cache.webp
 author: es/yuniel-acosta
 
 tags:
-  - Spring
-  - Spring Boot
-  - Java
-  - Kotlin
-  - Cache
+  - es/spring
+  - es/spring-boot
+  - es/java
+  - es/kotlin
+  - es/cache
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

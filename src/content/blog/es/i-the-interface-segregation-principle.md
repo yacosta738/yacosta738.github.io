@@ -6,15 +6,13 @@ description: Este artículo explica el Principio de Segregación de Interfaces
   práctica que viola ISP y una mejor práctica que lo sigue creando interfaces
   pequeñas y específicas para cada clase.
 date: 2023-03-17T10:52:46.179Z
-
 cover: /images/interface-segregation-principle.png
 author: es/yuniel-acosta
-
 tags:
-  - kotlin
-  - solid
+  - es/kotlin
+  - es/solid
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

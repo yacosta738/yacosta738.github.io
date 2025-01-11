@@ -7,9 +7,9 @@ date: 2025-01-05T16:25:00
 cover: /images/Java- A Decade of Evolution (2014-2023).jpg
 author: es/yuniel-acosta
 tags:
-  - IT
+  - es/tech
 categories:
-  - IT
+  - es/programming
 draft: true
 ---
 # **Java: Una Década de Evolución (2014-2023)**

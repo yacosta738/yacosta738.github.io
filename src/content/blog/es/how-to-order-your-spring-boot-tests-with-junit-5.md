@@ -10,12 +10,12 @@ cover: /images/junit5-spring-boot.webp
 author: es/yuniel-acosta
 
 tags:
-  - junit5
-  - spring boot
-  - java
-  - kotlin
+  - es/junit5
+  - es/spring-boot
+  - es/java
+  - es/kotlin
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

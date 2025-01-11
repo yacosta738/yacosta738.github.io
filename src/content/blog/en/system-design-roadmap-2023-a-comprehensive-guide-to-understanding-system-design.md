@@ -9,10 +9,10 @@ date: 2023-02-17T00:36:19.145Z
 cover: /images/system-design-roadmap-2023.png
 author: en/yuniel-acosta
 tags:
-  - system design
-  - architecture
+  - en/system-design
+  - en/architecture
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

@@ -9,10 +9,10 @@ date: 2023-03-17T10:46:22.279Z
 cover: /images/interface-segregation-principle.png
 author: en/yuniel-acosta
 tags:
-  - kotlin
-  - solid
+  - en/kotlin
+  - en/solid
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

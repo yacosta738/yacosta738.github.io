@@ -9,13 +9,13 @@ date: 2021-05-25T02:23:12.784Z
 cover: /images/visual-studio-code.webp
 author: es/yuniel-acosta
 tags:
-  - VS Code
-  - IDE
-  - Editor de texto
-  - extensiones
-  - plugins
+  - es/vs-code
+  - es/ide
+  - es/text-editor
+  - es/extensions
+  - es/plugin
 categories:
-  - OS & Tools
+  - es/tools
 draft: false
 ---
 

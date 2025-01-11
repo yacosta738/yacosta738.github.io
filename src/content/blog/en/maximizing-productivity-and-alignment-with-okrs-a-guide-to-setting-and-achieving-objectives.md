@@ -9,11 +9,11 @@ date: 2022-12-20
 cover: /images/okrs.webp
 author: en/yuniel-acosta
 tags:
-  - objectives
-  - organization
-  - productivity
+  - en/objectives
+  - en/organization
+  - en/productivity
 categories:
-  - Productivity
+  - en/productivity
 draft: false
 ---
 

@@ -7,12 +7,12 @@ date: 2023-01-12T17:20:31.160Z
 cover: /images/hibernate.webp
 author: en/yuniel-acosta
 tags:
-  - java
-  - sql
-  - kotlin
-  - orm
+  - en/java
+  - en/sql
+  - en/kotlin
+  - en/orm
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

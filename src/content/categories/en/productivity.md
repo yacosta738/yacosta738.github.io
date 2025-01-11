@@ -1,5 +1,5 @@
 ---
 title: productivity
-excludeFromFAQ: true
+order: 2
 ---
 

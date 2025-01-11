@@ -7,12 +7,12 @@ date: 2020-12-27
 cover: /images/portada.webp
 author: en/yuniel-acosta
 tags:
-  - JavaScript
-  - TypeScript
-  - HTML
-  - CSS
+  - en/javascript
+  - en/typescript
+  - en/html
+  - en/css
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

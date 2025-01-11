@@ -4,15 +4,13 @@ description: 'Explora la clase Runtime de Java: controla la ejecución de la JVM
   gestiona la memoria y ejecuta comandos del SO. Ejemplos y beneficios para
   construir aplicaciones sólidas y eficientes.'
 date: 2023-02-19T01:08:10.172Z
-
 cover: /images/runtime-code.jpeg
 author: es/yuniel-acosta
-
 tags:
-  - java
-  - jvm
+  - es/java
+  - es/jvm
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 

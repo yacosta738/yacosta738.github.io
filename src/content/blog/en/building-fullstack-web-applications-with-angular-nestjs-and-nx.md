@@ -7,12 +7,12 @@ date: 2021-05-22T23:32:13.655Z
 cover: /images/nx.webp
 author: en/yuniel-acosta
 tags:
-  - Angular
-  - NestJS
-  - Nx
-  - TypeScript
+  - en/angular
+  - en/nestjs
+  - en/nx
+  - en/typescript
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

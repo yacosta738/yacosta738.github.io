@@ -7,11 +7,11 @@ date: 2023-02-22T21:42:35.461Z
 cover: /images/array-list-vs-linked-list-java-collections.png
 author: en/yuniel-acosta
 tags:
-  - Java
-  - Kotlin
-  - jvm
+  - en/java
+  - en/kotlin
+  - en/jvm
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

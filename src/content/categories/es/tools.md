@@ -1,6 +1,5 @@
 ---
 title: so & herramientas
-order: null
-excludeFromFAQ: true
+order: 11
 ---
 

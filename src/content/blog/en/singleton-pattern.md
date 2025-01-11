@@ -9,9 +9,9 @@ date: 2023-02-02T16:53:55.243Z
 cover: /images/singleton-pattern.webp
 author: en/yuniel-acosta
 tags:
-  - Design pattern
+  - en/design-pattern
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

@@ -9,11 +9,11 @@ date: 2022-10-13T12:33:43.553Z
 cover: /images/wep-performance.webp
 author: en/yuniel-acosta
 tags:
-  - html
-  - javascript
-  - typescript
+  - en/html
+  - en/javascript
+  - en/typescript
 categories:
-  - Software Development
+  - en/software-development
 draft: false
 ---
 

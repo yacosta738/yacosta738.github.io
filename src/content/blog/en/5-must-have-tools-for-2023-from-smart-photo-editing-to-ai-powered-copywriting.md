@@ -8,10 +8,10 @@ date: 2023-02-10T15:12:23.179Z
 cover: /images/5-must-have-tools-for-2023.png
 author: en/yuniel-acosta
 tags:
-  - AI
+  - en/ai
 categories:
-  - Artificial Intelligence
-  - OS & Tools
+  - en/ai
+  - en/tools
 draft: false
 ---
 

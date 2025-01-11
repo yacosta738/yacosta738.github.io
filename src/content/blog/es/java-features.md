@@ -5,15 +5,13 @@ description: Java es un lenguaje de programación rápido, seguro y versátil
   hasta supercomputadoras científicas, consolas de juegos y más, ¡Java está en
   todas partes!
 date: 2022-10-10
-
 cover: /images/java-feactures.webp
 author: es/yuniel-acosta
-
 tags:
-  - java
-  - jvm
+  - es/java
+  - es/jvm
 categories:
-  - Software Development
+  - es/software-development
 draft: false
 ---
 
