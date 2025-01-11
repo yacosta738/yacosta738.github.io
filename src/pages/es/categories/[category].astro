@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const categories: CollectionEntry<'categories'>[] = await getCollection('categories');
-	return categories.map(category => ({
+	return categories.map((category) => ({
 		params: { category: category.data.title },
 	}));
 };
@@ -31,7 +31,7 @@ const posts: Article[] = currentCategory
 				.map(jsonToArticle)
 		)
 	: [];
-	
+
 const categoryPosts: Article[] = posts;
 ---
 
