@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/singleton-pattern
 title: Singleton pattern
 description: The Singleton pattern restricts a class's instantiation to one
   object, providing benefits such as global state, configuration settings, and

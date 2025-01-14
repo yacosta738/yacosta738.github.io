@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/caching-results-with-spring-boot
 title: Caching results with Spring Boot
 description: Implementing a Cache with Spring is a fairly easy task,
   due to the ease of implementation. For this Spring provides us with a series

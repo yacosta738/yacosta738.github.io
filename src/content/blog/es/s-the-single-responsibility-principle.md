@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/s-the-single-responsibility-principle
 title: '[S] El Principio de Responsabilidad Única'
 description: El Principio de Responsabilidad Única (SRP) es un principio de
   diseño que promueve el código mantenible. Establece que cada clase debe tener
@@ -6,12 +7,12 @@ description: El Principio de Responsabilidad Única (SRP) es un principio de
   código, lo que resulta en un código más comprensible y mantenible.
 date: 2023-03-01T17:38:53.409Z
 cover: /images/single-responsibility-principle.png
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/kotlin
-  - es/solid
+  - en/kotlin
+  - en/solid
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

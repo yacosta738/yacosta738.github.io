@@ -93,6 +93,7 @@ collections:
           collection: 'tags',
           value_field: '{{slug}}',
           search_fields: ['title'],
+          display_fields: ['title'],
           multiple: true,
         }
       - {
@@ -103,6 +104,7 @@ collections:
           collection: categories,
           value_field: '{{slug}}',
           search_fields: ['title'],
+          display_fields: ['title'],
           multiple: true,
         }
       - name: 'draft'
@@ -224,6 +226,7 @@ collections:
     label: 'Authors'
     folder: 'src/content/authors'
     create: true
+    slug: '{{name | localize}}'
     extension: 'json'
     fields:
       - { label: 'Name', name: 'name', widget: 'string', i18n: 'duplicate' }
@@ -258,6 +261,7 @@ collections:
     label: Categories
     label_singular: Category
     folder: src/content/categories
+    slug: '{{title | localize}}'
     create: true
     i18n: true
     fields:
@@ -278,6 +282,7 @@ collections:
     label: Tags
     label_singular: Tag
     folder: src/content/tags
+    slug: '{{title | localize}}'
     create: true
     i18n: true
     fields:

@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/vue-3-with-typescript-and-decorators
 title: Vue 3 with Typescript and Decorators
 description: I use Typescript and decorator libraries for VueJS. This allows me
   to use a class syntax that's easier to read. I'll show you how to build a

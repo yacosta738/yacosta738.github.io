@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/java-features
 title: Java Features
 description: Java is a fast, secure, and versatile programming language used in
   a wide range of applications and websites. From laptops to datacenters, game

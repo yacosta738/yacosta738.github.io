@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/solid-principles-explained-building-more-maintainable-and-understandable-software
 title: 'SOLID Principles Explained: Building More Maintainable and
   Understandable Software'
 description: 'Learn the SOLID principles of OOP: SRP, OCP, LSP, ISP, and DIP.

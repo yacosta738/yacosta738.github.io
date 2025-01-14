@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/building-fullstack-web-applications-with-angular-nestjs-and-nx
 title: Creación de apps web FullStack con Angular, NestJS y Nx
 description: Angular es uno de los frameworks front-end más recomendados, pero
   solo cubre la mitad de los requerimientos para crear una aplicación web
@@ -6,14 +7,14 @@ description: Angular es uno de los frameworks front-end más recomendados, pero
   de aplicaciones web.
 date: 2021-05-22T23:32:13.655Z
 cover: /images/nx.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/angular
-  - es/nestjs
-  - es/nx
-  - es/typescript
+  - en/angular
+  - en/nestjs
+  - en/nx
+  - en/typescript
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

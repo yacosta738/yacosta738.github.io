@@ -1,4 +1,5 @@
 ---
-title: 'Artificial Intelligence'
+defaultLocaleVersion: en/ai
+title: Artificial Intelligence
 ---
 

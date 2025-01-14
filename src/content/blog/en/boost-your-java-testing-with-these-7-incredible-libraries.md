@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/boost-your-java-testing-with-these-7-incredible-libraries
 title: Boost Your Java Testing with These 7 Incredible Libraries
 description: 'Discover 7 Java libraries for better unit and integration testing:
   AssertJ, Awaitility, Mockito, Wiser, Memoryfilesystem, WireMock, and

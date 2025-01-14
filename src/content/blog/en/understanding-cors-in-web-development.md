@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/understanding-cors-in-web-development
 title: Understanding CORS in Web Development
 description: This article explains CORS (Cross-Origin Resource Sharing) - a
   security feature built into web browsers that allows web pages to make

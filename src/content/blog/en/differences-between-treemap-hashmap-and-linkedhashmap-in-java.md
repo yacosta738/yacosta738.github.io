@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/differences-between-treemap-hashmap-and-linkedhashmap-in-java
 title: Differences Between TreeMap, HashMap, and LinkedHashMap in Java
 description: This article discusses the differences between TreeMap, HashMap,
   and LinkedHashMap in Java. It explains the characteristics and use cases of

@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/java-a-decade-of-evolution-2014-2023
 title: 'Java: A Decade of Evolution (2014-2023)'
 description: Discover the incredible transformation of Java from 2014 to 2023. Explore the technological innovations, performance enhancements, and features that have revolutionized this world-leading programming language.
 link: ''

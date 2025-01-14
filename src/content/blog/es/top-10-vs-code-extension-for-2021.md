@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/top-10-vs-code-extension-for-2021
 title: Las 10 principales extensiones de VS Code en el 2021
 description: Visual Studio Code es un popular editor de código entre los
   desarrolladores debido a sus numerosas extensiones que aceleran el proceso de
@@ -7,15 +8,15 @@ description: Visual Studio Code es un popular editor de código entre los
   2021.
 date: 2021-05-25T02:23:12.784Z
 cover: /images/visual-studio-code.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/vs-code
-  - es/ide
-  - es/text-editor
-  - es/extensions
-  - es/plugin
+  - en/vs-code
+  - en/ide
+  - en/text-editor
+  - en/extensions
+  - en/plugin
 categories:
-  - es/tools
+  - en/tools
 draft: false
 ---
 

@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/hibernate-tutorial-dialects-in-hibernate
 title: 'Hibernate Tutorial: Dialects in Hibernate'
 description: Hibernate requires the configuration of a SQL dialect in order to
   generate appropriate SQL statements for the specified database type. The

@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/introduction-to-gridsome
 title: Introducción a Gridsome
 description: Gridsome es un generador de sitios web estáticos con tecnología
   Vue.js para crear los sitios web lo más rápido posible para cualquier CMS, API
@@ -7,13 +8,13 @@ description: Gridsome es un generador de sitios web estáticos con tecnología
   convertirse en un experto en rendimiento.
 date: 2019-04-08
 cover: /images/gridsome-portada.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/frontend
-  - es/gridsome
-  - es/vuejs
+  - en/frontend
+  - en/gridsome
+  - en/vuejs
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

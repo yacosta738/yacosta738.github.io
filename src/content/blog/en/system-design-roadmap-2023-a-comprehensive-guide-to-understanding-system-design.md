@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/system-design-roadmap-2023-a-comprehensive-guide-to-understanding-system-design
 title: 'System Design Roadmap 2023: A Comprehensive Guide to Understanding
   System Design'
 description: This guide covers system design basics, including performance,

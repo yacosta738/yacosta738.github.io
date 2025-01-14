@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/an-introduction-to-the-runtime-class-in-java
 title: An Introduction to the Runtime Class in Java
 description: "Explore Java's Runtime class: control JVM execution, manage
   memory, and execute OS commands. Examples and benefits for building robust and

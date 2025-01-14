@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/how-to-order-your-spring-boot-tests-with-junit-5
 title: How to Order Your Spring Boot Tests with JUnit 5
 description: Learn how to use JUnit 5's feature for ordering test classes to run
   Spring Boot automated tests from unit to integration tests, with the fastest

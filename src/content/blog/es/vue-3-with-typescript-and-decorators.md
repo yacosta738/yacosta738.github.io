@@ -1,18 +1,19 @@
 ---
+defaultLocaleVersion: en/vue-3-with-typescript-and-decorators
 title: Vue 3 con Typescript y Decoradores
 description: Uso Typescript y bibliotecas de decoradores para VueJS. Esto me
   permite utilizar una sintaxis de clase más fácil de leer. Te mostraré cómo
   construir un componente de contador que pueda incrementar y decrementar.
 date: 2021-05-30T19:54:13.642Z
 cover: /images/vue3-typescript.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/vuejs
-  - es/typescript
-  - es/decorators
-  - es/vuex
+  - en/vuejs
+  - en/typescript
+  - en/decorators
+  - en/vuex
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 
