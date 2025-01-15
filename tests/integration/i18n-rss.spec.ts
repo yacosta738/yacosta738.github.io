@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 
 test('test i18n and rss', async ({ page }) => {
-	await page.goto('http://localhost:3000');
+	await page.goto('http://localhost:4321');
 
 	expect(page.locator('p').first()).toHaveText('Hi, my name is');
 
 	await page.locator('select').nth(1).selectOption('/es/');
-	await expect(page).toHaveURL('http://localhost:3000/es/');
+	await expect(page).toHaveURL('http://localhost:4321/es/');
 
 	expect(page.locator('p').first()).toHaveText('Hola, mi nombre es');
 
@@ -17,7 +17,7 @@ test('test i18n and rss', async ({ page }) => {
 	await expect(page.locator('h2:has-text("Contáctame")')).toHaveText('Contáctame');
 
 	await page.locator('select').nth(1).selectOption('/');
-	await expect(page).toHaveURL('http://localhost:3000');
+	await expect(page).toHaveURL('http://localhost:4321');
 
 	await expect(page.locator('h2:has-text("About me")')).toHaveText('About me');
 	await expect(page.locator('h2:has-text("Where I\'ve Worked")')).toHaveText("Where I've Worked");

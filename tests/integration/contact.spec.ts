@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test contact section', async ({ page }) => {
-	await page.goto('http://localhost:3000');
+	await page.goto('http://localhost:4321');
 
 	await page.locator('[id="form-name"]').click();
 

@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 
 test('test resume button 📓', async ({ page }) => {
-	await page.goto('http://localhost:3000');
+	await page.goto('http://localhost:4321');
 
 	const [curriculum] = await Promise.all([
 		page.waitForEvent('popup'),

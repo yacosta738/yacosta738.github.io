@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Test side social media links', async ({ page }) => {
-	await page.goto('http://localhost:3000/');
+	await page.goto('http://localhost:4321/');
 
 	const [githubPage] = await Promise.all([
 		page.waitForEvent('popup', { timeout: 5000 }),
@@ -38,5 +38,5 @@ test('Test side social media links', async ({ page }) => {
 	await CodepenPage?.goto('https://codepen.io/yacosta738');
 
 	await page.locator('text=yunielacosta738@gmail.com').click();
-	await expect(page).toHaveURL('http://localhost:3000/');
+	await expect(page).toHaveURL('http://localhost:4321/');
 });
