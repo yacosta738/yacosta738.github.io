@@ -10,7 +10,7 @@ test('test blog section', async ({ page }) => {
 	await expect(page).toHaveURL('http://localhost:4321/blog/2');
 
 	await page.goto(
-		'http://localhost:4321/posts/maximizing-productivity-and-alignment-with-okrs-a-guide-to-setting-and-achieving-objectives'
+		'http://localhost:4321/posts/en/maximizing-productivity-and-alignment-with-okrs-a-guide-to-setting-and-achieving-objectives'
 	);
 
 	await page.locator('text=Back to Blog').click();
