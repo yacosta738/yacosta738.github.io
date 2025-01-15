@@ -83,7 +83,7 @@ defineProps({
 				<div class="flex justify-start items-center">
 					<span
 						v-for="tag in result.item.tags"
-						:key="tag"
+						:key="tag.id"
 						class="flex justify-between items-center text-xs text-green-500 bg-lightest-navy border border-lightest-navy rounded-full px-2 py-1 mr-1"
 						><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
 							<path
@@ -91,11 +91,11 @@ defineProps({
 								d="m12 18l-4.2 1.8q-1 .425-1.9-.162T5 17.975V5q0-.825.588-1.412T7 3h10q.825 0 1.413.588T19 5v12.975q0 1.075-.9 1.663t-1.9.162zm0-2.2l5 2.15V5H7v12.95zM12 5H7h10z"
 							/>
 						</svg>
-						{{ tag }}
+						{{ tag.data.title }}
 					</span>
 					<span
 						v-for="category in result.item.categories"
-						:key="category"
+						:key="category.id"
 						class="flex justify-between items-center text-xs text-green-500 bg-lightest-navy border border-lightest-navy rounded-full px-2 py-1 mr-1"
 						><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
 							<path
@@ -103,7 +103,7 @@ defineProps({
 								d="M7.885 10.23L12 3.463l4.115 6.769zm9.606 11q-1.558 0-2.64-1.08q-1.082-1.083-1.082-2.64q0-1.56 1.082-2.65q1.082-1.09 2.64-1.09t2.649 1.09q1.09 1.09 1.09 2.65q0 1.557-1.09 2.64q-1.09 1.08-2.65 1.08m-13.72-.5v-6.46h6.46v6.46z"
 							/>
 						</svg>
-						{{ category }}
+						{{ category.data.title }}
 					</span>
 				</div>
 			</li>

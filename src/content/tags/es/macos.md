@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/macos
+defaultLocaleVersion: es/macos
 title: macos
 ---
 

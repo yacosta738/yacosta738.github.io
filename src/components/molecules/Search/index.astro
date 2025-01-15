@@ -17,11 +17,21 @@ const publishedBlogEntriesPromises = (
 	await getCollection('blog', ({ data }) => {
 		return !data.draft;
 	})
-).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
-const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
-const sortedPublishedBlogEntries: Awaited<Article>[] = publishedBlogEntries.sort((a, b) => {
-	return new Date(b.date).getTime() - new Date(a.date).getTime();
+).map(async (publishedBlogEntry) => {
+	const slugParts = publishedBlogEntry.slug.split('/');
+	const entryLang = slugParts[0] === 'es' ? 'es' : 'en';
+	return {
+		...(await jsonToArticle(publishedBlogEntry)),
+		lang: entryLang,
+	};
 });
+
+const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
+const sortedPublishedBlogEntries: Awaited<Article>[] = publishedBlogEntries
+	.filter((post) => post.lang === lang)
+	.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
 
 const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
 ---
