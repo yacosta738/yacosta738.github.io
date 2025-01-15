@@ -8,7 +8,7 @@ date: 2025-01-05T16:25:00
 cover: /images/Java- A Decade of Evolution (2014-2023).jpg
 author: en/yuniel-acosta
 tags:
-  - en/tech
+  - en/java
 categories:
   - en/programming
 draft: true
