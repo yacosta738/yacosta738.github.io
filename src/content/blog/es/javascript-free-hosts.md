@@ -1,6 +1,6 @@
 ---
 defaultLocaleVersion: es/javascript-free-hosts
-title: HOSTINGS GRATUITOS para proyectos WEB con JAVASCRIPT
+title: Hosting Web Gratuito para Proyectos con JavaScript
 author: es/yuniel-acosta
 cover: /images/6-free-hostings.webp
 date: 2022-09-28

@@ -6,20 +6,22 @@ test('searchArticlesInEnglishAndSpanish', async ({ page }) => {
 	await page.getByRole('link', { name: '" counter(item) ". Blog' }).click();
 	await page.getByLabel('Search').click();
 	await page.getByPlaceholder('Search articles and').click();
-	await page.getByPlaceholder('Search articles and').fill('vuejs');
-	await page.getByText('FREE HOSTINGS for WEB').click();
-	await page.waitForURL('http://localhost:4321/posts/javascript-free-hosts');
-	expect(page.url()).toBe('http://localhost:4321/posts/javascript-free-hosts');
+	await page.getByPlaceholder('Search articles and').fill('hosting');
+	await page.getByText('Free Web Hosting for JavaScript Projects').click();
+	const expectedEnglishPostUrl = 'http://localhost:4321/posts/en/javascript-free-hosts';
+	await page.waitForURL(expectedEnglishPostUrl);
+	expect(page.url()).toBe(expectedEnglishPostUrl);
 
 	// Search articles in Spanish
 	await page.getByRole('combobox').selectOption('/es/');
 	await page.getByRole('link', { name: '" counter(item) ". Blog' }).click();
 	await page.getByLabel('Buscar').click();
 	await page.getByPlaceholder('Buscar artículos y').click();
-	await page.getByPlaceholder('Buscar artículos y').fill('vuejs');
-	await page.getByText('HOSTINGS GRATUITOS para').click();
-	await page.waitForURL('http://localhost:4321/posts/es/javascript-free-hosts');
-	expect(page.url()).toBe('http://localhost:4321/posts/es/javascript-free-hosts');
+	await page.getByPlaceholder('Buscar artículos y').fill('hosting');
+	await page.getByText('Hosting Web Gratuito para Proyectos con JavaScript').click();
+	const spanishPostUrl = 'http://localhost:4321/posts/es/javascript-free-hosts';
+	await page.waitForURL(spanishPostUrl);
+	expect(page.url()).toBe(spanishPostUrl);
 });
 
 test('searchWithEmptyQuery', async ({ page }) => {
