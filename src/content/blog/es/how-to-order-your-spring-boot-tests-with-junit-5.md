@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/how-to-order-your-spring-boot-tests-with-junit-5
+defaultLocaleVersion: es/how-to-order-your-spring-boot-tests-with-junit-5
 title: Cómo ordenar sus pruebas de Spring Boot con JUnit 5
 description: Aprende cómo usar la función de ordenación de clases de prueba de
   JUnit 5 para ejecutar pruebas automáticas de Spring Boot, desde pruebas
@@ -8,14 +8,14 @@ description: Aprende cómo usar la función de ordenación de clases de prueba d
 date: 2023-01-25T22:16:55.497Z
 
 cover: /images/junit5-spring-boot.webp
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/junit5
-  - en/spring-boot
-  - en/java
-  - en/kotlin
+  - es/junit5
+  - es/spring-boot
+  - es/java
+  - es/kotlin
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

@@ -1,18 +1,18 @@
 ---
-defaultLocaleVersion: en/array-list-vs-linked-list-java-collections
+defaultLocaleVersion: es/array-list-vs-linked-list-java-collections
 title: Lista de array vs. lista enlazada de colecciones de Java
 description: Compara las estructuras de datos ArrayList y LinkedList en Java.
   Explora sus diferencias en implementación, complejidad temporal, uso de
   memoria y orientación sobre cuándo utilizar cada una en casos específicos.
 date: 2023-02-22T21:42:00.000Z
 cover: /images/array-list-vs-linked-list-java-collections.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/java
-  - en/kotlin
-  - en/jvm
+  - es/java
+  - es/kotlin
+  - es/jvm
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

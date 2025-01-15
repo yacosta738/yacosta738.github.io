@@ -11,6 +11,7 @@ const t = useTranslations(lang);
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const tags: CollectionEntry<'tags'>[] = await getCollection('tags');
+	console.log(tags);
 	return tags.map((tag) => ({
 		params: { tag: tag.data.title },
 	}));
@@ -23,7 +24,7 @@ const [tags, blogPosts] = await Promise.all([
 	getCollection('blog', ({ data }) => !data.draft),
 ]);
 
-const currentTag = tags.find((t) => t.data.title === tag);
+const currentTag = tags.find((t) => t.data.title.toLowerCase() === String(tag).toLowerCase());
 const posts: Article[] = currentTag
 	? await Promise.all(
 			blogPosts

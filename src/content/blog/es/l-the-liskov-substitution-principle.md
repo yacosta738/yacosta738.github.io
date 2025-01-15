@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/l-the-liskov-substitution-principle
+defaultLocaleVersion: es/l-the-liskov-substitution-principle
 title: '[L] El principio de sustitución de Liskov'
 description: El principio de sustitución de Liskov es una regla fundamental en
   el desarrollo de software que garantiza la intercambiabilidad de objetos de
@@ -8,11 +8,11 @@ description: El principio de sustitución de Liskov es una regla fundamental en
   gestión del código y aumenta la predictibilidad.
 date: 2023-03-08T20:56:23.626Z
 cover: /images/liskov-substitution-principle.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/kotlin
+  - es/kotlin
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

@@ -23,7 +23,7 @@ const [tags, blogPosts] = await Promise.all([
 	getCollection('blog', ({ data }) => !data.draft),
 ]);
 
-const currentTag = tags.find((t) => t.data.title === tag);
+const currentTag = tags.find((t) => t.data.title.toLowerCase() === String(tag).toLowerCase());
 const posts: Article[] = currentTag
 	? await Promise.all(
 			blogPosts

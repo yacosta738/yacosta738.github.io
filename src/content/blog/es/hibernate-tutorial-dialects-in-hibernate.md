@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/hibernate-tutorial-dialects-in-hibernate
+defaultLocaleVersion: es/hibernate-tutorial-dialects-in-hibernate
 title: 'Tutorial Hibernate: Dialects en Hibernate'
 description: Hibernate requiere la configuración de un dialecto SQL para generar
   las declaraciones SQL apropiadas para el tipo de base de datos especificado.
@@ -8,14 +8,14 @@ description: Hibernate requiere la configuración de un dialecto SQL para genera
 date: 2023-01-12T17:35:05.150Z
 
 cover: /images/hibernate.webp
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/java
-  - en/sql
-  - en/kotlin
-  - en/orm
+  - es/java
+  - es/sql
+  - es/kotlin
+  - es/orm
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

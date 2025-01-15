@@ -7,7 +7,7 @@ export interface Props {
 }
 const { tags } = Astro.props;
 
-const allTags = Object.keys(tags);
+const allTags = Object.keys(tags).sort();
 
 const textSize = (
 	tag: string,

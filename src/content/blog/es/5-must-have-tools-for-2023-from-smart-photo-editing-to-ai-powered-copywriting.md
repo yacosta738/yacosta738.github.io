@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/5-must-have-tools-for-2023-from-smart-photo-editing-to-ai-powered-copywriting
+defaultLocaleVersion: es/5-must-have-tools-for-2023-from-smart-photo-editing-to-ai-powered-copywriting
 title: '5 herramientas imprescindibles para 2023: desde la edición inteligente
   de fotos hasta la escritura de copias impulsada por IA'
 description: Maximiza tu productividad en 2023 con cinco herramientas poderosas
@@ -8,12 +8,12 @@ description: Maximiza tu productividad en 2023 con cinco herramientas poderosas
   simplifican tareas y te mantienen adelante en la era digital.
 date: 2023-02-10T15:19:45.365Z
 cover: /images/5-must-have-tools-for-2023.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/ai
+  - es/ai
 categories:
-  - en/ai
-  - en/tools
+  - es/ai
+  - es/tools
 draft: false
 ---
 

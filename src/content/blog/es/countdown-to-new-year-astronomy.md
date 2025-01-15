@@ -1,19 +1,19 @@
 ---
-defaultLocaleVersion: en/countdown-to-new-year-astronomy
+defaultLocaleVersion: es/countdown-to-new-year-astronomy
 title: Cuenta regresiva para el nuevo Año
 description: Combinando mis pasiones por la astronomía y la programación, estoy
   creando un sitio web para hacer la cuenta regresiva de los días hasta el año
   nuevo, con una simulación del movimiento de la Tierra.
 date: 2020-12-27
 cover: /images/portada.webp
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/javascript
-  - en/typescript
-  - en/html
-  - en/css
+  - es/javascript
+  - es/typescript
+  - es/html
+  - es/css
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

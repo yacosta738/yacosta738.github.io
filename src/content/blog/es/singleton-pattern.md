@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/singleton-pattern
+defaultLocaleVersion: es/singleton-pattern
 title: Patrón Singleton
 description: El patrón Singleton restringe la instanciación de una clase a un
   solo objeto, proporcionando beneficios como el estado global, la configuración
@@ -8,11 +8,11 @@ description: El patrón Singleton restringe la instanciación de una clase a un
   para mantener una única instancia de un objeto.
 date: 2023-02-02T16:59:31.360Z
 cover: /images/singleton-pattern.webp
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/design-pattern
+  - es/design-pattern
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

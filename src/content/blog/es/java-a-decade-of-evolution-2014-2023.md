@@ -1,16 +1,16 @@
 ---
-defaultLocaleVersion: en/java-a-decade-of-evolution-2014-2023
+defaultLocaleVersion: es/java-a-decade-of-evolution-2014-2023
 title: 'Java: Una Década de Evolución (2014-2023)'
 description: Descubre la increíble transformación de Java desde 2014 hasta 2023. Explora las innovaciones tecnológicas, mejoras de rendimiento y características que han revolucionado este lenguaje de programación líder mundial.
 link: ''
 isExternalLink: false
 date: 2025-01-05T16:25:00
 cover: /images/Java- A Decade of Evolution (2014-2023).jpg
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/java
+  - es/java
 categories:
-  - en/programming
+  - es/programming
 draft: true
 ---
 # **Java: Una Década de Evolución (2014-2023)**

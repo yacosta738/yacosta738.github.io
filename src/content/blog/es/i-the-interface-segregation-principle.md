@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/i-the-interface-segregation-principle
+defaultLocaleVersion: es/i-the-interface-segregation-principle
 title: '[I] Principio de Segregación de Interfaces'
 description: Este artículo explica el Principio de Segregación de Interfaces
   (ISP), un principio de diseño SOLID. ISP establece que una clase solo debe
@@ -8,12 +8,12 @@ description: Este artículo explica el Principio de Segregación de Interfaces
   pequeñas y específicas para cada clase.
 date: 2023-03-17T10:52:46.179Z
 cover: /images/interface-segregation-principle.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/kotlin
-  - en/solid
+  - es/kotlin
+  - es/solid
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

@@ -1,16 +1,16 @@
 ---
-defaultLocaleVersion: en/d-the-dependency-inversion-principle
+defaultLocaleVersion: es/d-the-dependency-inversion-principle
 title: '[D] El Principio de Inversión de Dependencias'
 description: Este artículo explora el Principio de Inversión de Dependencias (DIP) en los principios de diseño SOLID, resaltando los beneficios de crear un código flexible y fácil de mantener. Proporciona un ejemplo en Kotlin para implementar DIP y lograr una base de código adaptable.
 isExternalLink: false
 date: 2023-03-18T12:07:00
 cover: /images/dependency-inversion-principle.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/kotlin
-  - en/solid
+  - es/kotlin
+  - es/solid
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 ![Principio de Inversión de Dependencias](/images/dependency-inversion-principle.png 'Principio de Inversión de Dependencias')

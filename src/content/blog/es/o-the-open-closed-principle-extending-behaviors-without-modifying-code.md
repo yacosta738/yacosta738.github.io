@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/o-the-open-closed-principle-extending-behaviors-without-modifying-code
+defaultLocaleVersion: es/o-the-open-closed-principle-extending-behaviors-without-modifying-code
 title: '[O] El Principio Abierto-Cerrado'
 description: Este artículo explica el principio Abierto-Cerrado (OCP) del diseño
   SOLID, el cual aconseja crear código flexible y mantenible manteniendo las
@@ -8,12 +8,12 @@ description: Este artículo explica el principio Abierto-Cerrado (OCP) del dise�
   clases separadas para cada forma.
 date: 2023-03-01T18:18:15.659Z
 cover: /images/open-closed-principle.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/kotlin
-  - en/solid
+  - es/kotlin
+  - es/solid
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

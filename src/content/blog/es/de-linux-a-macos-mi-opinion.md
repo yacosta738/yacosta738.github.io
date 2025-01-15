@@ -1,19 +1,17 @@
 ---
-defaultLocaleVersion: en/from-linux-to-macos-my-opinion
+defaultLocaleVersion: en/en-from-linux-to-macos-my-opinion
 title: De Linux a macOS. Mi opinión
-description: Después de cambiar de Linux a MacOS, encontré algunas limitaciones
-  como la falta de funciones básicas como cortar archivos y la dificultad para
-  organizar las ventanas en el escritorio. Sin embargo, destaca el rendimiento,
-  el ecosistema completamente integrado y la gran variedad de software
-  disponible.
-date: 2023-01-19T17:48:28.127Z
-cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=4800
-author: en/yuniel-acosta
+description: Después de cambiar de Linux a MacOS, encontré algunas limitaciones   como la falta de funciones básicas como cortar archivos y la dificultad para   organizar las ventanas en el escritorio. Sin embargo, destaca el rendimiento,   el ecosistema completamente integrado y la gran variedad de software   disponible.
+link: ''
+isExternalLink: false
+date: 2023-01-19T20:15:00
+cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=6000
+author: es/yuniel-acosta
 tags:
-  - en/linux
-  - en/macos
+  - es/linux
+  - es/macos
 categories:
-  - en/tools
+  - es/tools
 draft: false
 ---
 

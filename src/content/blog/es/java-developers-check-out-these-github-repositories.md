@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/java-developers-check-out-these-github-repositories
+defaultLocaleVersion: es/java-developers-check-out-these-github-repositories
 title: 'Desarrolladores de Java: ¡Echa un vistazo a estos repositorios de GitHub!'
 description: Descubre en este artículo algunos de los mejores repositorios de
   GitHub para desarrolladores de Java. Aprende sobre estructuras de datos,
@@ -7,11 +7,11 @@ description: Descubre en este artículo algunos de los mejores repositorios de
   para mejorar tus habilidades.
 date: 2023-02-22T19:52:36.634Z
 cover: /images/java-developers-check-out-these-github-repositories-.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/java
+  - es/java
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

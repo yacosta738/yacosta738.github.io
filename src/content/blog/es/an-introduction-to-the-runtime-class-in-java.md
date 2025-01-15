@@ -1,17 +1,17 @@
 ---
-defaultLocaleVersion: en/an-introduction-to-the-runtime-class-in-java
+defaultLocaleVersion: es/an-introduction-to-the-runtime-class-in-java
 title: Introducción a la clase Runtime en Java
 description: 'Explora la clase Runtime de Java: controla la ejecución de la JVM,
   gestiona la memoria y ejecuta comandos del SO. Ejemplos y beneficios para
   construir aplicaciones sólidas y eficientes.'
 date: 2023-02-19T01:08:10.172Z
 cover: /images/runtime-code.jpeg
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/java
-  - en/jvm
+  - es/java
+  - es/jvm
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

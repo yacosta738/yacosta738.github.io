@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/boost-your-java-testing-with-these-7-incredible-libraries
+defaultLocaleVersion: es/boost-your-java-testing-with-these-7-incredible-libraries
 title: ¡Potencia tus pruebas en Java con estas 7 increíbles bibliotecas!
 description: 'Descubre 7 bibliotecas de Java para mejorar las pruebas de unidad
   e integración: AssertJ, Awaitility, Mockito, Wiser, Memoryfilesystem, WireMock
@@ -7,13 +7,13 @@ description: 'Descubre 7 bibliotecas de Java para mejorar las pruebas de unidad
   asegura la calidad del código.'
 date: 2023-02-15T13:46:25.916Z
 cover: /images/boost-your-java-testing-with-these-7-incredible-libraries.gif
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/java
-  - en/kotlin
-  - en/testing
+  - es/java
+  - es/kotlin
+  - es/testing
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

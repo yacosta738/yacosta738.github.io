@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/caching-results-with-spring-boot
+defaultLocaleVersion: es/caching-results-with-spring-boot
 title: Cacheando resultados con Spring Boot
 description: Implementar una Cache con Spring es una tarea bastante fácil,
   debido a la facilidad de implementación. Para ello Spring nos aporta una serie
@@ -7,15 +7,15 @@ description: Implementar una Cache con Spring es una tarea bastante fácil,
 date: 2022-10-21T23:18:16.315Z
 
 cover: /images/cache.webp
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/spring
-  - en/spring-boot
-  - en/java
-  - en/kotlin
-  - en/cache
+  - es/spring
+  - es/spring-boot
+  - es/java
+  - es/kotlin
+  - es/cache
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

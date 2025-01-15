@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/understanding-cors-in-web-development
+defaultLocaleVersion: es/understanding-cors-in-web-development
 title: Comprendiendo CORS en el Desarrollo Web
 description: Este artículo explica CORS (Compartición de Recursos de Origen
   Cruzado) - una característica de seguridad integrada en navegadores web que
@@ -9,11 +9,11 @@ description: Este artículo explica CORS (Compartición de Recursos de Origen
   modernas que requieren solicitudes entre dominios.
 date: 2023-04-03T08:06:22.454Z
 cover: /images/understanding-cors-in-web-development.png
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/cors
+  - es/cors
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 

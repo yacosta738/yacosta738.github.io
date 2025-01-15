@@ -1,5 +1,5 @@
 ---
-defaultLocaleVersion: en/2022-10-13-web-performance
+defaultLocaleVersion: es/2022-10-13-web-performance
 title: Rendimiento Web
 description: La percepción del usuario sobre la velocidad del sitio es más
   importante que el tiempo de carga en milisegundos. En este artículo,
@@ -9,13 +9,13 @@ description: La percepción del usuario sobre la velocidad del sitio es más
   afectan la percepción.
 date: 2022-10-13T12:33:43.553Z
 cover: /images/wep-performance.webp
-author: en/yuniel-acosta
+author: es/yuniel-acosta
 tags:
-  - en/html
-  - en/javascript
-  - en/typescript
+  - es/html
+  - es/javascript
+  - es/typescript
 categories:
-  - en/software-development
+  - es/software-development
 draft: false
 ---
 
