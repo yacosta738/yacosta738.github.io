@@ -3,19 +3,23 @@ import { getCollection } from 'astro:content';
 import { jsonToArticle } from '@models:Article';
 
 export const GET = async (context) => {
+	const language = 'en'; 
 	const publishedBlogEntriesPromises = (
-		await getCollection('blog', ({ data }) => {
-			return !data.draft;
+		await getCollection('blog', ({ data, slug }) => {
+			const slugParts = slug.split('/');
+			const lang = slugParts[0] === 'es' ? 'es' : 'en';
+			return !data.draft && lang === language;
 		})
 	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+
 	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
-	const language = 'en';
-
 	return rss({
-		title: 'Yuniel Acosta’s  Blog',
+		title: language === 'en' ? 'Yuniel Acosta’s Blog' : 'Blog de Yuniel Acosta',
 		description:
-			'Blog about programming and web technologies, scalable, high availability and tips to be more productive.',
+			language === 'en'
+				? 'Blog about programming and web technologies, scalable, high availability and tips to be more productive.'
+				: 'Blog sobre programación y tecnologías web, escalabilidad, alta disponibilidad y consejos para ser más productivo.',
 		site: context.site,
 		items: publishedBlogEntries.map((post) => ({
 			link: `posts/${post.url}`,
