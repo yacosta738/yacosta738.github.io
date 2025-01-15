@@ -27,7 +27,7 @@ const currentTag = tags.find((t) => t.data.title.toLowerCase() === String(tag).t
 const posts: Article[] = currentTag
 	? await Promise.all(
 			blogPosts
-				.filter((post) => post.data.tags?.some((t) => t.slug === currentTag.slug))
+				.filter((post) => post.data.tags?.some((t: { slug: string }) => t.slug === currentTag.slug))
 				.map(jsonToArticle)
 		)
 	: [];
