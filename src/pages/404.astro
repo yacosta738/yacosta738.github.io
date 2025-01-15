@@ -10,7 +10,7 @@ import Technologies from 'molecules:Technologies';
 import '../styles/global.css';
 import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
 import { type Article, jsonToArticle } from '@models:Article';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);

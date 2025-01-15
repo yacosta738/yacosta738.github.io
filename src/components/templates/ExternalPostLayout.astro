@@ -12,8 +12,10 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, cover, lang, link } = post.data;
+const slug = post.slug;
+const { title, description, cover, link } = post.data;
 const ogImageAlt = title;
+const lang = slug.split('/')[0];
 ---
 
 <html lang={lang} class="scroll-smooth">
