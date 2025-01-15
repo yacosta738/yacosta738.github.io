@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import { jsonToArticle } from '@models:Article';
 
 export const GET = async (context) => {
-	const language = 'en'; 
+	const language = 'en';
 	const publishedBlogEntriesPromises = (
 		await getCollection('blog', ({ data, slug }) => {
 			const slugParts = slug.split('/');
