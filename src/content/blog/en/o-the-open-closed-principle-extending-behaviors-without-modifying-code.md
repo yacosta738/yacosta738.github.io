@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/o-the-open-closed-principle-extending-behaviors-without-modifying-code
 title: '[O] The Open-Closed Principle'
 description: This article explains the Open-Closed Principle (OCP) of SOLID
   design, which advises creating flexible and maintainable code by keeping

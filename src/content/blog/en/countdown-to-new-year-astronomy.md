@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/countdown-to-new-year-astronomy
 title: Countdown to new year
 description: Combining my passions for astronomy and programming, I'm creating a
   website to countdown the days until the new year, with a simulation of the

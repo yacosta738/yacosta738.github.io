@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/configure-proxy-global-on-linux
 title: Configure global proxy on linux
 description: In this article I share some tips to configure the internet through a global proxy in GNU/Linux operating systems.
 date: 2020-12-06

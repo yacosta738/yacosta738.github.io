@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/i-the-interface-segregation-principle
 title: '[I] The Interface Segregation Principle'
 description: This article explains the Interface Segregation Principle (ISP), a
   SOLID design principle. ISP says that a class should only implement the

@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/system-design-roadmap-2023-a-comprehensive-guide-to-understanding-system-design
 title: 'Roadmap de Diseño de Sistemas 2023: Una guía completa para entender el
   Diseño de Sistemas.'
 description: Esta guía cubre los conceptos básicos del diseño de sistemas,
@@ -8,12 +9,12 @@ description: Esta guía cubre los conceptos básicos del diseño de sistemas,
   más, como libros, cursos, tutoriales y podcasts.
 date: 2023-02-17T00:47:44.121Z
 cover: /images/system-design-roadmap-2023.png
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/design-pattern
-  - es/architecture
+  - en/system-design
+  - en/architecture
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

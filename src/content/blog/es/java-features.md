@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/java-features
 title: Características de Java
 description: Java es un lenguaje de programación rápido, seguro y versátil
   utilizado en una amplia variedad de aplicaciones y sitios web. Desde laptops
@@ -6,12 +7,12 @@ description: Java es un lenguaje de programación rápido, seguro y versátil
   todas partes!
 date: 2022-10-10
 cover: /images/java-feactures.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/java
-  - es/jvm
+  - en/java
+  - en/jvm
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

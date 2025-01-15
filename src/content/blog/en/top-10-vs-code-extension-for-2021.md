@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/top-10-vs-code-extension-for-2021
 title: Top 10 VS Code extension for 2021
 description: Visual Studio Code is a popular code editor among developers
   because of its many extensions that speed up the development process. Here are

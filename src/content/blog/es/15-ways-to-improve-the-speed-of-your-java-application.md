@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/15-ways-to-improve-the-speed-of-your-java-application
 title: 15 formas de mejorar la velocidad de su aplicación de Java
 description: Obtén quince consejos para acelerar tus aplicaciones de Java y
   optimizar tu código para un rendimiento óptimo. Simplificar la arquitectura y
@@ -8,11 +9,11 @@ description: Obtén quince consejos para acelerar tus aplicaciones de Java y
   rendimiento óptimo. Implementa estos consejos para una velocidad máxima.
 date: 2023-02-02T16:39:17.873Z
 cover: /images/maximizing-java-code-performance.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/java
+  - en/java
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

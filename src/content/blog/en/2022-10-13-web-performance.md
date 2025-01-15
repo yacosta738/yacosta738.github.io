@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/2022-10-13-web-performance
 title: Web Performance
 description: User perception of website speed is more important than load time
   in milliseconds. In this article, we analyze various metrics and best

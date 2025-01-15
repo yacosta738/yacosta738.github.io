@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/solid-principles-explained-building-more-maintainable-and-understandable-software
 title: 'Principios SOLID explicados: construyendo software más mantenible y
   comprensible'
 description: 'Aprende los principios SOLID de POO: SRP, OCP, LSP, ISP y DIP.
@@ -6,11 +7,11 @@ description: 'Aprende los principios SOLID de POO: SRP, OCP, LSP, ISP y DIP.
   entender, evitando problemas comunes.'
 date: 2023-03-23T13:34:44.591Z
 cover: /images/solid-principles-explained.png
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/solid
+  - en/solid
 categories:
-  - es/software-development
+  - en/software-development
 draft: false
 ---
 

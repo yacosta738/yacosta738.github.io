@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/from-linux-to-macos-my-opinion
 title: From Linux to macOS. My opinion
 description: Switching from Linux to MacOS has limitations, such as lacking
   basic functions like cutting files and difficulty arranging windows on the

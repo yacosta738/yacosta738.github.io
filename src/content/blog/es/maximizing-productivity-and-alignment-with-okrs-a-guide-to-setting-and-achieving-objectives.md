@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/maximizing-productivity-and-alignment-with-okrs-a-guide-to-setting-and-achieving-objectives
 title: 'OKRs: Aumentar la productividad y la alineación'
 description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
   (OKRs) puede alinear los esfuerzos del equipo e individuales con los objetivos
@@ -7,13 +8,13 @@ description: Este artículo discute cómo el uso de Objetivos y Resultados Clave
   interesados. El artículo sirve como guía para implementar OKRs.
 date: 2022-12-20T01:46:12.468Z
 cover: /images/okrs.webp
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/objectives
-  - es/organization
-  - es/productivity
+  - en/objectives
+  - en/organization
+  - en/productivity
 categories:
-  - es/productivity
+  - en/productivity
 draft: false
 ---
 

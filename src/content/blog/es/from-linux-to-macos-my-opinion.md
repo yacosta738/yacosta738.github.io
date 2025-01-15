@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/from-linux-to-macos-my-opinion
 title: De Linux a macOS. Mi opinión
 description: Después de cambiar de Linux a MacOS, encontré algunas limitaciones
   como la falta de funciones básicas como cortar archivos y la dificultad para
@@ -7,12 +8,12 @@ description: Después de cambiar de Linux a MacOS, encontré algunas limitacione
   disponible.
 date: 2023-01-19T17:48:28.127Z
 cover: https://images.unsplash.com/photo-1619462729253-362aa7eb5db5?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=4800
-author: es/yuniel-acosta
+author: en/yuniel-acosta
 tags:
-  - es/linux
-  - es/macos
+  - en/linux
+  - en/macos
 categories:
-  - es/tools
+  - en/tools
 draft: false
 ---
 

@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/java-developers-check-out-these-github-repositories
 title: 'Java Developers: Check Out These GitHub Repositories!'
 description: Discover some of the best GitHub repositories for Java developers
   in this article. Learn about data structures, algorithms, Spring framework,

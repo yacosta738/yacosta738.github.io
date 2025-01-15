@@ -1,4 +1,5 @@
 ---
+defaultLocaleVersion: en/d-the-dependency-inversion-principle
 title: '[D] The Dependency Inversion Principle'
 description: This article explores the Dependency Inversion Principle (DIP) in SOLID design principles, highlighting the benefits of creating flexible and easy-to-maintain code. It provides a Kotlin example for implementing DIP to achieve an adaptable codebase.
 link: ''
