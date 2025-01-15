@@ -1,5 +1,5 @@
 ---
 defaultLocaleVersion: en/vuex
-title: vueX
+title: vuex
 ---
 
