@@ -54,8 +54,7 @@ export default defineConfig({
 	vite: {
 		ssr: {
 			external: ['svgo'],
-		},
-		plugins: [],
+		}
 	},
 	markdown: {
 		remarkPlugins: [remarkToc, remarkReadingTime],
