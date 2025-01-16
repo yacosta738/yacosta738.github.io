@@ -2,7 +2,7 @@ import { glob } from 'astro/loaders';
 import { defineCollection, reference, z } from 'astro:content';
 
 const blogCollection = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/data/blog" }),
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/data/blog' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),

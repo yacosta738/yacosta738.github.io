@@ -38,18 +38,22 @@ export const jsonToArticle = async (json: CollectionEntry<'blog'>): Promise<Arti
 		cover: article?.cover,
 		author,
 		timeToRead: remarkPluginFrontmatter?.minutesRead || 0,
-		tags: (await Promise.all(
-			article?.tags.map(async (tag) => {
-				const tagEntry = await getEntry('tags', tag.id);
-				return tagEntry;
-			})
-		)).filter((tag) => tag !== undefined) as CollectionEntry<'tags'>[],
-		categories: (await Promise.all(
-			article?.categories.map(async (category) => {
-				const categoryEntry = await getEntry('categories', category.id);
-				return categoryEntry;
-			})
-		)).filter((category) => category !== undefined) as CollectionEntry<'categories'>[],
+		tags: (
+			await Promise.all(
+				article?.tags.map(async (tag) => {
+					const tagEntry = await getEntry('tags', tag.id);
+					return tagEntry;
+				})
+			)
+		).filter((tag) => tag !== undefined) as CollectionEntry<'tags'>[],
+		categories: (
+			await Promise.all(
+				article?.categories.map(async (category) => {
+					const categoryEntry = await getEntry('categories', category.id);
+					return categoryEntry;
+				})
+			)
+		).filter((category) => category !== undefined) as CollectionEntry<'categories'>[],
 		draft: article?.draft,
 		content,
 	};
