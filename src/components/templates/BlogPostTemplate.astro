@@ -25,12 +25,12 @@ const tagsCollection = post.data.tags || [];
 
 const categories = await getCollection('categories')
 	.then((categories) =>
-		categories.filter((category) => categoriesCollection.some((cat) => cat.slug === category.slug))
+		categories.filter((category) => categoriesCollection.some((cat) => cat.id === category.id))
 	)
 	.then((categories) => categories.map((category) => category.data.title));
 
 const tags = await getCollection('tags')
-	.then((tags) => tags.filter((tag) => tagsCollection.some((t) => t.slug === tag.slug)))
+	.then((tags) => tags.filter((tag) => tagsCollection.some((t) => t.id === tag.id)))
 	.then((tags) => tags.map((tag) => tag.data.title));
 const lang = getLangFromUrl(Astro.url);
 

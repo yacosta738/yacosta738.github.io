@@ -27,7 +27,7 @@ const currentCategory = categories.find((cat) => cat.data.title === category);
 const posts: Article[] = currentCategory
 	? await Promise.all(
 			blogPosts
-				.filter((post) => post.data.categories?.some((cat) => cat.slug === currentCategory.slug))
+				.filter((post) => post.data.categories?.some((cat) => cat.id === currentCategory.id))
 				.map(jsonToArticle)
 		)
 	: [];

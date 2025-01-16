@@ -3,7 +3,7 @@
   "name": "Yuniel Acosta",
   "image": "/images/me.webp",
   "rol": "Senior Software Engineer",
-  "bio": "Soy una persona muy extrovertida y curiosa, apasionado por la codificación, el espacio, la naturaleza y los deportes. Disfruto creando software asombroso, ya sean sitios web o aplicaciones. Mi objetivo es siempre producir productos que ofrezcan un alto rendimiento. Estoy interesado en nuevas oportunidades en especial en proyectos grandes y ambiciosos.",
+  "bio": "I'm a very outgoing and curious person, who's passionate about coding, space, nature, and sports. I enjoy creating awesome software, whether that be websites, applications, or anything in between. My goal is always to create products that deliver high performance.",
   "email": "yunielacosta738@gmail.com",
   "social": [
     {
@@ -24,6 +24,5 @@
       "icon": "uit:twitter-alt",
       "handle": "yacosta738"
     }
-  ],
-  "slug": "yuniel-acosta"
+  ]
 }

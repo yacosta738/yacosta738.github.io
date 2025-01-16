@@ -11,9 +11,6 @@ const DEV_PORT: number = 4321;
 
 // https://astro.build/config
 export default defineConfig({
-	experimental: {
-		contentLayer: true,
-	},
 	site: 'https://yunielacosta.com/',
 	server: {
 		/* Dev. server only */

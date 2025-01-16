@@ -21,9 +21,9 @@
     "test:e2e": "pnpm run test:playwright"
   },
   "devDependencies": {
-    "@astrojs/rss": "4.0.9",
+    "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "3.2.1",
-    "@astrojs/tailwind": "5.1.2",
+    "@astrojs/tailwind": "5.1.4",
     "@iconify-json/akar-icons": "^1.2.1",
     "@iconify-json/charm": "^1.2.1",
     "@iconify-json/cib": "^1.2.1",
@@ -45,7 +45,7 @@
     "@typescript-eslint/parser": "8.11.0",
     "@vite-pwa/astro": "^0.4.3",
     "@vueuse/core": "11.1.0",
-    "astro": "4.16.7",
+    "astro": "5.1.7",
     "astro-compress": "2.3.5",
     "astro-critters": "2.2.0",
     "astro-icon": "1.1.1",
@@ -80,8 +80,8 @@
     "workbox-window": "^7.1.0"
   },
   "dependencies": {
-    "@astrojs/ts-plugin": "^1.10.3",
-    "@astrojs/vue": "^4.5.2",
+    "@astrojs/ts-plugin": "^1.10.4",
+    "@astrojs/vue": "^5.0.5",
     "@vueuse/integrations": "^11.1.0",
     "fuse.js": "^7.0.0",
     "globals": "^15.11.0",

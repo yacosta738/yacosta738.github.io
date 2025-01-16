@@ -16,8 +16,8 @@ const publishedBlogEntriesPromises = (
 	})
 )
 	.filter((entry) => {
-		const slugParts = entry.slug.split('/');
-		const entryLang = slugParts[0] === 'es' ? 'es' : 'en';
+		const idParts = entry.id.split('/');
+		const entryLang = idParts[0] === 'es' ? 'es' : 'en';
 		return entryLang === lang;
 	})
 	.map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));

@@ -6,6 +6,7 @@ import { getLangFromUrl } from '@i18n:index';
 import type { DocSearchTranslation } from '@i18n:search-translation';
 // @ts-expect-error
 import SearchBox from './SearchBox.vue';
+import type { AstroGlobal } from 'astro';
 
 const { pathname } = Astro.url;
 const isBlogRoot =
@@ -18,7 +19,7 @@ const publishedBlogEntriesPromises = (
 		return !data.draft;
 	})
 ).map(async (publishedBlogEntry) => {
-	const slugParts = publishedBlogEntry.slug.split('/');
+	const slugParts = publishedBlogEntry.id.split('/');
 	const entryLang = slugParts[0] === 'es' ? 'es' : 'en';
 	return {
 		...(await jsonToArticle(publishedBlogEntry)),
@@ -33,7 +34,7 @@ const sortedPublishedBlogEntries: Awaited<Article>[] = publishedBlogEntries
 		return new Date(b.date).getTime() - new Date(a.date).getTime();
 	});
 
-const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro);
+const docSearchStrings: DocSearchTranslation = getDocSearchStrings(Astro as unknown as AstroGlobal);
 ---
 
 {

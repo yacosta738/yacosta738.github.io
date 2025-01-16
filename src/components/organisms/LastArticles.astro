@@ -13,8 +13,8 @@ const publishedBlogEntries = await getCollection('blog', ({ data }) => {
 
 // Process posts to include language information
 const processedPosts = publishedBlogEntries.map((post) => {
-	const slugParts = post.slug.split('/');
-	const lang = slugParts[0] === 'es' ? 'es' : 'en';
+	const idParts = post.id.split('/');
+	const lang = idParts[0] === 'es' ? 'es' : 'en';
 	return {
 		...post,
 		lang,
