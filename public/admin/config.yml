@@ -33,7 +33,7 @@ i18n:
 collections:
   - name: 'tech'
     label: 'Tech'
-    folder: 'src/content/technologies'
+    folder: 'src/data/technologies'
     create: true
     extension: 'json'
     slug: '{{id}}'
@@ -46,7 +46,7 @@ collections:
   - name: 'posts'
     i18n: true
     label: 'Blog Posts'
-    folder: 'src/content/blog'
+    folder: 'src/data/blog'
     create: true
     slug: '{{title | localize}}'
     fields:
@@ -120,7 +120,7 @@ collections:
   - name: 'jobs'
     i18n: true
     label: 'Jobs'
-    folder: 'src/content/jobs'
+    folder: 'src/data/jobs'
     create: true
     extension: 'json'
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
@@ -170,7 +170,7 @@ collections:
   - name: 'projects'
     i18n: true
     label: 'Projects'
-    folder: 'src/content/projects'
+    folder: 'src/data/projects'
     create: true
     extension: 'json'
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
@@ -224,7 +224,7 @@ collections:
   - name: 'authors'
     i18n: true
     label: 'Authors'
-    folder: 'src/content/authors'
+    folder: 'src/data/authors'
     create: true
     slug: '{{name | localize}}'
     extension: 'json'
@@ -260,7 +260,7 @@ collections:
   - name: categories
     label: Categories
     label_singular: Category
-    folder: src/content/categories
+    folder: src/data/categories
     slug: '{{title | localize}}'
     create: true
     i18n: true
@@ -281,7 +281,7 @@ collections:
   - name: tags
     label: Tags
     label_singular: Tag
-    folder: src/content/tags
+    folder: src/data/tags
     slug: '{{title | localize}}'
     create: true
     i18n: true
