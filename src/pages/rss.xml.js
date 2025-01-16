@@ -5,9 +5,9 @@ import { jsonToArticle } from '@models:Article';
 export const GET = async (context) => {
 	const language = 'en';
 	const publishedBlogEntriesPromises = (
-		await getCollection('blog', ({ data, slug }) => {
-			const slugParts = slug.split('/');
-			const lang = slugParts[0] === 'es' ? 'es' : 'en';
+		await getCollection('blog', ({ data, id }) => {
+			const idParts = id.split('/');
+			const lang = idParts[0] === 'es' ? 'es' : 'en';
 			return !data.draft && lang === language;
 		})
 	).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
