@@ -30,6 +30,7 @@ test('test contact section', async ({ page }) => {
 
 	await page.locator('text=Send Message').click();
 	await expect(page).toHaveURL(
+		process.env.CONTACT_FORM ||
 		'https://n8n-k4aj.onrender.com/webhook-test/8901e5dd-9459-44df-86b7-8657178868f5'
 	);
 });

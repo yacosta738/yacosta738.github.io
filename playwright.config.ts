@@ -1,5 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -10,7 +9,7 @@ import { devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig({
 	testDir: './tests/integration',
 	/* Maximum time one test can run for. */
 	timeout: 30 * 1000,
@@ -40,6 +39,14 @@ const config: PlaywrightTestConfig = {
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry',
+
+		/* Test ID attribute */
+		testIdAttribute: 'data-testid',
+	},
+
+	/* Add environment variables */
+	env: {
+		CONTACT_FORM: 'https://n8n-k4aj.onrender.com/webhook-test/8901e5dd-9459-44df-86b7-8657178868f5',
 	},
 
 	/* Configure projects for major browsers */
@@ -104,6 +111,4 @@ const config: PlaywrightTestConfig = {
 		timeout: 120 * 1000,
 		reuseExistingServer: !process.env.CI,
 	},
-};
-
-export default config;
+});
