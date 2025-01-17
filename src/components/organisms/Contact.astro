@@ -26,7 +26,7 @@ const t = useTranslations(lang);
 				<Image src={contactImage} alt="Contact me" title="Contact me" />
 			</div>
 		</div>
-		<form id="contact-form" class="mx-auto" method="POST" action={import.meta.env.FORMSPREE}>
+		<form id="contact-form" class="mx-auto" method="POST" action={import.meta.env.CONTACT_FORM}>
 			<div>
 				<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
 					{t('yourFullName')}
@@ -47,7 +47,7 @@ const t = useTranslations(lang);
 				<input
 					id="form-email"
 					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
-					placeholder="jhondoe@gmail.com"
+					placeholder="johndoe@gmail.com"
 					name="email"
 					required
 					type="email"
