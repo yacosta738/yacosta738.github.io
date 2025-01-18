@@ -4,7 +4,6 @@ import { jsonToTech, type Tech } from './Tech';
 export interface Project {
 	id?: string;
 	title?: string;
-	lang?: string;
 	date?: string | Date;
 	cover?: string;
 	repository?: string;
@@ -26,7 +25,6 @@ export const jsonToProject = async (json: CollectionEntry<'projects'>): Promise<
 	return {
 		id: json.id,
 		title: jsonData.title,
-		lang: jsonData.lang,
 		date: jsonData.date,
 		cover: jsonData.cover,
 		repository: jsonData.repository,

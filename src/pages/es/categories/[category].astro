@@ -4,36 +4,35 @@ import { type Article, jsonToArticle } from '@models:Article';
 import BlogTemplate from 'templates:BlogTemplate';
 import ArticleSummary from 'molecules:ArticleSummary';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import type { GetStaticPaths } from 'astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-interface Props {
-	tag: string;
-	posts: Article[];
-}
-
-export async function getStaticPaths() {
-	const publishedBlogEntriesPromises: Promise<Article>[] = (
-		await getCollection('blog', ({ data }) => {
-			return !data.draft;
-		})
-	).map(
-		async (publishedBlogEntry: CollectionEntry<'blog'>) => await jsonToArticle(publishedBlogEntry)
-	);
-	const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
-	const uniqueCategories = [...new Set(publishedBlogEntries.map((post) => post.categories).flat())];
-	return uniqueCategories.map((category) => {
-		return {
-			params: { category: category.toLowerCase() },
-			props: { posts: publishedBlogEntries.filter((post) => post.categories.includes(category)) },
-		};
-	});
-}
+export const getStaticPaths: GetStaticPaths = async () => {
+	const categories: CollectionEntry<'categories'>[] = await getCollection('categories');
+	return categories.map((category) => ({
+		params: { category: category.data.title },
+	}));
+};
 
 const { category } = Astro.params;
-const { posts } = Astro.props;
-const categoryPosts = posts.filter((post) => post.lang === lang);
+
+const [categories, blogPosts] = await Promise.all([
+	getCollection('categories'),
+	getCollection('blog', ({ data }) => !data.draft),
+]);
+
+const currentCategory = categories.find((cat) => cat.data.title === category);
+const posts: Article[] = currentCategory
+	? await Promise.all(
+			blogPosts
+				.filter((post) => post.data.categories?.some((cat) => cat.id === currentCategory.id))
+				.map(jsonToArticle)
+		)
+	: [];
+
+const categoryPosts: Article[] = posts;
 ---
 
 <BlogTemplate

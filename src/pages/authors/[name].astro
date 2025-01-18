@@ -9,17 +9,20 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
 	const authorsData = await getCollection('authors');
-	const authors: Author[] = authorsData
-		.map((author) => jsonToAuthor(author))
-		.filter((author) => author.lang === 'en');
-	return authors.map((author) => ({
-		params: {
-			name: author.id,
-		},
-		props: {
-			author,
-		},
-	}));
+	const authors: Author[] = authorsData.map((author) => jsonToAuthor(author));
+	return authors
+		.filter((author) => {
+			const lang = author.id.split('/').shift();
+			return lang === 'en';
+		})
+		.map((author) => ({
+			params: {
+				name: author.id.split('/').pop(),
+			},
+			props: {
+				author,
+			},
+		}));
 }
 
 const { name } = Astro.params;

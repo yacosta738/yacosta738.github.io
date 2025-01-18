@@ -1,7 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 import { SEO } from 'astro-seo';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 export interface Props {
 	title: string;
 	description: string;
@@ -34,7 +34,7 @@ const imageExtension = image?.split('.').pop();
 		basic: {
 			title: title ?? t('seo.ogTitle'),
 			type: 'website',
-			image: image ?? '/uploads/me.webp',
+			image: image ?? '/images/me.webp',
 			url: canonicalUrl,
 		},
 		optional: {
@@ -55,4 +55,4 @@ const imageExtension = image?.split('.').pop();
 		],
 	}}
 />
-<ViewTransitions />
+<ClientRouter />

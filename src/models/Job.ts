@@ -10,7 +10,6 @@ export interface IRole {
 export interface IJob {
 	id?: string;
 	title?: string;
-	lang?: string;
 	company?: string;
 	icon?: string;
 	location?: string;
@@ -37,7 +36,6 @@ export class Role implements IRole {
 export class Job implements IJob {
 	id: string = crypto.randomUUID();
 	title: string = '';
-	lang: string = 'en';
 	company: string = '';
 	icon: string = '';
 	location: string = '';
@@ -55,7 +53,6 @@ export const jsonToJob = (json: CollectionEntry<'jobs'>): IJob => {
 	return {
 		id: json.id || crypto.randomUUID(),
 		title: json.data?.title,
-		lang: json.data?.lang,
 		company: json.data?.company,
 		icon: json.data?.icon,
 		location: json.data?.location,

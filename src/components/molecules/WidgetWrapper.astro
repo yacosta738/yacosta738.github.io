@@ -8,14 +8,20 @@ import { getLangFromUrl } from '@i18n:utils';
 
 const { pathname } = Astro.url;
 const isBlogRoot = pathname.endsWith('/blog');
-
 const lang = getLangFromUrl(Astro.url);
 
 const publishedBlogEntriesPromises = (
 	await getCollection('blog', ({ data }) => {
-		return !data.draft && data.lang === lang;
+		return !data.draft;
 	})
-).map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+)
+	.filter((entry) => {
+		const idParts = entry.id.split('/');
+		const entryLang = idParts[0] === 'es' ? 'es' : 'en';
+		return entryLang === lang;
+	})
+	.map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+
 const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
 const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
@@ -26,7 +32,7 @@ const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
 
 const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
 	post.tags.forEach((tag) => {
-		const tagLower = tag.toLowerCase();
+		const tagLower = tag.data.title.toLowerCase();
 		if (tagLower in acc) {
 			acc[tagLower] += 1;
 		} else {
@@ -39,7 +45,7 @@ const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: n
 const categories: { [key: string]: number } = allPosts.reduce(
 	(acc: { [key: string]: number }, post) => {
 		post.categories.forEach((category) => {
-			const categoryLower = category.toLowerCase();
+			const categoryLower = category.data.title.toLowerCase();
 			if (categoryLower in acc) {
 				acc[categoryLower] += 1;
 			} else {

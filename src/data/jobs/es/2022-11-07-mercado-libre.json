@@ -1,0 +1,21 @@
+{
+  "title": "Software Engineer en Mercado Libre",
+  "company": "Mercado Libre",
+  "url": "https://www.mercadolibre.com.uy",
+  "icon": "meli",
+  "location": "Montevideo, Uruguay",
+  "createDate": "2022-11-07T15:12:23.179Z",
+  "published": true,
+  "roles": [
+    {
+      "role": "Software Engineer",
+      "startDate": "2022-11-07T15:12:23.179Z",
+      "endDate": "2023-03-09T15:12:23.179Z",
+      "achievements": [
+        "Desarrollé y mantuve APIs internas para detectar comportamiento malicioso, mejorando la seguridad y previniendo posibles amenazas. También implementé políticas y evaluadores para detectar y prevenir el uso malintencionado durante los procesos de registro e inicio de sesión en MercadoLibre.com y MercadoPago.com",
+        "Colaboré con equipos interfuncionales para diseñar e implementar soluciones de software escalables y eficientes para operaciones de comercio electrónico",
+        "Realicé pruebas y análisis exhaustivos para garantizar la confiabilidad y el rendimiento de las aplicaciones de software, minimizando el tiempo de inactividad y mejorando la experiencia del usuario"
+      ]
+    }
+  ]
+}

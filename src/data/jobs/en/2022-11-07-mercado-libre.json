@@ -1,0 +1,21 @@
+{
+  "title": "Software Engineer in Mercado Libre",
+  "company": "Mercado Libre",
+  "url": "https://www.mercadolibre.com.uy",
+  "icon": "meli",
+  "location": "Montevideo, Uruguay",
+  "createDate": "2022-11-07T15:12:23.179Z",
+  "published": true,
+  "roles": [
+    {
+      "role": "Software Engineer",
+      "startDate": "2022-11-07T15:12:23.179Z",
+      "endDate": "2023-03-09T15:12:23.179Z",
+      "achievements": [
+        "Developed and maintained internal APIs for malicious behavior detection, improving security and preventing potential threats. I also implemented policies and scorers to detect and prevent malicious use during the registration and login processes for both MercadoLibre.com and MercadoPago.com.",
+        "Collaborated with cross-functional teams to design and implement scalable and efficient software solutions for e-commerce operations.",
+        "Conducted thorough testing and analysis to ensure the reliability and performance of software applications, minimizing downtime and improving user experience."
+      ]
+    }
+  ]
+}

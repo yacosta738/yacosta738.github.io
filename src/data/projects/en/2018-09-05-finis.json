@@ -1,0 +1,11 @@
+{
+  "date": "2018-09-05T15:12:23.179Z",
+  "title": "Finis",
+  "cover": "/images/cover-finis.webp",
+  "company": "Desoft",
+  "tech": ["angular", "typescript", "lumen", "php", "postgresql"],
+  "showInProjects": true,
+  "featured": false,
+  "published": true,
+  "content": "Application that allows to guarantee the control of the financial availability of the Electric Company of Ciego de Ávila. The application was developed with monolithic architecture using the [Lumen](https://lumen.laravel.com/) framework on the backend and [Angular](https://angular.io/) on the frontend."
+}

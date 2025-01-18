@@ -54,7 +54,7 @@ jobs:
       - name: ⚙️ Build
         run: pnpm run build
         env:
-          FORMSPREE: ${{ secrets.FORMSPREE }}
+          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
           
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -62,7 +62,7 @@ jobs:
       - name: 🧪 Run Tests
         run:  pnpm run test
         env:
-          FORMSPREE: ${{ secrets.FORMSPREE }}
+          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
     
       - uses: actions/upload-artifact@v4
         if: always()

@@ -1,0 +1,14 @@
+{
+  "title": "Food Ordering System",
+  "cover": "/images/Food Ordering System.jpeg",
+  "date": "2022-08-05T15:12:23.179Z",
+  "repository": "https://github.com/yacosta738/food-ordering-system",
+  "url": "",
+  "company": "Personal",
+  "showInProjects": true,
+  "featured": false,
+  "priority": 0,
+  "published": true,
+  "content": "This is a food ordering system that uses a microservice architecture with Kafka for inter-service communication and PostgreSQL as a database. It's a work in progress.",
+  "tech": ["java", "postgresql", "kafka"]
+}

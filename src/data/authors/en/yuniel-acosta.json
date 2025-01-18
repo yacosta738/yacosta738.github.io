@@ -1,0 +1,28 @@
+{
+  "defaultLocaleVersion": "en/yuniel-acosta",
+  "name": "Yuniel Acosta",
+  "image": "/images/me.webp",
+  "rol": "Senior Software Engineer",
+  "bio": "I'm a very outgoing and curious person, who's passionate about coding, space, nature, and sports. I enjoy creating awesome software, whether that be websites, applications, or anything in between. My goal is always to create products that deliver high performance.",
+  "email": "yunielacosta738@gmail.com",
+  "social": [
+    {
+      "name": "github",
+      "url": "https://www.github.com/yacosta738",
+      "icon": "uit:github-alt",
+      "handle": "yacosta738"
+    },
+    {
+      "name": "linkedin",
+      "url": "https://www.linkedin.com/in/yacosta738",
+      "icon": "uit:linkedin-alt",
+      "handle": "yacosta738"
+    },
+    {
+      "name": "twitter",
+      "url": "https://www.twitter.com/yacosta738",
+      "icon": "uit:twitter-alt",
+      "handle": "yacosta738"
+    }
+  ]
+}

@@ -41,4 +41,9 @@ export const markdownfy = async (str: string): Promise<string> => await marked.p
  * @param term The term to be converted.
  * @returns The URLized term.
  */
-export const urlize = (term: string): string => term.trim().toLowerCase().replace(/\s+/g, '-');
+export const urlize = (term: string): string => {
+	if (typeof term !== 'string') {
+		throw new TypeError(`The term must be a string, but received a value of type ${typeof term}`);
+	}
+	return term.trim().toLowerCase().replace(/\s+/g, '-');
+};

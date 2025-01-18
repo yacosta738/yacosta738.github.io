@@ -66,7 +66,7 @@ drwxr-xr-x     - yap  5 Nov 14:11 │  ├── fonts
 .rw-r--r--   12k yap  5 Nov 14:11 │  ├── logo.svg
 .rw-r--r--   20k yap  5 Nov 14:11 │  ├── oops.webp
 drwxr-xr-x     - yap  5 Nov 14:11 │  ├── rss
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── uploads
+drwxr-xr-x     - yap  5 Nov 14:11 │  ├── images
 .rw-r--r--   19k yap  5 Nov 14:11 │  └── you-are-the-best.webp
 .rw-r--r--@ 7.8k yap 25 Dec 10:43 ├── README.md
 .rw-r--r--@  508 yap 18 Dec 20:15 ├── remark-reading-time.mjs
@@ -106,7 +106,7 @@ All commands are run from the root of the project, from a terminal:
 | Command                   | Action                                             |
 | :------------------------ | :------------------------------------------------- |
 | `npm install`             | Installs dependencies                              |
-| `npm run dev`             | Starts local dev server at `localhost:3000`        |
+| `npm run dev`             | Starts local dev server at `localhost:4321`        |
 | `npm run build`           | Build your production site to `./dist/`            |
 | `npm run preview`         | Preview your build locally, before deploying       |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro preview` |
