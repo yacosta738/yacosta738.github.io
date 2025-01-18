@@ -37,13 +37,10 @@ test('test contact section', async ({ page }) => {
 		);
 
 	// Submit form and wait for response
-	const responsePromise = page.waitForResponse(
-		(response) => {
-			const url = response.url();
-			return url.includes('n8n-k4aj.onrender.com/webhook') && 
-			       response.status() === 307;
-		}
-	);
+	const responsePromise = page.waitForResponse((response) => {
+		const url = response.url();
+		return url.includes('n8n-k4aj.onrender.com/webhook') && response.status() === 307;
+	});
 
 	await page.locator('button[type="submit"]').click();
 
