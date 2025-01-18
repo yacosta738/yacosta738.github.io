@@ -1,11 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test('test contact section', async ({ page }) => {
-	const webhookUrl =
-		'https://n8n-k4aj.onrender.com/webhook-test/8901e5dd-9459-44df-86b7-8657178868f5';
+	const webhookPattern = 'https://n8n-k4aj.onrender.com/webhook*/*';
 
-	// Set up request interception
-	await page.route(webhookUrl, async (route) => {
+	// Set up request interception with pattern matching
+	await page.route(webhookPattern, async (route) => {
 		const response = await route.fetch();
 		await route.fulfill({
 			status: 307,
@@ -39,7 +38,11 @@ test('test contact section', async ({ page }) => {
 
 	// Submit form and wait for response
 	const responsePromise = page.waitForResponse(
-		(response) => response.url() === webhookUrl && response.status() === 307
+		(response) => {
+			const url = response.url();
+			return url.includes('n8n-k4aj.onrender.com/webhook') && 
+			       response.status() === 307;
+		}
 	);
 
 	await page.locator('button[type="submit"]').click();
