@@ -44,7 +44,6 @@ export default defineConfig({
 		testIdAttribute: 'data-testid',
 	},
 
-
 	/* Configure projects for major browsers */
 	projects: [
 		{
