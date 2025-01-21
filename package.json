@@ -37,7 +37,7 @@
   "devDependencies": {
     "@astrojs/rss": "4.0.11",
     "@astrojs/sitemap": "3.2.1",
-    "@astrojs/tailwind": "5.1.4",
+    "@astrojs/tailwind": "5.1.5",
     "@iconify-json/akar-icons": "^1.2.2",
     "@iconify-json/charm": "^1.2.2",
     "@iconify-json/cib": "^1.2.2",
@@ -59,7 +59,7 @@
     "@typescript-eslint/parser": "8.21.0",
     "@vite-pwa/astro": "^0.5.0",
     "@vueuse/core": "12.4.0",
-    "astro": "5.1.7",
+    "astro": "5.1.8",
     "astro-compress": "2.3.6",
     "astro-critters": "2.2.1",
     "astro-icon": "1.1.5",
@@ -90,7 +90,7 @@
     "rehype-accessible-emojis": "^0.3.2",
     "remark-toc": "^9.0.0",
     "tailwindcss": "3.4.17",
-    "vitest": "3.0.0-beta.3",
+    "vitest": "3.0.2",
     "workbox-window": "^7.3.0"
   },
   "dependencies": {
