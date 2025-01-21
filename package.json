@@ -1,8 +1,21 @@
 {
   "name": "yunielacosta.com",
+  "description": "Yuniel Acosta's personal website",
   "version": "1.0.7",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yacosta738/yacosta738.github.io.git"
+  },
+  "author": {
+    "name": "Yuniel Acosta",
+    "email": "stray-hefts.3o@icloud.com",
+    "url": "https://yunielacosta.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/yacosta738/yacosta738.github.io/issues"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

@@ -4,7 +4,7 @@ export interface SocialMedia {
 	icon: string;
 }
 
-export const email = 'yunielacosta738@gmail.com';
+export const email = 'stray-hefts.3o@icloud.com';
 export const domain = 'https://yunielacosta.com';
 
 const uuid = crypto.randomUUID();
