@@ -20,7 +20,7 @@ permissions:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  FORMSPREE: ${{ secrets.FORMSPREE }}
+  CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
   PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
   
 jobs:
@@ -51,7 +51,7 @@ jobs:
           # node-version: 18 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)
           package-manager: pnpm@9.12.2 # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
         env:
-          FORMSPREE: ${{ secrets.FORMSPREE }}
+          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
     outputs:
         revnumber: ${{ env.revnumber }}     
 
@@ -66,7 +66,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         env:
-          FORMSPREE: ${{ secrets.FORMSPREE }}
+          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
   
   deploy-container-image:
     needs: build
