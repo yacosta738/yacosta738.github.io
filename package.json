@@ -97,6 +97,7 @@
     "@astrojs/ts-plugin": "^1.10.4",
     "@astrojs/vue": "^5.0.5",
     "@vueuse/integrations": "^11.3.0",
+    "@yacosta738/ascii-progress-bar": "^1.4.0",
     "fuse.js": "^7.0.0",
     "globals": "^15.14.0",
     "sass": "1.80.4",

@@ -17,6 +17,9 @@ importers:
       '@vueuse/integrations':
         specifier: ^11.3.0
         version: 11.3.0(axios@1.7.9)(fuse.js@7.0.0)(vue@3.5.13(typescript@5.6.3))
+      '@yacosta738/ascii-progress-bar':
+        specifier: ^1.4.0
+        version: 1.4.0
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2249,6 +2252,9 @@ packages:
 
   '@vueuse/shared@11.3.0':
     resolution: {integrity: sha512-P8gSSWQeucH5821ek2mn/ciCk+MS/zoRKqdQIM3bHq6p7GXDAJLmnRRKmF5F65sAVJIfzQlwR3aDzwCn10s8hA==}
+
+  '@yacosta738/ascii-progress-bar@1.4.0':
+    resolution: {integrity: sha512-i1DHCcCFlAGj0KrFkMFqcwSRyIi5px23BUEZILOAI4Q3uWoYs5I0HX5OBn8+B0145jXuf3yPNAPwuyadkyO9TA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -9086,6 +9092,8 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@yacosta738/ascii-progress-bar@1.4.0': {}
 
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
