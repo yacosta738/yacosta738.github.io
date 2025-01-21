@@ -55,49 +55,48 @@ const portfolioTechIcon = [
 </footer>
 
 <script>
-    import '@yacosta738/ascii-progress-bar/browser';
+	import '@yacosta738/ascii-progress-bar/browser';
 
-    const HOUR_IN_MS = 60 * 60 * 1000;
-    
-    class YearProgress {
+	const HOUR_IN_MS = 60 * 60 * 1000;
+
+	class YearProgress {
 		private intervalId: ReturnType<typeof setInterval> | undefined;
-        
-        private calculateProgress(): number {
-            const now = new Date();
-            const start = new Date(now.getFullYear(), 0, 1);
-            const end = new Date(now.getFullYear() + 1, 0, 1);
-            return ((now.getTime() - start.getTime()) / 
-                   (end.getTime() - start.getTime())) * 100;
-        }
-        
-        private update(): void {
-            try {
-                const progressBar = document.getElementById('year-progress');
-                if (progressBar) {
-                    const progress = this.calculateProgress();
-                    progressBar.setAttribute('progress', progress.toFixed(2));
-                }
-            } catch (error) {
-                console.error('Failed to update year progress:', error);
-            }
-        }
-        
-        public start(): void {
-            this.update();
-            this.intervalId = setInterval(() => this.update(), HOUR_IN_MS);
-        }
-        
-        public stop(): void {
-            if (this.intervalId) {
-                clearInterval(this.intervalId);
-            }
-        }
-    }
 
-    // Initialize and start progress tracking
-    const yearProgress = new YearProgress();
-    yearProgress.start();
+		private calculateProgress(): number {
+			const now = new Date();
+			const start = new Date(now.getFullYear(), 0, 1);
+			const end = new Date(now.getFullYear() + 1, 0, 1);
+			return ((now.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * 100;
+		}
 
-    // Cleanup on page unload
-    window.addEventListener('unload', () => yearProgress.stop());
+		private update(): void {
+			try {
+				const progressBar = document.getElementById('year-progress');
+				if (progressBar) {
+					const progress = this.calculateProgress();
+					progressBar.setAttribute('progress', progress.toFixed(2));
+				}
+			} catch (error) {
+				console.error('Failed to update year progress:', error);
+			}
+		}
+
+		public start(): void {
+			this.update();
+			this.intervalId = setInterval(() => this.update(), HOUR_IN_MS);
+		}
+
+		public stop(): void {
+			if (this.intervalId) {
+				clearInterval(this.intervalId);
+			}
+		}
+	}
+
+	// Initialize and start progress tracking
+	const yearProgress = new YearProgress();
+	yearProgress.start();
+
+	// Cleanup on page unload
+	window.addEventListener('unload', () => yearProgress.stop());
 </script>
