@@ -62,7 +62,7 @@ importers:
         version: 1.2.2
       '@iconify-json/mdi':
         specifier: ^1.2.2
-        version: 1.2.2
+        version: 1.2.3
       '@iconify-json/ph':
         specifier: ^1.2.2
         version: 1.2.2
@@ -71,7 +71,7 @@ importers:
         version: 1.2.5
       '@iconify-json/simple-icons':
         specifier: ^1.2.20
-        version: 1.2.20
+        version: 1.2.21
       '@iconify-json/teenyicons':
         specifier: ^1.2.2
         version: 1.2.2
@@ -146,7 +146,7 @@ importers:
         version: 6.10.2(eslint@9.18.0(jiti@1.21.7))
       eslint-plugin-prettier:
         specifier: ^5.2.2
-        version: 5.2.2(eslint-config-prettier@10.0.1(eslint@9.18.0(jiti@1.21.7)))(eslint@9.18.0(jiti@1.21.7))(prettier@3.4.2)
+        version: 5.2.3(eslint-config-prettier@10.0.1(eslint@9.18.0(jiti@1.21.7)))(eslint@9.18.0(jiti@1.21.7))(prettier@3.4.2)
       eslint-plugin-prettier-vue:
         specifier: ^5.0.0
         version: 5.0.0
@@ -1312,8 +1312,8 @@ packages:
   '@iconify-json/ion@1.2.2':
     resolution: {integrity: sha512-GysHYDAyy3K4R2Xxsab3I0ZFmQA4oorfIkwX0g6xfZJNVZcFyAlA4pa1jAJC9Bk3cLiWUtnN8ZyWs6cP3nxlnw==}
 
-  '@iconify-json/mdi@1.2.2':
-    resolution: {integrity: sha512-84aznJXzfGdbOXGe8xB7E5uNAb7Yo5IABwTgq2X3kczb819qZeS9eL31bTVn7wJdCLK5ieaoUc2GTS3QYIkJ6g==}
+  '@iconify-json/mdi@1.2.3':
+    resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
   '@iconify-json/ph@1.2.2':
     resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
@@ -1321,8 +1321,8 @@ packages:
   '@iconify-json/ri@1.2.5':
     resolution: {integrity: sha512-kWGimOXMZrlYusjBKKXYOWcKhbOHusFsmrmRGmjS7rH0BpML5A9/fy8KHZqFOwZfC4M6amObQYbh8BqO5cMC3w==}
 
-  '@iconify-json/simple-icons@1.2.20':
-    resolution: {integrity: sha512-WlQ95zrdxxizrFt2HtkfYjyWatLfE8Z7BKOkew9quG5S5AKYVxF1PkTtOs8LDWShce1DpvxKWQne4W5DQyEGZg==}
+  '@iconify-json/simple-icons@1.2.21':
+    resolution: {integrity: sha512-aqbIuVshMZ2fNEhm25//9DoKudboXF3CpoEQJJlHl9gVSVNOTr4cgaCIZvgSEYmys2HHEfmhcpoZIhoEFZS8SQ==}
 
   '@iconify-json/teenyicons@1.2.2':
     resolution: {integrity: sha512-Do08DrvNpT+pKVeyFqn7nZiIviAAY8KbduSfpNKzE1bgVekAIJ/AAJtOBSUFpV4vTk+hXw195+jmCv8/0cJSKA==}
@@ -3181,8 +3181,8 @@ packages:
     resolution: {integrity: sha512-VsWmk/fftpjHBM7QFci0jZDLsc6Fh7jhenDHJ7Mbd/V0EMolcbezJRhtidE//3Liy5vEaVeX+U3skCQduWlmGA==}
     engines: {node: '>=16'}
 
-  eslint-plugin-prettier@5.2.2:
-    resolution: {integrity: sha512-1yI3/hf35wmlq66C8yOyrujQnel+v5l1Vop5Cl2I6ylyNTT1JbuUUnV3/41PzwTzcyDp/oF0jWE3HXvcH5AQOQ==}
+  eslint-plugin-prettier@5.2.3:
+    resolution: {integrity: sha512-qJ+y0FfCp/mQYQ/vWQ3s7eUlFEL4PyKfAJxsnYTJ4YT73nsJBWqmEpFryxV9OeUiqmsTsYJ5Y+KDNaeP31wrRw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       '@types/eslint': '>=8.0.0'
@@ -3330,8 +3330,8 @@ packages:
   fd-slicer@1.1.0:
     resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
 
-  fdir@6.4.2:
-    resolution: {integrity: sha512-KnhMXsKSPZlAhp7+IjUkRZKPb4fUyccpDrdFXbi4QL1qkmFh9kVY09Yox+n4MaOb3lHZ1Tv829C3oaaXoMYPDQ==}
+  fdir@6.4.3:
+    resolution: {integrity: sha512-PMXmW2y1hDDfTSRc9gaXIuCCRpuoz3Kaz8cUelp3smouvfT632ozg2vrT6lJsHKKOF59YLbOGfAWGUcKEfRMQw==}
     peerDependencies:
       picomatch: ^3 || ^4
     peerDependenciesMeta:
@@ -3520,8 +3520,8 @@ packages:
     resolution: {integrity: sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg==}
     engines: {node: '>= 0.4'}
 
-  get-tsconfig@4.8.1:
-    resolution: {integrity: sha512-k9PN+cFBmaLWtVz29SkUoqU5O0slLuHJXt/2P+tMVFT+phsSGXGkp9t3rQIqdz0e+06EHNGs3oM6ZX1s2zHxRg==}
+  get-tsconfig@4.9.0:
+    resolution: {integrity: sha512-52n24W52sIueosRe0XZ8Ex5Yle+WbhfCKnV/gWXpbVR8FXNTfqdKEKUSypKso66VRHTvvcQxL44UTZbJRlCTnw==}
 
   git-log-parser@1.2.1:
     resolution: {integrity: sha512-PI+sPDvHXNPl5WNOErAK05s3j0lgwUzMN6o8cyQrDaKfT3qd7TmNJKeXX+SknI5I0QhG5fVPAEwSY4tRGDtYoQ==}
@@ -5881,11 +5881,11 @@ packages:
     resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
-  tldts-core@6.1.72:
-    resolution: {integrity: sha512-FW3H9aCaGTJ8l8RVCR3EX8GxsxDbQXuwetwwgXA2chYdsX+NY1ytCBl61narjjehWmCw92tc1AxlcY3668CU8g==}
+  tldts-core@6.1.73:
+    resolution: {integrity: sha512-k1g5eX87vxu3g//6XMn62y4qjayu4cYby/PF7Ksnh4F4uUK1Z1ze/mJ4a+y5OjdJ+cXRp+YTInZhH+FGdUWy1w==}
 
-  tldts@6.1.72:
-    resolution: {integrity: sha512-QNtgIqSUb9o2CoUjX9T5TwaIvUUJFU1+12PJkgt42DFV2yf9J6549yTF2uGloQsJ/JOC8X+gIB81ind97hRiIQ==}
+  tldts@6.1.73:
+    resolution: {integrity: sha512-/h4bVmuEMm57c2uCiAf1Q9mlQk7cA22m+1Bu0K92vUUtTVT9D4mOFWD9r4WQuTULcG9eeZtNKhLl0Il1LdKGog==}
     hasBin: true
 
   to-regex-range@5.0.1:
@@ -5964,6 +5964,10 @@ packages:
 
   type-fest@4.32.0:
     resolution: {integrity: sha512-rfgpoi08xagF3JSdtJlCwMq9DGNDE0IMh3Mkpc1wUypg9vPi786AiqeBBKcqvIkq42azsBM85N490fyZjeUftw==}
+    engines: {node: '>=16'}
+
+  type-fest@4.33.0:
+    resolution: {integrity: sha512-s6zVrxuyKbbAsSAD5ZPTB77q4YIdRctkTbJ2/Dqlinwz+8ooH2gd+YA7VA6Pa93KML9GockVvoxjZ2vHP+mu8g==}
     engines: {node: '>=16'}
 
   typed-array-buffer@1.0.3:
@@ -7967,7 +7971,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/mdi@1.2.2':
+  '@iconify-json/mdi@1.2.3':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -7979,7 +7983,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.20':
+  '@iconify-json/simple-icons@1.2.21':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -10257,7 +10261,7 @@ snapshots:
       builtins: 5.1.0
       eslint: 9.18.0(jiti@1.21.7)
       eslint-plugin-es-x: 7.8.0(eslint@9.18.0(jiti@1.21.7))
-      get-tsconfig: 4.8.1
+      get-tsconfig: 4.9.0
       globals: 13.24.0
       ignore: 5.3.2
       is-builtin-module: 3.2.1
@@ -10274,7 +10278,7 @@ snapshots:
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
 
-  eslint-plugin-prettier@5.2.2(eslint-config-prettier@10.0.1(eslint@9.18.0(jiti@1.21.7)))(eslint@9.18.0(jiti@1.21.7))(prettier@3.4.2):
+  eslint-plugin-prettier@5.2.3(eslint-config-prettier@10.0.1(eslint@9.18.0(jiti@1.21.7)))(eslint@9.18.0(jiti@1.21.7))(prettier@3.4.2):
     dependencies:
       eslint: 9.18.0(jiti@1.21.7)
       prettier: 3.4.2
@@ -10477,7 +10481,7 @@ snapshots:
     dependencies:
       pend: 1.2.0
 
-  fdir@6.4.2(picomatch@4.0.2):
+  fdir@6.4.3(picomatch@4.0.2):
     optionalDependencies:
       picomatch: 4.0.2
 
@@ -10668,7 +10672,7 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.2.7
 
-  get-tsconfig@4.8.1:
+  get-tsconfig@4.9.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
@@ -12099,7 +12103,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.26.2
       index-to-position: 0.1.2
-      type-fest: 4.32.0
+      type-fest: 4.33.0
 
   parse-latin@7.0.0:
     dependencies:
@@ -12553,14 +12557,14 @@ snapshots:
     dependencies:
       find-up-simple: 1.0.0
       read-pkg: 9.0.1
-      type-fest: 4.32.0
+      type-fest: 4.33.0
 
   read-pkg@9.0.1:
     dependencies:
       '@types/normalize-package-data': 2.4.4
       normalize-package-data: 6.0.2
       parse-json: 8.1.0
-      type-fest: 4.32.0
+      type-fest: 4.33.0
       unicorn-magic: 0.1.0
 
   readable-stream@2.3.8:
@@ -13340,7 +13344,7 @@ snapshots:
 
   tinyglobby@0.2.10:
     dependencies:
-      fdir: 6.4.2(picomatch@4.0.2)
+      fdir: 6.4.3(picomatch@4.0.2)
       picomatch: 4.0.2
 
   tinypool@1.0.2: {}
@@ -13351,12 +13355,12 @@ snapshots:
 
   tinyspy@3.0.2: {}
 
-  tldts-core@6.1.72:
+  tldts-core@6.1.73:
     optional: true
 
-  tldts@6.1.72:
+  tldts@6.1.73:
     dependencies:
-      tldts-core: 6.1.72
+      tldts-core: 6.1.73
     optional: true
 
   to-regex-range@5.0.1:
@@ -13367,7 +13371,7 @@ snapshots:
 
   tough-cookie@5.1.0:
     dependencies:
-      tldts: 6.1.72
+      tldts: 6.1.73
     optional: true
 
   tr46@1.0.1:
@@ -13417,6 +13421,8 @@ snapshots:
   type-fest@2.19.0: {}
 
   type-fest@4.32.0: {}
+
+  type-fest@4.33.0: {}
 
   typed-array-buffer@1.0.3:
     dependencies:
