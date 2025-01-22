@@ -114,7 +114,9 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 
 		toast.querySelector('div').className =
 			`flex items-center p-1 rounded-lg shadow-lg min-w-[280px] border ${
-				isError ? 'border-red-500 bg-red-500/50 text-white' : 'border-green-500 bg-green-500/50 text-white'
+				isError
+					? 'border-red-500 bg-red-500/50 text-white'
+					: 'border-green-500 bg-green-500/50 text-white'
 			}`;
 
 		toastMessage.textContent = message;
