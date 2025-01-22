@@ -12,83 +12,83 @@ const DEV_PORT: number = 4321;
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yunielacosta.com/',
+	site: 'https://yunielacosta.com/',
 	output: 'server',
 	adapter: netlify(),
-  server: {
-      /* Dev. server only */
-      port: DEV_PORT,
+	server: {
+		/* Dev. server only */
+		port: DEV_PORT,
 	},
 	env: {
 		schema: {
 			RECAPTCHA_SECRET_KEY: envField.string({
 				context: 'server',
-				access: 'secret'
+				access: 'secret',
 			}),
 			RECAPTCHA_SITE_KEY: envField.string({
 				context: 'client',
-				access: "public"
+				access: 'public',
 			}),
 			CONTACT_FORM: envField.string({
 				context: 'client',
-				access: 'public'
+				access: 'public',
 			}),
 			CONTACT_FORM_TOKEN: envField.string({
 				context: 'client',
-				access: 'public'
+				access: 'public',
 			}),
-		}
+		},
 	},
-  i18n: {
-      defaultLocale: 'en',
-      locales: ['es', 'en'],
+	i18n: {
+		defaultLocale: 'en',
+		locales: ['es', 'en'],
 	},
 
-  integrations: [
-      sitemap({
-          i18n: {
-              defaultLocale: 'en',
-              locales: {
-                  en: 'en',
-                  es: 'es',
-              },
-          },
-      }),
-      tailwind(),
-      robotsTxt(),
-      icon({
-          iconDir: 'src/icons',
-          include: {
-              mdi: ['*'],
-              uit: ['*'],
-              'simple-icons': ['*'],
-              ph: ['*'],
-              ri: ['*'],
-              ic: ['*'],
-              charm: ['*'],
-              cib: ['*'],
-              ion: ['*'],
-              clarity: ['*'],
-              teenyicons: ['*'],
-              'akar-icons': ['*'],
-          },
-      }),
-      vue(),
+	integrations: [
+		sitemap({
+			i18n: {
+				defaultLocale: 'en',
+				locales: {
+					en: 'en',
+					es: 'es',
+				},
+			},
+		}),
+		tailwind(),
+		robotsTxt(),
+		icon({
+			iconDir: 'src/icons',
+			include: {
+				mdi: ['*'],
+				uit: ['*'],
+				'simple-icons': ['*'],
+				ph: ['*'],
+				ri: ['*'],
+				ic: ['*'],
+				charm: ['*'],
+				cib: ['*'],
+				ion: ['*'],
+				clarity: ['*'],
+				teenyicons: ['*'],
+				'akar-icons': ['*'],
+			},
+		}),
+		vue(),
 	],
 
-  vite: {
-      ssr: {
-          external: ['svgo'],
-      },
+	vite: {
+		ssr: {
+			external: ['svgo'],
+		},
 	},
 
-  markdown: {
-      remarkPlugins: [remarkToc, remarkReadingTime],
-      gfm: true,
+	markdown: {
+		remarkPlugins: [remarkToc, remarkReadingTime],
+		gfm: true,
 	},
 
-  image: {
-      domains: ['avatars.githubusercontent.com', 'yunielacosta.com'],
-      service: sharpImageService(),
+	image: {
+		domains: ['avatars.githubusercontent.com', 'yunielacosta.com'],
+		service: sharpImageService(),
 	},
 });

@@ -1,27 +1,27 @@
 ---
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 type Props = {
-  siteKey: string;
-  contactForm: string;
-  contactFormToken: string;
+	siteKey: string;
+	contactForm: string;
+	contactFormToken: string;
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 // Crear un objeto con las traducciones necesarias
 const translations = {
-  messageSent: t('messageSent'),
-  recaptchaError: t('recaptchaError'),
-  recaptchaFailed: t('recaptchaFailed'),
-  formError: t('formError'),
-  formSubmissionFailed: t('formSubmissionFailed'),
+	messageSent: t('messageSent'),
+	recaptchaError: t('recaptchaError'),
+	recaptchaFailed: t('recaptchaFailed'),
+	formError: t('formError'),
+	formSubmissionFailed: t('formSubmissionFailed'),
 };
 
-const { siteKey, contactForm, contactFormToken} = Astro.props;
+const { siteKey, contactForm, contactFormToken } = Astro.props;
 ---
 
 <form class="card p-5 space-y-4 bg-neutral text-neutral-content m-auto w-full" id="contact-form">
-  <div>
+	<div>
 		<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
 			{t('yourFullName')}
 		</label>
@@ -75,12 +75,12 @@ const { siteKey, contactForm, contactFormToken} = Astro.props;
 		></textarea>
 	</div>
 	<div class="mt-8">
-		<button 
+		<button
 			type="submit"
 			class="g-recaptcha big-button w-full"
 			data-sitekey={siteKey}
 			data-callback="onSubmit"
-			data-testid="submit-button" 
+			data-testid="submit-button"
 		>
 			{t('sendMessage')}
 		</button>
@@ -88,96 +88,100 @@ const { siteKey, contactForm, contactFormToken} = Astro.props;
 </form>
 
 <!-- Toast notification component -->
-<div id="toast-notification" class="fixed top-4 right-4 z-50 invisible opacity-0 transition-all duration-300 ease-in-out">
-  <div class="flex items-center p-4 rounded-lg shadow-lg min-w-[280px]">
-    <div class="flex-1 toast-message"></div>
-    <button onclick="closeToast()" class="ml-4">
-      <span class="text-2xl">&times;</span>
-    </button>
-  </div>
+<div
+	id="toast-notification"
+	class="fixed top-4 right-4 z-50 invisible opacity-0 transition-all duration-300 ease-in-out"
+>
+	<div class="flex items-center p-4 rounded-lg shadow-lg min-w-[280px]">
+		<div class="flex-1 toast-message"></div>
+		<button onclick="closeToast()" class="ml-4">
+			<span class="text-2xl">&times;</span>
+		</button>
+	</div>
 </div>
 
 <script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script define:vars={{contactForm, translations, contactFormToken}}>
-  const closeToast = () => {
-    const toast = document.getElementById('toast-notification');
-    toast.classList.remove('visible', 'opacity-100');
-    toast.classList.add('invisible', 'opacity-0');
-  };
+<script define:vars={{ contactForm, translations, contactFormToken }}>
+	const closeToast = () => {
+		const toast = document.getElementById('toast-notification');
+		toast.classList.remove('visible', 'opacity-100');
+		toast.classList.add('invisible', 'opacity-0');
+	};
 
-  const showToast = (message, isError = false) => {
-    const toast = document.getElementById('toast-notification');
-    const toastMessage = toast.querySelector('.toast-message');
-    
-    toast.querySelector('div').className = `flex items-center p-4 rounded-lg shadow-lg min-w-[280px] ${
-      isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'
-    }`;
-    
-    toastMessage.textContent = message;
-    
-    // Mostrar el toast
-    toast.classList.remove('invisible', 'opacity-0');
-    toast.classList.add('visible', 'opacity-100');
-    
-    // Auto ocultar después de 5 segundos
-    setTimeout(closeToast, 5000);
-  };
+	const showToast = (message, isError = false) => {
+		const toast = document.getElementById('toast-notification');
+		const toastMessage = toast.querySelector('.toast-message');
 
-  window.onSubmit = async (token) => {
-    const form = document.getElementById('contact-form');
+		toast.querySelector('div').className =
+			`flex items-center p-4 rounded-lg shadow-lg min-w-[280px] ${
+				isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'
+			}`;
 
-    try {
-      if (!token) {
-        showToast(translations.recaptchaFailed, true);
-        return;
-      }
+		toastMessage.textContent = message;
 
-      const recaptchaResponse = await fetch("/api/recaptcha", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ token })
-      });
+		// Mostrar el toast
+		toast.classList.remove('invisible', 'opacity-0');
+		toast.classList.add('visible', 'opacity-100');
 
-      const gResponse = await recaptchaResponse.json();
+		// Auto ocultar después de 5 segundos
+		setTimeout(closeToast, 5000);
+	};
 
-      if (!gResponse.success) {
-        const errorMessage = gResponse['error-codes']?.join(', ') || 'Verification failed';
-        showToast(`${translations.recaptchaError} ${errorMessage}`, true);
-        return;
-      }
+	window.onSubmit = async (token) => {
+		const form = document.getElementById('contact-form');
 
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-      const response = await fetch(contactForm, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "yap-token": contactFormToken
-        },
-        body: JSON.stringify(data)
-      });
+		try {
+			if (!token) {
+				showToast(translations.recaptchaFailed, true);
+				return;
+			}
 
-      if (response.ok) {
-        showToast(translations.messageSent);
-        form.reset();
-      } else {
-        throw new Error(translations.formSubmissionFailed);
-      }
-    } catch (error) {
-      showToast(translations.formError, true);
-      console.error(error);
-    }
-  }
+			const recaptchaResponse = await fetch('/api/recaptcha', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ token }),
+			});
+
+			const gResponse = await recaptchaResponse.json();
+
+			if (!gResponse.success) {
+				const errorMessage = gResponse['error-codes']?.join(', ') || 'Verification failed';
+				showToast(`${translations.recaptchaError} ${errorMessage}`, true);
+				return;
+			}
+
+			const formData = new FormData(form);
+			const data = Object.fromEntries(formData.entries());
+			const response = await fetch(contactForm, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'yap-token': contactFormToken,
+				},
+				body: JSON.stringify(data),
+			});
+
+			if (response.ok) {
+				showToast(translations.messageSent);
+				form.reset();
+			} else {
+				throw new Error(translations.formSubmissionFailed);
+			}
+		} catch (error) {
+			showToast(translations.formError, true);
+			console.error(error);
+		}
+	};
 </script>
 
 <style>
-  #toast-notification {
-    transform: translateX(0);
-  }
-  
-  #toast-notification.invisible {
-    transform: translateX(100%);
-  }
+	#toast-notification {
+		transform: translateX(0);
+	}
+
+	#toast-notification.invisible {
+		transform: translateX(100%);
+	}
 </style>
