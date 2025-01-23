@@ -3,14 +3,9 @@ local_backend: true
 logo_url: /logo.svg
 
 backend:
-  name: 'github'
+  name: github
   repo: yacosta738/yacosta738.github.io
   branch: main
-  base_url: https://yunielacosta.com
-  automatic_deployments: false
-  accept_roles:
-    - admin
-    - editor
 
 slug:
   encoding: 'ascii'
