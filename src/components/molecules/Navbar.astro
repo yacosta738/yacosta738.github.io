@@ -41,6 +41,27 @@ const translatePath = useTranslatedPath(lang);
 	</header>
 </div>
 <script define:vars={{ navbarHeaderId }}>
+	// Add navbar height calculation
+	const updateNavbarHeight = () => {
+		const navbar = document.getElementById(navbarHeaderId);
+		if (navbar) {
+			const height = navbar.offsetHeight;
+			document.documentElement.style.setProperty('--navbar-height', `${height}px`);
+		}
+	};
+
+	// Initial calculation
+	updateNavbarHeight();
+	// Update on resize
+	window.addEventListener('resize', updateNavbarHeight);
+	// Update when notifications change
+	const observer = new MutationObserver(updateNavbarHeight);
+	observer.observe(document.getElementById(navbarHeaderId), {
+		childList: true,
+		subtree: true,
+	});
+
+	// Existing scroll handling code
 	let showNavbar = true;
 	let scrollDirection = 'DOWN';
 	let lastScrollPosition = 0;
