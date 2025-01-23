@@ -15,6 +15,7 @@ concurrency:
 env:
   NODE_OPTIONS: "--max_old_space_size=4096"
   RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+  RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
   CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
 
 jobs:
@@ -58,6 +59,7 @@ jobs:
         env:
           CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
           RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
           CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
           
       - name: Install Playwright Browsers
@@ -68,6 +70,7 @@ jobs:
         env:
           CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
           RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
           CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
     
       - uses: actions/upload-artifact@v4
