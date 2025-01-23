@@ -31,11 +31,11 @@ const typeIcons = {
 const animationStyles = 'transition-all duration-300 ease-out';
 const htmlContent = markdownToHTML(content);
 const initiallyHidden = (() => {
-  if (typeof localStorage !== 'undefined') {
-    const dismissed = JSON.parse(localStorage.getItem('dismissed_banners') || '[]');
-    return dismissed.includes(bannerId);
-  }
-  return false;
+	if (typeof localStorage !== 'undefined') {
+		const dismissed = JSON.parse(localStorage.getItem('dismissed_banners') || '[]');
+		return dismissed.includes(bannerId);
+	}
+	return false;
 })();
 ---
 
@@ -110,12 +110,12 @@ const initiallyHidden = (() => {
 	class:list={[
 		'w-full z-50 flex justify-center items-center p-2 rounded-lg bg-opacity-10',
 		typeStyles[type],
-		animationStyles
+		animationStyles,
 	]}
 	style={{
 		opacity: initiallyHidden ? '0' : '1',
 		transform: initiallyHidden ? 'translateY(-100%)' : 'translateY(0)',
-		display: initiallyHidden ? 'none' : 'flex'
+		display: initiallyHidden ? 'none' : 'flex',
 	}}
 	role="alert"
 >
