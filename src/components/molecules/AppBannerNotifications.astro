@@ -4,7 +4,6 @@ import { getLangFromUrl } from '@i18n:utils';
 import { getCollection } from 'astro:content';
 
 const lang = getLangFromUrl(Astro.url);
-
 const notificationsData = await getCollection('notifications');
 const now = new Date();
 
@@ -19,8 +18,7 @@ const notifications = notificationsData
 		active: notification.data.active,
 	}))
 	.filter((notification) => {
-		const slugParts = notification.id.split('/');
-		const notificationLang = slugParts[0];
+		const notificationLang = notification.id.split('/')[0];
 		return notificationLang === lang;
 	})
 	.filter((notification) => notification.content && notification.active)
@@ -35,6 +33,7 @@ const notifications = notificationsData
 {
 	notifications.map((notification) => (
 		<Banner
+			id={notification.id}
 			content={notification.content}
 			type={notification.type}
 			dismissible={notification.dismissible}

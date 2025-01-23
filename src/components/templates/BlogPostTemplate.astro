@@ -95,7 +95,7 @@ const article = await jsonToArticle(post);
 >
 	<article class="mx-2 md:mx-8 md:px-2 lg:mx-24">
 		<h1
-			class="mt-10 text-center text-2xl font-bold leading-tight md:mt-0 md:text-justify md:text-4xl md:tracking-wider"
+			class="text-center text-2xl font-bold leading-tight md:mt-0 md:text-justify md:text-4xl md:tracking-wider"
 		>
 			{article.title}
 		</h1>
@@ -168,7 +168,8 @@ const article = await jsonToArticle(post);
 </style>
 
 <script is:inline>
-	const paragraphs = document.querySelectorAll('p');
+	const markdownBody = document.querySelector('#markdown-body');
+	const paragraphs = markdownBody.querySelectorAll('p');
 
 	const firstParagraph = Array.from(paragraphs).find((p) => p.textContent.trim().length > 0);
 
