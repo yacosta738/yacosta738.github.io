@@ -109,8 +109,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(astro@5.1.7(@types/node@22.10.7)(jiti@1.21.7)(lightningcss@1.28.2)(rollup@2.79.2)(sass@1.83.4)(terser@5.37.0)(typescript@5.6.3)(yaml@2.7.0))(vite-plugin-pwa@0.20.5(vite@6.0.11(@types/node@22.10.7)(jiti@1.21.7)(lightningcss@1.28.2)(sass@1.83.4)(terser@5.37.0)(yaml@2.7.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.3.0))
       '@vueuse/core':
-        specifier: 12.4.0
-        version: 12.4.0(typescript@5.6.3)
+        specifier: 12.5.0
+        version: 12.5.0(typescript@5.6.3)
       astro:
         specifier: 5.1.7
         version: 5.1.7(@types/node@22.10.7)(jiti@1.21.7)(lightningcss@1.28.2)(rollup@2.79.2)(sass@1.83.4)(terser@5.37.0)(typescript@5.6.3)(yaml@2.7.0)
@@ -2227,9 +2227,6 @@ packages:
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
 
-  '@vueuse/core@12.4.0':
-    resolution: {integrity: sha512-XnjQYcJwCsyXyIafyA6SvyN/OBtfPnjvJmbxNxQjCcyWD198urwm5TYvIUUyAxEAN0K7HJggOgT15cOlWFyLeA==}
-
   '@vueuse/core@12.5.0':
     resolution: {integrity: sha512-GVyH1iYqNANwcahAx8JBm6awaNgvR/SwZ1fjr10b8l1HIgDp82ngNbfzJUgOgWEoxjL+URAggnlilAEXwCOZtg==}
 
@@ -2274,14 +2271,8 @@ packages:
       universal-cookie:
         optional: true
 
-  '@vueuse/metadata@12.4.0':
-    resolution: {integrity: sha512-AhPuHs/qtYrKHUlEoNO6zCXufu8OgbR8S/n2oMw1OQuBQJ3+HOLQ+EpvXs+feOlZMa0p8QVvDWNlmcJJY8rW2g==}
-
   '@vueuse/metadata@12.5.0':
     resolution: {integrity: sha512-Ui7Lo2a7AxrMAXRF+fAp9QsXuwTeeZ8fIB9wsLHqzq9MQk+2gMYE2IGJW48VMJ8ecvCB3z3GsGLKLbSasQ5Qlg==}
-
-  '@vueuse/shared@12.4.0':
-    resolution: {integrity: sha512-9yLgbHVIF12OSCojnjTIoZL1+UA10+O4E1aD6Hpfo/DKVm5o3SZIwz6CupqGy3+IcKI8d6Jnl26EQj/YucnW0Q==}
 
   '@vueuse/shared@12.5.0':
     resolution: {integrity: sha512-vMpcL1lStUU6O+kdj6YdHDixh0odjPAUM15uJ9f7MY781jcYkIwFA4iv2EfoIPO6vBmvutI1HxxAwmf0cx5ISQ==}
@@ -9224,15 +9215,6 @@ snapshots:
 
   '@vue/shared@3.5.13': {}
 
-  '@vueuse/core@12.4.0(typescript@5.6.3)':
-    dependencies:
-      '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 12.4.0
-      '@vueuse/shared': 12.4.0(typescript@5.6.3)
-      vue: 3.5.13(typescript@5.6.3)
-    transitivePeerDependencies:
-      - typescript
-
   '@vueuse/core@12.5.0(typescript@5.6.3)':
     dependencies:
       '@types/web-bluetooth': 0.0.20
@@ -9253,15 +9235,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@vueuse/metadata@12.4.0': {}
-
   '@vueuse/metadata@12.5.0': {}
-
-  '@vueuse/shared@12.4.0(typescript@5.6.3)':
-    dependencies:
-      vue: 3.5.13(typescript@5.6.3)
-    transitivePeerDependencies:
-      - typescript
 
   '@vueuse/shared@12.5.0(typescript@5.6.3)':
     dependencies:
