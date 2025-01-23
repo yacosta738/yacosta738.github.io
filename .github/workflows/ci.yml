@@ -57,6 +57,8 @@ jobs:
         run: pnpm run build
         env:
           CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
+          RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+          CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
           
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -65,6 +67,8 @@ jobs:
         run:  pnpm run test
         env:
           CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
+          RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+          CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
     
       - uses: actions/upload-artifact@v4
         if: always()
