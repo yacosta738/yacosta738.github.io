@@ -99,6 +99,19 @@ const projects = defineCollection({
 	}),
 });
 
+const notifications = defineCollection({
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/data/notifications' }),
+	schema: z.object({
+		title: z.string(),
+		content: z.string(),
+		type: z.enum(['neutral', 'success', 'error']).default('neutral'),
+		startDate: z.string().datetime(),
+		endDate: z.string().datetime().optional(),
+		dismissible: z.boolean().default(false),
+		active: z.boolean().default(false),
+	}),
+});
+
 export const collections = {
 	blog: blogCollection,
 	authors,
@@ -107,4 +120,5 @@ export const collections = {
 	projects,
 	tags,
 	categories,
+	notifications,
 };

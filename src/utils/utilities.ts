@@ -47,3 +47,11 @@ export const urlize = (term: string): string => {
 	}
 	return term.trim().toLowerCase().replace(/\s+/g, '-');
 };
+
+/**
+ * Converts markdown to HTML using the 'marked' library.
+ * @param markdown The markdown string to be converted.
+ * @returns The converted HTML string.
+ * @see https://marked.js.org/
+ */
+export const markdownToHTML = async (markdown: string): Promise<string> => await marked(markdown);

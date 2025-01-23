@@ -20,7 +20,11 @@ const translations = {
 const { siteKey, contactForm, contactFormToken } = Astro.props;
 ---
 
-<form class="card p-5 space-y-4 bg-neutral text-neutral-content m-auto w-full" id="contact-form">
+<form
+	class="card p-5 space-y-4 bg-neutral text-neutral-content m-auto w-full"
+	id="contact-form"
+	novalidate
+>
 	<div>
 		<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
 			{t('yourFullName')}
@@ -77,12 +81,20 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 	<div class="mt-8">
 		<button
 			type="submit"
-			class="g-recaptcha big-button w-full"
+			class="g-recaptcha big-button w-full relative disabled:opacity-50 disabled:cursor-not-allowed"
 			data-sitekey={siteKey}
 			data-callback="onSubmit"
 			data-testid="submit-button"
+			disabled={false}
+			aria-label={t('sendMessage')}
 		>
-			{t('sendMessage')}
+			<span class="loading-text">{t('sendMessage')}</span>
+			<span class="loading-spinner hidden">
+				<span
+					class="animate-spin inline-block w-4 h-4 border-2 border-t-transparent border-white rounded-full"
+				></span>
+				{t('sending')}...
+			</span>
 		</button>
 	</div>
 </form>
@@ -129,12 +141,55 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 		setTimeout(closeToast, 5000);
 	};
 
-	window.onSubmit = async (token) => {
-		const form = document.getElementById('contact-form');
+	const form = document.getElementById('contact-form');
+	const submitButton = form.querySelector('button[type="submit"]');
+	const loadingText = submitButton.querySelector('.loading-text');
+	const loadingSpinner = submitButton.querySelector('.loading-spinner');
 
+	// Debounce function
+	function debounce(func, wait) {
+		let timeout;
+		return function executedFunction(...args) {
+			const later = () => {
+				clearTimeout(timeout);
+				func(...args);
+			};
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+		};
+	}
+
+	// Basic client-side validation
+	function validateForm(formData) {
+		const email = formData.get('email');
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailRegex.test(email)) {
+			showToast(translations.invalidEmail || 'Invalid email format', true);
+			return false;
+		}
+		return true;
+	}
+
+	// Set loading state
+	function setLoading(isLoading) {
+		submitButton.disabled = isLoading;
+		loadingText.classList.toggle('hidden', isLoading);
+		loadingSpinner.classList.toggle('hidden', !isLoading);
+	}
+
+	window.onSubmit = debounce(async (token) => {
 		try {
+			setLoading(true);
+			const formData = new FormData(form);
+
+			if (!validateForm(formData)) {
+				setLoading(false);
+				return;
+			}
+
 			if (!token) {
 				showToast(translations.recaptchaFailed, true);
+				setLoading(false);
 				return;
 			}
 
@@ -151,10 +206,10 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 			if (!gResponse.success) {
 				const errorMessage = gResponse['error-codes']?.join(', ') || 'Verification failed';
 				showToast(`${translations.recaptchaError} ${errorMessage}`, true);
+				setLoading(false);
 				return;
 			}
 
-			const formData = new FormData(form);
 			const data = Object.fromEntries(formData.entries());
 			const response = await fetch(contactForm, {
 				method: 'POST',
@@ -174,8 +229,23 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 		} catch (error) {
 			showToast(translations.formError, true);
 			console.error(error);
+		} finally {
+			setLoading(false);
+			grecaptcha.reset();
 		}
-	};
+	}, 500);
+
+	// Add form validation listeners
+	form.querySelectorAll('input, textarea').forEach((field) => {
+		field.addEventListener('invalid', (e) => {
+			e.preventDefault();
+			field.classList.add('border-red-500');
+		});
+
+		field.addEventListener('input', () => {
+			field.classList.remove('border-red-500');
+		});
+	});
 </script>
 
 <style>
@@ -185,5 +255,9 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 
 	#toast-notification.invisible {
 		transform: translateX(100%);
+	}
+
+	.border-red-500 {
+		border-color: rgb(239, 68, 68);
 	}
 </style>

@@ -16,6 +16,7 @@
   "bugs": {
     "url": "https://github.com/yacosta738/yacosta738.github.io/issues"
   },
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
