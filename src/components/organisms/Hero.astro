@@ -7,7 +7,7 @@ const t = useTranslations(lang);
 
 <section class="min-h-screen">
 	<div class="flex flex-col items-start">
-		<p class="font-mono text-base font-normal text-green-500">
+		<p id={`welcome-${lang}`} class="font-mono text-base font-normal text-green-500">
 			{t('welcome')}
 		</p>
 		<h1 id="generalName" class="yap-name my-2 text-5xl sm:text-4xl md:text-5xl lg:text-7xl">

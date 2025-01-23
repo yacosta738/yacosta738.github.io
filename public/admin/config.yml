@@ -287,3 +287,33 @@ collections:
     i18n: true
     fields:
       - { name: title, label: Title, widget: string, i18n: true }
+
+  - name: 'notifications'
+    i18n: true
+    label: 'Notifications'
+    label_singular: 'Notification'
+    folder: 'src/data/notifications'
+    extension: 'md'
+    create: true
+    fields:
+      - { name: 'title', label: 'Title', widget: 'string', required: true, i18n: true }
+      - { name: 'content', label: 'Content', widget: 'markdown', required: true, i18n: true }
+      - {
+          name: 'type',
+          label: 'Type',
+          widget: 'select',
+          options: ['neutral', 'success', 'error'],
+          default: 'neutral',
+          required: true,
+          i18n: 'duplicate',
+        }
+      - { label: 'Start Date', name: 'startDate', widget: 'datetime', i18n: duplicate }
+      - { label: 'End Date', name: 'endDate', widget: 'datetime', i18n: duplicate, required: false }
+      - {
+          label: 'Dismissible',
+          name: 'dismissible',
+          widget: 'boolean',
+          default: true,
+          i18n: duplicate,
+        }
+      - { label: 'Active', name: 'active', widget: 'boolean', default: false, i18n: duplicate }

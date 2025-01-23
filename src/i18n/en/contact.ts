@@ -13,4 +13,9 @@ export default {
 	messagePlaceholder:
 		'I think that success depends on communication and focus on the goal. I would like to work with you on your project.',
 	sendMessage: 'Send Message',
+	messageSent: 'Message sent successfully!',
+	recaptchaError: 'reCAPTCHA verification error:',
+	recaptchaFailed: 'reCAPTCHA verification failed. Please try again.',
+	formError: 'An error occurred while submitting the form',
+	formSubmissionFailed: 'Form submission failed',
 };

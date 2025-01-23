@@ -1,7 +1,9 @@
 ---
 import { Image } from 'astro:assets';
+import ContactForm from 'molecules:ContactForm';
 import contactImage from '../../assets/images/contact.png';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { RECAPTCHA_SITE_KEY, CONTACT_FORM_TOKEN, CONTACT_FORM } from 'astro:env/client';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -26,65 +28,10 @@ const t = useTranslations(lang);
 				<Image src={contactImage} alt="Contact me" title="Contact me" />
 			</div>
 		</div>
-		<form id="contact-form" class="mx-auto" method="POST" action={import.meta.env.CONTACT_FORM}>
-			<div>
-				<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
-					{t('yourFullName')}
-				</label>
-				<input
-					id="form-name"
-					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
-					name="name"
-					required
-					type="text"
-					placeholder="John Doe"
-				/>
-			</div>
-			<div class="mt-8">
-				<label for="form-email" class="text-sm font-bold uppercase text-lightest-slate">
-					{t('yourEmail')}
-				</label>
-				<input
-					id="form-email"
-					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
-					placeholder="johndoe@gmail.com"
-					name="email"
-					required
-					type="email"
-				/>
-			</div>
-			<div class="mt-8">
-				<label for="form-subject" class="text-sm font-bold uppercase text-lightest-slate">
-					{t('subject')}
-				</label>
-				<input
-					id="form-subject"
-					class="focus:shadow-outline mt-2 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
-					placeholder={t('subjectPlaceholder')}
-					name="subject"
-					spellcheck="true"
-					required
-					type="text"
-				/>
-			</div>
-			<div class="mt-8">
-				<label for="form-message" class="text-sm font-bold uppercase text-lightest-slate">
-					{t('message')}
-				</label>
-				<textarea
-					id="form-message"
-					placeholder={t('messagePlaceholder')}
-					name="message"
-					required
-					spellcheck="true"
-					class="focus:shadow-outline mt-2 h-32 w-full rounded-lg border-2 border-green-500 bg-transparent p-3 text-green-500 focus:outline-none"
-				></textarea>
-			</div>
-			<div class="mt-8">
-				<button class="big-button w-full" type="submit" value="Send Message">
-					{t('sendMessage')}
-				</button>
-			</div>
-		</form>
+		<ContactForm
+			siteKey={RECAPTCHA_SITE_KEY}
+			contactForm={CONTACT_FORM}
+			contactFormToken={CONTACT_FORM_TOKEN}
+		/>
 	</div>
 </section>

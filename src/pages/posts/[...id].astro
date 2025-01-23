@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import BlogPostTemplate from '@components:templates/BlogPostTemplate.astro';
 import ExternalPostLayout from '@components:templates/ExternalPostLayout.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
 	const publishedBlogEntries = await getCollection('blog', ({ data }) => {
 		return !data.draft;
