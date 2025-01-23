@@ -22,6 +22,8 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
   PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
+  RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+  CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
   
 jobs:
   build:
