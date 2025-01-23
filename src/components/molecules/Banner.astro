@@ -2,12 +2,16 @@
 import { markdownToHTML } from '@utils:utilities';
 
 interface Props {
+	id: string;
 	content: string;
 	type?: 'neutral' | 'success' | 'error';
 	dismissible?: boolean;
 }
 
-const { content, type = 'neutral', dismissible = false } = Astro.props;
+const { content, type = 'neutral', dismissible = false, id } = Astro.props;
+
+const sanitizeId = (id: string) => id.replace(/[^a-zA-Z0-9-_]/g, '-');
+const bannerId = sanitizeId(id);
 
 const typeStyles = {
 	neutral: 'bg-slate-500 text-slate-200',
@@ -27,21 +31,66 @@ const typeIcons = {
 const htmlContent = markdownToHTML(content);
 ---
 
-<script>
-	document.addEventListener('click', (event) => {
-		const dismissButton = (event.target as HTMLElement).closest('[aria-label="Close"]');
-		if (dismissButton) {
-			const alert = dismissButton.closest('#alert-banner');
-			if (alert) {
-				// alert.style.display = 'none'; // hide the alert banner
-				alert.remove(); // remove the alert banner
+<script define:vars={{ bannerId }}>
+	const DISMISSED_BANNERS_KEY = 'dismissed_banners';
+
+	const isDismissed = () => {
+		try {
+			const dismissed = JSON.parse(localStorage.getItem(DISMISSED_BANNERS_KEY) || '[]');
+			return dismissed.includes(bannerId);
+		} catch (error) {
+			console.error('Error checking dismissed status:', error);
+			return false;
+		}
+	};
+
+	const handleBannerVisibility = () => {
+		if (isDismissed()) {
+			const alertBannerId = `alert-banner-${bannerId}`;
+			const banner = document.getElementById(alertBannerId);
+			if (banner) {
+				banner.remove();
 			}
 		}
-	});
+	};
+
+	const handleDismissClick = (event) => {
+		const dismissButton = event.target.closest('[aria-label="Close"]');
+		if (dismissButton) {
+			const alert = dismissButton.closest(`#alert-banner-${bannerId}`);
+			if (alert) {
+				try {
+					const dismissed = JSON.parse(localStorage.getItem(DISMISSED_BANNERS_KEY) || '[]');
+					if (!dismissed.includes(bannerId)) {
+						dismissed.push(bannerId);
+						localStorage.setItem(DISMISSED_BANNERS_KEY, JSON.stringify(dismissed));
+					}
+					alert.remove();
+				} catch (error) {
+					console.error('Error storing dismissed banner:', error);
+				}
+			}
+		}
+	};
+
+	const initializeBanner = () => {
+		handleBannerVisibility();
+		document.addEventListener('click', handleDismissClick);
+	};
+
+	const cleanup = () => {
+		document.removeEventListener('click', handleDismissClick);
+	};
+
+	initializeBanner();
+
+	document.addEventListener('DOMContentLoaded', handleBannerVisibility);
+	document.addEventListener('astro:page-load', initializeBanner);
+	document.addEventListener('astro:before-swap', cleanup);
 </script>
 
 <div
-	id="alert-banner"
+	id={`alert-banner-${bannerId}`}
 	class={`w-full z-50 flex justify-center items-center p-2 rounded-lg bg-opacity-10 ${typeStyles[type]}`}
 	role="alert"
 >
