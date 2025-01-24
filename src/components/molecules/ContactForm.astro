@@ -23,7 +23,8 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 <form
 	class="card p-5 space-y-4 bg-neutral text-neutral-content m-auto w-full"
 	id="contact-form"
-	novalidate
+	method="post"
+	action="/api/contact"
 >
 	<div>
 		<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
@@ -79,13 +80,10 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 		></textarea>
 	</div>
 	<div class="mt-8">
+		<div id="hcaptcha" class="h-captcha" data-sitekey={siteKey} data-theme="dark"></div>
 		<button
 			type="submit"
-			class="g-recaptcha big-button w-full relative disabled:opacity-50 disabled:cursor-not-allowed"
-			data-sitekey={siteKey}
-			data-callback="onSubmit"
-			data-testid="submit-button"
-			disabled={false}
+			class="big-button w-full relative disabled:opacity-50 disabled:cursor-not-allowed"
 			aria-label={t('sendMessage')}
 		>
 			<span class="loading-text">{t('sendMessage')}</span>
@@ -112,6 +110,8 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 	</div>
 </div>
 
+<script is:inline src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<!-- 
 <script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script define:vars={{ contactForm, translations, contactFormToken }}>
 	const closeToast = () => {
@@ -246,7 +246,7 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 			field.classList.remove('border-red-500');
 		});
 	});
-</script>
+</script> -->
 
 <style>
 	#toast-notification {

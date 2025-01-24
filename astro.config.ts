@@ -6,7 +6,7 @@ import robotsTxt from 'astro-robots-txt';
 import remarkToc from 'remark-toc';
 import icon from 'astro-icon';
 import vue from '@astrojs/vue';
-import netlify from '@astrojs/netlify';
+import cloudflare from '@astrojs/cloudflare';
 
 const DEV_PORT: number = 4321;
 
@@ -14,7 +14,7 @@ const DEV_PORT: number = 4321;
 export default defineConfig({
 	site: 'https://yunielacosta.com/',
 	output: 'server',
-	adapter: netlify(),
+	adapter: cloudflare(),
 	server: {
 		/* Dev. server only */
 		port: DEV_PORT,
@@ -26,6 +26,14 @@ export default defineConfig({
 				access: 'secret',
 			}),
 			RECAPTCHA_SITE_KEY: envField.string({
+				context: 'client',
+				access: 'public',
+			}),
+			HCAPTCHA_SECRET: envField.string({
+				context: 'server',
+				access: 'secret',
+			}),
+			HCAPTCHA_SITE_KEY: envField.string({
 				context: 'client',
 				access: 'public',
 			}),
