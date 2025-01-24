@@ -6,6 +6,7 @@ backend:
   name: github
   repo: yacosta738/yacosta738.github.io
   branch: main
+  base_url: https://sveltia-cms-auth.yunielacosta738.workers.dev/
 
 slug:
   encoding: 'ascii'
