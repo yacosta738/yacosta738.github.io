@@ -1,20 +1,20 @@
 ---
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 type Props = {
-	siteKey: string;
-	contactForm: string;
-	contactFormToken: string;
+  siteKey: string;
+  contactForm: string;
+  contactFormToken: string;
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 // Crear un objeto con las traducciones necesarias
 const translations = {
-	messageSent: t('messageSent'),
-	recaptchaError: t('recaptchaError'),
-	recaptchaFailed: t('recaptchaFailed'),
-	formError: t('formError'),
-	formSubmissionFailed: t('formSubmissionFailed'),
+  messageSent: t('messageSent'),
+  recaptchaError: t('recaptchaError'),
+  recaptchaFailed: t('recaptchaFailed'),
+  formError: t('formError'),
+  formSubmissionFailed: t('formSubmissionFailed'),
 };
 
 const { siteKey, contactForm, contactFormToken } = Astro.props;

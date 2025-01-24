@@ -5,7 +5,7 @@ import { range } from '@utils:role-range';
 import AchievementDetails from 'molecules:AchievementDetails';
 
 export interface Props {
-	roles: IRole[];
+  roles: IRole[];
 }
 
 const { roles = [] } = Astro.props;
@@ -14,13 +14,13 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const rolesOrdered: Role[] =
-	[...roles]
-		?.sort((a, b) => {
-			const aDate = new Date(a.startDate ?? Date.now());
-			const bDate = new Date(b.startDate ?? Date.now());
-			return bDate.getTime() - aDate.getTime();
-		})
-		.map((role) => new Role(role)) ?? roles.map((role) => new Role(role));
+  [...roles]
+    ?.sort((a, b) => {
+      const aDate = new Date(a.startDate ?? Date.now());
+      const bDate = new Date(b.startDate ?? Date.now());
+      return bDate.getTime() - aDate.getTime();
+    })
+    .map((role) => new Role(role)) ?? roles.map((role) => new Role(role));
 
 const hasMultipleRoles = rolesOrdered.length > 1;
 const present: string = t('current');

@@ -6,13 +6,13 @@ import ExternalPostLayout from '@components:templates/ExternalPostLayout.astro';
 export const prerender = true;
 
 export async function getStaticPaths() {
-	const publishedBlogEntries = await getCollection('blog', ({ data }) => {
-		return !data.draft;
-	});
-	return publishedBlogEntries.map((entry) => ({
-		params: { id: entry.id },
-		props: { entry },
-	}));
+  const publishedBlogEntries = await getCollection('blog', ({ data }) => {
+    return !data.draft;
+  });
+  return publishedBlogEntries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
 }
 const { entry } = Astro.props;
 const { Content } = await render(entry);

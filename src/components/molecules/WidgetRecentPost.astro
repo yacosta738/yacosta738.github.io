@@ -8,7 +8,7 @@ const { pathname } = Astro.url;
 const isBlogRoot = pathname.endsWith('/blog');
 
 export interface Props {
-	recentPosts: Article[];
+  recentPosts: Article[];
 }
 const { recentPosts } = Astro.props;
 const lang = getLangFromUrl(Astro.url);

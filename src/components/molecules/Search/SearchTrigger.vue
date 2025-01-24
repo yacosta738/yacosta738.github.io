@@ -4,14 +4,14 @@ import { defineProps } from 'vue';
 const emit = defineEmits(['toggle']);
 
 defineProps({
-	text: {
-		type: String,
-		default: 'Search',
-	},
-	target: {
-		type: String,
-		default: 'search-modal',
-	},
+  text: {
+    type: String,
+    default: 'Search',
+  },
+  target: {
+    type: String,
+    default: 'search-modal',
+  },
 });
 </script>
 

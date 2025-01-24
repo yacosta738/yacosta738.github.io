@@ -8,17 +8,17 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const publishedBlogEntries = await getCollection('blog', ({ data }) => {
-	return !data.draft;
+  return !data.draft;
 });
 
 // Process posts to include language information
 const processedPosts = publishedBlogEntries.map((post) => {
-	const idParts = post.id.split('/');
-	const lang = idParts[0] === 'es' ? 'es' : 'en';
-	return {
-		...post,
-		lang,
-	};
+  const idParts = post.id.split('/');
+  const lang = idParts[0] === 'es' ? 'es' : 'en';
+  return {
+    ...post,
+    lang,
+  };
 });
 
 // Filter posts by current language
@@ -29,9 +29,9 @@ const postsPromises: Promise<Article>[] = filteredPosts.map((post) => jsonToArti
 const posts: Article[] = await Promise.all(postsPromises);
 
 posts.sort((a, b) => {
-	const aDate = new Date(a.date);
-	const bDate = new Date(b.date);
-	return bDate.getTime() - aDate.getTime();
+  const aDate = new Date(a.date);
+  const bDate = new Date(b.date);
+  return bDate.getTime() - aDate.getTime();
 });
 
 const maxNumberOfPosts = 3;

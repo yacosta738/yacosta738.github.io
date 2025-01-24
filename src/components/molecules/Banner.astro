@@ -2,10 +2,10 @@
 import { markdownToHTML } from '@utils:utilities';
 
 interface Props {
-	id: string;
-	content: string;
-	type?: 'neutral' | 'success' | 'error';
-	dismissible?: boolean;
+  id: string;
+  content: string;
+  type?: 'neutral' | 'success' | 'error';
+  dismissible?: boolean;
 }
 
 const { content, type = 'neutral', dismissible = false, id } = Astro.props;
@@ -14,28 +14,28 @@ const sanitizeId = (id: string) => id.replace(/[^a-zA-Z0-9-_]/g, '-');
 const bannerId = sanitizeId(id);
 
 const typeStyles = {
-	neutral: 'bg-slate-500 text-slate-200',
-	success: 'bg-green-500 text-green-200',
-	error: 'bg-red-500 text-red-200',
+  neutral: 'bg-slate-500 text-slate-200',
+  success: 'bg-green-500 text-green-200',
+  error: 'bg-red-500 text-red-200',
 };
 
 const typeIcons = {
-	neutral:
-		'<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/></svg>',
-	success:
-		'<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 12l-3-3 1.414-1.414L9 9.172l4.586-4.586L15 6l-6 6z"/></svg>',
-	error:
-		'<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.001 10h2v5h-2zM11 16h2v2h-2z"/><path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.99 1.99 0 0 0 .054 1.968A1.98 1.98 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.99 1.99 0 0 0 .054-1.968zM4.661 19L12 5.137L19.344 19z"/></svg>',
+  neutral:
+    '<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/></svg>',
+  success:
+    '<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 12l-3-3 1.414-1.414L9 9.172l4.586-4.586L15 6l-6 6z"/></svg>',
+  error:
+    '<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.001 10h2v5h-2zM11 16h2v2h-2z"/><path d="M13.768 4.2C13.42 3.545 12.742 3.138 12 3.138s-1.42.407-1.768 1.063L2.894 18.064a1.99 1.99 0 0 0 .054 1.968A1.98 1.98 0 0 0 4.661 21h14.678c.708 0 1.349-.362 1.714-.968a1.99 1.99 0 0 0 .054-1.968zM4.661 19L12 5.137L19.344 19z"/></svg>',
 };
 
 const animationStyles = 'transition-all duration-300 ease-out';
 const htmlContent = markdownToHTML(content);
 const initiallyHidden = (() => {
-	if (typeof localStorage !== 'undefined') {
-		const dismissed = JSON.parse(localStorage.getItem('dismissed_banners') || '[]');
-		return dismissed.includes(bannerId);
-	}
-	return false;
+  if (typeof localStorage !== 'undefined') {
+    const dismissed = JSON.parse(localStorage.getItem('dismissed_banners') || '[]');
+    return dismissed.includes(bannerId);
+  }
+  return false;
 })();
 ---
 

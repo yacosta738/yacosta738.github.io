@@ -11,50 +11,50 @@ const isBlogRoot = pathname.endsWith('/blog');
 const lang = getLangFromUrl(Astro.url);
 
 const publishedBlogEntriesPromises = (
-	await getCollection('blog', ({ data }) => {
-		return !data.draft;
-	})
+  await getCollection('blog', ({ data }) => {
+    return !data.draft;
+  })
 )
-	.filter((entry) => {
-		const idParts = entry.id.split('/');
-		const entryLang = idParts[0] === 'es' ? 'es' : 'en';
-		return entryLang === lang;
-	})
-	.map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
+  .filter((entry) => {
+    const idParts = entry.id.split('/');
+    const entryLang = idParts[0] === 'es' ? 'es' : 'en';
+    return entryLang === lang;
+  })
+  .map(async (publishedBlogEntry) => await jsonToArticle(publishedBlogEntry));
 
 const publishedBlogEntries = await Promise.all(publishedBlogEntriesPromises);
 
 const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
-	const aDate = new Date(a.date);
-	const bDate = new Date(b.date);
-	return bDate.getTime() - aDate.getTime();
+  const aDate = new Date(a.date);
+  const bDate = new Date(b.date);
+  return bDate.getTime() - aDate.getTime();
 });
 
 const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
-	post.tags.forEach((tag) => {
-		const tagLower = tag.data.title.toLowerCase();
-		if (tagLower in acc) {
-			acc[tagLower] += 1;
-		} else {
-			acc[tagLower] = 1;
-		}
-	});
-	return acc;
+  post.tags.forEach((tag) => {
+    const tagLower = tag.data.title.toLowerCase();
+    if (tagLower in acc) {
+      acc[tagLower] += 1;
+    } else {
+      acc[tagLower] = 1;
+    }
+  });
+  return acc;
 }, {});
 
 const categories: { [key: string]: number } = allPosts.reduce(
-	(acc: { [key: string]: number }, post) => {
-		post.categories.forEach((category) => {
-			const categoryLower = category.data.title.toLowerCase();
-			if (categoryLower in acc) {
-				acc[categoryLower] += 1;
-			} else {
-				acc[categoryLower] = 1;
-			}
-		});
-		return acc;
-	},
-	{}
+  (acc: { [key: string]: number }, post) => {
+    post.categories.forEach((category) => {
+      const categoryLower = category.data.title.toLowerCase();
+      if (categoryLower in acc) {
+        acc[categoryLower] += 1;
+      } else {
+        acc[categoryLower] = 1;
+      }
+    });
+    return acc;
+  },
+  {}
 );
 ---
 

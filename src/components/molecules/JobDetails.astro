@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon/components';
 import { range } from '@utils:role-range';
 
 export interface Props {
-	job: IJob;
+  job: IJob;
 }
 
 const { job } = Astro.props;
@@ -12,7 +12,7 @@ const { job } = Astro.props;
 const hasMultipleRoles = (job?.roles?.length ?? 0) > 1;
 
 const getFirstRole = (job: IJob) => {
-	return job?.roles?.[0] ?? undefined;
+  return job?.roles?.[0] ?? undefined;
 };
 ---
 

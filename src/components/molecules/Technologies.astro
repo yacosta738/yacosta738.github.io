@@ -5,8 +5,8 @@ import { getCollection } from 'astro:content';
 const techData = await getCollection('technologies');
 
 const techs: Tech[] = techData
-	.map((tech) => jsonToTech(tech))
-	.filter((tech) => tech.icon !== undefined && tech.icon !== null);
+  .map((tech) => jsonToTech(tech))
+  .filter((tech) => tech.icon !== undefined && tech.icon !== null);
 ---
 
 <div class="inset-0 -z-10">

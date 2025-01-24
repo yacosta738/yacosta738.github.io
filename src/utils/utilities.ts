@@ -8,9 +8,9 @@ import { marked } from 'marked';
  * @returns The generated random integer.
  */
 export const randomInt = (min: number, max: number) => {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1)) + min;
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 /**
@@ -18,15 +18,15 @@ export const randomInt = (min: number, max: number) => {
  * @param className The class name of the elements to search for.
  */
 export const inlineLinks = (className: string) => {
-	const elements = Array.from(document.querySelectorAll(className));
-	// eslint-disable-next-line no-array-constructor
-	const allLinks = new Array<HTMLElement[]>();
-	elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))));
-	if (allLinks.length > 0) {
-		allLinks.forEach((links) => {
-			links.forEach((link) => link.classList.add('inline-link'));
-		});
-	}
+  const elements = Array.from(document.querySelectorAll(className));
+  // eslint-disable-next-line no-array-constructor
+  const allLinks = new Array<HTMLElement[]>();
+  elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))));
+  if (allLinks.length > 0) {
+    allLinks.forEach((links) => {
+      links.forEach((link) => link.classList.add('inline-link'));
+    });
+  }
 };
 
 /**
@@ -42,10 +42,10 @@ export const markdownfy = async (str: string): Promise<string> => await marked.p
  * @returns The URLized term.
  */
 export const urlize = (term: string): string => {
-	if (typeof term !== 'string') {
-		throw new TypeError(`The term must be a string, but received a value of type ${typeof term}`);
-	}
-	return term.trim().toLowerCase().replace(/\s+/g, '-');
+  if (typeof term !== 'string') {
+    throw new TypeError(`The term must be a string, but received a value of type ${typeof term}`);
+  }
+  return term.trim().toLowerCase().replace(/\s+/g, '-');
 };
 
 /**

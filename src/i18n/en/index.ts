@@ -7,11 +7,11 @@ import projects from './projects';
 import notFound from './404';
 
 export default {
-	notFound,
-	...about,
-	...blog,
-	...common,
-	...contact,
-	...hero,
-	...projects,
+  notFound,
+  ...about,
+  ...blog,
+  ...common,
+  ...contact,
+  ...hero,
+  ...projects,
 } as const;

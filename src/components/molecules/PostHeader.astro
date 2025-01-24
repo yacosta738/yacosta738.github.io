@@ -5,7 +5,7 @@ import { urlize } from '@utils:utilities';
 import { Icon } from 'astro-icon/components';
 
 export interface Props {
-	article: Article;
+  article: Article;
 }
 const { article } = Astro.props;
 
@@ -15,26 +15,26 @@ const t = useTranslations(lang);
 
 const DAYS_BEFORE_FULL_DATE = 3 * 24 * 60 * 60 * 1000;
 const formatDateRelativeToNow = (date: Date) => {
-	const rtf = new Intl.RelativeTimeFormat(lang);
-	const daysDiff = Math.round((date.getTime() - Date.now()) / 1000 / 60 / 60 / 24);
-	return rtf.format(daysDiff, 'day');
+  const rtf = new Intl.RelativeTimeFormat(lang);
+  const daysDiff = Math.round((date.getTime() - Date.now()) / 1000 / 60 / 60 / 24);
+  return rtf.format(daysDiff, 'day');
 };
 
 const formatDate = (date: Date | string) => {
-	if (typeof date === 'string') {
-		date = new Date(date);
-	}
+  if (typeof date === 'string') {
+    date = new Date(date);
+  }
 
-	// if the date is 3 days ago or more, show the full date instead of the relative date
-	if (date.getTime() < Date.now() - DAYS_BEFORE_FULL_DATE) {
-		return date.toLocaleDateString('en', {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		});
-	} else {
-		return formatDateRelativeToNow(date);
-	}
+  // if the date is 3 days ago or more, show the full date instead of the relative date
+  if (date.getTime() < Date.now() - DAYS_BEFORE_FULL_DATE) {
+    return date.toLocaleDateString('en', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  } else {
+    return formatDateRelativeToNow(date);
+  }
 };
 ---
 

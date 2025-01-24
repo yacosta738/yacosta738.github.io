@@ -7,8 +7,8 @@ const translatePath = useTranslatedPath(currentLanguage);
 const supportedLanguages = Object.entries(allLanguages);
 
 export interface Props extends astroHTML.JSX.SelectHTMLAttributes {
-	showFlag?: boolean;
-	showLabel?: boolean;
+  showFlag?: boolean;
+  showLabel?: boolean;
 }
 // replace in the pathname the current language. e.g. /en/about -> /about
 // const regex = new RegExp(`^/${currentLanguage}`)

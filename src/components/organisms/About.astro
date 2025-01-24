@@ -4,19 +4,19 @@ import me from '../../assets/images/me.png';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 
 const skills: string[] = [
-	'TypeScript',
-	'HTML & (S)CSS',
-	'Vue',
-	'Node.js',
-	'Spring Boot',
-	'Java / Kotlin',
+  'TypeScript',
+  'HTML & (S)CSS',
+  'Vue',
+  'Node.js',
+  'Spring Boot',
+  'Java / Kotlin',
 ];
 
 const yearsOfExperience = (): number => {
-	const start = new Date(2017, 8);
-	const end = new Date();
-	const diff = end.getTime() - start.getTime();
-	return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+  const start = new Date(2017, 8);
+  const end = new Date();
+  const diff = end.getTime() - start.getTime();
+  return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

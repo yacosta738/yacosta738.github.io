@@ -10,21 +10,21 @@ import { getCollection } from 'astro:content';
 export const prerender = true;
 
 export async function getStaticPaths() {
-	const authorsData = await getCollection('authors');
-	const authors: Author[] = authorsData.map((author) => jsonToAuthor(author));
-	return authors
-		.filter((author) => {
-			const lang = author.id.split('/').shift();
-			return lang === 'en';
-		})
-		.map((author) => ({
-			params: {
-				name: author.id.split('/').pop(),
-			},
-			props: {
-				author,
-			},
-		}));
+  const authorsData = await getCollection('authors');
+  const authors: Author[] = authorsData.map((author) => jsonToAuthor(author));
+  return authors
+    .filter((author) => {
+      const lang = author.id.split('/').shift();
+      return lang === 'en';
+    })
+    .map((author) => ({
+      params: {
+        name: author.id.split('/').pop(),
+      },
+      props: {
+        author,
+      },
+    }));
 }
 
 const { name } = Astro.params;

@@ -13,29 +13,29 @@ const t = useTranslations(lang);
 export const prerender = true;
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allPosts = await getCollection('blog', ({ data }) => {
-		return !data.draft;
-	});
+  const allPosts = await getCollection('blog', ({ data }) => {
+    return !data.draft;
+  });
 
-	const processedPosts = allPosts.map((post) => {
-		const idParts = post.id.split('/');
-		const lang = idParts[0] === 'es' ? 'es' : 'en';
-		return {
-			...post,
-			lang,
-		};
-	});
+  const processedPosts = allPosts.map((post) => {
+    const idParts = post.id.split('/');
+    const lang = idParts[0] === 'es' ? 'es' : 'en';
+    return {
+      ...post,
+      lang,
+    };
+  });
 
-	// Filter for English posts (those without 'es/' prefix)
-	const englishPosts = processedPosts
-		.filter((post) => post.lang === 'en')
-		.map((post) => jsonToArticle(post));
+  // Filter for English posts (those without 'es/' prefix)
+  const englishPosts = processedPosts
+    .filter((post) => post.lang === 'en')
+    .map((post) => jsonToArticle(post));
 
-	const sortedPosts = (await Promise.all(englishPosts)).sort((a, b) => {
-		return new Date(b.date).getTime() - new Date(a.date).getTime();
-	});
+  const sortedPosts = (await Promise.all(englishPosts)).sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 
-	return paginate(sortedPosts, { pageSize: 5 });
+  return paginate(sortedPosts, { pageSize: 5 });
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

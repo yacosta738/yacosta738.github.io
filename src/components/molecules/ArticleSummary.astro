@@ -8,8 +8,8 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export interface Props {
-	article: Article;
-	hidePostHeaderInSmallScreen?: boolean;
+  article: Article;
+  hidePostHeaderInSmallScreen?: boolean;
 }
 const { article, hidePostHeaderInSmallScreen = false } = Astro.props;
 const url = `/posts/${article.url}/`;

@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "yacosta738.github.io",
+  "compatibility_date": "2025-01-24",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "./dist",
+  "observability": {
+    "enabled": true
+  }
+}
