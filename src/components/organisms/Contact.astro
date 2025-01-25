@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import ContactForm from 'molecules:ContactForm';
 import contactImage from '../../assets/images/contact.png';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { HCAPTCHA_SITE_KEY, CONTACT_FORM_TOKEN, CONTACT_FORM } from 'astro:env/client';
+import { HCAPTCHA_SITE_KEY } from 'astro:env/client';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -30,8 +30,6 @@ const t = useTranslations(lang);
 		</div>
 		<ContactForm
 			siteKey={HCAPTCHA_SITE_KEY}
-			contactForm={CONTACT_FORM}
-			contactFormToken={CONTACT_FORM_TOKEN}
 		/>
 	</div>
 </section>

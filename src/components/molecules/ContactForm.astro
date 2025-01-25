@@ -2,8 +2,8 @@
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 type Props = {
   siteKey: string;
-  contactForm: string;
-  contactFormToken: string;
+  // contactForm: string;
+  // contactFormToken: string;
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,7 +17,7 @@ const translations = {
   formSubmissionFailed: t('formSubmissionFailed'),
 };
 
-const { siteKey, contactForm, contactFormToken } = Astro.props;
+const { siteKey /*, contactForm, contactFormToken */ } = Astro.props;
 ---
 
 <form

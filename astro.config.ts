@@ -41,14 +41,14 @@ export default defineConfig({
         context: 'client',
         access: 'public',
       }),
-      CONTACT_FORM: envField.string({
-        context: 'client',
-        access: 'public',
-      }),
-      CONTACT_FORM_TOKEN: envField.string({
-        context: 'client',
-        access: 'public',
-      }),
+      // CONTACT_FORM: envField.string({
+      //   context: 'client',
+      //   access: 'public',
+      // }),
+      // CONTACT_FORM_TOKEN: envField.string({
+      //   context: 'client',
+      //   access: 'public',
+      // }),
     },
   },
   i18n: {
