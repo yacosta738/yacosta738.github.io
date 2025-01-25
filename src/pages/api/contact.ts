@@ -5,8 +5,10 @@ import type { APIContext } from 'astro';
 
 const hCaptchaVerifyUrl = 'https://hcaptcha.com/siteverify';
 
-export const POST: APIRoute = async ({ request }: APIContext) => {
+export const POST: APIRoute = async ({ request, locals }: APIContext) => {
   try {
+    const runtime = locals.runtime;
+    const { env } = runtime;
     const data = await request.formData();
 
     // Extract form fields
@@ -28,7 +30,7 @@ export const POST: APIRoute = async ({ request }: APIContext) => {
     }
 
     // Verify hCaptcha
-    if (!import.meta.env.HCAPTCHA_SECRET || !import.meta.env.HCAPTCHA_SITE_KEY) {
+    if (!env.HCAPTCHA_SECRET || !env.HCAPTCHA_SITE_KEY) {
       return new Response(
         JSON.stringify({
           status: '401 Unauthorized',
@@ -41,8 +43,8 @@ export const POST: APIRoute = async ({ request }: APIContext) => {
     const captchaVerified = await verifyHcaptcha(
       captcha,
       request.headers.get('cf-connecting-ip') || '',
-      import.meta.env.HCAPTCHA_SECRET,
-      import.meta.env.HCAPTCHA_SITE_KEY
+      (env.HCAPTCHA_SECRET as string) || '',
+      (env.HCAPTCHA_SITE_KEY as string) || ''
     );
 
     if (!captchaVerified) {
