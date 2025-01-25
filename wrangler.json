@@ -6,5 +6,10 @@
   "pages_build_output_dir": "./dist",
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "CONTACT_FORM": "https://n8n-k4aj.onrender.com/webhook/8901e5dd-9459-44df-86b7-8657178868f5",
+    "RECAPTCHA_SITE_KEY": "6LdJ9Q0bAAAAAAB9Zz1Z1Z1Z1Z1Z1Z1Z1Z1Z1Z1Z",
+    "HCAPTCHA_SITE_KEY": "24369534-be6c-460a-aea4-41546598c89c"
   }
 }
