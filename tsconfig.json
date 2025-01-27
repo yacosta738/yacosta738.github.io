@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "baseUrl": "src",
-    "types": ["vite/client", "@cloudflare/workers-types/2023-07-01"],
+    "types": ["vite/client"],
     "paths": {
       "@store:*": ["store/*"],
       "@components:*": ["components/*"],

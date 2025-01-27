@@ -6,49 +6,22 @@ import robotsTxt from 'astro-robots-txt';
 import remarkToc from 'remark-toc';
 import icon from 'astro-icon';
 import vue from '@astrojs/vue';
-import cloudflare from '@astrojs/cloudflare';
 
 const DEV_PORT: number = 4321;
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://yunielacosta.com/',
-  output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
   server: {
     /* Dev. server only */
     port: DEV_PORT,
   },
   env: {
     schema: {
-      RECAPTCHA_SECRET_KEY: envField.string({
-        context: 'server',
-        access: 'secret',
-      }),
-      RECAPTCHA_SITE_KEY: envField.string({
+      CONTACT_FORM: envField.string({
         context: 'client',
         access: 'public',
-      }),
-      HCAPTCHA_SECRET: envField.string({
-        context: 'server',
-        access: 'secret',
-      }),
-      HCAPTCHA_SITE_KEY: envField.string({
-        context: 'client',
-        access: 'public',
-      }),
-      // CONTACT_FORM: envField.string({
-      //   context: 'client',
-      //   access: 'public',
-      // }),
-      // CONTACT_FORM_TOKEN: envField.string({
-      //   context: 'client',
-      //   access: 'public',
-      // }),
+      })
     },
   },
   i18n: {
