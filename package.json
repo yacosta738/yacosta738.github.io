@@ -24,7 +24,7 @@
     "build": "astro build",
     "build:docker": "pnpm run build && docker build -t yap .",
     "preview": "astro preview",
-		"astro": "astro",
+    "astro": "astro",
     "prepare": "husky install",
     "clean": "rm -rf .astro dist",
     "format": "biome format --write .",

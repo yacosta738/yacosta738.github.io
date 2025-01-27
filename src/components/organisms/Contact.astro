@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import ContactForm from 'molecules:ContactForm';
 import contactImage from '../../assets/images/contact.png';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { CONTACT_FORM,  } from 'astro:env/client';
+import { CONTACT_FORM } from 'astro:env/client';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---

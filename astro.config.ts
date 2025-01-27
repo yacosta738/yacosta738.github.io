@@ -21,7 +21,7 @@ export default defineConfig({
       CONTACT_FORM: envField.string({
         context: 'client',
         access: 'public',
-      })
+      }),
     },
   },
   i18n: {
