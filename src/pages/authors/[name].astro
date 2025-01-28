@@ -7,8 +7,6 @@ import { getLangFromUrl, useTranslations } from '@i18n:utils';
 import { type Author, jsonToAuthor } from '@models:Author';
 import { getCollection } from 'astro:content';
 
-
-
 export async function getStaticPaths() {
   const authorsData = await getCollection('authors');
   const authors: Author[] = authorsData.map((author) => jsonToAuthor(author));

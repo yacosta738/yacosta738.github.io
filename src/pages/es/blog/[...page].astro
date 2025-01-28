@@ -10,8 +10,6 @@ import type { /*InferGetStaticParamsType,*/ InferGetStaticPropsType, GetStaticPa
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-
-
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getCollection('blog', ({ data }) => {
     return !data.draft;

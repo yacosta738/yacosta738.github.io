@@ -9,8 +9,6 @@ import type { GetStaticPaths } from 'astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags: CollectionEntry<'tags'>[] = await getCollection('tags');
   return tags.map((tag) => ({
