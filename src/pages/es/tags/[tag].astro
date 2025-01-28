@@ -6,7 +6,7 @@ import ArticleSummary from 'molecules:ArticleSummary';
 import { getLangFromUrl, useTranslations } from '@i18n:utils';
 import type { GetStaticPaths } from 'astro';
 
-export const prerender = true;
+
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

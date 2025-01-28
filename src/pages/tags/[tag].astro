@@ -9,7 +9,7 @@ import type { GetStaticPaths } from 'astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-export const prerender = true;
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags: CollectionEntry<'tags'>[] = await getCollection('tags');
