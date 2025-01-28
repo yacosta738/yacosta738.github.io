@@ -1,13 +1,13 @@
 {
-  "date": "2020-12-06T15:12:23.179Z",
-  "title": "ShopApp",
+	"date": "2020-12-06T15:12:23.179Z",
+	"title": "ShopApp",
 
-  "cover": "https://github.com/yacosta738/flutter_shop_app/blob/main/screenshots/shop-app.gif",
-  "repository": "https://github.com/yacosta738/flutter_shop_app",
-  "company": "Personal Project",
-  "tech": ["flutter", "dart", "idea"],
-  "showInProjects": true,
-  "featured": false,
-  "published": true,
-  "content": "Una aplicación simple hecha con [Flutter](https://flutter.dev/) para una tienda online. Donde puedes agregar, eliminar y editar los objetos a vender, también se pueden agregar a la lista de favoritos, así como comprobar el estado de las ordenes."
+	"cover": "https://github.com/yacosta738/flutter_shop_app/blob/main/screenshots/shop-app.gif",
+	"repository": "https://github.com/yacosta738/flutter_shop_app",
+	"company": "Personal Project",
+	"tech": ["flutter", "dart", "idea"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true,
+	"content": "Una aplicación simple hecha con [Flutter](https://flutter.dev/) para una tienda online. Donde puedes agregar, eliminar y editar los objetos a vender, también se pueden agregar a la lista de favoritos, así como comprobar el estado de las ordenes."
 }

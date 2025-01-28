@@ -60,62 +60,62 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, type Ref } from 'vue';
-import type { ModalSize } from './types';
+import { onMounted, onUnmounted, ref, type Ref } from "vue";
+import type { ModalSize } from "./types";
 
 interface ModalProps {
-  notEscapable?: boolean;
-  persistent?: boolean;
-  size?: ModalSize;
+	notEscapable?: boolean;
+	persistent?: boolean;
+	size?: ModalSize;
 }
 
 const props = withDefaults(defineProps<ModalProps>(), {
-  notEscapable: false,
-  persistent: false,
-  size: '5xl',
+	notEscapable: false,
+	persistent: false,
+	size: "5xl",
 });
 
-const emit = defineEmits(['close', 'click:outside']);
+const emit = defineEmits(["close", "click:outside"]);
 const modalSizeClasses = {
-  xs: 'max-w-xs',
-  sm: 'max-w-sm',
-  md: 'max-w-md',
-  lg: 'max-w-lg',
-  xl: 'max-w-xl',
-  '2xl': 'max-w-2xl',
-  '3xl': 'max-w-3xl',
-  '4xl': 'max-w-4xl',
-  '5xl': 'max-w-5xl',
-  '6xl': 'max-w-6xl',
-  '7xl': 'max-w-7xl',
-  screen: 'max-w-screen',
+	xs: "max-w-xs",
+	sm: "max-w-sm",
+	md: "max-w-md",
+	lg: "max-w-lg",
+	xl: "max-w-xl",
+	"2xl": "max-w-2xl",
+	"3xl": "max-w-3xl",
+	"4xl": "max-w-4xl",
+	"5xl": "max-w-5xl",
+	"6xl": "max-w-6xl",
+	"7xl": "max-w-7xl",
+	screen: "max-w-screen",
 };
 
 function closeModal() {
-  document.body.style.overflow = 'auto';
-  emit('close');
+	document.body.style.overflow = "auto";
+	emit("close");
 }
 
 function clickOutside() {
-  if (!props.persistent) {
-    emit('click:outside');
-    closeModal();
-  }
+	if (!props.persistent) {
+		emit("click:outside");
+		closeModal();
+	}
 }
 
 function closeWithEsc() {
-  if (!props.notEscapable && !props.persistent) closeModal();
+	if (!props.notEscapable && !props.persistent) closeModal();
 }
 
 const modalRef: Ref<HTMLElement | null> = ref(null);
 onMounted(() => {
-  if (modalRef.value) {
-    modalRef.value.focus();
-    document.body.style.overflow = 'hidden';
-  }
+	if (modalRef.value) {
+		modalRef.value.focus();
+		document.body.style.overflow = "hidden";
+	}
 });
 
 onUnmounted(() => {
-  document.body.style.overflow = 'auto';
+	document.body.style.overflow = "auto";
 });
 </script>

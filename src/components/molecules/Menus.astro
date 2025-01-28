@@ -1,11 +1,15 @@
 ---
-import { type Menu, navMenus } from '@models:Menu';
-import { Icon } from 'astro-icon/components';
-import { DRAWER_MENU_ID } from '@store:constants';
-import LanguageSelector from './LanguageSelector.astro';
-import { getLangFromUrl, useTranslatedPath, useTranslations } from '@i18n:utils';
+import { type Menu, navMenus } from "@models:Menu";
+import { Icon } from "astro-icon/components";
+import { DRAWER_MENU_ID } from "@store:constants";
+import LanguageSelector from "./LanguageSelector.astro";
+import {
+	getLangFromUrl,
+	useTranslatedPath,
+	useTranslations,
+} from "@i18n:utils";
 export interface Props {
-  drawer: boolean;
+	drawer: boolean;
 }
 
 const lang = getLangFromUrl(Astro.url);

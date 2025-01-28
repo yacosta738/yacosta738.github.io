@@ -1,36 +1,39 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { type Article, jsonToArticle } from '@models:Article';
-import BlogTemplate from 'templates:BlogTemplate';
-import ArticleSummary from 'molecules:ArticleSummary';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+import { type Article, jsonToArticle } from "@models:Article";
+import BlogTemplate from "templates:BlogTemplate";
+import ArticleSummary from "molecules:ArticleSummary";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import type { GetStaticPaths } from "astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const categories: CollectionEntry<'categories'>[] = await getCollection('categories');
-  return categories.map((category) => ({
-    params: { category: category.data.title },
-  }));
+	const categories: CollectionEntry<"categories">[] =
+		await getCollection("categories");
+	return categories.map((category) => ({
+		params: { category: category.data.title },
+	}));
 };
 
 const { category } = Astro.params;
 
 const [categories, blogPosts] = await Promise.all([
-  getCollection('categories'),
-  getCollection('blog', ({ data }) => !data.draft),
+	getCollection("categories"),
+	getCollection("blog", ({ data }) => !data.draft),
 ]);
 
 const currentCategory = categories.find((cat) => cat.data.title === category);
 const posts: Article[] = currentCategory
-  ? await Promise.all(
-      blogPosts
-        .filter((post) => post.data.categories?.some((cat) => cat.id === currentCategory.id))
-        .map(jsonToArticle)
-    )
-  : [];
+	? await Promise.all(
+			blogPosts
+				.filter((post) =>
+					post.data.categories?.some((cat) => cat.id === currentCategory.id),
+				)
+				.map(jsonToArticle),
+		)
+	: [];
 
 const categoryPosts: Article[] = posts;
 ---

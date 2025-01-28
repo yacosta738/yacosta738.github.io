@@ -1,6 +1,6 @@
 {
-  "id": "php",
-  "name": "PHP",
-  "icon": "akar-icons:php-fill",
-  "url": "https://www.php.net/"
+	"id": "php",
+	"name": "PHP",
+	"icon": "akar-icons:php-fill",
+	"url": "https://www.php.net/"
 }

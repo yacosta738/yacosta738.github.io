@@ -1,6 +1,6 @@
 {
-  "id": "vuejs",
-  "name": "VueJS",
-  "icon": "mdi:vuejs",
-  "url": "https://vuejs.org/"
+	"id": "vuejs",
+	"name": "VueJS",
+	"icon": "mdi:vuejs",
+	"url": "https://vuejs.org/"
 }

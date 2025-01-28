@@ -1,19 +1,19 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { SEO } from 'astro-seo';
-import { ClientRouter } from 'astro:transitions';
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import { SEO } from "astro-seo";
+import { ClientRouter } from "astro:transitions";
 export interface Props {
-  title: string;
-  description: string;
-  image: string;
-  ogImageAlt: string;
+	title: string;
+	description: string;
+	image: string;
+	ogImageAlt: string;
 }
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const { href: canonicalUrl } = Astro.url;
 const { title, description, image, ogImageAlt } = Astro.props;
-const imageExtension = image?.split('.').pop();
+const imageExtension = image?.split(".").pop();
 ---
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />

@@ -1,39 +1,42 @@
 ---
-import { getCollection } from 'astro:content';
-import BlogTemplate from 'templates:BlogTemplate';
-import { jsonToArticle, type Article } from '@models:Article';
-import ArticleSummary from 'molecules:ArticleSummary';
-import Paginator from 'molecules:Paginator';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import type { /*InferGetStaticParamsType,*/ InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { getCollection } from "astro:content";
+import BlogTemplate from "templates:BlogTemplate";
+import { jsonToArticle, type Article } from "@models:Article";
+import ArticleSummary from "molecules:ArticleSummary";
+import Paginator from "molecules:Paginator";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import type {
+	/*InferGetStaticParamsType,*/ InferGetStaticPropsType,
+	GetStaticPaths,
+} from "astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const allPosts = await getCollection('blog', ({ data }) => {
-    return !data.draft;
-  });
+	const allPosts = await getCollection("blog", ({ data }) => {
+		return !data.draft;
+	});
 
-  const processedPosts = allPosts.map((post) => {
-    const idParts = post.id.split('/');
-    const lang = idParts[0] === 'es' ? 'es' : 'en';
-    return {
-      ...post,
-      lang,
-    };
-  });
+	const processedPosts = allPosts.map((post) => {
+		const idParts = post.id.split("/");
+		const lang = idParts[0] === "es" ? "es" : "en";
+		return {
+			...post,
+			lang,
+		};
+	});
 
-  // Filter for Spanish posts (those with 'es/' prefix)
-  const spanishPosts = processedPosts
-    .filter((post) => post.lang === 'es')
-    .map((post) => jsonToArticle(post));
+	// Filter for Spanish posts (those with 'es/' prefix)
+	const spanishPosts = processedPosts
+		.filter((post) => post.lang === "es")
+		.map((post) => jsonToArticle(post));
 
-  const sortedPosts = (await Promise.all(spanishPosts)).sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+	const sortedPosts = (await Promise.all(spanishPosts)).sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
 
-  return paginate(sortedPosts, { pageSize: 5 });
+	return paginate(sortedPosts, { pageSize: 5 });
 }) satisfies GetStaticPaths;
 
 // type Params = InferGetStaticParamsType<typeof getStaticPaths>;

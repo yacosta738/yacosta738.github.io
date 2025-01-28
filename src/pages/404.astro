@@ -1,41 +1,45 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import HeadSEO from 'organisms:HeadSEO';
-import Social from 'atoms:Social';
-import Email from 'atoms:Email';
-import AppFooter from 'molecules:AppFooter';
-import Navbar from 'molecules:Navbar';
-import Technologies from 'molecules:Technologies';
-import '../styles/global.css';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
-import { type Article, jsonToArticle } from '@models:Article';
-import { getCollection } from 'astro:content';
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import HeadSEO from "organisms:HeadSEO";
+import Social from "atoms:Social";
+import Email from "atoms:Email";
+import AppFooter from "molecules:AppFooter";
+import Navbar from "molecules:Navbar";
+import Technologies from "molecules:Technologies";
+import "../styles/global.css";
+import {
+	getLangFromUrl,
+	useTranslations,
+	useTranslatedPath,
+} from "@i18n:utils";
+import { type Article, jsonToArticle } from "@models:Article";
+import { getCollection } from "astro:content";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 const publishedBlogEntriesPromises = (
-  await getCollection('blog', ({ data }) => {
-    return !data.draft;
-  })
+	await getCollection("blog", ({ data }) => {
+		return !data.draft;
+	})
 )
-  .map(async (publishedBlogEntry) => {
-    const idParts = publishedBlogEntry.id.split('/');
-    const entryLang = idParts[0] === 'es' ? 'es' : 'en';
-    if (entryLang === lang) {
-      return await jsonToArticle(publishedBlogEntry);
-    }
-    return null;
-  })
-  .filter(Boolean);
-const publishedBlogEntries = (await Promise.all(publishedBlogEntriesPromises)).filter(
-  (entry): entry is Article => entry !== null
-);
+	.map(async (publishedBlogEntry) => {
+		const idParts = publishedBlogEntry.id.split("/");
+		const entryLang = idParts[0] === "es" ? "es" : "en";
+		if (entryLang === lang) {
+			return await jsonToArticle(publishedBlogEntry);
+		}
+		return null;
+	})
+	.filter(Boolean);
+const publishedBlogEntries = (
+	await Promise.all(publishedBlogEntriesPromises)
+).filter((entry): entry is Article => entry !== null);
 const lastPublishedBlogEntry = publishedBlogEntries
-  .sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  })
-  .slice(0, 5);
+	.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	})
+	.slice(0, 5);
 ---
 
 <html lang={lang}>

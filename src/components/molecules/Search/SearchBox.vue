@@ -1,72 +1,78 @@
 <script setup lang="ts">
-import { computed, defineProps, type PropType, ref } from 'vue';
-import SearchTrigger from './SearchTrigger.vue';
-import SearchResults from './SearchResults.vue';
-import type { Article } from '@models:Article.ts';
-import type { DocSearchTranslation, ModalTranslations } from '@i18n:search-translation.ts';
-import { useFuse } from '@vueuse/integrations/useFuse';
-import type { UseFuseOptions } from '@vueuse/integrations';
-import Modal from '../Modal/Modal.vue';
+import { computed, defineProps, type PropType, ref } from "vue";
+import SearchTrigger from "./SearchTrigger.vue";
+import SearchResults from "./SearchResults.vue";
+import type { Article } from "@models:Article.ts";
+import type {
+	DocSearchTranslation,
+	ModalTranslations,
+} from "@i18n:search-translation.ts";
+import { useFuse } from "@vueuse/integrations/useFuse";
+import type { UseFuseOptions } from "@vueuse/integrations";
+import Modal from "../Modal/Modal.vue";
 
 const props = defineProps({
-  id: {
-    type: String,
-    default: () => crypto.randomUUID(),
-  },
-  articles: {
-    type: Array as PropType<Array<Article>>,
-    required: true,
-  },
-  translations: {
-    type: Object as PropType<DocSearchTranslation>,
-    required: true,
-  },
+	id: {
+		type: String,
+		default: () => crypto.randomUUID(),
+	},
+	articles: {
+		type: Array as PropType<Array<Article>>,
+		required: true,
+	},
+	translations: {
+		type: Object as PropType<DocSearchTranslation>,
+		required: true,
+	},
 });
 
-const searchString = ref('');
+const searchString = ref("");
 
 const options = computed<UseFuseOptions<Article>>(() => ({
-  fuseOptions: {
-    keys: ['title', 'description', 'author', 'tags', 'categories', 'content'],
-    includeMatches: true,
-    threshold: 0.3,
-    useExtendedSearch: true,
-  },
+	fuseOptions: {
+		keys: ["title", "description", "author", "tags", "categories", "content"],
+		includeMatches: true,
+		threshold: 0.3,
+		useExtendedSearch: true,
+	},
 }));
 
 const { results } = useFuse(searchString, props.articles, options);
 
 function getPlatformType() {
-  const userAgent = navigator?.userAgent.toLowerCase() ?? 'Unknown';
+	const userAgent = navigator?.userAgent.toLowerCase() ?? "Unknown";
 
-  if (userAgent.includes('windows')) {
-    return 'Windows';
-  }
-  if (userAgent.includes('mac')) {
-    return 'MacOS';
-  }
-  if (userAgent.includes('linux')) {
-    return 'Linux';
-  }
-  return 'Unknown';
+	if (userAgent.includes("windows")) {
+		return "Windows";
+	}
+	if (userAgent.includes("mac")) {
+		return "MacOS";
+	}
+	if (userAgent.includes("linux")) {
+		return "Linux";
+	}
+	return "Unknown";
 }
 
 const platformType = getPlatformType();
 const isShowModal = ref(false);
 
 function closeModal() {
-  isShowModal.value = false;
+	isShowModal.value = false;
 }
 
 const modal = ref(props.translations.modal);
 const searchBox = ref(modal.value?.searchBox);
 
 function showModal() {
-  isShowModal.value = true;
+	isShowModal.value = true;
 }
-const getModalTranslations = (value: ModalTranslations, key: string): string => {
-  if (!value) return '';
-  return value[key].toString();
+const getModalTranslations = (
+	value: ModalTranslations,
+	key: string,
+): string => {
+	if (!value) return "";
+	return value[key].toString();
 };
 </script>
 

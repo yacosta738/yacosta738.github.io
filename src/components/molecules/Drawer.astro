@@ -1,8 +1,8 @@
 ---
-import MenuButton from 'atoms:MenuButton';
-import Menus from 'molecules:Menus';
-import { DRAWER_MENU_ID, DRAWER_MENU_LABEL } from '@store:constants';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import MenuButton from "atoms:MenuButton";
+import Menus from "molecules:Menus";
+import { DRAWER_MENU_ID, DRAWER_MENU_LABEL } from "@store:constants";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---

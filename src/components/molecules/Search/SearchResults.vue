@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { defineProps, type PropType } from 'vue';
-import type { Article } from '@models:Article.ts';
-import type { FuseResult } from 'fuse.js';
+import { defineProps, type PropType } from "vue";
+import type { Article } from "@models:Article.ts";
+import type { FuseResult } from "fuse.js";
 
 defineProps({
-  results: {
-    type: Array as PropType<Array<FuseResult<Article>>>,
-    required: true,
-  },
-  noRecentSearchesText: {
-    type: String,
-    default: 'No recent searches',
-  },
+	results: {
+		type: Array as PropType<Array<FuseResult<Article>>>,
+		required: true,
+	},
+	noRecentSearchesText: {
+		type: String,
+		default: "No recent searches",
+	},
 });
 </script>
 

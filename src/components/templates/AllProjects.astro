@@ -1,29 +1,31 @@
 ---
-import { jsonToProject, type Project } from '@models:Project';
-import BaseTemplate from 'templates:BaseTemplate';
-import ProjectTechList from 'molecules:ProjectTechList';
-import ProjectLinks from 'molecules:ProjectLinks';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { getCollection } from 'astro:content';
+import { jsonToProject, type Project } from "@models:Project";
+import BaseTemplate from "templates:BaseTemplate";
+import ProjectTechList from "molecules:ProjectTechList";
+import ProjectLinks from "molecules:ProjectLinks";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import { getCollection } from "astro:content";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const projectData = await getCollection('projects');
+const projectData = await getCollection("projects");
 
 const projects: Project[] = (
-  await Promise.all(
-    projectData
-      .filter((project) => {
-        const slugParts = project.id.split('/');
-        const projectLang = slugParts[0];
-        return projectLang === lang;
-      })
-      .map((project) => jsonToProject(project))
-  )
+	await Promise.all(
+		projectData
+			.filter((project) => {
+				const slugParts = project.id.split("/");
+				const projectLang = slugParts[0];
+				return projectLang === lang;
+			})
+			.map((project) => jsonToProject(project)),
+	)
 )
-  .filter((project) => project.published)
-  .sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
+	.filter((project) => project.published)
+	.sort(
+		(a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime(),
+	);
 ---
 
 <BaseTemplate

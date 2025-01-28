@@ -1,12 +1,12 @@
 ---
-import type { Project } from '@models:Project';
-import type { Tech } from '@models:Tech';
-import { Icon } from 'astro-icon/components';
+import type { Project } from "@models:Project";
+import type { Tech } from "@models:Tech";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
-  position: string;
-  showIcon: boolean;
-  project: Project;
+	position: string;
+	showIcon: boolean;
+	project: Project;
 }
 
 const { position, showIcon = true, project } = Astro.props;

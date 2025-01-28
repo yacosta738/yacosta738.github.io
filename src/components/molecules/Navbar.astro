@@ -1,13 +1,13 @@
 ---
-import Menus from 'molecules:Menus';
-import Drawer from 'molecules:Drawer';
-import { NAVBAR_HEADER } from '@store:constants';
-import { getLangFromUrl, useTranslatedPath } from '@i18n:utils';
-import Search from './Search/index.astro';
-import AppBannerNotifications from 'molecules:AppBannerNotifications';
+import Menus from "molecules:Menus";
+import Drawer from "molecules:Drawer";
+import { NAVBAR_HEADER } from "@store:constants";
+import { getLangFromUrl, useTranslatedPath } from "@i18n:utils";
+import Search from "./Search/index.astro";
+import AppBannerNotifications from "molecules:AppBannerNotifications";
 
 interface Props {
-  id?: string;
+	id?: string;
 }
 
 const { id } = Astro.props;

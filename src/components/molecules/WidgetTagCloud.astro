@@ -1,33 +1,39 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
-import WidgetCard from 'molecules:WidgetCard';
+import {
+	getLangFromUrl,
+	useTranslations,
+	useTranslatedPath,
+} from "@i18n:utils";
+import WidgetCard from "molecules:WidgetCard";
 
 export interface Props {
-  tags: { [key: string]: number };
+	tags: { [key: string]: number };
 }
 const { tags } = Astro.props;
 
 const allTags = Object.keys(tags).sort();
 
 const textSize = (
-  tag: string,
-  fontSizeClass: string[] = [
-    'text-xs',
-    'text-sm',
-    'text-base',
-    'text-lg',
-    'text-xl',
-    'text-2xl',
-    'text-3xl',
-    'text-4xl',
-  ]
+	tag: string,
+	fontSizeClass: string[] = [
+		"text-xs",
+		"text-sm",
+		"text-base",
+		"text-lg",
+		"text-xl",
+		"text-2xl",
+		"text-3xl",
+		"text-4xl",
+	],
 ): string => {
-  const max = Math.max(...Object.values(tags));
-  const min = Math.min(...Object.values(tags));
-  const range = max - min;
-  const tagCount = tags[tag];
-  const index = Math.floor(((tagCount - min) / range) * (fontSizeClass.length - 1));
-  return fontSizeClass[index];
+	const max = Math.max(...Object.values(tags));
+	const min = Math.min(...Object.values(tags));
+	const range = max - min;
+	const tagCount = tags[tag];
+	const index = Math.floor(
+		((tagCount - min) / range) * (fontSizeClass.length - 1),
+	);
+	return fontSizeClass[index];
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

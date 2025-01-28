@@ -1,36 +1,39 @@
 ---
-import { jsonToProject, type Project } from '@models:Project';
-import ProjectsFeatured from 'molecules:ProjectsFeatured';
-import ProjectsCommon from 'molecules:ProjectsCommon';
-import { getLangFromUrl } from '@i18n:utils';
-import { getCollection } from 'astro:content';
+import { jsonToProject, type Project } from "@models:Project";
+import ProjectsFeatured from "molecules:ProjectsFeatured";
+import ProjectsCommon from "molecules:ProjectsCommon";
+import { getLangFromUrl } from "@i18n:utils";
+import { getCollection } from "astro:content";
 
 const lang = getLangFromUrl(Astro.url);
 
-const projectData = await getCollection('projects');
-const sortByPriority = (b: Project, a: Project) => Math.sign((b.priority || 0) - (a.priority || 0));
+const projectData = await getCollection("projects");
+const sortByPriority = (b: Project, a: Project) =>
+	Math.sign((b.priority || 0) - (a.priority || 0));
 
 const projects: Project[] = (
-  await Promise.all(
-    projectData
-      .filter((project) => {
-        const slugParts = project.id.split('/');
-        const projectLang = slugParts[0];
-        return projectLang === lang;
-      })
-      .map((project) => jsonToProject(project))
-  )
+	await Promise.all(
+		projectData
+			.filter((project) => {
+				const slugParts = project.id.split("/");
+				const projectLang = slugParts[0];
+				return projectLang === lang;
+			})
+			.map((project) => jsonToProject(project)),
+	)
 )
-  .filter((project) => project.published)
-  .sort((a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime());
+	.filter((project) => project.published)
+	.sort(
+		(a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime(),
+	);
 
 const featuredProjects = projects
-  .filter((project) => project.featured)
-  .sort((a, b) => sortByPriority(b, a));
+	.filter((project) => project.featured)
+	.sort((a, b) => sortByPriority(b, a));
 
 const commonProjects = projects
-  .filter((project) => project.showInProjects && !project.featured)
-  .sort((a, b) => sortByPriority(b, a));
+	.filter((project) => project.showInProjects && !project.featured)
+	.sort((a, b) => sortByPriority(b, a));
 ---
 
 <section id="projects" class="mx-4 md:mx-auto">

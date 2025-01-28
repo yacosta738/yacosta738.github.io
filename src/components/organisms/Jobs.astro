@@ -1,28 +1,28 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { type IJob, Job, jsonToJob } from '@models:Job';
-import { getCollection } from 'astro:content';
-import JobDetails from 'molecules:JobDetails';
-import RoleDetails from 'molecules:RoleDetails';
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import { type IJob, Job, jsonToJob } from "@models:Job";
+import { getCollection } from "astro:content";
+import JobDetails from "molecules:JobDetails";
+import RoleDetails from "molecules:RoleDetails";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const jobsCollection = await getCollection('jobs');
+const jobsCollection = await getCollection("jobs");
 const jobs: Job[] = jobsCollection
-  .filter((job) => {
-    const slugParts = job.id.split('/');
-    const jobLang = slugParts[0]; // 'en' or 'es' from the folder structure
-    return jobLang === lang;
-  })
-  .map((job) => jsonToJob(job))
-  .filter((job) => job.published)
-  .sort((a: IJob, b: IJob) => {
-    const aDate = a?.createDate ? new Date(a.createDate) : new Date();
-    const bDate = b?.createDate ? new Date(b.createDate) : new Date();
-    return bDate.getTime() - aDate.getTime();
-  })
-  .map((job) => new Job(job));
+	.filter((job) => {
+		const slugParts = job.id.split("/");
+		const jobLang = slugParts[0]; // 'en' or 'es' from the folder structure
+		return jobLang === lang;
+	})
+	.map((job) => jsonToJob(job))
+	.filter((job) => job.published)
+	.sort((a: IJob, b: IJob) => {
+		const aDate = a?.createDate ? new Date(a.createDate) : new Date();
+		const bDate = b?.createDate ? new Date(b.createDate) : new Date();
+		return bDate.getTime() - aDate.getTime();
+	})
+	.map((job) => new Job(job));
 ---
 
 <astro-jobs>

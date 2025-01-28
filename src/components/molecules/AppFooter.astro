@@ -1,16 +1,16 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { socialMedia } from 'store/constants';
-import { getLangFromUrl, useTranslations } from '@i18n:index';
+import { Icon } from "astro-icon/components";
+import { socialMedia } from "store/constants";
+import { getLangFromUrl, useTranslations } from "@i18n:index";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const portfolioTechIcon = [
-  'mdi:vuejs',
-  'simple-icons:astro',
-  'simple-icons:tailwindcss',
-  'simple-icons:netlify',
+	"mdi:vuejs",
+	"simple-icons:astro",
+	"simple-icons:tailwindcss",
+	"simple-icons:netlify",
 ];
 ---
 

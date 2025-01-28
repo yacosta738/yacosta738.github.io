@@ -1,7 +1,7 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
 type Props = {
-  contactForm: string;
+	contactForm: string;
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

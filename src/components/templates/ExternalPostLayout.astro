@@ -1,21 +1,21 @@
 ---
-import '../../styles/global.css';
-import HeadSEO from 'organisms:HeadSEO';
-import AppFooter from 'molecules:AppFooter';
-import WidgetWrapper from 'molecules:WidgetWrapper';
-import Navbar from 'molecules:Navbar';
-import Loader from 'atoms:Loader';
-import type { CollectionEntry } from 'astro:content';
+import "../../styles/global.css";
+import HeadSEO from "organisms:HeadSEO";
+import AppFooter from "molecules:AppFooter";
+import WidgetWrapper from "molecules:WidgetWrapper";
+import Navbar from "molecules:Navbar";
+import Loader from "atoms:Loader";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+	post: CollectionEntry<"blog">;
 }
 
 const { post } = Astro.props;
 const id = post.id;
 const { title, description, cover, link } = post.data;
 const ogImageAlt = title;
-const lang = id.split('/')[0];
+const lang = id.split("/")[0];
 ---
 
 <html lang={lang} class="scroll-smooth">

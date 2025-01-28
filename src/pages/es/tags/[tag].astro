@@ -1,36 +1,40 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import { type Article, jsonToArticle } from '@models:Article';
-import BlogTemplate from 'templates:BlogTemplate';
-import ArticleSummary from 'molecules:ArticleSummary';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+import { type Article, jsonToArticle } from "@models:Article";
+import BlogTemplate from "templates:BlogTemplate";
+import ArticleSummary from "molecules:ArticleSummary";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import type { GetStaticPaths } from "astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const tags: CollectionEntry<'tags'>[] = await getCollection('tags');
-  return tags.map((tag) => ({
-    params: { tag: tag.data.title.toLowerCase() },
-  }));
+	const tags: CollectionEntry<"tags">[] = await getCollection("tags");
+	return tags.map((tag) => ({
+		params: { tag: tag.data.title.toLowerCase() },
+	}));
 };
 
 const { tag } = Astro.params;
 
 const [tags, blogPosts] = await Promise.all([
-  getCollection('tags'),
-  getCollection('blog', ({ data }) => !data.draft),
+	getCollection("tags"),
+	getCollection("blog", ({ data }) => !data.draft),
 ]);
 
-const currentTag = tags.find((t) => t.data.title.toLowerCase() === String(tag).toLowerCase());
+const currentTag = tags.find(
+	(t) => t.data.title.toLowerCase() === String(tag).toLowerCase(),
+);
 const posts: Article[] = currentTag
-  ? await Promise.all(
-      blogPosts
-        .filter((post) => post.data.tags?.some((t: { id: string }) => t.id === currentTag.id))
-        .map(jsonToArticle)
-    )
-  : [];
+	? await Promise.all(
+			blogPosts
+				.filter((post) =>
+					post.data.tags?.some((t: { id: string }) => t.id === currentTag.id),
+				)
+				.map(jsonToArticle),
+		)
+	: [];
 const tagPosts: Article[] = posts;
 ---
 

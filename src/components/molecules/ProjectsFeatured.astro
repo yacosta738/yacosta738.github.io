@@ -1,13 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import type { Project } from '@models:Project';
-import ProjectTechList from 'molecules:ProjectTechList';
-import ProjectLinks from 'molecules:ProjectLinks';
-import { markdownfy } from '@utils:utilities';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { Image } from "astro:assets";
+import type { Project } from "@models:Project";
+import ProjectTechList from "molecules:ProjectTechList";
+import ProjectLinks from "molecules:ProjectLinks";
+import { markdownfy } from "@utils:utilities";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
 
 export interface Props {
-  projects: Project[];
+	projects: Project[];
 }
 
 const lang = getLangFromUrl(Astro.url);
@@ -15,7 +15,7 @@ const t = useTranslations(lang);
 
 const { projects } = Astro.props;
 const calculatePosition = (index: number): string => {
-  return index % 2 === 0 ? 'end' : 'start';
+	return index % 2 === 0 ? "end" : "start";
 };
 ---
 

@@ -1,17 +1,17 @@
 export const allLanguages = {
-  en: 'English',
-  es: 'Español',
+	en: "English",
+	es: "Español",
 } as const;
 
 export const emojiFlags = {
-  en: '🇺🇸',
-  es: '🇪🇸',
+	en: "🇺🇸",
+	es: "🇪🇸",
 } as const;
 
 // Build for two languages only to speed up Astro's smoke tests
 const twoLanguages = {
-  en: 'English',
-  es: 'Español',
+	en: "English",
+	es: "Español",
 } as const;
 
 /**

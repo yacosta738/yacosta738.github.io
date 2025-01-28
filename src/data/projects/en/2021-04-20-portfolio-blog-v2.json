@@ -1,13 +1,13 @@
 {
-  "title": "Portfolio Blog V2",
+	"title": "Portfolio Blog V2",
 
-  "date": "2020-03-12T02:53:17.048Z",
-  "repository": "https://github.com/yacosta738/nomada.digital",
-  "url": "https://yacosta738.github.io/nomada.digital/",
-  "company": "Personal",
-  "tech": ["hugo", "go", "scss"],
-  "showInProjects": true,
-  "featured": false,
-  "published": true,
-  "content": "Template for personal Blog and portfolio made with [HUGO](https://gohugo.io/). The template is part of the migration of my personal blog in its version 2 with the static website generator [HUGO](https://gohugo.io/)."
+	"date": "2020-03-12T02:53:17.048Z",
+	"repository": "https://github.com/yacosta738/nomada.digital",
+	"url": "https://yacosta738.github.io/nomada.digital/",
+	"company": "Personal",
+	"tech": ["hugo", "go", "scss"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true,
+	"content": "Template for personal Blog and portfolio made with [HUGO](https://gohugo.io/). The template is part of the migration of my personal blog in its version 2 with the static website generator [HUGO](https://gohugo.io/)."
 }

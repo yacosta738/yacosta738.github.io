@@ -1,6 +1,6 @@
 {
-  "id": "ruby",
-  "name": "Ruby",
-  "icon": "simple-icons:ruby",
-  "url": "https://www.ruby-lang.org/en/"
+	"id": "ruby",
+	"name": "Ruby",
+	"icon": "simple-icons:ruby",
+	"url": "https://www.ruby-lang.org/en/"
 }
