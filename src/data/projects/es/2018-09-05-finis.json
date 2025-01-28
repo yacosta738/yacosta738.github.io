@@ -1,12 +1,12 @@
 {
-  "date": "2018-09-05T15:12:23.179Z",
-  "title": "Finis",
+	"date": "2018-09-05T15:12:23.179Z",
+	"title": "Finis",
 
-  "cover": "/images/cover-finis.webp",
-  "company": "Desoft",
-  "tech": ["angular", "typescript", "lumen", "php", "postgresql"],
-  "showInProjects": true,
-  "featured": false,
-  "published": true,
-  "content": "Aplicación que permite garantizar el control de la disponibilidad financiera de la Empresa Eléctrica de Ciego de Ávila. La aplicación fue desarrollada con arquitectura monolítica usando el framework [Lumen](https://lumen.laravel.com/) en el backend y [Angular](https://angular.io/) en el frontend."
+	"cover": "/images/cover-finis.webp",
+	"company": "Desoft",
+	"tech": ["angular", "typescript", "lumen", "php", "postgresql"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true,
+	"content": "Aplicación que permite garantizar el control de la disponibilidad financiera de la Empresa Eléctrica de Ciego de Ávila. La aplicación fue desarrollada con arquitectura monolítica usando el framework [Lumen](https://lumen.laravel.com/) en el backend y [Angular](https://angular.io/) en el frontend."
 }

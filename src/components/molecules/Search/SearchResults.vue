@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineProps, type PropType } from 'vue';
-import type { Article } from '@models:Article.ts';
-import type { FuseResult } from 'fuse.js';
+import { defineProps, type PropType } from "vue";
+import type { Article } from "@models:Article.ts";
+import type { FuseResult } from "fuse.js";
 
 defineProps({
 	results: {
@@ -10,7 +10,7 @@ defineProps({
 	},
 	noRecentSearchesText: {
 		type: String,
-		default: 'No recent searches',
+		default: "No recent searches",
 	},
 });
 </script>

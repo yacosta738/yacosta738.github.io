@@ -1,7 +1,11 @@
 ---
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
-import { Icon } from 'astro-icon/components';
-import WidgetCard from 'molecules:WidgetCard';
+import {
+	getLangFromUrl,
+	useTranslations,
+	useTranslatedPath,
+} from "@i18n:utils";
+import { Icon } from "astro-icon/components";
+import WidgetCard from "molecules:WidgetCard";
 
 export interface Props {
 	categories: { [key: string]: number };

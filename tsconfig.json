@@ -1,36 +1,36 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "moduleResolution": "bundler",
-    "strict": true,
-    "target": "esnext",
-    "module": "esnext",
-    "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "allowJs": true,
-    "baseUrl": "src",
-    "types": ["vite/client"],
-    "paths": {
-      "@store:*": ["store/*"],
-      "@components:*": ["components/*"],
-      "@models:*": ["models/*"],
-      "@utils:*": ["utils/*"],
-      "@i18n:*": ["i18n/*"],
-      "@/*": ["*"],
-      "atoms:*": ["components/atoms/*.astro"],
-      "molecules:*": ["components/molecules/*.astro"],
-      "organisms:*": ["components/organisms/*.astro"],
-      "templates:*": ["components/templates/*.astro"]
-    },
-    "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      }
-    ],
-    "jsx": "preserve",
-    "jsxImportSource": "preact"
-  }
+	"extends": "astro/tsconfigs/base",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"moduleResolution": "bundler",
+		"strict": true,
+		"target": "esnext",
+		"module": "esnext",
+		"strictNullChecks": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"allowJs": true,
+		"baseUrl": "src",
+		"types": ["vite/client"],
+		"paths": {
+			"@store:*": ["store/*"],
+			"@components:*": ["components/*"],
+			"@models:*": ["models/*"],
+			"@utils:*": ["utils/*"],
+			"@i18n:*": ["i18n/*"],
+			"@/*": ["*"],
+			"atoms:*": ["components/atoms/*.astro"],
+			"molecules:*": ["components/molecules/*.astro"],
+			"organisms:*": ["components/organisms/*.astro"],
+			"templates:*": ["components/templates/*.astro"]
+		},
+		"plugins": [
+			{
+				"name": "@astrojs/ts-plugin"
+			}
+		],
+		"jsx": "preserve",
+		"jsxImportSource": "preact"
+	}
 }

@@ -1,6 +1,6 @@
 {
-  "id": "scss",
-  "name": "Scss",
-  "icon": "simple-icons:sass",
-  "url": "https://sass-lang.com/"
+	"id": "scss",
+	"name": "Scss",
+	"icon": "simple-icons:sass",
+	"url": "https://sass-lang.com/"
 }

@@ -1,29 +1,19 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
 type Props = {
-	siteKey: string;
 	contactForm: string;
-	contactFormToken: string;
 };
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Crear un objeto con las traducciones necesarias
-const translations = {
-	messageSent: t('messageSent'),
-	recaptchaError: t('recaptchaError'),
-	recaptchaFailed: t('recaptchaFailed'),
-	formError: t('formError'),
-	formSubmissionFailed: t('formSubmissionFailed'),
-};
-
-const { siteKey, contactForm, contactFormToken } = Astro.props;
+const { contactForm } = Astro.props;
 ---
 
 <form
 	class="card p-5 space-y-4 bg-neutral text-neutral-content m-auto w-full"
 	id="contact-form"
-	novalidate
+	method="post"
+	action={contactForm}
 >
 	<div>
 		<label for="form-name" class="text-sm font-bold uppercase text-lightest-slate">
@@ -79,13 +69,9 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 		></textarea>
 	</div>
 	<div class="mt-8">
-		<button
+	 <button
 			type="submit"
-			class="g-recaptcha big-button w-full relative disabled:opacity-50 disabled:cursor-not-allowed"
-			data-sitekey={siteKey}
-			data-callback="onSubmit"
-			data-testid="submit-button"
-			disabled={false}
+			class="big-button w-full relative disabled:opacity-50 disabled:cursor-not-allowed"
 			aria-label={t('sendMessage')}
 		>
 			<span class="loading-text">{t('sendMessage')}</span>
@@ -98,166 +84,3 @@ const { siteKey, contactForm, contactFormToken } = Astro.props;
 		</button>
 	</div>
 </form>
-
-<!-- Toast notification component -->
-<div
-	id="toast-notification"
-	class="fixed top-4 right-4 z-50 invisible opacity-0 transition-all duration-300 ease-in-out"
->
-	<div class="flex items-center p-4 rounded-lg shadow-lg min-w-[280px]">
-		<div class="flex-1 toast-message"></div>
-		<button onclick="closeToast()" class="ml-4">
-			<span class="text-2xl">&times;</span>
-		</button>
-	</div>
-</div>
-
-<script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script define:vars={{ contactForm, translations, contactFormToken }}>
-	const closeToast = () => {
-		const toast = document.getElementById('toast-notification');
-		toast.classList.remove('visible', 'opacity-100');
-		toast.classList.add('invisible', 'opacity-0');
-	};
-
-	const showToast = (message, isError = false) => {
-		const toast = document.getElementById('toast-notification');
-		const toastMessage = toast.querySelector('.toast-message');
-
-		toast.querySelector('div').className =
-			`flex items-center p-1 rounded-lg shadow-lg min-w-[280px] border ${
-				isError
-					? 'border-red-500 bg-red-500/50 text-white'
-					: 'border-green-500 bg-green-500/50 text-white'
-			}`;
-
-		toastMessage.textContent = message;
-
-		// Mostrar el toast
-		toast.classList.remove('invisible', 'opacity-0');
-		toast.classList.add('visible', 'opacity-100');
-
-		// Auto ocultar después de 5 segundos
-		setTimeout(closeToast, 5000);
-	};
-
-	const form = document.getElementById('contact-form');
-	const submitButton = form.querySelector('button[type="submit"]');
-	const loadingText = submitButton.querySelector('.loading-text');
-	const loadingSpinner = submitButton.querySelector('.loading-spinner');
-
-	// Debounce function
-	function debounce(func, wait) {
-		let timeout;
-		return function executedFunction(...args) {
-			const later = () => {
-				clearTimeout(timeout);
-				func(...args);
-			};
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-		};
-	}
-
-	// Basic client-side validation
-	function validateForm(formData) {
-		const email = formData.get('email');
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailRegex.test(email)) {
-			showToast(translations.invalidEmail || 'Invalid email format', true);
-			return false;
-		}
-		return true;
-	}
-
-	// Set loading state
-	function setLoading(isLoading) {
-		submitButton.disabled = isLoading;
-		loadingText.classList.toggle('hidden', isLoading);
-		loadingSpinner.classList.toggle('hidden', !isLoading);
-	}
-
-	window.onSubmit = debounce(async (token) => {
-		try {
-			setLoading(true);
-			const formData = new FormData(form);
-
-			if (!validateForm(formData)) {
-				setLoading(false);
-				return;
-			}
-
-			if (!token) {
-				showToast(translations.recaptchaFailed, true);
-				setLoading(false);
-				return;
-			}
-
-			const recaptchaResponse = await fetch('/api/recaptcha', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ token }),
-			});
-
-			const gResponse = await recaptchaResponse.json();
-
-			if (!gResponse.success) {
-				const errorMessage = gResponse['error-codes']?.join(', ') || 'Verification failed';
-				showToast(`${translations.recaptchaError} ${errorMessage}`, true);
-				setLoading(false);
-				return;
-			}
-
-			const data = Object.fromEntries(formData.entries());
-			const response = await fetch(contactForm, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'yap-token': contactFormToken,
-				},
-				body: JSON.stringify(data),
-			});
-
-			if (response.ok) {
-				showToast(translations.messageSent);
-				form.reset();
-			} else {
-				throw new Error(translations.formSubmissionFailed);
-			}
-		} catch (error) {
-			showToast(translations.formError, true);
-			console.error(error);
-		} finally {
-			setLoading(false);
-			grecaptcha.reset();
-		}
-	}, 500);
-
-	// Add form validation listeners
-	form.querySelectorAll('input, textarea').forEach((field) => {
-		field.addEventListener('invalid', (e) => {
-			e.preventDefault();
-			field.classList.add('border-red-500');
-		});
-
-		field.addEventListener('input', () => {
-			field.classList.remove('border-red-500');
-		});
-	});
-</script>
-
-<style>
-	#toast-notification {
-		transform: translateX(0);
-	}
-
-	#toast-notification.invisible {
-		transform: translateX(100%);
-	}
-
-	.border-red-500 {
-		border-color: rgb(239, 68, 68);
-	}
-</style>

@@ -1,6 +1,6 @@
 {
-  "id": "spark",
-  "name": "Apache Spark",
-  "icon": "simple-icons:apachespark",
-  "url": "https://spark.apache.org/"
+	"id": "spark",
+	"name": "Apache Spark",
+	"icon": "simple-icons:apachespark",
+	"url": "https://spark.apache.org/"
 }

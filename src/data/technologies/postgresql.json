@@ -1,6 +1,6 @@
 {
-  "id": "postgresql",
-  "name": "PostgreSQL",
-  "icon": "cib:postgresql",
-  "url": "https://www.postgresql.org/"
+	"id": "postgresql",
+	"name": "PostgreSQL",
+	"icon": "cib:postgresql",
+	"url": "https://www.postgresql.org/"
 }

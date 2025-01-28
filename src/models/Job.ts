@@ -1,4 +1,4 @@
-import { type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 export interface IRole {
 	role?: string;
 	startDate?: Date | string;
@@ -21,7 +21,7 @@ export interface IJob {
 
 export class Role implements IRole {
 	id: string = crypto.randomUUID();
-	role: string = '';
+	role = "";
 	startDate?: Date | string;
 	endDate?: Date | string;
 	achievements: string[] = [];
@@ -35,12 +35,12 @@ export class Role implements IRole {
 
 export class Job implements IJob {
 	id: string = crypto.randomUUID();
-	title: string = '';
-	company: string = '';
-	icon: string = '';
-	location: string = '';
-	url: string = '';
-	published: boolean = false;
+	title = "";
+	company = "";
+	icon = "";
+	location = "";
+	url = "";
+	published = false;
 	roles: IRole[] = [];
 	createDate?: Date | string;
 
@@ -49,7 +49,7 @@ export class Job implements IJob {
 	}
 }
 
-export const jsonToJob = (json: CollectionEntry<'jobs'>): IJob => {
+export const jsonToJob = (json: CollectionEntry<"jobs">): IJob => {
 	return {
 		id: json.id || crypto.randomUUID(),
 		title: json.data?.title,

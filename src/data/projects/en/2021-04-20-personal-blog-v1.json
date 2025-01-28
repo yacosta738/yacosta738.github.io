@@ -1,14 +1,14 @@
 {
-  "title": "Personal Blog v1.0",
+	"title": "Personal Blog v1.0",
 
-  "cover": "/images/pbv1.webp",
-  "date": "2019-11-14T03:35:24.000Z",
-  "repository": "https://github.com/yacosta738/yacosta738.github.io",
-  "url": "https://yacosta738.github.io/",
-  "company": "Personal",
-  "tech": ["jekyll", "ruby", "scss"],
-  "showInProjects": true,
-  "featured": false,
-  "published": true,
-  "content": "My first personal blog made with [jekyll](https://jekyllrb.com/) static websites generator and deployed in [Github Pages.](https://pages.github.com/)"
+	"cover": "/images/pbv1.webp",
+	"date": "2019-11-14T03:35:24.000Z",
+	"repository": "https://github.com/yacosta738/yacosta738.github.io",
+	"url": "https://yacosta738.github.io/",
+	"company": "Personal",
+	"tech": ["jekyll", "ruby", "scss"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true,
+	"content": "My first personal blog made with [jekyll](https://jekyllrb.com/) static websites generator and deployed in [Github Pages.](https://pages.github.com/)"
 }

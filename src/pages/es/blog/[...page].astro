@@ -1,25 +1,26 @@
 ---
-import { getCollection } from 'astro:content';
-import BlogTemplate from 'templates:BlogTemplate';
-import { jsonToArticle, type Article } from '@models:Article';
-import ArticleSummary from 'molecules:ArticleSummary';
-import Paginator from 'molecules:Paginator';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import type { /*InferGetStaticParamsType,*/ InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { getCollection } from "astro:content";
+import BlogTemplate from "templates:BlogTemplate";
+import { jsonToArticle, type Article } from "@models:Article";
+import ArticleSummary from "molecules:ArticleSummary";
+import Paginator from "molecules:Paginator";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import type {
+	/*InferGetStaticParamsType,*/ InferGetStaticPropsType,
+	GetStaticPaths,
+} from "astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-export const prerender = true;
-
 export const getStaticPaths = (async ({ paginate }) => {
-	const allPosts = await getCollection('blog', ({ data }) => {
+	const allPosts = await getCollection("blog", ({ data }) => {
 		return !data.draft;
 	});
 
 	const processedPosts = allPosts.map((post) => {
-		const idParts = post.id.split('/');
-		const lang = idParts[0] === 'es' ? 'es' : 'en';
+		const idParts = post.id.split("/");
+		const lang = idParts[0] === "es" ? "es" : "en";
 		return {
 			...post,
 			lang,
@@ -28,7 +29,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 	// Filter for Spanish posts (those with 'es/' prefix)
 	const spanishPosts = processedPosts
-		.filter((post) => post.lang === 'es')
+		.filter((post) => post.lang === "es")
 		.map((post) => jsonToArticle(post));
 
 	const sortedPosts = (await Promise.all(spanishPosts)).sort((a, b) => {

@@ -1,17 +1,21 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BlogTemplate from 'templates:BlogTemplate';
-import PostHeader from 'molecules:PostHeader';
-import ShareButton from 'atoms:ShareButton';
-import { Icon } from 'astro-icon/components';
-import '../../styles/github-markdown.css';
+import type { CollectionEntry } from "astro:content";
+import BlogTemplate from "templates:BlogTemplate";
+import PostHeader from "molecules:PostHeader";
+import ShareButton from "atoms:ShareButton";
+import { Icon } from "astro-icon/components";
+import "../../styles/github-markdown.css";
 
-import { domain } from '@store:constants';
-import { jsonToArticle } from '@models:Article';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
-import { getCollection } from 'astro:content';
+import { domain } from "@store:constants";
+import { jsonToArticle } from "@models:Article";
+import {
+	getLangFromUrl,
+	useTranslations,
+	useTranslatedPath,
+} from "@i18n:utils";
+import { getCollection } from "astro:content";
 export interface Props {
-	post: CollectionEntry<'blog'>;
+	post: CollectionEntry<"blog">;
 }
 const url = Astro.url;
 
@@ -23,65 +27,69 @@ const ogImageAlt = description;
 const categoriesCollection = post.data.categories || [];
 const tagsCollection = post.data.tags || [];
 
-const categories = await getCollection('categories')
+const categories = await getCollection("categories")
 	.then((categories) =>
-		categories.filter((category) => categoriesCollection.some((cat) => cat.id === category.id))
+		categories.filter((category) =>
+			categoriesCollection.some((cat) => cat.id === category.id),
+		),
 	)
 	.then((categories) => categories.map((category) => category.data.title));
 
-const tags = await getCollection('tags')
-	.then((tags) => tags.filter((tag) => tagsCollection.some((t) => t.id === tag.id)))
+const tags = await getCollection("tags")
+	.then((tags) =>
+		tags.filter((tag) => tagsCollection.some((t) => t.id === tag.id)),
+	)
 	.then((tags) => tags.map((tag) => tag.data.title));
 const lang = getLangFromUrl(Astro.url);
 
-const t = useTranslations(lang as 'en' | 'es');
-const translatePath = useTranslatedPath(lang as 'en' | 'es');
+const t = useTranslations(lang as "en" | "es");
+const translatePath = useTranslatedPath(lang as "en" | "es");
 
 const shareButtons: {
 	title: string;
 	url: string;
-	icon: string | 'et:global';
+	icon: string | "et:global";
 }[] = [
 	{
-		title: 'Twitter',
-		url: `https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(',')}`,
-		icon: 'uit:twitter-alt',
+		title: "Twitter",
+		url: `https://twitter.com/intent/tweet?url=${url}&text=${title}&hashtags=${tags.join(",")}`,
+		icon: "uit:twitter-alt",
 	},
 	{
-		title: 'Facebook',
+		title: "Facebook",
 		url: `https://www.facebook.com/sharer.php?u=${url}`,
-		icon: 'ic:round-facebook',
+		icon: "ic:round-facebook",
 	},
 	{
-		title: 'LinkedIn',
+		title: "LinkedIn",
 		url: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-		icon: 'uit:linkedin-alt',
+		icon: "uit:linkedin-alt",
 	},
 	{
-		title: 'Reddit',
+		title: "Reddit",
 		url: `https://reddit.com/submit?url=${url}&title=${title}`,
-		icon: 'ic:baseline-reddit',
+		icon: "ic:baseline-reddit",
 	},
 	{
-		title: 'Telegram',
+		title: "Telegram",
 		url: `https://t.me/share/url?url=${url}&text=${description}`,
-		icon: 'mdi:telegram',
+		icon: "mdi:telegram",
 	},
 	{
-		title: 'WhatsApp',
+		title: "WhatsApp",
 		url: `https://api.whatsapp.com/send?text=${title}%20${url}`,
-		icon: 'ic:baseline-whatsapp',
+		icon: "ic:baseline-whatsapp",
 	},
 	{
-		title: 'Email',
+		title: "Email",
 		url: `mailto:?subject=${title}&body=${description}%20${url}`,
-		icon: 'ic:baseline-email',
+		icon: "ic:baseline-email",
 	},
 ];
 
-const repo = 'yacosta738/blog.yap.comments';
-const label = 'Comment';
-const theme = 'icy-dark';
+const repo = "yacosta738/blog.yap.comments";
+const label = "Comment";
+const theme = "icy-dark";
 
 const article = await jsonToArticle(post);
 ---

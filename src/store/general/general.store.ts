@@ -1,12 +1,12 @@
-import { atom } from 'nanostores';
-const SHOW_ADS_BANNER = 'SHOW_ADS_BANNER';
+import { atom } from "nanostores";
+const SHOW_ADS_BANNER = "SHOW_ADS_BANNER";
 const getShowAdsBanner = (): boolean => {
 	const adsBanner: string | null = localStorage.getItem(SHOW_ADS_BANNER);
 	if (adsBanner === null) {
-		localStorage.setItem(SHOW_ADS_BANNER, 'true');
+		localStorage.setItem(SHOW_ADS_BANNER, "true");
 		return true;
 	}
-	return adsBanner === 'true';
+	return adsBanner === "true";
 };
 
 export interface IGeneralStore {
@@ -27,7 +27,7 @@ const generalStore = atom<IGeneralStore>({
 	showSide: true,
 	loading: false,
 	firstTimeLoading: true,
-	swStatus: 'pending',
+	swStatus: "pending",
 	searchModal: false,
 });
 

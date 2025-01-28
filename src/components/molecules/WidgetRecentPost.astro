@@ -1,11 +1,11 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import type { Article } from '@models:Article';
-import { Icon } from 'astro-icon/components';
-import WidgetCard from 'molecules:WidgetCard';
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import type { Article } from "@models:Article";
+import { Icon } from "astro-icon/components";
+import WidgetCard from "molecules:WidgetCard";
 
 const { pathname } = Astro.url;
-const isBlogRoot = pathname.endsWith('/blog');
+const isBlogRoot = pathname.endsWith("/blog");
 
 export interface Props {
 	recentPosts: Article[];

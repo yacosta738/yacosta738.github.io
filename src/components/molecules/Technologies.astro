@@ -1,8 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { jsonToTech, type Tech } from '@models:Tech';
-import { getCollection } from 'astro:content';
-const techData = await getCollection('technologies');
+import { Icon } from "astro-icon/components";
+import { jsonToTech, type Tech } from "@models:Tech";
+import { getCollection } from "astro:content";
+const techData = await getCollection("technologies");
 
 const techs: Tech[] = techData
 	.map((tech) => jsonToTech(tech))

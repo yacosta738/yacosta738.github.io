@@ -1,6 +1,6 @@
 {
-  "id": "hugo",
-  "name": "Hugo",
-  "icon": "simple-icons:hugo",
-  "url": "https://gohugo.io/"
+	"id": "hugo",
+	"name": "Hugo",
+	"icon": "simple-icons:hugo",
+	"url": "https://gohugo.io/"
 }

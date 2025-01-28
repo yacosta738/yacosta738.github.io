@@ -1,4 +1,4 @@
-import { type CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 export interface Tech {
 	id: string;
@@ -7,7 +7,7 @@ export interface Tech {
 	url?: string;
 }
 
-export const jsonToTech = (json: CollectionEntry<'technologies'>): Tech => {
+export const jsonToTech = (json: CollectionEntry<"technologies">): Tech => {
 	const jsonData = json.data;
 	return {
 		id: json.id,

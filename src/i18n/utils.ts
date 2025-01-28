@@ -1,10 +1,10 @@
-import { ui, defaultLanguage, type UiTranslate } from './translation';
+import { ui, defaultLanguage, type UiTranslate } from "./translation";
 
 export const showDefaultLang = false;
 type LanguageKey = keyof typeof ui;
 
 export function getLangFromUrl(url: URL): keyof typeof ui {
-	const pathSegments = url.pathname.split('/');
+	const pathSegments = url.pathname.split("/");
 	let lang = defaultLanguage;
 
 	for (const segment of pathSegments) {
@@ -18,8 +18,11 @@ export function getLangFromUrl(url: URL): keyof typeof ui {
 }
 
 export function useTranslations(lang: LanguageKey) {
-	return function t(key: string, params?: { [key: string]: string | number }): string {
-		const keys = key.split('.');
+	return function t(
+		key: string,
+		params?: { [key: string]: string | number },
+	): string {
+		const keys = key.split(".");
 		let value: UiTranslate | string = ui[lang];
 
 		for (const k of keys) {
@@ -33,19 +36,21 @@ export function useTranslations(lang: LanguageKey) {
 
 		value = interpolateParams(params, value);
 
-		return typeof value === 'string' ? value : key;
+		return typeof value === "string" ? value : key;
 	};
 }
 
 function interpolateParams(
 	params: { [key: string]: string | number } | undefined,
-	value: string | UiTranslate
+	value: string | UiTranslate,
 ) {
-	if (params && typeof value === 'string') {
+	if (params && typeof value === "string") {
+		let result = value;
 		for (const [paramKey, paramValue] of Object.entries(params)) {
-			const regex = new RegExp(`{{${paramKey}}}`, 'g');
-			value = value.replace(regex, String(paramValue));
+			const regex = new RegExp(`{{${paramKey}}}`, "g");
+			result = result.replace(regex, String(paramValue));
 		}
+		return result;
 	}
 	return value;
 }

@@ -1,5 +1,5 @@
 // import DOMPurify from 'dompurify';
-import { marked } from 'marked';
+import { marked } from "marked";
 
 /**
  * Generates a random integer between the specified minimum and maximum values.
@@ -8,9 +8,9 @@ import { marked } from 'marked';
  * @returns The generated random integer.
  */
 export const randomInt = (min: number, max: number) => {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1)) + min;
+	const minCeil = Math.ceil(min);
+	const maxFloor = Math.floor(max);
+	return Math.floor(Math.random() * (maxFloor - minCeil + 1)) + minCeil;
 };
 
 /**
@@ -21,11 +21,15 @@ export const inlineLinks = (className: string) => {
 	const elements = Array.from(document.querySelectorAll(className));
 	// eslint-disable-next-line no-array-constructor
 	const allLinks = new Array<HTMLElement[]>();
-	elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))));
+	for (const el of elements) {
+		allLinks.push(Array.from(el.querySelectorAll("a")));
+	}
 	if (allLinks.length > 0) {
-		allLinks.forEach((links) => {
-			links.forEach((link) => link.classList.add('inline-link'));
-		});
+		for (const links of allLinks) {
+			for (const link of links) {
+				link.classList.add("inline-link");
+			}
+		}
 	}
 };
 
@@ -34,7 +38,8 @@ export const inlineLinks = (className: string) => {
  * @param str The input string to be converted.
  * @returns A promise that resolves to the converted markdown string.
  */
-export const markdownfy = async (str: string): Promise<string> => await marked.parse(str);
+export const markdownfy = async (str: string): Promise<string> =>
+	await marked.parse(str);
 
 /**
  * Converts a term to a URL-friendly format.
@@ -42,10 +47,12 @@ export const markdownfy = async (str: string): Promise<string> => await marked.p
  * @returns The URLized term.
  */
 export const urlize = (term: string): string => {
-	if (typeof term !== 'string') {
-		throw new TypeError(`The term must be a string, but received a value of type ${typeof term}`);
+	if (typeof term !== "string") {
+		throw new TypeError(
+			`The term must be a string, but received a value of type ${typeof term}`,
+		);
 	}
-	return term.trim().toLowerCase().replace(/\s+/g, '-');
+	return term.trim().toLowerCase().replace(/\s+/g, "-");
 };
 
 /**
@@ -54,4 +61,5 @@ export const urlize = (term: string): string => {
  * @returns The converted HTML string.
  * @see https://marked.js.org/
  */
-export const markdownToHTML = async (markdown: string): Promise<string> => await marked(markdown);
+export const markdownToHTML = async (markdown: string): Promise<string> =>
+	await marked(markdown);

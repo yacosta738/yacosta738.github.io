@@ -1,6 +1,6 @@
 {
-  "id": "angular",
-  "name": "Angular",
-  "icon": "mdi:angular",
-  "url": "https://angular.io/"
+	"id": "angular",
+	"name": "Angular",
+	"icon": "mdi:angular",
+	"url": "https://angular.io/"
 }

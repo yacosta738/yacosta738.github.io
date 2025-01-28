@@ -1,10 +1,14 @@
 ---
-import type { Project } from '@models:Project';
-import ProjectLinks from 'molecules:ProjectLinks';
-import ProjectTechList from 'molecules:ProjectTechList';
-import { Icon } from 'astro-icon/components';
-import { markdownfy } from '@utils:utilities';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '@i18n:utils';
+import type { Project } from "@models:Project";
+import ProjectLinks from "molecules:ProjectLinks";
+import ProjectTechList from "molecules:ProjectTechList";
+import { Icon } from "astro-icon/components";
+import { markdownfy } from "@utils:utilities";
+import {
+	getLangFromUrl,
+	useTranslations,
+	useTranslatedPath,
+} from "@i18n:utils";
 
 const GRID_LIMIT = 6;
 export interface Props {
@@ -19,7 +23,9 @@ const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
 const projectsToShow = () => {
-	const firstProjects: Project[] = projects ? projects.slice(0, GRID_LIMIT) : [];
+	const firstProjects: Project[] = projects
+		? projects.slice(0, GRID_LIMIT)
+		: [];
 	return showMore ? projects : firstProjects;
 };
 ---

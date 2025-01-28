@@ -1,5 +1,5 @@
-@import './variables.css';
-@import './fonts.css';
+@import "./variables.css";
+@import "./fonts.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -187,7 +187,7 @@ h6 {
 	position: relative;
 	bottom: 4px;
 	counter-increment: section;
-	content: '0' counter(section) '.';
+	content: "0" counter(section) ".";
 	margin-right: 10px;
 	color: var(--green);
 
@@ -204,7 +204,7 @@ h6 {
 }
 
 .numbered-heading::after {
-	content: '';
+	content: "";
 	display: block;
 	position: relative;
 	top: -5px;
@@ -238,7 +238,7 @@ img {
 	vertical-align: middle;
 }
 
-img[alt=''],
+img[alt=""],
 img:not([alt]) {
 	filter: blur(5px);
 }
@@ -358,7 +358,7 @@ nav .active {
 }
 
 .order-list li a::before {
-	content: '0' counter(item) '.';
+	content: "0" counter(item) ".";
 	margin-right: 5px;
 	font-size: 12px;
 	text-align: right;
@@ -372,15 +372,11 @@ nav .active {
 .fadeup-enter {
 	opacity: 0.01;
 	transform: translateY(20px);
-	transition:
-		opacity 300ms var(--easing),
-		transform 300ms var(--easing);
+	transition: opacity 300ms var(--easing), transform 300ms var(--easing);
 }
 
 .fadeup-enter-active {
 	opacity: 1;
 	transform: translateY(0);
-	transition:
-		opacity 300ms var(--easing),
-		transform 300ms var(--easing);
+	transition: opacity 300ms var(--easing), transform 300ms var(--easing);
 }

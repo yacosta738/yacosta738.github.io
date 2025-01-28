@@ -1,6 +1,6 @@
 {
-  "id": "scala",
-  "name": "Scala",
-  "icon": "simple-icons:scala",
-  "url": "https://www.scala-lang.org/"
+	"id": "scala",
+	"name": "Scala",
+	"icon": "simple-icons:scala",
+	"url": "https://www.scala-lang.org/"
 }

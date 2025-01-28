@@ -2,13 +2,16 @@
 let previousTitle = document.title;
 
 // Define alternative title text for each language
-const titleTextAlt = { en: "Don't go! Come back! 😥", es: '¡No te vayas! ¡Vuelve! 😥' };
+const titleTextAlt = {
+	en: "Don't go! Come back! 😥",
+	es: "¡No te vayas! ¡Vuelve! 😥",
+};
 
 // Declare a variable to hold the ID of the timeout task
 let timeoutId;
 
 // When the window loses focus (e.g. the user switches to another tab)
-window.addEventListener('blur', () => {
+window.addEventListener("blur", () => {
 	// Cancel the previous timeout task if it's still running
 	clearTimeout(timeoutId);
 	// Store the current title in the previousTitle variable
@@ -20,7 +23,7 @@ window.addEventListener('blur', () => {
 });
 
 // When the window gains focus again (e.g. the user comes back to the tab)
-window.addEventListener('focus', () => {
+window.addEventListener("focus", () => {
 	// Cancel the previous timeout task if it's still running
 	clearTimeout(timeoutId);
 	// Restore the previous title

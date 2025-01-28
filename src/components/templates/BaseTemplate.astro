@@ -1,13 +1,13 @@
 ---
-import '../../styles/global.css';
-import HeadSEO from 'organisms:HeadSEO';
-import GoogleAnalytics from 'atoms:GoogleAnalytics';
-import AppFooter from 'molecules:AppFooter';
-import Social from 'atoms:Social';
-import Email from 'atoms:Email';
-import Navbar from 'molecules:Navbar';
-import Technologies from 'molecules:Technologies';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import "../../styles/global.css";
+import HeadSEO from "organisms:HeadSEO";
+import GoogleAnalytics from "atoms:GoogleAnalytics";
+import AppFooter from "molecules:AppFooter";
+import Social from "atoms:Social";
+import Email from "atoms:Email";
+import Navbar from "molecules:Navbar";
+import Technologies from "molecules:Technologies";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

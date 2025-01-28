@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { computed, defineProps, type PropType, ref } from 'vue';
-import SearchTrigger from './SearchTrigger.vue';
-import SearchResults from './SearchResults.vue';
-import type { Article } from '@models:Article.ts';
-import type { DocSearchTranslation, ModalTranslations } from '@i18n:search-translation.ts';
-import { useFuse } from '@vueuse/integrations/useFuse';
-import type { UseFuseOptions } from '@vueuse/integrations';
-import Modal from '../Modal/Modal.vue';
+import { computed, defineProps, type PropType, ref } from "vue";
+import SearchTrigger from "./SearchTrigger.vue";
+import SearchResults from "./SearchResults.vue";
+import type { Article } from "@models:Article.ts";
+import type {
+	DocSearchTranslation,
+	ModalTranslations,
+} from "@i18n:search-translation.ts";
+import { useFuse } from "@vueuse/integrations/useFuse";
+import type { UseFuseOptions } from "@vueuse/integrations";
+import Modal from "../Modal/Modal.vue";
 
 const props = defineProps({
 	id: {
@@ -23,11 +26,11 @@ const props = defineProps({
 	},
 });
 
-const searchString = ref('');
+const searchString = ref("");
 
 const options = computed<UseFuseOptions<Article>>(() => ({
 	fuseOptions: {
-		keys: ['title', 'description', 'author', 'tags', 'categories', 'content'],
+		keys: ["title", "description", "author", "tags", "categories", "content"],
 		includeMatches: true,
 		threshold: 0.3,
 		useExtendedSearch: true,
@@ -37,17 +40,18 @@ const options = computed<UseFuseOptions<Article>>(() => ({
 const { results } = useFuse(searchString, props.articles, options);
 
 function getPlatformType() {
-	const userAgent = navigator?.userAgent.toLowerCase() ?? 'Unknown';
+	const userAgent = navigator?.userAgent.toLowerCase() ?? "Unknown";
 
-	if (userAgent.includes('windows')) {
-		return 'Windows';
-	} else if (userAgent.includes('mac')) {
-		return 'MacOS';
-	} else if (userAgent.includes('linux')) {
-		return 'Linux';
-	} else {
-		return 'Unknown';
+	if (userAgent.includes("windows")) {
+		return "Windows";
 	}
+	if (userAgent.includes("mac")) {
+		return "MacOS";
+	}
+	if (userAgent.includes("linux")) {
+		return "Linux";
+	}
+	return "Unknown";
 }
 
 const platformType = getPlatformType();
@@ -63,8 +67,11 @@ const searchBox = ref(modal.value?.searchBox);
 function showModal() {
 	isShowModal.value = true;
 }
-const getModalTranslations = (value: ModalTranslations, key: string): string => {
-	if (!value) return '';
+const getModalTranslations = (
+	value: ModalTranslations,
+	key: string,
+): string => {
+	if (!value) return "";
 	return value[key].toString();
 };
 </script>

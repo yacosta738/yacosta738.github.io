@@ -1,6 +1,6 @@
 ---
-import type { Project } from '@models:Project';
-import { Icon } from 'astro-icon/components';
+import type { Project } from "@models:Project";
+import { Icon } from "astro-icon/components";
 export interface Props {
 	position: string;
 	project: Project;
@@ -8,22 +8,22 @@ export interface Props {
 const { position, project } = Astro.props;
 
 const classProjectLinks = () => {
-	if (position === 'end') {
-		return 'justify-end';
-	} else if (position === 'center') {
-		return 'justify-center';
-	} else {
-		return 'justify-start';
+	if (position === "end") {
+		return "justify-end";
 	}
+	if (position === "center") {
+		return "justify-center";
+	}
+	return "justify-start";
 };
 const classLinks = () => {
-	if (position === 'end') {
-		return 'mr-2';
-	} else if (position === 'center') {
-		return 'm-1';
-	} else {
-		return 'ml-2';
+	if (position === "end") {
+		return "mr-2";
 	}
+	if (position === "center") {
+		return "m-1";
+	}
+	return "ml-2";
 };
 ---
 

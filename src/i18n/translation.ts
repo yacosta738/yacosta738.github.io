@@ -1,8 +1,8 @@
-import languages from './languages';
+import languages from "./languages";
 
-import en from './en/index';
+import en from "./en/index";
 
-import es from './es/index';
+import es from "./es/index";
 
 export const supportedLanguages = Object.keys(languages);
 
@@ -19,4 +19,4 @@ export const ui = {
 	},
 } as const;
 
-export const defaultLanguage = 'en' as keyof typeof ui;
+export const defaultLanguage = "en" as keyof typeof ui;

@@ -1,5 +1,5 @@
-import { getEntries, type CollectionEntry } from 'astro:content';
-import { jsonToTech, type Tech } from './Tech';
+import { getEntries, type CollectionEntry } from "astro:content";
+import { jsonToTech, type Tech } from "./Tech";
 
 export interface Project {
 	id?: string;
@@ -17,7 +17,9 @@ export interface Project {
 	content?: string;
 }
 
-export const jsonToProject = async (json: CollectionEntry<'projects'>): Promise<Project> => {
+export const jsonToProject = async (
+	json: CollectionEntry<"projects">,
+): Promise<Project> => {
 	const jsonData = json.data;
 	const tech = await getEntries(jsonData?.tech)
 		.then((res) => res.map((t) => jsonToTech(t)))

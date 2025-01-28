@@ -1,8 +1,8 @@
 ---
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { Role, type IRole } from '@models:Job';
-import { range } from '@utils:role-range';
-import AchievementDetails from 'molecules:AchievementDetails';
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import { Role, type IRole } from "@models:Job";
+import { range } from "@utils:role-range";
+import AchievementDetails from "molecules:AchievementDetails";
 
 export interface Props {
 	roles: IRole[];
@@ -23,7 +23,7 @@ const rolesOrdered: Role[] =
 		.map((role) => new Role(role)) ?? roles.map((role) => new Role(role));
 
 const hasMultipleRoles = rolesOrdered.length > 1;
-const present: string = t('current');
+const present: string = t("current");
 ---
 
 {

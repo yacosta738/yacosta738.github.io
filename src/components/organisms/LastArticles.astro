@@ -1,20 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import { type Article, jsonToArticle } from '@models:Article';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { type Article, jsonToArticle } from "@models:Article";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const publishedBlogEntries = await getCollection('blog', ({ data }) => {
+const publishedBlogEntries = await getCollection("blog", ({ data }) => {
 	return !data.draft;
 });
 
 // Process posts to include language information
 const processedPosts = publishedBlogEntries.map((post) => {
-	const idParts = post.id.split('/');
-	const lang = idParts[0] === 'es' ? 'es' : 'en';
+	const idParts = post.id.split("/");
+	const lang = idParts[0] === "es" ? "es" : "en";
 	return {
 		...post,
 		lang,
@@ -24,7 +24,9 @@ const processedPosts = publishedBlogEntries.map((post) => {
 // Filter posts by current language
 const filteredPosts = processedPosts.filter((post) => post.lang === lang);
 
-const postsPromises: Promise<Article>[] = filteredPosts.map((post) => jsonToArticle(post));
+const postsPromises: Promise<Article>[] = filteredPosts.map((post) =>
+	jsonToArticle(post),
+);
 
 const posts: Article[] = await Promise.all(postsPromises);
 

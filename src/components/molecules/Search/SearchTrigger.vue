@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
-const emit = defineEmits(['toggle']);
+const emit = defineEmits(["toggle"]);
 
 defineProps({
 	text: {
 		type: String,
-		default: 'Search',
+		default: "Search",
 	},
 	target: {
 		type: String,
-		default: 'search-modal',
+		default: "search-modal",
 	},
 });
 </script>

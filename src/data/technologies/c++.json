@@ -1,6 +1,6 @@
 {
-  "id": "c++",
-  "name": "C++",
-  "icon": "mdi:language-cpp",
-  "url": "https://isocpp.org/"
+	"id": "c++",
+	"name": "C++",
+	"icon": "mdi:language-cpp",
+	"url": "https://isocpp.org/"
 }

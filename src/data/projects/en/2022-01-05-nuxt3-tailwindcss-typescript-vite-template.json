@@ -1,14 +1,14 @@
 {
-  "title": "Nuxt 3 Template",
-  "cover": "/images/Nuxt 3 Template.jpeg",
-  "date": "2022-01-05T03:40:11.790Z",
-  "repository": "https://github.com/yacosta738/nuxt3-tailwindcss-typescript",
-  "url": "https://nuxt3-tailwindcss-typescript.vercel.app/",
-  "company": "Personal",
-  "tech": ["nuxtjs", "vuejs", "typescript", "vite", "tailwind"],
-  "showInProjects": true,
-  "featured": false,
-  "priority": 0.05,
-  "published": true,
-  "content": "Simple, opinionated, fully typed, and production-ready project template made with [Vue 3](https://v3.vuejs.org/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/) y [Tailwindcss](https://tailwindcss.com/)."
+	"title": "Nuxt 3 Template",
+	"cover": "/images/Nuxt 3 Template.jpeg",
+	"date": "2022-01-05T03:40:11.790Z",
+	"repository": "https://github.com/yacosta738/nuxt3-tailwindcss-typescript",
+	"url": "https://nuxt3-tailwindcss-typescript.vercel.app/",
+	"company": "Personal",
+	"tech": ["nuxtjs", "vuejs", "typescript", "vite", "tailwind"],
+	"showInProjects": true,
+	"featured": false,
+	"priority": 0.05,
+	"published": true,
+	"content": "Simple, opinionated, fully typed, and production-ready project template made with [Vue 3](https://v3.vuejs.org/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/) y [Tailwindcss](https://tailwindcss.com/)."
 }

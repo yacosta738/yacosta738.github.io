@@ -1,16 +1,16 @@
-import { glob } from 'astro/loaders';
-import { defineCollection, reference, z } from 'astro:content';
+import { glob } from "astro/loaders";
+import { defineCollection, reference, z } from "astro:content";
 
 const blogCollection = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/data/blog' }),
+	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/data/blog" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
 		date: z.date(),
 		cover: z.string(),
-		author: reference('authors'),
-		tags: z.array(reference('tags')),
-		categories: z.array(reference('categories')),
+		author: reference("authors"),
+		tags: z.array(reference("tags")),
+		categories: z.array(reference("categories")),
 		isExternalLink: z.boolean().default(false),
 		link: z.string().optional(),
 		draft: z.boolean(),
@@ -18,14 +18,14 @@ const blogCollection = defineCollection({
 });
 
 const tags = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.md', base: './src/data/tags' }),
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/data/tags" }),
 	schema: z.object({
 		title: z.string(),
 	}),
 });
 
 const categories = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.md', base: './src/data/categories' }),
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/data/categories" }),
 	schema: z.object({
 		title: z.string(),
 		order: z.number().optional(),
@@ -33,7 +33,7 @@ const categories = defineCollection({
 });
 
 const authors = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.json', base: './src/data/authors' }),
+	loader: glob({ pattern: "**/[^_]*.json", base: "./src/data/authors" }),
 	schema: z.object({
 		name: z.string(),
 		image: z.string(),
@@ -45,13 +45,13 @@ const authors = defineCollection({
 				name: z.string(),
 				url: z.string(),
 				icon: z.string(),
-			})
+			}),
 		),
 	}),
 });
 
 const jobs = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.json', base: './src/data/jobs' }),
+	loader: glob({ pattern: "**/[^_]*.json", base: "./src/data/jobs" }),
 	schema: z.object({
 		title: z.string(),
 		company: z.string(),
@@ -66,13 +66,13 @@ const jobs = defineCollection({
 				startDate: z.string().datetime(),
 				endDate: z.string().datetime().optional(),
 				achievements: z.array(z.string()),
-			})
+			}),
 		),
 	}),
 });
 
 const technologies = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.json', base: './src/data/technologies' }),
+	loader: glob({ pattern: "**/[^_]*.json", base: "./src/data/technologies" }),
 	schema: z.object({
 		id: z.string(),
 		name: z.string(),
@@ -82,7 +82,7 @@ const technologies = defineCollection({
 });
 
 const projects = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.json', base: './src/data/projects' }),
+	loader: glob({ pattern: "**/[^_]*.json", base: "./src/data/projects" }),
 	schema: z.object({
 		title: z.string(),
 		cover: z.string().optional(),
@@ -90,7 +90,7 @@ const projects = defineCollection({
 		repository: z.string().optional(),
 		url: z.string().optional(),
 		company: z.string(),
-		tech: z.array(reference('technologies')),
+		tech: z.array(reference("technologies")),
 		showInProjects: z.boolean().default(false),
 		featured: z.boolean().default(false),
 		priority: z.number().default(0),
@@ -100,11 +100,14 @@ const projects = defineCollection({
 });
 
 const notifications = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/data/notifications' }),
+	loader: glob({
+		pattern: "**/[^_]*.{md,mdx}",
+		base: "./src/data/notifications",
+	}),
 	schema: z.object({
 		title: z.string(),
 		content: z.string(),
-		type: z.enum(['neutral', 'success', 'error']).default('neutral'),
+		type: z.enum(["neutral", "success", "error"]).default("neutral"),
 		startDate: z.string().datetime(),
 		endDate: z.string().datetime().optional(),
 		dismissible: z.boolean().default(false),

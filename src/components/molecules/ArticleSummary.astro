@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
-import type { Article } from '@models:Article';
-import PostHeader from 'molecules:PostHeader';
-import { getLangFromUrl, useTranslations } from '@i18n:index';
+import { Image } from "astro:assets";
+import type { Article } from "@models:Article";
+import PostHeader from "molecules:PostHeader";
+import { getLangFromUrl, useTranslations } from "@i18n:index";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

@@ -1,14 +1,14 @@
 {
-  "title": "ExpensesApp",
+	"title": "ExpensesApp",
 
-  "cover": "/images/cover-expenses-app.webp",
-  "date": "2020-12-12T15:12:23.179Z",
-  "repository": "https://github.com/yacosta738/flutter_expenses_app",
-  "url": "https://imgur.com/hQRUqNH",
-  "company": "Personal Project",
-  "tech": ["dart", "flutter"],
-  "showInProjects": true,
-  "featured": false,
-  "published": true,
-  "content": "Una aplicación simple hecha en [Flutter](https://flutter.dev/) para realizar un seguimiento de los gastos personales diarios. Puede controlar cuánto ha gastado semanalmente y diariamente."
+	"cover": "/images/cover-expenses-app.webp",
+	"date": "2020-12-12T15:12:23.179Z",
+	"repository": "https://github.com/yacosta738/flutter_expenses_app",
+	"url": "https://imgur.com/hQRUqNH",
+	"company": "Personal Project",
+	"tech": ["dart", "flutter"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true,
+	"content": "Una aplicación simple hecha en [Flutter](https://flutter.dev/) para realizar un seguimiento de los gastos personales diarios. Puede controlar cuánto ha gastado semanalmente y diariamente."
 }

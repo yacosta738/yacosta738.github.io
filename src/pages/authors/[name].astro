@@ -1,25 +1,23 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import Card3D from 'molecules:Card3D';
-import BaseTemplate from 'templates:BaseTemplate';
-import { getLangFromUrl, useTranslations } from '@i18n:utils';
-import { type Author, jsonToAuthor } from '@models:Author';
-import { getCollection } from 'astro:content';
-
-export const prerender = true;
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import Card3D from "molecules:Card3D";
+import BaseTemplate from "templates:BaseTemplate";
+import { getLangFromUrl, useTranslations } from "@i18n:utils";
+import { type Author, jsonToAuthor } from "@models:Author";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-	const authorsData = await getCollection('authors');
+	const authorsData = await getCollection("authors");
 	const authors: Author[] = authorsData.map((author) => jsonToAuthor(author));
 	return authors
 		.filter((author) => {
-			const lang = author.id.split('/').shift();
-			return lang === 'en';
+			const lang = author.id.split("/").shift();
+			return lang === "en";
 		})
 		.map((author) => ({
 			params: {
-				name: author.id.split('/').pop(),
+				name: author.id.split("/").pop(),
 			},
 			props: {
 				author,

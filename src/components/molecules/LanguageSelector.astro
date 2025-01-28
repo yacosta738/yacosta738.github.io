@@ -1,6 +1,6 @@
 ---
-import { allLanguages, emojiFlags } from '@i18n:languages';
-import { getLangFromUrl, useTranslatedPath } from '@i18n:utils';
+import { allLanguages, emojiFlags } from "@i18n:languages";
+import { getLangFromUrl, useTranslatedPath } from "@i18n:utils";
 const url = Astro.url;
 const currentLanguage = getLangFromUrl(url);
 const translatePath = useTranslatedPath(currentLanguage);
