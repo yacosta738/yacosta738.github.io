@@ -4,8 +4,9 @@ import BlogPostTemplate from "@components:templates/BlogPostTemplate.astro";
 import ExternalPostLayout from "@components:templates/ExternalPostLayout.astro";
 
 export async function getStaticPaths() {
-	const publishedBlogEntries = await getCollection("blog", ({ data }) => {
-		return !data.draft;
+	const publishedBlogEntries = await getCollection("blog", ({ data, id }) => {
+		const lang = id.split("/").shift();
+		return !data.draft && lang === "en";
 	});
 	return publishedBlogEntries.map((entry) => ({
 		params: { id: entry.id },
