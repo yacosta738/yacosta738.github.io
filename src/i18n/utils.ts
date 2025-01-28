@@ -42,10 +42,12 @@ function interpolateParams(
   value: string | UiTranslate
 ) {
   if (params && typeof value === 'string') {
+    let result = value;
     for (const [paramKey, paramValue] of Object.entries(params)) {
       const regex = new RegExp(`{{${paramKey}}}`, 'g');
-      value = value.replace(regex, String(paramValue));
+      result = result.replace(regex, String(paramValue));
     }
+    return result;
   }
   return value;
 }

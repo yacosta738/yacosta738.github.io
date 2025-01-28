@@ -21,20 +21,17 @@ const formatDateRelativeToNow = (date: Date) => {
 };
 
 const formatDate = (date: Date | string) => {
-  if (typeof date === 'string') {
-    date = new Date(date);
-  }
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
 
   // if the date is 3 days ago or more, show the full date instead of the relative date
-  if (date.getTime() < Date.now() - DAYS_BEFORE_FULL_DATE) {
-    return date.toLocaleDateString('en', {
+  if (dateObj.getTime() < Date.now() - DAYS_BEFORE_FULL_DATE) {
+    return dateObj.toLocaleDateString('en', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
-  } else {
-    return formatDateRelativeToNow(date);
   }
+  return formatDateRelativeToNow(dateObj);
 };
 ---
 

@@ -41,13 +41,14 @@ function getPlatformType() {
 
   if (userAgent.includes('windows')) {
     return 'Windows';
-  } else if (userAgent.includes('mac')) {
-    return 'MacOS';
-  } else if (userAgent.includes('linux')) {
-    return 'Linux';
-  } else {
-    return 'Unknown';
   }
+  if (userAgent.includes('mac')) {
+    return 'MacOS';
+  }
+  if (userAgent.includes('linux')) {
+    return 'Linux';
+  }
+  return 'Unknown';
 }
 
 const platformType = getPlatformType();

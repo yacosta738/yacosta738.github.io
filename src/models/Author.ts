@@ -1,5 +1,5 @@
-import { type SocialMedia } from '../store/constants';
-import { type CollectionEntry } from 'astro:content';
+import type { SocialMedia } from '../store/constants';
+import type { CollectionEntry } from 'astro:content';
 
 export interface Author {
   id: string;

@@ -31,27 +31,27 @@ const allPosts: Article[] = publishedBlogEntries.sort((a, b) => {
 });
 
 const tags: { [key: string]: number } = allPosts.reduce((acc: { [key: string]: number }, post) => {
-  post.tags.forEach((tag) => {
+  for (const tag of post.tags) {
     const tagLower = tag.data.title.toLowerCase();
     if (tagLower in acc) {
       acc[tagLower] += 1;
     } else {
       acc[tagLower] = 1;
     }
-  });
+  }
   return acc;
 }, {});
 
 const categories: { [key: string]: number } = allPosts.reduce(
   (acc: { [key: string]: number }, post) => {
-    post.categories.forEach((category) => {
+    for (const category of post.categories) {
       const categoryLower = category.data.title.toLowerCase();
       if (categoryLower in acc) {
         acc[categoryLower] += 1;
       } else {
         acc[categoryLower] = 1;
       }
-    });
+    }
     return acc;
   },
   {}

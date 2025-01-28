@@ -38,10 +38,13 @@ test('test contact section', async ({ page }) => {
 
   // Submit form and wait for response
   const FORM_SUBMISSION_TIMEOUT = 60000; // 60 seconds
-  const responsePromise = page.waitForResponse((response) => {
-    const url = response.url();
-    return url.includes('formspree.io/f') && response.status() === 307;
-  }, { timeout: FORM_SUBMISSION_TIMEOUT });
+  const responsePromise = page.waitForResponse(
+    (response) => {
+      const url = response.url();
+      return url.includes('formspree.io/f') && response.status() === 307;
+    },
+    { timeout: FORM_SUBMISSION_TIMEOUT }
+  );
 
   await page.locator('button[type="submit"]').click();
 
@@ -49,5 +52,5 @@ test('test contact section', async ({ page }) => {
 
   // Verify response
   expect(response.status()).toBe(307);
-  expect(response.headers()['location']).toBe('http://localhost:4321');
+  expect(response.headers().location).toBe('http://localhost:4321');
 });

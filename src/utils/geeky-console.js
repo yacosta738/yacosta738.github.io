@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   try {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     if (!isSafari) {
-      const imageUrl = window.location.origin + '/you-are-the-best.webp';
+      const imageUrl = `${window.location.origin}/you-are-the-best.webp`;
       console.log(
         '%cStop!',
         'color:#0a192f;font-family:system-ui;font-size:4rem;-webkit-text-stroke: 1px #64ffda;font-weight:bold'

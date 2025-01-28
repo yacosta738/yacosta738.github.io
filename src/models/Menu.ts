@@ -6,37 +6,37 @@ export interface Menu {
 }
 export const navMenus: Menu[] = [
   {
-    id: 'about-' + crypto.randomUUID(),
+    id: `about-${crypto.randomUUID()}`,
     title: 'about',
     link: '/#about',
     dataCypress: 'about',
   },
   {
-    id: 'experience-' + crypto.randomUUID(),
+    id: `experience-${crypto.randomUUID()}`,
     title: 'experience',
     link: '/#jobs',
     dataCypress: 'jobs',
   },
   {
-    id: 'projects-' + crypto.randomUUID(),
+    id: `projects-${crypto.randomUUID()}`,
     title: 'work',
     link: '/#projects',
     dataCypress: 'projects',
   },
   {
-    id: 'last-articles-' + crypto.randomUUID(),
+    id: `last-articles-${crypto.randomUUID()}`,
     title: 'lastArticles',
     link: '/#last3articles',
     dataCypress: 'last3articles',
   },
   {
-    id: 'contact-' + crypto.randomUUID(),
+    id: `contact-${crypto.randomUUID()}`,
     title: 'contact',
     link: '/#contact',
     dataCypress: 'contact',
   },
   {
-    id: 'blog-' + crypto.randomUUID(),
+    id: `blog-${crypto.randomUUID()}`,
     title: 'blog',
     link: '/blog',
     dataCypress: 'blog',

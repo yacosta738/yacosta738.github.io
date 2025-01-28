@@ -8,9 +8,9 @@ import { marked } from 'marked';
  * @returns The generated random integer.
  */
 export const randomInt = (min: number, max: number) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  const minCeil = Math.ceil(min);
+  const maxFloor = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloor - minCeil + 1)) + minCeil;
 };
 
 /**
@@ -21,11 +21,15 @@ export const inlineLinks = (className: string) => {
   const elements = Array.from(document.querySelectorAll(className));
   // eslint-disable-next-line no-array-constructor
   const allLinks = new Array<HTMLElement[]>();
-  elements.forEach((el) => allLinks.push(Array.from(el.querySelectorAll('a'))));
+  for (const el of elements) {
+    allLinks.push(Array.from(el.querySelectorAll('a')));
+  }
   if (allLinks.length > 0) {
-    allLinks.forEach((links) => {
-      links.forEach((link) => link.classList.add('inline-link'));
-    });
+    for (const links of allLinks) {
+      for (const link of links) {
+        link.classList.add('inline-link');
+      }
+    }
   }
 };
 
