@@ -1,12 +1,10 @@
 ---
 defaultLocaleVersion: en/o-the-open-closed-principle-extending-behaviors-without-modifying-code
 title: '[O] The Open-Closed Principle'
-description: This article explains the Open-Closed Principle (OCP) of SOLID
-  design, which advises creating flexible and maintainable code by keeping
-  classes open to extension but closed to modification. It uses an example to
-  show how to adhere to the OCP by defining an interface and creating separate
-  classes for each shape.
-date: 2023-03-01T18:13:14.418Z
+description: This article explains the Open-Closed Principle (OCP) of SOLID design, which advises creating flexible and maintainable code by keeping classes open to extension but closed to modification. It uses an example to show how to adhere to the OCP by defining an interface and creating separate classes for each shape.
+link: ''
+isExternalLink: false
+date: 2023-03-01T19:13:00
 cover: /images/open-closed-principle.png
 author: en/yuniel-acosta
 tags:
@@ -16,8 +14,7 @@ categories:
   - en/software-development
 draft: false
 ---
-
-![[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code](/images/open-closed-principle.png '[O] The Open-Closed Principle: Extending Behaviors Without Modifying Code')
+![\[O\] The Open-Closed Principle: Extending Behaviors Without Modifying Code](/images/open-closed-principle.png "\[O\] The Open-Closed Principle: Extending Behaviors Without Modifying Code")
 
 The Open-Closed Principle (OCP) is a fundamental principle of the SOLID design principles. It promotes the idea that a class should be designed to be open for extension but closed for modification. This means that the behavior of a class should be easily extendable without changing the existing code. By adhering to this principle, developers can create code that is more flexible, maintainable, and easier to scale.
 
@@ -37,9 +34,9 @@ class AreaCalculator {
 }
 ```
 
-Here, the **`AreaCalculator`** class calculates the area of different shapes. If we want to add more shapes or change the calculation of area for any shape, we have to modify the **`AreaCalculator`** class, which violates the OCP principle.
+Here, the `**AreaCalculator**` class calculates the area of different shapes. If we want to add more shapes or change the calculation of area for any shape, we have to modify the `**AreaCalculator**` class, which violates the OCP principle.
 
-To adhere to the OCP, a better practice is to define an interface **`Shape`** that defines a method to calculate the area, and create separate classes for each shape that implements the **`Shape`** interface. This way, the behavior of the class can be extended by creating new classes that implement the **`Shape`** interface, without modifying the existing code. Here's an example:
+To adhere to the OCP, a better practice is to define an interface `**Shape**` that defines a method to calculate the area, and create separate classes for each shape that implements the `**Shape**` interface. This way, the behavior of the class can be extended by creating new classes that implement the `**Shape**` interface, without modifying the existing code. Here's an example:
 
 ```kotlin
 interface Shape {
@@ -59,6 +56,6 @@ class Triangle(private val base: Double, private val height: Double) : Shape {
 }
 ```
 
-With this approach, adding new shapes or modifying the calculation of an existing shape only requires creating a new class that implements the **`Shape`** interface. This adheres to the OCP principle, making the code more flexible, maintainable, and scalable.
+With this approach, adding new shapes or modifying the calculation of an existing shape only requires creating a new class that implements the `**Shape**` interface. This adheres to the OCP principle, making the code more flexible, maintainable, and scalable.
 
 In conclusion, the OCP principle helps developers to create software that can be easily extended without modifying the existing code. By using interfaces and inheritance, the behavior of a class can be extended without changing the existing code, making it more flexible and easier to maintain.

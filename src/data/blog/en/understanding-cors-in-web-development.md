@@ -1,12 +1,9 @@
 ---
-defaultLocaleVersion: en/understanding-cors-in-web-development
 title: Understanding CORS in Web Development
-description: This article explains CORS (Cross-Origin Resource Sharing) - a
-  security feature built into web browsers that allows web pages to make
-  XMLHttpRequests to another domain. It covers what CORS is, why it's important,
-  and how it works. The article emphasizes the importance of understanding CORS
-  for building modern web applications that require cross-domain requests.
-date: 2023-04-03T08:06:22.454Z
+description: This article explains CORS (Cross-Origin Resource Sharing) - a security feature built into web browsers that allows web pages to make XMLHttpRequests to another domain. It covers what CORS is, why it's important, and how it works. The article emphasizes the importance of understanding CORS for building modern web applications that require cross-domain requests.
+link: ''
+isExternalLink: false
+date: 2023-04-03T10:06:00
 cover: /images/understanding-cors-in-web-development.png
 author: en/yuniel-acosta
 tags:
@@ -14,9 +11,9 @@ tags:
 categories:
   - en/software-development
 draft: false
+defaultLocaleVersion: en/understanding-cors-in-web-development
 ---
-
-![CORS](/images/cors.png 'CORS')
+![CORS](/images/cors.png "Cors")
 
 ## Understanding CORS
 

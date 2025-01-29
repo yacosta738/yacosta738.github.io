@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from "astro:content";
+import BlogPostTemplate from "../../../components/templates/BlogPostTemplate.astro";
+import ExternalPostLayout from "../../../components/templates/ExternalPostLayout.astro";
+
+export async function getStaticPaths() {
+	const publishedBlogEntries = await getCollection("blog", ({ data }) => {
+		return !data.draft;
+	});
+	return publishedBlogEntries.map((entry) => {
+		const [lang, ...id] = entry.id.split("/");
+		return {
+			params: { lang, id: id.join("/") || undefined },
+			props: { entry },
+		};
+	});
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const isExternalLink = entry.data.isExternalLink;
+---
+
+{
+	isExternalLink ? (
+		<ExternalPostLayout post={entry} />
+	) : (
+		<BlogPostTemplate post={entry}>
+			<Content />
+		</BlogPostTemplate>
+	)
+}

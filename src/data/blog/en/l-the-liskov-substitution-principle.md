@@ -1,11 +1,10 @@
 ---
 defaultLocaleVersion: en/l-the-liskov-substitution-principle
 title: '[L] The Liskov Substitution Principle'
-description: The Liskov substitution principle ensures that subclass objects can
-  be used interchangeably with those of the superclass, preventing unexpected
-  program errors. Adhering to this rule simplifies code management and increases
-  predictability.
-date: 2023-03-08T20:53:25.904Z
+description: The Liskov substitution principle ensures that subclass objects can be used interchangeably with those of the superclass, preventing unexpected program errors. Adhering to this rule simplifies code management and increases predictability.
+link: ''
+isExternalLink: false
+date: 2023-03-08T21:53:00
 cover: /images/liskov-substitution-principle.png
 author: en/yuniel-acosta
 tags:
@@ -14,8 +13,7 @@ categories:
   - en/software-development
 draft: false
 ---
-
-![[L] The Liskov Substitution Principle](/images/liskov-substitution-principle.png '[L] The Liskov Substitution Principle')
+![\[L\] The Liskov Substitution Principle](/images/liskov-substitution-principle.png "\[L\] The Liskov Substitution Principle")
 
 The Liskov substitution principle (LSP) is the third principle of the SOLID design principles. It states that subtypes should be substitutable for their base types. Specifically, objects of a superclass should be able to be replaced with objects of a subclass without altering the correctness of the program. This principle helps to ensure that objects of a subclass can be used interchangeably with objects of the superclass, without introducing any unexpected behavior.
 
@@ -44,7 +42,6 @@ class Square : Rectangle() {
             super.height = value
         }
 }
-
 ```
 
 In this example, the **Square** class is a subclass of the **Rectangle** class. However, the **Square** class overrides the **width** and **height** properties in a way that changes the class's contract. Specifically, the **Square** class sets both the **width** and **height** properties to the same value, ensuring that a square is always a square. Nevertheless, this is not an actual square, since a square is a rectangle with equal width and height values. As a result, replacing an object of the Rectangle class with an object of the Square class may result in unexpected program behavior.
@@ -76,7 +73,6 @@ class Square : Rectangle() {
         return side * side
     }
 }
-
 ```
 
 In conclusion, the **Square** class has its own properties and methods, making it interchangeable with the **Rectangle** class without introducing unexpected behavior. This adherence to the Liskov Substitution Principle results in code that is more maintainable and predictable.

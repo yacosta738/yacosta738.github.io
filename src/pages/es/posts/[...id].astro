@@ -5,8 +5,10 @@ import ExternalPostLayout from "@components:templates/ExternalPostLayout.astro";
 
 export async function getStaticPaths() {
 	const publishedBlogEntries = await getCollection("blog", ({ data, id }) => {
-		const lang = id.split("/").shift();
-		return !data.draft && lang === "en";
+		// const lang = id.split("/").shift();
+		// console.log('🟢 🟢 🟢 🟢 🟢 🟢 🟢 🟢 🟢 ');
+		// console.log(lang);
+		return !data.draft;
 	});
 	return publishedBlogEntries.map((entry) => ({
 		params: { id: entry.id },

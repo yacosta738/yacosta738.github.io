@@ -22,9 +22,6 @@ i18n:
   structure: 'multiple_folders'
   locales: ['en', 'es']
   default_locale: 'en'
-  canonical_slug:
-    key: defaultLocaleVersion
-    value: 'en/{{slug}}'
 
 collections:
   - name: 'tech'
@@ -44,7 +41,6 @@ collections:
     label: 'Blog Posts'
     folder: 'src/data/blog'
     create: true
-    slug: '{{title | localize}}'
     fields:
       - name: 'title'
         widget: 'string'
