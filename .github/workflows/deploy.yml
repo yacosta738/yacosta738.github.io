@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
           
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
+        uses: withastro/action@v4
         with:
           package-manager: pnpm@10.0.0
         env:
@@ -93,7 +93,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@8e1d5461f02b7886d3c1a774bfbd873650445aa2
+        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804
         with:
           images: |
             n4t5u/yacosta738.github.io
@@ -113,7 +113,7 @@ jobs:
         run: pnpm run build # build:docker     
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@67a2d409c0a876cbe6b11854e3e25193efe4e62d
+        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4
         with:
           context: .
           file: ./Dockerfile
