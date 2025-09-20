@@ -20,7 +20,7 @@ jobs:
         run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV    
 
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Cleanup
         run: |
