@@ -96,9 +96,9 @@ const translatePath = useTranslatedPath(currentLocale);
 		<div class="mt-6 pt-4 border-t border-border space-y-4">
 			<!-- Language Selector -->
 			<div class="space-y-2">
-				<label class="block text-sm font-medium text-foreground-muted">
+				<div class="block text-sm font-medium text-foreground-muted">
 					{t("nav.language") || "Language"}
-				</label>
+				</div>
 				<LocaleSelect 
 					class="w-full"
 					variant="text"
@@ -107,9 +107,9 @@ const translatePath = useTranslatedPath(currentLocale);
 
 			<!-- Theme Toggle -->
 			<div class="space-y-2">
-				<label class="block text-sm font-medium text-foreground-muted">
+				<div class="block text-sm font-medium text-foreground-muted">
 					{t("nav.theme") || "Theme"}
-				</label>
+				</div>
 				<div class="flex justify-start">
 					<ThemeToggle 
 						currentLocale={currentLocale}
