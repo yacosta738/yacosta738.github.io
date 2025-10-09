@@ -48,6 +48,7 @@ const isPdf = resumePath.toLowerCase().endsWith(".pdf");
 ---
 
 <a
+	data-test="download-cv"
 	href={resumePath}
 	{...(isPdf ? { download: true } : {})}
 	target="_blank"

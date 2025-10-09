@@ -44,6 +44,10 @@ merge_strategy = "merge"
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-filesystem", "."]
 
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp"]
+
 # --- .gitignore management ---
 [gitignore]
 enabled = true

@@ -67,6 +67,7 @@ const t = useTranslations(currentLocale);
 							{t("cta.email_placeholder")}
 						</label>
 						<input
+							data-test="newsletter-email"
 							type="email"
 							id="newsletter-email"
 							name="email"
@@ -89,6 +90,7 @@ const t = useTranslations(currentLocale);
 						</p>
 					</div>
 					<Button
+						data-test="newsletter-subscribe"
 						type="submit"
 						variant="outline"
 						size="lg"

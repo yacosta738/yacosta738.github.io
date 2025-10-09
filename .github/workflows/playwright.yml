@@ -1,0 +1,126 @@
+name: Playwright E2E Tests
+
+on:
+  push:
+    branches: [main, develop, feature/*]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: E2E Tests - ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox, webkit]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps ${{ matrix.project }}
+      
+      - name: Run Playwright tests
+        run: pnpm exec playwright test --project=${{ matrix.project }} --reporter=dot,json
+        env:
+          CI: true
+      
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results-${{ matrix.project }}
+          path: playwright-report/
+          retention-days: 30
+      
+      - name: Upload test traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces-${{ matrix.project }}
+          path: test-results/
+          retention-days: 30
+  
+  report:
+    name: Publish Test Report
+    runs-on: ubuntu-latest
+    needs: test
+    if: always()
+    
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: all-reports
+      
+      - name: Publish HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: all-reports/**/playwright-report/
+          retention-days: 30
+      
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Try to find results file
+            const findResultsFile = (dir) => {
+              const files = fs.readdirSync(dir);
+              for (const file of files) {
+                const fullPath = path.join(dir, file);
+                if (fs.statSync(fullPath).isDirectory()) {
+                  const found = findResultsFile(fullPath);
+                  if (found) return found;
+                } else if (file === 'results.json') {
+                  return fullPath;
+                }
+              }
+              return null;
+            };
+            
+            const resultsFile = findResultsFile('all-reports');
+            
+            if (resultsFile) {
+              const results = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
+              const summary = `## 🎭 Playwright Test Results
+              
+              - **Total Tests**: ${results.stats?.total || 'N/A'}
+              - **Passed**: ${results.stats?.passed || 'N/A'} ✅
+              - **Failed**: ${results.stats?.failed || 'N/A'} ❌
+              - **Flaky**: ${results.stats?.flaky || 'N/A'} ⚠️
+              - **Duration**: ${Math.round((results.stats?.duration || 0) / 1000)}s
+              
+              [View full report in artifacts](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+              `;
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: summary
+              });
+            }
+

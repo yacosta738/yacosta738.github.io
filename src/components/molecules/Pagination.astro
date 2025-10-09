@@ -57,6 +57,7 @@ function getPageUrl(pageNumber: number): string {
       <a
         href={urlPrev}
         aria-label="Previous page"
+        data-test="pagination-prev"
         class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
       >
         <Icon name="tabler:chevron-left" class="icon-base" />
@@ -95,6 +96,7 @@ function getPageUrl(pageNumber: number): string {
       <a
         href={urlNext}
         aria-label="Next page"
+        data-test="pagination-next"
         class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
       >
         <Icon name="tabler:chevron-right" class="icon-base" />

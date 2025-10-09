@@ -25,6 +25,8 @@ pnpm-debug.log*
 
 # test coverage
 coverage/
+playwright-report/
+test-results/
 
 
 # START Ruler Generated Files

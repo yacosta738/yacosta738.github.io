@@ -55,6 +55,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               >{t("contact.name")}</label
             >
             <input
+              data-test="contact-name"
               type="text"
               id="name"
               name="name"
@@ -78,6 +79,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               >{t("contact.email")}</label
             >
             <input
+              data-test="contact-email"
               type="email"
               id="email"
               name="email"
@@ -101,6 +103,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               >{t("contact.subject")}</label
             >
             <input
+              data-test="contact-subject"
               type="text"
               id="subject"
               name="subject"
@@ -124,6 +127,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               >{t("contact.message")}</label
             >
             <textarea
+              data-test="contact-message"
               id="message"
               name="message"
               rows="4"
@@ -143,6 +147,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 
         <div class="flex flex-col items-center">
           <button
+            data-test="contact-submit"
             type="submit"
             class="inline-flex items-center justify-center px-6 py-3 border rounded-md bg-transparent text-[color:var(--color-primary)] border-[color:var(--color-primary)] font-medium cursor-pointer transition hover:bg-[color:var(--color-primary)]/15 disabled:opacity-60 disabled:cursor-not-allowed">
             <Icon name="lucide:send" class="w-5 h-5 mr-2" />

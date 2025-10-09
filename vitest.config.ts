@@ -7,6 +7,7 @@ export default getViteConfig({
 		/* for example, use 'happy-dom' to run tests in a browser-like environment */
 		environment: "happy-dom",
 		setupFiles: ["./src/test-setup.ts"],
+		include: ["src/**/*.test.ts"],
 		coverage: {
 			enabled: true,
 			reporter: ["text", "json", "html"],
@@ -33,5 +34,6 @@ export default getViteConfig({
 				"src/i18n/components/NotTranslateCaution.astro",
 			],
 		},
+		exclude: ["tests/e2e/**/*.spec.ts"],
 	},
 });

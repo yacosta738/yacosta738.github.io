@@ -59,7 +59,9 @@ const { image, summary, url } = resume.basics;
 const metaDescription = description || summary || t("default.summary");
 
 // Extract the image URL from ImageMetadata if needed
-const getImageUrl = (img: string | { src: string } | null | undefined): string => {
+const getImageUrl = (
+	img: string | { src: string } | null | undefined,
+): string => {
 	if (!img) return "";
 	if (typeof img === "string") return img;
 	if (typeof img === "object" && "src" in img) return img.src;
