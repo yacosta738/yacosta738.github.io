@@ -68,8 +68,26 @@ export const POST: APIRoute = async ({ request }) => {
 			);
 		}
 
-		// Validación de email
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		// Validación de email - limitar longitud para prevenir DoS
+		if (typeof email !== "string" || email.length > 254) {
+			return new Response(
+				JSON.stringify({
+					success: false,
+					message: "Invalid email address",
+				}),
+				{
+					status: 400,
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
+		}
+
+		// Regex seguro: evita backtracking catastrófico (ReDoS)
+		// Cumple con RFC 5322 sin cuantificadores anidados peligrosos
+		const emailRegex =
+			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 		if (!emailRegex.test(email)) {
 			return new Response(
 				JSON.stringify({
