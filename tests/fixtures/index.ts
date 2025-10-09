@@ -236,7 +236,7 @@ export const selectors = {
 	},
 
 	cv: {
-		downloadButton: '[data-test="download-cv"]',
+		downloadButton: '[data-test="download-cv"]:not([data-drawer-close])',
 	},
 
 	contact: {

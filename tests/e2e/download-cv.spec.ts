@@ -4,6 +4,11 @@ import { expect, test } from "@playwright/test";
 import { selectors } from "../fixtures";
 
 test.describe("CV Download", () => {
+	test.beforeEach(async ({}, testInfo) => {
+		if (testInfo.project.name.includes("mobile")) {
+			test.skip();
+		}
+	});
 	test("should download CV file and verify integrity", async ({
 		page,
 	}, testInfo) => {

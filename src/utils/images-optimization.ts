@@ -69,19 +69,36 @@ const computeHeight = (width: number, aspectRatio: number) => {
 	return Math.floor(width / aspectRatio);
 };
 
-const parseAspectRatio = (
+export const parseAspectRatio = (
 	aspectRatio: number | string | null | undefined,
 ): number | undefined => {
 	if (typeof aspectRatio === "number") return aspectRatio;
 
 	if (typeof aspectRatio === "string") {
-		const match = aspectRatio.match(/(\d+)\s*[/:]\s*(\d+)/);
+		// Manual, linear-time parsing to avoid any potential ReDoS from complex regexes.
+		// Accept formats like "16:9", "4/3" (with optional whitespace), or a plain number like "1.777".
+		const s = aspectRatio.trim();
+		if (s.length === 0) return undefined;
 
-		if (match) {
-			const [, num, den] = match.map(Number);
-			if (den && !Number.isNaN(num)) return num / den;
+		// Find first occurrence of ':' or '/'
+		const colon = s.indexOf(":");
+		const slash = s.indexOf("/");
+		let sepIndex = -1;
+		if (colon !== -1 && slash !== -1) {
+			sepIndex = Math.min(colon, slash);
 		} else {
-			const numericValue = parseFloat(aspectRatio);
+			sepIndex = colon !== -1 ? colon : slash;
+		}
+
+		if (sepIndex !== -1) {
+			const left = s.slice(0, sepIndex).trim();
+			const right = s.slice(sepIndex + 1).trim();
+			const num = Number(left);
+			const den = Number(right);
+			if (!Number.isNaN(num) && !Number.isNaN(den) && den !== 0) return num / den;
+		} else {
+			// Fallback: try parsing as a plain number (may contain decimals)
+			const numericValue = parseFloat(s);
 			if (!Number.isNaN(numericValue)) return numericValue;
 		}
 	}

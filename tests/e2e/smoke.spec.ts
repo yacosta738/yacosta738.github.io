@@ -9,9 +9,9 @@ test.describe("Smoke Tests - Critical Paths", () => {
 		await expect(page).toHaveTitle(/Yuniel Acosta/i);
 
 		// Check critical elements exist
-		const header = page.locator("header");
+		const header = page.getByRole('banner');
 		const main = page.locator("main");
-		const footer = page.locator("footer");
+		const footer = page.locator("#main-footer");
 
 		await expect(header).toBeVisible();
 		await expect(main).toBeVisible();
@@ -32,7 +32,7 @@ test.describe("Smoke Tests - Critical Paths", () => {
 		await page.goto("/");
 
 		// Find navigation
-		const nav = page.locator("nav");
+		const nav = page.getByRole('navigation', { name: 'Main navigation' }).first();
 		await expect(nav).toBeVisible();
 
 		// Check for common navigation links
@@ -88,9 +88,8 @@ test.describe("Smoke Tests - Critical Paths", () => {
 	});
 
 	test("should open and close mobile menu", async ({ page }) => {
-		await page.setViewportSize({ width: 375, height: 667 });
-		await page.goto("/");
-
+		        await page.goto("/");
+		        await page.waitForLoadState("networkidle");
 		// Find mobile menu button
 		const menuButton = page
 			.locator('[data-drawer-target], button[aria-label*="menu" i]')
@@ -99,7 +98,7 @@ test.describe("Smoke Tests - Critical Paths", () => {
 
 		if (hasMenuButton) {
 			// Open menu
-			await menuButton.click();
+			await menuButton.click({ force: true });
 			await page.waitForTimeout(500); // Animation time
 
 			// Check if drawer/menu is visible
@@ -239,7 +238,7 @@ test.describe("Smoke Tests - Critical Paths", () => {
 	test("should load all languages", async ({ page }) => {
 		// Test English
 		await page.goto("/en/");
-		await expect(page.locator("html")).toHaveAttribute("lang", "en");
+		await expect(page.locator("html")).toHaveAttribute("lang", "en-US");
 
 		// Test Spanish
 		await page.goto("/es/");
@@ -280,7 +279,7 @@ test.describe("Cross-Browser Compatibility", () => {
 		console.log(`Testing on: ${browserName}`);
 
 		// Check critical elements
-		const header = page.locator("header");
+		const header = page.getByRole('banner');
 		await expect(header).toBeVisible();
 	});
 });

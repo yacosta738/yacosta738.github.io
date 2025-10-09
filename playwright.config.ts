@@ -32,7 +32,7 @@ export default defineConfig({
 
 	// Global configuration for all tests
 	use: {
-		baseURL: process.env.BASE_URL || "http://localhost:4321",
+		baseURL: process.env.BASE_URL || "http://localhost:4322",
 
 		// Capture traces, screenshots, and videos on failure
 		trace: "retain-on-failure",
@@ -54,8 +54,8 @@ export default defineConfig({
 
 	// Development server configuration - auto-start on test run
 	webServer: {
-		command: "pnpm dev",
-		url: "http://localhost:4321",
+		command: "pnpm dev --port 4322",
+		url: "http://localhost:4322",
 		timeout: 120_000,
 		reuseExistingServer: !process.env.CI,
 		stdout: "ignore",
