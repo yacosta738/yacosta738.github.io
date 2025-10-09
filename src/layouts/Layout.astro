@@ -58,19 +58,29 @@ const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
 const { image, summary, url } = resume.basics;
 const metaDescription = description || summary || t("default.summary");
 
+// Extract the image URL from ImageMetadata if needed
+const getImageUrl = (img: string | { src: string } | null | undefined): string => {
+	if (!img) return "";
+	if (typeof img === "string") return img;
+	if (typeof img === "object" && "src" in img) return img.src;
+	return "";
+};
+
+const imageUrl = getImageUrl(image as string | { src: string });
+
 // Resolve a single og:image URL. Preference order:
 // 1. ogImage prop (string or URL)
 // 2. resume.basics.image
 // Returns an absolute URL string or an empty string.
 const resolveOgImage = (candidate?: string | URL) => {
-	if (!candidate && !image) return "";
+	if (!candidate && !imageUrl) return "";
 	try {
 		if (candidate) return new URL(String(candidate), Astro.url).href;
 	} catch {
 		// fallthrough to try resume image
 	}
 	try {
-		return image ? new URL(image, Astro.url).href : "";
+		return imageUrl ? new URL(imageUrl, Astro.url).href : "";
 	} catch {
 		return "";
 	}
@@ -168,13 +178,13 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
 
     <!-- Preload LCP image with high priority -->
     {
-      image && (
+      imageUrl && (
         <link
           rel="preload"
           as="image"
-          href={image}
+          href={imageUrl}
           fetchpriority="high"
-          imagesrcset={`${image} 1x`}
+          imagesrcset={`${imageUrl} 1x`}
         />
       )
     }
@@ -206,7 +216,7 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <meta name="twitter:description" content={summary} />
     <meta
       name="twitter:image"
-      content={image ? new URL(image, Astro.url).href : ""}
+      content={imageUrl ? new URL(imageUrl, Astro.url).href : ""}
     />
   </head>
   <body>
