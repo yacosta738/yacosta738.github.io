@@ -37,7 +37,7 @@ jobs:
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
             -Dsonar.sources=src
-            -Dsonar.tests=src/**/__tests__
+            -Dsonar.tests=src
             -Dsonar.test.inclusions=**/*.test.ts,**/*.test.js
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.test.js,**/__tests__/**
