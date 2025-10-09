@@ -176,19 +176,6 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
 
     <!-- Font is loaded via @font-face in fonts.css, no preload needed in production -->
 
-    <!-- Preload LCP image with high priority -->
-    {
-      imageUrl && (
-        <link
-          rel="preload"
-          as="image"
-          href={imageUrl}
-          fetchpriority="high"
-          imagesrcset={`${imageUrl} 1x`}
-        />
-      )
-    }
-
     <!-- DNS prefetch for external resources (non-blocking) -->
     <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
 
