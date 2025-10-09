@@ -1,0 +1,12 @@
+{
+	"company": "Personal",
+	"cover": "/src/assets/images/itunes_desktop_movil.webp",
+	"date": "2021-05-01T20:50:35.024Z",
+	"featured": true,
+	"published": true,
+	"repository": "https://github.com/yacosta738/itunes-search-music",
+	"showInProjects": false,
+	"tech": ["vuejs", "tailwind", "vite", "itunes-api"],
+	"title": "Buscador de música ITunes",
+	"url": "https://itunes-search-music.vercel.app/"
+}

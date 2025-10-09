@@ -1,20 +1,44 @@
 ---
-export interface Props {
-	show: boolean;
-	orientation: string;
+/**
+ * Side component.
+ * A layout component for creating fixed-position sidebars, typically used for
+ * social links or an email address. It can be positioned on the left or right
+ * side of the viewport and can be conditionally rendered.
+ *
+ * @prop {boolean} [show=true] - Whether to render the component.
+ * @prop {"left" | "right"} [orientation="left"] - The side of the viewport to position the component on.
+ * @prop {string} [class] - Additional CSS classes to apply to the component.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends HTMLAttributes<"div"> {
+	show?: boolean;
+	orientation?: "left" | "right" | string;
+	class?: string;
 }
 
-const { orientation, show } = Astro.props;
+// Default props with safe fallbacks
+const {
+	orientation = "left",
+	show = true,
+	class: className = "",
+	...attrs
+} = Astro.props as Props;
 ---
 
 {
 	show && (
 		<div
-			class:list={`fixed bottom-0 z-10 hidden w-10 text-gray-500 lg:block ${
-				orientation === 'left'
-					? 'right-auto md:left-5 lg:left-10'
-					: 'left-auto md:right-5 lg:right-10 '
-			}`}
+			{...(attrs as HTMLAttributes<"div">)}
+			role="complementary"
+			class={cn(
+				"fixed bottom-0 z-10 w-10 text-foreground-muted",
+				orientation === "left"
+					? "right-auto md:left-5 lg:left-10"
+					: "left-auto md:right-5 lg:right-10",
+				className
+			)}
 		>
 			<slot />
 		</div>

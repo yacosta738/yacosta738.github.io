@@ -1,0 +1,156 @@
+---
+import ResumeButton from "@/components/atoms/ResumeButton.astro";
+import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
+import SearchBox from "@/components/molecules/SearchBox.astro";
+import { navMenus } from "@/core/menu";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
+import { cn } from "@/lib/utils";
+
+interface Props {
+	id?: string;
+	class?: string;
+	resumePath?: string;
+	showSearch?: boolean;
+}
+
+const {
+	id = "mobile-drawer",
+	class: className = "",
+	resumePath = "/files/yuniel_acosta_cv.pdf",
+	showSearch = false,
+} = Astro.props;
+
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+---
+
+<!-- Backdrop -->
+<div
+	id="mobile-drawer-backdrop"
+	class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-300"
+	aria-hidden="true"
+></div>
+
+<!-- Drawer -->
+<aside
+       id={id}
+	   class={cn(
+		   "fixed top-0 right-0 z-60 h-screen w-80 max-w-[90vw]",
+		   "bg-background border-l border-border shadow-2xl",
+		   "transform translate-x-full transition-transform duration-300 ease-in-out",
+		   "overflow-y-auto scrollbar-thin",
+		   className
+	   )}
+       aria-label={t("nav.mobile") || "Mobile navigation"}
+       aria-hidden="true"
+       role="dialog"
+       aria-modal="true"
+>
+	<!-- Header -->
+	<div class="p-4 border-b border-border">
+		<h2 class="text-lg font-semibold text-foreground">
+			{t("nav.menu") || "Menu"}
+		</h2>
+	</div>
+
+	<!-- Navigation -->
+	<nav class="p-4" aria-label={t("nav.main") || "Main navigation"}>
+		<!-- Search Box -->
+		{showSearch && (
+			<div class="mb-4 pb-4 border-b border-border">
+				<SearchBox 
+					placeholder={t("search.placeholder") || "Buscar contenido..."}
+					class="w-full"
+				/>
+			</div>
+		)}
+
+		<ul class="space-y-4">
+			{navMenus.map((menu) => (
+				<li>
+					<a
+						href={translatePath(menu.link)}
+						class="flex items-center px-3 py-2 rounded-md text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent hover:bg-brand-accent/10 hover:text-brand-accent dark:hover:bg-brand-accent/20 dark:hover:text-brand-accent"
+						data-drawer-close
+						tabindex="0"
+					>
+						<span class="font-medium">{t(menu.title)}</span>
+					</a>
+				</li>
+			))}
+		</ul>
+
+		<!-- Resume Download -->
+		<div class="mt-6 pt-4 border-t border-border">
+			<ResumeButton 
+				resumePath={resumePath}
+				fullWidth
+				currentLocale={currentLocale}
+				data-drawer-close
+			/>
+		</div>
+
+		<!-- Language & Theme -->
+		<div class="mt-6 pt-4 border-t border-border space-y-4">
+			<!-- Language Selector -->
+			<div class="space-y-2">
+				<label class="block text-sm font-medium text-foreground-muted">
+					{t("nav.language") || "Language"}
+				</label>
+				<LocaleSelect 
+					class="w-full"
+					variant="text"
+				/>
+			</div>
+
+			<!-- Theme Toggle -->
+			<div class="space-y-2">
+				<label class="block text-sm font-medium text-foreground-muted">
+					{t("nav.theme") || "Theme"}
+				</label>
+				<div class="flex justify-start">
+					<ThemeToggle 
+						currentLocale={currentLocale}
+						showText={true}
+						class="w-full justify-start text-left"
+					/>
+				</div>
+			</div>
+		</div>
+	</nav>
+</aside>
+<style>
+	/* Custom scrollbar for the drawer */
+	.scrollbar-thin {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-muted) transparent;
+	}
+
+	.scrollbar-thin::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.scrollbar-thin::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.scrollbar-thin::-webkit-scrollbar-thumb {
+		background-color: var(--color-muted);
+		border-radius: 3px;
+	}
+
+	.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+		background-color: var(--color-muted-hover);
+	}
+
+	/* Focus trap styles */
+	[aria-hidden="true"] {
+		pointer-events: none;
+	}
+
+	[aria-hidden="false"] {
+		pointer-events: auto;
+	}
+</style>

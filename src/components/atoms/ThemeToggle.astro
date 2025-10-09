@@ -1,0 +1,150 @@
+---
+/**
+ * ThemeToggle component.
+ * A button that allows the user to toggle between light and dark color themes.
+ * It displays a sun or moon icon to indicate the current theme and handles
+ * the theme switching logic via a client-side script.
+ *
+ * @prop {string} [class] - Additional CSS classes to apply to the button.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"button"> {
+	class?: string;
+	currentLocale: Lang;
+	showText?: boolean;
+}
+
+const {
+	class: className,
+	currentLocale,
+	showText = false,
+	...attrs
+} = Astro.props;
+const t = useTranslations(currentLocale);
+
+// Generate unique IDs to avoid conflicts when multiple ThemeToggle components exist
+const uniqueId = Math.random().toString(36).substring(2, 9);
+---
+
+<button
+  id={`theme-toggle-button-${uniqueId}`}
+  class={cn(
+    "rounded bg-transparent p-2 text-sm text-foreground-muted hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 border border-transparent hover:border-brand-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent",
+    "cursor-pointer print:hidden",
+    showText ? "flex items-center gap-3" : "",
+    className,
+  )}
+  aria-label={t("theme.toggle.button")}
+  title={t("theme.toggle.tooltip")}
+  type="button"
+  {...attrs}
+>
+  <div class="flex items-center">
+    <Icon id={`theme-toggle-dark-icon-${uniqueId}`} class="w-5 h-5 theme-toggle-dark-icon hidden" name="lucide:moon" />
+    <Icon id={`theme-toggle-light-icon-${uniqueId}`} class="w-5 h-5 theme-toggle-light-icon hidden" name="lucide:sun" />
+  </div>
+  {showText && (
+    <span class="theme-toggle-text text-sm font-medium">
+      <span class="theme-toggle-light-text hidden">{t("theme.light") || "Light"}</span>
+      <span class="theme-toggle-dark-text hidden">{t("theme.dark") || "Dark"}</span>
+    </span>
+  )}
+</button>
+
+<script>
+  import type { Theme } from "@/types";
+
+  // Function to initialize a single theme toggle button
+  function initializeThemeToggle(button: HTMLElement): void {
+    const lightIcon = button.querySelector('.theme-toggle-light-icon') as HTMLElement;
+    const darkIcon = button.querySelector('.theme-toggle-dark-icon') as HTMLElement;
+    const lightText = button.querySelector('.theme-toggle-light-text') as HTMLElement;
+    const darkText = button.querySelector('.theme-toggle-dark-text') as HTMLElement;
+
+    // Type guard to ensure elements exist
+    if (!lightIcon || !darkIcon) {
+      console.warn("Theme toggle: some icons are missing. This toggle will be disabled.");
+      button.setAttribute("aria-hidden", "true");
+      button.setAttribute("disabled", "true");
+      button.classList.add("opacity-50", "pointer-events-none");
+      return;
+    }
+
+    // Function to set the icons and text visibility
+    const setVisibility = (theme: Theme): void => {
+      if (theme === "dark") {
+        lightIcon.classList.remove("hidden");
+        darkIcon.classList.add("hidden");
+        if (lightText && darkText) {
+          lightText.classList.remove("hidden");
+          darkText.classList.add("hidden");
+        }
+      } else {
+        darkIcon.classList.remove("hidden");
+        lightIcon.classList.add("hidden");
+        if (lightText && darkText) {
+          darkText.classList.remove("hidden");
+          lightText.classList.add("hidden");
+        }
+      }
+    };
+
+    // Set initial visibility based on current theme
+    const initialTheme: Theme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    setVisibility(initialTheme);
+
+    // Handle theme toggle button click
+    button.addEventListener("click", (): void => {
+      // Use the global theme system API
+      if (window.themeSystem) {
+        window.themeSystem.toggle();
+        // Update visibility immediately for this button
+        const newTheme: Theme = document.documentElement.classList.contains("dark")
+          ? "dark" 
+          : "light";
+        setVisibility(newTheme);
+      }
+    });
+  }
+
+  // Initialize all theme toggle buttons on the page
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeToggleButtons = document.querySelectorAll('[id^="theme-toggle-button-"]');
+    themeToggleButtons.forEach((button) => {
+      if (button instanceof HTMLElement) {
+        initializeThemeToggle(button);
+      }
+    });
+  });
+
+  // Also handle dynamically added theme toggles (e.g., in mobile drawer)
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node instanceof HTMLElement) {
+          // Check if the added node is a theme toggle button
+          if (node.id && node.id.startsWith('theme-toggle-button-')) {
+            initializeThemeToggle(node);
+          }
+          // Check if the added node contains theme toggle buttons
+          const themeToggles = node.querySelectorAll('[id^="theme-toggle-button-"]');
+          themeToggles.forEach((toggle) => {
+            if (toggle instanceof HTMLElement) {
+              initializeThemeToggle(toggle);
+            }
+          });
+        }
+      });
+    });
+  });
+
+  // Start observing for theme toggle buttons being added to the page
+  observer.observe(document.body, { childList: true, subtree: true });
+</script>
+

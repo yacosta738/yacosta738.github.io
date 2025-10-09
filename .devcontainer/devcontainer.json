@@ -1,47 +1,22 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.187.0/containers/typescript-node
 {
-	"name": "Node.js & TypeScript",
 	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick a Node version: 14, 16, 18
-		"args": {
-			"VARIANT": "18"
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"astro-build.astro-vscode",
+				"biomejs.biome",
+				"bradlc.vscode-tailwindcss",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"github.vscode-github-actions",
+				"github.vscode-pull-request-github"
+			]
 		}
 	},
-
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"telemetry.enableTelemetry": false,
-		"redhat.telemetry.enabled": false,
-		"vulnCost.sendStatistics": false,
-		"editor.renderWhitespace": "all",
-		"editor.renderControlCharacters": true,
-		"editor.formatOnSave": true,
-		"files.insertFinalNewline": true
-	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-vscode-remote.remote-containers",
-		"astro-build.astro-vscode",
-		"esbenp.prettier-vscode",
-		"rvest.vs-code-prettier-eslint",
-		"Vue.vscode-typescript-vue-plugin",
-		"vivaxy.vscode-conventional-commits",
-		"EditorConfig.EditorConfig",
-		"bradlc.vscode-tailwindcss",
-		"ms-playwright.playwright",
-		"eamodio.gitlens",
-		"Vue.volar"
-	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [3000, 8081],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
+	"forwardPorts": [4321],
+	"name": "Astro Project",
 	"postCreateCommand": "pnpm install",
-
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"
 }

@@ -1,0 +1,13 @@
+{
+	"title": "Nuxt ToDo App",
+	"cover": "/src/assets/images/app.webp",
+	"date": "2022-01-05T03:29:14.163Z",
+	"repository": "https://github.com/yacosta738/todo-app",
+	"url": "https://task-app-acosta.vercel.app/",
+	"company": "Personal",
+	"tech": ["vuejs", "tailwind", "typescript", "vite", "nuxtjs"],
+	"showInProjects": true,
+	"featured": false,
+	"priority": 0.05,
+	"published": true
+}

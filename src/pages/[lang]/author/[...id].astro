@@ -1,0 +1,65 @@
+---
+export const prerender = true;
+
+import { getCollection } from "astro:content";
+import AuthorWrapper from "@/components/organisms/AuthorWrapper.astro";
+import PostsList from "@/components/organisms/PostsList.astro";
+import { getArticles } from "@/core/article";
+import { type Lang, useTranslations } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const authors = await getCollection("authors");
+
+	return Promise.all(
+		authors.map(async (author) => {
+			const [lang, ...id] = author.id.split("/");
+			const authorId = id.join("/") || undefined;
+
+			const articles = await getArticles({
+				lang: lang as Lang,
+				author: author.id,
+				includeDrafts: false,
+			});
+
+			const sortedArticles = articles.sort(
+				(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+			);
+
+			return {
+				params: { lang, id: authorId },
+				props: {
+					author,
+					authorArticles: sortedArticles,
+				},
+			};
+		}),
+	);
+}
+
+const locale = Astro.currentLocale as Lang;
+const { author, authorArticles } = Astro.props;
+// Ensure we pass a complete Author object (including id and slug) to AuthorWrapper.
+const authorForWrapper = {
+	id: author.id,
+	slug: author.id.split("/").pop() || author.id,
+	...author.data,
+};
+const hasArticles = authorArticles.length > 0;
+const t = useTranslations(locale);
+---
+
+<Layout title={author.data.name} description={author.data.bio}>
+  <div class="container mx-auto px-4 pt-24">
+	<AuthorWrapper author={authorForWrapper} />
+    <section class="p-8">
+      { hasArticles && (
+          <PostsList
+              posts={authorArticles}
+              title={t({ en: "Posts", es: "Publicaciones" }) || "Posts"}
+              showLoadMore={true}
+          />)
+      }
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,69 @@
+---
+/**
+ * AsyncCSS component
+ *
+ * Loads CSS asynchronously to prevent render blocking.
+ * Uses the media="print" trick to load CSS without blocking the initial render.
+ *
+ * Usage:
+ * <AsyncCSS />
+ *
+ * This component automatically handles all stylesheets in the page.
+ */
+---
+
+<script is:inline>
+  // Async CSS loader - prevents render blocking
+  (function() {
+    // Function to load CSS asynchronously
+    function loadCSS(href, before, media) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.media = media || "all";
+      
+      if (before) {
+        before.parentNode.insertBefore(link, before);
+      } else {
+        document.head.appendChild(link);
+      }
+      
+      return link;
+    }
+    
+    // Find all stylesheet links
+    var stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+    
+    stylesheets.forEach(function(stylesheet) {
+      // Skip if already loaded or has async marker
+      if (stylesheet.hasAttribute('data-async-loaded')) {
+        return;
+      }
+      
+      var href = stylesheet.getAttribute('href');
+      if (!href) return;
+      
+      // Create preload link
+      var preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'style';
+      preload.href = href;
+      preload.onload = function() {
+        this.onload = null;
+        this.rel = 'stylesheet';
+      };
+      
+      // Replace original link with preload
+      stylesheet.parentNode.insertBefore(preload, stylesheet);
+      stylesheet.parentNode.removeChild(stylesheet);
+      
+      // Add noscript fallback
+      var noscript = document.createElement('noscript');
+      var fallback = document.createElement('link');
+      fallback.rel = 'stylesheet';
+      fallback.href = href;
+      noscript.appendChild(fallback);
+      preload.parentNode.insertBefore(noscript, preload.nextSibling);
+    });
+  })();
+</script>

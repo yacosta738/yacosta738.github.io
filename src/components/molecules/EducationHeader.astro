@@ -1,0 +1,180 @@
+---
+/**
+ * EducationHeader component.
+ * This component displays the header for an education entry, including details
+ * like the institution, area of study, degree type, and optional information
+ * such as courses, thesis, and GPA.
+ *
+ * @prop {string} institution - The name of the educational institution.
+ * @prop {string} area - The area of study (e.g., "Computer Science").
+ * @prop {string} [studyType] - The type of study or degree (e.g., "Bachelor's").
+ * @prop {string[]} [courses] - A list of relevant courses taken.
+ * @prop {string} [thesis] - The title or description of the thesis.
+ * @prop {string} [url] - An optional URL for the institution or program.
+ * @prop {string} [score] - The score or GPA obtained.
+ * @prop {Date} [startDate] - The start date of the education. (Not used in template)
+ * @prop {Date | null} [endDate] - The end date of the education. (Not used in template)
+ * @prop {string} [locale] - The locale for date formatting. (Not used in template)
+ */
+
+import HighlightsList from "./HighlightsList.astro";
+
+interface Props {
+	institution: string;
+	area: string;
+	studyType?: string;
+	courses?: string[];
+	thesis?: string;
+	url?: string;
+	score?: string;
+	startDate?: Date;
+	endDate?: Date | null;
+	locale?: string;
+}
+
+const { institution, area, studyType, courses, thesis, url, score } =
+	Astro.props;
+---
+
+<div class="education-header">
+  <h3 class="institution">
+    {url ? (
+      <a href={url} class="institution-link" target="_blank" rel="noopener noreferrer">
+        <span class="institution-name">{institution}</span>
+      </a>
+    ) : (
+      <span class="institution-name">{institution}</span>
+    )}
+  </h3>
+
+  <div class="degree-info">
+    <p class="degree">
+      {studyType && <span class="study-type">{studyType}</span>}
+      {studyType && area && <span class="separator"> in </span>}
+      <span class="area">{area}</span>
+    </p>
+    {score && (
+      <p class="score">Score: {score}</p>
+    )}
+  </div>
+
+  {thesis && (
+    <div class="thesis">
+      <h4 class="thesis-title">Thesis:</h4>
+      <p class="thesis-description">{thesis}</p>
+    </div>
+  )}
+
+  {courses && courses.length > 0 && (
+    <div class="courses">
+      <h4 class="courses-title">Relevant Coursework:</h4>
+      {courses.length > 0 && (
+          <div class="mt-4">
+            <HighlightsList highlights={courses} columns={3} />
+          </div>
+      )}
+    </div>
+  )}
+</div>
+
+<style>
+  .education-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .institution {
+    font-size: var(--fz-xl);
+    font-weight: 500;
+    color: var(--color-foreground);
+    margin: 0 0 8px 0;
+  }
+
+  .institution-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.25s ease;
+  }
+
+  .institution-link:hover .institution-name {
+    color: var(--color-brand-accent);
+  }
+
+  .institution-name {
+    color: var(--color-brand-accent);
+  }
+
+  .degree-info {
+    margin-bottom: 12px;
+  }
+
+  .degree {
+    margin: 0 0 4px 0;
+    color: var(--color-foreground-muted);
+    font-size: var(--fz-md);
+  }
+
+  .study-type {
+    font-weight: 500;
+    color: var(--color-foreground-muted);
+  }
+
+  .separator {
+    color: var(--color-foreground-muted);
+  }
+
+  .area {
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
+    color: var(--color-brand-accent);
+  }
+
+  .score {
+    margin: 0;
+    color: var(--color-foreground-muted);
+    font-size: var(--fz-sm);
+    font-family: var(--font-mono);
+  }
+
+  .thesis {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: var(--color-background-secondary);
+    border-left: 3px solid var(--color-brand-accent);
+    border-radius: 4px;
+  }
+
+  .thesis-title {
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--color-brand-accent);
+    margin: 0 0 8px 0;
+    font-family: var(--font-mono);
+  }
+
+  .thesis-description {
+    margin: 0;
+    color: var(--color-foreground-muted);
+    font-size: var(--fz-sm);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .courses {
+    margin-top: 16px;
+  }
+
+  .courses-title {
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--color-brand-accent);
+    margin: 0 0 8px 0;
+    font-family: var(--font-mono);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .thesis {
+      padding: 8px;
+    }
+  }
+</style>

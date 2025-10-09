@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends HTMLAttributes<"button"> {}
+const { class: className, ...attrs } = Astro.props;
+---
+
+<button
+  class={cn(
+    "p-2 text-foreground hover:text-brand-accent dark:text-foreground-muted dark:hover:text-brand-accent cursor-pointer transition-colors",
+    className
+  )}
+    {...attrs}
+>
+  <slot />
+</button>

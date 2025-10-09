@@ -1,0 +1,30 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import ByAuthor from "@/components/atoms/ByAuthor.astro";
+import FormattedDate from "@/components/atoms/FormattedDate.astro";
+import ReadingTime from "@/components/atoms/ReadingTime.astro";
+import type Article from "@/core/article/article.model";
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"div"> {
+	post: Article;
+	readingTime: string;
+}
+const { post, readingTime, ...attrs } = Astro.props;
+
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+---
+
+<div class={cn("flex flex-col items-center gap-4 my-8", attrs.class)} {...attrs}>
+	<h1
+		class="inline text-4xl md:text-6xl font-inter font-semibold tracking-tighter leading-[112%] max-w-4xl"
+		aria-label={t("post.aria.title")}
+	>
+		{post.title}
+	</h1>
+	<ByAuthor author={post.author} currentLocale={currentLocale} />
+	<FormattedDate date={post.date} currentLocale={currentLocale} />
+	<ReadingTime readingTime={readingTime} currentLocale={currentLocale} />
+</div>

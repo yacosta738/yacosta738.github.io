@@ -1,5 +1,4 @@
 ---
-defaultLocaleVersion: en/vuejs
-title: vuejs
+title: Vuejs
 ---
 

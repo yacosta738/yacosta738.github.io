@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+
+import ProjectsTable from "@/components/organisms/ProjectsTable.astro";
+import { getAllProjects } from "@/core/resume/project/project.service";
+import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+
+export const getStaticPaths = () =>
+	Object.keys(LOCALES).map((lang) => ({
+		params: { lang },
+	}));
+
+const currentLocale = Astro.params.lang as Lang;
+
+import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
+
+const resume = await getMainResumeWithData({ lang: currentLocale });
+if (!resume || !resume.projects) {
+	throw new Error("No se pudo obtener el resume principal");
+}
+const allProjects = await getAllProjects(resume.projects);
+const t = useTranslations(currentLocale);
+const title = t("allProjects");
+---
+
+<Layout title={title}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-foreground">
+        {t("allProjects")}
+      </h1>
+      <p class="mt-4 text-lg text-primary">
+        {t("allProjectsDescription")}
+      </p>
+    </header>
+    <ProjectsTable projects={allProjects} />
+  </main>
+</Layout>

@@ -1,5 +1,4 @@
 ---
-defaultLocaleVersion: en/typescript
-title: typescript
+title: TypeScript
 ---
 

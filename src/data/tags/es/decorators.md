@@ -1,5 +1,4 @@
 ---
-defaultLocaleVersion: en/decorators
-title: decoradores
+title: Decoradores
 ---
 

@@ -1,6 +1,5 @@
 ---
-defaultLocaleVersion: en/software-development
-title: software development
-order: 12
+title: Software Development
+order: 0
 ---
 

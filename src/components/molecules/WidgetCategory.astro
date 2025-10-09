@@ -1,36 +1,37 @@
 ---
-import {
-	getLangFromUrl,
-	useTranslations,
-	useTranslatedPath,
-} from "@i18n:utils";
 import { Icon } from "astro-icon/components";
-import WidgetCard from "molecules:WidgetCard";
+import WidgetCard from "@/components/atoms/WidgetCard.astro";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+
+export type CategoryItem = {
+	slug: string;
+	title: string;
+	count: number;
+};
 
 export interface Props {
-	categories: { [key: string]: number };
+	categories: CategoryItem[];
 }
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 
 const { categories } = Astro.props;
-const allCategories = Object.keys(categories);
 ---
 
 <WidgetCard title={t('categories')}>
 	<ul class="relative my-4 flex list-none flex-col p-0">
 		{
-			allCategories.map((category) => (
+			categories.map(({ slug, title, count }) => (
 				<li class="my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate">
 					<Icon name="mdi:chevron-right" class="h-5 w-5 mr-1" />
-					<a href={translatePath(`/categories/${category}`)} class="inline-link">
+					<a href={translatePath(`/category/${slug}`)} class="inline-link">
 						<div class="flex items-center justify-center">
-							<span>{category}</span>
+							<span>{title}</span>
 						</div>
 					</a>
-					<p>({categories[category]})</p>
+					<p>({count})</p>
 				</li>
 			))
 		}

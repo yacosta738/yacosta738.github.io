@@ -1,0 +1,64 @@
+---
+/**
+ * Card component.
+ * A general-purpose card container with built-in styling for borders, shadows,
+ * and hover effects. It includes a "default" and a "minimal" variant.
+ *
+ * @prop {"default" | "minimal"} [variant="default"] - The visual style of the card.
+ * @prop {string} [class] - Additional CSS classes to apply to the card's outer article element.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends HTMLAttributes<"article"> {
+	class?: string;
+	variant?: "default" | "minimal";
+}
+
+const { class: className, variant = "default", ...attrs } = Astro.props;
+
+const classes = cn(
+	"group relative cursor-default transition-all duration-300 h-full",
+	"motion-reduce:hover:transform-none motion-reduce:focus-within:transform-none",
+	className,
+);
+
+const innerClasses = cn(
+	"flex flex-col relative h-full",
+	"bg-card dark:bg-card border border-border rounded-lg",
+	"shadow-sm hover:shadow-lg transition-all duration-300",
+	"p-4 overflow-hidden",
+	variant === "minimal" ? "bg-slate-50 dark:bg-slate-800/50" : "",
+);
+---
+
+<article class={classes} {...attrs}>
+	<div class={innerClasses}>
+		<slot />
+	</div>
+</article>
+
+<style>
+	/* Scoped styles to prevent global header interference */
+	:global(.card-header) {
+		/* Reset any global header styles that might leak in */
+		padding: 0;
+		background-color: transparent;
+		filter: none;
+		backdrop-filter: none;
+		user-select: auto;
+		pointer-events: auto;
+		transition: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.group {
+			transition: none;
+		}
+
+		.group:hover,
+		.group:focus-within {
+			transform: none;
+		}
+	}
+</style>

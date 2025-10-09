@@ -1,0 +1,226 @@
+---
+import Section from "@/components/atoms/Section.astro";
+import Typography from "@/components/atoms/Typography.astro";
+/**
+ * About section component.
+ * This component renders the "About Me" section of the page, including a
+ * summary, a profile picture with a hover effect, and a list of recently
+ * used technologies. It contains a helper function to determine the most
+ * relevant skills to display.
+ *
+ * @prop {object} basics - Basic information about the person.
+ * @prop {string} basics.summary - A summary paragraph.
+ * @prop {string} basics.image - The URL of the profile image.
+ * @prop {string} basics.name - The person's name.
+ * @prop {Skill[]} [skills=[]] - An array of skill objects to be analyzed.
+ */
+import HighlightsList from "@/components/molecules/HighlightsList.astro";
+import type Skill from "@/core/resume/skill/skill.model";
+import { getSkills } from "@/core/skill";
+import { type Lang, useTranslations } from "@/i18n";
+import { findImage } from "@/utils/images";
+import OptimizedPicture from "../atoms/OptimizedPicture.astro";
+
+interface Props {
+	basics: {
+		summary: string;
+		image: string;
+		name: string;
+	};
+	skills?: Skill[];
+}
+
+const { basics, skills = [] } = Astro.props as Props;
+const { summary, image, name } = basics;
+const preparedImage = await findImage(image || "");
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+/**
+ * Extracts the most frequent technical skills, prioritizing those that match
+ * the global skill library.
+ * @param {Skill[]} skillsList - An array of skill objects from the resume.
+ * @returns {Promise<string[]>} A promise that resolves to an array of the top 6 skill names.
+ */
+const getPrimaryTechSkills = async (skillsList: Skill[]): Promise<string[]> => {
+	const keywordFrequency = new Map<string, number>();
+
+	skillsList.forEach((skill) => {
+		if (skill.keywords) {
+			skill.keywords.forEach((keyword) => {
+				const normalizedKeyword = keyword.trim();
+				keywordFrequency.set(
+					normalizedKeyword,
+					(keywordFrequency.get(normalizedKeyword) || 0) + 1,
+				);
+			});
+		}
+	});
+
+	const skillLibrary = await getSkills({ lang: currentLocale });
+	const skillLibraryNames = new Set(
+		skillLibrary.map((skill) => skill.name.toLowerCase()),
+	);
+
+	const keywordScores = Array.from(keywordFrequency.entries()).map(
+		([keyword, frequency]) => ({
+			keyword,
+			frequency,
+			hasLibraryMatch: skillLibraryNames.has(keyword.toLowerCase()),
+			score:
+				frequency + (skillLibraryNames.has(keyword.toLowerCase()) ? 10 : 0),
+		}),
+	);
+
+	const topSkills = keywordScores
+		.sort((a, b) => b.score - a.score)
+		.slice(0, 6)
+		.map((item) => item.keyword);
+	return topSkills;
+};
+
+const defaultSkillsList = [
+	"TypeScript",
+	"HTML & (S)CSS",
+	"Vue",
+	"Node.js",
+	"Spring Boot",
+	"Java / Kotlin",
+];
+const recentTechnologies =
+	skills.length > 0 ? await getPrimaryTechSkills(skills) : defaultSkillsList;
+---
+
+<Section title={t('about')} id="about">
+	<div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+		<div class="lg:col-span-3 space-y-6">
+			<div class="space-y-4 text-foreground-muted">
+				<Typography as="p" variant="body" class="text-justify leading-relaxed">
+					{summary}
+				</Typography>
+				
+				<Typography as="p" variant="body" class="leading-relaxed">
+					Here are a few technologies that I've been working with recently:
+				</Typography>
+			</div>
+					<HighlightsList highlights={recentTechnologies} columns={2} />
+		</div>
+		
+		<div class="lg:col-span-2 flex justify-center lg:justify-end">
+			<div class="image-container w-full max-w-xs lg:max-w-sm">
+				<div class="image-wrapper">
+					<OptimizedPicture
+						src={preparedImage as unknown as any}
+						alt={name}
+						class="profile-image"
+						width={400}
+						height={400}
+						loading="eager"
+						fetchpriority="high"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</Section>
+
+<style>
+	.image-container {
+		position: relative;
+	}
+	
+	.image-wrapper {
+		display: block;
+		position: relative;
+		width: 100%;
+		border-radius: 4px;
+		background-color: var(--color-brand-accent);
+		box-shadow: 0 10px 30px -15px var(--color-background-secondary);
+		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	}
+	
+	.image-wrapper:hover,
+	.image-wrapper:focus {
+		outline: 0;
+		transform: translate(-4px, -4px);
+	}
+	
+	.image-wrapper:hover::after,
+	.image-wrapper:focus::after {
+		transform: translate(8px, 8px);
+	}
+	
+	.image-wrapper:hover .profile-image,
+	.image-wrapper:focus .profile-image {
+		filter: none;
+		mix-blend-mode: normal;
+	}
+	
+	.profile-image {
+		position: relative;
+		border-radius: 4px;
+		mix-blend-mode: multiply;
+		filter: grayscale(100%) contrast(1);
+		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+	
+	.image-wrapper::before,
+	.image-wrapper::after {
+		content: '';
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 4px;
+		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	}
+	
+	.image-wrapper::before {
+		top: 0;
+		left: 0;
+		background-color: var(--color-background-secondary);
+		mix-blend-mode: screen;
+	}
+	
+	.image-wrapper::after {
+		border: 2px solid var(--color-brand-accent);
+		top: 14px;
+		left: 14px;
+		z-index: -1;
+	}
+	
+	/* Remove default summary styles */
+	summary::-webkit-details-marker {
+		display: none;
+	}
+	
+	summary::marker {
+		display: none;
+	}
+	
+	/* Details open state */
+	details[open] summary::before {
+		transform: rotate(90deg);
+	}
+	
+	/* Light mode overrides for better photo visibility */
+	html:not(.dark) .profile-image {
+		filter: brightness(0.9) grayscale(100%) contrast(1);
+		mix-blend-mode: normal;
+	}
+	
+	html:not(.dark) .image-wrapper::before {
+		background-color: transparent;
+		mix-blend-mode: normal;
+	}
+	
+	/* Light mode hover effects - apply a subtle filter on hover instead */
+	html:not(.dark) .image-wrapper:hover .profile-image,
+	html:not(.dark) .image-wrapper:focus .profile-image {
+		filter: brightness(1.1) contrast(1.05);
+		mix-blend-mode: normal;
+	}
+</style>

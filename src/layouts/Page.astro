@@ -1,0 +1,26 @@
+---
+import Footer from "@/components/organisms/Footer.astro";
+import Header from "@/components/organisms/Header.astro";
+import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
+import Layout from "./Layout.astro";
+
+interface Props {
+	title?: string;
+	description?: string;
+	frontmatter?: undefined;
+}
+
+const { title, description } = Astro.props.frontmatter || Astro.props;
+---
+
+<Layout {title} {description}>
+	<slot name="header" slot="header">
+		<LocaleSuggest />
+    <Header />
+	</slot>
+	<slot name="subheader" slot="subheader" />
+	<div class="container mx-auto px-4 pt-24 prose lg:prose-xl xl:prose-2xl dark:prose-invert">
+		<slot />
+	</div>
+  <Footer />
+</Layout>

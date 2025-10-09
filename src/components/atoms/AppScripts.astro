@@ -1,0 +1,18 @@
+---
+/**
+ * AppScripts component - OPTIMIZED.
+ * Minimal client-side scripts for enhanced UX.
+ * Console message removed for performance. Title change kept but optimized.
+ */
+import { type Lang, useTranslations } from "@/i18n";
+
+const props = (Astro.props ?? {}) as { lang?: Lang };
+const currentLocale: Lang = (props.lang ?? Astro.params?.lang ?? "en") as Lang;
+const t = useTranslations(currentLocale);
+const titleTextAlt = t("titleAltText", { emoji: "😥" });
+---
+
+<!-- Optimized title change script - minimal impact -->
+<script is:inline define:vars={{ titleTextAlt }}>
+let prevTitle=document.title,tid;window.addEventListener("blur",()=>{clearTimeout(tid);prevTitle=document.title;tid=setTimeout(()=>document.title=titleTextAlt,10000)}),window.addEventListener("focus",()=>{clearTimeout(tid);document.title=prevTitle});
+</script>

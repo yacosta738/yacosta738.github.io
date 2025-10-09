@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type Tag from "@/core/tag/tag.model";
+import { type Lang, useTranslations } from "@/i18n";
+import { cleanEntityId } from "@/lib/collection.entity";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"a"> {
+	tag: Tag;
+	currentLocale: Lang;
+}
+const { tag, type, currentLocale, ...attrs } = Astro.props;
+
+const t = useTranslations(currentLocale);
+---
+
+<a
+	class={cn(
+		"w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80",
+		attrs.class
+	)}
+	href={`/${currentLocale}/blog/tag/${cleanEntityId(tag.slug).toLowerCase()}/`}
+	aria-label={t("post.aria.tag", { tag: tag.title })}
+	{...attrs}
+>
+	{tag.title}
+</a>

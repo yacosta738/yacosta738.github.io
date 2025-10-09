@@ -1,0 +1,12 @@
+{
+	"title": "Personal Blog v1.0",
+	"cover": "/src/assets/images/pbv1.webp",
+	"date": "2019-11-14T03:35:24.000Z",
+	"repository": "https://github.com/yacosta738/yacosta738.github.io",
+	"url": "https://yacosta738.github.io/",
+	"company": "Personal",
+	"tech": ["jekyll", "ruby", "scss"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true
+}

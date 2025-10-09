@@ -1,0 +1,11 @@
+{
+	"code": "es",
+	"nativeName": "Español",
+	"names": {
+		"en": "Spanish",
+		"es": "Español",
+		"fr": "Espagnol"
+	},
+	"flag": "openmoji:flag-spain",
+	"direction": "ltr"
+}

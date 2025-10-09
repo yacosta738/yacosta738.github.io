@@ -1,62 +1,37 @@
-import { ui, defaultLanguage, type UiTranslate } from "./translation";
+import { DEFAULT_LOCALE, type Lang, type Multilingual } from "./types";
+import { ui } from "./ui";
 
-export const showDefaultLang = false;
-type LanguageKey = keyof typeof ui;
-
-export function getLangFromUrl(url: URL): keyof typeof ui {
-	const pathSegments = url.pathname.split("/");
-	let lang = defaultLanguage;
-
-	for (const segment of pathSegments) {
-		if (segment in ui) {
-			lang = segment as keyof typeof ui;
-			break;
-		}
-	}
-
-	return lang;
+export function getLangFromUrl(url: URL) {
+	const [, lang] = url.pathname.split("/");
+	if (lang in ui) return lang as Lang;
+	return DEFAULT_LOCALE;
 }
 
-export function useTranslations(lang: LanguageKey) {
+export function useTranslations(lang: Lang) {
 	return function t(
-		key: string,
-		params?: { [key: string]: string | number },
+		multilingualOrKey: Multilingual | string,
+		variables?: Record<string, string | number>,
 	): string {
-		const keys = key.split(".");
-		let value: UiTranslate | string = ui[lang];
+		let text: string;
 
-		for (const k of keys) {
-			value = (value as UiTranslate)?.[k] as UiTranslate | string;
+		if (typeof multilingualOrKey === "string") {
+			const langUI = ui[lang] || {};
+			const defaultUI = ui[DEFAULT_LOCALE] || {};
 
-			if (!value) {
-				const dLang = defaultLanguage;
-				value = (ui[dLang] as UiTranslate)?.[k] as UiTranslate | string;
-			}
+			text =
+				langUI[multilingualOrKey] ??
+				defaultUI[multilingualOrKey] ??
+				multilingualOrKey;
+		} else {
+			text = multilingualOrKey[lang] ?? multilingualOrKey[DEFAULT_LOCALE] ?? "";
 		}
 
-		value = interpolateParams(params, value);
-
-		return typeof value === "string" ? value : key;
-	};
-}
-
-function interpolateParams(
-	params: { [key: string]: string | number } | undefined,
-	value: string | UiTranslate,
-) {
-	if (params && typeof value === "string") {
-		let result = value;
-		for (const [paramKey, paramValue] of Object.entries(params)) {
-			const regex = new RegExp(`{{${paramKey}}}`, "g");
-			result = result.replace(regex, String(paramValue));
+		if (variables) {
+			return Object.entries(variables).reduce((result, [key, value]) => {
+				return result.replace(new RegExp(`{${key}}`, "g"), String(value));
+			}, text);
 		}
-		return result;
-	}
-	return value;
-}
 
-export function useTranslatedPath(lang: keyof typeof ui) {
-	return function translatePath(path: string, l: string = lang) {
-		return !showDefaultLang && l === defaultLanguage ? path : `/${l}${path}`;
+		return text;
 	};
 }

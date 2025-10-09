@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"header"> {
+	title: string;
+}
+
+const { title, ...attrs } = Astro.props;
+---
+
+<header {...attrs} class={cn("relative overflow-hidden p-2 text-center",attrs.class)}>
+  <h1 class={cn(
+		"text-foreground text-3xl md:text-5xl font-bold leading-tight tracking-tight relative",
+		"transition-colors duration-350 animate-fadeIn font-heading text-center"
+	)}>{title}</h1>
+  <slot />
+</header>

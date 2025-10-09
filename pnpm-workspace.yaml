@@ -1,0 +1,30 @@
+packages:
+  - '.'
+
+catalog:
+  '@astrojs/cloudflare': 12.6.9
+  '@astrojs/netlify': 6.5.11
+  '@astrojs/node': 9.4.4
+  '@astrojs/vercel': 8.2.8
+
+catalogMode: strict
+
+cleanupUnusedCatalogs: true
+
+engineStrict: true
+
+linkWorkspacePackages: true
+
+minimumReleaseAge: 1440
+
+packageManagerStrictVersion: true
+
+preferWorkspacePackages: true
+
+resolutionMode: time-based
+
+savePrefix: ''
+
+strictDepBuilds: true
+
+strictPeerDependencies: true

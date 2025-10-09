@@ -1,0 +1,88 @@
+---
+/**
+ * CertificateHeader component.
+ * This component displays the header for a certificate, including its name,
+ * the issuing organization, and an optional URL to view the certificate.
+ *
+ * @prop {string} name - The name of the certificate.
+ * @prop {string} issuer - The organization that issued the certificate.
+ * @prop {string} [url] - An optional URL to the certificate.
+ */
+interface Props {
+	name: string;
+	issuer: string;
+	url?: string;
+}
+
+const { name, issuer, url } = Astro.props;
+---
+
+<div class="certificate-header">
+  <h3 class="certificate-title">
+    {url ? (
+      <a href={url} class="certificate-link" target="_blank" rel="noopener noreferrer">
+        <span class="title-name">{name}</span>
+      </a>
+    ) : (
+      <span class="title-name">{name}</span>
+    )}
+  </h3>
+  
+  <div class="certificate-info">
+    <p class="issuer">
+      <span class="issuer-name">{issuer}</span>
+    </p>
+  </div>
+</div>
+
+<style>
+  .certificate-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .certificate-title {
+    font-size: var(--fz-xl);
+    font-weight: 500;
+    color: var(--color-foreground);
+    margin: 0 0 8px 0;
+  }
+
+  .certificate-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.25s ease;
+  }
+
+  .certificate-link:hover .title-name {
+    color: var(--color-brand-accent);
+  }
+
+  .title-name {
+    color: var(--color-brand-accent);
+  }
+
+  .certificate-info {
+    margin-bottom: 12px;
+  }
+
+  .issuer {
+    margin: 0 0 4px 0;
+    color: var(--color-foreground-muted);
+    font-size: var(--fz-md);
+  }
+
+  .issuer-name {
+    font-weight: 500;
+    color: var(--color-foreground-muted);
+  }
+
+  /* Local font size variables - the only local variables we need */
+  :root {
+    --fz-xs: 13px;
+    --fz-sm: 14px;
+    --fz-md: 16px;
+    --fz-lg: 18px;
+    --fz-xl: 20px;
+    --fz-xxl: 22px;
+  }
+</style>

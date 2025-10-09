@@ -1,0 +1,45 @@
+
+# @file lefthook.yml
+# @ref https://evilmartians.github.io/lefthook/
+
+# .lefthook.yaml---
+remotes:
+  - git_url: https://github.com/yacosta738/lefthook.git
+    ref: v1.3.0
+    refetch_frequency: 24h # Refetches once every 24 hours
+    configs:
+      # lint commit messages based by the conventional commits
+      - hooks/commitlint/.lefthook.yaml
+      # lint Dockerfiles
+      - hooks/hadolint/.lefthook.yaml
+      # lint shell scripts
+      - hooks/shellcheck/.lefthook.yaml
+      # lint the markdown (.md) files
+      - hooks/markdown-lint/.lefthook.yaml
+      # A linter for YAML files.
+      - hooks/yamllint/.lefthook.yaml
+      # validate the JSON files
+      - hooks/jsonlint/.lefthook.yaml
+
+pre-commit:
+  commands:
+    git-update:
+      run: git update-index --again
+    ruler-apply:
+      glob: ".ruler/**/*"
+      run: pnpm run ruler:apply
+    organize:
+      run: pnpm run organize
+
+post-commit:
+  commands:
+    notify_user:
+      run: echo "✅ Commit successful! Don't forget to push your changes."
+
+pre-push:
+  parallel: true
+  commands:
+    lychee_link_check:
+      run: lychee --no-progress --exclude-all-private --exclude-path node_modules --exclude-path public/admin ./**/*.md
+    pnpm_check:
+      run: pnpm run check

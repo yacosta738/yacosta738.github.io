@@ -1,0 +1,226 @@
+---
+import Button from "@components/atoms/Button.astro";
+import type { HTMLAttributes } from "astro/types";
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"section"> {
+	title?: string;
+	description?: string;
+	formId?: string;
+}
+
+const { title, description, formId, ...attrs } = Astro.props as Props;
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+---
+
+<section
+	class={cn(
+		"flex w-full will-change-transform",
+		attrs.class
+	)}
+	id={formId}
+	{...attrs}
+>
+	<div
+		class={cn(
+			"flex py-5 px-0",
+			"transition-colors duration-[350ms] ease-in-out w-full"
+		)}
+	>
+		<div class="flex gap-5 mx-auto w-full">
+			<div class="flex flex-col w-full max-w-4xl">
+				<h1
+					class={cn(
+						"text-foreground text-3xl @md:text-5xl font-bold leading-tight tracking-tight relative",
+						"transition-colors duration-350 animate-fadeIn font-heading"
+					)}
+				>
+					{title || t("cta.title")}
+				</h1>
+				<p
+					class={cn(
+						"text-foreground relative mt-2 text-base font-medium tracking-wide leading-relaxed",
+						"animate-fadeIn animation-delay-150"
+					)}
+				>
+					{description || t("cta.description")}
+				</p>
+				<form
+					id="newsletter-form"
+					class="flex flex-col sm:flex-row gap-3 mt-6 w-full max-w-md"
+					novalidate
+				>
+					<!-- Honeypot to reduce spam (should remain empty) -->
+					<input
+						type="text"
+						name="_gotcha"
+						id="newsletter-gotcha"
+						autocomplete="off"
+						tabindex="-1"
+						style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
+						aria-hidden="true"
+					/>
+					<div class="flex-1">
+						<label for="newsletter-email" class="sr-only">
+							{t("cta.email_placeholder")}
+						</label>
+						<input
+							type="email"
+							id="newsletter-email"
+							name="email"
+							placeholder={t("cta.email_placeholder")}
+							required
+							class={cn(
+								"w-full px-4 py-3 border rounded-md",
+								"bg-background-secondary text-foreground border-border",
+								"placeholder:text-foreground-subtle",
+								"focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20",
+								"transition-colors"
+							)}
+							aria-describedby="newsletter-error"
+						/>
+						<p
+							id="newsletter-error"
+							class="text-red-500 text-sm mt-1 min-h-[1.25rem]"
+							aria-live="polite"
+						>
+						</p>
+					</div>
+					<Button
+						type="submit"
+						variant="outline"
+						size="lg"
+					>
+						{t("cta.subscribe_button")}
+					</Button>
+				</form>
+				<div id="newsletter-status" class="mt-4 text-center min-h-[1.5rem]" aria-live="polite">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	document.addEventListener("DOMContentLoaded", () => {
+		// Newsletter form submission handler
+		const form = document.getElementById("newsletter-form");
+		const emailInput = document.getElementById("newsletter-email");
+		const errorMessage = document.getElementById("newsletter-error");
+		const statusMessage = document.getElementById("newsletter-status");
+		const submitButton = form?.querySelector('button[type="submit"]');
+		const honeypotInput = document.getElementById("newsletter-gotcha");
+
+		if (!form || !emailInput || !submitButton || !errorMessage || !statusMessage || !honeypotInput) {
+			return;
+		}
+		// Get translations from data attributes
+		const currentLocale = document.documentElement.lang || "en";
+		const translations = {
+			en: {
+				subscribing: "Subscribing...",
+				success: "Thank you for subscribing!",
+				error: "Oops! Something went wrong. Please try again.",
+				required: "Email is required",
+				invalid: "Please enter a valid email address",
+			},
+			es: {
+				subscribing: "Suscribiendo...",
+				success: "¡Gracias por suscribirte!",
+				error: "¡Ups! Algo salió mal. Por favor, inténtalo de nuevo.",
+				required: "El correo electrónico es obligatorio",
+				invalid: "Por favor, introduce un correo electrónico válido",
+			},
+		};
+
+		const t = translations[currentLocale] || translations.en;
+
+		// Email validation
+		const validateEmail = (email) => {
+			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			return re.test(email);
+		};
+
+		// Clear error message
+		const clearError = () => {
+			errorMessage.textContent = "";
+			emailInput.classList.remove("border-red-500");
+		};
+
+		// Show error message
+		const showError = (message) => {
+			errorMessage.textContent = message;
+			emailInput.classList.add("border-red-500");
+		};
+
+		// Input event listener to clear error on typing
+		emailInput.addEventListener("input", clearError);
+
+		// Form submission
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+			clearError();
+
+			const email = emailInput.value.trim();
+			const _gotcha = honeypotInput.value;
+
+			// Validate email
+			if (!email) {
+				showError(t.required);
+				emailInput.focus();
+				return;
+			}
+
+			if (!validateEmail(email)) {
+				showError(t.invalid);
+				emailInput.focus();
+				return;
+			}
+
+			// Disable button and show loading state
+			submitButton.disabled = true;
+			const originalText = submitButton.textContent;
+			submitButton.textContent = t.subscribing;
+
+			try {
+				// Call our secure API route
+				const response = await fetch("/api/newsletter.json", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ email, _gotcha }),
+				});
+
+				const data = await response.json();
+
+				if (data.success) {
+					// Success
+					statusMessage.textContent = t.success;
+					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-green-600 font-medium";
+					form.reset();
+					
+					// Hide success message after 5 seconds
+					setTimeout(() => {
+						statusMessage.textContent = "";
+						statusMessage.className = "mt-4 text-center min-h-[1.5rem]";
+					}, 5000);
+				} else {
+					// Error
+					statusMessage.textContent = data.message || t.error;
+					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-red-600 font-medium";
+				}
+			} catch (error) {
+				console.error("Newsletter subscription error:", error);
+				statusMessage.textContent = t.error;
+				statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-red-600 font-medium";
+			} finally {
+				// Re-enable button
+				submitButton.disabled = false;
+				submitButton.textContent = originalText;
+			}
+		});
+	});
+</script>

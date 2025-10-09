@@ -1,3 +1,13 @@
+---
+export const prerender = true;
+
+/**
+ * This page serves as the entry point for the Sveltia CMS (formerly Decap CMS)
+ * admin interface. It is a self-contained HTML page that loads the CMS script
+ * and its configuration from `/admin/config.yml`. This page is not part of the
+ * main user-facing site.
+ */
+---
 <!doctype html>
 <html>
 	<head>
@@ -49,14 +59,6 @@
 		</style>
 	</head>
 	<body>
-		<!-- <script is:inline src="https://unpkg.com/decap-cms@^3.4.0/dist/decap-cms.js"></script> -->
-		<script is:inline src="https://unpkg.com/@sveltia/cms@0.54.0/dist/sveltia-cms.js"></script>
-		<!-- netlify identity -->
-		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-		<!-- Customize the netlify identity widget to refresh on logout preventing users from using the cms when not logged in and then seeing an error -->
-		<script is:inline>
-			netlifyIdentity.on('logout', () => location.reload());
-		</script>
+		<script is:inline src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 	</body>
 </html>

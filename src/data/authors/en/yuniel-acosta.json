@@ -1,28 +1,24 @@
 {
-	"defaultLocaleVersion": "en/yuniel-acosta",
-	"name": "Yuniel Acosta",
-	"image": "/images/me.webp",
-	"rol": "Senior Software Engineer",
+	"name": "Yuniel Acosta Pérez",
+	"email": "yunielacosta738@gmail.com",
+	"avatar": "/src/assets/images/me.webp",
 	"bio": "I'm a very outgoing and curious person, who's passionate about coding, space, nature, and sports. I enjoy creating awesome software, whether that be websites, applications, or anything in between. My goal is always to create products that deliver high performance.",
-	"email": "stray-hefts.3o@icloud.com",
-	"social": [
+	"location": "Valencia, Spain",
+	"socials": [
 		{
 			"name": "github",
-			"url": "https://www.github.com/yacosta738",
-			"icon": "uit:github-alt",
-			"handle": "yacosta738"
+			"url": "https://github.com/yacosta738",
+			"icon": "lucide:github"
 		},
 		{
 			"name": "linkedin",
-			"url": "https://www.linkedin.com/in/yacosta738",
-			"icon": "uit:linkedin-alt",
-			"handle": "yacosta738"
+			"url": "https://linkedin.com/in/yacosta738",
+			"icon": "lucide:linkedin"
 		},
 		{
 			"name": "twitter",
-			"url": "https://www.twitter.com/yacosta738",
-			"icon": "uit:twitter-alt",
-			"handle": "yacosta738"
+			"url": "https://x.com/yacosta738",
+			"icon": "lucide:twitter"
 		}
 	]
 }

@@ -1,102 +1,35 @@
 ---
-import { Icon } from "astro-icon/components";
+export const prerender = true;
+
 import { Image } from "astro:assets";
-import HeadSEO from "organisms:HeadSEO";
-import Social from "atoms:Social";
-import Email from "atoms:Email";
-import AppFooter from "molecules:AppFooter";
-import Navbar from "molecules:Navbar";
-import Technologies from "molecules:Technologies";
-import "../styles/global.css";
-import {
-	getLangFromUrl,
-	useTranslations,
-	useTranslatedPath,
-} from "@i18n:utils";
-import { type Article, jsonToArticle } from "@models:Article";
-import { getCollection } from "astro:content";
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
-const publishedBlogEntriesPromises = (
-	await getCollection("blog", ({ data }) => {
-		return !data.draft;
-	})
-)
-	.map(async (publishedBlogEntry) => {
-		const idParts = publishedBlogEntry.id.split("/");
-		const entryLang = idParts[0] === "es" ? "es" : "en";
-		if (entryLang === lang) {
-			return await jsonToArticle(publishedBlogEntry);
-		}
-		return null;
-	})
-	.filter(Boolean);
-const publishedBlogEntries = (
-	await Promise.all(publishedBlogEntriesPromises)
-).filter((entry): entry is Article => entry !== null);
-const lastPublishedBlogEntry = publishedBlogEntries
-	.sort((a, b) => {
-		return new Date(b.date).getTime() - new Date(a.date).getTime();
-	})
-	.slice(0, 5);
+import Container from "@/components/atoms/Container.astro";
+import { useTranslations } from "@/i18n";
+import { type Lang } from "@/i18n/types";
+/**
+ * This page is displayed when a user navigates to a URL that does not exist.
+ * It shows a 404 "Not Found" error message and provides a link back to the homepage.
+ */
+import Layout from "@/layouts/Layout.astro";
+import oops from "../../public/oops.webp";
+
+const t = useTranslations(Astro.currentLocale as Lang);
 ---
 
-<html lang={lang}>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<HeadSEO
-			title={t('error404')}
-			description={t('notFound.notFoundDescription')}
-			image="/oops.webp"
-			ogImageAlt={t('notFound.notFoundOgImageAlt')}
-		/>
-	</head>
-
-	<body
-		class="content-wrapper flex min-h-screen flex-col bg-background-primary leading-normal text-light-slate font-mono"
-	>
-		<div class="relative flex min-h-[100vh] flex-col">
-			<Navbar />
-			<div class="container mx-auto mt-7 flex flex-col xl:flex-row">
-				<main class="relative w-full overflow-hidden px-2">
-					<Technologies />
-					<div class="container-inner mx-auto py-16">
-						<h1 class="mb-16 text-4xl font-bold">{t('error404')}</h1>
-						<Image class="w-1/2" src="/oops.webp" alt={t('error404')} height={300} width={300} />
-						<p set:html={t('message404')} />
-						{
-							lastPublishedBlogEntry.length > 0 && (
-								<>
-									<h2 class="mt-16 mb-8 text-2xl font-bold">
-										{t('notFound.maybeYouAreInterestedIn')}
-									</h2>
-									<ul class="list-disc list-inside">
-										{lastPublishedBlogEntry.map((article: Article) => (
-											<li class="mb-4">
-												<a href={`/posts/${article.url}/`} class="underline">
-													{article.title}
-												</a>
-											</li>
-										))}
-									</ul>
-								</>
-							)
-						}
-						<a
-							href={translatePath('/')}
-							class="small-button mt-24 flex w-24 items-center justify-center uppercase"
-						>
-							<Icon name="mdi:arrow-left" class="mr-2 h-6" />
-							{t('home')}
-						</a>
-					</div>
-				</main>
-			</div>
-			<Social />
-			<Email />
-		</div>
-		<AppFooter />
-	</body>
-</html>
+<Layout title={t("404.title")}>
+  <main>
+    <Container
+      class={"flex h-screen flex-col items-center justify-center gap-8"}
+    >
+      <div class="max-w-md">
+        <Image src={oops} alt="404" />
+      </div>
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h1 class="text-4xl font-bold">404</h1>
+        <p class="text-lg">{t("404.message")}</p>
+      </div>
+      <a href="/" class="text-lg text-primary-500 hover:underline">
+        {t("404.link")}
+      </a>
+    </Container>
+  </main>
+</Layout>
