@@ -1,14 +1,13 @@
-name: Deploy to GitHub Pages
+name: Release, Build & Deploy
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
+  # Trigger on push to main branch
   push:
     branches: [ main ]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  # Allows manual workflow execution
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
+# Comprehensive permissions for release, build, and deployment
 permissions:
   actions: read
   contents: write
@@ -16,6 +15,7 @@ permissions:
   id-token: write
   pull-requests: write
   repository-projects: write
+  packages: write
 
 env:
   REGISTRY: ghcr.io
@@ -26,37 +26,40 @@ env:
   CONTACT_FORM_TOKEN: ${{ secrets.CONTACT_FORM_TOKEN }}
   
 jobs:
-  build:
+  release-and-build:
+    name: Release & Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for semantic-release
 
       - name: Install Tools & Dependencies
         uses: ./.github/actions/install
       
-      - name: 🔍 PBOT_GITHUB_TOKEN
+      - name: Setup GitHub Token (fallback)
         if: env.PBOT_GITHUB_TOKEN == ''
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
 
-      - name: 🚀 🟣 Release to GitHub
+      - name: 🚀 Semantic Release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           
-      - name: Install, build, and upload your site
+      - name: Build & Upload Astro Site
         uses: withastro/action@v3
         with:
           package-manager: pnpm@10.0.0
         env:
-          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
-    outputs:
-        revnumber: ${{ env.revnumber }}     
+          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}     
 
   deploy:
-    needs: build
+    name: Deploy to GitHub Pages
+    needs: release-and-build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -69,7 +72,8 @@ jobs:
           CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
   
   deploy-container-image:
-    needs: build
+    name: Build & Push Container Image
+    needs: release-and-build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
@@ -84,12 +88,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Log in to the Container registry
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ env.PBOT_GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -99,18 +103,17 @@ jobs:
             n4t5u/yacosta738.github.io
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            latest
-            ${{ github.sha }}
-            ${{ github.sha }}-${{ github.run_number }}
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,prefix={{branch}}-
+            type=sha,format=long
           labels: |
-            org.opencontainers.image.source= ${{ github.repository }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.created=${{ github.run_id }}
+            org.opencontainers.image.created=${{ github.event.repository.pushed_at }}
             org.opencontainers.image.authors=${{ github.actor }}
 
-
-      - name: Build the container image
-        run: pnpm run build # build:docker     
+      - name: Build Astro site
+        run: pnpm run build     
 
       - name: Build and push Docker image
         uses: docker/build-push-action@67a2d409c0a876cbe6b11854e3e25193efe4e62d
