@@ -7,11 +7,12 @@ runs:
     - name: Setup Token with Fallback
       shell: bash
       run: |
+        # If PBOT_GITHUB_TOKEN is not provided, fallback to the repository GITHUB_TOKEN
         if [ -z "$PBOT_GITHUB_TOKEN" ]; then
-          echo "ℹ️  PBOT_GITHUB_TOKEN not found, using GITHUB_TOKEN"
-          echo "PBOT_GITHUB_TOKEN=$GITHUB_TOKEN" >> $GITHUB_ENV
+          echo "PBOT_GITHUB_TOKEN not found, falling back to GITHUB_TOKEN"
+          echo "PBOT_GITHUB_TOKEN=$GITHUB_TOKEN" >> "$GITHUB_ENV"
         else
-          echo "✅ Using PBOT_GITHUB_TOKEN"
+          echo "Using PBOT_GITHUB_TOKEN"
         fi
       env:
         PBOT_GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}

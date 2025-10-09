@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Label PR Size
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup Token
         uses: ./.github/actions/setup-token
         env:
