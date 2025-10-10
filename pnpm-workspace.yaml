@@ -1,11 +1,12 @@
 packages:
-  - '.'
+  - .
 
 catalog:
   '@astrojs/cloudflare': 12.6.9
   '@astrojs/netlify': 6.5.11
   '@astrojs/node': 9.4.4
   '@astrojs/vercel': 8.2.8
+  wrangler: 4.42.1
 
 catalogMode: strict
 
