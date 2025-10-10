@@ -16,8 +16,8 @@ slug:
   sanitize_replacement: '-'
 
 
-media_folder: "src/assets/images" # Location where files will be stored in the repo
-public_folder: "src/assets/images" # The src attribute for uploaded media
+media_folder: "apps/portfolio/src/assets/images" # Location where files will be stored in the repo
+public_folder: "apps/portfolio/src/assets/images" # The src attribute for uploaded media
 
 i18n:
   structure: 'multiple_folders'
@@ -30,7 +30,7 @@ collections:
     label: "Skills Library"
     label_singular: "Skill"
     description: "System skills library (icons, metadata, etc.)"
-    folder: "src/data/skills"
+    folder: "apps/portfolio/src/data/skills"
     extension: "json"
     create: true
     fields:
@@ -43,7 +43,7 @@ collections:
     label: "Languages Library"
     label_singular: "Language"
     description: "Language names, mappings, and metadata"
-    folder: "src/data/languages"
+    folder: "apps/portfolio/src/data/languages"
     extension: "json"
     create: true
     fields:
@@ -68,7 +68,7 @@ collections:
   - name: 'projectMetadata'
     i18n: true
     label: 'Project Metadata'
-    folder: 'src/data/project-metadata'
+    folder: 'apps/portfolio/src/data/project-metadata'
     create: true
     extension: 'json'
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
@@ -122,7 +122,7 @@ collections:
   - name: "resume"
     label: "Resume"
     description: "Multi-language resume data"
-    folder: "src/data/resume"
+    folder: "apps/portfolio/src/data/resume"
     extension: "json"
     create: true
     i18n: true
@@ -347,7 +347,7 @@ collections:
   - name: 'articles'  
     label: 'Articles'
     label_singular: 'Article'
-    folder: 'src/data/articles'
+    folder: 'apps/portfolio/src/data/articles'
     create: true
     path: '{{year}}/{{month}}/{{day}}/{{slug}}'
     extension: mdx
@@ -383,7 +383,7 @@ collections:
         widget: 'image'
         label: 'Cover'
         i18n: 'duplicate'
-        default: 'src/assets/images/blog-placeholder-1.avif'
+        default: 'apps/portfolio/src/assets/images/blog-placeholder-1.avif'
       - name: 'tags'
         widget: 'relation'
         collection: 'tags'
@@ -418,7 +418,7 @@ collections:
   - name: categories
     label: Categories
     label_singular: Category
-    folder: src/data/categories
+    folder: apps/portfolio/src/data/categories
     slug: '{{title}}'
     create: true
     i18n: true
@@ -441,7 +441,7 @@ collections:
   - name: tags
     label: Tags
     label_singular: Tag
-    folder: src/data/tags
+    folder: apps/portfolio/src/data/tags
     slug: '{{title}}'
     create: true
     i18n: true
@@ -454,7 +454,7 @@ collections:
   - name: 'authors'
     label: 'Authors'
     label_singular: 'Author'
-    folder: src/data/authors
+    folder: apps/portfolio/src/data/authors
     slug: '{{name}}'
     create: true
     extension: json
@@ -503,7 +503,7 @@ collections:
   - name: 'externalArticles'  
     label: 'External Articles'
     label_singular: 'Article'
-    folder: 'src/data/external-articles'
+    folder: 'apps/portfolio/src/data/external-articles'
     create: true
     i18n: true
     path: '{{year}}/{{month}}/{{day}}/{{slug}}'
@@ -533,7 +533,7 @@ collections:
       - name: 'cover'
         widget: 'image'
         label: 'Cover'
-        default: 'src/assets/images/blog-placeholder-1.avif'
+        default: 'apps/portfolio/src/assets/images/blog-placeholder-1.avif'
       - name: 'tags'
         widget: 'relation'
         collection: 'tags'

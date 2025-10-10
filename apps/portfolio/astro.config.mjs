@@ -8,7 +8,6 @@ import pagefind from "astro-pagefind";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./src/i18n/locales.ts";
 import envSchema from "./src/utils/env-schema.ts";
 import { whenExternalScripts } from "./src/utils/externalScripts.ts";
-import { loadAdapter } from "./src/utils/loadAdapter.ts";
 import {
 	lazyImagesRehypePlugin,
 	readingTimeRemarkPlugin,
@@ -18,11 +17,6 @@ import { resolveSiteUrl } from "./src/utils/resolveSiteUrl.ts";
 
 export default defineConfig({
 	site: resolveSiteUrl(),
-
-	// Dynamic adapter configuration based on DEPLOYMENT_ADAPTER env var
-	adapter: await loadAdapter(),
-
-	// Set output mode to 'static' for a 100% static site
 	output: "static",
 
 	env: {
@@ -51,7 +45,7 @@ export default defineConfig({
 
 	integrations: [
 		icon({
-			iconDir: "src/icons",
+			iconDir: "./src/icons",
 		}),
 		pagefind(),
 		sitemap({
