@@ -14,32 +14,51 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
 	 */
-	// "placement": { "mode": "smart" }
+	"placement": { "mode": "smart" },
+
 	/**
 	 * Bindings
 	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
 	 * databases, object storage, AI inference, real-time communication and more.
 	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
 	 */
+
 	/**
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
 	 */
-	// "vars": { "MY_VARIABLE": "production_value" }
+	"vars": {
+		"ENVIRONMENT": "production"
+	}
+
+	/**
+	 * KV Namespaces (for sessions or caching)
+	 * Uncomment and configure if you need KV storage
+	 */
+	// "kv_namespaces": [
+	//   {
+	//     "binding": "SESSION",
+	//     "id": "your-kv-namespace-id"
+	//   }
+	// ]
+
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
+	 * Set secrets using: wrangler secret put <KEY>
 	 */
+
 	/**
 	 * Static Assets
 	 * https://developers.cloudflare.com/workers/static-assets/binding/
 	 */
-	// "assets": { "directory": "./public/", "binding": "ASSETS" }
+	// "assets": { "directory": "./public/", "binding": "ASSETS" },
+
 	/**
 	 * Service Bindings (communicate between multiple Workers)
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
