@@ -1,3 +1,5 @@
+import { passthroughImageService } from "astro/config";
+
 // Dynamic adapter loading based on DEPLOYMENT_ADAPTER env var
 export const loadAdapter = async () => {
 	const adapterName = (process.env.DEPLOYMENT_ADAPTER || "node").toLowerCase();
@@ -11,9 +13,22 @@ export const loadAdapter = async () => {
 			case "cloudflare": {
 				const cloudflare = await import("@astrojs/cloudflare");
 				return cloudflare.default({
-					imageService: "passthrough", // or 'cloudflare' if using Cloudflare Images
 					platformProxy: {
-						enabled: true, // Enable Cloudflare bindings in dev
+						enabled: true,
+						configPath: "wrangler.jsonc", // Explicitly specify your config file
+						persist: true, // Enable local binding persistence for development
+					},
+					// Use passthrough image service when Cloudflare Images is not configured.
+					// This prevents runtime sharp processing on the edge and avoids
+					// image-service related errors when deploying to Workers.
+					imageService: passthroughImageService(),
+					routes: {
+						extend: {
+							// Exclude a few static patterns but DO NOT exclude /_astro/*
+							// because those are the generated optimized assets that must
+							// remain available as static files for the ASSETS binding.
+							exclude: [{ pattern: "/fonts/*" }, { pattern: "/images/*" }],
+						},
 					},
 				});
 			}
