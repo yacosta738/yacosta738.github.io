@@ -41,8 +41,9 @@ test.describe("Blog Pagination and Navigation", () => {
 		if (hasNextPage) {
 			// Click next
 			await nextButton.click();
-			// Allow more time for CI or slow networks and then ensure articles are visible
-			await page.waitForLoadState("networkidle", { timeout: 60000 });
+			// Use 'load' instead of 'networkidle' for better CI stability
+			// (networkidle may never fire if there are persistent connections)
+			await page.waitForLoadState("load", { timeout: 60000 });
 			await page.waitForSelector(selectors.blog.articleTitle, {
 				timeout: 60000,
 			});
@@ -109,8 +110,8 @@ test.describe("Blog Pagination and Navigation", () => {
 
 		if (hasPrevPage) {
 			await prevButton.click();
-			// Allow more time for CI or slow networks and then ensure articles are visible
-			await page.waitForLoadState("networkidle", { timeout: 60000 });
+			// Use 'load' instead of 'networkidle' for better CI stability
+			await page.waitForLoadState("load", { timeout: 60000 });
 			await page.waitForSelector(selectors.blog.articleTitle, {
 				timeout: 60000,
 			});
@@ -151,8 +152,8 @@ test.describe("Blog Pagination and Navigation", () => {
 
 		if (hasNext) {
 			await nextButton.click();
-			// Allow more time for CI or slow networks and then ensure articles are visible
-			await page.waitForLoadState("networkidle", { timeout: 60000 });
+			// Use 'load' instead of 'networkidle' for better CI stability
+			await page.waitForLoadState("load", { timeout: 60000 });
 			await page.waitForSelector(selectors.blog.articleTitle, {
 				timeout: 60000,
 			});

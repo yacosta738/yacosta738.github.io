@@ -8,7 +8,7 @@ export default defineConfig({
 	testDir: "tests/e2e",
 
 	// Test execution settings
-	timeout: 30_000,
+	timeout: 90_000, // Increased to accommodate longer waits in CI
 	expect: { timeout: 5_000 },
 	fullyParallel: true,
 
