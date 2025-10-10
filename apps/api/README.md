@@ -3,6 +3,7 @@
 This is a Cloudflare Worker with OpenAPI 3.1 using [chanfana](https://github.com/cloudflare/chanfana) and [Hono](https://github.com/honojs/hono).
 
 This API provides secure endpoints for:
+
 - **Contact Form**: Send messages through a contact form with spam protection
 - **Newsletter**: Subscribe emails to a newsletter with validation
 
@@ -71,9 +72,11 @@ See [TESTING.md](./TESTING.md) for detailed testing documentation and [TEST-SUMM
 ## API Endpoints
 
 ### POST /api/contact
+
 Submit a contact form message.
 
 **Request body:**
+
 ```json
 {
   "name": "John Doe",
@@ -85,9 +88,11 @@ Submit a contact form message.
 ```
 
 ### POST /api/newsletter
+
 Subscribe to the newsletter.
 
 **Request body:**
+
 ```json
 {
   "email": "subscriber@example.com",
@@ -108,4 +113,3 @@ Subscribe to the newsletter.
 ## License
 
 See the main repository for license information.
-

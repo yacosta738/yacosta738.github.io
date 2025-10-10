@@ -1,5 +1,5 @@
 packages:
-  - 'apps/*'
+  - apps/*
 
 catalog:
-  'wrangler': ^3.96.4
+  wrangler: ^4.42.2

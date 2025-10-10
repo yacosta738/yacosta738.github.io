@@ -5,11 +5,29 @@
 		"@semantic-release/release-notes-generator",
 		"@semantic-release/changelog",
 		[
+			"@semantic-release/npm",
+			{
+				"npmPublish": false
+			}
+		],
+		[
+			"@semantic-release/exec",
+			{
+				"prepareCmd": "pnpm -r exec npm version ${nextRelease.version} --no-git-tag-version"
+			}
+		],
+		[
 			"@semantic-release/git",
 			{
-				"assets": ["package.json", "pnpm-lock.yaml", "CHANGELOG.md"],
+				"assets": [
+					"package.json",
+					"apps/*/package.json",
+					"pnpm-lock.yaml",
+					"CHANGELOG.md"
+				],
 				"message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
 			}
-		]
+		],
+		"@semantic-release/github"
 	]
 }
