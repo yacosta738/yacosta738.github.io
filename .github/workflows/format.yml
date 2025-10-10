@@ -21,7 +21,7 @@ jobs:
         run: echo "PBOT_GITHUB_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV    
 
       - name: Check out code using Git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
           # Needs access to push to main
@@ -34,7 +34,7 @@ jobs:
         run: pnpm run format
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: '[ci] format'
           branch: ${{ github.head_ref }}

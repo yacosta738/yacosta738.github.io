@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install Tools & Dependencies
         uses: ./.github/actions/install
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
           
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
+        uses: withastro/action@v4
         with:
           package-manager: pnpm@10.0.0
         env:
@@ -73,7 +73,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
     
       - name: Install Tools & Dependencies
         uses: ./.github/actions/install
@@ -93,7 +93,7 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@8e1d5461f02b7886d3c1a774bfbd873650445aa2
+        uses: docker/metadata-action@032a4b3bda1b716928481836ac5bfe36e1feaad6
         with:
           images: |
             n4t5u/yacosta738.github.io
@@ -113,7 +113,7 @@ jobs:
         run: pnpm run build # build:docker     
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@67a2d409c0a876cbe6b11854e3e25193efe4e62d
+        uses: docker/build-push-action@9e436ba9f2d7bcd1d038c8e55d039d37896ddc5d
         with:
           context: .
           file: ./Dockerfile
