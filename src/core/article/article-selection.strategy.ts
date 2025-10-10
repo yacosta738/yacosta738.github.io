@@ -42,12 +42,35 @@ export class NewestSelectionStrategy implements ArticleSelectionStrategy {
 
 // Concrete strategy: Random selection
 export class RandomSelectionStrategy implements ArticleSelectionStrategy {
+	/**
+	 * Create a new RandomSelectionStrategy.
+	 * @param rng Optional RNG function that accepts a positive integer n and returns
+	 * an integer in the range [0, n). By default this uses Math.random().
+	 *
+	 * Notes on safety: Math.random() is a non-cryptographic PRNG and is acceptable
+	 * for UI-level randomness such as shuffling articles for display. It should
+	 * NOT be used where cryptographic unpredictability is required (for example,
+	 * for session tokens, authentication, or security-sensitive randomness).
+	 *
+	 * If you need a cryptographically secure RNG, pass one in. In Node you can
+	 * use `randomInt` from the built-in `crypto` module, for example:
+	 *
+	 *   import { randomInt } from 'crypto';
+	 *   const strategy = new RandomSelectionStrategy((n) => randomInt(0, n));
+	 *
+	 * Tests can also inject a deterministic RNG for reproducibility.
+	 */
+	constructor(private rng?: (n: number) => number) {}
+
 	select(articles: Article[], count: number): Article[] {
+		const rng = this.rng ?? ((n: number) => Math.floor(Math.random() * n));
 		const shuffled = [...articles];
-		// Fisher-Yates shuffle algorithm
+		// Fisher-Yates shuffle algorithm using the provided RNG to pick indices
 		for (let i = shuffled.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+			const j = rng(i + 1);
+			// Ensure j is an integer within [0, i]
+			const jj = Math.max(0, Math.min(i, Math.floor(j)));
+			[shuffled[i], shuffled[jj]] = [shuffled[jj], shuffled[i]];
 		}
 		return shuffled.slice(0, count);
 	}
