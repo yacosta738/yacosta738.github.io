@@ -63,10 +63,10 @@ export class RandomSelectionStrategy implements ArticleSelectionStrategy {
 	constructor(private rng?: (n: number) => number) {}
 
 	/**
- * Uses Math.random() for UI-level shuffling only.
- * NOT used for security, tokens, or authentication.
- * Safe for article display randomization.
- */
+	 * Uses Math.random() for UI-level shuffling only.
+	 * NOT used for security, tokens, or authentication.
+	 * Safe for article display randomization.
+	 */
 	select(articles: Article[], count: number): Article[] {
 		const rng = this.rng ?? ((n: number) => Math.floor(Math.random() * n));
 		const shuffled = [...articles];

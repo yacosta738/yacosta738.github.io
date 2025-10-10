@@ -41,7 +41,11 @@ test.describe("Blog Pagination and Navigation", () => {
 		if (hasNextPage) {
 			// Click next
 			await nextButton.click();
-			await page.waitForLoadState("networkidle");
+			// Allow more time for CI or slow networks and then ensure articles are visible
+			await page.waitForLoadState("networkidle", { timeout: 60000 });
+			await page.waitForSelector(selectors.blog.articleTitle, {
+				timeout: 60000,
+			});
 
 			// Verify URL changed - actual format is /en/blog/page/2
 			await expect(page).toHaveURL(/\/blog\/page\/\d+/);
@@ -105,7 +109,11 @@ test.describe("Blog Pagination and Navigation", () => {
 
 		if (hasPrevPage) {
 			await prevButton.click();
-			await page.waitForLoadState("networkidle");
+			// Allow more time for CI or slow networks and then ensure articles are visible
+			await page.waitForLoadState("networkidle", { timeout: 60000 });
+			await page.waitForSelector(selectors.blog.articleTitle, {
+				timeout: 60000,
+			});
 
 			// Should be back on page 1
 			await expect(page).toHaveURL(/\/en\/blog\/?$/);
@@ -143,7 +151,11 @@ test.describe("Blog Pagination and Navigation", () => {
 
 		if (hasNext) {
 			await nextButton.click();
-			await page.waitForLoadState("networkidle");
+			// Allow more time for CI or slow networks and then ensure articles are visible
+			await page.waitForLoadState("networkidle", { timeout: 60000 });
+			await page.waitForSelector(selectors.blog.articleTitle, {
+				timeout: 60000,
+			});
 
 			// Same elements should still be visible
 			await expect(header).toBeVisible();
