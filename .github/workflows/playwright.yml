@@ -83,8 +83,20 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: all-reports
+        continue-on-error: true
+      
+      - name: Check if artifacts exist
+        id: check_artifacts
+        run: |
+          if [ -d "all-reports" ] && [ "$(ls -A all-reports)" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No artifacts found to process"
+          fi
       
       - name: Publish HTML Report
+        if: steps.check_artifacts.outputs.exists == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: playwright-html-report
@@ -92,24 +104,34 @@ jobs:
           retention-days: 30
       
       - name: Comment PR with results
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && steps.check_artifacts.outputs.exists == 'true'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const path = require('path');
             
+            // Check if directory exists
+            if (!fs.existsSync('all-reports')) {
+              console.log('No all-reports directory found');
+              return;
+            }
+            
             // Try to find results file
             const findResultsFile = (dir) => {
-              const files = fs.readdirSync(dir);
-              for (const file of files) {
-                const fullPath = path.join(dir, file);
-                if (fs.statSync(fullPath).isDirectory()) {
-                  const found = findResultsFile(fullPath);
-                  if (found) return found;
-                } else if (file === 'results.json') {
-                  return fullPath;
+              try {
+                const files = fs.readdirSync(dir);
+                for (const file of files) {
+                  const fullPath = path.join(dir, file);
+                  if (fs.statSync(fullPath).isDirectory()) {
+                    const found = findResultsFile(fullPath);
+                    if (found) return found;
+                  } else if (file === 'results.json') {
+                    return fullPath;
+                  }
                 }
+              } catch (error) {
+                console.log(`Error reading directory ${dir}:`, error.message);
               }
               return null;
             };
@@ -117,23 +139,29 @@ jobs:
             const resultsFile = findResultsFile('all-reports');
             
             if (resultsFile) {
-              const results = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
-              const summary = `## 🎭 Playwright Test Results
-              
-              - **Total Tests**: ${results.stats?.total || 'N/A'}
-              - **Passed**: ${results.stats?.passed || 'N/A'} ✅
-              - **Failed**: ${results.stats?.failed || 'N/A'} ❌
-              - **Flaky**: ${results.stats?.flaky || 'N/A'} ⚠️
-              - **Duration**: ${Math.round((results.stats?.duration || 0) / 1000)}s
-              
-              [View full report in artifacts](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
-              `;
-              
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: summary
-              });
+              try {
+                const results = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
+                const summary = `## 🎭 Playwright Test Results
+                
+                - **Total Tests**: ${results.stats?.total || 'N/A'}
+                - **Passed**: ${results.stats?.passed || 'N/A'} ✅
+                - **Failed**: ${results.stats?.failed || 'N/A'} ❌
+                - **Flaky**: ${results.stats?.flaky || 'N/A'} ⚠️
+                - **Duration**: ${Math.round((results.stats?.duration || 0) / 1000)}s
+                
+                [View full report in artifacts](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+                `;
+                
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: summary
+                });
+              } catch (error) {
+                console.log('Error processing results:', error.message);
+              }
+            } else {
+              console.log('No results.json file found in artifacts');
             }
 
