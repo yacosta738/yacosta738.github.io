@@ -1,0 +1,227 @@
+---
+/**
+ * EnhancedProjectCard component.
+ * A detailed card for displaying a project, including its name, description,
+ * technologies (with icons), and links to a live URL and GitHub repository.
+ * It also indicates if a project is currently active.
+ *
+ * @prop {string} name - The name of the project.
+ * @prop {string} description - A description of the project (can contain HTML).
+ * @prop {string[]} [tech=[]] - A list of technologies used in the project.
+ * @prop {string} [url] - The URL of the live project.
+ * @prop {string} [github] - The URL of the project's GitHub repository.
+ * @prop {boolean} [isActive=false] - Whether the project is currently active.
+ * @prop {string} [class] - Additional CSS classes for the card container.
+ * @prop {"default" | "minimal"} [variant="default"] - The visual style of the card.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import type Skill from "@/core/skill/skill-library.model";
+import { getSkills } from "@/core/skill/skill-library.service";
+import { cn } from "@/lib/utils";
+import Badge from "../atoms/Badge.astro";
+import Link from "../atoms/Link.astro";
+import Typography from "../atoms/Typography.astro";
+
+export interface Props extends HTMLAttributes<"article"> {
+	name: string;
+	description: string;
+	tech?: string[];
+	url?: string;
+	github?: string;
+	isActive?: boolean;
+	class?: string;
+	variant?: "default" | "minimal";
+}
+
+const {
+	name,
+	description,
+	tech = [],
+	url,
+	github,
+	isActive = false,
+	class: className,
+	variant = "default",
+	...attrs
+} = Astro.props;
+
+const classes = cn(
+	"group relative cursor-default transition-all duration-300 h-full",
+	"hover:-translate-y-2 focus-within:-translate-y-2",
+	"motion-reduce:hover:transform-none motion-reduce:focus-within:transform-none",
+	className,
+);
+
+const innerClasses = cn(
+	"flex flex-col justify-between relative h-full",
+	"bg-card dark:bg-card border border-border rounded-lg",
+	"shadow-sm hover:shadow-lg transition-all duration-300",
+	"p-4 overflow-hidden",
+	variant === "minimal" ? "bg-slate-50 dark:bg-slate-800/50" : "",
+);
+
+const matchedSkills: Skill[] = await getSkills({ icon: true });
+const skillMap = new Map(
+	matchedSkills.map((skill: Skill) => [skill.name.toLowerCase(), skill]),
+);
+---
+
+<article class={classes} {...attrs}>
+	<div class={innerClasses}>
+		<header class="flex flex-col project-card-header">
+			<div class="flex items-center justify-between mb-3">
+				<div class="folder text-primary flex-shrink-0">
+					<Icon name="lucide:folder" class="w-8 h-8" aria-hidden="true" />
+				</div>
+				<div class="project-links flex items-center gap-1 -mr-1 text-muted-foreground">
+					{github && (
+						<Link
+							href={github}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex items-center justify-center w-8 h-8 rounded-md hover:text-foreground hover:bg-muted/50 transition-all"
+							aria-label={`View ${name} on GitHub`}
+							title="GitHub Repository"
+						>
+							<Icon name="lucide:github" class="w-5 h-5" aria-hidden="true" />
+						</Link>
+					)}
+					{url && (
+						<Link
+							href={url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="external flex items-center justify-center w-8 h-8 rounded-md hover:text-foreground hover:bg-muted/50 transition-all"
+							aria-label={`Visit ${name} project`}
+							title="External Link"
+						>
+							<Icon name="lucide:external-link" class="w-5 h-5" aria-hidden="true" />
+						</Link>
+					)}
+				</div>
+			</div>
+
+			<Typography 
+				as="h3" 
+				class="project-title mb-2 font-semibold text-foreground text-base leading-tight relative"
+			>
+				{url ? (
+					<Link
+						href={url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="before:content-[''] before:absolute before:inset-0 before:z-0 hover:text-primary transition-colors"
+					>
+						{name}
+					</Link>
+				) : (
+					name
+				)}
+				{isActive && (
+					<span class="ml-2 inline-flex items-center">
+						<span 
+							aria-hidden="true" 
+							class="w-2 h-2 rounded-full bg-green-500 motion-safe:animate-pulse"
+						></span>
+						<span class="sr-only">Active Project</span>
+					</span>
+				)}
+			</Typography>
+
+			<div 
+				class="project-description text-muted-foreground text-sm leading-relaxed mb-4"
+				set:html={description}
+			/>
+		</header>
+
+		{tech && tech.length > 0 && (
+			<footer class="flex flex-wrap gap-1">
+				{tech.slice(0, 6).map((techName) => {
+					const matchedSkill = skillMap.get(techName.toLowerCase());
+					return (
+						<Badge
+							size="sm"
+							class="text-xs font-medium"
+							variant="primary"
+						>
+							{matchedSkill?.icon && (
+								<Icon name={matchedSkill.icon} class="mr-1" aria-hidden="true" />
+							)}
+							{techName}
+						</Badge>
+					);
+				})}
+				{tech.length > 6 && (
+					<span class="text-xs text-primary font-medium px-2 py-1 flex items-center">
+						+{tech.length - 6}
+					</span>
+				)}
+			</footer>
+		)}
+	</div>
+</article>
+
+<style>
+	/* Scoped styles to prevent global header interference */
+	.project-card-header {
+		/* Reset any global header styles that might leak in */
+		padding: 0;
+		background-color: transparent;
+		filter: none;
+		backdrop-filter: none;
+		user-select: auto;
+		pointer-events: auto;
+		transition: none;
+	}
+
+	.project-links a {
+		position: relative;
+		z-index: 1;
+	}
+
+	.project-title a {
+		position: static;
+	}
+
+	.project-title a:before {
+		content: '';
+		display: block;
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	.tech-item {
+		font-family: var(--font-mono, 'Courier New', monospace);
+		line-height: 1.2;
+		white-space: nowrap;
+		font-size: 11px;
+	}
+
+	.project-description {
+		line-height: 1.4;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.group {
+			transition: none;
+		}
+
+		.group:hover,
+		.group:focus-within {
+			transform: none;
+		}
+
+		.project-links a {
+			transition: none;
+		}
+
+		.tech-item {
+			transition: none;
+		}
+	}
+</style>

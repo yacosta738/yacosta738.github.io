@@ -1,0 +1,179 @@
+---
+/**
+ * VolunteerHeader component.
+ * This component displays the header for a volunteer experience entry, including
+ * the organization, position, and optional details like a URL, summary, and highlights.
+ *
+ * @prop {string} organization - The name of the organization.
+ * @prop {string} position - The volunteer position held.
+ * @prop {string} [url] - An optional URL for the organization.
+ * @prop {string} [summary] - An optional summary of the experience.
+ * @prop {string[]} [highlights] - An optional list of key highlights or achievements.
+ */
+interface Props {
+	organization: string;
+	position: string;
+	url?: string;
+	summary?: string;
+	highlights?: string[];
+}
+
+const { organization, position, url, summary, highlights } = Astro.props;
+---
+
+<div class="volunteer-header">
+  <h3 class="organization">
+    {url ? (
+      <a href={url} class="organization-link" target="_blank" rel="noopener noreferrer">
+        <span class="organization-name">{organization}</span>
+      </a>
+    ) : (
+      <span class="organization-name">{organization}</span>
+    )}
+  </h3>
+  
+  <div class="volunteer-info">
+    <p class="position">
+      <span class="position-title">{position}</span>
+    </p>
+  </div>
+
+  {summary && (
+    <div class="summary">
+      <p class="summary-description">{summary}</p>
+    </div>
+  )}
+
+  {highlights && highlights.length > 0 && (
+    <div class="highlights">
+      <h4 class="highlights-title">Logros destacados:</h4>
+      <ul class="highlights-list">
+        {highlights.map((highlight) => (
+          <li class="highlight-item">{highlight}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>
+
+<style>
+  .volunteer-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .organization {
+    font-size: var(--fz-xl);
+    font-weight: 500;
+    color: var(--lightest-slate);
+    margin: 0 0 8px 0;
+  }
+
+  .organization-link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.25s ease;
+  }
+
+  .organization-link:hover .organization-name {
+    color: var(--green);
+  }
+
+  .organization-name {
+    color: var(--green);
+  }
+
+  .volunteer-info {
+    margin-bottom: 12px;
+  }
+
+  .position {
+    margin: 0 0 4px 0;
+    color: var(--slate);
+    font-size: var(--fz-md);
+  }
+
+  .position-title {
+    font-weight: 500;
+    color: var(--light-slate);
+  }
+
+  .summary {
+    margin-top: 12px;
+  }
+
+  .summary-description {
+    color: var(--slate);
+    font-size: var(--fz-sm);
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+  }
+
+  .highlights {
+    margin-top: 16px;
+  }
+
+  .highlights-title {
+    font-size: var(--fz-sm);
+    font-weight: 500;
+    color: var(--light-slate);
+    margin: 0 0 8px 0;
+  }
+
+  .highlights-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .highlight-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 6px;
+    font-size: var(--fz-xs);
+    color: var(--slate);
+    line-height: 1.4;
+  }
+
+  .highlight-item::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .highlight-item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* CSS Variables */
+  :root {
+    --green: #64ffda;
+    --navy: #0a192f;
+    --light-navy: #112240;
+    --lightest-navy: #233554;
+    --slate: #8892b0;
+    --light-slate: #a8b2d1;
+    --lightest-slate: #ccd6f6;
+    --white: #e6f1ff;
+    --fz-xs: 13px;
+    --fz-sm: 14px;
+    --fz-md: 16px;
+    --fz-lg: 18px;
+    --fz-xl: 20px;
+    --fz-xxl: 22px;
+    --brand-accent: #10b981;
+  }
+
+  /* Dark mode variables */
+  .dark {
+    --green: var(--brand-accent);
+    --navy: #0f172a;
+    --light-navy: #1e293b;
+    --lightest-navy: #334155;
+    --slate: #64748b;
+    --light-slate: #94a3b8;
+    --lightest-slate: #e2e8f0;
+    --white: #f8fafc;
+  }
+</style>

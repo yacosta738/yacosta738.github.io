@@ -1,0 +1,194 @@
+---
+/**
+ * ProjectImage component.
+ * This component is responsible for displaying the image for a featured project.
+ * It handles the hover effects and provides a placeholder if an image is not available.
+ *
+ * @prop {string | null} [image] - The URL of the project image.
+ * @prop {string} name - The name of the project, used for alt text.
+ * @prop {string} [url] - The URL to link the image to.
+ * @prop {Lang} lang - The current language for translations.
+ */
+import { Icon } from "astro-icon/components";
+import { type Lang, tr, useTranslations } from "@/i18n";
+import OptimizedPicture from "../atoms/OptimizedPicture.astro";
+
+// Props interface
+interface Props {
+	image?: ImageMetadata | null;
+	name: string;
+	url?: string;
+	lang: Lang;
+	loading?: "lazy" | "eager";
+	fetchpriority?: "auto" | "high" | "low";
+}
+
+const {
+	image,
+	name,
+	url,
+	lang,
+	loading = "lazy",
+	fetchpriority = "auto",
+} = Astro.props as Props;
+const t = useTranslations(lang);
+
+const translated = (
+	key: string,
+	params: Record<string, unknown> = {},
+	fallback = "",
+) => {
+	return tr(t, key, params, fallback);
+};
+---
+
+<div class="project-image-wrapper">
+  <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${translated('viewProject', {}, 'View project')}: ${name}`}
+  >
+    {image ? (
+        <OptimizedPicture
+            src={image}
+            alt={name}
+            class="img"
+            width={1200}
+            height={800}
+            loading={loading}
+            fetchpriority={fetchpriority}
+            inferSize
+        />
+    ) : (
+        <div class="img-placeholder">
+          <Icon name="lucide:image" aria-hidden="true" />
+        </div>
+    )}
+  </a>
+</div>
+
+<style>
+  /* Project Image Wrapper */
+  .project-image-wrapper {
+    box-shadow:
+        0 10px 30px -15px rgba(2, 12, 27, 0.7),
+        0 4px 6px -2px rgba(2, 12, 27, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .dark .project-image-wrapper {
+    box-shadow:
+        0 10px 30px -15px rgba(2, 12, 27, 0.9),
+        0 4px 6px -2px rgba(2, 12, 27, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .project-image-wrapper {
+      height: 100%;
+    }
+  }
+
+  .project-image-wrapper a {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-brand-accent);
+    border-radius: 4px;
+    vertical-align: middle;
+    display: block;
+    position: relative;
+  }
+
+  .project-image-wrapper a:hover,
+  .project-image-wrapper a:focus {
+    background: transparent;
+    outline: 0;
+  }
+
+  .project-image-wrapper a:hover:before,
+  .project-image-wrapper a:focus:before,
+  .project-image-wrapper a:hover .img,
+  .project-image-wrapper a:hover picture,
+  .project-image-wrapper a:hover picture img,
+  .project-image-wrapper a:focus .img,
+  .project-image-wrapper a:focus picture,
+  .project-image-wrapper a:focus picture img {
+    background: transparent;
+    filter: none;
+  }
+
+  .project-image-wrapper a:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-color: var(--color-brand-navy);
+    mix-blend-mode: screen;
+  }
+
+  .dark .project-image-wrapper a:before {
+    background-color: var(--color-brand-navy);
+  }
+
+  picture,
+  picture img,
+  .img {
+    border-radius: 4px;
+    mix-blend-mode: multiply;
+    filter: grayscale(100%) contrast(1) brightness(90%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  @media (max-width: 768px) {
+    picture,
+    picture img,
+    .img {
+      object-fit: cover;
+      width: auto;
+      height: 100%;
+      filter: grayscale(0%) contrast(1) brightness(40%);
+      mix-blend-mode: normal;
+    }
+  }
+
+  .img-placeholder {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary) 50%);
+    color: var(--color-primary-foreground);
+  }
+
+  .img-placeholder svg {
+    width: 4rem;
+    height: 4rem;
+    opacity: 0.5;
+  }
+
+  /* Light mode overrides for better image visibility */
+  html:not(.dark) picture,
+  html:not(.dark) picture img,
+  html:not(.dark) .img {
+    filter: none;
+    mix-blend-mode: normal;
+  }
+  
+  html:not(.dark) .project-image-wrapper a:before {
+    background-color: transparent;
+    mix-blend-mode: normal;
+  }
+</style>

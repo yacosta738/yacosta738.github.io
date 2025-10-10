@@ -1,0 +1,27 @@
+---
+/**
+ * Certificates section component.
+ * This component renders a section displaying a timeline of certificates.
+ * It is only rendered if there are certificates to display.
+ *
+ * @prop {Certificate[]} [certificates=[]] - An array of certificate objects to display.
+ */
+import Section from "@atoms/Section.astro";
+import CertificateTimeline from "@/components/organisms/CertificateTimeline.astro";
+import type Certificate from "@/core/resume/certificate/certificate.model";
+import { type Lang, useTranslations } from "@/i18n";
+
+interface Props {
+	certificates?: Certificate[];
+}
+
+const { certificates = [] } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+---
+
+{certificates.length > 0 && (
+	<Section title={t('certificates')}>
+		<CertificateTimeline certificates={certificates} locale={currentLocale} />
+	</Section>
+)}

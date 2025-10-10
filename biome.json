@@ -1,31 +1,70 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"vcs": {
-		"enabled": false,
-		"clientKind": "git",
-		"useIgnoreFile": false
+	"$schema": "https://biomejs.dev/schemas/2.2.3/schema.json",
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		},
+		"enabled": true
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": [
-			"node_modules",
-			".astro",
-			".cache",
-			".git",
-			".pnpm",
-			".yarn",
-			"dist",
-			"out",
-			"public",
-			"tmp",
-			"vendor"
+		"includes": [
+			"**",
+			"!node_modules",
+			"!coverage",
+			"!.astro",
+			"!.cache",
+			"!.git",
+			"!.vscode",
+			"!.idea",
+			"!.pnpm",
+			"!.yarn",
+			"!dist",
+			"!out",
+			"!public"
 		]
 	},
-	"formatter": { "enabled": true, "indentStyle": "tab" },
-	"organizeImports": { "enabled": true },
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
 	"linter": {
 		"enabled": true,
-		"rules": { "recommended": true }
+		"rules": {
+			"a11y": "error",
+			"recommended": true,
+			"suspicious": {
+				"noUnknownAtRules": "off"
+			}
+		}
 	},
-	"javascript": { "formatter": { "quoteStyle": "double" } }
+	"overrides": [
+		{
+			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					},
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	],
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }

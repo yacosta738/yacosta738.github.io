@@ -1,0 +1,38 @@
+---
+import { Icon } from "astro-icon/components";
+import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
+import AuthorSocials from "@/components/molecules/AuthorSocials.astro";
+import type { Social } from "@/core/author";
+import { findImage } from "@/utils/images";
+
+interface Props {
+	name: string;
+	email: string;
+	avatar: string;
+	location: string;
+	socials: Social[];
+}
+
+const { name, email, avatar, location, socials } = Astro.props;
+
+const preparedImage = await findImage(avatar || "");
+---
+
+<div class="flex items-center gap-3">
+    <OptimizedPicture
+        src={preparedImage as unknown as any}
+        alt={name}
+        class="size-20 rounded-full"
+        loading="eager"
+    />
+    <div class="text-foreground font-inter">
+        <h1 class="text-xl font-semibold tracking-tighter leading-[130%]">
+            {name}
+        </h1>
+        <div class="flex items-center gap-0.5 text-sm my-1 text-foreground-muted">
+            <Icon name="lucide:map-pin" class="size-3" />
+            {location}
+        </div>
+        <AuthorSocials socials={socials} email={email} className="mt-2" />
+    </div>
+</div>

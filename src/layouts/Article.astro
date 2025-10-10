@@ -1,0 +1,46 @@
+---
+import ToTopButton from "@/components/atoms/ToTopButton.astro";
+import HeaderProgressBar from "@/components/molecules/HeaderProgressBar.astro";
+import BlogFooter from "@/components/organisms/BlogFooter.astro";
+import WidgetWrapper from "@/components/organisms/WidgetWrapper.astro";
+import type Article from "@/core/article/article.model";
+import BaseLayout from "@/layouts/Layout.astro";
+import { getOgImagePath } from "@/lib/open-graph/og.service";
+
+interface Props extends Article {
+	url: string;
+	minutesRead: string;
+}
+
+const {
+	title,
+	description,
+	tags = [],
+	url = Astro.request.url,
+	minutesRead,
+} = Astro.props;
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
+	.href;
+---
+
+<BaseLayout {title} {description} {ogImage}>
+	<HeaderProgressBar
+		slot="subheader"
+		title={title}
+		description={description}
+		url={url}
+		tags={tags.map((tag) => tag.title)}
+		minutesRead={minutesRead}
+	/>
+	<div class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28">
+		<article class="flex-1 lg:basis-3/4">
+			<slot />
+		</article>
+		<aside class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start">
+			<WidgetWrapper />
+		</aside>
+	</div>
+	<BlogFooter />
+	<ToTopButton />
+</BaseLayout>

@@ -1,0 +1,108 @@
+---
+/**
+ * TorchEffect component.
+ * This component creates a "torch" or "spotlight" effect that follows the user's
+ * mouse cursor, implemented with a CSS radial gradient. It is a purely decorative
+ * effect that is disabled for users who prefer reduced motion and on smaller screens
+ * to improve performance. It does not render any HTML and takes no props.
+ */
+---
+<style>
+  body.torch-enabled::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--torch-x, 50%) var(--torch-y, 50%),
+      var(--torch-color) 0%,
+      transparent 250px
+    );
+    pointer-events: none;
+    z-index: 50;
+    opacity: var(--torch-opacity, 1);
+    transition: opacity 0.3s ease;
+  }
+
+  /* Light mode - very subtle green glow to avoid washing out page content */
+  :root {
+    /* reduce mix amount and overall opacity so the torch doesn't reduce text contrast */
+    --torch-color: color-mix(in srgb, var(--color-brand-accent) 4%, transparent);
+    --torch-opacity: 0.35;
+  }
+
+  /* Dark mode - more visible green glow */
+  .dark {
+    /* In dark mode make it slightly stronger but still subtle */
+    --torch-color: color-mix(in srgb, var(--color-brand-accent) 10%, transparent);
+    --torch-opacity: 0.5;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    body.torch-enabled::before {
+      --torch-opacity: 0;
+    }
+  }
+
+  /* Hide on small screens to improve performance */
+  @media (max-width: 768px) {
+    body.torch-enabled::before {
+      --torch-opacity: 0;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    
+    if (prefersReducedMotion || isMobile) {
+      return; // Exit early if reduced motion is preferred or on mobile
+    }
+
+    document.body.classList.add('torch-enabled');
+
+    // Throttle mouse move events for better performance
+    let ticking = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    const updateTorchPosition = () => {
+      document.documentElement.style.setProperty('--torch-x', `${lastX}px`);
+      document.documentElement.style.setProperty('--torch-y', `${lastY}px`);
+      ticking = false;
+    };
+
+    const handleMouseMove = (e) => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      if (!ticking) {
+        requestAnimationFrame(updateTorchPosition);
+        ticking = true;
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    // Cleanup function for better memory management
+    window.torchCleanup = () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.body.classList.remove('torch-enabled');
+    };
+
+    // Optional: Listen for theme changes to adjust opacity if needed
+    const handleThemeChange = () => {
+      // Re-evaluate reduced motion preference on theme change
+      const newPrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (newPrefersReducedMotion) {
+        window.torchCleanup?.();
+      }
+    };
+
+    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', handleThemeChange);
+  })();
+</script>

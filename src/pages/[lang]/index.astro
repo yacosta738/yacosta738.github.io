@@ -1,0 +1,162 @@
+---
+export const prerender = true;
+
+import Section from "@/components/atoms/Section.astro";
+import Email from "@/components/molecules/Email.astro";
+import Social from "@/components/molecules/Social.astro";
+import Footer from "@/components/organisms/Footer.astro";
+import PostsList from "@/components/organisms/PostsList.astro";
+import About from "@/components/sections/About.astro";
+import AllProjects from "@/components/sections/AllProjects.astro";
+import Awards from "@/components/sections/Awards.astro";
+import Certificates from "@/components/sections/Certificates.astro";
+import Contact from "@/components/sections/Contact.astro";
+import Education from "@/components/sections/Education.astro";
+import Experience from "@/components/sections/Experience.astro";
+import FeaturedProjects from "@/components/sections/FeaturedProjects.astro";
+import Hero from "@/components/sections/Hero.astro";
+import Interests from "@/components/sections/Interests.astro";
+import Languages from "@/components/sections/Languages.astro";
+import Publications from "@/components/sections/Publications.astro";
+import References from "@/components/sections/References.astro";
+import Skills from "@/components/sections/Skills.astro";
+import Volunteer from "@/components/sections/Volunteer.astro";
+import { getArticles, hasArticles } from "@/core/article";
+import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
+import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+
+export const getStaticPaths = () =>
+	Object.keys(LOCALES).map((lang) => ({
+		params: { lang },
+	}));
+
+const currentLocale = Astro.params.lang as Lang;
+const resume = await getMainResumeWithData({ lang: currentLocale });
+if (!resume) {
+	throw new Error("No se pudo obtener el resume principal");
+}
+
+const { name, label } = resume.basics;
+const t = useTranslations(currentLocale);
+const title = t("title", { name, label });
+const NUMBER_OF_POSTS = 4;
+// Get last $NUMBER_OF_POSTS articles
+const allArticles = await getArticles({
+	lang: currentLocale,
+	includeDrafts: false,
+});
+const lastArticles = allArticles
+	.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+	.slice(0, NUMBER_OF_POSTS);
+const hasArticlesData = await hasArticles({ lang: currentLocale });
+---
+
+<Layout title={title}>
+  <main id="main-content">
+    <Hero basics={resume.basics} />
+    <About basics={resume.basics} skills={resume.skills} />
+    <Experience work={resume.work} />
+
+    {
+      resume.projects && resume.projects.length > 0 && (
+        <>
+          <FeaturedProjects projects={resume.projects} />
+          <AllProjects projects={resume.projects} />
+        </>
+      )
+    }
+
+    <Education education={resume.education} />
+    {
+      resume.skills && resume.skills.length > 0 && (
+        <Skills skills={resume.skills} />
+      )
+    }
+
+    {
+      resume.awards && resume.awards.length > 0 && (
+        <Awards awards={resume.awards} />
+      )
+    }
+
+    {
+      resume.certificates && resume.certificates.length > 0 && (
+        <Certificates certificates={resume.certificates} />
+      )
+    }
+
+    {
+      resume.publications && resume.publications.length > 0 && (
+        <Publications publications={resume.publications} />
+      )
+    }
+
+    {
+      resume.volunteer && resume.volunteer.length > 0 && (
+        <Volunteer volunteer={resume.volunteer} />
+      )
+    }
+
+    {
+      resume.references && resume.references.length > 0 && (
+        <References references={resume.references} />
+      )
+    }
+
+    {
+      resume.interests && resume.interests.length > 0 && (
+        <Interests interests={resume.interests} />
+      )
+    }
+
+    {
+      resume.languages && resume.languages.length > 0 && (
+        <Languages languages={resume.languages} />
+      )
+    }
+      { hasArticlesData && (
+        <Section  title={t({ en: "Posts", es: "Publicaciones" }) || "Posts"}>
+          <PostsList
+              posts={lastArticles}
+              showLoadMore={false}
+          />
+        </Section>
+        )
+      }
+    <Contact />
+  </main>
+  <slot name="aside">
+    <Social profiles={resume.basics.profiles} />
+    <Email email={resume.basics.email} />
+  </slot>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 50px;
+    width: 100%;
+  }
+
+  @media (width <= 1200px) {
+    main {
+      max-width: 1000px;
+      padding: 0 80px;
+    }
+  }
+
+  @media (width <= 900px) {
+    main {
+      padding: 0 50px;
+    }
+  }
+
+  @media (width <= 700px) {
+    main {
+      padding: 0 25px;
+    }
+  }
+</style>

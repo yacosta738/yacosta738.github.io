@@ -1,0 +1,101 @@
+---
+/**
+ * TabButton component.
+ * A button used within a tabbed interface. It's designed to control a
+ * corresponding tab panel and manages ARIA attributes for accessibility.
+ *
+ * @prop {string} company - The text to display on the tab (typically a company name).
+ * @prop {boolean} isActive - Whether the tab is currently active.
+ * @prop {number} tabIndex - The index of the tab, used for ARIA attributes.
+ * @prop {string} [onClick] - A JavaScript string to be executed on click. (Not used in template but available)
+ */
+interface Props {
+	company: string;
+	isActive: boolean;
+	tabIndex: number;
+	onClick?: string;
+}
+
+const { company, isActive, tabIndex } = Astro.props;
+---
+
+<button
+	class="tab-button"
+	data-tab={tabIndex}
+	id={`tab-${tabIndex}`}
+	role="tab"
+	tabindex={isActive ? "0" : "-1"}
+	aria-selected={isActive ? "true" : "false"}
+	aria-controls={`panel-${tabIndex}`}
+>
+	<span>{company}</span>
+</button>
+
+<style>
+	.tab-button {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: var(--tab-height);
+		padding: 0 20px 2px;
+		border: none;
+		border-left: 2px solid var(--lightest-navy);
+		background-color: transparent;
+		color: var(--slate);
+		font-family: var(--font-mono);
+		font-size: var(--fz-xs);
+		text-align: left;
+		white-space: nowrap;
+		cursor: pointer;
+		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	}
+
+	.tab-button:hover,
+	.tab-button:focus {
+		background-color: var(--light-navy);
+		color: var(--green);
+		outline: none;
+	}
+
+	.tab-button[aria-selected="true"] {
+		color: var(--green);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.tab-button {
+			padding: 0 15px 2px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.tab-button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-width: var(--tab-width);
+			padding: 0 15px;
+			border-left: 0;
+			border-bottom: 2px solid var(--lightest-navy);
+			text-align: center;
+		}
+
+		.tab-button:first-of-type {
+			margin-left: 50px;
+		}
+
+		.tab-button:last-of-type {
+			padding-right: 50px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.tab-button:first-of-type {
+			margin-left: 25px;
+		}
+
+		.tab-button:last-of-type {
+			padding-right: 25px;
+		}
+	}
+</style>

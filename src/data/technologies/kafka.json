@@ -1,6 +1,0 @@
-{
-	"id": "kafka",
-	"name": "Kafka",
-	"icon": "mdi:apache-kafka",
-	"url": "https://kafka.apache.org/"
-}

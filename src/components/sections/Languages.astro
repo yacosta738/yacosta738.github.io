@@ -1,0 +1,46 @@
+---
+import Section from "@atoms/Section.astro";
+/**
+ * Languages section component.
+ * This component renders a section displaying a grid of languages. It uses the
+ * `languageMapper` to determine if a language card should link to a different
+ * language version of the site.
+ *
+ * @prop {Language[]} [languages=[]] - An array of language objects to display.
+ */
+import LanguageCard from "@/components/molecules/LanguageCard.astro";
+import type Language from "@/core/resume/language/language.model";
+import { type Lang, useTranslations } from "@/i18n";
+import { languageMapper } from "@/lib/language-mapper";
+
+interface Props {
+	languages?: Language[];
+}
+
+const { languages = [] } = Astro.props as Props;
+
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+await languageMapper.initialize();
+---
+
+{languages.length > 0 && (
+	<Section title={t('languages')}>
+		<div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+			{languages.map((language) => {
+				const key = languageMapper.findLocaleCode(language.language);
+				// Ensure key is a string before using it in href
+				const localeCode = typeof key === 'string' ? key : undefined;
+				return (
+					<LanguageCard 
+						language={language}
+						showLink={!!localeCode}
+						href={localeCode ? `/${localeCode}/` : undefined}
+					/>
+				);
+			})}
+		</div>
+	</Section>
+)}
+
+

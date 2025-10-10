@@ -1,0 +1,140 @@
+---
+/**
+ * Email component.
+ * This component displays a fixed-position email link on the side of the page,
+ * styled to appear vertically. It is built using the `Side` component.
+ *
+ * @prop {string} email - The email address to display and link to.
+ * @prop {string} [class] - Additional CSS classes to apply to the component's container.
+ */
+import type { HTMLAttributes } from "astro/types";
+import Side from "@/components/atoms/Side.astro";
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"div"> {
+	email: string;
+	class?: string;
+}
+const { email, class: className = "", ...attrs } = Astro.props as Props;
+
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+
+const obfuscatedEmail = email
+	? Buffer.from(email.split("").reverse().join("")).toString("base64")
+	: null;
+---
+
+<Side show={true} orientation="right" class="hidden lg:block animate-fade-in-right animate-delay-800 animate-duration-slower">
+  <div class={cn("email-side flex flex-col items-center relative", className)} {...(attrs as HTMLAttributes<"div">)}>
+    <obfuscate-side-email data-email={obfuscatedEmail}>
+        <button
+          type="button"
+          class="my-5 px-2.5 py-2 font-mono text-xs tracking-widest transition-transform duration-150 hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-foreground focus:text-foreground"
+          style="writing-mode: vertical-rl;"
+          aria-label={t("copy.email.address")}
+        >
+        </button>
+        <span class="tooltip">{t("email.copied")}</span>
+    </obfuscate-side-email>
+    <span
+      class="block w-px mx-auto"
+      style="height: 90px; background-color: var(--color-slate);"
+      aria-hidden="true"
+    ></span>
+  </div>
+</Side>
+
+<style>
+    obfuscate-side-email {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    obfuscate-side-email button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        /* color is inherited from parent div's class */
+        padding: 0;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    obfuscate-side-email .tooltip {
+        position: absolute;
+        top: 50%;
+        right: 3rem; /* Position to the left of the vertical text */
+        transform: translateY(-50%);
+        background-color: rgb(31 41 55);
+        color: white;
+        font-size: 0.75rem;
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+        white-space: nowrap;
+        z-index: 10;
+    }
+
+    obfuscate-side-email .tooltip.show {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    class ObfuscateSideEmail extends HTMLElement {
+        connectedCallback() {
+            const button = this.querySelector("button");
+            const tooltip = this.querySelector(".tooltip");
+
+            if (!button || !tooltip) return;
+
+            const decodeBase64 = (base64String: string): string => {
+                try {
+                    // Use client-side decoding
+                    const binaryString = window.atob(base64String);
+                    // The rest of the decoding logic is to handle UTF-8 characters correctly,
+                    // though for an email it's less likely to be an issue.
+                    const bytes = new Uint8Array(binaryString.length);
+                    for (let i = 0; i < binaryString.length; i++) {
+                        bytes[i] = binaryString.charCodeAt(i);
+                    }
+                    return new TextDecoder().decode(bytes);
+                } catch (e) {
+                    console.error("Failed to decode base64 string:", e);
+                    return "";
+                }
+            };
+
+            const obfuscatedEmail = this.getAttribute("data-email") || "";
+            const decodedEmail = decodeBase64(obfuscatedEmail);
+            const originalEmail = decodedEmail.split("").reverse().join("");
+
+            if (originalEmail) {
+                button.textContent = originalEmail;
+            }
+
+            button.addEventListener("click", async () => {
+                if (!originalEmail) return;
+
+                try {
+                    await navigator.clipboard.writeText(originalEmail);
+                    tooltip.classList.add("show");
+                    setTimeout(() => {
+                        tooltip.classList.remove("show");
+                    }, 2000);
+                } catch (err) {
+                    console.error("Failed to copy email:", err);
+                }
+            });
+        }
+    }
+    customElements.define("obfuscate-side-email", ObfuscateSideEmail);
+</script>
+

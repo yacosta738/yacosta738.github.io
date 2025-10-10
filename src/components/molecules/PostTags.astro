@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import PostTag from "@/components/atoms/PostTag.astro";
+import type Tag from "@/core/tag/tag.model";
+import { type Lang } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"div"> {
+	tags: Tag[];
+	currentLocale: Lang;
+}
+const { tags, currentLocale, ...attrs } = Astro.props;
+---
+
+<div class={cn("flex flex-wrap gap-2", attrs.class)}>
+	{
+		tags?.map((tag) => (
+			<PostTag tag={tag} currentLocale={currentLocale} />
+		))
+	}
+</div>

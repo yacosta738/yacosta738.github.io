@@ -1,0 +1,29 @@
+name: Check Ruler Configuration
+on:
+  pull_request:
+    paths: ['.ruler/**']
+env:
+  NODE_VERSION: '22'
+jobs:
+  check-ruler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
+      - name: 🧩 Setup Node.js and pnpm
+        uses: ./.github/actions/setup/node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install Ruler
+        run: pnpm install -g @intellectronica/ruler
+
+      - name: Apply Ruler configuration
+        run: ruler apply --no-gitignore
+
+      - name: Check for uncommitted changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "::error::Ruler configuration is out of sync!"
+            echo "Please run 'ruler apply' locally and commit the changes."
+            exit 1
+          fi

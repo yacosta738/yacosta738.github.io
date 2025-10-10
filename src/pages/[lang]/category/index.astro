@@ -1,0 +1,68 @@
+---
+export const prerender = true;
+
+import Badge from "@/components/atoms/Badge.astro";
+import PageHeadline from "@/components/atoms/PageHeadline.astro";
+import Footer from "@/components/organisms/Footer.astro";
+import { getArticles } from "@/core/article";
+import { getCategories } from "@/core/category";
+import { LOCALES, useTranslations } from "@/i18n";
+import { getLangFromUrl } from "@/i18n/utils";
+import Layout from "@/layouts/Layout.astro";
+
+export const getStaticPaths = () =>
+	Object.keys(LOCALES).map((lang) => ({
+		params: { lang },
+	}));
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const categories = await getCategories({ lang });
+const allArticles = await getArticles();
+
+// Precompute number of articles per category for the current locale
+const categoryCounts = new Map();
+for (const category of categories) {
+	const count = allArticles.filter(
+		(article) =>
+			article.category?.slug === category.slug &&
+			article.id.startsWith(`${lang}/`),
+	).length;
+	categoryCounts.set(category.slug, count);
+}
+
+const title = t("categories.title");
+---
+
+<Layout {title}>
+  <div class="container mx-auto px-4 pt-24">
+    <PageHeadline {title}>
+      <p class="text-xl">
+        {t("categories.description")}
+      </p>
+    </PageHeadline>
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        categories.map((category) => (
+          <article class="group relative rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
+            <a href={`/${lang}/category/${category.slug}`} class="block hover:no-underline">
+              <div class="flex items-center gap-3">
+                <div class="flex-1">
+                  <h3 class="text-lg font-medium text-foreground dark:text-foreground-dark">{category.title}</h3>
+                  {/* category.description not present in Category model; omit description */}
+                </div>
+                <div aria-hidden="true">
+                  <Badge size="sm" class="text-xs font-medium bg-brand-accent text-white px-3 py-1">
+                    {String(categoryCounts.get(category.slug) ?? 0)}
+                  </Badge>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+  <Footer />
+</Layout>

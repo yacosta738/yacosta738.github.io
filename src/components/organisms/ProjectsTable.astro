@@ -1,0 +1,52 @@
+---
+import ProjectRow from "@/components/molecules/ProjectRow.astro";
+import type { EnhancedProject } from "@/core/resume/project/project.service";
+import { type Lang, useTranslations } from "@/i18n";
+import { sortProjectsByDate } from "@/lib/project-sorter";
+
+interface Props {
+	projects: EnhancedProject[];
+}
+
+const { projects } = Astro.props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+const sortedProjects = sortProjectsByDate(projects || []);
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full text-left border-collapse">
+    <caption class="sr-only">
+      {t("projects.tableCaption") || "List of projects sorted by date, most recent first"}
+    </caption>
+    
+    <thead class="text-sm text-foreground-muted uppercase">
+      <tr>
+        <th class="py-4 px-6 min-w-[100px]" scope="col">
+          <span class="flex items-center gap-2">
+            {t("table.year")}
+            <span class="text-xs" aria-label={t("projects.sortedByDate") || "Sorted by date, newest first"}>
+              ↓
+            </span>
+          </span>
+        </th>
+        <th class="py-4 px-6" scope="col">{t("table.title")}</th>
+        <th class="py-4 px-6 hidden md:table-cell" scope="col">{t("table.madeAt")}</th>
+        <th class="py-4 px-6 hidden lg:table-cell" scope="col">{t("table.builtWith")}</th>
+        <th class="py-4 px-6 text-right" scope="col">{t("table.link")}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sortedProjects.map((project) => (
+        <ProjectRow project={project} />
+      ))}
+    </tbody>
+  </table>
+
+  {!sortedProjects.length && (
+    <div class="text-center py-8 text-foreground-muted">
+      <p>{t("projects.noProjects") || "No projects to display"}</p>
+    </div>
+  )}
+</div>

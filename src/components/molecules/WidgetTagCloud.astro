@@ -1,63 +1,76 @@
 ---
-import {
-	getLangFromUrl,
-	useTranslations,
-	useTranslatedPath,
-} from "@i18n:utils";
-import WidgetCard from "molecules:WidgetCard";
+import WidgetCard from "@/components/atoms/WidgetCard.astro";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+
+export type TagItem = {
+	slug: string;
+	title: string;
+	count: number;
+};
 
 export interface Props {
-	tags: { [key: string]: number };
+	tags: TagItem[];
 }
+
 const { tags } = Astro.props;
 
-const allTags = Object.keys(tags).sort();
+const fontSizeClass = [
+	"text-xs",
+	"text-sm",
+	"text-base",
+	"text-lg",
+	"text-xl",
+	"text-2xl",
+	"text-3xl",
+	"text-4xl",
+];
 
-const textSize = (
-	tag: string,
-	fontSizeClass: string[] = [
-		"text-xs",
-		"text-sm",
-		"text-base",
-		"text-lg",
-		"text-xl",
-		"text-2xl",
-		"text-3xl",
-		"text-4xl",
-	],
-): string => {
-	const max = Math.max(...Object.values(tags));
-	const min = Math.min(...Object.values(tags));
-	const range = max - min;
-	const tagCount = tags[tag];
-	const index = Math.floor(
-		((tagCount - min) / range) * (fontSizeClass.length - 1),
+const counts = tags.map((tag) => tag.count);
+const minCount = counts.length > 0 ? Math.min(...counts) : 0;
+const maxCount = counts.length > 0 ? Math.max(...counts) : 0;
+const range = maxCount - minCount;
+
+const textSize = (count: number): string => {
+	if (counts.length === 0) {
+		return fontSizeClass[0];
+	}
+	if (range === 0) {
+		return fontSizeClass[Math.floor(fontSizeClass.length / 2)];
+	}
+	const ratio = (count - minCount) / range;
+	const index = Math.min(
+		fontSizeClass.length - 1,
+		Math.max(0, Math.floor(ratio * (fontSizeClass.length - 1))),
 	);
 	return fontSizeClass[index];
 };
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+
+const sortedTags = [...tags].sort((a, b) =>
+	a.title.localeCompare(b.title, undefined, { sensitivity: "base" }),
+);
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 ---
 
 <WidgetCard title={t('tags')}>
 	<div class="tag-cloud-tags">
 		{
-			allTags.map((tag) => (
+			sortedTags.map(({ slug, title, count }) => (
 				<a
-					href={translatePath(`/tags/${tag}`)}
-					aria-label={tag}
-					class:list={`inline-link ${textSize(tag)}`}
+					href={translatePath(`/tag/${slug}`)}
+					aria-label={title}
+					class={`inline-link ${textSize(count)}`}
 				>
-					<span class="capitalize">{tag}</span>
+					<span class="capitalize">{title}</span>
 				</a>
 			))
 		}
 	</div>
-	{allTags.length === 0 && <div class="text-center text-gray-500">{t('noTags')}</div>}
+	{sortedTags.length === 0 && <div class="text-center text-gray-500">{t('noTags')}</div>}
 </WidgetCard>
 
-<style scoped lang="scss">
+<style scoped>
 	.tag-cloud-tags {
 		display: block;
 		margin: 0;

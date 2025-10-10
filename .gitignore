@@ -1,7 +1,7 @@
 # build output
 dist/
-dev-dist/
-.output/
+
+# generated types
 .astro/
 
 # dependencies
@@ -13,23 +13,47 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
-.env.local
 .env.production
 
 # macOS-specific files
 .DS_Store
-/.idea/
 
-# Local Netlify folder
-.netlify
-/test-results/
-/playwright-report/
-/playwright/.cache/
+# local folders
+.history
 
-# wrangler files
-.wrangler
-.dev.vars
+# test coverage
+coverage/
+playwright-report/
+test-results/
 
+
+# START Ruler Generated Files
+/.codex/config.json
+/.codex/config.json.bak
+/.codex/config.toml
+/.codex/config.toml.bak
+/.cursor/mcp.json
+/.cursor/mcp.json.bak
+/.cursor/rules/ruler_cursor_instructions.mdc
+/.cursor/rules/ruler_cursor_instructions.mdc.bak
+/.gemini/settings.json
+/.gemini/settings.json.bak
+/.junie/guidelines.md
+/.junie/guidelines.md.bak
+/.mcp.json
+/.mcp.json.bak
+/.vscode/mcp.json
+/.vscode/mcp.json.bak
+/AGENTS.md
+/AGENTS.md.bak
+/CLAUDE.md
+/CLAUDE.md.bak
+# END Ruler Generated Files
+
+# gemini-cli settings
+.gemini/
+
+# GitHub App credentials
+gha-creds-*.json

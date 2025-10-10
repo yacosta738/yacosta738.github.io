@@ -1,0 +1,32 @@
+---
+/**
+ * NotTranslateCaution component.
+ * Displays a warning message if the current page is not available in the user's
+ * selected language.
+ *
+ * @prop {Lang[]} usedLangs - An array of language codes in which the current page IS available.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { type Lang, type Multilingual, useTranslations } from "@/i18n";
+
+interface Props extends HTMLAttributes<"p"> {
+	usedLangs: Lang[];
+}
+
+const NOT_TRANSLATED_CAUTION: string | Multilingual = {
+	en: "This page is not available in your language.",
+	es: "Esta página no está disponible en tu idioma.",
+};
+const t = useTranslations(Astro.currentLocale as Lang);
+const { usedLangs } = Astro.props;
+const currentLocale = Astro.currentLocale as Lang;
+---
+
+{
+  !usedLangs.includes(currentLocale) && (
+    <p class="p-2 my-4 text-lg font-semibold tracking-tight text-gray-800 bg-yellow-100 rounded-md">
+      <span class="material-icons-sharp mr-2 align-middle opacity-80">warning</span>
+      {t(NOT_TRANSLATED_CAUTION)}
+    </p>
+  )
+}

@@ -1,0 +1,69 @@
+---
+export const prerender = true;
+
+import { render } from "astro:content";
+import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
+import CtaNewsletterSubscription from "@/components/organisms/CtaNewsletterSubscription.astro";
+import PostFooter from "@/components/organisms/PostFooter.astro";
+import PostHeader from "@/components/organisms/PostHeader.astro";
+import { getArticles } from "@/core/article";
+import type Article from "@/core/article/article.model";
+import { type Lang, useTranslations } from "@/i18n";
+import Layout from "@/layouts/Article.astro";
+
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+
+interface Props {
+	post: Article;
+}
+
+export async function getStaticPaths() {
+	const posts = await getArticles();
+
+	return posts.map((post) => {
+		const [lang, ...id] = post.id.split("/");
+		const idPath = id.join("/");
+		return { params: { lang, id: idPath }, props: { post } };
+	});
+}
+
+const { post } = Astro.props;
+
+if (!post.entry) {
+	throw new Error(`No entry found for post: ${post.id}`);
+}
+
+const { Content, remarkPluginFrontmatter } = await render(post.entry);
+---
+
+<Layout
+	{...post}
+	url={Astro.request.url}
+	minutesRead={remarkPluginFrontmatter.minutesRead}
+>
+	<div class="container mx-auto px-4">
+		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
+		<div class="mx-auto prose lg:prose-xl dark:prose-invert">
+			{
+				post.cover && (
+					<OptimizedPicture src={post.cover} alt={post.title} loading="eager" />
+				)
+			}
+			<Content />
+			<PostFooter post={post} />
+		</div>
+
+		<!-- Comment Area -->
+
+	</div>
+	<div class="border-y border-y-secondary-foreground-light dark:border-y-secondary-foreground-dark mt-12">
+		<CtaNewsletterSubscription
+		formId="article-cta-newsletter-subscription-form"
+		title={t("cta.title")}
+		description={t("cta.description")}
+		class="my-10 py-5 mx-auto container px-4"
+	/>
+	</div>
+
+</Layout>

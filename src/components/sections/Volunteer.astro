@@ -1,0 +1,27 @@
+---
+/**
+ * Volunteer section component.
+ * This component renders a section displaying a timeline of volunteer experiences.
+ * It is only rendered if there are volunteer experiences to display.
+ *
+ * @prop {Volunteer[]} [volunteer=[]] - An array of volunteer experience objects to display.
+ */
+import Section from "@atoms/Section.astro";
+import VolunteerTimeline from "@/components/organisms/VolunteerTimeline.astro";
+import type Volunteer from "@/core/resume/volunteer/volunteer.model";
+import { type Lang, useTranslations } from "@/i18n";
+
+interface Props {
+	volunteer?: Volunteer[];
+}
+
+const { volunteer = [] } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+---
+
+{volunteer.length > 0 && (
+	<Section title={t('volunteer')}>
+		<VolunteerTimeline volunteer={volunteer} locale={currentLocale} />
+	</Section>
+)}

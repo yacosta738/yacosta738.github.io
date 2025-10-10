@@ -1,0 +1,141 @@
+---
+/**
+ * JobHeader component.
+ * This component displays the header for a job experience, including the position,
+ * company, date range, and location. It supports linking to the company's website
+ * and localizes the date range.
+ *
+ * @prop {string} position - The job position or title.
+ * @prop {string} company - The name of the company.
+ * @prop {string} [companyUrl] - The URL of the company's website.
+ * @prop {string} [location] - The location of the job.
+ * @prop {Date} startDate - The start date of the employment.
+ * @prop {Date | null} [endDate] - The end date of the employment. If null, "Present" is displayed.
+ * @prop {Lang} locale - The locale to use for date formatting ('en' or 'es').
+ * @prop {boolean} [showCompanyInTitle=true] - Whether to show the company name in the main title.
+ */
+import { Icon } from "astro-icon/components";
+import { getCompanyLogo } from "@/configs/company-logos";
+import type { Lang } from "@/i18n";
+
+interface Props {
+	position: string;
+	company: string;
+	companyUrl?: string;
+	location?: string;
+	startDate: Date;
+	endDate?: Date | null;
+	locale: Lang;
+	showCompanyInTitle?: boolean;
+}
+
+const {
+	position,
+	company,
+	companyUrl,
+	location,
+	startDate,
+	endDate,
+	locale,
+	showCompanyInTitle = true,
+} = Astro.props;
+
+const companyLogo = getCompanyLogo(company);
+
+/**
+ * Formats a date range into a localized string (e.g., "Jan 2022 - Present").
+ * @param {Date} start - The start date.
+ * @param {Date | null | undefined} end - The end date.
+ * @param {Lang} loc - The locale ('en' or 'es').
+ * @returns {string} The formatted date range string.
+ */
+const formatDateRange = (
+	start: Date,
+	end: Date | null | undefined,
+	loc: Lang,
+): string => {
+	const options: Intl.DateTimeFormatOptions = {
+		year: "numeric",
+		month: "short",
+	};
+
+	const startFormatted = start.toLocaleDateString(
+		loc === "es" ? "es-ES" : "en-US",
+		options,
+	);
+	const endFormatted = end
+		? end.toLocaleDateString(loc === "es" ? "es-ES" : "en-US", options)
+		: loc === "es"
+			? "Presente"
+			: "Present";
+
+	return `${startFormatted} - ${endFormatted}`.toUpperCase();
+};
+---
+
+<div class="mb-5 pb-4 border-b border-lightest-navy flex flex-col items-center gap-4 sm:flex-row sm:items-start">
+    {companyLogo && showCompanyInTitle && (
+       <div class="flex-shrink-0 w-full flex justify-center mb-4 sm:w-auto sm:mb-0">
+		<Icon size={64} title={company} name={companyLogo} />
+	</div>
+    )}
+    <div class="flex-1 min-w-0 w-full text-center sm:text-left">
+        <h3 class="mb-2 text-2xl font-medium leading-tight text-lightest-slate">
+            <span class="text-lightest-slate">{position}</span>
+            {
+                showCompanyInTitle && (
+                    <>
+                        <span class="text-slate">&nbsp;@&nbsp;</span>
+                        {companyUrl ? (
+                            <a
+                                href={companyUrl}
+                                class="text-green no-underline relative inline-block transition-all duration-250 ease-out hover:after:w-full focus:after:w-full after:content-[''] after:absolute after:w-0 after:h-px after:-bottom-0.5 after:left-0 after:bg-green after:transition-all after:duration-250 after:ease-out after:opacity-50"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {company}
+                            </a>
+                        ) : (
+                            <span class="text-green">{company}</span>
+                        )}
+                    </>
+                )
+            }
+        </h3>
+
+        <div class="flex gap-4 items-center flex-wrap max-sm:flex-col max-sm:items-start max-sm:gap-1">
+            <p class="text-right pr-5 text-green font-mono text-xs font-semibold leading-tight">{formatDateRange(startDate, endDate, locale)}</p>
+            {location && <p class="m-0 text-light-slate font-mono text-xs before:content-['📍_'] before:mr-1">{location}</p>}
+        </div>
+    </div>
+</div>
+
+<style>
+	/* Light mode overrides for JobHeader */
+	html:not(.dark) .text-green {
+		color: var(--brand-accent) !important;
+	}
+
+	html:not(.dark) .text-lightest-slate {
+		color: #0f172a !important; /* dark text for contrast */
+	}
+
+	html:not(.dark) .text-slate {
+		color: #64748b !important; /* readable gray */
+	}
+
+	html:not(.dark) .text-light-slate {
+		color: #64748b !important;
+	}
+
+	html:not(.dark) .border-lightest-navy {
+		border-color: rgba(15,23,42,0.06) !important;
+	}
+
+	/* Light mode link hover effects */
+	html:not(.dark) .after\:bg-green::after {
+		background-color: var(--brand-accent) !important;
+	}
+</style>
+
+

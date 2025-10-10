@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import { cn } from "@/lib/utils";
+
+interface Social {
+	name: string;
+	url: string;
+	icon: string;
+}
+
+interface Props extends HTMLAttributes<"div"> {
+	socials: Social[];
+}
+
+const {
+	socials,
+	class: className = "flex items-center justify-center w-full max-w-fit gap-4",
+	...attrs
+} = Astro.props;
+---
+
+<ul class={cn(className)} {...attrs}>
+    {socials && socials.map((social) => (
+        <li>
+            <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                class="text-foreground hover:text-brand-accent dark:text-foreground-muted dark:hover:text-brand-accent transition-opacity"
+            >
+                <Icon name={social.icon} class="size-5" />
+            </a>
+        </li>
+    ))}
+    <li>
+        <slot />
+    </li>
+</ul>

@@ -1,382 +1,720 @@
-@import "./variables.css";
+@import "tailwindcss";
 @import "./fonts.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin "@tailwindcss/typography";
+@plugin "@midudev/tailwind-animations";
+@custom-variant dark (&:where(.dark, .dark *));
 
-@layer components {
-	.button-ticket {
-		@apply flex h-24 w-[5.5rem] items-center rounded-lg p-4 opacity-60 contrast-75 transition-all hover:scale-110 hover:opacity-100 hover:contrast-100;
-	}
+/* Theme variables using Tailwind CSS 4 @theme directive */
+@theme {
+	/* Semantic color system */
+	--color-primary: #059669;
+	--color-primary-foreground: #ffffff;
 
-	.button {
-		transition: var(--transition);
-		outline: 0;
+	/* Text colors - semantic naming - Maximum contrast for light mode */
+	--color-foreground: #000000;
+	--color-foreground-muted: #1f2937;
+	--color-foreground-subtle: #374151;
 
-		@apply cursor-pointer select-none rounded border border-green-500 bg-transparent p-2 text-sm text-green-500 hover:bg-green-900;
-	}
+	/* Background colors for light mode - Maximum differentiation */
+	--color-background: #ffffff;
+	--color-background-secondary: #f8fafc;
+	--color-background-surface: #ffffff;
+	--color-background-tertiary: #f1f5f9;
+	--color-muted: #4b5563;
 
-	.resume-button {
-		@apply cursor-pointer select-none rounded border border-green-500 bg-transparent p-2 text-sm capitalize text-green-500 hover:bg-green-900;
-	}
+	/* Border colors - Maximum definition */
+	--color-border: #cbd5e0;
+	--color-border-hover: #9ca3af;
 
-	.small-button {
-		@apply button p-1 font-mono text-sm;
-	}
+	/* Brand colors for portfolio - Maximum contrast */
+	--color-brand-navy: #ffffff;
+	--color-brand-navy-light: #f8fafc;
+	--color-brand-navy-lighter: #cbd5e0;
+	--color-brand-accent: #047857;
 
-	.big-button {
-		@apply cursor-pointer select-none rounded border-2 border-green-500 bg-transparent px-6 py-4 font-mono text-lg text-green-500 hover:bg-green-900;
+	/* Font families */
+	--font-sans: "Calibre", "Inter", -apple-system, system-ui, sans-serif;
+	--font-display: "Calibre", "Inter", -apple-system, system-ui, sans-serif;
+	--font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+}
+
+/* Dark mode overrides */
+.dark {
+	/* Dark mode semantic colors */
+	--color-primary: #64ffda;
+	--color-primary-foreground: #0a192f;
+
+	/* Text colors for dark mode */
+	--color-foreground: #e2e8f0;
+	--color-foreground-muted: #cbd5e0;
+	--color-foreground-subtle: #8892b0;
+
+	/* Background colors for dark mode */
+	--color-background: #0a192f;
+	--color-background-secondary: #112240;
+	--color-background-surface: #172a45;
+	--color-background-tertiary: #1e3951;
+	--color-muted: #9ca3af;
+
+	/* Border colors for dark mode */
+	--color-border: #233554;
+	--color-border-hover: #a8b2d1;
+
+	/* Brand colors for dark mode */
+	--color-brand-navy: #0a192f;
+	--color-brand-navy-light: #112240;
+	--color-brand-navy-lighter: #233554;
+	--color-brand-accent: #64ffda;
+}
+
+@media (prefers-contrast: high) {
+	:root {
+		--color-foreground: #000000;
+		--color-foreground-muted: #000000;
+		--color-foreground-subtle: #1f2937;
+		--color-background: #ffffff;
+		--color-background-secondary: #ffffff;
+		--color-background-tertiary: #f9fafb;
+		--color-border: #4b5563;
+		--color-border-hover: #374151;
+		--color-brand-accent: #047857;
+		--color-muted: #000000;
 	}
 }
 
-.content-wrapper > main {
-	background-color: var(--bg-background-primary);
+/* Legacy variables for backwards compatibility during migration */
+:root {
+	--ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+	/* Map legacy variables to semantic ones */
+	--text-primary: var(--color-foreground);
+	--text-secondary: var(--color-foreground-muted);
+	--text-muted: var(--color-foreground-subtle);
+	--bg-primary: var(--color-background);
+	--bg-secondary: var(--color-background-secondary);
+	--border-color: var(--color-border);
+	--border-hover: var(--color-border-hover);
+
+	/* Legacy brand colors mapped to semantic equivalents */
+	--color-lightest-slate: var(--color-foreground);
+	--color-slate: var(--color-foreground-muted);
+	--color-navy: var(--color-brand-navy);
+	--color-light-navy: var(--color-brand-navy-light);
+	--color-lightest-navy: var(--color-brand-navy-lighter);
+	--color-green-500: var(--color-brand-accent);
+
+	/* Font family legacy mapping */
+	--font-titles: var(--font-display);
 }
 
+html.dark {
+	/* Override legacy variables for dark mode */
+	--text-primary: var(--color-foreground);
+	--text-secondary: var(--color-foreground-muted);
+	--text-muted: var(--color-foreground-subtle);
+	--bg-primary: var(--color-background);
+	--bg-secondary: var(--color-background-secondary);
+	--border-color: var(--color-border);
+	--border-hover: var(--color-border-hover);
+
+	/* Legacy brand colors for dark mode */
+	--color-lightest-slate: var(--color-foreground);
+	--color-slate: var(--color-foreground-muted);
+	--color-navy: var(--color-brand-navy);
+	--color-light-navy: var(--color-brand-navy-light);
+	--color-lightest-navy: var(--color-brand-navy-lighter);
+	--color-green-500: var(--color-brand-accent);
+}
+
+/* Custom Tailwind utilities for semantic colors and fonts */
+@layer utilities {
+	/* Font utilities */
+	.font-display {
+		font-family: var(--font-display);
+	}
+
+	.font-body {
+		font-family: var(--font-sans);
+	}
+
+	/* Legacy font support */
+	.font-titles {
+		font-family: var(--font-display);
+	}
+
+	/* Semantic text color utilities */
+	.text-foreground {
+		color: var(--color-foreground);
+	}
+
+	.text-foreground-muted {
+		color: var(--color-foreground-muted);
+	}
+
+	.text-foreground-subtle {
+		color: var(--color-foreground-subtle);
+	}
+
+	/* Background utilities */
+	.bg-background {
+		background-color: var(--color-background);
+	}
+
+	.bg-background-secondary {
+		background-color: var(--color-background-secondary);
+	}
+
+	.bg-background-surface {
+		background-color: var(--color-background-surface);
+	}
+
+	/* Border utilities */
+	.border-border {
+		border-color: var(--color-border);
+	}
+
+	.border-border-hover {
+		border-color: var(--color-border-hover);
+	}
+
+	/* Brand utilities */
+	.text-brand-accent {
+		color: var(--color-brand-accent);
+	}
+
+	.bg-brand-accent {
+		background-color: var(--color-brand-accent);
+	}
+
+	.bg-brand-navy {
+		background-color: var(--color-brand-navy);
+	}
+
+	.border-brand-accent {
+		border-color: var(--color-brand-accent);
+	}
+
+	/* Enhanced contrast utilities for better readability */
+	.text-contrast-high {
+		color: #000000;
+	}
+
+	.text-contrast-medium {
+		color: #1f2937;
+	}
+
+	.bg-contrast-light {
+		background-color: #ffffff;
+	}
+
+	.bg-contrast-subtle {
+		background-color: #f8fafc;
+	}
+
+	.border-contrast {
+		border-color: #9ca3af;
+	}
+
+	/* Animation delay utilities - small, explicit utilities to avoid inline styles
+	   and allow delaying Tailwind animations (for example: animate-pulse). */
+
+	.animate-delay-3s {
+		animation-delay: 3s;
+	}
+
+	.animate-fill-both {
+		animation-fill-mode: both;
+	}
+
+	/* Accessibility utilities */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.focus\:not-sr-only:focus {
+		position: static;
+		width: auto;
+		height: auto;
+		padding: inherit;
+		margin: inherit;
+		overflow: visible;
+		clip: auto;
+		white-space: normal;
+	}
+}
+
+/* Performance optimizations - prevent layout thrashing */
+@layer utilities {
+	/* Force GPU acceleration for transforms and animations */
+	.gpu-accelerated {
+		transform: translateZ(0);
+		will-change: transform;
+	}
+
+	/* Optimize for frequent changes */
+	.optimized-updates {
+		contain: layout style paint;
+		content-visibility: auto;
+	}
+
+	/* Prevent layout shifts during dynamic content loading */
+	.prevent-layout-shift {
+		contain: layout;
+	}
+
+	/* Efficient transform animations (use instead of top/left) */
+	.transform-gpu {
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		perspective: 1000px;
+	}
+}
+
+/* Base styles for the portfolio */
 html {
-	box-sizing: border-box;
-	width: 100%;
-	scroll-behavior: smooth;
-}
+	/* Primary typography and theme integration */
+	font-family: var(--font-sans);
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	letter-spacing: -0.025rem;
 
-*,
-*::before,
-*::after {
-	box-sizing: inherit;
-}
+	/* Browser optimizations */
+	color-scheme: light;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
 
-::selection {
-	background-color: var(--slate);
-	color: var(--lightest-slate);
-}
-
-::-webkit-scrollbar {
-	width: 4px;
-	height: 4px;
-	background-color: #58625f;
-}
-
-::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
-	background-color: #58625f;
-	border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-	background-color: #133040;
-	border-radius: 3px;
-	box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
-}
-
-* {
-	scrollbar-color: #133040 #58625f;
-	scrollbar-width: thin;
+	/* Smooth transitions */
+	transition:
+		background-color 200ms linear,
+		color 200ms linear,
+		border-color 200ms linear;
 }
 
 body {
 	margin: 0;
-	width: 100%;
-	min-height: 100%;
-	overflow-x: hidden;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	background-color: var(--navy);
-	color: var(--slate);
-	font-size: 20px;
-	line-height: 1.3;
+	padding: 0;
+	/* Keep resets and allow html to define theme colors to avoid double paints */
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+	/* Initialize section counter for numbered section titles */
+	counter-reset: section;
 }
 
-@media (width <= 480px) {
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	html,
+	body,
+	*,
+	.typed-text,
+	.animate-pulse,
+	[class*="animate-"] {
+		/* removed !important to satisfy linter; reduced motion still preferred */
+		transition: none;
+		animation: none;
+	}
+}
+
+body,
+figure {
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/* Headings: use system UI stack for a neutral sans-serif look */
+h1,
+h2,
+h3,
+h4 {
+	margin: 0;
+	font-family:
+		system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Custom scrollbar styling - thin and theme-aware */
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-brand-navy);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--color-foreground-subtle);
+	border: 3px solid var(--color-brand-navy);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-foreground-muted);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--bg-secondary);
+}
+
+/* Firefox scrollbar styling */
+html {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-foreground-subtle) var(--color-brand-navy);
+}
+
+/* Utility for screen-reader only content */
+.sr-only,
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+.text-foreground {
+	color: var(--text-primary);
+}
+
+.text-foreground-muted {
+	color: var(--text-secondary);
+}
+
+.no-print {
+	display: flex;
+}
+
+@media print {
+	/* Print: restore normal flow for elements with .print */
+	.print {
+		position: static;
+		display: block;
+		width: auto;
+		height: auto;
+		margin: 0;
+		clip: auto;
+		overflow: visible;
+		white-space: normal;
+	}
+
+	.no-print {
+		/* Increase specificity to avoid being overridden by ID selectors in components */
+		display: none;
+	}
+
+	/* Some components use an ID like #normal-footer
+	   with a display rule that can outrank the .no-print class. Add extra selectors
+	   so the print hide rule wins without using !important. */
+	#normal-footer.no-print,
+	footer.no-print,
+	.no-print {
+		display: none;
+	}
+
+	/* ====================================================
+	   FORCE LIGHT MODE FOR PRINTING
+	   Note: this block intentionally overrides runtime theme colors to guarantee
+	   a readable light print. Most uses of !important were removed by improving
+	   selector specificity and placing print rules later in the cascade. If a
+	   specific component later requires a targeted !important, annotate that
+	   selector with a single `biome-ignore` comment and a short rationale.
+	   ==================================================== */
+
+	/* Target root and body to prefer these print values over theme classes. */
+	html,
+	html.dark,
 	body {
-		font-size: 18px;
+		color-scheme: light;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8fafc;
+		--text-primary: #0f172a;
+		--text-secondary: #475569;
+		--text-muted: #64748b;
+		--border-color: #e2e8f0;
+		--border-hover: #cbd5e1;
+		--color-foreground: #0f172a;
+		--color-foreground-muted: #475569;
+		--color-foreground-subtle: #64748b;
+		--color-muted: #64748b;
+		--color-background: #ffffff;
+		--color-background-secondary: #f8fafc;
+		--color-background-surface: #ffffff;
+		--color-background-tertiary: #f1f5f9;
+		--color-brand-navy: #ffffff;
+		--color-brand-navy-light: #f8fafc;
+		--color-brand-navy-lighter: #e2e8f0;
+		--color-brand-accent: #0f766e;
+
+		/* Prefer explicit print background/text; these appear later in the cascade
+		   and should override normal theme classes. Leave without !important and
+		   fall back to targeted !important only when necessary. */
+		background-color: #ffffff;
+		color: #0f172a;
+	}
+
+	/* Keep descendants inheriting text color while preserving component backgrounds. */
+	html *[class],
+	html *::before,
+	html *::after {
+		color: inherit;
+	}
+
+	body,
+	main {
+		background-color: var(--color-background);
+		border-color: #e2e8f0;
+	}
+
+	/* Ensure text elements use dark text for readability in print */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	span,
+	li,
+	td,
+	th,
+	.text-foreground,
+	.text-foreground-muted {
+		color: #0f172a;
+		background-color: transparent;
+	}
+
+	/* Ensure subtle text uses appropriate dark color for print */
+	.text-foreground-muted,
+	.text-muted,
+	small {
+		color: #475569;
+	}
+
+	/* Force borders to be visible in print */
+	[class*="border"] {
+		border-color: #e2e8f0;
+	}
+
+	/* Override any Tailwind dark mode utilities that might interfere. These are
+	   class selectors so placing equivalent class selectors here (later in the file)
+	   will override them without !important. */
+	.dark\:bg-slate-800,
+	.dark\:bg-slate-900,
+	.dark\:bg-gray-800,
+	.dark\:bg-gray-900,
+	.dark\:text-white,
+	.dark\:text-slate-100,
+	.dark\:text-gray-100 {
+		background-color: transparent;
+		color: #0f172a;
+	}
+
+	/* Links in print: style to match on-screen 'primary' links (no underline, foreground color)
+	   Link.astro uses `text-foreground no-underline` for primary links, so mirror that here */
+	a,
+	a:link,
+	a:visited {
+		color: var(--text-primary);
+		text-decoration: none;
+	}
+
+	/* Optimize spacing and layout for print */
+	@page {
+		margin: 0.75in;
+		size: A4;
+	}
+
+	/* Better page breaks */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		page-break-after: avoid;
+	}
+
+	section,
+	.print-section {
+		page-break-inside: avoid;
+		break-inside: avoid;
+	}
+
+	/* Prevent awkward breaks in lists and paragraphs */
+	p,
+	li {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/* Hide scrollbars in print */
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	html {
+		scrollbar-width: none;
 	}
 }
 
-body.hidden {
-	overflow: hidden;
-}
+/* Navigation Menu Styles - Based on original portfolio */
+@layer components {
+	/* Typography classes */
+	.font-titles {
+		font-family: var(--font-titles);
+	}
 
-body.blur {
-	overflow: hidden;
-}
+	.font-body {
+		font-family: var(--font-sans);
+	}
 
-body.blur header {
-	background-color: transparent;
-}
+	/* Navigation and menu styling */
+	.nav-link {
+		position: relative;
+		font-family: var(--font-display);
+		white-space: nowrap; /* Prevent text wrapping in Safari */
+		@apply text-foreground-muted hover:text-brand-accent transition-colors duration-200 text-sm font-normal focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2;
+	}
 
-body.blur #content > * {
-	filter: blur(5px) brightness(0.7);
-	transition: var(--transition);
-	pointer-events: none;
-	user-select: none;
-}
+	.nav-link::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		bottom: -5px;
+		left: 0;
+		background-color: var(--color-brand-accent);
+		-webkit-transform: scaleX(0);
+		transform: scaleX(0);
+		-webkit-transform-origin: bottom right;
+		transform-origin: bottom right;
+		-webkit-transition: -webkit-transform 0.25s var(--ease-in-out);
+		transition: transform 0.25s var(--ease-in-out);
+	}
 
-main.fillHeight {
-	padding: 0 150px;
-}
+	.nav-link:hover::after {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1);
+		-webkit-transform-origin: bottom left;
+		transform-origin: bottom left;
+	}
 
-@media (width <= 1080px) {
-	main.fillHeight {
-		padding: 0 100px;
+	.navbar--show {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		background-color: color-mix(in srgb, var(--color-navy) 95%, transparent);
+		box-shadow: 0 10px 30px -10px var(--color-navy);
+	}
+
+	.navbar--hidden {
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+		background-color: color-mix(in srgb, var(--color-navy) 85%, transparent);
+		box-shadow: 0 10px 30px -10px var(--color-navy);
 	}
 }
 
-@media (width <= 768px) {
-	main.fillHeight {
-		padding: 0 50px;
-	}
-}
-
-@media (width <= 480px) {
-	main.fillHeight {
-		padding: 0 25px;
-	}
-}
-
-section {
-	margin: 0 auto;
-	padding: 100px 0;
-	max-width: 1000px;
-}
-
-@media (width <= 768px) {
-	section {
-		padding: 80px 0;
-	}
-}
-
-@media (width <= 480px) {
-	section {
-		padding: 60px 0;
-	}
-}
-
+/* Global Typography Styles */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+	font-family: var(--font-display);
 	margin: 0 0 10px;
-	font-weight: 600;
-	color: var(--lightest-slate);
-	line-height: 1.1;
+	font-weight: 700;
+	color: var(--color-lightest-slate);
+	line-height: 1.3;
 }
 
-.big-heading {
-	margin: 0;
-	font-size: clamp(40px, 8vw, 80px);
-}
-
-.medium-heading {
-	margin: 0;
-	font-size: clamp(40px, 8vw, 60px);
-}
-
-.numbered-heading {
-	display: flex;
-	align-items: center;
-	position: relative;
-	margin: 10px 0 40px;
-	width: 100%;
-	font-size: clamp(26px, 5vw, 32px);
-	white-space: nowrap;
-}
-
-.numbered-heading::before {
-	position: relative;
-	bottom: 4px;
-	counter-increment: section;
-	content: "0" counter(section) ".";
-	margin-right: 10px;
-	color: var(--green);
-
-	/* font-family: var(--font-mono); */
-	font-size: clamp(16px, 3vw, 20px);
-	font-weight: 400;
-}
-
-@media (width <= 480px) {
-	.numbered-heading::before {
-		margin-bottom: -3px;
-		margin-right: 5px;
-	}
-}
-
-.numbered-heading::after {
-	content: "";
-	display: block;
-	position: relative;
-	top: -5px;
-	width: 300px;
-	height: 1px;
-	margin-left: 20px;
-	background-color: var(--lightest-navy);
-}
-
-@media (width <= 1080px) {
-	.numbered-heading::after {
-		width: 200px;
-	}
-}
-
-@media (width <= 768px) {
-	.numbered-heading::after {
-		width: 100%;
-	}
-}
-
-@media (width <= 600px) {
-	.numbered-heading::after {
-		margin-left: 10px;
-	}
-}
-
-img {
-	width: 100%;
-	max-width: 100%;
-	vertical-align: middle;
-}
-
-img[alt=""],
-img:not([alt]) {
-	filter: blur(5px);
-}
-
-a {
-	display: inline-block;
-	text-decoration: none;
-	text-decoration-skip-ink: auto;
-	color: inherit;
-	position: relative;
-	transition: var(--transition);
-	cursor: pointer;
-
-	@apply font-bold;
-}
-
-a:hover,
-a:focus {
-	@apply text-green-500;
-}
-
-a.inline-link {
-	@apply text-green-500 hover:font-bold hover:text-green-600 hover:underline hover:underline-offset-2;
-}
-
-main {
-	counter-reset: section;
-}
-
-header,
-footer,
-main {
-	transition: var(--transition);
-}
-
-header {
-	padding: 0 50px;
-	background-color: var(--navy);
-	filter: none;
-	pointer-events: auto !important;
-	backdrop-filter: blur(10px);
-	user-select: none;
-}
-
-@media (width <= 768px) {
-	header {
-		padding: 0 25px;
-	}
+/* Body text uses Menlo */
+p,
+body,
+.font-body {
+	font-family: var(--font-sans);
 }
 
 nav .active {
 	font-weight: bold;
-
-	@apply border-b border-black;
+	border-bottom: 1px solid var(--color-green-500);
 }
 
-.navbar--show {
-	transform: translateY(0);
-	background-color: rgb(10 25 47 / 95%);
-	box-shadow: 0 10px 30px -10px var(--navy-shadow);
+/* Links styling */
+a {
+	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-.navbar--hidden {
-	transform: translate3d(0, -100%, 0);
-	background-color: rgb(10 25 47 / 85%);
-	box-shadow: 0 10px 30px -10px var(--navy-shadow);
+a:hover,
+a:focus {
+	color: var(--color-green-500);
 }
 
-.container-inner {
-	padding-left: 1rem;
-	padding-right: 1rem;
-}
-
-@media (width >= 640px) {
-	.container-inner {
-		max-width: 640px;
+/* Floating technology icons animation */
+@keyframes moving-background {
+	0% {
+		opacity: 0;
+		transform: translateY(0);
+	}
+	15% {
+		opacity: 0.3;
+	}
+	50% {
+		opacity: 0.6;
+	}
+	85% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-100vh);
 	}
 }
 
-@media (width >= 768px) {
-	.container-inner {
-		max-width: 768px;
-	}
+.animate-moving-background {
+	animation: moving-background 8s linear forwards;
+	opacity: 0.3; /* Ensure visibility during animation */
 }
 
-@media (width >= 1024px) {
-	.container-inner {
-		max-width: 800px;
-	}
-}
-
-.responsive-container {
-	position: relative;
-	overflow: hidden;
-	padding-top: 56.25%;
-}
-
-.responsive-iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	border: 0;
-}
-
+/* Numbered list for navigation */
 .order-list {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+	counter-reset: item;
 }
 
 .order-list li {
 	position: relative;
-	counter-increment: item 1;
+	counter-increment: item;
 	font-size: 13px;
 }
 
-.order-list li a::before {
+.order-list li .nav-link::before {
 	content: "0" counter(item) ".";
 	margin-right: 5px;
-	font-size: 12px;
+	font-size: 13px;
 	text-align: right;
-
-	@apply text-green-500;
-}
-
-/* transactions */
-
-/* Fade up */
-.fadeup-enter {
-	opacity: 0.01;
-	transform: translateY(20px);
-	transition: opacity 300ms var(--easing), transform 300ms var(--easing);
-}
-
-.fadeup-enter-active {
-	opacity: 1;
-	transform: translateY(0);
-	transition: opacity 300ms var(--easing), transform 300ms var(--easing);
+	color: var(--color-brand-accent);
+	font-family: var(--font-mono);
 }
