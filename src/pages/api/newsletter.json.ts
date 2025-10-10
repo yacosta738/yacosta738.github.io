@@ -28,13 +28,14 @@ export const POST: APIRoute = async ({ request }) => {
 			);
 		}
 
-		// Parsear el cuerpo de la petición
-		const body = await request.json();
+	// Parsear el cuerpo de la petición
+	const body = await request.json() as { 
+		email: string; 
+		_gotcha?: string;
+	};
 
-		// Validar los campos requeridos
-		const { email, _gotcha } = body;
-
-		// Honeypot check - si _gotcha tiene valor, es un bot
+	// Validar los campos requeridos
+	const { email, _gotcha } = body;		// Honeypot check - si _gotcha tiene valor, es un bot
 		if (_gotcha) {
 			console.warn("Honeypot triggered - potential spam detected");
 			// Devolver success true pero sin procesar para no alertar al bot

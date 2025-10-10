@@ -15,22 +15,6 @@
 <script is:inline>
   // Async CSS loader - prevents render blocking
   (function() {
-    // Function to load CSS asynchronously
-    function loadCSS(href, before, media) {
-      var link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      link.media = media || "all";
-      
-      if (before) {
-        before.parentNode.insertBefore(link, before);
-      } else {
-        document.head.appendChild(link);
-      }
-      
-      return link;
-    }
-    
     // Find all stylesheet links
     var stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
     

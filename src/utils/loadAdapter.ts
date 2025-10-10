@@ -1,7 +1,8 @@
+import type { AstroIntegration } from "astro";
 import { passthroughImageService } from "astro/config";
 
 // Dynamic adapter loading based on DEPLOYMENT_ADAPTER env var
-export const loadAdapter = async () => {
+export const loadAdapter = async (): Promise<AstroIntegration> => {
 	const adapterName = (process.env.DEPLOYMENT_ADAPTER || "node").toLowerCase();
 
 	try {
@@ -21,6 +22,7 @@ export const loadAdapter = async () => {
 					// Use passthrough image service when Cloudflare Images is not configured.
 					// This prevents runtime sharp processing on the edge and avoids
 					// image-service related errors when deploying to Workers.
+					// @ts-expect-error - Type mismatch between Astro's imageService and Cloudflare adapter
 					imageService: passthroughImageService(),
 					routes: {
 						extend: {

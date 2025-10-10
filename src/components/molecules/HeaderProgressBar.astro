@@ -107,7 +107,8 @@ const {
 		}
 
 		let progressUpdateId: number | null = null;
-		let visibilityUpdateId: number | null = null;
+		// visibilityUpdateId is reserved for future visibility tracking features
+		// let visibilityUpdateId: number | null = null;
 		let cachedArticleRect: { top: number; height: number } | null = null;
 		let cacheTime = 0;
 		const CACHE_DURATION = 100; // Cache for 100ms
