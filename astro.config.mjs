@@ -22,8 +22,8 @@ export default defineConfig({
 	// Dynamic adapter configuration based on DEPLOYMENT_ADAPTER env var
 	adapter: await loadAdapter(),
 
-	// Set output mode to 'server' to enable API routes
-	output: "server",
+	// Set output mode to 'static' for a 100% static site
+	output: "static",
 
 	env: {
 		schema: envSchema,
