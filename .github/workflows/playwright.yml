@@ -21,10 +21,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
       
+      - name: Read pnpm version from package.json
+        id: pnpm_version
+        run: |
+          # Read packageManager field from package.json and extract version part
+          ver=$(node -e "const pkg=require('./package.json'); const pm=pkg.packageManager||'pnpm@9'; const v=(pm.includes('@')?pm.split('@')[1]:pm); console.log(v||'9')")
+          echo "version=$ver" >> $GITHUB_OUTPUT
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: ${{ steps.pnpm_version.outputs.version }}
       
       - name: Setup Node.js
         uses: actions/setup-node@v5
