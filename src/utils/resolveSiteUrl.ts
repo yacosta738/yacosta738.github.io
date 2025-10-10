@@ -55,9 +55,12 @@ export const resolveSiteUrl = () => {
 				for (let j = 0; j < part.length; j++) {
 					const c = part.charCodeAt(j);
 					// allow a-z, A-Z, 0-9 and '-'
-					if (c >= 48 && c <= 57) hasAlnum = true; // 0-9
-					else if (c >= 65 && c <= 90) hasAlnum = true; // A-Z
-					else if (c >= 97 && c <= 122) hasAlnum = true; // a-z
+					if (c >= 48 && c <= 57)
+						hasAlnum = true; // 0-9
+					else if (c >= 65 && c <= 90)
+						hasAlnum = true; // A-Z
+					else if (c >= 97 && c <= 122)
+						hasAlnum = true; // a-z
 					else if (c === 45) {
 						// hyphen allowed
 					} else {

@@ -39,7 +39,7 @@ describe("resolveSiteUrl helper", () => {
 	});
 
 	it("handles long/malformed inputs safely", () => {
-		process.env.SITE_URL = "a".repeat(100000) + "/";
+		process.env.SITE_URL = `${"a".repeat(100000)}/`;
 		// should not throw and return trimmed long string (no protocol so not recognized as hostname)
 		const result = resolveSiteUrl();
 		expect(typeof result).toBe("string");

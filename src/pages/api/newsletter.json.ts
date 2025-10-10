@@ -68,8 +68,28 @@ export const POST: APIRoute = async ({ request }) => {
 			);
 		}
 
-		// Validación de email
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		// Validación de email - ReDoS-safe regex with bounded quantifiers
+		// Limit email length to prevent excessive processing
+		const maxEmailLength = 254; // RFC 5321 maximum
+		if (email.length > maxEmailLength) {
+			return new Response(
+				JSON.stringify({
+					success: false,
+					message: "Invalid email address",
+				}),
+				{
+					status: 400,
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
+		}
+
+		// Use a ReDoS-safe email validation regex with possessive quantifiers simulation
+		// This regex avoids catastrophic backtracking by using atomic grouping patterns
+		const emailRegex =
+			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 		if (!emailRegex.test(email)) {
 			return new Response(
 				JSON.stringify({

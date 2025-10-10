@@ -95,7 +95,8 @@ export const parseAspectRatio = (
 			const right = s.slice(sepIndex + 1).trim();
 			const num = Number(left);
 			const den = Number(right);
-			if (!Number.isNaN(num) && !Number.isNaN(den) && den !== 0) return num / den;
+			if (!Number.isNaN(num) && !Number.isNaN(den) && den !== 0)
+				return num / den;
 		} else {
 			// Fallback: try parsing as a plain number (may contain decimals)
 			const numericValue = parseFloat(s);

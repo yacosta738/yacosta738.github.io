@@ -85,7 +85,9 @@ test.describe("Language Switching", () => {
 
 		// Verify it has proper role
 		const role = await langSelector.getAttribute("role");
-		const tagName = await langSelector.evaluate((el) => el.tagName.toLowerCase());
+		const tagName = await langSelector.evaluate((el) =>
+			el.tagName.toLowerCase(),
+		);
 		expect(tagName === "select" || role === "combobox").toBeTruthy();
 	});
 });

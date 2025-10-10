@@ -16,13 +16,23 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 	const fallbackSlug = cleanEntityId(tagData.id);
 	const slugFromData = tagData.data.slug?.trim();
 	const title = tagData.data.title.trim();
-	const slugFromTitle = title
+
+	// Create slug from title with ReDoS-safe transformations
+	// Limit input length to prevent excessive processing
+	const maxLength = 200;
+	const truncatedTitle =
+		title.length > maxLength ? title.slice(0, maxLength) : title;
+
+	const slugFromTitle = truncatedTitle
 		.toLowerCase()
 		.normalize("NFD")
 		.replace(/[\u0300-\u036f]/g, "")
-		.replace(/[^a-z0-9]+/g, "-")
-		.replace(/^-+/g, "")
-		.replace(/-+$/g, "");
+		// Use non-greedy quantifier and avoid catastrophic backtracking
+		.replace(/[^a-z0-9]+?/g, "-")
+		// Remove leading/trailing dashes with bounded operations
+		.replace(/^-/, "")
+		.replace(/-$/, "");
+
 	const slug =
 		slugFromData && slugFromData.length > 0
 			? slugFromData

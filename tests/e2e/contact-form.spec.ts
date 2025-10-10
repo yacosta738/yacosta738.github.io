@@ -60,7 +60,10 @@ test.describe("Contact Form", () => {
 
 		let anyVisible = false;
 		try {
-			await Promise.any([...visPromises, routeCalledResolved.then((v) => (v ? true : Promise.reject(false)))]);
+			await Promise.any([
+				...visPromises,
+				routeCalledResolved.then((v) => (v ? true : Promise.reject(false))),
+			]);
 			anyVisible = true;
 		} catch {
 			anyVisible = false;
@@ -176,7 +179,10 @@ test.describe("Contact Form", () => {
 
 		let anyVisible = false;
 		try {
-			await Promise.any([...visPromises, routeCalledResolved.then((v) => (v ? true : Promise.reject(false)))]);
+			await Promise.any([
+				...visPromises,
+				routeCalledResolved.then((v) => (v ? true : Promise.reject(false))),
+			]);
 			anyVisible = true;
 		} catch {
 			anyVisible = false;

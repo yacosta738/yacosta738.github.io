@@ -182,7 +182,7 @@ test.describe("Newsletter Subscription", () => {
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
 
 		// Add whitespace to email
-		await emailInput.fill("  " + testData.newsletter.validEmail + "  ");
+		await emailInput.fill(`  ${testData.newsletter.validEmail}  `);
 		await subscribeButton.click();
 
 		await page.waitForTimeout(1000);

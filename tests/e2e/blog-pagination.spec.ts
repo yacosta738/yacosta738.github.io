@@ -83,7 +83,9 @@ test.describe("Blog Pagination and Navigation", () => {
 			// explicitly target the first matched heading to avoid strict
 			// mode violations when multiple <h1> elements exist on the page.
 			await page.waitForSelector(selectors.blog.articleHeading);
-			const articleHeading = page.locator(selectors.blog.articleHeading).first();
+			const articleHeading = page
+				.locator(selectors.blog.articleHeading)
+				.first();
 			await expect(articleHeading).toBeVisible();
 		} else {
 			// No articles found, skip this test

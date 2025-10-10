@@ -50,7 +50,7 @@ test.describe("Accessibility Tests", () => {
 
 		for (const heading of headings) {
 			const tagName = await heading.evaluate((el) => el.tagName);
-			const level = Number.parseInt(tagName.charAt(1));
+			const level = Number.parseInt(tagName.charAt(1), 10);
 			headingLevels.push(level);
 
 			// Heading shouldn't go backwards by more than expected

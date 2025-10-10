@@ -4,7 +4,11 @@ import { expect, test } from "@playwright/test";
 import { selectors } from "../fixtures";
 
 test.describe("CV Download", () => {
-	test.beforeEach(async ({}, testInfo) => {
+	// Playwright expects the first argument to be the test fixtures object
+	// and optional second argument to be the TestInfo. Use an (empty) object
+	// destructuring for fixtures and keep testInfo as the second parameter
+	// so we can read project.name.
+	test.beforeEach(async ({ page: _page }, testInfo) => {
 		if (testInfo.project.name.includes("mobile")) {
 			test.skip();
 		}

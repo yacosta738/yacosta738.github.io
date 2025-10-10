@@ -9,7 +9,7 @@ test.describe("Smoke Tests - Critical Paths", () => {
 		await expect(page).toHaveTitle(/Yuniel Acosta/i);
 
 		// Check critical elements exist
-		const header = page.getByRole('banner');
+		const header = page.getByRole("banner");
 		const main = page.locator("main");
 		const footer = page.locator("#main-footer");
 
@@ -32,7 +32,9 @@ test.describe("Smoke Tests - Critical Paths", () => {
 		await page.goto("/");
 
 		// Find navigation
-		const nav = page.getByRole('navigation', { name: 'Main navigation' }).first();
+		const nav = page
+			.getByRole("navigation", { name: "Main navigation" })
+			.first();
 		await expect(nav).toBeVisible();
 
 		// Check for common navigation links
@@ -88,8 +90,8 @@ test.describe("Smoke Tests - Critical Paths", () => {
 	});
 
 	test("should open and close mobile menu", async ({ page }) => {
-		        await page.goto("/");
-		        await page.waitForLoadState("networkidle");
+		await page.goto("/");
+		await page.waitForLoadState("networkidle");
 		// Find mobile menu button
 		const menuButton = page
 			.locator('[data-drawer-target], button[aria-label*="menu" i]')
@@ -279,7 +281,7 @@ test.describe("Cross-Browser Compatibility", () => {
 		console.log(`Testing on: ${browserName}`);
 
 		// Check critical elements
-		const header = page.getByRole('banner');
+		const header = page.getByRole("banner");
 		await expect(header).toBeVisible();
 	});
 });
