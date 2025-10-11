@@ -1,48 +1,66 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.3/schema.json",
-	"assist": {
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
-		},
-		"enabled": true
+	"$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
 	},
 	"files": {
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!node_modules",
-			"!coverage",
-			"!.astro",
-			"!.cache",
-			"!.git",
-			"!.vscode",
-			"!.idea",
-			"!.pnpm",
-			"!.yarn",
-			"!dist",
-			"!out",
-			"!public"
+			"!**/node_modules",
+			"!**/coverage",
+			"!**/playwright-report",
+			"!**/test-results",
+			"!**/.astro",
+			"!**/.cache",
+			"!**/.git",
+			"!**/.vscode",
+			"!**/.idea",
+			"!**/.pnpm",
+			"!**/.yarn",
+			"!**/dist",
+			"!**/out",
+			"!**/public/**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf,eot,otf,avif,mp4,webm,ogg,mov}",
+			"!**/public/**/*.min.*",
+			"!**/public/**/fonts",
+			"!**/public/**/images",
+			"!**/public/**/assets",
+			"public/scripts/**",
+			"!**/.vscode",
+			"!**/src/styles/global.css",
+			"!**/worker-configuration.d.ts",
+			"!**/components/ui",
+			"!**/components.d.ts"
 		]
 	},
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"
 	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double"
-		}
-	},
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"a11y": "error",
 			"recommended": true,
-			"suspicious": {
-				"noUnknownAtRules": "off"
+			"style": {
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
 			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
 		}
 	},
 	"overrides": [
@@ -50,21 +68,16 @@
 			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
 			"linter": {
 				"rules": {
-					"correctness": {
-						"noUnusedImports": "off",
-						"noUnusedVariables": "off"
-					},
 					"style": {
 						"useConst": "off",
 						"useImportType": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
 					}
 				}
 			}
 		}
-	],
-	"vcs": {
-		"clientKind": "git",
-		"enabled": true,
-		"useIgnoreFile": true
-	}
+	]
 }
