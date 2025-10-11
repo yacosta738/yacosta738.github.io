@@ -11,12 +11,6 @@
 			}
 		],
 		[
-			"@semantic-release/exec",
-			{
-				"prepareCmd": "pnpm -r exec npm version ${nextRelease.version} --no-git-tag-version"
-			}
-		],
-		[
 			"@semantic-release/git",
 			{
 				"assets": [

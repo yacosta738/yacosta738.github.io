@@ -57,8 +57,17 @@ export class Newsletter extends OpenAPIRoute {
 
 	async handle(c: AppContext) {
 		try {
-			// Get validated data
-			const data = await this.getValidatedData<typeof this.schema>();
+			// Get validated data (pass request context so validation runs)
+			// Use a typed helper to avoid `any` lint complaints while the OpenAPIRoute
+			// definition doesn't expose the context parameter in its signature.
+			const getValidatedData = (
+				this as unknown as {
+					getValidatedData: (
+						c: AppContext,
+					) => Promise<{ body: { email: string; _gotcha?: string } }>;
+				}
+			).getValidatedData;
+			const data = await getValidatedData(c);
 			const { email, _gotcha } = data.body;
 
 			// Get environment variables
