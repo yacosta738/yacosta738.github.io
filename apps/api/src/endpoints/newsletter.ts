@@ -81,10 +81,7 @@ export class Newsletter extends OpenAPIRoute {
 			// Honeypot check
 			if (_gotcha) {
 				console.warn("Honeypot triggered - potential spam detected");
-				return c.json(
-					{ success: true, message: "Subscription received" },
-					200,
-				);
+				return c.json({ success: true, message: "Subscription received" }, 200);
 			}
 
 			// Prepare the payload for n8n
@@ -103,22 +100,13 @@ export class Newsletter extends OpenAPIRoute {
 
 			if (!response.ok) {
 				console.error(`Webhook request failed with status: ${response.status}`);
-				return c.json(
-					{ success: false, message: "Failed to subscribe" },
-					500,
-				);
+				return c.json({ success: false, message: "Failed to subscribe" }, 500);
 			}
 
-			return c.json(
-				{ success: true, message: "Subscription successful" },
-				200,
-			);
+			return c.json({ success: true, message: "Subscription successful" }, 200);
 		} catch (error) {
 			console.error("Error in newsletter endpoint:", error);
-			return c.json(
-				{ success: false, message: "Internal server error" },
-				500,
-			);
+			return c.json({ success: false, message: "Internal server error" }, 500);
 		}
 	}
 }

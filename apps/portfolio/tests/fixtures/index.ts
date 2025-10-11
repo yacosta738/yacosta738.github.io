@@ -178,7 +178,7 @@ export const helpers = {
 	/**
 	 * Test keyboard navigation
 	 */
-	async testKeyboardNav(page: Page, selector: string, key: string = "Enter") {
+	async testKeyboardNav(page: Page, selector: string, key = "Enter") {
 		await page.focus(selector);
 		await page.keyboard.press(key);
 	},

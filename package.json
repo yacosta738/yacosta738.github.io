@@ -1,27 +1,30 @@
 {
-  "name": "yacosta-portfolio-monorepo",
-  "version": "0.0.0-development",
-  "private": true,
-  "scripts": {
-    "dev": "pnpm --filter=./apps/* --parallel dev",
-    "build": "pnpm --filter=./apps/* --parallel build",
-    "test": "pnpm --filter=./apps/* test",
-    "start": "pnpm --filter=./apps/* --parallel start",
-    "deploy": "pnpm --filter=./apps/* --parallel deploy",
-    "precommit": "pnpm -w run ruler:apply",
-    "preinstall": "npx only-allow pnpm",
-    "prepare": "pnpm -w run ruler:apply && pnpm exec lefthook install",
-    "ruler:apply": "npx @intellectronica/ruler apply",
-    "ruler:check": "npx @intellectronica/ruler check",
-    "semantic-release": "semantic-release",
-    "update": "pnpm update",
-    "update-deps": "pnpm update -i -r --latest",
-    "update-interactive": "pnpm update --interactive"
-  },
-  "devDependencies": {
-    "@semantic-release/exec": "7.1.0",
-    "@semantic-release/github": "11.0.6",
-    "@semantic-release/npm": "12.0.2",
-    "semantic-release": "^24.2.9"
-  }
+	"name": "yacosta-portfolio-monorepo",
+	"version": "0.0.0-development",
+	"private": true,
+	"scripts": {
+		"dev": "pnpm --filter=./apps/* --parallel dev",
+		"build": "pnpm --filter=./apps/* --parallel build",
+		"test": "pnpm --filter=./apps/* test",
+		"start": "pnpm --filter=./apps/* --parallel start",
+		"deploy": "pnpm --filter=./apps/* --parallel deploy",
+		"check:biome": "biome check . --write",
+		"check": "pnpm run check:biome && pnpm --filter=./apps/* check",
+		"precommit": "pnpm -w run ruler:apply",
+		"preinstall": "npx only-allow pnpm",
+		"prepare": "pnpm -w run ruler:apply && pnpm exec lefthook install",
+		"ruler:apply": "npx @intellectronica/ruler apply",
+		"ruler:check": "npx @intellectronica/ruler check",
+		"semantic-release": "semantic-release",
+		"update": "pnpm update",
+		"update-deps": "pnpm update -i -r --latest",
+		"update-interactive": "pnpm update --interactive"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.5",
+		"@semantic-release/exec": "7.1.0",
+		"@semantic-release/github": "11.0.6",
+		"@semantic-release/npm": "12.0.2",
+		"semantic-release": "^24.2.9"
+	}
 }

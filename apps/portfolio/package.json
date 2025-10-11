@@ -10,7 +10,6 @@
 		"check": "run-p check:*",
 		"check:a11y": "biome lint --only=a11y ./src",
 		"check:astro": "astro check",
-		"check:biome": "biome check . --write",
 		"clean": "rimraf dist .astro coverage",
 		"dev": "pnpm -w run ruler:apply && astro dev",
 		"organize": "node ./scripts/organize-articles.js",

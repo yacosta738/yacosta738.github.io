@@ -84,10 +84,7 @@ export class Contact extends OpenAPIRoute {
 			// Honeypot check - if _gotcha has a value, it's a bot
 			if (_gotcha) {
 				console.warn("Honeypot triggered - potential spam detected");
-				return c.json(
-					{ success: true, message: "Message received" },
-					200,
-				);
+				return c.json({ success: true, message: "Message received" }, 200);
 			}
 
 			// Prepare the payload for n8n
@@ -118,10 +115,7 @@ export class Contact extends OpenAPIRoute {
 			);
 		} catch (error) {
 			console.error("Error in contact endpoint:", error);
-			return c.json(
-				{ success: false, message: "Internal server error" },
-				500,
-			);
+			return c.json({ success: false, message: "Internal server error" }, 500);
 		}
 	}
 }

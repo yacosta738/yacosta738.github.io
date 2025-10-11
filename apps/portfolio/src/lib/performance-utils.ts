@@ -162,7 +162,7 @@ export function isElementVisible(element: Element): boolean {
 	return (
 		computedStyle.display !== "none" &&
 		computedStyle.visibility !== "hidden" &&
-		parseFloat(computedStyle.opacity) > 0
+		Number.parseFloat(computedStyle.opacity) > 0
 	);
 }
 

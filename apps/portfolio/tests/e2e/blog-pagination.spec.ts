@@ -69,15 +69,25 @@ test.describe("Blog Pagination and Navigation", () => {
 		// Wait for articles to load
 		await page.waitForSelector(selectors.blog.articleTitle);
 
-		// Find an article link (not just the title, but the actual link)
-		const articleLinks = await page.$$('article a[href*="/blog/"]');
+		// Find article card links more specifically
+		// Target links that wrap article titles/cards, not content links
+		const articleLink = page
+			.locator("article")
+			.filter({ has: page.locator(selectors.blog.articleTitle) })
+			.locator('a[href*="/blog/"]')
+			.first();
 
-		if (articleLinks.length > 0) {
-			// Click first article link
-			await articleLinks[0].click();
+		const linkCount = await articleLink.count();
 
-			// Wait for navigation
-			await page.waitForLoadState("networkidle");
+		if (linkCount > 0) {
+			// Get the href before clicking to verify it's a valid article link
+			const href = await articleLink.getAttribute("href");
+			expect(href).toMatch(/\/en\/blog\/.+/);
+
+			// Click without waiting for navigation to complete, preventing timeouts on slow navigations.
+			// The subsequent page.waitForURL handles the wait explicitly.
+			await articleLink.click({ noWaitAfter: true });
+			await page.waitForURL(/\/en\/blog\/.+$/, { timeout: 30000 });
 
 			// Verify we're on an article page — accept deeper paths (for example
 			// dated articles like /en/blog/2023/03/23/slug)

@@ -12,7 +12,7 @@ export type SortableProject = EnhancedProject & {
  * Extracts a timestamp for sorting from project date fields
  */
 const getProjectTimestamp = (project: EnhancedProject): number => {
-	if (!project) return -Infinity;
+	if (!project) return Number.NEGATIVE_INFINITY;
 
 	// Try startDate first
 	if (project.startDate) {
@@ -38,7 +38,7 @@ const getProjectTimestamp = (project: EnhancedProject): number => {
 		}
 	}
 
-	return -Infinity;
+	return Number.NEGATIVE_INFINITY;
 };
 
 /**

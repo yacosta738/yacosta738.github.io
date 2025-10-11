@@ -1,5 +1,9 @@
-import { describe, expect, it, beforeAll } from "vitest";
-import { env, createExecutionContext, waitOnExecutionContext, SELF } from "cloudflare:test";
+import {
+	createExecutionContext,
+	env,
+	waitOnExecutionContext,
+} from "cloudflare:test";
+import { beforeAll, describe, expect, it } from "vitest";
 import app from "./index";
 
 describe("API Worker", () => {
