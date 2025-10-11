@@ -2,10 +2,10 @@ packages:
   - .
 
 catalog:
-  '@astrojs/cloudflare': 12.6.9
-  '@astrojs/netlify': 6.5.11
-  '@astrojs/node': 9.4.4
-  '@astrojs/vercel': 8.2.8
+  '@astrojs/cloudflare': 12.6.10
+  '@astrojs/netlify': 6.5.12
+  '@astrojs/node': 9.4.6
+  '@astrojs/vercel': 8.2.9
   wrangler: 4.42.1
 
 catalogMode: strict
