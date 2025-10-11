@@ -23,6 +23,6 @@
 		"@types/service-worker-mock": "^2.0.4",
 		"@vitest/coverage-v8": "^2.1.8",
 		"vitest": "^2.1.8",
-		"wrangler": "^3.95.0"
+		"wrangler": "^4.0.0"
 	}
 }
