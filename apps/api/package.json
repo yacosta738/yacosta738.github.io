@@ -12,6 +12,8 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
+		"@hono/swagger-ui": "0.5.2",
+		"@hono/zod-openapi": "1.1.3",
 		"chanfana": "^2.6.3",
 		"hono": "^4.6.20",
 		"zod": "^4.1.12"

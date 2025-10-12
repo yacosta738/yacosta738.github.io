@@ -13,7 +13,9 @@ interface Env {
 	NEWSLETTER_WEBHOOK_URL: string;
 }
 
-export async function handleNewsletterSubscription(c: Context<{ Bindings: Env }>) {
+export async function handleNewsletterSubscription(
+	c: Context<{ Bindings: Env }>,
+) {
 	try {
 		// Get data from request body
 		const body = await c.req.json();
