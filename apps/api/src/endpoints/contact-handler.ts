@@ -37,8 +37,10 @@ export async function handleContactSubmission(c: Context<{ Bindings: Env }>) {
 		const hcaptchaSecret = c.env.HCAPTCHA_SECRET_KEY;
 
 		// Validate that environment variables are configured
-		if (!authToken || !formTokenId || !contactUrl) {
-			console.error("Missing webhook configuration in environment variables");
+		if (!authToken || !formTokenId || !contactUrl || !hcaptchaSecret) {
+			console.error(
+				"Missing webhook or hCaptcha configuration in environment variables",
+			);
 			return c.json(
 				{
 					success: false,

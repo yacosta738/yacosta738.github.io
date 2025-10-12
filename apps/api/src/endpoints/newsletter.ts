@@ -59,20 +59,11 @@ export class Newsletter extends OpenAPIRoute {
 
 	async handle(c: AppContext) {
 		try {
-			// Get data from request body
-			const body = await c.req.json();
-			const { email, hcaptchaToken, _gotcha } = body;
-
-			// Basic validation
-			if (!email || !hcaptchaToken) {
-				return c.json(
-					{
-						success: false,
-						message: "Email and captcha token are required",
-					},
-					400,
-				);
-			}
+			// Get validated data
+			const schema =
+				this.schema.request.body.content["application/json"].schema;
+			const data = await this.getValidatedData<typeof schema>();
+			const { email, hcaptchaToken, _gotcha } = data.body;
 
 			// Get environment variables
 			const authToken = c.env.WEBHOOK_AUTH_TOKEN;

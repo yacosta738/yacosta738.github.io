@@ -65,15 +65,15 @@ if (!siteKey) {
 			return;
 		}
 
-		// Find all hCaptcha containers
-		const containers = document.querySelectorAll<HTMLElement>('[data-hcaptcha-widget="true"]');
+		/** @type {NodeListOf<HTMLElement>} */
+		const containers = document.querySelectorAll('[data-hcaptcha-widget="true"]');
 		
 		containers.forEach((container) => {
 			const captchaId = container.id;
 			const siteKey = container.dataset.sitekey;
 			const themeMode = container.dataset.themeMode;
-			let theme = (container.dataset.theme || 'light') as 'light' | 'dark';
-			const size = (container.dataset.size || 'normal') as 'normal' | 'compact';
+			const theme = container.dataset.theme || 'light';
+			const size = container.dataset.size || 'normal';
 
 			// Detectar el tema del sistema si está en modo "auto"
 			if (themeMode === 'auto') {

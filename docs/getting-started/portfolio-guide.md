@@ -52,9 +52,9 @@ All content is managed through Astro Content Collections, configured in `src/con
 
 ## 6. Key Features
 
--   **Internationalization (i18n)**: The site supports multiple languages (English and Spanish). The logic in `src/i18n/` handles language detection and path generation. A custom solution detailed in `docs/tag-language-switching-solution.md` provides smart fallbacks for tag pages.
+-   **Internationalization (i18n)**: The site supports multiple languages (English and Spanish). The logic in `src/i18n/` handles language detection and path generation. A custom solution detailed in `docs/guides/i18n-tags.md` provides smart fallbacks for tag pages.
 -   **API Integration**: The portfolio communicates with a separate Cloudflare Worker for handling form submissions. This is managed by a dedicated, testable service layer in `src/services/`, ensuring the frontend is decoupled from the API backend.
--   **Dynamic Deployment**: The application can be deployed to multiple platforms (Node.js, Vercel, Cloudflare) by setting the `DEPLOYMENT_ADAPTER` environment variable. This is configured in `astro.config.mjs` and documented in `docs/deployment-adapters.md`.
+-   **Dynamic Deployment**: The application can be deployed to multiple platforms (Node.js, Vercel, Cloudflare) by setting the `DEPLOYMENT_ADAPTER` environment variable. This is configured in `astro.config.mjs` and documented in `docs/guides/deployment.md`.
 
 ## 7. How to Run Locally
 

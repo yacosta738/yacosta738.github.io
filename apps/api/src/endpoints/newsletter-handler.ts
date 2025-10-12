@@ -39,8 +39,10 @@ export async function handleNewsletterSubscription(
 		const hcaptchaSecret = c.env.HCAPTCHA_SECRET_KEY;
 
 		// Validate that environment variables are configured
-		if (!authToken || !formTokenId || !newsletterUrl) {
-			console.error("Missing webhook configuration in environment variables");
+		if (!authToken || !formTokenId || !newsletterUrl || !hcaptchaSecret) {
+			console.error(
+				"Missing webhook or hCaptcha configuration in environment variables",
+			);
 			return c.json(
 				{
 					success: false,

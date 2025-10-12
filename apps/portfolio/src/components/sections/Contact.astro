@@ -317,7 +317,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 
 			// Validate captcha
 			if (!hcaptchaToken) {
-				formStatus.textContent = "Please complete the captcha verification";
+				formStatus.textContent = t["contact.captcha_required"] || "Please complete the captcha verification";
 				formStatus.className = "mt-4 text-center h-6 text-red-600 font-medium";
 				hasErrors = true;
 			}

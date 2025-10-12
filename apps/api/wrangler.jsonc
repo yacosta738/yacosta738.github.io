@@ -29,8 +29,10 @@
 	 * Non-sensitive plaintext variables (safe to commit)
 	 */
 	"vars": {
-		"CONTACT_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook-test/v1/contact",
-		"NEWSLETTER_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook-test/v1/portfolio/newsletter"
+		// Example value: Replace with the actual production URL or parameterize via environment variables
+		"CONTACT_WEBHOOK_URL": "${CONTACT_WEBHOOK_URL}",
+		// Example value: Replace with the actual production URL or parameterize via environment variables
+		"NEWSLETTER_WEBHOOK_URL": "${NEWSLETTER_WEBHOOK_URL}"
 	}
 	/**
 	 * Secrets - Sensitive data (DO NOT add values here)

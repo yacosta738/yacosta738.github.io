@@ -253,14 +253,26 @@ const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "";
 			emailInput.classList.add("border-red-500");
 		};
 
-		// Input event listener to clear error on typing and reveal captcha on first input
-		emailInput.addEventListener("input", (ev) => {
-			clearError();
-			if (!captchaShown && (ev as InputEvent).data !== null) {
-				// Reveal captcha when user starts typing (ignore programmatic changes)
-				revealCaptcha();
-			}
-		});
+		// Input event listener to clear error and reveal captcha on any input
+			emailInput.addEventListener("input", () => {
+				clearError();
+				if (!captchaShown) {
+					revealCaptcha();
+				}
+			});
+
+			// Attach revealCaptcha to focus and change events
+			emailInput.addEventListener("focus", () => {
+				if (!captchaShown) {
+					revealCaptcha();
+				}
+			});
+
+			emailInput.addEventListener("change", () => {
+				if (!captchaShown) {
+					revealCaptcha();
+				}
+			});
 
 		// Form submission
 		form.addEventListener("submit", async (e) => {
@@ -296,6 +308,7 @@ const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "";
 			const originalText = submitButton.textContent;
 			submitButton.textContent = t.subscribing;
 
+			// Add console logs to debug success message rendering
 			try {
 				// Use the newsletter service
 				const result = await newsletterService.subscribe({
@@ -304,8 +317,11 @@ const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "";
 					hcaptchaToken: hcaptchaToken || undefined,
 				});
 
+				console.log('Subscription result:', result); // Debugging
+
 				if (result.success) {
 					// Success
+					console.log('Success message:', result.message || t.success); // Debugging
 					statusMessage.textContent = result.message || t.success;
 					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-green-600 font-medium";
 					form.reset();
@@ -322,6 +338,7 @@ const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "";
 					}, 5000);
 				} else {
 					// Error
+					console.log('Error message:', result.message || t.error); // Debugging
 					statusMessage.textContent = result.message || t.error;
 					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-red-600 font-medium";
 				}
