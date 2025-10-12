@@ -10,12 +10,12 @@
 	"compatibility_flags": ["nodejs_compat"],
 	"observability": {
 		"enabled": true
-	}
+	},
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
 	 */
-	// "placement": { "mode": "smart" }
+	// "placement": { "mode": "smart" },
 	/**
 	 * Bindings
 	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
@@ -25,11 +25,31 @@
 	/**
 	 * Environment Variables
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
+	 *
+	 * Non-sensitive plaintext variables (safe to commit)
 	 */
-	// "vars": { "MY_VARIABLE": "production_value" }
+	"vars": {
+		"CONTACT_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook-test/v1/contact",
+		"NEWSLETTER_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook-test/v1/portfolio/newsletter"
+	}
 	/**
-	 * Note: Use secrets to store sensitive data.
-	 * https://developers.cloudflare.com/workers/configuration/secrets/
+	 * Secrets - Sensitive data (DO NOT add values here)
+	 * Use: wrangler secret put <KEY_NAME>
+	 *
+	 * Required secrets for this worker:
+	 * - HCAPTCHA_SECRET_KEY: hCaptcha secret key for server-side validation
+	 * - WEBHOOK_AUTH_TOKEN: Authentication token for webhook endpoints
+	 * - WEBHOOK_FORM_TOKEN_ID: Form-specific token ID for webhook validation
+	 *
+	 * To set secrets in production:
+	 *   wrangler secret put HCAPTCHA_SECRET_KEY
+	 *   wrangler secret put WEBHOOK_AUTH_TOKEN
+	 *   wrangler secret put WEBHOOK_FORM_TOKEN_ID
+	 *
+	 * For local development, create a .dev.vars file:
+	 *   HCAPTCHA_SECRET_KEY=your_secret_key
+	 *   WEBHOOK_AUTH_TOKEN=your_auth_token
+	 *   WEBHOOK_FORM_TOKEN_ID=your_form_token_id
 	 */
 	/**
 	 * Static Assets

@@ -94,6 +94,22 @@ export default defineConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
+		resolve: {
+			alias: {
+				"@": "/src",
+				"@assets": "/src/assets",
+				"@components": "/src/components",
+				"@configs": "/src/configs",
+				"@core": "/src/core",
+				"@data": "/src/data",
+				"@i18n": "/src/i18n",
+				"@layouts": "/src/layouts",
+				"@lib": "/src/lib",
+				"@styles": "/src/styles",
+				"@utils": "/src/utils",
+				"@atoms": "/src/components/atoms",
+			},
+		},
 	},
 	markdown: {
 		remarkPlugins: [readingTimeRemarkPlugin],

@@ -1,19 +1,32 @@
-import { fromHono } from "chanfana";
 import { Hono } from "hono";
-import { Contact } from "./endpoints/contact";
-import { Newsletter } from "./endpoints/newsletter";
+import { cors } from "hono/cors";
+import { handleContactSubmission } from "./endpoints/contact-handler";
+import { handleNewsletterSubscription } from "./endpoints/newsletter-handler";
 
 // Start a Hono app
 const app = new Hono<{ Bindings: Env }>();
 
-// Setup OpenAPI registry
-const openapi = fromHono(app, {
-	docs_url: "/",
-});
+// --- CORS middleware for development ---
+app.use("/*", cors({
+	origin: "*",
+	allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+	allowHeaders: ["Content-Type", "YAP-AUTH-TOKEN", "form-token-id"],
+}));
+// --- END CORS ---
 
-// Register OpenAPI endpoints
-openapi.post("/api/contact", Contact);
-openapi.post("/api/newsletter", Newsletter);
+// Register API routes
+app.post("/api/contact", handleContactSubmission);
+app.post("/api/newsletter", handleNewsletterSubscription);
+
+// Root endpoint with API info
+app.get("/", (c) => c.json({
+	name: "YAP API",
+	version: "1.0.0",
+	endpoints: {
+		contact: "/api/contact",
+		newsletter: "/api/newsletter",
+	},
+}));
 
 // You may also register routes for non OpenAPI directly on Hono
 // app.get('/test', (c) => c.text('Hono!'))

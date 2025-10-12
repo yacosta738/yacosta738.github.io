@@ -1,0 +1,12 @@
+# Local Development Secrets for Cloudflare Worker
+# Copy this file to .dev.vars and fill in your actual secret values
+# NEVER commit .dev.vars to version control!
+
+# hCaptcha Secret Key (get from https://dashboard.hcaptcha.com/settings)
+HCAPTCHA_SECRET_KEY=your_hcaptcha_secret_key_here
+
+# Webhook Authentication Token (used to authenticate webhook requests)
+WEBHOOK_AUTH_TOKEN=your_webhook_auth_token_here
+
+# Webhook Form Token ID (form-specific token for validation)
+WEBHOOK_FORM_TOKEN_ID=your_webhook_form_token_id_here

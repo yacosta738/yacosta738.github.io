@@ -1,0 +1,240 @@
+---
+/**
+ * HCaptcha Component
+ * Renders hCaptcha widget for bot protection in forms
+ * Uses explicit rendering to work properly with Astro's hydration
+ *
+ * Usage:
+ * <HCaptcha id="contact-captcha" />
+ *
+ * Then in your form script:
+ * const token = window.hcaptcha?.getResponse(widgetId);
+ */
+
+interface Props {
+	id: string;
+	class?: string;
+	theme?: "light" | "dark" | "auto";
+	size?: "normal" | "compact";
+}
+
+const { id, class: className, theme = "auto", size = "normal" } = Astro.props;
+const siteKey = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY;
+
+// Determinar el tema basado en la configuración
+let actualTheme = theme;
+if (theme === "auto") {
+	// Usar 'light' por defecto, el script detectará el tema del sistema
+	actualTheme = "light";
+}
+
+if (!siteKey) {
+	console.error(
+		"PUBLIC_HCAPTCHA_SITE_KEY is not defined in environment variables. hCaptcha will not work.",
+	);
+}
+---
+
+<!-- hCaptcha container -->
+<div 
+	id={id}
+	class:list={[className]}
+	data-hcaptcha-widget="true"
+	data-sitekey={siteKey}
+	data-theme={actualTheme}
+	data-theme-mode={theme}
+	data-size={size}
+>
+</div>
+
+<!-- Load hCaptcha script with explicit rendering -->
+<script is:inline src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
+
+<script>
+	// Type definitions are in src/types/hcaptcha.d.ts
+
+	// Initialize widgets map
+	if (!window.hcaptchaWidgets) {
+		window.hcaptchaWidgets = new Map();
+	}
+
+	// Wait for hCaptcha API to load and initialize all widgets
+	function initAllHCaptchaWidgets() {
+		if (!window.hcaptcha) {
+			console.error('hCaptcha API not loaded');
+			return;
+		}
+
+		// Find all hCaptcha containers
+		const containers = document.querySelectorAll<HTMLElement>('[data-hcaptcha-widget="true"]');
+		
+		containers.forEach((container) => {
+			const captchaId = container.id;
+			const siteKey = container.dataset.sitekey;
+			const themeMode = container.dataset.themeMode;
+			let theme = (container.dataset.theme || 'light') as 'light' | 'dark';
+			const size = (container.dataset.size || 'normal') as 'normal' | 'compact';
+
+			// Detectar el tema del sistema si está en modo "auto"
+			if (themeMode === 'auto') {
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				theme = prefersDark ? 'dark' : 'light';
+			}
+
+			if (!captchaId) {
+				console.error('hCaptcha container missing ID');
+				return;
+			}
+
+			if (!siteKey) {
+				console.error(`hCaptcha site key not configured for container: ${captchaId}`);
+				container.innerHTML = '<div style="color: red; padding: 10px; border: 1px solid red;">hCaptcha configuration error: Missing site key</div>';
+				return;
+			}
+
+			// Check if already rendered
+			if (window.hcaptchaWidgets?.has(captchaId)) {
+				console.log(`hCaptcha widget "${captchaId}" already rendered`);
+				return;
+			}
+
+			try {
+				// Render the widget explicitly
+				if (!window.hcaptcha) {
+					console.error('hCaptcha API not available');
+					return;
+				}
+				
+				const widgetId = window.hcaptcha.render(container, {
+					sitekey: siteKey,
+					theme: theme,
+					size: size,
+					callback: (token) => {
+						console.log(`hCaptcha solved for ${captchaId}`);
+						// Store token in container dataset
+						container.dataset.token = token;
+						// Dispatch custom event
+						container.dispatchEvent(new CustomEvent('hcaptcha-success', {
+							detail: { token, widgetId }
+						}));
+					},
+					'expired-callback': () => {
+						console.log(`hCaptcha expired for ${captchaId}`);
+						delete container.dataset.token;
+						container.dispatchEvent(new CustomEvent('hcaptcha-expired'));
+					},
+					'error-callback': (error) => {
+						console.error(`hCaptcha error for ${captchaId}:`, error);
+						container.dispatchEvent(new CustomEvent('hcaptcha-error', {
+							detail: { error }
+						}));
+					}
+				});
+
+				// Store widget ID
+				window.hcaptchaWidgets?.set(captchaId, widgetId);
+				container.dataset.widgetId = widgetId;
+				container.dataset.ready = 'true';
+				
+				console.log(`hCaptcha widget "${captchaId}" initialized with widgetId: ${widgetId}`);
+			} catch (error) {
+				console.error(`Failed to render hCaptcha widget "${captchaId}":`, error);
+			}
+		});
+	}
+
+	// Check if hCaptcha is already loaded
+	if (window.hcaptcha) {
+		// API already loaded, initialize immediately
+		initAllHCaptchaWidgets();
+	} else {
+		// Wait for API to load
+		const checkInterval = setInterval(() => {
+			if (window.hcaptcha) {
+				clearInterval(checkInterval);
+				initAllHCaptchaWidgets();
+			}
+		}, 100) as unknown as number;
+
+		// Timeout after 10 seconds
+		setTimeout(() => {
+			clearInterval(checkInterval);
+			if (!window.hcaptcha) {
+				console.error('hCaptcha API failed to load within 10 seconds');
+			}
+		}, 10000);
+	}
+
+	// Helper function to get captcha token by container ID
+	window.getCaptchaToken = function(containerId) {
+		const widgetId = window.hcaptchaWidgets?.get(containerId);
+		if (!widgetId || !window.hcaptcha) {
+			return null;
+		}
+		
+		try {
+			const response = window.hcaptcha.getResponse(widgetId);
+			return response || null;
+		} catch (error) {
+			console.error('Failed to get hCaptcha response:', error);
+			return null;
+		}
+	};
+
+	// Helper function to reset captcha by container ID
+	window.resetCaptcha = function(containerId) {
+		const widgetId = window.hcaptchaWidgets?.get(containerId);
+		if (!widgetId || !window.hcaptcha) {
+			console.warn(`Cannot reset hCaptcha: widget "${containerId}" not found`);
+			return;
+		}
+		
+		try {
+			window.hcaptcha.reset(widgetId);
+			const container = document.getElementById(containerId);
+			if (container) {
+				delete container.dataset.token;
+			}
+		} catch (error) {
+			console.error('Failed to reset hCaptcha:', error);
+		}
+	};
+</script>
+
+<style>
+	[data-hcaptcha-widget] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 78px; /* Prevent layout shift */
+		width: 100%;
+		max-width: 304px; /* hCaptcha normal width */
+		margin: 0 auto;
+	}
+
+	/* Modo compacto */
+	[data-hcaptcha-widget][data-size="compact"] {
+		max-width: 164px; /* hCaptcha compact width */
+		min-height: 144px;
+	}
+
+	/* Ocultar el warning de localhost en desarrollo */
+	[data-hcaptcha-widget] :global(div[style*="color: red"]) {
+		display: none;
+	}
+
+	/* Asegurar que el iframe de hCaptcha se centre */
+	[data-hcaptcha-widget] :global(> div) {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+
+	/* Responsive: Ajustar en pantallas pequeñas */
+	@media (max-width: 320px) {
+		[data-hcaptcha-widget] {
+			transform: scale(0.95);
+			transform-origin: center;
+		}
+	}
+</style>

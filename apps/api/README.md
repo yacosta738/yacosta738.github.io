@@ -17,16 +17,72 @@ This API provides secure endpoints for:
 
 ## Configuration
 
-Before deploying, set up the required environment variables as secrets:
+### Environment Variables
 
-```bash
-wrangler secret put WEBHOOK_AUTH_TOKEN
-wrangler secret put WEBHOOK_FORM_TOKEN_ID
-wrangler secret put NEWSLETTER_WEBHOOK_URL
-wrangler secret put CONTACT_WEBHOOK_URL
+This worker uses two types of environment variables:
+
+#### 1. Plaintext Variables (in `wrangler.jsonc`)
+
+These are non-sensitive values that can be committed to version control:
+
+```jsonc
+{
+  "vars": {
+    "CONTACT_WEBHOOK_URL": "https://your-webhook-domain.com/webhook/v1/contact",
+    "NEWSLETTER_WEBHOOK_URL": "https://your-webhook-domain.com/webhook/v1/newsletter"
+  }
+}
 ```
 
-These variables are used to securely authenticate with your webhook endpoints (e.g., n8n).
+#### 2. Secrets (for sensitive data)
+
+**For Production:**
+
+Set secrets using Wrangler CLI (these are encrypted and never visible in code):
+
+```bash
+# Set hCaptcha secret key
+wrangler secret put HCAPTCHA_SECRET_KEY
+
+# Set webhook authentication token
+wrangler secret put WEBHOOK_AUTH_TOKEN
+
+# Set webhook form token ID
+wrangler secret put WEBHOOK_FORM_TOKEN_ID
+```
+
+**For Local Development:**
+
+Create a `.dev.vars` file in the `apps/api` directory:
+
+```bash
+# Copy the example file
+cp .dev.vars.example .dev.vars
+
+# Edit .dev.vars with your actual values
+```
+
+Example `.dev.vars` content:
+
+```bash
+HCAPTCHA_SECRET_KEY=0x0000000000000000000000000000000000000000
+WEBHOOK_AUTH_TOKEN=your_auth_token_here
+WEBHOOK_FORM_TOKEN_ID=your_form_token_id_here
+```
+
+> **⚠️ Important:** Never commit `.dev.vars` to version control! It's already in `.gitignore`.
+
+### Required Variables Summary
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `CONTACT_WEBHOOK_URL` | Plaintext | Webhook URL for contact form submissions |
+| `NEWSLETTER_WEBHOOK_URL` | Plaintext | Webhook URL for newsletter subscriptions |
+| `HCAPTCHA_SECRET_KEY` | Secret | hCaptcha secret key for validation |
+| `WEBHOOK_AUTH_TOKEN` | Secret | Authentication token for webhook requests |
+| `WEBHOOK_FORM_TOKEN_ID` | Secret | Form-specific token for validation |
+
+For more details, see the [Cloudflare Workers Environment Variables documentation](https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables).
 
 ## Project structure
 
