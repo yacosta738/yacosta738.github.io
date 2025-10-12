@@ -65,15 +65,14 @@ if (!siteKey) {
 			return;
 		}
 
-		/** @type {NodeListOf<HTMLElement>} */
-		const containers = document.querySelectorAll('[data-hcaptcha-widget="true"]');
+		const containers = document.querySelectorAll<HTMLElement>('[data-hcaptcha-widget="true"]');
 		
 		containers.forEach((container) => {
 			const captchaId = container.id;
 			const siteKey = container.dataset.sitekey;
 			const themeMode = container.dataset.themeMode;
-			const theme = container.dataset.theme || 'light';
-			const size = container.dataset.size || 'normal';
+			let theme = (container.dataset.theme || 'light') as 'light' | 'dark';
+			const size = (container.dataset.size || 'normal') as 'normal' | 'compact';
 
 			// Detectar el tema del sistema si está en modo "auto"
 			if (themeMode === 'auto') {

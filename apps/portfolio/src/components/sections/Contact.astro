@@ -196,7 +196,6 @@ const t = useTranslations(Astro.currentLocale as Lang);
 	const subjectInput = document.getElementById("subject") as HTMLInputElement;
 	const messageInput = document.getElementById("message") as HTMLTextAreaElement;
 	const honeypotInput = document.getElementById("_gotcha") as HTMLInputElement;
-	const captchaContainer = document.getElementById("contact-captcha") as HTMLDivElement;
 
 	// Get error message elements
 	const nameError = document.getElementById("name-error") as HTMLParagraphElement;
@@ -220,6 +219,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 				subjectRequired: "Subject is required",
 				messageRequired: "Message is required",
 				messageTooShort: "Message must be at least 10 characters",
+				captcha_required: "Please complete the captcha verification",
 			},
 			es: {
 				sending: "Enviando...",
@@ -231,6 +231,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 				subjectRequired: "El asunto es obligatorio",
 				messageRequired: "El mensaje es obligatorio",
 				messageTooShort: "El mensaje debe tener al menos 10 caracteres",
+				captcha_required: "Por favor completa la verificación del captcha",
 			},
 		};
 
@@ -317,7 +318,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 
 			// Validate captcha
 			if (!hcaptchaToken) {
-				formStatus.textContent = t["contact.captcha_required"] || "Please complete the captcha verification";
+				formStatus.textContent = t.captcha_required || "Please complete the captcha verification";
 				formStatus.className = "mt-4 text-center h-6 text-red-600 font-medium";
 				hasErrors = true;
 			}

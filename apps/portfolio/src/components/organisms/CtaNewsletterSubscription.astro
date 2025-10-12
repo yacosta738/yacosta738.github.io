@@ -130,8 +130,7 @@ const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "";
 		const statusMessage = document.getElementById("newsletter-status") as HTMLDivElement | null;
 		const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 		const honeypotInput = document.getElementById("newsletter-gotcha") as HTMLInputElement | null;
-	const captchaContainer = document.getElementById("newsletter-captcha") as HTMLDivElement | null;
-	const captchaWrapper = document.getElementById("newsletter-captcha-wrapper") as HTMLDivElement | null;
+		const captchaWrapper = document.getElementById("newsletter-captcha-wrapper") as HTMLDivElement | null;
 
 		if (!form || !emailInput || !submitButton || !errorMessage || !statusMessage || !honeypotInput) {
 			return;
