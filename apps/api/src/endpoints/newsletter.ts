@@ -1,6 +1,7 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
 import type { AppContext } from "../types";
+import { verifyHCaptcha } from "../utils/hcaptcha";
 
 export class Newsletter extends OpenAPIRoute {
 	schema = {
@@ -12,6 +13,7 @@ export class Newsletter extends OpenAPIRoute {
 					"application/json": {
 						schema: z.object({
 							email: z.string().email().max(254),
+							hcaptchaToken: z.string().min(1),
 							_gotcha: z.string().optional(),
 						}),
 					},
@@ -57,23 +59,17 @@ export class Newsletter extends OpenAPIRoute {
 
 	async handle(c: AppContext) {
 		try {
-			// Get validated data (pass request context so validation runs)
-			// Use a typed helper to avoid `any` lint complaints while the OpenAPIRoute
-			// definition doesn't expose the context parameter in its signature.
-			const getValidatedData = (
-				this as unknown as {
-					getValidatedData: (
-						c: AppContext,
-					) => Promise<{ body: { email: string; _gotcha?: string } }>;
-				}
-			).getValidatedData;
-			const data = await getValidatedData(c);
-			const { email, _gotcha } = data.body;
+			// Get validated data
+			const schema =
+				this.schema.request.body.content["application/json"].schema;
+			const data = await this.getValidatedData<typeof schema>();
+			const { email, hcaptchaToken, _gotcha } = data.body;
 
 			// Get environment variables
 			const authToken = c.env.WEBHOOK_AUTH_TOKEN;
 			const formTokenId = c.env.WEBHOOK_FORM_TOKEN_ID;
 			const newsletterUrl = c.env.NEWSLETTER_WEBHOOK_URL;
+			const hcaptchaSecret = c.env.HCAPTCHA_SECRET_KEY;
 
 			// Validate that environment variables are configured
 			if (!authToken || !formTokenId || !newsletterUrl) {
@@ -91,6 +87,24 @@ export class Newsletter extends OpenAPIRoute {
 			if (_gotcha) {
 				console.warn("Honeypot triggered - potential spam detected");
 				return c.json({ success: true, message: "Subscription received" }, 200);
+			}
+
+			// Verify hCaptcha token
+			const captchaResult = await verifyHCaptcha(
+				hcaptchaToken,
+				hcaptchaSecret,
+				c.req.header("CF-Connecting-IP"), // Cloudflare provides the real IP here
+			);
+
+			if (!captchaResult.success) {
+				console.warn("hCaptcha verification failed:", captchaResult.message);
+				return c.json(
+					{
+						success: false,
+						message: "Please complete the captcha verification",
+					},
+					400,
+				);
 			}
 
 			// Prepare the payload for n8n

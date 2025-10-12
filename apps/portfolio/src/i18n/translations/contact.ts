@@ -18,6 +18,7 @@ export const contact: { en: UIDict; es: UIDict } = {
 		"contact.send_button": "Send message",
 		"contact.sending": "Sending...",
 		"contact.image_alt": "Illustration of contact",
+		"contact.captcha_required": "Please complete the captcha verification",
 	},
 	es: {
 		"contact.title": "Contacto",
@@ -36,5 +37,7 @@ export const contact: { en: UIDict; es: UIDict } = {
 		"contact.send_button": "Enviar mensaje",
 		"contact.sending": "Enviando...",
 		"contact.image_alt": "Ilustración de contacto",
+		"contact.captcha_required":
+			"Por favor completa la verificación del captcha",
 	},
 };

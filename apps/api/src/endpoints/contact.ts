@@ -1,6 +1,7 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
 import type { AppContext } from "../types";
+import { verifyHCaptcha } from "../utils/hcaptcha";
 
 export class Contact extends OpenAPIRoute {
 	schema = {
@@ -15,6 +16,7 @@ export class Contact extends OpenAPIRoute {
 							email: z.string().email().max(254),
 							subject: z.string().min(1),
 							message: z.string().min(1),
+							hcaptchaToken: z.string().min(1),
 							_gotcha: z.string().optional(),
 						}),
 					},
@@ -62,12 +64,14 @@ export class Contact extends OpenAPIRoute {
 		try {
 			// Get validated data
 			const data = await this.getValidatedData<typeof this.schema>();
-			const { name, email, subject, message, _gotcha } = data.body;
+			const { name, email, subject, message, hcaptchaToken, _gotcha } =
+				data.body;
 
 			// Get environment variables
 			const authToken = c.env.WEBHOOK_AUTH_TOKEN;
 			const formTokenId = c.env.WEBHOOK_FORM_TOKEN_ID;
 			const contactUrl = c.env.CONTACT_WEBHOOK_URL;
+			const hcaptchaSecret = c.env.HCAPTCHA_SECRET_KEY;
 
 			// Validate that environment variables are configured
 			if (!authToken || !formTokenId || !contactUrl) {
@@ -85,6 +89,24 @@ export class Contact extends OpenAPIRoute {
 			if (_gotcha) {
 				console.warn("Honeypot triggered - potential spam detected");
 				return c.json({ success: true, message: "Message received" }, 200);
+			}
+
+			// Verify hCaptcha token
+			const captchaResult = await verifyHCaptcha(
+				hcaptchaToken,
+				hcaptchaSecret,
+				c.req.header("CF-Connecting-IP"), // Cloudflare provides the real IP here
+			);
+
+			if (!captchaResult.success) {
+				console.warn("hCaptcha verification failed:", captchaResult.message);
+				return c.json(
+					{
+						success: false,
+						message: "Please complete the captcha verification",
+					},
+					400,
+				);
 			}
 
 			// Prepare the payload for n8n

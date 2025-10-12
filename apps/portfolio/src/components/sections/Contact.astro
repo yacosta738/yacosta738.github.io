@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import contactImage from "@/assets/images/contact.webp";
+import HCaptcha from "@/components/atoms/HCaptcha.astro";
 import Section from "@/components/atoms/Section.astro";
 import Card from "@/components/molecules/Card.astro";
 import { type Lang, useTranslations } from "@/i18n";
@@ -145,6 +146,11 @@ const t = useTranslations(Astro.currentLocale as Lang);
           </div>
         </fieldset>
 
+        <!-- hCaptcha verification -->
+        <div class="flex justify-center">
+          <HCaptcha id="contact-captcha" />
+        </div>
+
         <div class="flex flex-col items-center">
           <button
             data-test="contact-submit"
@@ -177,6 +183,8 @@ const t = useTranslations(Astro.currentLocale as Lang);
 </style>
 
 <script>
+	import { contactService } from "@/services";
+
 	// Contact form submission handler
 	const form = document.getElementById("contact-form") as HTMLFormElement;
 	const formStatus = document.getElementById("form-status") as HTMLDivElement;
@@ -195,6 +203,8 @@ const t = useTranslations(Astro.currentLocale as Lang);
 	const subjectError = document.getElementById("subject-error") as HTMLParagraphElement;
 	const messageError = document.getElementById("message-error") as HTMLParagraphElement;
 
+	// Type definitions are now in HCaptcha.astro component
+
 	if (form && submitButton) {
 		// Get translations
 		const currentLocale = document.documentElement.lang || "en";
@@ -209,6 +219,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 				subjectRequired: "Subject is required",
 				messageRequired: "Message is required",
 				messageTooShort: "Message must be at least 10 characters",
+				captcha_required: "Please complete the captcha verification",
 			},
 			es: {
 				sending: "Enviando...",
@@ -220,15 +231,24 @@ const t = useTranslations(Astro.currentLocale as Lang);
 				subjectRequired: "El asunto es obligatorio",
 				messageRequired: "El mensaje es obligatorio",
 				messageTooShort: "El mensaje debe tener al menos 10 caracteres",
+				captcha_required: "Por favor completa la verificación del captcha",
 			},
 		};
 
-		const t = translations[currentLocale as keyof typeof translations] || translations.en;
+			const t = translations[currentLocale as keyof typeof translations] || translations.en;
 
 		// Email validation
 		const validateEmail = (email: string): boolean => {
 			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			return re.test(email);
+		};
+
+		// Get hCaptcha token
+		const getCaptchaToken = (): string | null => {
+			if (window.getCaptchaToken) {
+				return window.getCaptchaToken("contact-captcha");
+			}
+			return null;
 		};
 
 		// Clear error message
@@ -265,6 +285,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 			const subject = subjectInput.value.trim();
 			const message = messageInput.value.trim();
 			const _gotcha = honeypotInput.value;
+			const hcaptchaToken = getCaptchaToken();
 
 			// Validate fields
 			let hasErrors = false;
@@ -295,6 +316,13 @@ const t = useTranslations(Astro.currentLocale as Lang);
 				hasErrors = true;
 			}
 
+			// Validate captcha
+			if (!hcaptchaToken) {
+				formStatus.textContent = t.captcha_required || "Please complete the captcha verification";
+				formStatus.className = "mt-4 text-center h-6 text-red-600 font-medium";
+				hasErrors = true;
+			}
+
 			if (hasErrors) {
 				return;
 			}
@@ -308,31 +336,26 @@ const t = useTranslations(Astro.currentLocale as Lang);
 			</svg>${t.sending}`;
 
 			try {
-				// Send to our API route
-				const response = await fetch("/api/contact.json", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						name,
-						email,
-						subject,
-						message,
-						_gotcha,
-					}),
+				// Use the contact service
+				const result = await contactService.submitContact({
+					name,
+					email,
+					subject,
+					message,
+					_gotcha,
+					hcaptchaToken: hcaptchaToken || undefined,
 				});
 
-				const data = await response.json() as { 
-					success: boolean; 
-					message?: string;
-				};
-
-				if (data.success) {
+				if (result.success) {
 					// Success
-					formStatus.textContent = t.success;
+					formStatus.textContent = result.message || t.success;
 					formStatus.className = "mt-4 text-center h-6 text-green-600 font-medium";
 					form.reset();
+
+					// Reset captcha
+					if (window.resetCaptcha) {
+						window.resetCaptcha("contact-captcha");
+					}
 
 					// Hide success message after 5 seconds
 					setTimeout(() => {
@@ -341,7 +364,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 					}, 5000);
 				} else {
 					// Error
-					formStatus.textContent = data.message || t.error;
+					formStatus.textContent = result.message || t.error;
 					formStatus.className = "mt-4 text-center h-6 text-red-600 font-medium";
 				}
 			} catch (error) {

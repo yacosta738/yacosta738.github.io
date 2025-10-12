@@ -17,6 +17,7 @@
  * @prop {string} [locale] - The locale for date formatting. (Not used in template)
  */
 
+import { type Lang, useTranslations } from "@/i18n";
 import HighlightsList from "./HighlightsList.astro";
 
 interface Props {
@@ -34,147 +35,168 @@ interface Props {
 
 const { institution, area, studyType, courses, thesis, url, score } =
 	Astro.props;
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
 ---
 
 <div class="education-header">
-  <h3 class="institution">
-    {url ? (
-      <a href={url} class="institution-link" target="_blank" rel="noopener noreferrer">
-        <span class="institution-name">{institution}</span>
-      </a>
-    ) : (
-      <span class="institution-name">{institution}</span>
-    )}
-  </h3>
+	<h3 class="institution">
+		{
+			url ? (
+				<a
+					href={url}
+					class="institution-link"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<span class="institution-name">{institution}</span>
+				</a>
+			) : (
+				<span class="institution-name">{institution}</span>
+			)
+		}
+	</h3>
 
-  <div class="degree-info">
-    <p class="degree">
-      {studyType && <span class="study-type">{studyType}</span>}
-      {studyType && area && <span class="separator"> in </span>}
-      <span class="area">{area}</span>
-    </p>
-    {score && (
-      <p class="score">Score: {score}</p>
-    )}
-  </div>
+	<div class="degree-info">
+		<p class="degree">
+			{studyType && <span class="study-type">{studyType}</span>}
+			{
+				studyType && area && (
+					<span class="separator">
+						{" "}
+						{t({
+							en: "in",
+							es: "en",
+						})}{" "}
+					</span>
+				)
+			}
+			<span class="area">{area}</span>
+		</p>
+		{score && <p class="score">Score: {score}</p>}
+	</div>
 
-  {thesis && (
-    <div class="thesis">
-      <h4 class="thesis-title">Thesis:</h4>
-      <p class="thesis-description">{thesis}</p>
-    </div>
-  )}
+	{
+		thesis && (
+			<div class="thesis">
+				<h4 class="thesis-title">Thesis:</h4>
+				<p class="thesis-description">{thesis}</p>
+			</div>
+		)
+	}
 
-  {courses && courses.length > 0 && (
-    <div class="courses">
-      <h4 class="courses-title">Relevant Coursework:</h4>
-      {courses.length > 0 && (
-          <div class="mt-4">
-            <HighlightsList highlights={courses} columns={3} />
-          </div>
-      )}
-    </div>
-  )}
+	{
+		courses && courses.length > 0 && (
+			<div class="courses">
+				<h4 class="courses-title">Relevant Coursework:</h4>
+				{courses.length > 0 && (
+					<div class="mt-4">
+						<HighlightsList highlights={courses} columns={3} />
+					</div>
+				)}
+			</div>
+		)
+	}
 </div>
 
 <style>
-  .education-header {
-    margin-bottom: 1.5rem;
-  }
+	.education-header {
+		margin-bottom: 1.5rem;
+	}
 
-  .institution {
-    font-size: var(--fz-xl);
-    font-weight: 500;
-    color: var(--color-foreground);
-    margin: 0 0 8px 0;
-  }
+	.institution {
+		font-size: var(--fz-xl);
+		font-weight: 500;
+		color: var(--color-foreground);
+		margin: 0 0 8px 0;
+	}
 
-  .institution-link {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.25s ease;
-  }
+	.institution-link {
+		text-decoration: none;
+		color: inherit;
+		transition: color 0.25s ease;
+	}
 
-  .institution-link:hover .institution-name {
-    color: var(--color-brand-accent);
-  }
+	.institution-link:hover .institution-name {
+		color: var(--color-brand-accent);
+	}
 
-  .institution-name {
-    color: var(--color-brand-accent);
-  }
+	.institution-name {
+		color: var(--color-brand-accent);
+	}
 
-  .degree-info {
-    margin-bottom: 12px;
-  }
+	.degree-info {
+		margin-bottom: 12px;
+	}
 
-  .degree {
-    margin: 0 0 4px 0;
-    color: var(--color-foreground-muted);
-    font-size: var(--fz-md);
-  }
+	.degree {
+		margin: 0 0 4px 0;
+		color: var(--color-foreground-muted);
+		font-size: var(--fz-md);
+	}
 
-  .study-type {
-    font-weight: 500;
-    color: var(--color-foreground-muted);
-  }
+	.study-type {
+		font-weight: 500;
+		color: var(--color-foreground-muted);
+	}
 
-  .separator {
-    color: var(--color-foreground-muted);
-  }
+	.separator {
+		color: var(--color-foreground-muted);
+	}
 
-  .area {
-    font-family: var(--font-mono);
-    font-size: var(--fz-sm);
-    color: var(--color-brand-accent);
-  }
+	.area {
+		font-family: var(--font-mono);
+		font-size: var(--fz-sm);
+		color: var(--color-brand-accent);
+	}
 
-  .score {
-    margin: 0;
-    color: var(--color-foreground-muted);
-    font-size: var(--fz-sm);
-    font-family: var(--font-mono);
-  }
+	.score {
+		margin: 0;
+		color: var(--color-foreground-muted);
+		font-size: var(--fz-sm);
+		font-family: var(--font-mono);
+	}
 
-  .thesis {
-    margin-bottom: 16px;
-    padding: 12px;
-    background: var(--color-background-secondary);
-    border-left: 3px solid var(--color-brand-accent);
-    border-radius: 4px;
-  }
+	.thesis {
+		margin-bottom: 16px;
+		padding: 12px;
+		background: var(--color-background-secondary);
+		border-left: 3px solid var(--color-brand-accent);
+		border-radius: 4px;
+	}
 
-  .thesis-title {
-    font-size: var(--fz-sm);
-    font-weight: 600;
-    color: var(--color-brand-accent);
-    margin: 0 0 8px 0;
-    font-family: var(--font-mono);
-  }
+	.thesis-title {
+		font-size: var(--fz-sm);
+		font-weight: 600;
+		color: var(--color-brand-accent);
+		margin: 0 0 8px 0;
+		font-family: var(--font-mono);
+	}
 
-  .thesis-description {
-    margin: 0;
-    color: var(--color-foreground-muted);
-    font-size: var(--fz-sm);
-    line-height: 1.5;
-    font-style: italic;
-  }
+	.thesis-description {
+		margin: 0;
+		color: var(--color-foreground-muted);
+		font-size: var(--fz-sm);
+		line-height: 1.5;
+		font-style: italic;
+	}
 
-  .courses {
-    margin-top: 16px;
-  }
+	.courses {
+		margin-top: 16px;
+	}
 
-  .courses-title {
-    font-size: var(--fz-sm);
-    font-weight: 600;
-    color: var(--color-brand-accent);
-    margin: 0 0 8px 0;
-    font-family: var(--font-mono);
-  }
+	.courses-title {
+		font-size: var(--fz-sm);
+		font-weight: 600;
+		color: var(--color-brand-accent);
+		margin: 0 0 8px 0;
+		font-family: var(--font-mono);
+	}
 
-  /* Responsive */
-  @media (max-width: 600px) {
-    .thesis {
-      padding: 8px;
-    }
-  }
+	/* Responsive */
+	@media (max-width: 600px) {
+		.thesis {
+			padding: 8px;
+		}
+	}
 </style>

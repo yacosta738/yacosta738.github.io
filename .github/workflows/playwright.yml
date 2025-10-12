@@ -47,9 +47,11 @@ jobs:
       
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps ${{ matrix.project }}
+        working-directory: apps/portfolio
       
       - name: Run Playwright tests
-        run: pnpm exec playwright test --project=${{ matrix.project }} --reporter=dot,json
+        run: pnpm test:e2e --project=${{ matrix.project }}
+        working-directory: apps/portfolio
         env:
           CI: true
       
@@ -58,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-results-${{ matrix.project }}
-          path: playwright-report/
+          path: apps/portfolio/playwright-report/
           retention-days: 30
       
       - name: Upload test traces
@@ -66,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-traces-${{ matrix.project }}
-          path: test-results/
+          path: apps/portfolio/test-results/
           retention-days: 30
   
   report:

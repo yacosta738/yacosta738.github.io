@@ -1,15 +1,29 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { mockResponses, selectors, testData } from "../fixtures";
 
 test.describe("Newsletter Subscription", () => {
 	const blogUrl = "/en/blog";
+
+	// Helper to mock hCaptcha token
+	const mockHCaptchaToken = async (page: Page) => {
+		await page.evaluate(() => {
+			const placeholder = document.getElementById(
+				"newsletter-captcha-placeholder",
+			);
+			if (placeholder) {
+				placeholder.dataset.token = "mock-token-for-testing";
+			}
+		});
+	};
+
 	test("should successfully subscribe with valid email", async ({ page }) => {
-		// Mock successful subscription
-		await page.route("**/api/newsletter.json", (route) =>
+		// Mock successful subscription - intercept the external API call
+		await page.route("**/api/newsletter", (route) =>
 			route.fulfill(mockResponses.newsletter.success),
 		);
 
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		// Find newsletter form
 		const emailInput = page.locator(selectors.newsletter.email);
@@ -18,8 +32,14 @@ test.describe("Newsletter Subscription", () => {
 		await expect(emailInput).toBeVisible();
 		await expect(subscribeButton).toBeVisible();
 
-		// Fill and submit
+		// Fill email to reveal captcha
 		await emailInput.fill(testData.newsletter.validEmail);
+		await page.waitForTimeout(500); // Wait for captcha to render
+
+		// Mock hCaptcha token
+		await mockHCaptchaToken(page);
+
+		// Submit
 		await subscribeButton.click();
 
 		// Verify success message
@@ -30,6 +50,7 @@ test.describe("Newsletter Subscription", () => {
 
 	test("should validate email format", async ({ page }) => {
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
@@ -47,6 +68,7 @@ test.describe("Newsletter Subscription", () => {
 
 	test("should require email field", async ({ page }) => {
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
@@ -67,16 +89,22 @@ test.describe("Newsletter Subscription", () => {
 
 	test("should handle already subscribed scenario", async ({ page }) => {
 		// Mock already subscribed response
-		await page.route("**/api/newsletter.json", (route) =>
+		await page.route("**/api/newsletter", (route) =>
 			route.fulfill(mockResponses.newsletter.alreadySubscribed),
 		);
 
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
 
 		await emailInput.fill(testData.newsletter.validEmail);
+		await page.waitForTimeout(500); // Wait for captcha to render
+
+		// Mock hCaptcha token
+		await mockHCaptchaToken(page);
+
 		await subscribeButton.click();
 
 		// Should show appropriate message
@@ -87,16 +115,22 @@ test.describe("Newsletter Subscription", () => {
 	test("should clear email field after successful subscription", async ({
 		page,
 	}) => {
-		await page.route("**/api/newsletter.json", (route) =>
+		await page.route("**/api/newsletter", (route) =>
 			route.fulfill(mockResponses.newsletter.success),
 		);
 
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
 
 		await emailInput.fill(testData.newsletter.validEmail);
+		await page.waitForTimeout(500); // Wait for captcha to render
+
+		// Mock hCaptcha token
+		await mockHCaptchaToken(page);
+
 		await subscribeButton.click();
 
 		// Wait for success
@@ -116,6 +150,7 @@ test.describe("Newsletter Subscription", () => {
 
 	test("should have accessible form elements", async ({ page }) => {
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
@@ -148,15 +183,20 @@ test.describe("Newsletter Subscription", () => {
 	});
 
 	test("should work with keyboard submission", async ({ page }) => {
-		await page.route("**/api/newsletter.json", (route) =>
+		await page.route("**/api/newsletter", (route) =>
 			route.fulfill(mockResponses.newsletter.success),
 		);
 
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 
 		await emailInput.fill(testData.newsletter.validEmail);
+		await page.waitForTimeout(500); // Wait for captcha to render
+
+		// Mock hCaptcha token
+		await mockHCaptchaToken(page);
 
 		// Submit via Enter key
 		await page.keyboard.press("Enter");
@@ -170,19 +210,25 @@ test.describe("Newsletter Subscription", () => {
 	test("should trim whitespace from email", async ({ page }) => {
 		let submittedEmail = "";
 
-		await page.route("**/api/newsletter.json", async (route) => {
+		await page.route("**/api/newsletter", async (route) => {
 			const postData = route.request().postDataJSON();
 			submittedEmail = postData?.email || "";
 			route.fulfill(mockResponses.newsletter.success);
 		});
 
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
 
 		// Add whitespace to email
 		await emailInput.fill(`  ${testData.newsletter.validEmail}  `);
+		await page.waitForTimeout(500); // Wait for captcha to render
+
+		// Mock hCaptcha token
+		await mockHCaptchaToken(page);
+
 		await subscribeButton.click();
 
 		await page.waitForTimeout(1000);
@@ -198,18 +244,23 @@ test.describe("Newsletter Subscription", () => {
 	}) => {
 		let submitCount = 0;
 
-		await page.route("**/api/newsletter.json", async (route) => {
+		await page.route("**/api/newsletter", async (route) => {
 			submitCount++;
 			await new Promise((resolve) => setTimeout(resolve, 500)); // Slow response
 			route.fulfill(mockResponses.newsletter.success);
 		});
 
 		await page.goto(blogUrl);
+		await page.waitForLoadState("networkidle");
 
 		const emailInput = page.locator(selectors.newsletter.email);
 		const subscribeButton = page.locator(selectors.newsletter.subscribe);
 
 		await emailInput.fill(testData.newsletter.validEmail);
+		await page.waitForTimeout(500); // Wait for captcha to render
+
+		// Mock hCaptcha token
+		await mockHCaptchaToken(page);
 
 		// Double click quickly
 		await subscribeButton.click();

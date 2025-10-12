@@ -93,6 +93,20 @@ test.describe("Accessibility Tests", () => {
 		);
 
 		for (const input of inputs) {
+			// Skip inputs that are inside hCaptcha or honeypot fields
+			const isInHCaptcha = await input.evaluate((el) => {
+				return el.closest("[data-hcaptcha-widget]") !== null;
+			});
+
+			const isHoneypot = await input.evaluate((el) => {
+				const style = window.getComputedStyle(el);
+				return style.position === "absolute" && style.left.startsWith("-");
+			});
+
+			if (isInHCaptcha || isHoneypot) {
+				continue;
+			}
+
 			const id = await input.getAttribute("id");
 			const ariaLabel = await input.getAttribute("aria-label");
 			const ariaLabelledby = await input.getAttribute("aria-labelledby");

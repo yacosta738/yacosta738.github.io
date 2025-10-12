@@ -1,132 +1,215 @@
+import {
+	createExecutionContext,
+	env,
+	waitOnExecutionContext,
+} from "cloudflare:test";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { AppContext } from "../types";
-import { Contact } from "./contact";
+import app from "../index";
+import * as hcaptcha from "../utils/hcaptcha";
 
-// Mock fetch globally
+// Mock the hCaptcha utility
+vi.mock("../utils/hcaptcha");
+
+// Mock fetch for the webhook call
 const mockFetch = vi.fn();
-global.fetch = mockFetch as unknown as typeof global.fetch;
-
-type MockContext = Partial<AppContext> & Record<string, unknown>;
-type JSONResponse = { data: unknown; status: number };
+global.fetch = mockFetch;
 
 describe("Contact Endpoint", () => {
-	let contact: Contact;
-	let mockContext: MockContext;
+	let ctx: ExecutionContext;
 
 	beforeEach(() => {
-		vi.clearAllMocks();
-		// Create instance with minimal initialization - schema is accessed via prototype
-		contact = Object.assign(Object.create(Contact.prototype), {
-			schema: Contact.prototype.schema,
-		}) as Contact;
-
-		mockContext = {
-			env: {
-				WEBHOOK_AUTH_TOKEN: "test-auth-token",
-				WEBHOOK_FORM_TOKEN_ID: "test-form-token-id",
-				CONTACT_WEBHOOK_URL: "https://test-webhook.com/contact",
-				// include other env keys to satisfy Env type
-				NEWSLETTER_WEBHOOK_URL: "https://test-webhook.com/newsletter",
-			},
-			req: { valid: vi.fn() } as unknown as AppContext["req"],
-			json: ((data: unknown, status = 200) => ({
-				data,
-				status,
-			})) as unknown as AppContext["json"],
-		};
-	});
-
-	describe("Schema Validation", () => {
-		it("should have correct schema structure", () => {
-			// Create a new instance to access the schema
-			const contactInstance = new Contact({} as any);
-			expect(contactInstance.schema.tags).toEqual(["Contact"]);
-			expect(contactInstance.schema.summary).toBe("Send Contact Message");
-			expect(contactInstance.schema.request.body).toBeDefined();
-			expect(contactInstance.schema.responses["200"]).toBeDefined();
-			expect(contactInstance.schema.responses["400"]).toBeDefined();
-			expect(contactInstance.schema.responses["500"]).toBeDefined();
+		vi.resetAllMocks();
+		ctx = createExecutionContext();
+		// Mock hCaptcha to always succeed
+		vi.spyOn(hcaptcha, "verifyHCaptcha").mockResolvedValue({
+			success: true,
+			message: "Captcha verified",
 		});
 	});
 
 	describe("Successful Submissions", () => {
 		it("should successfully send a contact message", async () => {
-			const validData = {
-				body: {
+			// Mock successful webhook response
+			mockFetch.mockResolvedValueOnce(
+				new Response(JSON.stringify({ success: true }), { status: 200 }),
+			);
+
+			const request = new Request("http://localhost/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
 					name: "John Doe",
 					email: "john@example.com",
 					subject: "Test Subject",
 					message: "Test message content",
-				},
-			};
+					hcaptchaToken: "test-token",
+				}),
+			});
 
-			// Mock successful webhook response
-			mockFetch.mockResolvedValueOnce({ ok: true, status: 200 });
+			const response = await app.fetch(request, env, ctx);
+			await waitOnExecutionContext(ctx);
 
-			// Mock getValidatedData
-			vi.spyOn(
-				contact as unknown as { getValidatedData: () => Promise<unknown> },
-				"getValidatedData",
-			).mockResolvedValueOnce(validData as unknown);
-
-			const response = await contact.handle(
-				mockContext as unknown as AppContext,
-			);
-
-			const jsonResp = response as unknown as JSONResponse;
-
-			expect(jsonResp.data).toEqual({
+			expect(response.status).toBe(200);
+			const jsonResponse = await response.json();
+			expect(jsonResponse).toEqual({
 				success: true,
 				message: "Message sent successfully",
 			});
-			expect(jsonResp.status).toBe(200);
+
+			// Verify webhook call
 			expect(mockFetch).toHaveBeenCalledWith(
-				"https://test-webhook.com/contact",
-				{
+				env.CONTACT_WEBHOOK_URL,
+				expect.objectContaining({
 					method: "POST",
-					headers: {
+					headers: expect.objectContaining({
 						"Content-Type": "application/json",
-						"YAP-AUTH-TOKEN": "test-auth-token",
-						"form-token-id": "test-form-token-id",
-					},
+						"YAP-AUTH-TOKEN": env.WEBHOOK_AUTH_TOKEN,
+						"form-token-id": env.WEBHOOK_FORM_TOKEN_ID,
+					}),
 					body: JSON.stringify({
 						name: "John Doe",
 						email: "john@example.com",
 						subject: "Test Subject",
 						message: "Test message content",
 					}),
-				},
+				}),
 			);
 		});
 
 		it("should handle honeypot gracefully", async () => {
-			const spamData = {
-				body: {
+			const request = new Request("http://localhost/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
 					name: "Bot Name",
 					email: "bot@example.com",
 					subject: "Spam Subject",
 					message: "Spam message",
+					hcaptchaToken: "test-token",
 					_gotcha: "bot-filled-this",
-				},
-			};
+				}),
+			});
 
-			vi.spyOn(
-				contact as unknown as { getValidatedData: () => Promise<unknown> },
-				"getValidatedData",
-			).mockResolvedValueOnce(spamData as unknown);
+			const response = await app.fetch(request, env, ctx);
+			await waitOnExecutionContext(ctx);
 
-			const response = await contact.handle(
-				mockContext as unknown as AppContext,
-			);
-
-			const jsonResp2 = response as unknown as JSONResponse;
-
-			expect(jsonResp2.data).toEqual({
+			expect(response.status).toBe(200);
+			const jsonResponse = await response.json();
+			expect(jsonResponse).toEqual({
 				success: true,
 				message: "Message received",
 			});
-			expect(jsonResp2.status).toBe(200);
+
+			// Ensure webhook was not called
 			expect(mockFetch).not.toHaveBeenCalled();
+		});
+	});
+
+	describe("Error Handling", () => {
+		it("should return 400 if hCaptcha verification fails", async () => {
+			// Mock hCaptcha to fail
+			vi.spyOn(hcaptcha, "verifyHCaptcha").mockResolvedValue({
+				success: false,
+				message: "Invalid token",
+			});
+
+			const request = new Request("http://localhost/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name: "John Doe",
+					email: "john@example.com",
+					subject: "Test Subject",
+					message: "Test message content",
+					hcaptchaToken: "invalid-token",
+				}),
+			});
+
+			const response = await app.fetch(request, env, ctx);
+			await waitOnExecutionContext(ctx);
+
+			expect(response.status).toBe(400);
+			const jsonResponse = await response.json();
+			expect(jsonResponse).toEqual({
+				success: false,
+				message: "Please complete the captcha verification",
+			});
+		});
+
+		it("should return 500 if webhook fails", async () => {
+			// Mock failed webhook response
+			mockFetch.mockResolvedValueOnce(
+				new Response(JSON.stringify({ success: false }), { status: 500 }),
+			);
+
+			const request = new Request("http://localhost/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name: "John Doe",
+					email: "john@example.com",
+					subject: "Test Subject",
+					message: "Test message content",
+					hcaptchaToken: "test-token",
+				}),
+			});
+
+			const response = await app.fetch(request, env, ctx);
+			await waitOnExecutionContext(ctx);
+
+			expect(response.status).toBe(500);
+			const jsonResponse = await response.json();
+			expect(jsonResponse).toEqual({
+				success: false,
+				message: "Failed to send message",
+			});
+		});
+
+		it("should return 500 if env vars are missing", async () => {
+			const request = new Request("http://localhost/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name: "John Doe",
+					email: "john@example.com",
+					subject: "Test Subject",
+					message: "Test message content",
+					hcaptchaToken: "test-token",
+				}),
+			});
+
+			// Run with an empty env object
+			const response = await app.fetch(request, {}, ctx);
+			await waitOnExecutionContext(ctx);
+
+			expect(response.status).toBe(500);
+			const jsonResponse = await response.json();
+			expect(jsonResponse).toEqual({
+				success: false,
+				message: "Server configuration error",
+			});
+		});
+	});
+
+	describe("Validation", () => {
+		it("should return 400 for missing fields", async () => {
+			const request = new Request("http://localhost/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name: "John Doe",
+					// email is missing
+					subject: "Test Subject",
+					message: "Test message content",
+					hcaptchaToken: "test-token",
+				}),
+			});
+
+			const response = await app.fetch(request, env, ctx);
+			await waitOnExecutionContext(ctx);
+
+			// The zod-openapi middleware returns a 400 with validation errors
+			expect(response.status).toBe(400);
 		});
 	});
 });

@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-    "build": "echo '🚀 Validating configuration...' && wrangler deploy --dry-run",
+		"build": "echo '🚀 Validating configuration...' && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
@@ -12,6 +12,8 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
+		"@hono/swagger-ui": "0.5.2",
+		"@hono/zod-openapi": "1.1.3",
 		"chanfana": "^2.6.3",
 		"hono": "^4.6.20",
 		"zod": "^4.1.12"
@@ -23,6 +25,6 @@
 		"@types/service-worker-mock": "^2.0.4",
 		"@vitest/coverage-v8": "^2.1.8",
 		"vitest": "^2.1.8",
-		"wrangler": "^3.95.0"
+		"wrangler": "^4.42.2"
 	}
 }
