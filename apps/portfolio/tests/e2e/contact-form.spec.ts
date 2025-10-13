@@ -242,7 +242,8 @@ test.describe("Contact Form", () => {
 
 	test("should disable submit button while submitting", async ({ page }) => {
 		// Mock slow response
-		await page.route("**/api/contact.json", async (route) => {
+		await page.route("**/api/contact**", async (route) => {
+			// Wait for 1 second before fulfilling to simulate network latency
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 			route.fulfill(mockResponses.contact.success);
 		});
@@ -254,16 +255,18 @@ test.describe("Contact Form", () => {
 		await page.fill(selectors.contact.email, testData.contact.valid.email);
 		await page.fill(selectors.contact.message, testData.contact.valid.message);
 
-		// Click submit and immediately check if disabled
-		await page.click(selectors.contact.submit);
+		const submitButton = page.locator(selectors.contact.submit);
 
-		// Button should be disabled during submission
-		const isDisabledDuringSubmit = await page
-			.locator(selectors.contact.submit)
-			.isDisabled()
-			.catch(() => false);
+		// Start the submission process without waiting for it to complete
+		const submitPromise = submitButton.click();
 
-		// Just document the behavior - some forms disable, some don't
-		expect(typeof isDisabledDuringSubmit).toBe("boolean");
+		// Immediately after clicking, the button should be disabled
+		await expect(submitButton).toBeDisabled();
+
+		// Wait for the submission to complete
+		await submitPromise;
+
+		// After submission, the button should be enabled again
+		await expect(submitButton).toBeEnabled();
 	});
 });
