@@ -30,37 +30,27 @@ export default defineConfig({
 			]
 		: [["list"], ["html", { open: "on-failure" }]],
 
-	// Global configuration for all tests
-	use: {
-		baseURL: process.env.BASE_URL || "http://localhost:4322",
+       // Global configuration for all tests
+       use: {
+	       baseURL: process.env.BASE_URL || "http://localhost:4322",
+	       trace: "retain-on-failure",
+	       screenshot: "only-on-failure",
+	       video: "retain-on-failure",
+	       viewport: { width: 1280, height: 720 },
+	       colorScheme: "light",
+	       ignoreHTTPSErrors: true,
+	       actionTimeout: 10_000,
+       },
 
-		// Capture traces, screenshots, and videos on failure
-		trace: "retain-on-failure",
-		screenshot: "only-on-failure",
-		video: "retain-on-failure",
-
-		// Standard viewport for desktop tests
-		viewport: { width: 1280, height: 720 },
-
-		// Respect user preferences
-		colorScheme: "light",
-
-		// Browser context options
-		ignoreHTTPSErrors: true,
-
-		// Action timeout
-		actionTimeout: 10_000,
-	},
-
-	// Development server configuration - auto-start on test run
-	webServer: {
-		command: "pnpm dev --port 4322",
-		url: "http://localhost:4322",
-		timeout: 120_000,
-		reuseExistingServer: !process.env.CI,
-		stdout: "ignore",
-		stderr: "pipe",
-	},
+       // Development server configuration - auto-start on test run
+       webServer: {
+	       command: "pnpm dev --port 4322",
+	       url: "http://localhost:4322",
+	       timeout: 120_000,
+	       reuseExistingServer: true,
+	       stdout: "ignore",
+	       stderr: "pipe",
+       },
 
 	// Browser projects - test across all major browsers
 	projects: [

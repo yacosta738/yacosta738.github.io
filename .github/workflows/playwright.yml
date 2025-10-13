@@ -143,16 +143,24 @@ jobs:
             if (resultsFile) {
               try {
                 const results = JSON.parse(fs.readFileSync(resultsFile, 'utf8'));
-                const summary = `## 🎭 Playwright Test Results
                 
-                - **Total Tests**: ${results.stats?.total || 'N/A'}
-                - **Passed**: ${results.stats?.passed || 'N/A'} ✅
-                - **Failed**: ${results.stats?.failed || 'N/A'} ❌
-                - **Flaky**: ${results.stats?.flaky || 'N/A'} ⚠️
-                - **Duration**: ${Math.round((results.stats?.duration || 0) / 1000)}s
+                const total = results.stats?.total || 'N/A';
+                const passed = results.stats?.passed || 'N/A';
+                const failed = results.stats?.failed || 'N/A';
+                const flaky = results.stats?.flaky || 'N/A';
+                const duration = Math.round((results.stats?.duration || 0) / 1000);
                 
-                [View full report in artifacts](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
-                `;
+                const summary = [
+                  '## 🎭 Playwright Test Results',
+                  '',
+                  `**Total Tests**: ${total}`,
+                  `**Passed**: ${passed} ✅`,
+                  `**Failed**: ${failed} ❌`,
+                  `**Flaky**: ${flaky} ⚠️`,
+                  `**Duration**: ${duration}s`,
+                  '',
+                  `[View full report in artifacts](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`
+                ].join('\n');
                 
                 await github.rest.issues.createComment({
                   issue_number: context.issue.number,
