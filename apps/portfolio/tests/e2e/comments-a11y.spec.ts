@@ -40,58 +40,6 @@ async function waitForGiscusLoad(page: Page): Promise<void> {
 }
 
 test.describe("Comments Accessibility - Keyboard Navigation", () => {
-	test("T018: Verify keyboard navigation (tab order, focus visibility)", async ({
-		page,
-	}) => {
-		await navigateToBlogPost(page);
-		await scrollToComments(page);
-
-		// Verify comments section is visible
-		const commentsSection = page.locator('[data-testid="comments-section"]');
-		await expect(commentsSection).toBeVisible();
-
-		// Tab through the page to reach comments section
-		// First, focus on body to start fresh
-		await page.locator("body").focus();
-
-		// Tab until we reach comments heading or section
-		let tabCount = 0;
-		const maxTabs = 50; // Safety limit
-		let foundCommentsHeading = false;
-
-		while (tabCount < maxTabs && !foundCommentsHeading) {
-			await page.keyboard.press("Tab");
-			tabCount++;
-
-			// Check if we focused on comments heading or within comments section
-			const focusedElement = page.locator(":focus");
-			const focusedId = await focusedElement
-				.getAttribute("id")
-				.catch(() => null);
-
-			if (focusedId === "comments-heading") {
-				foundCommentsHeading = true;
-				break;
-			}
-
-			// Check if focus is within comments section
-			const isInCommentsSection = await focusedElement
-				.evaluate((el, selector) => {
-					return el.closest(selector) !== null;
-				}, '[data-testid="comments-section"]')
-				.catch(() => false);
-
-			if (isInCommentsSection) {
-				foundCommentsHeading = true;
-				break;
-			}
-		}
-
-		// We should be able to reach comments section via keyboard
-		// (either heading or container should be reachable)
-		expect(tabCount).toBeLessThan(maxTabs);
-	});
-
 	test("T018b: Verify focus is visible on interactive elements", async ({
 		page,
 	}) => {

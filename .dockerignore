@@ -57,8 +57,8 @@ vitest.config.ts
 playwright.config.ts
 
 # Docker
-Dockerfile*
-.dockerignore
+!Dockerfile*
+!.dockerignore
 docker-compose*.yml
 
 # Specs and planning
