@@ -1,0 +1,67 @@
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build artifacts
+dist/
+build/
+.astro/
+coverage/
+playwright-report/
+test-results/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment files
+.env*
+!.env.example
+
+# Development
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+docs/
+
+# Test files
+tests/
+*.test.ts
+*.spec.ts
+vitest.config.ts
+playwright.config.ts
+
+# Docker
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Specs and planning
+specs/
+.ruler/
+.specify/
