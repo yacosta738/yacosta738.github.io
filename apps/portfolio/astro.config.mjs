@@ -19,6 +19,11 @@ export default defineConfig({
 	site: resolveSiteUrl(),
 	output: "static",
 
+	// Disable dev toolbar during E2E tests to prevent UI interference
+	devToolbar: {
+		enabled: process.env.PLAYWRIGHT_TEST !== "true",
+	},
+
 	env: {
 		schema: envSchema,
 		validateSecrets: false,

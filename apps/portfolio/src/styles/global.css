@@ -65,6 +65,19 @@
 	--color-brand-navy-light: #112240;
 	--color-brand-navy-lighter: #233554;
 	--color-brand-accent: #64ffda;
+
+	/* Giscus comment widget colors for dark mode */
+	--giscus-bg: var(--color-background-secondary);
+	--giscus-text: var(--color-foreground);
+	--giscus-border: var(--color-border);
+}
+
+/* Giscus comment widget color overrides */
+:root {
+	/* Light mode Giscus colors */
+	--giscus-bg: var(--color-background);
+	--giscus-text: var(--color-foreground);
+	--giscus-border: var(--color-border);
 }
 
 @media (prefers-contrast: high) {

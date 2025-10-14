@@ -128,9 +128,11 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
               a = document.getElementById("theme-color");
             "dark" === e
               ? (t.classList.add("dark"),
-                a && a.setAttribute("content", DARK_COLOR))
+                a && a.setAttribute("content", DARK_COLOR),
+                document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "dark" } })))
               : (t.classList.remove("dark"),
-                a && a.setAttribute("content", LIGHT_COLOR));
+                a && a.setAttribute("content", LIGHT_COLOR),
+                document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "light" } })));
           },
           a = e();
         t(a),

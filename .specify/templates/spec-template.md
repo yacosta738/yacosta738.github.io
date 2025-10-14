@@ -95,6 +95,19 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Non-Functional Requirements
+
+- **NFR-001 (Code Quality)**: Code MUST pass Biome lint/format and TypeScript
+  strict type checks (`pnpm check`).
+- **NFR-002 (Testing)**: Add or update automated tests appropriate to the
+  change. Bug fixes MUST include a regression test. Frontend P1 journeys MUST
+  have Playwright coverage.
+- **NFR-003 (Accessibility & UX)**: Changes MUST maintain keyboard support,
+  visible focus, accurate accessible names, and no navigation regressions.
+- **NFR-004 (Performance)**: For web pages, Core Web Vitals targets are LCP ≤
+  2.5s, INP ≤ 200ms, CLS < 0.1. For API changes, p95 latency ≤ 200ms under
+  expected load. Provide measurement notes.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
@@ -113,3 +126,7 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-005**: Performance budget met (e.g., LCP ≤ 2.5s on [page], p95 ≤ 200ms
+  for [endpoint]) with measurement evidence.
+- **SC-006**: Required automated tests in CI pass (unit/integration/E2E as
+  applicable) with no flakiness.

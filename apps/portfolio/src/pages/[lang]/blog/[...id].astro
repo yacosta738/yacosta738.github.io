@@ -35,12 +35,18 @@ if (!post.entry) {
 }
 
 const { Content, remarkPluginFrontmatter } = await render(post.entry);
+
+// Extract slug from post id (remove lang prefix)
+const [_lang, ...slugParts] = post.id.split("/");
+const postSlug = slugParts.join("/");
 ---
 
 <Layout
 	{...post}
 	url={Astro.request.url}
 	minutesRead={remarkPluginFrontmatter.minutesRead}
+	enableComments={true}
+	slug={postSlug}
 >
 	<div class="container mx-auto px-4">
 		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
@@ -53,9 +59,6 @@ const { Content, remarkPluginFrontmatter } = await render(post.entry);
 			<Content />
 			<PostFooter post={post} />
 		</div>
-
-		<!-- Comment Area -->
-
 	</div>
 	<div class="border-y border-y-secondary-foreground-light dark:border-y-secondary-foreground-dark mt-12">
 		<CtaNewsletterSubscription
