@@ -126,6 +126,10 @@ test.describe("Comments Performance - Cumulative Layout Shift", () => {
 		const firstPostLink = page.locator('article a[href*="/blog/"]').first();
 		await expect(firstPostLink).toBeVisible();
 
+		await firstPostLink.click();
+		await page.waitForLoadState("networkidle"); // wait for the new page to load
+		await expect(page.locator("article h1").first()).toBeVisible();
+
 		// Start tracking layout shifts
 		await page.evaluate(() => {
 			window.layoutShifts = [];
@@ -144,9 +148,6 @@ test.describe("Comments Performance - Cumulative Layout Shift", () => {
 				}
 			}).observe({ type: "layout-shift", buffered: true });
 		});
-
-		await firstPostLink.click();
-		await expect(page.locator("h1")).toBeVisible();
 
 		// Scroll to comments
 		await scrollToComments(page);
