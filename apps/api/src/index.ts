@@ -4,6 +4,8 @@ import { handleContactSubmission } from "./endpoints/contact-handler";
 import { handleNewsletterSubscription } from "./endpoints/newsletter-handler";
 
 // --- Zod Schemas for OpenAPI ---
+// Note: Using z.string().email() as z.email() is not yet available in Zod v4.1.12
+// The deprecation warning is for future migration when Zod releases standalone z.email()
 const ContactSchema = z.object({
 	name: z.string().openapi({ example: "John Doe" }),
 	email: z.string().email().openapi({ example: "john.doe@example.com" }),
