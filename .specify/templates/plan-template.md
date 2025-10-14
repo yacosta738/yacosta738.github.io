@@ -31,13 +31,26 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+[Verify against repository Constitution]
+
+- Code Quality: Plan references Biome and TypeScript strict mode; coding
+  conventions documented (AGENTS.md, TypeScript, Tailwind v4, Astro).
+- Testing Standards: Identify test levels (unit/integration/E2E) and where they
+  apply; include at least one E2E for primary P1 journey if frontend; include
+  regression tests for known bugs.
+- UX Consistency: Note accessibility considerations, navigation/state behavior,
+  and i18n scope (languages impacted).
+- Performance Requirements: Define budgets/targets relevant to the feature (e.g.,
+  LCP/INP/CLS or p95 latency); describe how they’ll be measured in CI or locally.
+
+If any gates cannot be met, document a waiver in Complexity Tracking with owner
+and expiry (≤30 days) and a remediation plan.
 
 ## Project Structure
 
 ### Documentation (this feature)
 
-```
+```text
 specs/[###-feature]/
 ├── plan.md              # This file (/speckit.plan command output)
 ├── research.md          # Phase 0 output (/speckit.plan command)
@@ -55,7 +68,7 @@ specs/[###-feature]/
   not include Option labels.
 -->
 
-```
+```text
 # [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
 ├── models/
