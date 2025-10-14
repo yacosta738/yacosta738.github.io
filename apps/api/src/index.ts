@@ -1,10 +1,11 @@
 import { swaggerUI } from "@hono/swagger-ui";
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-import { cors } from "hono/cors";
 import { handleContactSubmission } from "./endpoints/contact-handler";
 import { handleNewsletterSubscription } from "./endpoints/newsletter-handler";
 
 // --- Zod Schemas for OpenAPI ---
+// Note: Using z.string().email() as z.email() is not yet available in Zod v4.1.12
+// The deprecation warning is for future migration when Zod releases standalone z.email()
 const ContactSchema = z.object({
 	name: z.string().openapi({ example: "John Doe" }),
 	email: z.string().email().openapi({ example: "john.doe@example.com" }),
@@ -91,14 +92,72 @@ const newsletterRoute = createRoute({
 const app = new OpenAPIHono<{ Bindings: Env }>();
 
 // --- CORS Middleware ---
-app.use(
-	"/*",
-	cors({
-		origin: "*",
-		allowMethods: ["GET", "POST", "OPTIONS"],
-		allowHeaders: ["Content-Type", "YAP-AUTH-TOKEN", "form-token-id"],
-	}),
-);
+// Use an allowlist driven by the `ALLOWED_ORIGINS` environment variable.
+// The value should be a comma-separated list of origins (for example:
+// "https://example.com,https://app.example.com"). In local/test environments
+// set it to the specific origins you need. Never use "*" in production.
+
+/**
+ * Parse allowed origins from environment variable
+ * @param env - Environment object with string key-value pairs
+ * @returns Array of allowed origin strings
+ */
+const parseAllowedOrigins = (
+	env?: Record<string, string | undefined>,
+): string[] => {
+	const raw = env?.ALLOWED_ORIGINS;
+	if (!raw) return [];
+	return raw
+		.split(",")
+		.map((s) => s.trim())
+		.filter(Boolean);
+};
+
+/**
+ * CORS middleware with allowlist validation
+ * Uses c.env.ALLOWED_ORIGINS from Cloudflare Workers environment
+ */
+app.use("/*", async (c, next) => {
+	const requestOrigin = c.req.header("origin");
+
+	// Parse allowed origins from the Worker's environment bindings
+	const allowedOrigins = parseAllowedOrigins({
+		ALLOWED_ORIGINS: c.env.ALLOWED_ORIGINS,
+	});
+
+	// If no origin header or empty allowlist, proceed without CORS headers
+	if (!requestOrigin || allowedOrigins.length === 0) {
+		return await next();
+	}
+
+	const originAllowed = allowedOrigins.includes(requestOrigin);
+
+	// Reject disallowed origins
+	if (!originAllowed) {
+		if (c.req.method === "OPTIONS") {
+			return new Response("CORS origin denied", { status: 403 });
+		}
+		// Continue without CORS headers - browser will block cross-origin access
+		return await next();
+	}
+
+	// Set CORS headers for allowed origins
+	c.header("Access-Control-Allow-Origin", requestOrigin);
+	c.header("Vary", "Origin");
+	c.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+	c.header(
+		"Access-Control-Allow-Headers",
+		"Content-Type, YAP-AUTH-TOKEN, form-token-id",
+	);
+	c.header("Access-Control-Max-Age", "86400"); // Cache preflight for 24 hours
+
+	// Handle preflight requests
+	if (c.req.method === "OPTIONS") {
+		return new Response(null, { status: 204 });
+	}
+
+	return await next();
+});
 
 // --- OpenAPI Route Registration ---
 app.openapi(contactRoute, handleContactSubmission);

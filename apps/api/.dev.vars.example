@@ -11,5 +11,10 @@ WEBHOOK_AUTH_TOKEN=your_webhook_auth_token_here
 # Webhook Form Token ID (form-specific token for validation)
 WEBHOOK_FORM_TOKEN_ID=your_webhook_form_token_id_here
 
+# Webhook URLs
 CONTACT_WEBHOOK_URL=https://your-webhook-url-here/v1/contact
 NEWSLETTER_WEBHOOK_URL=https://your-webhook-url-here/v1/portfolio/newsletter
+
+# CORS Allowed Origins (comma-separated list, for local dev use http://localhost:4321)
+# Example: https://yacosta738.github.io,https://www.yunielacosta.com
+ALLOWED_ORIGINS=http://localhost:4321,http://localhost:3000
