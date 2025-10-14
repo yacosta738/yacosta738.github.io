@@ -14,10 +14,9 @@
 			"@styles/*": ["src/styles/*"],
 			"@utils/*": ["src/utils/*"],
 			"@atoms/*": ["src/components/atoms/*"]
-		},
-		"types": ["./worker-configuration.d.ts", "node"]
+		}
 	},
 	"extends": "astro/tsconfigs/strict",
-	"include": [".astro/types.d.ts", "**/*", "../api/worker-configuration.d.ts"],
+	"include": [".astro/types.d.ts", "**/*"],
 	"exclude": ["dist"]
 }
