@@ -14,7 +14,8 @@ interface Props extends HTMLAttributes<"section"> {
 const { title, description, formId, ...attrs } = Astro.props as Props;
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
-const HCAPTCHA_SITE_KEY = import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "";
+
+import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 ---
 
 <section

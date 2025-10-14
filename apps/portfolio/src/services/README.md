@@ -73,14 +73,14 @@ const response = await apiClient.post("/custom-endpoint", {
 
 ## Configuration
 
-API configuration is managed in `api-config.ts`. Set the `PUBLIC_API_URL` environment variable:
+API configuration is managed in `api-config.ts`. Set the `API_URL` environment variable:
 
 ```bash
 # Development
-PUBLIC_API_URL=http://localhost:8787
+API_URL=http://localhost:8787
 
 # Production
-PUBLIC_API_URL=https://api.yunielacosta.com
+API_URL=https://api.yunielacosta.com
 ```
 
 If not set, defaults are:

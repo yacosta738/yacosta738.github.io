@@ -107,7 +107,7 @@ The Cloudflare Worker is located in `apps/api/`.
 
 5.  **Configure Portfolio Environment:** Create a `.env` file in `apps/portfolio/` with the following content:
     ```
-    PUBLIC_API_URL=http://localhost:8787
+    API_URL=http://localhost:8787
     ```
 
 ### Production Deployment
@@ -121,7 +121,7 @@ The Cloudflare Worker is located in `apps/api/`.
 
 2.  **Set Production Secrets:** Repeat the `wrangler secret put` commands without the `--env development` flag if you have different production values.
 
-3.  **Configure Production Environment:** In your hosting provider (Vercel, Netlify, etc.), set the `PUBLIC_API_URL` environment variable to your production worker URL (e.g., `https://api.yourdomain.com`).
+3.  **Configure Production Environment:** In your hosting provider (Vercel, Netlify, etc.), set the `API_URL` environment variable to your production worker URL (e.g., `https://api.yourdomain.com`).
 
 ---
 
@@ -167,7 +167,7 @@ The worker exposes the following endpoints.
 ### Files Modified
 - `apps/portfolio/src/components/sections/Contact.astro`: Updated to use `contactService`.
 - `apps/portfolio/src/components/organisms/CtaNewsletterSubscription.astro`: Updated to use `newsletterService`.
-- `.env.example`: Added `PUBLIC_API_URL`.
+- `.env.example`: Added `API_URL`.
 
 ### Files to Delete
 The following Astro API routes are now obsolete and can be removed after verifying the worker is fully functional:
@@ -180,7 +180,7 @@ The following Astro API routes are now obsolete and can be removed after verifyi
 
 - **"Failed to fetch" Error:**
   - Ensure the worker is running (`pnpm dev` in `apps/api`).
-  - Verify the `PUBLIC_API_URL` in your portfolio's `.env` file is correct.
+  - Verify the `API_URL` in your portfolio's `.env` file is correct.
 
 - **CORS Error:**
   - The worker is configured to allow `*` for `Access-Control-Allow-Origin`. If issues persist, check the headers in `apps/api/src/index.ts`.

@@ -8,11 +8,11 @@ const getApiBaseUrl = (): string => {
 	// Check if we're in development or production
 	if (import.meta.env.DEV) {
 		// In development, use the local worker or a dev deployment
-		return import.meta.env.PUBLIC_API_URL || "http://localhost:8787";
+		return import.meta.env.API_URL || "http://localhost:8787";
 	}
 
 	// In production, use the deployed worker URL
-	return import.meta.env.PUBLIC_API_URL || "https://api.yunielacosta.com";
+	return import.meta.env.API_URL || "https://api.yunielacosta.com";
 };
 
 export const API_CONFIG = {

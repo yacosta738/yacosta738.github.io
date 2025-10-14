@@ -181,7 +181,7 @@ Para desarrollo y testing, usar las claves de prueba de hCaptcha:
 
 ```bash
 # .env
-PUBLIC_HCAPTCHA_SITE_KEY=10000000-ffff-ffff-ffff-000000000001
+HCAPTCHA_SITE_KEY=10000000-ffff-ffff-ffff-000000000001
 ```
 
 ```bash

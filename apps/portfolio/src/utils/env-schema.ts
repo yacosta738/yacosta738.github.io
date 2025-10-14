@@ -41,22 +41,12 @@ export default {
 		access: "public",
 		default: "Esta página no está disponible en tu idioma.",
 	}),
-	BASE_URL_LOCAL: envField.string({
-		context: "client",
-		access: "public",
-		default: "http://localhost:4321",
-	}),
-	BASE_URL_PROD: envField.string({
-		context: "client",
-		access: "public",
-		default: "https://your-production-url.com",
-	}),
-	PUBLIC_API_URL: envField.string({
+	API_URL: envField.string({
 		context: "client",
 		access: "public",
 		default: "http://localhost:8787",
 	}),
-	PUBLIC_HCAPTCHA_SITE_KEY: envField.string({
+	HCAPTCHA_SITE_KEY: envField.string({
 		context: "client",
 		access: "public",
 		optional: true,

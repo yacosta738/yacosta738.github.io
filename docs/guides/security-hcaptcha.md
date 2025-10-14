@@ -60,7 +60,7 @@ Add the public **Site Key** to the `.env` file in the `apps/portfolio/` director
 **File**: `apps/portfolio/.env`
 
 ```env
-PUBLIC_HCAPTCHA_SITE_KEY=32849c48-cf0a-400c-b678-8e74992eadc4
+HCAPTCHA_SITE_KEY=32849c48-cf0a-400c-b678-8e74992eadc4
 ```
 
 ### Step 3: Configure the API Worker (Server-side)
@@ -133,7 +133,7 @@ You can temporarily use these in your `.env` and `.dev.vars` files to test the i
 
 - **Widget Not Rendering?**
   - Check the browser console for script-loading errors.
-  - Verify the `PUBLIC_HCAPTCHA_SITE_KEY` in your `.env` file is correct.
+  - Verify the `HCAPTCHA_SITE_KEY` in your `.env` file is correct.
 - **Verification Always Fails?**
   - Ensure the `HCAPTCHA_SECRET_KEY` is set correctly in your Cloudflare secrets.
   - Check the worker logs for any error messages using `pnpm wrangler tail`.
