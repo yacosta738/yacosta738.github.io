@@ -12,7 +12,7 @@ export class Newsletter extends OpenAPIRoute {
 				content: {
 					"application/json": {
 						schema: z.object({
-							email: z.string().email().max(254),
+							email: z.email().max(254),
 							hcaptchaToken: z.string().min(1),
 							_gotcha: z.string().optional(),
 						}),

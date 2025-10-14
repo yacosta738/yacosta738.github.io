@@ -32,7 +32,10 @@
 		// Example value: Replace with the actual production URL or parameterize via environment variables
 		"CONTACT_WEBHOOK_URL": "${CONTACT_WEBHOOK_URL}",
 		// Example value: Replace with the actual production URL or parameterize via environment variables
-		"NEWSLETTER_WEBHOOK_URL": "${NEWSLETTER_WEBHOOK_URL}"
+		"NEWSLETTER_WEBHOOK_URL": "${NEWSLETTER_WEBHOOK_URL}",
+		// CORS allowed origins (comma-separated list of allowed origins)
+		// Example: "https://yacosta738.github.io,https://www.yunielacosta.com"
+		"ALLOWED_ORIGINS": "${ALLOWED_ORIGINS}"
 	}
 	/**
 	 * Secrets - Sensitive data (DO NOT add values here)
