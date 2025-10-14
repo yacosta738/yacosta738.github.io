@@ -120,7 +120,10 @@ describe("Newsletter Endpoint", () => {
 		it("should return 500 if webhook fails", async () => {
 			// Mock failed webhook response
 			mockFetch.mockResolvedValueOnce(
-				new Response(JSON.stringify({ success: false }), { status: 500 }),
+				new Response(
+					JSON.stringify({ success: false, message: "Failed to subscribe" }),
+					{ status: 500 },
+				),
 			);
 
 			const request = new Request("http://localhost/api/newsletter", {

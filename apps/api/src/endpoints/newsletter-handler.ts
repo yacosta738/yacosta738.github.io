@@ -4,14 +4,8 @@
  */
 
 import type { Context } from "hono";
+import type { Env } from "../../worker-configuration";
 import { verifyHCaptcha } from "../utils/hcaptcha";
-
-interface Env {
-	HCAPTCHA_SECRET_KEY: string;
-	WEBHOOK_AUTH_TOKEN: string;
-	WEBHOOK_FORM_TOKEN_ID: string;
-	NEWSLETTER_WEBHOOK_URL: string;
-}
 
 export async function handleNewsletterSubscription(
 	c: Context<{ Bindings: Env }>,

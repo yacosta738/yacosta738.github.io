@@ -1,7 +1,11 @@
+import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { swaggerUI } from "@hono/swagger-ui";
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { handleContactSubmission } from "./endpoints/contact-handler";
 import { handleNewsletterSubscription } from "./endpoints/newsletter-handler";
+
+// Extend Zod with OpenAPI capabilities
+extendZodWithOpenApi(z);
 
 // --- Zod Schemas for OpenAPI ---
 // Note: Using z.string().email() as z.email() is not yet available in Zod v4.1.12

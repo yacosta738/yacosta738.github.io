@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      zod-openapi:
+        specifier: 5.4.3
+        version: 5.4.3
+      zod-to-openapi:
+        specifier: 0.2.1
+        version: 0.2.1
     devDependencies:
       '@biomejs/biome':
         specifier: 2.2.5
@@ -4434,6 +4441,9 @@ packages:
   oniguruma-to-es@4.3.3:
     resolution: {integrity: sha512-rPiZhzC3wXwE59YQMRDodUwwT9FZ9nNBwQQfsd1wfdtlKEyCdRV0avrTcSZ5xlIvGRVPd/cx6ZN45ECmS39xvg==}
 
+  openapi3-ts@2.0.2:
+    resolution: {integrity: sha512-TxhYBMoqx9frXyOgnRHufjQfPXomTIHYKhSKJ6jHfj13kS8OEIhvmE8CTuQyKtjjWttAjX5DPxM1vmalEpo8Qw==}
+
   openapi3-ts@4.5.0:
     resolution: {integrity: sha512-jaL+HgTq2Gj5jRcfdutgRGLosCy/hT8sQf6VOy+P+g36cZOjI1iukdPnijC+4CmeRzg/jEllJUboEic2FhxhtQ==}
 
@@ -5340,6 +5350,11 @@ packages:
   typescript-auto-import-cache@0.3.6:
     resolution: {integrity: sha512-RpuHXrknHdVdK7wv/8ug3Fr0WNsNi5l5aB8MYYuXhq2UH5lnEB1htJ1smhtD5VeCsGr2p8mUDtd83LCQDFVgjQ==}
 
+  typescript@4.9.5:
+    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
@@ -5998,6 +6013,10 @@ packages:
     resolution: {integrity: sha512-N47AqBDCMQmh6mBLmI6oqxryHRzi33aPFPsJhYy3VTUGCdLHYjGh4FZzpUjRlphaADBBkDmnkM/++KNIOHi5Rw==}
     hasBin: true
 
+  yaml@1.10.2:
+    resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
+    engines: {node: '>= 6'}
+
   yaml@2.2.2:
     resolution: {integrity: sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==}
     engines: {node: '>= 14'}
@@ -6054,10 +6073,22 @@ packages:
   youch@4.1.0-beta.10:
     resolution: {integrity: sha512-rLfVLB4FgQneDr0dv1oddCVZmKjcJ6yX6mS4pU82Mq/Dt9a3cLZQ62pDBL4AUO+uVrCvtWz3ZFUL2HFAFJ/BXQ==}
 
+  zod-openapi@5.4.3:
+    resolution: {integrity: sha512-6kJ/gJdvHZtuxjYHoMtkl2PixCwRuZ/s79dVkEr7arHvZGXfx7Cvh53X3HfJ5h9FzGelXOXlnyjwfX0sKEPByw==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      zod: ^3.25.74 || ^4.0.0
+
   zod-to-json-schema@3.24.6:
     resolution: {integrity: sha512-h/z3PKvcTcTetyjl1fkj79MHNEjm+HpD6NXheWjzOekY7kV+lwDYnHw+ivHkijnCSMz1yJaWBD9vu/Fcmk+vEg==}
     peerDependencies:
       zod: ^3.24.1
+
+  zod-to-openapi@0.2.1:
+    resolution: {integrity: sha512-F+3aAYcWcboNYXCmu4qqiZA1Cwwgxp06VF4DOeGE7l4cWdyxSABNBH8QSRGbC4ajSKU1h/prF+yQh7bQkYGVpw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+    peerDependencies:
+      zod: ~3.5.1
 
   zod-to-ts@1.2.0:
     resolution: {integrity: sha512-x30XE43V+InwGpvTySRNz9kB7qFU8DlyEy7BsSTCHPH1R0QasMmHWZDCzYm6bVXtj/9NNJAZF3jW8rzFvH5OFA==}
@@ -10736,6 +10767,10 @@ snapshots:
       regex: 6.0.1
       regex-recursion: 6.0.2
 
+  openapi3-ts@2.0.2:
+    dependencies:
+      yaml: 1.10.2
+
   openapi3-ts@4.5.0:
     dependencies:
       yaml: 2.8.1
@@ -11814,6 +11849,8 @@ snapshots:
     dependencies:
       semver: 7.7.3
 
+  typescript@4.9.5: {}
+
   typescript@5.9.3: {}
 
   ufo@1.6.1: {}
@@ -12469,6 +12506,8 @@ snapshots:
     optionalDependencies:
       prettier: 2.8.7
 
+  yaml@1.10.2: {}
+
   yaml@2.2.2: {}
 
   yaml@2.8.1: {}
@@ -12533,9 +12572,17 @@ snapshots:
       cookie: 1.0.2
       youch-core: 0.3.3
 
+  zod-openapi@5.4.3: {}
+
   zod-to-json-schema@3.24.6(zod@3.25.76):
     dependencies:
       zod: 3.25.76
+
+  zod-to-openapi@0.2.1:
+    dependencies:
+      lodash: 4.17.21
+      openapi3-ts: 2.0.2
+      typescript: 4.9.5
 
   zod-to-ts@1.2.0(typescript@5.9.3)(zod@3.25.76):
     dependencies:

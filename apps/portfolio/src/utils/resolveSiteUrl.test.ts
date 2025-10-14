@@ -28,8 +28,6 @@ describe("resolveSiteUrl helper", () => {
 			"URL",
 			"DEPLOY_PRIME_URL",
 			"CF_PAGES_URL",
-			"BASE_URL_PROD",
-			"BASE_URL_LOCAL",
 			"HOST",
 		];
 		for (const key of candidates) {
