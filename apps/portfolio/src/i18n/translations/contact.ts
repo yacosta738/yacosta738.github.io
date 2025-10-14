@@ -32,7 +32,7 @@ export const contact: { en: UIDict; es: UIDict } = {
 		"contact.email": "Tu Correo Electrónico",
 		"contact.email_placeholder": "juanperez@gmail.com",
 		"contact.subject": "Asunto",
-		"contact.subject_placeholder": "Juan, es hora de comenzar tu nuevo proyecto",
+		"contact.subject_placeholder": "Oportunidad de colaboración en proyecto",
 		"contact.message": "Mensaje",
 		"contact.message_placeholder":
 			"Creo que el éxito depende de la comunicación y el enfoque en el objetivo. Me gustaría trabajar contigo en tu proyecto.",
