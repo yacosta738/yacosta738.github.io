@@ -409,6 +409,8 @@ const _buttonLabel = buttonLabel ?? t("search.button");
 
   /* Style search result highlights (mark elements) */
   #enhanced-search__content :global(mark) {
+    /* Fallback for browsers without color-mix support */
+    background-color: rgba(100, 255, 218, 0.25); /* brand-accent with 25% opacity */
     background-color: color-mix(in srgb, var(--color-brand-accent) 25%, transparent);
     color: var(--color-foreground);
     padding: 0.125rem 0.25rem;
@@ -502,6 +504,8 @@ const _buttonLabel = buttonLabel ?? t("search.button");
 
   /* Dark mode highlight styling */
   :global(.dark) #enhanced-search__content :global(mark) {
+    /* Fallback for browsers without color-mix support */
+    background-color: rgba(100, 255, 218, 0.35); /* brand-accent with 35% opacity */
     background-color: color-mix(in srgb, var(--color-brand-accent) 35%, transparent);
     color: var(--color-foreground);
   }
