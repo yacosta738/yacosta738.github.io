@@ -29,6 +29,13 @@ jobs:
         run: pnpm run check
 
       - name: Run tests
+        env:
+          CONTACT_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
+          NEWSLETTER_WEBHOOK_URL: ${{ secrets.NEWSLETTER_WEBHOOK_URL }}
+          WEBHOOK_AUTH_TOKEN: ${{ secrets.WEBHOOK_AUTH_TOKEN }}
+          WEBHOOK_FORM_TOKEN_ID: ${{ secrets.WEBHOOK_FORM_TOKEN_ID }}
+          HCAPTCHA_SITE_KEY: ${{ secrets.HCAPTCHA_SITE_KEY }}
+          HCAPTCHA_SECRET: ${{ secrets.HCAPTCHA_SECRET }}
         run: pnpm -w test
 
       - name: Audit for high vulnerabilities
