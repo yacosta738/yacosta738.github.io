@@ -13,7 +13,7 @@ export class Contact extends OpenAPIRoute {
 					"application/json": {
 						schema: z.object({
 							name: z.string().min(1),
-							email: z.email().max(254),
+							email: z.string().email().max(254),
 							subject: z.string().min(1),
 							message: z.string().min(1),
 							hcaptchaToken: z.string().min(1),
