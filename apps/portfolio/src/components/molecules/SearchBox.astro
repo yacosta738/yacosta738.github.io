@@ -407,6 +407,15 @@ const _buttonLabel = buttonLabel ?? t("search.button");
     --pagefind-ui-font: inherit;
   }
 
+  /* Style search result highlights (mark elements) */
+  #enhanced-search__content :global(mark) {
+    background-color: color-mix(in srgb, var(--color-brand-accent) 25%, transparent);
+    color: var(--color-foreground);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+  }
+
   /* Override pagefind styles */
   :global([data-search-modal-open]) {
     overflow: hidden;
@@ -489,6 +498,12 @@ const _buttonLabel = buttonLabel ?? t("search.button");
 
   :global(.dark) #enhanced-search__content :global(.pagefind-ui__result) {
     background: var(--color-background-secondary);
+  }
+
+  /* Dark mode highlight styling */
+  :global(.dark) #enhanced-search__content :global(mark) {
+    background-color: color-mix(in srgb, var(--color-brand-accent) 35%, transparent);
+    color: var(--color-foreground);
   }
 
   /* Animation for modal */
