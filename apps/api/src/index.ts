@@ -125,8 +125,17 @@ app.use("/*", async (c, next) => {
 		ALLOWED_ORIGINS: c.env.ALLOWED_ORIGINS,
 	});
 
-	// If no origin header or empty allowlist, proceed without CORS headers
-	if (!requestOrigin || allowedOrigins.length === 0) {
+	// If no origin header, proceed without CORS headers (same-origin request)
+	if (!requestOrigin) {
+		return await next();
+	}
+
+	// If empty allowlist, log warning and deny CORS
+	if (allowedOrigins.length === 0) {
+		console.warn("ALLOWED_ORIGINS is not configured. Denying CORS request.");
+		if (c.req.method === "OPTIONS") {
+			return new Response("CORS not configured", { status: 403 });
+		}
 		return await next();
 	}
 
@@ -134,6 +143,7 @@ app.use("/*", async (c, next) => {
 
 	// Reject disallowed origins
 	if (!originAllowed) {
+		console.warn(`CORS denied for origin: ${requestOrigin}`);
 		if (c.req.method === "OPTIONS") {
 			return new Response("CORS origin denied", { status: 403 });
 		}
@@ -153,7 +163,7 @@ app.use("/*", async (c, next) => {
 
 	// Handle preflight requests
 	if (c.req.method === "OPTIONS") {
-		return new Response(null, { status: 204 });
+		return c.body(null, 204);
 	}
 
 	return await next();

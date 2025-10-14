@@ -12,6 +12,14 @@
 		"enabled": true
 	},
 	/**
+	 * Development Configuration
+	 * Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#dev
+	 */
+	"dev": {
+		"port": 8787,
+		"ip": "localhost"
+	},
+	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
 	 */
@@ -35,7 +43,7 @@
 		"NEWSLETTER_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook/v1/portfolio/newsletter",
 		// CORS allowed origins (comma-separated list of allowed origins)
 		// Example: "https://yacosta738.github.io,https://www.yunielacosta.com"
-		"ALLOWED_ORIGINS": "https://yacosta738.github.io,https://www.yunielacosta.com,https://www.v4.yunielacosta.com"
+		"ALLOWED_ORIGINS": "https://yacosta738.github.io,https://www.yunielacosta.com,https://yunielacosta.com,https://v4.yunielacosta.com,https://www.v4.yunielacosta.com"
 	}
 	/**
 	 * Secrets - Sensitive data (DO NOT add values here)
