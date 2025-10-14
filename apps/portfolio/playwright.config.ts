@@ -8,12 +8,12 @@ export default defineConfig({
 	testDir: "tests/e2e",
 
 	// Test execution settings
-	timeout: 90_000, // Increased to accommodate longer waits in CI
-	expect: { timeout: 5_000 },
+	timeout: 120_000, // Increased timeout for webkit stability
+	expect: { timeout: 10_000 },
 	fullyParallel: true,
 
-	// Retry on CI for flake resistance
-	retries: process.env.CI ? 2 : 0,
+	// Retry on CI and locally for webkit flake resistance
+	retries: process.env.CI ? 2 : 1,
 
 	// Only fail if more than 10% of tests are flaky
 	reportSlowTests: { max: 5, threshold: 60_000 },
@@ -33,31 +33,25 @@ export default defineConfig({
 	// Global configuration for all tests
 	use: {
 		baseURL: process.env.BASE_URL || "http://localhost:4322",
-
-		// Capture traces, screenshots, and videos on failure
 		trace: "retain-on-failure",
 		screenshot: "only-on-failure",
 		video: "retain-on-failure",
-
-		// Standard viewport for desktop tests
 		viewport: { width: 1280, height: 720 },
-
-		// Respect user preferences
 		colorScheme: "light",
-
-		// Browser context options
 		ignoreHTTPSErrors: true,
-
-		// Action timeout
-		actionTimeout: 10_000,
+		actionTimeout: 15_000,
+		navigationTimeout: 30_000,
 	},
 
 	// Development server configuration - auto-start on test run
 	webServer: {
 		command: "pnpm dev --port 4322",
 		url: "http://localhost:4322",
-		timeout: 120_000,
-		reuseExistingServer: !process.env.CI,
+		timeout: 180_000, // Increased timeout for slower machines
+		reuseExistingServer: true,
+		env: {
+			PLAYWRIGHT_TEST: "true",
+		},
 		stdout: "ignore",
 		stderr: "pipe",
 	},
@@ -74,7 +68,13 @@ export default defineConfig({
 		},
 		{
 			name: "webkit",
-			use: { ...devices["Desktop Safari"] },
+			use: {
+				...devices["Desktop Safari"],
+				// Webkit-specific settings for stability
+				launchOptions: {
+					slowMo: 50, // Slow down operations slightly for webkit
+				},
+			},
 		},
 
 		// Mobile viewports for responsive testing

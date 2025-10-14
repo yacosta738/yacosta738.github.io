@@ -1,50 +1,137 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: unversioned → 1.0.0
+- Modified principles: N/A (initial adoption)
+- Added sections:
+  - Core Principles: Code Quality, Testing Standards, User Experience Consistency, Performance Requirements
+  - Section: Quality Gates (CI/CD)
+  - Section: Development Workflow & Review Process
+- Removed sections: Template placeholder for a 5th principle was intentionally omitted per user request for four principles.
+- Templates requiring updates:
+  - ✅ .specify/templates/plan-template.md (Constitution Check aligned)
+  - ✅ .specify/templates/spec-template.md (Non-functional requirements added)
+  - ✅ .specify/templates/tasks-template.md (Tests marked REQUIRED; quality gates tasks added)
+  - ⚠ .specify/templates/commands/* (no files present) — N/A
+- Follow-up TODOs:
+  - TODO(RATIFICATION_DATE): Original adoption date unknown; set once historical date is decided.
+-->
+
+# Portfolio Monorepo (yacosta738.github.io) Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Code Quality (NON-NEGOTIABLE)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All source must be readable, consistent, and type-safe.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+- Lint/format: Biome is the single source of truth. `pnpm check` MUST pass with
+  zero errors before merge. Formatting is not debated in review.
+- Type safety: TypeScript `strict` MUST be enabled. Avoid `any`; use `unknown`
+  with proper narrowing. Prefer `type` aliases over `interface` unless merging
+  is explicitly required. Prefer named exports.
+- Maintainability: Functions and components MUST be small, cohesive, and have a
+  single responsibility. Follow the repo’s Architecture, Astro, Tailwind v4,
+  TypeScript, HTML, and UI conventions documented in `AGENTS.md`.
+- Docs-as-code: Public APIs, utilities, and complex components MUST include
+  inline docs or links to reference docs in `/docs`.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Rationale: High-quality, consistent code reduces defects, accelerates onboarding,
+and lowers long-term maintenance cost.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### II. Testing Standards (NON-NEGOTIABLE)
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Every change MUST be protected by automated tests at the appropriate level.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Scope: New features require tests; bug fixes REQUIRE a regression test.
+- Levels by app:
+  - apps/api: Unit tests (Vitest) + integration/contract tests for endpoints.
+  - apps/portfolio: End-to-end tests (Playwright) for primary user journeys; add
+    unit/integration tests where value is high.
+- Red–Green–Refactor: Tests SHOULD be written first or alongside and MUST fail
+  before implementation when practical.
+- Coverage: For libraries and API code, target ≥80% statements/branches overall
+  with no critical paths untested. For the portfolio, at minimum one E2E test
+  per P1 user journey and a smoke test per supported language.
+- Reliability: Flaky tests MUST be fixed or quarantined within 48 hours; no
+  merges with known flakiness on required checks.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Rationale: Tests provide safety for refactors, enforce behavior, and protect
+user experience.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### III. User Experience Consistency
+
+The interface MUST be consistent, accessible, and aligned with conventions.
+
+- Design system: Follow Atomic Design and Tailwind v4 conventions. Prefer
+  semantic utilities defined in `src/styles/global.css` and component-scoped
+  styling. Avoid unnecessary client JS; use Astro islands only when needed.
+- Accessibility: Meet WCAG 2.1 AA contrast; full keyboard support; visible
+  focus; accurate names/labels; `alt` text; polite `aria-live` for status.
+- Internationalization: Text MUST be localizable; dates/numbers are
+  locale-aware; ensure parity across languages per docs/i18n guides.
+- Navigation & state: URLs MUST reflect navigable state; links are links; back
+  and forward behavior preserved; avoid layout shift with reserved space.
+
+Rationale: Consistency and a11y broaden reach, reduce cognitive load, and build
+trust.
+
+### IV. Performance Requirements
+
+Deliver fast-by-default experiences with explicit budgets.
+
+- Web (apps/portfolio):
+  - Core Web Vitals (mobile p75): LCP ≤ 2.5s, INP ≤ 200ms, CLS < 0.1.
+  - Lighthouse: Performance score ≥ 90 on key pages (home, articles, CV) in CI
+    or documented local runs.
+  - Shipping JS: Keep client JS minimal; prefer static HTML; hydrate only where
+    necessary (`client:*`). Lazy-load below-the-fold images; use Astro `<Image>`.
+- API (apps/api):
+  - Latency: p95 ≤ 200ms under expected load; cold-start overhead minimized on
+    Workers; timeouts and retries applied as appropriate.
+  - Reliability: Explicit error handling, input validation, and idempotency for
+    mutating endpoints.
+
+Rationale: Performance is a feature; fast systems improve UX, SEO, and costs.
+
+## Quality Gates (CI/CD)
+
+These MUST pass on every PR to protected branches and on `main`:
+
+- Build: `pnpm build` succeeds for all apps.
+- Lint/Typecheck: `pnpm check` passes (Biome + typecheck). No new warnings are
+  introduced in required checks.
+- Tests: All required unit/integration tests pass (Vitest), and required E2E
+  tests (Playwright) pass for primary journeys and supported locales.
+- UX: Accessibility checks (manual or automated) confirm focus, names, and
+  contrast for changed surfaces; no regressions to navigation semantics.
+- Performance: Evidence of meeting budgets for affected pages/endpoints (CI or
+  documented local run linked from the PR).
+
+Exceptions MUST be recorded in the feature’s plan (`Complexity Tracking`) with a
+remediation path and owners; time-boxed waivers expire in ≤30 days.
+
+## Development Workflow & Review Process
+
+- Branching: `feature/*`, `fix/*`, `chore/*` naming. Keep changes small and
+  reviewable.
+- PR requirements: Link to spec/plan; include a Constitution Check summary
+  showing how gates were met (or waivers). At least one reviewer approval.
+- Commits: Conventional Commits are encouraged; release automation uses
+  semantic-release.
+- Documentation: Update `/docs` and in-repo READMEs when behavior or guidance
+  changes.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution supersedes other engineering practices for this repository.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+- Amendments: Proposed via PR with a Sync Impact Report and propagation plan
+  for templates/docs. Breaking governance changes require team approval.
+- Versioning of this document: Semantic Versioning is used.
+  - MAJOR: Backward-incompatible governance changes or principle removals.
+  - MINOR: New principles/sections or materially expanded guidance.
+  - PATCH: Clarifications and non-semantic edits.
+- Compliance: Reviewers verify Constitution Check in plans/PRs. Non-compliant
+  changes must carry a recorded waiver with owners and expiry.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-10-13
