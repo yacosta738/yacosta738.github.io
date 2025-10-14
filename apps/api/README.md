@@ -116,12 +116,32 @@ pnpm test:watch
 pnpm test:coverage
 ```
 
+### Known Issue: Vitest Explorer Extension
+
+If you're using the **Vitest Explorer** VS Code extension, you may encounter errors like:
+
+```text
+AssertionError: The expression evaluated to a falsy value:
+  assert4(fileMf !== void 0)
+```
+
+This is a known compatibility issue between the Vitest Explorer extension and `@cloudflare/vitest-pool-workers`. The extension tries to reuse Cloudflare Workers runtimes but fails with assertion errors.
+
+**Workaround:** Run tests from the terminal instead:
+
+```bash
+cd apps/api
+pnpm test
+```
+
+The tests work perfectly from the command line. We've disabled the Vitest extension for this workspace (`.vscode/settings.json`) to avoid confusion.
+
 ### Test coverage
 
-- **32 tests** covering both endpoints and integration
-- Contact endpoint: 10 tests
-- Newsletter endpoint: 15 tests
-- Integration: 7 tests
+- **20 tests** covering both endpoints and core functionality
+- Contact endpoint tests
+- Newsletter endpoint tests  
+- Integration tests
 
 See [TESTING.md](./TESTING.md) for detailed testing documentation and [TEST-SUMMARY.md](./TEST-SUMMARY.md) for the latest test results.
 

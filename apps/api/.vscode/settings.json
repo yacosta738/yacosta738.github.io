@@ -1,5 +1,9 @@
 {
 	"files.associations": {
 		"wrangler.json": "jsonc"
-	}
+	},
+	// Workaround for Vitest Explorer + Cloudflare Workers pool compatibility
+	// The extension tries to reuse runtimes but fails with assertion errors
+	// Use terminal (pnpm test) for reliable test execution
+	"vitest.enable": false
 }
