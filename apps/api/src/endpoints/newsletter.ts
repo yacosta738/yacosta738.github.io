@@ -140,10 +140,10 @@ export class Newsletter extends OpenAPIRoute {
 				return c.json(
 					{
 						success: false,
-						message: "Webhook request failed",
+						message: "Failed to subscribe",
 					},
-					502,
-				); // Use 502 for bad gateway errors
+					500,
+				);
 			}
 
 			return c.json({ success: true, message: "Subscription successful" }, 200);
