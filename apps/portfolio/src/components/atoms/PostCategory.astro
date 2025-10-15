@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { routes } from "@/configs/route.path";
 import type Category from "@/core/category/category.model";
 import { type Lang, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
@@ -19,7 +20,7 @@ const t = useTranslations(currentLocale);
 		"w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80",
 		attrs.class
 	)}
-	href={`/${currentLocale}/blog/category/${cleanEntityId(category.slug).toLowerCase()}/`}
+	href={`/${currentLocale}/${routes.category}/${cleanEntityId(category.slug).toLowerCase()}/`}
 	aria-label={t("post.aria.category", { category: category.title })}
 	{...attrs}
 >
