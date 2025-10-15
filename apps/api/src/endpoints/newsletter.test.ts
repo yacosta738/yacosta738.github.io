@@ -1,6 +1,5 @@
 import {
 	createExecutionContext,
-	env,
 	waitOnExecutionContext,
 } from "cloudflare:test";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -13,6 +12,17 @@ vi.mock("../utils/hcaptcha");
 // Mock fetch for the webhook call
 const mockFetch = vi.fn();
 global.fetch = mockFetch;
+
+// Mock environment object for tests
+const mockEnv = {
+	CONTACT_WEBHOOK_URL: "https://test-webhook.example.com/contact",
+	NEWSLETTER_WEBHOOK_URL: "https://test-webhook.example.com/newsletter",
+	WEBHOOK_AUTH_TOKEN: "test-auth-token",
+	WEBHOOK_FORM_TOKEN_ID: "test-form-token-id",
+	HCAPTCHA_SECRET_KEY: "test-hcaptcha-secret",
+	HCAPTCHA_SITE_KEY: "test-hcaptcha-site-key",
+	ALLOWED_ORIGINS: "http://localhost,https://example.com",
+};
 
 describe("Newsletter Endpoint", () => {
 	let ctx: ExecutionContext;
@@ -43,7 +53,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(200);
@@ -55,7 +65,7 @@ describe("Newsletter Endpoint", () => {
 
 			// Verify webhook call
 			expect(mockFetch).toHaveBeenCalledWith(
-				env.NEWSLETTER_WEBHOOK_URL,
+				mockEnv.NEWSLETTER_WEBHOOK_URL,
 				expect.objectContaining({
 					method: "POST",
 					body: JSON.stringify({ email: "test@example.com" }),
@@ -74,7 +84,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(200);
@@ -106,7 +116,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(400);
@@ -135,7 +145,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(500);
@@ -180,7 +190,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			// The zod-openapi middleware returns a 400 with validation errors
@@ -203,7 +213,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			await app.fetch(request, env, ctx);
+			await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(mockFetch).toHaveBeenCalled();

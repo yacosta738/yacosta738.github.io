@@ -1,10 +1,20 @@
 import {
 	createExecutionContext,
-	env,
 	waitOnExecutionContext,
 } from "cloudflare:test";
 import { beforeAll, describe, expect, it } from "vitest";
 import app from "./index";
+
+// Mock environment object for tests
+const mockEnv = {
+	CONTACT_WEBHOOK_URL: "https://test-webhook.example.com/contact",
+	NEWSLETTER_WEBHOOK_URL: "https://test-webhook.example.com/newsletter",
+	WEBHOOK_AUTH_TOKEN: "test-auth-token",
+	WEBHOOK_FORM_TOKEN_ID: "test-form-token-id",
+	HCAPTCHA_SECRET_KEY: "test-hcaptcha-secret",
+	HCAPTCHA_SITE_KEY: "test-hcaptcha-site-key",
+	ALLOWED_ORIGINS: "http://localhost,https://example.com",
+};
 
 describe("API Worker", () => {
 	let ctx: ExecutionContext;
@@ -16,7 +26,7 @@ describe("API Worker", () => {
 	describe("OpenAPI Documentation", () => {
 		it("should serve OpenAPI documentation at root", async () => {
 			const request = new Request("http://localhost/");
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(200);
@@ -40,7 +50,7 @@ describe("API Worker", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			// Should return 500 because env vars are not configured in test
@@ -59,7 +69,7 @@ describe("API Worker", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			// Should return 500 because env vars are not configured in test
@@ -77,7 +87,7 @@ describe("API Worker", () => {
 					method,
 				});
 
-				const response = await app.fetch(request, env, ctx);
+				const response = await app.fetch(request, mockEnv, ctx);
 				await waitOnExecutionContext(ctx);
 
 				expect([404, 405]).toContain(response.status);
@@ -92,7 +102,7 @@ describe("API Worker", () => {
 					method,
 				});
 
-				const response = await app.fetch(request, env, ctx);
+				const response = await app.fetch(request, mockEnv, ctx);
 				await waitOnExecutionContext(ctx);
 
 				expect([404, 405]).toContain(response.status);
@@ -103,7 +113,7 @@ describe("API Worker", () => {
 	describe("Invalid Routes", () => {
 		it("should return 404 for non-existent routes", async () => {
 			const request = new Request("http://localhost/api/non-existent");
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(404);
@@ -125,7 +135,7 @@ describe("API Worker", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			// Check if response has some headers

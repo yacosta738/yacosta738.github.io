@@ -28,35 +28,6 @@ jobs:
       - name: Run lint & checks
         run: pnpm run check
 
-      - name: Create .dev.vars for tests
-        env:
-          CONTACT_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
-          NEWSLETTER_WEBHOOK_URL: ${{ secrets.NEWSLETTER_WEBHOOK_URL }}
-          WEBHOOK_AUTH_TOKEN: ${{ secrets.WEBHOOK_AUTH_TOKEN }}
-          WEBHOOK_FORM_TOKEN_ID: ${{ secrets.WEBHOOK_FORM_TOKEN_ID }}
-          HCAPTCHA_SITE_KEY: ${{ secrets.HCAPTCHA_SITE_KEY }}
-          HCAPTCHA_SECRET: ${{ secrets.HCAPTCHA_SECRET }}
-        run: |
-          cat > .dev.vars <<EOF
-          CONTACT_WEBHOOK_URL=${CONTACT_WEBHOOK_URL}
-          NEWSLETTER_WEBHOOK_URL=${NEWSLETTER_WEBHOOK_URL}
-          WEBHOOK_AUTH_TOKEN=${WEBHOOK_AUTH_TOKEN}
-          WEBHOOK_FORM_TOKEN_ID=${WEBHOOK_FORM_TOKEN_ID}
-          HCAPTCHA_SITE_KEY=${HCAPTCHA_SITE_KEY}
-          HCAPTCHA_SECRET=${HCAPTCHA_SECRET}
-          EOF
-
-          # Also place a copy in apps/api so package-local test runners find it
-          mkdir -p apps/api
-          cat > apps/api/.dev.vars <<EOF
-          CONTACT_WEBHOOK_URL=${CONTACT_WEBHOOK_URL}
-          NEWSLETTER_WEBHOOK_URL=${NEWSLETTER_WEBHOOK_URL}
-          WEBHOOK_AUTH_TOKEN=${WEBHOOK_AUTH_TOKEN}
-          WEBHOOK_FORM_TOKEN_ID=${WEBHOOK_FORM_TOKEN_ID}
-          HCAPTCHA_SITE_KEY=${HCAPTCHA_SITE_KEY}
-          HCAPTCHA_SECRET=${HCAPTCHA_SECRET}
-          EOF
-
       - name: Run tests
         run: pnpm -w test
 

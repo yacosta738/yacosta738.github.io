@@ -1,6 +1,5 @@
 import {
 	createExecutionContext,
-	env,
 	waitOnExecutionContext,
 } from "cloudflare:test";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -13,6 +12,17 @@ vi.mock("../utils/hcaptcha");
 // Mock fetch for the webhook call
 const mockFetch = vi.fn();
 global.fetch = mockFetch;
+
+// Mock environment object for tests
+const mockEnv = {
+	CONTACT_WEBHOOK_URL: "https://test-webhook.example.com/contact",
+	NEWSLETTER_WEBHOOK_URL: "https://test-webhook.example.com/newsletter",
+	WEBHOOK_AUTH_TOKEN: "test-auth-token",
+	WEBHOOK_FORM_TOKEN_ID: "test-form-token-id",
+	HCAPTCHA_SECRET_KEY: "test-hcaptcha-secret",
+	HCAPTCHA_SITE_KEY: "test-hcaptcha-site-key",
+	ALLOWED_ORIGINS: "http://localhost,https://example.com",
+};
 
 describe("Contact Endpoint", () => {
 	let ctx: ExecutionContext;
@@ -46,7 +56,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(200);
@@ -58,13 +68,13 @@ describe("Contact Endpoint", () => {
 
 			// Verify webhook call
 			expect(mockFetch).toHaveBeenCalledWith(
-				env.CONTACT_WEBHOOK_URL,
+				mockEnv.CONTACT_WEBHOOK_URL,
 				expect.objectContaining({
 					method: "POST",
 					headers: expect.objectContaining({
 						"Content-Type": "application/json",
-						"YAP-AUTH-TOKEN": env.WEBHOOK_AUTH_TOKEN,
-						"form-token-id": env.WEBHOOK_FORM_TOKEN_ID,
+						"YAP-AUTH-TOKEN": mockEnv.WEBHOOK_AUTH_TOKEN,
+						"form-token-id": mockEnv.WEBHOOK_FORM_TOKEN_ID,
 					}),
 					body: JSON.stringify({
 						name: "John Doe",
@@ -90,7 +100,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(200);
@@ -125,7 +135,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(400);
@@ -154,7 +164,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			expect(response.status).toBe(500);
@@ -205,7 +215,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
+			const response = await app.fetch(request, mockEnv, ctx);
 			await waitOnExecutionContext(ctx);
 
 			// The zod-openapi middleware returns a 400 with validation errors
