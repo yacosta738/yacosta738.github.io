@@ -1,7 +1,4 @@
-import {
-	createExecutionContext,
-	waitOnExecutionContext,
-} from "cloudflare:test";
+// Removed cloudflare:test imports for Vitest-only environment
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import app from "../index";
 import * as hcaptcha from "../utils/hcaptcha";
@@ -25,11 +22,8 @@ const mockEnv = {
 };
 
 describe("Contact Endpoint", () => {
-	let ctx: ExecutionContext;
-
 	beforeEach(() => {
 		vi.resetAllMocks();
-		ctx = createExecutionContext();
 		// Mock hCaptcha to always succeed
 		vi.spyOn(hcaptcha, "verifyHCaptcha").mockResolvedValue({
 			success: true,
@@ -56,8 +50,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, mockEnv, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(200);
 			const jsonResponse = await response.json();
@@ -100,8 +93,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, mockEnv, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(200);
 			const jsonResponse = await response.json();
@@ -135,8 +127,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, mockEnv, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(400);
 			const jsonResponse = await response.json();
@@ -164,8 +155,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, mockEnv, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(500);
 			const jsonResponse = await response.json();
@@ -189,8 +179,7 @@ describe("Contact Endpoint", () => {
 			});
 
 			// Run with an empty env object
-			const response = await app.fetch(request, {}, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, {}, undefined);
 
 			expect(response.status).toBe(500);
 			const jsonResponse = await response.json();
@@ -215,8 +204,7 @@ describe("Contact Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, mockEnv, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			// The zod-openapi middleware returns a 400 with validation errors
 			expect(response.status).toBe(400);
