@@ -22,8 +22,8 @@ importers:
         specifier: 7.1.0
         version: 7.1.0(semantic-release@24.2.9(typescript@5.9.3))
       '@semantic-release/github':
-        specifier: 11.0.6
-        version: 11.0.6(semantic-release@24.2.9(typescript@5.9.3))
+        specifier: 12.0.0
+        version: 12.0.0(semantic-release@24.2.9(typescript@5.9.3))
       '@semantic-release/npm':
         specifier: 12.0.2
         version: 12.0.2(semantic-release@24.2.9(typescript@5.9.3))
@@ -1593,6 +1593,12 @@ packages:
   '@semantic-release/github@11.0.6':
     resolution: {integrity: sha512-ctDzdSMrT3H+pwKBPdyCPty6Y47X8dSrjd3aPZ5KKIKKWTwZBE9De8GtsH3TyAlw3Uyo2stegMx6rJMXKpJwJA==}
     engines: {node: '>=20.8.1'}
+    peerDependencies:
+      semantic-release: '>=24.1.0'
+
+  '@semantic-release/github@12.0.0':
+    resolution: {integrity: sha512-louWFjzZ+1dogfJTY8IuJuBcBUOTliYhBUYNcomnTfj0i959wtRQbr1POgdCoTHK7ut4N/0LNlYTH8SvSJM3hg==}
+    engines: {node: ^22.14.0 || >= 24.10.0}
     peerDependencies:
       semantic-release: '>=24.1.0'
 
@@ -6952,6 +6958,28 @@ snapshots:
       - supports-color
 
   '@semantic-release/github@11.0.6(semantic-release@24.2.9(typescript@5.9.3))':
+    dependencies:
+      '@octokit/core': 7.0.5
+      '@octokit/plugin-paginate-rest': 13.2.0(@octokit/core@7.0.5)
+      '@octokit/plugin-retry': 8.0.2(@octokit/core@7.0.5)
+      '@octokit/plugin-throttling': 11.0.2(@octokit/core@7.0.5)
+      '@semantic-release/error': 4.0.0
+      aggregate-error: 5.0.0
+      debug: 4.4.3
+      dir-glob: 3.0.1
+      http-proxy-agent: 7.0.2
+      https-proxy-agent: 7.0.6
+      issue-parser: 7.0.1
+      lodash-es: 4.17.21
+      mime: 4.1.0
+      p-filter: 4.1.0
+      semantic-release: 24.2.9(typescript@5.9.3)
+      tinyglobby: 0.2.15
+      url-join: 5.0.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@semantic-release/github@12.0.0(semantic-release@24.2.9(typescript@5.9.3))':
     dependencies:
       '@octokit/core': 7.0.5
       '@octokit/plugin-paginate-rest': 13.2.0(@octokit/core@7.0.5)
