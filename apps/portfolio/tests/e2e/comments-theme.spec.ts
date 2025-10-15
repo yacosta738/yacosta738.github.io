@@ -49,9 +49,9 @@ async function waitForGiscusLoad(page: Page): Promise<void> {
 
 	// Wait for Giscus to actually render content (not just load the iframe)
 	// Giscus adds a main element when it's ready
-	await expect(
-		giscusFrame.locator('main, .gsc-main, [class*="giscus"]'),
-	).toBeVisible({ timeout: 15000 });
+	await expect(giscusFrame.locator("main")).toBeVisible({
+		timeout: 15000,
+	});
 
 	// Additional wait for theme to be applied
 	await page.waitForTimeout(2000);
