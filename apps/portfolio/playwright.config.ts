@@ -47,7 +47,7 @@ export default defineConfig({
 	webServer: {
 		command: "pnpm dev --port 4322",
 		url: "http://localhost:4322",
-		timeout: 180_000, // Increased timeout for slower machines
+		timeout: 300_000, // Increased timeout for slower machines
 		reuseExistingServer: true,
 		env: {
 			PLAYWRIGHT_TEST: "true",
