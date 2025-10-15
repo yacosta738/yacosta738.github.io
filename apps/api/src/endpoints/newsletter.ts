@@ -1,5 +1,6 @@
 import { OpenAPIRoute } from "chanfana";
 import { z } from "zod";
+import { zodToOpenAPI } from "zod-to-openapi";
 import type { AppContext } from "../types";
 import { verifyHCaptcha } from "../utils/hcaptcha";
 
@@ -11,11 +12,13 @@ export class Newsletter extends OpenAPIRoute {
 			body: {
 				content: {
 					"application/json": {
-						schema: z.object({
-							email: z.string().email().max(254),
-							hcaptchaToken: z.string().min(1),
-							_gotcha: z.string().optional(),
-						}),
+						schema: zodToOpenAPI(
+							z.object({
+								email: z.string().email().max(254),
+								hcaptchaToken: z.string().min(1),
+								_gotcha: z.string().optional(),
+							}),
+						),
 					},
 				},
 			},
@@ -25,10 +28,12 @@ export class Newsletter extends OpenAPIRoute {
 				description: "Subscription successful",
 				content: {
 					"application/json": {
-						schema: z.object({
-							success: z.boolean(),
-							message: z.string(),
-						}),
+						schema: zodToOpenAPI(
+							z.object({
+								success: z.boolean(),
+								message: z.string(),
+							}),
+						),
 					},
 				},
 			},
@@ -36,10 +41,12 @@ export class Newsletter extends OpenAPIRoute {
 				description: "Invalid request",
 				content: {
 					"application/json": {
-						schema: z.object({
-							success: z.boolean(),
-							message: z.string(),
-						}),
+						schema: zodToOpenAPI(
+							z.object({
+								success: z.boolean(),
+								message: z.string(),
+							}),
+						),
 					},
 				},
 			},
@@ -47,10 +54,12 @@ export class Newsletter extends OpenAPIRoute {
 				description: "Internal server error",
 				content: {
 					"application/json": {
-						schema: z.object({
-							success: z.boolean(),
-							message: z.string(),
-						}),
+						schema: zodToOpenAPI(
+							z.object({
+								success: z.boolean(),
+								message: z.string(),
+							}),
+						),
 					},
 				},
 			},
@@ -59,10 +68,15 @@ export class Newsletter extends OpenAPIRoute {
 
 	async handle(c: AppContext) {
 		try {
-			// Get validated data
+			// Validate data before destructuring
 			const schema =
 				this.schema.request.body.content["application/json"].schema;
 			const data = await this.getValidatedData<typeof schema>();
+
+			if (!data || !data.body) {
+				return c.json({ success: false, message: "Invalid request body" }, 400);
+			}
+
 			const { email, hcaptchaToken, _gotcha } = data.body;
 
 			// Get environment variables
@@ -123,13 +137,25 @@ export class Newsletter extends OpenAPIRoute {
 
 			if (!response.ok) {
 				console.error(`Webhook request failed with status: ${response.status}`);
-				return c.json({ success: false, message: "Failed to subscribe" }, 500);
+				return c.json(
+					{
+						success: false,
+						message: "Failed to subscribe",
+					},
+					500,
+				);
 			}
 
 			return c.json({ success: true, message: "Subscription successful" }, 200);
 		} catch (error) {
-			console.error("Error in newsletter endpoint:", error);
-			return c.json({ success: false, message: "Internal server error" }, 500);
+			console.error("Unexpected error in newsletter endpoint:", error);
+			return c.json(
+				{
+					success: false,
+					message: "Unexpected server error",
+				},
+				500,
+			);
 		}
 	}
 }

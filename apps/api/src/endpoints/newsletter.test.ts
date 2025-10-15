@@ -1,8 +1,4 @@
-import {
-	createExecutionContext,
-	env,
-	waitOnExecutionContext,
-} from "cloudflare:test";
+// Removed cloudflare:test imports for Vitest-only environment
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import app from "../index";
 import * as hcaptcha from "../utils/hcaptcha";
@@ -14,12 +10,20 @@ vi.mock("../utils/hcaptcha");
 const mockFetch = vi.fn();
 global.fetch = mockFetch;
 
-describe("Newsletter Endpoint", () => {
-	let ctx: ExecutionContext;
+// Mock environment object for tests
+const mockEnv = {
+	CONTACT_WEBHOOK_URL: "https://test-webhook.example.com/contact",
+	NEWSLETTER_WEBHOOK_URL: "https://test-webhook.example.com/newsletter",
+	WEBHOOK_AUTH_TOKEN: "test-auth-token",
+	WEBHOOK_FORM_TOKEN_ID: "test-form-token-id",
+	HCAPTCHA_SECRET_KEY: "test-hcaptcha-secret",
+	HCAPTCHA_SITE_KEY: "test-hcaptcha-site-key",
+	ALLOWED_ORIGINS: "http://localhost,https://example.com",
+};
 
+describe("Newsletter Endpoint", () => {
 	beforeEach(() => {
 		vi.resetAllMocks();
-		ctx = createExecutionContext();
 		// Mock hCaptcha to always succeed
 		vi.spyOn(hcaptcha, "verifyHCaptcha").mockResolvedValue({
 			success: true,
@@ -43,8 +47,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(200);
 			const jsonResponse = await response.json();
@@ -55,7 +58,7 @@ describe("Newsletter Endpoint", () => {
 
 			// Verify webhook call
 			expect(mockFetch).toHaveBeenCalledWith(
-				env.NEWSLETTER_WEBHOOK_URL,
+				mockEnv.NEWSLETTER_WEBHOOK_URL,
 				expect.objectContaining({
 					method: "POST",
 					body: JSON.stringify({ email: "test@example.com" }),
@@ -74,8 +77,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(200);
 			const jsonResponse = await response.json();
@@ -106,8 +108,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(400);
 			const jsonResponse = await response.json();
@@ -120,7 +121,10 @@ describe("Newsletter Endpoint", () => {
 		it("should return 500 if webhook fails", async () => {
 			// Mock failed webhook response
 			mockFetch.mockResolvedValueOnce(
-				new Response(JSON.stringify({ success: false }), { status: 500 }),
+				new Response(
+					JSON.stringify({ success: false, message: "Failed to subscribe" }),
+					{ status: 500 },
+				),
 			);
 
 			const request = new Request("http://localhost/api/newsletter", {
@@ -132,8 +136,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			expect(response.status).toBe(500);
 			const jsonResponse = await response.json();
@@ -154,8 +157,7 @@ describe("Newsletter Endpoint", () => {
 			});
 
 			// Run with an empty env object
-			const response = await app.fetch(request, {}, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, {}, undefined);
 
 			expect(response.status).toBe(500);
 			const jsonResponse = await response.json();
@@ -177,8 +179,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			const response = await app.fetch(request, env, ctx);
-			await waitOnExecutionContext(ctx);
+			const response = await app.fetch(request, mockEnv, undefined);
 
 			// The zod-openapi middleware returns a 400 with validation errors
 			expect(response.status).toBe(400);
@@ -200,8 +201,7 @@ describe("Newsletter Endpoint", () => {
 				}),
 			});
 
-			await app.fetch(request, env, ctx);
-			await waitOnExecutionContext(ctx);
+			await app.fetch(request, mockEnv, undefined);
 
 			expect(mockFetch).toHaveBeenCalled();
 			const fetchCall = mockFetch.mock.calls[0];

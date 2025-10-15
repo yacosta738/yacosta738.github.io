@@ -1,7 +1,7 @@
 // https://astro.build/config
 // Resolve the site URL from common hosting provider env vars.
 // Precedence (first found): VERCEL_URL, URL (Netlify), DEPLOY_PRIME_URL (Netlify PRs),
-// CF_PAGES_URL (Cloudflare Pages), SITE_URL (manual), SITE_URL (env), BASE_URL_PROD, BASE_URL_LOCAL
+// CF_PAGES_URL (Cloudflare Pages), SITE_URL (manual), SITE_URL (env)
 // Fallback: http://localhost:4321
 export const resolveSiteUrl = () => {
 	// Known provider env vars (checked in order of preference)
@@ -13,8 +13,6 @@ export const resolveSiteUrl = () => {
 		process.env.URL, // Netlify exposes this
 		process.env.DEPLOY_PRIME_URL, // Netlify preview
 		process.env.CF_PAGES_URL, // Cloudflare Pages
-		process.env.BASE_URL_PROD,
-		process.env.BASE_URL_LOCAL,
 		process.env.HOST, // generic
 	];
 
