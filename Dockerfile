@@ -5,7 +5,7 @@ FROM node:22-slim AS builder
 WORKDIR /app
 
 # Install pnpm with a pinned version
-RUN npm install -g pnpm@8.6.3
+RUN npm install -g pnpm@10.18.2
 
 # Copy dependency definition files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./

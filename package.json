@@ -2,6 +2,7 @@
 	"name": "yacosta-portfolio-monorepo",
 	"version": "0.0.0-development",
 	"private": true,
+	"packageManager": "pnpm@10.18.2",
 	"scripts": {
 		"dev": "pnpm -w run ruler:apply && pnpm --filter=./apps/* --parallel dev",
 		"build": "pnpm --filter=./apps/* --parallel build",
