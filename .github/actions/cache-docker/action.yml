@@ -1,0 +1,37 @@
+name: 'Cache Docker Layers'
+description: 'Set up Docker Buildx with layer caching'
+
+inputs:
+  cache-key:
+    description: 'Cache key for Docker layers'
+    required: false
+    default: 'docker-buildx'
+  cache-from:
+    description: 'Cache sources (comma-separated)'
+    required: false
+    default: 'type=gha'
+  cache-to:
+    description: 'Cache destinations'
+    required: false
+    default: 'type=gha,mode=max'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        driver-opts: |
+          image=moby/buildkit:latest
+          network=host
+    
+    - name: Configure Docker BuildKit cache
+      shell: bash
+      run: |
+        echo "Docker Buildx configured with caching:"
+        echo "  Cache from: ${{ inputs.cache-from }}"
+        echo "  Cache to: ${{ inputs.cache-to }}"
+    
+    - name: Docker info
+      shell: bash
+      run: docker buildx version

@@ -1,0 +1,61 @@
+name: 'Install Dependencies with pnpm'
+description: 'Install dependencies using pnpm with optimized caching'
+
+inputs:
+  frozen-lockfile:
+    description: 'Use --frozen-lockfile flag'
+    required: false
+    default: 'true'
+  pnpm-version:
+    description: 'pnpm version to use (auto-detect if not specified)'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Read pnpm version from package.json
+      if: inputs.pnpm-version == ''
+      id: pnpm_version
+      shell: bash
+      run: |
+        if [ -f "package.json" ]; then
+          ver=$(node -e "const pkg=require('./package.json'); const pm=pkg.packageManager||'pnpm@10'; const v=(pm.includes('@')?pm.split('@')[1]:pm); console.log(v||'10')")
+          echo "version=$ver" >> $GITHUB_OUTPUT
+        else
+          echo "version=10" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version != '' && inputs.pnpm-version || steps.pnpm_version.outputs.version }}
+    
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+    
+    - name: Cache pnpm store
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+    
+    - name: Install dependencies
+      shell: bash
+      run: |
+        if [ "${{ inputs.frozen-lockfile }}" = "true" ]; then
+          pnpm install --frozen-lockfile
+        else
+          pnpm install
+        fi
+    
+    - name: Log installation summary
+      shell: bash
+      run: |
+        echo "pnpm version: $(pnpm --version)"
+        echo "Dependencies installed successfully"

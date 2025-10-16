@@ -9,6 +9,11 @@ on:
   pull_request:
     branches: [main, develop]
 
+# Cancel in-progress E2E test runs for the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: E2E Tests - ${{ matrix.project }}
@@ -23,10 +28,34 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+      
       - uses: ./.github/actions/setup
       
+      - name: Get Playwright version
+        id: playwright-version
+        run: |
+          PLAYWRIGHT_VERSION=$(pnpm list @playwright/test --json | jq -r '.[0].devDependencies["@playwright/test"].version')
+          echo "version=$PLAYWRIGHT_VERSION" >> $GITHUB_OUTPUT
+        working-directory: apps/portfolio
+      
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-${{ matrix.project }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-
+            ${{ runner.os }}-playwright-
+      
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: pnpm exec playwright install --with-deps ${{ matrix.project }}
+        working-directory: apps/portfolio
+      
+      - name: Install browser dependencies (cached scenario)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps ${{ matrix.project }}
         working-directory: apps/portfolio
       
       - name: Run Playwright tests
@@ -72,3 +101,22 @@ jobs:
           name: Playwright Tests
           path: "all-reports/**/results.xml"
           reporter: jest-junit
+  
+  collect-metrics:
+    name: Collect E2E Metrics
+    needs: [test, report]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v5
+      
+      - name: Collect and report metrics
+        run: |
+          chmod +x .github/scripts/collect-metrics.sh
+          .github/scripts/collect-metrics.sh --workflow=playwright.yml --format=table
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

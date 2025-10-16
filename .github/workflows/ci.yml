@@ -3,12 +3,77 @@ name: CI
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'specs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'specs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
+
+# Cancel in-progress runs for the same workflow and ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  lint:
+  detect-changes:
+    name: Detect Changed Files
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      should_run_lint: ${{ steps.should_run.outputs.lint }}
+      should_run_test: ${{ steps.should_run.outputs.test }}
+      should_run_security: ${{ steps.should_run.outputs.security }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Detect changes
+        id: detect
+        run: |
+          chmod +x .github/scripts/detect-changes.sh
+          .github/scripts/detect-changes.sh > changes.json
+          cat changes.json
+      
+      - name: Determine jobs to run
+        id: should_run
+        run: |
+          chmod +x .github/scripts/should-run-job.sh
+          
+          # Check each job type
+          LINT_RESULT=$(.github/scripts/should-run-job.sh lint changes.json)
+          TEST_RESULT=$(.github/scripts/should-run-job.sh test changes.json)
+          SECURITY_RESULT=$(.github/scripts/should-run-job.sh security changes.json)
+          
+          # Extract should_run values and set outputs
+          echo "lint=$(echo "$LINT_RESULT" | jq -r '.should_run')" >> $GITHUB_OUTPUT
+          echo "test=$(echo "$TEST_RESULT" | jq -r '.should_run')" >> $GITHUB_OUTPUT
+          echo "security=$(echo "$SECURITY_RESULT" | jq -r '.should_run')" >> $GITHUB_OUTPUT
+          
+          # Log reasoning
+          echo "Lint: $(echo "$LINT_RESULT" | jq -r '.reason')"
+          echo "Test: $(echo "$TEST_RESULT" | jq -r '.reason')"
+          echo "Security: $(echo "$SECURITY_RESULT" | jq -r '.reason')"
+
+  lint:
+    name: Lint & Format Check
+    needs: detect-changes
+    if: needs.detect-changes.outputs.should_run_lint == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
@@ -16,7 +81,13 @@ jobs:
         run: pnpm run check
 
   test:
+    name: Unit & Integration Tests
+    needs: detect-changes
+    if: needs.detect-changes.outputs.should_run_test == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
@@ -24,9 +95,34 @@ jobs:
         run: pnpm -w test
 
   security-audit:
+    name: Security Audit
+    needs: detect-changes
+    if: needs.detect-changes.outputs.should_run_security == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - name: Audit for high vulnerabilities
         run: pnpm -w audit --audit-level=high
+  
+  collect-metrics:
+    name: Collect Pipeline Metrics
+    needs: [detect-changes, lint, test, security-audit]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Collect and report metrics
+        run: |
+          chmod +x .github/scripts/collect-metrics.sh
+          .github/scripts/collect-metrics.sh --workflow=ci.yml --format=table
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
