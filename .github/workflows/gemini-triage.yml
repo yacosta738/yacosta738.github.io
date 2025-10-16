@@ -1,12 +1,14 @@
-name: '🔀 Gemini Triage'
+name: Gemini Issue Triage
+
+# Explicit least-privilege permissions for issue triage
+permissions:
+  contents: read
+  issues: write       # Required to label and comment on issues
+  pull-requests: read
 
 on:
-  workflow_call:
-    inputs:
-      additional_context:
-        type: 'string'
-        description: 'Any additional context from the request'
-        required: false
+  issues:
+    types: [opened, edited, labeled, unlabeled]
 
 concurrency:
   group: '${{ github.workflow }}-triage-${{ github.event_name }}-${{ github.event.pull_request.number || github.event.issue.number }}'

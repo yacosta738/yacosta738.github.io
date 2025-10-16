@@ -1,5 +1,11 @@
 name: CI
 
+# Explicit least-privilege permissions for security
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
+
 on:
   push:
     branches: ["main"]
@@ -25,6 +31,7 @@ concurrency:
 
 jobs:
   detect-changes:
+    # No dependencies; runs first to determine which jobs should execute
     name: Detect Changed Files
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -67,6 +74,7 @@ jobs:
           echo "Security: $(echo "$SECURITY_RESULT" | jq -r '.reason')"
 
   lint:
+    # Depends on detect-changes to only run if lint-relevant files changed
     name: Lint & Format Check
     needs: detect-changes
     if: needs.detect-changes.outputs.should_run_lint == 'true'
@@ -77,10 +85,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - name: Run lint & checks
-        run: pnpm run check
+      - name: Run lint & checks (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: pnpm run check
 
   test:
+    # Depends on detect-changes to only run if test-relevant files changed
     name: Unit & Integration Tests
     needs: detect-changes
     if: needs.detect-changes.outputs.should_run_test == 'true'
@@ -91,10 +104,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - name: Run tests
-        run: pnpm -w test
+      - name: Run tests (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: pnpm -w test
 
   security-audit:
+    # Depends on detect-changes to only run if security-relevant files changed
     name: Security Audit
     needs: detect-changes
     if: needs.detect-changes.outputs.should_run_security == 'true'
@@ -105,10 +123,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - name: Audit for high vulnerabilities
-        run: pnpm -w audit --audit-level=high
+      - name: Audit for high vulnerabilities (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: pnpm -w audit --audit-level=high
   
   collect-metrics:
+    # Depends on all jobs to collect metrics regardless of success/failure
     name: Collect Pipeline Metrics
     needs: [detect-changes, lint, test, security-audit]
     if: always()

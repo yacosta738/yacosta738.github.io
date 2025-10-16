@@ -9,15 +9,17 @@ on:
       - '**.webp'
       - '**.avif'
 
+# Explicit least-privilege permissions for image optimization
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write      # Required to commit optimized images
+  pull-requests: write # Required to comment on PR with results
 
 jobs:
   optimize:
     if: github.event.pull_request.head.repo.full_name == github.repository
     name: Optimize Images
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4

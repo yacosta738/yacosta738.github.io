@@ -1,5 +1,11 @@
 name: '▶️ Gemini Invoke'
 
+# Explicit least-privilege permissions for workflow calls
+permissions:
+  contents: read
+  issues: write        # Required to comment on issues
+  pull-requests: write # Required to comment on PRs
+
 on:
   workflow_call:
     inputs:

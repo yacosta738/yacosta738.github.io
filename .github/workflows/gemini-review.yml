@@ -1,5 +1,11 @@
 name: '🔎 Gemini Review'
 
+# Explicit least-privilege permissions for PR reviews
+permissions:
+  contents: read
+  pull-requests: write # Required to post review comments
+  issues: read
+
 on:
   workflow_call:
     inputs:

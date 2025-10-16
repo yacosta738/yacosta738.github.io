@@ -1,5 +1,10 @@
 name: PR Size Labeler
 
+# Explicit least-privilege permissions for PR labeling
+permissions:
+  contents: read
+  pull-requests: write # Required to add/remove labels
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -11,6 +16,7 @@ permissions:
 jobs:
   label:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     name: Label PR Size
     steps:
       - name: Checkout

@@ -1,5 +1,11 @@
 name: '🔀 Gemini Dispatch'
 
+# Explicit least-privilege permissions for issue/PR processing
+permissions:
+  contents: read
+  issues: write        # Required to comment on issues
+  pull-requests: write # Required to comment on PRs
+
 on:
   pull_request_review_comment:
     types:

@@ -7,12 +7,15 @@ on:
   # Allows manual workflow execution
   workflow_dispatch:
 
-# Comprehensive permissions for release, build, and deployment
+# Explicit permissions for deployment workflows (comprehensive scope)
 permissions:
-  contents: write
-  pages: write
-  id-token: write
-  packages: write
+  contents: write      # Required for semantic-release to create releases and push tags
+  issues: write        # Required for semantic-release to comment on issues
+  pull-requests: write # Required for semantic-release to comment on PRs
+  pages: write         # Required for GitHub Pages deployment
+  id-token: write      # Required for OIDC token generation
+  packages: write      # Required for GHCR Docker image publishing
+  actions: read        # Required for metrics collection
 
 env:
   REGISTRY: ghcr.io
@@ -36,6 +39,7 @@ env:
 
 jobs:
   release:
+    # No dependencies; runs first to create a release
     name: Release
     runs-on: ubuntu-latest
     permissions:
@@ -55,6 +59,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   build-astro:
+    # Depends on release to ensure site is built from the latest release
     name: Build Astro Site
     needs: release
     runs-on: ubuntu-latest
@@ -68,6 +73,7 @@ jobs:
           package-manager: pnpm@10.0.0
 
   deploy-pages:
+    # Depends on build-astro to deploy the freshly built site
     name: Deploy to GitHub Pages
     needs: build-astro
     runs-on: ubuntu-latest
@@ -78,8 +84,23 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Health Check: Verify site is live
+        run: |
+          for i in {1..5}; do
+            sleep 10
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ steps.deployment.outputs.page_url }}")
+            if [ "$STATUS" = "200" ]; then
+              echo "Site is live: ${{ steps.deployment.outputs.page_url }} (HTTP 200)"
+              exit 0
+            else
+              echo "Attempt $i: Site not live yet (HTTP $STATUS)"
+            fi
+          done
+          echo "ERROR: Site did not respond with HTTP 200 after deployment."
+          exit 1
 
   build-docker:
+    # Depends on release to build and push Docker image from the latest release
     name: Build Docker Image
     needs: release
     runs-on: ubuntu-latest
@@ -125,8 +146,12 @@ jobs:
             org.opencontainers.image.created=${{ github.event.repository.pushed_at }}
             org.opencontainers.image.authors=${{ github.actor }}
       
-      - name: Build Astro site
-        run: pnpm run build
+      - name: Build Astro site (with retry)
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: pnpm run build
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.10.0
@@ -140,6 +165,7 @@ jobs:
           cache-to: type=gha,mode=max
   
   collect-metrics:
+    # Depends on all jobs to collect deployment metrics regardless of success/failure
     name: Collect Deployment Metrics
     needs: [release, build-astro, deploy-pages, build-docker]
     if: always()

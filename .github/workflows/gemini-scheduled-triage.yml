@@ -1,8 +1,14 @@
-name: '📋 Gemini Scheduled Issue Triage'
+name: Gemini Scheduled Triage
+
+# Explicit least-privilege permissions for scheduled issue triage
+permissions:
+  contents: read
+  issues: write       # Required to label and comment on issues
+  pull-requests: read
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 0 * * *' # Daily at midnight UTC
   pull_request:
     branches:
       - 'main'

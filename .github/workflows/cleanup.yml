@@ -1,8 +1,14 @@
-name: Cleanup Caches
+name: cleanup caches by a branch
+
+# Explicit least-privilege permissions for cache cleanup
+permissions:
+  actions: write  # Required for cache deletion
+  contents: read
 
 on:
   pull_request:
-    types: [closed]
+    types:
+      - closed
   workflow_dispatch:
 
 permissions:
@@ -12,6 +18,7 @@ permissions:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
