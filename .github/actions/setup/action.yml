@@ -1,37 +1,79 @@
-name: 'Setup Node.js and pnpm'
-description: 'Set up Node.js, pnpm, and install dependencies with caching.'
+name: 'Monorepo Setup'
+description: 'Setup Node.js, pnpm with intelligent caching and install dependencies'
+author: 'yacosta738'
+
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '22'
+  install-deps:
+    description: 'Whether to install dependencies'
+    required: false
+    default: 'true'
+
+outputs:
+  pnpm-version:
+    description: 'Installed pnpm version'
+    value: ${{ steps.pnpm-version.outputs.version }}
+  cache-hit:
+    description: 'Whether cache was hit'
+    value: ${{ steps.pnpm-cache.outputs.cache-hit }}
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'pnpm'
-
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: 10 # fallback default, will be replaced if package.json specifies
+        version: '10.18.2'
+        run_install: false
 
-    - name: Read pnpm version from package.json (optional)
-      id: pnpm_version
+    - name: Get pnpm version
+      id: pnpm-version
       shell: bash
       run: |
-        if [ -f package.json ]; then
-          ver=$(node -e "const pkg=require('./package.json'); const pm=pkg.packageManager||'pnpm@10'; const v=(pm.includes('@')?pm.split('@')[1]:pm); console.log(v||'10')")
-          echo "version=$ver" >> $GITHUB_OUTPUT
-        else
-          echo "version=10" >> $GITHUB_OUTPUT
-        fi
+        VERSION=$(pnpm --version)
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "📦 pnpm version: $VERSION"
 
-    - name: Ensure correct pnpm version (if needed)
-      if: steps.pnpm_version.outputs.version != '10'
-      uses: pnpm/action-setup@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        version: ${{ steps.pnpm_version.outputs.version }}
+        node-version: ${{ inputs.node-version }}
+        cache: 'pnpm'
+
+    - name: Get pnpm store directory
+      id: pnpm-store
+      shell: bash
+      run: |
+        STORE_PATH=$(pnpm store path --silent)
+        echo "path=$STORE_PATH" >> $GITHUB_OUTPUT
+        echo "📂 pnpm store path: $STORE_PATH"
+
+    - name: Setup pnpm cache
+      id: pnpm-cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
 
     - name: Install dependencies
+      if: inputs.install-deps == 'true'
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: |
+        echo "📥 Installing dependencies..."
+        pnpm install --frozen-lockfile --prefer-offline
+        echo "✅ Dependencies installed successfully"
+
+    - name: Verify installation
+      if: inputs.install-deps == 'true'
+      shell: bash
+      run: |
+        echo "🔍 Verifying installation..."
+        echo "Node version: $(node --version)"
+        echo "pnpm version: $(pnpm --version)"
+        echo "Workspace structure:"
+        pnpm list -r --depth 0

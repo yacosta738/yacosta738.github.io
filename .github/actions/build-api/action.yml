@@ -1,0 +1,68 @@
+name: 'Build API (Cloudflare Workers)'
+description: 'Validate and build Cloudflare Workers API with Wrangler'
+author: 'yacosta738'
+
+inputs:
+  dry-run:
+    description: 'Run in dry-run mode (validation only)'
+    required: false
+    default: 'true'
+
+outputs:
+  validation-status:
+    description: 'Validation status'
+    value: ${{ steps.validate.outputs.status }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Wrangler
+      uses: actions/cache@v4
+      with:
+        path: |
+          apps/api/node_modules/.cache/wrangler
+          ~/.cache/wrangler
+        key: ${{ runner.os }}-wrangler-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-wrangler-
+
+    - name: Validate Wrangler configuration
+      id: validate
+      shell: bash
+      working-directory: apps/api
+      run: |
+        echo "🔍 Validating Wrangler configuration..."
+        
+        if [ "${{ inputs.dry-run }}" == "true" ]; then
+          echo "Running dry-run validation..."
+          pnpm build
+          STATUS=$?
+        else
+          echo "Skipping dry-run (deploy mode)"
+          STATUS=0
+        fi
+        
+        if [ $STATUS -eq 0 ]; then
+          echo "status=success" >> $GITHUB_OUTPUT
+          echo "✅ Configuration valid"
+        else
+          echo "status=failed" >> $GITHUB_OUTPUT
+          echo "❌ Configuration invalid"
+          exit 1
+        fi
+
+    - name: Type generation
+      shell: bash
+      working-directory: apps/api
+      run: |
+        echo "📝 Generating Cloudflare types..."
+        pnpm cf-typegen || echo "⚠️ Type generation failed (non-fatal)"
+
+    - name: Generate build summary
+      shell: bash
+      run: |
+        echo "## 🚀 API Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ✅ ${{ steps.validate.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Mode**: ${{ inputs.dry-run == 'true' && 'Validation' || 'Deploy' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **SHA**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY

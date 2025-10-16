@@ -1,0 +1,95 @@
+name: 'Lint & Type Check'
+description: 'Run Biome linting and TypeScript type checking'
+author: 'yacosta738'
+
+inputs:
+  fix:
+    description: 'Auto-fix issues (for local use)'
+    required: false
+    default: 'false'
+  check-astro:
+    description: 'Run Astro check'
+    required: false
+    default: 'true'
+
+outputs:
+  biome-status:
+    description: 'Biome check status'
+    value: ${{ steps.biome.outputs.status }}
+  astro-status:
+    description: 'Astro check status'
+    value: ${{ steps.astro.outputs.status }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Biome
+      uses: actions/cache@v4
+      with:
+        path: |
+          node_modules/.cache/biome
+          .biome-cache
+        key: ${{ runner.os }}-biome-${{ hashFiles('biome.json') }}
+        restore-keys: |
+          ${{ runner.os }}-biome-
+
+    - name: Run Biome check
+      id: biome
+      shell: bash
+      run: |
+        echo "🔍 Running Biome checks..."
+        
+        if [ "${{ inputs.fix }}" == "true" ]; then
+          echo "🔧 Auto-fixing issues..."
+          pnpm check:biome || true
+          STATUS="fixed"
+        else
+          pnpm run check:biome --write=false
+          STATUS=$?
+        fi
+        
+        if [ $STATUS -eq 0 ] || [ "$STATUS" == "fixed" ]; then
+          echo "status=success" >> $GITHUB_OUTPUT
+          echo "✅ Biome checks passed"
+        else
+          echo "status=failed" >> $GITHUB_OUTPUT
+          echo "❌ Biome checks failed"
+          exit 1
+        fi
+
+    - name: Run Astro check
+      id: astro
+      if: inputs.check-astro == 'true'
+      shell: bash
+      working-directory: apps/portfolio
+      run: |
+        echo "🔍 Running Astro type checks..."
+        pnpm check:astro
+        STATUS=$?
+        
+        if [ $STATUS -eq 0 ]; then
+          echo "status=success" >> $GITHUB_OUTPUT
+          echo "✅ Astro checks passed"
+        else
+          echo "status=failed" >> $GITHUB_OUTPUT
+          echo "❌ Astro checks failed"
+          exit 1
+        fi
+
+    - name: Check accessibility
+      shell: bash
+      working-directory: apps/portfolio
+      continue-on-error: true
+      run: |
+        echo "♿ Running accessibility checks..."
+        pnpm check:a11y || echo "⚠️ Accessibility warnings found"
+
+    - name: Generate lint summary
+      shell: bash
+      run: |
+        echo "## 🔍 Lint & Type Check Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Biome**: ${{ steps.biome.outputs.status == 'success' && '✅' || '❌' }} ${{ steps.biome.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ inputs.check-astro }}" == "true" ]; then
+          echo "- **Astro**: ${{ steps.astro.outputs.status == 'success' && '✅' || '❌' }} ${{ steps.astro.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+        fi

@@ -1,0 +1,94 @@
+name: 'Build Portfolio (Astro)'
+description: 'Build Astro portfolio application with caching'
+author: 'yacosta738'
+
+inputs:
+  skip-check:
+    description: 'Skip Astro check for faster builds'
+    required: false
+    default: 'false'
+  upload-artifact:
+    description: 'Upload build artifact'
+    required: false
+    default: 'false'
+
+outputs:
+  build-size:
+    description: 'Build output size in MB'
+    value: ${{ steps.build-stats.outputs.size }}
+  artifact-name:
+    description: 'Name of the uploaded artifact'
+    value: ${{ steps.upload.outputs.artifact-name }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Astro build
+      uses: actions/cache@v4
+      with:
+        path: |
+          apps/portfolio/.astro
+          apps/portfolio/dist
+          apps/portfolio/node_modules/.astro
+        key: ${{ runner.os }}-astro-build-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-astro-build-
+
+    - name: Build portfolio (with check)
+      if: inputs.skip-check == 'false'
+      shell: bash
+      working-directory: apps/portfolio
+      run: |
+        echo "🏗️ Building Astro portfolio with type checking..."
+        pnpm build
+
+    - name: Build portfolio (fast)
+      if: inputs.skip-check == 'true'
+      shell: bash
+      working-directory: apps/portfolio
+      run: |
+        echo "⚡ Fast building Astro portfolio..."
+        pnpm build:fast
+
+    - name: Build statistics
+      id: build-stats
+      shell: bash
+      working-directory: apps/portfolio
+      run: |
+        if [ -d "dist" ]; then
+          SIZE=$(du -sh dist | cut -f1)
+          SIZE_MB=$(du -sm dist | cut -f1)
+          echo "size=$SIZE_MB" >> $GITHUB_OUTPUT
+          echo "📊 Build size: $SIZE"
+          
+          echo "📦 Build contents:"
+          ls -lah dist/
+          
+          echo "🔢 File count:"
+          find dist -type f | wc -l
+        else
+          echo "⚠️ Warning: dist directory not found"
+          echo "size=0" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Upload build artifact
+      id: upload
+      if: inputs.upload-artifact == 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: portfolio-dist-${{ github.sha }}
+        path: apps/portfolio/dist/
+        retention-days: 7
+        compression-level: 9
+
+    - name: Generate build summary
+      shell: bash
+      run: |
+        echo "## 🎨 Portfolio Build Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+        echo "- **Size**: ${{ steps.build-stats.outputs.size }} MB" >> $GITHUB_STEP_SUMMARY
+        echo "- **SHA**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ inputs.upload-artifact }}" == "true" ]; then
+          echo "- **Artifact**: \`portfolio-dist-${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+        fi

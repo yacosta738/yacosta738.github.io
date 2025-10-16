@@ -1,0 +1,106 @@
+name: 'Unit Tests (Vitest)'
+description: 'Run Vitest unit tests with coverage reporting'
+author: 'yacosta738'
+
+inputs:
+  coverage:
+    description: 'Enable coverage reporting'
+    required: false
+    default: 'true'
+  project:
+    description: 'Specific project to test (portfolio/api/all)'
+    required: false
+    default: 'all'
+  upload-coverage:
+    description: 'Upload coverage artifact'
+    required: false
+    default: 'true'
+
+outputs:
+  coverage-percentage:
+    description: 'Code coverage percentage'
+    value: ${{ steps.coverage-report.outputs.percentage }}
+  tests-passed:
+    description: 'Number of tests passed'
+    value: ${{ steps.test-results.outputs.passed }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Vitest
+      uses: actions/cache@v4
+      with:
+        path: |
+          node_modules/.vitest
+          apps/*/node_modules/.vitest
+        key: ${{ runner.os }}-vitest-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-vitest-
+
+    - name: Run unit tests
+      id: test-results
+      shell: bash
+      run: |
+        echo "🧪 Running unit tests..."
+        
+        if [ "${{ inputs.project }}" == "all" ]; then
+          echo "Testing all projects..."
+          pnpm test:unit
+        else
+          echo "Testing ${{ inputs.project }}..."
+          cd apps/${{ inputs.project }}
+          pnpm test:unit
+        fi
+        
+        echo "passed=true" >> $GITHUB_OUTPUT
+
+    - name: Generate coverage report
+      id: coverage-report
+      if: inputs.coverage == 'true'
+      shell: bash
+      run: |
+        echo "📊 Generating coverage report..."
+        
+        # Find coverage files
+        COVERAGE_FILES=$(find . -name "coverage-final.json" -o -name "lcov.info" 2>/dev/null || true)
+        
+        if [ -n "$COVERAGE_FILES" ]; then
+          echo "✅ Coverage files found"
+          
+          # Try to extract coverage percentage from portfolio
+          if [ -f "apps/portfolio/coverage/coverage-summary.json" ]; then
+            PERCENTAGE=$(jq -r '.total.lines.pct' apps/portfolio/coverage/coverage-summary.json 2>/dev/null || echo "0")
+            echo "percentage=$PERCENTAGE" >> $GITHUB_OUTPUT
+            echo "📈 Coverage: $PERCENTAGE%"
+          else
+            echo "percentage=unknown" >> $GITHUB_OUTPUT
+          fi
+        else
+          echo "⚠️ No coverage files found"
+          echo "percentage=0" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Upload coverage to artifact
+      if: inputs.upload-coverage == 'true' && inputs.coverage == 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-${{ inputs.project }}-${{ github.sha }}
+        path: |
+          apps/*/coverage/
+          coverage/
+        retention-days: 14
+        if-no-files-found: warn
+
+    - name: Generate test summary
+      shell: bash
+      run: |
+        echo "## 🧪 Unit Tests Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Project**: ${{ inputs.project }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ✅ Passed" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ inputs.coverage }}" == "true" ]; then
+          COVERAGE="${{ steps.coverage-report.outputs.percentage }}"
+          if [ "$COVERAGE" != "unknown" ] && [ "$COVERAGE" != "0" ]; then
+            echo "- **Coverage**: $COVERAGE%" >> $GITHUB_STEP_SUMMARY
+          fi
+        fi

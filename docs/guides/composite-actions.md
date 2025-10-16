@@ -1,13 +1,17 @@
-# Composite Actions Usage Guide
+# GitHub Actions - Composite Actions Architecture
 
 **Date**: 2025-10-16  
-**Purpose**: Guide for using reusable composite actions in workflows
+**Purpose**: Complete guide for the optimized GitHub Actions architecture with reusable composite actions
 
-## Overview
+## 📋 Overview
 
-This repository provides several composite actions to simplify workflow configuration and ensure consistency across all CI/CD pipelines.
+This project uses a modular GitHub Actions architecture with reusable composite actions to optimize CI/CD pipelines. This approach reduces duplication, improves maintainability, and enables intelligent caching strategies.
 
-## Available Composite Actions
+## 🏗️ Architecture
+
+### Composite Actions (`.github/actions/`)
+
+Reusable building blocks for common tasks:
 
 ### 1. setup-node
 

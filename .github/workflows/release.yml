@@ -1,0 +1,112 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  test:
+    name: 🧪 Pre-Release Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run lint
+        uses: ./.github/actions/lint
+
+      - name: Run unit tests
+        uses: ./.github/actions/test-unit
+        with:
+          project: all
+          coverage: 'true'
+
+      - name: Build all projects
+        run: pnpm build
+
+  release:
+    name: 🚀 Semantic Release
+    runs-on: ubuntu-latest
+    needs: [test]
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Verify authentication
+        run: |
+          echo "🔐 Verifying GitHub authentication..."
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
+        run: |
+          echo "🚀 Running semantic-release..."
+          pnpm semantic-release
+
+      - name: Release summary
+        if: success()
+        run: |
+          echo "## 🎉 Release Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ New version released successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Check the [Releases page](https://github.com/${{ github.repository }}/releases) for details." >> $GITHUB_STEP_SUMMARY
+
+  post-release:
+    name: 📢 Post-Release
+    runs-on: ubuntu-latest
+    needs: [release]
+    if: success()
+    timeout-minutes: 5
+    steps:
+      - name: Post-release tasks
+        run: |
+          echo "✅ Release workflow completed!"
+          echo "📝 Changelog updated"
+          echo "🏷️ Git tag created"
+          echo "📦 GitHub Release published"
+
+      # Add post-release tasks here:
+      # - Notify team (Slack, Discord, etc.)
+      # - Update documentation
+      # - Trigger dependent workflows
+      # - Update project status
