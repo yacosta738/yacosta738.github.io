@@ -60,7 +60,7 @@ test.describe("Tag Pages with External Articles", () => {
 		expect(articleCount).toBeGreaterThanOrEqual(1);
 
 		// Verify we have actual article content, not just empty containers
-		for (let i = 0; i < await articles.count(); i++) {
+		for (let i = 0; i < (await articles.count()); i++) {
 			const article = articles.nth(i);
 			await expect(article).toHaveText(/./); // Has some text
 		}

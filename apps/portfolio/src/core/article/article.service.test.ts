@@ -5,9 +5,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { parseEntityId } from "@/lib/collection.entity";
 import { toArticles, toExternalArticles } from "./article.mapper";
 import {
+	getAllArticlesIncludingExternal,
 	getArticleById,
 	getArticles,
-	getAllArticlesIncludingExternal,
 	hasArticles,
 } from "./article.service";
 
@@ -124,7 +124,9 @@ describe("ArticleService", () => {
 		vi.mocked(getCollection).mockImplementation(
 			async (collection: string, filter) => {
 				const source =
-					collection === "externalArticles" ? mockExternalArticles : mockArticles;
+					collection === "externalArticles"
+						? mockExternalArticles
+						: mockArticles;
 				if (filter) {
 					return source.filter(filter) as any;
 				}
