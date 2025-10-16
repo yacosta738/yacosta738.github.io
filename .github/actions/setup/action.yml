@@ -4,6 +4,12 @@ description: 'Set up Node.js, pnpm, and install dependencies with caching.'
 runs:
   using: 'composite'
   steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+
     - name: Read pnpm version from package.json
       id: pnpm_version
       shell: bash
@@ -15,12 +21,6 @@ runs:
       uses: pnpm/action-setup@v4
       with:
         version: ${{ steps.pnpm_version.outputs.version }}
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'pnpm'
 
     - name: Install dependencies
       shell: bash
