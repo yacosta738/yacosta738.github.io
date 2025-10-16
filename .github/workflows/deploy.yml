@@ -85,20 +85,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Health Check: Verify site is live
-        run: |
-          for i in {1..5}; do
-            sleep 10
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ steps.deployment.outputs.page_url }}")
-            if [ "$STATUS" = "200" ]; then
-              echo "Site is live: ${{ steps.deployment.outputs.page_url }} (HTTP 200)"
-              exit 0
-            else
-              echo "Attempt $i: Site not live yet (HTTP $STATUS)"
-            fi
-          done
-          echo "ERROR: Site did not respond with HTTP 200 after deployment."
-          exit 1
-
+        uses: actions/github-script@v8
+        with:
+          script: "const url = \"${{ steps.deployment.outputs.url }}\"; let success = false; for (let i = 0; i < 5; i++) { await new Promise(resolve => setTimeout(resolve, 10000)); const response = await fetch(url); if (response.ok) { console.log('Site is live!'); success = true; break; } } if (!success) { throw new Error('Site is not live after 5 attempts.'); }"
+  
   build-docker:
     # Depends on release to build and push Docker image from the latest release
     name: Build Docker Image

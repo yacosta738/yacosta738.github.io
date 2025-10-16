@@ -11,10 +11,6 @@ on:
       - closed
   workflow_dispatch:
 
-permissions:
-  actions: write
-  contents: read
-
 jobs:
   cleanup:
     runs-on: ubuntu-latest
@@ -31,7 +27,7 @@ jobs:
       - name: Install gh-actions-cache extension
         run: gh extension install actions/gh-actions-cache
         env:
-          GH_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
 
       - name: Cleanup caches
         run: |
@@ -58,4 +54,4 @@ jobs:
           
           echo "✅ Cleanup completed"
         env:
-          GH_TOKEN: ${{ env.PBOT_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
