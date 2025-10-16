@@ -5,14 +5,14 @@ import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import Footer from "@/components/organisms/Footer.astro";
-import { getArticles } from "@/core/article";
+import { getAllArticlesIncludingExternal } from "@/core/article";
 import { getTags } from "@/core/tag";
 import { type Lang, LOCALES, useTranslations } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 
 export async function getStaticPaths() {
 	const paths = [];
-	const allArticles = await getArticles();
+	const allArticles = await getAllArticlesIncludingExternal();
 	const postsPerPage = 16;
 
 	for (const lang of Object.keys(LOCALES)) {

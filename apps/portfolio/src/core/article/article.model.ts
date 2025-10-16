@@ -16,5 +16,5 @@ export default interface Article {
 	lastModified?: Date;
 	category: Category;
 	featured: boolean;
-	entry?: CollectionEntry<"articles">;
+	entry?: CollectionEntry<"articles"> | CollectionEntry<"externalArticles">;
 }
