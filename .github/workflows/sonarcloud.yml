@@ -1,13 +1,9 @@
 name: SonarCloud analysis
 
-# Explicit least-privilege permissions for code analysis
+# Note: This workflow is deprecated in favor of the integrated code-quality job in ci.yml
+# Kept for reference but should not run automatically
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
-    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
@@ -16,31 +12,38 @@ permissions:
 
 jobs:
   analyze:
-    name: Code Quality Analysis
+    name: Code Quality Analysis (Standalone)
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Download coverage artifact
-        uses: actions/download-artifact@v4
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
         with:
-          name: coverage
+          node-version: '22'
+
+      - name: Run unit tests with coverage
+        uses: ./.github/actions/test-unit
+        with:
+          project: 'all'
+          coverage: 'true'
+          upload-coverage: 'false'
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@383f7e52eae3ab0510c3cb0e7d9d150bbaeab838
+        uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
-            -Dsonar.sources=.
-            -Dsonar.tests=.
-            -Dsonar.test.inclusions=**/*.test.ts,**/*.test.js
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.test.js,**/__tests__/**
+            -Dsonar.sources=apps/
+            -Dsonar.tests=apps/
+            -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
+            -Dsonar.javascript.lcov.reportPaths=apps/*/coverage/lcov.info
+            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**

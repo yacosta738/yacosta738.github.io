@@ -44,7 +44,8 @@ runs:
           pnpm check:biome || true
           STATUS="fixed"
         else
-          pnpm run check:biome --write=false
+          echo "Running checks in CI mode..."
+          biome check . --diagnostic-level=error --no-errors-on-unmatched
           STATUS=$?
         fi
         
