@@ -3,8 +3,13 @@ import { getCollection } from "astro:content";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { parseEntityId } from "@/lib/collection.entity";
-import { toArticles } from "./article.mapper";
-import { getArticleById, getArticles, hasArticles } from "./article.service";
+import { toArticles, toExternalArticles } from "./article.mapper";
+import {
+	getAllArticlesIncludingExternal,
+	getArticleById,
+	getArticles,
+	hasArticles,
+} from "./article.service";
 
 // Mock the dependencies
 vi.mock("astro:content", () => ({
@@ -12,8 +17,31 @@ vi.mock("astro:content", () => ({
 }));
 
 vi.mock("./article.mapper", () => ({
-	toArticles: vi.fn((articles: Array<{ id: string }>) =>
-		Promise.resolve(articles.map((a) => ({ ...a, id: a.id }))),
+	toArticles: vi.fn((articles: Array<{ id: string; data: any }>) =>
+		Promise.resolve(
+			articles.map((a) => ({
+				id: a.id,
+				author: a.data.author,
+				category: a.data.category,
+				tags: a.data.tags,
+				draft: a.data.draft,
+				featured: a.data.featured,
+				date: a.data.date,
+			})),
+		),
+	),
+	toExternalArticles: vi.fn((articles: Array<{ id: string; data: any }>) =>
+		Promise.resolve(
+			articles.map((a) => ({
+				id: a.id,
+				author: a.data.author,
+				category: a.data.category,
+				tags: a.data.tags,
+				draft: a.data.draft,
+				featured: false, // External articles don't have featured field
+				date: a.data.date,
+			})),
+		),
 	),
 }));
 
@@ -57,15 +85,54 @@ const mockArticles = [
 	},
 ];
 
+const mockExternalArticles = [
+	{
+		id: "en/external-1",
+		data: {
+			draft: false,
+			author: { id: "author-1" },
+			tags: [{ id: "en/r" }],
+			category: { id: "category-1" },
+			date: new Date("2023-02-01"),
+		},
+	},
+	{
+		id: "es/external-2",
+		data: {
+			draft: true,
+			author: { id: "author-2" },
+			tags: [{ id: "es/r" }],
+			category: { id: "category-2" },
+			date: new Date("2023-02-02"),
+		},
+	},
+	{
+		id: "en/article-1", // Duplicate ID with mockArticles
+		data: {
+			draft: false,
+			author: { id: "author-1" },
+			tags: [{ id: "en/r" }],
+			category: { id: "category-1" },
+			date: new Date("2023-02-03"),
+		},
+	},
+];
+
 describe("ArticleService", () => {
 	beforeEach(() => {
-		// Mock the getCollection to simulate filtering
-		vi.mocked(getCollection).mockImplementation(async (_collection, filter) => {
-			if (filter) {
-				return mockArticles.filter(filter) as any;
-			}
-			return mockArticles as any;
-		});
+		// Mock the getCollection to simulate filtering for both collections
+		vi.mocked(getCollection).mockImplementation(
+			async (collection: string, filter) => {
+				const source =
+					collection === "externalArticles"
+						? mockExternalArticles
+						: mockArticles;
+				if (filter) {
+					return source.filter(filter) as any;
+				}
+				return source as any;
+			},
+		);
 
 		// Mock parseEntityId
 		vi.mocked(parseEntityId).mockImplementation((id) => ({
@@ -75,7 +142,15 @@ describe("ArticleService", () => {
 
 		// Mock toArticles
 		vi.mocked(toArticles).mockImplementation(async (articles) => {
-			return articles.map((a) => ({ ...a })) as any;
+			return articles.map((a) => ({
+				id: a.id,
+				author: a.data.author,
+				category: a.data.category,
+				tags: a.data.tags,
+				draft: a.data.draft,
+				featured: a.data.featured,
+				date: a.data.date,
+			})) as any;
 		});
 	});
 
@@ -185,6 +260,72 @@ describe("ArticleService", () => {
 			);
 			const result = await hasArticles();
 			expect(result).toBe(false);
+		});
+	});
+
+	describe("getAllArticlesIncludingExternal", () => {
+		it("should return combined articles from both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal();
+			// Should return non-draft articles from both collections
+			// mockArticles: 2 non-draft (en/article-1, en/article-3)
+			// mockExternalArticles: 1 non-draft (en/external-1)
+			// After deduplication: en/article-1 should appear only once
+			expect(articles.length).toBeGreaterThanOrEqual(2);
+			expect(getCollection).toHaveBeenCalledWith(
+				"articles",
+				expect.any(Function),
+			);
+			expect(getCollection).toHaveBeenCalledWith(
+				"externalArticles",
+				expect.any(Function),
+			);
+		});
+
+		it("should deduplicate articles with same id from both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal();
+			const ids = articles.map((a) => a.id);
+			const uniqueIds = new Set(ids);
+			// Should not have duplicate IDs
+			expect(ids.length).toBe(uniqueIds.size);
+		});
+
+		it("should filter by lang across both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal({ lang: "en" });
+			// All returned articles should be English
+			expect(articles.every((a) => a.id.startsWith("en/"))).toBe(true);
+		});
+
+		it("should filter by tags across both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal({ tags: "en/r" });
+			// Should return external articles with tag "en/r"
+			expect(articles.length).toBeGreaterThanOrEqual(1);
+		});
+
+		it("should exclude drafts by default from both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal();
+			expect(articles.every((a) => !a.draft)).toBe(true);
+		});
+
+		it("should include drafts when requested from both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal({
+				includeDrafts: true,
+			});
+			// Should include all articles (drafts + non-drafts) from both collections
+			expect(articles.length).toBeGreaterThanOrEqual(3);
+		});
+
+		it("should filter by author across both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal({
+				author: "author-1",
+			});
+			expect(articles.every((a) => a.author.id === "author-1")).toBe(true);
+		});
+
+		it("should filter by category across both collections", async () => {
+			const articles = await getAllArticlesIncludingExternal({
+				category: "category-1",
+			});
+			expect(articles.every((a) => a.category.id === "category-1")).toBe(true);
 		});
 	});
 });
