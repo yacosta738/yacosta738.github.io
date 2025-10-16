@@ -4,7 +4,7 @@ export const prerender = true;
 import { Image } from "astro:assets";
 import Container from "@/components/atoms/Container.astro";
 import { useTranslations } from "@/i18n";
-import { type Lang } from "@/i18n/types";
+import { DEFAULT_LOCALE, type Lang } from "@/i18n/types";
 /**
  * This page is displayed when a user navigates to a URL that does not exist.
  * It shows a 404 "Not Found" error message and provides a link back to the homepage.
@@ -12,7 +12,7 @@ import { type Lang } from "@/i18n/types";
 import Layout from "@/layouts/Layout.astro";
 import oops from "../../public/oops.webp";
 
-const t = useTranslations(Astro.currentLocale as Lang);
+const t = useTranslations((Astro.currentLocale as Lang) || DEFAULT_LOCALE);
 ---
 
 <Layout title={t("404.title")}>
