@@ -27,57 +27,9 @@ runs:
         cache: 'pnpm'
 
     - name: Ensure pnpm is available
-      shell: bash
-      run: |
-        echo "🔧 Ensuring pnpm is available (requested version: ${{ inputs.pnpm-version }})"
-
-        # Try enabling corepack first (recommended for modern Node)
-        if command -v corepack >/dev/null 2>&1; then
-          echo "corepack found -> enabling"
-          corepack enable || echo "corepack enable failed, continuing"
-          echo "Preparing pnpm@${{ inputs.pnpm-version }} via corepack (activate)"
-          corepack prepare pnpm@${{ inputs.pnpm-version }} --activate 2>/dev/null || echo "corepack prepare failed, will try npm global install"
-        else
-          echo "corepack not available on this runner"
-        fi
-
-        # If pnpm is already available, record its directory and export it for subsequent steps
-        if command -v pnpm >/dev/null 2>&1; then
-          PNPM_BIN_DIR=$(dirname "$(command -v pnpm)")
-          echo "pnpm already available at: $(command -v pnpm)"
-          echo "Adding pnpm bin dir to PATH for subsequent steps: $PNPM_BIN_DIR"
-          echo "$PNPM_BIN_DIR" >> $GITHUB_PATH
-        fi
-
-        # Ensure npm global bin is on PATH (so npm -g installs are visible)
-        if command -v npm >/dev/null 2>&1; then
-          NGLOBAL=$(npm bin -g 2>/dev/null || echo "/usr/local/bin")
-          echo "npm global bin: $NGLOBAL"
-          # Persist to runner PATH for subsequent steps
-          echo "$NGLOBAL" >> $GITHUB_PATH
-        fi
-
-        # If pnpm is still not available, try installing globally via npm
-        if ! command -v pnpm >/dev/null 2>&1; then
-          if command -v npm >/dev/null 2>&1; then
-            echo "Installing pnpm@${{ inputs.pnpm-version }} globally via npm (this may require sudo on some runners)"
-            npm i -g pnpm@${{ inputs.pnpm-version }} || true
-            # refresh global bin and persist to PATH
-            NGLOBAL=$(npm bin -g 2>/dev/null || echo "/usr/local/bin")
-            echo "Post-install npm global bin: $NGLOBAL"
-            echo "$NGLOBAL" >> $GITHUB_PATH
-          else
-            echo "No npm found; cannot install pnpm."
-          fi
-        fi
-
-        # Final verification
-        if command -v pnpm >/dev/null 2>&1; then
-          echo "pnpm available: $(pnpm --version)"
-        else
-          echo "ERROR: pnpm was not found after attempting corepack and npm installations.\nPlease ensure pnpm is available on the runner or update the setup action to install it."
-          exit 1
-        fi
+      uses: pnpm/action-setup@v2
+      with:
+        version: ${{ inputs.pnpm-version }}
 
     - id: emit
       name: Emit outputs
