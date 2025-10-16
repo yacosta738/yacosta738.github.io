@@ -38,32 +38,27 @@ jobs:
     permissions:
       contents: read
     outputs:
-      should_run_lint: ${{ steps.should_run.outputs.lint }}
-      should_run_test: ${{ steps.should_run.outputs.test }}
-      should_run_security: ${{ steps.should_run.outputs.security }}
+      lint: ${{ steps.detect.outputs.lint }}
+      test: ${{ steps.detect.outputs.test }}
+      security: ${{ steps.detect.outputs.security }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      - name: Detect changes
+      - name: Detect changes and determine jobs to run
         id: detect
         run: |
           chmod +x .github/scripts/detect-changes.sh
-          .github/scripts/detect-changes.sh > changes.json
-          cat changes.json
-      
-      - name: Determine jobs to run
-        id: should_run
-        run: |
+          .github/scripts/detect-changes.sh | tee changes.json
+          
           chmod +x .github/scripts/should-run-job.sh
           
-          # Check each job type
+          # Check each job type and set outputs
           LINT_RESULT=$(.github/scripts/should-run-job.sh lint changes.json)
           TEST_RESULT=$(.github/scripts/should-run-job.sh test changes.json)
           SECURITY_RESULT=$(.github/scripts/should-run-job.sh security changes.json)
           
-          # Extract should_run values and set outputs
           echo "lint=$(echo "$LINT_RESULT" | jq -r '.should_run')" >> $GITHUB_OUTPUT
           echo "test=$(echo "$TEST_RESULT" | jq -r '.should_run')" >> $GITHUB_OUTPUT
           echo "security=$(echo "$SECURITY_RESULT" | jq -r '.should_run')" >> $GITHUB_OUTPUT
@@ -77,7 +72,7 @@ jobs:
     # Depends on detect-changes to only run if lint-relevant files changed
     name: Lint & Format Check
     needs: detect-changes
-    if: needs.detect-changes.outputs.should_run_lint == 'true'
+    if: needs.detect-changes.outputs.lint == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -85,6 +80,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Run lint & checks (with retry)
         uses: nick-fields/retry@v3
         with:
@@ -96,7 +103,7 @@ jobs:
     # Depends on detect-changes to only run if test-relevant files changed
     name: Unit & Integration Tests
     needs: detect-changes
-    if: needs.detect-changes.outputs.should_run_test == 'true'
+    if: needs.detect-changes.outputs.test == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -104,18 +111,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Run tests (with retry)
         uses: nick-fields/retry@v3
         with:
           timeout_minutes: 15
           max_attempts: 3
           command: pnpm -w test
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/lcov.info
 
   security-audit:
     # Depends on detect-changes to only run if security-relevant files changed
     name: Security Audit
     needs: detect-changes
-    if: needs.detect-changes.outputs.should_run_security == 'true'
+    if: needs.detect-changes.outputs.security == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -123,6 +147,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Audit for high vulnerabilities (with retry)
         uses: nick-fields/retry@v3
         with:

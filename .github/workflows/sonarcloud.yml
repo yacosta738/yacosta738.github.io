@@ -23,12 +23,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
         with:
-          fetch-depth: 0  # Shallow clones disabled for better analysis
+          fetch-depth: 0
 
-      - name: Setup Token
-        uses: ./.github/actions/setup-token
-        env:
-          PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@383f7e52eae3ab0510c3cb0e7d9d150bbaeab838
