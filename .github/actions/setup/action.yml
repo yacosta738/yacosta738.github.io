@@ -10,14 +10,24 @@ runs:
         node-version: '20'
         cache: 'pnpm'
 
-    - name: Read pnpm version from package.json
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10 # fallback default, will be replaced if package.json specifies
+
+    - name: Read pnpm version from package.json (optional)
       id: pnpm_version
       shell: bash
       run: |
-        ver=$(node -e "const pkg=require('./package.json'); const pm=pkg.packageManager||'pnpm@10'; const v=(pm.includes('@')?pm.split('@')[1]:pm); console.log(v||'10')")
-        echo "version=$ver" >> $GITHUB_OUTPUT
+        if [ -f package.json ]; then
+          ver=$(node -e "const pkg=require('./package.json'); const pm=pkg.packageManager||'pnpm@10'; const v=(pm.includes('@')?pm.split('@')[1]:pm); console.log(v||'10')")
+          echo "version=$ver" >> $GITHUB_OUTPUT
+        else
+          echo "version=10" >> $GITHUB_OUTPUT
+        fi
 
-    - name: Setup pnpm
+    - name: Ensure correct pnpm version (if needed)
+      if: steps.pnpm_version.outputs.version != '10'
       uses: pnpm/action-setup@v4
       with:
         version: ${{ steps.pnpm_version.outputs.version }}
