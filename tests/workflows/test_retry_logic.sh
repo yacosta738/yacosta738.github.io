@@ -81,6 +81,7 @@ for workflow in "$WORKFLOWS_DIR"/*.yml "$WORKFLOWS_DIR"/*.yaml; do
                 if ! sed -n "${START},${END}p" "$workflow" | grep -q "nick-fields/retry@\|uses: retry@"; then
                     echo -e "${YELLOW}  ⚠ $(basename "$workflow"): '$pattern' without retry logic${NC}"
                     FLAKY_WITHOUT_RETRY=$((FLAKY_WITHOUT_RETRY + 1))
+                    FAILED=$((FAILED + 1))
                 fi
             fi
         fi
@@ -92,6 +93,7 @@ if [ $FLAKY_WITHOUT_RETRY -eq 0 ]; then
 else
     echo -e "${YELLOW}  ⚠ Found $FLAKY_WITHOUT_RETRY flaky operation(s) without retry logic${NC}"
     echo -e "${YELLOW}    Consider adding retry logic for network operations${NC}"
+    FAILED=$((FAILED + FLAKY_WITHOUT_RETRY))
 fi
 echo ""
 
@@ -107,6 +109,7 @@ for workflow in "$WORKFLOWS_DIR"/*.yml "$WORKFLOWS_DIR"/*.yaml; do
         if ! grep -A 5 "nick-fields/retry@" "$workflow" | grep -q "max_attempts:\|timeout_minutes:"; then
             echo -e "${YELLOW}  ⚠ $(basename "$workflow"): retry without explicit max_attempts/timeout${NC}"
             HAS_PROPER_CONFIG=false
+            FAILED=$((FAILED + 1))
         fi
     fi
 done
@@ -135,6 +138,7 @@ done
 if [ "$HAS_BACKOFF" = false ]; then
     echo -e "${YELLOW}  ⚠ No exponential backoff configuration found${NC}"
     echo -e "${YELLOW}    Consider adding retry_wait_seconds for better reliability${NC}"
+    FAILED=$((FAILED + 1))
 fi
 echo ""
 
@@ -154,6 +158,7 @@ done
 
 if [ "$HAS_RETRY_HOOKS" = false ]; then
     echo -e "${YELLOW}  ⚠ No retry hooks found (optional)${NC}"
+    FAILED=$((FAILED + 1))
 fi
 echo ""
 

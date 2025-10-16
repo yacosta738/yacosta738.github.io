@@ -12,7 +12,6 @@ set -euo pipefail
 
 BASELINE_MINUTES="${1:-8}"
 TARGET_REDUCTION="${2:-20}"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Colors
 GREEN='\033[0;32m'
@@ -50,11 +49,12 @@ if command -v gh &> /dev/null; then
         for run in $(echo "$runs" | jq -c '.workflow_runs[]'); do
             created=$(echo "$run" | jq -r '.created_at')
             updated=$(echo "$run" | jq -r '.updated_at')
-            
+
             if [ "$created" != "null" ] && [ "$updated" != "null" ]; then
-                start_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$created" "+%s" 2>/dev/null || echo "0")
-                end_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$updated" "+%s" 2>/dev/null || echo "0")
-                
+                # Portable date parsing: try GNU date, then BSD date, then fallback to 0
+                start_epoch=$(date -d "$created" +%s 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$created" +%s 2>/dev/null || echo "0")
+                end_epoch=$(date -d "$updated" +%s 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$updated" +%s 2>/dev/null || echo "0")
+
                 if [ "$start_epoch" -gt 0 ] && [ "$end_epoch" -gt 0 ]; then
                     duration_seconds=$((end_epoch - start_epoch))
                     duration_minutes=$(echo "scale=2; $duration_seconds / 60" | bc)

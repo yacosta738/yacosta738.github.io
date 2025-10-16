@@ -86,31 +86,31 @@ if [ "$parallel_jobs" -ge 2 ]; then
     
     # Check if running in CI with actual run data
     if command -v gh &> /dev/null && [ -n "${GITHUB_ACTIONS:-}" ]; then
-        echo ""
-        echo "Fetching actual run timing data..."
-        
-        # Get latest workflow run
-        run_id=$(gh api \
-            "/repos/yacosta738/yacosta738.github.io/actions/workflows/${WORKFLOW}/runs?per_page=1" \
-            --jq '.workflow_runs[0].id' 2>/dev/null || echo "")
-        
-        if [ -n "$run_id" ] && [ "$run_id" != "null" ]; then
-            # Get job timings
-            jobs_data=$(gh api \
-                "/repos/yacosta738/yacosta738.github.io/actions/runs/${run_id}/jobs" \
-                --jq '.jobs[] | {name: .name, started_at: .started_at, completed_at: .completed_at}' \
-                2>/dev/null || echo "")
-            
-            if [ -n "$jobs_data" ]; then
-                echo ""
-                echo "Recent run job timings:"
-                echo "$jobs_data" | jq -r '"  \(.name): \(.started_at) -> \(.completed_at)"'
-                
-                # Check if jobs started at similar times (within 30 seconds)
-                # This would indicate parallel execution
-                echo ""
-                echo -e "${BLUE}ℹ${NC} Jobs starting within 30 seconds are likely running in parallel"
+        if command -v jq >/dev/null; then
+            echo ""
+            echo "Fetching actual run timing data..."
+            # Get latest workflow run
+            run_id=$(gh api \
+                "/repos/yacosta738/yacosta738.github.io/actions/workflows/${WORKFLOW}/runs?per_page=1" \
+                --jq '.workflow_runs[0].id' 2>/dev/null || echo "")
+            if [ -n "$run_id" ] && [ "$run_id" != "null" ]; then
+                # Get job timings
+                jobs_data=$(gh api \
+                    "/repos/yacosta738/yacosta738.github.io/actions/runs/${run_id}/jobs" \
+                    --jq '.jobs[] | {name: .name, started_at: .started_at, completed_at: .completed_at}' \
+                    2>/dev/null || echo "")
+                if [ -n "$jobs_data" ]; then
+                    echo ""
+                    echo "Recent run job timings:"
+                    echo "$jobs_data" | jq -r '"  \(.name): \(.started_at) -> \(.completed_at)"' || true
+                    # Check if jobs started at similar times (within 30 seconds)
+                    # This would indicate parallel execution
+                    echo ""
+                    echo -e "${BLUE}ℹ${NC} Jobs starting within 30 seconds are likely running in parallel"
+                fi
             fi
+        else
+            echo "(Skipping job timing metrics: jq not found)"
         fi
     fi
     
