@@ -119,22 +119,4 @@ jobs:
           name: Playwright Tests
           path: "all-reports/**/results.xml"
           reporter: jest-junit
-  
-  collect-metrics:
-    name: Collect E2E Metrics
-    needs: [test, report]
-    if: always()
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: read
-      actions: read
-    steps:
-      - uses: actions/checkout@v5
-      
-      - name: Collect and report metrics
-        run: |
-          chmod +x .github/scripts/collect-metrics.sh
-          .github/scripts/collect-metrics.sh --workflow=playwright.yml --format=table
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
