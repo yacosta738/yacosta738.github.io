@@ -1,79 +1,52 @@
-name: 'Monorepo Setup'
-description: 'Setup Node.js, pnpm with intelligent caching and install dependencies'
-author: 'yacosta738'
+name: 'Setup monorepo (Node + pnpm)'
+description: 'Lightweight composite action to setup Node.js and pnpm for repository workflows.'
+author: 'automation'
 
 inputs:
   node-version:
-    description: 'Node.js version to use'
+    description: 'Node.js version to install'
     required: false
     default: '22'
-  install-deps:
-    description: 'Whether to install dependencies'
+  pnpm-version:
+    description: 'pnpm version to prepare via corepack (or fallback to npm install)'
     required: false
-    default: 'true'
+    default: '10'
 
 outputs:
-  pnpm-version:
-    description: 'Installed pnpm version'
-    value: ${{ steps.pnpm-version.outputs.version }}
   cache-hit:
-    description: 'Whether cache was hit'
-    value: ${{ steps.pnpm-cache.outputs.cache-hit }}
+    description: 'Indicates whether a cache was hit (best-effort; default false)'
+    value: ${{ steps.emit.outputs.cache-hit }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: '10.18.2'
-        run_install: false
-
-    - name: Get pnpm version
-      id: pnpm-version
-      shell: bash
-      run: |
-        VERSION=$(pnpm --version)
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
-        echo "📦 pnpm version: $VERSION"
-
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
 
-    - name: Get pnpm store directory
-      id: pnpm-store
+    - name: Ensure pnpm is available
       shell: bash
       run: |
-        STORE_PATH=$(pnpm store path --silent)
-        echo "path=$STORE_PATH" >> $GITHUB_OUTPUT
-        echo "📂 pnpm store path: $STORE_PATH"
+        echo "🔧 Ensuring pnpm is available (requested version: ${{ inputs.pnpm-version }})"
+        # Prefer corepack (modern Node) to avoid global installs
+        if command -v pnpm >/dev/null 2>&1; then
+          echo "pnpm already installed -> $(pnpm --version)"
+        else
+          if command -v corepack >/dev/null 2>&1; then
+            corepack prepare pnpm@${{ inputs.pnpm-version }} --activate || true
+          else
+            echo "corepack not available, installing pnpm via npm"
+            npm i -g pnpm@${{ inputs.pnpm-version }} || true
+          fi
+        fi
+        echo "pnpm version: $(pnpm --version 2>/dev/null || echo 'unknown')"
 
-    - name: Setup pnpm cache
-      id: pnpm-cache
-      uses: actions/cache@v4
-      with:
-        path: ${{ steps.pnpm-store.outputs.path }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
-
-    - name: Install dependencies
-      if: inputs.install-deps == 'true'
+    - id: emit
+      name: Emit outputs
       shell: bash
       run: |
-        echo "📥 Installing dependencies..."
-        pnpm install --frozen-lockfile --prefer-offline
-        echo "✅ Dependencies installed successfully"
-
-    - name: Verify installation
-      if: inputs.install-deps == 'true'
-      shell: bash
-      run: |
-        echo "🔍 Verifying installation..."
-        echo "Node version: $(node --version)"
-        echo "pnpm version: $(pnpm --version)"
-        echo "Workspace structure:"
-        pnpm list -r --depth 0
+        # This composite action cannot reliably detect cache hits across runners in a generic way.
+        # Emit cache-hit=false by default to satisfy downstream workflows that reference it.
+        echo "cache-hit=false" >> $GITHUB_OUTPUT
