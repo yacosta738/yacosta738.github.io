@@ -1,5 +1,6 @@
 ---
 import WidgetCard from "@/components/atoms/WidgetCard.astro";
+import { routes } from "@/configs/route.path";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 
 export type TagItem = {
@@ -58,7 +59,7 @@ const translatePath = useTranslatedPath(currentLocale);
 		{
 			sortedTags.map(({ slug, title, count }) => (
 				<a
-					href={translatePath(`/tag/${slug}`)}
+					href={translatePath(`/${routes.tag}/${slug}`)}
 					aria-label={title}
 					class={`inline-link ${textSize(count)}`}
 				>

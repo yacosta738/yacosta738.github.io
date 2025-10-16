@@ -1,10 +1,9 @@
 /**
  * Contact Form Handler
- * Handles contact form submissions as a plain Hono handler
+ * Handles contact form submissions
  */
 
 import type { Context } from "hono";
-import type { Env } from "../../worker-configuration";
 import { verifyHCaptcha } from "../utils/hcaptcha";
 
 export async function handleContactSubmission(c: Context<{ Bindings: Env }>) {
