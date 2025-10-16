@@ -7,7 +7,7 @@ import { getCollection } from "astro:content";
 import type { Lang } from "@/i18n";
 import { parseEntityId } from "@/lib/collection.entity";
 import type { ArticleCriteria } from "./article.criteria";
-import { toArticles } from "./article.mapper";
+import { toArticles, toExternalArticles } from "./article.mapper";
 import type Article from "./article.model";
 
 /**
@@ -108,4 +108,101 @@ export async function getArticlesByAuthor(
 ): Promise<Article[]> {
 	const articles = await getArticles(criteria);
 	return articles.filter((article) => article.author.name === authorName);
+}
+
+/**
+ * Retrieves all articles including both regular and external articles
+ * @async
+ * @param {ArticleCriteria} criteria - Criteria for filtering articles
+ * @returns {Promise<Article[]>} A promise that resolves to an array of combined Article objects
+ */
+export async function getAllArticlesIncludingExternal(
+	criteria?: ArticleCriteria,
+): Promise<Article[]> {
+	const {
+		lang,
+		includeDrafts = false,
+		author,
+		tags,
+		category,
+		featured,
+	} = criteria || {};
+
+	// Fetch regular articles
+	const regularArticles = await getCollection("articles", ({ id, data }) => {
+		if (!includeDrafts && data.draft) return false;
+		if (lang) {
+			const articleLang = parseEntityId(id).lang;
+			if (articleLang !== lang) return false;
+		}
+		if (author) {
+			const authorsToMatch = Array.isArray(author) ? author : [author];
+			if (!data.author || !authorsToMatch.includes(data.author.id))
+				return false;
+		}
+		if (tags) {
+			const tagsToMatch = Array.isArray(tags) ? tags : [tags];
+			if (
+				!data.tags ||
+				!tagsToMatch.some((tag) => data.tags.some((t) => t.id === tag))
+			)
+				return false;
+		}
+		if (category) {
+			const categoriesToMatch = Array.isArray(category) ? category : [category];
+			if (!data.category || !categoriesToMatch.includes(data.category.id))
+				return false;
+		}
+		if (featured !== undefined && data.featured !== featured) return false;
+		return true;
+	});
+
+	// Fetch external articles with same filters
+	const externalArticles = await getCollection(
+		"externalArticles",
+		({ id, data }) => {
+			if (!includeDrafts && data.draft) return false;
+			if (lang) {
+				const articleLang = parseEntityId(id).lang;
+				if (articleLang !== lang) return false;
+			}
+			if (author) {
+				const authorsToMatch = Array.isArray(author) ? author : [author];
+				if (!data.author || !authorsToMatch.includes(data.author.id))
+					return false;
+			}
+			if (tags) {
+				const tagsToMatch = Array.isArray(tags) ? tags : [tags];
+				if (
+					!data.tags ||
+					!tagsToMatch.some((tag) => data.tags.some((t) => t.id === tag))
+				)
+					return false;
+			}
+			if (category) {
+				const categoriesToMatch = Array.isArray(category)
+					? category
+					: [category];
+				if (!data.category || !categoriesToMatch.includes(data.category.id))
+					return false;
+			}
+			// externalArticles doesn't have featured field in schema, skip that filter
+			return true;
+		},
+	);
+
+	// Combine and map both collections
+	const mappedRegular = await toArticles(regularArticles);
+	const mappedExternal = await toExternalArticles(externalArticles);
+	const combined = [...mappedRegular, ...mappedExternal];
+
+	// Deduplicate by id (in case same article exists in both collections)
+	const seen = new Set<string>();
+	const deduplicated = combined.filter((article) => {
+		if (seen.has(article.id)) return false;
+		seen.add(article.id);
+		return true;
+	});
+
+	return deduplicated;
 }
