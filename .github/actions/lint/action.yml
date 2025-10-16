@@ -35,7 +35,7 @@ runs:
 
     - name: Install Biome CLI
       shell: bash
-      run: npm install -g @biomejs/biome
+      run: pnpm add -g @biomejs/biome
 
     - name: Run Biome check
       id: biome
