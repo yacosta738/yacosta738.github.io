@@ -17,6 +17,22 @@ permissions:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  BRAND_NAME: ${{ secrets.BRAND_NAME }}
+  SITE_TITLE: ${{ secrets.SITE_TITLE }}
+  SITE_DESCRIPTION_EN: ${{ secrets.SITE_DESCRIPTION_EN }}
+  SITE_DESCRIPTION_ES: ${{ secrets.SITE_DESCRIPTION_ES }}
+  X_ACCOUNT: ${{ secrets.X_ACCOUNT }}
+  NOT_TRANSLATED_CAUTION_EN: ${{ secrets.NOT_TRANSLATED_CAUTION_EN }}
+  NOT_TRANSLATED_CAUTION_ES: ${{ secrets.NOT_TRANSLATED_CAUTION_ES }}
+  API_URL: ${{ secrets.API_URL }}
+  HCAPTCHA_SITE_KEY: ${{ secrets.HCAPTCHA_SITE_KEY }}
+  AHREFS_KEY: ${{ secrets.AHREFS_KEY }}
+  WEBHOOK_AUTH_TOKEN: ${{ secrets.WEBHOOK_AUTH_TOKEN }}
+  WEBHOOK_FORM_TOKEN_ID: ${{ secrets.WEBHOOK_FORM_TOKEN_ID }}
+  CONTACT_WEBHOOK_URL: ${{ secrets.CONTACT_WEBHOOK_URL }}
+  NEWSLETTER_WEBHOOK_URL: ${{ secrets.NEWSLETTER_WEBHOOK_URL }}
+  ALLOWED_ORIGINS: "https://yacosta738.github.io,https://www.yunielacosta.com,https://yunielacosta.com,https://v4.yunielacosta.com,https://www.v4.yunielacosta.com"
+  HCAPTCHA_SECRET_KEY: ${{ secrets.HCAPTCHA_SECRET_KEY }}
 
 jobs:
   release:
@@ -50,8 +66,6 @@ jobs:
         uses: withastro/action@v3
         with:
           package-manager: pnpm@10.0.0
-        env:
-          CONTACT_FORM: ${{ secrets.CONTACT_FORM }}
 
   deploy-pages:
     name: Deploy to GitHub Pages

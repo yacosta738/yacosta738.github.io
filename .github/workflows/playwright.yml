@@ -70,5 +70,5 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: Playwright Tests
-          path: "all-reports/**/*.xml"
+          path: "all-reports/**/results.xml"
           reporter: jest-junit
