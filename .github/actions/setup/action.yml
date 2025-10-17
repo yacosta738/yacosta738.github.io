@@ -24,12 +24,12 @@ runs:
       uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
-        cache: 'pnpm'
 
     - name: Ensure pnpm is available
       uses: pnpm/action-setup@v2
       with:
         version: ${{ inputs.pnpm-version }}
+        run_install: false
 
     - id: emit
       name: Emit outputs
