@@ -21,12 +21,12 @@ runs:
   using: 'composite'
   steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
       with:
         node-version: ${{ inputs.node-version }}
 
     - name: Ensure pnpm is available
-      uses: pnpm/action-setup@v2
+      uses: pnpm/action-setup@eae0cfeb286e66ffb5155f1a79b90583a127a68
       with:
         version: ${{ inputs.pnpm-version }}
         run_install: false

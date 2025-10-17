@@ -36,7 +36,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -64,7 +64,7 @@ jobs:
       url: https://api.yacosta.dev
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
