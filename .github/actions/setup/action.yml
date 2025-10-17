@@ -29,7 +29,11 @@ runs:
       uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
       with:
         version: ${{ inputs.pnpm-version }}
-        run_install: false
+        # Allow the action to install pnpm into the runner if it's not present.
+        # Previously set to false which left pnpm unavailable on some runners.
+        run_install: true
+
+    
 
     - id: emit
       name: Emit outputs
