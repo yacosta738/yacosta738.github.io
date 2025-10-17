@@ -22,7 +22,7 @@ outputs:
     value: ${{ steps.coverage-report.outputs.percentage }}
   tests-passed:
     description: 'Number of tests passed'
-    value: ${{ steps.test-results.outputs.passed }}
+    value: ${{ steps.run-tests.outputs.passed }}
 
 runs:
   using: "composite"
@@ -48,21 +48,31 @@ runs:
           pnpm install --frozen-lockfile
         fi
     - name: Run unit tests
-      id: test-results
+      id: run-tests
       shell: bash
       run: |
         echo "🧪 Running unit tests..."
-        
+
         if [ "${{ inputs.project }}" == "all" ]; then
           echo "Testing all projects..."
           pnpm test:unit
+          rc=$?
         else
           echo "Testing ${{ inputs.project }}..."
           cd apps/${{ inputs.project }}
           pnpm test:unit
+          rc=$?
         fi
-        
-        echo "passed=true" >> $GITHUB_OUTPUT
+
+        # Expose whether tests passed and fail the step on non-zero exit code
+        if [ $rc -ne 0 ]; then
+          echo "passed=false" >> $GITHUB_OUTPUT
+          echo "❌ Unit tests failed with exit code $rc"
+          exit $rc
+        else
+          echo "passed=true" >> $GITHUB_OUTPUT
+          echo "✅ Unit tests passed"
+        fi
 
     - name: Generate coverage report
       id: coverage-report
@@ -247,7 +257,14 @@ runs:
         echo "## 🧪 Unit Tests Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "- **Project**: ${{ inputs.project }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Status**: ✅ Passed" >> $GITHUB_STEP_SUMMARY
+        
+        # Check the actual test outcome
+        if [ "${{ steps.run-tests.outcome }}" == "success" ]; then
+          echo "- **Status**: ✅ Passed" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- **Status**: ❌ Failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        
         if [ "${{ inputs.coverage }}" == "true" ]; then
           COVERAGE="${{ steps.coverage-report.outputs.percentage }}"
           if [ "$COVERAGE" != "unknown" ] && [ "$COVERAGE" != "0" ]; then

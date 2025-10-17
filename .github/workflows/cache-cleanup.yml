@@ -65,14 +65,23 @@ jobs:
               
               let deletedCount = 0;
               
+              // NOTE: cache keys should follow the convention: "<type>-<descriptive-name>"
+              // e.g. "pnpm-deps-2025-10-12" or "playwright-browsers-v1".
+              // This avoids ambiguous substring matches (e.g. 'build' appearing inside another token).
               for (const cache of caches.data.actions_caches) {
                 const cacheDate = new Date(cache.created_at);
-                const shouldDelete = 
-                  (cacheType === 'all') ||
-                  (cacheType === 'pnpm' && cache.key.includes('pnpm')) ||
-                  (cacheType === 'playwright' && cache.key.includes('playwright')) ||
-                  (cacheType === 'build' && cache.key.includes('build'));
-                
+
+                // Normalize key and determine its prefix (type)
+                const key = String(cache.key || '');
+                const prefix = key.split('-')[0];
+
+                const isType = (type) => prefix === type || key.startsWith(`${type}-`);
+
+                const shouldDelete = (cacheType === 'all') ||
+                  (cacheType === 'pnpm' && isType('pnpm')) ||
+                  (cacheType === 'playwright' && isType('playwright')) ||
+                  (cacheType === 'build' && isType('build'));
+
                 if (shouldDelete && cacheDate < oneWeekAgo) {
                   try {
                     await github.rest.actions.deleteActionsCacheById({

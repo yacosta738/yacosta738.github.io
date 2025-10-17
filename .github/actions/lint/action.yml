@@ -23,6 +23,11 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Setup Biome
+      uses: biomejs/setup-biome@v2
+      with:
+        version: latest
+
     - name: Cache Biome
       uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
       with:
@@ -33,13 +38,6 @@ runs:
         restore-keys: |
           ${{ runner.os }}-biome-
 
-    - name: Install Biome CLI
-      shell: bash
-      run: |
-        export PNPM_HOME="/home/runner/.local/share/pnpm"
-        export PATH="$PNPM_HOME:$PATH"
-        pnpm add -g @biomejs/biome
-
     - name: Run Biome check
       id: biome
       shell: bash
@@ -48,15 +46,15 @@ runs:
         
         if [ "${{ inputs.fix }}" == "true" ]; then
           echo "🔧 Auto-fixing issues..."
-          pnpm check:biome || true
-          STATUS="fixed"
+          biome check . --write
+          STATUS=$?
         else
           echo "Running checks in CI mode..."
-          biome check . --diagnostic-level=error --no-errors-on-unmatched
+          biome ci . --diagnostic-level=error
           STATUS=$?
         fi
         
-        if [ $STATUS -eq 0 ] || [ "$STATUS" == "fixed" ]; then
+        if [ $STATUS -eq 0 ]; then
           echo "status=success" >> $GITHUB_OUTPUT
           echo "✅ Biome checks passed"
         else

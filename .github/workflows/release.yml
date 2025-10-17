@@ -65,10 +65,26 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Verify authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          echo "🔐 Verifying GitHub authentication..."
-          echo "Repository: ${{ github.repository }}"
-          echo "Actor: ${{ github.actor }}"
+          echo "🔐 Verifying authentication tokens (presence only)..."
+          # Do NOT print token values — only check presence via environment variables
+
+          if [ -z "$GITHUB_TOKEN" ]; then
+            echo "::error::Missing required secret GITHUB_TOKEN"
+            exit 1
+          else
+            echo "- GITHUB_TOKEN is set"
+          fi
+
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "::error::Missing required secret NPM_TOKEN"
+            exit 1
+          else
+            echo "- NPM_TOKEN is set"
+          fi
 
       - name: Run semantic-release
         env:
@@ -104,9 +120,3 @@ jobs:
           echo "📝 Changelog updated"
           echo "🏷️ Git tag created"
           echo "📦 GitHub Release published"
-
-      # Add post-release tasks here:
-      # - Notify team (Slack, Discord, etc.)
-      # - Update documentation
-      # - Trigger dependent workflows
-      # - Update project status
