@@ -71,6 +71,24 @@ runs:
       run: |
         echo "🔍 Running Astro type checks..."
         # Ensure node_modules are installed so `astro` and other local binaries are available.
+        # Make sure pnpm is available. Prefer Corepack if present.
+        if command -v corepack >/dev/null 2>&1; then
+          echo "⚙️ Corepack detected, preparing pnpm from packageManager..."
+          # Use the packageManager version declared in package.json if possible
+          if [ -f package.json ]; then
+            PM=$(node -e "console.log(require('./package.json').packageManager||'pnpm@latest')") || PM=pnpm@latest
+            echo "🔧 Preparing $PM"
+            corepack prepare "$PM" --activate || true
+          else
+            corepack prepare pnpm@latest --activate || true
+          fi
+        elif command -v pnpm >/dev/null 2>&1; then
+          echo "⚙️ pnpm already available"
+        else
+          echo "⚠️ pnpm and corepack not found, installing pnpm via npm..."
+          npm install -g pnpm@latest || true
+        fi
+
         if [ -f pnpm-lock.yaml ] || [ -f package-lock.json ] || [ -f yarn.lock ]; then
           echo "📦 Installing dependencies (pnpm install)..."
           pnpm install --frozen-lockfile --ignore-scripts || pnpm install
