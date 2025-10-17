@@ -29,6 +29,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  NODE_VERSION: '22'
+
 jobs:
   test:
     name: E2E Tests - ${{ matrix.project }}
@@ -44,74 +47,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       
-      - name: Setup Node.js and pnpm
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
         with:
-          node-version: '22'
-          cache: 'pnpm'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
-
-      - name: Setup pnpm global bin directory
-        run: |
-          pnpm setup
-          echo "$(pnpm config get global-bin-dir)" >> $GITHUB_PATH
-
-      - name: Install biome globally
-        run: pnpm add -g @biomejs/biome
-
-      - name: Get Playwright version
-        id: playwright-version
-        run: |
-          PLAYWRIGHT_VERSION=$(pnpm list @playwright/test --json | jq -r '.[0].devDependencies["@playwright/test"].version')
-          echo "version=$PLAYWRIGHT_VERSION" >> $GITHUB_OUTPUT
-        working-directory: apps/portfolio
+          node-version: ${{ env.NODE_VERSION }}
       
-      - name: Cache Playwright browsers
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
-        id: playwright-cache
+      - name: Run Playwright E2E tests
+        uses: ./.github/actions/test-playwright
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-${{ matrix.project }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-
-            ${{ runner.os }}-playwright-
-      
-      - name: Install Playwright browsers (with retry)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: cd apps/portfolio && pnpm exec playwright install --with-deps ${{ matrix.project }}
-      
-      - name: Install browser dependencies (cached scenario)
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: pnpm exec playwright install-deps ${{ matrix.project }}
-        working-directory: apps/portfolio
-      
-      - name: Run Playwright tests
-        run: pnpm test:e2e --project=${{ matrix.project }}
-        working-directory: apps/portfolio
-        env:
-          CI: true
-      
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: playwright-results-${{ matrix.project }}
-          path: apps/portfolio/playwright-report/
-          retention-days: 30
-      
-      - name: Upload test traces
-        if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: playwright-traces-${{ matrix.project }}
-          path: apps/portfolio/test-results/
-          retention-days: 30
+          browser: ${{ matrix.project }}
+          upload-results: 'true'
   
   report:
     name: Publish Test Report
