@@ -79,7 +79,7 @@ jobs:
         continue-on-error: true
 
       - name: Publish Test Report
-        uses: dorny/test-reporter@8861569aa5348397e7a26b6dda744c17c9265478
+        uses: dorny/test-reporter@34d8269ede7e3fdd0eb2af49b8b42e9288d49032
         with:
           name: Playwright Tests
           path: "all-reports/**/results.xml"
