@@ -1,4 +1,4 @@
-export const prerender = true;
+
 
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
