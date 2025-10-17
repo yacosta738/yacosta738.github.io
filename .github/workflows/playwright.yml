@@ -53,6 +53,14 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: Setup pnpm global bin directory
+        run: |
+          pnpm setup
+          echo "$(pnpm config get global-bin-dir)" >> $GITHUB_PATH
+
+      - name: Install biome globally
+        run: pnpm add -g @biomejs/biome
+
       - name: Get Playwright version
         id: playwright-version
         run: |
