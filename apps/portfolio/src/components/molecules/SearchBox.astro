@@ -409,13 +409,14 @@ const _buttonLabel = buttonLabel ?? t("search.button");
 
   /* Style search result highlights (mark elements) */
   #enhanced-search__content :global(mark) {
-    /* Fallback for browsers without color-mix support */
-    background-color: rgba(100, 255, 218, 0.25); /* brand-accent with 25% opacity */
-    background-color: color-mix(in srgb, var(--color-brand-accent) 25%, transparent);
-    color: var(--color-foreground);
-    padding: 0.125rem 0.25rem;
-    border-radius: 0.25rem;
-    font-weight: 500;
+    /* Use subtle highlight that matches the brand */
+    background-color: transparent;
+    color: var(--color-brand-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--color-brand-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
   }
 
   /* Override pagefind styles */
@@ -425,20 +426,27 @@ const _buttonLabel = buttonLabel ?? t("search.button");
 
   #enhanced-search__content :global(.pagefind-ui__search-input) {
     background: var(--color-background);
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     border-radius: 0.5rem;
     color: var(--color-foreground);
     font-size: 1rem;
-    padding: 0.75rem 1rem;
+    padding: 0.875rem 1rem;
     transition: all 0.2s ease;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-sans);
   }
 
   #enhanced-search__content :global(.pagefind-ui__search-input:focus) {
     outline: none;
     border-color: var(--color-brand-accent);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-accent) 15%, transparent);
+    background: var(--color-background);
+  }
+
+  #enhanced-search__content :global(.pagefind-ui__search-input::placeholder) {
+    color: var(--color-foreground-subtle);
+    opacity: 0.7;
   }
 
   #enhanced-search__content :global(.pagefind-ui__results) {
@@ -448,20 +456,62 @@ const _buttonLabel = buttonLabel ?? t("search.button");
     overflow-y: auto;
     flex: 1;
     min-height: 0;
+    scroll-behavior: smooth;
+    padding-right: 0.25rem;
+  }
+
+  /* Custom scrollbar styling */
+  #enhanced-search__content :global(.pagefind-ui__results)::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  #enhanced-search__content :global(.pagefind-ui__results)::-webkit-scrollbar-track {
+    background: var(--color-background-secondary);
+    border-radius: 4px;
+  }
+
+  #enhanced-search__content :global(.pagefind-ui__results)::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  #enhanced-search__content :global(.pagefind-ui__results)::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-hover);
+  }
+
+  /* Firefox scrollbar styling */
+  #enhanced-search__content :global(.pagefind-ui__results) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) var(--color-background-secondary);
   }
 
   #enhanced-search__content :global(.pagefind-ui__result) {
     border: 1px solid var(--color-border);
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     background: var(--color-background);
     transition: all 0.2s ease;
+    animation: slideInResult 0.3s ease-out;
+  }
+
+  @keyframes slideInResult {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   #enhanced-search__content :global(.pagefind-ui__result:hover) {
     border-color: var(--color-brand-accent);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-background-secondary);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
   }
 
   #enhanced-search__content :global(.pagefind-ui__result-link) {
@@ -472,22 +522,52 @@ const _buttonLabel = buttonLabel ?? t("search.button");
   }
 
   #enhanced-search__content :global(.pagefind-ui__result-title) {
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--color-foreground);
+    line-height: 1.4;
   }
 
   #enhanced-search__content :global(.pagefind-ui__result-excerpt) {
     color: var(--color-foreground-muted);
     font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   #enhanced-search__content :global(.pagefind-ui__result-nested) {
     margin-left: 1rem;
     border-left: 2px solid var(--color-border);
     padding-left: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Result URL/breadcrumb styling */
+  #enhanced-search__content :global(.pagefind-ui__result-url) {
+    color: var(--color-brand-accent);
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    display: block;
+    text-decoration: none;
+    opacity: 0.8;
+  }
+
+  #enhanced-search__content :global(.pagefind-ui__result-url:hover) {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  /* Tags styling */
+  #enhanced-search__content :global(.pagefind-ui__result-tag) {
+    display: inline-block;
+    background-color: var(--color-background-secondary);
+    color: var(--color-foreground-muted);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-right: 0.25rem;
     margin-top: 0.5rem;
   }
 
@@ -504,10 +584,13 @@ const _buttonLabel = buttonLabel ?? t("search.button");
 
   /* Dark mode highlight styling */
   :global(.dark) #enhanced-search__content :global(mark) {
-    /* Fallback for browsers without color-mix support */
-    background-color: rgba(100, 255, 218, 0.35); /* brand-accent with 35% opacity */
-    background-color: color-mix(in srgb, var(--color-brand-accent) 35%, transparent);
-    color: var(--color-foreground);
+    background-color: transparent;
+    color: var(--color-brand-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--color-brand-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
   }
 
   /* Animation for modal */
@@ -546,6 +629,10 @@ const _buttonLabel = buttonLabel ?? t("search.button");
     #enhanced-search__content :global(.pagefind-ui__result),
     .search-modal {
       transition: none !important;
+      animation: none !important;
+    }
+
+    #enhanced-search__content :global(.pagefind-ui__result) {
       animation: none !important;
     }
   }
@@ -594,6 +681,23 @@ const _buttonLabel = buttonLabel ?? t("search.button");
      search container to avoid affecting other parts of the site. */
   :global(#enhanced-search__content) {
     /* Force readable colors for titles and excerpts (defensive) */
+  }
+
+  /* Message states (no results, loading, etc.) */
+  #enhanced-search__content :global(.pagefind-ui__message) {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--color-foreground-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  #enhanced-search__content :global(.pagefind-ui__message--empty)::before {
+    content: "🔍";
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
   }
 
   :global(.dark) #enhanced-search__content :global(.pagefind-ui__result-title),
