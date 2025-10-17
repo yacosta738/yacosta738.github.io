@@ -33,9 +33,9 @@ runs:
         restore-keys: |
           ${{ runner.os }}-biome-
 
-    - name: Install dependencies
+    - name: Setup PNPM for global bin directory
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: pnpm setup
 
     - name: Install Biome CLI
       shell: bash
