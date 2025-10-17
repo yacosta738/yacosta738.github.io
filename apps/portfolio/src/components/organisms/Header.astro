@@ -7,7 +7,7 @@ import SearchBox from "@/components/molecules/SearchBox.astro";
 import MobileDrawer from "@/components/organisms/MobileDrawer.astro";
 import { HEADER_ID } from "@/configs/theme.consts";
 import { DRAWER_MENU_BUTTON_BOX_ID } from "@/core/menu/menu.constants";
-import { type Lang, useTranslations } from "@/i18n";
+import { DEFAULT_LOCALE, type Lang, useTranslations } from "@/i18n";
 import { cn } from "@/lib/utils";
 
 // Constants
@@ -29,7 +29,7 @@ const {
 	...attrs
 } = Astro.props;
 
-const currentLocale = Astro.params.lang as Lang;
+const currentLocale = (Astro.params.lang || Astro.url.pathname.split('/')[1] as Lang) || DEFAULT_LOCALE;
 const t = useTranslations(currentLocale);
 ---
 
