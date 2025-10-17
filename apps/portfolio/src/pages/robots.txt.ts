@@ -1,5 +1,3 @@
-export const prerender = true;
-
 /**
  * This is an Astro API route that dynamically generates the `robots.txt` file
  * for the site. It allows all user agents to crawl the site and includes a
