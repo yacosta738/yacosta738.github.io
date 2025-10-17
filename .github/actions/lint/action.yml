@@ -70,6 +70,15 @@ runs:
       working-directory: apps/portfolio
       run: |
         echo "🔍 Running Astro type checks..."
+        # Ensure node_modules are installed so `astro` and other local binaries are available.
+        if [ -f pnpm-lock.yaml ] || [ -f package-lock.json ] || [ -f yarn.lock ]; then
+          echo "📦 Installing dependencies (pnpm install)..."
+          pnpm install --frozen-lockfile --ignore-scripts || pnpm install
+        else
+          echo "📦 No lockfile found, running pnpm install..."
+          pnpm install
+        fi
+
         pnpm check:astro
         STATUS=$?
         
