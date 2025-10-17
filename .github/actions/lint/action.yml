@@ -33,13 +33,12 @@ runs:
         restore-keys: |
           ${{ runner.os }}-biome-
 
-    - name: Setup PNPM for global bin directory
-      shell: bash
-      run: pnpm setup
-
     - name: Install Biome CLI
       shell: bash
-      run: pnpm add -g @biomejs/biome
+      run: |
+        export PNPM_HOME="/home/runner/.local/share/pnpm"
+        export PATH="$PNPM_HOME:$PATH"
+        pnpm add -g @biomejs/biome
 
     - name: Run Biome check
       id: biome
