@@ -20,16 +20,16 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
+      with:
+        node-version: ${{ inputs.node-version }}
+
     - name: Enable Corepack
       shell: bash
       run: |
         corepack enable
         corepack prepare pnpm@${{ inputs.pnpm-version }} --activate
-
-    - name: Setup Node.js
-      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
-      with:
-        node-version: ${{ inputs.node-version }}
 
     - name: Verify pnpm installation
       shell: bash
