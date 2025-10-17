@@ -36,7 +36,17 @@ runs:
         key: ${{ runner.os }}-vitest-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-vitest-
-
+    - name: Install dependencies
+      shell: bash
+      run: |
+        if [ "${{ inputs.project }}" == "all" ]; then
+          pnpm install --frozen-lockfile
+          cd apps/portfolio && pnpm install --frozen-lockfile
+          cd ../api && pnpm install --frozen-lockfile
+        else
+          cd apps/${{ inputs.project }}
+          pnpm install --frozen-lockfile
+        fi
     - name: Run unit tests
       id: test-results
       shell: bash
