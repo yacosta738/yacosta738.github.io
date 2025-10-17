@@ -50,33 +50,9 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
 
-      - name: Ensure pnpm is available
-        shell: bash
-        run: |
-          PNPM_VERSION=10
-          echo "🔧 Ensuring pnpm is available (requested version: $PNPM_VERSION)"
-          if command -v pnpm >/dev/null 2>&1; then
-            echo "pnpm already present -> $(pnpm --version)"
-            exit 0
-          fi
-          if command -v corepack >/dev/null 2>&1; then
-            corepack enable || true
-            corepack prepare pnpm@${PNPM_VERSION} --activate || true
-          fi
-          if ! command -v pnpm >/dev/null 2>&1; then
-            if command -v npm >/dev/null 2>&1; then
-              npm i -g pnpm@${PNPM_VERSION} || true
-              NGLOBAL=$(npm bin -g 2>/dev/null || echo "/usr/local/bin")
-              echo "$NGLOBAL" >> $GITHUB_PATH
-            fi
-          fi
-          if command -v pnpm >/dev/null 2>&1; then
-            echo "pnpm available: $(pnpm --version)"
-          else
-            echo "ERROR: pnpm not found after attempts; subsequent steps may fail"
-            exit 1
-          fi
-      
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Get Playwright version
         id: playwright-version
         run: |
