@@ -20,16 +20,23 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Setup pnpm
-      uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
-      with:
-        version: ${{ inputs.pnpm-version }}
+    - name: Enable Corepack
+      shell: bash
+      run: |
+        corepack enable
+        corepack prepare pnpm@${{ inputs.pnpm-version }} --activate
 
     - name: Setup Node.js
       uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
       with:
         node-version: ${{ inputs.node-version }}
-        cache: 'pnpm'
+
+    - name: Verify pnpm installation
+      shell: bash
+      run: |
+        echo "Verifying pnpm is available..."
+        which pnpm
+        pnpm --version
 
     - id: emit
       name: Emit outputs
