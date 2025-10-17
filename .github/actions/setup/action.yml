@@ -20,20 +20,16 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
+      with:
+        version: ${{ inputs.pnpm-version }}
+
     - name: Setup Node.js
       uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
       with:
         node-version: ${{ inputs.node-version }}
-
-    - name: Ensure pnpm is available
-      uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
-      with:
-        version: ${{ inputs.pnpm-version }}
-        # Allow the action to install pnpm into the runner if it's not present.
-        # Previously set to false which left pnpm unavailable on some runners.
-        run_install: true
-
-    
+        cache: 'pnpm'
 
     - id: emit
       name: Emit outputs
