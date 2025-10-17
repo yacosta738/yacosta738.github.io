@@ -33,6 +33,10 @@ runs:
         restore-keys: |
           ${{ runner.os }}-biome-
 
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
     - name: Install Biome CLI
       shell: bash
       run: pnpm add -g @biomejs/biome

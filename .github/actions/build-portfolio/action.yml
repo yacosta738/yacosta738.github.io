@@ -34,6 +34,11 @@ runs:
         restore-keys: |
           ${{ runner.os }}-astro-build-
 
+    - name: Install dependencies
+      shell: bash
+      working-directory: apps/portfolio
+      run: pnpm install --frozen-lockfile
+
     - name: Build portfolio (with check)
       if: inputs.skip-check == 'false'
       shell: bash

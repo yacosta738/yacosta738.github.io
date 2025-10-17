@@ -44,7 +44,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
       
-      - uses: ./.github/actions/setup
+      - name: Setup Node.js and pnpm
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Ensure pnpm is available
+        shell: bash
+        run: |
+          PNPM_VERSION=10
+          echo "🔧 Ensuring pnpm is available (requested version: $PNPM_VERSION)"
+          if command -v pnpm >/dev/null 2>&1; then
+            echo "pnpm already present -> $(pnpm --version)"
+            exit 0
+          fi
+          if command -v corepack >/dev/null 2>&1; then
+            corepack enable || true
+            corepack prepare pnpm@${PNPM_VERSION} --activate || true
+          fi
+          if ! command -v pnpm >/dev/null 2>&1; then
+            if command -v npm >/dev/null 2>&1; then
+              npm i -g pnpm@${PNPM_VERSION} || true
+              NGLOBAL=$(npm bin -g 2>/dev/null || echo "/usr/local/bin")
+              echo "$NGLOBAL" >> $GITHUB_PATH
+            fi
+          fi
+          if command -v pnpm >/dev/null 2>&1; then
+            echo "pnpm available: $(pnpm --version)"
+          else
+            echo "ERROR: pnpm not found after attempts; subsequent steps may fail"
+            exit 1
+          fi
       
       - name: Get Playwright version
         id: playwright-version
@@ -84,7 +115,7 @@ jobs:
       
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: playwright-results-${{ matrix.project }}
           path: apps/portfolio/playwright-report/
@@ -92,7 +123,7 @@ jobs:
       
       - name: Upload test traces
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: playwright-traces-${{ matrix.project }}
           path: apps/portfolio/test-results/
@@ -107,16 +138,20 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: all-reports
         continue-on-error: true
 
       - name: Publish Test Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2.1.1
         with:
           name: Playwright Tests
           path: "all-reports/**/results.xml"
           reporter: jest-junit
-
