@@ -26,6 +26,11 @@ runs:
         restore-keys: |
           ${{ runner.os }}-wrangler-
 
+    - name: Install dependencies
+      shell: bash
+      working-directory: apps/api
+      run: pnpm install --frozen-lockfile
+
     - name: Validate Wrangler configuration
       id: validate
       shell: bash
