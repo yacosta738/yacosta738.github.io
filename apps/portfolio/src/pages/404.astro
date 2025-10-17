@@ -2,7 +2,7 @@
 // Redirect to 404 page for user's system locale
 // Basically, you don't need to edit this file.
 
-import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
+import { DEFAULT_LOCALE, LOCALES } from "@/i18n";
 
 const langs = Object.keys(LOCALES);
 const baseUrl = import.meta.env.PROD ? Astro.site : "/";
