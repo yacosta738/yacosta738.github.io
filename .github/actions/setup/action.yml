@@ -1,37 +1,47 @@
-name: 'Setup Node.js and pnpm'
-description: 'Set up Node.js, pnpm, and install dependencies with caching.'
+name: 'Setup monorepo (Node + pnpm)'
+description: 'Lightweight composite action to setup Node.js and pnpm for repository workflows.'
+author: 'automation'
+
+inputs:
+  node-version:
+    description: 'Node.js version to install'
+    required: false
+    default: '22'
+  pnpm-version:
+    description: 'pnpm version to prepare via corepack (or fallback to npm install)'
+    required: false
+    default: '10'
+
+outputs:
+  cache-hit:
+    description: 'Indicates whether a cache was hit (best-effort; default false)'
+    value: ${{ steps.emit.outputs.cache-hit }}
 
 runs:
   using: 'composite'
   steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
       with:
-        node-version: '20'
-        cache: 'pnpm'
+        node-version: ${{ inputs.node-version }}
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 10 # fallback default, will be replaced if package.json specifies
-
-    - name: Read pnpm version from package.json (optional)
-      id: pnpm_version
+    - name: Enable Corepack
       shell: bash
       run: |
-        if [ -f package.json ]; then
-          ver=$(node -e "const pkg=require('./package.json'); const pm=pkg.packageManager||'pnpm@10'; const v=(pm.includes('@')?pm.split('@')[1]:pm); console.log(v||'10')")
-          echo "version=$ver" >> $GITHUB_OUTPUT
-        else
-          echo "version=10" >> $GITHUB_OUTPUT
-        fi
+        corepack enable
+        corepack prepare pnpm@${{ inputs.pnpm-version }} --activate
 
-    - name: Ensure correct pnpm version (if needed)
-      if: steps.pnpm_version.outputs.version != '10'
-      uses: pnpm/action-setup@v4
-      with:
-        version: ${{ steps.pnpm_version.outputs.version }}
-
-    - name: Install dependencies
+    - name: Verify pnpm installation
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: |
+        echo "Verifying pnpm is available..."
+        which pnpm
+        pnpm --version
+
+    - id: emit
+      name: Emit outputs
+      shell: bash
+      run: |
+        # This composite action cannot reliably detect cache hits across runners in a generic way.
+        # Emit cache-hit=false by default to satisfy downstream workflows that reference it.
+        echo "cache-hit=false" >> $GITHUB_OUTPUT

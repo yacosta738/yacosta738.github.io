@@ -1,0 +1,116 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/portfolio/**'
+      - '.github/workflows/deploy-portfolio.yml'
+      - '.github/actions/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: choice
+        options:
+          - production
+          - preview
+        default: 'production'
+
+concurrency:
+  group: deploy-portfolio-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  build:
+    name: 🏗️ Build Portfolio
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: ${{ inputs.environment || 'production' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build portfolio
+        uses: ./.github/actions/build-portfolio
+        with:
+          skip-check: 'false'
+          upload-artifact: 'true'
+
+      - name: Upload build for deployment
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: portfolio-build-${{ github.sha }}
+          path: apps/portfolio/dist/
+          retention-days: 1
+
+  deploy-cloudflare:
+    name: 🚀 Deploy to Cloudflare Pages
+    runs-on: ubuntu-latest
+    needs: [build]
+    timeout-minutes: 10
+    environment:
+      name: ${{ inputs.environment || 'production' }}
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Download build artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: portfolio-build-${{ github.sha }}
+          path: apps/portfolio/dist/
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: yacosta-portfolio
+          directory: apps/portfolio/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref_name }}
+          wranglerVersion: '3'
+
+      - name: Deployment summary
+        run: |
+          echo "## 🚀 Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: ${{ inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+
+  post-deploy:
+    name: 📊 Post-Deployment
+    runs-on: ubuntu-latest
+    needs: [deploy-cloudflare]
+    if: always() && needs.deploy-cloudflare.result == 'success'
+    timeout-minutes: 5
+    steps:
+      - name: Notify deployment
+        run: |
+          echo "✅ Portfolio deployed successfully!"
+          echo "Check it out at: ${{ needs.deploy-cloudflare.outputs.url }}"
+      # Add post-deployment tasks here:
+      # - Lighthouse CI
+      # - Cache warming
+      # - Notify team
+      # - Update status page

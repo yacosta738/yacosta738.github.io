@@ -1,0 +1,126 @@
+name: Cache Cleanup
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      cache-type:
+        description: 'Type of cache to clean'
+        required: true
+        type: choice
+        options:
+          - all
+          - pnpm
+          - playwright
+          - build
+        default: 'all'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    name: 🧹 Clean Caches
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Get cache keys
+        id: cache-keys
+        run: |
+          echo "Listing cache keys..."
+          
+          # This is a placeholder - GitHub doesn't provide a direct API to list all cache keys
+          # You would typically use the GitHub REST API or a custom script
+          
+          echo "Cache cleanup will be performed by age and size limits set in cache actions"
+
+      - name: Cleanup old caches
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const cacheType = '${{ inputs.cache-type || 'all' }}';
+            
+            console.log(`🧹 Cleaning ${cacheType} caches...`);
+            
+            try {
+              // Get all caches
+              const caches = await github.rest.actions.getActionsCacheList({
+                owner,
+                repo,
+                per_page: 100
+              });
+              
+              console.log(`Found ${caches.data.total_count} caches`);
+              
+              // Filter caches based on type and age
+              const oneWeekAgo = new Date();
+              oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+              
+              let deletedCount = 0;
+              
+              // NOTE: cache keys should follow the convention: "<type>-<descriptive-name>"
+              // e.g. "pnpm-deps-2025-10-12" or "playwright-browsers-v1".
+              // This avoids ambiguous substring matches (e.g. 'build' appearing inside another token).
+              for (const cache of caches.data.actions_caches) {
+                const cacheDate = new Date(cache.created_at);
+
+                // Normalize key and determine its prefix (type)
+                const key = String(cache.key || '');
+                const prefix = key.split('-')[0];
+
+                const isType = (type) => prefix === type || key.startsWith(`${type}-`);
+
+                const shouldDelete = (cacheType === 'all') ||
+                  (cacheType === 'pnpm' && isType('pnpm')) ||
+                  (cacheType === 'playwright' && isType('playwright')) ||
+                  (cacheType === 'build' && isType('build'));
+
+                if (shouldDelete && cacheDate < oneWeekAgo) {
+                  try {
+                    await github.rest.actions.deleteActionsCacheById({
+                      owner,
+                      repo,
+                      cache_id: cache.id
+                    });
+                    console.log(`✅ Deleted cache: ${cache.key}`);
+                    deletedCount++;
+                  } catch (error) {
+                    console.log(`⚠️ Failed to delete cache ${cache.key}: ${error.message}`);
+                  }
+                }
+              }
+              
+              console.log(`🎉 Cleaned ${deletedCount} old caches`);
+              
+              core.summary
+                .addHeading('🧹 Cache Cleanup Report')
+                .addTable([
+                  [{data: 'Metric', header: true}, {data: 'Value', header: true}],
+                  ['Total Caches', caches.data.total_count.toString()],
+                  ['Deleted Caches', deletedCount.toString()],
+                  ['Cache Type', cacheType],
+                  ['Retention Period', '7 days']
+                ])
+                .write();
+              
+            } catch (error) {
+              console.error('Error cleaning caches:', error);
+              core.setFailed(error.message);
+            }
+
+      - name: Cleanup summary
+        run: |
+          echo "## 🧹 Cache Cleanup Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Cache cleanup completed successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Type**: ${{ inputs.cache-type || 'all' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Retention**: 7 days" >> $GITHUB_STEP_SUMMARY
+          echo "- **Next scheduled run**: Every Sunday at 00:00 UTC" >> $GITHUB_STEP_SUMMARY

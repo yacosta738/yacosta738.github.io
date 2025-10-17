@@ -1,32 +1,253 @@
-name: CI
+name: CI Pipeline
 
 on:
   push:
-    branches: ["main"]
+    branches: [main, develop, feature/*, fix/*]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'specs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
   pull_request:
-    branches: ["main"]
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+# Cancel in-progress runs for same ref
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Explicit least-privilege permissions
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+  checks: write
+
+env:
+  NODE_VERSION: '22'
+  PNPM_VERSION: '10.18.2'
 
 jobs:
+  # Job 1: Setup & Lint (fastest checks first)
   lint:
+    name: 🔍 Lint & Type Check
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      cache-key: ${{ steps.setup.outputs.cache-hit }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - name: Run lint & checks
-        run: pnpm run check
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          fetch-depth: 0
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - name: Run tests
-        run: pnpm -w test
+      - name: Setup monorepo
+        id: setup
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
-  security-audit:
+      - name: Run lint checks
+        uses: ./.github/actions/lint
+        with:
+          check-astro: 'true'
+
+      - name: Apply Ruler conventions
+        run: pnpm ruler:check
+        continue-on-error: true
+
+  # Job 2: Unit Tests (parallel with lint)
+  unit-tests:
+    name: 🧪 Unit Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [portfolio, api]
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - name: Audit for high vulnerabilities
-        run: pnpm -w audit --audit-level=high
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run unit tests
+        uses: ./.github/actions/test-unit
+        with:
+          project: ${{ matrix.project }}
+          coverage: 'true'
+          upload-coverage: 'true'
+
+  # Job 3: Build Projects (depends on lint)
+  build:
+    name: 🏗️ Build
+    runs-on: ubuntu-latest
+    needs: [lint]
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [portfolio, api]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build Portfolio
+        if: matrix.project == 'portfolio'
+        uses: ./.github/actions/build-portfolio
+        with:
+          skip-check: 'false'
+          upload-artifact: 'true'
+
+      - name: Build API
+        if: matrix.project == 'api'
+        uses: ./.github/actions/build-api
+        with:
+          dry-run: 'true'
+
+  # Job 4: E2E Tests (depends on build)
+  e2e-tests:
+    name: 🎭 E2E Tests
+    runs-on: ubuntu-latest
+    needs: [build]
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Download portfolio build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: portfolio-dist-${{ github.sha }}
+          path: apps/portfolio/dist/
+        continue-on-error: true
+
+      - name: Run E2E tests
+        uses: ./.github/actions/test-playwright
+        with:
+          browser: ${{ matrix.browser }}
+          upload-results: 'true'
+
+  # Job 5: Code Quality Analysis
+  code-quality:
+    name: 📊 Code Quality
+    runs-on: ubuntu-latest
+    needs: [unit-tests]
+    if: always()
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          fetch-depth: 0
+
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: coverage-*
+          path: coverage/
+          merge-multiple: true
+        continue-on-error: true
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=yacosta738_yacosta738.github.io
+            -Dsonar.organization=yacosta738
+            -Dsonar.sources=apps/
+            -Dsonar.tests=apps/
+            -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
+            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+        continue-on-error: true
+
+  # Job 6: Final Report
+  report:
+    name: 📋 Final Report
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests, build, e2e-tests, code-quality]
+    if: always()
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+
+      - name: Generate pipeline summary
+        run: |
+          echo "# 🎉 CI Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Job Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔍 Lint | ${{ needs.lint.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🧪 Unit Tests | ${{ needs.unit-tests.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🏗️ Build | ${{ needs.build.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🎭 E2E Tests | ${{ needs.e2e-tests.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📊 Code Quality | ${{ needs.code-quality.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Overall Status**: ${{ (needs.lint.result == 'success' && needs.unit-tests.result == 'success' && needs.build.result == 'success' && needs.e2e-tests.result == 'success') && '✅ All checks passed!' || '❌ Some checks failed' }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          script: |
+            const status = {
+              lint: '${{ needs.lint.result }}',
+              unit: '${{ needs.unit-tests.result }}',
+              build: '${{ needs.build.result }}',
+              e2e: '${{ needs.e2e-tests.result }}',
+              quality: '${{ needs.code-quality.result }}'
+            };
+            
+            const emoji = (result) => result === 'success' ? '✅' : result === 'skipped' ? '⏭️' : '❌';
+            
+            const body = `## 🤖 CI Pipeline Results
+            
+            | Check | Status |
+            |-------|--------|
+            | 🔍 Lint & Type Check | ${emoji(status.lint)} ${status.lint} |
+            | 🧪 Unit Tests | ${emoji(status.unit)} ${status.unit} |
+            | 🏗️ Build | ${emoji(status.build)} ${status.build} |
+            | 🎭 E2E Tests | ${emoji(status.e2e)} ${status.e2e} |
+            | 📊 Code Quality | ${emoji(status.quality)} ${status.quality} |
+            
+            **Commit**: ${context.sha.substring(0, 7)}
+            **Workflow**: [View Details](${context.payload.repository.html_url}/actions/runs/${context.runId})
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

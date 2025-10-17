@@ -1,7 +1,11 @@
 # Welcome to my personal portfolio made with [Astro](https://astro.build)
 
 [![Github Pages Astro CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml)
+![Deploy Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/deploy.yml?label=deploy%20reliability)
 [![CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml)
+![CI Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/ci.yml?label=ci%20reliability)
+[![Playwright E2E Tests](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/playwright.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/playwright.yml)
+![E2E Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/playwright.yml?label=e2e%20reliability)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0c5e5ad4-8565-4a37-b181-b4442505a68b/deploy-status)](https://app.netlify.com/sites/yunielacosta/deploys)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)

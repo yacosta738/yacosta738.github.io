@@ -65,3 +65,6 @@ docker-compose*.yml
 specs/
 .ruler/
 .specify/
+
+# Added missing patterns
+*.tmp

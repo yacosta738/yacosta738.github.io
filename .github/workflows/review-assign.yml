@@ -1,4 +1,9 @@
-name: Review Assign
+name: Auto Review Assign
+
+# Explicit least-privilege permissions for reviewer assignment
+permissions:
+  contents: read
+  pull-requests: write # Required to assign reviewers
 
 on:
   pull_request:
@@ -7,8 +12,9 @@ on:
 jobs:
   assign:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: hkusu/review-assign-action@v1
+      - uses: hkusu/review-assign-action@d9a4f924f3e44e4f6e119419a4e435f453a2dfe0
         with:
           assignees: ${{ github.actor }} # assign pull request author
           reviewers: yacosta738 # if draft, assigned when draft is released

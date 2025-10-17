@@ -1,13 +1,36 @@
 name: Playwright E2E Tests
 
+# Explicit least-privilege permissions for E2E testing
 permissions:
   contents: read
+  actions: read
+  pull-requests: read
 
 on:
   push:
     branches: [main, develop, feature/*]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'specs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
   pull_request:
     branches: [main, develop]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - 'specs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
+
+# Cancel in-progress E2E test runs for the same ref
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
 
 jobs:
   test:
@@ -22,34 +45,18 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
-      - uses: ./.github/actions/setup
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
       
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps ${{ matrix.project }}
-        working-directory: apps/portfolio
-      
-      - name: Run Playwright tests
-        run: pnpm test:e2e --project=${{ matrix.project }}
-        working-directory: apps/portfolio
-        env:
-          CI: true
-      
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
         with:
-          name: playwright-results-${{ matrix.project }}
-          path: apps/portfolio/playwright-report/
-          retention-days: 30
+          node-version: ${{ env.NODE_VERSION }}
       
-      - name: Upload test traces
-        if: failure()
-        uses: actions/upload-artifact@v4
+      - name: Run Playwright E2E tests
+        uses: ./.github/actions/test-playwright
         with:
-          name: playwright-traces-${{ matrix.project }}
-          path: apps/portfolio/test-results/
-          retention-days: 30
+          browser: ${{ matrix.project }}
+          upload-results: 'true'
   
   report:
     name: Publish Test Report
@@ -60,14 +67,19 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+      - name: Checkout code
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        with:
+          fetch-depth: 0
+
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
         with:
           path: all-reports
         continue-on-error: true
 
       - name: Publish Test Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@8861569aa5348397e7a26b6dda744c17c9265478
         with:
           name: Playwright Tests
           path: "all-reports/**/results.xml"
