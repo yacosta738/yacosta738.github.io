@@ -1,13 +1,21 @@
 /// <reference types="vitest" />
+
+import path from "node:path";
 import { getViteConfig } from "astro/config";
 
 export default getViteConfig({
+	resolve: {
+		alias: [
+			{ find: "@/", replacement: `${path.resolve("./src")}/` },
+			{ find: "@", replacement: path.resolve("./src") },
+		],
+	},
 	// @ts-expect-error
 	test: {
 		/* for example, use 'happy-dom' to run tests in a browser-like environment */
 		environment: "happy-dom",
-		setupFiles: ["./src/test-setup.ts"],
-		include: ["src/**/*.test.ts"],
+		setupFiles: ["./tests/unit/test-setup.ts"],
+		include: ["tests/unit/**/*.test.ts"],
 		coverage: {
 			enabled: true,
 			reporter: ["text", "json", "html"],

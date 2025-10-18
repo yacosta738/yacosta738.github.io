@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import ReadingTime from "./ReadingTime.astro";
+import ReadingTime from "@/components/atoms/ReadingTime.astro";
 
 test("ReadingTime renders with a reading time", async () => {
 	const container = await AstroContainer.create();

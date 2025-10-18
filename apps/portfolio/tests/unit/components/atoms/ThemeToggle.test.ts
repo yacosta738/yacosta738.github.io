@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import ThemeToggle from "./ThemeToggle.astro";
+import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
 
 test("ThemeToggle renders with correct ARIA labels", async () => {
 	const container = await AstroContainer.create();

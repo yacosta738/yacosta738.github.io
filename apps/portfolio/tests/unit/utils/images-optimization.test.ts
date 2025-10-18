@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseAspectRatio } from "./images-optimization";
+import { parseAspectRatio } from "@/utils/images-optimization";
 
 describe("parseAspectRatio", () => {
 	it("parses numeric input", () => {

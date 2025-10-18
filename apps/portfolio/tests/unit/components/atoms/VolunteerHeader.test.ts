@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import VolunteerHeader from "./VolunteerHeader.astro";
+import VolunteerHeader from "@/components/atoms/VolunteerHeader.astro";
 
 const mockProps = {
 	organization: "Test Org",

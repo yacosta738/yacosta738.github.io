@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import TypedText from "./TypedText.astro";
+import TypedText from "@/components/atoms/TypedText.astro";
 
 test("TypedText renders with fallback text", async () => {
 	const container = await AstroContainer.create();
