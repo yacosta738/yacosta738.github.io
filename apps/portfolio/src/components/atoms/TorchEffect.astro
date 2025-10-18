@@ -26,14 +26,16 @@
   /* Light mode - very subtle green glow to avoid washing out page content */
   :root {
     /* reduce mix amount and overall opacity so the torch doesn't reduce text contrast */
-    --torch-color: color-mix(in srgb, var(--color-brand-accent) 4%, transparent);
+    --torch-color: var(--torch-color-fallback, rgba(100,255,218,0.04));
+    --torch-color-fallback: rgba(100,255,218,0.04);
     --torch-opacity: 0.35;
   }
 
   /* Dark mode - more visible green glow */
   .dark {
     /* In dark mode make it slightly stronger but still subtle */
-    --torch-color: color-mix(in srgb, var(--color-brand-accent) 10%, transparent);
+    --torch-color: var(--torch-color-fallback, rgba(100,255,218,0.1));
+    --torch-color-fallback: rgba(100,255,218,0.1);
     --torch-opacity: 0.5;
   }
 

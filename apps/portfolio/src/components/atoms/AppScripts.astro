@@ -16,3 +16,21 @@ const titleTextAlt = t("titleAltText", { emoji: "😥" });
 <script is:inline define:vars={{ titleTextAlt }}>
 let prevTitle=document.title,tid;window.addEventListener("blur",()=>{clearTimeout(tid);prevTitle=document.title;tid=setTimeout(()=>document.title=titleTextAlt,10000)}),window.addEventListener("focus",()=>{clearTimeout(tid);document.title=prevTitle});
 </script>
+
+<!-- Global keyboard shortcuts for search -->
+<script>
+  // Cmd+K (Mac) or Ctrl+K (Windows/Linux) to open search
+  document.addEventListener('keydown', (event: KeyboardEvent) => {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+      event.preventDefault();
+
+      // Detect current language from URL
+      const currentPath = window.location.pathname;
+      const langMatch = currentPath.match(/^\/(en|es)\//);
+      const lang = langMatch ? langMatch[1] : 'en';
+
+      // Navigate to search page
+      window.location.href = `/${lang}/search`;
+    }
+  });
+</script>

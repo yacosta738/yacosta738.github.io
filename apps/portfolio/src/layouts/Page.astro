@@ -19,7 +19,7 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
     <Header />
 	</slot>
 	<slot name="subheader" slot="subheader" />
-	<div class="container mx-auto px-4 pt-24 prose lg:prose-xl xl:prose-2xl dark:prose-invert">
+	<div class="container mx-auto px-4 pt-24 prose lg:prose-xl xl:prose-2xl dark:prose-invert" data-pagefind-body>
 		<slot />
 	</div>
   <Footer />

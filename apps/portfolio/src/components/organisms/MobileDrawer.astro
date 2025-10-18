@@ -1,11 +1,11 @@
 ---
 import ResumeButton from "@/components/atoms/ResumeButton.astro";
 import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
-import SearchBox from "@/components/molecules/SearchBox.astro";
 import { navMenus } from "@/core/menu";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
+import SearchButton from "../atoms/SearchButton.astro";
 
 interface Props {
 	id?: string;
@@ -60,10 +60,7 @@ const translatePath = useTranslatedPath(currentLocale);
 		<!-- Search Box -->
 		{showSearch && (
 			<div class="mb-4 pb-4 border-b border-border">
-				<SearchBox 
-					placeholder={t("search.placeholder") || "Buscar contenido..."}
-					class="w-full"
-				/>
+				<SearchButton />
 			</div>
 		)}
 

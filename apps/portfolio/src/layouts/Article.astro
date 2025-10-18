@@ -42,7 +42,7 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 		minutesRead={minutesRead}
 	/>
 	<div class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28">
-		<article class="flex-1 lg:basis-3/4">
+		<article class="flex-1 lg:basis-3/4" data-pagefind-body>
 			<slot />
 			
 			<!-- Comments Section (if enabled) -->
@@ -51,10 +51,11 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 					slug={slug} 
 					locale={Astro.currentLocale as Lang}
 					class="mt-12"
+					data-pagefind-ignore
 				/>
 			)}
 		</article>
-		<aside class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start">
+		<aside class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start" data-pagefind-ignore>
 			<WidgetWrapper />
 		</aside>
 	</div>
