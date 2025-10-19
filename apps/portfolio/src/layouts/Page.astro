@@ -1,8 +1,8 @@
 ---
-import Footer from "@/components/organisms/Footer.astro";
 import Header from "@/components/organisms/Header.astro";
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
 import Layout from "./Layout.astro";
+import BlogFooter from "@/components/organisms/BlogFooter.astro";
 
 interface Props {
 	title?: string;
@@ -22,5 +22,5 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
 	<div class="container mx-auto px-4 pt-24 prose lg:prose-xl xl:prose-2xl dark:prose-invert" data-pagefind-body>
 		<slot />
 	</div>
-  <Footer />
+ 	<BlogFooter />
 </Layout>
