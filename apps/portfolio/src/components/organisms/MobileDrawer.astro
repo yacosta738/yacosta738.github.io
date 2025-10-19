@@ -2,7 +2,7 @@
 import ResumeButton from "@/components/atoms/ResumeButton.astro";
 import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
 import { navMenus } from "@/core/menu";
-import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+import { DEFAULT_LOCALE, type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
 import SearchButton from "../atoms/SearchButton.astro";
@@ -21,7 +21,10 @@ const {
 	showSearch = false,
 } = Astro.props;
 
-const currentLocale = Astro.params.lang as Lang;
+const currentLocale =
+	Astro.params.lang ||
+	(Astro.url.pathname.split("/")[1] as Lang) ||
+	DEFAULT_LOCALE;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 ---
