@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import FormattedDate from "./FormattedDate.astro";
+import FormattedDate from "@/components/atoms/FormattedDate.astro";
 
 test("FormattedDate renders with default props", async () => {
 	const container = await AstroContainer.create();

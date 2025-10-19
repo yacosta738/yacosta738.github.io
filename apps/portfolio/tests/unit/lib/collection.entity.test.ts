@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cleanEntityId, parseEntityId } from "./collection.entity";
+import { cleanEntityId, parseEntityId } from "@/lib/collection.entity";
 
 describe("parseEntityId function", () => {
 	it("should correctly parse an entity ID with an 'en' language prefix", () => {

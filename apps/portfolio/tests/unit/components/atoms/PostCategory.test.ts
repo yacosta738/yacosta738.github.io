@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import PostCategory from "./PostCategory.astro";
+import PostCategory from "@/components/atoms/PostCategory.astro";
 
 const mockCategory = {
 	id: "en/categories/technology",

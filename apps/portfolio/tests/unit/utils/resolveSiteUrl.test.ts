@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { resolveSiteUrl } from "./resolveSiteUrl";
+import { resolveSiteUrl } from "@/utils/resolveSiteUrl";
 
 describe("resolveSiteUrl helper", () => {
 	const env = { ...process.env };

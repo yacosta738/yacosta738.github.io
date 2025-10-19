@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { parseEntityId } from "@/lib/collection.entity";
-import { toArticles, toExternalArticles } from "./article.mapper";
+import { toArticles } from "./article.mapper";
 import {
 	getAllArticlesIncludingExternal,
 	getArticleById,

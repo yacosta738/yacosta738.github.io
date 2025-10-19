@@ -1,20 +1,17 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
-import { getLocalePaths, localeParams, useTranslatedPath } from "../i18n";
-import type { Multilingual } from "../types";
-import { useTranslations } from "../utils";
+import { beforeAll, beforeEach, describe, expect, test, vi } from "vitest";
+import type { Multilingual } from "@/i18n";
 
 // Define mock function before vi.mock
 const mockShowDefaultLang = vi.fn().mockReturnValue(false);
 
-// Mock the @/core/tag module to avoid astro:content dependency
+// Mock modules before importing the i18n module under test
 vi.mock("@/core/tag", () => ({
 	extractTagSlugFromPath: vi.fn(),
 	getTagLocalePaths: vi.fn(),
 	isTagPage: vi.fn(),
 }));
 
-// Mock the ui module
-vi.mock("../ui", () => ({
+vi.mock("@/i18n/ui", () => ({
 	ui: {
 		en: {
 			hello: "Hello",
@@ -26,20 +23,31 @@ vi.mock("../ui", () => ({
 		es: {
 			hello: "Hola",
 			welcome: "Bienvenido {name}",
-			// Note: 'missing' key doesn't exist in Spanish
 		},
 	},
 }));
 
-// Mock the types module
-vi.mock("../types", () => ({
+vi.mock("@/i18n/types", () => ({
 	DEFAULT_LOCALE: "en",
 	LOCALES: { en: "English", es: "Spanish" },
-	// Use the mock function here
 	get SHOW_DEFAULT_LANG_IN_URL() {
 		return mockShowDefaultLang();
 	},
 }));
+
+// Import the i18n module dynamically after mocks so the mocks are applied
+let getLocalePaths: typeof import("@/i18n")["getLocalePaths"];
+let localeParams: typeof import("@/i18n")["localeParams"];
+let useTranslatedPath: typeof import("@/i18n")["useTranslatedPath"];
+let useTranslations: typeof import("@/i18n")["useTranslations"];
+
+beforeAll(async () => {
+	const mod = await import("@/i18n");
+	getLocalePaths = mod.getLocalePaths;
+	localeParams = mod.localeParams;
+	useTranslatedPath = mod.useTranslatedPath;
+	useTranslations = mod.useTranslations;
+});
 
 describe("useTranslations", () => {
 	test("returns translation for string key in specified language", () => {

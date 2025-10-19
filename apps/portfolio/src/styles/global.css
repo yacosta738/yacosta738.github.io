@@ -261,6 +261,136 @@ html.dark {
 		clip: auto;
 		white-space: normal;
 	}
+
+	/* Search component design tokens and utilities */
+		/* Search theme tokens (dark-friendly) */
+			:root {
+				--search-border-radius: 12px;
+				--search-input-height: 48px;
+				--search-gap: 1rem;
+				--search-shadow: 0 8px 24px rgba(2,6,23,0.45);
+				--search-surface: rgba(23,42,69,0.06);
+				--search-surface-fallback: rgba(23,42,69,0.06);
+				/* Use a subtle tint of the brand accent for highlights with a stable fallback */
+				--search-highlight: rgba(100,255,218,0.20);
+				--search-highlight-fallback: rgba(100,255,218,0.20);
+				--search-highlight-color: var(--search-highlight, var(--search-highlight-fallback));
+				--search-focus-ring: 3px solid rgba(100,255,218,0.22);
+				--search-focus-ring-fallback: 3px solid rgba(100,255,218,0.22);
+				--search-focus-ring-color: var(--search-focus-ring, var(--search-focus-ring-fallback));
+			}
+
+		/* High-level search layout */
+		.search-hero {
+			padding: 2rem 1rem;
+			display: grid;
+			gap: var(--search-gap);
+		}
+
+		.search-card {
+			background: var(--search-surface);
+			border: 1px solid var(--color-border);
+			border-radius: var(--search-border-radius);
+			padding: 1rem;
+			box-shadow: var(--search-shadow);
+		}
+
+		.search-input {
+			height: var(--search-input-height);
+			display: flex;
+			gap: 0.5rem;
+			align-items: center;
+			padding: 0.25rem;
+		}
+
+		.search-input input[type="text"] {
+			height: 100%;
+			width: 100%;
+			background: transparent;
+			border: none;
+			outline: none;
+			padding: 0 0.75rem;
+			color: var(--color-foreground);
+			font-size: 1rem;
+		}
+
+		.search-input button {
+			background: transparent;
+			border: 1px solid transparent;
+			color: var(--color-foreground-muted);
+			padding: 0.45rem 0.65rem;
+			border-radius: 8px;
+			cursor: pointer;
+		}
+
+		.search-input button:focus,
+		.search-input input:focus {
+			box-shadow: var(--search-focus-ring);
+		}
+
+		.search-results {
+			margin-top: 0.75rem;
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.search-item {
+			padding: 1rem;
+			border-radius: 10px;
+			background: rgba(23,42,69,0.06);
+			background-color: var(--search-surface-fallback);
+			border: 1px solid var(--color-border);
+			display: flex;
+			gap: 0.75rem;
+			align-items: flex-start;
+			transition: transform 160ms var(--ease-in-out), box-shadow 160ms var(--ease-in-out);
+		}
+
+		.search-item:focus-within,
+		.search-item:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+		}
+
+		.search-item__title {
+			font-weight: 700;
+			color: var(--color-foreground);
+			font-size: 1.02rem;
+		}
+
+		.search-item__excerpt {
+			color: var(--color-foreground-muted);
+			margin-top: 0.35rem;
+			line-height: 1.4;
+		}
+
+		.search-item__meta {
+			margin-top: 0.5rem;
+			display: flex;
+			gap: 0.5rem;
+			font-size: 0.85rem;
+			color: var(--color-foreground-subtle);
+			align-items: center;
+		}
+
+			.search-badge {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.16rem 0.5rem;
+				border-radius: 999px;
+				font-size: 0.72rem;
+				background: var(--search-highlight, var(--search-highlight-fallback));
+				color: var(--color-foreground);
+				border: 1px solid rgba(64,255,200,0.12);
+				border-color: rgba(64,255,200,0.12);
+			}
+
+		.search-empty {
+			text-align: center;
+			padding: 1.5rem;
+			color: var(--color-foreground-muted);
+		}
 }
 
 /* Performance optimizations - prevent layout thrashing */
@@ -635,14 +765,14 @@ html {
 	.navbar--show {
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
-		background-color: color-mix(in srgb, var(--color-navy) 95%, transparent);
+		background-color: rgba(10,25,47,0.95);
 		box-shadow: 0 10px 30px -10px var(--color-navy);
 	}
 
 	.navbar--hidden {
 		-webkit-transform: translate3d(0, -100%, 0);
 		transform: translate3d(0, -100%, 0);
-		background-color: color-mix(in srgb, var(--color-navy) 85%, transparent);
+		background-color: rgba(10,25,47,0.85);
 		box-shadow: 0 10px 30px -10px var(--color-navy);
 	}
 }

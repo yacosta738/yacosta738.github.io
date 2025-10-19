@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import PostTag from "./PostTag.astro";
+import PostTag from "@/components/atoms/PostTag.astro";
 
 const mockTag = {
 	id: "en/tags/astro",

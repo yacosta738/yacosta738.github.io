@@ -100,6 +100,15 @@ export const testData = {
 		validEmail: "subscriber@example.com",
 		invalidEmail: "not-an-email",
 	},
+
+	search: {
+		validQueries: ["blog", "typescript", "astro", "react", "javascript"],
+		noResultsQuery: "xyzabcnonexistentquery123456",
+		specialCharsQuery: "test@#$%^&*()",
+		unicodeQuery: "café 日本語 emoji 🚀",
+		longQuery: "a".repeat(200),
+		emptyQuery: "",
+	},
 };
 
 /**
@@ -224,6 +233,53 @@ export const helpers = {
 			fullPage: true,
 		});
 	},
+
+	/**
+	 * Wait for search UI to initialize
+	 */
+	async waitForSearchUI(page: Page, timeout = 10000) {
+		console.log("Waiting for search UI to initialize...");
+		try {
+			await page.waitForSelector(".pagefind-ui__search-input", {
+				timeout,
+				state: "visible",
+			});
+			console.log("Search UI initialized successfully.");
+		} catch (error) {
+			console.error("Search UI initialization failed:", error);
+			await page.screenshot({
+				path: "test-results/search-ui-failure.png",
+				fullPage: true,
+			});
+			throw error;
+		}
+	},
+
+	/**
+	 * Perform search and wait for results
+	 */
+	async performSearch(page: Page, query: string, waitTime = 1000) {
+		const searchInput = page.locator(".pagefind-ui__search-input");
+		await searchInput.fill(query);
+		await page.waitForTimeout(waitTime);
+		return searchInput;
+	},
+
+	/**
+	 * Get search results count
+	 */
+	async getSearchResultsCount(page: Page): Promise<number> {
+		return await page.locator(".pagefind-ui__result").count();
+	},
+
+	/**
+	 * Verify search URL parameter
+	 */
+	async verifySearchParam(page: Page, expectedQuery: string | null) {
+		const url = new URL(page.url());
+		const actualQuery = url.searchParams.get("q");
+		expect(actualQuery).toBe(expectedQuery);
+	},
 };
 
 /**
@@ -264,6 +320,24 @@ export const selectors = {
 		articleHeading: "article h1",
 	},
 
+	search: {
+		container: "#search",
+		input: ".pagefind-ui__search-input",
+		clearButton: ".pagefind-ui__search-clear",
+		results: ".pagefind-ui__result",
+		resultLink: ".pagefind-ui__result-link",
+		resultExcerpt: ".pagefind-ui__result-excerpt",
+		resultThumb: ".pagefind-ui__result-thumb",
+		resultImage: ".pagefind-ui__result-image",
+		resultsArea: ".pagefind-ui__results",
+		message: ".pagefind-ui__message",
+		emptyState: ".pf-empty",
+		badge: ".pf-badge",
+		topResult: ".pf-top-result",
+		meta: ".meta",
+		loadMoreButton: ".pagefind-ui__button",
+	},
+
 	navigation: {
 		logo: 'a[href*="/"]',
 		menuButton: "button[data-drawer-target]",
@@ -280,11 +354,19 @@ export const i18nData = {
 		projectsHeading: "Projects",
 		contactHeading: "Contact",
 		welcomeText: /hello|hi|welcome/i,
+		searchTitle: "Search",
+		searchDescription: "Search for articles and content",
+		searchEmptyTitle: "No results",
+		searchEmptyMessage: /No results found for/i,
 	},
 	es: {
 		aboutHeading: "Sobre mí",
 		projectsHeading: "Proyectos",
 		contactHeading: "Contacto",
 		welcomeText: /hola|bienvenido/i,
+		searchTitle: "Buscar",
+		searchDescription: "Buscar artículos y contenido",
+		searchEmptyTitle: "Sin resultados",
+		searchEmptyMessage: /No se encontraron resultados para/i,
 	},
 };

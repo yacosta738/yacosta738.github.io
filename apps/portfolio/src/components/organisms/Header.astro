@@ -1,14 +1,15 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
 import Logo from "@/components/atoms/Logo.astro";
 import MobileMenuButton from "@/components/atoms/MobileMenuButton.astro";
 import Menu from "@/components/molecules/Menu.astro";
-import SearchBox from "@/components/molecules/SearchBox.astro";
 import MobileDrawer from "@/components/organisms/MobileDrawer.astro";
 import { HEADER_ID } from "@/configs/theme.consts";
 import { DRAWER_MENU_BUTTON_BOX_ID } from "@/core/menu/menu.constants";
 import { DEFAULT_LOCALE, type Lang, useTranslations } from "@/i18n";
 import { cn } from "@/lib/utils";
+import SearchButton from "../atoms/SearchButton.astro";
 
 // Constants
 const SCROLL_THRESHOLD = 50;
@@ -67,12 +68,7 @@ const t = useTranslations(currentLocale);
         
 		<div class="hidden md:flex md:items-center md:space-x-4">
 			{showSearch && (
-				<div class="max-w-xs">
-					<SearchBox 
-						placeholder={t("search.placeholder") || "Buscar contenido..."}
-						class="w-full"
-					/>
-				</div>
+					<SearchButton />
 			)}
 			<Menu />
 		</div>
@@ -93,10 +89,10 @@ const t = useTranslations(currentLocale);
 	}
 
 	header.scrolled {
-		background: color-mix(in srgb, var(--color-background-secondary) 75%, transparent);
+		background-color: rgba(17,34,51,0.75);
 		backdrop-filter: blur(16px);
 		-webkit-backdrop-filter: blur(16px);
-		border-bottom: 1px solid color-mix(in srgb, var(--color-border) 30%, transparent);
+		border-bottom: 1px solid rgba(35,53,84,0.3);
 		transition: all 0.3s ease;
 	}
 
@@ -107,8 +103,8 @@ const t = useTranslations(currentLocale);
 	}
 
 	:global(.dark) header.scrolled {
-		background: color-mix(in srgb, var(--color-background-secondary) 75%, transparent);
-		border-bottom: 1px solid color-mix(in srgb, var(--color-border) 30%, transparent);
+		background-color: rgba(17,34,51,0.75);
+		border-bottom: 1px solid rgba(35,53,84,0.3);
 	}
 
 	:global(.dark) header.scrolled #site-title,

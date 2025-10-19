@@ -1,8 +1,8 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { Window } from "happy-dom";
 import { expect, test, vi } from "vitest";
+import Projects from "@/components/organisms/Projects.astro";
 import type Project from "@/core/resume/project/project.model";
-import Projects from "./Projects.astro";
 
 // Mock i18n dependencies
 vi.mock("@/i18n/ui", () => ({

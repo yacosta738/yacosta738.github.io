@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { expect, test } from "vitest";
-import Typography from "./Typography.astro";
+import Typography from "@/components/atoms/Typography.astro";
 
 test("Typography renders with default props", async () => {
 	const container = await AstroContainer.create();

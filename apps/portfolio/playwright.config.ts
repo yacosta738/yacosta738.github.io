@@ -45,17 +45,33 @@ export default defineConfig({
 	},
 
 	// Development server configuration - auto-start on test run
-	webServer: {
-		command: "pnpm dev --port 4322",
-		url: "http://localhost:4322",
-		timeout: 180_000, // Increased timeout for slower machines
-		reuseExistingServer: true,
-		env: {
-			PLAYWRIGHT_TEST: "true",
-		},
-		stdout: "ignore",
-		stderr: "pipe",
-	},
+	webServer: (() => {
+		// By default use the dev server. For stable Pagefind-backed tests,
+		// set PW_USE_PREVIEW=1 to build and run `astro preview` so the Pagefind
+		// index is available (slower but more stable).
+		const usePreview = process.env.PW_USE_PREVIEW === "1";
+		if (usePreview) {
+			return {
+				command: "pnpm build && pnpm preview --port 4322",
+				url: "http://localhost:4322",
+				timeout: 600_000,
+				reuseExistingServer: false,
+				env: { PLAYWRIGHT_TEST: "true" },
+				stdout: "pipe",
+				stderr: "pipe",
+			};
+		}
+
+		return {
+			command: "pnpm dev --port 4322",
+			url: "http://localhost:4322",
+			timeout: 180_000,
+			reuseExistingServer: true,
+			env: { PLAYWRIGHT_TEST: "true" },
+			stdout: "ignore",
+			stderr: "pipe",
+		};
+	})(),
 
 	// Browser projects - test across all major browsers
 	projects: [
