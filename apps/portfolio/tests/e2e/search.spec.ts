@@ -41,7 +41,9 @@ test.describe("Search Page", () => {
 		await page.waitForTimeout(2000);
 
 		const input = page.locator(".pagefind-ui__search-input");
-		await input.clear();
+		await expect(input).toBeVisible({ timeout: 10000 });
+		await expect(input).toBeEnabled({ timeout: 10000 });
+		await input.fill(""); // Clear input reliably
 		await input.fill("test");
 
 		// Wait for Pagefind to update results or show empty state
@@ -73,6 +75,8 @@ test.describe("Search Page", () => {
 		});
 
 		const input = page.locator(".pagefind-ui__search-input");
+		await expect(input).toBeVisible({ timeout: 10000 });
+		await expect(input).toBeEnabled({ timeout: 10000 });
 		const initialResultCount = await page
 			.locator(".pagefind-ui__result")
 			.count();
