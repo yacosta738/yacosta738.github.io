@@ -12,10 +12,13 @@ import { cn } from "@/lib/utils";
 interface Props extends HTMLAttributes<"a"> {
 	class?: string;
 }
-const currentLocale =
+const localeSegment = Astro.url.pathname.split("/")[1];
+const validLocales = Object.keys(LOCALES);
+const resolvedLocale =
 	Astro.params.lang ||
-	(Astro.url.pathname.split("/")[1] as Lang) ||
+	(validLocales.includes(localeSegment) ? localeSegment : undefined) ||
 	DEFAULT_LOCALE;
+const currentLocale = resolvedLocale;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 const { class: className, ...props } = Astro.props;

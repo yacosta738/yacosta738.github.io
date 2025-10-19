@@ -30,10 +30,13 @@ const {
 	...attrs
 } = Astro.props;
 
-const currentLocale =
+const localeSegment = Astro.url.pathname.split("/")[1];
+const validLocales = Object.keys(LOCALES);
+const resolvedLocale =
 	Astro.params.lang ||
-	(Astro.url.pathname.split("/")[1] as Lang) ||
+	(validLocales.includes(localeSegment) ? localeSegment : undefined) ||
 	DEFAULT_LOCALE;
+const currentLocale = resolvedLocale;
 const t = useTranslations(currentLocale);
 ---
 

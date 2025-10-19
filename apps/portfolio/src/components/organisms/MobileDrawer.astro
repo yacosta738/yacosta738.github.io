@@ -2,7 +2,13 @@
 import ResumeButton from "@/components/atoms/ResumeButton.astro";
 import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
 import { navMenus } from "@/core/menu";
-import { DEFAULT_LOCALE, type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+import {
+	DEFAULT_LOCALE,
+	type Lang,
+	LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
 import SearchButton from "../atoms/SearchButton.astro";
@@ -21,10 +27,14 @@ const {
 	showSearch = false,
 } = Astro.props;
 
-const currentLocale =
+// Validate locale segment from URL
+const localeSegment = Astro.url.pathname.split("/")[1];
+const validLocales = Object.keys(LOCALES);
+const resolvedLocale =
 	Astro.params.lang ||
-	(Astro.url.pathname.split("/")[1] as Lang) ||
+	(validLocales.includes(localeSegment) ? localeSegment : undefined) ||
 	DEFAULT_LOCALE;
+const currentLocale = resolvedLocale;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 ---
@@ -34,22 +44,23 @@ const translatePath = useTranslatedPath(currentLocale);
 	id="mobile-drawer-backdrop"
 	class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-300"
 	aria-hidden="true"
-></div>
+>
+</div>
 
 <!-- Drawer -->
 <aside
-       id={id}
-	   class={cn(
-		   "fixed top-0 right-0 z-60 h-screen w-80 max-w-[90vw]",
-		   "bg-background border-l border-border shadow-2xl",
-		   "transform translate-x-full transition-transform duration-300 ease-in-out",
-		   "overflow-y-auto scrollbar-thin",
-		   className
-	   )}
-       aria-label={t("nav.mobile") || "Mobile navigation"}
-       aria-hidden="true"
-       role="dialog"
-       aria-modal="true"
+	id={id}
+	class={cn(
+		"fixed top-0 right-0 z-60 h-screen w-80 max-w-[90vw]",
+		"bg-background border-l border-border shadow-2xl",
+		"transform translate-x-full transition-transform duration-300 ease-in-out",
+		"overflow-y-auto scrollbar-thin",
+		className,
+	)}
+	aria-label={t("nav.mobile") || "Mobile navigation"}
+	aria-hidden="true"
+	role="dialog"
+	aria-modal="true"
 >
 	<!-- Header -->
 	<div class="p-4 border-b border-border">
@@ -61,30 +72,34 @@ const translatePath = useTranslatedPath(currentLocale);
 	<!-- Navigation -->
 	<nav class="p-4" aria-label={t("nav.main") || "Main navigation"}>
 		<!-- Search Box -->
-		{showSearch && (
-			<div class="mb-4 pb-4 border-b border-border">
-				<SearchButton />
-			</div>
-		)}
+		{
+			showSearch && (
+				<div class="mb-4 pb-4 border-b border-border">
+					<SearchButton />
+				</div>
+			)
+		}
 
 		<ul class="space-y-4">
-			{navMenus.map((menu) => (
-				<li>
-					<a
-						href={translatePath(menu.link)}
-						class="flex items-center px-3 py-2 rounded-md text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent hover:bg-brand-accent/10 hover:text-brand-accent dark:hover:bg-brand-accent/20 dark:hover:text-brand-accent"
-						data-drawer-close
-						tabindex="0"
-					>
-						<span class="font-medium">{t(menu.title)}</span>
-					</a>
-				</li>
-			))}
+			{
+				navMenus.map((menu) => (
+					<li>
+						<a
+							href={translatePath(menu.link)}
+							class="flex items-center px-3 py-2 rounded-md text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent hover:bg-brand-accent/10 hover:text-brand-accent dark:hover:bg-brand-accent/20 dark:hover:text-brand-accent"
+							data-drawer-close
+							tabindex="0"
+						>
+							<span class="font-medium">{t(menu.title)}</span>
+						</a>
+					</li>
+				))
+			}
 		</ul>
 
 		<!-- Resume Download -->
 		<div class="mt-6 pt-4 border-t border-border">
-			<ResumeButton 
+			<ResumeButton
 				resumePath={resumePath}
 				fullWidth
 				currentLocale={currentLocale}
@@ -99,10 +114,7 @@ const translatePath = useTranslatedPath(currentLocale);
 				<div class="block text-sm font-medium text-foreground-muted">
 					{t("nav.language") || "Language"}
 				</div>
-				<LocaleSelect 
-					class="w-full"
-					variant="text"
-				/>
+				<LocaleSelect class="w-full" variant="text" />
 			</div>
 
 			<!-- Theme Toggle -->
@@ -111,7 +123,7 @@ const translatePath = useTranslatedPath(currentLocale);
 					{t("nav.theme") || "Theme"}
 				</div>
 				<div class="flex justify-start">
-					<ThemeToggle 
+					<ThemeToggle
 						currentLocale={currentLocale}
 						showText={true}
 						class="w-full justify-start text-left"
