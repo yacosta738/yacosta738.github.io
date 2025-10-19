@@ -34,9 +34,9 @@ export default defineConfig({
 	// Global configuration for all tests
 	use: {
 		baseURL: process.env.BASE_URL || "http://localhost:4322",
-		trace: "retain-on-failure",
-		screenshot: "only-on-failure",
-		video: "retain-on-failure",
+		trace: "off",
+		screenshot: "off",
+		video: "off",
 		viewport: { width: 1280, height: 720 },
 		colorScheme: "light",
 		ignoreHTTPSErrors: true,

@@ -1,21 +1,14 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { Icon } from "astro-icon/components";
-import {
-	DEFAULT_LOCALE,
-	type Lang,
-	useTranslatedPath,
-	useTranslations,
-} from "@/i18n";
+import { useTranslatedPath, useTranslations } from "@/i18n";
+import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
 import { cn } from "@/lib/utils";
 
 interface Props extends HTMLAttributes<"a"> {
 	class?: string;
 }
-const currentLocale =
-	Astro.params.lang ||
-	(Astro.url.pathname.split("/")[1] as Lang) ||
-	DEFAULT_LOCALE;
+const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 const { class: className, ...props } = Astro.props;
