@@ -27,14 +27,9 @@ const {
 	showSearch = false,
 } = Astro.props;
 
-// Validate locale segment from URL
-const localeSegment = Astro.url.pathname.split("/")[1];
-const validLocales = Object.keys(LOCALES);
-const resolvedLocale =
-	Astro.params.lang ||
-	(validLocales.includes(localeSegment) ? localeSegment : undefined) ||
-	DEFAULT_LOCALE;
-const currentLocale = resolvedLocale;
+import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
+
+const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 ---
