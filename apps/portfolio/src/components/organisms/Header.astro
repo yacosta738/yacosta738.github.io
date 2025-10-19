@@ -1,13 +1,12 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { Icon } from "astro-icon/components";
 import Logo from "@/components/atoms/Logo.astro";
 import MobileMenuButton from "@/components/atoms/MobileMenuButton.astro";
 import Menu from "@/components/molecules/Menu.astro";
 import MobileDrawer from "@/components/organisms/MobileDrawer.astro";
 import { HEADER_ID } from "@/configs/theme.consts";
 import { DRAWER_MENU_BUTTON_BOX_ID } from "@/core/menu/menu.constants";
-import { DEFAULT_LOCALE, type Lang, useTranslations } from "@/i18n";
+import { DEFAULT_LOCALE, LOCALES, useTranslations } from "@/i18n";
 import { cn } from "@/lib/utils";
 import SearchButton from "../atoms/SearchButton.astro";
 
