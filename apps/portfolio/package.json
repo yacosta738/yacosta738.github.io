@@ -70,7 +70,7 @@
 		"gray-matter": "^4.0.3",
 		"happy-dom": "^20.0.0",
 		"jsdom": "^27.0.0",
-		"lefthook": "^1.13.6",
+		"lefthook": "^2.0.0",
 		"npm-run-all2": "^8.0.4",
 		"preact-render-to-string": "^6.6.2",
 		"reading-time": "^1.5.0",
