@@ -26,7 +26,6 @@ import {
 } from "@/i18n";
 import "@/styles/global.css";
 
-import { ViewTransitions } from "astro:transitions";
 import AppScripts from "@/components/atoms/AppScripts.astro";
 import Technologies from "@/components/atoms/Technologies.astro";
 import TorchEffect from "@/components/atoms/TorchEffect.astro";
@@ -173,6 +172,15 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
       })();
     </script>
 
+    <!-- Persist theme during view transitions to prevent flash -->
+    <script is:inline>
+      document.addEventListener("astro:before-swap", (e) => {
+        if (document.documentElement.classList.contains("dark")) {
+          e.newDocument.documentElement.classList.add("dark");
+        }
+      });
+    </script>
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
@@ -210,7 +218,6 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
       name="twitter:image"
       content={imageUrl ? new URL(imageUrl, Astro.url).href : ""}
     />
-    <ViewTransitions />
   </head>
   <body>
     <AsyncCSS />

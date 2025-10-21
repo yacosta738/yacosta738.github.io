@@ -8,6 +8,7 @@ import type Article from "@/core/article/article.model";
 import type { Lang } from "@/i18n";
 import BaseLayout from "@/layouts/Layout.astro";
 import { getOgImagePath } from "@/lib/open-graph/og.service";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props extends Article {
 	url: string;
@@ -33,6 +34,7 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 ---
 
 <BaseLayout {title} {description} {ogImage}>
+  <ViewTransitions />
 	<HeaderProgressBar
 		slot="subheader"
 		title={title}

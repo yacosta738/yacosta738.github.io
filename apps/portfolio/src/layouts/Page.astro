@@ -3,6 +3,7 @@ import BlogFooter from "@/components/organisms/BlogFooter.astro";
 import Header from "@/components/organisms/Header.astro";
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
 import Layout from "./Layout.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
 	title?: string;
@@ -14,6 +15,7 @@ const { title, description } = Astro.props.frontmatter || Astro.props;
 ---
 
 <Layout {title} {description}>
+  <ViewTransitions />
 	<slot name="header" slot="header">
 		<LocaleSuggest />
 		<Header />
