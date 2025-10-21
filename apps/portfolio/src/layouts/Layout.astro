@@ -26,6 +26,7 @@ import {
 } from "@/i18n";
 import "@/styles/global.css";
 
+import { ViewTransitions } from "astro:transitions";
 import AppScripts from "@/components/atoms/AppScripts.astro";
 import Technologies from "@/components/atoms/Technologies.astro";
 import TorchEffect from "@/components/atoms/TorchEffect.astro";
@@ -209,6 +210,7 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
       name="twitter:image"
       content={imageUrl ? new URL(imageUrl, Astro.url).href : ""}
     />
+    <ViewTransitions />
   </head>
   <body>
     <AsyncCSS />

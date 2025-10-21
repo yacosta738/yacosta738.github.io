@@ -41,7 +41,7 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 		tags={tags.map((tag) => tag.title)}
 		minutesRead={minutesRead}
 	/>
-	<div class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28">
+	<main class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28" transition:animate="slide">
 		<article class="flex-1 lg:basis-3/4" data-pagefind-body>
 			<slot />
 			
@@ -58,7 +58,7 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 		<aside class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start" data-pagefind-ignore>
 			<WidgetWrapper />
 		</aside>
-	</div>
+	</main>
 	<BlogFooter />
 	<ToTopButton />
 </BaseLayout>
