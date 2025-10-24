@@ -34,16 +34,16 @@ importers:
     dependencies:
       '@hono/swagger-ui':
         specifier: 0.5.2
-        version: 0.5.2(hono@4.9.10)
+        version: 0.5.2(hono@4.10.3)
       '@hono/zod-openapi':
         specifier: 1.1.3
-        version: 1.1.3(hono@4.9.10)(zod@4.1.12)
+        version: 1.1.3(hono@4.10.3)(zod@4.1.12)
       chanfana:
         specifier: ^2.6.3
         version: 2.8.3
       hono:
-        specifier: ^4.6.20
-        version: 4.9.10
+        specifier: ^4.10.3
+        version: 4.10.3
       zod:
         specifier: ^4.1.12
         version: 4.1.12
@@ -3080,8 +3080,8 @@ packages:
   highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
 
-  hono@4.9.10:
-    resolution: {integrity: sha512-AlI15ijFyKTXR7eHo7QK7OR4RoKIedZvBuRjO8iy4zrxvlY5oFCdiRG/V/lFJHCNXJ0k72ATgnyzx8Yqa5arug==}
+  hono@4.10.3:
+    resolution: {integrity: sha512-2LOYWUbnhdxdL8MNbNg9XZig6k+cZXm5IjHn2Aviv7honhBMOHb+jxrKIeJRZJRmn+htUCKhaicxwXuUDlchRA==}
     engines: {node: '>=16.9.0'}
 
   hook-std@4.0.0:
@@ -4733,6 +4733,7 @@ packages:
   sitemap@8.0.0:
     resolution: {integrity: sha512-+AbdxhM9kJsHtruUF39bwS/B0Fytw6Fr1o4ZAIAEqA6cke2xcoO2GleBw9Zw7nRzILVEgz7zBM5GiTJjie1G9A==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    deprecated: 'SECURITY: Multiple vulnerabilities fixed in 8.0.1 (XML injection, path traversal, command injection, protocol injection). Upgrade immediately: npm install sitemap@8.0.1'
     hasBin: true
 
   skin-tone@2.0.0:
@@ -6306,21 +6307,21 @@ snapshots:
   '@fastify/busboy@3.2.0':
     optional: true
 
-  '@hono/swagger-ui@0.5.2(hono@4.9.10)':
+  '@hono/swagger-ui@0.5.2(hono@4.10.3)':
     dependencies:
-      hono: 4.9.10
+      hono: 4.10.3
 
-  '@hono/zod-openapi@1.1.3(hono@4.9.10)(zod@4.1.12)':
+  '@hono/zod-openapi@1.1.3(hono@4.10.3)(zod@4.1.12)':
     dependencies:
       '@asteasolutions/zod-to-openapi': 8.1.0(zod@4.1.12)
-      '@hono/zod-validator': 0.7.4(hono@4.9.10)(zod@4.1.12)
-      hono: 4.9.10
+      '@hono/zod-validator': 0.7.4(hono@4.10.3)(zod@4.1.12)
+      hono: 4.10.3
       openapi3-ts: 4.5.0
       zod: 4.1.12
 
-  '@hono/zod-validator@0.7.4(hono@4.9.10)(zod@4.1.12)':
+  '@hono/zod-validator@0.7.4(hono@4.10.3)(zod@4.1.12)':
     dependencies:
-      hono: 4.9.10
+      hono: 4.10.3
       zod: 4.1.12
 
   '@iconify-json/lucide@1.2.69':
@@ -8981,7 +8982,7 @@ snapshots:
 
   highlight.js@10.7.3: {}
 
-  hono@4.9.10: {}
+  hono@4.10.3: {}
 
   hook-std@4.0.0: {}
 
