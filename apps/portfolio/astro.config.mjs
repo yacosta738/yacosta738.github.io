@@ -74,7 +74,7 @@ export default defineConfig({
 			},
 			Image: false,
 			JavaScript: true,
-			SVG: true,
+			SVG: false,
 			Logger: 1,
 		}),
 		// Only include Partytown if external scripts are enabled
