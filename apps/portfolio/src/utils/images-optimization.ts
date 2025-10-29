@@ -224,7 +224,7 @@ const getStyle = ({
 		.join(" ");
 };
 
-const getBreakpoints = ({
+export const getBreakpoints = ({
 	width,
 	breakpoints,
 	layout,
