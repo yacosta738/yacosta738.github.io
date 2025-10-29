@@ -30,7 +30,7 @@
 		"test:e2e:codegen": "playwright codegen http://localhost:4321"
 	},
 	"dependencies": {
-		"@astrojs/check": "0.9.4",
+		"@astrojs/check": "0.9.5",
 		"@astrojs/mdx": "^4.3.7",
 		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/rss": "^4.0.12",
