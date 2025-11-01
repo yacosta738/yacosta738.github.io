@@ -64,10 +64,10 @@ const badges = [
 		{
 			badges.map((badge) => (
 				<div
-					class={`group relative overflow-hidden px-4 py-3 rounded-lg bg-gradient-to-r ${badge.color} bg-opacity-10 border border-foreground-muted/10 hover:scale-105 transition-transform duration-300 cursor-default`}
+					class={`group relative overflow-hidden px-4 py-3 rounded-lg bg-opacity-10 border border-foreground-muted/10 hover:scale-105 transition-transform duration-300 cursor-default bg-gradient-to-r ${badge.color}`}
 					role="listitem"
 				>
-					<div class="absolute inset-0 bg-gradient-to-r ${badge.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+					<div class={`absolute inset-0 bg-gradient-to-r ${badge.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
 					<Typography
 						as="span"
 						variant="body"

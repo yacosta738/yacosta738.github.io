@@ -16,6 +16,7 @@ import Link from "@/components/atoms/Link.astro";
 import Typography from "@/components/atoms/Typography.astro";
 import type { Profile } from "@/core/resume";
 import { type Lang, useTranslations } from "@/i18n";
+import { CALENDLY_URL } from "@/configs/site.consts";
 
 interface Props {
 	profiles: Profile[];
@@ -29,8 +30,8 @@ const t = useTranslations(currentLocale);
 const linkedInProfile = profiles.find(({ network }) => network === "LinkedIn");
 const linkedInUrl = linkedInProfile?.url || "https://www.linkedin.com/in/yacosta738/";
 
-// Calendly or scheduling URL (can be customized)
-const calendlyUrl = "https://calendly.com/yacosta738"; // Update with actual URL
+// Get Calendly URL from config
+const calendlyUrl = CALENDLY_URL;
 ---
 
 <section class="max-w-6xl mx-auto mb-24 px-4">

@@ -51,3 +51,25 @@ export const NOT_TRANSLATED_CAUTION: Multilingual = {
 		import.meta.env.NOT_TRANSLATED_CAUTION_ES ||
 		"Esta página no está disponible en tu idioma.",
 };
+
+/**
+ * Current employer information for structured data
+ * @type {string}
+ */
+export const CURRENT_EMPLOYER =
+	import.meta.env.CURRENT_EMPLOYER || "Deutsche Bank";
+
+/**
+ * Alumni institution for structured data
+ * @type {string}
+ */
+export const ALUMNI_INSTITUTION =
+	import.meta.env.ALUMNI_INSTITUTION ||
+	"Universidad de las Ciencias Informáticas";
+
+/**
+ * Calendly scheduling URL
+ * @type {string}
+ */
+export const CALENDLY_URL =
+	import.meta.env.CALENDLY_URL || "https://calendly.com/yacosta738";

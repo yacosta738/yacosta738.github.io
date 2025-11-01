@@ -8,6 +8,7 @@
  */
 import type { Basics } from "@/core/resume";
 import { type Lang, LOCALES } from "@/i18n";
+import { CURRENT_EMPLOYER, ALUMNI_INSTITUTION } from "@/configs/site.consts";
 
 interface Props {
 	basics: Basics | { image: string; summary: string; url: string };
@@ -76,11 +77,11 @@ const personSchema = {
 	],
 	"worksFor": {
 		"@type": "Organization",
-		"name": "Deutsche Bank"
+		"name": CURRENT_EMPLOYER
 	},
 	"alumniOf": {
 		"@type": "EducationalOrganization",
-		"name": "Universidad de las Ciencias Informáticas"
+		"name": ALUMNI_INSTITUTION
 	}
 };
 
