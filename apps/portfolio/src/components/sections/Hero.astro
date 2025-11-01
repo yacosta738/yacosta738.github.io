@@ -89,29 +89,31 @@ const passionItems =
       {name}
     </Typography>
 
-    <!-- Motto/Philosophy -->
+    <!-- Architect's Narrative Headline -->
     <Typography 
       as="h2" 
       variant="subtitle" 
-      class="animate-fade-in-up animate-delay-300 animate-duration-slower text-3xl sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl text-balance font-display mb-8 leading-tight max-w-6xl"
+      class="animate-fade-in-up animate-delay-300 animate-duration-slower text-3xl sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl text-balance font-display mb-6 leading-tight max-w-6xl text-foreground-muted"
     >
-      <TypedText 
-        text={t('hero.motto')} 
-        speed={60} 
-        delay={1000} 
-        cursor={true}
-        cursorChar="|"
-        class="text-foreground-muted"
-      />
+      {t('hero.headline')}
     </Typography>
 
-    <!-- Professional Description -->
+    <!-- Subheadline -->
     <Typography 
       as="p" 
       variant="body" 
-      class="animate-fade-in-up animate-delay-400 animate-duration-slower text-lg text-foreground-muted max-w-4xl mb-12 leading-relaxed"
+      class="animate-fade-in-up animate-delay-400 animate-duration-slower text-xl text-foreground-muted max-w-3xl mb-8 leading-relaxed"
     >
-      {`${label} ${t('hero.passion')}`} 
+      {t('hero.subheadline')}
+    </Typography>
+
+    <!-- Passion & Technologies -->
+    <Typography 
+      as="p" 
+      variant="body" 
+      class="animate-fade-in-up animate-delay-450 animate-duration-slower text-lg text-foreground-muted max-w-4xl mb-12 leading-relaxed"
+    >
+      {t('hero.passion')}
       
       <TypedText 
         texts={passionItems}
@@ -124,13 +126,22 @@ const passionItems =
       />
     </Typography>
 
-    <!-- Get in Touch Button -->
-    <div class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print">
+    <!-- CTA Buttons -->
+    <div class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print flex gap-4 flex-wrap">
+      <Link
+        href="/resume.pdf"
+        class="inline-block px-8 py-4 bg-brand-accent text-background font-display text-lg font-medium rounded hover:bg-opacity-90 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+        aria-label={t('hero.downloadResume')}
+      >
+        📄 {t('hero.downloadResume')}
+      </Link>
+      
       <Link
         href={`mailto:${email}`}
-        class="animate-pulse animate-delay-10s animate-fill-both inline-block px-8 py-4 border-2 border-brand-accent text-brand-accent font-display text-lg font-medium rounded hover:bg-brand-accent hover:bg-opacity-10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+        class="inline-block px-8 py-4 border-2 border-brand-accent text-brand-accent font-display text-lg font-medium rounded hover:bg-brand-accent hover:bg-opacity-10 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
+        aria-label={t('hero.letsTalk')}
       >
-        👋🏻  {t('hero.getInTouch')}
+        👋🏻 {t('hero.letsTalk')}
       </Link>
     </div>
 
