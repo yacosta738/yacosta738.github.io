@@ -15,6 +15,8 @@ import Education from "@/components/sections/Education.astro";
 import Experience from "@/components/sections/Experience.astro";
 import FeaturedProjects from "@/components/sections/FeaturedProjects.astro";
 import Hero from "@/components/sections/Hero.astro";
+import ImpactMetrics from "@/components/sections/ImpactMetrics.astro";
+import TechnicalPhilosophy from "@/components/sections/TechnicalPhilosophy.astro";
 import Interests from "@/components/sections/Interests.astro";
 import Languages from "@/components/sections/Languages.astro";
 import Publications from "@/components/sections/Publications.astro";
@@ -55,7 +57,9 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
 <Layout title={title}>
   <main id="main-content">
     <Hero basics={resume.basics} />
+    <ImpactMetrics />
     <About basics={resume.basics} skills={resume.skills} />
+    <TechnicalPhilosophy />
     <Experience work={resume.work} />
 
     {

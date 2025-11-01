@@ -1,0 +1,75 @@
+---
+/**
+ * Impact Metrics section component.
+ * This component displays key quantifiable achievements and measurable results
+ * that demonstrate the engineer's impact on business outcomes and technical excellence.
+ * 
+ * Features:
+ * - Displays 3 key metrics in a grid layout
+ * - Animated on scroll for visual interest
+ * - Responsive design for mobile and desktop
+ * - Accessible with proper ARIA labels
+ */
+import Section from "@/components/atoms/Section.astro";
+import Typography from "@/components/atoms/Typography.astro";
+import { type Lang, useTranslations } from "@/i18n";
+
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+// Define metrics with icons
+const metrics = [
+	{
+		icon: "🚀",
+		key: "sync_improvement",
+		ariaLabel: "Performance improvement metric",
+	},
+	{
+		icon: "⚙️",
+		key: "uptime",
+		ariaLabel: "System reliability metric",
+	},
+	{
+		icon: "🧠",
+		key: "mentorship",
+		ariaLabel: "Mentorship and leadership metric",
+	},
+];
+---
+
+<Section title={t("impact.title")} id="impact">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+		{
+			metrics.map((metric, index) => (
+				<div
+					class={`flex flex-col items-center text-center p-6 rounded-lg bg-background-secondary border border-foreground-muted/10 hover:border-brand-accent/30 transition-all duration-300 animate-fade-in-up animate-delay-${(index + 1) * 100} animate-duration-slower`}
+					role="article"
+					aria-label={metric.ariaLabel}
+				>
+					<span
+						class="text-5xl mb-4"
+						role="img"
+						aria-label={metric.ariaLabel}
+					>
+						{metric.icon}
+					</span>
+					<Typography
+						as="p"
+						variant="body"
+						class="text-lg text-foreground leading-relaxed font-semibold"
+					>
+						{t(`impact.${metric.key}`)}
+					</Typography>
+				</div>
+			))
+		}
+	</div>
+</Section>
+
+<style>
+	@media (prefers-reduced-motion: reduce) {
+		div[class*="animate-"] {
+			animation: none;
+		}
+	}
+</style>

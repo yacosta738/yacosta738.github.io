@@ -1,0 +1,90 @@
+---
+/**
+ * Technical Philosophy section component.
+ * This component displays a manifesto about architectural principles
+ * along with key expertise badges that highlight technical specializations.
+ * 
+ * Features:
+ * - Prominent manifesto quote
+ * - Expertise badges for key architectural domains
+ * - Responsive grid layout
+ * - Accessible with proper semantic markup
+ */
+import Section from "@/components/atoms/Section.astro";
+import Typography from "@/components/atoms/Typography.astro";
+import { type Lang, useTranslations } from "@/i18n";
+
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+// Define expertise badges
+const badges = [
+	{ key: "clean", color: "from-blue-500 to-cyan-500" },
+	{ key: "ddd", color: "from-purple-500 to-pink-500" },
+	{ key: "event", color: "from-green-500 to-emerald-500" },
+	{ key: "devex", color: "from-orange-500 to-yellow-500" },
+];
+---
+
+<section class="max-w-6xl mx-auto mb-24 px-4">
+	<div class="text-center mb-12">
+		<Typography
+			as="h2"
+			variant="subtitle"
+			class="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-8"
+		>
+			{t("philosophy.title")}
+		</Typography>
+		
+		<blockquote
+			class="relative max-w-4xl mx-auto p-8 md:p-12 bg-background-secondary rounded-lg border-l-4 border-brand-accent"
+			role="note"
+			aria-label="Technical philosophy statement"
+		>
+			<svg
+				class="absolute top-4 left-4 w-8 h-8 text-brand-accent opacity-20"
+				fill="currentColor"
+				viewBox="0 0 32 32"
+				aria-hidden="true"
+			>
+				<path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+			</svg>
+			
+			<Typography
+				as="p"
+				variant="body"
+				class="text-xl md:text-2xl lg:text-3xl text-foreground font-serif italic leading-relaxed relative z-10"
+			>
+				{t("philosophy.manifesto")}
+			</Typography>
+		</blockquote>
+	</div>
+
+	<div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-4xl mx-auto">
+		{
+			badges.map((badge) => (
+				<div
+					class={`group relative overflow-hidden px-4 py-3 rounded-lg bg-gradient-to-r ${badge.color} bg-opacity-10 border border-foreground-muted/10 hover:scale-105 transition-transform duration-300 cursor-default`}
+					role="listitem"
+				>
+					<div class="absolute inset-0 bg-gradient-to-r ${badge.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+					<Typography
+						as="span"
+						variant="body"
+						class="relative z-10 block text-center text-sm md:text-base font-semibold text-foreground"
+					>
+						{t(`philosophy.badge.${badge.key}`)}
+					</Typography>
+				</div>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	@media (prefers-reduced-motion: reduce) {
+		.group:hover {
+			transform: none;
+		}
+	}
+</style>
