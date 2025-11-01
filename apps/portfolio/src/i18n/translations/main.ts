@@ -17,6 +17,7 @@ export const main: {
 		awards: "Awards",
 		certificates: "Certificates",
 		publications: "Publications",
+		"publications.architecture_notes": "Architecture Notes",
 		volunteer: "Volunteer",
 		references: "References",
 		interests: "Interests",
@@ -116,6 +117,13 @@ export const main: {
 		"cta.message": "I'm open to senior roles, consulting projects, and system audits.",
 		"cta.linkedin": "Connect on LinkedIn",
 		"cta.schedule": "Schedule a Call",
+		// Skills domains
+		"skills.domain.backend": "Backend & Systems",
+		"skills.domain.cloud": "Cloud & DevOps",
+		"skills.domain.architecture": "Architecture & Design",
+		"skills.domain.quality": "Quality & Testing",
+		"skills.domain.frontend": "Frontend & UI",
+		"skills.domain.data": "Data & Analytics",
 	},
 	es: {
 		title: "Portafolio de {name} - {label}",
@@ -130,6 +138,7 @@ export const main: {
 		awards: "Premios",
 		certificates: "Certificados",
 		publications: "Publicaciones",
+		"publications.architecture_notes": "Notas de Arquitectura",
 		volunteer: "Voluntariado",
 		references: "Referencias",
 		interests: "Intereses",
@@ -229,5 +238,12 @@ export const main: {
 		"cta.message": "Estoy abierto a roles senior, proyectos de consultoría y auditorías de sistemas.",
 		"cta.linkedin": "Conectar en LinkedIn",
 		"cta.schedule": "Agendar una Llamada",
+		// Skills domains
+		"skills.domain.backend": "Backend y Sistemas",
+		"skills.domain.cloud": "Cloud y DevOps",
+		"skills.domain.architecture": "Arquitectura y Diseño",
+		"skills.domain.quality": "Calidad y Testing",
+		"skills.domain.frontend": "Frontend e Interfaz",
+		"skills.domain.data": "Datos y Análisis",
 	},
 };
