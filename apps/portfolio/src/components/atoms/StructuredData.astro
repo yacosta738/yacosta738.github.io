@@ -1,0 +1,106 @@
+---
+/**
+ * Structured Data (JSON-LD) component.
+ * This component generates schema.org structured data for better SEO and rich results.
+ * Implements Person and SoftwareEngineer schemas with comprehensive information.
+ * 
+ * @prop {Basics} basics - Basic information from the resume
+ */
+import type { Basics } from "@/core/resume";
+import { type Lang, LOCALES } from "@/i18n";
+
+interface Props {
+	basics: Basics | { image: string; summary: string; url: string };
+}
+
+const { basics } = Astro.props;
+const currentLocale = Astro.params.lang as Lang;
+
+// Check if basics has full data or is fallback
+const hasFullData = 'name' in basics;
+
+if (!hasFullData) {
+	// Skip structured data if we don't have full basics
+	return null;
+}
+
+const { name, label, image, email, phone, url, summary, location, profiles } = basics as Basics;
+
+// Build social media profile URLs
+const sameAs = profiles.map(profile => profile.url).filter(Boolean);
+
+// Resolve absolute image URL
+const getAbsoluteUrl = (path: string) => {
+	try {
+		return new URL(path, Astro.site || Astro.url).href;
+	} catch {
+		return path;
+	}
+};
+
+const imageUrl = getAbsoluteUrl(typeof image === 'string' ? image : (image as any)?.src || '');
+
+// Create Person schema
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": ["Person", "SoftwareEngineer"],
+	"name": name,
+	"jobTitle": label,
+	"description": summary,
+	"image": imageUrl,
+	"email": email,
+	"telephone": phone,
+	"url": url,
+	"sameAs": sameAs,
+	"address": {
+		"@type": "PostalAddress",
+		"addressLocality": location.city,
+		"addressRegion": location.region,
+		"addressCountry": location.countryCode
+	},
+	"knowsAbout": [
+		"Software Architecture",
+		"Clean Architecture",
+		"Domain-Driven Design",
+		"Distributed Systems",
+		"Microservices",
+		"Event-Driven Architecture",
+		"Kotlin",
+		"Spring Boot",
+		"Java",
+		"TypeScript",
+		"Cloud Architecture",
+		"DevOps",
+		"SOLID Principles",
+		"Design Patterns"
+	],
+	"worksFor": {
+		"@type": "Organization",
+		"name": "Deutsche Bank"
+	},
+	"alumniOf": {
+		"@type": "EducationalOrganization",
+		"name": "Universidad de las Ciencias Informáticas"
+	}
+};
+
+// Create WebSite schema
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": name,
+	"description": summary,
+	"url": Astro.site?.href || url,
+	"author": {
+		"@type": "Person",
+		"name": name
+	},
+	"inLanguage": [LOCALES.en.lang, LOCALES.es.lang]
+};
+---
+
+<!-- Person/SoftwareEngineer Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+<!-- WebSite Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />

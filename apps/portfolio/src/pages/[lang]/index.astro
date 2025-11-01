@@ -17,6 +17,7 @@ import FeaturedProjects from "@/components/sections/FeaturedProjects.astro";
 import Hero from "@/components/sections/Hero.astro";
 import ImpactMetrics from "@/components/sections/ImpactMetrics.astro";
 import TechnicalPhilosophy from "@/components/sections/TechnicalPhilosophy.astro";
+import FinalCTA from "@/components/sections/FinalCTA.astro";
 import Interests from "@/components/sections/Interests.astro";
 import Languages from "@/components/sections/Languages.astro";
 import Publications from "@/components/sections/Publications.astro";
@@ -128,6 +129,7 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
         </Section>
         )
       }
+    <FinalCTA profiles={resume.basics.profiles} />
     <Contact />
   </main>
   <slot name="aside">

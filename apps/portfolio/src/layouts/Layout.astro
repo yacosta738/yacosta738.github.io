@@ -15,6 +15,7 @@
  */
 import Analytics from "@/components/atoms/Analytics.astro";
 import AsyncCSS from "@/components/atoms/AsyncCSS.astro";
+import StructuredData from "@/components/atoms/StructuredData.astro";
 import Header from "@/components/organisms/Header.astro";
 import { SITE_TITLE } from "@/configs/site.consts";
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
@@ -209,6 +210,9 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
       name="twitter:image"
       content={imageUrl ? new URL(imageUrl, Astro.url).href : ""}
     />
+
+    <!-- Structured Data (JSON-LD) -->
+    <StructuredData basics={resume.basics} />
   </head>
   <body>
     <AsyncCSS />

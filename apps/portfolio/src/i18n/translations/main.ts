@@ -111,6 +111,11 @@ export const main: {
 		"philosophy.badge.ddd": "Domain-Driven Design",
 		"philosophy.badge.event": "Event-Driven Systems",
 		"philosophy.badge.devex": "Developer Experience",
+		// Final CTA
+		"cta.title": "Let's Talk Architecture",
+		"cta.message": "I'm open to senior roles, consulting projects, and system audits.",
+		"cta.linkedin": "Connect on LinkedIn",
+		"cta.schedule": "Schedule a Call",
 	},
 	es: {
 		title: "Portafolio de {name} - {label}",
@@ -219,5 +224,10 @@ export const main: {
 		"philosophy.badge.ddd": "Diseño Dirigido por el Dominio",
 		"philosophy.badge.event": "Sistemas Orientados a Eventos",
 		"philosophy.badge.devex": "Experiencia del Desarrollador",
+		// Final CTA
+		"cta.title": "Hablemos de Arquitectura",
+		"cta.message": "Estoy abierto a roles senior, proyectos de consultoría y auditorías de sistemas.",
+		"cta.linkedin": "Conectar en LinkedIn",
+		"cta.schedule": "Agendar una Llamada",
 	},
 };
