@@ -13,8 +13,10 @@ export const BRAND_NAME: string | Multilingual =
  * Used in the `<title>` tag and for SEO.
  * @type {string | Multilingual}
  */
-export const SITE_TITLE: string | Multilingual =
-	import.meta.env.SITE_TITLE || "Yuniel Acosta - Full Stack Developer";
+export const SITE_TITLE: string | Multilingual = {
+	en: import.meta.env.SITE_TITLE_EN || "Yuniel Acosta — Senior Software Engineer & Software Architect",
+	es: import.meta.env.SITE_TITLE_ES || "Yuniel Acosta — Ingeniero de Software Senior y Arquitecto de Software",
+};
 
 /**
  * The description of the site. A multilingual object with descriptions for each supported language.
@@ -24,8 +26,10 @@ export const SITE_TITLE: string | Multilingual =
 export const SITE_DESCRIPTION: Multilingual = {
 	en:
 		import.meta.env.SITE_DESCRIPTION_EN ||
-		"Portfolio of Yuniel Acosta, Full Stack Developer",
-	es: "Portafolio de Yuniel Acosta, Desarrollador Full Stack",
+		"Building scalable systems using Kotlin, Spring Boot, and Clean Architecture. Senior Software Engineer specialized in distributed systems, DDD, and event-driven architecture.",
+	es:
+		import.meta.env.SITE_DESCRIPTION_ES ||
+		"Construyendo sistemas escalables usando Kotlin, Spring Boot y Arquitectura Limpia. Ingeniero de Software Senior especializado en sistemas distribuidos, DDD y arquitectura orientada a eventos.",
 };
 
 /**
@@ -47,3 +51,25 @@ export const NOT_TRANSLATED_CAUTION: Multilingual = {
 		import.meta.env.NOT_TRANSLATED_CAUTION_ES ||
 		"Esta página no está disponible en tu idioma.",
 };
+
+/**
+ * Current employer information for structured data
+ * @type {string}
+ */
+export const CURRENT_EMPLOYER =
+	import.meta.env.CURRENT_EMPLOYER || "Deutsche Bank";
+
+/**
+ * Alumni institution for structured data
+ * @type {string}
+ */
+export const ALUMNI_INSTITUTION =
+	import.meta.env.ALUMNI_INSTITUTION ||
+	"Universidad de las Ciencias Informáticas";
+
+/**
+ * Calendly scheduling URL
+ * @type {string}
+ */
+export const CALENDLY_URL =
+	import.meta.env.CALENDLY_URL || "https://calendly.com/yacosta738";

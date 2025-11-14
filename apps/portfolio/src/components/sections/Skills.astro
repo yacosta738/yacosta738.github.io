@@ -2,15 +2,15 @@
 import Section from "@atoms/Section.astro";
 import { Icon } from "astro-icon/components";
 /**
- * Skills section component.
- * This component renders a section that displays a grid of skills. For each skill,
- * it shows the name, an icon (if available), a level indicator, and a list of
- * related keywords or sub-skills.
+ * Skills section component - Enhanced with domain grouping.
+ * This component renders a section that displays skills organized by technical domains.
+ * Each domain shows relevant skills with icons and keywords.
  *
  * @prop {Skill[]} [skills=[]] - An array of skill objects to display.
  */
 import Card from "@/components/molecules/Card.astro";
 import HighlightsList from "@/components/molecules/HighlightsList.astro";
+import Typography from "@/components/atoms/Typography.astro";
 import type Skill from "@/core/resume/skill/skill.model";
 import type SkillLibrary from "@/core/skill/skill-library.model";
 import { getSkills } from "@/core/skill/skill-library.service";
@@ -28,69 +28,109 @@ const matchedSkills: SkillLibrary[] = await getSkills({ icon: true });
 const skillMap = new Map(
 	matchedSkills.map((skill: SkillLibrary) => [skill.name.toLowerCase(), skill]),
 );
+
+// Define domain groupings with icons
+const domains = [
+	{
+		key: "backend",
+		icon: "lucide:server",
+		keywords: ["Backend", "API", "Microservices", "Spring", "Kotlin", "Java", "Node.js", "REST", "GraphQL"]
+	},
+	{
+		key: "cloud",
+		icon: "lucide:cloud",
+		keywords: ["AWS", "Cloud", "Docker", "Kubernetes", "Terraform", "CI/CD", "DevOps", "Azure", "GCP"]
+	},
+	{
+		key: "architecture",
+		icon: "lucide:layers",
+		keywords: ["Architecture", "DDD", "CQRS", "Event-Driven", "Design Patterns", "Clean Architecture", "SOLID"]
+	},
+	{
+		key: "quality",
+		icon: "lucide:test-tube",
+		keywords: ["Testing", "TDD", "Quality", "Testcontainers", "JUnit", "CodeQL", "Observability", "Monitoring"]
+	}
+];
+
+// Group skills by domain
+const groupSkillsByDomain = () => {
+	const grouped: Record<string, Skill[]> = {};
+	
+	domains.forEach(domain => {
+		grouped[domain.key] = skills.filter(skill => {
+			const skillKeywords = skill.keywords?.map(k => k.toLowerCase()) || [];
+			const domainKeywords = domain.keywords.map(k => k.toLowerCase());
+			
+			// Check if skill name or any keyword matches domain keywords
+			const nameMatch = domainKeywords.some(dk => skill.name.toLowerCase().includes(dk));
+			const keywordMatch = skillKeywords.some(sk => 
+				domainKeywords.some(dk => sk.includes(dk) || dk.includes(sk))
+			);
+			
+			return nameMatch || keywordMatch;
+		});
+	});
+	
+	return grouped;
+};
+
+const groupedSkills = groupSkillsByDomain();
 ---
 
 {skills.length > 0 && (
   <Section title={t("skills")}>
-    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {skills.map(({ name, keywords = [], level }) => {
-        const matchedSkill = skillMap.get(name.toLowerCase());
+    <div class="space-y-12">
+      {domains.map(domain => {
+        const domainSkills = groupedSkills[domain.key];
+        if (!domainSkills || domainSkills.length === 0) return null;
+        
         return (
-          <li>
-            <Card class="h-full">
-              <header class="card-header mb-4">
-                <div class="flex items-start gap-3 mb-3">
-                  <div class="text-primary flex-shrink-0">
-                    {matchedSkill?.icon && (
-                      <Icon name={matchedSkill.icon} class="w-6 h-6" aria-hidden="true" />
-                    )}
-                  </div>
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-semibold text-foreground text-lg leading-tight mb-1">
-                    {name}
-                  </h3>
-                  <div class="flex items-center gap-2">
-                    {level?.toLowerCase() === "expert" && (
-                      <span
-                        class="inline-flex items-center text-brand-accent/80"
-                        title={t("skills.level.expert") || "Expert level"}
-                      >
-                        <Icon name="lucide:award" class="w-4 h-4" aria-hidden="true" />
-                      </span>
-                    )}
-                    {level?.toLowerCase() === "advanced" && (
-                      <span
-                        class="inline-flex items-center text-brand-accent/80"
-                        title={t("skills.level.advanced") || "Advanced level"}
-                      >
-                        <Icon name="lucide:star" class="w-4 h-4" aria-hidden="true" />
-                      </span>
-                    )}
-                    {level?.toLowerCase() !== "expert" && level?.toLowerCase() !== "advanced" && (
-                      <span
-                        class="inline-flex items-center text-muted-foreground/60"
-                        title={t("skills.level.other", { level }) || `${level} level`}
-                      >
-                        <Icon name="lucide:circle" class="w-4 h-4" aria-hidden="true" />
-                      </span>
-                    )}
-                    <span class="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                      {level}
-                    </span>
-                  </div>
-                </div>
-              </header>
-              
-              {keywords.length > 0 && (
-                <div class="mt-4">
-                  <HighlightsList highlights={keywords} columns={2} />
-                </div>
-              )}
-            </Card>
-          </li>
+          <div class="domain-group">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="p-2 rounded-lg bg-brand-accent/10 text-brand-accent">
+                <Icon name={domain.icon} class="w-6 h-6" aria-hidden="true" />
+              </div>
+              <Typography as="h3" variant="subtitle" class="text-2xl font-bold text-foreground">
+                {t(`skills.domain.${domain.key}`)}
+              </Typography>
+            </div>
+            
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {domainSkills.map(({ name, keywords = [] }) => {
+                const matchedSkill = skillMap.get(name.toLowerCase());
+                return (
+                  <li>
+                    <Card class="h-full hover:border-brand-accent/30 transition-colors">
+                      <div class="flex items-start gap-3">
+                        <div class="text-brand-accent flex-shrink-0 mt-1">
+                          {matchedSkill?.icon && (
+                            <Icon name={matchedSkill.icon} class="w-5 h-5" aria-hidden="true" />
+                          )}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <h4 class="font-semibold text-foreground text-base leading-tight mb-2">
+                            {name}
+                          </h4>
+                          {keywords.length > 0 && (
+                            <HighlightsList highlights={keywords.slice(0, 4)} columns={2} />
+                          )}
+                        </div>
+                      </div>
+                    </Card>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         );
       })}
-    </ul>
+    </div>
   </Section>
 )}
+
+<style>
+  .domain-group {
+    scroll-margin-top: 2rem;
+  }
+</style>
