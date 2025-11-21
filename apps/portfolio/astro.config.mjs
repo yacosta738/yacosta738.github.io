@@ -66,10 +66,15 @@ export default defineConfig({
 			},
 		}),
 		(await import("astro-compress")).default({
+			// Re-enable CSS compression now that the scoping issue is fixed
 			CSS: true,
 			HTML: {
 				"html-minifier-terser": {
 					removeAttributeQuotes: false,
+					// Preserve data attributes used for Astro scoping
+					removeEmptyAttributes: false,
+					// Don't collapse whitespace aggressively to preserve readability
+					conservativeCollapse: true,
 				},
 			},
 			Image: false,

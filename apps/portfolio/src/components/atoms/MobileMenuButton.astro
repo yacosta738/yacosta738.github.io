@@ -97,60 +97,60 @@ const t = useTranslations(currentLocale);
 	-ms-user-select: none;
 	user-select: none;
 	transition: transform 400ms;
+}
 
-	.ham {
-		transition: transform 400ms;
-	}
+.menu-toggle .ham {
+	transition: transform 400ms;
+}
 
-	.line {
-		fill: none;
-		transition:
-			stroke-dasharray 400ms,
-			stroke-dashoffset 400ms;
-		stroke: #64ffda;
-		stroke-width: 5.5;
-		stroke-linecap: round;
-	}
+.menu-toggle .line {
+	fill: none;
+	transition:
+		stroke-dasharray 400ms,
+		stroke-dashoffset 400ms;
+	stroke: #64ffda;
+	stroke-width: 5.5;
+	stroke-linecap: round;
+}
 
-	.ham7 {
-		.top {
-			stroke-dasharray: 40 82;
-		}
-		.middle {
-			stroke-dasharray: 30 111;
-		}
-		.bottom {
-			stroke-dasharray: 20 161;
-		}
-	}
+.menu-toggle .ham7 .top {
+	stroke-dasharray: 40 82;
+}
 
-	&.active-menu {
-		.hamRotate {
-			transform: rotate(45deg);
-		}
-		.hamRotate180 {
-			transform: rotate(180deg);
-		}
-		.ham7 {
-			.top {
-				stroke-dasharray: 40 82;
-				stroke-dashoffset: -62px;
-			}
-			.middle {
-				stroke-dasharray: 40 60;
-				stroke-dashoffset: 23px;
-			}
-			.bottom {
-				stroke-dasharray: 40 82;
-				stroke-dashoffset: -82px;
-			}
-		}
-	}
+.menu-toggle .ham7 .middle {
+	stroke-dasharray: 30 111;
+}
 
-	&:focus-visible {
-		outline: 2px solid #64ffda;
-		outline-offset: 4px;
-		border-radius: 9999px;
-	}
+.menu-toggle .ham7 .bottom {
+	stroke-dasharray: 20 161;
+}
+
+.menu-toggle.active-menu .hamRotate {
+	transform: rotate(45deg);
+}
+
+.menu-toggle.active-menu .hamRotate180 {
+	transform: rotate(180deg);
+}
+
+.menu-toggle.active-menu .ham7 .top {
+	stroke-dasharray: 40 82;
+	stroke-dashoffset: -62px;
+}
+
+.menu-toggle.active-menu .ham7 .middle {
+	stroke-dasharray: 40 60;
+	stroke-dashoffset: 23px;
+}
+
+.menu-toggle.active-menu .ham7 .bottom {
+	stroke-dasharray: 40 82;
+	stroke-dashoffset: -82px;
+}
+
+.menu-toggle:focus-visible {
+	outline: 2px solid #64ffda;
+	outline-offset: 4px;
+	border-radius: 9999px;
 }
 </style>
