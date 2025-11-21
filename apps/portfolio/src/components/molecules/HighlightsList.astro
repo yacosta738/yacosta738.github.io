@@ -16,13 +16,15 @@ interface Props extends HTMLAttributes<"ul"> {
 const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 ---
 
-{highlights && highlights.length > 0 && (
-<ul class={`highlights ${className}`} {...attrs}>
-		{highlights.map((highlight) => (
-			<li>{highlight}</li>
-		))}
-	</ul>
-)}
+{
+	highlights && highlights.length > 0 && (
+		<ul class={`highlights ${className}`} {...attrs}>
+			{highlights.map((highlight) => (
+				<li set:html={highlight} />
+			))}
+		</ul>
+	)
+}
 
 <style define:vars={{ columns }}>
 	.highlights {
@@ -30,7 +32,7 @@ const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 		margin: 0;
 		list-style: none;
 		font-size: var(--fz-md);
-		
+
 		/* CSS Grid implementation */
 		display: grid;
 		grid-template-columns: repeat(var(--columns), 1fr);

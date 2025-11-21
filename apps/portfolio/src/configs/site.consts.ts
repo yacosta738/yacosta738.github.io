@@ -14,7 +14,7 @@ export const BRAND_NAME: string | Multilingual =
  * @type {string | Multilingual}
  */
 export const SITE_TITLE: string | Multilingual =
-	import.meta.env.SITE_TITLE || "Yuniel Acosta - Full Stack Developer";
+	import.meta.env.SITE_TITLE || "Yuniel Acosta - Senior Software Engineer & Architect";
 
 /**
  * The description of the site. A multilingual object with descriptions for each supported language.
@@ -24,8 +24,8 @@ export const SITE_TITLE: string | Multilingual =
 export const SITE_DESCRIPTION: Multilingual = {
 	en:
 		import.meta.env.SITE_DESCRIPTION_EN ||
-		"Portfolio of Yuniel Acosta, Full Stack Developer",
-	es: "Portafolio de Yuniel Acosta, Desarrollador Full Stack",
+		"Portfolio of Yuniel Acosta, Senior Software Engineer & Software Architect specializing in Distributed Systems and DDD.",
+	es: "Portafolio de Yuniel Acosta, Ingeniero de Software Senior y Arquitecto de Software especializado en Sistemas Distribuidos y DDD.",
 };
 
 /**
