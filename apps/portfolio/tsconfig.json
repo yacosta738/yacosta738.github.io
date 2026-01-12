@@ -18,5 +18,12 @@
 	},
 	"extends": "astro/tsconfigs/strict",
 	"include": [".astro/types.d.ts", "**/*"],
-	"exclude": ["dist", "tests", "tests/**", "**/*.test.ts", "**/*.spec.ts"]
+	"exclude": [
+		"dist",
+		"coverage",
+		"tests",
+		"tests/**",
+		"**/*.test.ts",
+		"**/*.spec.ts"
+	]
 }
