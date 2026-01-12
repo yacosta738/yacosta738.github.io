@@ -21,88 +21,6 @@ interface VerificationResult {
 }
 
 /**
- * Verify hCaptcha token with the hCaptcha API
- *
- * @param token - The hCaptcha response token from the client
- * @param secretKey - The hCaptcha secret key from environment variables
- * @param remoteIp - Optional IP address of the user submitting the form
- * @returns Verification result with success status and message
- */
-export async function verifyHCaptcha(
-	token: string,
-	secretKey: string,
-	remoteIp?: string,
-): Promise<VerificationResult> {
-	// Validate inputs
-	if (!token) {
-		return {
-			success: false,
-			message: "Missing hCaptcha token",
-		};
-	}
-
-	if (!secretKey) {
-		console.error("hCaptcha secret key not configured");
-		return {
-			success: false,
-			message: "Server configuration error",
-		};
-	}
-
-	try {
-		// Prepare the request body
-		const formData = new URLSearchParams();
-		formData.append("secret", secretKey);
-		formData.append("response", token);
-		if (remoteIp) {
-			formData.append("remoteip", remoteIp);
-		}
-
-		// Make the verification request to hCaptcha
-		const response = await fetch("https://hcaptcha.com/siteverify", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-			},
-			body: formData.toString(),
-		});
-
-		if (!response.ok) {
-			console.error(
-				`hCaptcha verification request failed with status: ${response.status}`,
-			);
-			return {
-				success: false,
-				message: "Failed to verify captcha",
-			};
-		}
-
-		const result = (await response.json()) as HCaptchaVerifyResponse;
-
-		if (!result.success) {
-			console.warn("hCaptcha verification failed:", result["error-codes"]);
-			return {
-				success: false,
-				message: "Captcha verification failed",
-				errorCodes: result["error-codes"],
-			};
-		}
-
-		// Verification successful
-		return {
-			success: true,
-			message: "Captcha verified successfully",
-		};
-	} catch (error) {
-		console.error("Error verifying hCaptcha:", error);
-		return {
-			success: false,
-			message: "Error verifying captcha",
-		};
-	}
-}
-
-/**
  * Common hCaptcha error codes and their meanings
  */
 export const HCAPTCHA_ERROR_CODES = {
@@ -120,3 +38,114 @@ export const HCAPTCHA_ERROR_CODES = {
 	"sitekey-secret-mismatch":
 		"The sitekey is not registered with the provided secret",
 } as const;
+
+/**
+ * Verifies an hCaptcha token with the hCaptcha API
+ *
+ * @param token - The hCaptcha response token from the client
+ * @param secret - Your hCaptcha secret key
+ * @param remoteip - Optional: The user's IP address for additional validation
+ * @returns Promise resolving to a VerificationResult
+ *
+ * @example
+ * const result = await verifyHCaptcha(
+ *   token,
+ *   env.HCAPTCHA_SECRET_KEY,
+ *   request.headers.get("CF-Connecting-IP")
+ * );
+ * if (result.success) {
+ *   // Proceed with form submission
+ * }
+ */
+export async function verifyHCaptcha(
+	token: string,
+	secret: string,
+	remoteip?: string | null,
+): Promise<VerificationResult> {
+	// Validate input parameters
+	if (!token || typeof token !== "string") {
+		return {
+			success: false,
+			message: "Invalid or missing captcha token",
+		};
+	}
+
+	if (!secret || typeof secret !== "string") {
+		return {
+			success: false,
+			message: "Server configuration error: missing secret key",
+		};
+	}
+
+	try {
+		// Build the request body
+		const params = new URLSearchParams({
+			response: token,
+			secret: secret,
+		});
+
+		// Add remote IP if provided (optional but recommended)
+		if (remoteip) {
+			params.append("remoteip", remoteip);
+		}
+
+		// Make the verification request to hCaptcha
+		const response = await fetch("https://hcaptcha.com/siteverify", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: params.toString(),
+		});
+
+		// Handle network errors
+		if (!response.ok) {
+			console.error(
+				`hCaptcha API returned status ${response.status}: ${response.statusText}`,
+			);
+			return {
+				success: false,
+				message: "Failed to verify captcha with hCaptcha service",
+			};
+		}
+
+		// Parse the response
+		const data = (await response.json()) as HCaptchaVerifyResponse;
+
+		// Check if verification was successful
+		if (data.success) {
+			return {
+				success: true,
+				message: "Captcha verification successful",
+			};
+		}
+
+		// Handle verification failure with detailed error codes
+		const errorCodes = data["error-codes"] || [];
+		const errorMessages = errorCodes
+			.map(
+				(code) =>
+					HCAPTCHA_ERROR_CODES[code as keyof typeof HCAPTCHA_ERROR_CODES] ||
+					code,
+			)
+			.join(", ");
+
+		console.warn(
+			"hCaptcha verification failed:",
+			errorMessages || "Unknown error",
+		);
+
+		return {
+			success: false,
+			message: errorMessages || "Captcha verification failed",
+			errorCodes,
+		};
+	} catch (error) {
+		// Handle unexpected errors
+		console.error("Error during hCaptcha verification:", error);
+		return {
+			success: false,
+			message: "An error occurred while verifying captcha",
+		};
+	}
+}

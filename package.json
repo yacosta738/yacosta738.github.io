@@ -2,6 +2,7 @@
 	"name": "yacosta-portfolio-monorepo",
 	"version": "0.0.0-development",
 	"private": true,
+  "packageManager": "pnpm@10.28.0",
 	"scripts": {
 		"dev": "pnpm -w run ruler:apply && pnpm --filter=./apps/* --parallel dev",
 		"build": "pnpm --filter=./apps/* --parallel build",
@@ -23,13 +24,12 @@
 		"test:e2e": "pnpm --filter=./apps/* test:e2e"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.5",
+		"@biomejs/biome": "2.3.11",
 		"@semantic-release/exec": "7.1.0",
-		"@semantic-release/github": "11.0.6",
-		"@semantic-release/npm": "12.0.2",
-		"playwright": "1.56.0",
-		"semantic-release": "^24.2.9",
-		"vitest": "^2.1.9"
-	},
-	"dependencies": {}
+		"@semantic-release/github": "12.0.2",
+		"@semantic-release/npm": "13.1.3",
+		"playwright": "1.57.0",
+		"semantic-release": "^25.0.2",
+		"vitest": "^4.0.16"
+	}
 }
