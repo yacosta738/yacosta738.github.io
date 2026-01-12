@@ -1,4 +1,204 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:recommended"]
+	"description": "Renovate configuration for yacosta738.github.io monorepo",
+	"extends": [
+		"config:recommended",
+		":dependencyDashboard",
+		":semanticCommits",
+		":separateMajorReleases",
+		":combinePatchMinorReleases",
+		":ignoreModulesAndTests",
+		":prHourlyLimit2",
+		":prConcurrentLimit10",
+		"group:monorepos",
+		"group:recommended",
+		"workarounds:all"
+	],
+	"timezone": "Europe/Madrid",
+	"schedule": [
+		"after 10pm every weekday",
+		"before 5am every weekday",
+		"every weekend"
+	],
+	"labels": ["dependencies", "renovate"],
+	"assigneesFromCodeOwners": true,
+	"reviewersFromCodeOwners": true,
+	"packageRules": [
+		{
+			"description": "Security updates - auto-merge patch and minor",
+			"matchUpdateTypes": ["patch", "pin", "digest"],
+			"matchDepTypes": ["dependencies"],
+			"matchPackageNames": ["*"],
+			"automerge": true,
+			"automergeType": "pr",
+			"platformAutomerge": true,
+			"labels": ["dependencies", "security", "automerge"],
+			"schedule": ["at any time"]
+		},
+		{
+			"description": "Development dependencies - auto-merge non-major",
+			"matchDepTypes": ["devDependencies"],
+			"matchUpdateTypes": ["patch", "minor"],
+			"automerge": true,
+			"automergeType": "pr",
+			"platformAutomerge": true,
+			"labels": ["dependencies", "devDependencies", "automerge"]
+		},
+		{
+			"description": "Major updates - require review",
+			"matchUpdateTypes": ["major"],
+			"automerge": false,
+			"labels": ["dependencies", "major-update"],
+			"commitMessagePrefix": "feat(deps)!:",
+			"reviewers": ["yacosta738"]
+		},
+		{
+			"description": "Astro monorepo - group all together",
+			"groupName": "Astro",
+			"matchPackageNames": ["/^astro/", "/^@astrojs//"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"labels": ["dependencies", "astro"]
+		},
+		{
+			"description": "Vue ecosystem - group together",
+			"groupName": "Vue ecosystem",
+			"matchPackageNames": ["/^vue/", "/^@vue//", "/^@vueuse//", "/^pinia/"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"labels": ["dependencies", "vue"]
+		},
+		{
+			"description": "TypeScript and related tools",
+			"groupName": "TypeScript",
+			"matchPackageNames": ["/^typescript/", "/^@types//", "/^ts-/"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"labels": ["dependencies", "typescript"]
+		},
+		{
+			"description": "Testing tools - Vitest, Playwright",
+			"groupName": "Testing tools",
+			"matchPackageNames": [
+				"/^vitest/",
+				"/^@vitest//",
+				"/^playwright/",
+				"/^@playwright//",
+				"/^@testing-library//"
+			],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"labels": ["dependencies", "testing"]
+		},
+		{
+			"description": "Biome linter/formatter",
+			"groupName": "Biome",
+			"matchPackageNames": ["/^@biomejs//"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"labels": ["dependencies", "linting"]
+		},
+		{
+			"description": "Cloudflare Workers ecosystem",
+			"groupName": "Cloudflare Workers",
+			"matchPackageNames": [
+				"/^@cloudflare//",
+				"/^wrangler/",
+				"/^miniflare/",
+				"/^workerd/"
+			],
+			"matchUpdateTypes": ["minor", "patch"],
+			"labels": ["dependencies", "cloudflare"]
+		},
+		{
+			"description": "Hono framework and plugins",
+			"groupName": "Hono",
+			"matchPackageNames": ["/^hono/", "/^@hono//"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": true,
+			"labels": ["dependencies", "hono"]
+		},
+		{
+			"description": "GitHub Actions - monthly updates",
+			"matchManagers": ["github-actions"],
+			"schedule": ["before 5am on the first day of the month"],
+			"automerge": false,
+			"labels": ["dependencies", "github-actions"],
+			"commitMessagePrefix": "ci(deps):",
+			"groupName": "GitHub Actions"
+		},
+		{
+			"description": "Pin Dockerfile base images",
+			"matchManagers": ["dockerfile"],
+			"pinDigests": true,
+			"automerge": false,
+			"labels": ["dependencies", "docker"]
+		},
+		{
+			"description": "Semantic Release and related plugins",
+			"groupName": "Semantic Release",
+			"matchPackageNames": ["/^semantic-release/", "/^@semantic-release//"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"automerge": false,
+			"labels": ["dependencies", "semantic-release"],
+			"reviewers": ["yacosta738"]
+		},
+		{
+			"description": "pnpm package manager",
+			"matchManagers": ["npm"],
+			"matchPackageNames": ["pnpm"],
+			"automerge": false,
+			"labels": ["dependencies", "pnpm"],
+			"reviewers": ["yacosta738"]
+		}
+	],
+	"vulnerabilityAlerts": {
+		"labels": ["security", "vulnerability"],
+		"automerge": false,
+		"schedule": ["at any time"]
+	},
+	"lockFileMaintenance": {
+		"enabled": true,
+		"schedule": ["before 5am on monday"],
+		"automerge": true,
+		"automergeType": "pr",
+		"platformAutomerge": true,
+		"commitMessageAction": "chore(deps):",
+		"commitMessageTopic": "lock file maintenance"
+	},
+	"semanticCommits": "enabled",
+	"commitMessagePrefix": "fix(deps):",
+	"commitMessageAction": "update",
+	"commitMessageTopic": "{{depName}}",
+	"commitMessageExtra": "to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isMajor}}{{prettyNewMajor}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}{{/if}}",
+	"prCreation": "not-pending",
+	"rebaseWhen": "behind-base-branch",
+	"platformAutomerge": true,
+	"ignorePresets": [":prHourlyLimit2"],
+	"prHourlyLimit": 3,
+	"prConcurrentLimit": 15,
+	"minimumReleaseAge": "3 days",
+	"internalChecksFilter": "strict",
+	"separateMinorPatch": true,
+	"separateMultipleMajor": true,
+	"separateMajorMinor": true,
+	"rangeStrategy": "bump",
+	"bumpVersion": "patch",
+	"ignoreDeps": [],
+	"ignorePaths": [
+		"**/node_modules/**",
+		"**/bower_components/**",
+		"**/vendor/**",
+		"**/__tests__/**",
+		"**/test/**",
+		"**/tests/**",
+		"**/__mocks__/**"
+	],
+	"enabledManagers": ["npm", "github-actions", "dockerfile", "docker-compose"],
+	"dependencyDashboardApproval": false,
+	"dependencyDashboardAutoclose": true,
+	"dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
+	"dependencyDashboardHeader": "This issue lists Renovate updates and detected dependencies. Read the [Dependency Dashboard docs](https://docs.renovatebot.com/key-concepts/dashboard/) to learn more.",
+	"dependencyDashboardFooter": "---\n\n🔧 Configure Renovate in [renovate.json](https://github.com/yacosta738/yacosta738.github.io/blob/main/renovate.json)",
+	"customManagers": []
 }
