@@ -81,6 +81,7 @@ runs:
       working-directory: apps/portfolio
       env:
         CI: true
+        PW_USE_PREVIEW: '1'
       run: |
         echo "🎭 Running E2E tests..."
         
