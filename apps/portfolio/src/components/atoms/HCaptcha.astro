@@ -94,16 +94,21 @@ if (!siteKey) {
 				return;
 			}
 
-			// Already loading
-			if (window.hcaptchaLoading) {
-				const checkInterval = setInterval(() => {
-					if (window.hcaptcha) {
-						clearInterval(checkInterval as unknown as number);
-						resolve();
-					}
-				}, 100);
-				return;
-			}
+		// Already loading - wait for it with timeout
+		if (window.hcaptchaLoading) {
+			const maxWaitTime = 15000; // 15 seconds max wait
+			const startTime = Date.now();
+			const checkInterval = setInterval(() => {
+				if (window.hcaptcha) {
+					clearInterval(checkInterval as unknown as number);
+					resolve();
+				} else if (Date.now() - startTime > maxWaitTime) {
+					clearInterval(checkInterval as unknown as number);
+					reject(new Error('Timeout waiting for hCaptcha to load'));
+				}
+			}, 100);
+			return;
+		}
 
 			window.hcaptchaLoading = true;
 

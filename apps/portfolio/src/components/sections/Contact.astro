@@ -181,13 +181,13 @@ const t = useTranslations(Astro.currentLocale as Lang);
     border-color: #065f46;
   }
 
-  .dark .contact-submit-btn {
+  :global(.dark) .contact-submit-btn {
     color: #64ffda;
     border-color: #64ffda;
   }
 
-  .dark .contact-submit-btn:hover,
-  .dark .contact-submit-btn:focus {
+  :global(.dark) .contact-submit-btn:hover,
+  :global(.dark) .contact-submit-btn:focus {
     background-color: rgba(100, 255, 218, 0.15);
     color: #64ffda;
     border-color: #64ffda;

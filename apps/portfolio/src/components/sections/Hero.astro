@@ -147,7 +147,7 @@ const passionItems =
     color: #047857; /* emerald-700 - 5.5:1 contrast on white */
   }
 
-  .dark .hero-greeting {
+  :global(.dark) .hero-greeting {
     color: #64ffda; /* cyan for dark mode */
   }
 
@@ -176,24 +176,24 @@ const passionItems =
   }
 
   .get-in-touch-btn:focus-visible {
-    ring-color: #047857;
+    --tw-ring-color: #047857;
   }
 
   /* Dark mode: bright cyan on dark navy - excellent contrast */
-  .dark .get-in-touch-btn {
+  :global(.dark) .get-in-touch-btn {
     color: #64ffda;
     border-color: #64ffda;
   }
 
-  .dark .get-in-touch-btn:hover,
-  .dark .get-in-touch-btn:focus {
+  :global(.dark) .get-in-touch-btn:hover,
+  :global(.dark) .get-in-touch-btn:focus {
     background-color: rgba(100, 255, 218, 0.1);
     color: #64ffda;
     border-color: #64ffda;
   }
 
-  .dark .get-in-touch-btn:focus-visible {
-    ring-color: #64ffda;
+  :global(.dark) .get-in-touch-btn:focus-visible {
+    --tw-ring-color: #64ffda;
   }
 </style>
 

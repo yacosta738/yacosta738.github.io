@@ -189,8 +189,8 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <link rel="preconnect" href="https://api.hcaptcha.com" crossorigin />
     <link rel="dns-prefetch" href="https://newassets.hcaptcha.com" />
 
-    <!-- SEO: Canonical URL -->
-    <link rel="canonical" href={Astro.url.href} />
+    <!-- SEO: Canonical URL (clean, without query parameters) -->
+    <link rel="canonical" href={`${Astro.url.origin}${Astro.url.pathname}`} />
 
     <!-- Additional SEO meta tags -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
