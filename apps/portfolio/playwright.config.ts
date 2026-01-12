@@ -51,8 +51,14 @@ export default defineConfig({
 		// index is available (slower but more stable).
 		const usePreview = process.env.PW_USE_PREVIEW === "1";
 		if (usePreview) {
+			// In CI, the build artifact may already exist. Check before rebuilding.
+			// If dist/ exists and has content, skip build. Otherwise, build first.
+			const buildCommand = process.env.CI
+				? "test -d dist && test -f dist/index.html && echo 'Using pre-built artifact' || pnpm build"
+				: "pnpm build";
+
 			return {
-				command: "pnpm build && pnpm preview --port 4322",
+				command: `${buildCommand} && pnpm preview --port 4322`,
 				url: "http://localhost:4322",
 				timeout: 600_000,
 				reuseExistingServer: false,
