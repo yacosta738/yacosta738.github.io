@@ -48,7 +48,7 @@ const getPrimaryTechSkills = async (skillsList: Skill[]): Promise<string[]> => {
 		(s) => s.name === "Architecture" || s.name === "System Architecture",
 	);
 
-	if (architectureSkills && architectureSkills.keywords) {
+	if (architectureSkills?.keywords) {
 		return architectureSkills.keywords.slice(0, 6);
 	}
 

@@ -16,11 +16,7 @@
  */
 
 import { useTranslations } from "@/i18n";
-import {
-	getGiscusLang,
-	getGiscusTheme,
-	giscusConfig,
-} from "@/lib/comments-config";
+import { getGiscusLang } from "@/lib/comments-config";
 
 interface Props {
 	/** Current page slug for mapping to GitHub Discussion */
@@ -51,7 +47,7 @@ const lang = getGiscusLang(locale);
 
 	<!-- Reserved space container to prevent CLS -->
 	<div
-		class="giscus-container min-h-[200px] relative"
+		class="giscus-container min-h-50 relative"
 		data-slug={slug}
 		data-lang={lang}
 		data-testid="giscus-container"
@@ -80,7 +76,6 @@ const lang = getGiscusLang(locale);
 	 * Inject Giscus script into container
 	 */
 	function loadGiscusWidget(container: HTMLElement): void {
-		const slug = container.dataset.slug || '';
 		const lang = container.dataset.lang || 'en';
 		const theme = getCurrentTheme();
 		

@@ -14,7 +14,8 @@ export const BRAND_NAME: string | Multilingual =
  * @type {string | Multilingual}
  */
 export const SITE_TITLE: string | Multilingual =
-	import.meta.env.SITE_TITLE || "Yuniel Acosta - Senior Software Engineer & Architect";
+	import.meta.env.SITE_TITLE ||
+	"Yuniel Acosta - Senior Software Engineer & Architect";
 
 /**
  * The description of the site. A multilingual object with descriptions for each supported language.
