@@ -323,7 +323,7 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 					// Success
 					console.log('Success message:', result.message || t.success); // Debugging
 					statusMessage.textContent = result.message || t.success;
-					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-green-600 font-medium";
+					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-brand-accent font-medium";
 					form.reset();
 					
 					// Reset captcha

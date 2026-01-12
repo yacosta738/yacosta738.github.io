@@ -67,7 +67,14 @@ export default defineConfig({
 		}),
 		(await import("astro-compress")).default({
 			// Re-enable CSS compression now that the scoping issue is fixed
-			CSS: true,
+			CSS: {
+				// Use csso for better CSS minification
+				csso: {
+					restructure: true,
+					forceMediaMerge: false,
+					comments: false,
+				},
+			},
 			HTML: {
 				"html-minifier-terser": {
 					removeAttributeQuotes: false,
@@ -75,10 +82,26 @@ export default defineConfig({
 					removeEmptyAttributes: false,
 					// Don't collapse whitespace aggressively to preserve readability
 					conservativeCollapse: true,
+					minifyCSS: true,
+					minifyJS: true,
+					removeComments: true,
+					collapseWhitespace: true,
 				},
 			},
 			Image: false,
-			JavaScript: true,
+			JavaScript: {
+				// Use terser for better JS minification
+				terser: {
+					compress: {
+						drop_console: true,
+						passes: 2,
+					},
+					mangle: true,
+					format: {
+						comments: false,
+					},
+				},
+			},
 			SVG: true,
 			Logger: 1,
 		}),

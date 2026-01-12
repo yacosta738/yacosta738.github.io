@@ -1,0 +1,18 @@
+# Cloudflare Pages Configuration
+# https://developers.cloudflare.com/pages/platform/build-configuration
+
+[build]
+  # Build command
+  command = "pnpm install && pnpm --filter=portfolio build"
+  
+  # Output directory (relative to repo root)
+  directory = "apps/portfolio/dist"
+  
+  # Environment variables
+  [build.environment]
+    NODE_VERSION = "20"
+    PNPM_VERSION = "10.28.0"
+
+# Custom headers and routes are handled by:
+# - apps/portfolio/public/_headers
+# - apps/portfolio/public/_routes.json

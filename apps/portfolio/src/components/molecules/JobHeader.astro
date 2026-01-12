@@ -89,14 +89,14 @@ const formatDateRange = (
                         {companyUrl ? (
                             <a
                                 href={companyUrl}
-                                class="text-green no-underline relative inline-block transition-all duration-250 ease-out hover:after:w-full focus:after:w-full after:content-[''] after:absolute after:w-0 after:h-px after:-bottom-0.5 after:left-0 after:bg-green after:transition-all after:duration-250 after:ease-out after:opacity-50"
+                                class="text-brand-accent no-underline relative inline-block transition-all duration-250 ease-out hover:after:w-full focus:after:w-full after:content-[''] after:absolute after:w-0 after:h-px after:-bottom-0.5 after:left-0 after:bg-brand-accent after:transition-all after:duration-250 after:ease-out after:opacity-50"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 {company}
                             </a>
                         ) : (
-                            <span class="text-green">{company}</span>
+                            <span class="text-brand-accent">{company}</span>
                         )}
                     </>
                 )
@@ -104,7 +104,7 @@ const formatDateRange = (
         </h3>
 
         <div class="flex gap-4 items-center flex-wrap max-sm:flex-col max-sm:items-start max-sm:gap-1">
-            <p class="text-right pr-5 text-green font-mono text-xs font-semibold leading-tight">{formatDateRange(startDate, endDate, locale)}</p>
+            <p class="text-right pr-5 text-brand-accent font-mono text-xs font-semibold leading-tight">{formatDateRange(startDate, endDate, locale)}</p>
             {location && <p class="m-0 text-light-slate font-mono text-xs before:content-['📍_'] before:mr-1">{location}</p>}
         </div>
     </div>
@@ -112,9 +112,18 @@ const formatDateRange = (
 
 <style>
 	/* Light mode overrides for JobHeader */
-	html:not(.dark) .text-green {
-		color: var(--brand-accent) !important;
+	html:not(.dark) .text-lightest-slate {
+		color: #0f172a !important; /* dark text for contrast */
 	}
+
+	html:not(.dark) .text-slate {
+		color: #64748b !important; /* readable gray */
+	}
+
+	html:not(.dark) .text-light-slate {
+		color: #64748b !important;
+	}
+
 
 	html:not(.dark) .text-lightest-slate {
 		color: #0f172a !important; /* dark text for contrast */

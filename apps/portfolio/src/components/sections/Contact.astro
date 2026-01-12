@@ -178,7 +178,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 
   input:focus:valid,
   textarea:focus:valid {
-    border-color: #22c55e; /* green-500 */
+    border-color: var(--color-brand-accent);
   }
 </style>
 
@@ -349,7 +349,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 				if (result.success) {
 					// Success
 					formStatus.textContent = result.message || t.success;
-					formStatus.className = "mt-4 text-center h-6 text-green-600 font-medium";
+					formStatus.className = "mt-4 text-center h-6 text-brand-accent font-medium";
 					form.reset();
 
 					// Reset captcha

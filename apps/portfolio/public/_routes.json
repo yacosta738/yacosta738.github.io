@@ -1,0 +1,31 @@
+{
+	"version": 1,
+	"include": ["/*"],
+	"exclude": [
+		"/assets/*",
+		"/fonts/*",
+		"/_astro/*",
+		"/*.css",
+		"/*.js",
+		"/*.woff",
+		"/*.woff2",
+		"/*.ttf",
+		"/*.eot",
+		"/*.svg",
+		"/*.png",
+		"/*.jpg",
+		"/*.jpeg",
+		"/*.webp",
+		"/*.ico",
+		"/*.pdf",
+		"/favicon.*",
+		"/android-chrome-*.png",
+		"/apple-touch-icon.png",
+		"/icon-*.png",
+		"/site.webmanifest",
+		"/browserconfig.xml",
+		"/humans.txt",
+		"/robots.txt",
+		"/.nojekyll"
+	]
+}

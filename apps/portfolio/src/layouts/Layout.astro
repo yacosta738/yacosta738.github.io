@@ -178,10 +178,12 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Font is loaded via @font-face in fonts.css, no preload needed in production -->
+    <!-- Preload critical fonts to reduce render blocking -->
+    <link rel="preload" href="/assets/font/alkatra/alkatra-v3-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- DNS prefetch for external resources (non-blocking) -->
+    <!-- DNS prefetch and preconnect for Cloudflare optimization -->
     <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+    <link rel="preconnect" href="https://cloudflareinsights.com" crossorigin />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
@@ -211,7 +213,6 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     />
   </head>
   <body>
-    <AsyncCSS />
     <LocaleSuggest />
     <slot name="header">
       <Header id={HEADER_ID} showSearch={showSearch} />

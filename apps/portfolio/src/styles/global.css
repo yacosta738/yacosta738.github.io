@@ -30,7 +30,9 @@
 	--color-brand-navy: #ffffff;
 	--color-brand-navy-light: #f8fafc;
 	--color-brand-navy-lighter: #cbd5e0;
-	--color-brand-accent: #047857;
+	/* Using darker green for better contrast in light mode (WCAG AA compliant) */
+	--color-brand-accent: #065f46;
+	--color-brand-accent-hover: #047857;
 
 	/* Font families */
 	--font-sans: "Calibre", "Inter", -apple-system, system-ui, sans-serif;
@@ -65,6 +67,7 @@
 	--color-brand-navy-light: #112240;
 	--color-brand-navy-lighter: #233554;
 	--color-brand-accent: #64ffda;
+	--color-brand-accent-hover: #5ce3c6;
 
 	/* Giscus comment widget colors for dark mode */
 	--giscus-bg: var(--color-background-secondary);
@@ -90,7 +93,9 @@
 		--color-background-tertiary: #f9fafb;
 		--color-border: #4b5563;
 		--color-border-hover: #374151;
-		--color-brand-accent: #047857;
+		/* Even darker green for high contrast mode (AAA compliant) */
+		--color-brand-accent: #064e3b;
+		--color-brand-accent-hover: #065f46;
 		--color-muted: #000000;
 	}
 }
@@ -114,6 +119,7 @@
 	--color-light-navy: var(--color-brand-navy-light);
 	--color-lightest-navy: var(--color-brand-navy-lighter);
 	--color-green-500: var(--color-brand-accent);
+	--color-green: var(--color-brand-accent);
 
 	/* Font family legacy mapping */
 	--font-titles: var(--font-display);
@@ -136,6 +142,7 @@ html.dark {
 	--color-light-navy: var(--color-brand-navy-light);
 	--color-lightest-navy: var(--color-brand-navy-lighter);
 	--color-green-500: var(--color-brand-accent);
+	--color-green: var(--color-brand-accent);
 }
 
 /* Custom Tailwind utilities for semantic colors and fonts */
@@ -194,8 +201,16 @@ html.dark {
 		color: var(--color-brand-accent);
 	}
 
+	.text-brand-accent-hover {
+		color: var(--color-brand-accent-hover);
+	}
+
 	.bg-brand-accent {
 		background-color: var(--color-brand-accent);
+	}
+
+	.bg-brand-accent-hover {
+		background-color: var(--color-brand-accent-hover);
 	}
 
 	.bg-brand-navy {
@@ -204,6 +219,10 @@ html.dark {
 
 	.border-brand-accent {
 		border-color: var(--color-brand-accent);
+	}
+
+	.border-brand-accent-hover {
+		border-color: var(--color-brand-accent-hover);
 	}
 
 	/* Enhanced contrast utilities for better readability */
@@ -606,7 +625,9 @@ html {
 		--color-brand-navy: #ffffff;
 		--color-brand-navy-light: #f8fafc;
 		--color-brand-navy-lighter: #e2e8f0;
-		--color-brand-accent: #0f766e;
+		/* Darker green for print to ensure readability */
+		--color-brand-accent: #065f46;
+		--color-brand-accent-hover: #047857;
 
 		/* Prefer explicit print background/text; these appear later in the cascade
 		   and should override normal theme classes. Leave without !important and

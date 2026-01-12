@@ -21,7 +21,9 @@
 		"update-deps": "pnpm update -i -r --latest",
 		"update-interactive": "pnpm update --interactive",
 		"test:unit": "pnpm --filter=./apps/* test:unit",
-		"test:e2e": "pnpm --filter=./apps/* test:e2e"
+		"test:e2e": "pnpm --filter=./apps/* test:e2e",
+		"cloudflare:check": "bash scripts/cloudflare-check.sh",
+		"cloudflare:preview": "pnpm --filter=portfolio build && pnpm --filter=portfolio preview"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.11",
