@@ -20,17 +20,33 @@ let prevTitle=document.title,tid;window.addEventListener("blur",()=>{clearTimeou
 <!-- Global keyboard shortcuts for search -->
 <script is:inline>
   // Cmd+K (Mac) or Ctrl+K (Windows/Linux) to open search
-  document.addEventListener('keydown', (event) => {
-    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-      event.preventDefault();
+  // Prevents duplicate listener registration and hijacking while typing
+  if (!window.__portfolioSearchShortcutInstalled) {
+    window.__portfolioSearchShortcutInstalled = true;
+    document.addEventListener('keydown', function(event) {
+      // Skip if user is typing in an input field
+      var target = event.target;
+      if (target && (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        target.closest('input, textarea, [contenteditable="true"]')
+      )) {
+        return;
+      }
 
-      // Detect current language from URL
-      const currentPath = window.location.pathname;
-      const langMatch = currentPath.match(/^\/(en|es)\//);
-      const lang = langMatch ? langMatch[1] : 'en';
+      // Check for Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
 
-      // Navigate to search page
-      window.location.href = `/${lang}/search`;
-    }
-  });
+        // Detect current language from URL - only allow en/es
+        var currentPath = window.location.pathname;
+        var langMatch = currentPath.match(/^\/(en|es)\//);
+        var lang = langMatch ? langMatch[1] : 'en';
+
+        // Navigate to search page (safe: controlled path)
+        window.location.href = '/' + lang + '/search';
+      }
+    });
+  }
 </script>

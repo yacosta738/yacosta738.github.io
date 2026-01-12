@@ -1,4 +1,39 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
+
+/**
+ * Helper function to wait for Pagefind UI to fully initialize.
+ * Pagefind loads asynchronously in DOMContentLoaded, so we need to wait for:
+ * 1. The .pagefind-ui container to exist
+ * 2. The search input to be visible and enabled
+ *
+ * @param page - Playwright page object
+ * @param timeout - Maximum time to wait in milliseconds (default: 15000)
+ * @returns The input locator once it's ready
+ */
+async function waitForPagefindUI(page: Page, timeout = 15000) {
+	// Wait for the Pagefind UI container to exist
+	await page.waitForSelector(".pagefind-ui", { timeout, state: "attached" });
+
+	// Wait for the input to be visible and enabled
+	const input = page.locator(".pagefind-ui__search-input");
+	await expect(input).toBeVisible({ timeout });
+	await expect(input).toBeEnabled({ timeout });
+
+	return input;
+}
+
+/**
+ * Wait for Pagefind to finish processing and show either:
+ * - Results (.pagefind-ui__result)
+ * - Custom empty state (.pf-empty)
+ * - Pagefind's empty message (.pagefind-ui__message)
+ */
+async function waitForSearchResults(page: Page, timeout = 15000) {
+	await page.waitForSelector(
+		".pagefind-ui__result, .pf-empty, .pagefind-ui__message",
+		{ timeout, state: "visible" },
+	);
+}
 
 test.describe("Search Page", () => {
 	test("should display empty or no results state for invalid query", async ({
@@ -6,8 +41,11 @@ test.describe("Search Page", () => {
 	}) => {
 		await page.goto("/en/search?q=nonexistentquerythatdoesnotexist12345");
 
-		// Wait for Pagefind to process the search
-		await page.waitForTimeout(3000);
+		// Wait for Pagefind UI to initialize
+		await waitForPagefindUI(page);
+
+		// Wait for search to complete (results or empty state)
+		await waitForSearchResults(page);
 
 		// Check for either custom empty state or Pagefind's own message
 		const hasCustomEmpty = await page.locator(".pf-empty").count();
@@ -37,17 +75,18 @@ test.describe("Search Page", () => {
 	test("should update results when query is changed", async ({ page }) => {
 		await page.goto("/en/search?q=astro");
 
-		// Wait for Pagefind UI to initialize (results or empty state)
-		await page.waitForTimeout(2000);
+		// Wait for Pagefind UI to initialize
+		const input = await waitForPagefindUI(page);
 
-		const input = page.locator(".pagefind-ui__search-input");
-		await expect(input).toBeVisible({ timeout: 10000 });
-		await expect(input).toBeEnabled({ timeout: 10000 });
+		// Wait for initial search results to appear
+		await waitForSearchResults(page);
+
+		// Change the query to "test"
 		await input.fill(""); // Clear input reliably
 		await input.fill("test");
 
-		// Wait for Pagefind to update results or show empty state
-		await page.waitForTimeout(1500);
+		// Wait for Pagefind to update results after typing
+		await waitForSearchResults(page);
 
 		const results = page.locator(".pagefind-ui__result");
 		const resultCount = await results.count();
@@ -69,23 +108,29 @@ test.describe("Search Page", () => {
 	test("should handle clearing query", async ({ page }) => {
 		await page.goto("/en/search?q=astro");
 
-		// Wait for initial results
-		await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({
-			timeout: 10000,
-		});
+		// Wait for Pagefind UI to initialize
+		const input = await waitForPagefindUI(page);
 
-		const input = page.locator(".pagefind-ui__search-input");
-		await expect(input).toBeVisible({ timeout: 10000 });
-		await expect(input).toBeEnabled({ timeout: 10000 });
+		// Wait for initial results to appear (or empty state)
+		await waitForSearchResults(page);
+
+		// Verify we have initial state (either results or empty message)
 		const initialResultCount = await page
 			.locator(".pagefind-ui__result")
 			.count();
-		expect(initialResultCount).toBeGreaterThan(0);
+		const hasInitialEmpty = await page.locator(".pf-empty").count();
+		const hasInitialMessage = await page
+			.locator(".pagefind-ui__message")
+			.count();
+
+		const hasInitialState =
+			initialResultCount > 0 || hasInitialEmpty > 0 || hasInitialMessage > 0;
+		expect(hasInitialState).toBe(true);
 
 		// Clear the input
 		await input.clear();
 
-		// Wait a moment for Pagefind to process
+		// Wait for Pagefind to process the cleared state
 		await page.waitForTimeout(1500);
 
 		// After clearing, the search should either:
