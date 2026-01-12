@@ -51,8 +51,25 @@
 /browserconfig.xml
   Cache-Control: public, max-age=604800
 
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/sitemap*.xml
+  Cache-Control: public, max-age=86400
+
+# Cloudflare email protection scripts (override short default TTL)
+/cdn-cgi/*
+  Cache-Control: public, max-age=604800
+
 # HTML pages (shorter cache with revalidation)
 /*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Language-specific pages
+/en/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/es/*
   Cache-Control: public, max-age=3600, must-revalidate
 
 # Service Worker (no cache)
@@ -66,3 +83,4 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.hcaptcha.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline' https://hcaptcha.com; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://api.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://challenges.cloudflare.com https://*.hcaptcha.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.hcaptcha.com; frame-ancestors 'none';

@@ -1,0 +1,59 @@
+# robots.txt for yunielacosta.com
+# https://yunielacosta.com
+
+# Allow all robots
+User-agent: *
+Allow: /
+
+# Disallow admin and development paths
+Disallow: /admin/
+Disallow: /admin
+Disallow: /_astro/
+Disallow: /api/
+
+# Crawl-delay for respectful crawling (optional, some bots ignore this)
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://yunielacosta.com/sitemap-index.xml
+
+# Specific bot directives
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block AI training bots (optional - remove if you want AI bots to index)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# ClaudeBot is Anthropic's official web crawler for AI training
+# See: https://support.anthropic.com/en/articles/8896518
+User-agent: ClaudeBot
+Disallow: /
+
+# Block aggressive scrapers
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

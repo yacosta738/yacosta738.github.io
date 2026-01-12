@@ -155,7 +155,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
           <button
             data-test="contact-submit"
             type="submit"
-            class="inline-flex items-center justify-center px-6 py-3 border rounded-md bg-transparent text-[color:var(--color-primary)] border-[color:var(--color-primary)] font-medium cursor-pointer transition hover:bg-[color:var(--color-primary)]/15 disabled:opacity-60 disabled:cursor-not-allowed">
+            class="contact-submit-btn inline-flex items-center justify-center px-6 py-3 border rounded-md bg-transparent font-medium cursor-pointer transition disabled:opacity-60 disabled:cursor-not-allowed">
             <Icon name="lucide:send" class="w-5 h-5 mr-2" />
             {t("contact.send_button")}
             </button>
@@ -168,6 +168,31 @@ const t = useTranslations(Astro.currentLocale as Lang);
 </Section>
 
 <style>
+  /* Contact submit button - WCAG AA compliant contrast */
+  .contact-submit-btn {
+    color: #047857; /* emerald-700 - 5.5:1 contrast on white */
+    border-color: #047857;
+  }
+
+  .contact-submit-btn:hover,
+  .contact-submit-btn:focus {
+    background-color: rgba(4, 120, 87, 0.12);
+    color: #065f46;
+    border-color: #065f46;
+  }
+
+  :global(.dark) .contact-submit-btn {
+    color: #64ffda;
+    border-color: #64ffda;
+  }
+
+  :global(.dark) .contact-submit-btn:hover,
+  :global(.dark) .contact-submit-btn:focus {
+    background-color: rgba(100, 255, 218, 0.15);
+    color: #64ffda;
+    border-color: #64ffda;
+  }
+
   /* Additional styles for contact form validation */
   input:focus:invalid,
   textarea:focus:invalid {

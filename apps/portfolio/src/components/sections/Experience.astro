@@ -189,30 +189,30 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork).sort(
 		color: var(--green);
 	}
 
-	/* Light mode overrides: ensure good contrast when not using .dark */
+	/* Light mode overrides: ensure WCAG AA contrast when not using .dark */
 	html:not(.dark) .tab-button {
-		color: #0f172a; /* dark slate text for contrast on light backgrounds */
-		border-left-color: rgba(15,23,42,0.06);
+		color: #1e293b; /* slate-800 - 8.5:1 contrast ratio on white */
+		border-left-color: #cbd5e1; /* visible border */
 		background-color: transparent;
 	}
 
 	html:not(.dark) .tab-button:hover,
 	html:not(.dark) .tab-button:focus {
-		background-color: rgba(16,185,129,0.06); /* subtle green on hover */
-		color: var(--brand-accent);
+		background-color: rgba(4, 120, 87, 0.08); /* subtle emerald tint on hover */
+		color: #047857; /* emerald-700 - 5.5:1 contrast ratio */
 		outline: none;
 	}
 
 	html:not(.dark) .tab-button[aria-selected="true"] {
-		color: var(--brand-accent);
-		background-color: rgba(16,185,129,0.08);
-		border-left-color: var(--brand-accent);
+		color: #047857; /* emerald-700 - WCAG AA compliant */
+		background-color: rgba(4, 120, 87, 0.1);
+		border-left-color: #047857;
 		font-weight: 600;
 	}
 
 	/* Light mode highlight color */
 	html:not(.dark) .highlight {
-		background: var(--brand-accent);
+		background: #047857; /* emerald-700 for visibility */
 	}
 
 	.highlight {

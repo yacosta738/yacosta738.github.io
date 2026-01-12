@@ -184,6 +184,19 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
     <link rel="preconnect" href="https://cloudflareinsights.com" crossorigin />
 
+    <!-- Preconnect for hCaptcha (critical for contact form performance) -->
+    <link rel="preconnect" href="https://js.hcaptcha.com" crossorigin />
+    <link rel="preconnect" href="https://api.hcaptcha.com" crossorigin />
+    <link rel="dns-prefetch" href="https://newassets.hcaptcha.com" />
+
+    <!-- SEO: Canonical URL (clean, without query parameters) -->
+    <link rel="canonical" href={`${Astro.url.origin}${Astro.url.pathname}`} />
+
+    <!-- Additional SEO meta tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content={(resume.basics as { name?: string })?.name || "Yuniel Acosta"} />
+    <meta name="generator" content={Astro.generator} />
+
     <link rel="sitemap" href="/sitemap-index.xml" />
     {
       (await getLocalePathsEnhanced(Astro.url)).map((props) => (
