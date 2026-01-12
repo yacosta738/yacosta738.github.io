@@ -65,6 +65,7 @@
 		"@types/mdast": "^4.0.4",
 		"@vitest/coverage-v8": "^4.0.16",
 		"astro-component-tester": "^0.8.0",
+		"astro-critters": "2.2.1",
 		"astro-icon": "^1.1.5",
 		"clsx": "^2.1.1",
 		"gray-matter": "^4.0.3",

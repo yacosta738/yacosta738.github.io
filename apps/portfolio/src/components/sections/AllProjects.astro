@@ -47,7 +47,7 @@ const translated = (
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
       {translated('otherNoteworthyProjects', {}, 'Other Noteworthy Projects')}
     </h2>
-    <a href={translatePath('/projects')} class="archive-link text-primary hover:underline mb-12">
+    <a href={translatePath('/projects')} class="archive-link hover:underline mb-12">
       {translated('viewArchive', {}, 'View the Archive')}
     </a>
 
@@ -209,6 +209,26 @@ const translated = (
 <style>
   .projects-section {
     --transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  /* Archive link - WCAG AA compliant contrast */
+  .archive-link {
+    color: #047857; /* emerald-700 - 5.5:1 contrast on white */
+    transition: color 0.2s ease;
+  }
+
+  .archive-link:hover,
+  .archive-link:focus {
+    color: #065f46; /* emerald-800 - even higher contrast on hover */
+  }
+
+  .dark .archive-link {
+    color: #64ffda; /* cyan for dark mode */
+  }
+
+  .dark .archive-link:hover,
+  .dark .archive-link:focus {
+    color: #5eead4; /* lighter cyan on hover */
   }
 
   .projects-grid {

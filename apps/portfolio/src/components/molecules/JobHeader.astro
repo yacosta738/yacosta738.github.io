@@ -104,24 +104,42 @@ const formatDateRange = (
         </h3>
 
         <div class="flex gap-4 items-center flex-wrap max-sm:flex-col max-sm:items-start max-sm:gap-1">
-            <p class="text-right pr-5 text-brand-accent font-mono text-xs font-semibold leading-tight">{formatDateRange(startDate, endDate, locale)}</p>
-            {location && <p class="m-0 text-light-slate font-mono text-xs before:content-['📍_'] before:mr-1">{location}</p>}
+            <p class="job-date text-right pr-5 font-mono text-xs font-semibold leading-tight">{formatDateRange(startDate, endDate, locale)}</p>
+            {location && <p class="job-location m-0 font-mono text-xs before:content-['📍_'] before:mr-1">{location}</p>}
         </div>
     </div>
 </div>
 
 <style>
+	/* Job date styling - WCAG AA compliant */
+	.job-date {
+		color: #047857; /* emerald-700 - 5.5:1 contrast on white */
+	}
+
+	.dark .job-date {
+		color: #64ffda; /* cyan accent for dark mode */
+	}
+
+	/* Job location styling */
+	.job-location {
+		color: #475569; /* slate-600 - 5.5:1 contrast on white */
+	}
+
+	.dark .job-location {
+		color: #a8b2d1; /* light slate for dark mode */
+	}
+
 	/* Light mode overrides for JobHeader */
 	html:not(.dark) .text-lightest-slate {
 		color: #0f172a !important; /* dark text for contrast */
 	}
 
 	html:not(.dark) .text-slate {
-		color: #64748b !important; /* readable gray */
+		color: #475569 !important; /* readable gray - slate-600 */
 	}
 
 	html:not(.dark) .text-light-slate {
-		color: #64748b !important;
+		color: #475569 !important;
 	}
 
 
@@ -130,11 +148,11 @@ const formatDateRange = (
 	}
 
 	html:not(.dark) .text-slate {
-		color: #64748b !important; /* readable gray */
+		color: #475569 !important; /* readable gray */
 	}
 
 	html:not(.dark) .text-light-slate {
-		color: #64748b !important;
+		color: #475569 !important;
 	}
 
 	html:not(.dark) .border-lightest-navy {
@@ -143,7 +161,7 @@ const formatDateRange = (
 
 	/* Light mode link hover effects */
 	html:not(.dark) .after\:bg-green::after {
-		background-color: var(--brand-accent) !important;
+		background-color: #047857 !important;
 	}
 </style>
 

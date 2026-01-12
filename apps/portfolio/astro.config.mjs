@@ -3,6 +3,7 @@ import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, sharpImageService } from "astro/config";
+import critters from "astro-critters";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./src/i18n/locales.ts";
@@ -54,7 +55,12 @@ export default defineConfig({
 		}),
 		pagefind(),
 		sitemap({
-			filter: (page) => new URL(page).pathname !== "/admin/",
+			filter: (page) => {
+				const pathname = new URL(page).pathname;
+				// Exclude admin, api, and search pages from sitemap
+				const excludedPaths = ["/admin/", "/admin", "/search", "/404"];
+				return !excludedPaths.some((path) => pathname.includes(path));
+			},
 			i18n: {
 				defaultLocale: DEFAULT_LOCALE_SETTING,
 				locales: Object.fromEntries(
@@ -63,6 +69,61 @@ export default defineConfig({
 						value.lang ?? key,
 					]),
 				),
+			},
+			// Serialize function for per-page customization
+			serialize(item) {
+				const url = new URL(item.url);
+				const pathname = url.pathname;
+
+				// Set lastmod to current date for dynamic content
+				item.lastmod = new Date();
+
+				// Homepage - highest priority
+				if (pathname === "/" || pathname.match(/^\/(en|es)\/?$/)) {
+					item.changefreq = "weekly";
+					item.priority = 1.0;
+					return item;
+				}
+
+				// Blog posts - high priority, updated frequently
+				if (pathname.includes("/blog/") && !pathname.includes("/page/")) {
+					// Individual blog post
+					if (pathname.match(/\/blog\/[^/]+$/)) {
+						item.changefreq = "monthly";
+						item.priority = 0.8;
+						return item;
+					}
+					// Blog index pages
+					item.changefreq = "weekly";
+					item.priority = 0.7;
+					return item;
+				}
+
+				// Projects page
+				if (pathname.includes("/projects")) {
+					item.changefreq = "monthly";
+					item.priority = 0.8;
+					return item;
+				}
+
+				// Tag and category pages
+				if (pathname.includes("/tag/") || pathname.includes("/category/")) {
+					item.changefreq = "weekly";
+					item.priority = 0.5;
+					return item;
+				}
+
+				// Author pages
+				if (pathname.includes("/author/")) {
+					item.changefreq = "monthly";
+					item.priority = 0.4;
+					return item;
+				}
+
+				// Default for other pages
+				item.changefreq = "monthly";
+				item.priority = 0.6;
+				return item;
 			},
 		}),
 		(await import("astro-compress")).default({
@@ -123,6 +184,18 @@ export default defineConfig({
 			}),
 		),
 		mdx(),
+		// Critical CSS inlining for better PageSpeed scores
+		// This inlines above-the-fold CSS and lazy-loads the rest
+		critters({
+			// Only inline critical CSS to reduce render-blocking
+			pruneSource: false,
+			// Use media attribute for non-critical CSS (print trick)
+			preload: "media",
+			// Inline fonts for faster initial render
+			inlineFonts: false,
+			// Remove unused CSS selectors
+			reduceInlineStyles: true,
+		}),
 	],
 
 	vite: {
