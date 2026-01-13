@@ -5,21 +5,26 @@ test.describe("Language Switching", () => {
 	test("should switch from English to Spanish and update UI", async ({
 		page,
 	}) => {
-		// Start on English homepage
-		await page.goto("/");
+		// Start on English homepage (navigate directly to avoid redirect race)
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Verify initial English state (accept locale variants like `en-US`)
 		await expect(page.locator("html")).toHaveAttribute("lang", /^en/);
-		await expect(page).toHaveURL(/\/(en\/?)?$/); // Root, /en or /en/
+		await expect(page).toHaveURL(/\/en\/?$/);
 
 		// Find language selector (may not be visible due to CSS, but should be in DOM)
 		const langSelector = page.locator(selectors.language.toggle).first();
+		
+		// Wait for the selector to be attached to the DOM
+		await expect(langSelector).toBeAttached({ timeout: 10000 });
 
 		// Select Spanish from dropdown (use full path as value, force for hidden elements)
 		await langSelector.selectOption("/es/", { force: true });
 
 		// Wait for navigation to complete
 		await page.waitForLoadState("networkidle");
+		await page.waitForURL(/\/es\/?/, { timeout: 10000 });
 
 		// Verify Spanish is now active (accept locale variants like `es-ES`)
 		await expect(page.locator("html")).toHaveAttribute("lang", /^es/);
@@ -39,6 +44,7 @@ test.describe("Language Switching", () => {
 	}) => {
 		// Start on Spanish homepage
 		await page.goto("/es/");
+		await page.waitForLoadState("networkidle");
 
 		// Verify initial Spanish state (accept locale variants like `es-ES`)
 		await expect(page.locator("html")).toHaveAttribute("lang", /^es/);
@@ -52,14 +58,15 @@ test.describe("Language Switching", () => {
 
 		// Verify English is now active (accept locale variants like `en-US`)
 		await expect(page.locator("html")).toHaveAttribute("lang", /^en/);
-		await expect(page).toHaveURL(/\/(en\/?)?$/);
+		await expect(page).toHaveURL(/\/en\/?/);
 	});
 
 	test("should persist language selection across navigation", async ({
 		page,
 	}) => {
 		// Start on English
-		await page.goto("/");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Switch to Spanish (use first match and full path as value, force for hidden elements)
 		const _langToggle = page.locator(selectors.language.toggle).first();
@@ -68,6 +75,7 @@ test.describe("Language Switching", () => {
 
 		// Navigate to blog page
 		await page.goto("/es/blog");
+		await page.waitForLoadState("networkidle");
 
 		// Verify Spanish is still active (accept locale variants like `es-ES`)
 		await expect(page.locator("html")).toHaveAttribute("lang", /^es/);
@@ -75,7 +83,8 @@ test.describe("Language Switching", () => {
 	});
 
 	test("should have accessible language selector", async ({ page }) => {
-		await page.goto("/");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		const langSelector = page.locator(selectors.language.toggle).first();
 
