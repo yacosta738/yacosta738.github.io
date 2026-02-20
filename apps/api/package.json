@@ -1,6 +1,6 @@
 {
 	"name": "yap-api",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"private": true,
 	"packageManager": "pnpm@10.28.0",
 	"scripts": {
@@ -15,7 +15,7 @@
 	},
 	"dependencies": {
 		"@hono/swagger-ui": "0.5.3",
-		"@hono/zod-openapi": "1.2.0",
+		"@hono/zod-openapi": "1.2.2",
 		"chanfana": "^3.0.0",
 		"hono": "^4.11.3",
 		"zod": "^4.3.5"
