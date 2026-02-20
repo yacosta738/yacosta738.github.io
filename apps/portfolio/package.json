@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"packageManager": "pnpm@10.28.0",
 	"type": "module",
 	"scripts": {
@@ -69,7 +69,7 @@
 		"astro-icon": "^1.1.5",
 		"clsx": "^2.1.1",
 		"gray-matter": "^4.0.3",
-		"happy-dom": "^20.1.0",
+		"happy-dom": "^20.1.1",
 		"jsdom": "^27.4.0",
 		"lefthook": "^2.0.13",
 		"npm-run-all2": "^8.0.4",
