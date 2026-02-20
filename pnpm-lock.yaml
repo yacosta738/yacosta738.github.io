@@ -91,8 +91,8 @@ importers:
         specifier: ^3.6.1
         version: 3.6.1
       '@midudev/tailwind-animations':
-        specifier: ^0.2.0
-        version: 0.2.0(tailwindcss@4.1.18)
+        specifier: ^1.0.1
+        version: 1.0.1(tailwindcss@4.1.18)
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.1.18(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))
@@ -1352,10 +1352,10 @@ packages:
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
 
-  '@midudev/tailwind-animations@0.2.0':
-    resolution: {integrity: sha512-4mktb060dA7SZz0LjMfhBT30HWPmQENwF4AJC7/etESWohe4pukST0ohC2yAePS5GNinhY3MXmZZ8//2ywafOQ==}
+  '@midudev/tailwind-animations@1.0.1':
+    resolution: {integrity: sha512-KOtvFo7LJlw4Xko9akFhPqpGEDx+r/Dle+44G9uBYeiGEJNVUEaEIG251j+USDxPtMV5grJuc4kFxTunv5rZvA==}
     peerDependencies:
-      tailwindcss: ^3.0.0 || ^4.0.0
+      tailwindcss: ^4.0.0
 
   '@netlify/blobs@10.1.0':
     resolution: {integrity: sha512-dFpqDc6/x5LEu9L7kblCQu00CFEchH8J42jmQoXPuhKoE7avajzeLTbVKA8Olk3S/c2m9ejegrgbhL8NRA2Jyw==}
@@ -4935,6 +4935,11 @@ packages:
     resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
     engines: {node: '>=20'}
 
+  tailwind-animations@1.0.1:
+    resolution: {integrity: sha512-5ouCdgfGS4kcyuzRSb/1O3o9f5Akssi7ue46PHfKjvPLMWjtnzmqM8i6ElES3tKVTyhjSaTPfLti7aB7WSxhZg==}
+    peerDependencies:
+      tailwindcss: ^4.0.0
+
   tailwind-merge@3.4.0:
     resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
@@ -6663,8 +6668,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@midudev/tailwind-animations@0.2.0(tailwindcss@4.1.18)':
+  '@midudev/tailwind-animations@1.0.1(tailwindcss@4.1.18)':
     dependencies:
+      tailwind-animations: 1.0.1(tailwindcss@4.1.18)
       tailwindcss: 4.1.18
 
   '@netlify/blobs@10.1.0':
@@ -11156,6 +11162,10 @@ snapshots:
   symbol-tree@3.2.4: {}
 
   tagged-tag@1.0.0: {}
+
+  tailwind-animations@1.0.1(tailwindcss@4.1.18):
+    dependencies:
+      tailwindcss: 4.1.18
 
   tailwind-merge@3.4.0: {}
 
