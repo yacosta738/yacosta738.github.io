@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"packageManager": "pnpm@10.28.0",
 	"type": "module",
 	"scripts": {
@@ -71,7 +71,7 @@
 		"gray-matter": "^4.0.3",
 		"happy-dom": "^20.1.0",
 		"jsdom": "^27.4.0",
-		"lefthook": "^2.0.13",
+		"lefthook": "^2.0.16",
 		"npm-run-all2": "^8.0.4",
 		"preact-render-to-string": "^6.6.5",
 		"reading-time": "^1.5.0",
