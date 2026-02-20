@@ -171,6 +171,15 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
       })();
     </script>
 
+    <!-- Persist theme during view transitions to prevent flash -->
+    <script is:inline>
+      document.addEventListener("astro:before-swap", (e) => {
+        if (document.documentElement.classList.contains("dark")) {
+          e.newDocument.documentElement.classList.add("dark");
+        }
+      });
+    </script>
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
