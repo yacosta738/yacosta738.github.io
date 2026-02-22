@@ -36,7 +36,7 @@ export default defineConfig({
 	use: {
 		baseURL: process.env.BASE_URL || "http://localhost:4322",
 		trace: "on-first-retry",
-		screenshot: "on-first-retry",
+		screenshot: "on-first-failure",
 		video: "on-first-retry",
 		viewport: { width: 1280, height: 720 },
 		colorScheme: "light",
