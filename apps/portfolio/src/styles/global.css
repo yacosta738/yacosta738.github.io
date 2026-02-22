@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
 @plugin "@tailwindcss/typography";
-@plugin "@midudev/tailwind-animations";
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Theme variables using Tailwind CSS 4 @theme directive */
