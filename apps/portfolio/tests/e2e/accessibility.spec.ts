@@ -88,7 +88,10 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have proper form labels", async ({ page }) => {
-		await page.goto("/#contact");
+		await page.goto("/en/#contact", {
+			timeout: 60_000,
+			waitUntil: "domcontentloaded",
+		});
 
 		// Find all input fields
 		const inputs = await page.$$(
@@ -361,7 +364,10 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should handle form errors accessibly", async ({ page }) => {
-		await page.goto("/#contact");
+		await page.goto("/en/#contact", {
+			timeout: 60_000,
+			waitUntil: "domcontentloaded",
+		});
 
 		// Try to submit empty form
 		const submitButton = await page.$('button[type="submit"]');

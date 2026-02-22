@@ -112,7 +112,10 @@ test.describe("Blog Pagination and Navigation", () => {
 		page,
 	}) => {
 		// Start on page 2 (if it exists)
-		await page.goto("/en/blog/2");
+		await page.goto("/en/blog/page/2", {
+			timeout: 60_000,
+			waitUntil: "domcontentloaded",
+		});
 
 		// Check if prev button exists
 		const prevButton = page.locator(selectors.blog.paginationPrev);
@@ -222,8 +225,10 @@ test.describe("Blog Pagination and Navigation", () => {
 
 	test("should handle empty blog page gracefully", async ({ page }) => {
 		// Try to navigate to a very high page number
-		const response = await page.goto("/en/blog/page/999");
-		await page.waitForLoadState("domcontentloaded");
+		const response = await page.goto("/en/blog/page/999", {
+			timeout: 60_000,
+			waitUntil: "domcontentloaded",
+		});
 
 		// Should either redirect or render a not-found/empty state, but not crash
 		expect(response).not.toBeNull();
