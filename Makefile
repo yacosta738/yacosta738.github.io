@@ -18,7 +18,7 @@ help: ## Show available targets
 install: ## Install dependencies
 	$(PNPM) install
 
-clean: ## Clean generated artifacts
+clean: ## Clean portfolio generated artifacts
 	$(PNPM) $(PORTFOLIO_FILTER) clean
 
 dev: ## Run all apps in development mode
