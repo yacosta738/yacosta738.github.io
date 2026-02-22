@@ -14,9 +14,9 @@ export default defineConfig({
 
 	// Retry on CI and locally for webkit flake resistance
 	retries: process.env.CI ? 2 : 1,
-	failOnFlakyTests: true,
+	failOnFlakyTests: Boolean(process.env.CI),
 
-	// Only fail if more than 10% of tests are flaky
+	// Report up to 5 tests that exceed the duration threshold of 60_000 ms.
 	reportSlowTests: { max: 5, threshold: 60_000 },
 
 	// Limit parallel workers on CI to avoid resource exhaustion
@@ -35,9 +35,9 @@ export default defineConfig({
 	// Global configuration for all tests
 	use: {
 		baseURL: process.env.BASE_URL || "http://localhost:4322",
-		trace: "off",
-		screenshot: "off",
-		video: "off",
+		trace: "on-first-retry",
+		screenshot: "on-first-retry",
+		video: "on-first-retry",
 		viewport: { width: 1280, height: 720 },
 		colorScheme: "light",
 		ignoreHTTPSErrors: true,

@@ -16,7 +16,8 @@ test.describe("CV Download", () => {
 	test("should download CV file and verify integrity", async ({
 		page,
 	}, testInfo) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Check if download button exists
 		const downloadButton = page.locator(selectors.cv.downloadButton);
@@ -88,7 +89,8 @@ test.describe("CV Download", () => {
 	});
 
 	test("should have accessible download button", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		const downloadButton = page.locator(selectors.cv.downloadButton);
 
@@ -110,7 +112,8 @@ test.describe("CV Download", () => {
 	});
 
 	test("should not break on rapid clicks", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		const downloadButton = page.locator(selectors.cv.downloadButton);
 		await expect(downloadButton).toBeVisible();

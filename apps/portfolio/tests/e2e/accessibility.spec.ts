@@ -14,7 +14,8 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Accessibility Tests", () => {
 	test("should have proper document structure", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Check for main landmark
 		const main = page.locator("main");
@@ -34,7 +35,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have proper heading hierarchy", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Get all headings
 		const headings = await page.$$("h1, h2, h3, h4, h5, h6");
@@ -68,7 +70,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have alt text for all images", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Find all images
 		const images = await page.$$("img");
@@ -126,7 +129,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should support keyboard navigation", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Start tabbing
 		let tabbableElements = 0;
@@ -153,7 +157,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have visible focus indicators", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Tab to first interactive element
 		await page.keyboard.press("Tab");
@@ -182,7 +187,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have proper link text", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Find all links
 		const links = await page.$$("a");
@@ -205,7 +211,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have proper color contrast (manual check)", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// This is a placeholder - proper contrast checking requires axe-core
 		// For now, just check that text is visible
@@ -218,7 +225,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should support screen reader announcements", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Check for aria-live regions
 		const liveRegions = await page.$$("[aria-live]");
@@ -233,7 +241,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have proper button labels", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Find all buttons
 		const buttons = await page.$$("button");
@@ -288,7 +297,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have skip navigation link", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Check for skip link (usually hidden until focused)
 		const skipLink = await page.$(
@@ -308,7 +318,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should not have automatic audio/video playback", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Check for autoplay media
 		const autoplayMedia = await page.$$("audio[autoplay], video[autoplay]");
@@ -320,7 +331,8 @@ test.describe("Accessibility Tests", () => {
 	test("should have proper table structure (if applicable)", async ({
 		page,
 	}) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Find all tables
 		const tables = await page.$$("table");
@@ -374,7 +386,8 @@ test.describe("Accessibility Tests", () => {
 	});
 
 	test("should have accessible modals/dialogs", async ({ page }) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// Look for modal triggers
 		const modalTriggers = await page.$$(
@@ -414,7 +427,8 @@ test.describe("Accessibility - WCAG Compliance", () => {
 	test("should pass automated accessibility checks (placeholder)", async ({
 		page,
 	}) => {
-		await page.goto("/en/"); await page.waitForLoadState("networkidle");
+		await page.goto("/en/");
+		await page.waitForLoadState("networkidle");
 
 		// This is a placeholder for axe-core integration
 		// To implement:

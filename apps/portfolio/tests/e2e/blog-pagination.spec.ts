@@ -222,11 +222,11 @@ test.describe("Blog Pagination and Navigation", () => {
 
 	test("should handle empty blog page gracefully", async ({ page }) => {
 		// Try to navigate to a very high page number
-		await page.goto("/en/blog/999");
+		const response = await page.goto("/en/blog/page/999");
+		await page.waitForLoadState("domcontentloaded");
 
-		// Should either redirect or show appropriate message
-		// Check that page doesn't crash
-		const bodyText = await page.locator("body").textContent();
-		expect(bodyText).toBeTruthy();
+		// Should either redirect or render a not-found/empty state, but not crash
+		expect(response).not.toBeNull();
+		expect(response?.status()).toBeLessThan(500);
 	});
 });

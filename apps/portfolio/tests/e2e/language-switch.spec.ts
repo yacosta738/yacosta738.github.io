@@ -15,7 +15,7 @@ test.describe("Language Switching", () => {
 
 		// Find language selector (may not be visible due to CSS, but should be in DOM)
 		const langSelector = page.locator(selectors.language.toggle).first();
-		
+
 		// Wait for the selector to be attached to the DOM
 		await expect(langSelector).toBeAttached({ timeout: 10000 });
 

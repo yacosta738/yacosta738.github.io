@@ -96,7 +96,7 @@ test.describe("Smoke Tests - Critical Paths", () => {
 	test("should open and close mobile menu", async ({ page }) => {
 		await page.goto("/en/");
 		await page.waitForLoadState("networkidle");
-		
+
 		// Find mobile menu button
 		const menuButton = page
 			.locator('[data-drawer-target], button[aria-label*="menu" i]')
