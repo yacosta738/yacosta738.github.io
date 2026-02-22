@@ -1,7 +1,12 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { mockResponses, selectors, testData } from "../fixtures";
 
 test.describe("Contact Form", () => {
+	const gotoContactSection = async (page: Page) => {
+		await page.goto("/en/#contact");
+		await page.waitForSelector(selectors.contact.form, { timeout: 30_000 });
+	};
+
 	test("should successfully submit valid contact form", async ({ page }) => {
 		// Mock successful API response and create a promise that resolves
 		// when the route handler runs. This helps assert that the request
@@ -16,7 +21,7 @@ test.describe("Contact Form", () => {
 			routeCalledResolve?.(true);
 		});
 
-		await page.goto("/#contact");
+		await gotoContactSection(page);
 
 		// Wait for form to be visible
 		const formExists = await page.locator(selectors.contact.form).count();
@@ -74,7 +79,7 @@ test.describe("Contact Form", () => {
 	});
 
 	test("should validate required fields", async ({ page }) => {
-		await page.goto("/#contact");
+		await gotoContactSection(page);
 
 		// Try to submit empty form
 		await page.click(selectors.contact.submit);
@@ -99,7 +104,7 @@ test.describe("Contact Form", () => {
 	});
 
 	test("should validate email format", async ({ page }) => {
-		await page.goto("/#contact");
+		await gotoContactSection(page);
 
 		// Fill with invalid email
 		await page.fill(selectors.contact.name, "Test User");
@@ -130,7 +135,7 @@ test.describe("Contact Form", () => {
 			routeCalledResolve?.(true);
 		});
 
-		await page.goto("/#contact");
+		await gotoContactSection(page);
 
 		// Skip if form doesn't exist
 		const formExists = await page.locator(selectors.contact.form).count();
@@ -197,7 +202,7 @@ test.describe("Contact Form", () => {
 			route.fulfill(mockResponses.contact.success),
 		);
 
-		await page.goto("/#contact");
+		await gotoContactSection(page);
 
 		// Skip if form doesn't exist
 		const formExists = await page.locator(selectors.contact.form).count();
@@ -247,7 +252,7 @@ test.describe("Contact Form", () => {
 			route.fulfill(mockResponses.contact.success);
 		});
 
-		await page.goto("/#contact");
+		await gotoContactSection(page);
 
 		// Fill form
 		await page.fill(selectors.contact.name, testData.contact.valid.name);

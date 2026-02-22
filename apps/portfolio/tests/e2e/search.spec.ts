@@ -73,36 +73,41 @@ test.describe("Search Page", () => {
 	});
 
 	test("should update results when query is changed", async ({ page }) => {
-		await page.goto("/en/search?q=astro");
+		// Start from a query that should reliably produce an empty state,
+		// then switch to a known query and assert results appear.
+		await page.goto("/en/search?q=nonexistentquerythatdoesnotexist12345");
 
 		// Wait for Pagefind UI to initialize
 		const input = await waitForPagefindUI(page);
 
-		// Wait for initial search results to appear
+		// Wait for initial search state to appear (empty/message)
 		await waitForSearchResults(page);
 
-		// Change the query to "test"
-		await input.fill(""); // Clear input reliably
-		await input.fill("test");
+		// Change query to one that should produce actual results
+		await input.fill("astro");
+		await expect(input).toHaveValue("astro");
 
-		// Wait for Pagefind to update results after typing
-		await waitForSearchResults(page);
+		// URL should reflect latest query once Pagefind input handler runs
+		await expect
+			.poll(() => new URL(page.url()).searchParams.get("q"), {
+				timeout: 10_000,
+			})
+			.toBe("astro");
 
+		// Wait for Pagefind to render at least one result for the new query
 		const results = page.locator(".pagefind-ui__result");
-		const resultCount = await results.count();
-		const hasCustomEmpty = await page.locator(".pf-empty").count();
-		const hasPagefindMessage = await page
-			.locator(".pagefind-ui__message")
-			.count();
+		await expect
+			.poll(() => results.count(), { timeout: 15_000 })
+			.toBeGreaterThan(0);
 
-		if (resultCount > 0) {
-			await expect(results.first()).toBeVisible();
-			const content = await results.first().textContent();
-			expect(content?.toLowerCase()).toContain("test");
-		} else {
-			// Accept either custom empty state or Pagefind message
-			expect(hasCustomEmpty + hasPagefindMessage).toBeGreaterThan(0);
-		}
+		await expect(results.first()).toBeVisible();
+		const firstResultLinks = results
+			.first()
+			.locator(".pagefind-ui__result-link");
+		await expect
+			.poll(() => firstResultLinks.count(), { timeout: 10_000 })
+			.toBeGreaterThan(0);
+		await expect(firstResultLinks.first()).toBeVisible();
 	});
 
 	test("should handle clearing query", async ({ page }) => {
@@ -130,29 +135,33 @@ test.describe("Search Page", () => {
 		// Clear the input
 		await input.clear();
 
-		// Wait for Pagefind to process the cleared state
-		await page.waitForTimeout(1500);
-
-		// After clearing, the search should either:
-		// 1. Clear all results (no results shown)
-		// 2. Show all results (showing everything is also valid)
-		// 3. Show a message
-		const resultCount = await page.locator(".pagefind-ui__result").count();
-		const hasCustomEmpty = await page.locator(".pf-empty").count();
-		const hasPagefindMessage = await page
-			.locator(".pagefind-ui__message")
-			.count();
-
-		// Any of these states is valid after clearing:
-		// - No results (cleared state)
-		// - Has results (showing all results)
-		// - Has a message
-		const isValidState =
-			resultCount === 0 ||
-			resultCount > 0 ||
-			hasCustomEmpty > 0 ||
-			hasPagefindMessage > 0;
-		expect(isValidState).toBe(true);
+		// Wait deterministically for a post-clear state to appear.
+		await expect
+			.poll(
+				async () => {
+					const resultCount = await page
+						.locator(".pagefind-ui__result")
+						.count();
+					const hasCustomEmpty = await page.locator(".pf-empty").count();
+					const hasPagefindMessage = await page
+						.locator(".pagefind-ui__message")
+						.count();
+					const inputValue = await input.inputValue();
+					const isClearedState =
+						inputValue === "" &&
+						resultCount === 0 &&
+						hasCustomEmpty === 0 &&
+						hasPagefindMessage === 0;
+					return (
+						resultCount > 0 ||
+						hasCustomEmpty > 0 ||
+						hasPagefindMessage > 0 ||
+						isClearedState
+					);
+				},
+				{ timeout: 15_000 },
+			)
+			.toBe(true);
 
 		// Verify the input is actually empty
 		await expect(input).toHaveValue("");
