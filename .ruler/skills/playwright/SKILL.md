@@ -38,10 +38,8 @@ apps/portfolio/tests/
 ├── fixtures/ # Shared test fixtures
 │ └── index.ts
 ├── e2e/ # E2E tests (Playwright)
-│ ├── smoke.spec.ts # Basic smoke tests
 │ ├── search.spec.ts # Search functionality
 │ ├── comments.spec.ts # Comments system
-│ ├── accessibility.spec.ts # A11y tests
 │ └── {feature}.spec.ts # Feature-specific tests
 └── unit/ # Unit tests (Vitest)
 ├── test-setup.ts # Test configuration

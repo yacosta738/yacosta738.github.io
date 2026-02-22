@@ -81,13 +81,13 @@ pnpm test:e2e:mobile
 
 ```bash
 # Run a specific test file
-pnpm exec playwright test tests/e2e/language-switch.spec.ts
+pnpm exec playwright test tests/e2e/example.spec.ts
 
 # Run tests matching a pattern
 pnpm exec playwright test --grep "contact"
 
 # Run tests in a specific project
-pnpm exec playwright test --project=chromium tests/e2e/smoke.spec.ts
+pnpm exec playwright test --project=chromium tests/e2e/example.spec.ts
 ```
 
 ### View Reports
@@ -109,13 +109,10 @@ pnpm test:e2e:codegen
 ```
 tests/
 ├── e2e/
-│   ├── accessibility.spec.ts      # Accessibility/a11y tests
 │   ├── blog-pagination.spec.ts    # Blog navigation & pagination
 │   ├── contact-form.spec.ts       # Contact form submission
 │   ├── download-cv.spec.ts        # CV download functionality
-│   ├── language-switch.spec.ts    # i18n language switching
 │   ├── newsletter.spec.ts         # Newsletter subscription
-│   └── smoke.spec.ts              # Critical path smoke tests
 ├── fixtures/
 │   └── index.ts                   # Test helpers, mocks, and utilities
 └── test-results/                  # Test artifacts (generated)
