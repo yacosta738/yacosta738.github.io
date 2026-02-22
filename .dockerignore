@@ -63,7 +63,7 @@ docker-compose*.yml
 
 # Specs and planning
 specs/
-.ruler/
+.agents/
 .specify/
 
 # Added missing patterns

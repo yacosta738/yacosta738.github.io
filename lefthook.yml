@@ -25,9 +25,9 @@ pre-commit:
   commands:
     git-update:
       run: git update-index --again
-    ruler-apply:
-      glob: ".ruler/**/*"
-      run: pnpm run ruler:apply
+    agentsync-apply:
+      glob: ".agents/**/*"
+      run: pnpm run agents:apply
     organize:
       run: pnpm run organize
 

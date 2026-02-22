@@ -29,31 +29,34 @@ playwright-report/
 test-results/
 
 
-# START Ruler Generated Files
-/.codex/config.json
-/.codex/config.json.bak
-/.codex/config.toml
-/.codex/config.toml.bak
-/.cursor/mcp.json
-/.cursor/mcp.json.bak
-/.cursor/rules/ruler_cursor_instructions.mdc
-/.cursor/rules/ruler_cursor_instructions.mdc.bak
-/.gemini/settings.json
-/.gemini/settings.json.bak
-/.junie/guidelines.md
-/.junie/guidelines.md.bak
-/.mcp.json
-/.mcp.json.bak
-/.vscode/mcp.json
-/.vscode/mcp.json.bak
-/AGENTS.md
-/AGENTS.md.bak
-/CLAUDE.md
-/CLAUDE.md.bak
-# END Ruler Generated Files
 
 # gemini-cli settings
 .gemini/
 
 # GitHub App credentials
 gha-creds-*.json
+# START AI Agent Symlinks
+.claude/commands
+.claude/commands/
+.claude/skills
+.claude/skills/
+.codex/commands
+.codex/config.toml
+.codex/instructions.md
+.codex/skills
+.gemini/commands
+.gemini/commands/
+.gemini/settings.json
+.gemini/skills
+.gemini/skills/
+.github/agents
+.github/copilot-instructions.md
+.mcp.json
+.opencode/command
+.opencode/skill
+.vscode/mcp.json
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+opencode.json
+# END AI Agent Symlinks

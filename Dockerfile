@@ -9,7 +9,7 @@ RUN npm install -g pnpm@8.6.3
 
 # Copy dependency definition files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY .ruler ./.ruler
+COPY .agents ./.agents
 
 # Install dependencies with pinned versions and no additional recommended packages
 RUN apt-get update && apt-get install -y --no-install-recommends git=1:2.34.1-1

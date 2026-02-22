@@ -1,9 +1,7 @@
 
-# START Ruler Generated Files
+# START AI Agent Symlinks
 /.cursor/mcp.json
 /.cursor/mcp.json.bak
-/.cursor/rules/ruler_cursor_instructions.mdc
-/.cursor/rules/ruler_cursor_instructions.mdc.bak
 /.gemini/settings.json
 /.gemini/settings.json.bak
 /.mcp.json
@@ -12,7 +10,9 @@
 /AGENTS.md.bak
 /CLAUDE.md
 /CLAUDE.md.bak
-# END Ruler Generated Files
+/GEMINI.md
+/GEMINI.md.bak
+# END AI Agent Symlinks
 
 playwright-report/
 reports/

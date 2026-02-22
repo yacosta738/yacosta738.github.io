@@ -1,0 +1,143 @@
+# AgentSync Configuration
+# This file defines how AI agent configurations are synchronized via symbolic links.
+# Configuration reference: https://dallay.github.io/agentsync/reference/configuration
+#
+# Source directory (relative to this config file)
+source_dir = "."
+
+# Optional: compress AGENTS.md and point symlinks to the compressed file
+# compress_agents_md = false
+
+# Gitignore management
+[gitignore]
+enabled = true
+marker = "AI Agent Symlinks"
+# Additional entries can be added here:
+# entries = ["custom-file.md"]
+
+# -----------------------------------------------------------------------------
+# Agent Configurations
+# -----------------------------------------------------------------------------
+
+# Claude Code
+[agents.claude]
+enabled = true
+description = "Claude Code - Anthropic's AI coding assistant"
+
+[agents.claude.targets.instructions]
+source = "AGENTS.md"
+destination = "CLAUDE.md"
+type = "symlink"
+
+[agents.claude.targets.skills]
+source = "skills"
+destination = ".claude/skills"
+type = "symlink"
+pattern = "*"
+
+[agents.claude.targets.commands]
+source = "command"
+destination = ".claude/commands"
+type = "symlink"
+pattern = "*.md"
+
+# GitHub Copilot
+[agents.copilot]
+enabled = true
+description = "GitHub Copilot - VS Code and GitHub integrated AI"
+
+[agents.copilot.targets.instructions]
+source = "AGENTS.md"
+destination = ".github/copilot-instructions.md"
+type = "symlink"
+
+[agents.copilot.targets.agents]
+source = "command"
+destination = ".github/agents"
+type = "symlink"
+pattern = "*.md"
+
+# OpenAI Codex CLI
+[agents.codex]
+enabled = true
+description = "OpenAI Codex CLI - OpenAI's AI coding agent"
+
+[agents.codex.targets.instructions]
+source = "AGENTS.md"
+destination = ".codex/instructions.md"
+type = "symlink"
+
+[agents.codex.targets.skills]
+source = "skills"
+destination = ".codex/skills"
+type = "symlink"
+pattern = "*"
+
+[agents.codex.targets.commands]
+source = "command"
+destination = ".codex/commands"
+type = "symlink"
+pattern = "*.md"
+
+# Google Gemini
+[agents.gemini]
+enabled = true
+description = "Google Gemini - AI coding assistant"
+
+[agents.gemini.targets.instructions]
+source = "AGENTS.md"
+destination = "GEMINI.md"
+type = "symlink"
+
+[agents.gemini.targets.skills]
+source = "skills"
+destination = ".gemini/skills"
+type = "symlink"
+pattern = "*"
+
+[agents.gemini.targets.commands]
+source = "command"
+destination = ".gemini/commands"
+type = "symlink"
+pattern = "*.md"
+
+# OpenCode AI - Terminal-based AI coding assistant
+[agents.opencode]
+enabled = true
+description = "OpenCode - Open source AI coding agent"
+
+[agents.opencode.targets.skills]
+source = "skills"
+destination = ".opencode/skill"
+type = "symlink"
+pattern = "*"
+
+[agents.opencode.targets.commands]
+source = "command"
+destination = ".opencode/command"
+type = "symlink"
+pattern = "*.md"
+
+# Root AGENTS.md
+[agents.root]
+enabled = true
+description = "Root AGENTS.md for tools that look for it in repo root (e.g., Jules)"
+
+[agents.root.targets.agents]
+source = "AGENTS.md"
+destination = "AGENTS.md"
+type = "symlink"
+
+# -----------------------------------------------------------------------------
+# Model Context Protocol (MCP) Configuration
+# -----------------------------------------------------------------------------
+[mcp]
+enabled = true
+# Strategy for existing files: "merge" (default) or "overwrite"
+# "merge" preserves existing servers but overwrites conflicts with TOML config
+merge_strategy = "merge"
+
+# Define servers once
+[mcp_servers.filesystem]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "."]

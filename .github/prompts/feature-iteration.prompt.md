@@ -101,7 +101,7 @@ Expectations and Goals:
 Authoring Guidelines:
 
 - Make small, reversible changes; preserve clarity.
-- Tie choices to project conventions (Ruler docs); avoid cleverness over
+- Tie choices to project conventions (AGENTS/AgentSync docs); avoid cleverness over
   maintainability.
 - Justify significant decisions and note risks with mitigations.
 

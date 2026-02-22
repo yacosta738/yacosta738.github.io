@@ -1,0 +1,30 @@
+name: Check AgentSync Configuration
+
+on:
+  pull_request:
+    paths: [".agents/**"]
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  check-agentsync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Setup Node.js and pnpm
+        uses: ./.github/actions/setup/node
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Apply AgentSync configuration
+        run: pnpm dlx @dallay/agentsync apply --no-gitignore
+
+      - name: Check for uncommitted changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "::error::AgentSync configuration is out of sync!"
+            echo "Please run 'pnpm run agents:apply' locally and commit the changes."
+            exit 1
+          fi

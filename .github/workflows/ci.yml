@@ -55,8 +55,8 @@ jobs:
         with:
           check-astro: 'true'
 
-      - name: Apply Ruler conventions
-        run: pnpm ruler:check
+      - name: Check AgentSync conventions
+        run: pnpm agents:check
         continue-on-error: true
 
   # Job 2: Unit Tests (parallel with lint)

@@ -25,12 +25,12 @@ When making changes, please follow the coding style of the project.
 - Run `pnpm run check` to check for any errors.
 - Run `pnpm run dev` to start the development server.
 
-## AI Assistant Instructions (Ruler)
+## AI Assistant Instructions (AgentSync)
 
-This project uses [Ruler](https://github.com/intellectronica/ruler) to centralize
-and manage the instructions provided to AI coding assistants like GitHub Copilot,
-Gemini, and others. This ensures that all assistants work with the same context,
-conventions, and project architecture, which are defined in the `.ruler/`
+This project uses [AgentSync](https://github.com/dallay/agentsync) to centralize
+and synchronize the instructions provided to AI coding assistants like GitHub Copilot,
+Codex, Gemini, Claude, and others. This ensures that all assistants work with the same
+context, conventions, and project architecture, which are defined in the `.agents/`
 directory.
 
 ### How to Apply AI Instructions
@@ -39,15 +39,14 @@ After cloning the project or pulling new changes, you must synchronize the AI
 instructions. To do this, run the following command in the root of the project:
 
 ```bash
- npx @intellectronica/ruler apply
+pnpm run agents:apply
 ```
 
-This command reads all the instruction files from the `.ruler/` directory and
-automatically generates the necessary configuration for the different AI tools
-supported by the project.
+This command reads all instruction files from the `.agents/` directory and
+synchronizes the required links/configuration for supported AI tools.
 
 If you need to modify or add instructions for the AIs, edit the relevant Markdown
-files (`.md`) inside the `.ruler/` directory and run the `ruler apply` command
+files (`.md`) inside the `.agents/` directory and run the `agents:apply` command
 again to distribute the changes.
 
 ## Submitting changes
