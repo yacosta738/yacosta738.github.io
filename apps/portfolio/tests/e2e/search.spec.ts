@@ -73,36 +73,34 @@ test.describe("Search Page", () => {
 	});
 
 	test("should update results when query is changed", async ({ page }) => {
-		await page.goto("/en/search?q=astro");
+		// Start from a query that should reliably produce an empty state,
+		// then switch to a known query and assert results appear.
+		await page.goto("/en/search?q=nonexistentquerythatdoesnotexist12345");
 
 		// Wait for Pagefind UI to initialize
 		const input = await waitForPagefindUI(page);
 
-		// Wait for initial search results to appear
+		// Wait for initial search state to appear (empty/message)
 		await waitForSearchResults(page);
 
-		// Change the query to "test"
+		// Change query to one that should produce actual results
 		await input.fill(""); // Clear input reliably
-		await input.fill("test");
+		await input.fill("astro");
+		await expect(input).toHaveValue("astro");
 
-		// Wait for Pagefind to update results after typing
-		await waitForSearchResults(page);
+		// URL should reflect latest query once Pagefind input handler runs
+		await expect
+			.poll(() => new URL(page.url()).searchParams.get("q"), { timeout: 10_000 })
+			.toBe("astro");
 
+		// Wait for Pagefind to render at least one result for the new query
 		const results = page.locator(".pagefind-ui__result");
-		const resultCount = await results.count();
-		const hasCustomEmpty = await page.locator(".pf-empty").count();
-		const hasPagefindMessage = await page
-			.locator(".pagefind-ui__message")
-			.count();
+		await expect.poll(() => results.count(), { timeout: 15_000 }).toBeGreaterThan(0);
 
-		if (resultCount > 0) {
-			await expect(results.first()).toBeVisible();
-			const content = await results.first().textContent();
-			expect(content?.toLowerCase()).toContain("test");
-		} else {
-			// Accept either custom empty state or Pagefind message
-			expect(hasCustomEmpty + hasPagefindMessage).toBeGreaterThan(0);
-		}
+		await expect(results.first()).toBeVisible();
+		const firstResultLinks = results.first().locator(".pagefind-ui__result-link");
+		await expect.poll(() => firstResultLinks.count(), { timeout: 10_000 }).toBeGreaterThan(0);
+		await expect(firstResultLinks.first()).toBeVisible();
 	});
 
 	test("should handle clearing query", async ({ page }) => {

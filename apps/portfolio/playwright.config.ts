@@ -14,6 +14,7 @@ export default defineConfig({
 
 	// Retry on CI and locally for webkit flake resistance
 	retries: process.env.CI ? 2 : 1,
+	failOnFlakyTests: true,
 
 	// Only fail if more than 10% of tests are flaky
 	reportSlowTests: { max: 5, threshold: 60_000 },
