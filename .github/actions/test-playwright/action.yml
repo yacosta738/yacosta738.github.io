@@ -32,7 +32,7 @@ runs:
       shell: bash
       working-directory: apps/portfolio
       run: |
-        VERSION=$(pnpm list @playwright/test --json 2>/dev/null | jq -r '.[0].devDependencies["@playwright/test"].version // .[0].dependencies["@playwright/test"].version // "latest"')
+        VERSION=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"] // "latest"' package.json)
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "🎭 Playwright version: $VERSION"
     - name: Install dependencies
@@ -62,16 +62,18 @@ runs:
           pnpm exec playwright install --with-deps ${{ inputs.browser }}
         fi
 
-    - name: Install browser dependencies (cached)
+    - name: Ensure Playwright browsers (cached)
       if: steps.playwright-cache.outputs.cache-hit == 'true'
       shell: bash
       working-directory: apps/portfolio
       run: |
-        echo "♻️ Using cached browsers, installing system dependencies..."
+        echo "♻️ Using cached browsers, validating browser binaries and dependencies..."
         
         if [ "${{ inputs.browser }}" == "all" ]; then
+          pnpm exec playwright install
           pnpm exec playwright install-deps
         else
+          pnpm exec playwright install ${{ inputs.browser }}
           pnpm exec playwright install-deps ${{ inputs.browser }}
         fi
 
