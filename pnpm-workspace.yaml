@@ -2,6 +2,6 @@ packages:
   - apps/*
 
 catalog:
-  wrangler: ^4.58.0
+  wrangler: ^4.67.0
 
 minimumReleaseAge: 1440
