@@ -6,7 +6,7 @@ API_FILTER := --filter=yap-api
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install dev build check check-biome test unit e2e preflight ready-to-push \
+.PHONY: help install clean dev build check check-biome test unit e2e preflight ready-to-push \
 	portfolio-dev portfolio-build portfolio-check \
 	api-dev api-build api-test deploy \
 	e2e-headed e2e-debug e2e-ui e2e-report
@@ -17,6 +17,9 @@ help: ## Show available targets
 
 install: ## Install dependencies
 	$(PNPM) install
+
+clean: ## Clean generated artifacts
+	$(PNPM) $(PORTFOLIO_FILTER) clean
 
 dev: ## Run all apps in development mode
 	$(PNPM) dev
@@ -62,7 +65,7 @@ api-test: ## Run API unit tests
 	$(PNPM) $(API_FILTER) test:unit
 
 deploy: ## Deploy all deployable apps
-	$(PNPM) deploy
+	$(PNPM) run deploy
 
 e2e-headed: ## Run Playwright tests in headed mode (portfolio)
 	$(PNPM) $(PORTFOLIO_FILTER) test:e2e:headed

@@ -35,7 +35,6 @@
 		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/rss": "^4.0.15",
 		"@astrojs/sitemap": "^3.7.0",
-		"@midudev/tailwind-animations": "^1.0.1",
 		"@tailwindcss/vite": "^4.2.0",
 		"astro": "5.17.3",
 		"astro-compress": "2.3.9",

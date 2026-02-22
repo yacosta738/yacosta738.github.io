@@ -90,9 +90,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.0
         version: 3.7.0
-      '@midudev/tailwind-animations':
-        specifier: ^1.0.1
-        version: 1.0.1(tailwindcss@4.2.0)
       '@tailwindcss/vite':
         specifier: ^4.2.0
         version: 4.2.0(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2))
@@ -1081,11 +1078,6 @@ packages:
 
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
-
-  '@midudev/tailwind-animations@1.0.1':
-    resolution: {integrity: sha512-KOtvFo7LJlw4Xko9akFhPqpGEDx+r/Dle+44G9uBYeiGEJNVUEaEIG251j+USDxPtMV5grJuc4kFxTunv5rZvA==}
-    peerDependencies:
-      tailwindcss: ^4.0.0
 
   '@netlify/blobs@10.1.0':
     resolution: {integrity: sha512-dFpqDc6/x5LEu9L7kblCQu00CFEchH8J42jmQoXPuhKoE7avajzeLTbVKA8Olk3S/c2m9ejegrgbhL8NRA2Jyw==}
@@ -4715,11 +4707,6 @@ packages:
     resolution: {integrity: sha512-yEFYrVhod+hdNyx7g5Bnkkb0G6si8HJurOoOEgC8B/O0uXLHlaey/65KRv6cuWBNhBgHKAROVpc7QyYqE5gFng==}
     engines: {node: '>=20'}
 
-  tailwind-animations@1.0.1:
-    resolution: {integrity: sha512-5ouCdgfGS4kcyuzRSb/1O3o9f5Akssi7ue46PHfKjvPLMWjtnzmqM8i6ElES3tKVTyhjSaTPfLti7aB7WSxhZg==}
-    peerDependencies:
-      tailwindcss: ^4.0.0
-
   tailwind-merge@3.5.0:
     resolution: {integrity: sha512-I8K9wewnVDkL1NTGoqWmVEIlUcB9gFriAEkXkfCjX5ib8ezGxtR3xD7iZIxrfArjEsH7F1CHD4RFUtxefdqV/A==}
 
@@ -6293,11 +6280,6 @@ snapshots:
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
-
-  '@midudev/tailwind-animations@1.0.1(tailwindcss@4.2.0)':
-    dependencies:
-      tailwind-animations: 1.0.1(tailwindcss@4.2.0)
-      tailwindcss: 4.2.0
 
   '@netlify/blobs@10.1.0':
     dependencies:
@@ -10790,10 +10772,6 @@ snapshots:
   symbol-tree@3.2.4: {}
 
   tagged-tag@1.0.0: {}
-
-  tailwind-animations@1.0.1(tailwindcss@4.2.0):
-    dependencies:
-      tailwindcss: 4.2.0
 
   tailwind-merge@3.5.0: {}
 

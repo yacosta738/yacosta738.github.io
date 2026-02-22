@@ -9,6 +9,7 @@
 		"test": "pnpm --filter=./apps/* test",
 		"start": "pnpm --filter=./apps/* --parallel start",
 		"deploy": "pnpm --filter=./apps/* --parallel deploy",
+		"lint": "pnpm run check:biome",
 		"check:biome": "biome check . --write",
 		"check": "pnpm run check:biome && pnpm --filter=./apps/* check",
 		"precommit": "pnpm -w run ruler:apply",
