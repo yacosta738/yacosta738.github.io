@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"packageManager": "pnpm@10.28.0",
 	"type": "module",
 	"scripts": {
@@ -76,7 +76,7 @@
 		"preact-render-to-string": "^6.6.5",
 		"reading-time": "^1.5.0",
 		"rimraf": "^6.1.2",
-		"satori": "0.18.3",
+		"satori": "0.18.4",
 		"tailwind-merge": "^3.4.0",
 		"unified": "^11.0.5",
 		"vfile": "^6.0.3",
