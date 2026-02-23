@@ -343,7 +343,6 @@
 			"url": "https://gft.com"
 		},
 		{
-			"endDate": "",
 			"highlights": [
 				"Collaborated with cross-functional teams to analyze business requirements and design software solutions adhering to best practices and coding standards.",
 				"Provided technical leadership and mentorship to junior developers; troubleshot and resolved complex technical issues to maintain system reliability.",
@@ -354,6 +353,7 @@
 			"name": "Deutsche Bank",
 			"position": "Senior Software Engineer",
 			"startDate": "2023-04-08",
+      "endDate": "2025-12-18",
 			"summary": "As a Senior Software Engineer at Deutsche Bank, I bring expertise in collaborating with cross-functional teams to analyze business requirements, designing and delivering software solutions that follow best practices and high coding standards, and ensuring systems meet functional and performance goals.",
 			"url": "https://db.com"
 		},

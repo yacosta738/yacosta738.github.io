@@ -9,10 +9,14 @@ import {
 const load = async () => {
 	let images: Record<string, () => Promise<unknown>> | undefined;
 	try {
-		// Use an absolute /src/ glob so Vite can resolve assets inside the project
-		images = import.meta.glob(
+		const localImages = import.meta.glob(
 			"/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
 		);
+		const sharedImages = import.meta.glob(
+			"/../../packages/shared/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
+		);
+
+		images = { ...localImages, ...sharedImages };
 	} catch (_error) {
 		// continue regardless of error
 	}

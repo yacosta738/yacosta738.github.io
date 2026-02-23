@@ -347,7 +347,6 @@
 			"url": "https://gft.com"
 		},
 		{
-			"endDate": "",
 			"highlights": [
 				"Colaboré con equipos multifuncionales para analizar requisitos de negocio y diseñar soluciones de software siguiendo buenas prácticas y estándares de codificación.",
 				"Proporcioné liderazgo técnico y mentoría a desarrolladores junior; resolví problemas técnicos complejos para mantener la confiabilidad del sistema.",
@@ -358,6 +357,7 @@
 			"name": "Deutsche Bank",
 			"position": "Ingeniero de Software Senior",
 			"startDate": "2023-04-08",
+      "endDate": "2025-12-18",
 			"summary": "Como Ingeniero de Software Senior en Deutsche Bank, aporto experiencia colaborando con equipos multifuncionales para analizar requisitos de negocio, diseñar y entregar soluciones de software que siguen buenas prácticas y altos estándares de codificación, asegurando que los sistemas cumplan objetivos funcionales y de rendimiento.",
 			"url": "https://db.com"
 		},

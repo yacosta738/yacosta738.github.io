@@ -1,12 +1,11 @@
 ---
-import { getLocalePathsEnhanced, type Lang } from "@/i18n";
+import { localeParams, type Lang } from "@/i18n";
 
-export async function getStaticPaths() {
-	// Provide a dummy URL for build-time generation
-	return await getLocalePathsEnhanced(new URL('https://localhost'));
+export function getStaticPaths() {
+	return localeParams;
 }
 
-const locale = Astro.currentLocale as Lang;
+const locale = Astro.params.lang as Lang;
 ---
 <!doctype html>
 <html lang={locale}>

@@ -6,7 +6,10 @@ import { defineConfig, sharpImageService } from "astro/config";
 import critters from "astro-critters";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
-import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "../../packages/shared/src/i18n/locales.ts";
+import {
+	DEFAULT_LOCALE_SETTING,
+	LOCALES_SETTING,
+} from "../../packages/shared/src/i18n/locales.ts";
 import envSchema from "../../packages/shared/src/utils/env-schema.ts";
 import { whenExternalScripts } from "../../packages/shared/src/utils/externalScripts.ts";
 import {
@@ -51,7 +54,7 @@ export default defineConfig({
 
 	integrations: [
 		icon({
-			iconDir: "./src/icons",
+			iconDir: "../../packages/shared/src/icons",
 		}),
 		pagefind(),
 		sitemap({
@@ -202,6 +205,7 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		resolve: {
 			alias: {
+				src: "/../../packages/shared/src",
 				"@": "/../../packages/shared/src",
 				"@assets": "/../../packages/shared/src/assets",
 				"@components": "/../../packages/shared/src/components",
