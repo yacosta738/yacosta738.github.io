@@ -32,7 +32,8 @@ const hashInlineScript = (scriptContent) => {
 	return `'sha256-${hash}'`;
 };
 
-const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi;
+// Simplified script regex to avoid ReDoS
+const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
 const srcRegex = /\bsrc\s*=/i;
 
 const hashes = new Set();
@@ -53,33 +54,51 @@ if (hashes.size === 0) {
 }
 
 const headersContent = readFileSync(headersPath, "utf8");
-const cspLineRegex = /(Content-Security-Policy:\s*)([^\r\n]*)/i;
-const cspLineMatch = headersContent.match(cspLineRegex);
-if (!cspLineMatch) {
+
+// Parse _headers line by line to find CSP
+const lines = headersContent.split(/\r?\n/);
+const cspLineIndex = lines.findIndex((line) =>
+	line.trim().toLowerCase().startsWith("content-security-policy:"),
+);
+
+if (cspLineIndex === -1) {
 	throw new Error(
 		"Could not find Content-Security-Policy line in public/_headers.",
 	);
 }
 
-const cspValue = cspLineMatch[2];
-const scriptSrcRegex = /script-src\s+([^\s;](?:[^;]*[^\s;])?)\s*(?:;|$)/i;
-const scriptSrcMatch = cspValue.match(scriptSrcRegex);
-if (!scriptSrcMatch) {
+const originalLine = lines[cspLineIndex];
+const colonIndex = originalLine.indexOf(":");
+const prefix = originalLine.slice(0, colonIndex + 1).trimEnd() + " ";
+const cspValue = originalLine.slice(colonIndex + 1).trim();
+
+// Parse CSP directives
+const directives = cspValue.split(";").map((d) => d.trim()).filter(Boolean);
+const scriptSrcIndex = directives.findIndex((d) =>
+	d.toLowerCase().startsWith("script-src "),
+);
+
+if (scriptSrcIndex === -1) {
 	throw new Error("Could not find script-src directive in CSP.");
 }
 
-const existingTokens = scriptSrcMatch[1]
+const scriptSrcDirective = directives[scriptSrcIndex];
+const existingTokens = scriptSrcDirective
 	.split(/\s+/)
-	.map((token) => token.trim())
-	.filter(Boolean)
+	.slice(1) // Skip "script-src"
 	.filter(
-		(token) => token !== "'unsafe-inline'" && !token.startsWith("'sha256-"),
+		(token) =>
+			token !== "'unsafe-inline'" &&
+			!token.startsWith("'sha256-") &&
+			token.length > 0,
 	);
 
-const nextTokens = [...existingTokens, ...Array.from(hashes).sort()];
-const nextScriptSrc = `script-src ${nextTokens.join(" ")};`;
-const nextCspValue = cspValue.replace(scriptSrcRegex, nextScriptSrc);
-const nextHeaders = headersContent.replace(cspLineRegex, `$1${nextCspValue}`);
+const nextTokens = ["script-src", ...existingTokens, ...Array.from(hashes).sort()];
+directives[scriptSrcIndex] = nextTokens.join(" ");
+
+const nextCspValue = directives.join("; ") + ";";
+lines[cspLineIndex] = prefix + nextCspValue;
+const nextHeaders = lines.join("\n");
 
 writeFileSync(headersPath, nextHeaders, "utf8");
 
