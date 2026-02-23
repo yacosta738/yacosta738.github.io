@@ -6,7 +6,10 @@ import { defineConfig, sharpImageService } from "astro/config";
 import critters from "astro-critters";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
-import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "../../packages/shared/src/i18n/locales.ts";
+import {
+	DEFAULT_LOCALE_SETTING,
+	LOCALES_SETTING,
+} from "../../packages/shared/src/i18n/locales.ts";
 import envSchema from "../../packages/shared/src/utils/env-schema.ts";
 import { whenExternalScripts } from "../../packages/shared/src/utils/externalScripts.ts";
 import {

@@ -23,7 +23,10 @@ const locationSchema = z.object({
 
 // System skills library collection (icons, metadata, etc.)
 const skillsLibrary = defineCollection({
-	loader: glob({ pattern: "**/[^_]*.json", base: "../../packages/shared/src/data/skills" }),
+	loader: glob({
+		pattern: "**/[^_]*.json",
+		base: "../../packages/shared/src/data/skills",
+	}),
 	schema: z.object({
 		id: z.string(),
 		name: z.string(),
@@ -33,7 +36,10 @@ const skillsLibrary = defineCollection({
 
 // Languages library collection (language names, mappings, metadata)
 const languagesLibrary = defineCollection({
-	loader: glob({ pattern: "**/[^_]*.json", base: "../../packages/shared/src/data/languages" }),
+	loader: glob({
+		pattern: "**/[^_]*.json",
+		base: "../../packages/shared/src/data/languages",
+	}),
 	schema: z.object({
 		code: z.string(),
 		nativeName: z.string(),
@@ -66,7 +72,10 @@ const projectMetadata = defineCollection({
 
 // Main resume collection using glob loader for multiple languages
 const resume = defineCollection({
-	loader: glob({ pattern: "**/resume.json", base: "../../packages/shared/src/data/resume" }),
+	loader: glob({
+		pattern: "**/resume.json",
+		base: "../../packages/shared/src/data/resume",
+	}),
 	schema: z.object({
 		basics: z.object({
 			name: z.string(),
@@ -209,7 +218,10 @@ const resume = defineCollection({
 });
 
 const articles = defineCollection({
-	loader: glob({ pattern: "**/*.{md,mdx}", base: "../../packages/shared/src/data/articles" }),
+	loader: glob({
+		pattern: "**/*.{md,mdx}",
+		base: "../../packages/shared/src/data/articles",
+	}),
 	schema: ({ image }: SchemaContext) =>
 		z.object({
 			title: z.string(),
@@ -226,7 +238,10 @@ const articles = defineCollection({
 });
 
 const tags = defineCollection({
-	loader: glob({ pattern: "**/[^_]*.md", base: "../../packages/shared/src/data/tags" }),
+	loader: glob({
+		pattern: "**/[^_]*.md",
+		base: "../../packages/shared/src/data/tags",
+	}),
 	schema: z.object({
 		title: z.string(),
 		slug: z.string().optional(),
@@ -234,7 +249,10 @@ const tags = defineCollection({
 });
 
 const categories = defineCollection({
-	loader: glob({ pattern: "**/[^_]*.md", base: "../../packages/shared/src/data/categories" }),
+	loader: glob({
+		pattern: "**/[^_]*.md",
+		base: "../../packages/shared/src/data/categories",
+	}),
 	schema: z.object({
 		title: z.string(),
 		order: z.number().optional(),
@@ -242,7 +260,10 @@ const categories = defineCollection({
 });
 
 const authors = defineCollection({
-	loader: glob({ pattern: "**/[^_]*.json", base: "../../packages/shared/src/data/authors" }),
+	loader: glob({
+		pattern: "**/[^_]*.json",
+		base: "../../packages/shared/src/data/authors",
+	}),
 	schema: z.object({
 		name: z.string(),
 		email: z.string(),

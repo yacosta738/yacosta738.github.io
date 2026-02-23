@@ -6,8 +6,11 @@ import { getViteConfig } from "astro/config";
 export default getViteConfig({
 	resolve: {
 		alias: [
-			{ find: "@/", replacement: `${path.resolve("./src")}/` },
-			{ find: "@", replacement: path.resolve("./src") },
+			{
+				find: "@/",
+				replacement: `${path.resolve("../../packages/shared/src")}/`,
+			},
+			{ find: "@", replacement: path.resolve("../../packages/shared/src") },
 		],
 	},
 	// @ts-expect-error
