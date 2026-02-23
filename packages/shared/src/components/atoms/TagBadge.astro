@@ -1,0 +1,44 @@
+---
+import { routes } from "@/configs/route.path";
+/**
+ * TagBadge component.
+ * A reusable badge component for displaying tags with links.
+ * Built on top of the Badge component for consistent styling.
+ *
+ * @prop {string} title - The display title of the tag.
+ * @prop {string} slug - The slug for the tag URL.
+ * @prop {string} lang - The current language/locale.
+ * @prop {"primary" | "secondary" | "accent"} [variant="secondary"] - The badge variant.
+ * @prop {"sm" | "md" | "lg"} [size="md"] - The badge size.
+ * @prop {string} [class] - Additional CSS classes.
+ */
+import Badge from "./Badge.astro";
+
+export interface Props {
+	title: string;
+	slug: string;
+	lang: string;
+	variant?: "primary" | "secondary" | "accent";
+	size?: "sm" | "md" | "lg";
+	class?: string;
+}
+
+const {
+	title,
+	slug,
+	lang,
+	variant = "secondary",
+	size = "md",
+	class: className = "",
+} = Astro.props;
+---
+
+<a href={`/${lang}/${routes.tag}/${slug}`}>
+	<Badge
+		{variant}
+		{size}
+		class={`transition-colors duration-300 hover:opacity-80 cursor-pointer ${className}`}
+	>
+		{title}
+	</Badge>
+</a>

@@ -1,0 +1,149 @@
+---
+/**
+ * BaseToast component.
+ * A highly customizable toast notification component with options for positioning,
+ * styling, size, and behavior.
+ *
+ * @prop {"bottom-left" | "bottom-right" | "top-left" | "top-right" | "bottom-center"} [position="bottom-right"] - The position of the toast on the screen.
+ * @prop {"default" | "glass" | "solid"} [variant="default"] - The visual style of the toast.
+ * @prop {"sm" | "md" | "lg"} [size="md"] - The size of the toast.
+ * @prop {boolean} [showCloseButton=true] - Whether to display the close button.
+ * @prop {string} [closeButtonId="close-toast"] - The ID for the close button element.
+ * @prop {string} [closeButtonLabel="Close notification"] - The ARIA label for the close button.
+ * @prop {boolean} [autoHide=false] - If true, the toast will automatically hide after a delay.
+ * @prop {number} [autoHideDelay=4000] - The delay in milliseconds before the toast auto-hides.
+ * @prop {string} [class] - Additional CSS classes to apply to the toast container.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"div"> {
+	position?:
+		| "bottom-left"
+		| "bottom-right"
+		| "top-left"
+		| "top-right"
+		| "bottom-center";
+	variant?: "default" | "glass" | "solid";
+	size?: "sm" | "md" | "lg";
+	showCloseButton?: boolean;
+	closeButtonId?: string;
+	closeButtonLabel?: string;
+	autoHide?: boolean;
+	autoHideDelay?: number;
+}
+
+const {
+	position = "bottom-right",
+	variant = "default",
+	size = "md",
+	showCloseButton = true,
+	closeButtonId = "close-toast",
+	closeButtonLabel = "Close notification",
+	autoHide = false,
+	autoHideDelay = 4000,
+	class: className,
+	...attrs
+} = Astro.props;
+
+// Generate position classes based on the selected position
+const getPositionClasses = () => {
+	switch (position) {
+		case "bottom-left":
+			return "bottom-6 left-6";
+		case "bottom-right":
+			return "bottom-6 right-6";
+		case "bottom-center":
+			return "bottom-6 left-1/2 -translate-x-1/2";
+		case "top-left":
+			return "top-6 left-6";
+		case "top-right":
+			return "top-6 right-6";
+		default:
+			return "bottom-6 right-6";
+	}
+};
+
+// Generate variant classes
+const getVariantClasses = () => {
+	switch (variant) {
+		case "glass":
+			return "backdrop-blur-xl bg-white/10 dark:bg-gray-900/80 border border-white/20 dark:border-gray-700/50 shadow-2xl shadow-black/25";
+		case "solid":
+			return "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700";
+		default:
+			return "bg-gray-900/80 dark:bg-[#0a192f]/80 backdrop-blur-md border border-gray-700 dark:border-[#233554]";
+	}
+};
+
+// Generate size classes
+const getSizeClasses = () => {
+	switch (size) {
+		case "sm":
+			return "max-w-xs p-3";
+		case "lg":
+			return "max-w-lg p-6";
+		default:
+			return "max-w-sm p-4";
+	}
+};
+
+const positionClasses = getPositionClasses();
+const variantClasses = getVariantClasses();
+const sizeClasses = getSizeClasses();
+---
+
+<div 
+  class={cn(
+    "fixed z-50 transform translate-y-full transition-all duration-500 ease-out opacity-0 rounded-xl shadow-2xl",
+    positionClasses,
+    variantClasses,
+    sizeClasses,
+    className
+  )}
+  role="alert"
+  aria-live="polite"
+  data-toast="true"
+  {...attrs}
+>
+  
+  <div class="flex items-start">
+    <div class="flex-1">
+      <slot />
+    </div>
+    
+    {showCloseButton && (
+      <button 
+        id={closeButtonId}
+        class={cn(
+          "ml-3 transition-colors shrink-0 p-2 rounded-lg",
+          variant === "glass" 
+            ? "bg-white/10 dark:bg-gray-800/30 hover:bg-white/20 dark:hover:bg-gray-700/40 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white backdrop-blur-sm" 
+            : variant === "solid"
+            ? "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            : "text-gray-400 hover:text-gray-200 hover:bg-gray-800/50"
+        )}
+        aria-label={closeButtonLabel}
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    )}
+  </div>
+</div>
+
+{autoHide && (
+  <script is:inline define:vars={{ autoHideDelay }}>
+    // Auto-hide functionality
+    const toastElement = document.currentScript.previousElementSibling;
+    if (toastElement) {
+      setTimeout(() => {
+        if (toastElement.classList.contains('opacity-100')) {
+          toastElement.classList.remove('translate-y-0', 'opacity-100');
+          toastElement.classList.add('translate-y-full', 'opacity-0');
+        }
+      }, autoHideDelay);
+    }
+  </script>
+)}

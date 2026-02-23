@@ -1,0 +1,182 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import ResumeButton from "@/components/atoms/ResumeButton.astro";
+import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
+import { navMenus } from "@/core/menu";
+import { useTranslatedPath, useTranslations } from "@/i18n";
+import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"nav"> {
+	drawer?: boolean;
+	resumePath?: string;
+}
+
+const {
+	drawer = false,
+	class: className,
+	resumePath = "/files/yuniel_acosta_cv.pdf",
+	...props
+} = Astro.props;
+
+import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
+
+const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+---
+
+<nav
+	aria-label={t("mainNavigation")}
+	class={cn(
+		"mt-8 w-full origin-top-right items-center",
+		"space-y-6 overflow-x-hidden overflow-y-auto font-medium tracking-wide lg:mt-0 lg:flex",
+		"lg:w-auto lg:space-x-0 lg:space-y-0 flex-shrink-0",
+		"safari-nav-fix",
+		className,
+	)}
+	{...props}
+>
+	<ul class="flex items-center lg:gap-8 order-list safari-menu-list">
+		{
+			navMenus.map((menu) => (
+				<li>
+					<a
+						href={translatePath(menu.link)}
+						id={drawer ? `drawer-${menu.id}` : `nav-${menu.id}`}
+						data-drawer-dismiss={drawer ? "drawer-menu" : undefined}
+						aria-current={
+							Astro.url.pathname.startsWith(menu.link) ? "page" : undefined
+						}
+						class="nav-link"
+					>
+						{t(menu.title)}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+
+	<div class="flex items-center lg:gap-2 safari-actions-container">
+		<LocaleSelect
+			class="px-3 py-1 text-sm text-foreground-muted hover:text-brand-accent transition-all duration-200 font-display"
+		/>
+		<a
+			class="rounded bg-transparent p-2 text-sm text-foreground-muted hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 border border-transparent hover:border-brand-accent"
+			aria-label={t("rssFeed")}
+			target="_blank"
+			href={translatePath("/rss.xml")}
+		>
+			<Icon name="lucide:rss" class="h-5 w-5" aria-hidden="true" />
+		</a>
+		<ThemeToggle currentLocale={currentLocale} />
+		<ResumeButton
+			resumePath={resumePath}
+			variant="primary"
+			currentLocale={currentLocale}
+			class="w-full flex items-center justify-center gap-2"
+		/>
+	</div>
+</nav>
+
+<style>
+	/* Safari-specific fixes for menu navigation */
+	nav.safari-nav-fix {
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: row;
+		flex-direction: column;
+	}
+
+	@media (min-width: 1024px) {
+		nav.safari-nav-fix {
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			-webkit-flex-direction: row;
+			flex-direction: row;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+			width: auto;
+			max-width: 100%;
+			-webkit-box-flex: 0;
+			-webkit-flex: 0 0 auto;
+			flex: 0 0 auto;
+		}
+	}
+
+	/* Safari flexbox list fix with explicit margins as fallback for gap */
+	.safari-menu-list {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		align-items: center;
+	}
+
+	.safari-menu-list li {
+		margin-right: 2rem;
+	}
+
+	.safari-menu-list li:last-child {
+		margin-right: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.safari-menu-list {
+			gap: 2rem;
+		}
+
+		/* Reset margin when gap is supported */
+		@supports (gap: 2rem) {
+			.safari-menu-list li {
+				margin-right: 0;
+			}
+		}
+	}
+
+	/* Safari actions container with margin fallback */
+	.safari-actions-container {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		align-items: center;
+	}
+
+	.safari-actions-container > * {
+		margin-right: 0.5rem;
+	}
+
+	.safari-actions-container > *:last-child {
+		margin-right: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.safari-actions-container {
+			gap: 0.5rem;
+		}
+
+		/* Reset margin when gap is supported */
+		@supports (gap: 0.5rem) {
+			.safari-actions-container > * {
+				margin-right: 0;
+			}
+		}
+	}
+
+	/* Prevent unwanted scroll in Safari */
+	@media (min-width: 1024px) {
+		nav.safari-nav-fix {
+			overflow-x: hidden;
+			overflow-y: visible;
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+</style>

@@ -1,0 +1,53 @@
+---
+---
+<button
+  id="to-top-button"
+  aria-label="Go to top"
+  class="hidden fixed bottom-24 right-5 z-50 p-2 rounded-full bg-background border border-border text-foreground-muted hover:bg-background-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 15l7-7 7 7"
+    />
+  </svg>
+</button>
+
+<script is:inline>
+  const toTopButton = document.getElementById("to-top-button");
+
+  if (toTopButton) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        toTopButton.classList.remove("hidden");
+      } else {
+        toTopButton.classList.add("hidden");
+      }
+    });
+
+    toTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+</script>
+
+<style>
+  #to-top-button {
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  #to-top-button.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+</style>

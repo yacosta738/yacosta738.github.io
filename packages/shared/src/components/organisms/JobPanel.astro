@@ -1,0 +1,213 @@
+---
+/**
+ * JobPanel component.
+ * A panel within a tabbed interface that displays the work experience at a single company.
+ * It intelligently renders a single job view or a timeline if multiple positions
+ * were held at the same company.
+ *
+ * @prop {object} company - An object containing company details and a list of positions.
+ * @prop {string} company.name - The name of the company.
+ * @prop {string} [company.url] - The company's website URL.
+ * @prop {string} [company.location] - The company's location.
+ * @prop {Work[]} company.positions - An array of work experiences at this company.
+ * @prop {boolean} isActive - Whether this tab panel is currently active/visible.
+ * @prop {number} panelIndex - The index of the panel, used for ARIA attributes.
+ * @prop {Lang} locale - The locale for date formatting.
+ */
+import { Icon } from "astro-icon/components";
+import JobHeader from "@/components/molecules/JobHeader.astro";
+import JobHighlights from "@/components/molecules/JobHighlights.astro";
+import WorkTimeline from "@/components/organisms/WorkTimeline.astro";
+import { getCompanyLogo } from "@/configs/company-logos";
+import type Work from "@/core/resume/work/work.model";
+import type { Lang } from "@/i18n/types";
+
+interface Props {
+	company: {
+		name: string;
+		url?: string;
+		location?: string;
+		positions: Work[];
+	};
+	isActive: boolean;
+	panelIndex: number;
+	locale: Lang;
+}
+
+const { company, isActive, panelIndex, locale } = Astro.props;
+const hasMultiplePositions = company.positions.length > 1;
+const latestPosition = company.positions[0];
+const companyLogo = getCompanyLogo(company.name);
+---
+
+<div
+	class="tab-panel"
+	id={`panel-${panelIndex}`}
+	role="tabpanel"
+	tabindex={isActive ? "0" : "-1"}
+	aria-labelledby={`tab-${panelIndex}`}
+	aria-hidden={isActive ? "false" : "true"}
+	style={isActive ? "" : "display: none;"}
+>
+	{!hasMultiplePositions ? (
+		<div class="single-position">
+			<JobHeader
+				position={latestPosition.position}
+				company={company.name}
+				companyUrl={company.url}
+				location={company.location}
+				startDate={latestPosition.startDate}
+				endDate={latestPosition.endDate}
+				locale={locale}
+				showCompanyInTitle={true}
+			/>
+			<JobHighlights
+				summary={latestPosition.summary}
+				highlights={latestPosition.highlights}
+			/>
+		</div>
+	) : (
+		<div class="multiple-positions">
+			<div class="company-overview">
+				{companyLogo && (
+					<div class="company-logo">
+						<Icon size={48} title={company.name} name={companyLogo} />
+					</div>
+				)}
+				<div class="company-info">
+					<h3 class="company-name">
+						{company.url ? (
+							<a href={company.url} class="company-link" target="_blank" rel="noopener noreferrer">
+								{company.name}
+							</a>
+						) : (
+							<span class="company-title">{company.name}</span>
+						)}
+					</h3>
+					{company.location && (
+						<p class="company-location">{company.location}</p>
+					)}
+				</div>
+			</div>
+
+			<div class="positions-timeline">
+				<WorkTimeline
+					positions={company.positions}
+					company={company.name}
+					companyUrl={company.url}
+					location={company.location}
+					locale={locale}
+					showDates={true}
+					variant="default"
+				/>
+			</div>
+		</div>
+	)}
+</div>
+
+<style>
+	.tab-panel {
+		width: 100%;
+		height: auto;
+		padding: 10px 5px;
+		opacity: 1;
+		transition: opacity 0.25s ease-in-out;
+	}
+
+	.tab-panel[aria-hidden="true"] {
+		opacity: 0;
+	}
+
+	/* Company overview for multiple positions */
+	.company-overview {
+		margin-bottom: 24px;
+		padding-bottom: 16px;
+		border-bottom: 1px solid var(--lightest-navy);
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+	}
+
+	.company-logo {
+		flex-shrink: 0;
+	}
+
+	.company-info {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.company-name {
+		margin-bottom: 8px;
+		font-size: var(--fz-xl);
+		font-weight: 600;
+		line-height: 1.3;
+	}
+
+	.company-link,
+	.company-title {
+		color: var(--green);
+		text-decoration: none;
+		position: relative;
+		display: inline-block;
+		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	}
+
+	.company-link::after {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 1px;
+		bottom: -2px;
+		left: 0;
+		background-color: var(--green);
+		transition: width 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+		opacity: 0.5;
+	}
+
+	.company-link:hover::after,
+	.company-link:focus::after {
+		width: 100%;
+	}
+
+	.company-location {
+		margin: 0;
+		color: var(--light-slate);
+		font-family: var(--font-mono);
+		font-size: var(--fz-sm);
+	}
+
+	.company-location::before {
+		content: "📍 ";
+		margin-right: 4px;
+	}
+
+	.positions-timeline {
+		position: relative;
+	}
+
+	/* Light mode overrides */
+	html:not(.dark) .company-overview {
+		border-bottom-color: rgba(15,23,42,0.06);
+	}
+
+	html:not(.dark) .company-link,
+	html:not(.dark) .company-title {
+		color: var(--brand-accent);
+	}
+
+	html:not(.dark) .company-link::after {
+		background-color: var(--brand-accent);
+	}
+
+	html:not(.dark) .company-location {
+		color: #64748b; /* readable gray for light mode */
+	}
+
+	/* Responsive */
+	@media (max-width: 600px) {
+		.company-overview {
+			margin-bottom: 20px;
+		}
+	}
+</style>

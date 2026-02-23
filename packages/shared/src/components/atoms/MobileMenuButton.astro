@@ -1,0 +1,156 @@
+---
+import {
+	DRAWER_MENU_BUTTON_BOX_ID,
+	DRAWER_MENU_BUTTON_ID,
+} from "@/core/menu/menu.constants";
+import type { Lang } from "@/i18n";
+import { useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props {
+	drawerTarget: string;
+	class?: string;
+}
+const { drawerTarget, class: className = "" } = Astro.props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+---
+
+<div
+	id={DRAWER_MENU_BUTTON_BOX_ID}
+	class={cn("menu-btn-box", className)}
+>
+	<button
+		id={DRAWER_MENU_BUTTON_ID}
+		type="button"
+		data-drawer-target={drawerTarget}
+		data-drawer-placement="right"
+		class="menu-toggle"
+		aria-label={t("menu.open")}
+		aria-expanded="false"
+		aria-controls={drawerTarget}
+	>
+		<span class="sr-only">{t("menu.openOrClose")}</span>
+		<svg
+			class="ham hamRotate ham7"
+			viewBox="0 0 100 100"
+			width="60"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path
+				class="line top"
+				d="m 70,33 h -40 c 0,0 -6,1.368796 -6,8.5 0,7.131204 6,8.5013 6,8.5013 l 20,-0.0013"
+			></path>
+			<path class="line middle" d="m 70,50 h -40"></path>
+			<path
+				class="line bottom"
+				d="m 69.575405,67.073826 h -40 c -5.592752,0 -6.873604,-9.348582 1.371031,-9.348582 8.244634,0 19.053564,21.797129 19.053564,12.274756 l 0,-40"
+			></path>
+		</svg>
+	</button>
+</div>
+
+<style>
+.menu-btn-box {
+	position: fixed;
+	top: calc(var(--header-height, 64px) / 2);
+	right: clamp(1rem, 4vw, 1.5rem);
+	transform: translateY(-50%);
+	z-index: 70;
+	display: flex;
+	align-items: center;
+	transition: transform 240ms ease, opacity 180ms ease;
+}
+
+.menu-btn-box.is-hidden {
+	opacity: 0;
+	transform: translateY(-150%);
+	pointer-events: none;
+}
+
+@media (min-width: 768px) {
+	.menu-btn-box {
+		display: none !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.menu-btn-box {
+		transition: none;
+	}
+}
+
+.menu-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60px;
+	width: 60px;
+	padding: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	transition: transform 400ms;
+}
+
+.menu-toggle .ham {
+	transition: transform 400ms;
+}
+
+.menu-toggle .line {
+	fill: none;
+	transition:
+		stroke-dasharray 400ms,
+		stroke-dashoffset 400ms;
+	stroke: #64ffda;
+	stroke-width: 5.5;
+	stroke-linecap: round;
+}
+
+.menu-toggle .ham7 .top {
+	stroke-dasharray: 40 82;
+}
+
+.menu-toggle .ham7 .middle {
+	stroke-dasharray: 30 111;
+}
+
+.menu-toggle .ham7 .bottom {
+	stroke-dasharray: 20 161;
+}
+
+.menu-toggle.active-menu .hamRotate {
+	transform: rotate(45deg);
+}
+
+.menu-toggle.active-menu .hamRotate180 {
+	transform: rotate(180deg);
+}
+
+.menu-toggle.active-menu .ham7 .top {
+	stroke-dasharray: 40 82;
+	stroke-dashoffset: -62px;
+}
+
+.menu-toggle.active-menu .ham7 .middle {
+	stroke-dasharray: 40 60;
+	stroke-dashoffset: 23px;
+}
+
+.menu-toggle.active-menu .ham7 .bottom {
+	stroke-dasharray: 40 82;
+	stroke-dashoffset: -82px;
+}
+
+.menu-toggle:focus-visible {
+	outline: 2px solid #64ffda;
+	outline-offset: 4px;
+	border-radius: 9999px;
+}
+</style>

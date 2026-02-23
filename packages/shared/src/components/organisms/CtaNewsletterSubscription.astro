@@ -1,0 +1,356 @@
+---
+import Button from "@components/atoms/Button.astro";
+import type { HTMLAttributes } from "astro/types";
+// We'll render hCaptcha client-side on demand to avoid layout issues
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"section"> {
+	title?: string;
+	description?: string;
+	formId?: string;
+}
+
+const { title, description, formId, ...attrs } = Astro.props as Props;
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+
+import { HCAPTCHA_SITE_KEY } from "astro:env/client";
+---
+
+<section
+	class={cn(
+		"flex w-full will-change-transform",
+		attrs.class
+	)}
+	id={formId}
+	{...attrs}
+>
+	<div
+		class={cn(
+			"flex py-5 px-0",
+			"transition-colors duration-[350ms] ease-in-out w-full"
+		)}
+	>
+		<div class="flex gap-5 mx-auto w-full">
+			<div class="flex flex-col w-full max-w-4xl">
+				<h1
+					class={cn(
+						"text-foreground text-3xl @md:text-5xl font-bold leading-tight tracking-tight relative",
+						"transition-colors duration-350 animate-fadeIn font-heading"
+					)}
+				>
+					{title || t("cta.title")}
+				</h1>
+				<p
+					class={cn(
+						"text-foreground relative mt-2 text-base font-medium tracking-wide leading-relaxed",
+						"animate-fadeIn animation-delay-150"
+					)}
+				>
+					{description || t("cta.description")}
+				</p>
+				<form
+					id="newsletter-form"
+					class="flex flex-row gap-4 mt-6 w-full max-w-md"
+					novalidate
+				>
+					<!-- Honeypot to reduce spam (should remain empty) -->
+					<input
+						type="text"
+						name="_gotcha"
+						id="newsletter-gotcha"
+						autocomplete="off"
+						tabindex="-1"
+						style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
+						aria-hidden="true"
+					/>
+					<div class="flex-1 w-full">
+						<label for="newsletter-email" class="sr-only">
+							{t("cta.email_placeholder")}
+						</label>
+						<input
+							data-test="newsletter-email"
+							type="email"
+							id="newsletter-email"
+							name="email"
+							placeholder={t("cta.email_placeholder")}
+							required
+							class={cn(
+								"w-full px-4 py-3 border rounded-md",
+								"bg-background-secondary text-foreground border-border",
+								"placeholder:text-foreground-subtle",
+								"focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20",
+								"transition-colors"
+							)}
+							aria-describedby="newsletter-error"
+						/>
+						<p
+							id="newsletter-error"
+							class="text-red-500 text-sm mt-1 min-h-[1.25rem]"
+							aria-live="polite"
+						>
+						</p>
+					</div>
+					<Button
+						data-test="newsletter-subscribe"
+						type="submit"
+						variant="outline"
+						size="lg"
+						class="w-auto"
+					>
+						{t("cta.subscribe_button")}
+					</Button>
+				</form>
+				<div
+					id="newsletter-captcha-wrapper"
+					data-sitekey={HCAPTCHA_SITE_KEY}
+					class="flex justify-center w-full max-h-0 overflow-hidden opacity-0 transition-all duration-300"
+					aria-hidden="true"
+				>
+					<!-- placeholder for client-rendered hCaptcha -->
+					<div id="newsletter-captcha-placeholder" style="width:100%;max-width:304px;" aria-hidden="true"></div>
+				</div>
+				<div id="newsletter-status" class="mt-4 text-center min-h-[1.5rem]" aria-live="polite">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Type definitions for global functions (HCaptcha types are defined in HCaptcha.astro)
+	document.addEventListener("DOMContentLoaded", async () => {
+		// Import the newsletter service dynamically
+		const { newsletterService } = await import("@/services");
+
+		// Newsletter form submission handler
+		const form = document.getElementById("newsletter-form") as HTMLFormElement | null;
+		const emailInput = document.getElementById("newsletter-email") as HTMLInputElement | null;
+		const errorMessage = document.getElementById("newsletter-error") as HTMLParagraphElement | null;
+		const statusMessage = document.getElementById("newsletter-status") as HTMLDivElement | null;
+		const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+		const honeypotInput = document.getElementById("newsletter-gotcha") as HTMLInputElement | null;
+		const captchaWrapper = document.getElementById("newsletter-captcha-wrapper") as HTMLDivElement | null;
+
+		if (!form || !emailInput || !submitButton || !errorMessage || !statusMessage || !honeypotInput) {
+			return;
+		}
+		// Get translations from data attributes
+		const currentLocale = document.documentElement.lang || "en";
+		const translations = {
+			en: {
+				subscribing: "Subscribing...",
+				success: "Thank you for subscribing!",
+				error: "Oops! Something went wrong. Please try again.",
+				required: "Email is required",
+				invalid: "Please enter a valid email address",
+			},
+			es: {
+				subscribing: "Suscribiendo...",
+				success: "¡Gracias por suscribirte!",
+				error: "¡Ups! Algo salió mal. Por favor, inténtalo de nuevo.",
+				required: "El correo electrónico es obligatorio",
+				invalid: "Por favor, introduce un correo electrónico válido",
+			},
+		} as const;
+
+		type LocaleKey = keyof typeof translations;
+		const t = translations[currentLocale as LocaleKey] || translations.en;
+
+		// Email validation
+		const validateEmail = (email: string): boolean => {
+			const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			return re.test(email);
+		};
+
+		// Lazy show + initialize captcha when user starts typing
+		let captchaShown = false;
+
+		const revealCaptcha = async () => {
+			if (captchaShown || !captchaWrapper) return;
+			captchaShown = true;
+
+			// Reveal visually and for assistive tech
+			captchaWrapper.classList.remove('max-h-0', 'opacity-0');
+			captchaWrapper.style.maxHeight = '400px';
+			captchaWrapper.style.opacity = '1';
+			captchaWrapper.setAttribute('aria-hidden', 'false');
+
+			try {
+				// Ensure hCaptcha script is loaded
+				if (!(window as any).hcaptcha) {
+					const existingScript = document.querySelector('script[src*="js.hcaptcha.com/1/api.js"]');
+					if (!existingScript) {
+						const script = document.createElement('script');
+						script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
+						script.async = true;
+						script.defer = true;
+						document.head.appendChild(script);
+					}
+					await new Promise<void>((resolve) => {
+						const intervalId = window.setInterval(() => {
+							if ((window as any).hcaptcha) {
+								window.clearInterval(intervalId);
+								resolve();
+							}
+						}, 100);
+						window.setTimeout(() => {
+							window.clearInterval(intervalId);
+							resolve();
+						}, 5000);
+					});
+				}
+
+				// Render hCaptcha widget
+				const placeholder = document.getElementById('newsletter-captcha-placeholder');
+				const sitekey = captchaWrapper.dataset.sitekey || '';
+				if (placeholder && sitekey && (window as any).hcaptcha) {
+					const widgetId = (window as any).hcaptcha.render(placeholder, {
+						sitekey,
+						callback: (token: string) => {
+							placeholder.dataset.token = token;
+							placeholder.dispatchEvent(new CustomEvent('hcaptcha-success', { detail: { token, widgetId } }));
+						},
+						'expired-callback': () => {
+							delete placeholder.dataset.token;
+							placeholder.dispatchEvent(new CustomEvent('hcaptcha-expired'));
+						},
+					});
+					(window as any).hcaptchaWidgets = (window as any).hcaptchaWidgets || new Map();
+					(window as any).hcaptchaWidgets.set('newsletter-captcha', widgetId);
+				}
+			} catch (err) {
+				console.warn('Failed to initialize hCaptcha:', err);
+			}
+		};
+
+		// Get hCaptcha token (waits up to a short period if widget not ready)
+		const getCaptchaToken = (): string | null => {
+	const placeholder = document.getElementById('newsletter-captcha-placeholder');
+	if (!placeholder) {
+		console.warn('Captcha placeholder not found');
+		return null;
+	}
+
+	const token = placeholder.dataset.token || null;
+	if (!token) {
+		console.warn('Captcha token not available');
+	}
+
+	return token;
+};
+
+		// Clear error message
+		const clearError = (): void => {
+			errorMessage.textContent = "";
+			emailInput.classList.remove("border-red-500");
+		};
+
+		// Show error message
+		const showError = (message: string): void => {
+			errorMessage.textContent = message;
+			emailInput.classList.add("border-red-500");
+		};
+
+		// Input event listener to clear error and reveal captcha on any input
+			emailInput.addEventListener("input", () => {
+				clearError();
+				if (!captchaShown) {
+					revealCaptcha();
+				}
+			});
+
+			// Attach revealCaptcha to focus and change events
+			emailInput.addEventListener("focus", () => {
+				if (!captchaShown) {
+					revealCaptcha();
+				}
+			});
+
+			emailInput.addEventListener("change", () => {
+				if (!captchaShown) {
+					revealCaptcha();
+				}
+			});
+
+		// Form submission
+		form.addEventListener("submit", async (e) => {
+			e.preventDefault();
+			clearError();
+
+			const email = emailInput.value.trim();
+			const _gotcha = honeypotInput.value;
+			const hcaptchaToken = getCaptchaToken();
+
+			// Validate email
+			if (!email) {
+				showError(t.required);
+				emailInput.focus();
+				return;
+			}
+
+			if (!validateEmail(email)) {
+				showError(t.invalid);
+				emailInput.focus();
+				return;
+			}
+
+			// Validate captcha
+			if (!hcaptchaToken) {
+				statusMessage.textContent = "Please complete the captcha verification";
+				statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-red-600 font-medium";
+				return;
+			}
+
+			// Disable button and show loading state
+			submitButton.disabled = true;
+			const originalText = submitButton.textContent;
+			submitButton.textContent = t.subscribing;
+
+			// Add console logs to debug success message rendering
+			try {
+				// Use the newsletter service
+				const result = await newsletterService.subscribe({
+					email,
+					_gotcha,
+					hcaptchaToken: hcaptchaToken || undefined,
+				});
+
+				console.log('Subscription result:', result); // Debugging
+
+				if (result.success) {
+					// Success
+					console.log('Success message:', result.message || t.success); // Debugging
+					statusMessage.textContent = result.message || t.success;
+					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-brand-accent font-medium";
+					form.reset();
+					
+					// Reset captcha
+					if ((window as any).resetCaptcha) {
+						(window as any).resetCaptcha("newsletter-captcha");
+					}
+					
+					// Hide success message after 5 seconds
+					setTimeout(() => {
+						statusMessage.textContent = "";
+						statusMessage.className = "mt-4 text-center min-h-[1.5rem]";
+					}, 5000);
+				} else {
+					// Error
+					console.log('Error message:', result.message || t.error); // Debugging
+					statusMessage.textContent = result.message || t.error;
+					statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-red-600 font-medium";
+				}
+			} catch (error) {
+				console.error("Newsletter subscription error:", error);
+				statusMessage.textContent = t.error;
+				statusMessage.className = "mt-4 text-center min-h-[1.5rem] text-red-600 font-medium";
+			} finally {
+				// Re-enable button
+				submitButton.disabled = false;
+				submitButton.textContent = originalText;
+			}
+		});
+	});
+</script>

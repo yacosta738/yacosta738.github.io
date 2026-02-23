@@ -1,0 +1,99 @@
+---
+import WidgetCard from "@/components/atoms/WidgetCard.astro";
+import { routes } from "@/configs/route.path";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+
+export type TagItem = {
+	slug: string;
+	title: string;
+	count: number;
+};
+
+export interface Props {
+	tags: TagItem[];
+}
+
+const { tags } = Astro.props;
+
+const fontSizeClass = [
+	"text-xs",
+	"text-sm",
+	"text-base",
+	"text-lg",
+	"text-xl",
+	"text-2xl",
+	"text-3xl",
+	"text-4xl",
+];
+
+const counts = tags.map((tag) => tag.count);
+const minCount = counts.length > 0 ? Math.min(...counts) : 0;
+const maxCount = counts.length > 0 ? Math.max(...counts) : 0;
+const range = maxCount - minCount;
+
+const textSize = (count: number): string => {
+	if (counts.length === 0) {
+		return fontSizeClass[0];
+	}
+	if (range === 0) {
+		return fontSizeClass[Math.floor(fontSizeClass.length / 2)];
+	}
+	const ratio = (count - minCount) / range;
+	const index = Math.min(
+		fontSizeClass.length - 1,
+		Math.max(0, Math.floor(ratio * (fontSizeClass.length - 1))),
+	);
+	return fontSizeClass[index];
+};
+
+const sortedTags = [...tags].sort((a, b) =>
+	a.title.localeCompare(b.title, undefined, { sensitivity: "base" }),
+);
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+---
+
+<WidgetCard title={t('tags')}>
+	<div class="tag-cloud-tags">
+		{
+			sortedTags.map(({ slug, title, count }) => (
+				<a
+					href={translatePath(`/${routes.tag}/${slug}`)}
+					aria-label={title}
+					class={`inline-link ${textSize(count)}`}
+				>
+					<span class="capitalize">{title}</span>
+				</a>
+			))
+		}
+	</div>
+	{sortedTags.length === 0 && <div class="text-center text-gray-500">{t('noTags')}</div>}
+</WidgetCard>
+
+<style scoped>
+	.tag-cloud-tags {
+		display: block;
+		margin: 0;
+		list-style-type: none;
+		a {
+			display: inline-block;
+			padding: 0.3rem;
+			line-height: 1em;
+			word-break: break-word;
+			white-space: normal;
+		}
+		a:nth-child(5n + 1) {
+			transform: rotate(-2deg);
+		}
+		a:nth-child(3n + 3) {
+			transform: rotate(1deg);
+		}
+		a:nth-child(3n + 4) {
+			transform: rotate(-3deg);
+		}
+		a:nth-child(5n + 5) {
+			transform: rotate(3deg);
+		}
+	}
+</style>

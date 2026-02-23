@@ -1,0 +1,884 @@
+@import "tailwindcss";
+@import "./fonts.css";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme variables using Tailwind CSS 4 @theme directive */
+@theme {
+	/* Semantic color system */
+	--color-primary: #059669;
+	--color-primary-foreground: #ffffff;
+
+	/* Text colors - semantic naming - Maximum contrast for light mode */
+	--color-foreground: #000000;
+	--color-foreground-muted: #1f2937;
+	--color-foreground-subtle: #374151;
+
+	/* Background colors for light mode - Maximum differentiation */
+	--color-background: #ffffff;
+	--color-background-secondary: #f8fafc;
+	--color-background-surface: #ffffff;
+	--color-background-tertiary: #f1f5f9;
+	--color-muted: #4b5563;
+
+	/* Border colors - Maximum definition */
+	--color-border: #cbd5e0;
+	--color-border-hover: #9ca3af;
+
+	/* Brand colors for portfolio - Maximum contrast */
+	--color-brand-navy: #ffffff;
+	--color-brand-navy-light: #f8fafc;
+	--color-brand-navy-lighter: #cbd5e0;
+	/* Using darker green for better contrast in light mode (WCAG AA compliant) */
+	--color-brand-accent: #065f46;
+	--color-brand-accent-hover: #047857;
+
+	/* Font families */
+	--font-sans: "Calibre", "Inter", -apple-system, system-ui, sans-serif;
+	--font-display: "Calibre", "Inter", -apple-system, system-ui, sans-serif;
+	--font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+}
+
+/* Dark mode overrides */
+.dark {
+	/* Dark mode semantic colors */
+	--color-primary: #64ffda;
+	--color-primary-foreground: #0a192f;
+
+	/* Text colors for dark mode */
+	--color-foreground: #e2e8f0;
+	--color-foreground-muted: #cbd5e0;
+	--color-foreground-subtle: #8892b0;
+
+	/* Background colors for dark mode */
+	--color-background: #0a192f;
+	--color-background-secondary: #112240;
+	--color-background-surface: #172a45;
+	--color-background-tertiary: #1e3951;
+	--color-muted: #9ca3af;
+
+	/* Border colors for dark mode */
+	--color-border: #233554;
+	--color-border-hover: #a8b2d1;
+
+	/* Brand colors for dark mode */
+	--color-brand-navy: #0a192f;
+	--color-brand-navy-light: #112240;
+	--color-brand-navy-lighter: #233554;
+	--color-brand-accent: #64ffda;
+	--color-brand-accent-hover: #5ce3c6;
+
+	/* Giscus comment widget colors for dark mode */
+	--giscus-bg: var(--color-background-secondary);
+	--giscus-text: var(--color-foreground);
+	--giscus-border: var(--color-border);
+}
+
+/* Giscus comment widget color overrides */
+:root {
+	/* Light mode Giscus colors */
+	--giscus-bg: var(--color-background);
+	--giscus-text: var(--color-foreground);
+	--giscus-border: var(--color-border);
+}
+
+@media (prefers-contrast: high) {
+	:root {
+		--color-foreground: #000000;
+		--color-foreground-muted: #000000;
+		--color-foreground-subtle: #1f2937;
+		--color-background: #ffffff;
+		--color-background-secondary: #ffffff;
+		--color-background-tertiary: #f9fafb;
+		--color-border: #4b5563;
+		--color-border-hover: #374151;
+		/* Even darker green for high contrast mode (AAA compliant) */
+		--color-brand-accent: #064e3b;
+		--color-brand-accent-hover: #065f46;
+		--color-muted: #000000;
+	}
+}
+
+/* Legacy variables for backwards compatibility during migration */
+:root {
+	--ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+	/* Map legacy variables to semantic ones */
+	--text-primary: var(--color-foreground);
+	--text-secondary: var(--color-foreground-muted);
+	--text-muted: var(--color-foreground-subtle);
+	--bg-primary: var(--color-background);
+	--bg-secondary: var(--color-background-secondary);
+	--border-color: var(--color-border);
+	--border-hover: var(--color-border-hover);
+
+	/* Legacy brand colors mapped to semantic equivalents */
+	--color-lightest-slate: var(--color-foreground);
+	--color-slate: var(--color-foreground-muted);
+	--color-navy: var(--color-brand-navy);
+	--color-light-navy: var(--color-brand-navy-light);
+	--color-lightest-navy: var(--color-brand-navy-lighter);
+	--color-green-500: var(--color-brand-accent);
+	--color-green: var(--color-brand-accent);
+
+	/* Font family legacy mapping */
+	--font-titles: var(--font-display);
+}
+
+html.dark {
+	/* Override legacy variables for dark mode */
+	--text-primary: var(--color-foreground);
+	--text-secondary: var(--color-foreground-muted);
+	--text-muted: var(--color-foreground-subtle);
+	--bg-primary: var(--color-background);
+	--bg-secondary: var(--color-background-secondary);
+	--border-color: var(--color-border);
+	--border-hover: var(--color-border-hover);
+
+	/* Legacy brand colors for dark mode */
+	--color-lightest-slate: var(--color-foreground);
+	--color-slate: var(--color-foreground-muted);
+	--color-navy: var(--color-brand-navy);
+	--color-light-navy: var(--color-brand-navy-light);
+	--color-lightest-navy: var(--color-brand-navy-lighter);
+	--color-green-500: var(--color-brand-accent);
+	--color-green: var(--color-brand-accent);
+}
+
+/* Custom Tailwind utilities for semantic colors and fonts */
+@layer utilities {
+	/* Font utilities */
+	.font-display {
+		font-family: var(--font-display);
+	}
+
+	.font-body {
+		font-family: var(--font-sans);
+	}
+
+	/* Legacy font support */
+	.font-titles {
+		font-family: var(--font-display);
+	}
+
+	/* Semantic text color utilities */
+	.text-foreground {
+		color: var(--color-foreground);
+	}
+
+	.text-foreground-muted {
+		color: var(--color-foreground-muted);
+	}
+
+	.text-foreground-subtle {
+		color: var(--color-foreground-subtle);
+	}
+
+	/* Background utilities */
+	.bg-background {
+		background-color: var(--color-background);
+	}
+
+	.bg-background-secondary {
+		background-color: var(--color-background-secondary);
+	}
+
+	.bg-background-surface {
+		background-color: var(--color-background-surface);
+	}
+
+	/* Border utilities */
+	.border-border {
+		border-color: var(--color-border);
+	}
+
+	.border-border-hover {
+		border-color: var(--color-border-hover);
+	}
+
+	/* Brand utilities */
+	.text-brand-accent {
+		color: var(--color-brand-accent);
+	}
+
+	.text-brand-accent-hover {
+		color: var(--color-brand-accent-hover);
+	}
+
+	.bg-brand-accent {
+		background-color: var(--color-brand-accent);
+	}
+
+	.bg-brand-accent-hover {
+		background-color: var(--color-brand-accent-hover);
+	}
+
+	.bg-brand-navy {
+		background-color: var(--color-brand-navy);
+	}
+
+	.border-brand-accent {
+		border-color: var(--color-brand-accent);
+	}
+
+	.border-brand-accent-hover {
+		border-color: var(--color-brand-accent-hover);
+	}
+
+	/* Enhanced contrast utilities for better readability */
+	.text-contrast-high {
+		color: #000000;
+	}
+
+	.text-contrast-medium {
+		color: #1f2937;
+	}
+
+	.bg-contrast-light {
+		background-color: #ffffff;
+	}
+
+	.bg-contrast-subtle {
+		background-color: #f8fafc;
+	}
+
+	.border-contrast {
+		border-color: #9ca3af;
+	}
+
+	/* Animation delay utilities - small, explicit utilities to avoid inline styles
+	   and allow delaying Tailwind animations (for example: animate-pulse). */
+
+	.animate-delay-3s {
+		animation-delay: 3s;
+	}
+
+	.animate-fill-both {
+		animation-fill-mode: both;
+	}
+
+	/* Accessibility utilities */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.focus\:not-sr-only:focus {
+		position: static;
+		width: auto;
+		height: auto;
+		padding: inherit;
+		margin: inherit;
+		overflow: visible;
+		clip: auto;
+		white-space: normal;
+	}
+
+	/* Search component design tokens and utilities */
+		/* Search theme tokens (dark-friendly) */
+			:root {
+				--search-border-radius: 12px;
+				--search-input-height: 48px;
+				--search-gap: 1rem;
+				--search-shadow: 0 8px 24px rgba(2,6,23,0.45);
+				--search-surface: rgba(23,42,69,0.06);
+				--search-surface-fallback: rgba(23,42,69,0.06);
+				/* Use a subtle tint of the brand accent for highlights with a stable fallback */
+				--search-highlight: rgba(100,255,218,0.20);
+				--search-highlight-fallback: rgba(100,255,218,0.20);
+				--search-highlight-color: var(--search-highlight, var(--search-highlight-fallback));
+				--search-focus-ring: 3px solid rgba(100,255,218,0.22);
+				--search-focus-ring-fallback: 3px solid rgba(100,255,218,0.22);
+				--search-focus-ring-color: var(--search-focus-ring, var(--search-focus-ring-fallback));
+			}
+
+		/* High-level search layout */
+		.search-hero {
+			padding: 2rem 1rem;
+			display: grid;
+			gap: var(--search-gap);
+		}
+
+		.search-card {
+			background: var(--search-surface);
+			border: 1px solid var(--color-border);
+			border-radius: var(--search-border-radius);
+			padding: 1rem;
+			box-shadow: var(--search-shadow);
+		}
+
+		.search-input {
+			height: var(--search-input-height);
+			display: flex;
+			gap: 0.5rem;
+			align-items: center;
+			padding: 0.25rem;
+		}
+
+		.search-input input[type="text"] {
+			height: 100%;
+			width: 100%;
+			background: transparent;
+			border: none;
+			outline: none;
+			padding: 0 0.75rem;
+			color: var(--color-foreground);
+			font-size: 1rem;
+		}
+
+		.search-input button {
+			background: transparent;
+			border: 1px solid transparent;
+			color: var(--color-foreground-muted);
+			padding: 0.45rem 0.65rem;
+			border-radius: 8px;
+			cursor: pointer;
+		}
+
+		.search-input button:focus,
+		.search-input input:focus {
+			box-shadow: var(--search-focus-ring);
+		}
+
+		.search-results {
+			margin-top: 0.75rem;
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.search-item {
+			padding: 1rem;
+			border-radius: 10px;
+			background: rgba(23,42,69,0.06);
+			background-color: var(--search-surface-fallback);
+			border: 1px solid var(--color-border);
+			display: flex;
+			gap: 0.75rem;
+			align-items: flex-start;
+			transition: transform 160ms var(--ease-in-out), box-shadow 160ms var(--ease-in-out);
+		}
+
+		.search-item:focus-within,
+		.search-item:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+		}
+
+		.search-item__title {
+			font-weight: 700;
+			color: var(--color-foreground);
+			font-size: 1.02rem;
+		}
+
+		.search-item__excerpt {
+			color: var(--color-foreground-muted);
+			margin-top: 0.35rem;
+			line-height: 1.4;
+		}
+
+		.search-item__meta {
+			margin-top: 0.5rem;
+			display: flex;
+			gap: 0.5rem;
+			font-size: 0.85rem;
+			color: var(--color-foreground-subtle);
+			align-items: center;
+		}
+
+			.search-badge {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.16rem 0.5rem;
+				border-radius: 999px;
+				font-size: 0.72rem;
+				background: var(--search-highlight, var(--search-highlight-fallback));
+				color: var(--color-foreground);
+				border: 1px solid rgba(64,255,200,0.12);
+				border-color: rgba(64,255,200,0.12);
+			}
+
+		.search-empty {
+			text-align: center;
+			padding: 1.5rem;
+			color: var(--color-foreground-muted);
+		}
+}
+
+/* Performance optimizations - prevent layout thrashing */
+@layer utilities {
+	/* Force GPU acceleration for transforms and animations */
+	.gpu-accelerated {
+		transform: translateZ(0);
+		will-change: transform;
+	}
+
+	/* Optimize for frequent changes */
+	.optimized-updates {
+		contain: layout style paint;
+		content-visibility: auto;
+	}
+
+	/* Prevent layout shifts during dynamic content loading */
+	.prevent-layout-shift {
+		contain: layout;
+	}
+
+	/* Efficient transform animations (use instead of top/left) */
+	.transform-gpu {
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		perspective: 1000px;
+	}
+}
+
+/* Base styles for the portfolio */
+html {
+	/* Primary typography and theme integration */
+	font-family: var(--font-sans);
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	letter-spacing: -0.025rem;
+
+	/* Browser optimizations */
+	color-scheme: light;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+
+	/* Smooth transitions */
+	transition:
+		background-color 200ms linear,
+		color 200ms linear,
+		border-color 200ms linear;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	/* Keep resets and allow html to define theme colors to avoid double paints */
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+	/* Initialize section counter for numbered section titles */
+	counter-reset: section;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	html,
+	body,
+	*,
+	.typed-text,
+	.animate-pulse,
+	[class*="animate-"] {
+		/* removed !important to satisfy linter; reduced motion still preferred */
+		transition: none;
+		animation: none;
+	}
+}
+
+body,
+figure {
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/* Headings: use system UI stack for a neutral sans-serif look */
+h1,
+h2,
+h3,
+h4 {
+	margin: 0;
+	font-family:
+		system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	text-wrap: balance;
+}
+
+/* Custom scrollbar styling - thin and theme-aware */
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-brand-navy);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--color-foreground-subtle);
+	border: 3px solid var(--color-brand-navy);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-foreground-muted);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--bg-secondary);
+}
+
+/* Firefox scrollbar styling */
+html {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-foreground-subtle) var(--color-brand-navy);
+}
+
+/* Utility for screen-reader only content */
+.sr-only,
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+.text-foreground {
+	color: var(--text-primary);
+}
+
+.text-foreground-muted {
+	color: var(--text-secondary);
+}
+
+.no-print {
+	display: flex;
+}
+
+@media print {
+	/* Print: restore normal flow for elements with .print */
+	.print {
+		position: static;
+		display: block;
+		width: auto;
+		height: auto;
+		margin: 0;
+		clip: auto;
+		overflow: visible;
+		white-space: normal;
+	}
+
+	.no-print {
+		/* Increase specificity to avoid being overridden by ID selectors in components */
+		display: none;
+	}
+
+	/* Some components use an ID like #normal-footer
+	   with a display rule that can outrank the .no-print class. Add extra selectors
+	   so the print hide rule wins without using !important. */
+	#normal-footer.no-print,
+	footer.no-print,
+	.no-print {
+		display: none;
+	}
+
+	/* ====================================================
+	   FORCE LIGHT MODE FOR PRINTING
+	   Note: this block intentionally overrides runtime theme colors to guarantee
+	   a readable light print. Most uses of !important were removed by improving
+	   selector specificity and placing print rules later in the cascade. If a
+	   specific component later requires a targeted !important, annotate that
+	   selector with a single `biome-ignore` comment and a short rationale.
+	   ==================================================== */
+
+	/* Target root and body to prefer these print values over theme classes. */
+	html,
+	html.dark,
+	body {
+		color-scheme: light;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8fafc;
+		--text-primary: #0f172a;
+		--text-secondary: #475569;
+		--text-muted: #64748b;
+		--border-color: #e2e8f0;
+		--border-hover: #cbd5e1;
+		--color-foreground: #0f172a;
+		--color-foreground-muted: #475569;
+		--color-foreground-subtle: #64748b;
+		--color-muted: #64748b;
+		--color-background: #ffffff;
+		--color-background-secondary: #f8fafc;
+		--color-background-surface: #ffffff;
+		--color-background-tertiary: #f1f5f9;
+		--color-brand-navy: #ffffff;
+		--color-brand-navy-light: #f8fafc;
+		--color-brand-navy-lighter: #e2e8f0;
+		/* Darker green for print to ensure readability */
+		--color-brand-accent: #065f46;
+		--color-brand-accent-hover: #047857;
+
+		/* Prefer explicit print background/text; these appear later in the cascade
+		   and should override normal theme classes. Leave without !important and
+		   fall back to targeted !important only when necessary. */
+		background-color: #ffffff;
+		color: #0f172a;
+	}
+
+	/* Keep descendants inheriting text color while preserving component backgrounds. */
+	html *[class],
+	html *::before,
+	html *::after {
+		color: inherit;
+	}
+
+	body,
+	main {
+		background-color: var(--color-background);
+		border-color: #e2e8f0;
+	}
+
+	/* Ensure text elements use dark text for readability in print */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	span,
+	li,
+	td,
+	th,
+	.text-foreground,
+	.text-foreground-muted {
+		color: #0f172a;
+		background-color: transparent;
+	}
+
+	/* Ensure subtle text uses appropriate dark color for print */
+	.text-foreground-muted,
+	.text-muted,
+	small {
+		color: #475569;
+	}
+
+	/* Force borders to be visible in print */
+	[class*="border"] {
+		border-color: #e2e8f0;
+	}
+
+	/* Override any Tailwind dark mode utilities that might interfere. These are
+	   class selectors so placing equivalent class selectors here (later in the file)
+	   will override them without !important. */
+	.dark\:bg-slate-800,
+	.dark\:bg-slate-900,
+	.dark\:bg-gray-800,
+	.dark\:bg-gray-900,
+	.dark\:text-white,
+	.dark\:text-slate-100,
+	.dark\:text-gray-100 {
+		background-color: transparent;
+		color: #0f172a;
+	}
+
+	/* Links in print: style to match on-screen 'primary' links (no underline, foreground color)
+	   Link.astro uses `text-foreground no-underline` for primary links, so mirror that here */
+	a,
+	a:link,
+	a:visited {
+		color: var(--text-primary);
+		text-decoration: none;
+	}
+
+	/* Optimize spacing and layout for print */
+	@page {
+		margin: 0.75in;
+		size: A4;
+	}
+
+	/* Better page breaks */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		page-break-after: avoid;
+	}
+
+	section,
+	.print-section {
+		page-break-inside: avoid;
+		break-inside: avoid;
+	}
+
+	/* Prevent awkward breaks in lists and paragraphs */
+	p,
+	li {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/* Hide scrollbars in print */
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	html {
+		scrollbar-width: none;
+	}
+}
+
+/* Navigation Menu Styles - Based on original portfolio */
+@layer components {
+	/* Typography classes */
+	.font-titles {
+		font-family: var(--font-titles);
+	}
+
+	.font-body {
+		font-family: var(--font-sans);
+	}
+
+	/* Navigation and menu styling */
+	.nav-link {
+		position: relative;
+		font-family: var(--font-display);
+		white-space: nowrap; /* Prevent text wrapping in Safari */
+		@apply text-foreground-muted hover:text-brand-accent transition-colors duration-200 text-sm font-normal focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2;
+	}
+
+	.nav-link::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 1px;
+		bottom: -5px;
+		left: 0;
+		background-color: var(--color-brand-accent);
+		-webkit-transform: scaleX(0);
+		transform: scaleX(0);
+		-webkit-transform-origin: bottom right;
+		transform-origin: bottom right;
+		-webkit-transition: -webkit-transform 0.25s var(--ease-in-out);
+		transition: transform 0.25s var(--ease-in-out);
+	}
+
+	.nav-link:hover::after {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1);
+		-webkit-transform-origin: bottom left;
+		transform-origin: bottom left;
+	}
+
+	.navbar--show {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		background-color: rgba(10,25,47,0.95);
+		box-shadow: 0 10px 30px -10px var(--color-navy);
+	}
+
+	.navbar--hidden {
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+		background-color: rgba(10,25,47,0.85);
+		box-shadow: 0 10px 30px -10px var(--color-navy);
+	}
+}
+
+/* Global Typography Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-display);
+	margin: 0 0 10px;
+	font-weight: 700;
+	color: var(--color-lightest-slate);
+	line-height: 1.3;
+}
+
+/* Body text uses Menlo */
+p,
+body,
+.font-body {
+	font-family: var(--font-sans);
+}
+
+nav .active {
+	font-weight: bold;
+	border-bottom: 1px solid var(--color-green-500);
+}
+
+/* Links styling */
+a {
+	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+a:hover,
+a:focus {
+	color: var(--color-green-500);
+}
+
+/* Floating technology icons animation */
+@keyframes moving-background {
+	0% {
+		opacity: 0;
+		transform: translateY(0);
+	}
+	15% {
+		opacity: 0.3;
+	}
+	50% {
+		opacity: 0.6;
+	}
+	85% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-100vh);
+	}
+}
+
+.animate-moving-background {
+	animation: moving-background 8s linear forwards;
+	opacity: 0.3; /* Ensure visibility during animation */
+}
+
+/* Numbered list for navigation */
+.order-list {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	counter-reset: item;
+}
+
+.order-list li {
+	position: relative;
+	counter-increment: item;
+	font-size: 13px;
+}
+
+.order-list li .nav-link::before {
+	content: "0" counter(item) ".";
+	margin-right: 5px;
+	font-size: 13px;
+	text-align: right;
+	color: var(--color-brand-accent);
+	font-family: var(--font-mono);
+}

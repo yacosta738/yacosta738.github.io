@@ -1,0 +1,20 @@
+
+# START AI Agent Symlinks
+/.cursor/mcp.json
+/.cursor/mcp.json.bak
+/.gemini/settings.json
+/.gemini/settings.json.bak
+/.mcp.json
+/.mcp.json.bak
+/AGENTS.md
+/AGENTS.md.bak
+/CLAUDE.md
+/CLAUDE.md.bak
+/GEMINI.md
+/GEMINI.md.bak
+# END AI Agent Symlinks
+
+playwright-report/
+reports/
+test-results/
+.env

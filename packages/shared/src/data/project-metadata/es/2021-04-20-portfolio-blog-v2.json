@@ -1,0 +1,11 @@
+{
+	"title": "Portfolio Blog V2",
+	"date": "2020-03-12T02:53:17.048Z",
+	"repository": "https://github.com/yacosta738/nomada.digital",
+	"url": "https://yacosta738.github.io/nomada.digital/",
+	"company": "Personal",
+	"tech": ["hugo", "go", "scss"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true
+}

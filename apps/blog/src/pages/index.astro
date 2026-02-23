@@ -1,0 +1,87 @@
+---
+
+
+/**
+ * This is a client-side redirector page.
+ * It automatically redirects users to the appropriate language-specific version
+ * of the site based on their `localStorage` settings or browser language preferences.
+ * This is not intended to be a visible page.
+ */
+import { SITE_DESCRIPTION, SITE_TITLE, X_ACCOUNT } from "@/configs/site.consts";
+import {
+	DEFAULT_LOCALE,
+	getLocalePaths,
+	type Lang,
+	LOCALES,
+	useTranslations,
+} from "@/i18n";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const langs = Object.keys(LOCALES);
+const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const defaultLocale = DEFAULT_LOCALE;
+---
+
+<html lang={DEFAULT_LOCALE}>
+<head>
+  <meta charset="UTF-8" />
+  <title>redirect...</title>
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta name="generator" content={Astro.generator} />
+  {
+    getLocalePaths(Astro.url).map((props) => (
+        <link
+            rel="alternate"
+            hreflang={LOCALES[props.lang].lang || props.lang}
+            href={Astro.site?.origin + props.path}
+        />
+    ))
+  }
+
+  <!-- icon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" sizes="192x192" href="/android-chrome.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={t(SITE_TITLE)} />
+  <meta property="og:site_name" content={t(SITE_TITLE)} />
+  <meta property="og:description" content={t(SITE_DESCRIPTION)} />
+  <meta property="og:image" content={Astro.site + "ogp.png"} />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:locale" content={DEFAULT_LOCALE} />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content={t(X_ACCOUNT)} />
+
+  <noscript>
+    <meta
+        http-equiv="refresh"
+        content={`0;url=${baseUrl + DEFAULT_LOCALE}/`}
+    />
+  </noscript>
+
+  <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
+    if (
+        localStorage.selectedLang &&
+        langs.includes(localStorage.selectedLang)
+    ) {
+      location.href = `${baseUrl + localStorage.selectedLang}/`;
+    } else {
+      const browserLang = navigator.language.toLowerCase();
+
+      if (langs.includes(browserLang)) {
+        location.href = `${baseUrl + browserLang}/`;
+      } else if (langs.includes(browserLang.split("-")[0])) {
+        location.href = `${baseUrl + browserLang.split("-")[0]}/`;
+      } else {
+        location.href = `${baseUrl + defaultLocale}/`;
+      }
+    }
+  </script>
+</head>
+<body>
+<h1>redirect...</h1>
+</body>
+</html>

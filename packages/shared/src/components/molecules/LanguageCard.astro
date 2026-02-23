@@ -1,0 +1,140 @@
+---
+/**
+ * LanguageCard component.
+ * Displays a card representing a language and the user's proficiency level.
+ * It includes the language name, a fluency badge, and a visual level indicator.
+ * It can optionally render as a link to a different language version of the site.
+ *
+ * @prop {Language} language - The language object containing details like name and fluency.
+ * @prop {boolean} [showLink=false] - If true, wraps the card in an anchor tag.
+ * @prop {string} [href] - The URL for the link if `showLink` is true.
+ */
+import { Icon } from "astro-icon/components";
+import type Language from "@/core/resume/language/language.model";
+import { type Lang, useTranslations } from "@/i18n";
+import Badge from "../atoms/Badge.astro";
+
+const currentLocale = Astro.params?.lang as Lang;
+const t = useTranslations(currentLocale);
+
+type Props = {
+	language: Language;
+	showLink?: boolean;
+	href?: string;
+};
+
+const { language, showLink = false, href } = Astro.props;
+
+const DEFAULT_ICON = "lucide:globe";
+const DEFAULT_BADGE_CLASSES =
+	"bg-brand-accent text-primary-foreground border-brand-accent";
+
+const fluencyLevelMap: Record<string, number> = {
+	// English fluency levels
+	"Native speaker": 5,
+	Native: 5,
+	Fluent: 4,
+	Advanced: 4,
+	"Intermediate B1": 3,
+	"Intermediate B2": 4,
+	Intermediate: 3,
+	Basic: 2,
+	"Basic A1": 1,
+	"Basic A2": 2,
+	Beginner: 1,
+	// Spanish fluency levels
+	Nativo: 5,
+	"Hablante nativo": 5,
+	Fluido: 4,
+	Avanzado: 4,
+	"Intermedio B1": 3,
+	"Intermedio B2": 4,
+	Intermedio: 3,
+	Básico: 2,
+	"Básico A1": 1,
+	"Básico A2": 2,
+	Principiante: 1,
+};
+
+const level = fluencyLevelMap[language.fluency] ?? 3;
+const config = { variant: "secondary" as const, level, icon: DEFAULT_ICON };
+const badgeOverride = DEFAULT_BADGE_CLASSES;
+
+// Safety check: ensure href is a valid string
+const safeHref = typeof href === "string" ? href : undefined;
+const shouldShowLink = showLink && safeHref;
+---
+
+<div class="group relative rounded-lg border border-border bg-card p-3 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
+  {shouldShowLink ? (
+    <a 
+      href={safeHref} 
+      class="block hover:no-underline"
+  aria-label={t('viewContentIn', { language: language.language })}
+    >
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 flex-1">
+          <span class="text-lg flex items-center" aria-hidden="true">
+            <Icon name={config.icon} class="w-5 h-5 text-foreground-muted dark:text-foreground-muted" aria-hidden="true" />
+          </span>
+          <div class="flex-1">
+            <h3 class="text-sm font-medium text-foreground dark:text-foreground-dark">
+              {language.language}
+            </h3>
+            <div class="flex items-center gap-2 mt-1">
+               <Badge size="sm" class="text-xs font-medium">
+                {language.fluency}
+              </Badge>
+              
+              <div class="flex gap-1" aria-label={`Language level: ${config.level} out of 5`}>
+                {Array.from({ length: 5 }, (_, i) => (
+                  <div
+                    class={`w-1.5 h-1.5 rounded-full ${
+                      i < config.level
+                        ? 'bg-brand-accent' // semantic primary accent
+                        : 'bg-gray-300 dark:bg-gray-600'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  ) : (
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2 flex-1">
+        <span class="text-lg flex items-center" aria-hidden="true">
+          <Icon name={config.icon} class="w-5 h-5 text-foreground-muted dark:text-foreground-muted" aria-hidden="true" />
+        </span>
+        <div class="flex-1">
+          <h3 class="text-sm font-medium text-foreground dark:text-foreground-dark">
+            {language.language}
+          </h3>
+          <div class="flex items-center gap-2 mt-1">
+            <Badge
+              variant={config.variant}
+              size="sm"
+              class={`text-xs ${badgeOverride}`}
+            >
+              {language.fluency}
+            </Badge>
+            
+            <div class="flex gap-1" aria-label={t('languageLevel', { level: String(config.level) })}>
+              {Array.from({ length: 5 }, (_, i) => (
+                <div
+                  class={`w-1.5 h-1.5 rounded-full ${
+                    i < config.level
+                      ? 'bg-brand-accent'
+                      : 'bg-gray-300 dark:bg-gray-600'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+</div>

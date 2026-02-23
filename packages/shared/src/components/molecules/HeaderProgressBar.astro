@@ -1,0 +1,227 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import SocialMediaShare from "@/components/molecules/SocialMediaShare.astro";
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+import ReadingTime from "../atoms/ReadingTime.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+	title: string;
+	description: string;
+	url: string;
+	tags: string[];
+	minutesRead: string;
+}
+
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+const {
+	title,
+	description,
+	url = Astro.request.url,
+	tags,
+	minutesRead,
+	...attr
+} = Astro.props;
+---
+
+<div
+	id="progress-bar"
+	class={cn(
+		"fixed -top-[80px] left-0 w-full h-22 px-4 lg:px-12 z-40 opacity-0 flex items-center justify-between gap-8 border-b border-transparent transition-all duration-[350ms] ease-in-out",
+		"bg-background/75 backdrop-blur-md supports-[backdrop-filter]:bg-background-secondary/75",
+		attr.class,
+	)}
+	data-progress-bar
+>
+	<div class="container mx-auto flex items-center justify-between h-full">
+		<div class="flex items-center gap-2.5">
+			<span
+				class="font-inter text-sm md:text-xl font-semibold leading-[130%] tracking-tighter text-foreground"
+			>
+				{title}
+			</span>
+			<ReadingTime readingTime={minutesRead} currentLocale={currentLocale} />
+		</div>
+		<div class="hidden md:flex items-center justify-center">
+			<SocialMediaShare
+				title={title}
+				description={description}
+				url={url}
+				tags={tags}
+			/>
+		</div>
+	</div>
+
+	<div class="absolute left-0 bottom-0 w-full h-1">
+		<div
+			id="progress-indicator"
+			class="h-full w-0 bg-brand-accent dark:bg-brand-accent rounded-r-lg transition-all duration-150"
+			aria-label={`${t("progress.aria.label")}: 0%`}
+			role="progressbar"
+			aria-valuenow="0"
+			aria-valuemin="0"
+			aria-valuemax="100"
+			aria-valuetext={t("progress.aria.label")}
+		>
+		</div>
+	</div>
+</div>
+
+<style is:global>
+	/* Progress bar styles to match main header */
+	#progress-bar {
+		background-color: rgba(17,34,51,0.75);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border-bottom: 1px solid rgba(35,53,84,0.3);
+	}
+
+	:global(.dark) #progress-bar {
+	background-color: rgba(17,34,51,0.75);
+	border-bottom: 1px solid rgba(35,53,84,0.3);
+	}
+
+	/* Enhanced blur on hover to match main header */
+	#progress-bar:hover {
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+	}
+
+	/* Respect user's motion preferences */
+	@media (prefers-reduced-motion: reduce) {
+		#progress-bar {
+			transition: none !important;
+		}
+	}
+</style>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const progressBar = document.getElementById("progress-bar");
+		const progressIndicator = document.getElementById("progress-indicator");
+		
+		if (!progressBar || !progressIndicator) {
+			console.error("HeaderProgressBar: Required elements not found");
+			return;
+		}
+
+		let progressUpdateId: number | null = null;
+		// visibilityUpdateId is reserved for future visibility tracking features
+		// let visibilityUpdateId: number | null = null;
+		let cachedArticleRect: { top: number; height: number } | null = null;
+		let cacheTime = 0;
+		const CACHE_DURATION = 100; // Cache for 100ms
+
+		const headerHeight = 80; // Match main header height (h-20)
+		let isVisible = false;
+
+		const updateProgress = () => {
+			const article = document.querySelector("article");
+			if (!article) {
+				console.warn("HeaderProgressBar: No article found");
+				return;
+			}
+
+			// Use cached rect if recent enough
+			const now = performance.now();
+			if (!cachedArticleRect || (now - cacheTime) > CACHE_DURATION) {
+				const scrollY = window.scrollY;
+				const articleRect = article.getBoundingClientRect();
+				cachedArticleRect = {
+					top: articleRect.top + scrollY,
+					height: article.scrollHeight
+				};
+				cacheTime = now;
+			}
+
+			const scrollY = window.scrollY;
+			const windowHeight = window.innerHeight;
+
+			// Calculate progress within the article using cached values
+			const scrollStart = cachedArticleRect.top;
+			const scrollEnd = cachedArticleRect.top + cachedArticleRect.height - windowHeight;
+			const scrollDistance = scrollEnd - scrollStart;
+			
+			if (scrollDistance <= 0) return;
+
+			const progress = Math.max(0, Math.min(100, 
+				((scrollY - scrollStart) / scrollDistance) * 100
+			));
+
+			// Batch style updates
+			progressIndicator.style.width = `${progress}%`;
+			progressIndicator.setAttribute("aria-valuenow", Math.round(progress).toString());
+			progressIndicator.setAttribute("aria-label", `Reading progress: ${Math.round(progress)}%`);
+		};
+
+		const updateVisibility = () => {
+			const scrollY = window.scrollY;
+			const article = document.querySelector("article");
+			
+			if (!article) return;
+
+			// Use cached rect for visibility calculation too
+			const now = performance.now();
+			if (!cachedArticleRect || (now - cacheTime) > CACHE_DURATION) {
+				const articleRect = article.getBoundingClientRect();
+				cachedArticleRect = {
+					top: articleRect.top + scrollY,
+					height: article.scrollHeight
+				};
+				cacheTime = now;
+			}
+
+			// Show when scrolled past header and still in article content
+			// Keep visible even when scrolling up to show layered effect with main header
+			const shouldShow = scrollY > headerHeight && 
+							  scrollY < cachedArticleRect.top + cachedArticleRect.height - window.innerHeight / 4;
+
+			if (shouldShow && !isVisible) {
+				progressBar.style.top = "0";
+				progressBar.style.opacity = "1";
+				progressBar.style.transform = "translateY(0)";
+				isVisible = true;
+			} else if (!shouldShow && isVisible) {
+				progressBar.style.top = "-80px";
+				progressBar.style.opacity = "0";
+				progressBar.style.transform = "translateY(-100%)";
+				isVisible = false;
+			}
+		};
+
+		const handleScroll = () => {
+			// Throttle updates using RAF
+			if (progressUpdateId) return;
+			
+			progressUpdateId = requestAnimationFrame(() => {
+				updateProgress();
+				updateVisibility();
+				progressUpdateId = null;
+			});
+		};
+
+		// Invalidate cache on resize
+		const handleResize = () => {
+			cachedArticleRect = null;
+			cacheTime = 0;
+			handleScroll(); // Trigger immediate update
+		};
+
+		// Initial setup
+		progressBar.style.position = "fixed";
+		progressBar.style.top = "-80px";
+		progressBar.style.opacity = "0";
+		progressBar.style.transition = "all 0.3s ease-in-out";
+		progressBar.style.zIndex = "40";
+
+		// Add scroll listener with passive flag for better performance
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		
+		// Add resize listener to invalidate cache
+		window.addEventListener("resize", handleResize, { passive: true });
+
+		// Initial call
+		handleScroll();
+	});
+</script>

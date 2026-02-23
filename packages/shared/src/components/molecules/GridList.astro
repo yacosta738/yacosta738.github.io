@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends HTMLAttributes<"ul"> {
+	class?: string;
+	/**
+	 * Grid configuration for responsive columns
+	 * @default "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+	 */
+	cols?: string;
+	/**
+	 * Gap between grid items
+	 * @default "gap-6"
+	 */
+	gap?: string;
+	/**
+	 * Whether to use grid layout
+	 * @default true
+	 */
+	grid?: boolean;
+}
+
+const {
+	class: className,
+	cols = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+	gap = "gap-6",
+	grid = true,
+	...attrs
+} = Astro.props;
+
+const classes = cn(
+	grid ? "grid" : "flex flex-col",
+	grid ? cols : "",
+	gap,
+	className,
+);
+---
+
+<ul class={classes} {...attrs}>
+	<slot />
+</ul>

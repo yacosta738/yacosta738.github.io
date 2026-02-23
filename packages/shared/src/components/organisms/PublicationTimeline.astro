@@ -1,0 +1,79 @@
+---
+/**
+ * PublicationTimeline component.
+ * This component renders a timeline of publications by composing the `TimelineItem`
+ * and `PublicationHeader` components.
+ *
+ * @prop {Publication[]} publications - An array of publication objects to display.
+ * @prop {Lang} locale - The locale to use for date formatting.
+ */
+import PublicationHeader from "@/components/molecules/PublicationHeader.astro";
+import TimelineItem from "@/components/molecules/TimelineItem.astro";
+import type Publication from "@/core/resume/publication/publication.model";
+import { type Lang } from "@/i18n";
+
+interface Props {
+	publications: Publication[];
+	locale: Lang;
+}
+
+const { publications, locale } = Astro.props;
+---
+
+<div class="publication-timeline">
+  {publications.map((publication) => (
+    <TimelineItem
+      startDate={publication.releaseDate}
+      endDate={null}
+      locale={locale}
+      showDates={true}
+      variant="default"
+    >
+      <PublicationHeader
+        name={publication.name}
+        publisher={publication.publisher}
+        summary={publication.summary}
+        url={publication.url}
+      />
+    </TimelineItem>
+  ))}
+</div>
+
+<style>
+  :root {
+    --green: #64ffda;
+    --navy: #0a192f;
+    --light-navy: #112240;
+    --lightest-navy: #233554;
+    --slate: #8892b0;
+    --light-slate: #a8b2d1;
+    --lightest-slate: #ccd6f6;
+    --white: #e6f1ff;
+    --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+    --fz-xs: 13px;
+    --fz-sm: 14px;
+    --fz-md: 16px;
+    --fz-lg: 18px;
+    --fz-xl: 20px;
+    --fz-xxl: 22px;
+    --brand-accent: #10b981;
+  }
+
+  /* Dark mode variables */
+  .dark {
+    --green: var(--brand-accent);
+    --navy: #0f172a;
+    --light-navy: #1e293b;
+    --lightest-navy: #334155;
+    --slate: #64748b;
+    --light-slate: #94a3b8;
+    --lightest-slate: #e2e8f0;
+    --white: #f8fafc;
+  }
+
+  .publication-timeline {
+    position: relative;
+    margin-top: 10px;
+  }
+</style>

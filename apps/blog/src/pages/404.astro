@@ -1,0 +1,51 @@
+---
+// Redirect to 404 page for user's system locale
+// Basically, you don't need to edit this file.
+
+import { DEFAULT_LOCALE, LOCALES } from "@/i18n";
+
+const langs = Object.keys(LOCALES);
+const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const defaultLocale = DEFAULT_LOCALE;
+---
+
+<html lang={DEFAULT_LOCALE}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>404 PAGE NOT FOUND</title>
+    <link rel="canonical" href={Astro.site} />
+
+    <noscript>
+      <meta
+        http-equiv="refresh"
+        content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`}
+      />
+    </noscript>
+
+    <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
+      const urlHasLang = langs.includes(location.pathname.split("/")[1]);
+      const localStorageHasLang =
+        localStorage.selectedLang && langs.includes(localStorage.selectedLang);
+      const referrerHasLang =
+        document.referrer &&
+        new URL(document.referrer).host == location.host &&
+        langs.includes(new URL(document.referrer).pathname.split("/")[1]);
+
+      if (urlHasLang) {
+        localStorage.userAccessPath = location.pathname;
+        location.href = `${baseUrl + location.pathname.split("/")[1]}/404/`;
+      } else if (localStorageHasLang) {
+        location.href = baseUrl + localStorage.selectedLang + location.pathname;
+      } else if (referrerHasLang) {
+        const referrerLang = new URL(document.referrer).pathname.split("/")[1];
+        location.href = baseUrl + referrerLang + location.pathname;
+      } else {
+        location.href = baseUrl + defaultLocale + location.pathname;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>404 PAGE NOT FOUND</h1>
+    <a href={baseUrl}>TOP PAGE</a>
+  </body>
+</html>

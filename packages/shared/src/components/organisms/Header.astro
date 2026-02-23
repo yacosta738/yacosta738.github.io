@@ -1,0 +1,487 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Logo from "@/components/atoms/Logo.astro";
+import MobileMenuButton from "@/components/atoms/MobileMenuButton.astro";
+import Menu from "@/components/molecules/Menu.astro";
+import MobileDrawer from "@/components/organisms/MobileDrawer.astro";
+import { HEADER_ID } from "@/configs/theme.consts";
+import { DRAWER_MENU_BUTTON_BOX_ID } from "@/core/menu/menu.constants";
+import { useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+import SearchButton from "../atoms/SearchButton.astro";
+
+// Constants
+const SCROLL_THRESHOLD = 50;
+const HIDE_THRESHOLD = 100;
+
+interface Props extends HTMLAttributes<"header"> {
+	id?: string;
+	hideOnScroll?: boolean;
+	blurOnScroll?: boolean;
+	showSearch?: boolean;
+}
+
+const {
+	id = HEADER_ID,
+	hideOnScroll = true,
+	blurOnScroll = true,
+	showSearch = false,
+	...attrs
+} = Astro.props;
+
+import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
+
+const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
+const t = useTranslations(currentLocale);
+---
+
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-color-primary focus:text-color-primary-foreground focus:rounded">
+	{t("nav.skipToContent") || "Skip to main content"}
+</a>
+
+<!-- Live region for drawer state announcements -->
+<div 
+	id="drawer-live-region" 
+	role="status" 
+	aria-live="polite" 
+	aria-atomic="true" 
+	class="sr-only"
+></div>
+
+<header
+	id={id}
+	class={cn(
+		"fixed top-0 left-0 w-full z-50 border-b border-transparent",
+	"animate-fade-in-down animate-delay-100 animate-duration-slower animate-fill-forwards",
+		"transition-all duration-[400ms] ease-in-out [transition-property:top,background-color,border-bottom-color]",
+	)}
+	{...attrs}
+>
+	<nav 
+		class="container mx-auto px-4 lg:px-12 pr-16 md:pr-4 flex items-center justify-between h-16 lg:h-20 safari-header-nav"
+		aria-label={t("nav.main") || "Main navigation"}
+	>
+		<Logo currentLocale={currentLocale} />
+        
+        
+		<div class="hidden md:flex md:items-center md:space-x-4">
+			{showSearch && (
+					<SearchButton />
+			)}
+			<Menu />
+		</div>
+	</nav>
+</header>
+
+<MobileMenuButton drawerTarget="mobile-drawer" class="md:hidden" />
+
+<!-- Mobile Drawer -->
+<MobileDrawer showSearch={showSearch} />
+
+<style is:global>
+	/* Header states */
+	header {
+		background-color: transparent;
+		transform: translateY(0);
+		-webkit-transform: translateY(0);
+	}
+
+	header.scrolled {
+		background-color: rgba(17,34,51,0.75);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border-bottom: 1px solid rgba(35,53,84,0.3);
+		transition: all 0.3s ease;
+	}
+
+	header.scrolled #site-title,
+	header.scrolled nav a,
+	header.scrolled button:not([class*="bg-"]) {
+		color: var(--color-foreground);
+	}
+
+	:global(.dark) header.scrolled {
+		background-color: rgba(17,34,51,0.75);
+		border-bottom: 1px solid rgba(35,53,84,0.3);
+	}
+
+	:global(.dark) header.scrolled #site-title,
+	:global(.dark) header.scrolled nav a,
+	:global(.dark) header.scrolled button:not([class*="bg-"]) {
+		color: var(--color-foreground);
+	}
+
+	/* Enhanced blur on hover */
+	header.scrolled:hover {
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+	}
+
+	header.scrolled nav a:hover {
+		color: var(--color-brand-accent);
+	}
+
+	header.hide {
+		transform: translateY(-100%) !important;
+		-webkit-transform: translateY(-100%) !important;
+	}
+
+	/* Search container integration */
+	.search-container {
+		flex: 1;
+		min-width: 200px;
+		max-width: 300px;
+	}
+
+	/* Compact layout for header */
+	nav {
+		gap: 1rem;
+	}
+
+	/* Safari-specific header navigation fixes */
+	nav.safari-header-nav {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		align-items: center;
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		justify-content: space-between;
+	}
+
+	@media (min-width: 1024px) {
+		nav {
+			gap: 2rem;
+		}
+		
+		.search-container {
+			max-width: 280px;
+		}
+	}
+
+	/* Improved focus visibility for accessibility */
+	header a:focus-visible,
+	header button:focus-visible {
+		outline: 2px solid var(--color-brand-accent);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	/* Respect user's motion preferences */
+	@media (prefers-reduced-motion: reduce) {
+		header {
+			transition: none !important;
+			animation: none !important;
+		}
+		header.hide {
+			display: none;
+		}
+		.w-10.h-10 {
+			transition: none !important;
+		}
+	}
+
+	/* Ensure proper z-index stacking */
+	header {
+		z-index: 50;
+	}
+</style>
+
+<!-- Scroll header behavior: Only load if hideOnScroll is enabled -->
+{hideOnScroll && (
+	<script is:inline define:vars={{ id, SCROLL_THRESHOLD, HIDE_THRESHOLD, DRAWER_MENU_BUTTON_BOX_ID }}>
+	// Optimized header scroll behavior with batched DOM operations
+	(() => {
+		const header = document.getElementById(id);
+		if (!header) return;
+
+		const mobileMenuButtonBox = document.getElementById(DRAWER_MENU_BUTTON_BOX_ID);
+
+		// Cache class names for better performance
+		const HIDE_CLASS = 'hide';
+		const SCROLLED_CLASS = 'scrolled';
+		const HIDDEN_CLASS = 'is-hidden';
+		const ANIMATION_CLASSES = ['animate-fade-in-down', 'animate-delay-100', 'animate-duration-slower', 'animate-fill-forwards'];
+
+		let lastScrollY = window.scrollY;
+		let ticking = false;
+		let animationCleaned = false;
+		let currentState = '';
+
+		// Batch DOM operations to minimize reflows
+		const batchUpdate = (newState, shouldHideButton) => {
+			if (currentState === newState) return;
+			currentState = newState;
+
+			// Use requestAnimationFrame to batch all DOM updates
+			requestAnimationFrame(() => {
+				const classList = header.classList;
+				
+				switch (newState) {
+					case 'top':
+						classList.remove(HIDE_CLASS, SCROLLED_CLASS);
+						break;
+					case 'visible':
+						classList.remove(HIDE_CLASS);
+						classList.add(SCROLLED_CLASS);
+						break;
+					case 'hidden':
+						classList.add(HIDE_CLASS, SCROLLED_CLASS);
+						break;
+				}
+
+				// Update mobile button visibility in same frame
+				if (mobileMenuButtonBox) {
+					mobileMenuButtonBox.classList.toggle(HIDDEN_CLASS, shouldHideButton);
+				}
+			});
+		};
+
+		// Clean animation classes after first scroll
+		const cleanupAnimation = () => {
+			if (animationCleaned) return;
+			animationCleaned = true;
+			
+			requestAnimationFrame(() => {
+				ANIMATION_CLASSES.forEach(cls => header.classList.remove(cls));
+			});
+		};
+
+		const updateHeader = () => {
+			const y = window.scrollY;
+			const delta = y - lastScrollY;
+			
+			// Clean animation on first scroll
+			if (!animationCleaned) {
+				cleanupAnimation();
+			}
+			
+			// Determine new state
+			let newState;
+			let shouldHideButton;
+			
+			if (y <= SCROLL_THRESHOLD) {
+				newState = 'top';
+				shouldHideButton = false;
+			} else if (delta < 0) {
+				newState = 'visible';
+				shouldHideButton = false;
+			} else if (delta > 0 && y > HIDE_THRESHOLD) {
+				newState = 'hidden';
+				shouldHideButton = true;
+			} else {
+				// No change needed
+				ticking = false;
+				return;
+			}
+			
+			batchUpdate(newState, shouldHideButton);
+			lastScrollY = y;
+			ticking = false;
+		};
+
+		const handleScroll = () => {
+			if (!ticking) {
+				ticking = true;
+				requestAnimationFrame(updateHeader);
+			}
+		};
+
+		// Use passive listener for better scrolling performance
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		
+		// Cleanup on View Transitions
+		document.addEventListener('astro:before-preparation', () => {
+			window.removeEventListener('scroll', handleScroll);
+		}, { once: true });
+		
+		// Initial update
+		updateHeader();
+	})();
+	</script>
+)}
+
+<!-- Mobile drawer functionality: Always loaded because mobile menu always exists -->
+<script is:inline define:vars={{ 
+	ariaOpenMenu: t("nav.openMenu") || "Abrir menú",
+	ariaCloseMenu: t("nav.closeMenu") || "Cerrar menú",
+	ariaDrawerOpened: t("nav.drawerOpened") || "Menú abierto",
+	ariaDrawerClosed: t("nav.drawerClosed") || "Menú cerrado"
+}}>
+// Optimized mobile drawer functionality
+document.addEventListener('DOMContentLoaded', () => {
+	const mobileMenuButton = document.getElementById('drawer-menu-button');
+	const mobileDrawer = document.getElementById('mobile-drawer');
+	const mobileDrawerBackdrop = document.getElementById('mobile-drawer-backdrop');
+	const liveRegion = document.getElementById('drawer-live-region');
+	
+	if (!mobileMenuButton || !mobileDrawer || !mobileDrawerBackdrop) return;
+
+	let focusableElements = [];
+	let firstFocusableElement = null;
+	let lastFocusableElement = null;
+	let isOpen = false;
+
+	// Cache selectors
+	const FOCUSABLE_SELECTOR = 'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select';
+	const DRAWER_CLOSE_SELECTOR = '[data-drawer-close], nav a';
+
+	const getFocusableElements = () => {
+		focusableElements = Array.from(mobileDrawer.querySelectorAll(FOCUSABLE_SELECTOR));
+		firstFocusableElement = focusableElements[0];
+		lastFocusableElement = focusableElements[focusableElements.length - 1];
+	};
+
+	// Batch DOM updates for opening
+	const openDrawer = () => {
+		if (isOpen) return;
+		isOpen = true;
+
+		// Batch all DOM updates in a single RAF
+		requestAnimationFrame(() => {
+			// Button state
+			mobileMenuButton.classList.add('active-menu');
+			mobileMenuButton.setAttribute('aria-expanded', 'true');
+			mobileMenuButton.setAttribute('aria-label', ariaCloseMenu);
+			
+			// Drawer state
+			mobileDrawer.setAttribute('aria-hidden', 'false');
+			mobileDrawer.classList.remove('translate-x-full');
+			
+			// Backdrop state - show immediately with opacity transition
+			mobileDrawerBackdrop.classList.remove('hidden', 'opacity-0');
+			mobileDrawerBackdrop.setAttribute('aria-hidden', 'false');
+			
+			// Prevent body scroll
+			document.body.style.overflow = 'hidden';
+			
+			// Update live region
+			if (liveRegion) {
+				liveRegion.textContent = ariaDrawerOpened;
+			}
+		});
+		
+		// Set focus after drawer animation starts
+		getFocusableElements();
+		if (firstFocusableElement) {
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					firstFocusableElement?.focus();
+				});
+			});
+		}
+	};
+
+	// Batch DOM updates for closing
+	const closeDrawer = () => {
+		if (!isOpen) return;
+		isOpen = false;
+
+		// Batch all DOM updates
+		requestAnimationFrame(() => {
+			// Button state
+			mobileMenuButton.classList.remove('active-menu');
+			mobileMenuButton.setAttribute('aria-expanded', 'false');
+			mobileMenuButton.setAttribute('aria-label', ariaOpenMenu);
+			
+			// Drawer state
+			mobileDrawer.setAttribute('aria-hidden', 'true');
+			mobileDrawer.classList.add('translate-x-full');
+			
+			// Backdrop fade out
+			mobileDrawerBackdrop.classList.add('opacity-0');
+			
+			// Restore body scroll
+			document.body.style.overflow = '';
+			
+			// Update live region
+			if (liveRegion) {
+				liveRegion.textContent = ariaDrawerClosed;
+			}
+		});
+
+		// Hide backdrop after opacity transition completes
+		const handleTransitionEnd = (e) => {
+			if (e.propertyName === 'opacity' && !isOpen) {
+				requestAnimationFrame(() => {
+					mobileDrawerBackdrop.classList.add('hidden');
+					mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
+				});
+			}
+		};
+		
+		mobileDrawerBackdrop.addEventListener('transitionend', handleTransitionEnd, { once: true });
+		
+		// Return focus
+		mobileMenuButton.focus();
+	};
+
+	// Event listeners
+	const handleButtonClick = (e) => {
+		e.preventDefault();
+		if (isOpen) {
+			closeDrawer();
+		} else {
+			openDrawer();
+		}
+	};
+
+	const handleBackdropClick = (e) => {
+		if (e.target === mobileDrawerBackdrop) {
+			closeDrawer();
+		}
+	};
+
+	const handleEscapeKey = (e) => {
+		if (e.key === 'Escape' && isOpen) {
+			closeDrawer();
+		}
+	};
+
+	mobileMenuButton.addEventListener('click', handleButtonClick);
+	mobileDrawerBackdrop.addEventListener('click', handleBackdropClick);
+	document.addEventListener('keydown', handleEscapeKey);
+
+	// Close on navigation
+	const drawerCloseElements = mobileDrawer.querySelectorAll(DRAWER_CLOSE_SELECTOR);
+	drawerCloseElements.forEach((element) => {
+		element.addEventListener('click', () => {
+			// Use RAF instead of setTimeout
+			requestAnimationFrame(() => {
+				closeDrawer();
+			});
+		});
+	});
+
+	// Keyboard navigation (focus trap)
+	mobileDrawer.addEventListener('keydown', (e) => {
+		if (e.key === 'Tab') {
+			if (e.shiftKey) {
+				if (document.activeElement === firstFocusableElement) {
+					e.preventDefault();
+					lastFocusableElement?.focus();
+				}
+			} else {
+				if (document.activeElement === lastFocusableElement) {
+					e.preventDefault();
+					firstFocusableElement?.focus();
+				}
+			}
+		}
+	});
+
+	// Cleanup on View Transitions
+	document.addEventListener('astro:before-preparation', () => {
+		mobileMenuButton.removeEventListener('click', handleButtonClick);
+		mobileDrawerBackdrop.removeEventListener('click', handleBackdropClick);
+		document.removeEventListener('keydown', handleEscapeKey);
+		
+		// Close drawer if open
+		if (isOpen) {
+			closeDrawer();
+		}
+	}, { once: true });
+});
+</script>

@@ -1,0 +1,32 @@
+---
+/**
+ * ListItem component.
+ * A styled list item component that includes a custom bullet point (`▸`).
+ * It supports 'default' and 'compact' variants for different spacing.
+ *
+ * @prop {"default" | "compact"} [variant="default"] - The spacing variant of the list item.
+ * @prop {string} [class] - Additional CSS classes to apply to the `<li>` element.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"li"> {
+	class?: string;
+	variant?: "default" | "compact";
+}
+
+const { class: className, variant = "default", ...attrs } = Astro.props;
+
+const classes = [
+	"relative pl-5 text-sm font-mono text-foreground-muted",
+	// center the bullet vertically using top-1/2 and -translate-y-1/2
+	"before:content-['▸'] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:text-brand-accent before:text-base before:leading-none",
+	variant === "compact" ? "gap-y-1" : "gap-y-2",
+	className,
+]
+	.filter(Boolean)
+	.join(" ");
+---
+
+<li class={classes} {...attrs}>
+	<slot />
+</li>

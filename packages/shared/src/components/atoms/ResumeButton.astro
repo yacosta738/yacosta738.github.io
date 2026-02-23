@@ -1,0 +1,70 @@
+---
+/**
+ * ResumeButton component.
+ * A consistent button/link component for downloading the resume/CV.
+ * Used across different parts of the site to maintain visual consistency.
+ *
+ * @prop {string} [resumePath] - Path to the resume/CV file.
+ * @prop {string} [class] - Additional CSS classes to apply to the button.
+ * @prop {"primary" | "secondary"} [variant] - Button variant: 'primary' (default) or 'secondary'.
+ * @prop {boolean} [fullWidth] - Whether the button should take full width.
+ * @prop {Lang} currentLocale - Current language locale.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import { type Lang, useTranslations } from "@/i18n";
+import { cn } from "@/lib/utils";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+	resumePath?: string;
+	currentLocale: Lang;
+	class?: string;
+	variant?: "primary" | "secondary";
+	fullWidth?: boolean;
+}
+
+const {
+	resumePath = "/files/yuniel_acosta_cv.pdf",
+	currentLocale,
+	class: className,
+	variant = "primary",
+	fullWidth = false,
+	...attrs
+} = Astro.props;
+
+const t = useTranslations(currentLocale);
+
+const baseClasses =
+	"font-mono transition-all duration-200 ease-in-out cursor-pointer select-none rounded border focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2";
+
+const variantClasses = {
+	primary:
+		"border-brand-accent bg-transparent px-4 py-2 text-sm capitalize text-brand-accent hover:bg-brand-accent/10 focus-visible:bg-brand-accent/10 hover:shadow-[0_8px_15px_rgba(2,6,23,0.07)]",
+	secondary:
+		"bg-brand-accent text-brand-accent-foreground px-4 py-2 font-medium hover:bg-brand-accent/90 focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2",
+};
+
+const isPdf = resumePath.toLowerCase().endsWith(".pdf");
+---
+
+<a
+	data-test="download-cv"
+	href={resumePath}
+	{...(isPdf ? { download: true } : {})}
+	target="_blank"
+	rel="noopener noreferrer"
+	aria-label={t("nav.resume")}
+	class={cn(
+		baseClasses,
+		variantClasses[variant],
+		fullWidth && "w-full flex items-center justify-center gap-2",
+		className
+	)}
+	{...attrs}
+>
+	<slot name="prefix">
+        <Icon name="lucide:download" class="w-4 h-4" />
+    </slot>
+	<span>{t("nav.resume") || "Resume"}</span>
+	<slot name="suffix" />
+</a>

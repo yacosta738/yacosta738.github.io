@@ -1,0 +1,61 @@
+---
+/**
+ * Typography component.
+ * A versatile component for rendering text with consistent styling. It allows
+ * specifying the semantic HTML element (`as` prop) and the visual style
+ * (`variant` prop) independently.
+ *
+ * @prop {"h1" | "h2" | "h3" | "h4" | "p" | "span" | "time"} [as="p"] - The HTML tag to render.
+ * @prop {"title" | "subtitle" | "body" | "small" | "muted" | "date"} [variant="body"] - The visual style to apply.
+ * @prop {string} [class] - Additional CSS classes to apply to the element.
+ * @prop {boolean} [dateFixedWidth=false] - If true and variant is 'date', applies a fixed-width for alignment.
+ */
+import { cn } from "@/lib/utils";
+
+export interface Props {
+	as?: "h1" | "h2" | "h3" | "h4" | "p" | "span" | "time";
+	variant?: "title" | "subtitle" | "body" | "small" | "muted" | "date";
+	class?: string;
+	/** When true and variant === 'date', add a predictable min-width so date columns align (e.g. min-w-[8ch]) */
+	dateFixedWidth?: boolean;
+}
+
+type Variant = NonNullable<Props["variant"]>;
+
+const {
+	as: Element = "p",
+	variant = "body",
+	class: className,
+	dateFixedWidth = false,
+	...rest
+} = Astro.props as Props;
+
+const variantStyles: Record<Variant, string> = {
+	// Use a centralized design token for foreground text so callers don't need
+	// to repeat light/dark color utilities. If the project wants a different
+	// token name, update these entries and the Tailwind theme accordingly.
+	title: "text-4xl font-normal text-foreground my-4",
+	subtitle: "text-lg font-medium text-foreground my-6",
+	body: "text-sm leading-6 text-foreground my-2",
+	small: "text-xs leading-5 text-foreground my-2",
+	muted: "text-sm text-foreground-muted my-2",
+	date: "text-sm text-foreground cursor-default my-2 tabular-nums text-right",
+};
+
+// If the caller requests a fixed width for date columns, add a font-relative
+// minimum width so tabular numbers align predictably. We choose 8ch as a
+// reasonable default; consumers can override with custom className if needed.
+const dateWidthClass =
+	dateFixedWidth && variant === "date" ? "min-w-[8ch]" : "";
+
+const classes = cn(
+	"last:mb-0",
+	variantStyles[variant as Variant],
+	dateWidthClass,
+	className,
+);
+---
+
+<Element class={classes} {...rest}>
+	<slot />
+</Element>

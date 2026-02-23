@@ -1,0 +1,10 @@
+{
+	"title": "Bankiva",
+	"cover": "/src/assets/images/bankiva.webp",
+	"date": "2020-02-17T14:58:55.840Z",
+	"company": "Desoft",
+	"tech": ["java", "spring", "vuejs", "postgresql", "typescript"],
+	"showInProjects": true,
+	"featured": false,
+	"published": true
+}

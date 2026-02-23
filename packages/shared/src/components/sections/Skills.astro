@@ -1,0 +1,96 @@
+---
+import Section from "@atoms/Section.astro";
+import { Icon } from "astro-icon/components";
+/**
+ * Skills section component.
+ * This component renders a section that displays a grid of skills. For each skill,
+ * it shows the name, an icon (if available), a level indicator, and a list of
+ * related keywords or sub-skills.
+ *
+ * @prop {Skill[]} [skills=[]] - An array of skill objects to display.
+ */
+import Card from "@/components/molecules/Card.astro";
+import HighlightsList from "@/components/molecules/HighlightsList.astro";
+import type Skill from "@/core/resume/skill/skill.model";
+import type SkillLibrary from "@/core/skill/skill-library.model";
+import { getSkills } from "@/core/skill/skill-library.service";
+import { type Lang, useTranslations } from "@/i18n";
+
+interface Props {
+	skills?: Skill[];
+}
+
+const { skills = [] } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+const matchedSkills: SkillLibrary[] = await getSkills({ icon: true });
+const skillMap = new Map(
+	matchedSkills.map((skill: SkillLibrary) => [skill.name.toLowerCase(), skill]),
+);
+---
+
+{skills.length > 0 && (
+  <Section title={t("skills")}>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {skills.map(({ name, keywords = [], level }) => {
+        const matchedSkill = skillMap.get(name.toLowerCase());
+        return (
+          <li>
+            <Card class="h-full">
+              <header class="card-header mb-4">
+                <div class="flex items-start gap-3 mb-3">
+                  <div class="text-primary flex-shrink-0">
+                    {matchedSkill?.icon && (
+                      <Icon name={matchedSkill.icon} class="w-6 h-6" aria-hidden="true" />
+                    )}
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-semibold text-foreground text-lg leading-tight mb-1">
+                    {name}
+                  </h3>
+                  <div class="flex items-center gap-2">
+                    {level?.toLowerCase() === "expert" && (
+                      <span
+                        class="inline-flex items-center text-brand-accent/80"
+                        title={t("skills.level.expert") || "Expert level"}
+                      >
+                        <Icon name="lucide:award" class="w-4 h-4" aria-hidden="true" />
+                      </span>
+                    )}
+                    {level?.toLowerCase() === "advanced" && (
+                      <span
+                        class="inline-flex items-center text-brand-accent/80"
+                        title={t("skills.level.advanced") || "Advanced level"}
+                      >
+                        <Icon name="lucide:star" class="w-4 h-4" aria-hidden="true" />
+                      </span>
+                    )}
+                    {level?.toLowerCase() !== "expert" && level?.toLowerCase() !== "advanced" && (
+                      <span
+                        class="inline-flex items-center text-muted-foreground/60"
+                        title={t("skills.level.other", { level }) || `${level} level`}
+                      >
+                        <Icon name="lucide:circle" class="w-4 h-4" aria-hidden="true" />
+                      </span>
+                    )}
+                    <span class="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                      {level}
+                    </span>
+                  </div>
+                </div>
+              </header>
+              
+              {keywords.length > 0 && (
+                <div class="mt-4">
+                  <HighlightsList highlights={keywords} columns={2} />
+                </div>
+              )}
+            </Card>
+          </li>
+        );
+      })}
+    </ul>
+  </Section>
+)}

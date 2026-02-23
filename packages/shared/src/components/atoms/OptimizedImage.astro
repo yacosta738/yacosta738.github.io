@@ -1,0 +1,41 @@
+---
+import {
+	Image,
+	type LocalImageProps,
+	type RemoteImageProps,
+} from "astro:assets";
+import type { ImageOutputFormat } from "astro";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = (LocalImageProps | RemoteImageProps) & {
+	formats?: ImageOutputFormat[];
+	fallbackFormat?: ImageOutputFormat;
+	class?: string | null;
+	imageAttributes?: HTMLAttributes<"img">;
+};
+
+const {
+	formats = ["avif", "webp"],
+	fallbackFormat = "avif",
+	loading = "lazy",
+	fetchpriority = "auto",
+	class: className = "mx-auto w-full max-w-full rounded-lg",
+	decoding = "async",
+	...rest
+} = Astro.props as Props;
+
+const preferredFormat =
+	(Array.isArray(formats) && formats[0]) || fallbackFormat;
+
+const imageProps = {
+	...rest,
+	format: preferredFormat,
+	fallbackFormat,
+	loading,
+	fetchpriority,
+	class: className,
+	decoding,
+};
+---
+
+<Image {...(imageProps as unknown as LocalImageProps | RemoteImageProps)} />

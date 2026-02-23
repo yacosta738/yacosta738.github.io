@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import { useTranslatedPath, useTranslations } from "@/i18n";
+import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"a"> {
+	class?: string;
+}
+const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+const { class: className, ...props } = Astro.props;
+---
+
+<a
+	class={cn(
+		"rounded bg-transparent p-2 text-sm text-foreground-muted hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 border border-transparent hover:border-brand-accent",
+		className,
+	)}
+	{...props}
+	aria-label={t("search.placeholder") || "Buscar contenido..."}
+	href={translatePath("/search")}
+>
+	<Icon name="mdi:magnify" class="h-5 w-5" aria-hidden="true" />
+</a>

@@ -1,0 +1,89 @@
+---
+/**
+ * ProjectCard component.
+ * A card for displaying a project, including its name, description, keywords,
+ * and links to a live URL and GitHub repository. It can also indicate if a
+ * project is active.
+ *
+ * @prop {string} name - The name of the project.
+ * @prop {string} description - A brief description of the project.
+ * @prop {string[]} [highlights=[]] - A list of highlights for the project. (Not currently used in template)
+ * @prop {string[]} [keywords=[]] - A list of keywords or technologies used.
+ * @prop {string} [url] - The URL of the live project.
+ * @prop {string} [github] - The URL of the project's GitHub repository.
+ * @prop {boolean} [isActive=false] - Whether the project is currently active.
+ * @prop {string} [class] - Additional CSS classes for the card container.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import { cn } from "@/lib/utils";
+import Badge from "../atoms/Badge.astro";
+import Link from "../atoms/Link.astro";
+import Typography from "../atoms/Typography.astro";
+
+export interface Props extends HTMLAttributes<"article"> {
+	name: string;
+	description: string;
+	highlights?: string[];
+	keywords?: string[];
+	url?: string;
+	github?: string;
+	isActive?: boolean;
+	class?: string;
+}
+
+const {
+	name,
+	description,
+	highlights = [],
+	keywords = [],
+	url,
+	github,
+	isActive = false,
+	class: className,
+	...attrs
+} = Astro.props;
+
+const classes = cn(
+	"rounded-lg border border-slate-300 dark:border-slate-700 gap-4 flex flex-col p-4 h-full max-sm:border-none max-sm:shadow-sm max-sm:p-0 max-sm:pb-4 transition-colors duration-200",
+	className,
+);
+---
+
+<article class={classes} {...attrs}>
+	<header class="flex-1">
+		<Typography as="h3" class="mb-1 font-medium text-slate-900 dark:text-slate-100">
+			{url ? (
+				<Link href={url} variant="primary" external>
+					{name}
+				</Link>
+			) : (
+				name
+			)}
+			{github && (
+				<Link href={github} variant="subtle" external class="ml-1.5 text-slate-500 dark:text-slate-400">
+					<Icon name="lucide:github" class="size-3" aria-hidden="true" />
+				</Link>
+			)}
+			{isActive && (
+				<span class="ml-1.5 inline-flex items-center">
+					<span aria-hidden="true" class="size-2 rounded-full bg-brand-accent motion-safe:animate-pulse"></span>
+					<span class="sr-only">Active</span>
+				</span>
+			)}
+		</Typography>
+		<Typography variant="small" class="leading-5 mb-1 text-pretty">
+			{description}
+		</Typography>
+	</header>
+	
+	{keywords.length > 0 && (
+		<footer class="flex flex-wrap gap-1 text-xs">
+			{keywords.map((keyword) => (
+				<Badge size="sm" class="text-xs font-medium">
+					{keyword}
+				</Badge>
+			))}
+		</footer>
+	)}
+</article>

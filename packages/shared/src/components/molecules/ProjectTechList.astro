@@ -1,0 +1,125 @@
+---
+/**
+ * ProjectTechList component.
+ * This component displays a list of technologies for a project, including icons.
+ * It fetches all available skills to map technology names to their corresponding
+ * icons and handles the layout alignment.
+ *
+ * @prop {string[]} technologies - An array of technology names to display.
+ * @prop {boolean} [isOdd=false] - Determines the alignment of the list.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import { getSkills } from "@/core/skill";
+import { cn } from "@/lib/utils";
+
+interface Props extends HTMLAttributes<"ul"> {
+	technologies: string[];
+	isOdd?: boolean;
+}
+
+const {
+	technologies,
+	isOdd = false,
+	class: className,
+	...attrs
+} = Astro.props as Props;
+
+// Get all skills from the library for tech mapping
+const allSkills = await getSkills();
+const skillsMap = new Map(
+	allSkills.map((skill) => [skill.name.toLowerCase(), skill]),
+);
+
+// Helper function to get skill info for a technology
+const getTechWithIcon = (techName: string) => {
+	const skill = skillsMap.get(techName.toLowerCase());
+	return {
+		name: techName,
+		icon: skill?.icon,
+	};
+};
+---
+
+{technologies && technologies.length > 0 && (
+  <ul class={cn("project-tech-list", isOdd && "odd", className)} {...attrs}>
+    {technologies.map((tech: string) => {
+      const techInfo = getTechWithIcon(tech);
+      return (
+        <li>
+          {techInfo.icon && (
+            <Icon name={techInfo.icon} class="tech-icon" aria-hidden="true" />
+          )}
+          <span class="tech-name">{techInfo.name}</span>
+        </li>
+      );
+    })}
+  </ul>
+)}
+
+<style>
+  /* Technology List */
+  .project-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+    margin: 25px 0 10px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-tech-list li {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Espacio entre icono y texto */
+    margin: 0 20px 5px 0;
+    color: var(--color-foreground-muted);
+    font-family: var(--font-mono, 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace);
+    font-size: 0.813rem; /* 13px */
+    white-space: nowrap;
+  }
+
+  .tech-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .tech-name {
+    flex-shrink: 0;
+  }
+
+  /* Right-aligned tech list for odd projects */
+  .project-tech-list.odd {
+    justify-content: flex-end;
+    text-align: right;
+    padding-right: 0.5rem; /* small nudge to avoid touching the edge */
+  }
+
+  .project-tech-list.odd li {
+    margin: 0 0 5px 20px;
+  }
+
+  @media (max-width: 768px) {
+    .project-tech-list {
+      margin: 10px 0;
+    }
+
+    .project-tech-list li {
+      margin: 0 10px 5px 0;
+      color: var(--color-foreground);
+    }
+
+    /* On mobile keep tech list left-aligned for readability */
+    .project-tech-list.odd {
+      justify-content: flex-start;
+      text-align: left;
+      padding-right: 0;
+    }
+
+    .project-tech-list.odd li {
+      margin: 0 10px 5px 0;
+    }
+  }
+</style>

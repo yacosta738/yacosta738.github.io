@@ -1,0 +1,81 @@
+---
+/**
+ * Technologies component.
+ * This component creates a dynamic background effect featuring floating technology
+ * icons. It fetches a list of skills, filters for those with icons, and then
+ * uses a client-side script to randomly animate them across the viewport.
+ * The animation is purely decorative and does not accept any props.
+ */
+import { Icon } from "astro-icon/components";
+import { getSkills } from "@/core/skill";
+import type Skill from "@/core/skill/skill-library.model";
+
+const techData = await getSkills({ icon: true });
+
+const techs: Skill[] = techData.filter(
+	(tech) => tech.icon !== undefined && tech.icon !== null,
+);
+---
+
+<div class="fixed inset-0 -z-10 pointer-events-none">
+	<div
+		id="icons"
+		class="relative h-full w-full"
+	>
+		{techs.map((tech) => (
+			<Icon 
+				name={tech.icon} 
+				class="absolute h-24 w-24 fill-current p-4 opacity-0 tech-icon" 
+			/>
+		))}
+	</div>
+</div>
+<script>
+	// Wait for the page to fully load
+	window.addEventListener('load', function() {
+		// Add a delay to ensure all elements are rendered
+		setTimeout(function() {
+			const iconsContainer = document.getElementById('icons');
+			const techIcons = Array.from(iconsContainer?.querySelectorAll('.tech-icon') ?? []);
+			if (techIcons.length === 0) {
+				console.warn('No tech icons found for animation');
+				return;
+			}
+
+			const w = window.innerWidth;
+			const h = window.innerHeight;
+
+			function animateBackgroundIcons() {
+				const availableIcons = techIcons.filter((icon) => !icon.getAttribute('data-is-animating'));
+				if (availableIcons.length === 0) return;
+				
+				const iconToAnimate = availableIcons[Math.floor(Math.random() * availableIcons.length)];
+                if (!iconToAnimate) return;
+
+				iconToAnimate.addEventListener(
+					'animationend',
+					() => {
+						iconToAnimate.classList.remove('animate-moving-background');
+						iconToAnimate.removeAttribute('style');
+						iconToAnimate.removeAttribute('data-is-animating');
+					},
+					{ once: true }
+				);
+
+				// Random position
+				const x = Math.floor(Math.random() * (w - 96)); // subtract icon width
+				const y = Math.floor(Math.random() * (h - 96)); // subtract icon height
+				
+				iconToAnimate.setAttribute(
+					'style',
+					`top: ${y}px; left: ${x}px;`
+				);
+
+				iconToAnimate.classList.add('animate-moving-background');
+				iconToAnimate.setAttribute('data-is-animating', 'true');
+			}
+			animateBackgroundIcons();
+			setInterval(animateBackgroundIcons, 2000);
+		}, 2000); // 2 second delay to ensure astro-icon has loaded
+	});
+</script>

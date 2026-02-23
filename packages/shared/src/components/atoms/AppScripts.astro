@@ -1,0 +1,52 @@
+---
+/**
+ * AppScripts component - OPTIMIZED.
+ * Minimal client-side scripts for enhanced UX.
+ * Console message removed for performance. Title change kept but optimized.
+ */
+import { type Lang, useTranslations } from "@/i18n";
+
+const props = (Astro.props ?? {}) as { lang?: Lang };
+const currentLocale: Lang = (props.lang ?? Astro.params?.lang ?? "en") as Lang;
+const t = useTranslations(currentLocale);
+const titleTextAlt = t("titleAltText", { emoji: "😥" });
+---
+
+<!-- Optimized title change script - minimal impact -->
+<script is:inline define:vars={{ titleTextAlt }}>
+let prevTitle=document.title,tid;window.addEventListener("blur",()=>{clearTimeout(tid);prevTitle=document.title;tid=setTimeout(()=>document.title=titleTextAlt,10000)}),window.addEventListener("focus",()=>{clearTimeout(tid);document.title=prevTitle});
+</script>
+
+<!-- Global keyboard shortcuts for search -->
+<script is:inline>
+  // Cmd+K (Mac) or Ctrl+K (Windows/Linux) to open search
+  // Prevents duplicate listener registration and hijacking while typing
+  if (!window.__portfolioSearchShortcutInstalled) {
+    window.__portfolioSearchShortcutInstalled = true;
+    document.addEventListener('keydown', function(event) {
+      // Skip if user is typing in an input field
+      var target = event.target;
+      if (target && (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        target.closest('input, textarea, [contenteditable="true"]')
+      )) {
+        return;
+      }
+
+      // Check for Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+
+        // Detect current language from URL - only allow en/es
+        var currentPath = window.location.pathname;
+        var langMatch = currentPath.match(/^\/(en|es)\//);
+        var lang = langMatch ? langMatch[1] : 'en';
+
+        // Navigate to search page (safe: controlled path)
+        window.location.href = '/' + lang + '/search';
+      }
+    });
+  }
+</script>

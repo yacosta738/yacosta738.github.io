@@ -1,0 +1,142 @@
+---
+import ByAuthor from "@/components/atoms/ByAuthor.astro";
+import { routes } from "@/configs/route.path";
+import type Article from "@/core/article/article.model";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+import { cleanEntityId } from "@/lib/collection.entity";
+
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+
+interface Props extends Article {
+	animationDelay?: number;
+}
+
+const {
+	id,
+	date,
+	title,
+	description,
+	author,
+	tags,
+	animationDelay = 0,
+} = Astro.props;
+
+const formatMonthForDisplay = (date: Date) => {
+	return new Intl.DateTimeFormat(currentLocale, { month: "long" }).format(date);
+};
+
+const contentLink = `/${currentLocale}/blog/${cleanEntityId(id).toLowerCase()}/`;
+---
+
+<article
+  class="flex items-start gap-6 text-foreground pb-14 relative opacity-0 post-card-animation"
+  style={`--i: ${animationDelay}`}>
+  <div class="hidden md:flex w-35 h-35 items-center justify-center flex-col text-center flex-shrink-0 overflow-hidden relative bg-[var(--color-brand-navy-lighter)] dark:bg-[var(--color-brand-navy-light)] rounded font-inter text-sm leading-[140%] tracking-widest uppercase p-3">
+      <time datetime={date.toISOString().split('T')[0]} class="flex flex-col items-center">
+          <span class="font-inter text-7xl leading-[100%] tracking-[-0.04em] -mt-1.5">{date.getDate()}</span>
+          <span class="text-foreground-muted text-[9px]">
+            {formatMonthForDisplay(date)}, {date.getFullYear()}
+          </span>
+      </time>
+  </div>
+  <div class="flex-1">
+      <h3 class="font-display text-3xl font-semibold leading-[124%] tracking-[-0.04em] mb-3 max-w-[470px] w-full line-clamp-3 text-foreground">
+          <a
+            href={contentLink}
+            class="transition-colors hover:text-brand-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+            aria-label={`${t("post.aria.title")}: ${title}`}
+          >
+            {title}
+          </a>
+      </h3>
+      <p class="font-body text-lg leading-[140%] tracking-normal mb-3 max-w-[430px] w-full line-clamp-4 text-foreground-muted">{description}</p>
+      <div class="flex items-center flex-wrap gap-2">
+                    <ByAuthor author={author} currentLocale={currentLocale} />
+          <div class="flex items-center flex-wrap gap-2">
+              {tags?.map((tag) => (
+                <a
+                  class="w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-foreground-muted"
+                  href={translatePath(`/${routes.tag}/${tag.slug}`)}
+                  aria-label={t("post.aria.tag", { tag: tag.title })}
+                >
+                  {tag.title}
+                </a>
+              ))}
+          </div>
+      </div>
+  </div>
+</article>
+
+<style>
+  /* Animation using CSS custom property for staggered delay */
+  .post-card-animation {
+    animation: to-top-fade-in 0.4s ease forwards;
+    animation-delay: calc(var(--i) * 0.12s);
+  }
+
+  article:nth-of-type(even) {
+    padding-left: 0.75rem;
+  }
+
+  article:nth-of-type(odd) {
+    padding-right: 0.75rem;
+  }
+
+  @media (max-width: 767px) {
+    article:not(:first-child) {
+      position: relative;
+      padding-top: 3.5rem;
+    }
+
+    article:not(:first-child)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 1px;
+      background-color: var(--color-section-border-light);
+    }
+
+    :global(.dark) article:not(:first-child)::before {
+      background-color: var(--color-section-border-dark);
+    }
+  }
+
+  @media (min-width: 768px) {
+    article:nth-of-type(2n+3) {
+      padding-top: 3.5rem;
+    }
+
+    article:nth-of-type(2n+3)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 1px;
+      background-color: var(--color-section-border-light);
+    }
+
+    :global(.dark) article:nth-of-type(2n+3)::before {
+      background-color: var(--color-section-border-dark);
+    }
+
+    article:nth-of-type(n+3) {
+      padding-top: 3.5rem;
+    }
+  }
+
+  @keyframes to-top-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

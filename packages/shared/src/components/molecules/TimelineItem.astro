@@ -1,0 +1,201 @@
+---
+/**
+ * TimelineItem component.
+ * This component represents a single item within a vertical timeline. It provides
+ * the structural layout for the date, the connector (dot and line), and the
+ * content area which is populated via a slot.
+ *
+ * @prop {Date} [startDate] - The start date of the timeline event.
+ * @prop {Date | null} [endDate] - The end date of the timeline event.
+ * @prop {Lang} locale - The locale for date formatting.
+ * @prop {boolean} [showDates=true] - Whether to display the date.
+ * @prop {"default" | "compact"} [variant="default"] - The visual variant, affecting layout.
+ */
+import { type Lang } from "@/i18n";
+
+interface Props {
+	startDate?: Date;
+	endDate?: Date | null;
+	locale: Lang;
+	showDates?: boolean;
+	variant?: "default" | "compact";
+}
+
+const {
+	startDate,
+	endDate,
+	locale,
+	showDates = true,
+	variant = "default",
+} = Astro.props;
+
+// Helper function to format timeline dates (MAY, 2020)
+const formatTimelineDate = (date: Date, locale: Lang): string => {
+	const options: Intl.DateTimeFormatOptions = {
+		year: "numeric",
+		month: "short",
+	};
+	const formatted = date.toLocaleDateString(
+		locale === "es" ? "es-ES" : "en-US",
+		options,
+	);
+	const [month, year] = formatted.split(" ");
+	return `${month.toUpperCase().replace(".", "")}, ${year}`;
+};
+---
+
+<div class="timeline-item" data-variant={variant}>
+	{showDates && startDate && (
+		<div class="timeline-date">
+			{formatTimelineDate(startDate, locale)}
+			{endDate && (
+				<div class="timeline-end-date">
+					{formatTimelineDate(endDate, locale)}
+				</div>
+			)}
+		</div>
+	)}
+	
+	<div class="timeline-connector">
+		<div class="timeline-line"></div>
+		<div class="timeline-dot"></div>
+	</div>
+	
+	<div class="timeline-content">
+		<slot />
+	</div>
+</div>
+
+<style>
+	/* Local font size variables - the only local variables we need */
+	:root {
+		--fz-xs: 13px;
+		--fz-sm: 14px;
+		--fz-md: 16px;
+		--fz-lg: 18px;
+		--fz-xl: 20px;
+		--fz-xxl: 22px;
+	}
+
+	.timeline-item {
+		display: grid;
+		grid-template-columns: 120px 60px 1fr;
+		gap: 0;
+		margin-bottom: 30px;
+		position: relative;
+	}
+
+	.timeline-item:last-child {
+		margin-bottom: 0;
+	}
+
+	/* No dates variant */
+	.timeline-item[data-variant="compact"] {
+		grid-template-columns: 60px 1fr;
+	}
+
+	.timeline-item[data-variant="compact"] .timeline-date {
+		display: none;
+	}
+
+	/* Timeline Date */
+	.timeline-date {
+		text-align: right;
+		padding-right: 20px;
+		color: var(--color-brand-accent);
+		font-family: var(--font-mono);
+		font-size: var(--fz-xs);
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	.timeline-end-date {
+		margin-top: 5px;
+		font-size: 11px;
+		opacity: 0.8;
+	}
+
+	/* Timeline Connector */
+	.timeline-connector {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		padding-top: 5px;
+	}
+
+	.timeline-line {
+		position: absolute;
+		width: 2px;
+		height: 100%;
+		/* more subtle gradient stop to avoid washing out nearby content */
+		background: linear-gradient(180deg, var(--color-brand-accent), var(--color-brand-accent));
+		opacity: 0.15;
+		top: 0;
+	}
+
+	.timeline-dot {
+		position: relative;
+		z-index: 10;
+		width: 12px;
+		height: 12px;
+		background: var(--color-brand-accent);
+		border: 3px solid var(--color-background);
+		border-radius: 50%;
+		/* Subtle outline instead of heavy glow to avoid visual bleeding */
+		box-shadow: 0 0 0 1px var(--color-brand-accent);
+	}
+
+	/* Timeline Content */
+	.timeline-content {
+		padding-left: 20px;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.timeline-item {
+			grid-template-columns: 100px 40px 1fr;
+		}
+
+		.timeline-item[data-variant="compact"] {
+			grid-template-columns: 40px 1fr;
+		}
+
+		.timeline-date {
+			padding-right: 15px;
+		}
+
+		.timeline-content {
+			padding-left: 15px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.timeline-item {
+			grid-template-columns: 1fr;
+			gap: 15px;
+		}
+
+		.timeline-date {
+			text-align: left;
+			padding-right: 0;
+		}
+
+		.timeline-connector {
+			display: none;
+		}
+
+		.timeline-content {
+			border-left: 3px solid var(--color-brand-accent);
+			padding-left: 15px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.timeline-content {
+			padding-left: 12px;
+		}
+	}
+
+
+</style>

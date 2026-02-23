@@ -1,0 +1,64 @@
+---
+/**
+ * Link component.
+ * A versatile link component that can render as an `<a>` tag or a `<span>`.
+ * It supports multiple visual styles, handles external links automatically, and
+ * provides accessibility warnings in development.
+ *
+ * @prop {string} [href] - The URL for the link. If not provided, it renders a `<span>`.
+ * @prop {"primary" | "social" | "subtle"} [variant="primary"] - The visual style of the link.
+ * @prop {boolean} [external=false] - If true, adds `target="_blank"` and `rel="noopener noreferrer"`.
+ * @prop {string} [class] - Additional CSS classes to apply to the component.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends Omit<HTMLAttributes<"a">, "class"> {
+	href?: string;
+	variant?: "primary" | "social" | "subtle";
+	external?: boolean;
+	class?: string;
+}
+
+const {
+	href,
+	variant = "primary",
+	external = false,
+	class: className,
+	...attrs
+} = Astro.props;
+
+if (import.meta.env.DEV && variant === "social") {
+	const hasContent = Astro.slots.has("default");
+	const hasAriaLabel = Boolean(attrs["aria-label"]);
+
+	if (!hasContent && !hasAriaLabel) {
+		console.warn(
+			'Link[variant="social"]: Accessible name required. Provide an `aria-label` attribute or visible/visually-hidden text in the slot.',
+		);
+	}
+}
+const isLink = Boolean(href);
+const Tag = isLink ? "a" : "span";
+
+const baseStyles = {
+	primary:
+		"text-foreground link-underline hover:text-brand-accent focus-visible:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent",
+	social:
+		"text-foreground-muted inline-flex items-center justify-center border border-border p-1 h-8 w-8 rounded-md hover-lift hover:bg-brand-accent hover:bg-opacity-10 hover:border-brand-accent hover:text-brand-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent",
+	subtle:
+		"text-foreground link-underline hover:text-foreground-muted focus-visible:text-foreground-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent",
+};
+
+const componentProps = {
+	class: cn(baseStyles[variant], className),
+	href: href,
+	target: external ? "_blank" : undefined,
+	rel: external ? "noopener noreferrer" : undefined,
+	...attrs,
+};
+---
+
+<Tag {...componentProps}>
+    <slot />
+</Tag>

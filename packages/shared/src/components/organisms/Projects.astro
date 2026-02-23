@@ -1,0 +1,109 @@
+---
+/**
+ * Projects section component.
+ * This component renders a section that displays a grid of projects in a compact format.
+ * It is a simpler alternative to the `FeaturedProjects` and `AllProjects` sections.
+ *
+ * @prop {Project[]} [projects=[]] - An array of project objects to display.
+ */
+import Section from "@atoms/Section.astro";
+import { Icon } from "astro-icon/components";
+import type Project from "@/core/resume/project/project.model";
+import { type Lang, tr, useTranslations } from "@/i18n";
+import Link from "../atoms/Link.astro";
+
+interface Props {
+	projects?: Project[];
+}
+
+const { projects = [] } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+const translated = (
+	key: string,
+	params: Record<string, unknown> = {},
+	fallback = "",
+) => {
+	return tr(t, key, params, fallback);
+};
+---
+
+{
+  projects.length > 0 && (
+    <Section title={t("projects")}>
+      <ul class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 -mx-4 sm:mx-0">
+        {projects.map(
+          ({ url, description, highlights, name, isActive, github }) => {
+            return (
+              <li>
+                <article class="rounded-lg border border-(--border-color) dark:border-(--border-color) gap-4 flex flex-col p-4 h-full">
+                  <header class="flex-1">
+                    <h3 class="mb-1">
+                      <Link
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={translated(
+                          "viewProject",
+                          { name },
+                          `View project ${name}`,
+                        )}
+                        class="text-foreground hover:underline focus:underline hover:text-foreground-muted"
+                      >
+                        {name}
+                      </Link>
+                      {isActive && (
+                        <span class="text-brand-accent animate-flicker ml-1">
+                          •
+                        </span>
+                      )}
+                      {github &&
+                        (() => {
+                          const linkTitle = translated("viewSource", {}, `View source`);
+                          const ariaLabel = translated(
+                            "viewSourceOnGitHub",
+                            {},
+                            `View source on GitHub`,
+                          );
+
+                          return (
+                            <Link
+                              class="ml-1.5 inline-block text-foreground-muted"
+                              href={github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={linkTitle}
+                              aria-label={`${ariaLabel}: ${name}`}
+                            >
+                              <Icon
+                                name="lucide:github"
+                                class="size-4"
+                                aria-hidden="true"
+                              />
+                            </Link>
+                          );
+                        })()}
+                    </h3>
+                    <p class="text-xs leading-tight mb-1 text-foreground-muted">
+                      {description}
+                    </p>
+                  </header>
+                  <footer class="flex flex-wrap gap-1 text-[0.6rem]">
+                    {highlights?.map((highlight) => {
+                      return (
+                        <span class="rounded-md bg-(--bg-secondary) dark:bg-(--bg-primary) text-foreground-muted text-[0.6rem] font-medium px-2.5 py-1 border border-(--border-color)">
+                          {highlight}
+                        </span>
+                      );
+                    })}
+                  </footer>
+                </article>
+              </li>
+            );
+          },
+        )}
+      </ul>
+    </Section>
+  )
+}

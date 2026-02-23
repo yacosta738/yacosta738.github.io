@@ -1,0 +1,27 @@
+---
+/**
+ * Education section component.
+ * This component renders a section displaying a timeline of educational experiences.
+ *
+ * @prop {Education[]} education - An array of education objects to display.
+ */
+import Section from "@atoms/Section.astro";
+import EducationTimeline from "@/components/organisms/EducationTimeline.astro";
+import type Education from "@/core/resume/education/education.model";
+import { type Lang, useTranslations } from "@/i18n";
+
+// Props interface
+interface Props {
+	education: Education[];
+}
+
+const { education } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+---
+
+<Section title={t('education')}>
+  <EducationTimeline education={education} locale={currentLocale} />
+</Section>
+
+

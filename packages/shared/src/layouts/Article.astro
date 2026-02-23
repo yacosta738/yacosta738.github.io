@@ -1,0 +1,64 @@
+---
+import ToTopButton from "@/components/atoms/ToTopButton.astro";
+import HeaderProgressBar from "@/components/molecules/HeaderProgressBar.astro";
+import BlogFooter from "@/components/organisms/BlogFooter.astro";
+import Comments from "@/components/organisms/Comments.astro";
+import WidgetWrapper from "@/components/organisms/WidgetWrapper.astro";
+import type Article from "@/core/article/article.model";
+import type { Lang } from "@/i18n";
+import BaseLayout from "@/layouts/Layout.astro";
+import { getOgImagePath } from "@/lib/open-graph/og.service";
+
+interface Props extends Article {
+	url: string;
+	minutesRead: string;
+	/** Enable comments section (default: false) */
+	enableComments?: boolean;
+	/** Slug for comment thread mapping */
+	slug?: string;
+}
+
+const {
+	title,
+	description,
+	tags = [],
+	url = Astro.request.url,
+	minutesRead,
+	enableComments = false,
+	slug,
+} = Astro.props;
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
+	.href;
+---
+
+<BaseLayout {title} {description} {ogImage}>
+	<HeaderProgressBar
+		slot="subheader"
+		title={title}
+		description={description}
+		url={url}
+		tags={tags.map((tag) => tag.title)}
+		minutesRead={minutesRead}
+	/>
+	<div class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28">
+		<article class="flex-1 lg:basis-3/4" data-pagefind-body>
+			<slot />
+			
+			<!-- Comments Section (if enabled) -->
+			{enableComments && slug && (
+				<Comments 
+					slug={slug} 
+					locale={Astro.currentLocale as Lang}
+					class="mt-12"
+					data-pagefind-ignore
+				/>
+			)}
+		</article>
+		<aside class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start" data-pagefind-ignore>
+			<WidgetWrapper />
+		</aside>
+	</div>
+	<BlogFooter />
+	<ToTopButton />
+</BaseLayout>

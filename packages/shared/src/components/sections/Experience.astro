@@ -1,0 +1,492 @@
+---
+/**
+ * Experience section component.
+ * This component renders a complex, interactive tabbed section to display work
+ * experience. It groups different roles by company and creates a tab for each.
+ * The content of each tab is a `JobPanel` component.
+ *
+ * It uses a custom element, `<elegant-jobs>`, to manage the client-side
+ * interactivity, including tab switching, keyboard navigation, and ARIA attributes.
+ *
+ * @prop {Work[]} work - An array of work experience objects.
+ */
+import Section from "@/components/atoms/Section.astro";
+import JobPanel from "@/components/organisms/JobPanel.astro";
+import type Work from "@/core/resume/work/work.model";
+import { type Lang, useTranslations } from "@/i18n";
+
+// Props interface
+interface Props {
+	work: Work[];
+}
+
+// Interface for grouped work data
+interface GroupedCompany {
+	company: string;
+	url?: string;
+	location?: string;
+	positions: Work[];
+}
+
+const { work } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+
+// Group work experiences by company
+const groupedWork: Record<string, GroupedCompany> = work.reduce(
+	(acc, workItem) => {
+		const companyName = workItem.name;
+		if (!acc[companyName]) {
+			acc[companyName] = {
+				company: companyName,
+				url: workItem.url,
+				location: workItem.location,
+				positions: [],
+			};
+		}
+		acc[companyName].positions.push(workItem);
+		return acc;
+	},
+	{} as Record<string, GroupedCompany>,
+);
+
+// Sort positions within each company by start date (most recent first)
+Object.values(groupedWork).forEach((group: GroupedCompany) => {
+	group.positions.sort(
+		(a: Work, b: Work) => b.startDate.getTime() - a.startDate.getTime(),
+	);
+});
+
+// Convert to array and sort by most recent position start date
+const sortedCompanies: GroupedCompany[] = Object.values(groupedWork).sort(
+	(a: GroupedCompany, b: GroupedCompany) => {
+		const aLatest = a.positions[0].startDate.getTime();
+		const bLatest = b.positions[0].startDate.getTime();
+		return bLatest - aLatest;
+	},
+);
+---
+
+<elegant-jobs>
+	<Section title={t('experience')} id="experience">
+		<div class="jobs-section">
+			<div class="inner">
+				<div class="tab-list" role="tablist" aria-label="Job tabs">
+					{sortedCompanies.map((company, i) => (
+						<button
+							class="tab-button"
+							data-tab={i}
+							id={`tab-${i}`}
+							role="tab"
+							tabindex={i === 0 ? "0" : "-1"}
+							aria-selected={i === 0 ? "true" : "false"}
+							aria-controls={`panel-${i}`}
+						>
+							<span>{company.company}</span>
+						</button>
+					))}
+					<div class="highlight" id="tab-highlight"></div>
+				</div>
+
+				<div class="tab-panels">
+					{sortedCompanies.map((company, i) => (
+						<JobPanel
+							company={{
+								name: company.company,
+								url: company.url,
+								location: company.location,
+								positions: company.positions
+							}}
+							isActive={i === 0}
+							panelIndex={i}
+							locale={currentLocale}
+						/>
+					))}
+				</div>
+			</div>
+		</div>
+	</Section>
+</elegant-jobs>
+
+<style>
+	:root {
+		--green: #64ffda;
+		--navy: #0a192f;
+		--light-navy: #112240;
+		--lightest-navy: #233554;
+		--slate: #8892b0;
+		--light-slate: #a8b2d1;
+		--lightest-slate: #ccd6f6;
+		--white: #e6f1ff;
+		--font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+		--font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
+		--fz-xs: 13px;
+		--fz-sm: 14px;
+		--fz-md: 16px;
+		--fz-lg: 18px;
+		--fz-xl: 20px;
+		--fz-xxl: 22px;
+		--fz-heading: 32px;
+		--border-radius: 4px;
+		--tab-height: 42px;
+		--tab-width: 120px;
+		--brand-accent: #10b981;
+	}
+
+	/* Dark mode variables */
+	.dark {
+		--green: var(--brand-accent);
+		--navy: #0f172a;
+		--light-navy: #1e293b;
+		--lightest-navy: #334155;
+		--slate: #64748b;
+		--light-slate: #94a3b8;
+		--lightest-slate: #e2e8f0;
+		--white: #f8fafc;
+	}
+
+	.inner {
+		display: flex;
+		min-height: 340px;
+	}
+
+	/* Tab List */
+	.tab-list {
+		position: relative;
+		z-index: 3;
+		width: max-content;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+
+	.tab-button {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: var(--tab-height);
+		padding: 0 20px 2px;
+		border: none;
+		border-left: 2px solid var(--lightest-navy);
+		background-color: transparent;
+		color: var(--slate);
+		font-family: var(--font-mono);
+		font-size: var(--fz-xs);
+		text-align: left;
+		white-space: nowrap;
+		cursor: pointer;
+		transition: color 0.28s ease, background-color 0.28s ease;
+	}
+
+	.tab-button:hover,
+	.tab-button:focus {
+		background-color: var(--light-navy);
+		color: var(--green);
+		outline: none;
+	}
+
+	.tab-button[aria-selected="true"] {
+		color: var(--green);
+	}
+
+	/* Light mode overrides: ensure WCAG AA contrast when not using .dark */
+	html:not(.dark) .tab-button {
+		color: #1e293b; /* slate-800 - 8.5:1 contrast ratio on white */
+		border-left-color: #cbd5e1; /* visible border */
+		background-color: transparent;
+	}
+
+	html:not(.dark) .tab-button:hover,
+	html:not(.dark) .tab-button:focus {
+		background-color: rgba(4, 120, 87, 0.08); /* subtle emerald tint on hover */
+		color: #047857; /* emerald-700 - 5.5:1 contrast ratio */
+		outline: none;
+	}
+
+	html:not(.dark) .tab-button[aria-selected="true"] {
+		color: #047857; /* emerald-700 - WCAG AA compliant */
+		background-color: rgba(4, 120, 87, 0.1);
+		border-left-color: #047857;
+		font-weight: 600;
+	}
+
+	/* Light mode highlight color */
+	html:not(.dark) .highlight {
+		background: #047857; /* emerald-700 for visibility */
+	}
+
+	.highlight {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		width: 2px;
+		height: var(--tab-height);
+		border-radius: var(--border-radius);
+		background: var(--green);
+		transform: translateY(0px);
+		transition: transform 0.28s ease, width 0.28s ease, height 0.28s ease;
+		transition-delay: 0s;
+	}
+
+	/* Tab Panels */
+	.tab-panels {
+		position: relative;
+		width: 100%;
+		margin-left: 20px;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.tab-button {
+			padding: 0 15px 2px;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.inner {
+			display: block;
+		}
+
+		.tab-list {
+			display: flex;
+			overflow-x: auto;
+			width: calc(100% + 100px);
+			padding-left: 50px;
+			margin-left: -50px;
+			margin-bottom: 30px;
+		}
+
+		.tab-button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-width: var(--tab-width);
+			padding: 0 15px;
+			border-left: 0;
+			border-bottom: 2px solid var(--lightest-navy);
+			text-align: center;
+		}
+
+		.tab-button:first-of-type {
+			margin-left: 50px;
+		}
+
+		.tab-button:last-of-type {
+			padding-right: 50px;
+		}
+
+		.highlight {
+			top: auto;
+			bottom: 0;
+			width: 100%;
+			max-width: var(--tab-width);
+			height: 2px;
+			margin-left: 50px;
+			transform: translateX(0px);
+		}
+
+		.tab-panels {
+			margin-left: 0;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.tab-list {
+			width: calc(100% + 50px);
+			padding-left: 25px;
+			margin-left: -25px;
+		}
+
+		.tab-button:first-of-type {
+			margin-left: 25px;
+		}
+
+		.tab-button:last-of-type {
+			padding-right: 25px;
+		}
+
+		.highlight {
+			margin-left: 25px;
+		}
+	}
+</style>
+
+<script>
+	class ElegantJobs extends HTMLElement {
+		private activeTabId: number = 0;
+		private tabFocus: number = 0;
+		private tabs: HTMLElement[] = [];
+		private panels: HTMLElement[] = [];
+		private highlight: HTMLElement | null = null;
+		private highlightRafId: number | null = null;
+
+		connectedCallback() {
+			this.init();
+		}
+
+		init() {
+			this.tabs = Array.from(this.querySelectorAll('.tab-button'));
+			this.panels = Array.from(this.querySelectorAll('.tab-panel'));
+			this.highlight = this.querySelector('#tab-highlight');
+
+			if (this.tabs.length === 0) return;
+
+			// Set initial active state
+			this.setActiveTab(0);
+
+			// Add click event listeners
+			this.tabs.forEach((tab, index) => {
+				tab.addEventListener('click', () => this.setActiveTab(index));
+			});
+
+			// Add keyboard event listener
+			const tabList = this.querySelector('.tab-list');
+			if (tabList) {
+				tabList.addEventListener('keydown', (e) => this.onKeyDown(e as KeyboardEvent));
+			}
+
+			// Update highlight on resize
+			window.addEventListener('resize', () => this.updateHighlight());
+		}
+
+		setActiveTab(index: number) {
+			if (index < 0 || index >= this.tabs.length) return;
+
+			// Update active tab
+			this.activeTabId = index;
+			this.tabFocus = index;
+
+			// Update tab states
+			this.tabs.forEach((tab, i) => {
+				const isActive = i === index;
+				tab.setAttribute('tabindex', isActive ? '0' : '-1');
+				tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+			});
+
+			// If on mobile (horizontal tabs) ensure the active tab is visible
+			try {
+				const isMobile = window.innerWidth <= 600;
+				if (isMobile) {
+					const activeTabEl = this.tabs[index] as HTMLElement | undefined;
+					if (activeTabEl && typeof activeTabEl.scrollIntoView === 'function') {
+						activeTabEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+					}
+				}
+			} catch (err) {
+				// ignore environment where scrollIntoView may not be available
+			}
+
+			// Update panel states
+			this.panels.forEach((panel, i) => {
+				const isActive = i === index;
+				panel.setAttribute('tabindex', isActive ? '0' : '-1');
+				panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+				(panel as HTMLElement).style.display = isActive ? 'block' : 'none';
+			});
+
+			// Update highlight position
+			this.updateHighlight();
+		}
+
+		updateHighlight() {
+			if (!this.highlight) return;
+
+			// Schedule highlight update for next frame to avoid forced reflow
+			if (this.highlightRafId) {
+				cancelAnimationFrame(this.highlightRafId);
+			}
+			
+			this.highlightRafId = requestAnimationFrame(() => {
+				this.performHighlightUpdate();
+				this.highlightRafId = null;
+			});
+		}
+
+		performHighlightUpdate() {
+			if (!this.highlight) return;
+
+			const activeTab = this.tabs[this.activeTabId];
+			if (!activeTab) return;
+
+			// Batch DOM reads first
+			const tabRect = activeTab.getBoundingClientRect();
+			const listRect = (this.querySelector('.tab-list') as HTMLElement)?.getBoundingClientRect();
+			const isMobile = window.innerWidth <= 600;
+
+			// Then batch DOM writes
+			if (isMobile) {
+				// Horizontal highlight: set width and translateX relative to container
+				const offsetX = tabRect.left - (listRect?.left ?? 0);
+				
+				// Batch style updates to avoid multiple reflows
+				Object.assign(this.highlight.style, {
+					width: `${tabRect.width}px`,
+					height: '2px',
+					transform: `translateX(${offsetX}px)`,
+					left: '0px'
+				});
+			} else {
+				// Vertical highlight: set height and translateY relative to container
+				const offsetY = tabRect.top - (listRect?.top ?? 0);
+				
+				// Batch style updates to avoid multiple reflows
+				Object.assign(this.highlight.style, {
+					height: `${tabRect.height}px`,
+					width: '2px',
+					transform: `translateY(${offsetY}px)`,
+					left: '0px'
+				});
+			}
+		}
+
+		focusTab() {
+			if (this.tabs[this.tabFocus]) {
+				this.tabs[this.tabFocus].focus();
+				return;
+			}
+
+			// If we're at the end, go to the start
+			if (this.tabFocus >= this.tabs.length) {
+				this.tabFocus = 0;
+			}
+			// If we're at the start, move to the end
+			if (this.tabFocus < 0) {
+				this.tabFocus = this.tabs.length - 1;
+			}
+
+			if (this.tabs[this.tabFocus]) {
+				this.tabs[this.tabFocus].focus();
+			}
+		}
+
+		onKeyDown(e: KeyboardEvent) {
+			switch (e.key) {
+				case 'ArrowUp':
+				case 'ArrowLeft':
+					e.preventDefault();
+					this.tabFocus = this.tabFocus - 1;
+					this.focusTab();
+					break;
+
+				case 'ArrowDown':
+				case 'ArrowRight':
+					e.preventDefault();
+					this.tabFocus = this.tabFocus + 1;
+					this.focusTab();
+					break;
+
+				case 'Enter':
+				case ' ':
+					e.preventDefault();
+					this.setActiveTab(this.tabFocus);
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+
+	customElements.define('elegant-jobs', ElegantJobs);
+</script>

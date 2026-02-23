@@ -1,0 +1,33 @@
+---
+import Section from "@atoms/Section.astro";
+/**
+ * References section component.
+ * This component renders a section displaying a grid of references or testimonials.
+ * It is only rendered if there are references to display.
+ *
+ * @prop {Reference[]} [references=[]] - An array of reference objects to display.
+ */
+import ReferenceCard from "@/components/molecules/ReferenceCard.astro";
+import type Reference from "@/core/resume/reference/reference.model";
+import { type Lang, useTranslations } from "@/i18n";
+
+interface Props {
+	references?: Reference[];
+}
+
+const { references = [] } = Astro.props as Props;
+const currentLocale = Astro.params.lang as Lang;
+const t = useTranslations(currentLocale);
+---
+
+{references.length > 0 && (
+	<Section title={t('references')}>
+		<div class="grid gap-6 md:grid-cols-2">
+			{references.map((reference) => (
+				<ReferenceCard reference={reference} />
+			))}
+		</div>
+	</Section>
+)}
+
+

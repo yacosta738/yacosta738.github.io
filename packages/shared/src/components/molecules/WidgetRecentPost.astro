@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+import WidgetCard from "@/components/atoms/WidgetCard.astro";
+import { type Lang, useTranslations } from "@/i18n";
+import type { BlogPost } from "@/lib/blog-post.utils";
+import {
+	getBlogPostRel,
+	getBlogPostTarget,
+	getBlogPostUrl,
+	isExternalArticle,
+} from "@/lib/blog-post.utils";
+
+const { pathname } = Astro.url;
+const isBlogRoot = pathname.endsWith("/blog");
+
+export interface Props {
+	recentPosts: BlogPost[];
+}
+const { recentPosts } = Astro.props;
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+---
+
+{
+	!isBlogRoot && (
+		<WidgetCard title={t("recentPost")}>
+			<ul class="relative my-4 flex list-none flex-col p-0">
+				{
+					// Use article.id to build the internal url and to filter out the current page.
+					// article.id has the pattern "<lang>/.../slug" so we remove the lang prefix when building paths.
+				}
+				{recentPosts
+					.map((post) => {
+						const url = getBlogPostUrl(post, currentLocale);
+						return { post, url };
+					})
+					.filter(({ url }) => {
+						// Compare normalized paths without trailing slash for robustness
+						const normalize = (p: string) =>
+							p.replace(/\/+$/g, "") || "/";
+						return normalize(url) !== normalize(pathname);
+					})
+					.map(({ post, url }) => (
+						<li class="my-2 flex flex-row font-mono text-base text-light-slate">
+							<div class="flex flex-row items-center justify-center">
+								<Icon
+									name="mdi:chevron-right"
+									class="h-5 w-5 mr-1"
+								/>
+								<a
+									href={`${url}${isExternalArticle(post) ? "" : "/"}`}
+									class="inline-link flex items-center justify-center"
+									target={getBlogPostTarget(post)}
+									rel={getBlogPostRel(post)}
+								>
+									<p class="pl-2">{post.title}</p>
+								</a>
+							</div>
+						</li>
+					))}
+			</ul>
+		</WidgetCard>
+	)
+}

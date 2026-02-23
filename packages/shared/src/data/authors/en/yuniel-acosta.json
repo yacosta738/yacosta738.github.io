@@ -1,0 +1,24 @@
+{
+	"name": "Yuniel Acosta Pérez",
+	"email": "yunielacosta738@gmail.com",
+	"avatar": "/src/assets/images/me.webp",
+	"bio": "I'm a very outgoing and curious person, who's passionate about coding, space, nature, and sports. I enjoy creating awesome software, whether that be websites, applications, or anything in between. My goal is always to create products that deliver high performance.",
+	"location": "Valencia, Spain",
+	"socials": [
+		{
+			"name": "github",
+			"url": "https://github.com/yacosta738",
+			"icon": "lucide:github"
+		},
+		{
+			"name": "linkedin",
+			"url": "https://linkedin.com/in/yacosta738",
+			"icon": "lucide:linkedin"
+		},
+		{
+			"name": "twitter",
+			"url": "https://x.com/yacosta738",
+			"icon": "lucide:twitter"
+		}
+	]
+}

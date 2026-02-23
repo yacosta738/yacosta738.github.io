@@ -1,0 +1,40 @@
+---
+import { routes } from "@configs/route.path.ts";
+import { Icon } from "astro-icon/components";
+import WidgetCard from "@/components/atoms/WidgetCard.astro";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+
+export type CategoryItem = {
+	slug: string;
+	title: string;
+	count: number;
+};
+
+export interface Props {
+	categories: CategoryItem[];
+}
+
+const currentLocale = Astro.currentLocale as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+
+const { categories } = Astro.props;
+---
+
+<WidgetCard title={t('categories')}>
+	<ul class="relative my-4 flex list-none flex-col p-0">
+		{
+			categories.map(({ slug, title, count }) => (
+				<li class="my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate">
+					<Icon name="mdi:chevron-right" class="h-5 w-5 mr-1" />
+					<a href={translatePath(`/${routes.category}/${slug}`)} class="inline-link">
+						<div class="flex items-center justify-center">
+							<span>{title}</span>
+						</div>
+					</a>
+					<p>({count})</p>
+				</li>
+			))
+		}
+	</ul>
+</WidgetCard>

@@ -1,0 +1,22 @@
+---
+/**
+ * Container component.
+ * A basic layout component that acts as a flexbox container. It can be extended
+ * with additional CSS classes.
+ *
+ * @prop {string} [class] - Additional CSS classes to apply to the container div.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+export interface Props extends HTMLAttributes<"div"> {
+	class?: string;
+}
+
+const { class: className, ...attrs } = Astro.props;
+const classes = cn("flex", className);
+---
+
+<div class={classes} {...attrs}>
+	<slot />
+</div>

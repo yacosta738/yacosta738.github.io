@@ -1,0 +1,240 @@
+---
+/**
+ * Main layout component for all pages.
+ * This component sets up the basic HTML document structure, including the <head>
+ * and <body>, and includes global styles, scripts, and common UI elements.
+ *
+ * It handles:
+ * - SEO metadata (title, description, Open Graph, Twitter cards).
+ * - Theme switching logic (with an inline script to prevent FOUC).
+ * - Favicons and manifest links.
+ * - Common components like the Header, Analytics, and various effects.
+ * - The main content slot for individual pages.
+ *
+ * @prop {string} [title] - The title of the page, which will be combined with the site title.
+ */
+import Analytics from "@/components/atoms/Analytics.astro";
+import Header from "@/components/organisms/Header.astro";
+import { SITE_TITLE } from "@/configs/site.consts";
+import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
+import {
+	getLocalePathsEnhanced,
+	type Lang,
+	LOCALES,
+	useTranslations,
+} from "@/i18n";
+import "@/styles/global.css";
+
+import AppScripts from "@/components/atoms/AppScripts.astro";
+import Technologies from "@/components/atoms/Technologies.astro";
+import TorchEffect from "@/components/atoms/TorchEffect.astro";
+import {
+	DARK_COLOR,
+	HEADER_ID,
+	LIGHT_COLOR,
+	STORAGE_KEY,
+} from "@/configs/theme.consts";
+import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string | URL;
+}
+const { title = "", description = "", ogImage = "" } = Astro.props;
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+const resume = (await getMainResumeWithData()) ?? {
+	basics: {
+		image: "",
+		summary: t("default.summary"),
+		url: Astro.site?.href || "",
+	},
+};
+
+const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
+const { image, summary, url } = resume.basics;
+const metaDescription = description || summary || t("default.summary");
+
+// Extract the image URL from ImageMetadata if needed
+const getImageUrl = (
+	img: string | { src: string } | null | undefined,
+): string => {
+	if (!img) return "";
+	if (typeof img === "string") return img;
+	if (typeof img === "object" && "src" in img) return img.src;
+	return "";
+};
+
+const imageUrl = getImageUrl(image as string | { src: string });
+
+// Resolve a single og:image URL. Preference order:
+// 1. ogImage prop (string or URL)
+// 2. resume.basics.image
+// Returns an absolute URL string or an empty string.
+const resolveOgImage = (candidate?: string | URL) => {
+	if (!candidate && !imageUrl) return "";
+	try {
+		if (candidate) return new URL(String(candidate), Astro.url).href;
+	} catch {
+		// fallthrough to try resume image
+	}
+	try {
+		return imageUrl ? new URL(imageUrl, Astro.url).href : "";
+	} catch {
+		return "";
+	}
+};
+const ogImageUrl = resolveOgImage(ogImage as string | URL);
+
+const getHostname = (urlStr?: string) => {
+	if (!urlStr) return "";
+	try {
+		return new URL(urlStr).hostname;
+	} catch {
+		return "";
+	}
+};
+// Show search only on blog pages (paths that include '/blog')
+const showSearch = Astro.url?.pathname?.includes("/blog");
+---
+
+<!doctype html>
+<html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || "ltr"}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{localeTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" id="theme-color" content={LIGHT_COLOR} />
+
+    <!-- Optimized inline theme script - minimal blocking -->
+    <script is:inline define:vars={{ STORAGE_KEY, LIGHT_COLOR, DARK_COLOR }}>
+      (() => {
+        const e = () => {
+            try {
+              const e = localStorage.getItem(STORAGE_KEY);
+              if ("dark" === e || "light" === e) return e;
+            } catch {}
+            return matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+          },
+          t = (e) => {
+            const t = document.documentElement,
+              a = document.getElementById("theme-color");
+            "dark" === e
+              ? (t.classList.add("dark"),
+                a && a.setAttribute("content", DARK_COLOR),
+                document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "dark" } })))
+              : (t.classList.remove("dark"),
+                a && a.setAttribute("content", LIGHT_COLOR),
+                document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "light" } })));
+          },
+          a = e();
+        t(a),
+          matchMedia("(prefers-color-scheme: dark)").addEventListener(
+            "change",
+            (e) => {
+              try {
+                localStorage.getItem(STORAGE_KEY) ||
+                  t(e.matches ? "dark" : "light");
+              } catch {}
+            },
+          ),
+          (window.themeSystem = {
+            toggle() {
+              const e = document.documentElement.classList.contains("dark")
+                  ? "dark"
+                  : "light",
+                a = "dark" === e ? "light" : "dark";
+              t(a);
+              try {
+                localStorage.setItem(STORAGE_KEY, a);
+              } catch {}
+            },
+            clear() {
+              try {
+                localStorage.removeItem(STORAGE_KEY);
+              } catch {}
+              try {
+                t(
+                  matchMedia("(prefers-color-scheme: dark)").matches
+                    ? "dark"
+                    : "light",
+                );
+              } catch {}
+            },
+          });
+      })();
+    </script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Preload critical fonts to reduce render blocking -->
+    <link rel="preload" href="/assets/font/alkatra/alkatra-v3-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- DNS prefetch and preconnect for Cloudflare optimization -->
+    <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+    <link rel="preconnect" href="https://cloudflareinsights.com" crossorigin />
+
+    <!-- Preconnect for hCaptcha (critical for contact form performance) -->
+    <link rel="preconnect" href="https://js.hcaptcha.com" crossorigin />
+    <link rel="preconnect" href="https://api.hcaptcha.com" crossorigin />
+    <link rel="dns-prefetch" href="https://newassets.hcaptcha.com" />
+
+    <!-- SEO: Canonical URL (clean, without query parameters) -->
+    <link rel="canonical" href={`${Astro.url.origin}${Astro.url.pathname}`} />
+
+    <!-- Additional SEO meta tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content={(resume.basics as { name?: string })?.name || "Yuniel Acosta"} />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      (await getLocalePathsEnhanced(Astro.url)).map((props) => (
+        <link
+          rel="alternate"
+          hreflang={LOCALES[props.lang].lang || props.lang}
+          href={Astro.site?.origin + props.path}
+        />
+      ))
+    }
+
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={localeTitle} />
+    <meta property="og:description" content={summary} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content={getHostname(url)} />
+    <meta name="twitter:url" content={url} />
+    <meta name="twitter:title" content={localeTitle} />
+    <meta name="twitter:description" content={summary} />
+    <meta
+      name="twitter:image"
+      content={imageUrl ? new URL(imageUrl, Astro.url).href : ""}
+    />
+  </head>
+  <body>
+    <LocaleSuggest />
+    <slot name="header">
+      <Header id={HEADER_ID} showSearch={showSearch} />
+    </slot>
+    <slot name="subheader" />
+    <slot />
+    <slot name="aside" />
+    <Analytics />
+    <Technologies />
+    <AppScripts />
+    <TorchEffect />
+  </body>
+</html>
