@@ -7,6 +7,22 @@ import type { Context } from "hono";
 import type { Env } from "../../worker-configuration";
 import { verifyHCaptcha } from "../utils/hcaptcha";
 
+const parseAllowedHostnames = (allowedOrigins?: string): string[] => {
+	if (!allowedOrigins) return [];
+	return allowedOrigins
+		.split(",")
+		.map((origin) => origin.trim())
+		.filter(Boolean)
+		.map((origin) => {
+			try {
+				return new URL(origin).hostname;
+			} catch {
+				return "";
+			}
+		})
+		.filter(Boolean);
+};
+
 export async function handleNewsletterSubscription(
 	c: Context<{ Bindings: Env }>,
 ) {
@@ -57,6 +73,7 @@ export async function handleNewsletterSubscription(
 			hcaptchaToken,
 			hcaptchaSecret,
 			c.req.header("CF-Connecting-IP"), // Cloudflare provides the real IP here
+			parseAllowedHostnames(c.env.ALLOWED_ORIGINS),
 		);
 
 		if (!captchaResult.success) {

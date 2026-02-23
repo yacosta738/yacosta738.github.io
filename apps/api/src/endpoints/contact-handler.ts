@@ -6,6 +6,22 @@
 import type { Context } from "hono";
 import { verifyHCaptcha } from "../utils/hcaptcha";
 
+const parseAllowedHostnames = (allowedOrigins?: string): string[] => {
+	if (!allowedOrigins) return [];
+	return allowedOrigins
+		.split(",")
+		.map((origin) => origin.trim())
+		.filter(Boolean)
+		.map((origin) => {
+			try {
+				return new URL(origin).hostname;
+			} catch {
+				return "";
+			}
+		})
+		.filter(Boolean);
+};
+
 export async function handleContactSubmission(c: Context<{ Bindings: Env }>) {
 	try {
 		// Get data from request body
@@ -54,6 +70,7 @@ export async function handleContactSubmission(c: Context<{ Bindings: Env }>) {
 			hcaptchaToken,
 			hcaptchaSecret,
 			c.req.header("CF-Connecting-IP"), // Cloudflare provides the real IP here
+			parseAllowedHostnames(c.env.ALLOWED_ORIGINS),
 		);
 
 		if (!captchaResult.success) {

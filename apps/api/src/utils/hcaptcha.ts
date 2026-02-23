@@ -61,6 +61,7 @@ export async function verifyHCaptcha(
 	token: string,
 	secret: string,
 	remoteip?: string | null,
+	expectedHostnames?: readonly string[],
 ): Promise<VerificationResult> {
 	// Validate input parameters
 	if (!token || typeof token !== "string") {
@@ -111,9 +112,26 @@ export async function verifyHCaptcha(
 
 		// Parse the response
 		const data = (await response.json()) as HCaptchaVerifyResponse;
+		const normalizedExpectedHostnames = (expectedHostnames || [])
+			.map((hostname) => hostname.trim().toLowerCase())
+			.filter(Boolean);
 
 		// Check if verification was successful
 		if (data.success) {
+			if (normalizedExpectedHostnames.length > 0) {
+				const responseHostname = data.hostname?.trim().toLowerCase();
+				const hostnameAllowed =
+					typeof responseHostname === "string" &&
+					normalizedExpectedHostnames.includes(responseHostname);
+
+				if (!hostnameAllowed) {
+					return {
+						success: false,
+						message: "Captcha hostname validation failed",
+					};
+				}
+			}
+
 			return {
 				success: true,
 				message: "Captcha verification successful",

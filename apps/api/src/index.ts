@@ -93,6 +93,21 @@ const newsletterRoute = createRoute({
 
 // --- Hono App Initialization ---
 const app = new OpenAPIHono<{ Bindings: Env }>();
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 20;
+const rateLimitStore = new Map<
+	string,
+	{ count: number; windowStart: number }
+>();
+
+const resolveClientIp = (request: Request): string => {
+	const cfIp = request.headers.get("CF-Connecting-IP")?.trim();
+	if (cfIp) return cfIp;
+	const forwardedFor = request.headers.get("X-Forwarded-For");
+	if (!forwardedFor) return "unknown";
+	const firstIp = forwardedFor.split(",")[0]?.trim();
+	return firstIp || "unknown";
+};
 
 // --- CORS Middleware ---
 // Use an allowlist driven by the `ALLOWED_ORIGINS` environment variable.
@@ -169,6 +184,50 @@ app.use("/*", async (c, next) => {
 		return c.body(null, 204);
 	}
 
+	return await next();
+});
+
+/**
+ * Basic per-IP throttling for public form endpoints.
+ * Note: this in-memory store is per isolate; enforce global limits at Cloudflare edge too.
+ */
+app.use("/api/*", async (c, next) => {
+	if (c.req.method !== "POST") {
+		return await next();
+	}
+
+	const path = c.req.path;
+	if (path !== "/api/contact" && path !== "/api/newsletter") {
+		return await next();
+	}
+
+	const now = Date.now();
+	const ip = resolveClientIp(c.req.raw);
+	const key = `${path}:${ip}`;
+	const entry = rateLimitStore.get(key);
+
+	if (!entry || now - entry.windowStart >= RATE_LIMIT_WINDOW_MS) {
+		rateLimitStore.set(key, { count: 1, windowStart: now });
+		return await next();
+	}
+
+	if (entry.count >= RATE_LIMIT_MAX_REQUESTS) {
+		const retryAfterSeconds = Math.max(
+			1,
+			Math.ceil((RATE_LIMIT_WINDOW_MS - (now - entry.windowStart)) / 1000),
+		);
+		c.header("Retry-After", String(retryAfterSeconds));
+		return c.json(
+			{
+				success: false,
+				message: "Too many requests. Please try again later.",
+			},
+			429,
+		);
+	}
+
+	entry.count += 1;
+	rateLimitStore.set(key, entry);
 	return await next();
 });
 

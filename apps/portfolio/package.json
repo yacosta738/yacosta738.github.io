@@ -11,6 +11,7 @@
 		"check:a11y": "biome lint --only=a11y ./src",
 		"check:astro": "astro check",
 		"clean": "rimraf dist .astro coverage",
+		"csp:hashes": "node ./scripts/update-csp-script-hashes.mjs",
 		"dev": "astro dev",
 		"organize": "node ./scripts/organize-articles.js",
 		"preview": "astro preview",

@@ -34,5 +34,11 @@
 		"playwright": "1.58.2",
 		"semantic-release": "^25.0.3",
 		"vitest": "^4.0.18"
+	},
+	"pnpm": {
+		"overrides": {
+			"fast-xml-parser": "^5.3.6",
+			"h3": "^1.15.5"
+		}
 	}
 }

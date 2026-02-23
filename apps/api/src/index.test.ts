@@ -126,4 +126,31 @@ describe("API Worker", () => {
 			expect(response.headers).toBeDefined();
 		});
 	});
+
+	describe("Rate Limiting", () => {
+		it("should throttle repeated requests to form endpoints", async () => {
+			let lastStatus = 0;
+			let retryAfter: string | null = null;
+
+			for (let i = 0; i < 25; i++) {
+				const request = new Request("http://localhost/api/contact", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"CF-Connecting-IP": "198.51.100.77",
+					},
+					body: JSON.stringify({}),
+				});
+				const response = await app.fetch(request, mockEnv, undefined);
+				lastStatus = response.status;
+				if (response.status === 429) {
+					retryAfter = response.headers.get("Retry-After");
+					break;
+				}
+			}
+
+			expect(lastStatus).toBe(429);
+			expect(retryAfter).toBeTruthy();
+		});
+	});
 });

@@ -348,61 +348,72 @@ export async function getStaticPaths() {
 			return node;
 		};
 
-		const resultsRoot = () =>
-			document.querySelector(".pagefind-ui__results") ||
-			document.querySelector(".pagefind-ui__results-list");
+			const resultsRoot = () =>
+				document.querySelector(".pagefind-ui__results") ||
+				document.querySelector(".pagefind-ui__results-list");
 
-		const enhanceResults = async () => {
-			const results = Array.from(
-				document.querySelectorAll(".pagefind-ui__result"),
-			) as HTMLElement[];
-			document
-				.querySelectorAll(".pf-top-result")
-				.forEach((el) => el.classList.remove("pf-top-result"));
+			const renderEmptyState = (node: Element, query: string) => {
+				const title = document.createElement("h3");
+				title.style.fontWeight = "700";
+				title.textContent = emptyTitle;
 
-			if (results.length === 0) {
-				const node = ensureEmptyNode();
-				const q = new URL(window.location.href).searchParams.get("q") || "";
-				node.innerHTML = `<h3 style="font-weight:700;">${emptyTitle}</h3><p>${emptyMessageTemplate.replace("{query}", q)}</p>`;
-				return;
-			} else {
-				const node = document.querySelector(".pf-empty");
-				if (node) node.remove();
-			}
+				const message = document.createElement("p");
+				message.textContent = emptyMessageTemplate.replace("{query}", query);
 
-			const first = results[0];
-			if (first) first.classList.add("pf-top-result");
+				node.replaceChildren(title, message);
+			};
 
-			results.forEach(async (r) => {
-				if (r.querySelector(".pf-badge")) return;
-				const link = r.querySelector("a[href]") as HTMLAnchorElement | null;
-				const meta = document.createElement("div");
-				meta.className = "meta";
+			const enhanceResults = async () => {
+				const results = Array.from(
+					document.querySelectorAll(".pagefind-ui__result"),
+				) as HTMLElement[];
+				document
+					.querySelectorAll(".pf-top-result")
+					.forEach((el) => el.classList.remove("pf-top-result"));
 
-				let type = "Page";
-				try {
-					if (link) {
-						const href = link.getAttribute("href") || "";
-						if (/\bblog\b|\/posts\//i.test(href)) type = "Post";
-						else if (/\bproject\b|\/projects\//i.test(href)) type = "Project";
-						else if (/\/about\b|contact/i.test(href)) type = "Page";
-					}
-				} catch (e) {
-					/* ignore */
+				if (results.length === 0) {
+					const node = ensureEmptyNode();
+					const q = new URL(window.location.href).searchParams.get("q") || "";
+					renderEmptyState(node, q);
+					return;
+				} else {
+					const node = document.querySelector(".pf-empty");
+					if (node) node.remove();
 				}
 
-				const badge = document.createElement("span");
-				badge.className = "pf-badge";
-				badge.textContent = type;
-				meta.appendChild(badge);
+				const first = results[0];
+				if (first) first.classList.add("pf-top-result");
 
-				const dateEl =
-					r.querySelector("time") || r.querySelector(".pagefind-ui__meta-date");
-				if (dateEl) meta.appendChild(dateEl.cloneNode(true));
+				results.forEach(async (r) => {
+					if (r.querySelector(".pf-badge")) return;
+					const link = r.querySelector("a[href]") as HTMLAnchorElement | null;
+					const meta = document.createElement("div");
+					meta.className = "meta";
 
-				r.appendChild(meta);
-			});
-		};
+					let type = "Page";
+					try {
+						if (link) {
+							const href = link.getAttribute("href") || "";
+							if (/\bblog\b|\/posts\//i.test(href)) type = "Post";
+							else if (/\bproject\b|\/projects\//i.test(href)) type = "Project";
+							else if (/\/about\b|contact/i.test(href)) type = "Page";
+						}
+					} catch (e) {
+						/* ignore */
+					}
+
+					const badge = document.createElement("span");
+					badge.className = "pf-badge";
+					badge.textContent = type;
+					meta.appendChild(badge);
+
+					const dateEl =
+						r.querySelector("time") || r.querySelector(".pagefind-ui__meta-date");
+					if (dateEl) meta.appendChild(dateEl.cloneNode(true));
+
+					r.appendChild(meta);
+				});
+			};
 
 		const obsTarget = resultsRoot();
 		if (obsTarget) {
