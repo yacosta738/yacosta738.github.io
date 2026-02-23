@@ -32,7 +32,7 @@ const hashInlineScript = (scriptContent) => {
 	return `'sha256-${hash}'`;
 };
 
-const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/\s*script[^>]*>/gi;
 const srcRegex = /\bsrc\s*=/i;
 
 const hashes = new Set();
