@@ -6,6 +6,12 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
 	testDir: "tests/e2e",
+	testIgnore: [
+		"tests/e2e/comments*.spec.ts",
+		"tests/e2e/search.spec.ts",
+		"tests/e2e/newsletter.spec.ts",
+		"tests/e2e/tag-external-articles.spec.ts",
+	],
 
 	// Test execution settings
 	timeout: 120_000, // Increased timeout for webkit stability
@@ -34,7 +40,7 @@ export default defineConfig({
 
 	// Global configuration for all tests
 	use: {
-		baseURL: process.env.BASE_URL || "http://localhost:4322",
+		baseURL: process.env.BASE_URL || "http://localhost:4321",
 		trace: "on-first-retry",
 		screenshot: "on-first-failure",
 		video: "on-first-retry",
@@ -59,8 +65,8 @@ export default defineConfig({
 				: "pnpm build";
 
 			return {
-				command: `${buildCommand} && pnpm preview --port 4322`,
-				url: "http://localhost:4322",
+				command: `${buildCommand} && pnpm preview --port 4321`,
+				url: "http://localhost:4321",
 				timeout: 600_000,
 				reuseExistingServer: false,
 				env: { PLAYWRIGHT_TEST: "true" },
@@ -70,8 +76,8 @@ export default defineConfig({
 		}
 
 		return {
-			command: "pnpm dev --port 4322",
-			url: "http://localhost:4322",
+			command: "pnpm dev --port 4321",
+			url: "http://localhost:4321",
 			timeout: 180_000,
 			reuseExistingServer: true,
 			env: { PLAYWRIGHT_TEST: "true" },

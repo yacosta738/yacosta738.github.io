@@ -45,7 +45,7 @@
 		"test:unit:portfolio": "pnpm --filter=portfolio test:unit",
 		"test:unit:blog": "pnpm --filter=blog test:unit",
 		"test:unit:api": "pnpm --filter=yap-api test:unit",
-		"test:e2e": "pnpm --filter=portfolio --filter=blog test:e2e",
+		"test:e2e": "pnpm test:e2e:portfolio && pnpm test:e2e:blog",
 		"test:e2e:portfolio": "pnpm --filter=portfolio test:e2e",
 		"test:e2e:blog": "pnpm --filter=blog test:e2e",
 		"cloudflare:check": "bash scripts/cloudflare-check.sh",

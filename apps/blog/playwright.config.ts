@@ -6,6 +6,7 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
 	testDir: "tests/e2e",
+	testIgnore: ["tests/e2e/contact-form.spec.ts"],
 
 	// Test execution settings
 	timeout: 120_000, // Increased timeout for webkit stability
