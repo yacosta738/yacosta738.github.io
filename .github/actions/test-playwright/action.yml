@@ -3,6 +3,10 @@ description: 'Run Playwright E2E tests with intelligent browser caching'
 author: 'yacosta738'
 
 inputs:
+  app:
+    description: 'App to test (portfolio/blog)'
+    required: false
+    default: 'portfolio'
   browser:
     description: 'Browser to test (chromium/firefox/webkit/all)'
     required: false
@@ -22,7 +26,7 @@ outputs:
     value: ${{ steps.run-tests.outputs.status }}
   report-path:
     description: 'Path to test report'
-    value: 'apps/portfolio/playwright-report'
+    value: apps/${{ inputs.app }}/playwright-report
 
 runs:
   using: "composite"
@@ -30,14 +34,14 @@ runs:
     - name: Get Playwright version
       id: playwright-version
       shell: bash
-      working-directory: apps/portfolio
+      working-directory: apps/${{ inputs.app }}
       run: |
         VERSION=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"] // "latest"' package.json)
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "🎭 Playwright version: $VERSION"
     - name: Install dependencies
       shell: bash
-      working-directory: apps/portfolio
+      working-directory: apps/${{ inputs.app }}
       run: pnpm install --frozen-lockfile
     - name: Cache Playwright browsers
       id: playwright-cache
@@ -52,7 +56,7 @@ runs:
     - name: Install Playwright browsers
       if: steps.playwright-cache.outputs.cache-hit != 'true'
       shell: bash
-      working-directory: apps/portfolio
+      working-directory: apps/${{ inputs.app }}
       run: |
         echo "📥 Installing Playwright browsers..."
         
@@ -65,7 +69,7 @@ runs:
     - name: Ensure Playwright browsers (cached)
       if: steps.playwright-cache.outputs.cache-hit == 'true'
       shell: bash
-      working-directory: apps/portfolio
+      working-directory: apps/${{ inputs.app }}
       run: |
         echo "♻️ Using cached browsers, validating browser binaries and dependencies..."
         
@@ -80,7 +84,7 @@ runs:
     - name: Run Playwright tests
       id: run-tests
       shell: bash
-      working-directory: apps/portfolio
+      working-directory: apps/${{ inputs.app }}
       env:
         CI: true
         PW_USE_PREVIEW: '1'
@@ -113,8 +117,8 @@ runs:
       if: always() && inputs.upload-results == 'true'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4
       with:
-        name: playwright-report-${{ inputs.browser }}-${{ github.run_number }}
-        path: apps/portfolio/playwright-report/
+        name: playwright-report-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
+        path: apps/${{ inputs.app }}/playwright-report/
         retention-days: 30
         if-no-files-found: warn
 
@@ -122,8 +126,8 @@ runs:
       if: failure() && inputs.upload-results == 'true'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4
       with:
-        name: playwright-traces-${{ inputs.browser }}-${{ github.run_number }}
-        path: apps/portfolio/test-results/
+        name: playwright-traces-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
+        path: apps/${{ inputs.app }}/test-results/
         retention-days: 30
         if-no-files-found: warn
 
@@ -133,11 +137,12 @@ runs:
       run: |
         echo "## 🎭 E2E Tests Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **App**: ${{ inputs.app }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Browser**: ${{ inputs.browser }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Status**: ${{ steps.run-tests.outputs.status == 'success' && '✅ Passed' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Mode**: ${{ inputs.headed == 'true' && 'Headed' || 'Headless' }}" >> $GITHUB_STEP_SUMMARY
         
         # Try to extract test statistics
-        if [ -f "apps/portfolio/playwright-report/index.html" ]; then
+        if [ -f "apps/${{ inputs.app }}/playwright-report/index.html" ]; then
           echo "- **Report**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
         fi

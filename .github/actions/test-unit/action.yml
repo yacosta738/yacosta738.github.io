@@ -8,7 +8,7 @@ inputs:
     required: false
     default: 'true'
   project:
-    description: 'Specific project to test (portfolio/api/all)'
+    description: 'Specific project to test (portfolio/blog/api/all)'
     required: false
     default: 'all'
   upload-coverage:
@@ -39,13 +39,12 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
+        pnpm install --frozen-lockfile
+
         if [ "${{ inputs.project }}" == "all" ]; then
-          pnpm install --frozen-lockfile
-          cd apps/portfolio && pnpm install --frozen-lockfile
-          cd ../api && pnpm install --frozen-lockfile
+          echo "Installing workspace dependencies for all projects..."
         else
-          cd apps/${{ inputs.project }}
-          pnpm install --frozen-lockfile
+          echo "Installing workspace dependencies for ${{ inputs.project }}..."
         fi
     - name: Run unit tests
       id: run-tests

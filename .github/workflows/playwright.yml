@@ -34,14 +34,22 @@ env:
 
 jobs:
   test:
-    name: E2E Tests - ${{ matrix.project }}
+    name: E2E Tests - ${{ matrix.app }} (${{ matrix.browser }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
     
     strategy:
       fail-fast: false
       matrix:
-        project: [chromium, firefox, webkit]
+        include:
+          - app: portfolio
+            browser: chromium
+          - app: portfolio
+            browser: firefox
+          - app: portfolio
+            browser: webkit
+          - app: blog
+            browser: chromium
     
     steps:
       - name: Checkout code
@@ -55,7 +63,8 @@ jobs:
       - name: Run Playwright E2E tests
         uses: ./.github/actions/test-playwright
         with:
-          browser: ${{ matrix.project }}
+          app: ${{ matrix.app }}
+          browser: ${{ matrix.browser }}
           upload-results: 'true'
   
   report:

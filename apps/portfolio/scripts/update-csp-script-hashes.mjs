@@ -59,7 +59,20 @@ const extractHashesFromHtml = (html) => {
 		const startTagIndex = lowerHtml.indexOf("<script", pos);
 		if (startTagIndex === -1) break;
 
-		const endTagIndex = lowerHtml.indexOf("</script>", startTagIndex);
+		let endTagIndex = lowerHtml.indexOf("</script>", startTagIndex);
+		let endTagLength = 9;
+
+		if (endTagIndex === -1) {
+			const closeTagPattern = /<\s*\/\s*script\b[^>]*>/gi;
+			closeTagPattern.lastIndex = startTagIndex;
+			const fallbackMatch = closeTagPattern.exec(lowerHtml);
+
+			if (fallbackMatch) {
+				endTagIndex = fallbackMatch.index;
+				endTagLength = fallbackMatch[0].length;
+			}
+		}
+
 		if (endTagIndex === -1) {
 			pos = startTagIndex + 7;
 			continue;
@@ -83,7 +96,7 @@ const extractHashesFromHtml = (html) => {
 				hashes.add(hashInlineScript(content));
 			}
 		}
-		pos = endTagIndex + 9;
+		pos = endTagIndex + endTagLength;
 	}
 	return hashes;
 };
@@ -111,10 +124,11 @@ const main = () => {
 
 	if (!existsSync(headersPath)) {
 		console.error(`_headers file not found at ${headersPath}`);
-		return;
+		process.exit(1);
 	}
 
 	const headersContent = readFileSync(headersPath, "utf8");
+	const separator = headersContent.includes("\r\n") ? "\r\n" : "\n";
 	const lines = headersContent.split(/\r?\n/);
 	let cspLineIndex = -1;
 
@@ -127,7 +141,7 @@ const main = () => {
 
 	if (cspLineIndex === -1) {
 		console.error("Could not find Content-Security-Policy line in _headers.");
-		return;
+		process.exit(1);
 	}
 
 	const originalLine = lines[cspLineIndex];
@@ -151,7 +165,7 @@ const main = () => {
 
 	if (scriptSrcIndex === -1) {
 		console.error("Could not find script-src directive in CSP.");
-		return;
+		process.exit(1);
 	}
 
 	const scriptSrcDirective = directives[scriptSrcIndex];
@@ -172,7 +186,7 @@ const main = () => {
 	const nextCspValue = `${directives.join("; ")};`;
 	lines[cspLineIndex] = prefix + nextCspValue;
 
-	writeFileSync(headersPath, lines.join("\n"), "utf8");
+	writeFileSync(headersPath, lines.join(separator), "utf8");
 
 	console.log(
 		`Updated CSP script-src with ${allHashes.size} inline script hash(es) in ${headersPath}`,
