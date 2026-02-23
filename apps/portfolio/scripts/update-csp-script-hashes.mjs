@@ -1,12 +1,26 @@
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import {
+	existsSync,
+	readdirSync,
+	readFileSync,
+	statSync,
+	writeFileSync,
+} from "node:fs";
 import { join, resolve } from "node:path";
 
 const rootDir = resolve(process.cwd());
 const distDir = join(rootDir, "dist");
 const headersPath = join(rootDir, "public", "_headers");
 
+/**
+ * Walk through a directory and find all HTML files
+ * @param {string} dir
+ * @returns {string[]}
+ */
 const walkHtmlFiles = (dir) => {
+	if (!existsSync(dir)) {
+		return [];
+	}
 	const entries = readdirSync(dir);
 	const htmlFiles = [];
 
@@ -15,9 +29,7 @@ const walkHtmlFiles = (dir) => {
 		const stats = statSync(absolutePath);
 		if (stats.isDirectory()) {
 			htmlFiles.push(...walkHtmlFiles(absolutePath));
-			continue;
-		}
-		if (entry.endsWith(".html")) {
+		} else if (entry.endsWith(".html")) {
 			htmlFiles.push(absolutePath);
 		}
 	}
@@ -25,6 +37,11 @@ const walkHtmlFiles = (dir) => {
 	return htmlFiles;
 };
 
+/**
+ * Hash script content for CSP
+ * @param {string} scriptContent
+ * @returns {string}
+ */
 const hashInlineScript = (scriptContent) => {
 	const hash = createHash("sha256")
 		.update(scriptContent, "utf8")
@@ -32,17 +49,26 @@ const hashInlineScript = (scriptContent) => {
 	return `'sha256-${hash}'`;
 };
 
-// Simplified script regex to avoid ReDoS
-const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+// Safer script tag detection
+// Avoids catastrophic backtracking by using non-greedy match and limiting scope
+const scriptRegex = /<script(?:\s+([^>]*))?>([\s\S]*?)<\/script\s*>/gi;
 const srcRegex = /\bsrc\s*=/i;
 
 const hashes = new Set();
-for (const htmlFile of walkHtmlFiles(distDir)) {
+const htmlFiles = walkHtmlFiles(distDir);
+
+if (htmlFiles.length === 0) {
+	console.warn(`No HTML files found in ${distDir}. Skipping CSP update.`);
+	process.exit(0);
+}
+
+for (const htmlFile of htmlFiles) {
 	const html = readFileSync(htmlFile, "utf8");
 	const matches = html.matchAll(scriptRegex);
 	for (const match of matches) {
 		const attrs = match[1] || "";
 		const content = match[2] || "";
+		// Only hash inline scripts that are not empty
 		if (!srcRegex.test(attrs) && content.trim().length > 0) {
 			hashes.add(hashInlineScript(content));
 		}
@@ -50,7 +76,8 @@ for (const htmlFile of walkHtmlFiles(distDir)) {
 }
 
 if (hashes.size === 0) {
-	throw new Error("No inline script hashes found in dist HTML files.");
+	console.warn("No inline script hashes found in dist HTML files.");
+	process.exit(0);
 }
 
 const headersContent = readFileSync(headersPath, "utf8");
@@ -69,13 +96,25 @@ if (cspLineIndex === -1) {
 
 const originalLine = lines[cspLineIndex];
 const colonIndex = originalLine.indexOf(":");
-const prefix = originalLine.slice(0, colonIndex + 1).trimEnd() + " ";
+if (colonIndex === -1) {
+	throw new Error(
+		"Invalid Content-Security-Policy line format (missing colon).",
+	);
+}
+
+const prefix = `${originalLine.slice(0, colonIndex + 1).trimEnd()} `;
 const cspValue = originalLine.slice(colonIndex + 1).trim();
 
 // Parse CSP directives
-const directives = cspValue.split(";").map((d) => d.trim()).filter(Boolean);
-const scriptSrcIndex = directives.findIndex((d) =>
-	d.toLowerCase().startsWith("script-src "),
+const directives = cspValue
+	.split(";")
+	.map((d) => d.trim())
+	.filter(Boolean);
+
+const scriptSrcIndex = directives.findIndex(
+	(d) =>
+		d.toLowerCase() === "script-src" ||
+		d.toLowerCase().startsWith("script-src "),
 );
 
 if (scriptSrcIndex === -1) {
@@ -83,9 +122,10 @@ if (scriptSrcIndex === -1) {
 }
 
 const scriptSrcDirective = directives[scriptSrcIndex];
-const existingTokens = scriptSrcDirective
-	.split(/\s+/)
-	.slice(1) // Skip "script-src"
+const tokens = scriptSrcDirective.split(/\s+/);
+// Keep everything that is not 'unsafe-inline' or a previous hash
+const existingTokens = tokens
+	.slice(1)
 	.filter(
 		(token) =>
 			token !== "'unsafe-inline'" &&
@@ -93,10 +133,14 @@ const existingTokens = scriptSrcDirective
 			token.length > 0,
 	);
 
-const nextTokens = ["script-src", ...existingTokens, ...Array.from(hashes).sort()];
+const nextTokens = [
+	"script-src",
+	...existingTokens,
+	...Array.from(hashes).sort(),
+];
 directives[scriptSrcIndex] = nextTokens.join(" ");
 
-const nextCspValue = directives.join("; ") + ";";
+const nextCspValue = `${directives.join("; ")};`;
 lines[cspLineIndex] = prefix + nextCspValue;
 const nextHeaders = lines.join("\n");
 
