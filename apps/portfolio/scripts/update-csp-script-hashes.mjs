@@ -32,20 +32,19 @@ const hashInlineScript = (scriptContent) => {
 	return `'sha256-${hash}'`;
 };
 
-const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/\s*script[^>]*>/gi;
+const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi;
 const srcRegex = /\bsrc\s*=/i;
 
 const hashes = new Set();
 for (const htmlFile of walkHtmlFiles(distDir)) {
 	const html = readFileSync(htmlFile, "utf8");
-	let match = scriptRegex.exec(html);
-	while (match) {
+	const matches = html.matchAll(scriptRegex);
+	for (const match of matches) {
 		const attrs = match[1] || "";
 		const content = match[2] || "";
 		if (!srcRegex.test(attrs) && content.trim().length > 0) {
 			hashes.add(hashInlineScript(content));
 		}
-		match = scriptRegex.exec(html);
 	}
 }
 
@@ -54,7 +53,7 @@ if (hashes.size === 0) {
 }
 
 const headersContent = readFileSync(headersPath, "utf8");
-const cspLineRegex = /(Content-Security-Policy:\s*)(.*)/;
+const cspLineRegex = /(Content-Security-Policy:\s*)([^\r\n]*)/i;
 const cspLineMatch = headersContent.match(cspLineRegex);
 if (!cspLineMatch) {
 	throw new Error(
@@ -63,7 +62,7 @@ if (!cspLineMatch) {
 }
 
 const cspValue = cspLineMatch[2];
-const scriptSrcRegex = /script-src\s+([^;]+);/;
+const scriptSrcRegex = /script-src\s+([^;]+);/i;
 const scriptSrcMatch = cspValue.match(scriptSrcRegex);
 if (!scriptSrcMatch) {
 	throw new Error("Could not find script-src directive in CSP.");
