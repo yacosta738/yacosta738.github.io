@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../../../apps/portfolio/src";
+@source "../../../../apps/blog/src";
 @import "./fonts.css";
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
