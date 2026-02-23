@@ -62,7 +62,7 @@ if (!cspLineMatch) {
 }
 
 const cspValue = cspLineMatch[2];
-const scriptSrcRegex = /script-src\s+([^;]+);/i;
+const scriptSrcRegex = /script-src\s+([^\s;](?:[^;]*[^\s;])?)\s*(?:;|$)/i;
 const scriptSrcMatch = cspValue.match(scriptSrcRegex);
 if (!scriptSrcMatch) {
 	throw new Error("Could not find script-src directive in CSP.");
