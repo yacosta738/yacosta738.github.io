@@ -1,30 +1,43 @@
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import {
+	existsSync,
+	readdirSync,
+	readFileSync,
+	statSync,
+	writeFileSync,
+} from "node:fs";
 import { join, resolve } from "node:path";
 
 const rootDir = resolve(process.cwd());
 const distDir = join(rootDir, "dist");
 const headersPath = join(rootDir, "public", "_headers");
 
+/**
+ * Walk through a directory and find all HTML files
+ * @param {string} dir
+ * @returns {string[]}
+ */
 const walkHtmlFiles = (dir) => {
-	const entries = readdirSync(dir);
+	if (!existsSync(dir)) return [];
 	const htmlFiles = [];
-
+	const entries = readdirSync(dir);
 	for (const entry of entries) {
-		const absolutePath = join(dir, entry);
-		const stats = statSync(absolutePath);
+		const fullPath = join(dir, entry);
+		const stats = statSync(fullPath);
 		if (stats.isDirectory()) {
-			htmlFiles.push(...walkHtmlFiles(absolutePath));
-			continue;
-		}
-		if (entry.endsWith(".html")) {
-			htmlFiles.push(absolutePath);
+			htmlFiles.push(...walkHtmlFiles(fullPath));
+		} else if (entry.endsWith(".html")) {
+			htmlFiles.push(fullPath);
 		}
 	}
-
 	return htmlFiles;
 };
 
+/**
+ * Hash script content for CSP
+ * @param {string} scriptContent
+ * @returns {string}
+ */
 const hashInlineScript = (scriptContent) => {
 	const hash = createHash("sha256")
 		.update(scriptContent, "utf8")
@@ -32,57 +45,135 @@ const hashInlineScript = (scriptContent) => {
 	return `'sha256-${hash}'`;
 };
 
-const scriptRegex = /<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi;
-const srcRegex = /\bsrc\s*=/i;
+/**
+ * Extract inline script hashes from HTML without using complex regex
+ * @param {string} html
+ * @returns {Set<string>}
+ */
+const extractHashesFromHtml = (html) => {
+	const hashes = new Set();
+	let pos = 0;
+	const lowerHtml = html.toLowerCase();
 
-const hashes = new Set();
-for (const htmlFile of walkHtmlFiles(distDir)) {
-	const html = readFileSync(htmlFile, "utf8");
-	const matches = html.matchAll(scriptRegex);
-	for (const match of matches) {
-		const attrs = match[1] || "";
-		const content = match[2] || "";
-		if (!srcRegex.test(attrs) && content.trim().length > 0) {
-			hashes.add(hashInlineScript(content));
+	while (true) {
+		const startTagIndex = lowerHtml.indexOf("<script", pos);
+		if (startTagIndex === -1) break;
+
+		const endTagIndex = lowerHtml.indexOf("</script>", startTagIndex);
+		if (endTagIndex === -1) break;
+
+		const startTagEndIndex = lowerHtml.indexOf(">", startTagIndex);
+		if (startTagEndIndex === -1 || startTagEndIndex > endTagIndex) {
+			pos = startTagIndex + 7;
+			continue;
+		}
+
+		const attrs = lowerHtml.slice(startTagIndex + 7, startTagEndIndex);
+		// Check for src attribute safely
+		const normalizedAttrs = attrs.replace(/\t|\n|\r/g, " ");
+		const hasSrc =
+			normalizedAttrs.includes(" src=") || normalizedAttrs.startsWith("src=");
+
+		if (!hasSrc) {
+			const content = html.slice(startTagEndIndex + 1, endTagIndex);
+			if (content.trim().length > 0) {
+				hashes.add(hashInlineScript(content));
+			}
+		}
+		pos = endTagIndex + 9;
+	}
+	return hashes;
+};
+
+const main = () => {
+	const htmlFiles = walkHtmlFiles(distDir);
+	if (htmlFiles.length === 0) {
+		console.warn(`No HTML files found in ${distDir}. Skipping CSP update.`);
+		return;
+	}
+
+	const allHashes = new Set();
+	for (const htmlFile of htmlFiles) {
+		const html = readFileSync(htmlFile, "utf8");
+		const fileHashes = extractHashesFromHtml(html);
+		for (const h of fileHashes) {
+			allHashes.add(h);
 		}
 	}
-}
 
-if (hashes.size === 0) {
-	throw new Error("No inline script hashes found in dist HTML files.");
-}
+	if (allHashes.size === 0) {
+		console.warn("No inline script hashes found in dist HTML files.");
+		return;
+	}
 
-const headersContent = readFileSync(headersPath, "utf8");
-const cspLineRegex = /(Content-Security-Policy:\s*)([^\r\n]*)/i;
-const cspLineMatch = headersContent.match(cspLineRegex);
-if (!cspLineMatch) {
-	throw new Error(
-		"Could not find Content-Security-Policy line in public/_headers.",
+	if (!existsSync(headersPath)) {
+		console.error(`_headers file not found at ${headersPath}`);
+		return;
+	}
+
+	const headersContent = readFileSync(headersPath, "utf8");
+	const lines = headersContent.split(/\r?\n/);
+	let cspLineIndex = -1;
+
+	for (let i = 0; i < lines.length; i++) {
+		if (lines[i].trim().toLowerCase().startsWith("content-security-policy:")) {
+			cspLineIndex = i;
+			break;
+		}
+	}
+
+	if (cspLineIndex === -1) {
+		console.error("Could not find Content-Security-Policy line in _headers.");
+		return;
+	}
+
+	const originalLine = lines[cspLineIndex];
+	const colonIndex = originalLine.indexOf(":");
+	const prefix = `${originalLine.slice(0, colonIndex + 1).trimEnd()} `;
+	const cspValue = originalLine.slice(colonIndex + 1).trim();
+
+	const directives = cspValue
+		.split(";")
+		.map((d) => d.trim())
+		.filter((d) => d.length > 0);
+
+	let scriptSrcIndex = -1;
+	for (let i = 0; i < directives.length; i++) {
+		const dLower = directives[i].toLowerCase();
+		if (dLower === "script-src" || dLower.startsWith("script-src ")) {
+			scriptSrcIndex = i;
+			break;
+		}
+	}
+
+	if (scriptSrcIndex === -1) {
+		console.error("Could not find script-src directive in CSP.");
+		return;
+	}
+
+	const scriptSrcDirective = directives[scriptSrcIndex];
+	const tokens = scriptSrcDirective
+		.replace(/\t|\n|\r/g, " ")
+		.split(" ")
+		.filter((t) => t.length > 0);
+
+	const filteredTokens = tokens.slice(1).filter((token) => {
+		const tLower = token.toLowerCase();
+		return tLower !== "'unsafe-inline'" && !tLower.startsWith("'sha256-");
+	});
+
+	const sortedHashes = Array.from(allHashes).sort();
+	const nextTokens = ["script-src", ...filteredTokens, ...sortedHashes];
+	directives[scriptSrcIndex] = nextTokens.join(" ");
+
+	const nextCspValue = `${directives.join("; ")};`;
+	lines[cspLineIndex] = prefix + nextCspValue;
+
+	writeFileSync(headersPath, lines.join("\n"), "utf8");
+
+	console.log(
+		`Updated CSP script-src with ${allHashes.size} inline script hash(es) in ${headersPath}`,
 	);
-}
+};
 
-const cspValue = cspLineMatch[2];
-const scriptSrcRegex = /script-src\s+([^;]+);/i;
-const scriptSrcMatch = cspValue.match(scriptSrcRegex);
-if (!scriptSrcMatch) {
-	throw new Error("Could not find script-src directive in CSP.");
-}
-
-const existingTokens = scriptSrcMatch[1]
-	.split(/\s+/)
-	.map((token) => token.trim())
-	.filter(Boolean)
-	.filter(
-		(token) => token !== "'unsafe-inline'" && !token.startsWith("'sha256-"),
-	);
-
-const nextTokens = [...existingTokens, ...Array.from(hashes).sort()];
-const nextScriptSrc = `script-src ${nextTokens.join(" ")};`;
-const nextCspValue = cspValue.replace(scriptSrcRegex, nextScriptSrc);
-const nextHeaders = headersContent.replace(cspLineRegex, `$1${nextCspValue}`);
-
-writeFileSync(headersPath, nextHeaders, "utf8");
-
-console.log(
-	`Updated CSP script-src with ${hashes.size} inline script hash(es) in ${headersPath}`,
-);
+main();
