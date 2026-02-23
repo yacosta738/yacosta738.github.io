@@ -49,6 +49,7 @@
 		"unpic": "^4.2.2"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "4.11.1",
 		"@biomejs/biome": "2.4.4",
 		"@faker-js/faker": "^10.3.0",
 		"@iconify-json/lucide": "^1.2.92",

@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, test } from "@playwright/test";
 
 /**
@@ -197,5 +198,22 @@ test.describe("Comments Accessibility - Focus Management", () => {
 		// Note: This might not always be visible due to :focus-visible,
 		// but the mechanism should be in place
 		expect(typeof hasFocusIndicator).toBe("boolean");
+	});
+});
+
+test.describe("Automated Accessibility Scans", () => {
+	test("T018i: Verify no automatically detectable accessibility issues", async ({
+		page,
+	}) => {
+		await navigateToBlogPost(page);
+		await scrollToComments(page);
+		await waitForGiscusLoad(page);
+
+		const accessibilityScanResults = await new AxeBuilder({ page })
+			// Exclude the giscus iframe from being fully analyzed if it throws false positives
+			.exclude("iframe.giscus-frame")
+			.analyze();
+
+		expect(accessibilityScanResults.violations).toEqual([]);
 	});
 });
