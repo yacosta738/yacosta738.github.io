@@ -60,7 +60,10 @@ const extractHashesFromHtml = (html) => {
 		if (startTagIndex === -1) break;
 
 		const endTagIndex = lowerHtml.indexOf("</script>", startTagIndex);
-		if (endTagIndex === -1) break;
+		if (endTagIndex === -1) {
+			pos = startTagIndex + 7;
+			continue;
+		}
 
 		const startTagEndIndex = lowerHtml.indexOf(">", startTagIndex);
 		if (startTagEndIndex === -1 || startTagEndIndex > endTagIndex) {
