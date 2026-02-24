@@ -239,27 +239,15 @@ jobs:
             -Dsonar.qualitygate.wait=true
             -Dsonar.qualitygate.timeout=300
 
-      - name: SonarCloud Scan (Push/Non-main)
-        if: steps.coverage-check.outputs.coverage_found == 'true' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref != 'refs/heads/main'))
-        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=yacosta738_yacosta738.github.io
-            -Dsonar.organization=yacosta738
-            -Dsonar.sources=apps,packages
-            -Dsonar.tests=apps
-            -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
-            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
-            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
-
       - name: SonarCloud skipped (no coverage artifacts)
         if: steps.coverage-check.outputs.coverage_found != 'true'
         run: |
           echo "⚠️ SonarCloud scan skipped because no LCOV artifacts were found."
+
+      - name: SonarCloud skipped (non-main push)
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref != 'refs/heads/main'
+        run: |
+          echo "ℹ️ SonarCloud scan skipped on non-main pushes to avoid branch-analysis conflicts with Automatic Analysis."
 
   # Job 6: Final Report
   report:
