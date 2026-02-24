@@ -1,5 +1,30 @@
 import type Article from "@/core/article/article.model";
 
+const UINT32_MODULUS = 0x1_0000_0000;
+
+const secureRandomInt = (maxExclusive: number): number => {
+	if (!Number.isInteger(maxExclusive) || maxExclusive <= 0) {
+		return 0;
+	}
+
+	if (!globalThis.crypto?.getRandomValues) {
+		throw new Error(
+			"Secure random generator is not available in this runtime.",
+		);
+	}
+
+	const limit = UINT32_MODULUS - (UINT32_MODULUS % maxExclusive);
+	const randomBuffer = new Uint32Array(1);
+
+	while (true) {
+		globalThis.crypto.getRandomValues(randomBuffer);
+		const candidate = randomBuffer[0];
+		if (candidate < limit) {
+			return candidate % maxExclusive;
+		}
+	}
+};
+
 // Strategy interface
 /**
  * Interface defining a strategy for selecting a subset of articles from a collection.
@@ -45,30 +70,17 @@ export class RandomSelectionStrategy implements ArticleSelectionStrategy {
 	/**
 	 * Create a new RandomSelectionStrategy.
 	 * @param rng Optional RNG function that accepts a positive integer n and returns
-	 * an integer in the range [0, n). By default this uses Math.random().
+	 * an integer in the range [0, n). By default this uses Web Crypto.
 	 *
-	 * Notes on safety: Math.random() is a non-cryptographic PRNG and is acceptable
-	 * for UI-level randomness such as shuffling articles for display. It should
-	 * NOT be used where cryptographic unpredictability is required (for example,
-	 * for session tokens, authentication, or security-sensitive randomness).
-	 *
-	 * If you need a cryptographically secure RNG, pass one in. In Node you can
-	 * use `randomInt` from the built-in `crypto` module, for example:
-	 *
-	 *   import { randomInt } from 'crypto';
-	 *   const strategy = new RandomSelectionStrategy((n) => randomInt(0, n));
-	 *
-	 * Tests can also inject a deterministic RNG for reproducibility.
+	 * Tests can inject a deterministic RNG for reproducibility.
 	 */
 	constructor(private rng?: (n: number) => number) {}
 
 	/**
-	 * Uses Math.random() for UI-level shuffling only.
-	 * NOT used for security, tokens, or authentication.
-	 * Safe for article display randomization.
+	 * Uses Web Crypto by default to avoid weak PRNGs.
 	 */
 	select(articles: Article[], count: number): Article[] {
-		const rng = this.rng ?? ((n: number) => Math.floor(Math.random() * n));
+		const rng = this.rng ?? secureRandomInt;
 		const shuffled = [...articles];
 		// Fisher-Yates shuffle algorithm using the provided RNG to pick indices
 		for (let i = shuffled.length - 1; i > 0; i--) {
