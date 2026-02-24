@@ -90,6 +90,8 @@ export const parseAspectRatio = (
 			const den = Number(right);
 			if (!Number.isNaN(num) && !Number.isNaN(den) && den !== 0)
 				return num / den;
+
+			return undefined;
 		}
 
 		const numericValue = Number.parseFloat(s);
