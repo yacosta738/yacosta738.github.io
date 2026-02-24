@@ -64,6 +64,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     timeout-minutes: 10
+    outputs:
+      url: ${{ steps.deploy.outputs.url }}
     environment:
       name: ${{ inputs.environment || 'production' }}
       url: ${{ steps.deploy.outputs.url }}
@@ -91,12 +93,14 @@ jobs:
 
       - name: Deployment summary
         run: |
-          echo "## 🚀 Deployment Complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Environment**: ${{ inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL**: ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          ## 🚀 Deployment Complete
+
+          - **Environment**: ${{ inputs.environment || 'production' }}
+          - **URL**: ${{ steps.deploy.outputs.url }}
+          - **Commit**: `${{ github.sha }}`
+          - **Branch**: `${{ github.ref_name }}`
+          EOF
 
   post-deploy:
     name: 📊 Post-Deployment

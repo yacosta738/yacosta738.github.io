@@ -117,10 +117,12 @@ jobs:
 
       - name: Cleanup summary
         run: |
-          echo "## 🧹 Cache Cleanup Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Cache cleanup completed successfully!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Type**: ${{ inputs.cache-type || 'all' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Retention**: 7 days" >> $GITHUB_STEP_SUMMARY
-          echo "- **Next scheduled run**: Every Sunday at 00:00 UTC" >> $GITHUB_STEP_SUMMARY
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          ## 🧹 Cache Cleanup Summary
+
+          Cache cleanup completed successfully!
+
+          - **Type**: ${{ inputs.cache-type || 'all' }}
+          - **Retention**: 7 days
+          - **Next scheduled run**: Every Sunday at 00:00 UTC
+          EOF

@@ -52,18 +52,31 @@ runs:
       run: |
         echo "🧪 Running unit tests..."
 
-        if [ "${{ inputs.project }}" == "all" ]; then
+        PROJECT="${{ inputs.project }}"
+        COVERAGE="${{ inputs.coverage }}"
+
+        if [ "$PROJECT" != "all" ]; then
+          case "$PROJECT" in
+            portfolio|blog|api) ;;
+            *)
+              echo "❌ Invalid project '$PROJECT'. Allowed values: all, portfolio, blog, api"
+              exit 1
+              ;;
+          esac
+        fi
+
+        if [ "$PROJECT" == "all" ]; then
           echo "Testing all projects..."
-          if [ "${{ inputs.coverage }}" == "true" ]; then
+          if [ "$COVERAGE" == "true" ]; then
             pnpm --filter=portfolio --filter=blog --filter=yap-api --parallel test:unit:coverage
           else
             pnpm test:unit
           fi
           rc=$?
         else
-          echo "Testing ${{ inputs.project }}..."
-          cd apps/${{ inputs.project }}
-          if [ "${{ inputs.coverage }}" == "true" ]; then
+          echo "Testing $PROJECT..."
+          cd "apps/$PROJECT"
+          if [ "$COVERAGE" == "true" ]; then
             pnpm test:unit:coverage
           else
             pnpm test:unit

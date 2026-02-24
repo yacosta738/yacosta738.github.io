@@ -82,12 +82,14 @@ jobs:
 
       - name: Deployment summary
         run: |
-          echo "## 🚀 API Deployment Complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Environment**: ${{ inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL**: https://api.yacosta.dev" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          ## 🚀 API Deployment Complete
+
+          - **Environment**: ${{ inputs.environment || 'production' }}
+          - **URL**: https://api.yacosta.dev
+          - **Commit**: `${{ github.sha }}`
+          - **Branch**: `${{ github.ref_name }}`
+          EOF
 
   health-check:
     name: 🏥 Health Check
