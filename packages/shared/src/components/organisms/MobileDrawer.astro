@@ -2,10 +2,12 @@
 import ResumeButton from "@/components/atoms/ResumeButton.astro";
 import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
 import { navMenus } from "@/core/menu";
+import { resolveNavigationMenuHref } from "@/core/menu/menu.service";
 import { useTranslatedPath, useTranslations } from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
 import SearchButton from "../atoms/SearchButton.astro";
+import { DOMAIN } from "astro:env/client";
 
 interface Props {
 	id?: string;
@@ -74,7 +76,7 @@ const translatePath = useTranslatedPath(currentLocale);
 				navMenus.map((menu) => (
 					<li>
 						<a
-							href={translatePath(menu.link)}
+							href={resolveNavigationMenuHref(menu, translatePath, DOMAIN)}
 							class="flex items-center px-3 py-2 rounded-md text-foreground transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent hover:bg-brand-accent/10 hover:text-brand-accent dark:hover:bg-brand-accent/20 dark:hover:text-brand-accent"
 							data-drawer-close
 							tabindex="0"
