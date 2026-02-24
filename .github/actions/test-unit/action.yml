@@ -54,12 +54,20 @@ runs:
 
         if [ "${{ inputs.project }}" == "all" ]; then
           echo "Testing all projects..."
-          pnpm test:unit
+          if [ "${{ inputs.coverage }}" == "true" ]; then
+            pnpm --filter=portfolio --filter=blog --filter=yap-api --parallel test:unit:coverage
+          else
+            pnpm test:unit
+          fi
           rc=$?
         else
           echo "Testing ${{ inputs.project }}..."
           cd apps/${{ inputs.project }}
-          pnpm test:unit
+          if [ "${{ inputs.coverage }}" == "true" ]; then
+            pnpm test:unit:coverage
+          else
+            pnpm test:unit
+          fi
           rc=$?
         fi
 

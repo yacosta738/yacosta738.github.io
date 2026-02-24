@@ -181,7 +181,21 @@ jobs:
           pattern: coverage-*
           path: coverage/
           merge-multiple: true
-        continue-on-error: true
+
+      - name: Validate LCOV reports exist
+        run: |
+          ls -R coverage || true
+          if [ -z "$(find coverage -name 'lcov.info' -print -quit)" ]; then
+            echo "❌ No LCOV reports were found under coverage/."
+            exit 1
+          fi
+
+      - name: Validate Sonar token
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "❌ SONAR_TOKEN is not configured in repository secrets."
+            exit 1
+          fi
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
@@ -192,12 +206,14 @@ jobs:
           args: >
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
-            -Dsonar.sources=apps/
-            -Dsonar.tests=apps/
+            -Dsonar.sources=apps,packages
+            -Dsonar.tests=apps
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
-        continue-on-error: true
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.qualitygate.timeout=300
 
   # Job 6: Final Report
   report:

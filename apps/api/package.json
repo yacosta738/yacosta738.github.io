@@ -12,7 +12,8 @@
 		"cf-typegen": "wrangler types",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"test:unit": "vitest run"
+		"test:unit": "vitest run",
+		"test:unit:coverage": "vitest run --coverage"
 	},
 	"dependencies": {
 		"@hono/swagger-ui": "0.5.3",
