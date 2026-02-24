@@ -49,11 +49,14 @@ runs:
     - name: Run unit tests
       id: run-tests
       shell: bash
+      env:
+        PROJECT_INPUT: ${{ inputs.project }}
+        COVERAGE_INPUT: ${{ inputs.coverage }}
       run: |
         echo "🧪 Running unit tests..."
 
-        PROJECT="${{ inputs.project }}"
-        COVERAGE="${{ inputs.coverage }}"
+        PROJECT="$PROJECT_INPUT"
+        COVERAGE="$COVERAGE_INPUT"
 
         if [ "$PROJECT" != "all" ]; then
           case "$PROJECT" in
