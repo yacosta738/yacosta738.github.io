@@ -54,22 +54,38 @@ if (hashes.size === 0) {
 }
 
 const headersContent = readFileSync(headersPath, "utf8");
-const cspLineRegex = /(Content-Security-Policy:\s*)(.*)/;
-const cspLineMatch = headersContent.match(cspLineRegex);
-if (!cspLineMatch) {
+const headersLines = headersContent.split(/\r?\n/);
+const cspLinePrefix = "Content-Security-Policy:";
+const cspLineIndex = headersLines.findIndex((line) =>
+	line.trimStart().startsWith(cspLinePrefix),
+);
+
+if (cspLineIndex === -1) {
 	throw new Error(
 		"Could not find Content-Security-Policy line in public/_headers.",
 	);
 }
 
-const cspValue = cspLineMatch[2];
-const scriptSrcRegex = /script-src\s+([^;]+);/;
-const scriptSrcMatch = cspValue.match(scriptSrcRegex);
-if (!scriptSrcMatch) {
+const cspLine = headersLines[cspLineIndex];
+const cspPrefixIndex = cspLine.indexOf(cspLinePrefix);
+const cspValue = cspLine.slice(cspPrefixIndex + cspLinePrefix.length).trim();
+
+const directives = cspValue
+	.split(";")
+	.map((directive) => directive.trim())
+	.filter(Boolean);
+
+const scriptSrcIndex = directives.findIndex((directive) =>
+	directive.startsWith("script-src "),
+);
+
+if (scriptSrcIndex === -1) {
 	throw new Error("Could not find script-src directive in CSP.");
 }
 
-const existingTokens = scriptSrcMatch[1]
+const scriptSrcValue = directives[scriptSrcIndex].slice("script-src ".length);
+
+const existingTokens = scriptSrcValue
 	.split(/\s+/)
 	.map((token) => token.trim())
 	.filter(Boolean)
@@ -78,9 +94,12 @@ const existingTokens = scriptSrcMatch[1]
 	);
 
 const nextTokens = [...existingTokens, ...Array.from(hashes).sort()];
-const nextScriptSrc = `script-src ${nextTokens.join(" ")};`;
-const nextCspValue = cspValue.replace(scriptSrcRegex, nextScriptSrc);
-const nextHeaders = headersContent.replace(cspLineRegex, `$1${nextCspValue}`);
+directives[scriptSrcIndex] = `script-src ${nextTokens.join(" ")}`;
+
+const nextCspValue = `${directives.join("; ")};`;
+headersLines[cspLineIndex] =
+	`${cspLine.slice(0, cspPrefixIndex + cspLinePrefix.length)} ${nextCspValue}`;
+const nextHeaders = headersLines.join("\n");
 
 writeFileSync(headersPath, nextHeaders, "utf8");
 
