@@ -221,7 +221,9 @@ jobs:
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
 
       - name: SonarCloud Scan (Push/Main)
+        id: sonar-main-scan
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        continue-on-error: true
         uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -236,6 +238,11 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
             -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+
+      - name: SonarCloud main scan warning
+        if: steps.sonar-main-scan.outcome == 'failure'
+        run: |
+          echo "::warning::SonarCloud main scan failed. Automatic Analysis is enabled in SonarCloud, which conflicts with CI analysis. Disable Automatic Analysis in SonarCloud project settings to re-enable strict CI gating."
 
       - name: SonarCloud skipped (no coverage artifacts)
         if: steps.coverage-check.outputs.coverage_found != 'true'

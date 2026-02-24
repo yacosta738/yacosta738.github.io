@@ -89,6 +89,9 @@ jobs:
             echo "- NPM_TOKEN is set"
           fi
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
