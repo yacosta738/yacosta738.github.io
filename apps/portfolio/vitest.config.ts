@@ -21,7 +21,7 @@ export default getViteConfig({
 		include: ["tests/unit/**/*.test.ts"],
 		coverage: {
 			enabled: true,
-			reporter: ["text", "json", "html"],
+			reporter: ["text", "json", "html", "lcov"],
 			include: ["src/**/*.ts", "src/**/*.astro"],
 			exclude: [
 				"src/env.d.ts",

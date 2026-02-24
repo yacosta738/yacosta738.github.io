@@ -181,9 +181,30 @@ jobs:
           pattern: coverage-*
           path: coverage/
           merge-multiple: true
-        continue-on-error: true
 
-      - name: SonarCloud Scan
+      - name: Validate LCOV reports exist
+        id: coverage-check
+        run: |
+          ls -R coverage || true
+          if [ -n "$(find coverage -name 'lcov.info' -print -quit)" ]; then
+            echo "coverage_found=true" >> "$GITHUB_OUTPUT"
+            echo "✅ LCOV reports detected."
+          else
+            echo "coverage_found=false" >> "$GITHUB_OUTPUT"
+            echo "⚠️ No LCOV reports were found under coverage/. SonarCloud scan will be skipped."
+          fi
+
+      - name: Validate Sonar token
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -z "${SONAR_TOKEN}" ]; then
+            echo "❌ SONAR_TOKEN is not configured in repository secrets."
+            exit 1
+          fi
+
+      - name: SonarCloud Scan (PR)
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request'
         uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -192,12 +213,41 @@ jobs:
           args: >
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
-            -Dsonar.sources=apps/
-            -Dsonar.tests=apps/
+            -Dsonar.sources=apps,packages
+            -Dsonar.tests=apps
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
-        continue-on-error: true
+
+      - name: SonarCloud Scan (Push/Main with Quality Gate)
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=yacosta738_yacosta738.github.io
+            -Dsonar.organization=yacosta738
+            -Dsonar.sources=apps,packages
+            -Dsonar.tests=apps
+            -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
+            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
+            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.qualitygate.timeout=300
+
+      - name: SonarCloud skipped (no coverage artifacts)
+        if: steps.coverage-check.outputs.coverage_found != 'true'
+        run: |
+          echo "⚠️ SonarCloud scan skipped because no LCOV artifacts were found."
+
+      - name: SonarCloud skipped (non-main push)
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref != 'refs/heads/main'
+        run: |
+          echo "ℹ️ SonarCloud scan skipped on non-main pushes to avoid branch-analysis conflicts with Automatic Analysis."
 
   # Job 6: Final Report
   report:
@@ -216,19 +266,21 @@ jobs:
 
       - name: Generate pipeline summary
         run: |
-          echo "# 🎉 CI Pipeline Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## Job Status" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
-          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔍 Lint | ${{ needs.lint.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🧪 Unit Tests | ${{ needs.unit-tests.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🏗️ Build | ${{ needs.build.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🎭 E2E Tests | ${{ needs.e2e-tests.result == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 📊 Code Quality | ${{ needs.code-quality.result == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Overall Status**: ${{ (needs.lint.result == 'success' && needs.unit-tests.result == 'success' && needs.build.result == 'success' && needs.e2e-tests.result == 'success') && '✅ All checks passed!' || '❌ Some checks failed' }}" >> $GITHUB_STEP_SUMMARY
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          # 🎉 CI Pipeline Summary
+
+          ## Job Status
+
+          | Job | Status |
+          |-----|--------|
+          | 🔍 Lint | ${{ needs.lint.result == 'success' && '✅' || '❌' }} |
+          | 🧪 Unit Tests | ${{ needs.unit-tests.result == 'success' && '✅' || '❌' }} |
+          | 🏗️ Build | ${{ needs.build.result == 'success' && '✅' || '❌' }} |
+          | 🎭 E2E Tests | ${{ needs.e2e-tests.result == 'success' && '✅' || '❌' }} |
+          | 📊 Code Quality | ${{ needs.code-quality.result == 'success' && '✅' || '⚠️' }} |
+
+          **Overall Status**: ${{ (needs.lint.result == 'success' && needs.unit-tests.result == 'success' && needs.build.result == 'success' && needs.e2e-tests.result == 'success') && '✅ All checks passed!' || '❌ Some checks failed' }}
+          EOF
 
       - name: Comment PR
         if: github.event_name == 'pull_request'

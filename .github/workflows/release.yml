@@ -101,11 +101,13 @@ jobs:
       - name: Release summary
         if: success()
         run: |
-          echo "## 🎉 Release Complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ New version released successfully!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Check the [Releases page](https://github.com/${{ github.repository }}/releases) for details." >> $GITHUB_STEP_SUMMARY
+          cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          ## 🎉 Release Complete
+
+          ✅ New version released successfully!
+
+          Check the [Releases page](https://github.com/${{ github.repository }}/releases) for details.
+          EOF
 
   post-release:
     name: 📢 Post-Release
