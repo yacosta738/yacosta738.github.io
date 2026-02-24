@@ -290,11 +290,7 @@ test.describe("Comments Performance - LCP Impact", () => {
 						element?: HTMLElement;
 					};
 					const element = lastEntry.element;
-					resolve(
-						element?.getAttribute("data-testid") ||
-							element?.tagName ||
-							"unknown",
-					);
+					resolve(element?.dataset.testid || element?.tagName || "unknown");
 				}).observe({ type: "largest-contentful-paint", buffered: true });
 
 				setTimeout(() => resolve("timeout"), 5000);
