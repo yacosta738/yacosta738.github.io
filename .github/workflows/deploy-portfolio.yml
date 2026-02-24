@@ -22,11 +22,6 @@ concurrency:
   group: deploy-portfolio-${{ github.ref }}
   cancel-in-progress: false
 
-permissions:
-  contents: read
-  deployments: write
-  pull-requests: write
-
 env:
   NODE_VERSION: '22'
 
@@ -35,6 +30,8 @@ jobs:
     name: 🏗️ Build Portfolio
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
     environment:
       name: ${{ inputs.environment || 'production' }}
     steps:
@@ -64,6 +61,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     timeout-minutes: 10
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
     outputs:
       url: ${{ steps.deploy.outputs.url }}
     environment:

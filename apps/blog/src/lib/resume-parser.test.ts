@@ -26,7 +26,7 @@ describe("getResumeData", () => {
 
 		expect(path.resolve).toHaveBeenCalledWith(
 			process.cwd(),
-			"src/data/resume/es/resume.json",
+			"../../packages/shared/src/data/resume/es/resume.json",
 		);
 		expect(fs.readFileSync).toHaveBeenCalledWith(mockFilePath, "utf-8");
 		expect(result).toEqual(mockResumeData);

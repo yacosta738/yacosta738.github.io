@@ -1,11 +1,5 @@
 name: Playwright E2E Tests
 
-# Explicit least-privilege permissions for E2E testing
-permissions:
-  contents: read
-  actions: read
-  pull-requests: read
-
 on:
   push:
     branches: [main, develop, feature/*]
@@ -37,6 +31,8 @@ jobs:
     name: E2E Tests - ${{ matrix.app }} (${{ matrix.browser }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    permissions:
+      contents: read
     
     strategy:
       fail-fast: false

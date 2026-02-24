@@ -1,4 +1,0 @@
----
-title: diseño de sistemas
----
-

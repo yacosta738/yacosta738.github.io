@@ -45,6 +45,28 @@ const hashInlineScript = (scriptContent) => {
 	return `'sha256-${hash}'`;
 };
 
+const getScriptEnd = (lowerHtml, startTagIndex) => {
+	const plainEndTagIndex = lowerHtml.indexOf("</script>", startTagIndex);
+	if (plainEndTagIndex !== -1) {
+		return {
+			endTagIndex: plainEndTagIndex,
+			endTagLength: 9,
+		};
+	}
+
+	const closeTagPattern = /<\s*\/\s*script\b[^>]*>/gi;
+	closeTagPattern.lastIndex = startTagIndex;
+	const fallbackMatch = closeTagPattern.exec(lowerHtml);
+	if (!fallbackMatch) {
+		return null;
+	}
+
+	return {
+		endTagIndex: fallbackMatch.index,
+		endTagLength: fallbackMatch[0].length,
+	};
+};
+
 /**
  * Extract inline script hashes from HTML without using complex regex
  * @param {string} html
@@ -59,24 +81,13 @@ const extractHashesFromHtml = (html) => {
 		const startTagIndex = lowerHtml.indexOf("<script", pos);
 		if (startTagIndex === -1) break;
 
-		let endTagIndex = lowerHtml.indexOf("</script>", startTagIndex);
-		let endTagLength = 9;
-
-		if (endTagIndex === -1) {
-			const closeTagPattern = /<\s*\/\s*script\b[^>]*>/gi;
-			closeTagPattern.lastIndex = startTagIndex;
-			const fallbackMatch = closeTagPattern.exec(lowerHtml);
-
-			if (fallbackMatch) {
-				endTagIndex = fallbackMatch.index;
-				endTagLength = fallbackMatch[0].length;
-			}
-		}
-
-		if (endTagIndex === -1) {
+		const scriptEnd = getScriptEnd(lowerHtml, startTagIndex);
+		if (!scriptEnd) {
 			pos = startTagIndex + 7;
 			continue;
 		}
+
+		const { endTagIndex, endTagLength } = scriptEnd;
 
 		const startTagEndIndex = lowerHtml.indexOf(">", startTagIndex);
 		if (startTagEndIndex === -1 || startTagEndIndex > endTagIndex) {
