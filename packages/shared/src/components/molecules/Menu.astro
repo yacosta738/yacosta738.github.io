@@ -1,4 +1,5 @@
 ---
+import { DOMAIN } from "astro:env/client";
 import type { HTMLAttributes } from "astro/types";
 import { Icon } from "astro-icon/components";
 import ResumeButton from "@/components/atoms/ResumeButton.astro";
@@ -8,7 +9,6 @@ import { resolveNavigationMenuHref } from "@/core/menu/menu.service";
 import { useTranslatedPath, useTranslations } from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
-import { DOMAIN } from "astro:env/client";
 
 interface Props extends HTMLAttributes<"nav"> {
 	drawer?: boolean;
