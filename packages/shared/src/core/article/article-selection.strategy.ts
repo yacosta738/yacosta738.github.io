@@ -74,7 +74,7 @@ export class RandomSelectionStrategy implements ArticleSelectionStrategy {
 	 *
 	 * Tests can inject a deterministic RNG for reproducibility.
 	 */
-	constructor(private rng?: (n: number) => number) {}
+	constructor(private readonly rng?: (n: number) => number) {}
 
 	/**
 	 * Uses Web Crypto by default to avoid weak PRNGs.

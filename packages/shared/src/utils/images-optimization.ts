@@ -11,7 +11,7 @@ type Layout =
 	| "responsive"
 	| "contained";
 
-export interface ImageProps extends Omit<HTMLAttributes<"img">, "src"> {
+export type ImageProps = Omit<HTMLAttributes<"img">, "src"> & {
 	src?: string | ImageMetadata | null;
 	width?: string | number | null;
 	height?: string | number | null;
@@ -22,14 +22,12 @@ export interface ImageProps extends Omit<HTMLAttributes<"img">, "src"> {
 	srcset?: string | null;
 	sizes?: string | null;
 	fetchpriority?: "high" | "low" | "auto" | null;
-
 	layout?: Layout;
 	widths?: number[] | null;
 	aspectRatio?: string | number | null;
 	objectPosition?: string;
-
 	format?: string;
-}
+};
 
 export type ImagesOptimizer = (
 	image: ImageMetadata | string,
@@ -39,9 +37,12 @@ export type ImagesOptimizer = (
 	format?: string,
 ) => Promise<Array<{ src: string; width: number }>>;
 
+type AspectRatioInput = number | string | null | undefined;
+type OptionalStyleValue = string | undefined;
+
 /* ******* */
 const config = {
-	// FIXME: Use this when image.width is minor than deviceSizes
+	// Reserved for future responsive tuning when source image is very small.
 	imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 
 	deviceSizes: [
@@ -70,26 +71,18 @@ const computeHeight = (width: number, aspectRatio: number) => {
 };
 
 export const parseAspectRatio = (
-	aspectRatio: number | string | null | undefined,
+	aspectRatio: AspectRatioInput,
 ): number | undefined => {
 	if (typeof aspectRatio === "number") return aspectRatio;
 
 	if (typeof aspectRatio === "string") {
-		// Manual, linear-time parsing to avoid any potential ReDoS from complex regexes.
-		// Accept formats like "16:9", "4/3" (with optional whitespace), or a plain number like "1.777".
 		const s = aspectRatio.trim();
 		if (s.length === 0) return undefined;
 
-		// Find first occurrence of ':' or '/'
-		const colon = s.indexOf(":");
-		const slash = s.indexOf("/");
-		let sepIndex = -1;
-		if (colon !== -1 && slash !== -1) {
-			sepIndex = Math.min(colon, slash);
-		} else {
-			sepIndex = colon !== -1 ? colon : slash;
-		}
-
+		const separators = [s.indexOf(":"), s.indexOf("/")].filter(
+			(index) => index >= 0,
+		);
+		const sepIndex = separators.length > 0 ? Math.min(...separators) : -1;
 		if (sepIndex !== -1) {
 			const left = s.slice(0, sepIndex).trim();
 			const right = s.slice(sepIndex + 1).trim();
@@ -97,11 +90,12 @@ export const parseAspectRatio = (
 			const den = Number(right);
 			if (!Number.isNaN(num) && !Number.isNaN(den) && den !== 0)
 				return num / den;
-		} else {
-			// Fallback: try parsing as a plain number (may contain decimals)
-			const numericValue = Number.parseFloat(s);
-			if (!Number.isNaN(numericValue)) return numericValue;
+
+			return undefined;
 		}
+
+		const numericValue = Number.parseFloat(s);
+		if (!Number.isNaN(numericValue)) return numericValue;
 	}
 
 	return undefined;
@@ -156,7 +150,8 @@ const getStyle = ({
 	layout?: string;
 	background?: string;
 }) => {
-	const styleEntries: Array<[prop: string, value: string | undefined]> = [
+	const aspectRatioValue = aspectRatio ? `${aspectRatio}` : undefined;
+	const styleEntries: Array<[prop: string, value: OptionalStyleValue]> = [
 		["object-fit", objectFit],
 		["object-position", objectPosition],
 	];
@@ -167,54 +162,53 @@ const getStyle = ({
 		background?.startsWith("http:") ||
 		background?.startsWith("data:")
 	) {
-		styleEntries.push(["background-image", `url(${background})`]);
-		styleEntries.push(["background-size", "cover"]);
-		styleEntries.push(["background-repeat", "no-repeat"]);
+		styleEntries.push(
+			["background-image", `url(${background})`],
+			["background-size", "cover"],
+			["background-repeat", "no-repeat"],
+		);
 	} else {
 		styleEntries.push(["background", background]);
 	}
 	if (layout === "fixed") {
-		styleEntries.push(["width", pixelate(width)]);
-		styleEntries.push(["height", pixelate(height)]);
-		styleEntries.push(["object-position", "top left"]);
+		styleEntries.push(
+			["width", pixelate(width)],
+			["height", pixelate(height)],
+			["object-position", "top left"],
+		);
 	}
 	if (layout === "constrained") {
-		styleEntries.push(["max-width", pixelate(width)]);
-		styleEntries.push(["max-height", pixelate(height)]);
-		styleEntries.push([
-			"aspect-ratio",
-			aspectRatio ? `${aspectRatio}` : undefined,
-		]);
-		styleEntries.push(["width", "100%"]);
+		styleEntries.push(
+			["max-width", pixelate(width)],
+			["max-height", pixelate(height)],
+			["aspect-ratio", aspectRatioValue],
+			["width", "100%"],
+		);
 	}
 	if (layout === "fullWidth") {
-		styleEntries.push(["width", "100%"]);
-		styleEntries.push([
-			"aspect-ratio",
-			aspectRatio ? `${aspectRatio}` : undefined,
-		]);
-		styleEntries.push(["height", pixelate(height)]);
+		styleEntries.push(
+			["width", "100%"],
+			["aspect-ratio", aspectRatioValue],
+			["height", pixelate(height)],
+		);
 	}
 	if (layout === "responsive") {
-		styleEntries.push(["width", "100%"]);
-		styleEntries.push(["height", "auto"]);
-		styleEntries.push([
-			"aspect-ratio",
-			aspectRatio ? `${aspectRatio}` : undefined,
-		]);
+		styleEntries.push(
+			["width", "100%"],
+			["height", "auto"],
+			["aspect-ratio", aspectRatioValue],
+		);
 	}
 	if (layout === "contained") {
-		styleEntries.push(["max-width", "100%"]);
-		styleEntries.push(["max-height", "100%"]);
-		styleEntries.push(["object-fit", "contain"]);
-		styleEntries.push([
-			"aspect-ratio",
-			aspectRatio ? `${aspectRatio}` : undefined,
-		]);
+		styleEntries.push(
+			["max-width", "100%"],
+			["max-height", "100%"],
+			["object-fit", "contain"],
+			["aspect-ratio", aspectRatioValue],
+		);
 	}
 	if (layout === "cover") {
-		styleEntries.push(["max-width", "100%"]);
-		styleEntries.push(["max-height", "100%"]);
+		styleEntries.push(["max-width", "100%"], ["max-height", "100%"]);
 	}
 
 	const styles = Object.fromEntries(styleEntries.filter(([, value]) => value));
@@ -292,7 +286,84 @@ export const astroAssetsOptimizer: ImagesOptimizer = async (
 };
 
 export const isUnpicCompatible = (image: string) => {
-	return typeof parseUrl(image) !== "undefined";
+	return parseUrl(image) !== undefined;
+};
+
+const toNumberOrUndefined = (
+	value: string | number | null | undefined,
+): number | undefined => {
+	if (value === null || value === undefined || value === "") {
+		return undefined;
+	}
+
+	const numeric = Number(value);
+	return Number.isFinite(numeric) ? numeric : undefined;
+};
+
+const resolveBaseDimensions = (
+	image: ImageMetadata | string,
+	width: string | number | null | undefined,
+	height: string | number | null | undefined,
+): { width: number | undefined; height: number | undefined } => {
+	let resolvedWidth = toNumberOrUndefined(width);
+	let resolvedHeight = toNumberOrUndefined(height);
+
+	if (typeof image !== "string") {
+		resolvedWidth ??= Number(image.width) || undefined;
+		if (resolvedHeight === undefined && typeof resolvedWidth === "number") {
+			resolvedHeight = computeHeight(resolvedWidth, image.width / image.height);
+		}
+	}
+
+	return { width: resolvedWidth, height: resolvedHeight };
+};
+
+const resolveAspectRatioAndDimensions = (
+	image: ImageMetadata | string,
+	layout: Layout,
+	aspectRatio: AspectRatioInput,
+	width: number | undefined,
+	height: number | undefined,
+): {
+	aspectRatio: number | undefined;
+	width: number | undefined;
+	height: number | undefined;
+} => {
+	let resolvedAspectRatio = parseAspectRatio(aspectRatio);
+	let resolvedWidth = width;
+	let resolvedHeight = height;
+
+	if (resolvedAspectRatio) {
+		if (resolvedWidth && !resolvedHeight) {
+			resolvedHeight = resolvedWidth / resolvedAspectRatio;
+		} else if (!resolvedWidth && resolvedHeight) {
+			resolvedWidth = Number(resolvedHeight * resolvedAspectRatio);
+		} else if (!resolvedWidth && !resolvedHeight && layout !== "fullWidth") {
+			console.error(
+				"When aspectRatio is set, either width or height must also be set",
+			);
+			console.error("Image", image);
+		}
+
+		return {
+			aspectRatio: resolvedAspectRatio,
+			width: resolvedWidth,
+			height: resolvedHeight,
+		};
+	}
+
+	if (resolvedWidth && resolvedHeight) {
+		resolvedAspectRatio = resolvedWidth / resolvedHeight;
+	} else if (layout !== "fullWidth") {
+		console.error("Either aspectRatio or both width and height must be set");
+		console.error("Image", image);
+	}
+
+	return {
+		aspectRatio: resolvedAspectRatio,
+		width: resolvedWidth,
+		height: resolvedHeight,
+	};
 };
 
 /* ** */
@@ -351,50 +422,22 @@ export async function getImagesOptimized(
 	}: ImageProps,
 	transform: ImagesOptimizer = () => Promise.resolve([]),
 ): Promise<{ src: string; attributes: HTMLAttributes<"img"> }> {
-	if (typeof image !== "string") {
-		width ||= Number(image.width) || undefined;
-		height ||=
-			typeof width === "number"
-				? computeHeight(width, image.width / image.height)
-				: undefined;
-	}
+	const baseDimensions = resolveBaseDimensions(image, width, height);
+	const resolvedDimensions = resolveAspectRatioAndDimensions(
+		image,
+		layout,
+		aspectRatio,
+		baseDimensions.width,
+		baseDimensions.height,
+	);
 
-	width = (width && Number(width)) || undefined;
-	height = (height && Number(height)) || undefined;
-
-	widths ||= config.deviceSizes;
-	sizes ||= getSizes(Number(width) || undefined, layout);
-	aspectRatio = parseAspectRatio(aspectRatio);
-
-	// Calculate dimensions from aspect ratio
-	if (aspectRatio) {
-		if (width) {
-			if (height) {
-				/* empty */
-			} else {
-				height = width / aspectRatio;
-			}
-		} else if (height) {
-			width = Number(height * aspectRatio);
-		} else if (layout !== "fullWidth") {
-			// Fullwidth images have 100% width, so aspectRatio is applicable
-			console.error(
-				"When aspectRatio is set, either width or height must also be set",
-			);
-			console.error("Image", image);
-		}
-	} else if (width && height) {
-		aspectRatio = width / height;
-	} else if (layout !== "fullWidth") {
-		// Fullwidth images don't need dimensions
-		console.error("Either aspectRatio or both width and height must be set");
-		console.error("Image", image);
-	}
+	const resolvedWidths = widths ?? config.deviceSizes;
+	const resolvedSizes = sizes ?? getSizes(resolvedDimensions.width, layout);
 
 	let breakpoints = getBreakpoints({
-		width: width,
-		breakpoints: widths,
-		layout: layout,
+		width: resolvedDimensions.width,
+		breakpoints: resolvedWidths,
+		layout,
 	});
 	breakpoints = [...new Set(breakpoints)].sort((a, b) => a - b);
 
@@ -402,8 +445,8 @@ export async function getImagesOptimized(
 		await transform(
 			image,
 			breakpoints,
-			Number(width) || undefined,
-			Number(height) || undefined,
+			resolvedDimensions.width,
+			resolvedDimensions.height,
 			format,
 		)
 	)
@@ -413,16 +456,16 @@ export async function getImagesOptimized(
 	return {
 		src: typeof image === "string" ? image : image.src,
 		attributes: {
-			width: width,
-			height: height,
+			width: resolvedDimensions.width,
+			height: resolvedDimensions.height,
 			srcset: srcset || undefined,
-			sizes: sizes,
+			sizes: resolvedSizes,
 			style: `${getStyle({
-				width: width,
-				height: height,
-				aspectRatio: aspectRatio,
-				objectPosition: objectPosition,
-				layout: layout,
+				width: resolvedDimensions.width,
+				height: resolvedDimensions.height,
+				aspectRatio: resolvedDimensions.aspectRatio,
+				objectPosition,
+				layout,
 			})}${style ?? ""}`,
 			...rest,
 		},

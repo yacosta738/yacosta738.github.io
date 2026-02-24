@@ -19,7 +19,7 @@ export function extractTagSlugFromPath(pathname: string): string | null {
 	// Pattern: /[lang]/tag/[slug] or /[lang]/tag/[slug]/page/[number]
 	// Must have content after /tag/ (not just empty or slash)
 	const tagPagePattern = /^\/[a-z]{2}(?:-[a-z]{2})?\/tag\/([^/]+)(?:\/|$)/i;
-	const match = pathname.match(tagPagePattern);
+	const match = tagPagePattern.exec(pathname);
 	return match ? match[1] : null;
 }
 

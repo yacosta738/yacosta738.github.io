@@ -53,7 +53,7 @@ describe("CategoryService", () => {
 		// Mock the getCollection and getEntry methods
 		vi.mocked(getCollection).mockImplementation(async (_collection, filter) => {
 			if (filter) {
-				return mockCategories.filter(filter) as any;
+				return mockCategories.filter((entry) => filter(entry)) as any;
 			}
 			return mockCategories as any;
 		});

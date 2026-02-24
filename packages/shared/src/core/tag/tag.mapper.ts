@@ -26,19 +26,19 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 	const slugFromTitle = truncatedTitle
 		.toLowerCase()
 		.normalize("NFD")
-		.replace(/[\u0300-\u036f]/g, "")
-		// Use non-greedy quantifier and avoid catastrophic backtracking
-		.replace(/[^a-z0-9]+?/g, "-")
+		.replaceAll(/[\u0300-\u036f]/g, "")
+		.replace(/[^a-z0-9]+/g, "-")
 		// Remove leading/trailing dashes with bounded operations
 		.replace(/^-/, "")
 		.replace(/-$/, "");
 
-	const slug =
-		slugFromData && slugFromData.length > 0
-			? slugFromData
-			: slugFromTitle.length > 0
-				? slugFromTitle
-				: fallbackSlug;
+	let slug = fallbackSlug;
+	if (slugFromTitle.length > 0) {
+		slug = slugFromTitle;
+	}
+	if (slugFromData && slugFromData.length > 0) {
+		slug = slugFromData;
+	}
 
 	return {
 		id: tagData.id,

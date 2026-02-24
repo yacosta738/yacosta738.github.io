@@ -1,9 +1,13 @@
 import { DEFAULT_LOCALE, type Lang, type Multilingual } from "./types";
 import { ui } from "./ui";
 
+const isSupportedLang = (value: string): value is Lang => {
+	return Object.hasOwn(ui, value);
+};
+
 export function getLangFromUrl(url: URL) {
 	const [, lang] = url.pathname.split("/");
-	if (lang in ui) return lang as Lang;
+	if (isSupportedLang(lang)) return lang;
 	return DEFAULT_LOCALE;
 }
 
@@ -28,7 +32,7 @@ export function useTranslations(lang: Lang) {
 
 		if (variables) {
 			return Object.entries(variables).reduce((result, [key, value]) => {
-				return result.replace(new RegExp(`{${key}}`, "g"), String(value));
+				return result.replaceAll(`{${key}}`, String(value));
 			}, text);
 		}
 

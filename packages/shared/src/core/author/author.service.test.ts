@@ -43,7 +43,7 @@ describe("AuthorService", () => {
 		// Mock the getCollection to simulate filtering
 		vi.mocked(getCollection).mockImplementation(async (_collection, filter) => {
 			if (filter) {
-				return mockAuthors.filter(filter) as any;
+				return mockAuthors.filter((entry) => filter(entry)) as any;
 			}
 			return mockAuthors as any;
 		});
