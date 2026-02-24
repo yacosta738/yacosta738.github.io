@@ -41,10 +41,12 @@ runs:
     - name: Run Biome check
       id: biome
       shell: bash
+      env:
+        FIX_INPUT: ${{ inputs.fix }}
       run: |
         echo "🔍 Running Biome checks..."
         
-        if [ "${{ inputs.fix }}" == "true" ]; then
+        if [ "$FIX_INPUT" == "true" ]; then
           echo "🔧 Auto-fixing issues..."
           biome check . --write
           STATUS=$?
@@ -93,10 +95,24 @@ runs:
 
     - name: Generate lint summary
       shell: bash
+      env:
+        CHECK_ASTRO_INPUT: ${{ inputs.check-astro }}
+        BIOME_STATUS: ${{ steps.biome.outputs.status }}
+        ASTRO_STATUS: ${{ steps.astro.outputs.status }}
       run: |
         echo "## 🔍 Lint & Type Check Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "- **Biome**: ${{ steps.biome.outputs.status == 'success' && '✅' || '❌' }} ${{ steps.biome.outputs.status }}" >> $GITHUB_STEP_SUMMARY
-        if [ "${{ inputs.check-astro }}" == "true" ]; then
-          echo "- **Astro**: ${{ steps.astro.outputs.status == 'success' && '✅' || '❌' }} ${{ steps.astro.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+        if [ "$BIOME_STATUS" == "success" ]; then
+          BIOME_ICON="✅"
+        else
+          BIOME_ICON="❌"
+        fi
+        echo "- **Biome**: $BIOME_ICON $BIOME_STATUS" >> $GITHUB_STEP_SUMMARY
+        if [ "$CHECK_ASTRO_INPUT" == "true" ]; then
+          if [ "$ASTRO_STATUS" == "success" ]; then
+            ASTRO_ICON="✅"
+          else
+            ASTRO_ICON="❌"
+          fi
+          echo "- **Astro**: $ASTRO_ICON $ASTRO_STATUS" >> $GITHUB_STEP_SUMMARY
         fi

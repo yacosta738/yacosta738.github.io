@@ -86,7 +86,7 @@ const extractHashesFromHtml = (html) => {
 
 		const attrs = lowerHtml.slice(startTagIndex + 7, startTagEndIndex);
 		// Check for src attribute safely
-		const normalizedAttrs = attrs.replace(/\t|\n|\r/g, " ");
+		const normalizedAttrs = attrs.replaceAll(/[\t\n\r]/g, " ");
 		const hasSrc =
 			normalizedAttrs.includes(" src=") || normalizedAttrs.startsWith("src=");
 
@@ -170,7 +170,7 @@ const main = () => {
 
 	const scriptSrcDirective = directives[scriptSrcIndex];
 	const tokens = scriptSrcDirective
-		.replace(/\t|\n|\r/g, " ")
+		.replaceAll(/[\t\n\r]/g, " ")
 		.split(" ")
 		.filter((t) => t.length > 0);
 
@@ -179,7 +179,7 @@ const main = () => {
 		return tLower !== "'unsafe-inline'" && !tLower.startsWith("'sha256-");
 	});
 
-	const sortedHashes = Array.from(allHashes).sort();
+	const sortedHashes = Array.from(allHashes).sort((a, b) => a.localeCompare(b));
 	const nextTokens = ["script-src", ...filteredTokens, ...sortedHashes];
 	directives[scriptSrcIndex] = nextTokens.join(" ");
 

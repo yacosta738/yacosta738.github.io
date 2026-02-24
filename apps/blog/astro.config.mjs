@@ -84,7 +84,7 @@ export default defineConfig({
 				// Homepage - highest priority
 				if (pathname === "/" || pathname.match(/^\/(en|es)\/?$/)) {
 					item.changefreq = "weekly";
-					item.priority = 1.0;
+					item.priority = 1;
 					return item;
 				}
 
@@ -175,14 +175,6 @@ export default defineConfig({
 			partytown({
 				config: {
 					forward: ["dataLayer.push"],
-					// Optimize Partytown loading
-					resolveUrl: (url) => {
-						// Only process analytics scripts
-						if (url.hostname === "analytics.ahrefs.com") {
-							return url;
-						}
-						return url;
-					},
 				},
 			}),
 		),

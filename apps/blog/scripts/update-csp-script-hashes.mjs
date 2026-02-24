@@ -93,7 +93,10 @@ const existingTokens = scriptSrcValue
 		(token) => token !== "'unsafe-inline'" && !token.startsWith("'sha256-"),
 	);
 
-const nextTokens = [...existingTokens, ...Array.from(hashes).sort()];
+const nextTokens = [
+	...existingTokens,
+	...Array.from(hashes).sort((a, b) => a.localeCompare(b)),
+];
 directives[scriptSrcIndex] = `script-src ${nextTokens.join(" ")}`;
 
 const nextCspValue = `${directives.join("; ")};`;

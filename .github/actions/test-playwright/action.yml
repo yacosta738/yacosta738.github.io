@@ -57,28 +57,32 @@ runs:
       if: steps.playwright-cache.outputs.cache-hit != 'true'
       shell: bash
       working-directory: apps/${{ inputs.app }}
+      env:
+        BROWSER_INPUT: ${{ inputs.browser }}
       run: |
         echo "📥 Installing Playwright browsers..."
         
-        if [ "${{ inputs.browser }}" == "all" ]; then
+        if [ "$BROWSER_INPUT" == "all" ]; then
           pnpm exec playwright install --with-deps
         else
-          pnpm exec playwright install --with-deps ${{ inputs.browser }}
+          pnpm exec playwright install --with-deps "$BROWSER_INPUT"
         fi
 
     - name: Ensure Playwright browsers (cached)
       if: steps.playwright-cache.outputs.cache-hit == 'true'
       shell: bash
       working-directory: apps/${{ inputs.app }}
+      env:
+        BROWSER_INPUT: ${{ inputs.browser }}
       run: |
         echo "♻️ Using cached browsers, validating browser binaries and dependencies..."
         
-        if [ "${{ inputs.browser }}" == "all" ]; then
+        if [ "$BROWSER_INPUT" == "all" ]; then
           pnpm exec playwright install
           pnpm exec playwright install-deps
         else
-          pnpm exec playwright install ${{ inputs.browser }}
-          pnpm exec playwright install-deps ${{ inputs.browser }}
+          pnpm exec playwright install "$BROWSER_INPUT"
+          pnpm exec playwright install-deps "$BROWSER_INPUT"
         fi
 
     - name: Run Playwright tests
@@ -88,18 +92,20 @@ runs:
       env:
         CI: true
         PW_USE_PREVIEW: '1'
+        BROWSER_INPUT: ${{ inputs.browser }}
+        HEADED_INPUT: ${{ inputs.headed }}
       run: |
         echo "🎭 Running E2E tests..."
         
         EXTRA_ARGS=""
-        if [ "${{ inputs.headed }}" == "true" ]; then
+        if [ "$HEADED_INPUT" == "true" ]; then
           EXTRA_ARGS="--headed"
         fi
         
-        if [ "${{ inputs.browser }}" == "all" ]; then
+        if [ "$BROWSER_INPUT" == "all" ]; then
           pnpm test:e2e $EXTRA_ARGS
         else
-          pnpm test:e2e --project=${{ inputs.browser }} $EXTRA_ARGS
+          pnpm test:e2e --project="$BROWSER_INPUT" $EXTRA_ARGS
         fi
         
         STATUS=$?
@@ -134,15 +140,32 @@ runs:
     - name: Generate test summary
       if: always()
       shell: bash
+      env:
+        APP_INPUT: ${{ inputs.app }}
+        BROWSER_INPUT: ${{ inputs.browser }}
+        HEADED_INPUT: ${{ inputs.headed }}
+        TEST_STATUS: ${{ steps.run-tests.outputs.status }}
       run: |
+        if [ "$TEST_STATUS" == "success" ]; then
+          STATUS_TEXT="✅ Passed"
+        else
+          STATUS_TEXT="❌ Failed"
+        fi
+
+        if [ "$HEADED_INPUT" == "true" ]; then
+          MODE_TEXT="Headed"
+        else
+          MODE_TEXT="Headless"
+        fi
+
         echo "## 🎭 E2E Tests Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "- **App**: ${{ inputs.app }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Browser**: ${{ inputs.browser }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Status**: ${{ steps.run-tests.outputs.status == 'success' && '✅ Passed' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
-        echo "- **Mode**: ${{ inputs.headed == 'true' && 'Headed' || 'Headless' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **App**: $APP_INPUT" >> $GITHUB_STEP_SUMMARY
+        echo "- **Browser**: $BROWSER_INPUT" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: $STATUS_TEXT" >> $GITHUB_STEP_SUMMARY
+        echo "- **Mode**: $MODE_TEXT" >> $GITHUB_STEP_SUMMARY
         
         # Try to extract test statistics
-        if [ -f "apps/${{ inputs.app }}/playwright-report/index.html" ]; then
+        if [ -f "apps/$APP_INPUT/playwright-report/index.html" ]; then
           echo "- **Report**: Available in artifacts" >> $GITHUB_STEP_SUMMARY
         fi

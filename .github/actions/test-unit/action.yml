@@ -38,13 +38,15 @@ runs:
           ${{ runner.os }}-vitest-
     - name: Install dependencies
       shell: bash
+      env:
+        PROJECT_INPUT: ${{ inputs.project }}
       run: |
         pnpm install --frozen-lockfile
 
-        if [ "${{ inputs.project }}" == "all" ]; then
+        if [ "$PROJECT_INPUT" == "all" ]; then
           echo "Installing workspace dependencies for all projects..."
         else
-          echo "Installing workspace dependencies for ${{ inputs.project }}..."
+          echo "Installing workspace dependencies for $PROJECT_INPUT..."
         fi
     - name: Run unit tests
       id: run-tests
@@ -101,10 +103,12 @@ runs:
       id: coverage-report
       if: inputs.coverage == 'true'
       shell: bash
+      env:
+        PROJECT_INPUT: ${{ inputs.project }}
       run: |
         echo "📊 Generating coverage report..."
 
-        PROJECT="${{ inputs.project }}"
+        PROJECT="$PROJECT_INPUT"
         echo "🔎 Looking for coverage-summary.json for project: $PROJECT"
 
         FILES=()
@@ -276,20 +280,25 @@ runs:
 
     - name: Generate test summary
       shell: bash
+      env:
+        PROJECT_INPUT: ${{ inputs.project }}
+        TEST_OUTCOME: ${{ steps.run-tests.outcome }}
+        COVERAGE_INPUT: ${{ inputs.coverage }}
+        COVERAGE_PERCENTAGE: ${{ steps.coverage-report.outputs.percentage }}
       run: |
         echo "## 🧪 Unit Tests Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "- **Project**: ${{ inputs.project }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Project**: $PROJECT_INPUT" >> $GITHUB_STEP_SUMMARY
         
         # Check the actual test outcome
-        if [ "${{ steps.run-tests.outcome }}" == "success" ]; then
+        if [ "$TEST_OUTCOME" == "success" ]; then
           echo "- **Status**: ✅ Passed" >> $GITHUB_STEP_SUMMARY
         else
           echo "- **Status**: ❌ Failed" >> $GITHUB_STEP_SUMMARY
         fi
         
-        if [ "${{ inputs.coverage }}" == "true" ]; then
-          COVERAGE="${{ steps.coverage-report.outputs.percentage }}"
+        if [ "$COVERAGE_INPUT" == "true" ]; then
+          COVERAGE="$COVERAGE_PERCENTAGE"
           if [ "$COVERAGE" != "unknown" ] && [ "$COVERAGE" != "0" ]; then
             echo "- **Coverage**: $COVERAGE%" >> $GITHUB_STEP_SUMMARY
           fi

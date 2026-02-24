@@ -1,6 +1,6 @@
 import type Article from "@/core/article/article.model";
 
-const UINT32_MODULUS = 0x1_0000_0000;
+const UINT32_MODULUS = 4_294_967_296;
 
 const secureRandomInt = (maxExclusive: number): number => {
 	if (!Number.isInteger(maxExclusive) || maxExclusive <= 0) {
