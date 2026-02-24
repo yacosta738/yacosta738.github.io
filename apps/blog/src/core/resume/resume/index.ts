@@ -1,4 +1,1 @@
-export * from "./resume.criteria";
-export * from "./resume.mapper";
-export * from "./resume.model";
-export * from "./resume.service";
+export * from "../../../../../../packages/shared/src/core/resume/resume/index";

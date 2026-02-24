@@ -1,28 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { routes } from "@/configs/route.path";
-import type Category from "@/core/category/category.model";
-import { type Lang, useTranslations } from "@/i18n";
-import { cleanEntityId } from "@/lib/collection.entity";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedPostCategory from "../../../../../packages/shared/src/components/atoms/PostCategory.astro";
 
-interface Props extends HTMLAttributes<"a"> {
-	category: Category;
-	currentLocale: Lang;
-}
-const { category, currentLocale, ...attrs } = Astro.props;
-
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedPostCategory>;
 ---
 
-<a
-	class={cn(
-		"w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80",
-		attrs.class
-	)}
-	href={`/${currentLocale}/${routes.category}/${cleanEntityId(category.slug).toLowerCase()}/`}
-	aria-label={t("post.aria.category", { category: category.title })}
-	{...attrs}
->
-	{category.title}
-</a>
+<SharedPostCategory {...props}>
+	<slot />
+</SharedPostCategory>

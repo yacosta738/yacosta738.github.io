@@ -6,8 +6,8 @@
 import { API_CONFIG, type ApiResponse } from "./api-config";
 
 export class ApiClient {
-	private baseUrl: string;
-	private timeout: number;
+	private readonly baseUrl: string;
+	private readonly timeout: number;
 
 	constructor(
 		baseUrl: string = API_CONFIG.baseUrl,
@@ -22,7 +22,7 @@ export class ApiClient {
 	 */
 	async post<T = unknown>(
 		endpoint: string,
-		data: Record<string, unknown> | unknown,
+		data: unknown,
 	): Promise<ApiResponse<T>> {
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), this.timeout);

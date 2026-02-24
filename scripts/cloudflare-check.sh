@@ -45,7 +45,7 @@ FILES=(
 )
 
 for file in "${FILES[@]}"; do
-    if [ -f "$file" ]; then
+    if [[ -f "$file" ]]; then
         echo -e "${GREEN}✓${NC} $file"
     else
         echo -e "${RED}✗${NC} $file (missing)"
@@ -66,17 +66,17 @@ echo ""
 
 # Check dist directory
 echo "📂 Checking build output..."
-if [ -d "dist" ]; then
+if [[ -d "dist" ]]; then
     echo -e "${GREEN}✓${NC} dist/ directory exists"
     
     # Check if _headers and _routes.json are copied
-    if [ -f "dist/_headers" ]; then
+    if [[ -f "dist/_headers" ]]; then
         echo -e "${GREEN}✓${NC} dist/_headers present"
     else
         echo -e "${RED}✗${NC} dist/_headers missing (check public/_headers)"
     fi
     
-    if [ -f "dist/_routes.json" ]; then
+    if [[ -f "dist/_routes.json" ]]; then
         echo -e "${GREEN}✓${NC} dist/_routes.json present"
     else
         echo -e "${RED}✗${NC} dist/_routes.json missing (check public/_routes.json)"

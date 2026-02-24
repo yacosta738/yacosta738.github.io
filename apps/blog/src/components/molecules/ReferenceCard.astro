@@ -1,38 +1,10 @@
 ---
-/**
- * ReferenceCard component.
- * This component displays a reference or testimonial in a styled card format.
- * It includes the reference text as a blockquote and the author's name.
- *
- * @prop {Reference} reference - The reference object containing the name and text.
- */
-import type Reference from "@/core/resume/reference/reference.model";
+import type { ComponentProps } from "astro/types";
+import SharedReferenceCard from "../../../../../packages/shared/src/components/molecules/ReferenceCard.astro";
 
-type Props = {
-	reference: Reference;
-};
-
-const { reference } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedReferenceCard>;
 ---
 
-<div class="group relative rounded-lg border border-border bg-card p-6 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
-  <div class="space-y-4">
-    <!-- Quote/Reference Text -->
-    <blockquote class="relative">
-      <div class="text-lg leading-relaxed text-muted-foreground dark:text-muted-foreground-dark">
-        <span class="absolute -left-2 -top-2 text-4xl text-primary/20 dark:text-primary-dark/20">"</span>
-        <p class="relative pl-6">
-          {reference.reference}
-        </p>
-        <span class="absolute -bottom-4 right-0 text-4xl text-primary/20 dark:text-primary-dark/20">"</span>
-      </div>
-    </blockquote>
-    
-    <!-- Author Name -->
-    <footer class="border-l-4 border-primary pl-4 dark:border-primary-dark">
-      <cite class="text-sm font-medium text-foreground dark:text-foreground-dark">
-        — {reference.name}
-      </cite>
-    </footer>
-  </div>
-</div>
+<SharedReferenceCard {...props}>
+	<slot />
+</SharedReferenceCard>

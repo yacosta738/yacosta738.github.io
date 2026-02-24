@@ -1,1 +1,1 @@
-export * from "./skill.model";
+export * from "../../../../../../packages/shared/src/core/resume/skill/index";

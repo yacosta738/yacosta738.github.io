@@ -1,12 +1,1 @@
-import type { Lang } from "@/i18n";
-
-/**
- * Interface for external article filtering criteria
- */
-export interface ExternalArticleCriteria {
-	lang?: Lang;
-	includeDrafts?: boolean;
-	author?: string | string[];
-	tags?: string | string[];
-	category?: string | string[];
-}
+export * from "../../../../../packages/shared/src/core/external-article/external-article.criteria";

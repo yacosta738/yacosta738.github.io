@@ -1,79 +1,10 @@
 ---
-/**
- * Footer section component.
- * This component renders the main site footer, which includes social media links,
- * design and build credits.
- */
-import { Icon } from "astro-icon/components";
-import Toast from "@/components/molecules/Toast.astro";
-import { getSocialIcon } from "@/configs/social.consts";
-import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
-import { type Lang, useTranslations } from "@/i18n";
-import Link from "../atoms/Link.astro";
+import type { ComponentProps } from "astro/types";
+import SharedFooter from "../../../../../packages/shared/src/components/organisms/Footer.astro";
 
-const resume = await getMainResumeWithData();
-if (!resume) {
-	throw new Error("No se pudo obtener el resume principal");
-}
-
-const { profiles } = resume.basics;
-const currentLocale = Astro.params.lang as Lang;
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedFooter>;
 ---
 
-<footer id="main-footer" class="container mx-auto flex flex-col items-center justify-center px-5 py-8 no-print">
-  <div class="flex flex-col items-center text-center">
-    <!-- Social links for mobile -->
-    <ul class="relative flex list-none flex-wrap justify-center p-0 mb-4 md:hidden">
-      {
-        profiles.map((profile) => {
-          const iconSvg = getSocialIcon(profile.network);
-          return (
-            <li class="mx-2">
-              <Link
-                href={profile.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={profile.network}
-                class="block p-2 text-foreground-muted hover:text-brand-accent transition-all duration-200 ease-in-out hover:-translate-y-1"
-              >
-                <Icon name={iconSvg} class="size-6" />
-              </Link>
-            </li>
-          );
-        })
-      }
-    </ul>
-
-    <!-- Credits -->
-    <div class="font-mono text-xs text-foreground-subtle">
-      <p>
-        {t('footer.builtBy')}
-        <Link
-          href="https://www.yunielacosta.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-foreground-muted hover:text-brand-accent transition-colors"
-        >
-          Yuniel Acosta
-        </Link>
-      </p>
-      <p class="mt-1">{t('footer.designBy')}</p>
-    </div>
-  </div>
-</footer>
-
-<!-- Toast for command palette hint -->
-<Toast currentLang={currentLocale} />
-
-<style>
-  /* Hide footer when printing */
-  @media print {
-    footer#main-footer.no-print,
-    footer#main-footer.no-print * {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-    }
-  }
-</style>
+<SharedFooter {...props}>
+	<slot />
+</SharedFooter>

@@ -1,17 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedIconButton from "../../../../../packages/shared/src/components/atoms/IconButton.astro";
 
-export interface Props extends HTMLAttributes<"button"> {}
-const { class: className, ...attrs } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedIconButton>;
 ---
 
-<button
-  class={cn(
-    "p-2 text-foreground hover:text-brand-accent dark:text-foreground-muted dark:hover:text-brand-accent cursor-pointer transition-colors",
-    className
-  )}
-    {...attrs}
->
-  <slot />
-</button>
+<SharedIconButton {...props}>
+	<slot />
+</SharedIconButton>

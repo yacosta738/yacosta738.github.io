@@ -73,7 +73,7 @@ export class Newsletter extends OpenAPIRoute {
 				this.schema.request.body.content["application/json"].schema;
 			const data = await this.getValidatedData<typeof schema>();
 
-			if (!data || !data.body) {
+			if (!data?.body) {
 				return c.json({ success: false, message: "Invalid request body" }, 400);
 			}
 

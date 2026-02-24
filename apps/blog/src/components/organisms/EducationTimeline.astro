@@ -1,51 +1,10 @@
 ---
+import type { ComponentProps } from "astro/types";
+import SharedEducationTimeline from "../../../../../packages/shared/src/components/organisms/EducationTimeline.astro";
 
-import EducationHeader from "@/components/molecules/EducationHeader.astro";
-/**
- * EducationTimeline component.
- * This component renders a timeline of educational experiences by composing the
- * `TimelineItem` and `EducationHeader` components.
- *
- * @prop {Education[]} education - An array of education objects to display.
- * @prop {Lang} locale - The locale to use for date formatting.
- */
-import TimelineItem from "@/components/molecules/TimelineItem.astro";
-import type Education from "@/core/resume/education/education.model";
-import { type Lang } from "@/i18n";
-
-interface Props {
-	education: Education[];
-	locale: Lang;
-}
-
-const { education, locale } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedEducationTimeline>;
 ---
 
-<div class="education-timeline">
-  {education.map((entry) => (
-    <TimelineItem
-      startDate={entry.startDate}
-      endDate={entry.endDate}
-      locale={locale}
-      showDates={true}
-      variant="default"
-    >
-      <EducationHeader
-        institution={entry.institution}
-        area={entry.area}
-        studyType={entry.studyType}
-        courses={entry.courses}
-        thesis={entry.thesis}
-        url={entry.url}
-        score={entry.score}
-      />
-    </TimelineItem>
-  ))}
-</div>
-
-<style>
-  .education-timeline {
-    position: relative;
-    margin-top: 10px;
-  }
-</style>
+<SharedEducationTimeline {...props}>
+	<slot />
+</SharedEducationTimeline>

@@ -20,7 +20,7 @@ export const isValidEmailAddress = (email: string): boolean => {
 
 	const localPart = value.slice(0, atIndex);
 	const domainPart = value.slice(atIndex + 1);
-	if (!localPart || !domainPart || !domainPart.includes(".")) {
+	if (!localPart || !domainPart?.includes(".")) {
 		return false;
 	}
 

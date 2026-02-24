@@ -1,21 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedWidgetCard from "../../../../../packages/shared/src/components/atoms/WidgetCard.astro";
 
-interface Props extends HTMLAttributes<"div"> {
-	title: string;
-}
-
-const { title, class: className, ...attrs } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedWidgetCard>;
 ---
 
-<div class={cn("mb-5 p-4 md:p-0", className)} {...attrs}>
-	<div class="bg-light-navy">
-		<h3
-			class="m-1 p-1 text-center font-mono text-3xl font-bold uppercase text-lightest-slate md:text-center"
-		>
-			{title}
-		</h3>
-	</div>
+<SharedWidgetCard {...props}>
 	<slot />
-</div>
+</SharedWidgetCard>

@@ -1,3 +1,1 @@
-export * from "./article.mapper";
-export * from "./article.model";
-export * from "./article.service";
+export * from "../../../../../packages/shared/src/core/article";

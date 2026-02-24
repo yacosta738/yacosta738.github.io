@@ -1,34 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import AuthorCard from "@/components/organisms/AuthorCard.astro";
-import type Author from "@/core/author/author.model";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedAuthorWrapper from "../../../../../packages/shared/src/components/organisms/AuthorWrapper.astro";
 
-interface Props extends HTMLAttributes<"div"> {
-	author: Author;
-}
-const { author, ...attrs } = Astro.props;
-const { name, email, avatar, bio, location, socials } = author;
+const props = Astro.props as ComponentProps<typeof SharedAuthorWrapper>;
 ---
 
-<div
-    class={cn(
-        "flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12 relative p-8",
-        "border-b border-brand-accent",
-        attrs.class,
-    )}
-    {...attrs}
->
-    <AuthorCard
-        name={name}
-        email={email}
-        avatar={avatar}
-        location={location}
-        socials={socials}
-    />
-    <p
-        class="font-body text-base font-normal tracking-normal leading-[140%] max-w-md relative text-foreground"
-    >
-        {bio}
-    </p>
-</div>
+<SharedAuthorWrapper {...props}>
+	<slot />
+</SharedAuthorWrapper>

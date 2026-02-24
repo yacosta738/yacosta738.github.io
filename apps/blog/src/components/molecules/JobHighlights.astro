@@ -1,41 +1,10 @@
 ---
-import HighlightsList from "@/components/molecules/HighlightsList.astro";
+import type { ComponentProps } from "astro/types";
+import SharedJobHighlights from "../../../../../packages/shared/src/components/molecules/JobHighlights.astro";
 
-/**
- * JobHighlights component.
- * This component displays the summary and key highlights of a job or role.
- *
- * @prop {string[]} [highlights] - A list of key achievements or responsibilities.
- * @prop {string} [summary] - A brief summary of the role.
- */
-interface Props {
-	highlights?: string[];
-	summary?: string;
-}
-
-const { highlights, summary } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedJobHighlights>;
 ---
 
-<div class="job-content">
-	{summary && <p class="summary">{summary}</p>}
-	
-	{highlights && <HighlightsList highlights={highlights} />}
-</div>
-
-<style>
-	.job-content {
-		margin-top: 16px;
-	}
-
-	.summary {
-		margin-bottom: 15px;
-		color: var(--slate);
-		font-size: var(--fz-md);
-		line-height: 1.6;
-	}
-
-	/* Light mode overrides */
-	html:not(.dark) .summary {
-		color: #64748b; /* readable gray for light mode */
-	}
-</style>
+<SharedJobHighlights {...props}>
+	<slot />
+</SharedJobHighlights>

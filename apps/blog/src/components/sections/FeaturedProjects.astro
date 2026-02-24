@@ -1,73 +1,10 @@
 ---
-/**
- * FeaturedProjects section component.
- * This component renders a section that showcases a list of featured projects.
- * It uses the molecular `ProjectCard` component to display each project in an
- * alternating layout.
- *
- * @prop {Project[]} [projects=[]] - An array of project objects from the resume.
- */
-import Section from "@/components/atoms/Section.astro";
-import FeaturedProjectCard from "@/components/organisms/FeaturedProjectCard.astro";
-import type Project from "@/core/resume/project/project.model";
-import {
-	type EnhancedProject,
-	getFeaturedProjects,
-} from "@/core/resume/project/project.service";
-import { type Lang, tr, useTranslations } from "@/i18n";
+import type { ComponentProps } from "astro/types";
+import SharedFeaturedProjects from "../../../../../packages/shared/src/components/sections/FeaturedProjects.astro";
 
-// Props interface
-interface Props {
-	projects?: Project[];
-}
-
-const { projects = [] } = Astro.props as Props;
-const currentLocale = Astro.params.lang as Lang;
-const t = useTranslations(currentLocale);
-
-// Get enhanced featured projects
-const featuredProjects: EnhancedProject[] = await getFeaturedProjects(projects);
-
-const translated = (
-	key: string,
-	params: Record<string, unknown> = {},
-	fallback = "",
-) => {
-	return tr(t, key, params, fallback);
-};
+const props = Astro.props as ComponentProps<typeof SharedFeaturedProjects>;
 ---
 
-{featuredProjects.length > 0 && (
-  <Section title={translated('featuredProjects', {}, 'Some Things I\'ve Built')} id="projects">
-    <ul class="featured-projects-grid">
-      {
-        featuredProjects.map((project, i) => {
-          const isOdd = i % 2 === 1;
-          
-          return (
-            <FeaturedProjectCard
-              project={project}
-              isOdd={isOdd}
-              lang={currentLocale}
-              isFirst={i === 0}
-            />
-          )
-        })
-      }
-    </ul>
-  </Section>
-)}
-
-<style>
-  /* Featured Projects Grid */
-  .featured-projects-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .featured-projects-grid a {
-    position: relative;
-    z-index: 1;
-  }
-</style>
+<SharedFeaturedProjects {...props}>
+	<slot />
+</SharedFeaturedProjects>

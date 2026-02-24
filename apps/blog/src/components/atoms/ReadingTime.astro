@@ -1,26 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { type Lang, useTranslations } from "@/i18n";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedReadingTime from "../../../../../packages/shared/src/components/atoms/ReadingTime.astro";
 
-interface Props extends HTMLAttributes<"span"> {
-	readingTime: string;
-	currentLocale: Lang;
-}
-const { readingTime, currentLocale, ...attrs } = Astro.props;
-
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedReadingTime>;
 ---
 
-{
-	readingTime && (
-		<span
-			class={
-				cn("text-secondary-foreground-light dark:text-secondary-foreground-dark font-inter text-[9px] leading-[140%] tracking-widest uppercase rounded gap-1", attrs.class)
-			}
-			aria-label={t("post.reading.time.aria", { time: readingTime })}
-		>
-			{t("post.reading.time", { time: readingTime })}
-		</span>
-	)
-}
+<SharedReadingTime {...props}>
+	<slot />
+</SharedReadingTime>

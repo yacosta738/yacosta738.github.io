@@ -1,10 +1,2 @@
-export default interface Work {
-	name: string;
-	position: string;
-	url?: string;
-	location?: string;
-	startDate: Date;
-	endDate?: Date | null;
-	summary?: string;
-	highlights?: string[];
-}
+export type { default } from "../../../../../../packages/shared/src/core/resume/work/work.model";
+export * from "../../../../../../packages/shared/src/core/resume/work/work.model";

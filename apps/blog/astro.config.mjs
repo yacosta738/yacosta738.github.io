@@ -54,7 +54,7 @@ export default defineConfig({
 
 	integrations: [
 		icon({
-			iconDir: "./src/icons",
+			iconDir: "../../packages/shared/src/icons",
 		}),
 		pagefind(),
 		sitemap({

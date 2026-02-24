@@ -1,62 +1,10 @@
 ---
-/**
- * CriticalCss component.
- * Implements critical CSS inlining strategy to eliminate render-blocking CSS.
- *
- * Strategy:
- * 1. Inline critical CSS for above-the-fold content
- * 2. Defer non-critical CSS loading
- *
- * This approach:
- * - Eliminates render-blocking CSS
- * - Improves LCP (Largest Contentful Paint)
- * - Reduces initial page load time
- */
+import type { ComponentProps } from "astro/types";
+import SharedCriticalCss from "../../../../../packages/shared/src/components/atoms/CriticalCss.astro";
+
+const props = Astro.props as ComponentProps<typeof SharedCriticalCss>;
 ---
 
-<!-- Critical CSS for above-the-fold content -->
-<style is:inline>
-  /* Reset and base styles - critical for initial render */
-  *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}
-  html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}
-  body{margin:0;line-height:inherit}
-  
-  /* Critical layout styles */
-  #main-content{min-height:100vh}
-  
-  /* Critical typography - only for above-the-fold headings */
-  h1,h2,h3{font-size:inherit;font-weight:inherit;margin:0}
-  
-  /* Critical link styles */
-  a{color:inherit;text-decoration:inherit}
-  
-  /* Hide non-critical content during initial render */
-  .defer-render{visibility:hidden}
-  
-  /* Dark mode critical styles */
-  .dark{color-scheme:dark}
-  
-  /* Prevent FOUC with theme */
-  html:not(.dark) body{background-color:#ffffff;color:#000000}
-  html.dark body{background-color:#000000;color:#ffffff}
-</style>
-
-<!-- Inline script to reveal deferred content after CSS loads -->
-<script is:inline>
-  (()=>{
-    // Reveal deferred content after critical render
-    const revealDeferred = () => {
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.defer-render').forEach(el => {
-          el.style.visibility = 'visible';
-        });
-      });
-    };
-    
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', revealDeferred);
-    } else {
-      revealDeferred();
-    }
-  })();
-</script>
+<SharedCriticalCss {...props}>
+	<slot />
+</SharedCriticalCss>

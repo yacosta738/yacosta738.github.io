@@ -1,37 +1,10 @@
 ---
-/**
- * TechBadge component.
- * A specialized badge for displaying a technology, optionally with an icon.
- * It is built upon the base `Badge` component.
- *
- * @prop {string} name - The name of the technology.
- * @prop {string} [icon] - The name of the icon to display from `astro-icon`.
- * @prop {"sm" | "md" | "lg"} [size="sm"] - The size of the badge.
- * @prop {string} [class] - Additional CSS classes to apply to the badge.
- */
-import type { HTMLAttributes } from "astro/types";
-import { Icon } from "astro-icon/components";
-import Badge from "./Badge.astro";
+import type { ComponentProps } from "astro/types";
+import SharedTechBadge from "../../../../../packages/shared/src/components/atoms/TechBadge.astro";
 
-export interface Props extends HTMLAttributes<"span"> {
-	name: string;
-	icon?: string;
-	size?: "sm" | "md" | "lg";
-	class?: string;
-}
-
-const {
-	name,
-	icon,
-	size = "sm",
-	class: className = "",
-	...attrs
-} = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedTechBadge>;
 ---
 
-<Badge size={size} class={`inline-flex items-center gap-1.5 ${className}`} {...attrs}>
-	{icon && (
-		<Icon name={icon} class="size-3" aria-hidden="true" />
-	)}
-	<span>{name}</span>
-</Badge>
+<SharedTechBadge {...props}>
+	<slot />
+</SharedTechBadge>

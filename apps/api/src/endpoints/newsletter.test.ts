@@ -8,7 +8,7 @@ vi.mock("../utils/hcaptcha");
 
 // Mock fetch for the webhook call
 const mockFetch = vi.fn();
-global.fetch = mockFetch;
+globalThis.fetch = mockFetch;
 
 // Mock environment object for tests
 const mockEnv = {

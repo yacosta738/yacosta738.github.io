@@ -1,1 +1,1 @@
-export * from "./award.model";
+export * from "../../../../../../packages/shared/src/core/resume/award/index";

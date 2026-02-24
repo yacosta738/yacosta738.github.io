@@ -1,10 +1,2 @@
-/**
- * Represents a language proficiency entry.
- *
- * @property {string} language - The name of the language (e.g., "English").
- * @property {string} fluency - The proficiency level (e.g., "Native speaker", "Fluent").
- */
-export default interface Language {
-	language: string;
-	fluency: string;
-}
+export type { default } from "../../../../../../packages/shared/src/core/resume/language/language.model";
+export * from "../../../../../../packages/shared/src/core/resume/language/language.model";

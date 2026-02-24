@@ -1,46 +1,10 @@
 ---
-/**
- * TagBadges component.
- * A molecule component that displays a collection of tag badges.
- * Useful for showing multiple tags in a consistent layout.
- *
- * @prop {Array<{title: string, slug: string}>} tags - Array of tag objects with title and slug.
- * @prop {string} lang - The current language/locale.
- * @prop {"primary" | "secondary" | "accent"} [variant="secondary"] - Default badge variant.
- * @prop {"sm" | "md" | "lg"} [size="md"] - Default badge size.
- * @prop {string} [class] - Additional CSS classes for the container.
- */
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
-import TagBadge from "../atoms/TagBadge.astro";
+import type { ComponentProps } from "astro/types";
+import SharedTagBadges from "../../../../../packages/shared/src/components/molecules/TagBadges.astro";
 
-export interface Props extends HTMLAttributes<"div"> {
-	tags: Array<{ title: string; slug: string }>;
-	lang: string;
-	variant?: "primary" | "secondary" | "accent";
-	size?: "sm" | "md" | "lg";
-}
-
-const {
-	tags,
-	lang,
-	variant = "secondary",
-	size = "md",
-	class: className,
-	...attrs
-} = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedTagBadges>;
 ---
 
-<div class={cn("flex flex-wrap gap-2", className)} {...attrs}>
-	{
-		tags?.map((tag) => (
-			<TagBadge
-				title={tag.title}
-				slug={tag.slug}
-				lang={lang}
-				variant={variant}
-				size={size}
-			/>
-		))
-	}
-</div>
+<SharedTagBadges {...props}>
+	<slot />
+</SharedTagBadges>

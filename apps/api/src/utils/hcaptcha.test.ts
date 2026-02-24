@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { verifyHCaptcha } from "./hcaptcha";
 
 const mockFetch = vi.fn();
-global.fetch = mockFetch;
+globalThis.fetch = mockFetch;
 
 describe("verifyHCaptcha", () => {
 	afterEach(() => {

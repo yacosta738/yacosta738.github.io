@@ -1,27 +1,10 @@
 ---
-/**
- * Awards section component.
- * This component renders a section displaying a timeline of awards.
- * It is only rendered if there are awards to display.
- *
- * @prop {Award[]} [awards=[]] - An array of award objects to display.
- */
-import Section from "@atoms/Section.astro";
-import AwardTimeline from "@/components/organisms/AwardTimeline.astro";
-import type Award from "@/core/resume/award/award.model";
-import { type Lang, useTranslations } from "@/i18n";
+import type { ComponentProps } from "astro/types";
+import SharedAwards from "../../../../../packages/shared/src/components/sections/Awards.astro";
 
-interface Props {
-	awards?: Award[];
-}
-
-const { awards = [] } = Astro.props as Props;
-const currentLocale = Astro.params.lang as Lang;
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedAwards>;
 ---
 
-{awards.length > 0 && (
-	<Section title={t('awards')}>
-		<AwardTimeline awards={awards} locale={currentLocale} />
-	</Section>
-)}
+<SharedAwards {...props}>
+	<slot />
+</SharedAwards>

@@ -1,3 +1,1 @@
-export * from "./author.mapper";
-export * from "./author.model";
-export * from "./author.service";
+export * from "../../../../../packages/shared/src/core/author";

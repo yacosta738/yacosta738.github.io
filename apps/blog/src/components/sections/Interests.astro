@@ -1,32 +1,10 @@
 ---
-import Section from "@atoms/Section.astro";
-/**
- * Interests section component.
- * This component renders a section displaying a grid of interests.
- * It is only rendered if there are interests to display.
- *
- * @prop {Interest[]} [interests=[]] - An array of interest objects to display.
- */
-import InterestCard from "@/components/molecules/InterestCard.astro";
-import type Interest from "@/core/resume/interest/interest.model";
-import { type Lang, useTranslations } from "@/i18n";
+import type { ComponentProps } from "astro/types";
+import SharedInterests from "../../../../../packages/shared/src/components/sections/Interests.astro";
 
-interface Props {
-	interests?: Interest[];
-}
-
-const { interests = [] } = Astro.props as Props;
-const currentLocale = Astro.params.lang as Lang;
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedInterests>;
 ---
 
-{interests.length > 0 && (
-	<Section title={t('interests')}>
-		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-			{interests.map((interest) => (
-				<InterestCard interest={interest} />
-			))}
-		</div>
-	</Section>
-)}
-
+<SharedInterests {...props}>
+	<slot />
+</SharedInterests>

@@ -1,1 +1,1 @@
-export * from "./publication.model";
+export * from "../../../../../../packages/shared/src/core/resume/publication/index";

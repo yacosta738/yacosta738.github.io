@@ -1,33 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import type Author from "@/core/author/author.model";
-import { type Lang, useTranslations } from "@/i18n";
-import { cleanEntityId } from "@/lib/collection.entity";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedByAuthor from "../../../../../packages/shared/src/components/atoms/ByAuthor.astro";
 
-interface Props extends HTMLAttributes<"div"> {
-	author: Author;
-	currentLocale: Lang;
-}
-const { author, currentLocale, ...attrs } = Astro.props;
-
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedByAuthor>;
 ---
 
-<div
-	class={cn(
-		"flex items-baseline text-secondary-foreground-light dark:text-secondary-foreground-dark font-inter text-xs leading-[140%] tracking-widest uppercase rounded gap-1",
-		attrs.class,
-	)}
-	aria-label={t("post.aria.author", { name: author.name })}
-	{...attrs}
->
-	<span class="text-[9px]">{t("by")}</span>
-	<a
-		href={`/${currentLocale}/author/${cleanEntityId(author.slug).toLowerCase()}`}
-		class="capitalize leading-[140%] min-w-max transition-colors hover:opacity-80 font-inter font-bold tracking-normal"
-		aria-label={t("post.aria.author", { name: author.name })}
-	>
-		{author.name}
-	</a>
-</div>
+<SharedByAuthor {...props}>
+	<slot />
+</SharedByAuthor>

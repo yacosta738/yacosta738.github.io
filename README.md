@@ -17,8 +17,6 @@
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.yunielacosta.com%2F)
 ![GitHub repo size](https://img.shields.io/github/repo-size/yacosta738/yacosta738.github.io)
 
-
-
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=yacosta738_yacosta738.github.io)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/yacosta738/yacosta738.github.io)
@@ -26,11 +24,16 @@
 [![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://pr.new/github.com/yacosta738/yacosta738.github.io)
 
 ![yap-readme.png](docs%2Fimages%2Fyap-readme.png)
-Welcome to my little corner of the internet! This is where I store all my achievements and experiences after becoming a developer. From the first line of code I wrote to my most recent projects, this portfolio serves as a record of my journey in this field.
+Welcome to my little corner of the internet! This is where I store all my achievements and
+experiences after becoming a developer. From the first line of code I wrote to my most recent
+projects, this portfolio serves as a record of my journey in this field.
 
-In addition to showcasing my work, I also like to share my thoughts and insights through articles that I write and publish here. Whether it's about the latest trends in technology or a personal reflection on my growth as a developer, I hope you find something here that sparks your interest.
+In addition to showcasing my work, I also like to share my thoughts and insights through articles
+that I write and publish here. Whether it's about the latest trends in technology or a personal
+reflection on my growth as a developer, I hope you find something here that sparks your interest.
 
-Thank you for taking the time to visit my portfolio. Feel free to explore and get in touch if you have any questions or would like to collaborate on a project.
+Thank you for taking the time to visit my portfolio. Feel free to explore and get in touch if you
+have any questions or would like to collaborate on a project.
 
 ## :beers: My Social Links
 
@@ -42,20 +45,21 @@ Thank you for taking the time to visit my portfolio. Feel free to explore and ge
 
 ## 🚀 Project Structure
 
-This is a monorepo managed with pnpm workspaces. It contains multiple applications and shared packages.
+This is a monorepo managed with pnpm workspaces. It contains multiple applications and shared
+packages.
 
-```shell
+```markdown
 .
 ├── apps/
-│   ├── portfolio/      # Main portfolio website (Astro)
-│   ├── blog/           # Personal blog (Astro)
-│   └── api/            # Backend API (Cloudflare Workers + Hono)
+│ ├── portfolio/ # Main portfolio website (Astro)
+│ ├── blog/ # Personal blog (Astro)
+│ └── api/ # Backend API (Cloudflare Workers + Hono)
 ├── packages/
-│   └── shared/         # Shared logic, components, and types
-├── docs/               # Project documentation
-├── scripts/            # Helper scripts
-├── specs/              # Project specifications
-└── package.json        # Root package.json
+│ └── shared/ # Shared logic, components, and types
+├── docs/ # Project documentation
+├── scripts/ # Helper scripts
+├── specs/ # Project specifications
+└── package.json # Root package.json
 ```
 
 ## 🧞 Commands
@@ -64,24 +68,24 @@ All commands are run from the root of the project using pnpm:
 
 ### Global Commands
 
-| Command | Action |
-| :--- | :--- |
-| `pnpm install` | Installs dependencies for all projects |
-| `pnpm run dev` | Starts all applications in development mode |
-| `pnpm run build` | Builds all applications |
-| `pnpm run test` | Runs all unit and E2E tests |
-| `pnpm run lint` | Lints the entire codebase with Biome |
-| `pnpm run check` | Runs type checks and linting for all apps |
+| Command          | Action                                      |
+|:-----------------|:--------------------------------------------|
+| `pnpm install`   | Installs dependencies for all projects      |
+| `pnpm run dev`   | Starts all applications in development mode |
+| `pnpm run build` | Builds all applications                     |
+| `pnpm run test`  | Runs all unit and E2E tests                 |
+| `pnpm run lint`  | Lints the entire codebase with Biome        |
+| `pnpm run check` | Runs type checks and linting for all apps   |
 
 ### App-Specific Commands
 
-| App | Command | Action |
-| :--- | :--- | :--- |
-| **Portfolio** | `pnpm dev:portfolio` | Dev server for portfolio |
-| | `pnpm build:portfolio` | Build portfolio |
-| **Blog** | `pnpm dev:blog` | Dev server for blog |
-| | `pnpm build:blog` | Build blog |
-| **API** | `pnpm dev:api` | Dev server for API |
-| | `pnpm build:api` | Build API |
+| App           | Command                | Action                   |
+|:--------------|:-----------------------|:-------------------------|
+| **Portfolio** | `pnpm dev:portfolio`   | Dev server for portfolio |
+|               | `pnpm build:portfolio` | Build portfolio          |
+| **Blog**      | `pnpm dev:blog`        | Dev server for blog      |
+|               | `pnpm build:blog`      | Build blog               |
+| **API**       | `pnpm dev:api`         | Dev server for API       |
+|               | `pnpm build:api`       | Build API                |
 
 ![Alt](https://repobeats.axiom.co/api/embed/e814d9379628a6c98c24408834f6394ec8ea0c07.svg "Repobeats analytics image")

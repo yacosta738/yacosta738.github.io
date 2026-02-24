@@ -1,28 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { routes } from "@/configs/route.path";
-import type Tag from "@/core/tag/tag.model";
-import { type Lang, useTranslations } from "@/i18n";
-import { cleanEntityId } from "@/lib/collection.entity";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedPostTag from "../../../../../packages/shared/src/components/atoms/PostTag.astro";
 
-interface Props extends HTMLAttributes<"a"> {
-	tag: Tag;
-	currentLocale: Lang;
-}
-const { tag, type, currentLocale, ...attrs } = Astro.props;
-
-const t = useTranslations(currentLocale);
+const props = Astro.props as ComponentProps<typeof SharedPostTag>;
 ---
 
-<a
-	class={cn(
-		"w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80",
-		attrs.class
-	)}
-	href={`/${currentLocale}/${routes.tag}/${cleanEntityId(tag.slug).toLowerCase()}/`}
-	aria-label={t("post.aria.tag", { tag: tag.title })}
-	{...attrs}
->
-	{tag.title}
-</a>
+<SharedPostTag {...props}>
+	<slot />
+</SharedPostTag>

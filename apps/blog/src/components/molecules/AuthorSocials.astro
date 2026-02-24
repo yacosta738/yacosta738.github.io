@@ -1,18 +1,10 @@
 ---
-import ObfuscateEmail from "@/components/atoms/ObfuscateEmail.astro";
-import SocialLinks from "@/components/molecules/SocialLinks.astro";
-import type { Social } from "@/core/author";
+import type { ComponentProps } from "astro/types";
+import SharedAuthorSocials from "../../../../../packages/shared/src/components/molecules/AuthorSocials.astro";
 
-interface Props {
-	socials: Social[];
-	email: string;
-	className?: string;
-}
-
-const { socials, email, className = "mt-2" } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedAuthorSocials>;
 ---
 
-<SocialLinks socials={socials} class={`flex items-center w-full max-w-fit gap-4 ${className}`}>
-    {email && (<ObfuscateEmail email={email} />)}
-</SocialLinks>
-
+<SharedAuthorSocials {...props}>
+	<slot />
+</SharedAuthorSocials>

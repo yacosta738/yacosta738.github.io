@@ -1,81 +1,10 @@
 ---
-/**
- * ExperienceEntry component.
- * This component renders an entry for a professional or volunteer experience,
- * displaying the title, organization, date range, and an optional description.
- *
- * @prop {string} title - The main title of the experience (e.g., project name, role).
- * @prop {string} [organization] - The name of the organization or company.
- * @prop {string} [url] - An optional URL for the organization.
- * @prop {string} startDate - The start date of the experience.
- * @prop {string} [endDate] - The end date of the experience. Defaults to "Actual" if not provided.
- * @prop {string} [description] - A description of the experience.
- * @prop {string} [position] - The specific position or role held.
- * @prop {string} [class] - Additional CSS classes for the component container.
- */
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
-import Link from "../atoms/Link.astro";
-import Typography from "../atoms/Typography.astro";
+import type { ComponentProps } from "astro/types";
+import SharedExperienceEntry from "../../../../../packages/shared/src/components/molecules/ExperienceEntry.astro";
 
-export interface Props extends HTMLAttributes<"article"> {
-	title: string;
-	organization?: string;
-	url?: string;
-	startDate: string;
-	endDate?: string;
-	description?: string;
-	position?: string;
-	class?: string;
-}
-
-const {
-	title,
-	organization,
-	url,
-	startDate,
-	endDate,
-	description,
-	position,
-	class: className,
-	...attrs
-} = Astro.props;
-
-const classes = cn("p-2", className);
+const props = Astro.props as ComponentProps<typeof SharedExperienceEntry>;
 ---
 
-<article class={classes} {...attrs}>
-	<header class="flex justify-between items-start mb-1">
-		<div class="flex-1">
-			<Typography as="h3" class="font-medium text-foreground mb-0">
-				{url ? (
-					<Link href={url} variant="primary" external>
-						{organization || title}
-					</Link>
-				) : (
-					organization || title
-				)}
-			</Typography>
-			{position && (
-				<Typography as="h4" class="text-foreground font-normal">
-					{position}
-				</Typography>
-			)}
-		</div>
-		<div class="flex gap-1 text-foreground-muted text-sm min-w-[102px] text-right max-sm:text-right">
-			<Typography as="time" variant="date">
-				{startDate}
-			</Typography>
-			<span>-</span>
-			<Typography as="time" variant="date">
-				{endDate || 'Actual'}
-			</Typography>
-		</div>
-	</header>
-	{description && (
-		<Typography variant="body" class="text-pretty text-foreground">
-			{description}
-		</Typography>
-	)}
+<SharedExperienceEntry {...props}>
 	<slot />
-</article>
+</SharedExperienceEntry>

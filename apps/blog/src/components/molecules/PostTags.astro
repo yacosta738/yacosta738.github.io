@@ -1,21 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import PostTag from "@/components/atoms/PostTag.astro";
-import type Tag from "@/core/tag/tag.model";
-import { type Lang } from "@/i18n";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedPostTags from "../../../../../packages/shared/src/components/molecules/PostTags.astro";
 
-interface Props extends HTMLAttributes<"div"> {
-	tags: Tag[];
-	currentLocale: Lang;
-}
-const { tags, currentLocale, ...attrs } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedPostTags>;
 ---
 
-<div class={cn("flex flex-wrap gap-2", attrs.class)}>
-	{
-		tags?.map((tag) => (
-			<PostTag tag={tag} currentLocale={currentLocale} />
-		))
-	}
-</div>
+<SharedPostTags {...props}>
+	<slot />
+</SharedPostTags>
