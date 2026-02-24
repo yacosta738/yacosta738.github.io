@@ -9,6 +9,94 @@ import type { ExternalArticleCriteria } from "./external-article.criteria";
 import { toExternalArticles } from "./external-article.mapper";
 import type ExternalArticle from "./external-article.model";
 
+type FilterableExternalArticleData = {
+	draft: boolean;
+	author?: { id: string };
+	tags?: Array<{ id: string }>;
+	category?: { id: string };
+};
+
+type FilterableExternalArticleEntry = {
+	id: string;
+	data: FilterableExternalArticleData;
+};
+
+const matchesEntityId = (
+	criteriaValue: string | ReadonlyArray<string> | undefined,
+	entityId: string | undefined,
+): boolean => {
+	if (!criteriaValue) {
+		return true;
+	}
+
+	if (!entityId) {
+		return false;
+	}
+
+	const idsToMatch = Array.isArray(criteriaValue)
+		? criteriaValue
+		: [criteriaValue];
+
+	return idsToMatch.includes(entityId);
+};
+
+const matchesTags = (
+	criteriaTags: string | ReadonlyArray<string> | undefined,
+	entryTags: ReadonlyArray<{ id: string }> | undefined,
+): boolean => {
+	if (!criteriaTags) {
+		return true;
+	}
+
+	if (!entryTags) {
+		return false;
+	}
+
+	const tagsToMatch = Array.isArray(criteriaTags)
+		? criteriaTags
+		: [criteriaTags];
+
+	return tagsToMatch.some((tag) =>
+		entryTags.some((entryTag) => entryTag.id === tag),
+	);
+};
+
+const createExternalArticleFilter = (
+	criteria: ExternalArticleCriteria | undefined,
+) => {
+	const {
+		lang,
+		includeDrafts = false,
+		author,
+		tags,
+		category,
+	} = criteria ?? {};
+
+	return ({ id, data }: FilterableExternalArticleEntry): boolean => {
+		if (!includeDrafts && data.draft) {
+			return false;
+		}
+
+		if (lang && parseEntityId(id).lang !== lang) {
+			return false;
+		}
+
+		if (!matchesEntityId(author, data.author?.id)) {
+			return false;
+		}
+
+		if (!matchesTags(tags, data.tags)) {
+			return false;
+		}
+
+		if (!matchesEntityId(category, data.category?.id)) {
+			return false;
+		}
+
+		return true;
+	};
+};
+
 /**
  * Retrieves external articles from the content collection with filtering options
  * @async
@@ -18,55 +106,8 @@ import type ExternalArticle from "./external-article.model";
 export async function getExternalArticles(
 	criteria?: ExternalArticleCriteria,
 ): Promise<ExternalArticle[]> {
-	const {
-		lang,
-		includeDrafts = false,
-		author,
-		tags,
-		category,
-	} = criteria || {};
-
-	const externalArticles = await getCollection(
-		"externalArticles",
-		({ id, data }) => {
-			// Always check draft status unless includeDrafts is true
-			if (!includeDrafts && data.draft) return false;
-
-			// Filter by language if provided
-			if (lang) {
-				const articleLang = parseEntityId(id).lang;
-				if (articleLang !== lang) return false;
-			}
-
-			// Filter by author if provided
-			if (author) {
-				const authorsToMatch = Array.isArray(author) ? author : [author];
-				if (!data.author || !authorsToMatch.includes(data.author.id))
-					return false;
-			}
-
-			// Filter by tags if provided
-			if (tags) {
-				const tagsToMatch = Array.isArray(tags) ? tags : [tags];
-				if (
-					!data.tags ||
-					!tagsToMatch.some((tag) => data.tags.some((t) => t.id === tag))
-				)
-					return false;
-			}
-
-			// Filter by category if provided
-			if (category) {
-				const categoriesToMatch = Array.isArray(category)
-					? category
-					: [category];
-				if (!data.category || !categoriesToMatch.includes(data.category.id))
-					return false;
-			}
-
-			return true;
-		},
-	);
+	const filter = createExternalArticleFilter(criteria);
+	const externalArticles = await getCollection("externalArticles", filter);
 
 	return toExternalArticles(externalArticles);
 }
@@ -91,8 +132,9 @@ export async function getExternalArticleById(
  * @returns {Promise<boolean>} A promise that resolves to true if external articles exist, false otherwise
  */
 export async function hasExternalArticles(
-	criteria: ExternalArticleCriteria = { includeDrafts: false },
+	criteria?: ExternalArticleCriteria,
 ): Promise<boolean> {
-	const externalArticles = await getExternalArticles(criteria);
+	const resolvedCriteria = criteria ?? { includeDrafts: false };
+	const externalArticles = await getExternalArticles(resolvedCriteria);
 	return externalArticles.length > 0;
 }

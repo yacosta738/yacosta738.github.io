@@ -48,7 +48,5 @@ export function generateMockImageArray(
 		format?: string;
 	} = {},
 ): ImageMetadata[] {
-	return Array(count)
-		.fill(null)
-		.map(() => generateMockImage(options));
+	return new Array(count).fill(null).map(() => generateMockImage(options));
 }

@@ -33,6 +33,10 @@ export const SOCIAL_ICONS: SocialIcon = {
 	discord: "simple-icons:discord",
 } as const;
 
+const isSocialIconKey = (value: string): value is keyof SocialIcon => {
+	return Object.hasOwn(SOCIAL_ICONS, value);
+};
+
 /**
  * Get the icon identifier for a given social network key.
  *
@@ -45,7 +49,7 @@ export const SOCIAL_ICONS: SocialIcon = {
  * const fallback = getSocialIcon('unknown'); // "lucide:origami"
  */
 export const getSocialIcon = (name: string) => {
-	const key = name.toLowerCase() as keyof SocialIcon;
-	const icon = SOCIAL_ICONS[key];
+	const key = name.toLowerCase();
+	const icon = isSocialIconKey(key) ? SOCIAL_ICONS[key] : undefined;
 	return icon ?? "lucide:origami";
 };

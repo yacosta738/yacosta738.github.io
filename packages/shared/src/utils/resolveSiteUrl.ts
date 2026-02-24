@@ -3,6 +3,95 @@
 // Precedence (first found): VERCEL_URL, URL (Netlify), DEPLOY_PRIME_URL (Netlify PRs),
 // CF_PAGES_URL (Cloudflare Pages), SITE_URL (manual), SITE_URL (env)
 // Fallback: http://localhost:4321
+const trimTrailingSlashes = (value: string): string => {
+	let end = value.length;
+	while (end > 0 && value.at(end - 1) === "/") {
+		end -= 1;
+	}
+
+	return value.slice(0, end);
+};
+
+const hasInvalidHostnameChars = (value: string): boolean => {
+	for (const char of value) {
+		const codePoint = char.codePointAt(0);
+		if (codePoint === undefined) {
+			return true;
+		}
+
+		if (codePoint === 0x2f || codePoint <= 0x20) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+const hasValidHostnameLabels = (value: string): boolean => {
+	const parts = value.split(".");
+	if (parts.length < 2) {
+		return false;
+	}
+
+	for (const part of parts) {
+		if (part.length === 0) {
+			return false;
+		}
+
+		let hasAlphanumeric = false;
+		for (const char of part) {
+			const codePoint = char.codePointAt(0);
+			if (codePoint === undefined) {
+				return false;
+			}
+
+			const isDigit = codePoint >= 48 && codePoint <= 57;
+			const isUpperCase = codePoint >= 65 && codePoint <= 90;
+			const isLowerCase = codePoint >= 97 && codePoint <= 122;
+			if (isDigit || isUpperCase || isLowerCase) {
+				hasAlphanumeric = true;
+				continue;
+			}
+
+			if (codePoint !== 45) {
+				return false;
+			}
+		}
+
+		if (!hasAlphanumeric) {
+			return false;
+		}
+	}
+
+	return true;
+};
+
+const isLikelyHostname = (value: string): boolean => {
+	if (!value) {
+		return false;
+	}
+
+	if (hasInvalidHostnameChars(value)) {
+		return false;
+	}
+
+	return hasValidHostnameLabels(value);
+};
+
+const normalizeCandidate = (raw: string): string => {
+	const value = raw.trim();
+	if (/^https?:\/\//i.test(value)) {
+		return trimTrailingSlashes(value);
+	}
+
+	const trimmed = trimTrailingSlashes(value);
+	if (isLikelyHostname(trimmed)) {
+		return `https://${trimmed}`;
+	}
+
+	return trimTrailingSlashes(value);
+};
+
 export const resolveSiteUrl = () => {
 	// Known provider env vars (checked in order of preference)
 	const candidates = [
@@ -18,67 +107,7 @@ export const resolveSiteUrl = () => {
 
 	for (const raw of candidates) {
 		if (!raw) continue;
-
-		const value = String(raw).trim();
-
-		// Helper: trim trailing slashes in linear time to avoid regex backtracking issues
-		const trimTrailingSlashes = (s: string) => {
-			let end = s.length;
-			while (end > 0 && s.charAt(end - 1) === "/") end--;
-			return s.slice(0, end);
-		};
-
-		// If value starts with protocol, return as-is (after trimming trailing slash)
-		if (/^https?:\/\//i.test(value)) {
-			return trimTrailingSlashes(value);
-		}
-
-		// If value looks like host (no protocol), add https://
-		// Use a linear-time validator instead of a regex to avoid any ReDoS risk.
-		const isLikelyHostname = (s: string) => {
-			if (!s || s.length === 0) return false;
-			// Fast reject common invalid chars
-			for (let i = 0; i < s.length; i++) {
-				const ch = s.charCodeAt(i);
-				if (ch === 0x2f) return false; // '/'
-				if (ch <= 0x20) return false; // control or whitespace
-			}
-
-			const parts = s.split(".");
-			if (parts.length < 2) return false; // require at least one dot
-
-			for (const part of parts) {
-				if (part.length === 0) return false; // empty label
-				let hasAlnum = false;
-				for (let j = 0; j < part.length; j++) {
-					const c = part.charCodeAt(j);
-					// allow a-z, A-Z, 0-9 and '-'
-					if (c >= 48 && c <= 57)
-						hasAlnum = true; // 0-9
-					else if (c >= 65 && c <= 90)
-						hasAlnum = true; // A-Z
-					else if (c >= 97 && c <= 122)
-						hasAlnum = true; // a-z
-					else if (c === 45) {
-						// hyphen allowed
-					} else {
-						return false; // other chars not allowed
-					}
-				}
-				if (!hasAlnum) return false; // label must contain at least one alphanumeric
-			}
-			return true;
-		};
-
-		// Check hostname against the trimmed value so values like "example.com/" are
-		// recognized as hostnames (matching previous behavior).
-		const trimmed = trimTrailingSlashes(value);
-		if (isLikelyHostname(trimmed)) {
-			return `https://${trimmed}`;
-		}
-
-		// As a last resort, if it's something else, try to return it normalized
-		if (value) return trimTrailingSlashes(value);
+		return normalizeCandidate(String(raw));
 	}
 
 	return "http://localhost:4321";
