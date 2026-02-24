@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
+  pull-requests: write
 
 jobs:
   analyze:
@@ -34,7 +34,7 @@ jobs:
           upload-coverage: 'false'
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v4
+        uses: SonarSource/sonarcloud-github-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

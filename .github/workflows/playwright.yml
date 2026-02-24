@@ -71,6 +71,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      checks: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -84,7 +85,7 @@ jobs:
         continue-on-error: true
 
       - name: Publish Test Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         with:
           name: Playwright Tests
           path: "all-reports/**/results.xml"

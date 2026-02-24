@@ -21,7 +21,7 @@ concurrency:
 
 env:
   NODE_VERSION: '22'
-  PNPM_VERSION: '10.30.1'
+  PNPM_VERSION: '10.30.2'
 
 jobs:
   # Job 1: Setup & Lint (fastest checks first)
@@ -209,7 +209,7 @@ jobs:
 
       - name: SonarCloud Scan (PR)
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request'
-        uses: SonarSource/sonarcloud-github-action@v4
+        uses: SonarSource/sonarcloud-github-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -228,7 +228,7 @@ jobs:
         id: sonar-main-scan
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
         continue-on-error: true
-        uses: SonarSource/sonarcloud-github-action@v4
+        uses: SonarSource/sonarcloud-github-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
