@@ -8,7 +8,10 @@ import Logo from "../atoms/Logo.astro";
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
-const localizedSiteTitle = t(SITE_TITLE);
+const localizedSiteTitle =
+	typeof SITE_TITLE === "string"
+		? SITE_TITLE
+		: SITE_TITLE[currentLocale] || SITE_TITLE.en;
 
 const socials = [
 	{
