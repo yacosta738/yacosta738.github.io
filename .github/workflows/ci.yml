@@ -19,13 +19,6 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# Explicit least-privilege permissions
-permissions:
-  contents: read
-  actions: read
-  pull-requests: write
-  checks: write
-
 env:
   NODE_VERSION: '22'
   PNPM_VERSION: '10.30.1'
@@ -36,6 +29,8 @@ jobs:
     name: 🔍 Lint & Type Check
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     outputs:
       cache-key: ${{ steps.setup.outputs.cache-hit }}
     steps:
@@ -64,6 +59,8 @@ jobs:
     name: 🧪 Unit Tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -90,6 +87,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [lint]
     timeout-minutes: 15
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -126,6 +125,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     timeout-minutes: 30
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -169,6 +170,9 @@ jobs:
     needs: [unit-tests]
     if: always()
     timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout code
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
@@ -217,7 +221,7 @@ jobs:
             -Dsonar.tests=apps
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
 
       - name: SonarCloud Scan (Push/Main)
@@ -236,7 +240,7 @@ jobs:
             -Dsonar.tests=apps
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
-            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
 
       - name: SonarCloud main scan warning

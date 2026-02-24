@@ -18,7 +18,10 @@ let cachedResumeData: RawResumeData | null = null;
  */
 export const getResumeData = (): RawResumeData => {
 	if (cachedResumeData === null) {
-		const filePath = resolve(process.cwd(), "src/data/resume/es/resume.json");
+		const filePath = resolve(
+			process.cwd(),
+			"../../packages/shared/src/data/resume/es/resume.json",
+		);
 		const fileContent = readFileSync(filePath, "utf-8");
 		cachedResumeData = JSON.parse(fileContent) as RawResumeData;
 	}

@@ -67,7 +67,12 @@ test.describe("Contact Form", () => {
 		try {
 			await Promise.any([
 				...visPromises,
-				routeCalledResolved.then((v) => (v ? true : Promise.reject(false))),
+				routeCalledResolved.then((v) => {
+					if (!v) {
+						throw new Error("Route handler was not called");
+					}
+					return true;
+				}),
 			]);
 			anyVisible = true;
 		} catch {
@@ -186,7 +191,12 @@ test.describe("Contact Form", () => {
 		try {
 			await Promise.any([
 				...visPromises,
-				routeCalledResolved.then((v) => (v ? true : Promise.reject(false))),
+				routeCalledResolved.then((v) => {
+					if (!v) {
+						throw new Error("Route handler was not called");
+					}
+					return true;
+				}),
 			]);
 			anyVisible = true;
 		} catch {

@@ -7,7 +7,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define the base articles directory
-const BASE_ARTICLES_DIR = path.join(__dirname, "..", "src/data", "articles");
+const BASE_ARTICLES_DIR = path.resolve(
+	__dirname,
+	"..",
+	"..",
+	"..",
+	"packages",
+	"shared",
+	"src",
+	"data",
+	"articles",
+);
 // Add dry run option to preview changes without applying them
 const DRY_RUN = process.argv.includes("--dry-run");
 // Parse directories from command line arguments or use all subdirectories
