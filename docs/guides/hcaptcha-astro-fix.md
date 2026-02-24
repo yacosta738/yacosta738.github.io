@@ -104,7 +104,7 @@ declare global {
 
 ## Archivos Modificados
 
-### 1. `/apps/portfolio/src/components/atoms/HCaptcha.astro`
+### 1. `/packages/shared/src/components/atoms/HCaptcha.astro`
 - **Cambio principal**: Implementación completa de renderizado explícito
 - **Mejoras**:
   - Renderizado manual con `hcaptcha.render()`
@@ -113,11 +113,11 @@ declare global {
   - Prevención de layout shift con `min-height`
   - Mejor manejo de errores y timeouts
 
-### 2. `/apps/portfolio/src/components/organisms/CtaNewsletterSubscription.astro`
+### 2. `/packages/shared/src/components/organisms/CtaNewsletterSubscription.astro`
 - **Cambio**: Removidas declaraciones de tipos duplicadas
 - **Motivo**: Los tipos ahora están centralizados en `hcaptcha.d.ts`
 
-### 3. `/apps/portfolio/src/components/sections/Contact.astro`
+### 3. `/packages/shared/src/components/sections/Contact.astro`
 - **Cambio**: Removidas declaraciones de tipos duplicadas
 - **Motivo**: Los tipos ahora están centralizados en `hcaptcha.d.ts`
 
