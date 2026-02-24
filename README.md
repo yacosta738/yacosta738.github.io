@@ -1,16 +1,15 @@
-# Welcome to my personal portfolio made with [Astro](https://astro.build)
+# Welcome to my personal monorepo portfolio made with [Astro](https://astro.build)
 
-![Deploy Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/deploy.yml?label=deploy%20reliability)
-[![CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml)
+![Deploy Portfolio](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/deploy-portfolio.yml?label=deploy%20portfolio)
+![Deploy API](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/deploy-api.yml?label=deploy%20api)
+[![CI Pipeline](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml)
 ![CI Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/ci.yml?label=ci%20reliability)
 [![Playwright E2E Tests](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/playwright.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/playwright.yml)
 ![E2E Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/playwright.yml?label=e2e%20reliability)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0c5e5ad4-8565-4a37-b181-b4442505a68b/deploy-status)](https://app.netlify.com/sites/yunielacosta/deploys)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=yacosta738_yacosta738.github.io&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=yacosta738_yacosta738.github.io)
@@ -43,80 +42,46 @@ Thank you for taking the time to visit my portfolio. Feel free to explore and ge
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+This is a monorepo managed with pnpm workspaces. It contains multiple applications and shared packages.
 
 ```shell
-drwxr-xr-x     - yap 25 Dec 10:43 .
-.rw-r--r--  1.4k yap 23 Dec 09:28 ├── astro.config.ts
-.rw-r--r--   374 yap  5 Nov 14:11 ├── Dockerfile
-drwxr-xr-x     - yap 25 Dec 10:41 ├── docs
-drwxr-xr-x     - yap 25 Dec 10:41 │  └── images
-.rw-r--r--    32 yap  5 Nov 14:11 ├── netlify.toml
-.rw-r--r--  2.8k yap 23 Dec 16:15 ├── package.json
-.rw-r--r--@ 2.6k yap 18 Dec 20:15 ├── playwright.config.ts
-.rw-r--r--  518k yap 25 Dec 10:09 ├── pnpm-lock.yaml
-drwxr-xr-x     - yap 18 Dec 20:15 ├── public
-.rw-r--r--   13k yap  5 Nov 14:11 │  ├── android-chrome-192x192.png
-.rw-r--r--   47k yap  5 Nov 14:11 │  ├── android-chrome-512x512.png
-.rw-r--r--   12k yap  5 Nov 14:11 │  ├── apple-touch-icon.png
-.rw-r--r--   336 yap  5 Nov 14:11 │  ├── browserconfig.xml
-.rw-r--r--   559 yap  5 Nov 14:11 │  ├── favicon-16x16.png
-.rw-r--r--  1.5k yap  5 Nov 14:11 │  ├── favicon-32x32.png
-.rw-r--r--  9.3k yap  5 Nov 14:11 │  ├── favicon.ico
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── files
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── fonts
-.rw-r--r--@  253 yap  5 Nov 14:11 │  ├── humans.txt
-.rw-r--r--   12k yap  5 Nov 14:11 │  ├── logo.svg
-.rw-r--r--   20k yap  5 Nov 14:11 │  ├── oops.webp
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── rss
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── images
-.rw-r--r--   19k yap  5 Nov 14:11 │  └── you-are-the-best.webp
-.rw-r--r--@ 7.8k yap 25 Dec 10:43 ├── README.md
-.rw-r--r--@  508 yap 18 Dec 20:15 ├── remark-reading-time.mjs
-.rw-r--r--@  541 yap 18 Dec 20:15 ├── renovate.json
-.rw-r--r--   619 yap  5 Nov 14:11 ├── SECURITY.md
-drwxr-xr-x     - yap 20 Dec 15:36 ├── src
-drwxr-xr-x     - yap 20 Dec 15:36 │  ├── assets
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── components
-drwxr-xr-x@    - yap 18 Dec 20:15 │  ├── content
-.rw-r--r--@  453 yap 22 Dec 17:05 │  ├── env.d.ts
-drwxr-xr-x@    - yap 23 Dec 16:17 │  ├── i18n
-drwxr-xr-x     - yap  5 Nov 14:11 │  ├── icons
-drwxr-xr-x     - yap 18 Dec 20:15 │  ├── models
-drwxr-xr-x     - yap 18 Dec 20:15 │  ├── pages
-drwxr-xr-x     - yap 18 Dec 20:15 │  ├── plugins
-drwxr-xr-x     - yap 18 Dec 20:15 │  ├── store
-drwxr-xr-x     - yap 24 Dec 12:08 │  ├── styles
-drwxr-xr-x     - yap 18 Dec 20:15 │  └── utils
-.rw-r--r--@ 2.4k yap 18 Dec 20:15 ├── tailwind.config.cjs
-drwxr-xr-x     - yap  5 Nov 14:11 ├── tests
-drwxr-xr-x     - yap 24 Dec 16:35 │  ├── integration
-drwxr-xr-x     - yap 18 Dec 20:15 │  └── unit
-.rw-r--r--@ 1.2k yap 21 Dec 17:08 ├── tsconfig.json
-.rw-r--r--@  252 yap 18 Dec 20:15 └── vitest.config.ts
+.
+├── apps/
+│   ├── portfolio/      # Main portfolio website (Astro)
+│   ├── blog/           # Personal blog (Astro)
+│   └── api/            # Backend API (Cloudflare Workers + Hono)
+├── packages/
+│   └── shared/         # Shared logic, components, and types
+├── docs/               # Project documentation
+├── scripts/            # Helper scripts
+├── specs/              # Project specifications
+└── package.json        # Root package.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components or layouts.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project using pnpm:
 
-| Command                   | Action                                             |
-| :------------------------ | :------------------------------------------------- |
-| `npm install`             | Installs dependencies                              |
-| `npm run dev`             | Starts local dev server at `localhost:4321`        |
-| `npm run build`           | Build your production site to `./dist/`            |
-| `npm run preview`         | Preview your build locally, before deploying       |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help`    | Get help using the Astro CLI                       |
-| `npm run format`          | Format your code with Prettier                     |
-| `npm run lint`             | Lint your code with Biome                         |
-| `npm run test`            | Run your tests with Playwright                     |
-| `npm run test:e2e`        | Run your end-to-end tests with Playwright          |
+### Global Commands
+
+| Command | Action |
+| :--- | :--- |
+| `pnpm install` | Installs dependencies for all projects |
+| `pnpm run dev` | Starts all applications in development mode |
+| `pnpm run build` | Builds all applications |
+| `pnpm run test` | Runs all unit and E2E tests |
+| `pnpm run lint` | Lints the entire codebase with Biome |
+| `pnpm run check` | Runs type checks and linting for all apps |
+
+### App-Specific Commands
+
+| App | Command | Action |
+| :--- | :--- | :--- |
+| **Portfolio** | `pnpm dev:portfolio` | Dev server for portfolio |
+| | `pnpm build:portfolio` | Build portfolio |
+| **Blog** | `pnpm dev:blog` | Dev server for blog |
+| | `pnpm build:blog` | Build blog |
+| **API** | `pnpm dev:api` | Dev server for API |
+| | `pnpm build:api` | Build API |
 
 ![Alt](https://repobeats.axiom.co/api/embed/e814d9379628a6c98c24408834f6394ec8ea0c07.svg "Repobeats analytics image")
