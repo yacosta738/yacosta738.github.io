@@ -35,6 +35,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Run lint
         uses: ./.github/actions/lint
 
