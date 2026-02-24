@@ -1,9 +1,11 @@
 ---
+import { DOMAIN } from "astro:env/client";
 import type { HTMLAttributes } from "astro/types";
 import { Icon } from "astro-icon/components";
 import ResumeButton from "@/components/atoms/ResumeButton.astro";
 import ThemeToggle from "@/components/atoms/ThemeToggle.astro";
 import { navMenus } from "@/core/menu";
+import { resolveNavigationMenuHref } from "@/core/menu/menu.service";
 import { useTranslatedPath, useTranslations } from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
@@ -43,7 +45,7 @@ const translatePath = useTranslatedPath(currentLocale);
 			navMenus.map((menu) => (
 				<li>
 					<a
-						href={translatePath(menu.link)}
+						href={resolveNavigationMenuHref(menu, translatePath, DOMAIN)}
 						id={drawer ? `drawer-${menu.id}` : `nav-${menu.id}`}
 						data-drawer-dismiss={drawer ? "drawer-menu" : undefined}
 						aria-current={

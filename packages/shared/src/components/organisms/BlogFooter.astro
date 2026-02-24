@@ -1,6 +1,6 @@
 ---
-import { SITE_TITLE } from "astro:env/client";
 import SocialLinks from "@/components/molecules/SocialLinks.astro";
+import { SITE_TITLE } from "@/configs/site.consts";
 import { filterMenuItems, navLinks } from "@/core/menu";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import Logo from "../atoms/Logo.astro";
@@ -8,6 +8,10 @@ import Logo from "../atoms/Logo.astro";
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
+const localizedSiteTitle =
+	typeof SITE_TITLE === "string"
+		? SITE_TITLE
+		: SITE_TITLE[currentLocale] || SITE_TITLE.en;
 
 const socials = [
 	{
@@ -77,7 +81,7 @@ const columnsClass = optimalColumns === 1 ? "md:grid-cols-1" : "md:grid-cols-2";
 			class="text-footer-copyright-light dark:text-footer-copyright-dark text-xs font-inter font-normal leading-[140%] tracking-normal"
 		>
 			{t("blog.footer.copyright")} © {new Date().getFullYear()}
-			{SITE_TITLE}
+			{localizedSiteTitle}
 		</p>
 	</div>
 </footer>
