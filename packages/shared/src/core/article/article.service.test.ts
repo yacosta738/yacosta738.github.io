@@ -128,7 +128,7 @@ describe("ArticleService", () => {
 						? mockExternalArticles
 						: mockArticles;
 				if (filter) {
-					return source.filter(filter) as any;
+					return source.filter((entry) => filter(entry)) as any;
 				}
 				return source as any;
 			},
@@ -150,7 +150,7 @@ describe("ArticleService", () => {
 				draft: a.data.draft,
 				featured: a.data.featured,
 				date: a.data.date,
-			})) as any;
+			}));
 		});
 	});
 
@@ -253,7 +253,7 @@ describe("ArticleService", () => {
 						},
 					];
 					if (filter) {
-						return allDrafts.filter(filter) as any;
+						return allDrafts.filter((entry) => filter(entry)) as any;
 					}
 					return allDrafts as any;
 				},

@@ -30,9 +30,8 @@ export function batchDOMOperations(operations: {
 	writes: Array<() => void>;
 }): void {
 	// Perform all reads first
-	const readResults: unknown[] = [];
-	operations.reads.forEach((read, index) => {
-		readResults[index] = read();
+	operations.reads.forEach((read) => {
+		read();
 	});
 
 	// Then perform all writes
@@ -94,7 +93,7 @@ export function debounceResize(callback: () => void, delay = 100): () => void {
 			clearTimeout(timeoutId);
 		}
 
-		timeoutId = window.setTimeout(callback, delay);
+		timeoutId = globalThis.setTimeout(callback, delay);
 	};
 }
 
@@ -110,7 +109,7 @@ export function createManagedResizeObserver(
 	unobserve: (element: Element) => void;
 	disconnect: () => void;
 } {
-	if (!window.ResizeObserver) {
+	if (!globalThis.ResizeObserver) {
 		// Fallback for browsers without ResizeObserver
 		const noop = () => {};
 		return {
@@ -171,11 +170,11 @@ export function isElementVisible(element: Element): boolean {
  */
 export function createThrottledScrollHandler(
 	handler: (event: Event) => void,
-	element: Element | Window = window,
+	element: Element | Window = globalThis,
 ): () => void {
-	const throttledHandler = (event: Event) => {
-		let rafId: number | null = null;
+	let rafId: number | null = null;
 
+	const throttledHandler = (event: Event) => {
 		if (rafId !== null) return;
 
 		rafId = requestAnimationFrame(() => {

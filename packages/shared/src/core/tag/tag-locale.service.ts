@@ -8,15 +8,15 @@
  */
 
 import type { Lang } from "@/i18n/types";
+import { LOCALES } from "@/i18n/types";
 import type Tag from "./tag.model";
 import { getTags } from "./tag.service";
-import {
-	extractTagSlugFromPath as extractSlug,
-	isTagPage as isTag,
-} from "./tag-locale.utils";
 
-// Re-export pure utilities
-export { extractSlug as extractTagSlugFromPath, isTag as isTagPage };
+export { extractTagSlugFromPath, isTagPage } from "./tag-locale.utils";
+
+const isLang = (value: string): value is Lang => {
+	return Object.hasOwn(LOCALES, value);
+};
 
 /**
  * Result of attempting to find a tag in a target language
@@ -112,7 +112,16 @@ export async function getTagLocalePaths(
 			});
 		} else {
 			// Different language - try to find equivalent tag
-			const result = await findTagInLanguage(currentTagSlug, lang as Lang);
+			if (!isLang(lang)) {
+				paths.push({
+					lang,
+					path: `/${currentLang}/tag/${currentTagSlug}`,
+					tagFound: false,
+				});
+				continue;
+			}
+
+			const result = await findTagInLanguage(currentTagSlug, lang);
 
 			paths.push({
 				lang,

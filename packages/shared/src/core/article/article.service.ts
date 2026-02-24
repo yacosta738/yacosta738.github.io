@@ -10,6 +10,105 @@ import type { ArticleCriteria } from "./article.criteria";
 import { toArticles, toExternalArticles } from "./article.mapper";
 import type Article from "./article.model";
 
+type FilterableArticleData = {
+	draft: boolean;
+	author?: { id: string };
+	tags?: Array<{ id: string }>;
+	category?: { id: string };
+	featured?: boolean;
+};
+
+type FilterableArticleEntry = {
+	id: string;
+	data: FilterableArticleData;
+};
+
+const matchesEntityId = (
+	criteriaValue: string | ReadonlyArray<string> | undefined,
+	entityId: string | undefined,
+): boolean => {
+	if (!criteriaValue) {
+		return true;
+	}
+
+	if (!entityId) {
+		return false;
+	}
+
+	const idsToMatch = Array.isArray(criteriaValue)
+		? criteriaValue
+		: [criteriaValue];
+
+	return idsToMatch.includes(entityId);
+};
+
+const matchesTags = (
+	criteriaTags: string | ReadonlyArray<string> | undefined,
+	entryTags: ReadonlyArray<{ id: string }> | undefined,
+): boolean => {
+	if (!criteriaTags) {
+		return true;
+	}
+
+	if (!entryTags) {
+		return false;
+	}
+
+	const tagsToMatch = Array.isArray(criteriaTags)
+		? criteriaTags
+		: [criteriaTags];
+
+	return tagsToMatch.some((tag) =>
+		entryTags.some((entryTag) => entryTag.id === tag),
+	);
+};
+
+const createArticleFilter = (
+	criteria: ArticleCriteria | undefined,
+	options: { includeFeatured: boolean },
+) => {
+	const {
+		lang,
+		includeDrafts = false,
+		author,
+		tags,
+		category,
+		featured,
+	} = criteria ?? {};
+
+	return ({ id, data }: FilterableArticleEntry): boolean => {
+		if (!includeDrafts && data.draft) {
+			return false;
+		}
+
+		if (lang && parseEntityId(id).lang !== lang) {
+			return false;
+		}
+
+		if (!matchesEntityId(author, data.author?.id)) {
+			return false;
+		}
+
+		if (!matchesTags(tags, data.tags)) {
+			return false;
+		}
+
+		if (!matchesEntityId(category, data.category?.id)) {
+			return false;
+		}
+
+		if (
+			options.includeFeatured &&
+			featured !== undefined &&
+			data.featured !== featured
+		) {
+			return false;
+		}
+
+		return true;
+	};
+};
+
 /**
  * Retrieves articles from the content collection with filtering options
  * @async
@@ -19,54 +118,8 @@ import type Article from "./article.model";
 export async function getArticles(
 	criteria?: ArticleCriteria,
 ): Promise<Article[]> {
-	const {
-		lang,
-		includeDrafts = false,
-		author,
-		tags,
-		category,
-		featured,
-	} = criteria || {};
-
-	const articles = await getCollection("articles", ({ id, data }) => {
-		// Always check draft status unless includeDrafts is true
-		if (!includeDrafts && data.draft) return false;
-
-		// Filter by language if provided
-		if (lang) {
-			const articleLang = parseEntityId(id).lang;
-			if (articleLang !== lang) return false;
-		}
-
-		// Filter by author if provided
-		if (author) {
-			const authorsToMatch = Array.isArray(author) ? author : [author];
-			if (!data.author || !authorsToMatch.includes(data.author.id))
-				return false;
-		}
-
-		// Filter by tags if provided
-		if (tags) {
-			const tagsToMatch = Array.isArray(tags) ? tags : [tags];
-			if (
-				!data.tags ||
-				!tagsToMatch.some((tag) => data.tags.some((t) => t.id === tag))
-			)
-				return false;
-		}
-
-		// Filter by category if provided
-		if (category) {
-			const categoriesToMatch = Array.isArray(category) ? category : [category];
-			if (!data.category || !categoriesToMatch.includes(data.category.id))
-				return false;
-		}
-
-		// Filter by featured status if provided
-		if (featured !== undefined && data.featured !== featured) return false;
-
-		return true;
-	});
+	const filter = createArticleFilter(criteria, { includeFeatured: true });
+	const articles = await getCollection("articles", filter);
 
 	return toArticles(articles);
 }
@@ -96,9 +149,10 @@ export async function getArticleById(id: string): Promise<Article | undefined> {
  * @returns {Promise<boolean>} A promise that resolves to true if article exist, false otherwise
  */
 export async function hasArticles(
-	criteria: ArticleCriteria = { includeDrafts: false },
+	criteria?: ArticleCriteria,
 ): Promise<boolean> {
-	const articles = await getArticles(criteria);
+	const resolvedCriteria = criteria ?? { includeDrafts: false };
+	const articles = await getArticles(resolvedCriteria);
 	return articles.length > 0;
 }
 
@@ -119,76 +173,17 @@ export async function getArticlesByAuthor(
 export async function getAllArticlesIncludingExternal(
 	criteria?: ArticleCriteria,
 ): Promise<Article[]> {
-	const {
-		lang,
-		includeDrafts = false,
-		author,
-		tags,
-		category,
-		featured,
-	} = criteria || {};
-
-	// Fetch regular articles
-	const regularArticles = await getCollection("articles", ({ id, data }) => {
-		if (!includeDrafts && data.draft) return false;
-		if (lang) {
-			const articleLang = parseEntityId(id).lang;
-			if (articleLang !== lang) return false;
-		}
-		if (author) {
-			const authorsToMatch = Array.isArray(author) ? author : [author];
-			if (!data.author || !authorsToMatch.includes(data.author.id))
-				return false;
-		}
-		if (tags) {
-			const tagsToMatch = Array.isArray(tags) ? tags : [tags];
-			if (
-				!data.tags ||
-				!tagsToMatch.some((tag) => data.tags.some((t) => t.id === tag))
-			)
-				return false;
-		}
-		if (category) {
-			const categoriesToMatch = Array.isArray(category) ? category : [category];
-			if (!data.category || !categoriesToMatch.includes(data.category.id))
-				return false;
-		}
-		if (featured !== undefined && data.featured !== featured) return false;
-		return true;
+	const regularFilter = createArticleFilter(criteria, {
+		includeFeatured: true,
+	});
+	const externalFilter = createArticleFilter(criteria, {
+		includeFeatured: false,
 	});
 
-	// Fetch external articles with same filters
+	const regularArticles = await getCollection("articles", regularFilter);
 	const externalArticles = await getCollection(
 		"externalArticles",
-		({ id, data }) => {
-			if (!includeDrafts && data.draft) return false;
-			if (lang) {
-				const articleLang = parseEntityId(id).lang;
-				if (articleLang !== lang) return false;
-			}
-			if (author) {
-				const authorsToMatch = Array.isArray(author) ? author : [author];
-				if (!data.author || !authorsToMatch.includes(data.author.id))
-					return false;
-			}
-			if (tags) {
-				const tagsToMatch = Array.isArray(tags) ? tags : [tags];
-				if (
-					!data.tags ||
-					!tagsToMatch.some((tag) => data.tags.some((t) => t.id === tag))
-				)
-					return false;
-			}
-			if (category) {
-				const categoriesToMatch = Array.isArray(category)
-					? category
-					: [category];
-				if (!data.category || !categoriesToMatch.includes(data.category.id))
-					return false;
-			}
-			// externalArticles doesn't have featured field in schema, skip that filter
-			return true;
-		},
+		externalFilter,
 	);
 
 	// Combine and map both collections
