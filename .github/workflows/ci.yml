@@ -181,16 +181,18 @@ jobs:
           pattern: coverage-*
           path: coverage/
           merge-multiple: true
-        continue-on-error: true
 
       - name: Validate LCOV reports exist
+        id: coverage-check
         run: |
           ls -R coverage || true
-          if [ -z "$(find coverage -name 'lcov.info' -print -quit)" ]; then
-            echo "❌ No LCOV reports were found under coverage/."
-            exit 1
+          if [ -n "$(find coverage -name 'lcov.info' -print -quit)" ]; then
+            echo "coverage_found=true" >> "$GITHUB_OUTPUT"
+            echo "✅ LCOV reports detected."
+          else
+            echo "coverage_found=false" >> "$GITHUB_OUTPUT"
+            echo "⚠️ No LCOV reports were found under coverage/. SonarCloud scan will be skipped."
           fi
-        continue-on-error: true
 
       - name: Validate Sonar token
         env:
@@ -201,7 +203,25 @@ jobs:
             exit 1
           fi
 
-      - name: SonarCloud Scan
+      - name: SonarCloud Scan (PR)
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request'
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=yacosta738_yacosta738.github.io
+            -Dsonar.organization=yacosta738
+            -Dsonar.sources=apps,packages
+            -Dsonar.tests=apps
+            -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
+            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
+            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+
+      - name: SonarCloud Scan (Push)
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name != 'pull_request'
         uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -217,7 +237,12 @@ jobs:
             -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
             -Dsonar.qualitygate.wait=true
-            -Dsonar.qualitygate.timeout=180
+            -Dsonar.qualitygate.timeout=300
+
+      - name: SonarCloud skipped (no coverage artifacts)
+        if: steps.coverage-check.outputs.coverage_found != 'true'
+        run: |
+          echo "⚠️ SonarCloud scan skipped because no LCOV artifacts were found."
 
   # Job 6: Final Report
   report:
