@@ -1,6 +1,5 @@
 # Welcome to my personal portfolio made with [Astro](https://astro.build)
 
-[![Github Pages Astro CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/deploy.yml)
 ![Deploy Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/deploy.yml?label=deploy%20reliability)
 [![CI](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/yacosta738/yacosta738.github.io/actions/workflows/ci.yml)
 ![CI Reliability](https://img.shields.io/github/actions/workflow/status/yacosta738/yacosta738.github.io/ci.yml?label=ci%20reliability)
