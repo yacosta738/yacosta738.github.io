@@ -106,7 +106,7 @@ echo "HCAPTCHA_SECRET_KEY=YOUR_SECRET_KEY_HERE" >> .dev.vars
 
 ### Frontend Components
 
-- **`HCaptcha.astro`**: A reusable component at `apps/portfolio/src/components/atoms/HCaptcha.astro` that handles loading the hCaptcha script and rendering the widget.
+- **`HCaptcha.astro`**: A reusable component at `packages/shared/src/components/atoms/HCaptcha.astro` that handles loading the hCaptcha script and rendering the widget.
 - **Form Integrations**: The widget is integrated into the contact form (`Contact.astro`) and the newsletter form (`CtaNewsletterSubscription.astro`). Client-side scripts in these components ensure a token is present before allowing a form to be submitted.
 
 ### Backend Verification

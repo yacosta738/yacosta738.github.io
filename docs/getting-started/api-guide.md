@@ -34,7 +34,7 @@ Component (e.g., Contact.astro)
 
 ## 2. Service Layer Implementation
 
-A new service layer was created at `apps/portfolio/src/services/` to handle all API communication.
+A new service layer was created at `packages/shared/src/services/` to handle all API communication.
 
 ### File Structure
 ```text
@@ -165,8 +165,8 @@ The worker exposes the following endpoints.
 - **Documentation (5 files):** The original set of migration documents.
 
 ### Files Modified
-- `apps/portfolio/src/components/sections/Contact.astro`: Updated to use `contactService`.
-- `apps/portfolio/src/components/organisms/CtaNewsletterSubscription.astro`: Updated to use `newsletterService`.
+- `packages/shared/src/components/sections/Contact.astro`: Updated to use `contactService`.
+- `packages/shared/src/components/organisms/CtaNewsletterSubscription.astro`: Updated to use `newsletterService`.
 - `.env.example`: Added `API_URL`.
 
 ### Files to Delete
