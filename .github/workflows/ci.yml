@@ -35,7 +35,7 @@ jobs:
       cache-key: ${{ steps.setup.outputs.cache-hit }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -67,7 +67,7 @@ jobs:
         project: [portfolio, blog, api]
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -95,7 +95,7 @@ jobs:
         project: [portfolio, blog, api]
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -141,7 +141,7 @@ jobs:
             browser: chromium
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -150,7 +150,7 @@ jobs:
 
       - name: Download portfolio build
         if: matrix.app == 'portfolio'
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        uses: actions/download-artifact@v4
         with:
           name: portfolio-dist-${{ github.sha }}
           path: apps/portfolio/dist/
@@ -175,12 +175,12 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Download coverage artifacts
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        uses: actions/download-artifact@v4
         with:
           pattern: coverage-*
           path: coverage/
@@ -209,7 +209,7 @@ jobs:
 
       - name: SonarCloud Scan (PR)
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request'
-        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        uses: SonarSource/sonarcloud-github-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -228,7 +228,7 @@ jobs:
         id: sonar-main-scan
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
         continue-on-error: true
-        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
+        uses: SonarSource/sonarcloud-github-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -271,7 +271,7 @@ jobs:
       checks: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
 
       - name: Generate pipeline summary
         run: |
@@ -293,7 +293,7 @@ jobs:
 
       - name: Comment PR
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        uses: actions/github-script@v7
         with:
           script: |
             const status = {

@@ -45,7 +45,7 @@ runs:
       run: pnpm install --frozen-lockfile
     - name: Cache Playwright browsers
       id: playwright-cache
-      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+      uses: actions/cache@v4
       with:
         path: ~/.cache/ms-playwright
         key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-${{ inputs.browser }}
@@ -121,7 +121,7 @@ runs:
 
     - name: Upload test results
       if: always() && inputs.upload-results == 'true'
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4
+      uses: actions/upload-artifact@v6 #v4
       with:
         name: playwright-report-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
         path: apps/${{ inputs.app }}/playwright-report/
@@ -130,7 +130,7 @@ runs:
 
     - name: Upload test traces
       if: failure() && inputs.upload-results == 'true'
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4
+      uses: actions/upload-artifact@v6 #v4
       with:
         name: playwright-traces-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
         path: apps/${{ inputs.app }}/test-results/
