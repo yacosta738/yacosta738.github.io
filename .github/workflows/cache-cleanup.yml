@@ -28,7 +28,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
 
       - name: Get cache keys
         id: cache-keys
@@ -41,7 +41,7 @@ jobs:
           echo "Cache cleanup will be performed by age and size limits set in cache actions"
 
       - name: Cleanup old caches
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        uses: actions/github-script@v7
         with:
           script: |
             const { owner, repo } = context.repo;

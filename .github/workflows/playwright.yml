@@ -49,7 +49,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
       
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -73,18 +73,18 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Download all artifacts
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        uses: actions/download-artifact@v4
         with:
           path: all-reports
         continue-on-error: true
 
       - name: Publish Test Report
-        uses: dorny/test-reporter@8861569aa5348397e7a26b6dda744c17c9265478
+        uses: dorny/test-reporter@v1
         with:
           name: Playwright Tests
           path: "all-reports/**/results.xml"

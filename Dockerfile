@@ -1,11 +1,11 @@
 # Stage 1: Build the Astro application
-FROM node:22.21.0-slim@sha256:f9f7f95dcf1f007b007c4dcd44ea8f7773f931b71dc79d57c216e731c87a090b AS builder
+FROM node:22.22.0-slim AS builder
 
 # Set the working directory
 WORKDIR /app
 
 # Install pnpm with a pinned version
-RUN npm install -g pnpm@8.6.3
+RUN npm install -g pnpm@10.30.2
 
 # Copy dependency definition files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -26,7 +26,7 @@ COPY . .
 RUN pnpm build
 
 # Stage 2: Serve the static files with Caddy
-FROM caddy:2-alpine
+FROM caddy:2.8.4-alpine
 
 # Set the working directory
 WORKDIR /srv

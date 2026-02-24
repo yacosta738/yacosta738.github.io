@@ -3,6 +3,9 @@ packages:
   - packages/*
 
 catalog:
-  wrangler: ^4.67.0
+  wrangler: ^4.68.1
 
 minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - "@cloudflare/workers-types"
+  - wrangler

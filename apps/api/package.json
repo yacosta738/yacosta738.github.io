@@ -2,9 +2,9 @@
 	"name": "yap-api",
 	"version": "0.0.3",
 	"private": true,
-	"packageManager": "pnpm@10.30.1",
+	"packageManager": "pnpm@10.30.2",
 	"scripts": {
-		"build": "echo '🚀 Validating configuration...' && wrangler deploy --dry-run",
+		"build": "echo '\ud83d\ude80 Validating configuration...' && wrangler deploy --dry-run",
 		"check": "pnpm test:unit && pnpm build",
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
@@ -19,11 +19,11 @@
 		"@hono/swagger-ui": "0.5.3",
 		"@hono/zod-openapi": "1.2.2",
 		"chanfana": "^3.0.0",
-		"hono": "^4.12.1",
+		"hono": "^4.12.2",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20260228.0",
+		"@cloudflare/workers-types": "^4.20260303.0",
 		"@types/node": "25.3.0",
 		"@types/service-worker-mock": "^2.0.4",
 		"@vitest/coverage-v8": "^4.0.18",
