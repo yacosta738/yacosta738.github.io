@@ -29,4 +29,6 @@ interface PagefindUI {
 
 interface Window {
 	PagefindUI: PagefindUI;
+	getCaptchaToken?: (widgetId: string) => string | null;
+	resetCaptcha?: (widgetId: string) => void;
 }

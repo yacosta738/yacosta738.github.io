@@ -1,21 +1,10 @@
 ---
-/**
- * Ahrefs Analytics component.
- * This component injects the Ahrefs analytics script into the page using Partytown
- * for off-main-thread execution. It only renders if the `AHREFS_KEY` environment
- * variable is set.
- */
-import { AHREFS_KEY } from "astro:env/client";
+import type { ComponentProps } from "astro/types";
+import SharedAnalytics from "../../../../../packages/shared/src/components/atoms/Analytics.astro";
+
+const props = Astro.props as ComponentProps<typeof SharedAnalytics>;
 ---
 
-{
-	AHREFS_KEY && (
-		<script
-			type="text/partytown"
-			is:inline
-			src="https://analytics.ahrefs.com/analytics.js"
-			data-key={AHREFS_KEY}
-			async
-		/>
-	)
-}
+<SharedAnalytics {...props}>
+	<slot />
+</SharedAnalytics>

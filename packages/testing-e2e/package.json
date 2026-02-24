@@ -1,0 +1,10 @@
+{
+	"name": "@portfolio/testing-e2e",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"@axe-core/playwright": "4.11.1",
+		"@playwright/test": "1.58.2"
+	}
+}

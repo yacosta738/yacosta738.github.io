@@ -1,9 +1,1 @@
-import type { Lang } from "@/i18n";
-
-/**
- * Interface for tag filtering criteria
- */
-export interface TagCriteria {
-	lang?: Lang;
-	title?: string;
-}
+export * from "../../../../../packages/shared/src/core/tag/tag.criteria";

@@ -27,7 +27,31 @@ vi.mock("@/i18n/ui", () => ({
 	},
 }));
 
+vi.mock("../../../../../packages/shared/src/i18n/ui", () => ({
+	ui: {
+		en: {
+			hello: "Hello",
+			welcome: "Welcome {name}",
+			missing: "This exists in English",
+			repeat: "Hello {name}, {name}!",
+			complex: "Hello {name}, you are {age} years old.",
+		},
+		es: {
+			hello: "Hola",
+			welcome: "Bienvenido {name}",
+		},
+	},
+}));
+
 vi.mock("@/i18n/types", () => ({
+	DEFAULT_LOCALE: "en",
+	LOCALES: { en: "English", es: "Spanish" },
+	get SHOW_DEFAULT_LANG_IN_URL() {
+		return mockShowDefaultLang();
+	},
+}));
+
+vi.mock("../../../../../packages/shared/src/i18n/types", () => ({
 	DEFAULT_LOCALE: "en",
 	LOCALES: { en: "English", es: "Spanish" },
 	get SHOW_DEFAULT_LANG_IN_URL() {

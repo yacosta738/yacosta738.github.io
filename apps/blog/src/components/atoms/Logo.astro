@@ -1,31 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
-import { cn } from "@/lib/utils";
-import OptimizedPicture from "./OptimizedPicture.astro";
+import type { ComponentProps } from "astro/types";
+import SharedLogo from "../../../../../packages/shared/src/components/atoms/Logo.astro";
 
-interface Props extends HTMLAttributes<"a"> {
-	currentLocale: Lang;
-}
-const { class: className, currentLocale, ...attrs } = Astro.props as Props;
-const lang = currentLocale;
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const props = Astro.props as ComponentProps<typeof SharedLogo>;
 ---
 
-<a
-	href={translatePath("/", lang)}
-	class={cn("border-none flex items-center", className)}
-	{...attrs}
-	aria-label={t("nav.home") || "Go to homepage"}
->
-	<OptimizedPicture
-		src="/favicon.svg"
-		class="w-10 h-10 transition-transform hover:scale-110"
-		alt=""
-		height="40"
-		width="40"
-		loading="eager"
-		fetchpriority="high"
-	/>
-</a>
+<SharedLogo {...props}>
+	<slot />
+</SharedLogo>

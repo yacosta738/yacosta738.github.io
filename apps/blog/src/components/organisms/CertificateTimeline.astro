@@ -1,46 +1,10 @@
 ---
-/**
- * CertificateTimeline component.
- * This component renders a timeline of certificates by composing the `TimelineItem`
- * and `CertificateHeader` components.
- *
- * @prop {Certificate[]} certificates - An array of certificate objects to display.
- * @prop {Lang} locale - The locale to use for date formatting.
- */
-import CertificateHeader from "@/components/molecules/CertificateHeader.astro";
-import TimelineItem from "@/components/molecules/TimelineItem.astro";
-import type Certificate from "@/core/resume/certificate/certificate.model";
-import { type Lang } from "@/i18n";
+import type { ComponentProps } from "astro/types";
+import SharedCertificateTimeline from "../../../../../packages/shared/src/components/organisms/CertificateTimeline.astro";
 
-interface Props {
-	certificates: Certificate[];
-	locale: Lang;
-}
-
-const { certificates, locale } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedCertificateTimeline>;
 ---
 
-<div class="certificate-timeline">
-  {certificates.map((certificate) => (
-    <TimelineItem
-      startDate={certificate.date}
-      endDate={null}
-      locale={locale}
-      showDates={true}
-      variant="default"
-    >
-      <CertificateHeader
-        name={certificate.name}
-        issuer={certificate.issuer}
-        url={certificate.url}
-      />
-    </TimelineItem>
-  ))}
-</div>
-
-<style>
-  .certificate-timeline {
-    position: relative;
-    margin-top: 10px;
-  }
-</style>
+<SharedCertificateTimeline {...props}>
+	<slot />
+</SharedCertificateTimeline>

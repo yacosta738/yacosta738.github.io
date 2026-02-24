@@ -1,1 +1,1 @@
-export * from "./language.model";
+export * from "../../../../../../packages/shared/src/core/resume/language/index";

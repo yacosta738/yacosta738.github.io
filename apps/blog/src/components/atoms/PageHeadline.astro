@@ -1,18 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedPageHeadline from "../../../../../packages/shared/src/components/atoms/PageHeadline.astro";
 
-interface Props extends HTMLAttributes<"header"> {
-	title: string;
-}
-
-const { title, ...attrs } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedPageHeadline>;
 ---
 
-<header {...attrs} class={cn("relative overflow-hidden p-2 text-center",attrs.class)}>
-  <h1 class={cn(
-		"text-foreground text-3xl md:text-5xl font-bold leading-tight tracking-tight relative",
-		"transition-colors duration-350 animate-fadeIn font-heading text-center"
-	)}>{title}</h1>
-  <slot />
-</header>
+<SharedPageHeadline {...props}>
+	<slot />
+</SharedPageHeadline>

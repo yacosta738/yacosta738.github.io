@@ -1,4 +1,1 @@
-export const routes = {
-	category: "blog/category",
-	tag: "blog/tag",
-} as const;
+export * from "../../../../packages/shared/src/configs/route.path";

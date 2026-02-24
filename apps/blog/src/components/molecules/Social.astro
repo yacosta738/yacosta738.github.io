@@ -1,47 +1,10 @@
 ---
-/**
- * Social component.
- * This component displays a list of social media links in a fixed-position
- * sidebar. It uses the `Side` component for positioning and maps over an
- * array of social profiles to create the links.
- *
- * @prop {Profile[]} profiles - An array of social profile objects.
- * @prop {string} [class] - Additional CSS classes to apply to the `<ul>` element.
- */
-import type { HTMLAttributes } from "astro/types";
-import { Icon } from "astro-icon/components";
-import Side from "@/components/atoms/Side.astro";
-import { getSocialIcon } from "@/configs/social.consts";
-import type { Profile } from "@/core/resume";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedSocial from "../../../../../packages/shared/src/components/molecules/Social.astro";
 
-interface Props extends HTMLAttributes<"ul"> {
-	profiles: Array<Profile>;
-	class?: string;
-}
-const { profiles, class: className = "", ...attrs } = Astro.props as Props;
+const props = Astro.props as ComponentProps<typeof SharedSocial>;
 ---
 
-<Side show={true} orientation="left" class="hidden lg:block animate-fade-in-left animate-delay-700 animate-duration-slower">
-  <ul class={cn("social-links flex flex-col items-center m-0 p-0 list-none", className)} {...(attrs as HTMLAttributes<"ul">)}>
-    {
-      profiles.map((social, idx) => (
-        <li class={cn(idx === profiles.length - 1 ? "mb-5" : "", "") }>
-          <a
-            id={social.network.toLowerCase()}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="my-1.5 p-0.5 inline-flex items-center justify-center transition-all duration-200 ease-in-out hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-brand-accent focus:text-brand-accent"
-            aria-label={social.network}
-          >
-            <Icon name={getSocialIcon(social.network)} class="w-5 h-5" />
-          </a>
-        </li>
-      ))
-    }
-    <li aria-hidden="true" class="mt-2">
-      <span class="block w-px mx-auto" style="height: 90px; background-color: var(--color-slate)"></span>
-    </li>
-  </ul>
-</Side>
+<SharedSocial {...props}>
+	<slot />
+</SharedSocial>

@@ -6,8 +6,16 @@ import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n";
  */
 export function resolveLocaleFromUrl(url: URL, paramsLang?: string): Lang {
 	const localeSegment = url.pathname.split("/")[1];
-	const validLocales = Object.keys(LOCALES);
-	return (paramsLang ||
-		(validLocales.includes(localeSegment) ? localeSegment : undefined) ||
-		DEFAULT_LOCALE) as Lang;
+	const isLang = (value: string | undefined): value is Lang =>
+		typeof value === "string" && value in LOCALES;
+
+	if (isLang(paramsLang)) {
+		return paramsLang;
+	}
+
+	if (isLang(localeSegment)) {
+		return localeSegment;
+	}
+
+	return DEFAULT_LOCALE;
 }

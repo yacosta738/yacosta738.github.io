@@ -1,77 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
-import { type Lang, useTranslations } from "@/i18n";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedArticleCard from "../../../../../packages/shared/src/components/molecules/ArticleCard.astro";
 
-interface Props extends HTMLAttributes<"article"> {
-	title: string;
-	description: string;
-	url: string;
-	image?: ImageMetadata;
-	loading?: "lazy" | "eager";
-}
-const {
-	image,
-	title,
-	description,
-	url,
-	loading = "lazy",
-	...attrs
-} = Astro.props;
-const currentLocale = Astro.currentLocale as Lang;
-const t = useTranslations(currentLocale);
-
-// Extract target and rel from data attributes
-const isExternal = attrs["data-external"] === "true";
-const target = isExternal ? attrs["data-target"] || "_blank" : undefined;
-const rel = isExternal
-	? attrs["data-rel"] || "noopener nofollow ugc"
-	: "noopener nofollow ugc";
+const props = Astro.props as ComponentProps<typeof SharedArticleCard>;
 ---
 
-<article
-	class={cn(
-		"@container group relative flex aspect-video h-full w-full cursor-pointer flex-col overflow-hidden bg-background-surface rounded-lg shadow-md hover:shadow-lg focus-within:shadow-lg",
-		"transition-all duration-300 ease-in-out",
-		"transition-transform duration-500 hover:-translate-y-1 hover:scale-100",
-		attrs.class
-	)}
-	{...attrs}
->
-	<a
-		href={url}
-		rel={rel}
-		target={target}
-		class="h-full w-full"
-		aria-label={`${t("read.article")}: ${title}`}
-	>
-		<span class="sr-only">{title}</span>
-		{
-			image && (
-				<OptimizedPicture
-					src={image}
-					alt={title}
-					loading={loading}
-					inferSize
-					class="h-full w-full object-cover"
-				/>
-			)
-		}
-		<footer
-			class={cn(
-				"text-foreground",
-				"pointer-events-none absolute bottom-0 z-10 flex w-full flex-col gap-1 @sm:gap-2 bg-background-surface/90 p-2 @sm:p-3 @md:p-4 opacity-0",
-				"transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100",
-				"rounded-b-lg"
-			)}
-		>
-			<h2 data-test="article-title" class="text-base @sm:text-lg @md:text-xl font-medium line-clamp-2">
-				{title}
-			</h2>
-			<p class="flex flex-row items-center gap-1 @sm:gap-2 text-xs @sm:text-sm">
-				<span class="line-clamp-1 @sm:line-clamp-2 @md:line-clamp-3">{description}</span>
-			</p>
-		</footer>
-	</a>
-</article>
+<SharedArticleCard {...props}>
+	<slot />
+</SharedArticleCard>

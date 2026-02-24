@@ -530,6 +530,15 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@25.3.0)(happy-dom@20.7.0)(jiti@2.6.1)(jsdom@28.1.0)(lightningcss@1.31.1)(terser@5.44.1)(yaml@2.8.2)
 
+  packages/testing-e2e:
+    devDependencies:
+      '@axe-core/playwright':
+        specifier: 4.11.1
+        version: 4.11.1(playwright-core@1.58.2)
+      '@playwright/test':
+        specifier: 1.58.2
+        version: 1.58.2
+
 packages:
 
   '@acemir/cssom@0.9.31':

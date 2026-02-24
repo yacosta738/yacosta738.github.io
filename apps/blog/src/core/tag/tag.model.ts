@@ -1,5 +1,1 @@
-export default interface Tag {
-	id: string;
-	slug: string;
-	title: string;
-}
+export type { default } from "../../../../../packages/shared/src/core/tag/tag.model";

@@ -1,35 +1,10 @@
 ---
-import ByAuthor from "@/components/atoms/ByAuthor.astro";
-import FormattedDate from "@/components/atoms/FormattedDate.astro";
-import PostCategory from "@/components/atoms/PostCategory.astro";
-import PostTags from "@/components/molecules/PostTags.astro";
-import SocialMediaShare from "@/components/molecules/SocialMediaShare.astro";
-import type Article from "@/core/article/article.model";
-import { type Lang } from "@/i18n";
+import type { ComponentProps } from "astro/types";
+import SharedPostFooter from "../../../../../packages/shared/src/components/organisms/PostFooter.astro";
 
-interface Props {
-	post: Article;
-}
-
-const { post } = Astro.props;
-const currentLocale = Astro.currentLocale as Lang;
+const props = Astro.props as ComponentProps<typeof SharedPostFooter>;
 ---
 
-<div class="flex flex-col justify-center mt-8 not-prose">
-	<SocialMediaShare
-		url={Astro.request.url}
-		title={post.title}
-		description={post.description}
-		tags={post.tags.map((tag) => tag.title)}
-	/>
-	<div
-		class="flex justify-between flex-wrap gap-2 border-t border-t-secondary-foreground-light dark:border-t-secondary-foreground-dark pt-6 mt-6"
-	>
-		<div class="flex flex-col gap-2">
-			<ByAuthor author={post.author} currentLocale={currentLocale} />
-			<FormattedDate date={post.date} currentLocale={currentLocale} />
-			{"category" in post && <PostCategory category={post.category} currentLocale={currentLocale} />}
-		</div>
-		<PostTags tags={post.tags} currentLocale={currentLocale} />
-	</div>
-</div>
+<SharedPostFooter {...props}>
+	<slot />
+</SharedPostFooter>

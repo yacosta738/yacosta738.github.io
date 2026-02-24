@@ -1,5 +1,10 @@
 ---
-// Minimal stub Toast component to satisfy imports during type checking.
-// Replace with the real implementation if available.
+import type { ComponentProps } from "astro/types";
+import SharedToast from "../../../../../packages/shared/src/components/molecules/Toast.astro";
+
+const props = Astro.props as ComponentProps<typeof SharedToast>;
 ---
-<div aria-live="polite" class="sr-only">Toast placeholder</div>
+
+<SharedToast {...props}>
+	<slot />
+</SharedToast>

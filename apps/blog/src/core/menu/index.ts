@@ -1,3 +1,1 @@
-export * from "./menu.constants";
-export * from "./menu.service";
-export * from "./menu.type";
+export * from "../../../../../packages/shared/src/core/menu";

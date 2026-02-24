@@ -1,65 +1,10 @@
 ---
-/**
- * Badge component.
- * A flexible badge component that can be customized with different variants and sizes.
- * It supports `primary`, `secondary`, and `accent` color variants, and `sm`, `md`, `lg` sizes.
- * Additional CSS classes can be passed via the `class` prop.
- *
- * @prop {string} [variant="primary"] - The color variant of the badge.
- * @prop {string} [size="md"] - The size of the badge.
- * @prop {string} [class] - Additional CSS classes to apply to the badge.
- */
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedBadge from "../../../../../packages/shared/src/components/atoms/Badge.astro";
 
-export interface Props extends HTMLAttributes<"span"> {
-	variant?: "primary" | "secondary" | "accent";
-	size?: "sm" | "md" | "lg";
-	class?: string;
-}
-
-const {
-	variant = "primary",
-	size = "md",
-	class: className,
-	...attrs
-} = Astro.props;
-
-const baseStyles = {
-	primary: "badge-primary",
-	secondary:
-		"bg-blue-50 text-blue-900 border border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-600",
-	accent: "bg-brand-accent/10 text-brand-accent border border-brand-accent/30",
-};
-
-const sizeStyles = {
-	sm: "px-2 py-0.5 text-xs",
-	md: "px-3 py-1 text-xs",
-	lg: "px-4 py-1.5 text-sm",
-};
-
-const classes = cn(
-	"inline-flex items-center gap-1 rounded-md font-medium",
-	baseStyles[variant],
-	sizeStyles[size],
-	className,
-);
+const props = Astro.props as ComponentProps<typeof SharedBadge>;
 ---
 
-<span class={classes} {...attrs}>
+<SharedBadge {...props}>
 	<slot />
-</span>
-
-<style>
-	.badge-primary {
-		background-color: #f1f5f9; /* slate-100 equivalent */
-		color: #1e293b; /* slate-800 equivalent */
-		border: 1px solid #94a3b8; /* slate-400 equivalent */
-	}
-	
-	:global(.dark) .badge-primary {
-		background-color: var(--bg-secondary);
-		color: var(--text-primary);
-		border-color: var(--border-color);
-	}
-</style>
+</SharedBadge>

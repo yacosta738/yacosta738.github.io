@@ -1,35 +1,10 @@
 ---
-/**
- * InterestCard component.
- * This component displays a card for a single interest, showing its name
- * and a list of related keywords as badges.
- *
- * @prop {Interest} interest - The interest object to display.
- */
-import type Interest from "@/core/resume/interest/interest.model";
-import Badge from "../atoms/Badge.astro";
+import type { ComponentProps } from "astro/types";
+import SharedInterestCard from "../../../../../packages/shared/src/components/molecules/InterestCard.astro";
 
-type Props = {
-	interest: Interest;
-};
-
-const { interest } = Astro.props;
+const props = Astro.props as ComponentProps<typeof SharedInterestCard>;
 ---
 
-<div class="group relative rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
-  <div class="space-y-3">
-    <h3 class="text-base font-medium text-foreground dark:text-foreground-dark">
-      {interest.name}
-    </h3>
-    
-    {interest.keywords && interest.keywords.length > 0 && (
-      <div class="flex flex-wrap gap-2">
-        {interest.keywords.map((keyword) => (
-          <>
-            <Badge size="sm" class="text-xs font-medium">{keyword}</Badge>
-          </>
-        ))}
-      </div>
-    )}
-  </div>
-</div>
+<SharedInterestCard {...props}>
+	<slot />
+</SharedInterestCard>

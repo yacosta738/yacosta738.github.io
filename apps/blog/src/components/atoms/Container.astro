@@ -1,22 +1,10 @@
 ---
-/**
- * Container component.
- * A basic layout component that acts as a flexbox container. It can be extended
- * with additional CSS classes.
- *
- * @prop {string} [class] - Additional CSS classes to apply to the container div.
- */
-import type { HTMLAttributes } from "astro/types";
-import { cn } from "@/lib/utils";
+import type { ComponentProps } from "astro/types";
+import SharedContainer from "../../../../../packages/shared/src/components/atoms/Container.astro";
 
-export interface Props extends HTMLAttributes<"div"> {
-	class?: string;
-}
-
-const { class: className, ...attrs } = Astro.props;
-const classes = cn("flex", className);
+const props = Astro.props as ComponentProps<typeof SharedContainer>;
 ---
 
-<div class={classes} {...attrs}>
+<SharedContainer {...props}>
 	<slot />
-</div>
+</SharedContainer>

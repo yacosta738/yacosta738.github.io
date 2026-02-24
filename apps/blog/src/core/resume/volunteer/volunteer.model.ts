@@ -1,9 +1,2 @@
-export default interface Volunteer {
-	organization: string;
-	position: string;
-	url?: string;
-	startDate: Date;
-	endDate?: Date | null;
-	summary?: string;
-	highlights?: string[];
-}
+export type { default } from "../../../../../../packages/shared/src/core/resume/volunteer/volunteer.model";
+export * from "../../../../../../packages/shared/src/core/resume/volunteer/volunteer.model";

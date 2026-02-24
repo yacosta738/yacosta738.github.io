@@ -1,23 +1,7 @@
 ---
-/**
- * LocalesHomeList component.
- * This component generates a list (`<li>`) of links to the homepage of each
- * available language. It is likely intended for use on a 404 page or a
- * dedicated language selection page. It does not accept any props.
- */
-import { LOCALES } from "@/i18n";
+import SharedLocalesHomeList from "../../../../../packages/shared/src/i18n/components/LocalesHomeList.astro";
 ---
 
-{
-  Object.entries(LOCALES).map(([lang, { label }]) => (
-    <li>
-      <a
-        href={`/${lang}/`}
-        onclick={`localStorage.selectedLang = "${lang}"`}
-        dir={LOCALES[lang].dir || null}
-      >
-        {label}
-      </a>
-    </li>
-  ))
-}
+<SharedLocalesHomeList {...Astro.props}>
+	<slot />
+</SharedLocalesHomeList>

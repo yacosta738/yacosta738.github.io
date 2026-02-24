@@ -111,7 +111,7 @@ export async function verifyHCaptcha(
 		}
 
 		// Parse the response
-		const data = (await response.json()) as HCaptchaVerifyResponse;
+		const data: HCaptchaVerifyResponse = await response.json();
 		const normalizedExpectedHostnames = (expectedHostnames || [])
 			.map((hostname) => hostname.trim().toLowerCase())
 			.filter(Boolean);

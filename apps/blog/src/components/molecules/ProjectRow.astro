@@ -1,74 +1,10 @@
 ---
-import type { HTMLAttributes } from "astro/types";
-import { Icon } from "astro-icon/components";
-import { type Lang, useTranslations } from "@/i18n";
-import type { SortableProject } from "@/lib/project-sorter";
-import { cn } from "@/lib/utils";
-import Badge from "../atoms/Badge.astro";
-import Link from "../atoms/Link.astro";
+import type { ComponentProps } from "astro/types";
+import SharedProjectRow from "../../../../../packages/shared/src/components/molecules/ProjectRow.astro";
 
-interface Props extends HTMLAttributes<"tr"> {
-	project: SortableProject;
-}
-
-const { project, class: className, ...attrs } = Astro.props;
-const currentLocale = Astro.params.lang as Lang;
-const t = useTranslations(currentLocale);
-
-const displayYear = project._displayYear || project.metadata?.year || "";
-const projectUrl = project.metadata?.url || project.url;
-const hasValidUrl = projectUrl && projectUrl !== "#";
+const props = Astro.props as ComponentProps<typeof SharedProjectRow>;
 ---
 
-<tr class={cn("border-b border-border hover:bg-background-secondary", className)} {...attrs}>
-  <td class="py-4 px-6">
-    {displayYear && (
-      <span class="text-primary font-medium" title={t("projects.yearHint") || "Project year"}>
-        {displayYear}
-      </span>
-    )}
-  </td>
-
-  <th scope="row" class="py-4 px-6 font-bold text-left">
-    {project.name}
-  </th>
-
-  <td class="py-4 px-6 hidden md:table-cell">
-    {project.metadata?.company}
-  </td>
-
-  <td class="py-4 px-6 hidden lg:table-cell">
-    {project.metadata?.tech?.length ? (
-      <ul class="flex flex-wrap gap-2">
-        {project.metadata.tech.map((tech) => (
-          <li>
-            <Badge>{tech}</Badge>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <span class="text-foreground-muted text-sm">{t("projects.noTech") || "Not specified"}</span>
-    )}
-  </td>
-
-
-  <td class="py-4 px-6 text-right">
-    {hasValidUrl ? (
-      <Link
-        href={projectUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
-        aria-label={t("projects.viewProject", { name: project.name }) || `View project ${project.name}`}
-      >
-        <span class="sr-only">{t("projects.viewProject", { name: project.name }) || `View project ${project.name}`}</span>
-        <Icon name="lucide:external-link" class="size-5" aria-hidden="true" />
-      </Link>
-    ) : (
-      <span class="text-foreground-muted inline-flex items-center gap-2" aria-label={t("projects.noLink") || "No link available"}>
-        <Icon name="lucide:unlink" class="size-5" aria-hidden="true" />
-        <span class="sr-only">{t("projects.noLink") || "No link available"}</span>
-      </span>
-    )}
-  </td>
-</tr>
+<SharedProjectRow {...props}>
+	<slot />
+</SharedProjectRow>
