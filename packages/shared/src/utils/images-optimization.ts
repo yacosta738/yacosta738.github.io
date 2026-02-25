@@ -84,7 +84,6 @@ const parseRatioFromDelimitedString = (value: string): number | undefined => {
 	return numerator / denominator;
 };
 
-/* ******* */
 const config = {
 	// Reserved for future responsive tuning when source image is very small.
 	imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -344,7 +343,6 @@ const getBreakpoints = ({
 	return [];
 };
 
-/* ** */
 export const astroAssetsOptimizer: ImagesOptimizer = async (
 	image,
 	breakpoints,
@@ -505,7 +503,6 @@ const resolveAspectRatioAndDimensions = (
 	};
 };
 
-/* ** */
 export const unpicOptimizer: ImagesOptimizer = async (
 	image,
 	breakpoints,
@@ -543,7 +540,6 @@ export const unpicOptimizer: ImagesOptimizer = async (
 	);
 };
 
-/* ** */
 export async function getImagesOptimized(
 	image: ImageMetadata | string,
 	{
