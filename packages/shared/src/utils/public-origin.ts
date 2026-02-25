@@ -16,6 +16,7 @@ export const isLocalOrPrivateHostname = (hostname: string): boolean => {
 	if (value.startsWith("[") && value.endsWith("]")) {
 		value = value.slice(1, -1);
 	}
+	value = value.replace(/\.+$/, "");
 
 	if (
 		value === "localhost" ||
