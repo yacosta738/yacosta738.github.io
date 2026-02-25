@@ -2,7 +2,9 @@
 // Resolve the site URL from common hosting provider env vars.
 // Precedence (first found): VERCEL_URL, URL (Netlify), DEPLOY_PRIME_URL (Netlify PRs),
 // CF_PAGES_URL (Cloudflare Pages), SITE_URL (manual), SITE_URL (env)
-// Fallback: http://localhost:4321
+// Fallbacks:
+// - Production: https://yunielacosta.com
+// - Development: http://localhost:4321
 const trimTrailingSlashes = (value: string): string => {
 	let end = value.length;
 	while (end > 0 && value.at(end - 1) === "/") {
@@ -96,18 +98,22 @@ export const resolveSiteUrl = () => {
 	// Known provider env vars (checked in order of preference)
 	const candidates = [
 		process.env.SITE_URL,
+		process.env.DOMAIN,
 		process.env.VERCEL_PROJECT_PRODUCTION_URL, // Vercel production domain
 		process.env.VERCEL_URL, // vercel provides host without protocol
 		process.env.VERCEL_BRANCH_URL, // Vercel branch domain
 		process.env.URL, // Netlify exposes this
 		process.env.DEPLOY_PRIME_URL, // Netlify preview
 		process.env.CF_PAGES_URL, // Cloudflare Pages
-		process.env.HOST, // generic
 	];
 
 	for (const raw of candidates) {
 		if (!raw) continue;
 		return normalizeCandidate(String(raw));
+	}
+
+	if (process.env.NODE_ENV === "production") {
+		return "https://yunielacosta.com";
 	}
 
 	return "http://localhost:4321";

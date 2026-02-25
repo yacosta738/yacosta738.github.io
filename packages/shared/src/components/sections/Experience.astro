@@ -28,6 +28,49 @@ interface GroupedCompany {
 	positions: Work[];
 }
 
+const isCurrentPosition = (position: Work): boolean => {
+	return position.endDate === null || position.endDate === undefined;
+};
+
+const sortPositionsByRecency = (a: Work, b: Work): number => {
+	const aIsCurrent = isCurrentPosition(a);
+	const bIsCurrent = isCurrentPosition(b);
+
+	if (aIsCurrent !== bIsCurrent) {
+		return aIsCurrent ? -1 : 1;
+	}
+
+	return b.startDate.getTime() - a.startDate.getTime();
+};
+
+const getCompanySortKey = (
+	group: GroupedCompany,
+): { hasCurrentRole: boolean; latestRelevantDate: number } => {
+	const currentRoles = group.positions.filter(isCurrentPosition);
+
+	if (currentRoles.length > 0) {
+		const latestCurrentStartDate = Math.max(
+			...currentRoles.map((position) => position.startDate.getTime()),
+		);
+
+		return {
+			hasCurrentRole: true,
+			latestRelevantDate: latestCurrentStartDate,
+		};
+	}
+
+	const latestClosedDate = Math.max(
+		...group.positions.map((position) => {
+			return position.endDate?.getTime() ?? position.startDate.getTime();
+		}),
+	);
+
+	return {
+		hasCurrentRole: false,
+		latestRelevantDate: latestClosedDate,
+	};
+};
+
 const { work } = Astro.props as Props;
 const currentLocale = Astro.params.lang as Lang;
 const t = useTranslations(currentLocale);
@@ -50,19 +93,22 @@ const groupedWork: Record<string, GroupedCompany> = work.reduce(
 	{} as Record<string, GroupedCompany>,
 );
 
-// Sort positions within each company by start date (most recent first)
+// Sort positions within each company: open roles first, then by recency.
 Object.values(groupedWork).forEach((group: GroupedCompany) => {
-	group.positions.sort(
-		(a: Work, b: Work) => b.startDate.getTime() - a.startDate.getTime(),
-	);
+	group.positions.sort(sortPositionsByRecency);
 });
 
-// Convert to array and sort by most recent position start date
+// Sort companies: open roles first, then most recent activity.
 const sortedCompanies: GroupedCompany[] = Object.values(groupedWork).sort(
 	(a: GroupedCompany, b: GroupedCompany) => {
-		const aLatest = a.positions[0].startDate.getTime();
-		const bLatest = b.positions[0].startDate.getTime();
-		return bLatest - aLatest;
+		const aSortKey = getCompanySortKey(a);
+		const bSortKey = getCompanySortKey(b);
+
+		if (aSortKey.hasCurrentRole !== bSortKey.hasCurrentRole) {
+			return aSortKey.hasCurrentRole ? -1 : 1;
+		}
+
+		return bSortKey.latestRelevantDate - aSortKey.latestRelevantDate;
 	},
 );
 ---

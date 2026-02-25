@@ -97,6 +97,14 @@ const getHostname = (urlStr?: string) => {
 		return "";
 	}
 };
+
+const isLocalhostHost = (hostname: string): boolean => {
+	return hostname === "localhost" || hostname === "127.0.0.1";
+};
+
+const alternatesOrigin =
+	Astro.site && !isLocalhostHost(Astro.site.hostname) ? Astro.site.origin : "";
+const canonicalHref = `${alternatesOrigin}${Astro.url.pathname}`;
 // Show search only on blog pages (paths that include '/blog')
 const showSearch = Astro.url?.pathname?.includes("/blog");
 ---
@@ -191,7 +199,7 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <link rel="dns-prefetch" href="https://newassets.hcaptcha.com" />
 
     <!-- SEO: Canonical URL (clean, without query parameters) -->
-    <link rel="canonical" href={`${Astro.url.origin}${Astro.url.pathname}`} />
+    <link rel="canonical" href={canonicalHref} />
 
     <!-- Additional SEO meta tags -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -204,7 +212,7 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
         <link
           rel="alternate"
           hreflang={LOCALES[props.lang].lang || props.lang}
-          href={Astro.site?.origin + props.path}
+          href={`${alternatesOrigin}${props.path}`}
         />
       ))
     }

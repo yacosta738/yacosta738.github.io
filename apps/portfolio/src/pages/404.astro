@@ -5,15 +5,16 @@
 import { DEFAULT_LOCALE, LOCALES } from "@/i18n";
 
 const langs = Object.keys(LOCALES);
-const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const baseUrl = "/";
 const defaultLocale = DEFAULT_LOCALE;
+const canonicalHref = "/";
 ---
 
 <html lang={DEFAULT_LOCALE}>
   <head>
     <meta charset="UTF-8" />
     <title>404 PAGE NOT FOUND</title>
-    <link rel="canonical" href={Astro.site} />
+    <link rel="canonical" href={canonicalHref} />
 
     <noscript>
       <meta

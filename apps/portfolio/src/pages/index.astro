@@ -18,8 +18,16 @@ import {
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const langs = Object.keys(LOCALES);
-const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const baseUrl = "/";
 const defaultLocale = DEFAULT_LOCALE;
+const alternatesOrigin =
+	Astro.site &&
+	Astro.site.hostname !== "localhost" &&
+	Astro.site.hostname !== "127.0.0.1"
+		? Astro.site.origin
+		: "";
+const ogImage = `${alternatesOrigin}/ogp.png`;
+const ogUrl = `${alternatesOrigin}/${defaultLocale}/`;
 ---
 
 <html lang={DEFAULT_LOCALE}>
@@ -33,7 +41,7 @@ const defaultLocale = DEFAULT_LOCALE;
         <link
             rel="alternate"
             hreflang={LOCALES[props.lang].lang || props.lang}
-            href={Astro.site?.origin + props.path}
+            href={`${alternatesOrigin}${props.path}`}
         />
     ))
   }
@@ -49,8 +57,8 @@ const defaultLocale = DEFAULT_LOCALE;
   <meta property="og:title" content={t(SITE_TITLE)} />
   <meta property="og:site_name" content={t(SITE_TITLE)} />
   <meta property="og:description" content={t(SITE_DESCRIPTION)} />
-  <meta property="og:image" content={Astro.site + "ogp.png"} />
-  <meta property="og:url" content={Astro.url} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={ogUrl} />
   <meta property="og:locale" content={DEFAULT_LOCALE} />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content={t(X_ACCOUNT)} />
