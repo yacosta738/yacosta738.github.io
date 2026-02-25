@@ -20,17 +20,18 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 	// Create slug from title with ReDoS-safe transformations
 	// Limit input length to prevent excessive processing
 	const maxLength = 200;
-	const truncatedTitle =
-		title.length > maxLength ? title.slice(0, maxLength) : title;
+	let truncatedTitle = title;
+	if (truncatedTitle.length > maxLength) {
+		truncatedTitle = truncatedTitle.slice(0, maxLength);
+	}
 
 	const slugFromTitle = truncatedTitle
 		.toLowerCase()
 		.normalize("NFD")
 		.replaceAll(/[\u0300-\u036f]/g, "")
-		.replace(/[^a-z0-9]+/g, "-")
+		.replaceAll(/[^a-z0-9]+/g, "-")
 		// Remove leading/trailing dashes with bounded operations
-		.replace(/^-/, "")
-		.replace(/-$/, "");
+		.replaceAll(/^-+|-+$/g, "");
 
 	let slug = fallbackSlug;
 	if (slugFromTitle.length > 0) {

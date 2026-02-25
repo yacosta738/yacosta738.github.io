@@ -122,13 +122,15 @@ describe("ArticleService", () => {
 	beforeEach(() => {
 		// Mock the getCollection to simulate filtering for both collections
 		vi.mocked(getCollection).mockImplementation(
-			async (collection: string, filter) => {
+			async (collection: string, entryFilter) => {
 				const source =
 					collection === "externalArticles"
 						? mockExternalArticles
 						: mockArticles;
-				if (filter) {
-					return source.filter((entry) => filter(entry)) as any;
+				if (entryFilter) {
+					return source.filter((entry) => {
+						return Boolean(entryFilter(entry));
+					}) as any;
 				}
 				return source as any;
 			},
@@ -245,15 +247,17 @@ describe("ArticleService", () => {
 
 		it("should return false if no articles exist that are not drafts", async () => {
 			vi.mocked(getCollection).mockImplementation(
-				async (_collection, filter) => {
+				async (_collection, entryFilter) => {
 					const allDrafts = [
 						{
 							id: "en/article-1",
 							data: { draft: true },
 						},
 					];
-					if (filter) {
-						return allDrafts.filter((entry) => filter(entry)) as any;
+					if (entryFilter) {
+						return allDrafts.filter((entry) => {
+							return Boolean(entryFilter(entry));
+						}) as any;
 					}
 					return allDrafts as any;
 				},

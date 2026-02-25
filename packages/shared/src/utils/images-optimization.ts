@@ -11,20 +11,25 @@ type Layout =
 	| "responsive"
 	| "contained";
 
+type Nullable<T> = T | null | undefined;
+type ImageSource = string | ImageMetadata;
+type DimensionInput = string | number;
+type OptionalImageDimension = Nullable<DimensionInput>;
+
 export type ImageProps = Omit<HTMLAttributes<"img">, "src"> & {
-	src?: string | ImageMetadata | null;
-	width?: string | number | null;
-	height?: string | number | null;
-	alt?: string | null;
-	loading?: "eager" | "lazy" | null;
-	decoding?: "sync" | "async" | "auto" | null;
+	src?: Nullable<ImageSource>;
+	width?: OptionalImageDimension;
+	height?: OptionalImageDimension;
+	alt?: Nullable<string>;
+	loading?: Nullable<"eager" | "lazy">;
+	decoding?: Nullable<"sync" | "async" | "auto">;
 	style?: string;
-	srcset?: string | null;
-	sizes?: string | null;
-	fetchpriority?: "high" | "low" | "auto" | null;
+	srcset?: Nullable<string>;
+	sizes?: Nullable<string>;
+	fetchpriority?: Nullable<"high" | "low" | "auto">;
 	layout?: Layout;
-	widths?: number[] | null;
-	aspectRatio?: string | number | null;
+	widths?: Nullable<number[]>;
+	aspectRatio?: Nullable<string | number>;
 	objectPosition?: string;
 	format?: string;
 };
@@ -40,7 +45,45 @@ export type ImagesOptimizer = (
 type AspectRatioInput = number | string | null | undefined;
 type OptionalStyleValue = string | undefined;
 
-/* ******* */
+const getRatioSeparatorIndex = (value: string): number => {
+	const separators = [value.indexOf(":"), value.indexOf("/")].filter(
+		(index) => index >= 0,
+	);
+
+	if (separators.length === 0) {
+		return -1;
+	}
+
+	return Math.min(...separators);
+};
+
+const parseRatioValue = (value: string): number | undefined => {
+	const parsed = Number(value);
+	return parsed > 0 && Number.isFinite(parsed) ? parsed : undefined;
+};
+
+const parseRatioFromDelimitedString = (value: string): number | undefined => {
+	const separatorIndex = getRatioSeparatorIndex(value);
+	if (separatorIndex === -1) {
+		return undefined;
+	}
+
+	const left = value.slice(0, separatorIndex).trim();
+	const right = value.slice(separatorIndex + 1).trim();
+	const numerator = parseRatioValue(left);
+	const denominator = parseRatioValue(right);
+
+	if (
+		numerator === undefined ||
+		denominator === undefined ||
+		denominator === 0
+	) {
+		return undefined;
+	}
+
+	return numerator / denominator;
+};
+
 const config = {
 	// Reserved for future responsive tuning when source image is very small.
 	imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
@@ -73,29 +116,28 @@ const computeHeight = (width: number, aspectRatio: number) => {
 export const parseAspectRatio = (
 	aspectRatio: AspectRatioInput,
 ): number | undefined => {
-	if (typeof aspectRatio === "number") return aspectRatio;
+	if (typeof aspectRatio === "number") {
+		return Number.isFinite(aspectRatio) && aspectRatio > 0
+			? aspectRatio
+			: undefined;
+	}
 
 	if (typeof aspectRatio === "string") {
 		const s = aspectRatio.trim();
-		if (s.length === 0) return undefined;
-
-		const separators = [s.indexOf(":"), s.indexOf("/")].filter(
-			(index) => index >= 0,
-		);
-		const sepIndex = separators.length > 0 ? Math.min(...separators) : -1;
-		if (sepIndex !== -1) {
-			const left = s.slice(0, sepIndex).trim();
-			const right = s.slice(sepIndex + 1).trim();
-			const num = Number(left);
-			const den = Number(right);
-			if (!Number.isNaN(num) && !Number.isNaN(den) && den !== 0)
-				return num / den;
-
+		if (s.length === 0) {
 			return undefined;
 		}
 
-		const numericValue = Number.parseFloat(s);
-		if (!Number.isNaN(numericValue)) return numericValue;
+		const ratioSeparatorIndex = getRatioSeparatorIndex(s);
+		if (ratioSeparatorIndex !== -1) {
+			const parsed = parseRatioFromDelimitedString(s);
+			return parsed !== undefined && parsed > 0 ? parsed : undefined;
+		}
+
+		const numericValue = parseRatioValue(s);
+		if (numericValue !== undefined && numericValue > 0) {
+			return numericValue;
+		}
 	}
 
 	return undefined;
@@ -133,13 +175,103 @@ export const getSizes = (
 const pixelate = (value?: number) =>
 	value || value === 0 ? `${value}px` : undefined;
 
+const isBackgroundImageUrl = (background: string | undefined): boolean => {
+	return (
+		background?.startsWith("https:") === true ||
+		background?.startsWith("http:") === true ||
+		background?.startsWith("data:") === true
+	);
+};
+
+const getBackgroundStyleEntries = (
+	background: string | undefined,
+): Array<[prop: string, value: OptionalStyleValue]> => {
+	if (isBackgroundImageUrl(background)) {
+		return [
+			["background-image", `url(${background})`],
+			["background-size", "cover"],
+			["background-repeat", "no-repeat"],
+		];
+	}
+
+	return [["background", background]];
+};
+
+const getLayoutStyleEntries = ({
+	layout,
+	width,
+	height,
+	aspectRatio,
+	objectFit,
+	objectPosition,
+}: {
+	layout: Layout | undefined;
+	width: number | undefined;
+	height: number | undefined;
+	aspectRatio: string | undefined;
+	objectFit?: string;
+	objectPosition?: string;
+}): Array<[prop: string, value: OptionalStyleValue]> => {
+	if (layout === undefined) {
+		return [];
+	}
+
+	switch (layout) {
+		case "fixed": {
+			const entries: Array<[prop: string, value: OptionalStyleValue]> = [
+				["width", pixelate(width)],
+				["height", pixelate(height)],
+			];
+			if (objectPosition === undefined) {
+				entries.push(["object-position", "top left"]);
+			}
+			return entries;
+		}
+		case "constrained":
+			return [
+				["max-width", pixelate(width)],
+				["max-height", pixelate(height)],
+				["aspect-ratio", aspectRatio],
+				["width", "100%"],
+			];
+		case "fullWidth":
+			return [
+				["width", "100%"],
+				["aspect-ratio", aspectRatio],
+				["height", pixelate(height)],
+			];
+		case "responsive":
+			return [
+				["width", "100%"],
+				["height", "auto"],
+				["aspect-ratio", aspectRatio],
+			];
+		case "contained": {
+			const entries: Array<[prop: string, value: OptionalStyleValue]> = [
+				["max-width", "100%"],
+				["max-height", "100%"],
+				["aspect-ratio", aspectRatio],
+			];
+			if (objectFit === undefined) {
+				entries.push(["object-fit", "contain"]);
+			}
+			return entries;
+		}
+		case "cover":
+			return [
+				["max-width", "100%"],
+				["max-height", "100%"],
+			];
+	}
+};
+
 const getStyle = ({
 	width,
 	height,
 	aspectRatio,
 	layout,
-	objectFit = "cover",
-	objectPosition = "center",
+	objectFit,
+	objectPosition,
 	background,
 }: {
 	width?: number;
@@ -147,71 +279,30 @@ const getStyle = ({
 	aspectRatio?: number;
 	objectFit?: string;
 	objectPosition?: string;
-	layout?: string;
+	layout?: Layout;
 	background?: string;
 }) => {
 	const aspectRatioValue = aspectRatio ? `${aspectRatio}` : undefined;
+	const baseStyleEntries: Array<[prop: string, value: OptionalStyleValue]> = [
+		["object-fit", objectFit ?? "cover"],
+		["object-position", objectPosition ?? "center"],
+	];
 	const styleEntries: Array<[prop: string, value: OptionalStyleValue]> = [
-		["object-fit", objectFit],
-		["object-position", objectPosition],
+		...baseStyleEntries,
+		...getBackgroundStyleEntries(background),
+		...getLayoutStyleEntries({
+			layout,
+			width,
+			height,
+			aspectRatio: aspectRatioValue,
+			objectFit,
+			objectPosition,
+		}),
 	];
 
-	// If background is a URL, set it to cover the image and not repeat
-	if (
-		background?.startsWith("https:") ||
-		background?.startsWith("http:") ||
-		background?.startsWith("data:")
-	) {
-		styleEntries.push(
-			["background-image", `url(${background})`],
-			["background-size", "cover"],
-			["background-repeat", "no-repeat"],
-		);
-	} else {
-		styleEntries.push(["background", background]);
-	}
-	if (layout === "fixed") {
-		styleEntries.push(
-			["width", pixelate(width)],
-			["height", pixelate(height)],
-			["object-position", "top left"],
-		);
-	}
-	if (layout === "constrained") {
-		styleEntries.push(
-			["max-width", pixelate(width)],
-			["max-height", pixelate(height)],
-			["aspect-ratio", aspectRatioValue],
-			["width", "100%"],
-		);
-	}
-	if (layout === "fullWidth") {
-		styleEntries.push(
-			["width", "100%"],
-			["aspect-ratio", aspectRatioValue],
-			["height", pixelate(height)],
-		);
-	}
-	if (layout === "responsive") {
-		styleEntries.push(
-			["width", "100%"],
-			["height", "auto"],
-			["aspect-ratio", aspectRatioValue],
-		);
-	}
-	if (layout === "contained") {
-		styleEntries.push(
-			["max-width", "100%"],
-			["max-height", "100%"],
-			["object-fit", "contain"],
-			["aspect-ratio", aspectRatioValue],
-		);
-	}
-	if (layout === "cover") {
-		styleEntries.push(["max-width", "100%"], ["max-height", "100%"]);
-	}
-
-	const styles = Object.fromEntries(styleEntries.filter(([, value]) => value));
+	const styles = Object.fromEntries(
+		styleEntries.filter(([, value]) => value !== undefined),
+	);
 
 	return Object.entries(styles)
 		.map(([key, value]) => `${key}: ${value};`)
@@ -255,7 +346,6 @@ const getBreakpoints = ({
 	return [];
 };
 
-/* ** */
 export const astroAssetsOptimizer: ImagesOptimizer = async (
 	image,
 	breakpoints,
@@ -301,9 +391,9 @@ const toNumberOrUndefined = (
 };
 
 const resolveBaseDimensions = (
-	image: ImageMetadata | string,
-	width: string | number | null | undefined,
-	height: string | number | null | undefined,
+	image: ImageSource,
+	width: OptionalImageDimension,
+	height: OptionalImageDimension,
 ): { width: number | undefined; height: number | undefined } => {
 	let resolvedWidth = toNumberOrUndefined(width);
 	let resolvedHeight = toNumberOrUndefined(height);
@@ -318,8 +408,77 @@ const resolveBaseDimensions = (
 	return { width: resolvedWidth, height: resolvedHeight };
 };
 
+const redactImageIdentifier = (image: ImageSource): string => {
+	const SAFE_BASE = "http://localhost";
+
+	const sanitizeUrl = (urlString: string): string => {
+		try {
+			const url = new URL(urlString, SAFE_BASE);
+			url.search = "";
+			url.hash = "";
+			url.username = "";
+			url.password = "";
+			return url.origin + url.pathname;
+		} catch {
+			const stripped = urlString.replace(/\?[^#]*/, "").replace(/#.*$/, "");
+			return stripped.slice(0, 50) + (stripped.length > 50 ? "..." : "");
+		}
+	};
+
+	if (typeof image === "string") {
+		return sanitizeUrl(image);
+	}
+
+	if (image?.src) {
+		return sanitizeUrl(image.src);
+	}
+
+	return "unknown";
+};
+
+const logMissingAspectRatioInputs = (
+	image: ImageSource,
+	message: string,
+): void => {
+	console.error(message);
+	const id = redactImageIdentifier(image);
+	const type = typeof image !== "string" ? ` (type: ${typeof image})` : "";
+	console.error(`Image: ${id}${type}`);
+};
+
+const resolveDimensionsFromAspectRatio = ({
+	image,
+	layout,
+	aspectRatio,
+	width,
+	height,
+}: {
+	image: ImageSource;
+	layout: Layout;
+	aspectRatio: number;
+	width: number | undefined;
+	height: number | undefined;
+}): { width: number | undefined; height: number | undefined } => {
+	if (width !== undefined && height === undefined) {
+		return { width, height: Math.floor(width / aspectRatio) };
+	}
+
+	if (width === undefined && height !== undefined) {
+		return { width: Math.floor(height * aspectRatio), height };
+	}
+
+	if (width === undefined && height === undefined && layout !== "fullWidth") {
+		logMissingAspectRatioInputs(
+			image,
+			"When aspectRatio is set, either width or height must also be set",
+		);
+	}
+
+	return { width, height };
+};
+
 const resolveAspectRatioAndDimensions = (
-	image: ImageMetadata | string,
+	image: ImageSource,
 	layout: Layout,
 	aspectRatio: AspectRatioInput,
 	width: number | undefined,
@@ -329,44 +488,52 @@ const resolveAspectRatioAndDimensions = (
 	width: number | undefined;
 	height: number | undefined;
 } => {
-	let resolvedAspectRatio = parseAspectRatio(aspectRatio);
-	let resolvedWidth = width;
-	let resolvedHeight = height;
-
-	if (resolvedAspectRatio) {
-		if (resolvedWidth && !resolvedHeight) {
-			resolvedHeight = resolvedWidth / resolvedAspectRatio;
-		} else if (!resolvedWidth && resolvedHeight) {
-			resolvedWidth = Number(resolvedHeight * resolvedAspectRatio);
-		} else if (!resolvedWidth && !resolvedHeight && layout !== "fullWidth") {
-			console.error(
-				"When aspectRatio is set, either width or height must also be set",
-			);
-			console.error("Image", image);
-		}
+	const resolvedAspectRatio = parseAspectRatio(aspectRatio);
+	if (resolvedAspectRatio !== undefined) {
+		const resolvedDimensions = resolveDimensionsFromAspectRatio({
+			image,
+			layout,
+			aspectRatio: resolvedAspectRatio,
+			width,
+			height,
+		});
 
 		return {
 			aspectRatio: resolvedAspectRatio,
-			width: resolvedWidth,
-			height: resolvedHeight,
+			width: resolvedDimensions.width,
+			height: resolvedDimensions.height,
 		};
 	}
 
-	if (resolvedWidth && resolvedHeight) {
-		resolvedAspectRatio = resolvedWidth / resolvedHeight;
-	} else if (layout !== "fullWidth") {
-		console.error("Either aspectRatio or both width and height must be set");
-		console.error("Image", image);
+	if (
+		width !== undefined &&
+		height !== undefined &&
+		width > 0 &&
+		height > 0 &&
+		Number.isFinite(width) &&
+		Number.isFinite(height)
+	) {
+		return {
+			aspectRatio: width / height,
+			width,
+			height,
+		};
+	}
+
+	if (layout !== "fullWidth") {
+		logMissingAspectRatioInputs(
+			image,
+			"Either aspectRatio or both width and height must be set",
+		);
 	}
 
 	return {
-		aspectRatio: resolvedAspectRatio,
-		width: resolvedWidth,
-		height: resolvedHeight,
+		aspectRatio: undefined,
+		width,
+		height,
 	};
 };
 
-/* ** */
 export const unpicOptimizer: ImagesOptimizer = async (
 	image,
 	breakpoints,
@@ -404,7 +571,6 @@ export const unpicOptimizer: ImagesOptimizer = async (
 	);
 };
 
-/* ** */
 export async function getImagesOptimized(
 	image: ImageMetadata | string,
 	{
