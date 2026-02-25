@@ -149,5 +149,7 @@ const localesData = JSON.stringify(LOCALES);
     }
   }
 
-  customElements.define('locale-select', LocaleSelect);
+  if (!customElements.get('locale-select')) {
+    customElements.define('locale-select', LocaleSelect);
+  }
 </script>

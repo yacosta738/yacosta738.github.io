@@ -125,5 +125,7 @@ const obfuscatedEmail = email
             });
         }
     }
-    customElements.define("obfuscate-email", ObfuscateEmail);
+    if (!customElements.get("obfuscate-email")) {
+        customElements.define("obfuscate-email", ObfuscateEmail);
+    }
 </script>

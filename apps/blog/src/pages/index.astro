@@ -15,17 +15,13 @@ import {
 	LOCALES,
 	useTranslations,
 } from "@/i18n";
+import { getPublicOrigin } from "@/utils/public-origin";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const langs = Object.keys(LOCALES);
 const baseUrl = "/";
 const defaultLocale = DEFAULT_LOCALE;
-const alternatesOrigin =
-	Astro.site &&
-	Astro.site.hostname !== "localhost" &&
-	Astro.site.hostname !== "127.0.0.1"
-		? Astro.site.origin
-		: "";
+const alternatesOrigin = getPublicOrigin(Astro.site);
 const ogImage = `${alternatesOrigin}/ogp.png`;
 const ogUrl = `${alternatesOrigin}/${defaultLocale}/`;
 ---

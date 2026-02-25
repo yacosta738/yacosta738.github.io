@@ -40,7 +40,10 @@ const sortPositionsByRecency = (a: Work, b: Work): number => {
 		return aIsCurrent ? -1 : 1;
 	}
 
-	return b.startDate.getTime() - a.startDate.getTime();
+	const aActivity = (a.endDate ?? a.startDate).getTime();
+	const bActivity = (b.endDate ?? b.startDate).getTime();
+
+	return bActivity - aActivity;
 };
 
 const getCompanySortKey = (
@@ -99,18 +102,22 @@ Object.values(groupedWork).forEach((group: GroupedCompany) => {
 });
 
 // Sort companies: open roles first, then most recent activity.
-const sortedCompanies: GroupedCompany[] = Object.values(groupedWork).sort(
-	(a: GroupedCompany, b: GroupedCompany) => {
-		const aSortKey = getCompanySortKey(a);
-		const bSortKey = getCompanySortKey(b);
+const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
+	.map((company) => ({
+		company,
+		sortKey: getCompanySortKey(company),
+	}))
+	.sort((a, b) => {
+		const { sortKey: aSortKey } = a;
+		const { sortKey: bSortKey } = b;
 
 		if (aSortKey.hasCurrentRole !== bSortKey.hasCurrentRole) {
 			return aSortKey.hasCurrentRole ? -1 : 1;
 		}
 
 		return bSortKey.latestRelevantDate - aSortKey.latestRelevantDate;
-	},
-);
+	})
+	.map((entry) => entry.company);
 ---
 
 <elegant-jobs>
@@ -534,5 +541,7 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork).sort(
 		}
 	}
 
-	customElements.define('elegant-jobs', ElegantJobs);
+	if (!customElements.get('elegant-jobs')) {
+		customElements.define('elegant-jobs', ElegantJobs);
+	}
 </script>
