@@ -117,7 +117,9 @@ export const parseAspectRatio = (
 	aspectRatio: AspectRatioInput,
 ): number | undefined => {
 	if (typeof aspectRatio === "number") {
-		return Number.isFinite(aspectRatio) ? aspectRatio : undefined;
+		return Number.isFinite(aspectRatio) && aspectRatio > 0
+			? aspectRatio
+			: undefined;
 	}
 
 	if (typeof aspectRatio === "string") {
@@ -128,11 +130,12 @@ export const parseAspectRatio = (
 
 		const ratioSeparatorIndex = getRatioSeparatorIndex(s);
 		if (ratioSeparatorIndex !== -1) {
-			return parseRatioFromDelimitedString(s);
+			const parsed = parseRatioFromDelimitedString(s);
+			return parsed !== undefined && parsed > 0 ? parsed : undefined;
 		}
 
 		const numericValue = Number.parseFloat(s);
-		if (Number.isFinite(numericValue)) {
+		if (Number.isFinite(numericValue) && numericValue > 0) {
 			return numericValue;
 		}
 	}
@@ -405,12 +408,38 @@ const resolveBaseDimensions = (
 	return { width: resolvedWidth, height: resolvedHeight };
 };
 
+const redactImageIdentifier = (image: ImageSource): string => {
+	if (typeof image === "string") {
+		try {
+			const url = new URL(image);
+			url.search = "";
+			url.hash = "";
+			return url.toString();
+		} catch {
+			return image.slice(0, 50) + (image.length > 50 ? "..." : "");
+		}
+	}
+
+	if (image?.src) {
+		try {
+			const url = new URL(image.src);
+			url.search = "";
+			url.hash = "";
+			return url.toString();
+		} catch {
+			return image.src.slice(0, 50) + (image.src.length > 50 ? "..." : "");
+		}
+	}
+
+	return "unknown";
+};
+
 const logMissingAspectRatioInputs = (
 	image: ImageSource,
 	message: string,
 ): void => {
 	console.error(message);
-	const id = typeof image === "string" ? image : image.src || "unknown";
+	const id = redactImageIdentifier(image);
 	const type = typeof image !== "string" ? ` (type: ${typeof image})` : "";
 	console.error(`Image: ${id}${type}`);
 };
