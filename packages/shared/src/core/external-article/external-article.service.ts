@@ -4,97 +4,36 @@
  */
 
 import { getCollection } from "astro:content";
-import { parseEntityId } from "@/lib/collection.entity";
+import {
+	type BaseContentCriteria,
+	createContentEntryFilter,
+} from "../content-filter";
 import type { ExternalArticleCriteria } from "./external-article.criteria";
 import { toExternalArticles } from "./external-article.mapper";
 import type ExternalArticle from "./external-article.model";
 
-type FilterableExternalArticleData = {
-	draft: boolean;
-	author?: { id: string };
-	tags?: Array<{ id: string }>;
-	category?: { id: string };
-};
-
-type FilterableExternalArticleEntry = {
-	id: string;
-	data: FilterableExternalArticleData;
-};
-
-const matchesEntityId = (
-	criteriaValue: string | ReadonlyArray<string> | undefined,
-	entityId: string | undefined,
-): boolean => {
-	if (!criteriaValue) {
-		return true;
+const toBaseCriteria = (
+	criteria: ExternalArticleCriteria | undefined,
+): BaseContentCriteria | undefined => {
+	if (criteria === undefined) {
+		return undefined;
 	}
 
-	if (!entityId) {
-		return false;
-	}
-
-	const idsToMatch = Array.isArray(criteriaValue)
-		? criteriaValue
-		: [criteriaValue];
-
-	return idsToMatch.includes(entityId);
-};
-
-const matchesTags = (
-	criteriaTags: string | ReadonlyArray<string> | undefined,
-	entryTags: ReadonlyArray<{ id: string }> | undefined,
-): boolean => {
-	if (!criteriaTags) {
-		return true;
-	}
-
-	if (!entryTags) {
-		return false;
-	}
-
-	const tagsToMatch = Array.isArray(criteriaTags)
-		? criteriaTags
-		: [criteriaTags];
-
-	return tagsToMatch.some((tag) =>
-		entryTags.some((entryTag) => entryTag.id === tag),
-	);
+	return {
+		lang: criteria.lang,
+		includeDrafts: criteria.includeDrafts,
+		author: criteria.author,
+		tags: criteria.tags,
+		category: criteria.category,
+	};
 };
 
 const createExternalArticleFilter = (
 	criteria: ExternalArticleCriteria | undefined,
 ) => {
-	const {
-		lang,
-		includeDrafts = false,
-		author,
-		tags,
-		category,
-	} = criteria ?? {};
-
-	return ({ id, data }: FilterableExternalArticleEntry): boolean => {
-		if (!includeDrafts && data.draft) {
-			return false;
-		}
-
-		if (lang && parseEntityId(id).lang !== lang) {
-			return false;
-		}
-
-		if (!matchesEntityId(author, data.author?.id)) {
-			return false;
-		}
-
-		if (!matchesTags(tags, data.tags)) {
-			return false;
-		}
-
-		if (!matchesEntityId(category, data.category?.id)) {
-			return false;
-		}
-
-		return true;
-	};
+	return createContentEntryFilter(toBaseCriteria(criteria), {
+		applyFeaturedFilter: false,
+	});
 };
 
 /**
@@ -134,7 +73,6 @@ export async function getExternalArticleById(
 export async function hasExternalArticles(
 	criteria?: ExternalArticleCriteria,
 ): Promise<boolean> {
-	const resolvedCriteria = criteria ?? { includeDrafts: false };
-	const externalArticles = await getExternalArticles(resolvedCriteria);
+	const externalArticles = await getExternalArticles(criteria);
 	return externalArticles.length > 0;
 }

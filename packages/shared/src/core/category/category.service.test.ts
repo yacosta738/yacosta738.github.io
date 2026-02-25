@@ -51,12 +51,16 @@ const mockCategories = [
 describe("CategoryService", () => {
 	beforeEach(() => {
 		// Mock the getCollection and getEntry methods
-		vi.mocked(getCollection).mockImplementation(async (_collection, filter) => {
-			if (filter) {
-				return mockCategories.filter((entry) => filter(entry)) as any;
-			}
-			return mockCategories as any;
-		});
+		vi.mocked(getCollection).mockImplementation(
+			async (_collection, entryFilter) => {
+				if (entryFilter) {
+					return mockCategories.filter((entry) => {
+						return Boolean(entryFilter(entry));
+					}) as any;
+				}
+				return mockCategories as any;
+			},
+		);
 		vi.mocked(getEntry).mockResolvedValue(mockCategories[0] as any);
 
 		// Mock parseEntityId

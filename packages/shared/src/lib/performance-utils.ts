@@ -30,14 +30,14 @@ export function batchDOMOperations(operations: {
 	writes: Array<() => void>;
 }): void {
 	// Perform all reads first
-	operations.reads.forEach((read) => {
-		read();
-	});
+	for (const read of operations.reads) {
+		void read();
+	}
 
 	// Then perform all writes
-	operations.writes.forEach((write) => {
+	for (const write of operations.writes) {
 		write();
-	});
+	}
 }
 
 /**

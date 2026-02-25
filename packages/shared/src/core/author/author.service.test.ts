@@ -41,12 +41,16 @@ const mockAuthors = [
 describe("AuthorService", () => {
 	beforeEach(() => {
 		// Mock the getCollection to simulate filtering
-		vi.mocked(getCollection).mockImplementation(async (_collection, filter) => {
-			if (filter) {
-				return mockAuthors.filter((entry) => filter(entry)) as any;
-			}
-			return mockAuthors as any;
-		});
+		vi.mocked(getCollection).mockImplementation(
+			async (_collection, entryFilter) => {
+				if (entryFilter) {
+					return mockAuthors.filter((entry) => {
+						return Boolean(entryFilter(entry));
+					}) as any;
+				}
+				return mockAuthors as any;
+			},
+		);
 
 		// Mock parseEntityId
 		vi.mocked(parseEntityId).mockImplementation((id) => ({

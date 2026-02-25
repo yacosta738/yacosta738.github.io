@@ -5,108 +5,38 @@
 
 import { getCollection } from "astro:content";
 import type { Lang } from "@/i18n";
-import { parseEntityId } from "@/lib/collection.entity";
+import {
+	type BaseContentCriteria,
+	createContentEntryFilter,
+} from "../content-filter";
 import type { ArticleCriteria } from "./article.criteria";
 import { toArticles, toExternalArticles } from "./article.mapper";
 import type Article from "./article.model";
 
-type FilterableArticleData = {
-	draft: boolean;
-	author?: { id: string };
-	tags?: Array<{ id: string }>;
-	category?: { id: string };
-	featured?: boolean;
-};
-
-type FilterableArticleEntry = {
-	id: string;
-	data: FilterableArticleData;
-};
-
-const matchesEntityId = (
-	criteriaValue: string | ReadonlyArray<string> | undefined,
-	entityId: string | undefined,
-): boolean => {
-	if (!criteriaValue) {
-		return true;
+const toBaseCriteria = (
+	criteria: ArticleCriteria | undefined,
+): BaseContentCriteria | undefined => {
+	if (criteria === undefined) {
+		return undefined;
 	}
 
-	if (!entityId) {
-		return false;
-	}
-
-	const idsToMatch = Array.isArray(criteriaValue)
-		? criteriaValue
-		: [criteriaValue];
-
-	return idsToMatch.includes(entityId);
-};
-
-const matchesTags = (
-	criteriaTags: string | ReadonlyArray<string> | undefined,
-	entryTags: ReadonlyArray<{ id: string }> | undefined,
-): boolean => {
-	if (!criteriaTags) {
-		return true;
-	}
-
-	if (!entryTags) {
-		return false;
-	}
-
-	const tagsToMatch = Array.isArray(criteriaTags)
-		? criteriaTags
-		: [criteriaTags];
-
-	return tagsToMatch.some((tag) =>
-		entryTags.some((entryTag) => entryTag.id === tag),
-	);
+	return {
+		lang: criteria.lang,
+		includeDrafts: criteria.includeDrafts,
+		author: criteria.author,
+		tags: criteria.tags,
+		category: criteria.category,
+	};
 };
 
 const createArticleFilter = (
 	criteria: ArticleCriteria | undefined,
 	options: { includeFeatured: boolean },
 ) => {
-	const {
-		lang,
-		includeDrafts = false,
-		author,
-		tags,
-		category,
-		featured,
-	} = criteria ?? {};
-
-	return ({ id, data }: FilterableArticleEntry): boolean => {
-		if (!includeDrafts && data.draft) {
-			return false;
-		}
-
-		if (lang && parseEntityId(id).lang !== lang) {
-			return false;
-		}
-
-		if (!matchesEntityId(author, data.author?.id)) {
-			return false;
-		}
-
-		if (!matchesTags(tags, data.tags)) {
-			return false;
-		}
-
-		if (!matchesEntityId(category, data.category?.id)) {
-			return false;
-		}
-
-		if (
-			options.includeFeatured &&
-			featured !== undefined &&
-			data.featured !== featured
-		) {
-			return false;
-		}
-
-		return true;
-	};
+	return createContentEntryFilter(toBaseCriteria(criteria), {
+		applyFeaturedFilter: options.includeFeatured,
+		featured: criteria?.featured,
+	});
 };
 
 /**
@@ -151,8 +81,7 @@ export async function getArticleById(id: string): Promise<Article | undefined> {
 export async function hasArticles(
 	criteria?: ArticleCriteria,
 ): Promise<boolean> {
-	const resolvedCriteria = criteria ?? { includeDrafts: false };
-	const articles = await getArticles(resolvedCriteria);
+	const articles = await getArticles(criteria);
 	return articles.length > 0;
 }
 
