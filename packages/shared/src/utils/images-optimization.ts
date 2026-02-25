@@ -127,9 +127,9 @@ export const parseAspectRatio = (
 			return undefined;
 		}
 
-		const ratioFromDelimiter = parseRatioFromDelimitedString(s);
-		if (ratioFromDelimiter !== undefined) {
-			return ratioFromDelimiter;
+		const ratioSeparatorIndex = getRatioSeparatorIndex(s);
+		if (ratioSeparatorIndex !== -1) {
+			return parseRatioFromDelimitedString(s);
 		}
 
 		const numericValue = Number.parseFloat(s);
