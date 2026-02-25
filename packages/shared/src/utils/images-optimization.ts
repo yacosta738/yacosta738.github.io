@@ -59,7 +59,7 @@ const getRatioSeparatorIndex = (value: string): number => {
 
 const parseRatioValue = (value: string): number | undefined => {
 	const parsed = Number(value);
-	return Number.isFinite(parsed) ? parsed : undefined;
+	return parsed > 0 && Number.isFinite(parsed) ? parsed : undefined;
 };
 
 const parseRatioFromDelimitedString = (value: string): number | undefined => {
@@ -200,23 +200,31 @@ const getLayoutStyleEntries = ({
 	width,
 	height,
 	aspectRatio,
+	objectFit,
+	objectPosition,
 }: {
 	layout: Layout | undefined;
 	width: number | undefined;
 	height: number | undefined;
 	aspectRatio: string | undefined;
+	objectFit?: string;
+	objectPosition?: string;
 }): Array<[prop: string, value: OptionalStyleValue]> => {
 	if (layout === undefined) {
 		return [];
 	}
 
 	switch (layout) {
-		case "fixed":
-			return [
+		case "fixed": {
+			const entries: Array<[prop: string, value: OptionalStyleValue]> = [
 				["width", pixelate(width)],
 				["height", pixelate(height)],
-				["object-position", "top left"],
 			];
+			if (objectPosition === undefined) {
+				entries.push(["object-position", "top left"]);
+			}
+			return entries;
+		}
 		case "constrained":
 			return [
 				["max-width", pixelate(width)],
@@ -236,13 +244,17 @@ const getLayoutStyleEntries = ({
 				["height", "auto"],
 				["aspect-ratio", aspectRatio],
 			];
-		case "contained":
-			return [
+		case "contained": {
+			const entries: Array<[prop: string, value: OptionalStyleValue]> = [
 				["max-width", "100%"],
 				["max-height", "100%"],
-				["object-fit", "contain"],
 				["aspect-ratio", aspectRatio],
 			];
+			if (objectFit === undefined) {
+				entries.push(["object-fit", "contain"]);
+			}
+			return entries;
+		}
 		case "cover":
 			return [
 				["max-width", "100%"],
@@ -256,8 +268,8 @@ const getStyle = ({
 	height,
 	aspectRatio,
 	layout,
-	objectFit = "cover",
-	objectPosition = "center",
+	objectFit,
+	objectPosition,
 	background,
 }: {
 	width?: number;
@@ -270,8 +282,8 @@ const getStyle = ({
 }) => {
 	const aspectRatioValue = aspectRatio ? `${aspectRatio}` : undefined;
 	const baseStyleEntries: Array<[prop: string, value: OptionalStyleValue]> = [
-		["object-fit", objectFit],
-		["object-position", objectPosition],
+		["object-fit", objectFit ?? "cover"],
+		["object-position", objectPosition ?? "center"],
 	];
 	const styleEntries: Array<[prop: string, value: OptionalStyleValue]> = [
 		...baseStyleEntries,
@@ -281,6 +293,8 @@ const getStyle = ({
 			width,
 			height,
 			aspectRatio: aspectRatioValue,
+			objectFit,
+			objectPosition,
 		}),
 	];
 
@@ -398,7 +412,9 @@ const logMissingAspectRatioInputs = (
 	message: string,
 ): void => {
 	console.error(message);
-	console.error("Image", image);
+	const id = typeof image === "string" ? image : image.src || "unknown";
+	const type = typeof image !== "string" ? ` (type: ${typeof image})` : "";
+	console.error(`Image: ${id}${type}`);
 };
 
 const resolveDimensionsFromAspectRatio = ({
@@ -415,11 +431,11 @@ const resolveDimensionsFromAspectRatio = ({
 	height: number | undefined;
 }): { width: number | undefined; height: number | undefined } => {
 	if (width !== undefined && height === undefined) {
-		return { width, height: width / aspectRatio };
+		return { width, height: Math.floor(width / aspectRatio) };
 	}
 
 	if (width === undefined && height !== undefined) {
-		return { width: Number(height * aspectRatio), height };
+		return { width: Math.floor(height * aspectRatio), height };
 	}
 
 	if (width === undefined && height === undefined && layout !== "fullWidth") {
@@ -460,7 +476,14 @@ const resolveAspectRatioAndDimensions = (
 		};
 	}
 
-	if (width !== undefined && height !== undefined) {
+	if (
+		width !== undefined &&
+		height !== undefined &&
+		width > 0 &&
+		height > 0 &&
+		Number.isFinite(width) &&
+		Number.isFinite(height)
+	) {
 		return {
 			aspectRatio: width / height,
 			width,
