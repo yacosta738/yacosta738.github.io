@@ -22,8 +22,10 @@ const langs = Object.keys(LOCALES);
 const baseUrl = "/";
 const defaultLocale = DEFAULT_LOCALE;
 const alternatesOrigin = getPublicOrigin(Astro.site);
-const ogImage = `${alternatesOrigin}/ogp.png`;
-const ogUrl = `${alternatesOrigin}/${defaultLocale}/`;
+const fallbackOrigin = "http://localhost";
+const alternatesOriginWithFallback = alternatesOrigin || fallbackOrigin;
+const ogImage = `${alternatesOriginWithFallback}/ogp.png`;
+const ogUrl = `${alternatesOriginWithFallback}/${defaultLocale}/`;
 ---
 
 <html lang={DEFAULT_LOCALE}>

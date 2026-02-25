@@ -27,6 +27,19 @@ export const isLocalOrPrivateHostname = (hostname: string): boolean => {
 		return true;
 	}
 
+	if (value.includes(":")) {
+		if (
+			value.startsWith("fc") ||
+			value.startsWith("fd") ||
+			value.startsWith("fe8") ||
+			value.startsWith("fe9") ||
+			value.startsWith("fea") ||
+			value.startsWith("feb")
+		) {
+			return true;
+		}
+	}
+
 	const octets = toIpv4Octets(value);
 	if (!octets) {
 		return false;
