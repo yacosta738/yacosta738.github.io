@@ -16,6 +16,7 @@ describe("isLocalOrPrivateHostname", () => {
 		expect(isLocalOrPrivateHostname("127.0.0.1")).toBe(true);
 		expect(isLocalOrPrivateHostname("127.0.1.1")).toBe(true);
 		expect(isLocalOrPrivateHostname("::1")).toBe(true);
+		expect(isLocalOrPrivateHostname("[::1]")).toBe(true);
 		expect(isLocalOrPrivateHostname("0:0:0:0:0:0:0:1")).toBe(true);
 		expect(isLocalOrPrivateHostname("0.0.0.0")).toBe(true);
 	});
@@ -37,6 +38,7 @@ describe("isLocalOrPrivateHostname", () => {
 
 	it("should return true for IPv6 ULA (fc00::/7)", () => {
 		expect(isLocalOrPrivateHostname("fc00::1")).toBe(true);
+		expect(isLocalOrPrivateHostname("[fc00::1]")).toBe(true);
 		expect(
 			isLocalOrPrivateHostname("fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"),
 		).toBe(true);
@@ -57,6 +59,10 @@ describe("getPublicOrigin", () => {
 
 	it("should return empty string for local sites", () => {
 		expect(getPublicOrigin(new URL("http://localhost:4321"))).toBe("");
+	});
+
+	it("should return empty string for non-http(s) protocols", () => {
+		expect(getPublicOrigin(new URL("ftp://example.com"))).toBe("");
 	});
 
 	it("should return origin for public sites", () => {

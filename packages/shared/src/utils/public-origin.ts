@@ -12,7 +12,10 @@ const toIpv4Octets = (hostname: string): number[] | null => {
 };
 
 export const isLocalOrPrivateHostname = (hostname: string): boolean => {
-	const value = hostname.toLowerCase();
+	let value = hostname.toLowerCase();
+	if (value.startsWith("[") && value.endsWith("]")) {
+		value = value.slice(1, -1);
+	}
 
 	if (
 		value === "localhost" ||
@@ -79,4 +82,22 @@ export const getPublicOrigin = (site?: URL): string => {
 	}
 
 	return site.origin;
+};
+
+export const getOriginAndOg = (
+	site: URL | undefined,
+	defaultLocale: string,
+): {
+	alternatesOrigin: string;
+	ogImage: string;
+	ogUrl: string;
+} => {
+	const alternatesOrigin = getPublicOrigin(site);
+	const baseOrigin = alternatesOrigin || "http://localhost";
+
+	return {
+		alternatesOrigin,
+		ogImage: `${baseOrigin}/ogp.png`,
+		ogUrl: `${baseOrigin}/${defaultLocale}/`,
+	};
 };

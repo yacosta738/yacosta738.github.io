@@ -15,17 +15,16 @@ import {
 	LOCALES,
 	useTranslations,
 } from "@/i18n";
-import { getPublicOrigin } from "@/utils/public-origin";
+import { getOriginAndOg } from "@/utils/public-origin";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const langs = Object.keys(LOCALES);
 const baseUrl = "/";
 const defaultLocale = DEFAULT_LOCALE;
-const alternatesOrigin = getPublicOrigin(Astro.site);
-const fallbackOrigin = "http://localhost";
-const alternatesOriginWithFallback = alternatesOrigin || fallbackOrigin;
-const ogImage = `${alternatesOriginWithFallback}/ogp.png`;
-const ogUrl = `${alternatesOriginWithFallback}/${defaultLocale}/`;
+const { alternatesOrigin, ogImage, ogUrl } = getOriginAndOg(
+	Astro.site,
+	defaultLocale,
+);
 ---
 
 <html lang={DEFAULT_LOCALE}>
