@@ -60,6 +60,8 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
 
   // Function to initialize a single theme toggle button
   function initializeThemeToggle(button: HTMLElement): void {
+    if (button.dataset.themeInitialized === "true") return;
+    
     const lightIcon = button.querySelector('.theme-toggle-light-icon') as HTMLElement;
     const darkIcon = button.querySelector('.theme-toggle-dark-icon') as HTMLElement;
     const lightText = button.querySelector('.theme-toggle-light-text') as HTMLElement;
@@ -73,6 +75,8 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
       button.classList.add("opacity-50", "pointer-events-none");
       return;
     }
+
+    button.dataset.themeInitialized = "true";
 
     // Function to set the icons and text visibility
     const setVisibility = (theme: Theme): void => {
@@ -113,38 +117,46 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
     });
   }
 
+  // Keep track of the observer to prevent memory leaks across View Transitions
+  let observer: MutationObserver | null = null;
+
   // Initialize all theme toggle buttons on the page
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const themeToggleButtons = document.querySelectorAll('[id^="theme-toggle-button-"]');
     themeToggleButtons.forEach((button) => {
       if (button instanceof HTMLElement) {
         initializeThemeToggle(button);
       }
     });
-  });
 
-  // Also handle dynamically added theme toggles (e.g., in mobile drawer)
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      mutation.addedNodes.forEach((node) => {
-        if (node instanceof HTMLElement) {
-          // Check if the added node is a theme toggle button
-          if (node.id && node.id.startsWith('theme-toggle-button-')) {
-            initializeThemeToggle(node);
-          }
-          // Check if the added node contains theme toggle buttons
-          const themeToggles = node.querySelectorAll('[id^="theme-toggle-button-"]');
-          themeToggles.forEach((toggle) => {
-            if (toggle instanceof HTMLElement) {
-              initializeThemeToggle(toggle);
+    // Clean up any existing observer before creating a new one on the fresh body
+    if (observer) {
+      observer.disconnect();
+    }
+
+    // Also handle dynamically added theme toggles (e.g., in mobile drawer)
+    observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof HTMLElement) {
+            // Check if the added node is a theme toggle button
+            if (node.id && node.id.startsWith('theme-toggle-button-')) {
+              initializeThemeToggle(node);
             }
-          });
-        }
+            // Check if the added node contains theme toggle buttons
+            const themeToggles = node.querySelectorAll('[id^="theme-toggle-button-"]');
+            themeToggles.forEach((toggle) => {
+              if (toggle instanceof HTMLElement) {
+                initializeThemeToggle(toggle);
+              }
+            });
+          }
+        });
       });
     });
-  });
 
-  // Start observing for theme toggle buttons being added to the page
-  observer.observe(document.body, { childList: true, subtree: true });
+    // Start observing for theme toggle buttons being added to the new document.body
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
 </script>
 

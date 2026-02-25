@@ -197,12 +197,8 @@ const fallbackText = allTexts.join(" • ");
 		});
 	}
 	
-	// Initialize when DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initializeTypedTexts);
-	} else {
-		initializeTypedTexts();
-	}
+	// Initialize when page loads or during view transitions
+	document.addEventListener('astro:page-load', initializeTypedTexts);
 </script>
 
 <style>

@@ -37,6 +37,7 @@ import {
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
 import { isLocalOrPrivateHostname } from "@/utils/public-origin";
 import alkatraRegularWoff2 from "../assets/font/alkatra/alkatra-v3-latin-regular.woff2";
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title?: string;
@@ -120,65 +121,62 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" id="theme-color" content={LIGHT_COLOR} />
 
-    <!-- Optimized inline theme script - minimal blocking -->
+    <!-- Optimized inline theme script - View Transitions supported -->
     <script is:inline define:vars={{ STORAGE_KEY, LIGHT_COLOR, DARK_COLOR }}>
-      (() => {
-        const e = () => {
-            try {
-              const e = localStorage.getItem(STORAGE_KEY);
-              if ("dark" === e || "light" === e) return e;
-            } catch {}
-            return matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light";
+      const initTheme = () => {
+        const getPreferredTheme = () => {
+          try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored === "dark" || stored === "light") return stored;
+          } catch {}
+          return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+        
+        const applyTheme = (theme) => {
+          const docEl = document.documentElement;
+          const metaColor = document.getElementById("theme-color");
+          if (theme === "dark") {
+            docEl.classList.add("dark");
+            if (metaColor) metaColor.setAttribute("content", DARK_COLOR);
+            document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "dark" } }));
+          } else {
+            docEl.classList.remove("dark");
+            if (metaColor) metaColor.setAttribute("content", LIGHT_COLOR);
+            document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "light" } }));
+          }
+        };
+        
+        const currentTheme = getPreferredTheme();
+        applyTheme(currentTheme);
+        
+        window.themeSystem = {
+          toggle() {
+            const current = document.documentElement.classList.contains("dark") ? "dark" : "light";
+            const next = current === "dark" ? "light" : "dark";
+            applyTheme(next);
+            try { localStorage.setItem(STORAGE_KEY, next); } catch {}
           },
-          t = (e) => {
-            const t = document.documentElement,
-              a = document.getElementById("theme-color");
-            "dark" === e
-              ? (t.classList.add("dark"),
-                a && a.setAttribute("content", DARK_COLOR),
-                document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "dark" } })))
-              : (t.classList.remove("dark"),
-                a && a.setAttribute("content", LIGHT_COLOR),
-                document.dispatchEvent(new CustomEvent("themeChanged", { detail: { theme: "light" } })));
-          },
-          a = e();
-        t(a),
-          matchMedia("(prefers-color-scheme: dark)").addEventListener(
-            "change",
-            (e) => {
-              try {
-                localStorage.getItem(STORAGE_KEY) ||
-                  t(e.matches ? "dark" : "light");
-              } catch {}
-            },
-          ),
-          (window.themeSystem = {
-            toggle() {
-              const e = document.documentElement.classList.contains("dark")
-                  ? "dark"
-                  : "light",
-                a = "dark" === e ? "light" : "dark";
-              t(a);
-              try {
-                localStorage.setItem(STORAGE_KEY, a);
-              } catch {}
-            },
-            clear() {
-              try {
-                localStorage.removeItem(STORAGE_KEY);
-              } catch {}
-              try {
-                t(
-                  matchMedia("(prefers-color-scheme: dark)").matches
-                    ? "dark"
-                    : "light",
-                );
-              } catch {}
-            },
-          });
-      })();
+          clear() {
+            try { localStorage.removeItem(STORAGE_KEY); } catch {}
+            applyTheme(getPreferredTheme());
+          }
+        };
+      };
+
+      initTheme();
+
+      document.addEventListener('astro:after-swap', initTheme);
+
+      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+        try {
+          if (!localStorage.getItem(STORAGE_KEY)) {
+            const theme = e.matches ? "dark" : "light";
+            const docEl = document.documentElement;
+            if (theme === "dark") docEl.classList.add("dark");
+            else docEl.classList.remove("dark");
+          }
+        } catch {}
+      });
     </script>
 
     <!-- Favicons -->
@@ -206,6 +204,7 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content={(resume.basics as { name?: string })?.name || "Yuniel Acosta"} />
     <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     {

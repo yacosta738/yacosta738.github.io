@@ -32,14 +32,24 @@ const translated = (
 {
   projects.length > 0 && (
     <Section title={t("projects")}>
-      <ul class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 -mx-4 sm:mx-0">
+      <ul class="grid grid-cols-1 md:grid-cols-4 gap-4 -mx-4 sm:mx-0 auto-rows-[220px]">
         {projects.map(
-          ({ url, description, highlights, name, isActive, github }) => {
+          ({ url, description, highlights, name, isActive, github }, i) => {
+            // Bento grid classes based on index
+            const isLarge = i % 5 === 0;    // Every 5th item is large (0, 5)
+            const isMedium = i % 5 === 1 || i % 5 === 2; // Medium items (1, 2)
+            const isTall = i % 5 === 3;     // Tall item (3)
+
+            const bentoClasses = isLarge ? "md:col-span-2 md:row-span-2" :
+                                 isMedium ? "md:col-span-2 md:row-span-1" :
+                                 isTall ? "md:col-span-1 md:row-span-2" :
+                                 "md:col-span-1 md:row-span-1";
+
             return (
-              <li>
-                <article class="rounded-lg border border-(--border-color) dark:border-(--border-color) gap-4 flex flex-col p-4 h-full">
-                  <header class="flex-1">
-                    <h3 class="mb-1">
+              <li class={bentoClasses}>
+                <article class="relative overflow-hidden rounded-2xl border border-white/5 dark:border-white/10 gap-4 flex flex-col p-6 h-full bg-white/40 dark:bg-slate-900/40 backdrop-blur-md shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-brand-accent/50 transition-all duration-500 group">
+                  <header class="flex-1 relative z-10">
+                    <h3 class="mb-2 text-xl font-semibold">
                       <Link
                         href={url}
                         target="_blank"
@@ -49,12 +59,12 @@ const translated = (
                           { name },
                           `View project ${name}`,
                         )}
-                        class="text-foreground hover:underline focus:underline hover:text-foreground-muted"
+                        class="text-foreground flex-wrap hover:text-brand-accent transition-colors before:absolute before:inset-0"
                       >
                         {name}
                       </Link>
                       {isActive && (
-                        <span class="text-brand-accent animate-flicker ml-1">
+                        <span class="text-brand-accent animate-flicker ml-1 inline-block">
                           •
                         </span>
                       )}
@@ -69,7 +79,7 @@ const translated = (
 
                           return (
                             <Link
-                              class="ml-1.5 inline-block text-foreground-muted"
+                              class="ml-2 relative z-20 text-foreground-muted hover:text-foreground transition-colors inline-block"
                               href={github}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -78,26 +88,34 @@ const translated = (
                             >
                               <Icon
                                 name="lucide:github"
-                                class="size-4"
+                                class="size-5"
                                 aria-hidden="true"
                               />
                             </Link>
                           );
                         })()}
                     </h3>
-                    <p class="text-xs leading-tight mb-1 text-foreground-muted">
+                    <p class="text-sm leading-relaxed mb-1 text-foreground-muted/90 max-w-[90%]">
                       {description}
                     </p>
                   </header>
-                  <footer class="flex flex-wrap gap-1 text-[0.6rem]">
-                    {highlights?.map((highlight) => {
+                  <footer class="flex flex-wrap gap-2 relative z-10 mt-auto">
+                    {highlights?.slice(0, 4).map((highlight) => {
                       return (
-                        <span class="rounded-md bg-(--bg-secondary) dark:bg-(--bg-primary) text-foreground-muted text-[0.6rem] font-medium px-2.5 py-1 border border-(--border-color)">
+                        <span class="rounded-full bg-slate-200/50 dark:bg-slate-800/50 backdrop-blur-sm text-foreground-muted text-[10px] md:text-xs font-medium px-3 py-1.5 border border-white/10 dark:border-white/5 transition-colors group-hover:border-brand-accent/20">
                           {highlight}
                         </span>
                       );
                     })}
+                    {(highlights?.length || 0) > 4 && (
+                      <span class="rounded-full bg-slate-200/50 dark:bg-slate-800/50 backdrop-blur-sm text-foreground-muted text-[10px] md:text-xs font-medium px-3 py-1.5 border border-white/10 dark:border-white/5">
+                        +{highlights!.length - 4}
+                      </span>
+                    )}
                   </footer>
+                  
+                  {/* Subtle hover gradient glow */}
+                  <div class="absolute inset-0 bg-linear-to-br from-brand-accent/0 to-brand-accent/0 group-hover:from-brand-accent/5 group-hover:to-transparent transition-all duration-500 pointer-events-none" />
                 </article>
               </li>
             );

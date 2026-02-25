@@ -52,13 +52,15 @@ const translated = (
     </a>
 
     <ul 
-      class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-12 max-w-7xl"
+      class="projects-grid grid grid-cols-1 md:grid-cols-4 gap-4 w-full mb-12 max-w-7xl"
       id="projects-grid"
-      style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));"
     >
       {
-        initialProjects.map((project) => (
-          <li class="project-item opacity-0" data-project-item>
+        initialProjects.map((project, i) => {
+          const isWide = i % 4 === 0 || i % 4 === 3;
+          const bentoClasses = isWide ? "md:col-span-2" : "md:col-span-1";
+          return (
+          <li class={`project-item opacity-0 ${bentoClasses}`} data-project-item>
             <EnhancedProjectCard
               name={project.name}
               description={project.description}
@@ -69,14 +71,19 @@ const translated = (
               class="h-full"
             />
           </li>
-        ))
+          );
+        })
       }
 
       {hasMoreProjects && (
         <template id="additional-projects">
           {
-            otherProjects.slice(limit).map((project) => (
-              <li class="project-item hidden opacity-0" data-additional-project data-project-item>
+            otherProjects.slice(limit).map((project, index) => {
+              const i = index + limit;
+              const isWide = i % 4 === 0 || i % 4 === 3;
+              const bentoClasses = isWide ? "md:col-span-2" : "md:col-span-1";
+              return (
+              <li class={`project-item hidden opacity-0 ${bentoClasses}`} data-additional-project data-project-item>
                 <EnhancedProjectCard
                   name={project.name}
                   description={project.description}
@@ -87,7 +94,8 @@ const translated = (
                   class="h-full"
                 />
               </li>
-            ))
+            );
+          })
           }
         </template>
       )}
@@ -109,7 +117,7 @@ const translated = (
 )}
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const toggleBtn = document.getElementById('toggle-projects-btn');
     const btnText = document.getElementById('toggle-btn-text');
     const btnSpinner = document.getElementById('toggle-btn-spinner');
@@ -236,9 +244,7 @@ const translated = (
   }
 
   @media (max-width: 1080px) {
-    .projects-grid {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
-    }
+    /* Removed custom grid overrides to respect tailwind bento */
   }
 
   .more-button {
