@@ -134,8 +134,8 @@ export const parseAspectRatio = (
 			return parsed !== undefined && parsed > 0 ? parsed : undefined;
 		}
 
-		const numericValue = Number.parseFloat(s);
-		if (Number.isFinite(numericValue) && numericValue > 0) {
+		const numericValue = parseRatioValue(s);
+		if (numericValue !== undefined && numericValue > 0) {
 			return numericValue;
 		}
 	}
@@ -409,26 +409,28 @@ const resolveBaseDimensions = (
 };
 
 const redactImageIdentifier = (image: ImageSource): string => {
-	if (typeof image === "string") {
+	const SAFE_BASE = "http://localhost";
+
+	const sanitizeUrl = (urlString: string): string => {
 		try {
-			const url = new URL(image);
+			const url = new URL(urlString, SAFE_BASE);
 			url.search = "";
 			url.hash = "";
-			return url.toString();
+			url.username = "";
+			url.password = "";
+			return url.origin + url.pathname;
 		} catch {
-			return image.slice(0, 50) + (image.length > 50 ? "..." : "");
+			const stripped = urlString.replace(/\?[^#]*/, "").replace(/#.*$/, "");
+			return stripped.slice(0, 50) + (stripped.length > 50 ? "..." : "");
 		}
+	};
+
+	if (typeof image === "string") {
+		return sanitizeUrl(image);
 	}
 
 	if (image?.src) {
-		try {
-			const url = new URL(image.src);
-			url.search = "";
-			url.hash = "";
-			return url.toString();
-		} catch {
-			return image.src.slice(0, 50) + (image.src.length > 50 ? "..." : "");
-		}
+		return sanitizeUrl(image.src);
 	}
 
 	return "unknown";
