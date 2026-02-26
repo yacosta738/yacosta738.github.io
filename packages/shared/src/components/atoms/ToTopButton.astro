@@ -22,24 +22,52 @@
 </button>
 
 <script is:inline>
-  const toTopButton = document.getElementById("to-top-button");
+  (() => {
+    const CLEANUP_KEY = "__toTopButtonCleanup";
 
-  if (toTopButton) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {
-        toTopButton.classList.remove("hidden");
-      } else {
-        toTopButton.classList.add("hidden");
+    const cleanup = () => {
+      const currentCleanup = window[CLEANUP_KEY];
+      if (typeof currentCleanup === "function") {
+        currentCleanup();
+        window[CLEANUP_KEY] = undefined;
       }
-    });
+    };
 
-    toTopButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
-  }
+    const initialize = () => {
+      cleanup();
+
+      const toTopButton = document.getElementById("to-top-button");
+      if (!toTopButton) return;
+
+      const handleScroll = () => {
+        if (window.scrollY > 200) {
+          toTopButton.classList.remove("hidden");
+        } else {
+          toTopButton.classList.add("hidden");
+        }
+      };
+
+      const handleClick = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      toTopButton.addEventListener("click", handleClick);
+      handleScroll();
+
+      window[CLEANUP_KEY] = () => {
+        window.removeEventListener("scroll", handleScroll);
+        toTopButton.removeEventListener("click", handleClick);
+      };
+    };
+
+    document.addEventListener("astro:page-load", initialize);
+    document.addEventListener("astro:before-preparation", cleanup);
+    initialize();
+  })();
 </script>
 
 <style>

@@ -52,11 +52,8 @@
         });
       });
     };
-    
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', revealDeferred);
-    } else {
-      revealDeferred();
-    }
+
+    document.addEventListener('astro:page-load', revealDeferred);
+    revealDeferred();
   })();
 </script>
