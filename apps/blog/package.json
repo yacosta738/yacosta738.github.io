@@ -53,7 +53,7 @@
 		"@axe-core/playwright": "4.11.1",
 		"@biomejs/biome": "2.4.4",
 		"@faker-js/faker": "^10.3.0",
-		"@iconify-json/lucide": "^1.2.93",
+		"@iconify-json/lucide": "^1.2.94",
 		"@iconify-json/mdi": "^1.2.3",
 		"@iconify-json/simple-icons": "^1.2.71",
 		"@iconify-json/tabler": "^1.2.27",
