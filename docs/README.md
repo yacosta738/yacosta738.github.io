@@ -29,7 +29,13 @@ Low-level details for developers who need to understand the specifics of an impl
 
 High-level documents about architectural choices and process analysis.
 
--   [**Semantic Release](./architecture/semantic-release.md)**: An analysis of the monorepo's release process.
+This project uses **Architecture Decision Records (ADRs)** to document significant architectural choices. ADRs are numbered sequentially (ADR-001, ADR-002, etc.) and follow the format established in [adr.github.io](https://adr.github.io/).
+
+-   [Monorepo Structure](./architecture/001-monorepo-structure.md) - Overall architecture and workspace setup
+-   [Content Collections](./architecture/002-content-collections.md) - Data and content management system
+-   [API Architecture](./architecture/003-api-architecture.md) - Cloudflare Workers API design
+-   [Testing Strategy](./architecture/004-testing-strategy.md) - Testing approach and coverage goals
+-   [Semantic Release](./architecture/semantic-release.md) - Analysis of the monorepo's release process
 
 ## 🗄️ Archive
 

@@ -1,32 +1,32 @@
 # hCaptcha Integration Fix - Astro
 
-## Problema Original
+## Original Problem
 
-El widget de hCaptcha no se renderizaba correctamente en Astro, mostrando el error:
+The hCaptcha widget was not rendering correctly in Astro, showing the error:
 ```
 hCaptcha has failed to initialize. Please see the developer tools console for more information.
 Missing sitekey - https://docs.hcaptcha.com/configuration#javascript-api
 ```
 
-## Causa Raíz
+## Root Cause
 
-El problema tenía dos aspectos principales:
+The problem had two main aspects:
 
-1. **Auto-renderizado vs. Renderizado Explícito**: El modo auto-renderizado de hCaptcha (`data-sitekey` en el div) no funciona bien con el sistema de hidratación de Astro, causando que el widget intente renderizarse antes de que el script esté completamente cargado.
+1. **Auto-rendering vs. Explicit Rendering**: hCaptcha's auto-render mode (`data-sitekey` on the div) doesn't work well with Astro's hydration system, causing the widget to try to render before the script is fully loaded.
 
-2. **Timing de Inicialización**: Los scripts de Astro se ejecutan en un orden específico que puede causar condiciones de carrera con bibliotecas externas como hCaptcha.
+2. **Initialization Timing**: Astro scripts run in a specific order that can cause race conditions with external libraries like hCaptcha.
 
-## Solución Implementada
+## Implemented Solution
 
-### 1. Renderizado Explícito con Widget IDs
+### 1. Explicit Rendering with Widget IDs
 
-En lugar del auto-renderizado, ahora usamos el API de JavaScript de hCaptcha para renderizar explícitamente cada widget:
+Instead of auto-rendering, we now use hCaptcha's JavaScript API to explicitly render each widget:
 
 ```javascript
-// Cargar script con renderizado explícito
+// Load script with explicit rendering
 <script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
 
-// Renderizar manualmente cuando el API esté listo
+// Manually render when API is ready
 const widgetId = window.hcaptcha.render(container, {
   sitekey: siteKey,
   theme: theme,
@@ -35,30 +35,30 @@ const widgetId = window.hcaptcha.render(container, {
 });
 ```
 
-### 2. Gestión de Widget IDs
+### 2. Widget ID Management
 
-Implementamos un mapa global para rastrear los widget IDs por container ID:
+We implement a global map to track widget IDs by container ID:
 
 ```javascript
 window.hcaptchaWidgets = new Map();
 window.hcaptchaWidgets.set(captchaId, widgetId);
 ```
 
-Esto permite:
-- Múltiples widgets hCaptcha en la misma página
-- Resetear widgets específicos por su container ID
-- Obtener respuestas de widgets específicos
+This enables:
+- Multiple hCaptcha widgets on the same page
+- Reset specific widgets by their container ID
+- Get responses from specific widgets
 
-### 3. Callbacks y Eventos Personalizados
+### 3. Custom Callbacks and Events
 
-Agregamos callbacks para todos los eventos del ciclo de vida:
+We add callbacks for all lifecycle events:
 
 ```javascript
 {
   callback: (token) => {
-    // Token almacenado en dataset
+    // Token stored in dataset
     container.dataset.token = token;
-    // Evento personalizado para el formulario
+    // Custom event for the form
     container.dispatchEvent(new CustomEvent('hcaptcha-success', {
       detail: { token, widgetId }
     }));
@@ -68,21 +68,21 @@ Agregamos callbacks para todos los eventos del ciclo de vida:
 }
 ```
 
-### 4. Funciones Helper Globales
+### 4. Global Helper Functions
 
-Se mantienen funciones helper simples para los formularios:
+Simple helper functions are maintained for forms:
 
 ```javascript
-// Obtener token por container ID
+// Get token by container ID
 window.getCaptchaToken(containerId);
 
-// Resetear widget por container ID  
+// Reset widget by container ID  
 window.resetCaptcha(containerId);
 ```
 
-### 5. Tipos TypeScript Centralizados
+### 5. Centralized TypeScript Types
 
-Creamos `src/types/hcaptcha.d.ts` con todas las definiciones de tipos:
+We created `src/types/hcaptcha.d.ts` with all type definitions:
 
 ```typescript
 interface HCaptchaAPI {
@@ -102,52 +102,52 @@ declare global {
 }
 ```
 
-## Archivos Modificados
+## Modified Files
 
 ### 1. `/packages/shared/src/components/atoms/HCaptcha.astro`
-- **Cambio principal**: Implementación completa de renderizado explícito
-- **Mejoras**:
-  - Renderizado manual con `hcaptcha.render()`
-  - Gestión de widget IDs en mapa global
-  - Callbacks para todos los eventos del ciclo de vida
-  - Prevención de layout shift con `min-height`
-  - Mejor manejo de errores y timeouts
+- **Main change**: Complete explicit render implementation
+- **Improvements**:
+  - Manual rendering with `hcaptcha.render()`
+  - Widget ID management in global map
+  - Callbacks for all lifecycle events
+  - Layout shift prevention with `min-height`
+  - Better error handling and timeouts
 
 ### 2. `/packages/shared/src/components/organisms/CtaNewsletterSubscription.astro`
-- **Cambio**: Removidas declaraciones de tipos duplicadas
-- **Motivo**: Los tipos ahora están centralizados en `hcaptcha.d.ts`
+- **Change**: Removed duplicate type declarations
+- **Reason**: Types are now centralized in `hcaptcha.d.ts`
 
 ### 3. `/packages/shared/src/components/sections/Contact.astro`
-- **Cambio**: Removidas declaraciones de tipos duplicadas
-- **Motivo**: Los tipos ahora están centralizados en `hcaptcha.d.ts`
+- **Change**: Removed duplicate type declarations
+- **Reason**: Types are now centralized in `hcaptcha.d.ts`
 
-### 4. `/apps/portfolio/src/types/hcaptcha.d.ts` (NUEVO)
-- **Propósito**: Definiciones de tipos centralizadas para hCaptcha
-- **Beneficios**:
-  - IntelliSense completo en toda la aplicación
-  - Previene conflictos de tipos
-  - Documentación inline de la API
+### 4. `/apps/portfolio/src/types/hcaptcha.d.ts` (NEW)
+- **Purpose**: Centralized hCaptcha type definitions
+- **Benefits**:
+  - Full IntelliSense across the application
+  - Prevents type conflicts
+  - Inline API documentation
 
-## Uso en Formularios
+## Usage in Forms
 
 ### Template (Astro)
 ```astro
 <form id="my-form">
   <input type="email" name="email" required />
   
-  <!-- Widget hCaptcha -->
+  <!-- hCaptcha Widget -->
   <HCaptcha id="my-captcha" theme="light" size="normal" />
   
   <button type="submit">Submit</button>
 </form>
 ```
 
-### Script del Formulario
+### Form Script
 ```javascript
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   
-  // Obtener token
+  // Get token
   const token = window.getCaptchaToken('my-captcha');
   
   if (!token) {
@@ -155,29 +155,29 @@ form.addEventListener('submit', async (e) => {
     return;
   }
   
-  // Enviar formulario con token
+  // Submit form with token
   await submitForm({ email, hcaptchaToken: token });
   
-  // Resetear captcha después del envío
+  // Reset captcha after submission
   window.resetCaptcha('my-captcha');
 });
 ```
 
-## Ventajas de Esta Implementación
+## Advantages of This Implementation
 
-1. ✅ **Compatible con Astro**: Funciona correctamente con el sistema de hidratación
-2. ✅ **Múltiples Widgets**: Soporta múltiples captchas en la misma página
-3. ✅ **Type-Safe**: TypeScript completo con IntelliSense
-4. ✅ **Mejor UX**: Callbacks para feedback inmediato al usuario
-5. ✅ **Sin Layout Shift**: `min-height` previene saltos de contenido
-6. ✅ **Manejo de Errores**: Callbacks de error para mejor debugging
-7. ✅ **Eventos Personalizados**: Los formularios pueden escuchar eventos específicos
+1. ✅ **Astro Compatible**: Works correctly with the hydration system
+2. ✅ **Multiple Widgets**: Supports multiple captchas on the same page
+3. ✅ **Type-Safe**: Full TypeScript with IntelliSense
+4. ✅ **Better UX**: Callbacks for immediate user feedback
+5. ✅ **No Layout Shift**: `min-height` prevents content jumping
+6. ✅ **Error Handling**: Error callbacks for better debugging
+7. ✅ **Custom Events**: Forms can listen for specific events
 
 ## Testing
 
-### 1. Test con hCaptcha Test Keys
+### 1. Test with hCaptcha Test Keys
 
-Para desarrollo y testing, usar las claves de prueba de hCaptcha:
+For development and testing, use hCaptcha test keys:
 
 ```bash
 # .env
@@ -189,22 +189,22 @@ HCAPTCHA_SITE_KEY=10000000-ffff-ffff-ffff-000000000001
 HCAPTCHA_SECRET_KEY=0x0000000000000000000000000000000000000000
 ```
 
-Estas claves siempre pasan la validación.
+These keys always pass validation.
 
-### 2. Verificar en Consola del Navegador
+### 2. Verify in Browser Console
 
 ```javascript
-// Ver widgets registrados
+// Check registered widgets
 console.log(window.hcaptchaWidgets);
 
-// Probar obtener token
+// Test getting token
 console.log(window.getCaptchaToken('newsletter-captcha'));
 
-// Verificar si hCaptcha API está cargada
+// Check if hCaptcha API is loaded
 console.log(window.hcaptcha ? 'Loaded' : 'Not loaded');
 ```
 
-### 3. Eventos para Debugging
+### 3. Events for Debugging
 
 ```javascript
 const container = document.getElementById('my-captcha');
@@ -222,16 +222,16 @@ container.addEventListener('hcaptcha-expired', () => {
 });
 ```
 
-## Referencias
+## References
 
 - [hCaptcha Configuration Docs](https://docs.hcaptcha.com/configuration/)
 - [hCaptcha JavaScript API](https://docs.hcaptcha.com/configuration/#javascript-api)
 - [hCaptcha Test Keys](https://docs.hcaptcha.com/#integration-testing-test-keys)
 - [Astro Client-Side Scripts](https://docs.astro.build/en/guides/client-side-scripts/)
 
-## Próximos Pasos (Opcional)
+## Next Steps (Optional)
 
-1. **Temas Dinámicos**: Detectar el tema del sistema y ajustar el tema de hCaptcha
-2. **Modo Invisible**: Implementar modo invisible para mejor UX
-3. **Analytics**: Trackear tasa de éxito/fallo de captcha
-4. **Retry Logic**: Implementar reintentos automáticos en caso de error de red
+1. **Dynamic Themes**: Detect system theme and adjust hCaptcha theme
+2. **Invisible Mode**: Implement invisible mode for better UX
+3. **Analytics**: Track captcha success/failure rate
+4. **Retry Logic**: Implement automatic retries on network errors
