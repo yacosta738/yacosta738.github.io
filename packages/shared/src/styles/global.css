@@ -77,33 +77,14 @@
 	--giscus-border: var(--color-border);
 }
 
-/* Giscus comment widget color overrides */
+/* Giscus comment widget color overrides + Legacy variables */
 :root {
 	/* Light mode Giscus colors */
 	--giscus-bg: var(--color-background);
 	--giscus-text: var(--color-foreground);
 	--giscus-border: var(--color-border);
-}
 
-@media (prefers-contrast: high) {
-	:root {
-		--color-foreground: #000000;
-		--color-foreground-muted: #000000;
-		--color-foreground-subtle: #1f2937;
-		--color-background: #ffffff;
-		--color-background-secondary: #ffffff;
-		--color-background-tertiary: #f9fafb;
-		--color-border: #4b5563;
-		--color-border-hover: #374151;
-		/* Even darker green for high contrast mode (AAA compliant) */
-		--color-brand-accent: #064e3b;
-		--color-brand-accent-hover: #065f46;
-		--color-muted: #000000;
-	}
-}
-
-/* Legacy variables for backwards compatibility during migration */
-:root {
+	/* Legacy variables for backwards compatibility during migration */
 	--ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
 	/* Map legacy variables to semantic ones */
 	--text-primary: var(--color-foreground);
@@ -125,6 +106,23 @@
 
 	/* Font family legacy mapping */
 	--font-titles: var(--font-display);
+}
+
+@media (prefers-contrast: high) {
+	:root {
+		--color-foreground: #000000;
+		--color-foreground-muted: #000000;
+		--color-foreground-subtle: #1f2937;
+		--color-background: #ffffff;
+		--color-background-secondary: #ffffff;
+		--color-background-tertiary: #f9fafb;
+		--color-border: #4b5563;
+		--color-border-hover: #374151;
+		/* Even darker green for high contrast mode (AAA compliant) */
+		--color-brand-accent: #064e3b;
+		--color-brand-accent-hover: #065f46;
+		--color-muted: #000000;
+	}
 }
 
 html.dark {
@@ -461,6 +459,10 @@ html {
 		background-color 200ms linear,
 		color 200ms linear,
 		border-color 200ms linear;
+
+	/* Firefox scrollbar styling */
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-foreground-subtle) var(--color-brand-navy);
 }
 
 body {
@@ -534,12 +536,6 @@ h4 {
 
 ::-webkit-scrollbar-corner {
 	background: var(--bg-secondary);
-}
-
-/* Firefox scrollbar styling */
-html {
-	scrollbar-width: thin;
-	scrollbar-color: var(--color-foreground-subtle) var(--color-brand-navy);
 }
 
 /* Utility for screen-reader only content */

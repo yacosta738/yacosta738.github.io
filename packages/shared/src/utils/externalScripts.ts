@@ -3,11 +3,21 @@
 import type { AstroIntegration } from "astro";
 
 const hasExternalScripts = false;
+
+const normalizeToArray = (
+	items: (() => AstroIntegration) | (() => AstroIntegration)[],
+): AstroIntegration[] => {
+	if (Array.isArray(items)) {
+		return items.map((item) => item());
+	}
+	return [items()];
+};
+
 export const whenExternalScripts = (
 	items: (() => AstroIntegration) | (() => AstroIntegration)[] = [],
-) =>
-	hasExternalScripts
-		? Array.isArray(items)
-			? items.map((item) => item())
-			: [items()]
-		: [];
+): AstroIntegration[] => {
+	if (!hasExternalScripts) {
+		return [];
+	}
+	return normalizeToArray(items);
+};

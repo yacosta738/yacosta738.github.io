@@ -113,31 +113,34 @@ const computeHeight = (width: number, aspectRatio: number) => {
 	return Math.floor(width / aspectRatio);
 };
 
+const isValidNumber = (value: unknown): value is number => {
+	return typeof value === "number" && Number.isFinite(value) && value > 0;
+};
+
+const parseStringRatio = (s: string): number | undefined => {
+	const ratioSeparatorIndex = getRatioSeparatorIndex(s);
+	if (ratioSeparatorIndex !== -1) {
+		const parsed = parseRatioFromDelimitedString(s);
+		return isValidNumber(parsed) ? parsed : undefined;
+	}
+
+	const numericValue = parseRatioValue(s);
+	return isValidNumber(numericValue) ? numericValue : undefined;
+};
+
 export const parseAspectRatio = (
 	aspectRatio: AspectRatioInput,
 ): number | undefined => {
 	if (typeof aspectRatio === "number") {
-		return Number.isFinite(aspectRatio) && aspectRatio > 0
-			? aspectRatio
-			: undefined;
+		return isValidNumber(aspectRatio) ? aspectRatio : undefined;
 	}
 
 	if (typeof aspectRatio === "string") {
-		const s = aspectRatio.trim();
-		if (s.length === 0) {
+		const trimmed = aspectRatio.trim();
+		if (trimmed.length === 0) {
 			return undefined;
 		}
-
-		const ratioSeparatorIndex = getRatioSeparatorIndex(s);
-		if (ratioSeparatorIndex !== -1) {
-			const parsed = parseRatioFromDelimitedString(s);
-			return parsed !== undefined && parsed > 0 ? parsed : undefined;
-		}
-
-		const numericValue = parseRatioValue(s);
-		if (numericValue !== undefined && numericValue > 0) {
-			return numericValue;
-		}
+		return parseStringRatio(trimmed);
 	}
 
 	return undefined;
