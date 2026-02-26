@@ -28,11 +28,30 @@ const buildBlogBaseUrl = (baseUrl: string): string => {
 };
 
 /**
+ * Check if hostname is localhost or loopback address
+ */
+const isLocalhost = (hostname: string): boolean => {
+	return (
+		hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1"
+	);
+};
+
+/**
  * Get the blog base URL based on the environment
  * - Production: blog.yunielacosta.com (derived from domain)
  * - Development: localhost:4322 (blog port)
  */
 const getBlogBaseUrl = (domain?: string): string => {
+	// In production, use production blog URL
+	if (process.env.NODE_ENV === "production") {
+		const normalized = normalizeBaseUrl(domain);
+		// If no domain configured in production, use default
+		if (!normalized) {
+			return "https://blog.yunielacosta.com";
+		}
+		return buildBlogBaseUrl(normalized);
+	}
+
 	// In development or when no domain is configured, use localhost:4322
 	if (!domain) {
 		return "http://localhost:4322";
@@ -41,11 +60,16 @@ const getBlogBaseUrl = (domain?: string): string => {
 	const normalized = normalizeBaseUrl(domain);
 
 	// If domain is localhost, use localhost:4322 for blog
-	if (normalized.includes("localhost")) {
-		return "http://localhost:4322";
+	try {
+		const url = new URL(normalized);
+		if (isLocalhost(url.hostname)) {
+			return "http://localhost:4322";
+		}
+	} catch {
+		// If URL parsing fails, proceed to buildBlogBaseUrl
 	}
 
-	// In production, derive blog URL from domain (e.g., yunielacosta.com -> blog.yunielacosta.com)
+	// In other dev environments, derive blog URL from domain
 	return buildBlogBaseUrl(normalized);
 };
 
