@@ -1,6 +1,7 @@
 export default {
 	en: {
-		"projects.tableCaption": "List of projects sorted by date, most recent first",
+		"projects.tableCaption":
+			"List of projects sorted by date, most recent first",
 		"projects.sortedByDate": "Sorted by date, newest first",
 		"projects.noProjects": "No projects to display",
 		"projects.yearHint": "Project year",
@@ -9,7 +10,8 @@ export default {
 		"projects.viewProject": "View project {name}",
 	},
 	es: {
-		"projects.tableCaption": "Lista de proyectos ordenados por fecha, más recientes primero",
+		"projects.tableCaption":
+			"Lista de proyectos ordenados por fecha, más recientes primero",
 		"projects.sortedByDate": "Ordenados por fecha, más nuevos primero",
 		"projects.noProjects": "No hay proyectos para mostrar",
 		"projects.yearHint": "Año del proyecto",

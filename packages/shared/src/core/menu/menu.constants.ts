@@ -28,11 +28,11 @@ export const navMenus = [
 		title: "nav.contact",
 		link: "/#contact",
 	},
-// {
-	// 	id: "blog",
-	// 	title: "nav.blog",
-	// 	link: "/blog",
-	// },
+	{
+		id: "blog",
+		title: "nav.blog",
+		link: "/",
+	},
 ];
 
 // Navigation links array with translation keys and conditions

@@ -31,7 +31,7 @@ export function batchDOMOperations(operations: {
 }): void {
 	// Perform all reads first
 	for (const read of operations.reads) {
-		void read();
+		read();
 	}
 
 	// Then perform all writes

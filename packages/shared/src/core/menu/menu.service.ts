@@ -28,6 +28,28 @@ const buildBlogBaseUrl = (baseUrl: string): string => {
 };
 
 /**
+ * Get the blog base URL based on the environment
+ * - Production: blog.yunielacosta.com (derived from domain)
+ * - Development: localhost:4322 (blog port)
+ */
+const getBlogBaseUrl = (domain?: string): string => {
+	// In development or when no domain is configured, use localhost:4322
+	if (!domain) {
+		return "http://localhost:4322";
+	}
+
+	const normalized = normalizeBaseUrl(domain);
+
+	// If domain is localhost, use localhost:4322 for blog
+	if (normalized.includes("localhost")) {
+		return "http://localhost:4322";
+	}
+
+	// In production, derive blog URL from domain (e.g., yunielacosta.com -> blog.yunielacosta.com)
+	return buildBlogBaseUrl(normalized);
+};
+
+/**
  * Filters menu items based on their condition property
  * @param items Array of menu items
  * @returns Filtered array of menu items where condition is not false
@@ -42,14 +64,14 @@ export function resolveNavigationMenuHref(
 	domain?: string,
 ): string {
 	const localizedPath = translatePath(menu.link);
-	const portfolioBaseUrl = normalizeBaseUrl(domain);
-
-	if (!portfolioBaseUrl) return localizedPath;
 
 	if (menu.id === "blog") {
-		const blogBaseUrl = buildBlogBaseUrl(portfolioBaseUrl);
+		const blogBaseUrl = getBlogBaseUrl(domain);
 		return blogBaseUrl ? `${blogBaseUrl}${localizedPath}` : localizedPath;
 	}
 
-	return `${portfolioBaseUrl}${localizedPath}`;
+	const portfolioBaseUrl = normalizeBaseUrl(domain);
+	return portfolioBaseUrl
+		? `${portfolioBaseUrl}${localizedPath}`
+		: localizedPath;
 }
