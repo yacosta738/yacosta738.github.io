@@ -30,8 +30,8 @@ export const ui: UIMultilingual = Object.values(translationModules).reduce(
 		for (const [lang, translations] of Object.entries(translationExport)) {
 			if (lang in acc) {
 				// Merge translations into the accumulated object
-				acc[lang] = {
-					...acc[lang],
+				acc[lang as Lang] = {
+					...acc[lang as Lang],
 					...(translations as UIDict),
 				};
 			}
@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "development") {
 	console.log(
 		"㊙︎ Loaded translations:",
 		Object.keys(ui)
-			.map((lang) => `${lang}: ${Object.keys(ui[lang]).length} keys`)
+			.map((lang) => `${lang}: ${Object.keys(ui[lang as Lang]).length} keys`)
 			.join(", "),
 	);
 }

@@ -66,17 +66,29 @@ export function useTranslatedPath(lang: Lang) {
  * //   ...
  * // ]
  */
+/**
+ * Build a regex pattern for matching language prefixes
+ */
+const buildLangPrefixRegex = (): RegExp => {
+	const locales = Object.keys(LOCALES);
+	// Use String.raw to avoid escaping issues, wrap locales in a capturing group for extraction
+	const pattern = String.raw`^/(${locales.join("|")})/`;
+	return new RegExp(pattern);
+};
+
 export function getLocalePaths(url: URL): LocalePath[] {
 	// Create a regex pattern that matches only language prefixes
-	const langPrefixPattern = `^/${Object.keys(LOCALES).join("|")}/`;
-	const langPrefixRegex = new RegExp(langPrefixPattern);
+	const langPrefixRegex = buildLangPrefixRegex();
 
 	// Extract the pathname without the language prefix if it exists
 	const pathWithoutLangPrefix = url.pathname.replace(langPrefixRegex, "");
 
 	// If pathWithoutLangPrefix is empty, it means the URL was just a language prefix
 	// In that case, use "/" as the path
-	const cleanPath = pathWithoutLangPrefix || "/";
+	// Ensure the path starts with "/" for Astro's getRelativeLocaleUrl
+	const cleanPath = pathWithoutLangPrefix
+		? `/${pathWithoutLangPrefix.replace(/^\/+/, "")}`
+		: "/";
 
 	return Object.keys(LOCALES).map((lang) => {
 		return {
@@ -109,11 +121,10 @@ export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 	if (isTagPage(pathname)) {
 		const tagSlug = extractTagSlugFromPath(pathname);
 		if (tagSlug) {
-			// Extract current language
-			const langPrefixPattern = `^/${Object.keys(LOCALES).join("|")}/`;
-			const langPrefixRegex = new RegExp(langPrefixPattern);
+			// Extract current language using the shared regex builder
+			const langPrefixRegex = buildLangPrefixRegex();
 			const match = langPrefixRegex.exec(pathname);
-			const currentLang = match ? match[1] : DEFAULT_LOCALE;
+			const currentLang = match && match[1] ? match[1] : DEFAULT_LOCALE;
 
 			// Get tag-aware locale paths
 			const tagPaths = await getTagLocalePaths(
