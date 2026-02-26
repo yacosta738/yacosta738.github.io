@@ -3,7 +3,7 @@ const toIpv4Octets = (hostname: string): number[] | null => {
 		return null;
 	}
 
-	const octets = hostname.split(".").map((part) => Number(part));
+	const octets = hostname.split(".").map(Number);
 	if (octets.some((octet) => Number.isNaN(octet) || octet < 0 || octet > 255)) {
 		return null;
 	}
