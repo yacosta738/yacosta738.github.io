@@ -5,6 +5,21 @@ import type { OgData } from "./og.types";
 /**
  * Opengraph template to generate svg
  */
+
+const formatDateValue = (
+	date: string | Date | undefined,
+	dateLocale: string,
+	dateFormatter: Intl.DateTimeFormatOptions,
+): string => {
+	if (!date) {
+		return new Date().toLocaleDateString(dateLocale, dateFormatter);
+	}
+	if (typeof date === "string") {
+		return date;
+	}
+	return new Date(date).toLocaleDateString(dateLocale, dateFormatter);
+};
+
 export const Template = (props: OgData) => {
 	const {
 		title,
@@ -26,11 +41,7 @@ export const Template = (props: OgData) => {
 		day: "numeric",
 	} as const;
 
-	const formattedDate = date
-		? typeof date === "string"
-			? date
-			: new Date(date).toLocaleDateString(dateLocale, dateFormatter)
-		: new Date().toLocaleDateString(dateLocale, dateFormatter);
+	const formattedDate = formatDateValue(date, dateLocale, dateFormatter);
 
 	return {
 		type: "div",

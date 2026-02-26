@@ -23,8 +23,8 @@ export interface LanguageEntry {
  * It initializes its data from the `languagesLibrary` content collection.
  */
 export class LanguageMapper {
-	private languagesMap: Map<string, LanguageEntry> = new Map();
-	private nameToCodeMap: Map<string, string> = new Map();
+	private readonly languagesMap: Map<string, LanguageEntry> = new Map();
+	private readonly nameToCodeMap: Map<string, string> = new Map();
 	private initialized = false;
 
 	/**

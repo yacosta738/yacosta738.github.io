@@ -9,8 +9,8 @@ test.describe("Tag Pages with External Articles", () => {
 		// Verify page loaded successfully
 		await expect(page).toHaveURL("/en/blog/tag/r");
 
-		// Check for page heading
-		const heading = page.locator("h1");
+		// Check for page heading - use specific selector to avoid capturing Playwright DevTools h1
+		const heading = page.locator("main h1, article h1, .container h1").first();
 		await expect(heading).toBeVisible();
 
 		// Articles should be visible
@@ -29,8 +29,8 @@ test.describe("Tag Pages with External Articles", () => {
 		// Verify page loaded successfully
 		await expect(page).toHaveURL("/es/blog/tag/r");
 
-		// Check for page heading
-		const heading = page.locator("h1");
+		// Check for page heading - use specific selector to avoid capturing Playwright DevTools h1
+		const heading = page.locator("main h1, article h1, .container h1").first();
 		await expect(heading).toBeVisible();
 
 		// Articles should be visible
