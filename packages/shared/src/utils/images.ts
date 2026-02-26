@@ -40,8 +40,12 @@ const tryExactMatch = async (
 	imagePath: string,
 ): Promise<ImageMetadata | undefined> => {
 	if (typeof images[imagePath] === "function") {
-		const result = await images[imagePath]();
-		return (result as { default: ImageMetadata }).default;
+		try {
+			const result = await images[imagePath]();
+			return (result as { default: ImageMetadata }).default;
+		} catch {
+			return undefined;
+		}
 	}
 	return undefined;
 };
@@ -53,8 +57,12 @@ const trySuffixMatch = async (
 ): Promise<ImageMetadata | undefined> => {
 	const match = keys.find((k) => k.endsWith(searchPath));
 	if (match && typeof images[match] === "function") {
-		const result = await images[match]();
-		return (result as { default: ImageMetadata }).default;
+		try {
+			const result = await images[match]();
+			return (result as { default: ImageMetadata }).default;
+		} catch {
+			return undefined;
+		}
 	}
 	return undefined;
 };
@@ -68,8 +76,12 @@ const tryBasenameMatch = async (
 		(k) => k.endsWith(`/${basename}`) || k.endsWith(basename),
 	);
 	if (match && typeof images[match] === "function") {
-		const result = await images[match]();
-		return (result as { default: ImageMetadata }).default;
+		try {
+			const result = await images[match]();
+			return (result as { default: ImageMetadata }).default;
+		} catch {
+			return undefined;
+		}
 	}
 	return undefined;
 };
@@ -337,13 +349,47 @@ const adaptSingleImage = async (
 			resolvedImage.startsWith("https://")) &&
 		isUnpicCompatible(resolvedImage)
 	) {
-		const optimized = await unpicOptimizer(
+		try {
+			const optimized = await unpicOptimizer(
+				resolvedImage,
+				[defaultWidth],
+				defaultWidth,
+				defaultHeight,
+				"jpg",
+			);
+			const _image = optimized[0];
+			if (_image && "src" in _image && typeof _image.src === "string") {
+				const urlStr = astroSite
+					? String(new URL(_image.src, astroSite))
+					: _image.src;
+				return {
+					url: urlStr,
+					width: "width" in _image ? _image.width : undefined,
+					height: "height" in _image ? _image.height : undefined,
+				};
+			}
+		} catch {
+			// continue to Astro assets optimizer path
+		}
+	}
+
+	// Use Astro assets optimizer for local images
+	const dimensions =
+		typeof resolvedImage !== "string" &&
+		resolvedImage &&
+		resolvedImage.width <= defaultWidth
+			? [resolvedImage.width, resolvedImage.height]
+			: [defaultWidth, defaultHeight];
+
+	try {
+		const optimized = await astroAssetsOptimizer(
 			resolvedImage,
-			[defaultWidth],
-			defaultWidth,
-			defaultHeight,
+			[dimensions[0]],
+			dimensions[0],
+			dimensions[1],
 			"jpg",
 		);
+
 		const _image = optimized[0];
 		if (_image && "src" in _image && typeof _image.src === "string") {
 			const urlStr = astroSite
@@ -355,35 +401,8 @@ const adaptSingleImage = async (
 				height: "height" in _image ? _image.height : undefined,
 			};
 		}
-		return { url: "" };
-	}
-
-	// Use Astro assets optimizer for local images
-	const dimensions =
-		typeof resolvedImage !== "string" &&
-		resolvedImage &&
-		resolvedImage.width <= defaultWidth
-			? [resolvedImage.width, resolvedImage.height]
-			: [defaultWidth, defaultHeight];
-
-	const optimized = await astroAssetsOptimizer(
-		resolvedImage,
-		[dimensions[0]],
-		dimensions[0],
-		dimensions[1],
-		"jpg",
-	);
-
-	const _image = optimized[0];
-	if (_image && "src" in _image && typeof _image.src === "string") {
-		const urlStr = astroSite
-			? String(new URL(_image.src, astroSite))
-			: _image.src;
-		return {
-			url: urlStr,
-			width: "width" in _image ? _image.width : undefined,
-			height: "height" in _image ? _image.height : undefined,
-		};
+	} catch {
+		// return empty result on error
 	}
 
 	return { url: "" };
