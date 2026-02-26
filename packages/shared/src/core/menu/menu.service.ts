@@ -49,15 +49,17 @@ const getBlogBaseUrl = (domain?: string): string => {
 		if (!normalized) {
 			return "https://blog.yunielacosta.com";
 		}
-		return buildBlogBaseUrl(normalized);
+		const blogUrl = buildBlogBaseUrl(normalized);
+		// If domain is malformed and buildBlogBaseUrl returns empty, use fallback
+		return blogUrl || "https://blog.yunielacosta.com";
 	}
 
 	// In development or when no domain is configured, use localhost:4322
-	if (!domain) {
+	// Normalize first to catch whitespace-only strings
+	const normalized = normalizeBaseUrl(domain);
+	if (!normalized) {
 		return "http://localhost:4322";
 	}
-
-	const normalized = normalizeBaseUrl(domain);
 
 	// If domain is localhost, use localhost:4322 for blog
 	try {
@@ -66,11 +68,13 @@ const getBlogBaseUrl = (domain?: string): string => {
 			return "http://localhost:4322";
 		}
 	} catch {
-		// If URL parsing fails, proceed to buildBlogBaseUrl
+		// If URL parsing fails, return localhost as fallback
+		return "http://localhost:4322";
 	}
 
 	// In other dev environments, derive blog URL from domain
-	return buildBlogBaseUrl(normalized);
+	const blogUrl = buildBlogBaseUrl(normalized);
+	return blogUrl || "http://localhost:4322";
 };
 
 /**
