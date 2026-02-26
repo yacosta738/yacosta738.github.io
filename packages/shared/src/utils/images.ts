@@ -311,8 +311,12 @@ export const findImage = async (
 	if (images) {
 		const key = imagePath.replace("~/", "/src/");
 		if (typeof images[key] === "function") {
-			const result = await images[key]();
-			return (result as { default: ImageMetadata }).default;
+			try {
+				const result = await images[key]();
+				return (result as { default: ImageMetadata }).default;
+			} catch {
+				return null;
+			}
 		}
 	}
 
@@ -369,11 +373,29 @@ const adaptSingleImage = async (
 				};
 			}
 		} catch {
-			// continue to Astro assets optimizer path
+			// If remote URL optimization failed, return the original URL as fallback
+			if (
+				typeof resolvedImage === "string" &&
+				(resolvedImage.startsWith("http://") ||
+					resolvedImage.startsWith("https://"))
+			) {
+				return { url: resolvedImage };
+			}
+			// continue to Astro assets optimizer path for local images
 		}
 	}
 
-	// Use Astro assets optimizer for local images
+	// Use Astro assets optimizer for local images only (not remote URLs)
+	if (
+		typeof resolvedImage === "string" &&
+		(resolvedImage.startsWith("http://") ||
+			resolvedImage.startsWith("https://"))
+	) {
+		// Remote URL that couldn't be optimized - return as-is
+		return { url: resolvedImage };
+	}
+
+	// For local ImageMetadata
 	const dimensions =
 		typeof resolvedImage !== "string" &&
 		resolvedImage &&
@@ -419,11 +441,10 @@ export const adaptOpenGraphImages = async (
 
 	const defaultWidth = 1200;
 	const defaultHeight = 626;
-	const site = astroSite;
 
 	const adaptedImages = await Promise.all(
 		openGraph.images.map((image) =>
-			adaptSingleImage(image, defaultWidth, defaultHeight, site),
+			adaptSingleImage(image, defaultWidth, defaultHeight, astroSite),
 		),
 	);
 
