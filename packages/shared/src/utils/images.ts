@@ -484,7 +484,9 @@ const adaptSingleImage = async (
 		return astroResult;
 	}
 
-	return { url: "" };
+	// Fallback: return the original image source instead of empty URL
+	// This ensures callers receive a valid URL even if optimization fails
+	return { url: resolvedImage.src };
 };
 
 /** */
