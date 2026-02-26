@@ -71,8 +71,7 @@ export function useTranslatedPath(lang: Lang) {
  */
 const buildLangPrefixRegex = (): RegExp => {
 	const locales = Object.keys(LOCALES);
-	// Use String.raw to avoid escaping issues, wrap locales in a capturing group for extraction
-	const pattern = String.raw`^/(${locales.join("|")})/`;
+	const pattern = `^/(${locales.join("|")})/`;
 	return new RegExp(pattern);
 };
 
@@ -124,7 +123,7 @@ export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 			// Extract current language using the shared regex builder
 			const langPrefixRegex = buildLangPrefixRegex();
 			const match = langPrefixRegex.exec(pathname);
-			const currentLang = match && match[1] ? match[1] : DEFAULT_LOCALE;
+			const currentLang = match?.[1] ?? DEFAULT_LOCALE;
 
 			// Get tag-aware locale paths
 			const tagPaths = await getTagLocalePaths(
