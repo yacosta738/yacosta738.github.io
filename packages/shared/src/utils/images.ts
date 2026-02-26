@@ -102,7 +102,7 @@ const tryCandidateVariants = async (
 			kNorm === imagePath.replace(/^\.\/?/, "/") ||
 			kNorm.endsWith(pathInsideAssets) ||
 			kNorm.endsWith(`/${basename}`) ||
-			kNorm.includes(basename || "")
+			(basename && kNorm.includes(basename))
 		) {
 			candidates.add(k);
 			candidates.add(kNorm);
@@ -142,7 +142,7 @@ const tryFullMetadataScan = async (
 				if (
 					candidateSrc === imagePath ||
 					candidateSrc.endsWith(`/${basename}`) ||
-					candidateSrc.includes(basename || "")
+					(basename && candidateSrc.includes(basename))
 				) {
 					return meta;
 				}
@@ -276,7 +276,11 @@ export const findImage = async (
 	if (imagePath.startsWith("/src/") && images) {
 		const result = await resolveSourcePath(imagePath, images);
 		if (result) return result;
-		logResolutionFailure(imagePath, Object.keys(images), new Set());
+		logResolutionFailure(
+			imagePath,
+			Object.keys(images),
+			new Set(Object.keys(images)),
+		);
 		return null;
 	}
 
@@ -309,9 +313,9 @@ export const findImage = async (
 
 const adaptSingleImage = async (
 	image: { url?: string },
-	astroSite: URL,
 	defaultWidth: number,
 	defaultHeight: number,
+	astroSite?: URL | undefined,
 ): Promise<{ url: string; width?: number; height?: number }> => {
 	if (!image?.url) {
 		return { url: "" };
@@ -342,8 +346,11 @@ const adaptSingleImage = async (
 		);
 		const _image = optimized[0];
 		if (_image && "src" in _image && typeof _image.src === "string") {
+			const urlStr = astroSite
+				? String(new URL(_image.src, astroSite))
+				: _image.src;
 			return {
-				url: String(new URL(_image.src, astroSite)),
+				url: urlStr,
 				width: "width" in _image ? _image.width : undefined,
 				height: "height" in _image ? _image.height : undefined,
 			};
@@ -369,8 +376,11 @@ const adaptSingleImage = async (
 
 	const _image = optimized[0];
 	if (_image && "src" in _image && typeof _image.src === "string") {
+		const urlStr = astroSite
+			? String(new URL(_image.src, astroSite))
+			: _image.src;
 		return {
-			url: String(new URL(_image.src, astroSite)),
+			url: urlStr,
 			width: "width" in _image ? _image.width : undefined,
 			height: "height" in _image ? _image.height : undefined,
 		};
@@ -382,7 +392,7 @@ const adaptSingleImage = async (
 /** */
 export const adaptOpenGraphImages = async (
 	openGraph: OpenGraph = {},
-	astroSite: URL | undefined = new URL(""),
+	astroSite?: URL | undefined,
 ): Promise<OpenGraph> => {
 	if (!openGraph?.images?.length) {
 		return openGraph;
@@ -390,11 +400,11 @@ export const adaptOpenGraphImages = async (
 
 	const defaultWidth = 1200;
 	const defaultHeight = 626;
-	const site = astroSite ?? new URL("");
+	const site = astroSite;
 
 	const adaptedImages = await Promise.all(
 		openGraph.images.map((image) =>
-			adaptSingleImage(image, site, defaultWidth, defaultHeight),
+			adaptSingleImage(image, defaultWidth, defaultHeight, site),
 		),
 	);
 

@@ -6,7 +6,7 @@ const hasExternalScripts = false;
 
 const normalizeToArray = (
 	items: (() => AstroIntegration) | (() => AstroIntegration)[],
-): (() => AstroIntegration)[] => {
+): AstroIntegration[] => {
 	if (Array.isArray(items)) {
 		return items.map((item) => item());
 	}
@@ -15,7 +15,7 @@ const normalizeToArray = (
 
 export const whenExternalScripts = (
 	items: (() => AstroIntegration) | (() => AstroIntegration)[] = [],
-): (() => AstroIntegration)[] => {
+): AstroIntegration[] => {
 	if (!hasExternalScripts) {
 		return [];
 	}

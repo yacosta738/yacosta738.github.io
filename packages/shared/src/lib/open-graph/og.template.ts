@@ -17,7 +17,7 @@ const formatDateValue = (
 	if (typeof date === "string") {
 		return date;
 	}
-	return new Date(date).toLocaleDateString(dateLocale, dateFormatter);
+	return date.toLocaleDateString(dateLocale, dateFormatter);
 };
 
 export const Template = (props: OgData) => {
