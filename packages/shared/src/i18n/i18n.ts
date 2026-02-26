@@ -68,7 +68,7 @@ export function useTranslatedPath(lang: Lang) {
  */
 export function getLocalePaths(url: URL): LocalePath[] {
 	// Create a regex pattern that matches only language prefixes
-	const langPrefixPattern = `^\\/(${Object.keys(LOCALES).join("|")})`;
+	const langPrefixPattern = `^/${Object.keys(LOCALES).join("|")}/`;
 	const langPrefixRegex = new RegExp(langPrefixPattern);
 
 	// Extract the pathname without the language prefix if it exists
@@ -110,10 +110,10 @@ export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 		const tagSlug = extractTagSlugFromPath(pathname);
 		if (tagSlug) {
 			// Extract current language
-			const langPrefixPattern = `^\\/(${Object.keys(LOCALES).join("|")})`;
+			const langPrefixPattern = `^/${Object.keys(LOCALES).join("|")}/`;
 			const langPrefixRegex = new RegExp(langPrefixPattern);
-			const match = pathname.match(langPrefixRegex);
-			const currentLang = match ? (match[1] as Lang) : DEFAULT_LOCALE;
+			const match = langPrefixRegex.exec(pathname);
+			const currentLang = match ? match[1] : DEFAULT_LOCALE;
 
 			// Get tag-aware locale paths
 			const tagPaths = await getTagLocalePaths(

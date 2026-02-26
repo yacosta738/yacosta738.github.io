@@ -24,7 +24,7 @@ export function parseEntityId(entityId: string): {
 } {
 	// Match language prefixes like "en/", "es/", "zh-cn/", etc.
 	const languagePrefixRegex = /^([a-z]{2}(?:-[a-z]{2})?)\/(.+)$/i;
-	const match = entityId.match(languagePrefixRegex);
+	const match = languagePrefixRegex.exec(entityId);
 
 	if (match) {
 		// If language prefix exists, return it with the cleaned path

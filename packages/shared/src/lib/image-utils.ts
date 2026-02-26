@@ -41,9 +41,10 @@ async function safeFindImage(path: string): Promise<ImageMetadata | null> {
  */
 export async function prepareImageForOptimizedPicture(
 	imagePath: unknown,
-): Promise<ImageMetadata | string | unknown> {
-	if (imagePath !== null && typeof imagePath === "object") return imagePath;
-	if (typeof imagePath !== "string") return imagePath;
+): Promise<ImageMetadata | string | null> {
+	if (imagePath !== null && typeof imagePath === "object")
+		return imagePath as ImageMetadata;
+	if (typeof imagePath !== "string") return null;
 	if (imagePath.startsWith("http")) return imagePath;
 
 	const metadata = await safeFindImage(imagePath);
