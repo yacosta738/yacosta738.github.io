@@ -1,41 +1,41 @@
-# ADR-004: Estrategia de Testing
+# ADR-004: Testing Strategy
 
-## Estado
-**Aceptado** | Fecha: 2024-01
+## Status
+**Accepted** | Date: 2024-01
 
-## Contexto
-Necesitamos una estrategia de testing que garantice:
-- Calidad del código
-- Regresión minima
-- Confianza en despliegues
+## Context
+We need a testing strategy that ensures:
+- Code quality
+- Minimal regression
+- Confidence in deployments
 
-## Decisión
-Usaremos una estrategia de testing en múltiples niveles:
+## Decision
+We will use a multi-level testing strategy:
 
-### Niveles de Testing:
+### Testing Levels:
 
 #### 1. Unit Tests (Vitest)
-- **Alcance**: Utilidades, funciones puras, componentes aislados
-- **Ubicación**: `tests/unit/**/*.test.ts`
-- **Ejecución**: En CI y pre-push
+- **Scope**: Utilities, pure functions, isolated components
+- **Location**: `tests/unit/**/*.test.ts`
+- **Execution**: In CI and pre-push
 
 #### 2. Integration Tests (Vitest)
-- **Alcance**: API endpoints, handlers
-- **Ubicación**: `src/**/*.test.ts` (en cada app)
-- **Mocks**: Wrangler para testing de Workers
+- **Scope**: API endpoints, handlers
+- **Location**: `src/**/*.test.ts` (in each app)
+- **Mocks**: Wrangler for Workers testing
 
 #### 3. E2E Tests (Playwright)
-- **Alcance**: Flujos completos del usuario
-- **Ubicación**: `packages/testing-e2e/tests/e2e/**/*.spec.ts`
-- **Navegadores**: Chromium, Firefox, WebKit, Mobile
-- **Accesibilidad**: @axe-core/playwright
+- **Scope**: Complete user flows
+- **Location**: `packages/testing-e2e/tests/e2e/**/*.spec.ts`
+- **Browsers**: Chromium, Firefox, WebKit, Mobile
+- **Accessibility**: @axe-core/playwright
 
-### Cobertura objetivo:
-- Unit: >70% para lógica de negocio
-- API: 100% coverage en endpoints
-- E2E: Flujos críticos (contact, newsletter, navegación)
+### Target Coverage:
+- Unit: >70% for business logic
+- API: 100% coverage on endpoints
+- E2E: Critical flows (contact, newsletter, navigation)
 
-### Pipeline CI:
+### CI Pipeline:
 ```
 1. Biome (lint + format)
 2. TypeScript check
@@ -45,13 +45,13 @@ Usaremos una estrategia de testing en múltiples niveles:
 6. SonarCloud quality gate
 ```
 
-## Consecuencias
-- ✅ Múltiples niveles = confianza
+## Consequences
+- ✅ Multiple levels = confidence
 - ✅ Coverage tracking
-- ✅ Accesibilidad verificada
-- ❌ Tiempo de CI aumenta
-- ❌ Mantenimiento de tests E2E
+- ✅ Accessibility verified
+- ❌ CI time increases
+- ❌ E2E tests maintenance
 
-## Referencias
+## References
 - Playwright config: `apps/*/playwright.config.ts`
 - Vitest config: `apps/*/vitest.config.ts`
