@@ -25,6 +25,7 @@ import {
 } from "@/i18n";
 import "@/styles/global.css";
 
+import { ClientRouter } from "astro:transitions";
 import AppScripts from "@/components/atoms/AppScripts.astro";
 import Technologies from "@/components/atoms/Technologies.astro";
 import TorchEffect from "@/components/atoms/TorchEffect.astro";
@@ -37,7 +38,6 @@ import {
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
 import { isLocalOrPrivateHostname } from "@/utils/public-origin";
 import alkatraRegularWoff2 from "../assets/font/alkatra/alkatra-v3-latin-regular.woff2";
-import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title?: string;

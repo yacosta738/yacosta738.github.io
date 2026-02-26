@@ -5,12 +5,12 @@ import { defineConfig, devices } from "@playwright/test";
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-	testDir: "tests/e2e",
+	testDir: "../../packages/testing-e2e/tests/e2e",
 	testIgnore: [
-		"tests/e2e/comments*.spec.ts",
-		"tests/e2e/search.spec.ts",
-		"tests/e2e/newsletter.spec.ts",
-		"tests/e2e/tag-external-articles.spec.ts",
+		"**/comments*.spec.ts",
+		"**/search.spec.ts",
+		"**/newsletter.spec.ts",
+		"**/tag-external-articles.spec.ts",
 	],
 
 	// Test execution settings

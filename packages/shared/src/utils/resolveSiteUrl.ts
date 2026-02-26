@@ -5,6 +5,7 @@
 // Fallbacks:
 // - Production: https://yunielacosta.com
 // - Development: http://localhost:4321
+
 const trimTrailingSlashes = (value: string): string => {
 	let end = value.length;
 	while (end > 0 && value.at(end - 1) === "/") {
@@ -14,70 +15,22 @@ const trimTrailingSlashes = (value: string): string => {
 	return value.slice(0, end);
 };
 
-const hasInvalidHostnameChars = (value: string): boolean => {
-	for (const char of value) {
-		const codePoint = char.codePointAt(0);
-		if (codePoint === undefined) {
-			return true;
-		}
-
-		if (codePoint === 0x2f || codePoint <= 0x20) {
-			return true;
-		}
-	}
-
-	return false;
-};
-
-const hasValidHostnameLabels = (value: string): boolean => {
-	const parts = value.split(".");
-	if (parts.length < 2) {
-		return false;
-	}
-
-	for (const part of parts) {
-		if (part.length === 0) {
-			return false;
-		}
-
-		let hasAlphanumeric = false;
-		for (const char of part) {
-			const codePoint = char.codePointAt(0);
-			if (codePoint === undefined) {
-				return false;
-			}
-
-			const isDigit = codePoint >= 48 && codePoint <= 57;
-			const isUpperCase = codePoint >= 65 && codePoint <= 90;
-			const isLowerCase = codePoint >= 97 && codePoint <= 122;
-			if (isDigit || isUpperCase || isLowerCase) {
-				hasAlphanumeric = true;
-				continue;
-			}
-
-			if (codePoint !== 45) {
-				return false;
-			}
-		}
-
-		if (!hasAlphanumeric) {
-			return false;
-		}
-	}
-
-	return true;
-};
+// Regex: starts with alphanumeric, contains valid hostname labels separated by dots
+const HOSTNAME_REGEX =
+	/^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 const isLikelyHostname = (value: string): boolean => {
 	if (!value) {
 		return false;
 	}
 
-	if (hasInvalidHostnameChars(value)) {
+	// Check for invalid characters: forward slash, or characters outside printable ASCII
+	const hasInvalidChars = value.includes("/") || /[^\x21-\x7E]/.test(value);
+	if (hasInvalidChars) {
 		return false;
 	}
 
-	return hasValidHostnameLabels(value);
+	return HOSTNAME_REGEX.test(value);
 };
 
 const normalizeCandidate = (raw: string): string => {
