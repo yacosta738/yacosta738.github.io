@@ -163,7 +163,23 @@ const showSearch = Astro.url?.pathname?.includes("/blog");
         };
       };
 
+      const syncThemeToIncomingDocument = (newDocument) => {
+        if (!newDocument?.documentElement) return;
+
+        const isDark = document.documentElement.classList.contains("dark");
+        newDocument.documentElement.classList.toggle("dark", isDark);
+
+        const incomingThemeColor = newDocument.getElementById("theme-color");
+        if (incomingThemeColor) {
+          incomingThemeColor.setAttribute("content", isDark ? DARK_COLOR : LIGHT_COLOR);
+        }
+      };
+
       initTheme();
+
+      document.addEventListener('astro:before-swap', (event) => {
+        syncThemeToIncomingDocument(event.newDocument);
+      });
 
       document.addEventListener('astro:after-swap', initTheme);
 
