@@ -120,7 +120,7 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 
 <script>
 	// Type definitions for global functions (HCaptcha types are defined in HCaptcha.astro)
-	document.addEventListener("DOMContentLoaded", async () => {
+	const initNewsletterForm = async () => {
 		// Import the newsletter service dynamically
 		const { newsletterService } = await import("@/services");
 
@@ -136,6 +136,11 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 		if (!form || !emailInput || !submitButton || !errorMessage || !statusMessage || !honeypotInput) {
 			return;
 		}
+
+		if (form.dataset.newsletterBound === 'true') {
+			return;
+		}
+		form.dataset.newsletterBound = 'true';
 		// Get translations from data attributes
 		const currentLocale = document.documentElement.lang || "en";
 		const translations = {
@@ -352,5 +357,7 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 				submitButton.textContent = originalText;
 			}
 		});
-	});
+	};
+
+	document.addEventListener("astro:page-load", initNewsletterForm);
 </script>

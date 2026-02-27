@@ -94,7 +94,19 @@ const categoryList = Array.from(categories.values());
 <script>
 // Only run in the browser
 if (typeof window !== 'undefined') {
+	const CLEANUP_KEY = '__widgetWrapperCleanup';
+
+	const cleanup = () => {
+		const currentCleanup = window[CLEANUP_KEY];
+		if (typeof currentCleanup === 'function') {
+			currentCleanup();
+			window[CLEANUP_KEY] = undefined;
+		}
+	};
+
 	const initWidgetBehavior = () => {
+		cleanup();
+
 		const categoryEl = document.getElementById('categoryWidget');
 		// if the url is /blog or es/blog, remove the category widget
 		if (categoryEl) {
@@ -122,18 +134,15 @@ if (typeof window !== 'undefined') {
 			}
 		};
 
-		// Run once after DOM is ready
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', () => {
-				adjustTopOnNavbar();
-			});
-		} else {
-			adjustTopOnNavbar();
-		}
-
+		adjustTopOnNavbar();
 		window.addEventListener('scroll', adjustTopOnNavbar);
+
+		window[CLEANUP_KEY] = () => {
+			window.removeEventListener('scroll', adjustTopOnNavbar);
+		};
 	};
 
-	initWidgetBehavior();
+	document.addEventListener('astro:page-load', initWidgetBehavior);
+	document.addEventListener('astro:before-preparation', cleanup);
 }
 </script>

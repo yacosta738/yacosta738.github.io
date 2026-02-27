@@ -307,7 +307,20 @@ export async function getStaticPaths() {
 	}
 </style>
 <script>
-	window.addEventListener("DOMContentLoaded", async () => {
+	const CLEANUP_KEY = "__searchPageCleanup";
+	const cleanupStore = window as typeof window & Record<string, (() => void) | undefined>;
+
+	const cleanupSearchPage = () => {
+		const currentCleanup = cleanupStore[CLEANUP_KEY];
+		if (typeof currentCleanup === "function") {
+			currentCleanup();
+			cleanupStore[CLEANUP_KEY] = undefined;
+		}
+	};
+
+	const initSearchPage = async () => {
+		cleanupSearchPage();
+
 		const PagefindUI = (window as any).PagefindUI;
 		if (typeof PagefindUI !== "function") {
 			console.warn(
@@ -337,6 +350,9 @@ export async function getStaticPaths() {
 		const emptyTitle = searchContainer?.dataset.emptyTitle || "No results";
 		const emptyMessageTemplate =
 			searchContainer?.dataset.emptyMessage || 'No results for "{query}".';
+
+		let resultsObserver: MutationObserver | null = null;
+		let intervalId: number | null = null;
 
 		const ensureEmptyNode = () => {
 			let node = document.querySelector(".pf-empty");
@@ -417,20 +433,23 @@ export async function getStaticPaths() {
 
 		const obsTarget = resultsRoot();
 		if (obsTarget) {
-			const mo = new MutationObserver(() => {
+			resultsObserver = new MutationObserver(() => {
 				enhanceResults();
 			});
-			mo.observe(obsTarget, { childList: true, subtree: true });
+			resultsObserver.observe(obsTarget, { childList: true, subtree: true });
 			enhanceResults();
 		} else {
-			const interval = setInterval(() => {
+			intervalId = window.setInterval(() => {
 				const rt = resultsRoot();
 				if (rt) {
-					window.clearInterval(interval as any);
-					const mo = new MutationObserver(() => {
+					if (intervalId) {
+						window.clearInterval(intervalId);
+						intervalId = null;
+					}
+					resultsObserver = new MutationObserver(() => {
 						enhanceResults();
 					});
-					mo.observe(rt, { childList: true, subtree: true });
+					resultsObserver.observe(rt, { childList: true, subtree: true });
 					enhanceResults();
 				}
 			}, 150);
@@ -445,7 +464,7 @@ export async function getStaticPaths() {
 			input.dispatchEvent(new Event("input", { bubbles: true }));
 		}
 
-		input?.addEventListener("input", (e) => {
+		const handleInput = (e: Event) => {
 			const target = e.target as HTMLInputElement;
 			const url = new URL(window.location.href);
 			const params = new URLSearchParams(url.search);
@@ -457,11 +476,32 @@ export async function getStaticPaths() {
 				"",
 				`${url.pathname}${newSearch ? `?${newSearch}` : ""}`,
 			);
-		});
+		};
 
-		clearButton?.addEventListener("click", () => {
+		const handleClear = () => {
 			const url = new URL(window.location.href);
 			window.history.replaceState({}, "", `${url.pathname}`);
-		});
-	});
+		};
+
+		input?.addEventListener("input", handleInput);
+		clearButton?.addEventListener("click", handleClear);
+
+		cleanupStore[CLEANUP_KEY] = () => {
+			if (resultsObserver) {
+				resultsObserver.disconnect();
+				resultsObserver = null;
+			}
+
+			if (intervalId) {
+				window.clearInterval(intervalId);
+				intervalId = null;
+			}
+
+			input?.removeEventListener("input", handleInput);
+			clearButton?.removeEventListener("click", handleClear);
+		};
+	};
+
+	document.addEventListener("astro:page-load", initSearchPage);
+	document.addEventListener("astro:before-preparation", cleanupSearchPage);
 </script>

@@ -85,13 +85,18 @@ switch (orderBy) {
 
 {hasPosts && showLoadMore && hasMorePosts && (
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
+    const initLoadMorePosts = () => {
       const loadMoreButton = document.getElementById('load-more-button');
       const loadMoreContainer = document.getElementById('load-more-container');
       const hiddenPosts = Array.from(document.querySelectorAll('.hidden-post'));
       const postsPerBatch = 6;
 
+      if (loadMoreButton?.dataset.boundLoadMore === 'true') {
+        return;
+      }
+
       if (loadMoreButton && hiddenPosts.length > 0) {
+        loadMoreButton.dataset.boundLoadMore = 'true';
         loadMoreButton.addEventListener('click', () => {
           const postsToShow = hiddenPosts.slice(0, postsPerBatch);
 
@@ -114,7 +119,9 @@ switch (orderBy) {
           }
         });
       }
-    });
+    };
+
+    document.addEventListener('astro:page-load', initLoadMorePosts);
   </script>
 )}
 <style>

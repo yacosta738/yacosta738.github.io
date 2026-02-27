@@ -445,7 +445,7 @@ const logMissingAspectRatioInputs = (
 ): void => {
 	console.error(message);
 	const id = redactImageIdentifier(image);
-	const type = typeof image !== "string" ? ` (type: ${typeof image})` : "";
+	const type = typeof image === "string" ? "" : ` (type: ${typeof image})`;
 	console.error(`Image: ${id}${type}`);
 };
 

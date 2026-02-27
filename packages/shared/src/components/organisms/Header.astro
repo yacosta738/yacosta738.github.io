@@ -192,113 +192,117 @@ const t = useTranslations(currentLocale);
 <!-- Scroll header behavior: Only load if hideOnScroll is enabled -->
 {hideOnScroll && (
 	<script is:inline define:vars={{ id, SCROLL_THRESHOLD, HIDE_THRESHOLD, DRAWER_MENU_BUTTON_BOX_ID }}>
-	// Optimized header scroll behavior with batched DOM operations
+	// Optimized header scroll behavior with View Transitions-safe lifecycle
 	(() => {
-		const header = document.getElementById(id);
-		if (!header) return;
+		const CLEANUP_KEY = '__mainHeaderScrollCleanup';
 
-		const mobileMenuButtonBox = document.getElementById(DRAWER_MENU_BUTTON_BOX_ID);
-
-		// Cache class names for better performance
-		const HIDE_CLASS = 'hide';
-		const SCROLLED_CLASS = 'scrolled';
-		const HIDDEN_CLASS = 'is-hidden';
-		const ANIMATION_CLASSES = ['animate-fade-in-down', 'animate-delay-100', 'animate-duration-slower', 'animate-fill-forwards'];
-
-		let lastScrollY = window.scrollY;
-		let ticking = false;
-		let animationCleaned = false;
-		let currentState = '';
-
-		// Batch DOM operations to minimize reflows
-		const batchUpdate = (newState, shouldHideButton) => {
-			if (currentState === newState) return;
-			currentState = newState;
-
-			// Use requestAnimationFrame to batch all DOM updates
-			requestAnimationFrame(() => {
-				const classList = header.classList;
-				
-				switch (newState) {
-					case 'top':
-						classList.remove(HIDE_CLASS, SCROLLED_CLASS);
-						break;
-					case 'visible':
-						classList.remove(HIDE_CLASS);
-						classList.add(SCROLLED_CLASS);
-						break;
-					case 'hidden':
-						classList.add(HIDE_CLASS, SCROLLED_CLASS);
-						break;
-				}
-
-				// Update mobile button visibility in same frame
-				if (mobileMenuButtonBox) {
-					mobileMenuButtonBox.classList.toggle(HIDDEN_CLASS, shouldHideButton);
-				}
-			});
-		};
-
-		// Clean animation classes after first scroll
-		const cleanupAnimation = () => {
-			if (animationCleaned) return;
-			animationCleaned = true;
-			
-			requestAnimationFrame(() => {
-				ANIMATION_CLASSES.forEach(cls => header.classList.remove(cls));
-			});
-		};
-
-		const updateHeader = () => {
-			const y = window.scrollY;
-			const delta = y - lastScrollY;
-			
-			// Clean animation on first scroll
-			if (!animationCleaned) {
-				cleanupAnimation();
+		const cleanup = () => {
+			const currentCleanup = window[CLEANUP_KEY];
+			if (typeof currentCleanup === 'function') {
+				currentCleanup();
+				window[CLEANUP_KEY] = undefined;
 			}
-			
-			// Determine new state
-			let newState;
-			let shouldHideButton;
-			
-			if (y <= SCROLL_THRESHOLD) {
-				newState = 'top';
-				shouldHideButton = false;
-			} else if (delta < 0) {
-				newState = 'visible';
-				shouldHideButton = false;
-			} else if (delta > 0 && y > HIDE_THRESHOLD) {
-				newState = 'hidden';
-				shouldHideButton = true;
-			} else {
-				// No change needed
+		};
+
+		const initialize = () => {
+			cleanup();
+
+			const header = document.getElementById(id);
+			if (!header) return;
+
+			const mobileMenuButtonBox = document.getElementById(DRAWER_MENU_BUTTON_BOX_ID);
+			const HIDE_CLASS = 'hide';
+			const SCROLLED_CLASS = 'scrolled';
+			const HIDDEN_CLASS = 'is-hidden';
+			const ANIMATION_CLASSES = ['animate-fade-in-down', 'animate-delay-100', 'animate-duration-slower', 'animate-fill-forwards'];
+
+			let lastScrollY = window.scrollY;
+			let ticking = false;
+			let animationCleaned = false;
+			let currentState = '';
+
+			const batchUpdate = (newState, shouldHideButton) => {
+				if (currentState === newState) return;
+				currentState = newState;
+
+				requestAnimationFrame(() => {
+					const classList = header.classList;
+
+					switch (newState) {
+						case 'top':
+							classList.remove(HIDE_CLASS, SCROLLED_CLASS);
+							break;
+						case 'visible':
+							classList.remove(HIDE_CLASS);
+							classList.add(SCROLLED_CLASS);
+							break;
+						case 'hidden':
+							classList.add(HIDE_CLASS, SCROLLED_CLASS);
+							break;
+					}
+
+					if (mobileMenuButtonBox) {
+						mobileMenuButtonBox.classList.toggle(HIDDEN_CLASS, shouldHideButton);
+					}
+				});
+			};
+
+			const cleanupAnimation = () => {
+				if (animationCleaned) return;
+				animationCleaned = true;
+
+				requestAnimationFrame(() => {
+					ANIMATION_CLASSES.forEach((cls) => header.classList.remove(cls));
+				});
+			};
+
+			const updateHeader = () => {
+				const y = window.scrollY;
+				const delta = y - lastScrollY;
+
+				if (!animationCleaned) {
+					cleanupAnimation();
+				}
+
+				let newState;
+				let shouldHideButton;
+
+				if (y <= SCROLL_THRESHOLD) {
+					newState = 'top';
+					shouldHideButton = false;
+				} else if (delta < 0) {
+					newState = 'visible';
+					shouldHideButton = false;
+				} else if (delta > 0 && y > HIDE_THRESHOLD) {
+					newState = 'hidden';
+					shouldHideButton = true;
+				} else {
+					ticking = false;
+					return;
+				}
+
+				batchUpdate(newState, shouldHideButton);
+				lastScrollY = y;
 				ticking = false;
-				return;
-			}
-			
-			batchUpdate(newState, shouldHideButton);
-			lastScrollY = y;
-			ticking = false;
+			};
+
+			const handleScroll = () => {
+				if (!ticking) {
+					ticking = true;
+					requestAnimationFrame(updateHeader);
+				}
+			};
+
+			window.addEventListener('scroll', handleScroll, { passive: true });
+			updateHeader();
+
+			window[CLEANUP_KEY] = () => {
+				window.removeEventListener('scroll', handleScroll);
+			};
 		};
 
-		const handleScroll = () => {
-			if (!ticking) {
-				ticking = true;
-				requestAnimationFrame(updateHeader);
-			}
-		};
-
-		// Use passive listener for better scrolling performance
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		
-		// Cleanup on View Transitions
-		document.addEventListener('astro:before-preparation', () => {
-			window.removeEventListener('scroll', handleScroll);
-		}, { once: true });
-		
-		// Initial update
-		updateHeader();
+		document.addEventListener('astro:page-load', initialize);
+		document.addEventListener('astro:before-preparation', cleanup);
 	})();
 	</script>
 )}
@@ -310,178 +314,173 @@ const t = useTranslations(currentLocale);
 	ariaDrawerOpened: t("nav.drawerOpened") || "Menú abierto",
 	ariaDrawerClosed: t("nav.drawerClosed") || "Menú cerrado"
 }}>
-// Optimized mobile drawer functionality
-document.addEventListener('DOMContentLoaded', () => {
-	const mobileMenuButton = document.getElementById('drawer-menu-button');
-	const mobileDrawer = document.getElementById('mobile-drawer');
-	const mobileDrawerBackdrop = document.getElementById('mobile-drawer-backdrop');
-	const liveRegion = document.getElementById('drawer-live-region');
-	
-	if (!mobileMenuButton || !mobileDrawer || !mobileDrawerBackdrop) return;
+// Optimized mobile drawer functionality with View Transitions-safe lifecycle
+(() => {
+	const CLEANUP_KEY = '__mobileDrawerCleanup';
 
-	let focusableElements = [];
-	let firstFocusableElement = null;
-	let lastFocusableElement = null;
-	let isOpen = false;
-
-	// Cache selectors
-	const FOCUSABLE_SELECTOR = 'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select';
-	const DRAWER_CLOSE_SELECTOR = '[data-drawer-close], nav a';
-
-	const getFocusableElements = () => {
-		focusableElements = Array.from(mobileDrawer.querySelectorAll(FOCUSABLE_SELECTOR));
-		firstFocusableElement = focusableElements[0];
-		lastFocusableElement = focusableElements[focusableElements.length - 1];
-	};
-
-	// Batch DOM updates for opening
-	const openDrawer = () => {
-		if (isOpen) return;
-		isOpen = true;
-
-		// Batch all DOM updates in a single RAF
-		requestAnimationFrame(() => {
-			// Button state
-			mobileMenuButton.classList.add('active-menu');
-			mobileMenuButton.setAttribute('aria-expanded', 'true');
-			mobileMenuButton.setAttribute('aria-label', ariaCloseMenu);
-			
-			// Drawer state
-			mobileDrawer.setAttribute('aria-hidden', 'false');
-			mobileDrawer.classList.remove('translate-x-full');
-			
-			// Backdrop state - show immediately with opacity transition
-			mobileDrawerBackdrop.classList.remove('hidden', 'opacity-0');
-			mobileDrawerBackdrop.setAttribute('aria-hidden', 'false');
-			
-			// Prevent body scroll
-			document.body.style.overflow = 'hidden';
-			
-			// Update live region
-			if (liveRegion) {
-				liveRegion.textContent = ariaDrawerOpened;
-			}
-		});
-		
-		// Set focus after drawer animation starts
-		getFocusableElements();
-		if (firstFocusableElement) {
-			requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					firstFocusableElement?.focus();
-				});
-			});
+	const cleanup = () => {
+		const currentCleanup = window[CLEANUP_KEY];
+		if (typeof currentCleanup === 'function') {
+			currentCleanup();
+			window[CLEANUP_KEY] = undefined;
 		}
 	};
 
-	// Batch DOM updates for closing
-	const closeDrawer = () => {
-		if (!isOpen) return;
-		isOpen = false;
+	const initialize = () => {
+		cleanup();
 
-		// Batch all DOM updates
-		requestAnimationFrame(() => {
-			// Button state
-			mobileMenuButton.classList.remove('active-menu');
-			mobileMenuButton.setAttribute('aria-expanded', 'false');
-			mobileMenuButton.setAttribute('aria-label', ariaOpenMenu);
-			
-			// Drawer state
-			mobileDrawer.setAttribute('aria-hidden', 'true');
-			mobileDrawer.classList.add('translate-x-full');
-			
-			// Backdrop fade out
-			mobileDrawerBackdrop.classList.add('opacity-0');
-			
-			// Restore body scroll
-			document.body.style.overflow = '';
-			
-			// Update live region
-			if (liveRegion) {
-				liveRegion.textContent = ariaDrawerClosed;
-			}
-		});
+		const mobileMenuButton = document.getElementById('drawer-menu-button');
+		const mobileDrawer = document.getElementById('mobile-drawer');
+		const mobileDrawerBackdrop = document.getElementById('mobile-drawer-backdrop');
+		const liveRegion = document.getElementById('drawer-live-region');
 
-		// Hide backdrop after opacity transition completes
-		const handleTransitionEnd = (e) => {
-			if (e.propertyName === 'opacity' && !isOpen) {
+		if (!mobileMenuButton || !mobileDrawer || !mobileDrawerBackdrop) return;
+
+		let focusableElements = [];
+		let firstFocusableElement = null;
+		let lastFocusableElement = null;
+		let isOpen = false;
+
+		const FOCUSABLE_SELECTOR = 'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select';
+		const DRAWER_CLOSE_SELECTOR = '[data-drawer-close], nav a';
+
+		const getFocusableElements = () => {
+			focusableElements = Array.from(mobileDrawer.querySelectorAll(FOCUSABLE_SELECTOR));
+			firstFocusableElement = focusableElements[0];
+			lastFocusableElement = focusableElements[focusableElements.length - 1];
+		};
+
+		const openDrawer = () => {
+			if (isOpen) return;
+			isOpen = true;
+
+			requestAnimationFrame(() => {
+				mobileMenuButton.classList.add('active-menu');
+				mobileMenuButton.setAttribute('aria-expanded', 'true');
+				mobileMenuButton.setAttribute('aria-label', ariaCloseMenu);
+
+				mobileDrawer.setAttribute('aria-hidden', 'false');
+				mobileDrawer.classList.remove('translate-x-full');
+
+				mobileDrawerBackdrop.classList.remove('hidden', 'opacity-0');
+				mobileDrawerBackdrop.setAttribute('aria-hidden', 'false');
+
+				document.body.style.overflow = 'hidden';
+
+				if (liveRegion) {
+					liveRegion.textContent = ariaDrawerOpened;
+				}
+			});
+
+			getFocusableElements();
+			if (firstFocusableElement) {
 				requestAnimationFrame(() => {
-					mobileDrawerBackdrop.classList.add('hidden');
-					mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
+					requestAnimationFrame(() => {
+						firstFocusableElement?.focus();
+					});
 				});
 			}
 		};
-		
-		mobileDrawerBackdrop.addEventListener('transitionend', handleTransitionEnd, { once: true });
-		
-		// Return focus
-		mobileMenuButton.focus();
-	};
 
-	// Event listeners
-	const handleButtonClick = (e) => {
-		e.preventDefault();
-		if (isOpen) {
-			closeDrawer();
-		} else {
-			openDrawer();
-		}
-	};
+		const closeDrawer = () => {
+			if (!isOpen) return;
+			isOpen = false;
 
-	const handleBackdropClick = (e) => {
-		if (e.target === mobileDrawerBackdrop) {
-			closeDrawer();
-		}
-	};
-
-	const handleEscapeKey = (e) => {
-		if (e.key === 'Escape' && isOpen) {
-			closeDrawer();
-		}
-	};
-
-	mobileMenuButton.addEventListener('click', handleButtonClick);
-	mobileDrawerBackdrop.addEventListener('click', handleBackdropClick);
-	document.addEventListener('keydown', handleEscapeKey);
-
-	// Close on navigation
-	const drawerCloseElements = mobileDrawer.querySelectorAll(DRAWER_CLOSE_SELECTOR);
-	drawerCloseElements.forEach((element) => {
-		element.addEventListener('click', () => {
-			// Use RAF instead of setTimeout
 			requestAnimationFrame(() => {
-				closeDrawer();
-			});
-		});
-	});
+				mobileMenuButton.classList.remove('active-menu');
+				mobileMenuButton.setAttribute('aria-expanded', 'false');
+				mobileMenuButton.setAttribute('aria-label', ariaOpenMenu);
 
-	// Keyboard navigation (focus trap)
-	mobileDrawer.addEventListener('keydown', (e) => {
-		if (e.key === 'Tab') {
-			if (e.shiftKey) {
-				if (document.activeElement === firstFocusableElement) {
-					e.preventDefault();
-					lastFocusableElement?.focus();
+				mobileDrawer.setAttribute('aria-hidden', 'true');
+				mobileDrawer.classList.add('translate-x-full');
+
+				mobileDrawerBackdrop.classList.add('opacity-0');
+				document.body.style.overflow = '';
+
+				if (liveRegion) {
+					liveRegion.textContent = ariaDrawerClosed;
 				}
-			} else {
-				if (document.activeElement === lastFocusableElement) {
+			});
+
+			const handleTransitionEnd = (e) => {
+				if (e.propertyName === 'opacity' && !isOpen) {
+					requestAnimationFrame(() => {
+						mobileDrawerBackdrop.classList.add('hidden');
+						mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
+					});
+				}
+			};
+
+			mobileDrawerBackdrop.addEventListener('transitionend', handleTransitionEnd, { once: true });
+			mobileMenuButton.focus();
+		};
+
+		const handleButtonClick = (e) => {
+			e.preventDefault();
+			if (isOpen) closeDrawer();
+			else openDrawer();
+		};
+
+		const handleBackdropClick = (e) => {
+			if (e.target === mobileDrawerBackdrop) {
+				closeDrawer();
+			}
+		};
+
+		const handleEscapeKey = (e) => {
+			if (e.key === 'Escape' && isOpen) {
+				closeDrawer();
+			}
+		};
+
+		const handleDrawerKeydown = (e) => {
+			if (e.key === 'Tab') {
+				if (e.shiftKey) {
+					if (document.activeElement === firstFocusableElement) {
+						e.preventDefault();
+						lastFocusableElement?.focus();
+					}
+				} else if (document.activeElement === lastFocusableElement) {
 					e.preventDefault();
 					firstFocusableElement?.focus();
 				}
 			}
-		}
-	});
+		};
 
-	// Cleanup on View Transitions
-	document.addEventListener('astro:before-preparation', () => {
-		mobileMenuButton.removeEventListener('click', handleButtonClick);
-		mobileDrawerBackdrop.removeEventListener('click', handleBackdropClick);
-		document.removeEventListener('keydown', handleEscapeKey);
-		
-		// Close drawer if open
-		if (isOpen) {
-			closeDrawer();
-		}
-	}, { once: true });
-});
+		mobileMenuButton.addEventListener('click', handleButtonClick);
+		mobileDrawerBackdrop.addEventListener('click', handleBackdropClick);
+		document.addEventListener('keydown', handleEscapeKey);
+		mobileDrawer.addEventListener('keydown', handleDrawerKeydown);
+
+		const drawerCloseElements = mobileDrawer.querySelectorAll(DRAWER_CLOSE_SELECTOR);
+		const drawerCloseHandlers = [];
+		drawerCloseElements.forEach((element) => {
+			const handler = () => {
+				requestAnimationFrame(() => {
+					closeDrawer();
+				});
+			};
+			drawerCloseHandlers.push({ element, handler });
+			element.addEventListener('click', handler);
+		});
+
+		window[CLEANUP_KEY] = () => {
+			mobileMenuButton.removeEventListener('click', handleButtonClick);
+			mobileDrawerBackdrop.removeEventListener('click', handleBackdropClick);
+			document.removeEventListener('keydown', handleEscapeKey);
+			mobileDrawer.removeEventListener('keydown', handleDrawerKeydown);
+
+			drawerCloseHandlers.forEach(({ element, handler }) => {
+				element.removeEventListener('click', handler);
+			});
+
+			if (isOpen) {
+				closeDrawer();
+			}
+		};
+	};
+
+	document.addEventListener('astro:page-load', initialize);
+	document.addEventListener('astro:before-preparation', cleanup);
+})();
 </script>

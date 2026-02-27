@@ -129,23 +129,19 @@ const currentLocale = Astro.currentLocale as Lang;
 
     const closeButton = document.getElementById("js-close");
     if (closeButton) {
-      closeButton.addEventListener("click", () => {
-        // Hide with animation
-        suggest.classList.remove('translate-y-0', 'opacity-100');
-        suggest.classList.add('translate-y-full', 'opacity-0');
-        
-        setTimeout(() => {
-          suggest.classList.add("hidden");
-        }, 500);
-        
-        localStorage.setItem('languageSuggestDenied', 'true');
-      });
+		closeButton.onclick = () => {
+			// Hide with animation
+			suggest.classList.remove('translate-y-0', 'opacity-100');
+			suggest.classList.add('translate-y-full', 'opacity-0');
+			
+			setTimeout(() => {
+				suggest.classList.add("hidden");
+			}, 500);
+			
+			localStorage.setItem('languageSuggestDenied', 'true');
+		};
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLanguageSuggest);
-  } else {
-    initLanguageSuggest();
-  }
+	document.addEventListener('astro:page-load', initLanguageSuggest);
 </script>

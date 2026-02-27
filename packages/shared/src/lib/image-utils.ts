@@ -14,6 +14,32 @@ export function isLocalImage(imagePath: string): boolean {
 }
 
 /**
+ * Type guard to check if an unknown value is a valid ImageMetadata object
+ */
+const isImageMetadata = (value: unknown): value is ImageMetadata => {
+	if (value === null || typeof value !== "object") {
+		return false;
+	}
+
+	const obj = value as Record<string, unknown>;
+
+	// Check for required ImageMetadata properties
+	if (typeof obj.src !== "string") {
+		return false;
+	}
+
+	// width and height should be numbers (optional but if present, must be numbers)
+	if (obj.width !== undefined && typeof obj.width !== "number") {
+		return false;
+	}
+	if (obj.height !== undefined && typeof obj.height !== "number") {
+		return false;
+	}
+
+	return true;
+};
+
+/**
  * Safely resolve ImageMetadata for a given path, returning null on failure.
  */
 async function safeFindImage(path: string): Promise<ImageMetadata | null> {
@@ -41,9 +67,15 @@ async function safeFindImage(path: string): Promise<ImageMetadata | null> {
  */
 export async function prepareImageForOptimizedPicture(
 	imagePath: unknown,
-): Promise<ImageMetadata | string | unknown> {
-	if (imagePath !== null && typeof imagePath === "object") return imagePath;
-	if (typeof imagePath !== "string") return imagePath;
+): Promise<ImageMetadata | string | null> {
+	// Use type guard to validate ImageMetadata
+	if (imagePath !== null && typeof imagePath === "object") {
+		if (isImageMetadata(imagePath)) {
+			return imagePath;
+		}
+		return null;
+	}
+	if (typeof imagePath !== "string") return null;
 	if (imagePath.startsWith("http")) return imagePath;
 
 	const metadata = await safeFindImage(imagePath);

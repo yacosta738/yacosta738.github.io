@@ -7,20 +7,14 @@ import {
 } from "./images-optimization";
 
 const load = async () => {
-	let images: Record<string, () => Promise<unknown>> | undefined;
-	try {
-		const localImages = import.meta.glob(
-			"/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
-		);
-		const sharedImages = import.meta.glob(
-			"/../../packages/shared/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
-		);
+	const localImages = import.meta.glob(
+		"/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
+	);
+	const sharedImages = import.meta.glob(
+		"/../../packages/shared/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
+	);
 
-		images = { ...localImages, ...sharedImages };
-	} catch (_error) {
-		// continue regardless of error
-	}
-	return images;
+	return { ...localImages, ...sharedImages };
 };
 
 let _images: Record<string, () => Promise<unknown>> | undefined;
@@ -268,6 +262,34 @@ const logResolutionFailure = (
 // Main findImage function
 // ============================================
 
+/**
+ * Check if the path is a remote URL (http or https)
+ */
+const isRemoteUrl = (path: string): boolean => {
+	return path.startsWith("http://") || path.startsWith("https://");
+};
+
+/**
+ * Check if the path is a source tree path (/src/...)
+ */
+const isSourceTreePath = (path: string): boolean => {
+	return path.startsWith("/src/");
+};
+
+/**
+ * Check if the path is root-relative (/...)
+ */
+const isRootRelativePath = (path: string): boolean => {
+	return path.startsWith("/") && !path.startsWith("/src/");
+};
+
+/**
+ * Check if the path is a tilde assets path (~/assets/images)
+ */
+const isTildeAssetsPath = (path: string): boolean => {
+	return path.startsWith("~/assets/images");
+};
+
 /** */
 export const findImage = async (
 	imagePath?: string | ImageMetadata | null,
@@ -278,14 +300,14 @@ export const findImage = async (
 	}
 
 	// Absolute URLs
-	if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+	if (isRemoteUrl(imagePath)) {
 		return imagePath;
 	}
 
 	const images = await fetchLocalImages();
 
 	// If the path points into the source tree (for example '/src/assets/...')
-	if (imagePath.startsWith("/src/") && images) {
+	if (isSourceTreePath(imagePath) && images) {
 		const result = await resolveSourcePath(imagePath, images);
 		if (result) return result;
 		logResolutionFailure(
@@ -297,13 +319,13 @@ export const findImage = async (
 	}
 
 	// Root-relative paths (for example '/me.webp' or '/assets/...')
-	if (imagePath.startsWith("/") && images) {
+	if (isRootRelativePath(imagePath) && images) {
 		const result = await resolveRootRelativePath(imagePath, images);
 		if (result) return result;
 	}
 
 	// Relative paths or not "~/assets/"
-	if (!imagePath.startsWith("~/assets/images")) {
+	if (!isTildeAssetsPath(imagePath)) {
 		return imagePath;
 	}
 
@@ -327,6 +349,99 @@ export const findImage = async (
 // OpenGraph image adaptation
 // ============================================
 
+/**
+ * Check if an image is a remote URL
+ */
+const isRemoteImage = (image: unknown): image is string => {
+	return (
+		typeof image === "string" &&
+		(image.startsWith("http://") || image.startsWith("https://"))
+	);
+};
+
+/**
+ * Try to optimize a remote image using Unpic
+ */
+const tryUnpicOptimization = async (
+	image: string,
+	width: number,
+	height: number,
+	astroSite?: URL,
+): Promise<{ url: string; width?: number; height?: number } | null> => {
+	if (!isUnpicCompatible(image)) {
+		return null;
+	}
+
+	try {
+		const optimized = await unpicOptimizer(
+			image,
+			[width],
+			width,
+			height,
+			"jpg",
+		);
+		const optimizedImage = optimized[0];
+		if (
+			optimizedImage &&
+			"src" in optimizedImage &&
+			typeof optimizedImage.src === "string"
+		) {
+			const urlStr = astroSite
+				? String(new URL(optimizedImage.src, astroSite))
+				: optimizedImage.src;
+			return {
+				url: urlStr,
+				width: "width" in optimizedImage ? optimizedImage.width : undefined,
+				height: "height" in optimizedImage ? optimizedImage.height : undefined,
+			};
+		}
+	} catch {
+		// Fall through - will return original URL below
+	}
+	return null;
+};
+
+/**
+ * Try to optimize a local image using Astro assets
+ */
+const tryAstroOptimization = async (
+	image: ImageMetadata,
+	width: number,
+	height: number,
+	astroSite?: URL,
+): Promise<{ url: string; width?: number; height?: number } | null> => {
+	const dimensions =
+		image.width <= width ? [image.width, image.height] : [width, height];
+
+	try {
+		const optimized = await astroAssetsOptimizer(
+			image,
+			[dimensions[0]],
+			dimensions[0],
+			dimensions[1],
+			"jpg",
+		);
+		const optimizedImage = optimized[0];
+		if (
+			optimizedImage &&
+			"src" in optimizedImage &&
+			typeof optimizedImage.src === "string"
+		) {
+			const urlStr = astroSite
+				? String(new URL(optimizedImage.src, astroSite))
+				: optimizedImage.src;
+			return {
+				url: urlStr,
+				width: "width" in optimizedImage ? optimizedImage.width : undefined,
+				height: "height" in optimizedImage ? optimizedImage.height : undefined,
+			};
+		}
+	} catch {
+		// Fall through - will return empty
+	}
+	return null;
+};
+
 const adaptSingleImage = async (
 	image: { url?: string },
 	defaultWidth: number,
@@ -337,97 +452,41 @@ const adaptSingleImage = async (
 		return { url: "" };
 	}
 
-	const resolvedImage = (await findImage(image.url)) as
-		| ImageMetadata
-		| string
-		| undefined;
+	const resolvedImage = await findImage(image.url);
 
 	if (!resolvedImage) {
 		return { url: "" };
 	}
 
-	// Try Unpic optimization for remote images
-	if (
-		typeof resolvedImage === "string" &&
-		(resolvedImage.startsWith("http://") ||
-			resolvedImage.startsWith("https://")) &&
-		isUnpicCompatible(resolvedImage)
-	) {
-		try {
-			const optimized = await unpicOptimizer(
-				resolvedImage,
-				[defaultWidth],
-				defaultWidth,
-				defaultHeight,
-				"jpg",
-			);
-			const _image = optimized[0];
-			if (_image && "src" in _image && typeof _image.src === "string") {
-				const urlStr = astroSite
-					? String(new URL(_image.src, astroSite))
-					: _image.src;
-				return {
-					url: urlStr,
-					width: "width" in _image ? _image.width : undefined,
-					height: "height" in _image ? _image.height : undefined,
-				};
-			}
-		} catch {
-			// If remote URL optimization failed, return the original URL as fallback
-			if (
-				typeof resolvedImage === "string" &&
-				(resolvedImage.startsWith("http://") ||
-					resolvedImage.startsWith("https://"))
-			) {
-				return { url: resolvedImage };
-			}
-			// continue to Astro assets optimizer path for local images
+	// Handle remote images with Unpic optimization
+	if (isRemoteImage(resolvedImage)) {
+		const unpicResult = await tryUnpicOptimization(
+			resolvedImage,
+			defaultWidth,
+			defaultHeight,
+			astroSite,
+		);
+		if (unpicResult) {
+			return unpicResult;
 		}
-	}
-
-	// Use Astro assets optimizer for local images only (not remote URLs)
-	if (
-		typeof resolvedImage === "string" &&
-		(resolvedImage.startsWith("http://") ||
-			resolvedImage.startsWith("https://"))
-	) {
 		// Remote URL that couldn't be optimized - return as-is
 		return { url: resolvedImage };
 	}
 
-	// For local ImageMetadata
-	const dimensions =
-		typeof resolvedImage !== "string" &&
-		resolvedImage &&
-		resolvedImage.width <= defaultWidth
-			? [resolvedImage.width, resolvedImage.height]
-			: [defaultWidth, defaultHeight];
-
-	try {
-		const optimized = await astroAssetsOptimizer(
-			resolvedImage,
-			[dimensions[0]],
-			dimensions[0],
-			dimensions[1],
-			"jpg",
-		);
-
-		const _image = optimized[0];
-		if (_image && "src" in _image && typeof _image.src === "string") {
-			const urlStr = astroSite
-				? String(new URL(_image.src, astroSite))
-				: _image.src;
-			return {
-				url: urlStr,
-				width: "width" in _image ? _image.width : undefined,
-				height: "height" in _image ? _image.height : undefined,
-			};
-		}
-	} catch {
-		// return empty result on error
+	// Handle local images with Astro optimization
+	const astroResult = await tryAstroOptimization(
+		resolvedImage,
+		defaultWidth,
+		defaultHeight,
+		astroSite,
+	);
+	if (astroResult) {
+		return astroResult;
 	}
 
-	return { url: "" };
+	// Fallback: return the original image source instead of empty URL
+	// This ensures callers receive a valid URL even if optimization fails
+	return { url: resolvedImage.src };
 };
 
 /** */

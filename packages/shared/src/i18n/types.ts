@@ -25,7 +25,7 @@ export type Translations = Record<string, Record<string, string>>;
  */
 export type Lang = keyof typeof LOCALES;
 
-export const DEFAULT_LOCALE = DEFAULT_LOCALE_SETTING as Lang;
+export const DEFAULT_LOCALE: Lang = DEFAULT_LOCALE_SETTING;
 
 /**
  * Represents a dictionary of UI strings for a single language.

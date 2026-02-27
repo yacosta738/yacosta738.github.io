@@ -149,12 +149,14 @@ const lang = getGiscusLang(locale);
 	/**
 	 * Listen for theme changes and update widget
 	 */
-	function setupThemeListener(): void {
+	function setupThemeListener(): () => void {
 		// Listen for custom theme change events
-		document.addEventListener('themeChanged', ((event: CustomEvent) => {
+		const onThemeChanged = ((event: CustomEvent) => {
 			const newTheme = event.detail?.theme || getCurrentTheme();
 			updateGiscusTheme(newTheme);
-		}) as EventListener);
+		}) as EventListener;
+
+		document.addEventListener('themeChanged', onThemeChanged);
 		
 		// Also listen for dark class changes via MutationObserver
 		const observer = new MutationObserver(() => {
@@ -166,18 +168,34 @@ const lang = getGiscusLang(locale);
 			attributes: true,
 			attributeFilter: ['class'],
 		});
+
+		return () => {
+			document.removeEventListener('themeChanged', onThemeChanged);
+			observer.disconnect();
+		};
 	}
-	
-	// Initialize on page load
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', () => {
-			initializeLazyLoading();
-			setupThemeListener();
-		});
-	} else {
+
+	const CLEANUP_KEY = '__commentsWidgetCleanup';
+
+	const cleanup = () => {
+		const currentCleanup = window[CLEANUP_KEY];
+		if (typeof currentCleanup === 'function') {
+			currentCleanup();
+			window[CLEANUP_KEY] = undefined;
+		}
+	};
+
+	const initialize = () => {
+		cleanup();
 		initializeLazyLoading();
-		setupThemeListener();
-	}
+		const removeThemeListener = setupThemeListener();
+		window[CLEANUP_KEY] = () => {
+			removeThemeListener();
+		};
+	};
+
+	document.addEventListener('astro:page-load', initialize);
+	document.addEventListener('astro:before-preparation', cleanup);
 </script>
 
 <style>
