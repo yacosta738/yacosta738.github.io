@@ -29,7 +29,10 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 		.toLowerCase()
 		.normalize("NFD")
 		.replaceAll(/[\u0300-\u036f]/g, "")
-		.replaceAll(/[^a-z0-9]+/g, "-")
+		// Use split-join pattern instead of regex with + to prevent potential ReDoS
+		.split(/[^a-z0-9]+/)
+		.filter(Boolean)
+		.join("-")
 		// Remove leading/trailing dashes with bounded operations
 		.replaceAll(/^-+|-+$/g, "");
 

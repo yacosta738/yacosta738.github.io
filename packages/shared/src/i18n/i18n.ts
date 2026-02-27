@@ -90,9 +90,10 @@ export function getLocalePaths(url: URL): LocalePath[] {
 		: "/";
 
 	return Object.keys(LOCALES).map((lang) => {
+		const localePath = getRelativeLocaleUrl(lang, cleanPath);
 		return {
-			lang: lang as Lang,
-			path: getRelativeLocaleUrl(lang, cleanPath),
+			lang,
+			path: localePath,
 		};
 	});
 }
@@ -142,7 +143,7 @@ export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 			}>;
 
 			return tagPathsTyped.map(({ lang, path }) => ({
-				lang: lang as Lang,
+				lang,
 				path: typeof path === "string" ? path : path.path,
 			}));
 		}

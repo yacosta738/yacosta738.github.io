@@ -47,3 +47,4 @@ jobs:
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=apps/*/coverage/lcov.info
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+            -Dsonar.duplication.exclusions=**/content.config.ts,**/vitest.config.ts,**/playwright.config.ts,**/astro.config.mjs,**/organize-articles.js

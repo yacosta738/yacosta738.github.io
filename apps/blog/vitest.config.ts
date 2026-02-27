@@ -22,24 +22,17 @@ export default getViteConfig({
 			include: ["src/**/*.ts", "src/**/*.astro"],
 			exclude: [
 				"src/env.d.ts",
-				"src/pages/admin.astro",
-				"src/pages/index.astro",
-				"src/pages/[lang]/index.astro",
-				"src/layouts/Layout.astro",
-				"src/components/atoms/Analytics.astro",
-				"src/components/atoms/AppScripts.astro",
-				"src/components/molecules/EnhancedProjectCard.astro",
-				"src/components/atoms/OptimizedPicture.astro",
-				"rsc/components/atoms/TorchEffect.astro",
-				"src/components/molecules/Email.astro",
-				"src/components/molecules/Menu.astro",
-				"src/components/molecules/Social.astro",
-				"src/components/organisms/Hero.astro",
-				"src/i18n/components/LocaleSelect.astro",
-				"src/i18n/components/LocaleSelectSingle.astro",
-				"src/i18n/components/LocaleSuggest.astro",
-				"src/i18n/components/LocalesHomeList.astro",
-				"src/i18n/components/NotTranslateCaution.astro",
+				// Exclude all Astro pages - they are hard to unit test
+				"src/pages/**/*.astro",
+				"src/layouts/**/*.astro",
+				// Exclude components that require Astro context
+				"src/components/**/*.astro",
+				// Exclude i18n components
+				"src/i18n/components/**/*.astro",
+				// Exclude RSC components
+				"rsc/**/*.astro",
+				// Exclude test mocks
+				"src/utils/test/**/*.ts",
 			],
 		},
 		exclude: ["tests/e2e/**/*.spec.ts"],

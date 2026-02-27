@@ -285,64 +285,95 @@ const isRootRelativePath = (path: string): boolean => {
 
 /**
  * Check if the path is a tilde assets path (~/assets/images)
+ * Kept for documentation purposes, logic is inlined in findImage
  */
-const isTildeAssetsPath = (path: string): boolean => {
+const _isTildeAssetsPath = (path: string): boolean => {
 	return path.startsWith("~/assets/images");
+};
+
+/**
+ * Try to resolve a source tree path
+ */
+const tryResolveSourcePath = async (
+	imagePath: string,
+	images: Record<string, unknown>,
+): Promise<ImageMetadata | null> => {
+	const result = await resolveSourcePath(imagePath, images);
+	if (result) return result;
+	logResolutionFailure(
+		imagePath,
+		Object.keys(images),
+		new Set(Object.keys(images)),
+	);
+	return null;
+};
+
+/**
+ * Try to resolve a root-relative path
+ */
+const tryResolveRootRelativePath = async (
+	imagePath: string,
+	images: Record<string, unknown>,
+): Promise<ImageMetadata | null> => {
+	return resolveRootRelativePath(imagePath, images);
+};
+
+/**
+ * Try to resolve a tilde assets path
+ */
+const tryResolveTildePath = async (
+	imagePath: string,
+	images: Record<string, unknown>,
+): Promise<ImageMetadata | null> => {
+	const key = imagePath.replace("~/", "/src/");
+	if (typeof images[key] === "function") {
+		try {
+			const result = await images[key]();
+			return (result as { default: ImageMetadata }).default;
+		} catch {
+			return null;
+		}
+	}
+	return null;
 };
 
 /** */
 export const findImage = async (
 	imagePath?: string | ImageMetadata | null,
 ): Promise<string | ImageMetadata | undefined | null> => {
-	// Not string
+	// Not string - return as is
 	if (typeof imagePath !== "string") {
 		return imagePath;
 	}
 
-	// Absolute URLs
+	// Absolute URLs - return as is
 	if (isRemoteUrl(imagePath)) {
 		return imagePath;
 	}
 
 	const images = await fetchLocalImages();
-
-	// If the path points into the source tree (for example '/src/assets/...')
-	if (isSourceTreePath(imagePath) && images) {
-		const result = await resolveSourcePath(imagePath, images);
-		if (result) return result;
-		logResolutionFailure(
-			imagePath,
-			Object.keys(images),
-			new Set(Object.keys(images)),
-		);
-		return null;
-	}
-
-	// Root-relative paths (for example '/me.webp' or '/assets/...')
-	if (isRootRelativePath(imagePath) && images) {
-		const result = await resolveRootRelativePath(imagePath, images);
-		if (result) return result;
-	}
-
-	// Relative paths or not "~/assets/"
-	if (!isTildeAssetsPath(imagePath)) {
+	if (!images) {
 		return imagePath;
 	}
 
-	// Resolve ~/assets/images path
-	if (images) {
-		const key = imagePath.replace("~/", "/src/");
-		if (typeof images[key] === "function") {
-			try {
-				const result = await images[key]();
-				return (result as { default: ImageMetadata }).default;
-			} catch {
-				return null;
-			}
-		}
+	// Try source tree path resolution
+	if (isSourceTreePath(imagePath)) {
+		const result = await tryResolveSourcePath(imagePath, images);
+		if (result) return result;
 	}
 
-	return null;
+	// Try root-relative path resolution
+	if (isRootRelativePath(imagePath)) {
+		const result = await tryResolveRootRelativePath(imagePath, images);
+		if (result) return result;
+	}
+
+	// Try tilde assets path resolution
+	const tildeResult = await tryResolveTildePath(imagePath, images);
+	if (tildeResult) return tildeResult;
+
+	// Return original path if no resolution found
+	return imagePath;
 };
 
 // ============================================
