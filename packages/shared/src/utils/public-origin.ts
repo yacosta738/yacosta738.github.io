@@ -21,7 +21,7 @@ export const isLocalOrPrivateHostname = (hostname: string): boolean => {
 		value = value.slice(0, 253);
 	}
 	// Use replaceAll instead of regex with + quantifier to prevent ReDoS
-	value = value.replaceAll(".", ".").replace("..", ".").replace(/\.+$/, "");
+	value = value.replaceAll(".", ".").replaceAll("..", ".").replace(/\.+$/, "");
 
 	if (
 		value === "localhost" ||
