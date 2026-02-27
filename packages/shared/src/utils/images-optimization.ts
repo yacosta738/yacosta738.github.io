@@ -413,18 +413,41 @@ const resolveBaseDimensions = (
 
 const redactImageIdentifier = (image: ImageSource): string => {
 	const SAFE_BASE = "http://localhost";
+	// Limit URL length to prevent ReDoS
+	const MAX_URL_LENGTH = 2000;
+	const MAX_OUTPUT_LENGTH = 50;
 
 	const sanitizeUrl = (urlString: string): string => {
+		// Truncate before processing to prevent ReDoS
+		const truncatedUrl = urlString.slice(0, MAX_URL_LENGTH);
 		try {
-			const url = new URL(urlString, SAFE_BASE);
+			const url = new URL(truncatedUrl, SAFE_BASE);
 			url.search = "";
 			url.hash = "";
 			url.username = "";
 			url.password = "";
-			return url.origin + url.pathname;
+			const result = url.origin + url.pathname;
+			// Enforce 50-char cap for parsed URLs too
+			return result.length > MAX_OUTPUT_LENGTH
+				? `${result.slice(0, MAX_OUTPUT_LENGTH)}...`
+				: result;
 		} catch {
-			const stripped = urlString.replace(/\?[^#]*/, "").replace(/#.*$/, "");
-			return stripped.slice(0, 50) + (stripped.length > 50 ? "..." : "");
+			const questionIdx = truncatedUrl.indexOf("?");
+			const hashIdx = truncatedUrl.indexOf("#");
+			let stripped = truncatedUrl;
+			if (questionIdx !== -1) {
+				stripped = truncatedUrl.slice(0, questionIdx);
+			}
+			if (
+				hashIdx !== -1 &&
+				hashIdx < (questionIdx === -1 ? truncatedUrl.length : questionIdx)
+			) {
+				stripped = stripped.slice(0, hashIdx);
+			}
+			return (
+				stripped.slice(0, MAX_OUTPUT_LENGTH) +
+				(stripped.length > MAX_OUTPUT_LENGTH ? "..." : "")
+			);
 		}
 	};
 

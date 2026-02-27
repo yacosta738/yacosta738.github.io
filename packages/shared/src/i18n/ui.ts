@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === "development") {
 	console.log(
 		"㊙︎ Loaded translations:",
 		Object.keys(ui)
-			.map((lang) => `${lang}: ${Object.keys(ui[lang as Lang]).length} keys`)
+			.map((lang) => `${lang}: ${Object.keys(ui[lang]).length} keys`)
 			.join(", "),
 	);
 }
