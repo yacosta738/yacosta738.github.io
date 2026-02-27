@@ -415,6 +415,7 @@ const redactImageIdentifier = (image: ImageSource): string => {
 	const SAFE_BASE = "http://localhost";
 	// Limit URL length to prevent ReDoS
 	const MAX_URL_LENGTH = 2000;
+	const MAX_OUTPUT_LENGTH = 50;
 
 	const sanitizeUrl = (urlString: string): string => {
 		// Truncate before processing to prevent ReDoS
@@ -425,7 +426,11 @@ const redactImageIdentifier = (image: ImageSource): string => {
 			url.hash = "";
 			url.username = "";
 			url.password = "";
-			return url.origin + url.pathname;
+			const result = url.origin + url.pathname;
+			// Enforce 50-char cap for parsed URLs too
+			return result.length > MAX_OUTPUT_LENGTH
+				? `${result.slice(0, MAX_OUTPUT_LENGTH)}...`
+				: result;
 		} catch {
 			const questionIdx = truncatedUrl.indexOf("?");
 			const hashIdx = truncatedUrl.indexOf("#");
@@ -439,7 +444,10 @@ const redactImageIdentifier = (image: ImageSource): string => {
 			) {
 				stripped = stripped.slice(0, hashIdx);
 			}
-			return stripped.slice(0, 50) + (stripped.length > 50 ? "..." : "");
+			return (
+				stripped.slice(0, MAX_OUTPUT_LENGTH) +
+				(stripped.length > MAX_OUTPUT_LENGTH ? "..." : "")
+			);
 		}
 	};
 

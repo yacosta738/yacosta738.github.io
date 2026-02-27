@@ -16,12 +16,25 @@ export const isLocalOrPrivateHostname = (hostname: string): boolean => {
 	if (value.startsWith("[") && value.endsWith("]")) {
 		value = value.slice(1, -1);
 	}
-	// Limit input length to prevent ReDoS on regex
+	// Limit input length to prevent ReDoS
 	if (value.length > 253) {
 		value = value.slice(0, 253);
 	}
-	// Use replaceAll instead of regex with + quantifier to prevent ReDoS
-	value = value.replaceAll(".", ".").replace("..", ".").replace(/\.+$/, "");
+	// Collapse consecutive dots deterministically to prevent ReDoS
+	let result = "";
+	let dotCount = 0;
+	for (const char of value) {
+		if (char === ".") {
+			dotCount++;
+			if (dotCount === 1) {
+				result += char;
+			}
+		} else {
+			dotCount = 0;
+			result += char;
+		}
+	}
+	value = result.replace(/\.+$/, "");
 
 	if (
 		value === "localhost" ||

@@ -296,7 +296,7 @@ const _isTildeAssetsPath = (path: string): boolean => {
  */
 const tryResolveSourcePath = async (
 	imagePath: string,
-	images: Record<string, unknown>,
+	images: Record<string, () => Promise<unknown>>,
 ): Promise<ImageMetadata | null> => {
 	const result = await resolveSourcePath(imagePath, images);
 	if (result) return result;
@@ -313,7 +313,7 @@ const tryResolveSourcePath = async (
  */
 const tryResolveRootRelativePath = async (
 	imagePath: string,
-	images: Record<string, unknown>,
+	images: Record<string, () => Promise<unknown>>,
 ): Promise<ImageMetadata | null> => {
 	return resolveRootRelativePath(imagePath, images);
 };
@@ -323,7 +323,7 @@ const tryResolveRootRelativePath = async (
  */
 const tryResolveTildePath = async (
 	imagePath: string,
-	images: Record<string, unknown>,
+	images: Record<string, () => Promise<unknown>>,
 ): Promise<ImageMetadata | null> => {
 	const key = imagePath.replace("~/", "/src/");
 	if (typeof images[key] === "function") {
@@ -504,20 +504,23 @@ const adaptSingleImage = async (
 		return { url: resolvedImage };
 	}
 
-	// Handle local images with Astro optimization
-	const astroResult = await tryAstroOptimization(
-		resolvedImage,
-		defaultWidth,
-		defaultHeight,
-		astroSite,
-	);
-	if (astroResult) {
-		return astroResult;
+	// Handle local ImageMetadata objects with Astro optimization
+	if (typeof resolvedImage === "object" && "src" in resolvedImage) {
+		const astroResult = await tryAstroOptimization(
+			resolvedImage,
+			defaultWidth,
+			defaultHeight,
+			astroSite,
+		);
+		if (astroResult) {
+			return astroResult;
+		}
+		// Fallback: return the original image src
+		return { url: resolvedImage.src };
 	}
 
-	// Fallback: return the original image source instead of empty URL
-	// This ensures callers receive a valid URL even if optimization fails
-	return { url: resolvedImage.src };
+	// Handle non-remote string paths (fallback)
+	return { url: resolvedImage };
 };
 
 /** */
