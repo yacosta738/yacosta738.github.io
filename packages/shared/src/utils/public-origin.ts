@@ -49,6 +49,8 @@ const isLocalHostname = (hostname: string): boolean =>
 	hostname.endsWith(".local") ||
 	hostname === "::1" ||
 	hostname === "0:0:0:0:0:0:0:1" ||
+	hostname === "0000:0000:0000:0000:0000:0000:0000:0001" ||
+	hostname.startsWith("::ffff:127.") ||
 	hostname === "0.0.0.0" ||
 	hostname.startsWith("127.");
 
