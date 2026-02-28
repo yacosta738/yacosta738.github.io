@@ -11,7 +11,7 @@ catalogs:
       version: 4.68.1
 
 overrides:
-  fast-xml-parser: ^5.3.8
+  fast-xml-parser: ^5.4.1
   h3: ^1.15.5
 
 importers:
