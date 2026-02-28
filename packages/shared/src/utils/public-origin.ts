@@ -11,80 +11,78 @@ const toIpv4Octets = (hostname: string): number[] | null => {
 	return octets;
 };
 
-export const isLocalOrPrivateHostname = (hostname: string): boolean => {
+const MAX_HOSTNAME_LENGTH = 253;
+
+const normalizeHostname = (hostname: string): string => {
 	let value = hostname.toLowerCase();
+
 	if (value.startsWith("[") && value.endsWith("]")) {
 		value = value.slice(1, -1);
 	}
-	// Limit input length to prevent ReDoS
-	if (value.length > 253) {
-		value = value.slice(0, 253);
+
+	if (value.length > MAX_HOSTNAME_LENGTH) {
+		value = value.slice(0, MAX_HOSTNAME_LENGTH);
 	}
-	// Collapse consecutive dots deterministically to prevent ReDoS
+
 	let result = "";
-	let dotCount = 0;
+	let previousWasDot = false;
 	for (const char of value) {
 		if (char === ".") {
-			dotCount++;
-			if (dotCount === 1) {
+			if (!previousWasDot) {
 				result += char;
 			}
-		} else {
-			dotCount = 0;
-			result += char;
+			previousWasDot = true;
+			continue;
 		}
-	}
-	value = result.replace(/\.+$/, "");
 
-	if (
-		value === "localhost" ||
-		value.endsWith(".localhost") ||
-		value === "localhost.localdomain" ||
-		value.endsWith(".local") ||
-		value === "::1" ||
-		value === "0:0:0:0:0:0:0:1" ||
-		value === "0.0.0.0" ||
-		value.startsWith("127.")
-	) {
-		return true;
+		result += char;
+		previousWasDot = false;
 	}
 
-	if (value.includes(":")) {
-		if (
-			value.startsWith("fc") ||
-			value.startsWith("fd") ||
-			value.startsWith("fe8") ||
-			value.startsWith("fe9") ||
-			value.startsWith("fea") ||
-			value.startsWith("feb")
-		) {
-			return true;
-		}
-	}
+	return result.replace(/\.+$/, "");
+};
 
-	const octets = toIpv4Octets(value);
+const isLocalHostname = (hostname: string): boolean =>
+	hostname === "localhost" ||
+	hostname.endsWith(".localhost") ||
+	hostname === "localhost.localdomain" ||
+	hostname.endsWith(".local") ||
+	hostname === "::1" ||
+	hostname === "0:0:0:0:0:0:0:1" ||
+	hostname === "0.0.0.0" ||
+	hostname.startsWith("127.");
+
+const isPrivateIpv6Address = (hostname: string): boolean =>
+	hostname.includes(":") && /^(?:fc|fd|fe[89ab])/.test(hostname);
+
+const isPrivateIpv4Address = (hostname: string): boolean => {
+	const octets = toIpv4Octets(hostname);
 	if (!octets) {
 		return false;
 	}
 
 	const [first, second] = octets;
-	if (first === 10) {
+
+	return (
+		first === 10 ||
+		(first === 172 && second >= 16 && second <= 31) ||
+		(first === 192 && second === 168) ||
+		(first === 169 && second === 254)
+	);
+};
+
+export const isLocalOrPrivateHostname = (hostname: string): boolean => {
+	const normalizedHostname = normalizeHostname(hostname);
+
+	if (isLocalHostname(normalizedHostname)) {
 		return true;
 	}
 
-	if (first === 172 && second >= 16 && second <= 31) {
+	if (isPrivateIpv6Address(normalizedHostname)) {
 		return true;
 	}
 
-	if (first === 192 && second === 168) {
-		return true;
-	}
-
-	if (first === 169 && second === 254) {
-		return true;
-	}
-
-	return false;
+	return isPrivateIpv4Address(normalizedHostname);
 };
 
 export const getPublicOrigin = (site?: URL): string => {
