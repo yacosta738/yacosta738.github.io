@@ -150,7 +150,7 @@ jobs:
 
       - name: Download portfolio build
         if: matrix.app == 'portfolio'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: portfolio-dist-${{ github.sha }}
           path: apps/portfolio/dist/
@@ -180,7 +180,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download coverage artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: coverage-*
           path: coverage/
