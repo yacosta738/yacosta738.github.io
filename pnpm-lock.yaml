@@ -49,8 +49,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(hono@4.12.2)(zod@4.3.6)
       chanfana:
-        specifier: ^3.1.0
-        version: 3.1.0
+        specifier: ^3.2.1
+        version: 3.2.1
       hono:
         specifier: ^4.12.2
         version: 4.12.2
@@ -2362,8 +2362,8 @@ packages:
     resolution: {integrity: sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
-  chanfana@3.1.0:
-    resolution: {integrity: sha512-veX6CMVK6jQrs0+I7IDSh9KdA04RTBOeNTVehOU/uvO2AkPoSRpq6Cyw8ErsleQ8EB+3GjxGfBQFyAOIDpoSjg==}
+  chanfana@3.2.1:
+    resolution: {integrity: sha512-SHi6AYErJwS5C2iQx12AsCY1w0ztQcxWOI4yC+G2BGguLuuLGixTrUu7dP6apuPMjL04iwZALUT/m1+5+26+xw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -8024,7 +8024,7 @@ snapshots:
 
   chalk@5.6.2: {}
 
-  chanfana@3.1.0:
+  chanfana@3.2.1:
     dependencies:
       '@asteasolutions/zod-to-openapi': 8.4.1(zod@4.3.6)
       js-yaml: 4.1.1
