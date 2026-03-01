@@ -3,7 +3,7 @@ packages:
   - packages/*
 
 catalog:
-  wrangler: ^4.68.1
+  wrangler: ^4.69.0
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
