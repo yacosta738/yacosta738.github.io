@@ -121,7 +121,7 @@ runs:
 
     - name: Upload test results
       if: always() && inputs.upload-results == 'true'
-      uses: actions/upload-artifact@v6 #v4
+      uses: actions/upload-artifact@v7
       with:
         name: playwright-report-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
         path: apps/${{ inputs.app }}/playwright-report/
@@ -130,7 +130,7 @@ runs:
 
     - name: Upload test traces
       if: failure() && inputs.upload-results == 'true'
-      uses: actions/upload-artifact@v6 #v4
+      uses: actions/upload-artifact@v7
       with:
         name: playwright-traces-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
         path: apps/${{ inputs.app }}/test-results/
