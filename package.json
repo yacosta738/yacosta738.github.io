@@ -1,6 +1,6 @@
 {
 	"name": "yacosta-portfolio-monorepo",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"private": true,
 	"packageManager": "pnpm@10.30.3",
 	"scripts": {
@@ -52,7 +52,7 @@
 		"cloudflare:preview": "pnpm --filter=portfolio build && pnpm --filter=portfolio preview"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.4",
+		"@biomejs/biome": "2.4.5",
 		"@semantic-release/exec": "7.1.0",
 		"@semantic-release/github": "12.0.6",
 		"@semantic-release/npm": "13.1.4",
