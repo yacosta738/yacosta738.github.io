@@ -1,6 +1,6 @@
 {
 	"name": "yacosta-portfolio-monorepo",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"private": true,
 	"packageManager": "pnpm@10.30.3",
 	"scripts": {
@@ -62,7 +62,7 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"fast-xml-parser": "^5.3.8",
+			"fast-xml-parser": "^5.4.2",
 			"h3": "^1.15.5"
 		}
 	}
