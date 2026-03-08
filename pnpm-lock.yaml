@@ -147,7 +147,7 @@ importers:
         specifier: ^1.2.71
         version: 1.2.71
       '@iconify-json/tabler':
-        specifier: ^1.2.28
+        specifier: ^1.2.29
         version: 1.2.29
       '@playwright/test':
         specifier: 1.58.2
@@ -298,7 +298,7 @@ importers:
         specifier: ^1.2.71
         version: 1.2.71
       '@iconify-json/tabler':
-        specifier: ^1.2.28
+        specifier: ^1.2.29
         version: 1.2.29
       '@playwright/test':
         specifier: 1.58.2
@@ -449,7 +449,7 @@ importers:
         specifier: ^1.2.71
         version: 1.2.71
       '@iconify-json/tabler':
-        specifier: ^1.2.28
+        specifier: ^1.2.29
         version: 1.2.29
       '@playwright/test':
         specifier: 1.58.2
