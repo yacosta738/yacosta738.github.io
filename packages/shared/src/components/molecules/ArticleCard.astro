@@ -32,7 +32,7 @@ const rel = isExternal
 
 <article
 	class={cn(
-		"@container group relative flex aspect-video h-full w-full cursor-pointer flex-col overflow-hidden bg-background-surface rounded-lg shadow-md hover:shadow-lg focus-within:shadow-lg",
+		"@container group relative flex h-full w-full cursor-pointer flex-col overflow-hidden bg-background-surface rounded-lg shadow-md hover:shadow-lg focus-within:shadow-lg blog-article-card",
 		"transition-all duration-300 ease-in-out",
 		"transition-transform duration-500 hover:-translate-y-1 hover:scale-100",
 		attrs.class
@@ -43,35 +43,38 @@ const rel = isExternal
 		href={url}
 		rel={rel}
 		target={target}
-		class="h-full w-full"
+		class="h-full w-full blog-article-card__link"
 		aria-label={`${t("read.article")}: ${title}`}
 	>
 		<span class="sr-only">{title}</span>
-		{
-			image && (
-				<OptimizedPicture
-					src={image}
-					alt={title}
-					loading={loading}
-					inferSize
-					class="h-full w-full object-cover"
-				/>
-			)
-		}
+		<div class="blog-article-card__media">
+			{
+				image && (
+					<OptimizedPicture
+						src={image}
+						alt={title}
+						loading={loading}
+						inferSize
+						class="h-full w-full object-cover"
+					/>
+				)
+			}
+		</div>
 		<footer
 			class={cn(
 				"text-foreground",
-				"pointer-events-none absolute bottom-0 z-10 flex w-full flex-col gap-1 @sm:gap-2 bg-background-surface/90 p-2 @sm:p-3 @md:p-4 opacity-0",
+				"pointer-events-none absolute bottom-0 z-10 flex w-full flex-col gap-1 @sm:gap-2 bg-background-surface/90 p-2 @sm:p-3 @md:p-4 opacity-0 blog-article-card__footer",
 				"transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100",
 				"rounded-b-lg"
 			)}
 		>
-			<h2 data-test="article-title" class="text-base @sm:text-lg @md:text-xl font-medium line-clamp-2">
+			<h2 data-test="article-title" class="text-base @sm:text-lg @md:text-xl font-medium line-clamp-2 blog-article-card__title">
 				{title}
 			</h2>
-			<p class="flex flex-row items-center gap-1 @sm:gap-2 text-xs @sm:text-sm">
+			<p class="flex flex-row items-center gap-1 @sm:gap-2 text-xs @sm:text-sm blog-article-card__description">
 				<span class="line-clamp-1 @sm:line-clamp-2 @md:line-clamp-3">{description}</span>
 			</p>
+			<span class="blog-article-card__cta">{t("blog.readMore")}</span>
 		</footer>
 	</a>
 </article>
