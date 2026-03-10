@@ -1,14 +1,14 @@
 ---
 
 
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
-import Footer from "@blog/components/organisms/Footer.astro";
 import { getAllArticlesIncludingExternal } from "@/core/article";
 import { getTags } from "@/core/tag";
 import { type Lang, LOCALES, useTranslations } from "@/i18n";
-import Layout from "@blog/layouts/Layout.astro";
 
 export async function getStaticPaths() {
 	const paths = [];

@@ -1,19 +1,16 @@
 ---
 
 
+import ArticleCard from "@blog/components/molecules/ArticleCard.astro";
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
-import Footer from "@blog/components/organisms/Footer.astro";
-import ArticleCard from "@blog/components/molecules/ArticleCard.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
 import { type Lang, LOCALES, useTranslations } from "@/i18n";
-import Layout from "@blog/layouts/Layout.astro";
-import {
-	getBlogPostUrl,
-	type BlogPost,
-} from "@/lib/blog-post.utils";
+import { getBlogPostUrl, type BlogPost } from "@/lib/blog-post.utils";
 
 // Get locale from params
 const { lang } = Astro.params;
@@ -38,9 +35,7 @@ const sortedArticles = allBlogPosts.sort(
 );
 
 const featuredPosts = allArticles
-	.filter(
-		(post) => post.id.split("/")[0] === currentLocale && post.featured,
-	)
+	.filter((post) => post.id.split("/")[0] === currentLocale && post.featured)
 	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
 	.slice(0, 3);
 const featuredIds = new Set(featuredPosts.map((post) => post.id));

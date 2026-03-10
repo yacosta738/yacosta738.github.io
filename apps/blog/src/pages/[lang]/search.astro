@@ -1,6 +1,6 @@
 ---
-import { type Lang, useTranslations } from "@/i18n";
 import Layout from "@blog/layouts/Layout.astro";
+import { type Lang, useTranslations } from "@/i18n";
 
 const url = new URL(Astro.request.url);
 const initialQuery = url.searchParams.get("q") || "";

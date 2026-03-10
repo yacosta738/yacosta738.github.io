@@ -1,14 +1,14 @@
 ---
 
 
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
 import Badge from "@/components/atoms/Badge.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
-import Footer from "@blog/components/organisms/Footer.astro";
 import { getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
 import { LOCALES, useTranslations } from "@/i18n";
 import { getLangFromUrl } from "@/i18n/utils";
-import Layout from "@blog/layouts/Layout.astro";
 
 export const getStaticPaths = () =>
 	Object.keys(LOCALES).map((lang) => ({

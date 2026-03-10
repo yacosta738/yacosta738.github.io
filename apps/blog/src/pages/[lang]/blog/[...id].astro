@@ -2,6 +2,7 @@
 
 
 import { render } from "astro:content";
+import Layout from "@blog/layouts/Article.astro";
 import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
 import CtaNewsletterSubscription from "@/components/organisms/CtaNewsletterSubscription.astro";
 import PostFooter from "@/components/organisms/PostFooter.astro";
@@ -9,7 +10,6 @@ import PostHeader from "@/components/organisms/PostHeader.astro";
 import { getArticles } from "@/core/article";
 import type Article from "@/core/article/article.model";
 import { type Lang, useTranslations } from "@/i18n";
-import Layout from "@blog/layouts/Article.astro";
 
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
