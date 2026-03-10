@@ -17,7 +17,7 @@ const localizedSiteTitle =
 
 const resume = await getMainResumeWithData();
 if (!resume) {
-	throw new Error("No se pudo obtener el resume principal");
+	throw new Error("Could not load main resume");
 }
 
 const socials = resume.basics.profiles

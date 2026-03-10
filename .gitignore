@@ -37,7 +37,7 @@ test-results/
 # GitHub App credentials
 gha-creds-*.json
 # START AI Agent Symlinks
-.agents/skills/*.bak
+.agents/skills/*.bak*
 .claude/commands
 .claude/commands.bak.*
 .claude/commands/
@@ -66,9 +66,9 @@ gha-creds-*.json
 .opencode/command
 .opencode/command.bak.*
 .opencode/command/
-.opencode/skill
+.opencode/skill/
 .opencode/skill.bak.*
-.opencode/skills/
+.opencode/skill/*.bak*
 .vscode/mcp.json
 AGENTS.md
 AGENTS.md.bak.*

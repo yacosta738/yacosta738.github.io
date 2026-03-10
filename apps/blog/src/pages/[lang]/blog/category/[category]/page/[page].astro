@@ -63,8 +63,8 @@ const { lang, category: categorySlug } = Astro.params;
 const { category, page } = Astro.props;
 const t = useTranslations(lang as Lang);
 
-const basePath = `/${lang}/category/${categorySlug}/page`;
-const indexUrl = `/${lang}/category/${categorySlug}`;
+const basePath = `/${lang}/blog/category/${categorySlug}/page`;
+const indexUrl = `/${lang}/blog/category/${categorySlug}`;
 const title = `${t("category.title")}: ${category.title}`;
 ---
 

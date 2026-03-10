@@ -178,19 +178,13 @@ h6 {
 
 .blog-headline h1 {
 	text-align: left;
-}
-
-.blog-headline p {
-	margin-top: 0.6rem;
-}
-
-.blog-headline h1 {
 	font-size: clamp(2.3rem, 2rem + 2vw, 4rem);
 	line-height: 1.05;
 	text-wrap: balance;
 }
 
 .blog-headline p {
+	margin-top: 0.6rem;
 	font-size: clamp(1.05rem, 1rem + 0.5vw, 1.35rem);
 	color: var(--color-foreground-muted);
 	max-width: 62ch;

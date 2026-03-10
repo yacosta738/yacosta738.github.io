@@ -197,7 +197,7 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		resolve: {
 			alias: {
-				"@blog": "/src",
+				"@blog": "./src",
 				"@": "/../../packages/shared/src",
 				"@assets": "/../../packages/shared/src/assets",
 				"@components": "/../../packages/shared/src/components",

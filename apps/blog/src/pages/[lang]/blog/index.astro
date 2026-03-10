@@ -56,7 +56,7 @@ export const getStaticPaths = () =>
 	}));
 
 const postsPerPage = 16;
-const totalPages = Math.ceil(sortedArticles.length / postsPerPage);
+const totalPages = Math.ceil(visibleArticles.length / postsPerPage);
 const basePath = `/${currentLocale}/blog/page`;
 const indexUrl = `/${currentLocale}/blog`;
 ---
