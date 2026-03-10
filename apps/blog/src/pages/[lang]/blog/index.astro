@@ -4,13 +4,14 @@
 import BlogHero from "@blog/components/organisms/BlogHero.astro";
 import Footer from "@blog/components/organisms/Footer.astro";
 import Layout from "@blog/layouts/Layout.astro";
+import { buildBlogListing } from "@blog/lib/blog-listing";
 import ArticleCard from "@/components/molecules/ArticleCard.astro";
 import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
 import { type Lang, LOCALES, useTranslations } from "@/i18n";
-import { type BlogPost, getBlogPostUrl } from "@/lib/blog-post.utils";
+import { getBlogPostUrl } from "@/lib/blog-post.utils";
 
 // Get locale from params
 const { lang } = Astro.params;
@@ -21,27 +22,11 @@ const t = useTranslations(currentLocale);
 const allArticles = await getArticles();
 const allExternalArticles = await getExternalArticles();
 
-// Combine both types and filter by language
-const allBlogPosts: BlogPost[] = [
-	...allArticles.filter((post) => post.id.split("/")[0] === currentLocale),
-	...allExternalArticles.filter(
-		(post) => post.id.split("/")[0] === currentLocale,
-	),
-];
-
-// Sort by date (newest first)
-const sortedArticles = allBlogPosts.sort(
-	(a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf(),
-);
-
-const featuredPosts = allArticles
-	.filter((post) => post.id.split("/")[0] === currentLocale && post.featured)
-	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-	.slice(0, 3);
-const featuredIds = new Set(featuredPosts.map((post) => post.id));
-const visibleArticles = sortedArticles.filter(
-	(post) => !featuredIds.has(post.id),
-);
+const { featuredPosts, visiblePosts } = buildBlogListing({
+	articles: allArticles,
+	externalArticles: allExternalArticles,
+	locale: currentLocale,
+});
 
 const title = t("blog.title");
 
@@ -51,7 +36,7 @@ export const getStaticPaths = () =>
 	}));
 
 const postsPerPage = 16;
-const totalPages = Math.ceil(visibleArticles.length / postsPerPage);
+const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
 const basePath = `/${currentLocale}/blog/page`;
 const indexUrl = `/${currentLocale}/blog`;
 ---
@@ -82,7 +67,7 @@ const indexUrl = `/${currentLocale}/blog`;
 		)}
 		<BlogGridContainer
 			class="blog-grid blog-stagger"
-			posts={visibleArticles.slice(0, postsPerPage)}
+			posts={visiblePosts.slice(0, postsPerPage)}
 		/>
 		<Pagination
 			class="blog-pagination"

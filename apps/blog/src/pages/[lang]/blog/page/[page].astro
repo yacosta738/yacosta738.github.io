@@ -4,12 +4,12 @@
 import BlogHero from "@blog/components/organisms/BlogHero.astro";
 import Footer from "@blog/components/organisms/Footer.astro";
 import Layout from "@blog/layouts/Layout.astro";
+import { buildBlogListing } from "@blog/lib/blog-listing";
 import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
 import { type Lang, LOCALES, useTranslations } from "@/i18n";
-import type { BlogPost } from "@/lib/blog-post.utils";
 
 export async function getStaticPaths() {
 	// Get all articles and external articles
@@ -21,24 +21,19 @@ export async function getStaticPaths() {
 
 	// Generate paths for all supported languages
 	for (const lang of Object.keys(LOCALES)) {
-		// Combine both types and filter articles for this language
-		const allBlogPosts: BlogPost[] = [
-			...allArticles.filter((post) => post.id.split("/")[0] === lang),
-			...allExternalArticles.filter((post) => post.id.split("/")[0] === lang),
-		];
-
-		// Sort by date (newest first)
-		const langArticles = allBlogPosts.sort(
-			(a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf(),
-		);
+		const { visiblePosts } = buildBlogListing({
+			articles: allArticles,
+			externalArticles: allExternalArticles,
+			locale: lang as Lang,
+		});
 
 		// Define pagination config
 		const postsPerPage = 16;
-		const totalPages = Math.ceil(langArticles.length / postsPerPage);
+		const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
 
 		// Only generate pages starting from page 2 (page 1 is handled by index.astro)
 		for (let i = 2; i <= totalPages; i++) {
-			const pagePosts = langArticles.slice(
+			const pagePosts = visiblePosts.slice(
 				(i - 1) * postsPerPage,
 				i * postsPerPage,
 			);

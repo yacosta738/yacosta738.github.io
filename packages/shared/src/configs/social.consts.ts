@@ -42,13 +42,13 @@ const isSocialIconKey = (value: string): value is keyof SocialIcon => {
  *
  * @param name - The social network key (one of the keys defined in SocialIcon).
  * @returns The icon identifier string for the given social network (e.g. "lucide:github").
- * If the key is not found, returns undefined.
+ * If the key is not found, returns the fallback icon "lucide:origami".
  *
  * @example
  * const icon = getSocialIcon('github'); // "lucide:github"
- * const fallback = getSocialIcon('unknown'); // undefined
+ * const fallback = getSocialIcon('unknown'); // "lucide:origami"
  */
 export const getSocialIcon = (name: string) => {
 	const key = name.toLowerCase();
-	return isSocialIconKey(key) ? SOCIAL_ICONS[key] : undefined;
+	return isSocialIconKey(key) ? SOCIAL_ICONS[key] : "lucide:origami";
 };

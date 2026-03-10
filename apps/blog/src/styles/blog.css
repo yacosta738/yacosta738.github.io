@@ -1,5 +1,5 @@
 @font-face {
-	font-family: "PlusJakartaSans";
+	font-family: PlusJakartaSans;
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
@@ -7,7 +7,7 @@
 }
 
 @font-face {
-	font-family: "JetBrainsMono";
+	font-family: JetBrainsMono;
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
@@ -15,7 +15,7 @@
 }
 
 @font-face {
-	font-family: "JetBrainsMono";
+	font-family: JetBrainsMono;
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
@@ -70,9 +70,9 @@ body {
 }
 
 html body {
-	--font-sans: "PlusJakartaSans", "Calibre", "Inter", system-ui, sans-serif;
-	--font-display: "PlusJakartaSans", "Calibre", "Inter", system-ui, sans-serif;
-	--font-mono: "JetBrainsMono", "SF Mono", "Fira Code", monospace;
+	--font-sans: PlusJakartaSans, "Calibre", "Inter", system-ui, sans-serif;
+	--font-display: PlusJakartaSans, "Calibre", "Inter", system-ui, sans-serif;
+	--font-mono: JetBrainsMono, "SF Mono", "Fira Code", monospace;
 	--color-background: var(--blog-bg);
 	--color-background-secondary: var(--blog-surface-elevated);
 	--color-background-surface: var(--blog-surface);
@@ -89,7 +89,7 @@ html body {
 	--color-brand-accent-hover: var(--blog-accent-strong);
 	--color-primary: var(--blog-accent);
 	--color-primary-foreground: #ffffff;
-	font-synthesis: weight;
+	font-synthesis: none;
 }
 
 html.dark body {
@@ -269,7 +269,12 @@ h6 {
 	transform: translateY(-3px);
 	border-color: var(--color-brand-accent);
 	box-shadow: var(--blog-shadow);
-	outline: none;
+}
+
+.blog-article-card .blog-article-card__link:focus-visible {
+	outline: 2px solid var(--color-brand-accent);
+	outline-offset: 4px;
+	border-radius: 18px;
 }
 
 .blog-article-card .blog-article-card__link {
