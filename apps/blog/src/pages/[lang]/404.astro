@@ -4,10 +4,10 @@
  * It shows a 404 "Not Found" error message and provides a link back to the homepage.
  */
 import { Image } from "astro:assets";
+import Layout from "@blog/layouts/Layout.astro";
 import Container from "@/components/atoms/Container.astro";
 import { useTranslatedPath, useTranslations } from "@/i18n";
 import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n/types";
-import Layout from "@blog/layouts/Layout.astro";
 import oops from "../../../public/oops.webp";
 
 const currentLocale = (Astro.params.lang as Lang) || DEFAULT_LOCALE;

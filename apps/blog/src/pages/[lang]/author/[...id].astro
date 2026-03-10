@@ -2,11 +2,11 @@
 
 
 import { getCollection } from "astro:content";
+import Layout from "@blog/layouts/Layout.astro";
 import AuthorWrapper from "@/components/organisms/AuthorWrapper.astro";
 import PostsList from "@/components/organisms/PostsList.astro";
 import { getArticles } from "@/core/article";
 import { type Lang, useTranslations } from "@/i18n";
-import Layout from "@blog/layouts/Layout.astro";
 
 export async function getStaticPaths() {
 	const authors = await getCollection("authors");
