@@ -1,14 +1,6 @@
 @font-face {
 	font-family: "PlusJakartaSans";
 	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: url("../assets/font/PlusJakartaSans-Bold.ttf") format("truetype");
-}
-
-@font-face {
-	font-family: "PlusJakartaSans";
-	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
 	src: url("../assets/font/PlusJakartaSans-Bold.ttf") format("truetype");
@@ -412,7 +404,7 @@ h6 {
 .blog-prose a:hover,
 .blog-prose a:focus-visible {
 	color: var(--color-brand-accent-hover);
-	border-color: currentColor;
+	border-color: currentcolor;
 }
 
 .blog-prose blockquote {
