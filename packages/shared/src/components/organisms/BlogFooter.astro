@@ -16,11 +16,9 @@ const localizedSiteTitle =
 		: SITE_TITLE[currentLocale] || SITE_TITLE.en;
 
 const resume = await getMainResumeWithData();
-if (!resume) {
-	throw new Error("Could not load main resume");
-}
+const profiles = resume?.basics?.profiles ?? [];
 
-const socials = resume.basics.profiles
+const socials = profiles
 	.map((profile) => ({
 		name: profile.network,
 		url: profile.url,

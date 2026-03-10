@@ -10,7 +10,7 @@ import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
 import { type Lang, LOCALES, useTranslations } from "@/i18n";
-import { getBlogPostUrl, type BlogPost } from "@/lib/blog-post.utils";
+import { type BlogPost, getBlogPostUrl } from "@/lib/blog-post.utils";
 
 // Get locale from params
 const { lang } = Astro.params;

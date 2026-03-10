@@ -1,0 +1,41 @@
+---
+import PageHeadline from "@/components/atoms/PageHeadline.astro";
+import { type Lang, useTranslations } from "@/i18n";
+
+type Props = {
+	title: string;
+	currentLocale: Lang;
+};
+
+const { title, currentLocale } = Astro.props as Props;
+const t = useTranslations(currentLocale);
+---
+
+<section class="blog-hero">
+	<div class="blog-hero__content">
+		<span class="blog-hero__kicker">
+			{t({ en: "Technical journal", es: "Diario técnico" })}
+		</span>
+		<PageHeadline class="blog-headline" {title}>
+			<p>
+				{
+					t({
+						en: "Deep dives, engineering notes, and lessons learned from building.",
+					es: "Análisis, notas de ingeniería y aprendizajes reales de construir.",
+					})
+				}
+			</p>
+		</PageHeadline>
+		<div class="blog-hero__actions">
+			<a class="blog-pill" href={`/${currentLocale}/search`}>
+				{t("search.title")}
+			</a>
+			<a class="blog-pill" href={`/${currentLocale}/blog/tag`}>
+				{t("tags.title")}
+			</a>
+			<a class="blog-pill" href={`/${currentLocale}/blog/category`}>
+				{t("categories.title")}
+			</a>
+		</div>
+	</div>
+</section>
