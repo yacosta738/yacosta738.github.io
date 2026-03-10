@@ -1,6 +1,6 @@
 ---
+import Layout from "@blog/layouts/Layout.astro";
 import { type Lang, useTranslations } from "@/i18n";
-import Layout from "@/layouts/Layout.astro";
 
 const url = new URL(Astro.request.url);
 const initialQuery = url.searchParams.get("q") || "";
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 ---
 
 <Layout title={t("search.title")} description={t("search.description")}>
-	<main class="container">
+	<main class="container mx-auto px-4 blog-shell">
 		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 		<script is:inline src="/pagefind/pagefind-ui.js"></script>
 

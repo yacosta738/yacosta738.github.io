@@ -50,6 +50,5 @@ const isSocialIconKey = (value: string): value is keyof SocialIcon => {
  */
 export const getSocialIcon = (name: string) => {
 	const key = name.toLowerCase();
-	const icon = isSocialIconKey(key) ? SOCIAL_ICONS[key] : undefined;
-	return icon ?? "lucide:origami";
+	return isSocialIconKey(key) ? SOCIAL_ICONS[key] : "lucide:origami";
 };

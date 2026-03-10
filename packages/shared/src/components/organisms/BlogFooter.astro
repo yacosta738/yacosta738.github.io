@@ -1,7 +1,9 @@
 ---
 import SocialLinks from "@/components/molecules/SocialLinks.astro";
 import { SITE_TITLE } from "@/configs/site.consts";
+import { getSocialIcon } from "@/configs/social.consts";
 import { filterMenuItems, navLinks } from "@/core/menu";
+import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import Logo from "../atoms/Logo.astro";
 
@@ -13,19 +15,21 @@ const localizedSiteTitle =
 		? SITE_TITLE
 		: SITE_TITLE[currentLocale] || SITE_TITLE.en;
 
-const socials = [
-	{
-		name: "Twitter",
-		url: "https://x.com/yacosta738",
-		icon: "simple-icons:x",
-	},
-	{
-		name: "GitHub",
-		url: "https://github.com/yacosta738",
-		icon: "simple-icons:github",
-	},
-	{ name: "RSS", url: translatePath("/rss.xml"), icon: "lucide:rss" },
-];
+const resume = await getMainResumeWithData();
+const profiles = resume?.basics?.profiles ?? [];
+
+const socials = profiles
+	.map((profile) => ({
+		name: profile.network,
+		url: profile.url,
+		icon: getSocialIcon(profile.network),
+	}))
+	.filter((profile) => Boolean(profile.icon));
+socials.push({
+	name: "RSS",
+	url: translatePath("/rss.xml"),
+	icon: "lucide:rss",
+});
 
 const filteredNavLinks = filterMenuItems(navLinks);
 

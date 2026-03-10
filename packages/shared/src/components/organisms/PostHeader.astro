@@ -17,9 +17,12 @@ const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
 ---
 
-<div class={cn("flex flex-col items-center gap-4 my-8", attrs.class)} {...attrs}>
+<div
+	class={cn("flex flex-col items-center gap-4 my-8 blog-post-header", attrs.class)}
+	{...attrs}
+>
 	<h1
-		class="inline text-4xl md:text-6xl font-inter font-semibold tracking-tighter leading-[112%] max-w-4xl"
+		class="inline text-4xl md:text-6xl font-inter font-semibold tracking-tighter leading-[112%] max-w-4xl blog-post-title"
 		aria-label={t("post.aria.title")}
 	>
 		{post.title}

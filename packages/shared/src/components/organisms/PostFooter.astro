@@ -15,7 +15,7 @@ const { post } = Astro.props;
 const currentLocale = Astro.currentLocale as Lang;
 ---
 
-<div class="flex flex-col justify-center mt-8 not-prose">
+<div class="flex flex-col justify-center mt-8 not-prose blog-post-footer">
 	<SocialMediaShare
 		url={Astro.request.url}
 		title={post.title}

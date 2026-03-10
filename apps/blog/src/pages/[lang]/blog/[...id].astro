@@ -2,6 +2,7 @@
 
 
 import { render } from "astro:content";
+import Layout from "@blog/layouts/Article.astro";
 import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
 import CtaNewsletterSubscription from "@/components/organisms/CtaNewsletterSubscription.astro";
 import PostFooter from "@/components/organisms/PostFooter.astro";
@@ -9,7 +10,6 @@ import PostHeader from "@/components/organisms/PostHeader.astro";
 import { getArticles } from "@/core/article";
 import type Article from "@/core/article/article.model";
 import { type Lang, useTranslations } from "@/i18n";
-import Layout from "@/layouts/Article.astro";
 
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
@@ -48,9 +48,9 @@ const postSlug = slugParts.join("/");
 	enableComments={true}
 	slug={postSlug}
 >
-	<div class="container mx-auto px-4">
+	<div class="container mx-auto px-4 blog-shell">
 		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
-		<div class="mx-auto prose lg:prose-xl dark:prose-invert">
+		<div class="mx-auto prose lg:prose-xl dark:prose-invert blog-prose">
 			{
 				post.cover && (
 					<OptimizedPicture src={post.cover} alt={post.title} loading="eager" />

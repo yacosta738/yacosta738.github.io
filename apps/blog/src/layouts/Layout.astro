@@ -1,10 +1,8 @@
 ---
+import "../styles/blog.css";
 import SharedLayout from "../../../../packages/shared/src/layouts/Layout.astro";
 ---
 
 <SharedLayout {...Astro.props}>
-	<slot name="header" slot="header" />
-	<slot name="subheader" slot="subheader" />
 	<slot />
-	<slot name="aside" slot="aside" />
 </SharedLayout>
