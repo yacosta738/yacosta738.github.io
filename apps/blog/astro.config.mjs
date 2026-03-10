@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
@@ -197,6 +198,7 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		resolve: {
 			alias: {
+				"@blog": fileURLToPath(new URL("./src", import.meta.url)),
 				"@": "/../../packages/shared/src",
 				"@assets": "/../../packages/shared/src/assets",
 				"@components": "/../../packages/shared/src/components",

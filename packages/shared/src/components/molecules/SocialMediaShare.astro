@@ -68,14 +68,14 @@ const socialMediaLinkShare: {
 ];
 ---
 
-<div class="flex items-center justify-center gap-3 not-prose w-full" {...attrs}>
+<div class="flex items-center justify-center md:justify-end gap-3 not-prose w-full" {...attrs}>
 	<span
 		class="font-inter text-xs tracking-widest uppercase leading-[140%] rounded flex-shrink-0"
 	>
 		{t("share")}
 	</span>
 	<SocialLinks
-		class={cn(`flex items-center justify-center gap-4`, className)}
+		class={cn("flex items-center justify-center md:justify-end gap-4", className)}
 		socials={socialMediaLinkShare}
 	>
 			<IconButton
