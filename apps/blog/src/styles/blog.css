@@ -50,6 +50,33 @@
 	--blog-shadow-soft: 0 8px 24px rgba(12, 16, 20, 0.08);
 }
 
+body {
+	background-color: var(--color-background);
+	background-image:
+		radial-gradient(circle at 20% 10%, var(--blog-hero-glow), transparent 45%),
+		radial-gradient(circle at 80% 0%, rgba(15, 85, 140, 0.12), transparent 40%),
+		linear-gradient(
+			to bottom,
+			transparent 0 55%,
+			rgba(9, 14, 18, 0.04) 80%,
+			transparent 100%
+		),
+		linear-gradient(90deg, var(--blog-grid-line) 1px, transparent 1px),
+		linear-gradient(var(--blog-grid-line) 1px, transparent 1px);
+	background-size:
+		auto,
+		auto,
+		auto,
+		120px 120px,
+		120px 120px;
+	background-position:
+		center,
+		top right,
+		center,
+		top left,
+		top left;
+}
+
 html body {
 	--font-sans: "PlusJakartaSans", "Calibre", "Inter", system-ui, sans-serif;
 	--font-display: "PlusJakartaSans", "Calibre", "Inter", system-ui, sans-serif;
@@ -91,33 +118,6 @@ html.dark body {
 	--blog-grid-line: rgba(230, 237, 245, 0.08);
 	--blog-shadow: 0 18px 40px rgba(3, 9, 14, 0.48);
 	--blog-shadow-soft: 0 10px 30px rgba(3, 9, 14, 0.4);
-}
-
-body {
-	background-color: var(--color-background);
-	background-image:
-		radial-gradient(circle at 20% 10%, var(--blog-hero-glow), transparent 45%),
-		radial-gradient(circle at 80% 0%, rgba(15, 85, 140, 0.12), transparent 40%),
-		linear-gradient(
-			to bottom,
-			transparent 0 55%,
-			rgba(9, 14, 18, 0.04) 80%,
-			transparent 100%
-		),
-		linear-gradient(90deg, var(--blog-grid-line) 1px, transparent 1px),
-		linear-gradient(var(--blog-grid-line) 1px, transparent 1px);
-	background-size:
-		auto,
-		auto,
-		auto,
-		120px 120px,
-		120px 120px;
-	background-position:
-		center,
-		top right,
-		center,
-		top left,
-		top left;
 }
 
 h1,
@@ -586,7 +586,7 @@ h6 {
 		gap: 0.5rem;
 	}
 
-	.blog-article-card__footer {
+	.blog-article-card .blog-article-card__footer {
 		padding: 1rem;
 	}
 }
