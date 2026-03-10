@@ -4,15 +4,16 @@
  * dynamic link to the sitemap index.
  */
 import type { APIRoute } from "astro";
-import { LOCALES_SETTING } from "@/i18n/locales";
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/i18n/locales";
 
 const getRobotsTxt = (sitemapURL: URL) => {
 	const disallowRules = Object.keys(LOCALES_SETTING)
-		.map(
-			(lang) => `
-Disallow: /${lang}/category/
-Disallow: /${lang}/tag/`,
-		)
+		.map((lang) => {
+			const prefix = lang === DEFAULT_LOCALE_SETTING ? "" : `/${lang}`;
+			return `
+Disallow: ${prefix}/blog/category/
+Disallow: ${prefix}/blog/tag/`;
+		})
 		.join("");
 
 	return `User-agent: *

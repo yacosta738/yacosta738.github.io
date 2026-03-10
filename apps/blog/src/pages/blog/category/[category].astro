@@ -1,0 +1,104 @@
+---
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
+import PageHeadline from "@/components/atoms/PageHeadline.astro";
+import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
+import Pagination from "@/components/molecules/Pagination.astro";
+import { getArticles } from "@/core/article";
+import { getCategories } from "@/core/category";
+import {
+	DEFAULT_LOCALE,
+	type Lang,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
+
+export async function getStaticPaths() {
+	const paths = [];
+	const allArticles = await getArticles();
+	const lang: Lang = DEFAULT_LOCALE;
+	const categories = await getCategories({ lang });
+
+	for (const category of categories) {
+		const categoryArticles = allArticles.filter(
+			(article) =>
+				article.category.slug === category.slug &&
+				article.id.startsWith(`${lang}/`),
+		);
+
+		if (categoryArticles.length > 0) {
+			paths.push({
+				params: {
+					category: category.slug,
+				},
+				props: { category },
+			});
+		}
+	}
+	return paths;
+}
+
+const { category: categorySlug } = Astro.params;
+const { category } = Astro.props;
+
+const currentLocale: Lang = DEFAULT_LOCALE;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+
+const allArticles = await getArticles();
+const categoryArticles = allArticles
+	.filter(
+		(article) =>
+			article.category.slug === categorySlug &&
+			article.id.startsWith(`${currentLocale}/`),
+	)
+	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+
+const postsPerPage = 16;
+const totalPages = Math.ceil(categoryArticles.length / postsPerPage);
+const basePath = translatePath(`/blog/category/${categorySlug}/page`);
+const indexUrl = translatePath(`/blog/category/${categorySlug}`);
+
+const title = `${t("category.title")}: ${category.title}`;
+---
+
+<Layout {title}>
+	<div class="container mx-auto px-4 blog-shell">
+		<section class="blog-hero">
+			<div class="blog-hero__content">
+				<span class="blog-hero__kicker">
+					{t("categories.title")}
+				</span>
+				<PageHeadline class="blog-headline" title={category.title}>
+					<p>{t("category.description", { category: category.title })}</p>
+				</PageHeadline>
+				<div class="blog-hero__actions">
+					<a class="blog-pill" href={translatePath("/search")}>
+						{t("search.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/blog")}>
+						{t("blog.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/blog/category")}>
+						{t("categories.title")}
+					</a>
+				</div>
+			</div>
+		</section>
+		<BlogGridContainer
+			class="blog-grid blog-stagger"
+			posts={categoryArticles.slice(0, postsPerPage)}
+		/>
+		<Pagination
+			class="blog-pagination"
+			currentPage={1}
+			lastPage={totalPages}
+			urlPrev={null}
+			urlNext={totalPages > 1 ? `${basePath}/2` : null}
+			basePath={basePath}
+			maxDisplayedPages={5}
+			firstPageUrl={indexUrl}
+		/>
+	</div>
+	<Footer />
+</Layout>

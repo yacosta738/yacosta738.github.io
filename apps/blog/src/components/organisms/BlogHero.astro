@@ -1,6 +1,6 @@
 ---
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
-import { type Lang, useTranslations } from "@/i18n";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 
 type Props = {
 	title: string;
@@ -9,6 +9,7 @@ type Props = {
 
 const { title, currentLocale } = Astro.props as Props;
 const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 ---
 
 <section class="blog-hero">
@@ -27,13 +28,13 @@ const t = useTranslations(currentLocale);
 			</p>
 		</PageHeadline>
 		<div class="blog-hero__actions">
-			<a class="blog-pill" href={`/${currentLocale}/search`}>
+			<a class="blog-pill" href={translatePath("/search")}>
 				{t("search.title")}
 			</a>
-			<a class="blog-pill" href={`/${currentLocale}/blog/tag`}>
+			<a class="blog-pill" href={translatePath("/blog/tag")}>
 				{t("tags.title")}
 			</a>
-			<a class="blog-pill" href={`/${currentLocale}/blog/category`}>
+			<a class="blog-pill" href={translatePath("/blog/category")}>
 				{t("categories.title")}
 			</a>
 		</div>

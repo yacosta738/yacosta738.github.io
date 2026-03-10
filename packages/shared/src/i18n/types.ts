@@ -9,7 +9,7 @@ type LocaleConfig = {
 
 export const LOCALES = LOCALES_SETTING as Record<string, LocaleConfig>;
 
-export const SHOW_DEFAULT_LANG_IN_URL: boolean = true;
+export const SHOW_DEFAULT_LANG_IN_URL: boolean = false;
 
 /**
  * Represents a dictionary of translations for multiple languages.

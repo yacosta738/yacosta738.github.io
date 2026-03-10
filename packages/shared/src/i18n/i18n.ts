@@ -34,17 +34,25 @@ export function useTranslatedPath(lang: Lang) {
 	return function translatePath(path: string, targetLang: Lang = lang): string {
 		// Ensure path starts with a slash
 		const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+		const defaultLangPrefixRegex = new RegExp(`^/${DEFAULT_LOCALE}(?:/|$)`);
+		const normalizedWithoutDefaultPrefix = normalizedPath.replace(
+			defaultLangPrefixRegex,
+			"/",
+		);
 
 		// Check if path already starts with the target language prefix
 		const langPrefixRegex = new RegExp(`^/${targetLang}/`);
 		if (langPrefixRegex.test(normalizedPath)) {
 			// Path already has the language prefix, return as is
+			if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
+				return normalizedWithoutDefaultPrefix;
+			}
 			return normalizedPath;
 		}
 
 		// For default language, we might not show the language prefix based on config
 		if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
-			return normalizedPath;
+			return normalizedWithoutDefaultPrefix;
 		}
 
 		// For other languages, or if we always show the language prefix

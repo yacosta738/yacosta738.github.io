@@ -2,7 +2,7 @@ import { expect, type Page, test } from "@playwright/test";
 import { mockResponses, selectors, testData } from "../fixtures";
 
 test.describe("Newsletter Subscription", () => {
-	const blogUrl = "/en/blog";
+	const blogUrl = "/blog";
 
 	// Helper to mock hCaptcha token
 	const mockHCaptchaToken = async (page: Page) => {

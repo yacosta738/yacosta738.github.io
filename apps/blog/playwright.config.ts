@@ -1,4 +1,8 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig, devices } from "@playwright/test";
+
+const e2ePort = Number.parseInt(process.env.E2E_PORT ?? "", 10) || 4322;
+const appDir = fileURLToPath(new URL(".", import.meta.url));
 
 /**
  * Playwright configuration for E2E testing
@@ -35,7 +39,7 @@ export default defineConfig({
 
 	// Global configuration for all tests
 	use: {
-		baseURL: process.env.BASE_URL || "http://localhost:4322",
+		baseURL: `http://localhost:${e2ePort}`,
 		trace: "on-first-retry",
 		screenshot: "on-first-failure",
 		video: "on-first-retry",
@@ -48,35 +52,20 @@ export default defineConfig({
 
 	// Development server configuration - auto-start on test run
 	webServer: (() => {
-		// By default use the dev server. For stable Pagefind-backed tests,
-		// set PW_USE_PREVIEW=1 to build and run `astro preview` so the Pagefind
-		// index is available (slower but more stable).
-		const usePreview = process.env.PW_USE_PREVIEW === "1";
-		if (usePreview) {
-			// In CI, the build artifact may already exist. Check before rebuilding.
-			// If dist/ exists and has content, skip build. Otherwise, build first.
-			const buildCommand = process.env.CI
-				? "test -d dist && test -f dist/index.html && echo 'Using pre-built artifact' || pnpm build"
-				: "pnpm build";
-
-			return {
-				command: `${buildCommand} && pnpm preview --port 4322`,
-				url: "http://localhost:4322",
-				timeout: 600_000,
-				reuseExistingServer: false,
-				env: { PLAYWRIGHT_TEST: "true" },
-				stdout: "pipe",
-				stderr: "pipe",
-			};
-		}
+		// Always use preview so Pagefind assets are available for search tests.
+		// In CI, the build artifact may already exist. Check before rebuilding.
+		const buildCommand = process.env.CI
+			? "test -d dist && test -f dist/index.html && test -f dist/pagefind/pagefind-ui.css && test -f dist/pagefind/pagefind-ui.js && echo 'Using pre-built artifact' || pnpm build"
+			: "pnpm build";
 
 		return {
-			command: "pnpm dev --port 4322",
-			url: "http://localhost:4322",
-			timeout: 180_000,
-			reuseExistingServer: true,
+			command: `${buildCommand} && pnpm exec astro preview --port ${e2ePort} --strictPort`,
+			url: `http://localhost:${e2ePort}`,
+			cwd: appDir,
+			timeout: 600_000,
+			reuseExistingServer: false,
 			env: { PLAYWRIGHT_TEST: "true" },
-			stdout: "ignore",
+			stdout: "pipe",
 			stderr: "pipe",
 		};
 	})(),

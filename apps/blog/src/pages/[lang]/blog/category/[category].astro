@@ -8,7 +8,7 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
-import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
 
 export async function getStaticPaths() {
 	const paths = [];
@@ -40,7 +40,9 @@ export async function getStaticPaths() {
 const { lang, category: categorySlug } = Astro.params;
 const { category } = Astro.props;
 
-const t = useTranslations(lang as Lang);
+const currentLocale = lang as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 
 const allArticles = await getArticles();
 const categoryArticles = allArticles
@@ -53,8 +55,8 @@ const categoryArticles = allArticles
 
 const postsPerPage = 16;
 const totalPages = Math.ceil(categoryArticles.length / postsPerPage);
-const basePath = `/${lang}/blog/category/${categorySlug}/page`;
-const indexUrl = `/${lang}/blog/category/${categorySlug}`;
+const basePath = translatePath(`/blog/category/${categorySlug}/page`);
+const indexUrl = translatePath(`/blog/category/${categorySlug}`);
 
 const title = `${t("category.title")}: ${category.title}`;
 ---
@@ -70,13 +72,13 @@ const title = `${t("category.title")}: ${category.title}`;
 					<p>{t("category.description", { category: category.title })}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={`/${lang}/search`}>
+					<a class="blog-pill" href={translatePath("/search")}>
 						{t("search.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog`}>
+					<a class="blog-pill" href={translatePath("/blog")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog/category`}>
+					<a class="blog-pill" href={translatePath("/blog/category")}>
 						{t("categories.title")}
 					</a>
 				</div>

@@ -1,0 +1,55 @@
+---
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
+import PageHeadline from "@/components/atoms/PageHeadline.astro";
+import TagBadges from "@/components/molecules/TagBadges.astro";
+import { getTags } from "@/core/tag";
+import {
+	DEFAULT_LOCALE,
+	type Lang,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
+
+const lang: Lang = DEFAULT_LOCALE;
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const tags = await getTags({ lang });
+
+const title = t("tags.title");
+---
+
+<Layout {title}>
+	<div class="container mx-auto px-4 blog-shell">
+		<section class="blog-hero">
+			<div class="blog-hero__content">
+				<span class="blog-hero__kicker">
+					{t({ en: "Explore tags", es: "Explora etiquetas" })}
+				</span>
+				<PageHeadline class="blog-headline" {title}>
+					<p>{t("tags.description")}</p>
+				</PageHeadline>
+				<div class="blog-hero__actions">
+					<a class="blog-pill" href={translatePath("/search")}>
+						{t("search.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/blog")}>
+						{t("blog.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/blog/category")}>
+						{t("categories.title")}
+					</a>
+				</div>
+			</div>
+		</section>
+		<TagBadges
+			tags={tags.map((tag) => ({ title: tag.title, slug: tag.slug }))}
+			lang={lang}
+			variant="primary"
+			size="sm"
+			class="blog-tag-badges mt-6"
+		/>
+	</div>
+	<Footer />
+</Layout>

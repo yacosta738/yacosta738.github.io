@@ -8,6 +8,12 @@ const initialQuery = url.searchParams.get("q") || "";
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
 
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+	? import.meta.env.BASE_URL
+	: `${import.meta.env.BASE_URL}/`;
+const pagefindCssHref = `${baseUrl}pagefind/pagefind-ui.css`;
+const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
+
 export async function getStaticPaths() {
 	return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
 }
@@ -15,8 +21,8 @@ export async function getStaticPaths() {
 
 <Layout title={t("search.title")} description={t("search.description")}>
 	<main class="container mx-auto px-4 blog-shell">
-		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-		<script is:inline src="/pagefind/pagefind-ui.js"></script>
+		<link href={pagefindCssHref} rel="stylesheet" />
+		<script is:inline src={pagefindJsSrc}></script>
 
 		<section
 			class="min-h-[80vh] flex items-start justify-center px-4 py-12 md:py-20"

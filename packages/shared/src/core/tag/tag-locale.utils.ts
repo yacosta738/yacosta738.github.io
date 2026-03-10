@@ -4,23 +4,32 @@
  * @module TagLocaleUtils
  */
 
+import { routes } from "@/configs/route.path";
+import { LOCALES } from "@/i18n/types";
+
 /**
  * Extracts tag slug from a URL path
  *
- * @param pathname - The URL pathname (e.g., "/en/tag/security" or "/es/tag/seguridad")
+ * @param pathname - The URL pathname (e.g., "/blog/tag/security" or "/es/blog/tag/seguridad")
  * @returns The tag slug if found, null otherwise
  *
  * @example
- * extractTagSlugFromPath('/en/tag/security'); // Returns 'security'
- * extractTagSlugFromPath('/es/tag/'); // Returns null
- * extractTagSlugFromPath('/en/about'); // Returns null
+ * extractTagSlugFromPath('/blog/tag/security'); // Returns 'security'
+ * extractTagSlugFromPath('/es/blog/tag/seguridad'); // Returns 'seguridad'
+ * extractTagSlugFromPath('/blog/tag/'); // Returns null
+ * extractTagSlugFromPath('/about'); // Returns null
  */
 export function extractTagSlugFromPath(pathname: string): string | null {
-	// Pattern: /[lang]/tag/[slug] or /[lang]/tag/[slug]/page/[number]
-	// Must have content after /tag/ (not just empty or slash)
-	const tagPagePattern = /^\/[a-z]{2}(?:-[a-z]{2})?\/tag\/([^/]+)(?:\/|$)/i;
+	const locales = Object.keys(LOCALES).join("|");
+	const tagRoute = routes.tag.replace("/", "\\/");
+	// Pattern: /blog/tag/[slug] or /es/blog/tag/[slug]/page/[number]
+	// Optional locale prefix based on supported locales
+	const tagPagePattern = new RegExp(
+		`^/(?:(${locales})/)?${tagRoute}/([^/]+)(?:/|$)`,
+		"i",
+	);
 	const match = tagPagePattern.exec(pathname);
-	return match ? match[1] : null;
+	return match ? match[2] : null;
 }
 
 /**
@@ -30,10 +39,10 @@ export function extractTagSlugFromPath(pathname: string): string | null {
  * @returns True if the path is a tag page, false otherwise
  *
  * @example
- * isTagPage('/en/tag/security'); // true
- * isTagPage('/en/tag/security/page/2'); // true
- * isTagPage('/en/tag'); // false (tag index)
- * isTagPage('/en/about'); // false
+ * isTagPage('/blog/tag/security'); // true
+ * isTagPage('/es/blog/tag/security/page/2'); // true
+ * isTagPage('/blog/tag'); // false (tag index)
+ * isTagPage('/about'); // false
  */
 export function isTagPage(pathname: string): boolean {
 	return extractTagSlugFromPath(pathname) !== null;

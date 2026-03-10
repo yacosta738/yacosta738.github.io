@@ -10,7 +10,7 @@ test("Logo renders with default props", async () => {
 		},
 	});
 
-	expect(result).toContain('href="/en/"');
+	expect(result).toContain('href="/"');
 }, 10000);
 
 test("Logo renders with a different locale", async () => {

@@ -11,13 +11,24 @@ export { useTranslations } from "./utils";
 export function useTranslatedPath(lang: Lang) {
 	return function translatePath(path: string, targetLang: Lang = lang): string {
 		const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+		const defaultLangPrefixRegex = new RegExp(`^/${DEFAULT_LOCALE}(?:/|$)`);
+		const normalizedWithoutDefaultPrefix = normalizedPath.replace(
+			defaultLangPrefixRegex,
+			"/",
+		);
+
 		const langPrefixRegex = new RegExp(`^/${targetLang}/`);
 		if (langPrefixRegex.test(normalizedPath)) {
+			if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
+				return normalizedWithoutDefaultPrefix;
+			}
 			return normalizedPath;
 		}
+
 		if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
-			return normalizedPath;
+			return normalizedWithoutDefaultPrefix;
 		}
+
 		return `/${targetLang}${normalizedPath}`;
 	};
 }

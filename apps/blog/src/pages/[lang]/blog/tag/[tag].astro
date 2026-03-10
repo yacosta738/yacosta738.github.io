@@ -8,7 +8,7 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getAllArticlesIncludingExternal } from "@/core/article";
 import { getTags } from "@/core/tag";
-import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
 
 export async function getStaticPaths() {
 	const paths = [];
@@ -40,7 +40,9 @@ export async function getStaticPaths() {
 const { lang, tag: tagSlug } = Astro.params;
 const { tag } = Astro.props;
 
-const t = useTranslations(lang as Lang);
+const currentLocale = lang as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 
 const allArticles = await getAllArticlesIncludingExternal();
 const tagArticles = allArticles
@@ -53,8 +55,8 @@ const tagArticles = allArticles
 
 const postsPerPage = 16;
 const totalPages = Math.ceil(tagArticles.length / postsPerPage);
-const basePath = `/${lang}/blog/tag/${tagSlug}/page`;
-const indexUrl = `/${lang}/blog/tag/${tagSlug}`;
+const basePath = translatePath(`/blog/tag/${tagSlug}/page`);
+const indexUrl = translatePath(`/blog/tag/${tagSlug}`);
 
 const title = `${t("tag.title")}: ${tag.title}`;
 ---
@@ -70,13 +72,13 @@ const title = `${t("tag.title")}: ${tag.title}`;
 					<p>{t("tag.description", { tag: tag.title })}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={`/${lang}/search`}>
+					<a class="blog-pill" href={translatePath("/search")}>
 						{t("search.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog`}>
+					<a class="blog-pill" href={translatePath("/blog")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog/tag`}>
+					<a class="blog-pill" href={translatePath("/blog/tag")}>
 						{t("tags.title")}
 					</a>
 				</div>

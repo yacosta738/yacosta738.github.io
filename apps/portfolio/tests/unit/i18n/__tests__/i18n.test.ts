@@ -131,6 +131,12 @@ describe("useTranslatedPath", () => {
 		expect(translatePath("/about", "en")).toBe("/about");
 	});
 
+	test("strips default language prefix when SHOW_DEFAULT_LANG_IN_URL is false", () => {
+		mockShowDefaultLang.mockReturnValue(false);
+		const translatePath = useTranslatedPath("en");
+		expect(translatePath("/en/about", "en")).toBe("/about");
+	});
+
 	test("when SHOW_DEFAULT_LANG_IN_URL is true, default language has prefix", () => {
 		mockShowDefaultLang.mockReturnValue(true);
 		const translatePath = useTranslatedPath("en");
@@ -162,7 +168,9 @@ describe("useTranslatedPath", () => {
 describe("getLocalePaths", () => {
 	// Mock getRelativeLocaleUrl from astro:i18n
 	vi.mock("astro:i18n", () => ({
-		getRelativeLocaleUrl: vi.fn((lang, path) => `/${lang}${path}`),
+		getRelativeLocaleUrl: vi.fn((lang, path) =>
+			lang === "en" ? path : `/${lang}${path}`,
+		),
 	}));
 
 	test("returns locale paths for all configured languages", () => {
@@ -195,7 +203,7 @@ describe("getLocalePaths", () => {
 		// Find the English path
 		const enPath = paths.find((p) => p.lang === "en");
 		expect(enPath).toBeDefined();
-		expect(enPath?.path).toBe("/en/about");
+		expect(enPath?.path).toBe("/about");
 	});
 
 	test("handles URLs without language prefix", () => {

@@ -36,7 +36,7 @@ export default defineConfig({
 		defaultLocale: DEFAULT_LOCALE_SETTING,
 		locales: Object.keys(LOCALES_SETTING),
 		routing: {
-			prefixDefaultLocale: true,
+			prefixDefaultLocale: false,
 			redirectToDefaultLocale: false,
 		},
 	},
@@ -81,7 +81,7 @@ export default defineConfig({
 				item.lastmod = new Date();
 
 				// Homepage - highest priority
-				if (pathname === "/" || pathname.match(/^\/(en|es)\/?$/)) {
+				if (pathname === "/" || pathname.match(/^\/es\/?$/)) {
 					item.changefreq = "weekly";
 					item.priority = 1;
 					return item;

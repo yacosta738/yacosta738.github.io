@@ -1,12 +1,13 @@
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/configs/site.consts";
-import { localeParams } from "@/i18n";
+import { localeParams, useTranslatedPath } from "@/i18n";
 
 export const getStaticPaths = () => localeParams;
 
 export async function GET(context) {
 	const locale = context.params.lang;
+	const translatePath = useTranslatedPath(locale);
 
 	const localeTitle =
 		typeof SITE_TITLE === "string" ? SITE_TITLE : SITE_TITLE[locale];
@@ -25,7 +26,7 @@ export async function GET(context) {
 		title: post.data.title,
 		pubDate: post.data.date,
 		description: post.data.description,
-		link: `/${locale}/blog/${post.id.split("/").slice(1).join("/")}/`,
+		link: translatePath(`/blog/${post.id.split("/").slice(1).join("/")}/`),
 	}));
 
 	// Combine and sort all items by date

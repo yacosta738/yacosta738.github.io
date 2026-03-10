@@ -9,7 +9,7 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
-import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
 
 export async function getStaticPaths() {
 	// Get all articles and external articles
@@ -64,10 +64,11 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const currentLocale = lang as Lang;
 const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 
 const title = t("blog.title");
-const basePath = `/${currentLocale}/blog/page`;
-const indexUrl = `/${currentLocale}/blog`;
+const basePath = translatePath("/blog/page");
+const indexUrl = translatePath("/blog");
 const { page } = Astro.props;
 ---
 

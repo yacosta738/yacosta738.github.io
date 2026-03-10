@@ -27,7 +27,7 @@ const formatMonthForDisplay = (date: Date) => {
 	return new Intl.DateTimeFormat(currentLocale, { month: "long" }).format(date);
 };
 
-const contentLink = `/${currentLocale}/blog/${cleanEntityId(id).toLowerCase()}/`;
+const contentLink = translatePath(`/blog/${cleanEntityId(id).toLowerCase()}/`);
 ---
 
 <article

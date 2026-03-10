@@ -10,7 +10,7 @@ import { expect, type Page, test } from "@playwright/test";
  * - Error states are handled gracefully
  */
 
-const BLOG_POST_URL = "/en/blog/"; // We'll use the blog list to find a post
+const BLOG_POST_URL = "/blog/"; // We'll use the blog list to find a post
 
 /**
  * Helper: Navigate to a blog post

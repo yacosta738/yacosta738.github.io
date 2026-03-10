@@ -9,7 +9,7 @@ import { expect, type Page, test } from "@playwright/test";
  * - LCP remains within acceptable limits on blog post pages
  */
 
-const BLOG_POST_URL = "/en/blog/";
+const BLOG_POST_URL = "/blog/";
 
 /**
  * Helper: Navigate to a blog post
