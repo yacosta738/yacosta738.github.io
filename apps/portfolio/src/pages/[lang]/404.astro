@@ -14,9 +14,11 @@ const currentLocale = (Astro.params.lang as Lang) || DEFAULT_LOCALE;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
-		params: { lang },
-	}));
+	Object.keys(LOCALES)
+		.filter((lang) => lang !== DEFAULT_LOCALE)
+		.map((lang) => ({
+			params: { lang },
+		}));
 ---
 
 <Layout title={t("404.title")}>

@@ -20,6 +20,8 @@
 	"include": [".astro/types.d.ts", "**/*"],
 	"exclude": [
 		"dist",
+		"playwright-report",
+		"test-results",
 		"coverage",
 		"tests",
 		"tests/**",

@@ -11,12 +11,13 @@
  * @prop {string} [class] - Additional CSS classes for the container.
  */
 import type { HTMLAttributes } from "astro/types";
+import { type Lang } from "@/i18n";
 import { cn } from "@/lib/utils";
 import TagBadge from "../atoms/TagBadge.astro";
 
 export interface Props extends HTMLAttributes<"div"> {
 	tags: Array<{ title: string; slug: string }>;
-	lang: string;
+	lang: Lang;
 	variant?: "primary" | "secondary" | "accent";
 	size?: "sm" | "md" | "lg";
 }

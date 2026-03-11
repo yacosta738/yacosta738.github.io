@@ -6,18 +6,24 @@ import Layout from "@blog/layouts/Layout.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import TagBadges from "@/components/molecules/TagBadges.astro";
 import { getTags } from "@/core/tag";
-import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import { getLangFromUrl } from "@/i18n/utils";
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
+	ROUTE_LOCALES.map((lang) => ({
 		params: { lang },
 	}));
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as Lang;
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
-const tags = await getTags({ lang: lang as Lang });
+const tags = await getTags({ lang });
 
 const title = t("tags.title");
 ---
@@ -33,13 +39,13 @@ const title = t("tags.title");
 					<p>{t("tags.description")}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={`/${lang}/search`}>
+					<a class="blog-pill" href={translatePath("/search")}>
 						{t("search.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog`}>
+					<a class="blog-pill" href={translatePath("/blog")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog/category`}>
+					<a class="blog-pill" href={translatePath("/blog/category")}>
 						{t("categories.title")}
 					</a>
 				</div>

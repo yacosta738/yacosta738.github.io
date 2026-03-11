@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import type Author from "@/core/author/author.model";
-import { type Lang, useTranslations } from "@/i18n";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,10 @@ interface Props extends HTMLAttributes<"div"> {
 const { author, currentLocale, ...attrs } = Astro.props;
 
 const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+const authorPath = translatePath(
+	`/author/${cleanEntityId(author.slug).toLowerCase()}`,
+);
 ---
 
 <div
@@ -24,7 +28,7 @@ const t = useTranslations(currentLocale);
 >
 	<span class="text-[9px]">{t("by")}</span>
 	<a
-		href={`/${currentLocale}/author/${cleanEntityId(author.slug).toLowerCase()}`}
+		href={authorPath}
 		class="capitalize leading-[140%] min-w-max transition-colors hover:opacity-80 font-inter font-bold tracking-normal"
 		aria-label={t("post.aria.author", { name: author.name })}
 	>

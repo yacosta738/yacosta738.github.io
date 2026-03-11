@@ -7,16 +7,22 @@ import Badge from "@/components/atoms/Badge.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import { getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
-import { LOCALES, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import { getLangFromUrl } from "@/i18n/utils";
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
+	ROUTE_LOCALES.map((lang) => ({
 		params: { lang },
 	}));
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as Lang;
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const categories = await getCategories({ lang });
 const allArticles = await getArticles();
@@ -46,13 +52,13 @@ const title = t("categories.title");
 					<p>{t("categories.description")}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={`/${lang}/search`}>
+					<a class="blog-pill" href={translatePath("/search")}>
 						{t("search.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog`}>
+					<a class="blog-pill" href={translatePath("/blog")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={`/${lang}/blog/tag`}>
+					<a class="blog-pill" href={translatePath("/blog/tag")}>
 						{t("tags.title")}
 					</a>
 				</div>
@@ -62,7 +68,7 @@ const title = t("categories.title");
 			{
 				categories.map((category) => (
 					<article class="group relative rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
-					<a href={`/${lang}/blog/category/${category.slug}`} class="block hover:no-underline">
+					<a href={translatePath(`/blog/category/${category.slug}`)} class="block hover:no-underline">
 							<div class="flex items-center gap-3">
 								<div class="flex-1">
 									<h3 class="text-lg font-medium text-foreground dark:text-foreground-dark">{category.title}</h3>

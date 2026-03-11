@@ -10,13 +10,19 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
-import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import { getBlogPostUrl } from "@/lib/blog-post.utils";
 
 // Get locale from params
 const { lang } = Astro.params;
 const currentLocale = lang as Lang;
 const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
 
 // Get and sort articles and external articles for the current language
 const allArticles = await getArticles();
@@ -31,14 +37,14 @@ const { featuredPosts, visiblePosts } = buildBlogListing({
 const title = t("blog.title");
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
+	ROUTE_LOCALES.map((lang) => ({
 		params: { lang },
 	}));
 
 const postsPerPage = 16;
 const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
-const basePath = `/${currentLocale}/blog/page`;
-const indexUrl = `/${currentLocale}/blog`;
+const basePath = translatePath("/blog/page");
+const indexUrl = translatePath("/blog");
 ---
 
 <Layout {title}>

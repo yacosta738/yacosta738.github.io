@@ -18,7 +18,7 @@ test("PostCategory renders with default props", async () => {
 	});
 
 	expect(result).toContain("Technology");
-	expect(result).toContain('href="/en/blog/category/technology/"');
+	expect(result).toContain('href="/blog/category/technology/"');
 });
 
 test("PostCategory renders with a different locale", async () => {

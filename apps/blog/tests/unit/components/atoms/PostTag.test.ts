@@ -18,7 +18,7 @@ test("PostTag renders with default props", async () => {
 	});
 
 	expect(result).toContain("Astro");
-	expect(result).toContain('href="/en/blog/tag/astro/"');
+	expect(result).toContain('href="/blog/tag/astro/"');
 });
 
 test("PostTag renders with a different locale", async () => {

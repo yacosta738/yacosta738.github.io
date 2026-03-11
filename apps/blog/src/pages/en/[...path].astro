@@ -1,0 +1,120 @@
+---
+import { getCollection } from "astro:content";
+import { buildBlogListing } from "@blog/lib/blog-listing";
+import { getAllArticlesIncludingExternal, getArticles } from "@/core/article";
+import { getCategories } from "@/core/category";
+import { getExternalArticles } from "@/core/external-article";
+import { getTags } from "@/core/tag";
+import { DEFAULT_LOCALE } from "@/i18n";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+	const normalizeRoute = (filePath: string): string | null => {
+		let route = filePath.replace(/^\.\.\//, "");
+		if (route.startsWith("en/")) {
+			route = route.slice("en/".length);
+		} else if (route.startsWith("[lang]/")) {
+			route = route.slice("[lang]/".length);
+		}
+
+		route = route.replace(/\.(astro|mdx|md)$/, "");
+		route = route.replace(/\/index$/, "");
+		route = route.replace(/^index$/, "");
+
+		if (!route || route.includes("[")) {
+			return null;
+		}
+
+		return route;
+	};
+
+	const localizedPages = Object.keys(
+		import.meta.glob("../en/**/*.{astro,mdx,md}"),
+	);
+	const langPages = Object.keys(
+		import.meta.glob("../[lang]/**/*.{astro,mdx,md}"),
+	);
+	const rootPages = Object.keys(import.meta.glob("../*.{astro,mdx,md}"));
+
+	const routes = new Set<string>();
+	[...localizedPages, ...langPages, ...rootPages].forEach((filePath) => {
+		const route = normalizeRoute(filePath);
+		if (route) {
+			routes.add(route);
+		}
+	});
+
+	const defaultLocale = DEFAULT_LOCALE;
+	const postsPerPage = 16;
+
+	const articles = await getCollection("articles", ({ id, data }) => {
+		return !data.draft && id.startsWith(`${defaultLocale}/`);
+	});
+	articles.forEach((post) => {
+		const slug = post.id.split("/").slice(1).join("/");
+		routes.add(`blog/${slug}`);
+	});
+
+	const allArticles = await getArticles();
+	const allExternalArticles = await getExternalArticles();
+	const { visiblePosts } = buildBlogListing({
+		articles: allArticles,
+		externalArticles: allExternalArticles,
+		locale: defaultLocale,
+	});
+	const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
+	for (let i = 2; i <= totalPages; i++) {
+		routes.add(`blog/page/${i}`);
+	}
+
+	const allArticlesIncludingExternal = await getAllArticlesIncludingExternal();
+
+	const tags = await getTags({ lang: defaultLocale });
+	for (const tag of tags) {
+		const tagArticles = allArticlesIncludingExternal.filter(
+			(article) =>
+				article.tags.some((tagItem) => tagItem.slug === tag.slug) &&
+				article.id.startsWith(`${defaultLocale}/`),
+		);
+		if (tagArticles.length === 0) continue;
+
+		routes.add(`blog/tag/${tag.slug}`);
+		const tagPages = Math.ceil(tagArticles.length / postsPerPage);
+		for (let i = 2; i <= tagPages; i++) {
+			routes.add(`blog/tag/${tag.slug}/page/${i}`);
+		}
+	}
+
+	const categories = await getCategories({ lang: defaultLocale });
+	for (const category of categories) {
+		const categoryArticles = allArticlesIncludingExternal.filter(
+			(article) =>
+				article.category?.slug === category.slug &&
+				article.id.startsWith(`${defaultLocale}/`),
+		);
+		if (categoryArticles.length === 0) continue;
+
+		routes.add(`blog/category/${category.slug}`);
+		const categoryPages = Math.ceil(categoryArticles.length / postsPerPage);
+		for (let i = 2; i <= categoryPages; i++) {
+			routes.add(`blog/category/${category.slug}/page/${i}`);
+		}
+	}
+
+	return Array.from(routes).map((route) => ({
+		params: {
+			path: route ? route.replace(/^\/+/, "") : undefined,
+		},
+	}));
+}
+
+return Astro.redirect(
+	(Array.isArray(Astro.params.path)
+		? `/${Astro.params.path.join("/")}`
+		: Astro.params.path
+			? `/${Astro.params.path}`
+			: "/") + new URL(Astro.request.url).search,
+	301,
+);
+---

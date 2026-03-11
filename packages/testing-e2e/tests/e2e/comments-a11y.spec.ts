@@ -11,7 +11,7 @@ import { expect, type Page, test } from "@playwright/test";
  * - Focus management
  */
 
-const BLOG_POST_URL = "/en/blog/";
+const BLOG_POST_URL = "/blog/";
 
 /**
  * Helper: Navigate to a blog post

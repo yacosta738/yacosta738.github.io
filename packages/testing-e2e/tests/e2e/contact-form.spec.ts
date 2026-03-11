@@ -3,7 +3,7 @@ import { mockResponses, selectors, testData } from "../fixtures";
 
 test.describe("Contact Form", () => {
 	const gotoContactSection = async (page: Page) => {
-		await page.goto("/en/#contact");
+		await page.goto("/#contact");
 		await page.waitForSelector(selectors.contact.form, { timeout: 30_000 });
 	};
 

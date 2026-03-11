@@ -22,6 +22,8 @@
 	"exclude": [
 		"dist",
 		"coverage",
+		"playwright-report",
+		"test-results",
 		"tests",
 		"tests/**",
 		"**/*.test.ts",

@@ -1,0 +1,86 @@
+---
+import BlogHero from "@blog/components/organisms/BlogHero.astro";
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
+import { buildBlogListing } from "@blog/lib/blog-listing";
+import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
+import Pagination from "@/components/molecules/Pagination.astro";
+import { getArticles } from "@/core/article";
+import { getExternalArticles } from "@/core/external-article";
+import {
+	DEFAULT_LOCALE,
+	type Lang,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
+
+export async function getStaticPaths() {
+	// Get all articles and external articles
+	const allArticles = await getArticles();
+	const allExternalArticles = await getExternalArticles();
+
+	const currentLocale: Lang = DEFAULT_LOCALE;
+	const { visiblePosts } = buildBlogListing({
+		articles: allArticles,
+		externalArticles: allExternalArticles,
+		locale: currentLocale,
+	});
+
+	const paths = [];
+	const postsPerPage = 16;
+	const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
+
+	// Only generate pages starting from page 2 (page 1 is handled by index.astro)
+	for (let i = 2; i <= totalPages; i++) {
+		const pagePosts = visiblePosts.slice(
+			(i - 1) * postsPerPage,
+			i * postsPerPage,
+		);
+
+		if (pagePosts.length === 0) continue;
+
+		paths.push({
+			params: {
+				page: i.toString(),
+			},
+			props: {
+				page: {
+					data: pagePosts,
+					currentPage: i,
+					lastPage: totalPages,
+				},
+			},
+		});
+	}
+
+	return paths;
+}
+
+const currentLocale: Lang = DEFAULT_LOCALE;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+
+const title = t("blog.title");
+const basePath = translatePath("/blog/page");
+const indexUrl = translatePath("/blog");
+const { page } = Astro.props;
+---
+
+<Layout title={title}>
+	<div class="container mx-auto px-4 blog-shell">
+		<BlogHero title={title} currentLocale={currentLocale} />
+		<BlogGridContainer class="blog-grid blog-stagger" posts={page.data} />
+
+		<Pagination
+			class="blog-pagination"
+			currentPage={page.currentPage}
+			lastPage={page.lastPage}
+			urlPrev={page.currentPage > 2 ? `${basePath}/${page.currentPage - 1}` : indexUrl}
+			urlNext={page.currentPage < page.lastPage ? `${basePath}/${page.currentPage + 1}` : null}
+			basePath={basePath}
+			maxDisplayedPages={5}
+			firstPageUrl={indexUrl}
+		/>
+	</div>
+	<Footer />
+</Layout>

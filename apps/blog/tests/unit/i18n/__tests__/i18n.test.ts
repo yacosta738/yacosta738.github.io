@@ -27,31 +27,7 @@ vi.mock("@/i18n/ui", () => ({
 	},
 }));
 
-vi.mock("../../../../../packages/shared/src/i18n/ui", () => ({
-	ui: {
-		en: {
-			hello: "Hello",
-			welcome: "Welcome {name}",
-			missing: "This exists in English",
-			repeat: "Hello {name}, {name}!",
-			complex: "Hello {name}, you are {age} years old.",
-		},
-		es: {
-			hello: "Hola",
-			welcome: "Bienvenido {name}",
-		},
-	},
-}));
-
 vi.mock("@/i18n/types", () => ({
-	DEFAULT_LOCALE: "en",
-	LOCALES: { en: "English", es: "Spanish" },
-	get SHOW_DEFAULT_LANG_IN_URL() {
-		return mockShowDefaultLang();
-	},
-}));
-
-vi.mock("../../../../../packages/shared/src/i18n/types", () => ({
 	DEFAULT_LOCALE: "en",
 	LOCALES: { en: "English", es: "Spanish" },
 	get SHOW_DEFAULT_LANG_IN_URL() {
@@ -155,6 +131,12 @@ describe("useTranslatedPath", () => {
 		expect(translatePath("/about", "en")).toBe("/about");
 	});
 
+	test("strips default language prefix when SHOW_DEFAULT_LANG_IN_URL is false", () => {
+		mockShowDefaultLang.mockReturnValue(false);
+		const translatePath = useTranslatedPath("en");
+		expect(translatePath("/en/about", "en")).toBe("/about");
+	});
+
 	test("when SHOW_DEFAULT_LANG_IN_URL is true, default language has prefix", () => {
 		mockShowDefaultLang.mockReturnValue(true);
 		const translatePath = useTranslatedPath("en");
@@ -186,7 +168,9 @@ describe("useTranslatedPath", () => {
 describe("getLocalePaths", () => {
 	// Mock getRelativeLocaleUrl from astro:i18n
 	vi.mock("astro:i18n", () => ({
-		getRelativeLocaleUrl: vi.fn((lang, path) => `/${lang}${path}`),
+		getRelativeLocaleUrl: vi.fn((lang, path) =>
+			lang === "en" ? path : `/${lang}${path}`,
+		),
 	}));
 
 	test("returns locale paths for all configured languages", () => {
@@ -219,7 +203,7 @@ describe("getLocalePaths", () => {
 		// Find the English path
 		const enPath = paths.find((p) => p.lang === "en");
 		expect(enPath).toBeDefined();
-		expect(enPath?.path).toBe("/en/about");
+		expect(enPath?.path).toBe("/about");
 	});
 
 	test("handles URLs without language prefix", () => {
@@ -237,11 +221,10 @@ describe("getLocalePaths", () => {
 });
 
 describe("localeParams", () => {
-	test("returns params for all configured languages", () => {
-		// Should have an entry for each language in LOCALES
-		expect(localeParams.length).toBe(
-			Object.keys(vi.mocked({ en: "English", es: "Spanish" })).length,
-		);
+	test("returns params for route locales when default lang is hidden", () => {
+		// Default locale should be excluded when SHOW_DEFAULT_LANG_IN_URL is false
+		const langs = localeParams.map((param) => param.params.lang);
+		expect(langs).toEqual(["es"]);
 
 		// Each entry should have a params object with a lang property
 		for (const param of localeParams) {
@@ -249,12 +232,5 @@ describe("localeParams", () => {
 			expect(param.params).toHaveProperty("lang");
 			expect(typeof param.params.lang).toBe("string");
 		}
-	});
-
-	test("includes all supported languages", () => {
-		// Check that specific languages are included
-		const langs = localeParams.map((param) => param.params.lang);
-		expect(langs).toContain("en");
-		expect(langs).toContain("es");
 	});
 });

@@ -13,7 +13,7 @@ test("TagBadge renders with correct link and text", async () => {
 	});
 
 	expect(result).toContain("JavaScript");
-	expect(result).toContain('href="/en/blog/tag/javascript"');
+	expect(result).toContain('href="/blog/tag/javascript"');
 });
 
 test("TagBadge applies correct variant and size", async () => {
@@ -29,6 +29,7 @@ test("TagBadge applies correct variant and size", async () => {
 	});
 
 	expect(result).toContain("React");
+	expect(result).toContain('href="/es/blog/tag/react"');
 	expect(result).toContain("badge-primary");
 	expect(result).toContain("px-4 py-1.5 text-sm");
 });

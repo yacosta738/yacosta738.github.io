@@ -4,10 +4,10 @@ import { selectors } from "../fixtures";
 test.describe("Tag Pages with External Articles", () => {
 	test("should display the 'r' tag page in English", async ({ page }) => {
 		// Navigate to the tag page for 'r' in English
-		await page.goto("/en/blog/tag/r");
+		await page.goto("/blog/tag/r");
 
 		// Verify page loaded successfully
-		await expect(page).toHaveURL("/en/blog/tag/r");
+		await expect(page).toHaveURL("/blog/tag/r");
 
 		// Check for page heading - use specific selector to avoid capturing Playwright DevTools h1
 		const heading = page.locator("main h1, article h1, .container h1").first();
@@ -44,7 +44,7 @@ test.describe("Tag Pages with External Articles", () => {
 
 	test("should include external articles in tag results", async ({ page }) => {
 		// Navigate to tag page that has external articles
-		await page.goto("/en/blog/tag/r");
+		await page.goto("/blog/tag/r");
 
 		// Wait for articles to load
 		await page.waitForSelector(selectors.blog.articleTitle, {
@@ -67,10 +67,10 @@ test.describe("Tag Pages with External Articles", () => {
 	});
 
 	test("should filter articles correctly by tag", async ({ page }) => {
-		await page.goto("/en/blog/tag/r");
+		await page.goto("/blog/tag/r");
 
 		// Get all article links
-		const articleLinks = page.locator('a[href^="/en/blog/"]');
+		const articleLinks = page.locator('a[href^="/blog/"]');
 		const linkCount = await articleLinks.count();
 
 		// Should have at least one link to an article
@@ -80,7 +80,7 @@ test.describe("Tag Pages with External Articles", () => {
 	test("should handle pagination if tag has many articles", async ({
 		page,
 	}) => {
-		await page.goto("/en/blog/tag/r");
+		await page.goto("/blog/tag/r");
 
 		// Check if pagination exists
 		const paginationNav = page.locator(selectors.blog.paginationNav);
@@ -115,7 +115,7 @@ test.describe("Tag Pages with External Articles", () => {
 	});
 
 	test("should have correct meta information", async ({ page }) => {
-		await page.goto("/en/blog/tag/r");
+		await page.goto("/blog/tag/r");
 
 		// Check page title
 		await expect(page).toHaveTitle(/tag/i);
@@ -143,7 +143,7 @@ test.describe("Tag Pages with External Articles", () => {
 		page,
 	}) => {
 		// This test verifies that the combined API works correctly
-		await page.goto("/en/blog/tag/r");
+		await page.goto("/blog/tag/r");
 
 		// Wait for articles to render
 		await page.waitForSelector(selectors.blog.articleTitle, {

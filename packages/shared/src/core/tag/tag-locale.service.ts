@@ -7,8 +7,9 @@
  * @module TagLocaleService
  */
 
-import type { Lang } from "@/i18n/types";
-import { LOCALES } from "@/i18n/types";
+import { routes } from "@/configs/route.path";
+import { type Lang, LOCALES } from "@/i18n/types";
+import { buildLocalePath } from "../../i18n/path";
 import type Tag from "./tag.model";
 import { getTags } from "./tag.service";
 
@@ -41,13 +42,16 @@ export type TagLocaleResult = {
  * if (result.found) {
  *   console.log(`Found: ${result.tag.slug}`); // "security"
  * } else {
- *   console.log(`Fallback to: ${result.fallbackPath}`); // "/es/tag"
+ *   console.log(`Fallback to: ${result.fallbackPath}`); // "/es/blog/tag"
  * }
  */
 export async function findTagInLanguage(
 	sourceTagSlug: string,
 	targetLang: Lang,
 ): Promise<TagLocaleResult> {
+	const tagBasePath = `/${routes.tag}`;
+	const resolvePath = (lang: Lang, path: string) => buildLocalePath(path, lang);
+
 	try {
 		// Get all tags in the target language
 		const targetTags = await getTags({ lang: targetLang });
@@ -59,21 +63,24 @@ export async function findTagInLanguage(
 			return {
 				found: true,
 				tag: matchingTag,
-				fallbackPath: `/${targetLang}/tag/${matchingTag.slug}`,
+				fallbackPath: resolvePath(
+					targetLang,
+					`${tagBasePath}/${matchingTag.slug}`,
+				),
 			};
 		}
 
 		// No matching tag found - provide fallback to tags index
 		return {
 			found: false,
-			fallbackPath: `/${targetLang}/tag`,
+			fallbackPath: resolvePath(targetLang, tagBasePath),
 		};
 	} catch (error) {
 		console.error(`Error finding tag in language ${targetLang}:`, error);
 		// On error, fallback to tags index
 		return {
 			found: false,
-			fallbackPath: `/${targetLang}/tag`,
+			fallbackPath: resolvePath(targetLang, tagBasePath),
 		};
 	}
 }
@@ -91,8 +98,8 @@ export async function findTagInLanguage(
  * const paths = await getTagLocalePaths('security', 'en', ['en', 'es']);
  * // Returns:
  * // [
- * //   { lang: 'en', path: '/en/tag/security', tagFound: true },
- * //   { lang: 'es', path: '/es/tag/security', tagFound: true }
+ * //   { lang: 'en', path: '/blog/tag/security', tagFound: true },
+ * //   { lang: 'es', path: '/es/blog/tag/security', tagFound: true }
  * // ]
  */
 export async function getTagLocalePaths(
@@ -100,6 +107,9 @@ export async function getTagLocalePaths(
 	currentLang: Lang,
 	availableLanguages: string[],
 ): Promise<Array<{ lang: string; path: string; tagFound: boolean }>> {
+	const tagBasePath = `/${routes.tag}`;
+	const tagSlugPath = `${tagBasePath}/${currentTagSlug}`;
+	const resolvePath = (lang: Lang, path: string) => buildLocalePath(path, lang);
 	const paths = [];
 
 	for (const lang of availableLanguages) {
@@ -107,7 +117,7 @@ export async function getTagLocalePaths(
 			// Current language - keep the same path
 			paths.push({
 				lang,
-				path: `/${lang}/tag/${currentTagSlug}`,
+				path: resolvePath(currentLang, tagSlugPath),
 				tagFound: true,
 			});
 		} else {
@@ -115,7 +125,7 @@ export async function getTagLocalePaths(
 			if (!isLang(lang)) {
 				paths.push({
 					lang,
-					path: `/${currentLang}/tag/${currentTagSlug}`,
+					path: resolvePath(currentLang, tagSlugPath),
 					tagFound: false,
 				});
 				continue;

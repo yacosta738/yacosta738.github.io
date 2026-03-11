@@ -30,29 +30,27 @@ describe("Search Page", () => {
 
 	describe("URL Query Parameter Handling", () => {
 		it("should correctly extract query parameter from URL", () => {
-			const url = new URL("https://example.com/en/search?q=typescript");
+			const url = new URL("https://example.com/search?q=typescript");
 			const query = url.searchParams.get("q");
 			expect(query).toBe("typescript");
 		});
 
 		it("should handle empty query parameter", () => {
-			const url = new URL("https://example.com/en/search");
+			const url = new URL("https://example.com/search");
 			const query = url.searchParams.get("q") || "";
 			expect(query).toBe("");
 		});
 
 		it("should handle special characters in query", () => {
 			const url = new URL(
-				"https://example.com/en/search?q=test%20search%20%26%20more",
+				"https://example.com/search?q=test%20search%20%26%20more",
 			);
 			const query = url.searchParams.get("q");
 			expect(query).toBe("test search & more");
 		});
 
 		it("should handle URL-encoded special characters", () => {
-			const url = new URL(
-				'https://example.com/en/search?q=test"quote%27single',
-			);
+			const url = new URL('https://example.com/search?q=test"quote%27single');
 			const query = url.searchParams.get("q");
 			expect(query).toBe("test\"quote'single");
 		});

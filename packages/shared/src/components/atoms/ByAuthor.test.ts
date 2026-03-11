@@ -9,7 +9,7 @@ const mockAuthor = {
 	avatar: "https://example.com/avatar.png",
 	description: "A test author",
 	social: [],
-	route: "/en/authors/johndoe",
+	route: "/author/johndoe",
 };
 
 test("ByAuthor renders with default props", async () => {
@@ -22,7 +22,7 @@ test("ByAuthor renders with default props", async () => {
 	});
 
 	expect(result).toContain("John Doe");
-	expect(result).toContain('href="/en/author/johndoe"');
+	expect(result).toContain('href="/author/johndoe"');
 });
 
 test("ByAuthor renders with a different locale", async () => {

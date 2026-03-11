@@ -1,0 +1,56 @@
+---
+export const prerender = true;
+
+export async function getStaticPaths() {
+	const normalizeRoute = (filePath: string): string | null => {
+		let route = filePath.replace(/^\.\.\//, "");
+		if (route.startsWith("en/")) {
+			route = route.slice("en/".length);
+		} else if (route.startsWith("[lang]/")) {
+			route = route.slice("[lang]/".length);
+		}
+
+		route = route.replace(/\.(astro|mdx|md)$/, "");
+		route = route.replace(/\/index$/, "");
+		route = route.replace(/^index$/, "");
+
+		if (!route || route.includes("[")) {
+			return null;
+		}
+
+		return route;
+	};
+
+	const langPages = Object.keys(
+		import.meta.glob("../[lang]/**/*.{astro,mdx,md}"),
+	);
+	const rootPages = Object.keys(import.meta.glob("../**/*.{astro,mdx,md}"));
+	const extraRoutes = ["projects/case-study"];
+
+	const routes = new Set<string>();
+	[...langPages, ...rootPages].forEach((filePath) => {
+		const route = normalizeRoute(filePath);
+		if (route) {
+			routes.add(route);
+		}
+	});
+	for (const route of extraRoutes) {
+		routes.add(route);
+	}
+
+	return Array.from(routes).map((route) => ({
+		params: {
+			path: route ? route.replace(/^\/+/, "") : undefined,
+		},
+	}));
+}
+
+return Astro.redirect(
+	Array.isArray(Astro.params.path)
+		? `/${Astro.params.path.join("/")}`
+		: Astro.params.path
+			? `/${Astro.params.path}`
+			: "/",
+	301,
+);
+---

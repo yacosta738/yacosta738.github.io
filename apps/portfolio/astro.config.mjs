@@ -36,7 +36,7 @@ export default defineConfig({
 		defaultLocale: DEFAULT_LOCALE_SETTING,
 		locales: Object.keys(LOCALES_SETTING),
 		routing: {
-			prefixDefaultLocale: true,
+			prefixDefaultLocale: false,
 			redirectToDefaultLocale: false,
 		},
 	},
@@ -59,6 +59,13 @@ export default defineConfig({
 		sitemap({
 			filter: (page) => {
 				const pathname = new URL(page).pathname;
+				const defaultLocalePrefix = `/${DEFAULT_LOCALE_SETTING}`;
+				if (
+					pathname === defaultLocalePrefix ||
+					pathname.startsWith(`${defaultLocalePrefix}/`)
+				) {
+					return false;
+				}
 				// Exclude admin, api, and search pages from sitemap
 				const excludedPaths = ["/admin/", "/admin", "/search", "/404"];
 				return !excludedPaths.some((path) => pathname.includes(path));
@@ -76,12 +83,18 @@ export default defineConfig({
 			serialize(item) {
 				const url = new URL(item.url);
 				const pathname = url.pathname;
+				const localeHomePaths = new Set(["/"]);
+				Object.keys(LOCALES_SETTING).forEach((locale) => {
+					if (locale === DEFAULT_LOCALE_SETTING) return;
+					localeHomePaths.add(`/${locale}`);
+					localeHomePaths.add(`/${locale}/`);
+				});
 
 				// Set lastmod to current date for dynamic content
 				item.lastmod = new Date();
 
 				// Homepage - highest priority
-				if (pathname === "/" || pathname.match(/^\/(en|es)\/?$/)) {
+				if (localeHomePaths.has(pathname)) {
 					item.changefreq = "weekly";
 					item.priority = 1;
 					return item;

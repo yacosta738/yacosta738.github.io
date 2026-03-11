@@ -1,5 +1,6 @@
 ---
 import { routes } from "@/configs/route.path";
+import { type Lang, useTranslatedPath } from "@/i18n";
 /**
  * TagBadge component.
  * A reusable badge component for displaying tags with links.
@@ -17,7 +18,7 @@ import Badge from "./Badge.astro";
 export interface Props {
 	title: string;
 	slug: string;
-	lang: string;
+	lang: Lang;
 	variant?: "primary" | "secondary" | "accent";
 	size?: "sm" | "md" | "lg";
 	class?: string;
@@ -31,9 +32,12 @@ const {
 	size = "md",
 	class: className = "",
 } = Astro.props;
+
+const translatePath = useTranslatedPath(lang);
+const tagPath = translatePath(`/${routes.tag}/${slug}`);
 ---
 
-<a href={`/${lang}/${routes.tag}/${slug}`}>
+<a href={tagPath}>
 	<Badge
 		{variant}
 		{size}

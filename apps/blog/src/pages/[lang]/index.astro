@@ -1,21 +1,23 @@
 ---
-import { type Lang, localeParams } from "@/i18n";
+import { type Lang, localeRouteParams, useTranslatedPath } from "@/i18n";
 
 export function getStaticPaths() {
-	return localeParams;
+	return localeRouteParams;
 }
 
 const locale = Astro.params.lang as Lang;
+const translatePath = useTranslatedPath(locale);
+const blogPath = translatePath("/blog");
 ---
 <!doctype html>
 <html lang={locale}>
   <head>
-    <meta http-equiv="refresh" content={`0;url=/${locale}/blog`} />
+    <meta http-equiv="refresh" content={`0;url=${blogPath}`} />
     <title>Redirecting to blog...</title>
   </head>
   <body>
     <div style="display: flex; align-items: center; justify-content: center; min-height: 50vh;">
-      <p>Redirecting to <a href={`/${locale}/blog`} style="color: blue; text-decoration: underline;">blog</a>...</p>
+      <p>Redirecting to <a href={blogPath} style="color: blue; text-decoration: underline;">blog</a>...</p>
     </div>
   </body>
 </html>

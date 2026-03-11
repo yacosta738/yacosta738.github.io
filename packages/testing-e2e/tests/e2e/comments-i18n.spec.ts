@@ -16,7 +16,8 @@ async function navigateToBlogPost(
 	page: Page,
 	locale: "en" | "es" = "en",
 ): Promise<void> {
-	await page.goto(`/${locale}/blog/`);
+	const prefix = locale === "en" ? "" : `/${locale}`;
+	await page.goto(`${prefix}/blog/`);
 	const firstPostLink = page.locator('article a[href*="/blog/"]').first();
 	await expect(firstPostLink).toBeVisible();
 	await firstPostLink.click();
@@ -95,7 +96,7 @@ test.describe("Comments Internationalization - English", () => {
 		await navigateToBlogPost(page, "en");
 
 		// Verify we're on English version
-		await expect(page).toHaveURL(/\/en\//);
+		await expect(page).toHaveURL(/\/blog\//);
 
 		// Check comments heading in English
 		const heading = page.locator("#comments-heading");

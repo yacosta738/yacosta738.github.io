@@ -39,7 +39,7 @@ test.describe("Search Page", () => {
 	test("should display empty or no results state for invalid query", async ({
 		page,
 	}) => {
-		await page.goto("/en/search?q=nonexistentquerythatdoesnotexist12345");
+		await page.goto("/search?q=nonexistentquerythatdoesnotexist12345");
 
 		// Wait for Pagefind UI to initialize
 		await waitForPagefindUI(page);
@@ -75,7 +75,7 @@ test.describe("Search Page", () => {
 	test("should update results when query is changed", async ({ page }) => {
 		// Start from a query that should reliably produce an empty state,
 		// then switch to a known query and assert results appear.
-		await page.goto("/en/search?q=nonexistentquerythatdoesnotexist12345");
+		await page.goto("/search?q=nonexistentquerythatdoesnotexist12345");
 
 		// Wait for Pagefind UI to initialize
 		const input = await waitForPagefindUI(page);
@@ -111,7 +111,7 @@ test.describe("Search Page", () => {
 	});
 
 	test("should handle clearing query", async ({ page }) => {
-		await page.goto("/en/search?q=astro");
+		await page.goto("/search?q=astro");
 
 		// Wait for Pagefind UI to initialize
 		const input = await waitForPagefindUI(page);
