@@ -26,5 +26,5 @@
 
 ## Phase 4: Cleanup and Documentation
 
-- [ ] 4.1 Update `apps/blog/tests/README.md` and `apps/portfolio/tests/README.md` with any new e2e test instructions if required.
-- [ ] 4.2 Run unit tests for i18n helpers in both apps and verify default-locale routing manually in a build preview.
+- [x] 4.1 Update `apps/blog/tests/README.md` and `apps/portfolio/tests/README.md` with any new e2e test instructions if required.
+- [x] 4.2 Run unit tests for i18n helpers in both apps and verify default-locale routing manually in a build preview.

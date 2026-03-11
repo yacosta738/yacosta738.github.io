@@ -183,6 +183,7 @@ export default defineConfig({
 		// Critical CSS inlining for better PageSpeed scores
 		// This inlines above-the-fold CSS and lazy-loads the rest
 		critters({
+			Critters: false,
 			// Only inline critical CSS to reduce render-blocking
 			pruneSource: false,
 			// Use media attribute for non-critical CSS (print trick)
@@ -191,6 +192,8 @@ export default defineConfig({
 			inlineFonts: false,
 			// Remove unused CSS selectors
 			reduceInlineStyles: true,
+			// Skip legacy redirect pages under /en/
+			Exclude: [/\/en\//],
 		}),
 	],
 

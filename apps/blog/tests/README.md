@@ -106,11 +106,14 @@ pnpm test:e2e:codegen
 
 ## 📁 Test Structure
 
+E2E specs are shared in `packages/testing-e2e/tests/e2e` and executed from each app's Playwright config.
+
 ```
 tests/
 ├── e2e/
 │   ├── blog-pagination.spec.ts    # Blog navigation & pagination
 │   ├── contact-form.spec.ts       # Contact form submission
+│   ├── i18n-default-locale-redirects-blog.spec.ts # /en/* -> unprefixed redirects
 │   ├── download-cv.spec.ts        # CV download functionality
 │   ├── newsletter.spec.ts         # Newsletter subscription
 ├── fixtures/
