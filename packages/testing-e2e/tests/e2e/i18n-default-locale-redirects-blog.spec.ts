@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
 
+function escapeRegExp(str: string): string {
+	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+}
+
 test.describe("Default locale legacy redirects - blog", () => {
 	test.beforeEach(({ baseURL }, testInfo) => {
 		testInfo.skip(
@@ -34,7 +38,7 @@ test.describe("Default locale legacy redirects - blog", () => {
 
 		for (const { from, to } of cases) {
 			await page.goto(from, { waitUntil: "domcontentloaded" });
-			const expected = new RegExp(`${to.replace(/\//g, "\\/")}\\/?$`);
+			const expected = new RegExp(`${escapeRegExp(to)}\\/?$`);
 			await expect(page).toHaveURL(expected);
 		}
 	});
