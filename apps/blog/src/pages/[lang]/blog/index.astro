@@ -10,7 +10,12 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
-import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import { getBlogPostUrl } from "@/lib/blog-post.utils";
 
 // Get locale from params
@@ -32,7 +37,7 @@ const { featuredPosts, visiblePosts } = buildBlogListing({
 const title = t("blog.title");
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
+	ROUTE_LOCALES.map((lang) => ({
 		params: { lang },
 	}));
 

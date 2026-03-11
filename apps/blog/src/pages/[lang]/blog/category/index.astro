@@ -7,11 +7,16 @@ import Badge from "@/components/atoms/Badge.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import { getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
-import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import { getLangFromUrl } from "@/i18n/utils";
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
+	ROUTE_LOCALES.map((lang) => ({
 		params: { lang },
 	}));
 

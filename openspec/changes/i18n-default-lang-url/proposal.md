@@ -35,7 +35,7 @@ Adopt the Astro-native unprefixed default locale by setting `prefixDefaultLocale
 
 | Risk | Likelihood | Mitigation |
 |------|------------|------------|
-| Default-locale routes 404 if `[lang]` pages don"t map to unprefixed paths | Medium | Add explicit default-locale routes or redirects; validate with tests. |
+| Default-locale routes 404 if `[lang]` pages don't map to unprefixed paths | Medium | Add explicit default-locale routes or redirects; validate with tests. |
 | SEO regressions from URL changes | Medium | Add redirects from `/en/...` to `/...`, update canonical/alternate links and sitemap outputs if applicable. |
 | Inconsistent behavior across apps | Low | Apply changes to both apps in the same change and verify. |
 

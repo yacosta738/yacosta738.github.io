@@ -109,9 +109,12 @@ export async function getStaticPaths() {
 	}));
 }
 
-const { path } = Astro.params;
-const normalizedPath = Array.isArray(path) ? path.join("/") : (path ?? "");
-const target = normalizedPath ? `/${normalizedPath}` : "/";
-
-return Astro.redirect(target, 301);
+return Astro.redirect(
+	(Array.isArray(Astro.params.path)
+		? `/${Astro.params.path.join("/")}`
+		: Astro.params.path
+			? `/${Astro.params.path}`
+			: "/") + new URL(Astro.request.url).search,
+	301,
+);
 ---

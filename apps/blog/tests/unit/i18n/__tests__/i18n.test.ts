@@ -221,11 +221,10 @@ describe("getLocalePaths", () => {
 });
 
 describe("localeParams", () => {
-	test("returns params for all configured languages", () => {
-		// Should have an entry for each language in LOCALES
-		expect(localeParams.length).toBe(
-			Object.keys(vi.mocked({ en: "English", es: "Spanish" })).length,
-		);
+	test("returns params for route locales when default lang is hidden", () => {
+		// Default locale should be excluded when SHOW_DEFAULT_LANG_IN_URL is false
+		const langs = localeParams.map((param) => param.params.lang);
+		expect(langs).toEqual(["es"]);
 
 		// Each entry should have a params object with a lang property
 		for (const param of localeParams) {
@@ -233,12 +232,5 @@ describe("localeParams", () => {
 			expect(param.params).toHaveProperty("lang");
 			expect(typeof param.params.lang).toBe("string");
 		}
-	});
-
-	test("includes all supported languages", () => {
-		// Check that specific languages are included
-		const langs = localeParams.map((param) => param.params.lang);
-		expect(langs).toContain("en");
-		expect(langs).toContain("es");
 	});
 });

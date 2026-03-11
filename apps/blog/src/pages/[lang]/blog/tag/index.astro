@@ -6,11 +6,16 @@ import Layout from "@blog/layouts/Layout.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import TagBadges from "@/components/molecules/TagBadges.astro";
 import { getTags } from "@/core/tag";
-import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 import { getLangFromUrl } from "@/i18n/utils";
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
+	ROUTE_LOCALES.map((lang) => ({
 		params: { lang },
 	}));
 
@@ -18,7 +23,7 @@ const lang = getLangFromUrl(Astro.url) as Lang;
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-const tags = await getTags({ lang: lang as Lang });
+const tags = await getTags({ lang });
 
 const title = t("tags.title");
 ---

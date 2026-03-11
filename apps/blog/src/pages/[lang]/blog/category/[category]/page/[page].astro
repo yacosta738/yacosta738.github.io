@@ -8,14 +8,19 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
-import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 
 export async function getStaticPaths() {
 	const paths = [];
 	const allArticles = await getArticles();
 	const postsPerPage = 16;
 
-	for (const lang of Object.keys(LOCALES)) {
+	for (const lang of ROUTE_LOCALES) {
 		const categories = await getCategories({ lang: lang as Lang });
 		for (const category of categories) {
 			const categoryArticles = allArticles

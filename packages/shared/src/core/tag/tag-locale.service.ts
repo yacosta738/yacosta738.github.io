@@ -8,12 +8,8 @@
  */
 
 import { routes } from "@/configs/route.path";
-import {
-	DEFAULT_LOCALE,
-	type Lang,
-	LOCALES,
-	SHOW_DEFAULT_LANG_IN_URL,
-} from "@/i18n/types";
+import { type Lang, LOCALES } from "@/i18n/types";
+import { buildLocalePath } from "../../i18n/path";
 import type Tag from "./tag.model";
 import { getTags } from "./tag.service";
 
@@ -21,29 +17,6 @@ export { extractTagSlugFromPath, isTagPage } from "./tag-locale.utils";
 
 const isLang = (value: string): value is Lang => {
 	return Object.hasOwn(LOCALES, value);
-};
-
-const translatePath = (path: string, targetLang: Lang): string => {
-	const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-	const defaultLangPrefixRegex = new RegExp(`^/${DEFAULT_LOCALE}(?:/|$)`);
-	const normalizedWithoutDefaultPrefix = normalizedPath.replace(
-		defaultLangPrefixRegex,
-		"/",
-	);
-
-	const langPrefixRegex = new RegExp(`^/${targetLang}/`);
-	if (langPrefixRegex.test(normalizedPath)) {
-		if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
-			return normalizedWithoutDefaultPrefix;
-		}
-		return normalizedPath;
-	}
-
-	if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
-		return normalizedWithoutDefaultPrefix;
-	}
-
-	return `/${targetLang}${normalizedPath}`;
 };
 
 /**
@@ -77,7 +50,7 @@ export async function findTagInLanguage(
 	targetLang: Lang,
 ): Promise<TagLocaleResult> {
 	const tagBasePath = `/${routes.tag}`;
-	const resolvePath = (lang: Lang, path: string) => translatePath(path, lang);
+	const resolvePath = (lang: Lang, path: string) => buildLocalePath(path, lang);
 
 	try {
 		// Get all tags in the target language
@@ -136,7 +109,7 @@ export async function getTagLocalePaths(
 ): Promise<Array<{ lang: string; path: string; tagFound: boolean }>> {
 	const tagBasePath = `/${routes.tag}`;
 	const tagSlugPath = `${tagBasePath}/${currentTagSlug}`;
-	const resolvePath = (lang: Lang, path: string) => translatePath(path, lang);
+	const resolvePath = (lang: Lang, path: string) => buildLocalePath(path, lang);
 	const paths = [];
 
 	for (const lang of availableLanguages) {

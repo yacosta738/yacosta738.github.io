@@ -1,3 +1,5 @@
+# OpenSpec configuration for Spec-Driven Development (SDD).
+# schema: spec-driven (intended for OpenSpec tooling; currently a config-only placeholder).
 schema: spec-driven
 
 context: |
@@ -22,7 +24,7 @@ rules:
     - Keep tasks small enough to complete in one session
   apply:
     - Follow existing code patterns and conventions
-    - Load relevant coding skills for the project stack
+    - Identify stack languages/frameworks and versions; review key docs/diagrams; link starter templates/linters/configs; list owners/mentors per skill
   verify:
     - Run tests if test infrastructure exists
     - Compare implementation against every spec scenario

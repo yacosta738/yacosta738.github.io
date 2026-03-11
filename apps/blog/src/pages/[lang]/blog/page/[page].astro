@@ -9,7 +9,12 @@ import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
-import { type Lang, LOCALES, useTranslatedPath, useTranslations } from "@/i18n";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
 
 export async function getStaticPaths() {
 	// Get all articles and external articles
@@ -20,7 +25,7 @@ export async function getStaticPaths() {
 	const paths = [];
 
 	// Generate paths for all supported languages
-	for (const lang of Object.keys(LOCALES)) {
+	for (const lang of ROUTE_LOCALES) {
 		const { visiblePosts } = buildBlogListing({
 			articles: allArticles,
 			externalArticles: allExternalArticles,

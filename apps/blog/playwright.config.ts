@@ -63,6 +63,8 @@ export default defineConfig({
 			url: `http://localhost:${e2ePort}`,
 			cwd: appDir,
 			timeout: 600_000,
+			// CI runs expect a fresh preview server. For local parallel runs,
+			// set E2E_PORT per run or flip reuseExistingServer to true.
 			reuseExistingServer: false,
 			env: { PLAYWRIGHT_TEST: "true" },
 			stdout: "pipe",

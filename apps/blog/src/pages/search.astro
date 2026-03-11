@@ -2,9 +2,6 @@
 import Layout from "@blog/layouts/Layout.astro";
 import { DEFAULT_LOCALE, type Lang, useTranslations } from "@/i18n";
 
-const url = new URL(Astro.request.url);
-const initialQuery = url.searchParams.get("q") || "";
-
 const locale: Lang = DEFAULT_LOCALE;
 const t = useTranslations(locale);
 
@@ -36,10 +33,9 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 					class="w-full"
 					role="region"
 					aria-label="Search results"
-					data-initial-query={initialQuery}
 					data-empty-title={t("search.empty.title")}
-					data-empty-message={t("search.empty.message", {
-						query: initialQuery,
+					data-empty-message-template={t("search.empty.message", {
+						query: "__QUERY__",
 					})}
 				></div>
 			</div>
@@ -307,7 +303,18 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 </style>
 <script>
 	const CLEANUP_KEY = "__searchPageCleanup";
-	const cleanupStore = window as typeof window & Record<string, (() => void) | undefined>;
+	const HANDLERS_KEY = "__searchPageHandlers";
+	const cleanupStore = window as typeof window &
+		Record<string, (() => void) | undefined>;
+	const handlerStore = window as typeof window &
+		Record<
+			string,
+			| {
+					pageLoad?: () => void;
+					beforePreparation?: () => void;
+				}
+			| undefined
+		>;
 
 	const cleanupSearchPage = () => {
 		const currentCleanup = cleanupStore[CLEANUP_KEY];
@@ -315,11 +322,21 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 			currentCleanup();
 			cleanupStore[CLEANUP_KEY] = undefined;
 		}
+
+		const handlers = handlerStore[HANDLERS_KEY];
+		if (handlers?.pageLoad) {
+			document.removeEventListener("astro:page-load", handlers.pageLoad);
+		}
+		if (handlers?.beforePreparation) {
+			document.removeEventListener(
+				"astro:before-preparation",
+				handlers.beforePreparation,
+			);
+		}
+		handlerStore[HANDLERS_KEY] = undefined;
 	};
 
 	const initSearchPage = async () => {
-		cleanupSearchPage();
-
 		const PagefindUI = (window as any).PagefindUI;
 		if (typeof PagefindUI !== "function") {
 			console.warn(
@@ -348,7 +365,8 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 		const searchContainer = document.getElementById("search");
 		const emptyTitle = searchContainer?.dataset.emptyTitle || "No results";
 		const emptyMessageTemplate =
-			searchContainer?.dataset.emptyMessage || 'No results for "{query}".';
+			searchContainer?.dataset.emptyMessageTemplate ||
+			'No results found for "__QUERY__".';
 
 		let resultsObserver: MutationObserver | null = null;
 		let intervalId: number | null = null;
@@ -373,7 +391,7 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 			title.textContent = emptyTitle;
 
 			const message = document.createElement("p");
-			message.textContent = emptyMessageTemplate.replace("{query}", query);
+			message.textContent = emptyMessageTemplate.replace("__QUERY__", query);
 
 			node.replaceChildren(title, message);
 		};
@@ -501,6 +519,17 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 		};
 	};
 
-	document.addEventListener("astro:page-load", initSearchPage);
-	document.addEventListener("astro:before-preparation", cleanupSearchPage);
+	cleanupSearchPage();
+	const handlePageLoad = () => {
+		void initSearchPage();
+	};
+	const handleBeforePreparation = () => cleanupSearchPage();
+	
+	handlerStore[HANDLERS_KEY] = {
+		pageLoad: handlePageLoad,
+		beforePreparation: handleBeforePreparation,
+	};
+
+	document.addEventListener("astro:page-load", handlePageLoad);
+	document.addEventListener("astro:before-preparation", handleBeforePreparation);
 </script>

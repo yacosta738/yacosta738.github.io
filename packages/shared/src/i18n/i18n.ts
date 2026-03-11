@@ -4,6 +4,7 @@ import {
 	getTagLocalePaths,
 	isTagPage,
 } from "@/core/tag";
+import { buildLocalePath } from "./path";
 import {
 	DEFAULT_LOCALE,
 	type Lang,
@@ -32,31 +33,7 @@ import { useTranslations } from "./utils";
  */
 export function useTranslatedPath(lang: Lang) {
 	return function translatePath(path: string, targetLang: Lang = lang): string {
-		// Ensure path starts with a slash
-		const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-		const defaultLangPrefixRegex = new RegExp(`^/${DEFAULT_LOCALE}(?:/|$)`);
-		const normalizedWithoutDefaultPrefix = normalizedPath.replace(
-			defaultLangPrefixRegex,
-			"/",
-		);
-
-		// Check if path already starts with the target language prefix
-		const langPrefixRegex = new RegExp(`^/${targetLang}/`);
-		if (langPrefixRegex.test(normalizedPath)) {
-			// Path already has the language prefix, return as is
-			if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
-				return normalizedWithoutDefaultPrefix;
-			}
-			return normalizedPath;
-		}
-
-		// For default language, we might not show the language prefix based on config
-		if (!SHOW_DEFAULT_LANG_IN_URL && targetLang === DEFAULT_LOCALE) {
-			return normalizedWithoutDefaultPrefix;
-		}
-
-		// For other languages, or if we always show the language prefix
-		return `/${targetLang}${normalizedPath}`;
+		return buildLocalePath(path, targetLang);
 	};
 }
 
@@ -172,6 +149,16 @@ type LocalePath = {
  * @see https://docs.astro.build/en/guides/routing/#dynamic-routes
  */
 export const localeParams = Object.keys(LOCALES).map((lang) => ({
+	params: { lang },
+}));
+
+const ROUTE_LOCALE_KEYS = Object.keys(LOCALES) as Lang[];
+
+export const ROUTE_LOCALES: Lang[] = SHOW_DEFAULT_LANG_IN_URL
+	? ROUTE_LOCALE_KEYS
+	: ROUTE_LOCALE_KEYS.filter((lang) => lang !== DEFAULT_LOCALE);
+
+export const localeRouteParams = ROUTE_LOCALES.map((lang) => ({
 	params: { lang },
 }));
 

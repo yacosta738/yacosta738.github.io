@@ -3,13 +3,15 @@
 
 import ProjectsTable from "@/components/organisms/ProjectsTable.astro";
 import { getAllProjects } from "@/core/resume/project/project.service";
-import { type Lang, LOCALES, useTranslations } from "@/i18n";
+import { DEFAULT_LOCALE, type Lang, LOCALES, useTranslations } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 
 export const getStaticPaths = () =>
-	Object.keys(LOCALES).map((lang) => ({
-		params: { lang },
-	}));
+	Object.keys(LOCALES)
+		.filter((lang) => lang !== DEFAULT_LOCALE)
+		.map((lang) => ({
+			params: { lang },
+		}));
 
 const currentLocale = Astro.params.lang as Lang;
 

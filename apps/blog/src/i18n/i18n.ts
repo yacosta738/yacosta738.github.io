@@ -33,6 +33,12 @@ export function useTranslatedPath(lang: Lang) {
 	};
 }
 
-export const localeParams = Object.keys(LOCALES).map((langKey) => ({
-	params: { lang: langKey },
+const ROUTE_LOCALE_KEYS = Object.keys(LOCALES) as Lang[];
+
+export const ROUTE_LOCALES: Lang[] = SHOW_DEFAULT_LANG_IN_URL
+	? ROUTE_LOCALE_KEYS
+	: ROUTE_LOCALE_KEYS.filter((lang) => lang !== DEFAULT_LOCALE);
+
+export const localeParams = ROUTE_LOCALES.map((lang) => ({
+	params: { lang },
 }));

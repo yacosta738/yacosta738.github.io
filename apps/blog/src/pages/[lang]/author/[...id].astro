@@ -6,14 +6,17 @@ import Layout from "@blog/layouts/Layout.astro";
 import AuthorWrapper from "@/components/organisms/AuthorWrapper.astro";
 import PostsList from "@/components/organisms/PostsList.astro";
 import { getArticles } from "@/core/article";
-import { type Lang, useTranslations } from "@/i18n";
+import { type Lang, ROUTE_LOCALES, useTranslations } from "@/i18n";
 
 export async function getStaticPaths() {
 	const authors = await getCollection("authors");
 
-	return Promise.all(
+	const paths = await Promise.all(
 		authors.map(async (author) => {
 			const [lang, ...id] = author.id.split("/");
+			if (!ROUTE_LOCALES.includes(lang as Lang)) {
+				return null;
+			}
 			const authorId = id.join("/") || undefined;
 
 			const articles = await getArticles({
@@ -34,6 +37,10 @@ export async function getStaticPaths() {
 				},
 			};
 		}),
+	);
+
+	return paths.filter(
+		(path): path is NonNullable<typeof path> => path !== null,
 	);
 }
 

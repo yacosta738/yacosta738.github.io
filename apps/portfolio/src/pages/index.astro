@@ -29,7 +29,7 @@ export const prerender = true;
 const currentLocale = DEFAULT_LOCALE;
 const resume = await getMainResumeWithData({ lang: currentLocale });
 if (!resume) {
-	throw new Error("No se pudo obtener el resume principal");
+	throw new Error("Failed to fetch main resume");
 }
 
 const { name, label } = resume.basics;

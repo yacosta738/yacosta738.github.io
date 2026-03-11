@@ -21,21 +21,22 @@ export async function getStaticPaths() {
 		return route;
 	};
 
-	const localizedPages = Object.keys(
-		import.meta.glob("../en/**/*.{astro,mdx,md}"),
-	);
 	const langPages = Object.keys(
 		import.meta.glob("../[lang]/**/*.{astro,mdx,md}"),
 	);
-	const rootPages = Object.keys(import.meta.glob("../*.{astro,mdx,md}"));
+	const rootPages = Object.keys(import.meta.glob("../**/*.{astro,mdx,md}"));
+	const extraRoutes = ["projects/case-study"];
 
 	const routes = new Set<string>();
-	[...localizedPages, ...langPages, ...rootPages].forEach((filePath) => {
+	[...langPages, ...rootPages].forEach((filePath) => {
 		const route = normalizeRoute(filePath);
 		if (route) {
 			routes.add(route);
 		}
 	});
+	for (const route of extraRoutes) {
+		routes.add(route);
+	}
 
 	return Array.from(routes).map((route) => ({
 		params: {
@@ -44,9 +45,12 @@ export async function getStaticPaths() {
 	}));
 }
 
-const { path } = Astro.params;
-const normalizedPath = Array.isArray(path) ? path.join("/") : (path ?? "");
-const target = normalizedPath ? `/${normalizedPath}` : "/";
-
-return Astro.redirect(target, 301);
+return Astro.redirect(
+	Array.isArray(Astro.params.path)
+		? `/${Astro.params.path.join("/")}`
+		: Astro.params.path
+			? `/${Astro.params.path}`
+			: "/",
+	301,
+);
 ---

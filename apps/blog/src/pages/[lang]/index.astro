@@ -1,8 +1,8 @@
 ---
-import { type Lang, localeParams, useTranslatedPath } from "@/i18n";
+import { type Lang, localeRouteParams, useTranslatedPath } from "@/i18n";
 
 export function getStaticPaths() {
-	return localeParams;
+	return localeRouteParams;
 }
 
 const locale = Astro.params.lang as Lang;

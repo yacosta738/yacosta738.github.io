@@ -1,15 +1,10 @@
 ---
-import { DEFAULT_LOCALE, type Lang } from "@/i18n";
-
 export const prerender = true;
 
-const currentLocale = Astro.currentLocale as Lang | undefined;
-const targetLocale =
-	currentLocale && currentLocale !== DEFAULT_LOCALE
-		? currentLocale
-		: DEFAULT_LOCALE;
-const targetPath =
-	targetLocale === DEFAULT_LOCALE ? "/blog" : `/${targetLocale}/blog`;
-
-return Astro.redirect(targetPath, 301);
+return Astro.redirect(
+	Astro.currentLocale && Astro.currentLocale !== "en"
+		? `/${Astro.currentLocale}/blog`
+		: "/blog",
+	301,
+);
 ---

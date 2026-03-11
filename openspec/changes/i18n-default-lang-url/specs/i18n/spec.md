@@ -54,11 +54,17 @@ The system MUST redirect legacy default-locale prefixed URLs to their unprefixed
 - WHEN a user requests `/en/about`
 - THEN the response MUST redirect to `/about`
 
-#### Scenario: Legacy default-locale root redirects to unprefixed root
+#### Scenario: Legacy default-locale root redirects to portfolio root
 
 - GIVEN the default locale is `en`
-- WHEN a user requests `/en/`
+- WHEN a user requests `/en/` on the portfolio app
 - THEN the response MUST redirect to `/`
+
+#### Scenario: Legacy default-locale root redirects to blog index
+
+- GIVEN the default locale is `en`
+- WHEN a user requests `/en/` on the blog app
+- THEN the response MUST redirect to `/blog`
 
 ### Requirement: i18n Path Helpers Emit Canonical URLs
 
