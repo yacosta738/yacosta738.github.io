@@ -9,27 +9,27 @@ import { extractTagSlugFromPath, isTagPage } from "./tag-locale.utils";
 
 describe("extractTagSlugFromPath", () => {
 	it("should extract tag slug from English tag page", () => {
-		const slug = extractTagSlugFromPath("/blog/tag/security");
+		const slug = extractTagSlugFromPath("/tag/security");
 		expect(slug).toBe("security");
 	});
 
 	it("should extract tag slug from Spanish tag page", () => {
-		const slug = extractTagSlugFromPath("/es/blog/tag/seguridad");
+		const slug = extractTagSlugFromPath("/es/tag/seguridad");
 		expect(slug).toBe("seguridad");
 	});
 
 	it("should extract tag slug from paginated tag page", () => {
-		const slug = extractTagSlugFromPath("/blog/tag/security/page/2");
+		const slug = extractTagSlugFromPath("/tag/security/page/2");
 		expect(slug).toBe("security");
 	});
 
 	it("should return null for tag index page", () => {
-		const slug = extractTagSlugFromPath("/blog/tag");
+		const slug = extractTagSlugFromPath("/tag");
 		expect(slug).toBeNull();
 	});
 
 	it("should return null for tag index page with trailing slash", () => {
-		const slug = extractTagSlugFromPath("/blog/tag/");
+		const slug = extractTagSlugFromPath("/tag/");
 		expect(slug).toBeNull();
 	});
 
@@ -46,19 +46,19 @@ describe("extractTagSlugFromPath", () => {
 
 describe("isTagPage", () => {
 	it("should return true for tag page", () => {
-		expect(isTagPage("/blog/tag/security")).toBe(true);
+		expect(isTagPage("/tag/security")).toBe(true);
 	});
 
 	it("should return true for paginated tag page", () => {
-		expect(isTagPage("/blog/tag/security/page/2")).toBe(true);
+		expect(isTagPage("/tag/security/page/2")).toBe(true);
 	});
 
 	it("should return false for tag index", () => {
-		expect(isTagPage("/blog/tag")).toBe(false);
+		expect(isTagPage("/tag")).toBe(false);
 	});
 
 	it("should return false for tag index with trailing slash", () => {
-		expect(isTagPage("/blog/tag/")).toBe(false);
+		expect(isTagPage("/tag/")).toBe(false);
 	});
 
 	it("should return false for non-tag page", () => {
@@ -70,6 +70,6 @@ describe("isTagPage", () => {
 	});
 
 	it("should return false for category page", () => {
-		expect(isTagPage("/blog/category/tech")).toBe(false);
+		expect(isTagPage("/category/tech")).toBe(false);
 	});
 });

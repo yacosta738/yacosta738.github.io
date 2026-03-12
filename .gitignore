@@ -23,6 +23,7 @@ pnpm-debug.log*
 # local folders
 .history
 tmp/
+apps/blog/.cache/notion-loader.json
 
 # test coverage
 coverage/

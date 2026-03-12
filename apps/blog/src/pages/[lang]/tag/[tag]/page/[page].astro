@@ -1,0 +1,112 @@
+---
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
+import PageHeadline from "@/components/atoms/PageHeadline.astro";
+import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
+import Pagination from "@/components/molecules/Pagination.astro";
+import { getAllArticlesIncludingExternal } from "@/core/article";
+import { getTags } from "@/core/tag";
+import {
+	type Lang,
+	ROUTE_LOCALES,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
+
+export async function getStaticPaths() {
+	const paths = [];
+	const allArticles = await getAllArticlesIncludingExternal();
+	const postsPerPage = 16;
+
+	for (const lang of ROUTE_LOCALES) {
+		const tags = await getTags({ lang: lang as Lang });
+		for (const tag of tags) {
+			const tagArticles = allArticles
+				.filter(
+					(article) =>
+						article.tags.some((tagItem) => tagItem.slug === tag.slug) &&
+						article.id.startsWith(`${lang}/`),
+				)
+				.sort(
+					(a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf(),
+				);
+
+			const totalPages = Math.ceil(tagArticles.length / postsPerPage);
+
+			for (let i = 2; i <= totalPages; i++) {
+				const pagePosts = tagArticles.slice(
+					(i - 1) * postsPerPage,
+					i * postsPerPage,
+				);
+
+				if (pagePosts.length > 0) {
+					paths.push({
+						params: {
+							lang,
+							tag: tag.slug,
+							page: i.toString(),
+						},
+						props: {
+							tag,
+							page: {
+								data: pagePosts,
+								currentPage: i,
+								lastPage: totalPages,
+							},
+						},
+					});
+				}
+			}
+		}
+	}
+	return paths;
+}
+
+const { lang, tag: tagSlug } = Astro.params;
+const { tag, page } = Astro.props;
+const currentLocale = lang as Lang;
+const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+
+const basePath = translatePath(`/tag/${tagSlug}/page`);
+const indexUrl = translatePath(`/tag/${tagSlug}`);
+const title = `${t("tag.title")}: ${tag.title}`;
+---
+
+<Layout {title}>
+	<div class="container mx-auto px-4 blog-shell">
+		<section class="blog-hero">
+			<div class="blog-hero__content">
+				<span class="blog-hero__kicker">
+					{t("tags.title")}
+				</span>
+				<PageHeadline class="blog-headline" title={tag.title}>
+					<p>{t("tag.description", { tag: tag.title })}</p>
+				</PageHeadline>
+				<div class="blog-hero__actions">
+					<a class="blog-pill" href={translatePath("/search")}>
+						{t("search.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/")}>
+						{t("blog.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/tag")}>
+						{t("tags.title")}
+					</a>
+				</div>
+			</div>
+		</section>
+		<BlogGridContainer class="blog-grid blog-stagger" posts={page.data} />
+		<Pagination
+			class="blog-pagination"
+			currentPage={page.currentPage}
+			lastPage={page.lastPage}
+			urlPrev={page.currentPage > 2 ? `${basePath}/${page.currentPage - 1}` : indexUrl}
+			urlNext={page.currentPage < page.lastPage ? `${basePath}/${page.currentPage + 1}` : null}
+			basePath={basePath}
+			maxDisplayedPages={5}
+			firstPageUrl={indexUrl}
+		/>
+	</div>
+	<Footer />
+</Layout>

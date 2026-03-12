@@ -26,7 +26,7 @@ export async function GET(context) {
 		title: post.data.title,
 		pubDate: post.data.date,
 		description: post.data.description,
-		link: translatePath(`/blog/${post.id.split("/").slice(1).join("/")}/`),
+		link: translatePath(`/${post.id.split("/").slice(1).join("/")}/`),
 	}));
 
 	// Combine and sort all items by date

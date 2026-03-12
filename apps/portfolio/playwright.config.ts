@@ -1,4 +1,38 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { defineConfig, devices } from "@playwright/test";
+
+const portlessHost = process.env.E2E_HOST ?? "portfolio.localhost";
+const portlessPortRaw = process.env.PORTLESS_PORT ?? "1355";
+const portlessPort = Number.parseInt(portlessPortRaw, 10);
+const resolvedPortlessPort = Number.isNaN(portlessPort) ? 1355 : portlessPort;
+const portlessStateDir =
+	process.env.PORTLESS_STATE_DIR ?? path.join(os.homedir(), ".portless");
+const portlessCaPath = path.join(portlessStateDir, "ca.pem");
+const usePortless =
+	(process.env.PW_USE_PORTLESS ?? (process.env.CI ? "0" : "1")) !== "0";
+const devPortRaw = process.env.E2E_DEV_PORT ?? "4321";
+const devPort = Number.parseInt(devPortRaw, 10);
+const resolvedDevPort = Number.isNaN(devPort) ? 4321 : devPort;
+const baseURL =
+	process.env.E2E_BASE_URL ??
+	(usePortless
+		? `https://${portlessHost}:${resolvedPortlessPort}`
+		: `http://127.0.0.1:${resolvedDevPort}`);
+
+if (usePortless && fs.existsSync(portlessCaPath)) {
+	if (!process.env.NODE_EXTRA_CA_CERTS) {
+		process.env.NODE_EXTRA_CA_CERTS = portlessCaPath;
+	}
+	const systemCaOption = "--use-system-ca";
+	const nodeOptions = process.env.NODE_OPTIONS ?? "";
+	if (!nodeOptions.includes(systemCaOption)) {
+		process.env.NODE_OPTIONS = nodeOptions
+			? `${nodeOptions} ${systemCaOption}`
+			: systemCaOption;
+	}
+}
 
 /**
  * Playwright configuration for E2E testing
@@ -6,12 +40,6 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
 	testDir: "../../packages/testing-e2e/tests/e2e",
-	testIgnore: [
-		"**/comments*.spec.ts",
-		"**/search.spec.ts",
-		"**/newsletter.spec.ts",
-		"**/tag-external-articles.spec.ts",
-	],
 
 	// Test execution settings
 	timeout: 120_000, // Increased timeout for webkit stability
@@ -40,7 +68,7 @@ export default defineConfig({
 
 	// Global configuration for all tests
 	use: {
-		baseURL: process.env.BASE_URL || "http://localhost:4321",
+		baseURL,
 		trace: "on-first-retry",
 		screenshot: "on-first-failure",
 		video: "on-first-retry",
@@ -57,30 +85,41 @@ export default defineConfig({
 		// set PW_USE_PREVIEW=1 to build and run `astro preview` so the Pagefind
 		// index is available (slower but more stable).
 		const usePreview = process.env.PW_USE_PREVIEW === "1";
+		const baseEnv: Record<string, string> = { PLAYWRIGHT_TEST: "true" };
+		if (usePortless) {
+			baseEnv.PORTLESS_HTTPS = "1";
+		}
 		if (usePreview) {
 			// In CI, the build artifact may already exist. Check before rebuilding.
 			// If dist/ exists and has content, skip build. Otherwise, build first.
 			const buildCommand = process.env.CI
 				? "test -d dist && test -f dist/index.html && echo 'Using pre-built artifact' || pnpm build"
 				: "pnpm build";
+			const previewCommand = usePortless
+				? `${buildCommand} && pnpm --filter=portfolio preview:portless`
+				: `${buildCommand} && pnpm exec astro preview --host 127.0.0.1 --port ${resolvedDevPort}`;
 
 			return {
-				command: `${buildCommand} && pnpm preview --port 4321`,
-				url: "http://localhost:4321",
+				command: previewCommand,
+				url: baseURL,
 				timeout: 600_000,
 				reuseExistingServer: false,
-				env: { PLAYWRIGHT_TEST: "true" },
+				env: baseEnv,
 				stdout: "pipe",
 				stderr: "pipe",
 			};
 		}
 
+		const devCommand = usePortless
+			? "pnpm --filter=portfolio dev"
+			: `pnpm exec astro dev --host 127.0.0.1 --port ${resolvedDevPort}`;
+
 		return {
-			command: "pnpm dev --port 4321",
-			url: "http://localhost:4321",
+			command: devCommand,
+			url: baseURL,
 			timeout: 180_000,
 			reuseExistingServer: true,
-			env: { PLAYWRIGHT_TEST: "true" },
+			env: baseEnv,
 			stdout: "ignore",
 			stderr: "pipe",
 		};

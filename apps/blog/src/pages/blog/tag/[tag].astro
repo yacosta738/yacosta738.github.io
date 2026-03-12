@@ -1,17 +1,7 @@
 ---
-import Footer from "@blog/components/organisms/Footer.astro";
-import Layout from "@blog/layouts/Layout.astro";
-import PageHeadline from "@/components/atoms/PageHeadline.astro";
-import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
-import Pagination from "@/components/molecules/Pagination.astro";
 import { getAllArticlesIncludingExternal } from "@/core/article";
 import { getTags } from "@/core/tag";
-import {
-	DEFAULT_LOCALE,
-	type Lang,
-	useTranslatedPath,
-	useTranslations,
-} from "@/i18n";
+import { DEFAULT_LOCALE, type Lang } from "@/i18n";
 
 export async function getStaticPaths() {
 	const paths = [];
@@ -31,74 +21,14 @@ export async function getStaticPaths() {
 				params: {
 					tag: tag.slug,
 				},
-				props: { tag },
 			});
 		}
 	}
 	return paths;
 }
 
-const { tag: tagSlug } = Astro.params;
-const { tag } = Astro.props;
-
-const currentLocale: Lang = DEFAULT_LOCALE;
-const t = useTranslations(currentLocale);
-const translatePath = useTranslatedPath(currentLocale);
-
-const allArticles = await getAllArticlesIncludingExternal();
-const tagArticles = allArticles
-	.filter(
-		(article) =>
-			article.tags.some((tagItem) => tagItem.slug === tagSlug) &&
-			article.id.startsWith(`${currentLocale}/`),
-	)
-	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
-
-const postsPerPage = 16;
-const totalPages = Math.ceil(tagArticles.length / postsPerPage);
-const basePath = translatePath(`/blog/tag/${tagSlug}/page`);
-const indexUrl = translatePath(`/blog/tag/${tagSlug}`);
-
-const title = `${t("tag.title")}: ${tag.title}`;
+return Astro.redirect(
+	`/tag/${Astro.params.tag}${new URL(Astro.request.url).search}`,
+	301,
+);
 ---
-
-<Layout {title}>
-	<div class="container mx-auto px-4 blog-shell">
-		<section class="blog-hero">
-			<div class="blog-hero__content">
-				<span class="blog-hero__kicker">
-					{t("tags.title")}
-				</span>
-				<PageHeadline class="blog-headline" title={tag.title}>
-					<p>{t("tag.description", { tag: tag.title })}</p>
-				</PageHeadline>
-				<div class="blog-hero__actions">
-					<a class="blog-pill" href={translatePath("/search")}>
-						{t("search.title")}
-					</a>
-					<a class="blog-pill" href={translatePath("/blog")}>
-						{t("blog.title")}
-					</a>
-					<a class="blog-pill" href={translatePath("/blog/tag")}>
-						{t("tags.title")}
-					</a>
-				</div>
-			</div>
-		</section>
-		<BlogGridContainer
-			class="blog-grid blog-stagger"
-			posts={tagArticles.slice(0, postsPerPage)}
-		/>
-		<Pagination
-			class="blog-pagination"
-			currentPage={1}
-			lastPage={totalPages}
-			urlPrev={null}
-			urlNext={totalPages > 1 ? `${basePath}/2` : null}
-			basePath={basePath}
-			maxDisplayedPages={5}
-			firstPageUrl={indexUrl}
-		/>
-	</div>
-	<Footer />
-</Layout>

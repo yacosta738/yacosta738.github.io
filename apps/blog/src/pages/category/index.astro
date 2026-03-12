@@ -1,0 +1,82 @@
+---
+import Footer from "@blog/components/organisms/Footer.astro";
+import Layout from "@blog/layouts/Layout.astro";
+import Badge from "@/components/atoms/Badge.astro";
+import PageHeadline from "@/components/atoms/PageHeadline.astro";
+import { getArticles } from "@/core/article";
+import { getCategories } from "@/core/category";
+import {
+	DEFAULT_LOCALE,
+	type Lang,
+	useTranslatedPath,
+	useTranslations,
+} from "@/i18n";
+
+const lang: Lang = DEFAULT_LOCALE;
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const categories = await getCategories({ lang });
+const allArticles = await getArticles();
+
+// Precompute number of articles per category for the current locale
+const categoryCounts = new Map();
+for (const category of categories) {
+	const count = allArticles.filter(
+		(article) =>
+			article.category?.slug === category.slug &&
+			article.id.startsWith(`${lang}/`),
+	).length;
+	categoryCounts.set(category.slug, count);
+}
+
+const title = t("categories.title");
+---
+
+<Layout {title}>
+	<div class="container mx-auto px-4 blog-shell">
+		<section class="blog-hero">
+			<div class="blog-hero__content">
+				<span class="blog-hero__kicker">
+					{t({ en: "Browse topics", es: "Explora temas" })}
+				</span>
+				<PageHeadline class="blog-headline" {title}>
+					<p>{t("categories.description")}</p>
+				</PageHeadline>
+				<div class="blog-hero__actions">
+					<a class="blog-pill" href={translatePath("/search")}>
+						{t("search.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/")}>
+						{t("blog.title")}
+					</a>
+					<a class="blog-pill" href={translatePath("/tag")}>
+						{t("tags.title")}
+					</a>
+				</div>
+			</div>
+		</section>
+		<div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 blog-category-grid">
+			{
+				categories.map((category) => (
+					<article class="group relative rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
+						<a href={translatePath(`/category/${category.slug}`)} class="block hover:no-underline">
+							<div class="flex items-center gap-3">
+								<div class="flex-1">
+									<h3 class="text-lg font-medium text-foreground dark:text-foreground-dark">{category.title}</h3>
+									{/* category.description not present in Category model; omit description */}
+								</div>
+								<div aria-hidden="true">
+									<Badge size="sm" class="text-xs font-medium bg-brand-accent text-white px-3 py-1">
+										{String(categoryCounts.get(category.slug) ?? 0)}
+									</Badge>
+								</div>
+							</div>
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</div>
+	<Footer />
+</Layout>

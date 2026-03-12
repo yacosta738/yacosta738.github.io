@@ -111,3 +111,61 @@ export async function toExternalArticles(
 ): Promise<Article[]> {
 	return Promise.all(articles.map(toExternalArticle));
 }
+
+/**
+ * Maps a collection entry of type "notionArticles" to an Article object.
+ *
+ * @param articleData - The collection entry containing Notion article data
+ * @throws {Error} If the author is not found for the article
+ * @throws {Error} If the category is not found for the article
+ * @returns Promise containing the mapped Article object
+ */
+export async function toNotionArticle(
+	articleData: CollectionEntry<"notionArticles">,
+): Promise<Article> {
+	const fallbackAuthorId = articleData.id.startsWith("es/")
+		? "es/yuniel-acosta-perez"
+		: "en/yuniel-acosta-perez";
+	const author =
+		(await getEntry(articleData.data.author)) ??
+		(await getEntry(fallbackAuthorId));
+	const category = await getEntry(articleData.data.category);
+	const tags = await getEntries(articleData.data.tags);
+
+	if (!author) {
+		throw new Error(`Author not found for notion article: ${articleData.id}`);
+	}
+	if (!category) {
+		throw new Error(`Category not found for notion article: ${articleData.id}`);
+	}
+
+	return {
+		id: articleData.id,
+		title: articleData.data.title,
+		description: articleData.data.description,
+		author: toAuthor(author),
+		cover: articleData.data.cover,
+		tags: tags.map(toTag),
+		category: toCategory(category),
+		featured: articleData.data.featured ?? false,
+		draft: articleData.data.draft ?? false,
+		body: articleData.body ?? "",
+		date: new Date(articleData.data.date),
+		lastModified: articleData.data.lastModified
+			? new Date(articleData.data.lastModified)
+			: undefined,
+		entry: articleData,
+	};
+}
+
+/**
+ * Converts an array of Notion article collection entries to an array of Article objects.
+ *
+ * @param articles - Array of collection entries of type "notionArticles"
+ * @returns Promise containing an array of mapped Article objects
+ */
+export async function toNotionArticles(
+	articles: CollectionEntry<"notionArticles">[],
+): Promise<Article[]> {
+	return Promise.all(articles.map(toNotionArticle));
+}

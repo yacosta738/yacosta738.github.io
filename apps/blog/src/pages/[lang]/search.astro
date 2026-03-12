@@ -434,7 +434,12 @@ export async function getStaticPaths() {
 					try {
 						if (link) {
 							const href = link.getAttribute("href") || "";
-							if (/\bblog\b|\/posts\//i.test(href)) type = "Post";
+							const stripLocalePrefix = (path: string) =>
+								path.replace(/^\/[a-z]{2}(?:-[a-z]{2})?(?=\/)/i, "");
+							const normalizedHref = stripLocalePrefix(href);
+							const postPattern =
+								/^\/(?!tag\/|category\/|author\/|search\/|projects\/|page\/)([^/]+)(\/|$)/i;
+							if (postPattern.test(normalizedHref)) type = "Post";
 							else if (/\bproject\b|\/projects\//i.test(href)) type = "Project";
 							else if (/\/about\b|contact/i.test(href)) type = "Page";
 						}

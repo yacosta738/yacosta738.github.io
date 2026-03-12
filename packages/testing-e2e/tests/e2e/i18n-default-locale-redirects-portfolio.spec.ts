@@ -2,9 +2,20 @@ import { expect, test } from "@playwright/test";
 
 test.describe("Default locale legacy redirects - portfolio", () => {
 	test.beforeEach(({ baseURL }, testInfo) => {
+		const isPortfolioBaseUrl = (url: string | undefined) => {
+			if (!url) {
+				return false;
+			}
+			try {
+				return new URL(url).hostname.includes("portfolio.localhost");
+			} catch {
+				return url.includes("portfolio.localhost");
+			}
+		};
+
 		testInfo.skip(
-			!baseURL?.includes("4321"),
-			"Portfolio app only (baseURL port 4321)",
+			!isPortfolioBaseUrl(baseURL),
+			"Portfolio app only (baseURL portfolio.localhost)",
 		);
 	});
 

@@ -118,7 +118,7 @@ for (let i = 0; i < totalPosts; i++) {
             image={post.cover}
             title={post.title}
             description={post.description}
-							url={translatePath(`/blog/${cleanEntityId(post.id)}`)}
+						url={translatePath(`/${cleanEntityId(post.id)}`)}
             loading={imageLoading}
           />
         </li>

@@ -42,7 +42,7 @@ export type TagLocaleResult = {
  * if (result.found) {
  *   console.log(`Found: ${result.tag.slug}`); // "security"
  * } else {
- *   console.log(`Fallback to: ${result.fallbackPath}`); // "/es/blog/tag"
+ *   console.log(`Fallback to: ${result.fallbackPath}`); // "/es/tag"
  * }
  */
 export async function findTagInLanguage(
@@ -98,8 +98,8 @@ export async function findTagInLanguage(
  * const paths = await getTagLocalePaths('security', 'en', ['en', 'es']);
  * // Returns:
  * // [
- * //   { lang: 'en', path: '/blog/tag/security', tagFound: true },
- * //   { lang: 'es', path: '/es/blog/tag/security', tagFound: true }
+ * //   { lang: 'en', path: '/tag/security', tagFound: true },
+ * //   { lang: 'es', path: '/es/tag/security', tagFound: true }
  * // ]
  */
 export async function getTagLocalePaths(

@@ -10,7 +10,11 @@ import {
 	createContentEntryFilter,
 } from "../content-filter";
 import type { ArticleCriteria } from "./article.criteria";
-import { toArticles, toExternalArticles } from "./article.mapper";
+import {
+	toArticles,
+	toExternalArticles,
+	toNotionArticles,
+} from "./article.mapper";
 import type Article from "./article.model";
 
 const toBaseCriteria = (
@@ -39,6 +43,57 @@ const createArticleFilter = (
 	});
 };
 
+const getSortDate = (article: Article): Date => {
+	if (article.date) {
+		return article.date;
+	}
+
+	if (article.lastModified) {
+		return article.lastModified;
+	}
+
+	return new Date(0);
+};
+
+const sortArticles = (articles: Article[]): Article[] => {
+	return [...articles].sort(
+		(a, b) => getSortDate(b).valueOf() - getSortDate(a).valueOf(),
+	);
+};
+
+const mergeArticles = (
+	primary: Article[],
+	secondary: Article[],
+	context: string,
+): Article[] => {
+	const seen = new Set(primary.map((article) => article.id));
+	const merged = [...primary];
+
+	for (const article of secondary) {
+		if (seen.has(article.id)) {
+			console.warn(
+				`Duplicate article id detected (${context}): ${article.id}. Keeping primary entry.`,
+			);
+			continue;
+		}
+		seen.add(article.id);
+		merged.push(article);
+	}
+
+	return merged;
+};
+
+const deduplicateArticles = (articles: Article[]): Article[] => {
+	const seen = new Set<string>();
+	return articles.filter((article) => {
+		if (seen.has(article.id)) {
+			return false;
+		}
+		seen.add(article.id);
+		return true;
+	});
+};
+
 /**
  * Retrieves articles from the content collection with filtering options
  * @async
@@ -50,8 +105,17 @@ export async function getArticles(
 ): Promise<Article[]> {
 	const filter = createArticleFilter(criteria, { includeFeatured: true });
 	const articles = await getCollection("articles", filter);
+	const notionArticles = await getCollection("notionArticles", filter);
 
-	return toArticles(articles);
+	const mappedArticles = await toArticles(articles);
+	const mappedNotion = await toNotionArticles(notionArticles);
+	const combined = mergeArticles(
+		mappedArticles,
+		mappedNotion,
+		"articles/notionArticles",
+	);
+
+	return sortArticles(combined);
 }
 
 /**
@@ -110,6 +174,7 @@ export async function getAllArticlesIncludingExternal(
 	});
 
 	const regularArticles = await getCollection("articles", regularFilter);
+	const notionArticles = await getCollection("notionArticles", regularFilter);
 	const externalArticles = await getCollection(
 		"externalArticles",
 		externalFilter,
@@ -117,16 +182,14 @@ export async function getAllArticlesIncludingExternal(
 
 	// Combine and map both collections
 	const mappedRegular = await toArticles(regularArticles);
+	const mappedNotion = await toNotionArticles(notionArticles);
 	const mappedExternal = await toExternalArticles(externalArticles);
-	const combined = [...mappedRegular, ...mappedExternal];
+	const merged = mergeArticles(
+		mappedRegular,
+		mappedNotion,
+		"articles/notionArticles",
+	);
+	const combined = deduplicateArticles([...merged, ...mappedExternal]);
 
-	// Deduplicate by id (in case same article exists in both collections)
-	const seen = new Set<string>();
-	const deduplicated = combined.filter((article) => {
-		if (seen.has(article.id)) return false;
-		seen.add(article.id);
-		return true;
-	});
-
-	return deduplicated;
+	return sortArticles(combined);
 }

@@ -11,8 +11,8 @@ const getRobotsTxt = (sitemapURL: URL) => {
 		.map((lang) => {
 			const prefix = lang === DEFAULT_LOCALE_SETTING ? "" : `/${lang}`;
 			return `
-Disallow: ${prefix}/blog/category/
-Disallow: ${prefix}/blog/tag/`;
+Disallow: ${prefix}/category/
+Disallow: ${prefix}/tag/`;
 		})
 		.join("");
 

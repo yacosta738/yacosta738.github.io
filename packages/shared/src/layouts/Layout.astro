@@ -43,8 +43,14 @@ interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string | URL;
+	showSearch?: boolean;
 }
-const { title = "", description = "", ogImage = "" } = Astro.props;
+const {
+	title = "",
+	description = "",
+	ogImage = "",
+	showSearch: showSearchProp,
+} = Astro.props;
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
 
@@ -107,8 +113,7 @@ const isLocalhostHost = (hostname: string): boolean => {
 const alternatesOrigin =
 	Astro.site && !isLocalhostHost(Astro.site.hostname) ? Astro.site.origin : "";
 const canonicalHref = `${alternatesOrigin}${Astro.url.pathname}`;
-// Show search only on blog pages (paths that include '/blog')
-const showSearch = Astro.url?.pathname?.includes("/blog");
+const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 ---
 
 <!doctype html>
