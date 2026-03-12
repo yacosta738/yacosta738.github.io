@@ -6,6 +6,8 @@ export const getStaticPaths = () =>
 		params: { lang },
 	}));
 
-const search = new URL(Astro.request.url).search;
-return Astro.redirect(`/${Astro.params.lang}/category${search}`, 301);
+return Astro.redirect(
+	`/${Astro.params.lang}/category${new URL(Astro.request.url).search}`,
+	301,
+);
 ---

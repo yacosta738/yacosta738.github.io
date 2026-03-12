@@ -40,8 +40,8 @@ export async function getStaticPaths() {
 	return paths;
 }
 
-const search = new URL(Astro.request.url).search;
-const { id } = Astro.params;
-const path = Array.isArray(id) ? id.join("/") : id;
-return Astro.redirect(`/${Astro.params.lang}/${path}${search}`, 301);
+return Astro.redirect(
+	`/${Astro.params.lang}/${Array.isArray(Astro.params.id) ? Astro.params.id.join("/") : Astro.params.id}${new URL(Astro.request.url).search}`,
+	301,
+);
 ---

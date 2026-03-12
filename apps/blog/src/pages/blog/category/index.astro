@@ -1,6 +1,5 @@
 ---
 export const prerender = true;
 
-const search = new URL(Astro.request.url).search;
-return Astro.redirect(`/category${search}`, 301);
+return Astro.redirect(`/category${new URL(Astro.request.url).search}`, 301);
 ---
