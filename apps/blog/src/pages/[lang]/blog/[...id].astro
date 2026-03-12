@@ -1,22 +1,6 @@
 ---
-
-
-import { render } from "astro:content";
-import Layout from "@blog/layouts/Article.astro";
-import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
-import CtaNewsletterSubscription from "@/components/organisms/CtaNewsletterSubscription.astro";
-import PostFooter from "@/components/organisms/PostFooter.astro";
-import PostHeader from "@/components/organisms/PostHeader.astro";
 import { getArticles } from "@/core/article";
-import type Article from "@/core/article/article.model";
-import { type Lang, ROUTE_LOCALES, useTranslations } from "@/i18n";
-
-const currentLocale = Astro.currentLocale as Lang;
-const t = useTranslations(currentLocale);
-
-interface Props {
-	post: Article;
-}
+import { DEFAULT_LOCALE, type Lang, ROUTE_LOCALES } from "@/i18n";
 
 export async function getStaticPaths() {
 	const posts = (await getArticles()).filter((post) => {
@@ -24,52 +8,40 @@ export async function getStaticPaths() {
 		return ROUTE_LOCALES.includes(lang as Lang);
 	});
 
-	return posts.map((post) => {
+	const bySlug = new Map<string, Map<Lang, unknown>>();
+	for (const post of posts) {
 		const [lang, ...id] = post.id.split("/");
 		const idPath = id.join("/");
-		return { params: { lang, id: idPath }, props: { post } };
-	});
+		const langKey = lang as Lang;
+		const entry = bySlug.get(idPath) ?? new Map<Lang, unknown>();
+		entry.set(langKey, post);
+		bySlug.set(idPath, entry);
+	}
+
+	const paths: Array<{ params: { lang: string; id: string } }> = [];
+
+	for (const [idPath, langMap] of bySlug.entries()) {
+		const availableLangs = Array.from(langMap.keys());
+		const fallbackLang = (
+			langMap.has(DEFAULT_LOCALE) ? DEFAULT_LOCALE : availableLangs[0]
+		) as Lang;
+		const fallbackPost = langMap.get(fallbackLang);
+		if (!fallbackPost) {
+			continue;
+		}
+
+		for (const lang of ROUTE_LOCALES) {
+			paths.push({
+				params: { lang, id: idPath },
+			});
+		}
+	}
+
+	return paths;
 }
 
-const { post } = Astro.props;
-
-if (!post.entry) {
-	throw new Error(`No entry found for post: ${post.id}`);
-}
-
-const { Content, remarkPluginFrontmatter } = await render(post.entry);
-
-// Extract slug from post id (remove lang prefix)
-const [_lang, ...slugParts] = post.id.split("/");
-const postSlug = slugParts.join("/");
+const search = new URL(Astro.request.url).search;
+const { id } = Astro.params;
+const path = Array.isArray(id) ? id.join("/") : id;
+return Astro.redirect(`/${Astro.params.lang}/${path}${search}`, 301);
 ---
-
-<Layout
-	{...post}
-	url={Astro.request.url}
-	minutesRead={remarkPluginFrontmatter.minutesRead}
-	enableComments={true}
-	slug={postSlug}
->
-	<div class="container mx-auto px-4 blog-shell">
-		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
-		<div class="mx-auto prose lg:prose-xl dark:prose-invert blog-prose">
-			{
-				post.cover && (
-					<OptimizedPicture src={post.cover} alt={post.title} loading="eager" />
-				)
-			}
-			<Content />
-			<PostFooter post={post} />
-		</div>
-	</div>
-	<div class="border-y border-y-secondary-foreground-light dark:border-y-secondary-foreground-dark mt-12">
-		<CtaNewsletterSubscription
-		formId="article-cta-newsletter-subscription-form"
-		title={t("cta.title")}
-		description={t("cta.description")}
-		class="my-10 py-5 mx-auto container px-4"
-	/>
-	</div>
-
-</Layout>

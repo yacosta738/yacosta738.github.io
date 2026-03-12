@@ -4,12 +4,12 @@ import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 describe("i18n/utils", () => {
 	describe("getLangFromUrl", () => {
 		it("should return the language code from URL pathname", () => {
-			const url = new URL("https://example.com/en/blog");
+			const url = new URL("https://example.com/en");
 			expect(getLangFromUrl(url)).toBe("en");
 		});
 
 		it("should return default locale for unsupported language", () => {
-			const url = new URL("https://example.com/fr/blog");
+			const url = new URL("https://example.com/fr");
 			expect(getLangFromUrl(url)).toBe("en");
 		});
 
@@ -19,7 +19,7 @@ describe("i18n/utils", () => {
 		});
 
 		it("should return default locale for URL without language prefix", () => {
-			const url = new URL("https://example.com/blog");
+			const url = new URL("https://example.com/");
 			expect(getLangFromUrl(url)).toBe("en");
 		});
 	});

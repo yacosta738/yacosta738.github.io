@@ -1,4 +1,4 @@
 export const routes = {
-	category: "blog/category",
-	tag: "blog/tag",
+	category: "category",
+	tag: "tag",
 } as const;

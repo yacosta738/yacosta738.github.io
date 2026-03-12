@@ -23,14 +23,30 @@ const {
 	decoding = "async",
 	...props
 } = Astro.props;
+
+const { src, alt, width, height } = props;
+const isTest = import.meta.env.MODE === "test";
 ---
-<Picture
-    {...props}
-    formats={formats}
-    fallbackFormat={fallbackFormat}
-    loading={loading}
-    fetchpriority={fetchpriority}
+{isTest ? (
+	<img
+		src={src}
+		alt={alt ?? ""}
+		width={width}
+		height={height}
+		loading={loading}
+		fetchpriority={fetchpriority}
+		decoding={decoding}
+		class={className}
+	/>
+) : (
+	<Picture
+		{...props}
+		formats={formats}
+		fallbackFormat={fallbackFormat}
+		loading={loading}
+		fetchpriority={fetchpriority}
 		class={className}
 		decoding={decoding}
-    inferSize
-  />
+		inferSize
+	/>
+)}

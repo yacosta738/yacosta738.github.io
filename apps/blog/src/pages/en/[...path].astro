@@ -53,7 +53,7 @@ export async function getStaticPaths() {
 	});
 	articles.forEach((post) => {
 		const slug = post.id.split("/").slice(1).join("/");
-		routes.add(`blog/${slug}`);
+		routes.add(`${slug}`);
 	});
 
 	const allArticles = await getArticles();
@@ -65,7 +65,7 @@ export async function getStaticPaths() {
 	});
 	const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
 	for (let i = 2; i <= totalPages; i++) {
-		routes.add(`blog/page/${i}`);
+		routes.add(`page/${i}`);
 	}
 
 	const allArticlesIncludingExternal = await getAllArticlesIncludingExternal();
@@ -79,10 +79,10 @@ export async function getStaticPaths() {
 		);
 		if (tagArticles.length === 0) continue;
 
-		routes.add(`blog/tag/${tag.slug}`);
+		routes.add(`tag/${tag.slug}`);
 		const tagPages = Math.ceil(tagArticles.length / postsPerPage);
 		for (let i = 2; i <= tagPages; i++) {
-			routes.add(`blog/tag/${tag.slug}/page/${i}`);
+			routes.add(`tag/${tag.slug}/page/${i}`);
 		}
 	}
 
@@ -95,10 +95,10 @@ export async function getStaticPaths() {
 		);
 		if (categoryArticles.length === 0) continue;
 
-		routes.add(`blog/category/${category.slug}`);
+		routes.add(`category/${category.slug}`);
 		const categoryPages = Math.ceil(categoryArticles.length / postsPerPage);
 		for (let i = 2; i <= categoryPages; i++) {
-			routes.add(`blog/category/${category.slug}/page/${i}`);
+			routes.add(`category/${category.slug}/page/${i}`);
 		}
 	}
 

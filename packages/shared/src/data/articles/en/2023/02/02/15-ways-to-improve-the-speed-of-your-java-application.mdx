@@ -7,7 +7,7 @@ description: Get fifteen tips to speed up your Java applications and optimize
   optimal performance. Implement these tips for maximum speed.
 date: 2023-02-02T16:28:19.185Z
 cover: src/assets/images/maximizing-java-code-performance.webp
-author: en/yuniel-acosta
+author: en/yuniel-acosta-perez
 tags:
   - en/java
 category: en/software-development
@@ -119,7 +119,7 @@ The stored procedure has an advantage in data transfer and network traffic, as i
 
 Certain classes act as data holders within the application, such as **DB connection** objects or session objects for the user after login. These objects are heavy and their creation should be avoided multiple times, as they use a lot of resources. To improve application performance, we should **reuse** these objects instead of creating them, as this will reduce memory usage.
 
-We should use the **[Singleton pattern](/blog/singleton-pattern)** whenever possible to create a single instance of an object and reuse it when needed, or clone the object instead of creating a new one.
+We should use the **[Singleton pattern](/singleton-pattern)** whenever possible to create a single instance of an object and reuse it when needed, or clone the object instead of creating a new one.
 
 ## 9. Use “contains” with caution in your Java applications
 

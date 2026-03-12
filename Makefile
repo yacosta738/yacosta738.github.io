@@ -44,7 +44,7 @@ e2e: ## Run end-to-end tests
 
 preflight: check test build ## Run full pre-push validation (format/lint/check + tests + build)
 
-ready-to-push: preflight ## Alias for full pre-push validation
+all: preflight ## Alias for full pre-push validation
 
 portfolio-dev: ## Start portfolio dev server (http://localhost:4321)
 	$(PNPM) $(PORTFOLIO_FILTER) dev

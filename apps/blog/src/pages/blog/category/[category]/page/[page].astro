@@ -1,17 +1,7 @@
 ---
-import Footer from "@blog/components/organisms/Footer.astro";
-import Layout from "@blog/layouts/Layout.astro";
-import PageHeadline from "@/components/atoms/PageHeadline.astro";
-import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
-import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
-import {
-	DEFAULT_LOCALE,
-	type Lang,
-	useTranslatedPath,
-	useTranslations,
-} from "@/i18n";
+import { DEFAULT_LOCALE, type Lang } from "@/i18n";
 
 export async function getStaticPaths() {
 	const paths = [];
@@ -43,14 +33,6 @@ export async function getStaticPaths() {
 						category: category.slug,
 						page: i.toString(),
 					},
-					props: {
-						category,
-						page: {
-							data: pagePosts,
-							currentPage: i,
-							lastPage: totalPages,
-						},
-					},
 				});
 			}
 		}
@@ -58,51 +40,9 @@ export async function getStaticPaths() {
 	return paths;
 }
 
-const { category: categorySlug } = Astro.params;
-const { category, page } = Astro.props;
-const currentLocale: Lang = DEFAULT_LOCALE;
-const t = useTranslations(currentLocale);
-const translatePath = useTranslatedPath(currentLocale);
-
-const basePath = translatePath(`/blog/category/${categorySlug}/page`);
-const indexUrl = translatePath(`/blog/category/${categorySlug}`);
-const title = `${t("category.title")}: ${category.title}`;
+const search = new URL(Astro.request.url).search;
+return Astro.redirect(
+	`/category/${Astro.params.category}/page/${Astro.params.page}${search}`,
+	301,
+);
 ---
-
-<Layout {title}>
-	<div class="container mx-auto px-4 blog-shell">
-		<section class="blog-hero">
-			<div class="blog-hero__content">
-				<span class="blog-hero__kicker">
-					{t("categories.title")}
-				</span>
-				<PageHeadline class="blog-headline" title={category.title}>
-					<p>{t("category.description", { category: category.title })}</p>
-				</PageHeadline>
-				<div class="blog-hero__actions">
-					<a class="blog-pill" href={translatePath("/search")}>
-						{t("search.title")}
-					</a>
-					<a class="blog-pill" href={translatePath("/blog")}>
-						{t("blog.title")}
-					</a>
-					<a class="blog-pill" href={translatePath("/blog/category")}>
-						{t("categories.title")}
-					</a>
-				</div>
-			</div>
-		</section>
-		<BlogGridContainer class="blog-grid blog-stagger" posts={page.data} />
-		<Pagination
-			class="blog-pagination"
-			currentPage={page.currentPage}
-			lastPage={page.lastPage}
-			urlPrev={page.currentPage > 2 ? `${basePath}/${page.currentPage - 1}` : indexUrl}
-			urlNext={page.currentPage < page.lastPage ? `${basePath}/${page.currentPage + 1}` : null}
-			basePath={basePath}
-			maxDisplayedPages={5}
-			firstPageUrl={indexUrl}
-		/>
-	</div>
-	<Footer />
-</Layout>

@@ -4,7 +4,10 @@ import {
 	type SchemaContext,
 	z,
 } from "astro:content";
+import type { RehypePlugins } from "astro";
 import { glob } from "astro/loaders";
+import { notionBlockFallbacks } from "./lib/notion/notion-blocks";
+import { createCachedNotionLoader } from "./lib/notion/notion-loader";
 
 // Reusable schemas
 const profileSchema = z.object({
@@ -20,6 +23,66 @@ const locationSchema = z.object({
 	countryCode: z.string(),
 	region: z.string(),
 });
+
+const notionCacheUrl = new URL("../.cache/notion-loader.json", import.meta.url);
+const normalizeNotionId = (value?: string): string | undefined => {
+	if (!value) {
+		return undefined;
+	}
+	const match = value.match(
+		/[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
+	);
+	if (!match) {
+		return value;
+	}
+	return match[0].replace(/-/g, "");
+};
+const defaultNotionPlatformId = "ea2cff95e1ca82ab97128153e241fe9a";
+const notionPlatformId =
+	normalizeNotionId(import.meta.env.NOTION_PLATFORM_ID) ??
+	defaultNotionPlatformId;
+const defaultNotionAuthorId = "en/yuniel-acosta-perez";
+const defaultNotionCategoryId = "en/software-development";
+const defaultNotionTagIds = ["en/tech"];
+const notionDefaultAuthorId =
+	import.meta.env.NOTION_DEFAULT_AUTHOR_ID ?? defaultNotionAuthorId;
+const notionDefaultCategoryId =
+	import.meta.env.NOTION_DEFAULT_CATEGORY_ID ?? defaultNotionCategoryId;
+const notionDefaultTagIds = (
+	import.meta.env.NOTION_DEFAULT_TAG_IDS ?? defaultNotionTagIds.join(",")
+)
+	.split(",")
+	.map((tag: string) => tag.trim())
+	.filter(Boolean);
+const notionRehypePlugin =
+	notionBlockFallbacks as unknown as RehypePlugins[number];
+const notionTypeFilter = "Article";
+const notionStatusFilter = "Ready";
+const notionToday = new Date().toISOString().slice(0, 10);
+const notionPostsFilter = {
+	and: [
+		{
+			property: "Platforms",
+			relation: { contains: notionPlatformId },
+		},
+		{
+			property: "Type",
+			select: { equals: notionTypeFilter },
+		},
+		{
+			property: "Status",
+			status: { equals: notionStatusFilter },
+		},
+		{
+			property: "Schedule Date",
+			date: { on_or_before: notionToday },
+		},
+		{
+			property: "Published",
+			checkbox: { equals: true },
+		},
+	],
+};
 
 // System skills library collection (icons, metadata, etc.)
 const skillsLibrary = defineCollection({
@@ -237,6 +300,34 @@ const articles = defineCollection({
 		}),
 });
 
+const notionArticles = defineCollection({
+	loader: createCachedNotionLoader({
+		auth: import.meta.env.NOTION_TOKEN,
+		database_id: normalizeNotionId(import.meta.env.NOTION_DATABASE_ID) ?? "",
+		filter: notionPostsFilter,
+		platformId: notionPlatformId,
+		requiredType: notionTypeFilter,
+		requiredStatus: notionStatusFilter,
+		defaultAuthorId: notionDefaultAuthorId,
+		defaultCategoryId: notionDefaultCategoryId,
+		defaultTags: notionDefaultTagIds,
+		cacheUrl: notionCacheUrl,
+		rehypePlugins: [notionRehypePlugin],
+	}),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		date: z.coerce.date(),
+		lastModified: z.coerce.date().optional(),
+		cover: z.string().optional(),
+		author: reference("authors"),
+		tags: z.array(reference("tags")),
+		category: reference("categories"),
+		draft: z.boolean().optional().default(false),
+		featured: z.boolean().optional().default(false),
+	}),
+});
+
 const tags = defineCollection({
 	loader: glob({
 		pattern: "**/[^_]*.md",
@@ -307,6 +398,7 @@ export const collections = {
 	languagesLibrary,
 	projectMetadata,
 	articles,
+	notionArticles,
 	tags,
 	categories,
 	authors,

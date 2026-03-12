@@ -18,8 +18,8 @@ describe("parseEntityId function", () => {
 	});
 
 	it("should handle entity IDs with multiple slashes", () => {
-		const result = parseEntityId("en/blog/my-post");
-		expect(result).toEqual({ lang: "en", path: "blog/my-post" });
+		const result = parseEntityId("en/my-post");
+		expect(result).toEqual({ lang: "en", path: "my-post" });
 	});
 
 	it("should handle entity IDs with numbers", () => {
@@ -45,7 +45,7 @@ describe("cleanEntityId function", () => {
 	});
 
 	it("should handle entity IDs with multiple path segments", () => {
-		const result = cleanEntityId("fr/blog/tech/article");
-		expect(result).toBe("blog/tech/article");
+		const result = cleanEntityId("fr/tech/article");
+		expect(result).toBe("tech/article");
 	});
 });

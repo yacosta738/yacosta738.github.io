@@ -2,7 +2,7 @@
 	"name": "yacosta-portfolio-monorepo",
 	"version": "0.0.4",
 	"private": true,
-	"packageManager": "pnpm@10.30.3",
+	"packageManager": "pnpm@10.32.1",
 	"scripts": {
 		"dev": "pnpm -w run agents:apply && pnpm --filter=portfolio --filter=blog --filter=yap-api --parallel dev",
 		"dev:portfolio": "pnpm --filter=portfolio dev",
@@ -49,7 +49,9 @@
 		"test:e2e:portfolio": "pnpm --filter=portfolio test:e2e",
 		"test:e2e:blog": "pnpm --filter=blog test:e2e",
 		"cloudflare:check": "bash scripts/cloudflare-check.sh",
-		"cloudflare:preview": "pnpm --filter=portfolio build && pnpm --filter=portfolio preview"
+		"cloudflare:preview": "pnpm --filter=portfolio build && pnpm --filter=portfolio preview",
+		"notion:sync-authors": "node scripts/notion-sync-authors.mjs",
+		"notion:sync-taxonomy": "node scripts/notion-sync-taxonomy.mjs"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.4",

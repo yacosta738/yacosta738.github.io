@@ -1,62 +1,36 @@
 ---
-
-
-import BlogHero from "@blog/components/organisms/BlogHero.astro";
-import Footer from "@blog/components/organisms/Footer.astro";
-import Layout from "@blog/layouts/Layout.astro";
 import { buildBlogListing } from "@blog/lib/blog-listing";
-import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
-import Pagination from "@/components/molecules/Pagination.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
-import {
-	type Lang,
-	ROUTE_LOCALES,
-	useTranslatedPath,
-	useTranslations,
-} from "@/i18n";
+import { ROUTE_LOCALES } from "@/i18n";
 
 export async function getStaticPaths() {
-	// Get all articles and external articles
+	const paths = [];
 	const allArticles = await getArticles();
 	const allExternalArticles = await getExternalArticles();
+	const postsPerPage = 16;
 
-	// Create paths for each language
-	const paths = [];
-
-	// Generate paths for all supported languages
 	for (const lang of ROUTE_LOCALES) {
 		const { visiblePosts } = buildBlogListing({
 			articles: allArticles,
 			externalArticles: allExternalArticles,
-			locale: lang as Lang,
+			locale: lang,
 		});
 
-		// Define pagination config
-		const postsPerPage = 16;
 		const totalPages = Math.ceil(visiblePosts.length / postsPerPage);
 
-		// Only generate pages starting from page 2 (page 1 is handled by index.astro)
 		for (let i = 2; i <= totalPages; i++) {
 			const pagePosts = visiblePosts.slice(
 				(i - 1) * postsPerPage,
 				i * postsPerPage,
 			);
 
-			// Skip if no posts for this page
 			if (pagePosts.length === 0) continue;
 
 			paths.push({
 				params: {
 					lang,
 					page: i.toString(),
-				},
-				props: {
-					page: {
-						data: pagePosts,
-						currentPage: i,
-						lastPage: totalPages,
-					},
 				},
 			});
 		}
@@ -65,37 +39,9 @@ export async function getStaticPaths() {
 	return paths;
 }
 
-// Get current locale from params for rendering
-const { lang } = Astro.params;
-const currentLocale = lang as Lang;
-const t = useTranslations(currentLocale);
-const translatePath = useTranslatedPath(currentLocale);
-
-const title = t("blog.title");
-const basePath = translatePath("/blog/page");
-const indexUrl = translatePath("/blog");
-const { page } = Astro.props;
+const search = new URL(Astro.request.url).search;
+return Astro.redirect(
+	`/${Astro.params.lang}/page/${Astro.params.page}${search}`,
+	301,
+);
 ---
-
-<Layout title={title}>
-	<div class="container mx-auto px-4 blog-shell">
-		<BlogHero title={title} currentLocale={currentLocale} />
-		<BlogGridContainer class="blog-grid blog-stagger" posts={page.data} />
-
-		<Pagination
-			class="blog-pagination"
-			currentPage={page.currentPage}
-			lastPage={page.lastPage}
-			urlPrev={page.currentPage > 2
-				? `${basePath}/${page.currentPage - 1}`
-				: indexUrl}
-			urlNext={page.currentPage < page.lastPage
-				? `${basePath}/${page.currentPage + 1}`
-				: null}
-			basePath={basePath}
-			maxDisplayedPages={5}
-			firstPageUrl={indexUrl}
-		/>
-	</div>
-	<Footer />
-</Layout>

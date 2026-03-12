@@ -19,6 +19,11 @@
 			"name": "twitter",
 			"url": "https://x.com/yacosta738",
 			"icon": "lucide:twitter"
+		},
+		{
+			"name": "yap-portfolio",
+			"url": "https://www.yunielacosta.com",
+			"icon": "lucide:globe"
 		}
 	]
 }

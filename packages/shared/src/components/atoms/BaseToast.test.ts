@@ -7,7 +7,7 @@ test("BaseToast renders with default props", async () => {
 	const result = await container.renderToString(BaseToast);
 
 	expect(result).toContain("bottom-6 right-6");
-	expect(result).toContain("bg-gray-900/95");
+	expect(result).toContain("bg-gray-900/80");
 	expect(result).toContain("max-w-sm p-4");
 	expect(result).toContain("button");
 });

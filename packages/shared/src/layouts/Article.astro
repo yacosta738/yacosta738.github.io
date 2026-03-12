@@ -32,7 +32,7 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 	.href;
 ---
 
-<BaseLayout {title} {description} {ogImage}>
+<BaseLayout {title} {description} {ogImage} showSearch={true}>
 	<HeaderProgressBar
 		slot="subheader"
 		title={title}

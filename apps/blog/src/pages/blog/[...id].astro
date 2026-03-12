@@ -1,20 +1,6 @@
 ---
-import { render } from "astro:content";
-import Layout from "@blog/layouts/Article.astro";
-import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
-import CtaNewsletterSubscription from "@/components/organisms/CtaNewsletterSubscription.astro";
-import PostFooter from "@/components/organisms/PostFooter.astro";
-import PostHeader from "@/components/organisms/PostHeader.astro";
 import { getArticles } from "@/core/article";
-import type Article from "@/core/article/article.model";
-import { DEFAULT_LOCALE, type Lang, useTranslations } from "@/i18n";
-
-const currentLocale: Lang = DEFAULT_LOCALE;
-const t = useTranslations(currentLocale);
-
-interface Props {
-	post: Article;
-}
+import { DEFAULT_LOCALE } from "@/i18n";
 
 export async function getStaticPaths() {
 	const posts = await getArticles();
@@ -25,49 +11,12 @@ export async function getStaticPaths() {
 		.map((post) => {
 			const [, ...id] = post.id.split("/");
 			const idPath = id.join("/");
-			return { params: { id: idPath }, props: { post } };
+			return { params: { id: idPath } };
 		});
 }
 
-const { post } = Astro.props;
-
-if (!post.entry) {
-	throw new Error(`No entry found for post: ${post.id}`);
-}
-
-const { Content, remarkPluginFrontmatter } = await render(post.entry);
-
-// Extract slug from post id (remove lang prefix)
-const [, ...slugParts] = post.id.split("/");
-const postSlug = slugParts.join("/");
+const search = new URL(Astro.request.url).search;
+const { id } = Astro.params;
+const path = Array.isArray(id) ? id.join("/") : id;
+return Astro.redirect(`/${path}${search}`, 301);
 ---
-
-<Layout
-	{...post}
-	url={Astro.request.url}
-	minutesRead={remarkPluginFrontmatter.minutesRead}
-	enableComments={true}
-	slug={postSlug}
->
-	<div class="container mx-auto px-4 blog-shell">
-		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
-		<div class="mx-auto prose lg:prose-xl dark:prose-invert blog-prose">
-			{
-				post.cover && (
-					<OptimizedPicture src={post.cover} alt={post.title} loading="eager" />
-				)
-			}
-			<Content />
-			<PostFooter post={post} />
-		</div>
-	</div>
-	<div class="border-y border-y-secondary-foreground-light dark:border-y-secondary-foreground-dark mt-12">
-		<CtaNewsletterSubscription
-			formId="article-cta-newsletter-subscription-form"
-			title={t("cta.title")}
-			description={t("cta.description")}
-			class="my-10 py-5 mx-auto container px-4"
-		/>
-	</div>
-
-</Layout>

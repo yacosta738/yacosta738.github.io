@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@blog/layouts/Layout.astro";
+import AuthorWrapper from "@/components/organisms/AuthorWrapper.astro";
+import PostsList from "@/components/organisms/PostsList.astro";
+import { getArticles } from "@/core/article";
+import { DEFAULT_LOCALE, type Lang, useTranslations } from "@/i18n";
+
+export async function getStaticPaths() {
+	const authors = await getCollection("authors");
+	const defaultLocale = DEFAULT_LOCALE;
+
+	const paths = await Promise.all(
+		authors
+			.filter((author) => author.id.startsWith(`${defaultLocale}/`))
+			.map(async (author) => {
+				const [, ...id] = author.id.split("/");
+				const authorId = id.join("/") || undefined;
+
+				const articles = await getArticles({
+					lang: defaultLocale,
+					author: author.id,
+					includeDrafts: false,
+				});
+
+				const sortedArticles = articles.sort(
+					(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+				);
+
+				return {
+					params: { id: authorId },
+					props: {
+						author,
+						authorArticles: sortedArticles,
+					},
+				};
+			}),
+	);
+
+	return paths;
+}
+
+const currentLocale = DEFAULT_LOCALE as Lang;
+const { author, authorArticles } = Astro.props;
+const authorForWrapper = {
+	id: author.id,
+	slug: author.id.split("/").pop() || author.id,
+	...author.data,
+};
+const hasArticles = authorArticles.length > 0;
+const t = useTranslations(currentLocale);
+---
+
+<Layout title={author.data.name} description={author.data.bio}>
+	<div class="container mx-auto px-4 blog-shell">
+		<AuthorWrapper author={authorForWrapper} />
+		<section class="p-8">
+			{hasArticles && (
+				<PostsList
+					posts={authorArticles}
+					title={t({ en: "Posts", es: "Publicaciones" }) || "Posts"}
+					showLoadMore={true}
+				/>
+			)}
+		</section>
+	</div>
+</Layout>

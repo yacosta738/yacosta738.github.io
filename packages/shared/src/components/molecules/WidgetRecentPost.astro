@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import WidgetCard from "@/components/atoms/WidgetCard.astro";
 import { type Lang, useTranslations } from "@/i18n";
+import { LOCALES } from "@/i18n/types";
 import type { BlogPost } from "@/lib/blog-post.utils";
 import {
 	getBlogPostRel,
@@ -11,7 +12,10 @@ import {
 } from "@/lib/blog-post.utils";
 
 const { pathname } = Astro.url;
-const isBlogRoot = pathname.endsWith("/blog");
+const localeRoots = new Set(Object.keys(LOCALES).map((lang) => `/${lang}`));
+const normalizedPath =
+	pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+const isBlogRoot = normalizedPath === "/" || localeRoots.has(normalizedPath);
 
 export interface Props {
 	recentPosts: BlogPost[];

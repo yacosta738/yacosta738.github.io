@@ -104,12 +104,12 @@ describe("Search Page", () => {
 
 		it("should track result types for badging", () => {
 			const resultTypes = {
-				post: /\bblog\b|\/posts\//i,
+				post: /^\/(?!tag\/|category\/|author\/|search\/|projects\/|page\/)([^/]+)(\/|$)/i,
 				project: /\bproject\b|\/projects\//i,
 				page: /\/about\b|contact/i,
 			};
 
-			expect(resultTypes.post.test("/blog/my-post")).toBe(true);
+			expect(resultTypes.post.test("/my-post")).toBe(true);
 			expect(resultTypes.project.test("/projects/my-project")).toBe(true);
 			expect(resultTypes.page.test("/about")).toBe(true);
 		});

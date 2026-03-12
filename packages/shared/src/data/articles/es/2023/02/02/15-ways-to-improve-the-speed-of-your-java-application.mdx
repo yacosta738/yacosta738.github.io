@@ -8,7 +8,7 @@ description: Obtén quince consejos para acelerar tus aplicaciones de Java y
   rendimiento óptimo. Implementa estos consejos para una velocidad máxima.
 date: 2023-02-02T16:39:17.873Z
 cover: src/assets/images/maximizing-java-code-performance.webp
-author: es/yuniel-acosta
+author: es/yuniel-acosta-perez
 tags:
   - es/java
 category: es/software-development
@@ -120,7 +120,7 @@ La procedimiento almacenado tiene una ventaja en la transferencia de datos y el 
 
 Ciertas clases actúan como contenedores de datos dentro de la aplicación, como objetos de **conexión DB** o objetos de sesión para el usuario después del inicio de sesión. Estos objetos son pesados y su creación debe evitarse varias veces, ya que usan muchos recursos. Para mejorar el rendimiento de la aplicación, deberíamos **reutilizar** estos objetos en lugar de crearlos, ya que esto reducirá el uso de memoria.
 
-Deberíamos usar el [patrón **Singleton**](/es/blog/singleton-pattern) siempre que sea posible para crear una única instancia de un objeto y reutilizarla cuando sea necesario, o clonar el objeto en lugar de crear uno nuevo.
+Deberíamos usar el [patrón **Singleton**](/es/singleton-pattern) siempre que sea posible para crear una única instancia de un objeto y reutilizarla cuando sea necesario, o clonar el objeto en lugar de crear uno nuevo.
 
 ## 9. Usa "\***\*contains\*\***" con precaución en tus aplicaciones de Java
 

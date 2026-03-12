@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { parseEntityId } from "@/lib/collection.entity";
-import { toArticles } from "./article.mapper";
+import { toArticles, toNotionArticles } from "./article.mapper";
 import {
 	getAllArticlesIncludingExternal,
 	getArticleById,
@@ -39,6 +39,19 @@ vi.mock("./article.mapper", () => ({
 				tags: a.data.tags,
 				draft: a.data.draft,
 				featured: false, // External articles don't have featured field
+				date: a.data.date,
+			})),
+		),
+	),
+	toNotionArticles: vi.fn((articles: Array<{ id: string; data: any }>) =>
+		Promise.resolve(
+			articles.map((a) => ({
+				id: a.id,
+				author: a.data.author,
+				category: a.data.category,
+				tags: a.data.tags,
+				draft: a.data.draft,
+				featured: a.data.featured,
 				date: a.data.date,
 			})),
 		),
@@ -85,6 +98,42 @@ const mockArticles = [
 	},
 ];
 
+const mockNotionArticles = [
+	{
+		id: "en/article-1",
+		data: {
+			draft: false,
+			author: { id: "author-1" },
+			tags: [{ id: "tag-2" }],
+			category: { id: "category-1" },
+			featured: false,
+			date: new Date("2023-01-04"),
+		},
+	},
+	{
+		id: "en/notion-1",
+		data: {
+			draft: false,
+			author: { id: "author-1" },
+			tags: [{ id: "tag-2" }],
+			category: { id: "category-1" },
+			featured: true,
+			date: new Date("2023-01-05"),
+		},
+	},
+	{
+		id: "es/notion-2",
+		data: {
+			draft: true,
+			author: { id: "author-2" },
+			tags: [{ id: "tag-2" }],
+			category: { id: "category-2" },
+			featured: false,
+			date: new Date("2023-01-06"),
+		},
+	},
+];
+
 const mockExternalArticles = [
 	{
 		id: "en/external-1",
@@ -126,7 +175,9 @@ describe("ArticleService", () => {
 				const source =
 					collection === "externalArticles"
 						? mockExternalArticles
-						: mockArticles;
+						: collection === "notionArticles"
+							? mockNotionArticles
+							: mockArticles;
 				if (entryFilter) {
 					return source.filter((entry) => {
 						return Boolean(entryFilter(entry));
@@ -167,24 +218,61 @@ describe("ArticleService", () => {
 				"articles",
 				expect.any(Function),
 			);
-			expect(articles).toHaveLength(2);
+			expect(getCollection).toHaveBeenCalledWith(
+				"notionArticles",
+				expect.any(Function),
+			);
+			expect(articles).toHaveLength(3);
 			expect(articles.some((a) => a.draft)).toBe(false);
+		});
+
+		it("should return local articles when Notion source is empty", async () => {
+			vi.mocked(getCollection).mockImplementation(
+				async (collection: string, entryFilter) => {
+					const source = collection === "notionArticles" ? [] : mockArticles;
+					if (entryFilter) {
+						return source.filter((entry) => {
+							return Boolean(entryFilter(entry));
+						}) as any;
+					}
+					return source as any;
+				},
+			);
+
+			const articles = await getArticles();
+			expect(articles).toHaveLength(2);
+		});
+
+		it("should return Notion articles when local source is empty", async () => {
+			vi.mocked(getCollection).mockImplementation(
+				async (collection: string, entryFilter) => {
+					const source = collection === "articles" ? [] : mockNotionArticles;
+					if (entryFilter) {
+						return source.filter((entry) => {
+							return Boolean(entryFilter(entry));
+						}) as any;
+					}
+					return source as any;
+				},
+			);
+
+			const articles = await getArticles();
+			expect(articles).toHaveLength(2);
 		});
 
 		it("should filter articles by lang, excluding drafts", async () => {
 			const articles = await getArticles({ lang: "en" });
-			expect(articles).toHaveLength(2);
+			expect(articles).toHaveLength(3);
 		});
 
 		it("should filter articles by lang, including drafts", async () => {
 			const articles = await getArticles({ lang: "es", includeDrafts: true });
-			expect(articles).toHaveLength(1);
-			expect(articles[0].id).toBe("es/article-2");
+			expect(articles).toHaveLength(2);
 		});
 
 		it("should include draft articles when requested", async () => {
 			const articles = await getArticles({ includeDrafts: true });
-			expect(articles).toHaveLength(3);
+			expect(articles).toHaveLength(5);
 		});
 
 		it("should filter by author, including drafts", async () => {
@@ -192,14 +280,12 @@ describe("ArticleService", () => {
 				author: "author-2",
 				includeDrafts: true,
 			});
-			expect(articles).toHaveLength(1);
-			expect(articles[0].id).toBe("es/article-2");
+			expect(articles).toHaveLength(2);
 		});
 
 		it("should filter by tags, excluding drafts", async () => {
 			const articles = await getArticles({ tags: "tag-2" });
-			expect(articles).toHaveLength(1);
-			expect(articles[0].id).toBe("en/article-3");
+			expect(articles).toHaveLength(3);
 		});
 
 		it("should filter by tags, including drafts", async () => {
@@ -207,7 +293,7 @@ describe("ArticleService", () => {
 				tags: "tag-2",
 				includeDrafts: true,
 			});
-			expect(articles).toHaveLength(2);
+			expect(articles).toHaveLength(5);
 		});
 
 		it("should filter by category, including drafts", async () => {
@@ -215,14 +301,122 @@ describe("ArticleService", () => {
 				category: "category-2",
 				includeDrafts: true,
 			});
-			expect(articles).toHaveLength(1);
-			expect(articles[0].id).toBe("es/article-2");
+			expect(articles).toHaveLength(2);
 		});
 
 		it("should filter by featured", async () => {
 			const articles = await getArticles({ featured: true });
-			expect(articles).toHaveLength(1);
-			expect(articles[0].id).toBe("en/article-1");
+			expect(articles).toHaveLength(2);
+		});
+
+		it("should prefer local articles on id collisions", async () => {
+			const articles = await getArticles();
+			const collided = articles.find(
+				(article) => article.id === "en/article-1",
+			);
+			expect(collided?.tags[0].id).toBe("tag-1");
+		});
+
+		it("should warn and continue when collisions are detected", async () => {
+			const warnSpy = vi
+				.spyOn(console, "warn")
+				.mockImplementation(() => undefined);
+
+			const articles = await getArticles();
+			const ids = articles.map((article) => article.id);
+			const uniqueIds = new Set(ids);
+			expect(ids.length).toBe(uniqueIds.size);
+			expect(warnSpy).toHaveBeenCalledWith(
+				expect.stringContaining("Duplicate article id detected"),
+			);
+
+			warnSpy.mockRestore();
+		});
+
+		it("should order entries by date with lastModified fallback", async () => {
+			vi.mocked(getCollection).mockImplementation(
+				async (collection: string, entryFilter) => {
+					const source =
+						collection === "notionArticles"
+							? [
+									{
+										id: "en/notion-1",
+										data: {
+											date: undefined,
+											lastModified: new Date("2024-01-03"),
+											draft: false,
+											author: { id: "author-1" },
+											tags: [{ id: "tag-1" }],
+											category: { id: "category-1" },
+											featured: false,
+										},
+									},
+								]
+							: [
+									{
+										id: "en/article-1",
+										data: {
+											date: new Date("2023-01-02"),
+											lastModified: new Date("2023-01-05"),
+											draft: false,
+											author: { id: "author-1" },
+											tags: [{ id: "tag-1" }],
+											category: { id: "category-1" },
+											featured: false,
+										},
+									},
+									{
+										id: "en/article-2",
+										data: {
+											date: new Date("2022-12-31"),
+											draft: false,
+											author: { id: "author-1" },
+											tags: [{ id: "tag-1" }],
+											category: { id: "category-1" },
+											featured: false,
+										},
+									},
+								];
+					if (entryFilter) {
+						return source.filter((entry) => {
+							return Boolean(entryFilter(entry));
+						}) as any;
+					}
+					return source as any;
+				},
+			);
+
+			vi.mocked(toArticles).mockImplementation(async (articles) =>
+				articles.map((article) => ({
+					id: article.id,
+					author: article.data.author,
+					category: article.data.category,
+					tags: article.data.tags,
+					draft: article.data.draft,
+					featured: article.data.featured,
+					date: article.data.date,
+					lastModified: article.data.lastModified,
+				})),
+			);
+			vi.mocked(toNotionArticles).mockImplementation(async (articles) =>
+				articles.map((article) => ({
+					id: article.id,
+					author: article.data.author,
+					category: article.data.category,
+					tags: article.data.tags,
+					draft: article.data.draft,
+					featured: article.data.featured,
+					date: article.data.date,
+					lastModified: article.data.lastModified,
+				})),
+			);
+
+			const articles = await getArticles();
+			expect(articles.map((article) => article.id)).toEqual([
+				"en/notion-1",
+				"en/article-1",
+				"en/article-2",
+			]);
 		});
 	});
 
@@ -272,11 +466,16 @@ describe("ArticleService", () => {
 			const articles = await getAllArticlesIncludingExternal();
 			// Should return non-draft articles from both collections
 			// mockArticles: 2 non-draft (en/article-1, en/article-3)
+			// mockNotionArticles: 2 non-draft (en/article-1, en/notion-1)
 			// mockExternalArticles: 1 non-draft (en/external-1)
 			// After deduplication: en/article-1 should appear only once
 			expect(articles.length).toBeGreaterThanOrEqual(2);
 			expect(getCollection).toHaveBeenCalledWith(
 				"articles",
+				expect.any(Function),
+			);
+			expect(getCollection).toHaveBeenCalledWith(
+				"notionArticles",
 				expect.any(Function),
 			);
 			expect(getCollection).toHaveBeenCalledWith(

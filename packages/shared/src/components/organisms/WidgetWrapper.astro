@@ -5,10 +5,15 @@ import WidgetTagCloud from "@/components/molecules/WidgetTagCloud.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
 import { type Lang } from "@/i18n";
+import { LOCALES } from "@/i18n/types";
 import type { BlogPost } from "@/lib/blog-post.utils";
 
 const { pathname } = Astro.url;
-const isBlogRoot = pathname.endsWith("/blog");
+const localeRootList = Object.keys(LOCALES).map((lang) => `/${lang}`);
+const localeRoots = new Set(localeRootList);
+const normalizedPath =
+	pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+const isBlogRoot = normalizedPath === "/" || localeRoots.has(normalizedPath);
 const currentLocale = Astro.currentLocale as Lang;
 
 // Use the same logic as the blog index: combine internal and external articles,
@@ -77,7 +82,11 @@ const categories = allPosts.reduce(
 const categoryList = Array.from(categories.values());
 ---
 
-<div id="widget-wrapper" class="w-full px-0 lg:w-full sticky top-8">
+<div
+	id="widget-wrapper"
+	class="w-full px-0 lg:w-full sticky top-8"
+	data-locale-roots={JSON.stringify(localeRootList)}
+>
 	<slot name="widget">
 		{
 			!isBlogRoot && (
@@ -108,10 +117,16 @@ if (typeof window !== 'undefined') {
 		cleanup();
 
 		const categoryEl = document.getElementById('categoryWidget');
-		// if the url is /blog or es/blog, remove the category widget
+		// if the url is / or /{lang}, remove the category widget
 		if (categoryEl) {
-			const href = window.location?.href || '';
-			const isBlogRoot = href.endsWith('/blog') || href.endsWith('/blog/');
+			const path = new URL(window.location?.href || '', window.location.origin).pathname;
+			const normalized = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+			const localeRoots = JSON.parse(
+				document
+					.getElementById('widget-wrapper')
+					?.dataset.localeRoots ?? '[]',
+			);
+			const isBlogRoot = normalized === '/' || localeRoots.includes(normalized);
 			if (isBlogRoot) {
 				categoryEl.classList.add('hidden');
 			} else {
