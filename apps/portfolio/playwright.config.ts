@@ -10,7 +10,8 @@ const resolvedPortlessPort = Number.isNaN(portlessPort) ? 1355 : portlessPort;
 const portlessStateDir =
 	process.env.PORTLESS_STATE_DIR ?? path.join(os.homedir(), ".portless");
 const portlessCaPath = path.join(portlessStateDir, "ca.pem");
-const usePortless = (process.env.PW_USE_PORTLESS ?? "1") !== "0";
+const usePortless =
+	(process.env.PW_USE_PORTLESS ?? (process.env.CI ? "0" : "1")) !== "0";
 const devPortRaw = process.env.E2E_DEV_PORT ?? "4321";
 const devPort = Number.parseInt(devPortRaw, 10);
 const resolvedDevPort = Number.isNaN(devPort) ? 4321 : devPort;
