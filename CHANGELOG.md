@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.1...v2.0.2) (2026-03-13)
+
+
+### Bug Fixes
+
+* **deps:** update astro to v5.18.0 ([#1649](https://github.com/yacosta738/yacosta738.github.io/issues/1649)) ([ce55ba3](https://github.com/yacosta738/yacosta738.github.io/commit/ce55ba314e1fcc693c0e9e7d05adfc528847e0bb))
+
 ## [2.0.1](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.0...v2.0.1) (2026-03-13)
 
 
