@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.2...v2.0.3) (2026-03-13)
+
+
+### Bug Fixes
+
+* **notion-loader:** improve error handling and logging for Notion API failures ([1db6c9f](https://github.com/yacosta738/yacosta738.github.io/commit/1db6c9f72a43cae076482b5815824d881f852142))
+
 ## [2.0.2](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.1...v2.0.2) (2026-03-13)
 
 
