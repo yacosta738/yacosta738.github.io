@@ -54,7 +54,7 @@
 		"notion:sync-taxonomy": "node scripts/notion-sync-taxonomy.mjs"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.4",
+		"@biomejs/biome": "2.4.6",
 		"@semantic-release/exec": "7.1.0",
 		"@semantic-release/github": "12.0.6",
 		"@semantic-release/npm": "13.1.5",
@@ -65,7 +65,14 @@
 	"pnpm": {
 		"overrides": {
 			"fast-xml-parser": "^5.3.8",
-			"h3": "^1.15.5"
+			"h3": "^1.15.5",
+			"vite": "^6.0.0"
+		},
+		"peerDependencyRules": {
+			"ignoreMissing": [
+				"astro",
+				"vite"
+			]
 		}
 	}
 }

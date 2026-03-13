@@ -16,13 +16,14 @@ import {
 } from "@notionhq/client";
 import type { MarkdownHeading } from "astro";
 import type { Loader, LoaderContext } from "astro/loaders";
-import type { Root } from "hast";
+import type { Element as ElementNode, Root } from "hast";
 import { fileToUrl, type NotionLoaderOptions } from "notion-astro-loader";
 import notionRehype from "notion-rehype-k";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeStringify from "rehype-stringify";
 import { type Plugin, unified } from "unified";
+import { visit } from "unist-util-visit";
 import {
 	mapNotionArticleEntry,
 	type NotionArticleData,
@@ -83,6 +84,15 @@ const applyPlugin = (
 const baseProcessor = unified()
 	.use(notionRehype, {})
 	.use(rehypeSlug)
+	.use(function rehypeKatexWorkaround() {
+		return (tree) => {
+			visit(tree, "element", (node: ElementNode) => {
+				if (!node.properties) {
+					node.properties = {};
+				}
+			});
+		};
+	})
 	.use(rehypeKatex as unknown as Plugin)
 	.use(rehypeStringify);
 
