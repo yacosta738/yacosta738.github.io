@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.4...v2.0.5) (2026-03-13)
+
+
+### Bug Fixes
+
+* **deps:** update rehype-stringify to ^10.0.1 ([#1725](https://github.com/yacosta738/yacosta738.github.io/issues/1725)) ([2657c56](https://github.com/yacosta738/yacosta738.github.io/commit/2657c56260816d8e35a34eaab152f37bbb8efb99))
+
 ## [2.0.4](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.3...v2.0.4) (2026-03-13)
 
 
