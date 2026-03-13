@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.3...v2.0.4) (2026-03-13)
+
+
+### Bug Fixes
+
+* Keep mobile drawer trigger clear of first content card ([#1733](https://github.com/yacosta738/yacosta738.github.io/issues/1733)) ([daa6646](https://github.com/yacosta738/yacosta738.github.io/commit/daa66469d8e83a4f42405ed5e7e4840cc95b572d))
+
 ## [2.0.3](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.2...v2.0.3) (2026-03-13)
 
 
