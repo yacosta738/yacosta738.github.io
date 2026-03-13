@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.0...v2.0.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* **mapper:** filter out invalid tags in article mapping ([#1729](https://github.com/yacosta738/yacosta738.github.io/issues/1729)) ([4360b63](https://github.com/yacosta738/yacosta738.github.io/commit/4360b6334432968c1b367e2d629c1798a9931aa9))
+
 # [2.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v1.13.0...v2.0.0) (2026-03-13)
 
 
