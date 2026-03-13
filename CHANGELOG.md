@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.8...v2.0.9) (2026-03-13)
+
+
+### Bug Fixes
+
+* **blog:** route blog links and guard content refs ([#1741](https://github.com/yacosta738/yacosta738.github.io/issues/1741)) ([f1f543c](https://github.com/yacosta738/yacosta738.github.io/commit/f1f543c6fe672b5403e9b73a4b2f1d952563f69a))
+
 ## [2.0.6](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.5...v2.0.6) (2026-03-13)
 
 
