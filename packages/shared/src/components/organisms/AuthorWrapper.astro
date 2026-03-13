@@ -11,8 +11,8 @@ const { author, ...attrs } = Astro.props;
 const { name, email, avatar, bio, location, socials } = author;
 ---
 
-<div class={cn("blog-author-hero", attrs.class)} {...attrs}>
-    <div class="blog-author-hero__content">
+<div class={cn("author-hero", attrs.class)} {...attrs}>
+    <div class="author-hero__content">
         <AuthorCard
             name={name}
             email={email}
@@ -20,6 +20,6 @@ const { name, email, avatar, bio, location, socials } = author;
             location={location}
             socials={socials}
         />
-        <p class="blog-author-hero__bio">{bio}</p>
+        <p class="author-hero__bio">{bio}</p>
     </div>
 </div>

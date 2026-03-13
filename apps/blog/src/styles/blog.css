@@ -156,7 +156,7 @@ h6 {
 	animation: blog-rise 0.6s ease both;
 }
 
-.blog-author-hero {
+.author-hero {
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -166,7 +166,7 @@ h6 {
 	overflow: hidden;
 }
 
-.blog-author-hero::before {
+.author-hero::before {
 	content: "";
 	position: absolute;
 	inset: 0;
@@ -177,7 +177,7 @@ h6 {
 	pointer-events: none;
 }
 
-.blog-author-hero__content {
+.author-hero__content {
 	position: relative;
 	z-index: 1;
 	display: flex;
@@ -191,30 +191,40 @@ h6 {
 	animation: blog-rise 0.6s ease both;
 }
 
-.blog-author-card {
+.author-card {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 0.85rem;
 }
 
-.blog-author-avatar {
+.author-avatar {
 	width: 96px;
 	height: 96px;
 	border-radius: 999px;
 	border: 3px solid var(--color-background);
 	box-shadow: 0 12px 28px rgba(12, 16, 20, 0.18);
 	background: var(--color-background-secondary);
+	overflow: hidden;
 }
 
-.blog-author-card__meta {
+.author-avatar img,
+.author-avatar picture {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	border-radius: inherit;
+}
+
+.author-card__meta {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 0.35rem;
 }
 
-.blog-author-name {
+.author-name {
 	margin: 0;
 	font-size: clamp(1.7rem, 1.4rem + 1.2vw, 2.5rem);
 	line-height: 1.1;
@@ -222,7 +232,7 @@ h6 {
 	color: var(--color-foreground);
 }
 
-.blog-author-location {
+.author-location {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -231,18 +241,18 @@ h6 {
 	color: var(--color-foreground-muted);
 }
 
-.blog-author-location__icon {
+.author-location__icon {
 	width: 0.85rem;
 	height: 0.85rem;
 }
 
-.blog-author-socials {
+.author-socials {
 	margin-top: 0.6rem;
 	justify-content: center;
 	width: 100%;
 }
 
-.blog-author-hero__bio {
+.author-hero__bio {
 	margin: 0;
 	max-width: 60ch;
 	font-size: clamp(1rem, 0.95rem + 0.4vw, 1.15rem);
@@ -674,15 +684,15 @@ h6 {
 		padding-top: 3.5rem;
 	}
 
-	.blog-author-hero {
+	.author-hero {
 		padding: 2.75rem 0 2rem;
 	}
 
-	.blog-author-hero__content {
+	.author-hero__content {
 		padding: 0.5rem 0.75rem;
 	}
 
-	.blog-author-avatar {
+	.author-avatar {
 		width: 84px;
 		height: 84px;
 	}
@@ -714,7 +724,7 @@ h6 {
 	.blog-pill,
 	.blog-article-card__media img,
 	.blog-hero__content,
-	.blog-author-hero__content {
+	.author-hero__content {
 		transition: none;
 		animation: none;
 	}
