@@ -10,19 +10,6 @@
 				"npmPublish": false
 			}
 		],
-		[
-			"@semantic-release/git",
-			{
-				"assets": [
-					"package.json",
-					"apps/*/package.json",
-					"pnpm-lock.yaml",
-					"CHANGELOG.md"
-				],
-				"message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
-				"push": false
-			}
-		],
 		"@semantic-release/github"
 	]
 }
