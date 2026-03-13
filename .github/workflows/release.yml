@@ -97,6 +97,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run semantic-release
+        id: semantic_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -107,49 +108,26 @@ jobs:
         run: |
           echo "🚀 Running semantic-release..."
           pnpm semantic-release
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Create Release PR
-        if: success()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Get the version from package.json (updated by semantic-release)
-          VERSION=$(node -p "require('./package.json').version")
-          
-          if [ -n "$VERSION" ]; then
-            # Create release tag
-            TAG_NAME="v$VERSION"
-            
-            # Configure git user for commits
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            
-            # Add all changes and create commit
-            git add -A
-            git commit -m "chore(release): $VERSION [skip ci]" || echo "No changes to commit"
-            
-            # Create and push tag
-            git tag -d $TAG_NAME 2>/dev/null || true
-            git tag $TAG_NAME
-            
-            # Create release branch from current state (main with changes)
-            RELEASE_BRANCH="release/$(echo $VERSION | sed 's/v//')"
-            git checkout -b "$RELEASE_BRANCH"
-            
-            # Push release branch with tag
-            git push origin "$RELEASE_BRANCH" --set-upstream
-            git push origin "$TAG_NAME"
-            
-            # Create Pull Request
-            gh pr create --base main --head "$RELEASE_BRANCH" \
-              --title "Release $TAG_NAME" \
-              --body "## Release $TAG_NAME\n\nThis PR contains the release changes created by Semantic Release.\n\nPlease review and merge this PR to complete the release."
-            
-            echo "✅ Created PR for release $TAG_NAME"
-          else
-            echo "No version found, skipping PR creation"
-            exit 1
-          fi
+        if: success() && steps.semantic_release.outputs.version != ''
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(release): ${{ steps.semantic_release.outputs.version }} [skip ci]"
+          branch: release/${{ steps.semantic_release.outputs.version }}
+          title: "chore(release): ${{ steps.semantic_release.outputs.version }}"
+          body: |
+            ## Release ${{ steps.semantic_release.outputs.version }}
+
+            This PR contains the release changes created by Semantic Release.
+
+            Please review and merge this PR to complete the release.
+
+            📋 See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for full release notes.
+          base: main
 
       - name: Release summary
         if: success()
