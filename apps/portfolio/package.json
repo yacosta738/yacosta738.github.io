@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"packageManager": "pnpm@10.32.1",
 	"type": "module",
 	"scripts": {
@@ -39,7 +39,7 @@
 		"@astrojs/rss": "^4.0.17",
 		"@astrojs/sitemap": "^3.7.1",
 		"@tailwindcss/vite": "^4.2.1",
-		"astro": "5.17.3",
+		"astro": "5.18.0",
 		"astro-compress": "2.3.9",
 		"astro-pagefind": "^1.8.5",
 		"mdast-util-to-string": "^4.0.0",
