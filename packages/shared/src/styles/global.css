@@ -867,6 +867,18 @@ h4 {
 		background: var(--color-background-secondary);
 	}
 
+	.ui-icon-button--ghost {
+		background: transparent;
+		border-color: transparent;
+		color: var(--color-foreground-muted);
+	}
+
+	.ui-icon-button--ghost:hover {
+		background: var(--color-background-secondary);
+		border-color: var(--color-border);
+		color: var(--color-brand-accent);
+	}
+
 	.ui-icon-button:focus-visible {
 		outline: 2px solid var(--color-brand-accent);
 		outline-offset: 2px;
