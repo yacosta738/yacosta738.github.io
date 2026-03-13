@@ -11,24 +11,15 @@ const { author, ...attrs } = Astro.props;
 const { name, email, avatar, bio, location, socials } = author;
 ---
 
-<div
-    class={cn(
-        "flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12 relative p-8",
-        "border-b border-brand-accent",
-        attrs.class,
-    )}
-    {...attrs}
->
-    <AuthorCard
-        name={name}
-        email={email}
-        avatar={avatar}
-        location={location}
-        socials={socials}
-    />
-    <p
-        class="font-body text-base font-normal tracking-normal leading-[140%] max-w-md relative text-foreground"
-    >
-        {bio}
-    </p>
+<div class={cn("author-hero", attrs.class)} {...attrs}>
+    <div class="author-hero__content">
+        <AuthorCard
+            name={name}
+            email={email}
+            avatar={avatar}
+            location={location}
+            socials={socials}
+        />
+        <p class="author-hero__bio">{bio}</p>
+    </div>
 </div>

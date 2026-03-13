@@ -25,7 +25,7 @@ const t = useTranslations(currentLocale);
 		type="button"
 		data-drawer-target={drawerTarget}
 		data-drawer-placement="right"
-		class="menu-toggle"
+		class="menu-toggle ui-icon-button"
 		aria-label={t("menu.open")}
 		aria-expanded="false"
 		aria-controls={drawerTarget}
@@ -88,8 +88,9 @@ const t = useTranslations(currentLocale);
 	height: 60px;
 	width: 60px;
 	padding: 0;
-	background: transparent;
-	border: none;
+	background: var(--color-background-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 999px;
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
 	-moz-user-select: none;
@@ -108,9 +109,17 @@ const t = useTranslations(currentLocale);
 	transition:
 		stroke-dasharray 400ms,
 		stroke-dashoffset 400ms;
-	stroke: #64ffda;
+	stroke: var(--color-foreground);
 	stroke-width: 5.5;
 	stroke-linecap: round;
+}
+
+.menu-toggle:hover {
+	border-color: var(--color-brand-accent);
+}
+
+.menu-toggle:hover .line {
+	stroke: var(--color-brand-accent);
 }
 
 .menu-toggle .ham7 .top {
@@ -149,7 +158,7 @@ const t = useTranslations(currentLocale);
 }
 
 .menu-toggle:focus-visible {
-	outline: 2px solid #64ffda;
+	outline: 2px solid var(--color-brand-accent);
 	outline-offset: 4px;
 	border-radius: 9999px;
 }

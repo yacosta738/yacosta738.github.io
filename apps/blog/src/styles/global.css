@@ -735,6 +735,134 @@ h4 {
 
 /* Navigation Menu Styles - Based on original portfolio */
 @layer components {
+	.ui-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10px;
+		font-weight: 600;
+		transition:
+			background-color 200ms var(--ease-in-out),
+			border-color 200ms var(--ease-in-out),
+			color 200ms var(--ease-in-out),
+			transform 200ms var(--ease-in-out);
+	}
+
+	.ui-button:focus-visible {
+		outline: 2px solid var(--color-brand-accent);
+		outline-offset: 2px;
+	}
+
+	.ui-button--sm {
+		height: 32px;
+		padding: 0 12px;
+		font-size: 0.75rem;
+		gap: 0.4rem;
+	}
+
+	.ui-button--md {
+		height: 40px;
+		padding: 0 20px;
+		font-size: 0.85rem;
+		gap: 0.5rem;
+	}
+
+	.ui-button--lg {
+		height: 48px;
+		padding: 0 24px;
+		font-size: 0.95rem;
+		gap: 0.6rem;
+	}
+
+	.ui-button--xl {
+		height: 56px;
+		padding: 0 32px;
+		font-size: 1.05rem;
+		gap: 0.7rem;
+	}
+
+	.ui-button--primary,
+	.ui-button--accent {
+		background: var(--color-brand-accent);
+		color: var(--color-primary-foreground);
+		border: 1px solid transparent;
+	}
+
+	.ui-button--primary:hover,
+	.ui-button--accent:hover {
+		background: var(--color-brand-accent-hover);
+	}
+
+	.ui-button--secondary {
+		background: var(--color-background-secondary);
+		color: var(--color-foreground);
+		border: 1px solid var(--color-border);
+	}
+
+	.ui-button--secondary:hover {
+		border-color: var(--color-brand-accent);
+		color: var(--color-brand-accent);
+	}
+
+	.ui-button--outline {
+		background: transparent;
+		color: var(--color-brand-accent);
+		border: 1px solid var(--color-brand-accent);
+	}
+
+	.ui-button--outline:hover {
+		background: var(--color-brand-accent);
+		color: var(--color-primary-foreground);
+	}
+
+	.ui-button--ghost {
+		background: transparent;
+		color: var(--color-foreground);
+		border: 1px solid transparent;
+	}
+
+	.ui-button--ghost:hover {
+		background: var(--color-background-secondary);
+	}
+
+	.ui-button--destructive {
+		background: #dc2626;
+		color: #ffffff;
+		border: 1px solid transparent;
+	}
+
+	.ui-button--destructive:hover {
+		background: #b91c1c;
+	}
+
+	.ui-icon-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		background: var(--color-background-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-foreground);
+		transition:
+			background-color 200ms var(--ease-in-out),
+			border-color 200ms var(--ease-in-out),
+			color 200ms var(--ease-in-out),
+			transform 200ms var(--ease-in-out);
+	}
+
+	.ui-icon-button:hover {
+		border-color: var(--color-brand-accent);
+		color: var(--color-brand-accent);
+		background: var(--color-background-secondary);
+	}
+
+	.ui-icon-button:focus-visible {
+		outline: 2px solid var(--color-brand-accent);
+		outline-offset: 2px;
+	}
+
 	/* Typography classes */
 	.font-titles {
 		font-family: var(--font-titles);
