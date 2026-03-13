@@ -554,6 +554,13 @@ export const createCachedNotionLoader = (
 	return {
 		name: "notion-articles-loader",
 		async load(context) {
+			context.logger.info(
+				`Notion env check: token=${loaderOptions.auth ? "set" : "missing"} (len ${
+					loaderOptions.auth?.length ?? 0
+				}), database=${loaderOptions.database_id ? "set" : "missing"} (len ${
+					loaderOptions.database_id?.length ?? 0
+				}), platform=${platformId ? "set" : "missing"} (len ${platformId?.length ?? 0})`,
+			);
 			if (!loaderOptions.auth || !loaderOptions.database_id) {
 				context.logger.warn(
 					"Notion credentials missing; falling back to cached entries.",
