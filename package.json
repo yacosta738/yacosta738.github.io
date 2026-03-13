@@ -51,7 +51,8 @@
 		"cloudflare:check": "bash scripts/cloudflare-check.sh",
 		"cloudflare:preview": "pnpm --filter=portfolio build && pnpm --filter=portfolio preview",
 		"notion:sync-authors": "node scripts/notion-sync-authors.mjs",
-		"notion:sync-taxonomy": "node scripts/notion-sync-taxonomy.mjs"
+		"notion:sync-taxonomy": "node scripts/notion-sync-taxonomy.mjs",
+		"clean": "pnpm --filter=portfolio clean && pnpm --filter=blog clean && pnpm --filter=yap-api clean"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.6",
@@ -59,6 +60,7 @@
 		"@semantic-release/github": "12.0.6",
 		"@semantic-release/npm": "13.1.5",
 		"playwright": "1.58.2",
+		"rimraf": "^6.1.3",
 		"semantic-release": "^25.0.3",
 		"vitest": "^4.0.18"
 	},
