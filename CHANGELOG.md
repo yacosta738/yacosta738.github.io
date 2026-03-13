@@ -1,3 +1,10 @@
+## [2.0.8](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.7...v2.0.8) (2026-03-13)
+
+
+### Bug Fixes
+
+* **notion-loader:** remove verbose logging for Notion environment checks ([759030a](https://github.com/yacosta738/yacosta738.github.io/commit/759030ad63b7c4d6f728d9ffca00afb8965fac24))
+
 ## [2.0.5](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.4...v2.0.5) (2026-03-13)
 
 
