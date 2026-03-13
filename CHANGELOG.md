@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.5...v2.0.6) (2026-03-13)
+
+
+### Bug Fixes
+
+* **deps:** update fast-xml-parser to ^5.5.1 ([#1697](https://github.com/yacosta738/yacosta738.github.io/issues/1697)) ([a174738](https://github.com/yacosta738/yacosta738.github.io/commit/a174738968ae07764423cccba71043e30de387b2))
+
 ## [2.0.5](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.4...v2.0.5) (2026-03-13)
 
 
