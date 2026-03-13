@@ -588,9 +588,21 @@ export const createCachedNotionLoader = (
 					entries: mappedEntries,
 				});
 			} catch (error) {
+				const errorMessage =
+					error instanceof Error ? error.message : String(error);
 				context.logger.warn(
-					`Notion loader failed; attempting cache fallback. ${String(error)}`,
+					`Notion loader failed; attempting cache fallback. ${errorMessage}`,
 				);
+				if (/api token is invalid/i.test(errorMessage)) {
+					context.logger.warn(
+						"Notion token rejected. Check NOTION_TOKEN in build env and re-share the database with the integration.",
+					);
+				}
+				if (/could not find database|object not found/i.test(errorMessage)) {
+					context.logger.warn(
+						"Notion database not found or not shared. Verify NOTION_DATABASE_ID and ensure the integration has access.",
+					);
+				}
 				const hasCache = await applyCache(context, cacheUrl);
 				if (!hasCache) {
 					context.logger.warn(
