@@ -6,6 +6,7 @@
 	"scripts": {
 		"build": "echo '🚀 Validating configuration...' && wrangler deploy --dry-run",
 		"check": "pnpm test:unit && pnpm build",
+		"clean": "rimraf dist .wrangler coverage",
 		"deploy": "wrangler deploy",
 		"dev": "PORTLESS_HTTPS=1 portless --name api --app-port 8787 wrangler dev",
 		"start": "PORTLESS_HTTPS=1 portless --name api --app-port 8787 wrangler dev",
@@ -27,6 +28,7 @@
 		"@types/node": "25.4.0",
 		"@types/service-worker-mock": "^2.0.4",
 		"@vitest/coverage-v8": "^4.0.18",
+		"rimraf": "^6.1.3",
 		"vitest": "^4.0.18",
 		"wrangler": "catalog:"
 	}

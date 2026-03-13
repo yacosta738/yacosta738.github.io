@@ -18,6 +18,9 @@ export async function toArticle(
 	const author = await getEntry(articleData.data.author);
 	const category = await getEntry(articleData.data.category);
 	const tags = await getEntries(articleData.data.tags);
+	const tagEntries = tags.filter((tag): tag is CollectionEntry<"tags"> =>
+		Boolean(tag),
+	);
 
 	if (!author) {
 		throw new Error(`Author not found for article: ${articleData.id}`);
@@ -32,7 +35,7 @@ export async function toArticle(
 		description: articleData.data.description,
 		author: toAuthor(author),
 		cover: articleData.data.cover,
-		tags: tags.map(toTag),
+		tags: tagEntries.map(toTag),
 		category: toCategory(category),
 		featured: articleData.data.featured,
 		draft: articleData.data.draft,
@@ -71,6 +74,9 @@ export async function toExternalArticle(
 	const author = await getEntry(articleData.data.author);
 	const category = await getEntry(articleData.data.category);
 	const tags = await getEntries(articleData.data.tags);
+	const tagEntries = tags.filter((tag): tag is CollectionEntry<"tags"> =>
+		Boolean(tag),
+	);
 
 	if (!author) {
 		throw new Error(`Author not found for external article: ${articleData.id}`);
@@ -87,7 +93,7 @@ export async function toExternalArticle(
 		description: articleData.data.description,
 		author: toAuthor(author),
 		cover: articleData.data.cover,
-		tags: tags.map(toTag),
+		tags: tagEntries.map(toTag),
 		category: toCategory(category),
 		featured: false, // externalArticles don't have featured field
 		draft: articleData.data.draft ?? false,
@@ -131,6 +137,9 @@ export async function toNotionArticle(
 		(await getEntry(fallbackAuthorId));
 	const category = await getEntry(articleData.data.category);
 	const tags = await getEntries(articleData.data.tags);
+	const tagEntries = tags.filter((tag): tag is CollectionEntry<"tags"> =>
+		Boolean(tag),
+	);
 
 	if (!author) {
 		throw new Error(`Author not found for notion article: ${articleData.id}`);
@@ -145,7 +154,7 @@ export async function toNotionArticle(
 		description: articleData.data.description,
 		author: toAuthor(author),
 		cover: articleData.data.cover,
-		tags: tags.map(toTag),
+		tags: tagEntries.map(toTag),
 		category: toCategory(category),
 		featured: articleData.data.featured ?? false,
 		draft: articleData.data.draft ?? false,
