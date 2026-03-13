@@ -1,3 +1,10 @@
+## [2.0.7](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.6...v2.0.7) (2026-03-13)
+
+
+### Bug Fixes
+
+* **notion-loader:** enhance logging for Notion environment checks ([3c8b6f2](https://github.com/yacosta738/yacosta738.github.io/commit/3c8b6f2ed2b90574769555c37f65911446b280bf))
+
 ## [2.0.5](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.4...v2.0.5) (2026-03-13)
 
 
