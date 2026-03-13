@@ -1,6 +1,6 @@
 {
 	"name": "yap-api",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"private": true,
 	"packageManager": "pnpm@10.30.3",
 	"scripts": {
@@ -23,7 +23,7 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20260305.0",
+		"@cloudflare/workers-types": "^4.20260305.1",
 		"@types/node": "25.3.5",
 		"@types/service-worker-mock": "^2.0.4",
 		"@vitest/coverage-v8": "^4.0.18",
