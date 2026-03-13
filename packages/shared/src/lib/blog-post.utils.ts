@@ -1,6 +1,7 @@
 import type Article from "@/core/article/article.model";
 import type ExternalArticle from "@/core/external-article/external-article.model";
 import { type Lang, useTranslatedPath } from "@/i18n";
+import { buildBlogUrl } from "@/utils/blog-url";
 
 /**
  * Union type for both regular and external articles
@@ -24,13 +25,18 @@ export function isArticle(post: BlogPost): post is Article {
 /**
  * Get the URL for a blog post (internal slug or external link)
  */
-export function getBlogPostUrl(post: BlogPost, lang: Lang): string {
+export function getBlogPostUrl(
+	post: BlogPost,
+	lang: Lang,
+	domain?: string,
+): string {
 	if (isExternalArticle(post)) {
 		return post.link;
 	}
 	// For regular articles, create internal URL
 	const translatePath = useTranslatedPath(lang);
-	return translatePath(`/${post.id.split("/").slice(1).join("/")}`);
+	const path = translatePath(`/${post.id.split("/").slice(1).join("/")}`);
+	return domain ? buildBlogUrl(path, domain) : path;
 }
 
 /**

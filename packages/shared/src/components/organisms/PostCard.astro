@@ -4,6 +4,7 @@ import { routes } from "@/configs/route.path";
 import type Article from "@/core/article/article.model";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
+import { buildBlogUrl, getBlogBaseUrl } from "@/utils/blog-url";
 
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
@@ -27,7 +28,13 @@ const formatMonthForDisplay = (date: Date) => {
 	return new Intl.DateTimeFormat(currentLocale, { month: "long" }).format(date);
 };
 
-const contentLink = translatePath(`/${cleanEntityId(id).toLowerCase()}/`);
+const siteOrigin = Astro.site?.origin;
+const blogBaseUrl = siteOrigin ? getBlogBaseUrl(siteOrigin) : "";
+const buildBlogHref = (path: string) =>
+	blogBaseUrl ? buildBlogUrl(path, siteOrigin) : path;
+const contentLink = buildBlogHref(
+	translatePath(`/${cleanEntityId(id).toLowerCase()}/`),
+);
 ---
 
 <article
@@ -53,12 +60,18 @@ const contentLink = translatePath(`/${cleanEntityId(id).toLowerCase()}/`);
       </h3>
       <p class="font-body text-lg leading-[140%] tracking-normal mb-3 max-w-[430px] w-full line-clamp-4 text-foreground-muted">{description}</p>
       <div class="flex items-center flex-wrap gap-2">
-                    <ByAuthor author={author} currentLocale={currentLocale} />
+							<ByAuthor
+								author={author}
+								currentLocale={currentLocale}
+								baseUrl={siteOrigin}
+							/>
           <div class="flex items-center flex-wrap gap-2">
               {tags?.map((tag) => (
                 <a
                   class="w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-foreground-muted"
-                  href={translatePath(`/${routes.tag}/${tag.slug}`)}
+									href={buildBlogHref(
+										translatePath(`/${routes.tag}/${tag.slug}`),
+									)}
                   aria-label={t("post.aria.tag", { tag: tag.title })}
                 >
                   {tag.title}

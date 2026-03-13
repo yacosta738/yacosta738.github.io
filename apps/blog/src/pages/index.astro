@@ -55,7 +55,7 @@ const indexUrl = translatePath("/");
 							image={post.cover}
 							title={post.title}
 							description={post.description}
-							url={getBlogPostUrl(post, currentLocale)}
+							url={getBlogPostUrl(post, currentLocale, Astro.site?.origin)}
 							loading="eager"
 						/>
 					))}

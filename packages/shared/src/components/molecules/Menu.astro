@@ -9,6 +9,7 @@ import { resolveNavigationMenuHref } from "@/core/menu/menu.service";
 import { useTranslatedPath, useTranslations } from "@/i18n";
 import LocaleSelect from "@/i18n/components/LocaleSelect.astro";
 import { cn } from "@/lib/utils";
+import { buildBlogUrl, getBlogBaseUrl } from "@/utils/blog-url";
 
 interface Props extends HTMLAttributes<"nav"> {
 	drawer?: boolean;
@@ -27,6 +28,10 @@ import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
 const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
+const siteOrigin = Astro.site?.origin || DOMAIN;
+const blogBaseUrl = siteOrigin ? getBlogBaseUrl(siteOrigin) : "";
+const blogHref = (path: string) =>
+	blogBaseUrl ? buildBlogUrl(path, siteOrigin) : path;
 ---
 
 <nav
@@ -68,7 +73,7 @@ const translatePath = useTranslatedPath(currentLocale);
 			class="rounded bg-transparent p-2 text-sm text-foreground-muted hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 border border-transparent hover:border-brand-accent"
 			aria-label={t("rssFeed")}
 			target="_blank"
-			href={translatePath("/rss.xml")}
+			href={blogHref(translatePath("/rss.xml"))}
 		>
 			<Icon name="lucide:rss" class="h-5 w-5" aria-hidden="true" />
 		</a>
