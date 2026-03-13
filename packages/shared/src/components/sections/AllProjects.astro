@@ -104,13 +104,13 @@ const translated = (
     {hasMoreProjects && (
       <button
         id="toggle-projects-btn"
-        class="more-button px-8 py-3 border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300 rounded font-medium text-sm uppercase tracking-wide flex items-center justify-center gap-2"
+        class="more-button ui-button ui-button--outline ui-button--lg uppercase tracking-wide flex items-center justify-center gap-2"
         data-show-text={translated('showMore', {}, 'Show More')}
         data-hide-text={translated('showLess', {}, 'Show Less')}
         aria-expanded="false"
       >
         <span id="toggle-btn-text">{translated('showMore', {}, 'Show More')}</span>
-        <span id="toggle-btn-spinner" class="hidden w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></span>
+        <span id="toggle-btn-spinner" class="hidden w-4 h-4 border-2 border-brand-accent border-t-transparent rounded-full animate-spin"></span>
       </button>
     )}
   </section>

@@ -18,21 +18,19 @@ const { name, email, avatar, location, socials } = Astro.props;
 const preparedImage = await findImage(avatar || "");
 ---
 
-<div class="flex items-center gap-3">
+<div class="blog-author-card">
     <OptimizedPicture
         src={preparedImage as unknown as any}
         alt={name}
-        class="size-20 rounded-full"
+        class="blog-author-avatar"
         loading="eager"
     />
-    <div class="text-foreground font-inter">
-        <h1 class="text-xl font-semibold tracking-tighter leading-[130%]">
-            {name}
-        </h1>
-        <div class="flex items-center gap-0.5 text-sm my-1 text-foreground-muted">
-            <Icon name="lucide:map-pin" class="size-3" />
+    <div class="blog-author-card__meta">
+        <h1 class="blog-author-name">{name}</h1>
+        <div class="blog-author-location">
+            <Icon name="lucide:map-pin" class="blog-author-location__icon" />
             {location}
         </div>
-        <AuthorSocials socials={socials} email={email} className="mt-2" />
+        <AuthorSocials socials={socials} email={email} className="blog-author-socials" />
     </div>
 </div>
