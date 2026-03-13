@@ -4,6 +4,48 @@ import { toCategory } from "../category";
 import { toTag } from "../tag";
 import type Article from "./article.model";
 
+const isStringReference = (value: unknown): value is string =>
+	typeof value === "string" && value.trim().length > 0;
+
+const isObjectReference = (
+	value: unknown,
+): value is { collection: string; id: string } =>
+	typeof value === "object" &&
+	value !== null &&
+	"collection" in value &&
+	"id" in value &&
+	typeof (value as { collection?: unknown }).collection === "string" &&
+	(value as { collection: string }).collection.trim().length > 0 &&
+	typeof (value as { id?: unknown }).id === "string" &&
+	(value as { id: string }).id.trim().length > 0;
+
+const isValidReference = (
+	value: unknown,
+): value is string | { collection: string; id: string } =>
+	isStringReference(value) || isObjectReference(value);
+
+type EntryWithId = { id?: string };
+
+const mapEntriesSafe = async <T extends EntryWithId, U>(
+	entries: T[],
+	mapper: (entry: T) => Promise<U>,
+	context: string,
+): Promise<U[]> => {
+	const results = await Promise.allSettled(entries.map(mapper));
+	return results.flatMap((result, index) => {
+		if (result.status === "fulfilled") {
+			return [result.value];
+		}
+		const id = entries[index]?.id ?? "unknown";
+		const message =
+			result.reason instanceof Error
+				? result.reason.message
+				: String(result.reason);
+		console.warn(`Skipping ${context} entry ${id}: ${message}`);
+		return [];
+	});
+};
+
 /**
  * Maps a collection entry of type "articles" to an Article object.
  *
@@ -15,9 +57,16 @@ import type Article from "./article.model";
 export async function toArticle(
 	articleData: CollectionEntry<"articles">,
 ): Promise<Article> {
-	const author = await getEntry(articleData.data.author);
-	const category = await getEntry(articleData.data.category);
-	const tags = await getEntries(articleData.data.tags);
+	const authorRef = articleData.data.author;
+	const categoryRef = articleData.data.category;
+	const author = isValidReference(authorRef)
+		? await getEntry(authorRef)
+		: undefined;
+	const category = isValidReference(categoryRef)
+		? await getEntry(categoryRef)
+		: undefined;
+	const tagRefs = (articleData.data.tags ?? []).filter(isValidReference);
+	const tags = await getEntries(tagRefs);
 	const tagEntries = tags.filter((tag): tag is CollectionEntry<"tags"> =>
 		Boolean(tag),
 	);
@@ -57,7 +106,7 @@ export async function toArticle(
 export async function toArticles(
 	articles: CollectionEntry<"articles">[],
 ): Promise<Article[]> {
-	return Promise.all(articles.map(toArticle));
+	return mapEntriesSafe(articles, toArticle, "article");
 }
 
 /**
@@ -71,9 +120,16 @@ export async function toArticles(
 export async function toExternalArticle(
 	articleData: CollectionEntry<"externalArticles">,
 ): Promise<Article> {
-	const author = await getEntry(articleData.data.author);
-	const category = await getEntry(articleData.data.category);
-	const tags = await getEntries(articleData.data.tags);
+	const authorRef = articleData.data.author;
+	const categoryRef = articleData.data.category;
+	const author = isValidReference(authorRef)
+		? await getEntry(authorRef)
+		: undefined;
+	const category = isValidReference(categoryRef)
+		? await getEntry(categoryRef)
+		: undefined;
+	const tagRefs = (articleData.data.tags ?? []).filter(isValidReference);
+	const tags = await getEntries(tagRefs);
 	const tagEntries = tags.filter((tag): tag is CollectionEntry<"tags"> =>
 		Boolean(tag),
 	);
@@ -115,7 +171,7 @@ export async function toExternalArticle(
 export async function toExternalArticles(
 	articles: CollectionEntry<"externalArticles">[],
 ): Promise<Article[]> {
-	return Promise.all(articles.map(toExternalArticle));
+	return mapEntriesSafe(articles, toExternalArticle, "external article");
 }
 
 /**
@@ -132,11 +188,17 @@ export async function toNotionArticle(
 	const fallbackAuthorId = articleData.id.startsWith("es/")
 		? "es/yuniel-acosta-perez"
 		: "en/yuniel-acosta-perez";
-	const author =
-		(await getEntry(articleData.data.author)) ??
-		(await getEntry(fallbackAuthorId));
-	const category = await getEntry(articleData.data.category);
-	const tags = await getEntries(articleData.data.tags);
+	const authorRef = articleData.data.author;
+	const categoryRef = articleData.data.category;
+	const primaryAuthor = isValidReference(authorRef)
+		? await getEntry(authorRef)
+		: undefined;
+	const author = primaryAuthor ?? (await getEntry(fallbackAuthorId));
+	const category = isValidReference(categoryRef)
+		? await getEntry(categoryRef)
+		: undefined;
+	const tagRefs = (articleData.data.tags ?? []).filter(isValidReference);
+	const tags = await getEntries(tagRefs);
 	const tagEntries = tags.filter((tag): tag is CollectionEntry<"tags"> =>
 		Boolean(tag),
 	);
@@ -145,7 +207,32 @@ export async function toNotionArticle(
 		throw new Error(`Author not found for notion article: ${articleData.id}`);
 	}
 	if (!category) {
-		throw new Error(`Category not found for notion article: ${articleData.id}`);
+		const fallbackCategoryId = articleData.id.startsWith("es/")
+			? "es/software-development"
+			: "en/software-development";
+		const fallbackCategory = await getEntry(fallbackCategoryId);
+		if (!fallbackCategory) {
+			throw new Error(
+				`Category not found for notion article: ${articleData.id}`,
+			);
+		}
+		return {
+			id: articleData.id,
+			title: articleData.data.title,
+			description: articleData.data.description,
+			author: toAuthor(author),
+			cover: articleData.data.cover,
+			tags: tagEntries.map(toTag),
+			category: toCategory(fallbackCategory),
+			featured: articleData.data.featured ?? false,
+			draft: articleData.data.draft ?? false,
+			body: articleData.body ?? "",
+			date: new Date(articleData.data.date),
+			lastModified: articleData.data.lastModified
+				? new Date(articleData.data.lastModified)
+				: undefined,
+			entry: articleData,
+		};
 	}
 
 	return {
@@ -176,5 +263,5 @@ export async function toNotionArticle(
 export async function toNotionArticles(
 	articles: CollectionEntry<"notionArticles">[],
 ): Promise<Article[]> {
-	return Promise.all(articles.map(toNotionArticle));
+	return mapEntriesSafe(articles, toNotionArticle, "notion article");
 }

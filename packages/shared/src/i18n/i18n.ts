@@ -32,8 +32,13 @@ import { useTranslations } from "./utils";
  * translatePath('/en/about', 'en'); // returns '/en/about' (prevents duplicate prefixes)
  */
 export function useTranslatedPath(lang: Lang) {
-	return function translatePath(path: string, targetLang: Lang = lang): string {
-		return buildLocalePath(path, targetLang);
+	const fallbackLang = (lang || DEFAULT_LOCALE) as Lang;
+	return function translatePath(
+		path: string,
+		targetLang: Lang = fallbackLang,
+	): string {
+		const resolvedLang = (targetLang || fallbackLang) as Lang;
+		return buildLocalePath(path, resolvedLang);
 	};
 }
 

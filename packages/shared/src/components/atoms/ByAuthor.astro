@@ -4,18 +4,24 @@ import type Author from "@/core/author/author.model";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
 import { cn } from "@/lib/utils";
+import { buildBlogUrl, getBlogBaseUrl } from "@/utils/blog-url";
 
 interface Props extends HTMLAttributes<"div"> {
 	author: Author;
 	currentLocale: Lang;
+	baseUrl?: string;
 }
-const { author, currentLocale, ...attrs } = Astro.props;
+const { author, currentLocale, baseUrl, ...attrs } = Astro.props;
 
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
-const authorPath = translatePath(
-	`/author/${cleanEntityId(author.slug).toLowerCase()}`,
-);
+const blogBaseUrl = baseUrl ? getBlogBaseUrl(baseUrl) : "";
+const authorPath = blogBaseUrl
+	? buildBlogUrl(
+			translatePath(`/author/${cleanEntityId(author.slug).toLowerCase()}`),
+			baseUrl,
+		)
+	: translatePath(`/author/${cleanEntityId(author.slug).toLowerCase()}`);
 ---
 
 <div

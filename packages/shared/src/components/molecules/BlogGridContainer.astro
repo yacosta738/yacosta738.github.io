@@ -126,7 +126,11 @@ for (let i = 0; i < totalPosts; i++) {
       }
 
       // Get the URL and link attributes for the post
-      const postUrl = getBlogPostUrl(post, currentLocale);
+		const postUrl = getBlogPostUrl(
+			post,
+			currentLocale,
+			Astro.site?.origin,
+		);
       const target = getBlogPostTarget(post);
       const rel = getBlogPostRel(post);
 

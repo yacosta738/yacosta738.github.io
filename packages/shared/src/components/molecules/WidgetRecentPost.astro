@@ -35,7 +35,11 @@ const t = useTranslations(currentLocale);
 				}
 				{recentPosts
 					.map((post) => {
-						const url = getBlogPostUrl(post, currentLocale);
+						const url = getBlogPostUrl(
+							post,
+							currentLocale,
+							Astro.site?.origin,
+						);
 						return { post, url };
 					})
 					.filter(({ url }) => {
