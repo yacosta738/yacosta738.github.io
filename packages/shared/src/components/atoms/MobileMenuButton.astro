@@ -25,7 +25,7 @@ const t = useTranslations(currentLocale);
 		type="button"
 		data-drawer-target={drawerTarget}
 		data-drawer-placement="right"
-		class="menu-toggle ui-icon-button"
+		class="menu-toggle ui-icon-button ui-icon-button--ghost"
 		aria-label={t("menu.open")}
 		aria-expanded="false"
 		aria-controls={drawerTarget}
@@ -34,7 +34,7 @@ const t = useTranslations(currentLocale);
 		<svg
 			class="ham hamRotate ham7"
 			viewBox="0 0 100 100"
-			width="60"
+			width="48"
 			aria-hidden="true"
 			focusable="false"
 		>
@@ -54,9 +54,9 @@ const t = useTranslations(currentLocale);
 <style>
 .menu-btn-box {
 	position: fixed;
-	top: calc(var(--header-height, 64px) / 2);
-	right: clamp(1rem, 4vw, 1.5rem);
-	transform: translateY(-50%);
+	top: calc(env(safe-area-inset-top, 0px) + 0.5rem);
+	right: calc(env(safe-area-inset-right, 0px) + clamp(0.75rem, 4vw, 1.25rem));
+	transform: translateY(0);
 	z-index: 70;
 	display: flex;
 	align-items: center;
@@ -65,7 +65,7 @@ const t = useTranslations(currentLocale);
 
 .menu-btn-box.is-hidden {
 	opacity: 0;
-	transform: translateY(-150%);
+	transform: translateY(-120%);
 	pointer-events: none;
 }
 
@@ -85,11 +85,11 @@ const t = useTranslations(currentLocale);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 60px;
-	width: 60px;
+	height: 52px;
+	width: 52px;
 	padding: 0;
-	background: var(--color-background-surface);
-	border: 1px solid var(--color-border);
+	background: transparent;
+	border: 1px solid transparent;
 	border-radius: 999px;
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
@@ -115,11 +115,17 @@ const t = useTranslations(currentLocale);
 }
 
 .menu-toggle:hover {
-	border-color: var(--color-brand-accent);
+	border-color: var(--color-border);
 }
 
 .menu-toggle:hover .line {
 	stroke: var(--color-brand-accent);
+}
+
+.menu-toggle.active-menu {
+	background: var(--color-background-secondary);
+	border-color: var(--color-brand-accent);
+	box-shadow: none;
 }
 
 .menu-toggle .ham7 .top {
