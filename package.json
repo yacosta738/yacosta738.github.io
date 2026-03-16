@@ -1,6 +1,6 @@
 {
 	"name": "yacosta-portfolio-monorepo",
-	"version": "2.0.10",
+	"version": "2.0.11",
 	"private": true,
 	"packageManager": "pnpm@10.32.1",
 	"scripts": {
@@ -68,7 +68,7 @@
 		"overrides": {
 			"fast-xml-parser": "^5.5.1",
 			"h3": "^1.15.5",
-			"vite": "^6.0.0"
+			"vite": "^6.0.15"
 		},
 		"peerDependencyRules": {
 			"ignoreMissing": [
