@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
+
+
+### Bug Fixes
+
+* **deps:** update @notionhq/client to ^2.3.0 ([#1724](https://github.com/yacosta738/yacosta738.github.io/issues/1724)) ([80d01be](https://github.com/yacosta738/yacosta738.github.io/commit/80d01be5802dc3bc14d47a7321cd9c8f8ab05988))
+
 ## [2.0.9](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.8...v2.0.9) (2026-03-13)
 
 
