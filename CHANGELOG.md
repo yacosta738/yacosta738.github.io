@@ -1,3 +1,11 @@
+## [2.0.12](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.11...v2.0.12) (2026-03-16)
+
+
+### Bug Fixes
+
+* **deps:** update caddy Docker tag to v2.11.2 ([#1743](https://github.com/yacosta738/yacosta738.github.io/issues/1743)) ([4ca9094](https://github.com/yacosta738/yacosta738.github.io/commit/4ca9094aae7b92e8a5b74fa7fbe274c1307dd6fb))
+* **deps:** update vite to ^6.0.15 ([#1746](https://github.com/yacosta738/yacosta738.github.io/issues/1746)) ([9c910c3](https://github.com/yacosta738/yacosta738.github.io/commit/9c910c3791e828d93936a96d83193bff530a16ad))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
