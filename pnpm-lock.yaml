@@ -105,7 +105,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       '@notionhq/client':
-        specifier: ^2.2.0
+        specifier: ^2.3.0
         version: 2.3.0
       '@tailwindcss/vite':
         specifier: ^4.2.1
@@ -7404,7 +7404,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 24.12.0
+      '@types/node': 25.4.0
 
   '@types/service-worker-mock@2.0.4': {}
 
