@@ -4,7 +4,7 @@ import { buildBlogListing } from "@blog/lib/blog-listing";
 import { getAllArticlesIncludingExternal, getArticles } from "@/core/article";
 import { getCategories } from "@/core/category";
 import { getExternalArticles } from "@/core/external-article";
-import { getTags } from "@/core/tag";
+import { getTagSlug, getTags } from "@/core/tag";
 import { DEFAULT_LOCALE } from "@/i18n";
 
 export const prerender = true;
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 		route = route.replace(/\/index$/, "");
 		route = route.replace(/^index$/, "");
 
-		if (!route || route.includes("[")) {
+		if (route.includes("[")) {
 			return null;
 		}
 
@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 	const routes = new Set<string>();
 	[...localizedPages, ...langPages, ...rootPages].forEach((filePath) => {
 		const route = normalizeRoute(filePath);
-		if (route) {
+		if (route !== null) {
 			routes.add(route);
 		}
 	});
@@ -72,17 +72,18 @@ export async function getStaticPaths() {
 
 	const tags = await getTags({ lang: defaultLocale });
 	for (const tag of tags) {
+		const tagSlug = getTagSlug(tag);
 		const tagArticles = allArticlesIncludingExternal.filter(
 			(article) =>
-				article.tags.some((tagItem) => tagItem.slug === tag.slug) &&
+				article.tags.some((tagItem) => getTagSlug(tagItem) === tagSlug) &&
 				article.id.startsWith(`${defaultLocale}/`),
 		);
 		if (tagArticles.length === 0) continue;
 
-		routes.add(`tag/${tag.slug}`);
+		routes.add(`tag/${tagSlug}`);
 		const tagPages = Math.ceil(tagArticles.length / postsPerPage);
 		for (let i = 2; i <= tagPages; i++) {
-			routes.add(`tag/${tag.slug}/page/${i}`);
+			routes.add(`tag/${tagSlug}/page/${i}`);
 		}
 	}
 

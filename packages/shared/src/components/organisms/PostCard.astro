@@ -2,6 +2,7 @@
 import ByAuthor from "@/components/atoms/ByAuthor.astro";
 import { routes } from "@/configs/route.path";
 import type Article from "@/core/article/article.model";
+import { getTagSlug } from "@/core/tag";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
 import { buildBlogUrl, getBlogBaseUrl } from "@/utils/blog-url";
@@ -66,14 +67,14 @@ const contentLink = buildBlogHref(
 								baseUrl={siteOrigin}
 							/>
           <div class="flex items-center flex-wrap gap-2">
-              {tags?.map((tag) => (
-                <a
-                  class="w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-foreground-muted"
-									href={buildBlogHref(
-										translatePath(`/${routes.tag}/${tag.slug}`),
-									)}
-                  aria-label={t("post.aria.tag", { tag: tag.title })}
-                >
+				{tags?.map((tag) => (
+					<a
+						class="w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-foreground-muted"
+						href={buildBlogHref(
+							translatePath(`/${routes.tag}/${getTagSlug(tag)}`),
+						)}
+						aria-label={t("post.aria.tag", { tag: tag.title })}
+					>
                   {tag.title}
                 </a>
               ))}

@@ -13,8 +13,7 @@ import type Tag from "./tag.model";
  * @returns {Tag} A Tag object with id and title
  */
 export function toTag(tagData: CollectionEntry<"tags">): Tag {
-	const fallbackSlug = cleanEntityId(tagData.id);
-	const slugFromData = tagData.data.slug?.trim();
+	const fallbackSlug = cleanEntityId(tagData.id).replace(/^tags\//, "");
 	const title = tagData.data.title.trim();
 
 	// Create slug from title with ReDoS-safe transformations
@@ -39,9 +38,6 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 	let slug = fallbackSlug;
 	if (slugFromTitle.length > 0) {
 		slug = slugFromTitle;
-	}
-	if (slugFromData && slugFromData.length > 0) {
-		slug = slugFromData;
 	}
 
 	return {

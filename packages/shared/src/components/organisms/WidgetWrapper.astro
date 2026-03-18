@@ -4,6 +4,7 @@ import WidgetRecentPost from "@/components/molecules/WidgetRecentPost.astro";
 import WidgetTagCloud from "@/components/molecules/WidgetTagCloud.astro";
 import { getArticles } from "@/core/article";
 import { getExternalArticles } from "@/core/external-article";
+import { getTagSlug } from "@/core/tag";
 import { type Lang } from "@/i18n";
 import { LOCALES } from "@/i18n/types";
 import type { BlogPost } from "@/lib/blog-post.utils";
@@ -38,7 +39,7 @@ const tags = allPosts.reduce(
 			return acc;
 		}
 		for (const tag of post.tags) {
-			const slug = (tag.slug || "").trim();
+			const slug = getTagSlug(tag).trim();
 			if (!slug) {
 				continue;
 			}

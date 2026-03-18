@@ -1,33 +1,21 @@
-import type { RenderedContent } from "astro:content";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type {
-	HtmlElementNode,
-	ListNode,
-	TextNode,
-} from "@jsdevtools/rehype-toc";
-import { toc as rehypeToc } from "@jsdevtools/rehype-toc";
-import {
-	Client,
-	isFullBlock,
-	isFullPage,
-	iteratePaginatedAPI,
-} from "@notionhq/client";
-import type { MarkdownHeading } from "astro";
 import type { Loader, LoaderContext } from "astro/loaders";
-import type { Element as ElementNode, Root } from "hast";
-import { fileToUrl, type NotionLoaderOptions } from "notion-astro-loader";
-import notionRehype from "notion-rehype-k";
-import rehypeKatex from "rehype-katex";
-import rehypeSlug from "rehype-slug";
-import rehypeStringify from "rehype-stringify";
-import { type Plugin, unified } from "unified";
-import { visit } from "unist-util-visit";
-import {
-	mapNotionArticleEntry,
-	type NotionArticleData,
-} from "./notion-article.mapper";
+import type { Element as ElementNode } from "hast";
+
+type NotionArticleData = {
+	title: string;
+	description: string;
+	date: string;
+	lastModified?: string;
+	cover?: string;
+	author: string;
+	tags: string[];
+	category: string;
+	draft?: boolean;
+	featured?: boolean;
+};
 
 type CachedNotionLoaderOptions = NotionLoaderOptions & {
 	cacheUrl: URL;
@@ -39,6 +27,38 @@ type CachedNotionLoaderOptions = NotionLoaderOptions & {
 	defaultTags?: string[];
 };
 
+type FileObject =
+	| { type: "external"; external: { url: string } }
+	| { type: "file"; file: { url: string } };
+
+type NotionLoaderOptions = {
+	auth?: string;
+	timeoutMs?: number;
+	baseUrl?: string;
+	notionVersion?: string;
+	fetch?: typeof fetch;
+	agent?: unknown;
+	database_id: string;
+	filter_properties?: string[];
+	sorts?: unknown[];
+	filter?: unknown;
+	archived?: boolean;
+	rehypePlugins?: ReadonlyArray<unknown>;
+};
+
+const fileToUrl = (file: FileObject | null | undefined): string | undefined => {
+	if (!file) {
+		return undefined;
+	}
+	if (file.type === "external") {
+		return file.external.url;
+	}
+	if (file.type === "file") {
+		return file.file.url;
+	}
+	return undefined;
+};
+
 type CachedEntry = {
 	id: string;
 	data: NotionArticleData;
@@ -46,6 +66,25 @@ type CachedEntry = {
 	digest?: string | number;
 	body?: string;
 	sourceId?: string;
+};
+
+type MarkdownHeading = {
+	depth: number;
+	slug: string;
+	text: string;
+};
+
+type UnistNode = {
+	type?: string;
+	children?: unknown[];
+};
+
+type RenderedContent = {
+	html: string;
+	metadata?: {
+		imagePaths?: string[];
+		headings?: MarkdownHeading[];
+	};
 };
 
 type NotionLoaderCache = {
@@ -65,7 +104,44 @@ const normalizeUrlValue = (value: unknown): string | undefined => {
 	return undefined;
 };
 
-type RehypePlugin = Plugin<unknown[], Root>;
+type RehypePlugin = (tree: unknown, file: unknown) => void;
+
+type NotionModuleBlocks = {
+	isFullBlock: (value: unknown) => boolean;
+	iteratePaginatedAPI: (
+		fn: (args: Record<string, unknown>) => Promise<unknown>,
+		args: Record<string, unknown>,
+	) => AsyncIterable<unknown>;
+};
+
+type NotionModuleLoad = {
+	Client: new (
+		opts: unknown,
+	) => {
+		databases: { query: (args: Record<string, unknown>) => Promise<unknown> };
+	};
+	isFullPage: (value: unknown) => boolean;
+	iteratePaginatedAPI: (
+		fn: (args: Record<string, unknown>) => Promise<unknown>,
+		args: Record<string, unknown>,
+	) => AsyncIterable<unknown>;
+};
+
+type NotionPage = {
+	id: string;
+	last_edited_time: string;
+	properties: Record<string, unknown>;
+	cover?: unknown | null;
+};
+
+type HtmlElementNode = {
+	tagName?: string;
+	properties?: { href?: string };
+	children?: Array<HtmlElementNode>;
+};
+
+type ListNode = HtmlElementNode;
+type TextNode = { value?: string };
 
 const applyPlugin = (
 	processor: unknown,
@@ -81,21 +157,6 @@ const applyPlugin = (
 		: typedProcessor.use(typedPlugin, options);
 };
 
-const baseProcessor = unified()
-	.use(notionRehype, {})
-	.use(rehypeSlug)
-	.use(function rehypeKatexWorkaround() {
-		return (tree) => {
-			visit(tree, "element", (node: ElementNode) => {
-				if (!node.properties) {
-					node.properties = {};
-				}
-			});
-		};
-	})
-	.use(rehypeKatex as unknown as Plugin)
-	.use(rehypeStringify);
-
 type RehypePluginConfig = unknown | string | readonly [unknown, unknown];
 
 const buildProcessor = (
@@ -103,14 +164,53 @@ const buildProcessor = (
 ) => {
 	let headings: MarkdownHeading[] = [];
 
-	const processorWithToc = baseProcessor().use(rehypeToc, {
-		customizeTOC(toc) {
-			headings = extractTocHeadings(toc as HtmlElementNode);
-			return false;
-		},
-	});
+	const processorPromise = (async () => {
+		const [
+			{ default: notionRehype },
+			{ default: rehypeSlug },
+			{ default: rehypeKatex },
+			{ default: rehypeStringify },
+			{ toc: rehypeToc },
+			{ unified },
+			{ visit },
+		] = await Promise.all([
+			import("notion-rehype-k"),
+			import("rehype-slug"),
+			import("rehype-katex"),
+			import("rehype-stringify"),
+			import("@jsdevtools/rehype-toc"),
+			import("unified"),
+			import("unist-util-visit"),
+		]);
 
-	const processorPromise = rehypePlugins.then((plugins) => {
+		const baseProcessor = unified()
+			.use(notionRehype, {})
+			.use(rehypeSlug)
+			.use(function rehypeKatexWorkaround() {
+				return (tree: unknown) => {
+					const visitElement = visit as (
+						tree: UnistNode,
+						test: "element",
+						visitor: (node: ElementNode) => void,
+					) => void;
+					visitElement(tree as UnistNode, "element", (node: ElementNode) => {
+						if (!node.properties) {
+							node.properties = {};
+						}
+					});
+				};
+			})
+			.use(rehypeKatex)
+			.use(rehypeStringify);
+
+		const processorWithToc = baseProcessor.use(rehypeToc, {
+			customizeTOC(toc: unknown) {
+				headings = extractTocHeadings(toc as HtmlElementNode);
+				return false;
+			},
+		});
+
+		const plugins = await rehypePlugins;
 		let processor: unknown = processorWithToc;
 		for (const config of plugins) {
 			let plugin: unknown;
@@ -120,17 +220,21 @@ const buildProcessor = (
 			} else {
 				plugin = config;
 			}
+			if (typeof plugin === "string") {
+				plugin = (await import(/* @vite-ignore */ plugin)).default;
+			}
 			processor = applyPlugin(processor, plugin, options);
 		}
-		return processor as ReturnType<typeof unified>;
-	});
+
+		return processor as { process: (value: unknown) => Promise<unknown> };
+	})();
 
 	return async function process(blocks: unknown[]) {
 		const processor = await processorPromise;
-		const vFile = await processor.process({ data: blocks } as Record<
+		const vFile = (await processor.process({ data: blocks } as Record<
 			string,
 			unknown
-		>);
+		>)) as { toString: () => string };
 		return { vFile, headings };
 	};
 };
@@ -144,45 +248,63 @@ const awaitAll = async <T>(iterable: AsyncIterable<T>): Promise<T[]> => {
 };
 
 const listBlocks = async function* (
-	client: Client,
+	client: unknown,
 	blockId: string,
 	resolveImage: (file: unknown) => string | undefined,
 ) {
-	for await (const block of iteratePaginatedAPI(client.blocks.children.list, {
-		block_id: blockId,
-	})) {
+	const { isFullBlock, iteratePaginatedAPI } = (await import(
+		"@notionhq/client"
+	)) as NotionModuleBlocks;
+	const typedClient = client as {
+		blocks: {
+			children: { list: (args: Record<string, unknown>) => Promise<unknown> };
+		};
+	};
+	for await (const block of iteratePaginatedAPI(
+		typedClient.blocks.children.list,
+		{
+			block_id: blockId,
+		},
+	)) {
 		if (!isFullBlock(block)) {
 			continue;
 		}
+		const typedBlock = block as {
+			id: string;
+			type: string;
+			has_children?: boolean;
+			image?: { type: string; caption?: unknown };
+		};
 
-		if (block.has_children) {
+		if (typedBlock.has_children) {
 			const children = await awaitAll(
-				listBlocks(client, block.id, resolveImage),
+				listBlocks(client, typedBlock.id, resolveImage),
 			);
-			const typedBlock = block as unknown as Record<
+			const typedBlockRecord = typedBlock as unknown as Record<
 				string,
 				{ children?: unknown[] }
 			>;
-			const entry = typedBlock[block.type];
+			const entry = typedBlockRecord[typedBlock.type];
 			if (entry && typeof entry === "object") {
 				entry.children = children;
 			}
 		}
 
-		if (block.type === "image") {
-			const url = resolveImage(block.image);
+		if (typedBlock.type === "image" && typedBlock.image) {
+			const url = resolveImage(typedBlock.image);
+			const baseBlock = typedBlock as unknown as Record<string, unknown>;
 			yield {
-				...block,
+				...baseBlock,
 				image: {
-					type: block.image.type,
-					[block.image.type]: url ?? "",
-					caption: block.image.caption,
+					type: typedBlock.image.type,
+					[typedBlock.image.type]: url ?? "",
+					caption: typedBlock.image.caption,
 				},
 			};
 			continue;
 		}
 
-		yield block;
+		yield typedBlock as unknown;
 	}
 };
 
@@ -195,13 +317,16 @@ const extractTocHeadings = (toc: HtmlElementNode): MarkdownHeading[] => {
 		ol: ListNode,
 		depth: number,
 	): MarkdownHeading[] => {
+		if (!ol.children || ol.children.length === 0) {
+			return [];
+		}
 		return ol.children.flatMap((li) => {
-			const [_link, subList] = li.children;
-			const link = _link as HtmlElementNode;
+			const [_link, subList] = li.children ?? [];
+			const link = _link as HtmlElementNode | undefined;
 			const currentHeading: MarkdownHeading = {
 				depth,
-				text: (link.children?.[0] as TextNode)?.value ?? "",
-				slug: (link.properties?.href as string | undefined)?.slice(1) ?? "",
+				text: (link?.children?.[0] as TextNode | undefined)?.value ?? "",
+				slug: (link?.properties?.href as string | undefined)?.slice(1) ?? "",
 			};
 
 			let headings = [currentHeading];
@@ -230,7 +355,7 @@ class NotionPageRenderer {
 	#logger: LoaderContext["logger"];
 
 	constructor(
-		private readonly client: Client,
+		private readonly client: unknown,
 		private readonly page: unknown,
 		parentLogger: LoaderContext["logger"],
 	) {
@@ -302,7 +427,7 @@ class NotionPageRenderer {
 	}
 
 	#resolveImage = (file: unknown): string | undefined => {
-		const url = fileToUrl(file as Parameters<typeof fileToUrl>[0]);
+		const url = fileToUrl(file as FileObject | null | undefined);
 		if (url) {
 			this.#imagePaths.push(url);
 		}
@@ -319,7 +444,6 @@ const createNotionLoaderNoImages = ({
 	rehypePlugins = [],
 	...clientOptions
 }: NotionLoaderOptions): Loader => {
-	const notionClient = new Client(clientOptions);
 	const resolvedRehypePlugins = Promise.all(
 		rehypePlugins.map(async (config) => {
 			let plugin: unknown;
@@ -335,52 +459,120 @@ const createNotionLoaderNoImages = ({
 			return [plugin, options] as const;
 		}),
 	);
-	const processor = buildProcessor(resolvedRehypePlugins);
+	const shouldRender = process.env.NOTION_LOADER_RENDER !== "0";
 
 	return {
 		name: "notion-loader-no-images",
 		async load({ store, logger, parseData }) {
-			logger.info("Loading notion pages");
-			const existingPageIds = new Set<string>(store.keys());
-			const renderPromises: Promise<void>[] = [];
+			const traceMode = process.env.NOTION_LOADER_TRACE ?? "";
+			let notionModule: NotionModuleLoad;
+			try {
+				notionModule = (await import(
+					"@notionhq/client"
+				)) as unknown as NotionModuleLoad;
+			} catch (error) {
+				if (traceMode) {
+					throw new Error(
+						`notion-loader: failed to import @notionhq/client: ${error instanceof Error ? error.message : String(error)}`,
+					);
+				}
+				throw error;
+			}
+			const { Client, isFullPage, iteratePaginatedAPI } = notionModule;
+			let stage = "init";
+			try {
+				stage = "create-client";
+				const notionClient = new Client(clientOptions);
+				const processor = shouldRender
+					? buildProcessor(resolvedRehypePlugins)
+					: null;
+				logger.info("Loading notion pages");
+				const existingPageIds = new Set<string>(store.keys());
+				const renderPromises: Promise<void>[] = [];
 
-			const pages = iteratePaginatedAPI(notionClient.databases.query, {
-				database_id,
-				filter_properties,
-				sorts,
-				filter,
-				archived,
-			});
-			for await (const page of pages) {
-				if (!isFullPage(page)) {
-					continue;
+				if (traceMode === "pre-query") {
+					throw new Error("notion-loader: reached pre-query stage");
 				}
 
-				existingPageIds.delete(page.id);
-				const existingPage = store.get(page.id);
-				if (existingPage?.digest !== page.last_edited_time) {
-					const renderer = new NotionPageRenderer(notionClient, page, logger);
-					const data = await parseData(renderer.getPageData());
-					const renderPromise = renderer.render(processor).then((rendered) => {
-						if (!rendered) {
-							return;
+				stage = "query";
+				const pages = iteratePaginatedAPI(notionClient.databases.query, {
+					database_id,
+					filter_properties,
+					sorts,
+					filter,
+					archived,
+				});
+				if (traceMode === "post-query") {
+					throw new Error("notion-loader: reached post-query stage");
+				}
+				stage = "iterate";
+				for await (const page of pages) {
+					if (traceMode === "iterate") {
+						throw new Error("notion-loader: reached iterate stage");
+					}
+					if (!isFullPage(page)) {
+						continue;
+					}
+					const typedPage = page as NotionPage;
+					existingPageIds.delete(typedPage.id);
+					const existingPage = store.get(typedPage.id);
+					if (existingPage?.digest !== typedPage.last_edited_time) {
+						stage = "render";
+						if (traceMode === "before-parse") {
+							throw new Error("notion-loader: reached before-parse stage");
 						}
-						store.set({
-							id: page.id,
-							digest: page.last_edited_time,
-							data,
-							rendered,
-						});
-					});
-					renderPromises.push(renderPromise);
+						const renderer = new NotionPageRenderer(
+							notionClient,
+							typedPage,
+							logger,
+						);
+						const data = await parseData(renderer.getPageData());
+						if (traceMode === "after-parse") {
+							throw new Error("notion-loader: reached after-parse stage");
+						}
+						if (!processor) {
+							store.set({
+								id: typedPage.id,
+								digest: typedPage.last_edited_time,
+								data,
+							});
+							if (traceMode === "after-store") {
+								throw new Error("notion-loader: reached after-store stage");
+							}
+							continue;
+						}
+						const renderPromise = renderer
+							.render(processor)
+							.then((rendered) => {
+								if (!rendered) {
+									return;
+								}
+								store.set({
+									id: typedPage.id,
+									digest: typedPage.last_edited_time,
+									data,
+									rendered,
+								});
+							});
+						renderPromises.push(renderPromise);
+					}
 				}
-			}
 
-			for (const deletedPageId of existingPageIds) {
-				store.delete(deletedPageId);
-			}
+				stage = "cleanup";
+				for (const deletedPageId of existingPageIds) {
+					store.delete(deletedPageId);
+				}
 
-			await Promise.all(renderPromises);
+				stage = "await";
+				await Promise.all(renderPromises);
+			} catch (error) {
+				if (traceMode) {
+					throw new Error(
+						`notion-loader: stage ${stage} failed: ${error instanceof Error ? error.message : String(error)}`,
+					);
+				}
+				throw error;
+			}
 		},
 	};
 };
@@ -442,6 +634,18 @@ const mapEntries = async (
 		| "defaultTags"
 	>,
 ) => {
+	const traceMode = process.env.NOTION_LOADER_TRACE ?? "";
+	let mapNotionArticleEntry: typeof import("./notion-article.mapper").mapNotionArticleEntry;
+	try {
+		({ mapNotionArticleEntry } = await import("./notion-article.mapper"));
+	} catch (error) {
+		if (traceMode === "map-import") {
+			throw new Error(
+				`notion-loader: mapper import failed: ${error instanceof Error ? error.message : String(error)}`,
+			);
+		}
+		throw error;
+	}
 	const mappedEntries: CachedEntry[] = [];
 	const rawEntries = context.store.entries();
 	context.store.clear();
@@ -477,6 +681,9 @@ const mapEntries = async (
 			? normalizeUrlValue(imagePaths[0])
 			: undefined;
 
+		if (traceMode === "map-before-parse") {
+			throw new Error("notion-loader: reached map-before-parse stage");
+		}
 		const parsedData = await context.parseData({
 			id: mapped.id,
 			data: {
@@ -484,6 +691,9 @@ const mapEntries = async (
 				cover: coverFromContent ?? mapped.data.cover,
 			},
 		});
+		if (traceMode === "map-after-parse") {
+			throw new Error("notion-loader: reached map-after-parse stage");
+		}
 		const renderedWithCover = coverFromContent
 			? stripCoverFromRendered(entry.rendered, coverFromContent)
 			: entry.rendered;
@@ -572,6 +782,9 @@ export const createCachedNotionLoader = (
 					...context,
 					parseData: async ({ data }) => data,
 				});
+				if (process.env.NOTION_LOADER_SKIP_MAP === "1") {
+					return;
+				}
 
 				const mappedEntries = await mapEntries(context, {
 					platformId,

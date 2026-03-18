@@ -1,11 +1,25 @@
-import { fileToUrl } from "notion-astro-loader";
-import * as rawProperties from "notion-astro-loader/schemas/raw-properties";
-import * as transformedProperties from "notion-astro-loader/schemas/transformed-properties";
-import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n";
+import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n/types";
 
 type NotionPageData = {
 	cover: unknown | null;
 	properties: Record<string, unknown>;
+};
+
+type FileObject =
+	| { type: "external"; external: { url: string } }
+	| { type: "file"; file: { url: string } };
+
+const fileToUrl = (file: FileObject | null | undefined): string | undefined => {
+	if (!file) {
+		return undefined;
+	}
+	if (file.type === "external") {
+		return file.external.url;
+	}
+	if (file.type === "file") {
+		return file.file.url;
+	}
+	return undefined;
 };
 
 type MapOptions = {
@@ -67,19 +81,98 @@ const getProperty = (
 	return undefined;
 };
 
-const parseProperty = <T>(
-	schema: {
-		safeParse: (
-			input: unknown,
-		) => { success: true; data: T } | { success: false };
-	},
+const getTypedProperty = <T>(
 	property: unknown,
+	type: string,
 ): T | undefined => {
-	if (!property) {
+	if (!property || typeof property !== "object") {
 		return undefined;
 	}
-	const result = schema.safeParse(property);
-	return result.success ? result.data : undefined;
+	const typed = property as { type?: string } & Record<string, unknown>;
+	if (typed.type !== type) {
+		return undefined;
+	}
+	return typed[type] as T | undefined;
+};
+
+const extractPlainText = (
+	items: Array<{ plain_text?: string }> | undefined,
+): string | undefined => {
+	if (!items || items.length === 0) {
+		return undefined;
+	}
+	const text = items
+		.map((item) => item?.plain_text ?? "")
+		.join("")
+		.trim();
+	return text.length > 0 ? text : undefined;
+};
+
+const readTitle = (property: unknown): string | undefined =>
+	extractPlainText(getTypedProperty(property, "title"));
+
+const readRichText = (property: unknown): string | undefined =>
+	extractPlainText(getTypedProperty(property, "rich_text"));
+
+const readSelect = (property: unknown): string | undefined =>
+	getTypedProperty<{ name?: string }>(property, "select")?.name ?? undefined;
+
+const readStatus = (property: unknown): string | undefined =>
+	getTypedProperty<{ name?: string }>(property, "status")?.name ?? undefined;
+
+const readCheckbox = (property: unknown): boolean | undefined =>
+	getTypedProperty<boolean>(property, "checkbox");
+
+const readDateStart = (property: unknown): Date | undefined => {
+	const dateValue = getTypedProperty<{
+		start?: string | null;
+		end?: string | null;
+		time_zone?: string | null;
+	}>(property, "date");
+	if (!dateValue?.start) {
+		return undefined;
+	}
+	const date = new Date(dateValue.start);
+	return Number.isNaN(date.valueOf()) ? undefined : date;
+};
+
+const readMultiSelect = (property: unknown): string[] | undefined => {
+	const values = getTypedProperty<Array<{ name?: string }>>(
+		property,
+		"multi_select",
+	);
+	if (!values || values.length === 0) {
+		return undefined;
+	}
+	return values
+		.map((item) => item?.name)
+		.filter((value): value is string => Boolean(value));
+};
+
+const readCreatedTime = (property: unknown): Date | undefined => {
+	const value = getTypedProperty<string>(property, "created_time");
+	if (!value) {
+		return undefined;
+	}
+	const date = new Date(value);
+	return Number.isNaN(date.valueOf()) ? undefined : date;
+};
+
+const readLastEditedTime = (property: unknown): Date | undefined => {
+	const value = getTypedProperty<string>(property, "last_edited_time");
+	if (!value) {
+		return undefined;
+	}
+	const date = new Date(value);
+	return Number.isNaN(date.valueOf()) ? undefined : date;
+};
+
+const readPeopleName = (property: unknown): string | undefined => {
+	const people = getTypedProperty<Array<{ name?: string }>>(property, "people");
+	if (!people || people.length === 0) {
+		return undefined;
+	}
+	return people[0]?.name?.trim() || undefined;
 };
 
 const toRelationItems = (
@@ -192,9 +285,7 @@ const resolveCover = (cover: NotionPageData["cover"]): string | undefined => {
 	}
 
 	try {
-		return normalizeUrlValue(
-			fileToUrl(cover as Parameters<typeof fileToUrl>[0]),
-		);
+		return normalizeUrlValue(fileToUrl(cover as FileObject | null | undefined));
 	} catch {
 		return undefined;
 	}
@@ -204,31 +295,26 @@ const resolveTitle = (
 	properties: Record<string, unknown>,
 ): string | undefined => {
 	const property = getProperty(properties, TITLE_KEYS);
-	return parseProperty(transformedProperties.title, property);
+	return readTitle(property);
 };
 
 const resolveDescription = (
 	properties: Record<string, unknown>,
 ): string | undefined => {
 	const property = getProperty(properties, DESCRIPTION_KEYS);
-	return parseProperty(transformedProperties.rich_text, property);
+	return readRichText(property);
 };
 
 const resolveSlug = (
 	properties: Record<string, unknown>,
 ): string | undefined => {
 	const property = getProperty(properties, SLUG_KEYS);
-	return (
-		parseProperty(transformedProperties.rich_text, property) ??
-		parseProperty(transformedProperties.title, property)
-	);
+	return readRichText(property) ?? readTitle(property);
 };
 
 const resolveLocale = (properties: Record<string, unknown>): Lang => {
 	const property = getProperty(properties, LOCALE_KEYS);
-	const localeValue =
-		parseProperty<string>(transformedProperties.select, property) ??
-		parseProperty<string>(transformedProperties.rich_text, property);
+	const localeValue = readSelect(property) ?? readRichText(property);
 	return normalizeLocale(localeValue);
 };
 
@@ -241,36 +327,28 @@ const resolveType = (
 	properties: Record<string, unknown>,
 ): string | undefined => {
 	const property = getProperty(properties, TYPE_KEYS);
-	return parseProperty(transformedProperties.select, property);
+	return readSelect(property);
 };
 
 const resolveStatus = (
 	properties: Record<string, unknown>,
 ): string | undefined => {
 	const property = getProperty(properties, STATUS_KEYS);
-	return parseProperty(transformedProperties.status, property);
+	return readStatus(property);
 };
 
 const resolvePublished = (
 	properties: Record<string, unknown>,
 ): boolean | undefined => {
 	const property = getProperty(properties, PUBLISHED_KEYS);
-	return parseProperty(transformedProperties.checkbox, property);
+	return readCheckbox(property);
 };
 
 const resolveScheduleDate = (
 	properties: Record<string, unknown>,
 ): Date | undefined => {
 	const dateProperty = getProperty(properties, DATE_KEYS);
-	const dateValue = parseProperty<{ start?: Date }>(
-		transformedProperties.date,
-		dateProperty,
-	);
-	if (dateValue?.start) {
-		return dateValue.start;
-	}
-
-	return undefined;
+	return readDateStart(dateProperty);
 };
 
 const resolveTags = (
@@ -278,10 +356,7 @@ const resolveTags = (
 	lang: Lang,
 ): string[] => {
 	const property = getProperty(properties, TAG_KEYS);
-	const tagNames = parseProperty<string[]>(
-		transformedProperties.multi_select,
-		property,
-	);
+	const tagNames = readMultiSelect(property);
 	const relationNames = resolveRelationNames(property);
 	const tags = tagNames ?? relationNames;
 	if (!tags || tags.length === 0) {
@@ -298,10 +373,7 @@ const resolveCategory = (
 	lang: Lang,
 ): string | undefined => {
 	const property = getProperty(properties, CATEGORY_KEYS);
-	const categoryName = parseProperty<string>(
-		transformedProperties.select,
-		property,
-	);
+	const categoryName = readSelect(property);
 	if (!categoryName) {
 		return undefined;
 	}
@@ -313,17 +385,12 @@ const resolveAuthor = (
 	lang: Lang,
 ): string | undefined => {
 	const property = getProperty(properties, AUTHOR_KEYS);
-	const peopleResult = rawProperties.people.safeParse(property);
-	const peopleName = peopleResult.success
-		? (
-				peopleResult.data.people as Array<{ name?: string }> | undefined
-			)?.[0]?.name?.trim()
-		: undefined;
+	const peopleName = readPeopleName(property);
 	const authorName =
 		peopleName ??
-		parseProperty<string>(transformedProperties.select, property) ??
-		parseProperty<string>(transformedProperties.rich_text, property) ??
-		parseProperty<string>(transformedProperties.title, property);
+		readSelect(property) ??
+		readRichText(property) ??
+		readTitle(property);
 
 	if (!authorName) {
 		return undefined;
@@ -339,25 +406,14 @@ const resolveDate = (properties: Record<string, unknown>): Date | undefined => {
 	}
 
 	const createdProperty = getProperty(properties, CREATED_TIME_KEYS);
-	return parseProperty<Date>(
-		transformedProperties.created_time,
-		createdProperty,
-	);
+	return readCreatedTime(createdProperty);
 };
 
 const resolveLastModified = (
 	properties: Record<string, unknown>,
 ): Date | undefined => {
 	const lastEditedProperty = getProperty(properties, LAST_EDITED_KEYS);
-	const parsed = parseProperty(
-		rawProperties.last_edited_time,
-		lastEditedProperty,
-	);
-	if (!parsed?.last_edited_time) {
-		return undefined;
-	}
-
-	return new Date(parsed.last_edited_time);
+	return readLastEditedTime(lastEditedProperty);
 };
 
 const resolveDraft = (properties: Record<string, unknown>): boolean => {
@@ -376,7 +432,7 @@ const resolveDraft = (properties: Record<string, unknown>): boolean => {
 
 const resolveFeatured = (properties: Record<string, unknown>): boolean => {
 	const property = getProperty(properties, FEATURED_KEYS);
-	return parseProperty(transformedProperties.checkbox, property) ?? false;
+	return readCheckbox(property) ?? false;
 };
 
 const buildEntryId = (lang: Lang, date: Date, slug: string): string => {

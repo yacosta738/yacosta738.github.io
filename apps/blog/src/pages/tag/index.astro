@@ -3,7 +3,7 @@ import Footer from "@blog/components/organisms/Footer.astro";
 import Layout from "@blog/layouts/Layout.astro";
 import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import TagBadges from "@/components/molecules/TagBadges.astro";
-import { getTags } from "@/core/tag";
+import { getTagSlug, getTags } from "@/core/tag";
 import {
 	DEFAULT_LOCALE,
 	type Lang,
@@ -44,7 +44,7 @@ const title = t("tags.title");
 			</div>
 		</section>
 		<TagBadges
-			tags={tags.map((tag) => ({ title: tag.title, slug: tag.slug }))}
+			tags={tags.map((tag) => ({ title: tag.title, slug: getTagSlug(tag) }))}
 			lang={lang}
 			variant="primary"
 			size="sm"

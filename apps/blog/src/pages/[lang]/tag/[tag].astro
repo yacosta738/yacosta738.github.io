@@ -5,7 +5,7 @@ import PageHeadline from "@/components/atoms/PageHeadline.astro";
 import BlogGridContainer from "@/components/molecules/BlogGridContainer.astro";
 import Pagination from "@/components/molecules/Pagination.astro";
 import { getAllArticlesIncludingExternal } from "@/core/article";
-import { getTags } from "@/core/tag";
+import { getTagSlug, getTags } from "@/core/tag";
 import {
 	type Lang,
 	ROUTE_LOCALES,
@@ -20,9 +20,10 @@ export async function getStaticPaths() {
 	for (const lang of ROUTE_LOCALES) {
 		const tags = await getTags({ lang: lang as Lang });
 		for (const tag of tags) {
+			const tagSlug = getTagSlug(tag);
 			const tagArticles = allArticles.filter(
 				(article) =>
-					article.tags.some((tagItem) => tagItem.slug === tag.slug) &&
+					article.tags.some((tagItem) => getTagSlug(tagItem) === tagSlug) &&
 					article.id.startsWith(`${lang}/`),
 			);
 
@@ -30,7 +31,7 @@ export async function getStaticPaths() {
 				paths.push({
 					params: {
 						lang: lang,
-						tag: tag.slug,
+						tag: tagSlug,
 					},
 					props: { tag },
 				});
@@ -51,7 +52,7 @@ const allArticles = await getAllArticlesIncludingExternal();
 const tagArticles = allArticles
 	.filter(
 		(article) =>
-			article.tags.some((tagItem) => tagItem.slug === tagSlug) &&
+			article.tags.some((tagItem) => getTagSlug(tagItem) === tagSlug) &&
 			article.id.startsWith(`${lang}/`),
 	)
 	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());

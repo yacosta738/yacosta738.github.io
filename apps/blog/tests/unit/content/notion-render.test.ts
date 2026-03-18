@@ -1,7 +1,7 @@
 import { render } from "astro:content";
+import { notionBlockFallbacks } from "@blog/lib/notion/notion-blocks";
 import type { Root } from "hast";
 import { describe, expect, it } from "vitest";
-import { notionBlockFallbacks } from "@/lib/notion/notion-blocks";
 
 const createEntry = () => ({
 	id: "en/2024/01/02/notion-entry",

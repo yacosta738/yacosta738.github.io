@@ -1,16 +1,13 @@
-import {
-	defineCollection,
-	reference,
-	type SchemaContext,
-	z,
-} from "astro:content";
+import { defineCollection, reference, type SchemaContext } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
+import { z as zod } from "zod";
 
 // Reusable schemas
 const profileSchema = z.object({
 	network: z.string(),
 	username: z.string(),
-	url: z.string().url(),
+	url: z.url(),
 });
 
 const locationSchema = z.object({
@@ -58,7 +55,9 @@ const projectMetadata = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		cover: z.string().optional(),
-		date: z.string().datetime(),
+		date: zod
+			.string()
+			.refine((value) => !Number.isNaN(Date.parse(value)), "Invalid datetime"),
 		repository: z.string().optional(),
 		url: z.string().optional(),
 		company: z.string(),
@@ -81,9 +80,9 @@ const resume = defineCollection({
 			name: z.string(),
 			label: z.string(),
 			image: z.string(),
-			email: z.string().email(),
+			email: z.email(),
 			phone: z.string().optional(),
-			url: z.string().url().optional(),
+			url: z.url().optional(),
 			summary: z.string(),
 			location: locationSchema,
 			profiles: z.array(profileSchema),
@@ -93,7 +92,7 @@ const resume = defineCollection({
 			z.object({
 				name: z.string(),
 				position: z.string(),
-				url: z.string().url().optional(),
+				url: z.url().optional(),
 				startDate: z.coerce.date(),
 				endDate: z.preprocess(
 					(v) => (v === "" || v === null || v === undefined ? null : v),
@@ -108,7 +107,7 @@ const resume = defineCollection({
 				z.object({
 					organization: z.string(),
 					position: z.string(),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 					startDate: z.coerce.date(),
 					endDate: z.preprocess(
 						(v) => (v === "" || v === null || v === undefined ? null : v),
@@ -122,7 +121,7 @@ const resume = defineCollection({
 		education: z.array(
 			z.object({
 				institution: z.string(),
-				url: z.string().url().optional(),
+				url: z.url().optional(),
 				area: z.string(),
 				studyType: z.string(),
 				startDate: z.coerce.date(),
@@ -150,7 +149,7 @@ const resume = defineCollection({
 					name: z.string(),
 					date: z.coerce.date(),
 					issuer: z.string(),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 				}),
 			)
 			.optional(),
@@ -160,7 +159,7 @@ const resume = defineCollection({
 					name: z.string(),
 					publisher: z.string(),
 					releaseDate: z.coerce.date(),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 					summary: z.string().optional(),
 				}),
 			)
@@ -210,7 +209,7 @@ const resume = defineCollection({
 						(v) => (v === "" || v === null || v === undefined ? null : v),
 						z.coerce.date().nullable().optional(),
 					),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 				}),
 			)
 			.optional(),
@@ -235,6 +234,23 @@ const articles = defineCollection({
 			draft: z.boolean().optional().default(false),
 			featured: z.boolean().optional().default(false),
 		}),
+});
+
+const emptyNotionLoader = async () => [];
+const notionArticles = defineCollection({
+	loader: emptyNotionLoader,
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		date: z.coerce.date(),
+		lastModified: z.coerce.date().optional(),
+		cover: z.string().optional(),
+		author: reference("authors"),
+		tags: z.array(reference("tags")),
+		category: reference("categories"),
+		draft: z.boolean().optional().default(false),
+		featured: z.boolean().optional().default(false),
+	}),
 });
 
 const tags = defineCollection({
@@ -297,7 +313,7 @@ const externalArticles = defineCollection({
 			category: reference("categories"),
 			draft: z.boolean().optional().default(false),
 			isExternal: z.boolean().default(true),
-			link: z.string().url(),
+			link: z.url(),
 		}),
 });
 
@@ -307,6 +323,7 @@ export const collections = {
 	languagesLibrary,
 	projectMetadata,
 	articles,
+	notionArticles,
 	tags,
 	categories,
 	authors,

@@ -1,4 +1,7 @@
+import { createRequire } from "node:module";
 import { vi } from "vitest";
+
+globalThis.require = createRequire(import.meta.url);
 
 // Mock astro:content module to avoid server-only module errors in tests
 vi.mock("astro:content", () => ({
