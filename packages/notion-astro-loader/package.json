@@ -17,24 +17,24 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"import": "./dist/index.js",
-			"types": "./dist/index.d.ts"
+			"import": "./src/index.ts",
+			"types": "./src/index.ts"
 		},
 		"./schemas": {
-			"import": "./dist/schemas/index.js",
-			"types": "./dist/schemas/index.d.ts"
+			"import": "./src/schemas/index.ts",
+			"types": "./src/schemas/index.ts"
 		},
 		"./schemas/raw-properties": {
-			"import": "./dist/schemas/raw-properties.js",
-			"types": "./dist/schemas/raw-properties.d.ts"
+			"import": "./src/schemas/raw-properties.ts",
+			"types": "./src/schemas/raw-properties.ts"
 		},
 		"./schemas/transformed-properties": {
-			"import": "./dist/schemas/transformed-properties.js",
-			"types": "./dist/schemas/transformed-properties.d.ts"
+			"import": "./src/schemas/transformed-properties.ts",
+			"types": "./src/schemas/transformed-properties.ts"
 		},
 		"./schemas/page": {
-			"import": "./dist/schemas/page.js",
-			"types": "./dist/schemas/page.d.ts"
+			"import": "./src/schemas/page.ts",
+			"types": "./src/schemas/page.ts"
 		}
 	},
 	"files": [
