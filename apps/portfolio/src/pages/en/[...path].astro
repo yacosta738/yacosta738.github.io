@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 		route = route.replace(/\/index$/, "");
 		route = route.replace(/^index$/, "");
 
-		if (!route || route.includes("[")) {
+		if (route.includes("[")) {
 			return null;
 		}
 
@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 	const routes = new Set<string>();
 	[...langPages, ...rootPages].forEach((filePath) => {
 		const route = normalizeRoute(filePath);
-		if (route) {
+		if (route !== null) {
 			routes.add(route);
 		}
 	});

@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { routes } from "@/configs/route.path";
+import { getTagSlug } from "@/core/tag";
 import type Tag from "@/core/tag/tag.model";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
@@ -22,7 +23,7 @@ const translatePath = useTranslatedPath(currentLocale);
 		attrs.class
 	)}
 	href={translatePath(
-		`/${routes.tag}/${cleanEntityId(tag.slug).toLowerCase()}/`,
+		`/${routes.tag}/${cleanEntityId(getTagSlug(tag)).toLowerCase()}/`,
 	)}
 	aria-label={t("post.aria.tag", { tag: tag.title })}
 	{...attrs}

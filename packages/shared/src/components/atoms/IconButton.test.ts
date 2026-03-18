@@ -6,8 +6,7 @@ test("IconButton renders with default classes", async () => {
 	const container = await AstroContainer.create();
 	const result = await container.renderToString(IconButton);
 
-	expect(result).toContain("p-2");
-	expect(result).toContain("text-foreground");
+	expect(result).toContain("ui-icon-button");
 });
 
 test("IconButton renders with additional classes", async () => {

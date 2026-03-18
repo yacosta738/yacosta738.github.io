@@ -15,8 +15,7 @@ export default getViteConfig({
 	},
 	// @ts-expect-error
 	test: {
-		/* for example, use 'happy-dom' to run tests in a browser-like environment */
-		environment: "happy-dom",
+		environment: "node",
 		setupFiles: ["./tests/unit/test-setup.ts"],
 		include: ["tests/unit/**/*.test.ts"],
 		coverage: {

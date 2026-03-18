@@ -1,19 +1,13 @@
-import {
-	defineCollection,
-	reference,
-	type SchemaContext,
-	z,
-} from "astro:content";
-import type { RehypePlugins } from "astro";
+import { defineCollection, reference, type SchemaContext } from "astro:content";
 import { glob } from "astro/loaders";
-import { notionBlockFallbacks } from "./lib/notion/notion-blocks";
-import { createCachedNotionLoader } from "./lib/notion/notion-loader";
+import { z } from "astro/zod";
+import { z as zod } from "zod";
 
 // Reusable schemas
 const profileSchema = z.object({
 	network: z.string(),
 	username: z.string(),
-	url: z.string().url(),
+	url: z.url(),
 });
 
 const locationSchema = z.object({
@@ -24,7 +18,6 @@ const locationSchema = z.object({
 	region: z.string(),
 });
 
-const notionCacheUrl = new URL("../.cache/notion-loader.json", import.meta.url);
 const normalizeNotionId = (value?: string): string | undefined => {
 	if (!value) {
 		return undefined;
@@ -37,51 +30,75 @@ const normalizeNotionId = (value?: string): string | undefined => {
 	}
 	return match[0].replace(/-/g, "");
 };
-const defaultNotionPlatformId = "ea2cff95e1ca82ab97128153e241fe9a";
-const notionPlatformId =
-	normalizeNotionId(import.meta.env.NOTION_PLATFORM_ID) ??
-	defaultNotionPlatformId;
-const defaultNotionAuthorId = "en/yuniel-acosta-perez";
-const defaultNotionCategoryId = "en/software-development";
-const defaultNotionTagIds = ["en/tech"];
-const notionDefaultAuthorId =
-	import.meta.env.NOTION_DEFAULT_AUTHOR_ID ?? defaultNotionAuthorId;
-const notionDefaultCategoryId =
-	import.meta.env.NOTION_DEFAULT_CATEGORY_ID ?? defaultNotionCategoryId;
-const notionDefaultTagIds = (
-	import.meta.env.NOTION_DEFAULT_TAG_IDS ?? defaultNotionTagIds.join(",")
-)
-	.split(",")
-	.map((tag: string) => tag.trim())
-	.filter(Boolean);
-const notionRehypePlugin =
-	notionBlockFallbacks as unknown as RehypePlugins[number];
-const notionTypeFilter = "Article";
-const notionStatusFilter = "Ready";
-const notionToday = new Date().toISOString().slice(0, 10);
-const notionPostsFilter = {
-	and: [
-		{
-			property: "Platforms",
-			relation: { contains: notionPlatformId },
-		},
-		{
-			property: "Type",
-			select: { equals: notionTypeFilter },
-		},
-		{
-			property: "Status",
-			status: { equals: notionStatusFilter },
-		},
-		{
-			property: "Schedule Date",
-			date: { on_or_before: notionToday },
-		},
-		{
-			property: "Published",
-			checkbox: { equals: true },
-		},
-	],
+
+const createNotionLoader = async () => {
+	const { notionBlockFallbacks } = await import("./lib/notion/notion-blocks");
+	const { createCachedNotionLoader } = await import(
+		"./lib/notion/notion-loader"
+	);
+	const notionCacheUrl = new URL(
+		"../.cache/notion-loader.json",
+		import.meta.url,
+	);
+	const defaultNotionPlatformId = "ea2cff95e1ca82ab97128153e241fe9a";
+	const notionPlatformId =
+		normalizeNotionId(import.meta.env.NOTION_PLATFORM_ID) ??
+		defaultNotionPlatformId;
+	const defaultNotionAuthorId = "en/yuniel-acosta-perez";
+	const defaultNotionCategoryId = "en/software-development";
+	const defaultNotionTagIds = ["en/tech"];
+	const notionDefaultAuthorId =
+		import.meta.env.NOTION_DEFAULT_AUTHOR_ID ?? defaultNotionAuthorId;
+	const notionDefaultCategoryId =
+		import.meta.env.NOTION_DEFAULT_CATEGORY_ID ?? defaultNotionCategoryId;
+	const notionDefaultTagIds = (
+		import.meta.env.NOTION_DEFAULT_TAG_IDS ?? defaultNotionTagIds.join(",")
+	)
+		.split(",")
+		.map((tag: string) => tag.trim())
+		.filter(Boolean);
+	const notionRehypePlugin = notionBlockFallbacks as unknown;
+	const notionTypeFilter = "Article";
+	const notionStatusFilter = "Ready";
+	const notionToday = new Date().toISOString().slice(0, 10);
+	const notionPostsFilter = {
+		and: [
+			{
+				property: "Platforms",
+				relation: { contains: notionPlatformId },
+			},
+			{
+				property: "Type",
+				select: { equals: notionTypeFilter },
+			},
+			{
+				property: "Status",
+				status: { equals: notionStatusFilter },
+			},
+			{
+				property: "Schedule Date",
+				date: { on_or_before: notionToday },
+			},
+			{
+				property: "Published",
+				checkbox: { equals: true },
+			},
+		],
+	};
+
+	return createCachedNotionLoader({
+		auth: import.meta.env.NOTION_TOKEN,
+		database_id: normalizeNotionId(import.meta.env.NOTION_DATABASE_ID) ?? "",
+		filter: notionPostsFilter,
+		platformId: notionPlatformId,
+		requiredType: notionTypeFilter,
+		requiredStatus: notionStatusFilter,
+		defaultAuthorId: notionDefaultAuthorId,
+		defaultCategoryId: notionDefaultCategoryId,
+		defaultTags: notionDefaultTagIds,
+		cacheUrl: notionCacheUrl,
+		rehypePlugins: [notionRehypePlugin],
+	});
 };
 
 // System skills library collection (icons, metadata, etc.)
@@ -121,7 +138,9 @@ const projectMetadata = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		cover: z.string().optional(),
-		date: z.string().datetime(),
+		date: zod
+			.string()
+			.refine((value) => !Number.isNaN(Date.parse(value)), "Invalid datetime"),
 		repository: z.string().optional(),
 		url: z.string().optional(),
 		company: z.string(),
@@ -144,9 +163,9 @@ const resume = defineCollection({
 			name: z.string(),
 			label: z.string(),
 			image: z.string(),
-			email: z.string().email(),
+			email: z.email(),
 			phone: z.string().optional(),
-			url: z.string().url().optional(),
+			url: z.url().optional(),
 			summary: z.string(),
 			location: locationSchema,
 			profiles: z.array(profileSchema),
@@ -156,7 +175,7 @@ const resume = defineCollection({
 			z.object({
 				name: z.string(),
 				position: z.string(),
-				url: z.string().url().optional(),
+				url: z.url().optional(),
 				startDate: z.coerce.date(),
 				endDate: z.preprocess(
 					(v) => (v === "" || v === null || v === undefined ? null : v),
@@ -171,7 +190,7 @@ const resume = defineCollection({
 				z.object({
 					organization: z.string(),
 					position: z.string(),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 					startDate: z.coerce.date(),
 					endDate: z.preprocess(
 						(v) => (v === "" || v === null || v === undefined ? null : v),
@@ -185,7 +204,7 @@ const resume = defineCollection({
 		education: z.array(
 			z.object({
 				institution: z.string(),
-				url: z.string().url().optional(),
+				url: z.url().optional(),
 				area: z.string(),
 				studyType: z.string(),
 				startDate: z.coerce.date(),
@@ -213,7 +232,7 @@ const resume = defineCollection({
 					name: z.string(),
 					date: z.coerce.date(),
 					issuer: z.string(),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 				}),
 			)
 			.optional(),
@@ -223,7 +242,7 @@ const resume = defineCollection({
 					name: z.string(),
 					publisher: z.string(),
 					releaseDate: z.coerce.date(),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 					summary: z.string().optional(),
 				}),
 			)
@@ -273,7 +292,7 @@ const resume = defineCollection({
 						(v) => (v === "" || v === null || v === undefined ? null : v),
 						z.coerce.date().nullable().optional(),
 					),
-					url: z.string().url().optional(),
+					url: z.url().optional(),
 				}),
 			)
 			.optional(),
@@ -300,20 +319,13 @@ const articles = defineCollection({
 		}),
 });
 
+const useNotionLoader = process.env.NOTION_LOADER === "1";
+const emptyNotionLoader = async () => [];
+const notionLoader = useNotionLoader
+	? await createNotionLoader()
+	: emptyNotionLoader;
 const notionArticles = defineCollection({
-	loader: createCachedNotionLoader({
-		auth: import.meta.env.NOTION_TOKEN,
-		database_id: normalizeNotionId(import.meta.env.NOTION_DATABASE_ID) ?? "",
-		filter: notionPostsFilter,
-		platformId: notionPlatformId,
-		requiredType: notionTypeFilter,
-		requiredStatus: notionStatusFilter,
-		defaultAuthorId: notionDefaultAuthorId,
-		defaultCategoryId: notionDefaultCategoryId,
-		defaultTags: notionDefaultTagIds,
-		cacheUrl: notionCacheUrl,
-		rehypePlugins: [notionRehypePlugin],
-	}),
+	loader: notionLoader,
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -388,7 +400,7 @@ const externalArticles = defineCollection({
 			category: reference("categories"),
 			draft: z.boolean().optional().default(false),
 			isExternal: z.boolean().default(true),
-			link: z.string().url(),
+			link: z.url(),
 		}),
 });
 

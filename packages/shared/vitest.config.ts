@@ -40,7 +40,7 @@ export default getViteConfig({
 	},
 	// @ts-expect-error
 	test: {
-		environment: "happy-dom",
+		environment: "node",
 		include: ["src/**/*.test.ts"],
 		coverage: {
 			enabled: true,

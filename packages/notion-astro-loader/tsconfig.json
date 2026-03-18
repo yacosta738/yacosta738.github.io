@@ -1,0 +1,17 @@
+{
+	"extends": "astro/tsconfigs/strictest",
+	"compilerOptions": {
+		"composite": true,
+		"types": ["astro/client"],
+		"exactOptionalPropertyTypes": false,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"rootDir": "src",
+		"outDir": "dist",
+		"noEmit": false,
+		"declaration": true,
+		"declarationMap": true,
+		"allowImportingTsExtensions": false
+	},
+	"include": ["src/**/*.ts"]
+}

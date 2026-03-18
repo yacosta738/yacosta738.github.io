@@ -1,6 +1,6 @@
 ---
 import { getAllArticlesIncludingExternal } from "@/core/article";
-import { getTags } from "@/core/tag";
+import { getTagSlug, getTags } from "@/core/tag";
 import { DEFAULT_LOCALE, type Lang } from "@/i18n";
 
 export async function getStaticPaths() {
@@ -11,10 +11,11 @@ export async function getStaticPaths() {
 	const tags = await getTags({ lang });
 
 	for (const tag of tags) {
+		const tagSlug = getTagSlug(tag);
 		const tagArticles = allArticles
 			.filter(
 				(article) =>
-					article.tags.some((tagItem) => tagItem.slug === tag.slug) &&
+					article.tags.some((tagItem) => getTagSlug(tagItem) === tagSlug) &&
 					article.id.startsWith(`${lang}/`),
 			)
 			.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
@@ -30,7 +31,7 @@ export async function getStaticPaths() {
 			if (pagePosts.length > 0) {
 				paths.push({
 					params: {
-						tag: tag.slug,
+						tag: tagSlug,
 						page: i.toString(),
 					},
 				});

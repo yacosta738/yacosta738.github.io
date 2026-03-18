@@ -103,9 +103,12 @@ const deduplicateArticles = (articles: Article[]): Article[] => {
 export async function getArticles(
 	criteria?: ArticleCriteria,
 ): Promise<Article[]> {
+	const shouldLoadNotion = import.meta.env.NOTION_LOADER === "1";
 	const filter = createArticleFilter(criteria, { includeFeatured: true });
 	const articles = await getCollection("articles", filter);
-	const notionArticles = await getCollection("notionArticles", filter);
+	const notionArticles = shouldLoadNotion
+		? await getCollection("notionArticles", filter)
+		: [];
 
 	const mappedArticles = await toArticles(articles);
 	const mappedNotion = await toNotionArticles(notionArticles);
@@ -166,6 +169,7 @@ export async function getArticlesByAuthor(
 export async function getAllArticlesIncludingExternal(
 	criteria?: ArticleCriteria,
 ): Promise<Article[]> {
+	const shouldLoadNotion = import.meta.env.NOTION_LOADER === "1";
 	const regularFilter = createArticleFilter(criteria, {
 		includeFeatured: true,
 	});
@@ -174,7 +178,9 @@ export async function getAllArticlesIncludingExternal(
 	});
 
 	const regularArticles = await getCollection("articles", regularFilter);
-	const notionArticles = await getCollection("notionArticles", regularFilter);
+	const notionArticles = shouldLoadNotion
+		? await getCollection("notionArticles", regularFilter)
+		: [];
 	const externalArticles = await getCollection(
 		"externalArticles",
 		externalFilter,

@@ -2,8 +2,8 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { createCachedNotionLoader } from "@blog/lib/notion/notion-loader";
 import { describe, expect, it, vi } from "vitest";
-import { createCachedNotionLoader } from "@/lib/notion/notion-loader";
 
 type StoreEntry = { id: string } & Record<string, unknown>;
 

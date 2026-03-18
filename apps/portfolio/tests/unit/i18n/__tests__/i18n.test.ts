@@ -35,6 +35,12 @@ vi.mock("@/i18n/types", () => ({
 	},
 }));
 
+vi.mock("astro:i18n", () => ({
+	getRelativeLocaleUrl: vi.fn((lang, path) =>
+		lang === "en" ? path : `/${lang}${path}`,
+	),
+}));
+
 // Import the i18n module dynamically after mocks so the mocks are applied
 let getLocalePaths: typeof import("@/i18n")["getLocalePaths"];
 let localeParams: typeof import("@/i18n")["localeParams"];
@@ -166,13 +172,6 @@ describe("useTranslatedPath", () => {
 });
 
 describe("getLocalePaths", () => {
-	// Mock getRelativeLocaleUrl from astro:i18n
-	vi.mock("astro:i18n", () => ({
-		getRelativeLocaleUrl: vi.fn((lang, path) =>
-			lang === "en" ? path : `/${lang}${path}`,
-		),
-	}));
-
 	test("returns locale paths for all configured languages", () => {
 		const url = new URL("https://example.com/en/about");
 		const paths = getLocalePaths(url);

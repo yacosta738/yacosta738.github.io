@@ -1,5 +1,5 @@
+import type { Multilingual } from "@blog/i18n";
 import { beforeAll, beforeEach, describe, expect, test, vi } from "vitest";
-import type { Multilingual } from "@/i18n";
 
 // Define mock function before vi.mock
 const mockShowDefaultLang = vi.fn().mockReturnValue(false);
@@ -11,7 +11,7 @@ vi.mock("@/core/tag", () => ({
 	isTagPage: vi.fn(),
 }));
 
-vi.mock("@/i18n/ui", () => ({
+vi.mock("@blog/i18n/ui", () => ({
 	ui: {
 		en: {
 			hello: "Hello",
@@ -27,7 +27,7 @@ vi.mock("@/i18n/ui", () => ({
 	},
 }));
 
-vi.mock("@/i18n/types", () => ({
+vi.mock("@blog/i18n/types", () => ({
 	DEFAULT_LOCALE: "en",
 	LOCALES: { en: "English", es: "Spanish" },
 	get SHOW_DEFAULT_LANG_IN_URL() {
@@ -35,14 +35,20 @@ vi.mock("@/i18n/types", () => ({
 	},
 }));
 
+vi.mock("astro:i18n", () => ({
+	getRelativeLocaleUrl: vi.fn((lang, path) =>
+		lang === "en" ? path : `/${lang}${path}`,
+	),
+}));
+
 // Import the i18n module dynamically after mocks so the mocks are applied
-let getLocalePaths: typeof import("@/i18n")["getLocalePaths"];
-let localeParams: typeof import("@/i18n")["localeParams"];
-let useTranslatedPath: typeof import("@/i18n")["useTranslatedPath"];
-let useTranslations: typeof import("@/i18n")["useTranslations"];
+let getLocalePaths: typeof import("@blog/i18n")["getLocalePaths"];
+let localeParams: typeof import("@blog/i18n")["localeParams"];
+let useTranslatedPath: typeof import("@blog/i18n")["useTranslatedPath"];
+let useTranslations: typeof import("@blog/i18n")["useTranslations"];
 
 beforeAll(async () => {
-	const mod = await import("@/i18n");
+	const mod = await import("@blog/i18n");
 	getLocalePaths = mod.getLocalePaths;
 	localeParams = mod.localeParams;
 	useTranslatedPath = mod.useTranslatedPath;
@@ -166,13 +172,6 @@ describe("useTranslatedPath", () => {
 });
 
 describe("getLocalePaths", () => {
-	// Mock getRelativeLocaleUrl from astro:i18n
-	vi.mock("astro:i18n", () => ({
-		getRelativeLocaleUrl: vi.fn((lang, path) =>
-			lang === "en" ? path : `/${lang}${path}`,
-		),
-	}));
-
 	test("returns locale paths for all configured languages", () => {
 		const url = new URL("https://example.com/en/about");
 		const paths = getLocalePaths(url);

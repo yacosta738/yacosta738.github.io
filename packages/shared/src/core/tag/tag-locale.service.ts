@@ -12,6 +12,7 @@ import { type Lang, LOCALES } from "@/i18n/types";
 import { buildLocalePath } from "../../i18n/path";
 import type Tag from "./tag.model";
 import { getTags } from "./tag.service";
+import { getTagSlug } from "./tag.utils";
 
 export { extractTagSlugFromPath, isTagPage } from "./tag-locale.utils";
 
@@ -57,7 +58,9 @@ export async function findTagInLanguage(
 		const targetTags = await getTags({ lang: targetLang });
 
 		// Try to find a tag with the same slug in the target language
-		const matchingTag = targetTags.find((tag) => tag.slug === sourceTagSlug);
+		const matchingTag = targetTags.find(
+			(tag) => getTagSlug(tag) === sourceTagSlug,
+		);
 
 		if (matchingTag) {
 			return {
@@ -65,7 +68,7 @@ export async function findTagInLanguage(
 				tag: matchingTag,
 				fallbackPath: resolvePath(
 					targetLang,
-					`${tagBasePath}/${matchingTag.slug}`,
+					`${tagBasePath}/${getTagSlug(matchingTag)}`,
 				),
 			};
 		}

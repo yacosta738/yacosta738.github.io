@@ -1,7 +1,7 @@
+import { mapNotionArticleEntry } from "@blog/lib/notion/notion-article.mapper";
 import { describe, expect, it, vi } from "vitest";
-import { mapNotionArticleEntry } from "@/lib/notion/notion-article.mapper";
 
-vi.mock("notion-astro-loader", () => ({
+vi.mock("@yap/astro-notion-loader", () => ({
 	fileToUrl: () => new URL("https://example.com/notion-cover.png"),
 }));
 
@@ -180,7 +180,10 @@ describe("mapNotionArticleEntry", () => {
 	it("normalizes cover URLs from Notion files", () => {
 		const entry = mapNotionArticleEntry(
 			{
-				cover: { type: "external" },
+				cover: {
+					type: "external",
+					external: { url: "https://example.com/notion-cover.png" },
+				},
 				properties: {
 					Name: titleProperty("Cover test"),
 					Description: richTextProperty("Cover description"),
