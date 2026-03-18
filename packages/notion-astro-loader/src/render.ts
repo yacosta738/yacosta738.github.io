@@ -34,7 +34,8 @@ const baseProcessor = unified()
 	.use(notionRehype, {}) // Parse Notion blocks to rehype AST
 	.use(rehypeSlug)
 	.use(
-		// @ts-expect-error
+		// @ts-expect-error rehype-katex types don't align with unified/rehype Plugin types yet.
+		// Safe to ignore here; remove once rehype-katex or unified types are updated.
 		rehypeKatex,
 	) // Then you can use any rehype plugins to enrich the AST
 	.use(rehypeStringify); // Turn AST to HTML string
@@ -152,7 +153,7 @@ function extractTocHeadings(toc: HtmlElementNode): MarkdownHeading[] {
 		});
 	}
 
-	return listElementToTree(toc.children?.[0] as ListNode, 0);
+	return listElementToTree(toc.children?.[0] as ListNode, 1);
 }
 
 export interface RenderedNotionEntry {
@@ -260,7 +261,7 @@ export class NotionPageRenderer {
 			};
 		} catch (error) {
 			this.#logger.error(`Failed to render: ${getErrorMessage(error)}`);
-			return undefined;
+			throw error;
 		}
 	}
 
@@ -281,7 +282,7 @@ export class NotionPageRenderer {
 
 			fse.ensureDirSync(this.imageSavePath);
 
-			// 文件需要下载到本地的指定目录中
+			// File needs to be downloaded to a specified local directory.
 			const imageUrl = await saveImageFromAWS(
 				imageFileObject.file.url,
 				this.imageSavePath,

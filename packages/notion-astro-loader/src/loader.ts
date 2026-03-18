@@ -192,16 +192,23 @@ export function notionLoader({
 						),
 					);
 
-					const renderPromise = renderer.render(processor).then((rendered) => {
-						store.set({
-							id: page.id,
-							digest: page.last_edited_time,
-							data,
-							rendered,
-							filePath: `${VIRTUAL_CONTENT_ROOT}/${page.id}.md`, // 不重要，有就行
-							assetImports: rendered?.metadata.imagePaths,
+					const renderPromise = renderer
+						.render(processor)
+						.then((rendered) => {
+							store.set({
+								id: page.id,
+								digest: page.last_edited_time,
+								data,
+								rendered,
+								filePath: `${VIRTUAL_CONTENT_ROOT}/${page.id}.md`, // Not important — just needs to exist.
+								assetImports: rendered?.metadata.imagePaths,
+							});
+						})
+						.catch((error) => {
+							log_pg.error(
+								`Render failed for page ${page.id}: ${error instanceof Error ? error.message : String(error)}`,
+							);
 						});
-					});
 
 					renderPromises.push(renderPromise);
 

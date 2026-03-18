@@ -12,5 +12,6 @@ export const getTagSlug = (tag: TagLike): string => {
 		return normalizeTagId(tag.id);
 	}
 
-	return normalizeTagId(tag.id);
+	const slug = tag.slug?.trim();
+	return slug ? slug : normalizeTagId(tag.id);
 };

@@ -1,25 +1,9 @@
 import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n/types";
+import { type FileObject, fileToUrl } from "./notion-file";
 
 type NotionPageData = {
 	cover: unknown | null;
 	properties: Record<string, unknown>;
-};
-
-type FileObject =
-	| { type: "external"; external: { url: string } }
-	| { type: "file"; file: { url: string } };
-
-const fileToUrl = (file: FileObject | null | undefined): string | undefined => {
-	if (!file) {
-		return undefined;
-	}
-	if (file.type === "external") {
-		return file.external.url;
-	}
-	if (file.type === "file") {
-		return file.file.url;
-	}
-	return undefined;
 };
 
 type MapOptions = {

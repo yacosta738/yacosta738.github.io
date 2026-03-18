@@ -49,13 +49,11 @@ export async function saveImageFromAWS(
 	}
 
 	// Validate and parse the URL
-	const [parentId, objId, fileName] = new URL(url).pathname
-		.split("/")
-		.filter(Boolean); // Remove empty strings
-
-	if (!fileName || !parentId || !objId) {
-		throw new Error("Invalid URL");
+	const segments = new URL(url).pathname.split("/").filter(Boolean);
+	if (segments.length < 3) {
+		throw new Error(`Malformed image URL path: ${url}`);
 	}
+	const [parentId, objId, fileName] = segments.slice(-3);
 
 	// Path to parent directory of the image
 	// ./src/{dir}/{parentId}
@@ -71,8 +69,11 @@ export async function saveImageFromAWS(
 	if (ignoreCache || !fse.existsSync(filePath)) {
 		// If ignoreCache is true or the file doesn't exist, download it
 		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Failed to fetch image (${response.status}): ${url}`);
+		}
 		const buffer = await response.arrayBuffer();
-		fse.writeFile(filePath, new Uint8Array(buffer));
+		await fse.writeFile(filePath, new Uint8Array(buffer));
 
 		log?.(`Saved image \`${fileName}\` ${dim(`created \`${filePath}\``)}`);
 		tag?.("download");

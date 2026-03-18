@@ -15,7 +15,13 @@ export function rehypeImages() {
 				if (node.tagName !== "img") return;
 
 				if (node.properties?.src) {
-					node.properties.src = decodeURI(node.properties.src);
+					let decoded = node.properties.src;
+					try {
+						decoded = decodeURI(node.properties.src);
+					} catch {
+						decoded = node.properties.src;
+					}
+					node.properties.src = decoded;
 					const astroData = file.data.astro as
 						| { imagePaths?: string[] }
 						| undefined;
