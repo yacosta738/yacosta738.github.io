@@ -1,3 +1,11 @@
+## [2.0.13](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.12...v2.0.13) (2026-03-18)
+
+
+### Bug Fixes
+
+* address review feedback ([1375f78](https://github.com/yacosta738/yacosta738.github.io/commit/1375f78a702788b05457423290c1a840e9913c68))
+* resolve workspace notion loader entry ([1e14a71](https://github.com/yacosta738/yacosta738.github.io/commit/1e14a7100b05e8ce8c09d4c1a67ae88d00529220))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
