@@ -1,3 +1,13 @@
+## [2.0.14](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.13...v2.0.14) (2026-03-18)
+
+
+### Bug Fixes
+
+* address review feedback ([5e0310a](https://github.com/yacosta738/yacosta738.github.io/commit/5e0310aeafa07976c746faeb3a0d001611060635))
+* keep en root route in redirects ([7fd397e](https://github.com/yacosta738/yacosta738.github.io/commit/7fd397eabd2c9c46c01f5a5fe43b4460b147a564))
+* resolve en route conflict and cpp skill id ([42d5392](https://github.com/yacosta738/yacosta738.github.io/commit/42d5392a9e32bcc4ce6f6ded1b3b0d9f1a0ed9cf))
+* resolve workspace notion loader entry ([63864b6](https://github.com/yacosta738/yacosta738.github.io/commit/63864b649a54fefcc71826c5cad73341b914b31f))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
