@@ -1,3 +1,11 @@
+## [2.0.15](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.14...v2.0.15) (2026-03-18)
+
+
+### Bug Fixes
+
+* **deps:** update astro to >=5.15.9 [SECURITY] ([3a64924](https://github.com/yacosta738/yacosta738.github.io/commit/3a649246f633ca844cea1f83946b09b15918d36c))
+* **deps:** update fast-xml-parser to ^5.5.6 [SECURITY] ([#1756](https://github.com/yacosta738/yacosta738.github.io/issues/1756)) ([450e900](https://github.com/yacosta738/yacosta738.github.io/commit/450e900e3e5a488cd91c606423143180c2cfaf83))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
