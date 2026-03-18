@@ -21,9 +21,6 @@ export async function getStaticPaths() {
 		route = route.replace(/\.(astro|mdx|md)$/, "");
 		route = route.replace(/\/index$/, "");
 		route = route.replace(/^index$/, "");
-		if (route === "") {
-			return null;
-		}
 
 		if (route.includes("[")) {
 			return null;
