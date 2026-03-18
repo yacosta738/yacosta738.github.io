@@ -60,7 +60,7 @@
 		"clean": "pnpm --filter=portfolio clean && pnpm --filter=blog clean && pnpm --filter=yap-api clean"
 	},
 	"engines": {
-		"node": ">=22.12.0"
+		"node": ">=22.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.6",

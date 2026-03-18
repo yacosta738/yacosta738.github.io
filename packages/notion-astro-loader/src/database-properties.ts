@@ -45,7 +45,7 @@ export async function propertiesSchemaForDatabase(
 					propertySchema = propertySchema.describe(value.description);
 				}
 				if (key !== "Name") {
-					// propertySchema = propertySchema.optional();
+					propertySchema = propertySchema.optional();
 				}
 
 				return [key, propertySchema];

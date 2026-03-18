@@ -49,8 +49,8 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 /**
  * Converts an array of tag collection entries to Tag objects
  * @param {CollectionEntry<"tags">[]} tags - Array of tag collection entries
- * @returns {Promise<Tag[]>} Promise that resolves to an array of Tag objects
+ * @returns {Tag[]} Array of Tag objects
  */
-export async function toTags(tags: CollectionEntry<"tags">[]): Promise<Tag[]> {
+export function toTags(tags: CollectionEntry<"tags">[]): Tag[] {
 	return tags.map(toTag);
 }

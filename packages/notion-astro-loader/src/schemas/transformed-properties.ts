@@ -22,7 +22,7 @@ export const select: z.ZodTypeAny = propertyType.select.transform(
 	(property) => property.select?.name ?? null,
 );
 export const multi_select: z.ZodTypeAny = propertyType.multi_select.transform(
-	(property) => property.multi_select.map((option) => option.name) ?? [],
+	(property) => property.multi_select.map((option) => option.name),
 );
 export const status: z.ZodTypeAny = propertyType.status.transform(
 	(property) => property.status?.name ?? null,

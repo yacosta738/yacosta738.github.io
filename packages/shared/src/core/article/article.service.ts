@@ -94,6 +94,8 @@ const deduplicateArticles = (articles: Article[]): Article[] => {
 	});
 };
 
+const shouldLoadNotion = (): boolean => import.meta.env.NOTION_LOADER === "1";
+
 /**
  * Retrieves articles from the content collection with filtering options
  * @async
@@ -103,10 +105,9 @@ const deduplicateArticles = (articles: Article[]): Article[] => {
 export async function getArticles(
 	criteria?: ArticleCriteria,
 ): Promise<Article[]> {
-	const shouldLoadNotion = import.meta.env.NOTION_LOADER === "1";
 	const filter = createArticleFilter(criteria, { includeFeatured: true });
 	const articles = await getCollection("articles", filter);
-	const notionArticles = shouldLoadNotion
+	const notionArticles = shouldLoadNotion()
 		? await getCollection("notionArticles", filter)
 		: [];
 
@@ -169,7 +170,6 @@ export async function getArticlesByAuthor(
 export async function getAllArticlesIncludingExternal(
 	criteria?: ArticleCriteria,
 ): Promise<Article[]> {
-	const shouldLoadNotion = import.meta.env.NOTION_LOADER === "1";
 	const regularFilter = createArticleFilter(criteria, {
 		includeFeatured: true,
 	});
@@ -178,7 +178,7 @@ export async function getAllArticlesIncludingExternal(
 	});
 
 	const regularArticles = await getCollection("articles", regularFilter);
-	const notionArticles = shouldLoadNotion
+	const notionArticles = shouldLoadNotion()
 		? await getCollection("notionArticles", regularFilter)
 		: [];
 	const externalArticles = await getCollection(

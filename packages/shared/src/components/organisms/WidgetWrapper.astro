@@ -3,6 +3,7 @@ import WidgetCategory from "@/components/molecules/WidgetCategory.astro";
 import WidgetRecentPost from "@/components/molecules/WidgetRecentPost.astro";
 import WidgetTagCloud from "@/components/molecules/WidgetTagCloud.astro";
 import { getArticles } from "@/core/article";
+import { getCategorySlug } from "@/core/category";
 import { getExternalArticles } from "@/core/external-article";
 import { getTagSlug } from "@/core/tag";
 import { type Lang } from "@/i18n";
@@ -64,7 +65,7 @@ const categories = allPosts.reduce(
 		if (!post.category) {
 			return acc;
 		}
-		const slug = (post.category.slug || "").trim();
+		const slug = getCategorySlug(post.category).trim();
 		if (!slug) {
 			return acc;
 		}

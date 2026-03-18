@@ -54,7 +54,7 @@ export async function getTags(criteria?: TagCriteria): Promise<Tag[]> {
 			return true;
 		});
 
-		const mappedTags = await toTags(tags);
+		const mappedTags = toTags(tags);
 		tagsCache[cacheKey] = mappedTags;
 		return mappedTags;
 	} catch (error) {

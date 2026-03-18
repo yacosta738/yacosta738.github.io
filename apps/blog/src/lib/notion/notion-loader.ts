@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Loader, LoaderContext } from "astro/loaders";
 import type { Element as ElementNode } from "hast";
+import { type FileObject, fileToUrl } from "./notion-file";
 
 type NotionArticleData = {
 	title: string;
@@ -27,10 +28,6 @@ type CachedNotionLoaderOptions = NotionLoaderOptions & {
 	defaultTags?: string[];
 };
 
-type FileObject =
-	| { type: "external"; external: { url: string } }
-	| { type: "file"; file: { url: string } };
-
 type NotionLoaderOptions = {
 	auth?: string;
 	timeoutMs?: number;
@@ -44,19 +41,6 @@ type NotionLoaderOptions = {
 	filter?: unknown;
 	archived?: boolean;
 	rehypePlugins?: ReadonlyArray<unknown>;
-};
-
-const fileToUrl = (file: FileObject | null | undefined): string | undefined => {
-	if (!file) {
-		return undefined;
-	}
-	if (file.type === "external") {
-		return file.external.url;
-	}
-	if (file.type === "file") {
-		return file.file.url;
-	}
-	return undefined;
 };
 
 type CachedEntry = {
@@ -569,6 +553,7 @@ const createNotionLoaderNoImages = ({
 				if (traceMode) {
 					throw new Error(
 						`notion-loader: stage ${stage} failed: ${error instanceof Error ? error.message : String(error)}`,
+						{ cause: error },
 					);
 				}
 				throw error;

@@ -5,7 +5,7 @@ type AstroContentEntry = {
 	data: {
 		title: string;
 		cover?: string;
-		date: string;
+		date: string | Date;
 		repository?: string;
 		url?: string;
 		company: string;
@@ -27,10 +27,12 @@ type AstroContentEntry = {
  */
 export const fromContentEntry = (entry: AstroContentEntry): ProjectMetadata => {
 	const data = entry.data;
+	const dateValue = data.date instanceof Date ? data.date : new Date(data.date);
+	const date = data.date instanceof Date ? data.date.toISOString() : data.date;
 	return {
 		title: data.title,
 		cover: data.cover,
-		date: data.date,
+		date,
 		repository: data.repository,
 		url: data.url,
 		company: data.company,
@@ -43,7 +45,9 @@ export const fromContentEntry = (entry: AstroContentEntry): ProjectMetadata => {
 		featured: data.featured ?? false,
 		priority: data.priority ?? 0,
 		published: data.published ?? false,
-		year: data.date ? new Date(data.date).getFullYear() : undefined,
+		year: Number.isNaN(dateValue.valueOf())
+			? undefined
+			: dateValue.getFullYear(),
 	};
 };
 

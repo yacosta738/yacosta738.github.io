@@ -20,8 +20,8 @@ export const pageObjectSchema = z.object({
 		.nullable(),
 	archived: z.boolean(),
 	in_trash: z.boolean(),
-	url: z.string().url(),
-	public_url: z.string().url().nullable(),
+	url: z.url(),
+	public_url: z.url().nullable(),
 	properties: z.object({}).catchall(
 		z
 			.object({

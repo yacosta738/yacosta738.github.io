@@ -1,7 +1,6 @@
 import { defineCollection, reference, type SchemaContext } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { z as zod } from "zod";
 
 // Reusable schemas
 const profileSchema = z.object({
@@ -138,7 +137,7 @@ const projectMetadata = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		cover: z.string().optional(),
-		date: zod
+		date: z
 			.string()
 			.refine((value) => !Number.isNaN(Date.parse(value)), "Invalid datetime"),
 		repository: z.string().optional(),
