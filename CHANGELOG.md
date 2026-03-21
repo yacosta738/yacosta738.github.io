@@ -1,3 +1,11 @@
+## [2.0.16](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.15...v2.0.16) (2026-03-21)
+
+
+### Bug Fixes
+
+* **deps:** update @biomejs/biome to v2.4.8 ([#1708](https://github.com/yacosta738/yacosta738.github.io/issues/1708)) ([687e885](https://github.com/yacosta738/yacosta738.github.io/commit/687e88501b162de734e1c708c85eb3d93fd7cb22))
+* **deps:** update h3 to ^1.15.9 [SECURITY] ([#1766](https://github.com/yacosta738/yacosta738.github.io/issues/1766)) ([74b144a](https://github.com/yacosta738/yacosta738.github.io/commit/74b144a3dc4b1f223e3be0a89a8a867541224612))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
