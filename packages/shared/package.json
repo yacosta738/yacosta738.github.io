@@ -1,6 +1,6 @@
 {
 	"name": "@portfolio/shared",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"packageManager": "pnpm@10.32.1",
 	"type": "module",
 	"scripts": {
@@ -38,7 +38,7 @@
 		"@astrojs/sitemap": "^3.7.1",
 		"@tailwindcss/vite": "^4.2.1",
 		"astro": "6.0.5",
-		"astro-compress": "2.3.9",
+		"astro-compress": "2.4.0",
 		"astro-pagefind": "^1.8.5",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "1.4.0",
