@@ -1,6 +1,6 @@
 {
 	"name": "@portfolio/shared",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"packageManager": "pnpm@10.32.1",
 	"type": "module",
 	"scripts": {
@@ -32,12 +32,12 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "0.9.8",
-		"@astrojs/mdx": "5.0.1",
+		"@astrojs/mdx": "5.0.2",
 		"@astrojs/partytown": "^2.1.5",
 		"@astrojs/rss": "^4.0.17",
 		"@astrojs/sitemap": "^3.7.1",
 		"@tailwindcss/vite": "^4.2.1",
-		"astro": "6.0.5",
+		"astro": "6.0.7",
 		"astro-compress": "2.3.9",
 		"astro-pagefind": "^1.8.5",
 		"mdast-util-to-string": "^4.0.0",
