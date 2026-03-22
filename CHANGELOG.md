@@ -1,3 +1,10 @@
+## [2.0.17](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.16...v2.0.17) (2026-03-22)
+
+
+### Bug Fixes
+
+* **deps:** update Node.js to v22.22.1 ([#1745](https://github.com/yacosta738/yacosta738.github.io/issues/1745)) ([dbfaa02](https://github.com/yacosta738/yacosta738.github.io/commit/dbfaa02299f0e11b4c7074f00561ebdfac161517))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
