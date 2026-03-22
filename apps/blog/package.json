@@ -42,7 +42,7 @@
 		"@jsdevtools/rehype-toc": "^3.0.2",
 		"@notionhq/client": "^2.3.0",
 		"@tailwindcss/vite": "^4.2.1",
-		"astro": "6.0.5",
+		"astro": "6.0.8",
 		"astro-compress": "2.3.9",
 		"astro-pagefind": "^1.8.5",
 		"mdast-util-to-string": "^4.0.0",
