@@ -1,3 +1,10 @@
+## [2.0.18](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.17...v2.0.18) (2026-03-22)
+
+
+### Bug Fixes
+
+* **deps:** update @iconify-json/simple-icons to ^1.2.74 ([#1769](https://github.com/yacosta738/yacosta738.github.io/issues/1769)) ([158e44f](https://github.com/yacosta738/yacosta738.github.io/commit/158e44f0cab77f8b27713bbccda36e4b122d1dde))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
