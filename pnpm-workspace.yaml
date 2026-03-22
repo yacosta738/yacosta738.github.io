@@ -9,8 +9,8 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - "@cloudflare/workers-types"
   - wrangler
-  # Renovate security update: fast-xml-parser@5.3.8 || 5.5.6
-  - fast-xml-parser@5.3.8 || 5.5.6
+  # Renovate security update: fast-xml-parser@5.3.8 || 5.5.6 || 5.5.7
+  - fast-xml-parser@5.3.8 || 5.5.6 || 5.5.7
   # Renovate security update: hono@4.12.4
   - hono@4.12.4
   # Renovate security update: h3@1.15.9
