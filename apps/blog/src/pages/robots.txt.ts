@@ -22,7 +22,6 @@ Disallow: ${prefix}/tag/`;
 # Default: allow all
 User-agent: *
 Allow: /
-Disallow: /admin/
 Disallow: /admin
 Disallow: /_astro/
 Disallow: /api/
@@ -61,6 +60,11 @@ Disallow: /
 };
 
 export const GET: APIRoute = ({ site }) => {
+	if (!site) {
+		throw new Error(
+			"Missing `site` in Astro context; please set `site` in astro.config.mjs",
+		);
+	}
 	const sitemapURL = new URL("sitemap-index.xml", site);
 	return new Response(getRobotsTxt(sitemapURL), {
 		headers: { "Content-Type": "text/plain; charset=utf-8" },

@@ -55,7 +55,7 @@ const postSlug = slugParts.join("/");
 		{
 			post.cover &&
 				(typeof post.cover === "string" ? (
-					<img src={post.cover} alt={post.title} loading="eager" fetchpriority="high" decoding="async" class="mx-auto w-full max-w-full rounded-lg" />
+					<img src={post.cover} alt={post.title} width="1200" height="675" loading="eager" fetchpriority="high" decoding="async" style="aspect-ratio:16/9;object-fit:cover" class="mx-auto w-full max-w-full rounded-lg" />
 				) : (
 					<OptimizedPicture
 						src={post.cover}

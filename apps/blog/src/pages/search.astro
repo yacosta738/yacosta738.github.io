@@ -14,7 +14,7 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 ---
 
 <Layout title={t("search.title")} description={t("search.description")}>
-	<main class="container mx-auto px-4 blog-shell">
+	<div class="container mx-auto px-4 blog-shell">
 		<link href={pagefindCssHref} rel="stylesheet" />
 		<script is:inline src={pagefindJsSrc}></script>
 
@@ -41,7 +41,7 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 				></div>
 			</div>
 		</section>
-	</main>
+	</div>
 </Layout>
 
 <script>

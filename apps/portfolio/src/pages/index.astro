@@ -23,6 +23,7 @@ import { getArticles, hasArticles } from "@/core/article";
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 import { DEFAULT_LOCALE, useTranslations } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
+import { buildPersonJsonLd, safeJsonLd } from "@/lib/seo/json-ld";
 
 export const prerender = true;
 
@@ -46,48 +47,12 @@ const lastArticles = allArticles
 const hasArticlesData = await hasArticles({ lang: currentLocale });
 
 // Person JSON-LD structured data
-const getImageUrl = (
-	img: string | { src: string } | null | undefined,
-): string => {
-	if (!img) return "";
-	if (typeof img === "string") return img;
-	if (typeof img === "object" && "src" in img) return img.src;
-	return "";
-};
 const siteOrigin = Astro.site?.origin || Astro.url.origin;
-const personJsonLd = {
-	"@context": "https://schema.org",
-	"@type": "Person",
-	name: resume.basics.name,
-	jobTitle: resume.basics.label,
-	description: resume.basics.summary,
-	url: resume.basics.url || siteOrigin,
-	...(resume.basics.image && {
-		image: new URL(
-			getImageUrl(resume.basics.image as string | { src: string }),
-			siteOrigin,
-		).href,
-	}),
-	...(resume.basics.email && { email: `mailto:${resume.basics.email}` }),
-	...(resume.basics.location && {
-		address: {
-			"@type": "PostalAddress",
-			addressLocality: (resume.basics.location as { city?: string })?.city,
-			addressCountry: (resume.basics.location as { countryCode?: string })
-				?.countryCode,
-		},
-	}),
-	...(resume.basics.profiles &&
-		resume.basics.profiles.length > 0 && {
-			sameAs: (resume.basics.profiles as Array<{ url: string }>).map(
-				(p) => p.url,
-			),
-		}),
-};
+const personJsonLd = buildPersonJsonLd(resume.basics as Parameters<typeof buildPersonJsonLd>[0], siteOrigin);
 ---
 
 <Layout title={title}>
-	<script slot="head" type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+	<script slot="head" type="application/ld+json" set:html={safeJsonLd(personJsonLd)} />
 	<div class="portfolio-content">
 		<Hero basics={resume.basics} />
 		<About basics={resume.basics} skills={resume.skills} />

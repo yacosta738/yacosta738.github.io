@@ -5,6 +5,7 @@ import ProjectsTable from "@/components/organisms/ProjectsTable.astro";
 import { getAllProjects } from "@/core/resume/project/project.service";
 import { DEFAULT_LOCALE, type Lang, LOCALES, useTranslations } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 
 export const getStaticPaths = () =>
 	Object.keys(LOCALES)
@@ -51,7 +52,7 @@ const collectionJsonLd = {
 ---
 
 <Layout title={title}>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
+  <script slot="head" type="application/ld+json" set:html={safeJsonLd(collectionJsonLd)} />
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <header class="text-center mb-12">
       <h1 class="text-4xl md:text-5xl font-bold text-foreground">

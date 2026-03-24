@@ -54,6 +54,14 @@ interface Props {
 	articleAuthor?: string;
 	/** Tags for article OG tags */
 	articleTags?: string[];
+	/** When true, Layout skips rendering its own <main> (page provides its own) */
+	hasOwnMain?: boolean;
+	/** OG image width (only emitted when explicitly provided) */
+	ogImageWidth?: number;
+	/** OG image height (only emitted when explicitly provided) */
+	ogImageHeight?: number;
+	/** OG image MIME type (only emitted when explicitly provided) */
+	ogImageType?: string;
 }
 const {
 	title = "",
@@ -65,6 +73,10 @@ const {
 	articleModifiedTime,
 	articleAuthor,
 	articleTags = [],
+	hasOwnMain = false,
+	ogImageWidth,
+	ogImageHeight,
+	ogImageType,
 } = Astro.props;
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
@@ -127,7 +139,15 @@ const isLocalhostHost = (hostname: string): boolean => {
 
 const alternatesOrigin =
 	Astro.site && !isLocalhostHost(Astro.site.hostname) ? Astro.site.origin : "";
-const canonicalHref = `${alternatesOrigin}${Astro.url.pathname}`;
+
+// Ensure canonicalHref is always an absolute URL
+const fallbackOrigin = alternatesOrigin
+	|| Astro.site?.origin
+	|| (() => {
+		const host = Astro.request.headers.get("host");
+		return host ? `https://${host}` : Astro.url.origin;
+	})();
+const canonicalHref = `${fallbackOrigin}${Astro.url.pathname}`;
 const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 const xAccount =
 	typeof X_ACCOUNT === "string"
@@ -135,6 +155,10 @@ const xAccount =
 		: X_ACCOUNT[locale] || X_ACCOUNT.en || "";
 const siteName = typeof SITE_TITLE === "string" ? SITE_TITLE : t(SITE_TITLE);
 const localeTag = LOCALES[locale].lang || locale;
+
+/** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
+const safeJsonLd = (data: Record<string, unknown>): string =>
+	JSON.stringify(data).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -266,9 +290,9 @@ const localeTag = LOCALES[locale].lang || locale;
     <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={localeTag.replace("-", "_")} />
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-    {ogImageUrl && <meta property="og:image:width" content="1200" />}
-    {ogImageUrl && <meta property="og:image:height" content="630" />}
-    {ogImageUrl && <meta property="og:image:type" content="image/png" />}
+    {ogImageUrl && ogImageWidth && <meta property="og:image:width" content={String(ogImageWidth)} />}
+    {ogImageUrl && ogImageHeight && <meta property="og:image:height" content={String(ogImageHeight)} />}
+    {ogImageUrl && ogImageType && <meta property="og:image:type" content={ogImageType} />}
 
     <!-- Article-specific OG tags -->
     {ogType === "article" && articlePublishedTime && (
@@ -298,11 +322,11 @@ const localeTag = LOCALES[locale].lang || locale;
     />
 
     <!-- JSON-LD: WebSite schema (all pages) -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script type="application/ld+json" set:html={safeJsonLd({
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": siteName,
-      "url": alternatesOrigin || Astro.site?.href || canonicalHref,
+      "url": fallbackOrigin || canonicalHref,
       "description": metaDescription,
       "inLanguage": localeTag,
     })} />
@@ -316,9 +340,13 @@ const localeTag = LOCALES[locale].lang || locale;
       <Header id={HEADER_ID} showSearch={showSearch} />
     </slot>
     <slot name="subheader" />
-    <main id="main-content">
+    {hasOwnMain ? (
       <slot />
-    </main>
+    ) : (
+      <main id="main-content">
+        <slot />
+      </main>
+    )}
     <slot name="aside" />
     <slot name="json-ld" />
     <Analytics />

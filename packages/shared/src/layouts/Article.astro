@@ -5,7 +5,7 @@ import BlogFooter from "@/components/organisms/BlogFooter.astro";
 import Comments from "@/components/organisms/Comments.astro";
 import WidgetWrapper from "@/components/organisms/WidgetWrapper.astro";
 import type Article from "@/core/article/article.model";
-import type { Lang } from "@/i18n";
+import { type Lang, useTranslations } from "@/i18n";
 import BaseLayout from "@/layouts/Layout.astro";
 import { getOgImagePath } from "@/lib/open-graph/og.service";
 
@@ -33,6 +33,11 @@ const {
 	slug,
 } = Astro.props;
 
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+const DEFAULT_AUTHOR = "Yuniel Acosta";
+const authorName = author?.name || DEFAULT_AUTHOR;
+
 const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 	.href;
 
@@ -46,9 +51,18 @@ const getCoverUrl = (img: typeof cover): string => {
 	return ogImage;
 };
 
-const canonicalUrl = Astro.site
-	? `${Astro.site.origin}${Astro.url.pathname}`
-	: Astro.url.href;
+// Build locale-aware origin and canonical URL
+const siteOrigin = Astro.site?.origin || Astro.url.origin;
+const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
+
+// Locale-aware base path (e.g., "" for default, "/es" for Spanish)
+const localePrefix = Astro.url.pathname.match(/^\/([a-z]{2})\//)?.[0]?.slice(0, -1) || "";
+const localizedHome = `${siteOrigin}${localePrefix}/`;
+const localizedBlog = `${siteOrigin}${localePrefix}/blog`;
+
+/** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
+const safeJsonLd = (data: Record<string, unknown>): string =>
+	JSON.stringify(data).replace(/</g, "\\u003c");
 
 // BlogPosting JSON-LD structured data
 const blogPostingJsonLd = {
@@ -62,12 +76,12 @@ const blogPostingJsonLd = {
 	...(lastModified && { dateModified: lastModified.toISOString() }),
 	author: {
 		"@type": "Person",
-		name: author?.name || "Yuniel Acosta",
+		name: authorName,
 		...(author?.url && { url: author.url }),
 	},
 	publisher: {
 		"@type": "Person",
-		name: author?.name || "Yuniel Acosta",
+		name: authorName,
 	},
 	...(category && {
 		articleSection: category.title,
@@ -81,7 +95,7 @@ const blogPostingJsonLd = {
 	},
 };
 
-// BreadcrumbList JSON-LD
+// BreadcrumbList JSON-LD (locale-aware)
 const breadcrumbJsonLd = {
 	"@context": "https://schema.org",
 	"@type": "BreadcrumbList",
@@ -89,14 +103,14 @@ const breadcrumbJsonLd = {
 		{
 			"@type": "ListItem",
 			position: 1,
-			name: "Home",
-			item: Astro.site?.href || Astro.url.origin,
+			name: t({ en: "Home", es: "Inicio" }) || "Home",
+			item: localizedHome,
 		},
 		{
 			"@type": "ListItem",
 			position: 2,
 			name: "Blog",
-			item: `${Astro.site?.origin || Astro.url.origin}/blog`,
+			item: localizedBlog,
 		},
 		{
 			"@type": "ListItem",
@@ -116,8 +130,11 @@ const breadcrumbJsonLd = {
 	ogType="article"
 	articlePublishedTime={date?.toISOString()}
 	articleModifiedTime={lastModified?.toISOString()}
-	articleAuthor={author?.name}
+	articleAuthor={authorName}
 	articleTags={tags.map((tag) => tag.title)}
+	ogImageWidth={1200}
+	ogImageHeight={630}
+	ogImageType="image/png"
 >
 	<HeaderProgressBar
 		slot="subheader"
@@ -149,6 +166,6 @@ const breadcrumbJsonLd = {
 	<ToTopButton />
 
 	<!-- BlogPosting + BreadcrumbList JSON-LD -->
-	<script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
-	<script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+	<script slot="head" type="application/ld+json" set:html={safeJsonLd(blogPostingJsonLd)} />
+	<script slot="head" type="application/ld+json" set:html={safeJsonLd(breadcrumbJsonLd)} />
 </BaseLayout>
