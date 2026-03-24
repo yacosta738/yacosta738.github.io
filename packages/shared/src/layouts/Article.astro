@@ -8,6 +8,7 @@ import type Article from "@/core/article/article.model";
 import { type Lang, useTranslations } from "@/i18n";
 import BaseLayout from "@/layouts/Layout.astro";
 import { getOgImagePath } from "@/lib/open-graph/og.service";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import { resolvePublicOrigin } from "@/utils/public-origin";
 
 interface Props extends Article {
@@ -48,9 +49,19 @@ const ogImage = publicOrigin
 const getCoverUrl = (img: typeof cover): string => {
 	if (!img) return ogImage;
 	if (typeof img === "string")
-		return img.startsWith("http") ? img : new URL(img, publicOrigin).href;
+		return img.startsWith("http")
+			? img
+			: publicOrigin
+				? new URL(img, publicOrigin).href
+				: img.startsWith("/")
+					? img
+					: `/${img}`;
 	if (typeof img === "object" && "src" in img)
-		return new URL(img.src, publicOrigin).href;
+		return publicOrigin
+			? new URL(img.src, publicOrigin).href
+			: img.src.startsWith("/")
+				? img.src
+				: `/${img.src}`;
 	return ogImage;
 };
 
@@ -67,10 +78,6 @@ const authorProfileUrl =
 	publicOrigin && author?.slug
 		? new URL(`${localePrefix}/author/${author.slug}`, `${publicOrigin}/`).href
 		: undefined;
-
-/** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
-const safeJsonLd = (data: Record<string, unknown>): string =>
-	JSON.stringify(data).replace(/</g, "\\u003c");
 
 // BlogPosting JSON-LD structured data
 const blogPostingJsonLd = {

@@ -36,6 +36,7 @@ import {
 	STORAGE_KEY,
 } from "@/configs/theme.consts";
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
+import { safeJsonLd } from "@/lib/seo/json-ld";
 import { resolvePublicOrigin } from "@/utils/public-origin";
 import alkatraRegularWoff2 from "../assets/font/alkatra/alkatra-v3-latin-regular.woff2";
 
@@ -151,7 +152,7 @@ const fallbackOrigin = resolvePublicOrigin(
 const alternatesOrigin = fallbackOrigin;
 const canonicalHref = fallbackOrigin
 	? new URL(Astro.url.pathname, fallbackOrigin).href
-	: "";
+	: Astro.url.href;
 const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 const xAccount =
 	typeof X_ACCOUNT === "string"
@@ -163,10 +164,6 @@ const siteDescription =
 		? SITE_DESCRIPTION
 		: SITE_DESCRIPTION[locale] || SITE_DESCRIPTION.en || metaDescription;
 const localeTag = LOCALES[locale].lang || locale;
-
-/** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
-const safeJsonLd = (data: Record<string, unknown>): string =>
-	JSON.stringify(data).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>

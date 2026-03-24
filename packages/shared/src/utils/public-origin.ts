@@ -39,7 +39,12 @@ const normalizeHostname = (hostname: string): string => {
 		previousWasDot = false;
 	}
 
-	return result.replace(/\.+$/, "");
+	// Remove trailing dots without regex (avoids ReDoS with quantifier + anchor)
+	let end = result.length;
+	while (end > 0 && result[end - 1] === ".") {
+		end--;
+	}
+	return result.slice(0, end);
 };
 
 const isLocalHostname = (hostname: string): boolean =>
