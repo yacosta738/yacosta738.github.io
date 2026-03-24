@@ -12,6 +12,7 @@ const baseURL =
  */
 export default defineConfig({
 	testDir: "../../packages/testing-e2e/tests/e2e",
+	testIgnore: ["**/*-blog.spec.ts"],
 
 	// Test execution settings
 	timeout: 120_000, // Increased timeout for webkit stability

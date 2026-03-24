@@ -17,7 +17,7 @@ const reuseExistingServer =
  */
 export default defineConfig({
 	testDir: "../../packages/testing-e2e/tests/e2e",
-	testIgnore: ["**/contact-form.spec.ts"],
+	testIgnore: ["**/contact-form.spec.ts", "**/*-portfolio.spec.ts"],
 
 	// Test execution settings
 	timeout: 120_000, // Increased timeout for webkit stability
