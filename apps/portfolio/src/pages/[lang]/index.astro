@@ -56,11 +56,14 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
 
 // Person JSON-LD structured data
 const siteOrigin = Astro.site?.origin || Astro.url.origin;
-const personJsonLd = buildPersonJsonLd(resume.basics as Parameters<typeof buildPersonJsonLd>[0], siteOrigin);
+const personJsonLd = buildPersonJsonLd(
+	resume.basics as Parameters<typeof buildPersonJsonLd>[0],
+	siteOrigin,
+);
 ---
 
 <Layout title={title}>
-  <script slot="head" type="application/ld+json" set:html={safeJsonLd(personJsonLd)} />
+  <script is:inline slot="head" type="application/ld+json" set:html={safeJsonLd(personJsonLd)} />
   <div class="portfolio-content">
     <Hero basics={resume.basics} />
     <About basics={resume.basics} skills={resume.skills} />

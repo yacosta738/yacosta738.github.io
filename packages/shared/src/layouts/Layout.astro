@@ -141,9 +141,10 @@ const alternatesOrigin =
 	Astro.site && !isLocalhostHost(Astro.site.hostname) ? Astro.site.origin : "";
 
 // Ensure canonicalHref is always an absolute URL
-const fallbackOrigin = alternatesOrigin
-	|| Astro.site?.origin
-	|| (() => {
+const fallbackOrigin =
+	alternatesOrigin ||
+	Astro.site?.origin ||
+	(() => {
 		const host = Astro.request.headers.get("host");
 		return host ? `https://${host}` : Astro.url.origin;
 	})();

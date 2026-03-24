@@ -56,7 +56,8 @@ const siteOrigin = Astro.site?.origin || Astro.url.origin;
 const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
 
 // Locale-aware base path (e.g., "" for default, "/es" for Spanish)
-const localePrefix = Astro.url.pathname.match(/^\/([a-z]{2})\//)?.[0]?.slice(0, -1) || "";
+const localePrefix =
+	Astro.url.pathname.match(/^\/([a-z]{2})\//)?.[0]?.slice(0, -1) || "";
 const localizedHome = `${siteOrigin}${localePrefix}/`;
 const localizedBlog = `${siteOrigin}${localePrefix}/blog`;
 
