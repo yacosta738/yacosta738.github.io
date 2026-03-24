@@ -1,9 +1,19 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+let previousNodeEnv: string | undefined;
 
 describe("ui translations", () => {
+	beforeEach(() => {
+		previousNodeEnv = process.env.NODE_ENV;
+	});
+
 	afterEach(() => {
 		vi.restoreAllMocks();
-		delete process.env.NODE_ENV;
+		if (previousNodeEnv === undefined) {
+			delete process.env.NODE_ENV;
+		} else {
+			process.env.NODE_ENV = previousNodeEnv;
+		}
 	});
 
 	it("loads and merges translation files for supported languages", async () => {

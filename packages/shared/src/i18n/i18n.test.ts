@@ -1,4 +1,12 @@
-import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+	afterEach,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from "vitest";
 
 const mockShowDefaultLang = vi.fn().mockReturnValue(false);
 const mockExtractTagSlugFromPath = vi.fn();
@@ -52,6 +60,10 @@ describe("shared i18n helpers", () => {
 		mockGetTagLocalePaths.mockReset();
 		mockIsTagPage.mockReset();
 		vi.stubEnv("LANG", "es");
+	});
+
+	afterEach(() => {
+		vi.unstubAllEnvs();
 	});
 
 	it("builds translated paths for target languages", () => {
