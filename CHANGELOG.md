@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.0...v2.1.1) (2026-03-24)
+
+
+### Bug Fixes
+
+* resolve SonarQube quality gate issues — security hotspots, complexity, and code smells ([#1781](https://github.com/yacosta738/yacosta738.github.io/issues/1781)) ([9aa2e7d](https://github.com/yacosta738/yacosta738.github.io/commit/9aa2e7d456ef69b28e145adc2909a8bd5814e0cc))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
