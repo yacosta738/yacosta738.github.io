@@ -1,3 +1,10 @@
+## [2.0.19](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.18...v2.0.19) (2026-03-24)
+
+
+### Bug Fixes
+
+* update biome schema version and correct async function syntax in Playwright tests ([666477c](https://github.com/yacosta738/yacosta738.github.io/commit/666477c74a6a765362baee57b4bd23105d1fb4ee))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
