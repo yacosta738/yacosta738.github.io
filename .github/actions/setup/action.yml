@@ -38,10 +38,26 @@ runs:
         which pnpm
         pnpm --version
 
+    - name: Get pnpm store directory
+      id: pnpm-store
+      shell: bash
+      run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - name: Cache pnpm store
+      id: pnpm-cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+
     - id: emit
       name: Emit outputs
       shell: bash
       run: |
-        # This composite action cannot reliably detect cache hits across runners in a generic way.
-        # Emit cache-hit=false by default to satisfy downstream workflows that reference it.
-        echo "cache-hit=false" >> $GITHUB_OUTPUT
+        echo "cache-hit=${{ steps.pnpm-cache.outputs.cache-hit || 'false' }}" >> $GITHUB_OUTPUT

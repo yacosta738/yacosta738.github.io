@@ -39,10 +39,6 @@ runs:
         VERSION=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"] // "latest"' package.json)
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         echo "🎭 Playwright version: $VERSION"
-    - name: Install dependencies
-      shell: bash
-      working-directory: apps/${{ inputs.app }}
-      run: pnpm install --frozen-lockfile
     - name: Cache Playwright browsers
       id: playwright-cache
       uses: actions/cache@v4
@@ -125,7 +121,7 @@ runs:
       with:
         name: playwright-report-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
         path: apps/${{ inputs.app }}/playwright-report/
-        retention-days: 30
+        retention-days: 7
         if-no-files-found: warn
 
     - name: Upload test traces
@@ -134,7 +130,7 @@ runs:
       with:
         name: playwright-traces-${{ inputs.app }}-${{ inputs.browser }}-${{ github.run_number }}
         path: apps/${{ inputs.app }}/test-results/
-        retention-days: 30
+        retention-days: 7
         if-no-files-found: warn
 
     - name: Generate test summary

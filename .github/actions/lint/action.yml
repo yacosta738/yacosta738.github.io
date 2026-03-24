@@ -71,7 +71,6 @@ runs:
       shell: bash
       run: |
         echo "🔍 Running Astro type checks for portfolio and blog..."
-        pnpm install --frozen-lockfile --ignore-scripts || pnpm install
         pnpm --filter=portfolio check:astro
         pnpm --filter=blog check:astro
         STATUS=$?

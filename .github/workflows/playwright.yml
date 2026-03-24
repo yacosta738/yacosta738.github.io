@@ -1,22 +1,21 @@
-name: Playwright E2E Tests
+name: Playwright E2E Tests (Manual)
 
+# NOTE: This workflow is disabled for automatic runs.
+# E2E tests run as part of the CI Pipeline (ci.yml).
+# Use workflow_dispatch for ad-hoc full browser matrix testing.
 on:
-  push:
-    branches: [main, develop, feature/*]
-    paths-ignore:
-      - 'docs/**'
-      - '**.md'
-      - 'specs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/PULL_REQUEST_TEMPLATE/**'
-  pull_request:
-    branches: [main, develop]
-    paths-ignore:
-      - 'docs/**'
-      - '**.md'
-      - 'specs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/PULL_REQUEST_TEMPLATE/**'
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Browser to test'
+        required: false
+        type: choice
+        options:
+          - all
+          - chromium
+          - firefox
+          - webkit
+        default: 'all'
 
 # Cancel in-progress E2E test runs for the same ref
 concurrency:
