@@ -182,16 +182,25 @@ jobs:
           path: coverage/
           merge-multiple: true
 
+      - name: Setup monorepo
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run targeted shared coverage for Sonar
+        run: pnpm --filter=@portfolio/shared exec vitest run src/lib/seo/json-ld.test.ts src/core/tag/tag.mapper.test.ts
+
       - name: Validate LCOV reports exist
         id: coverage-check
         run: |
           ls -R coverage || true
-          if [ -n "$(find coverage -name 'lcov.info' -print -quit)" ]; then
+          ls -R packages/shared/coverage || true
+          if [ -n "$(find coverage packages -path '*/coverage/lcov.info' -print -quit 2>/dev/null)" ]; then
             echo "coverage_found=true" >> "$GITHUB_OUTPUT"
             echo "✅ LCOV reports detected."
           else
             echo "coverage_found=false" >> "$GITHUB_OUTPUT"
-            echo "⚠️ No LCOV reports were found under coverage/. SonarCloud scan will be skipped."
+            echo "⚠️ No LCOV reports were found in downloaded artifacts or packages/*/coverage. SonarCloud scan will be skipped."
           fi
 
       - name: Validate Sonar token
@@ -214,11 +223,12 @@ jobs:
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
             -Dsonar.sources=apps,packages
-            -Dsonar.tests=apps
+            -Dsonar.tests=apps,packages
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
-            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info,packages/*/coverage/lcov.info
             -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+            -Dsonar.cpd.exclusions=**/content.config.ts,**/vitest.config.ts,**/playwright.config.ts,**/astro.config.mjs,**/organize-articles.js
 
       - name: SonarCloud Scan (Push/Main)
         id: sonar-main-scan
@@ -233,11 +243,12 @@ jobs:
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
             -Dsonar.sources=apps,packages
-            -Dsonar.tests=apps
+            -Dsonar.tests=apps,packages
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
-            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info,packages/*/coverage/lcov.info
             -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
+            -Dsonar.cpd.exclusions=**/content.config.ts,**/vitest.config.ts,**/playwright.config.ts,**/astro.config.mjs,**/organize-articles.js
 
       - name: SonarCloud main scan warning
         if: steps.sonar-main-scan.outcome == 'failure'

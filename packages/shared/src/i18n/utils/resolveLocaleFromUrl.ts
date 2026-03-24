@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n";
+import { DEFAULT_LOCALE, isLang, type Lang } from "@/i18n";
 
 /**
  * Resolves the current locale from the URL and optional params.lang.
@@ -6,8 +6,13 @@ import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n";
  */
 export function resolveLocaleFromUrl(url: URL, paramsLang?: string): Lang {
 	const localeSegment = url.pathname.split("/")[1];
-	const validLocales = Object.keys(LOCALES);
-	return (paramsLang ||
-		(validLocales.includes(localeSegment) ? localeSegment : undefined) ||
-		DEFAULT_LOCALE) as Lang;
+	if (paramsLang && isLang(paramsLang)) {
+		return paramsLang;
+	}
+
+	if (localeSegment && isLang(localeSegment)) {
+		return localeSegment;
+	}
+
+	return DEFAULT_LOCALE;
 }

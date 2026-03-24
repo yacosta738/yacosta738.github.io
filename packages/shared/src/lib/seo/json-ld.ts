@@ -4,7 +4,7 @@
 
 /** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
 export const safeJsonLd = (data: Record<string, unknown>): string =>
-	JSON.stringify(data).replace(/</g, "\\u003c");
+	JSON.stringify(data).replaceAll("<", String.raw`\u003c`);
 
 /** Extract a URL string from an image that may be a string or ImageMetadata */
 const getImageUrl = (

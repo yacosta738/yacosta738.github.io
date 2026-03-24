@@ -36,6 +36,23 @@ export type NotionArticleEntry = {
 	sourceId?: string;
 };
 
+const isLocale = (value: string): value is Lang => value in LOCALES;
+
+const trimHyphenEdges = (value: string): string => {
+	let start = 0;
+	let end = value.length;
+
+	while (start < end && value[start] === "-") {
+		start += 1;
+	}
+
+	while (end > start && value[end - 1] === "-") {
+		end -= 1;
+	}
+
+	return value.slice(start, end);
+};
+
 const TITLE_KEYS = ["Title", "Name"] as const;
 const DESCRIPTION_KEYS = ["Description", "Summary", "Excerpt"] as const;
 const SLUG_KEYS = ["Slug"] as const;
@@ -201,14 +218,14 @@ const resolveRelationNames = (property: unknown): string[] => {
 };
 
 const slugify = (value: string): string => {
-	return value
+	const normalizedSlug = value
 		.normalize("NFKD")
 		.replaceAll(/[^\w\s-]/g, "")
 		.trim()
 		.toLowerCase()
-		.replaceAll(/[\s_-]+/g, "-")
-		.replace(/^-+/, "")
-		.replace(/-+$/, "");
+		.replaceAll(/[\s_-]+/g, "-");
+
+	return trimHyphenEdges(normalizedSlug);
 };
 
 const normalizeNotionId = (value: string): string => {
@@ -238,13 +255,13 @@ const normalizeLocale = (value: string | undefined): Lang => {
 	}
 
 	const normalized = value.toLowerCase();
-	if (normalized in LOCALES) {
-		return normalized as Lang;
+	if (isLocale(normalized)) {
+		return normalized;
 	}
 
 	const base = normalized.split("-")[0];
-	if (base in LOCALES) {
-		return base as Lang;
+	if (isLocale(base)) {
+		return base;
 	}
 
 	return DEFAULT_LOCALE;

@@ -43,6 +43,11 @@ type NotionLoaderOptions = {
 	rehypePlugins?: ReadonlyArray<unknown>;
 };
 
+type NotionEntryData = {
+	properties: Record<string, unknown>;
+	cover: unknown;
+};
+
 type CachedEntry = {
 	id: string;
 	data: NotionArticleData;
@@ -140,7 +145,10 @@ const applyPlugin = (
 		: typedProcessor.use(typedPlugin, options);
 };
 
-type RehypePluginConfig = unknown | string | readonly [unknown, unknown];
+type RehypePluginConfig =
+	| RehypePlugin
+	| string
+	| readonly [RehypePlugin, unknown];
 
 const ensureElementProperties = (node: ElementNode) => {
 	if (!node.properties) {
@@ -681,10 +689,7 @@ const mapEntries = async (
 
 	for (const [sourceId, entry] of rawEntries) {
 		const mapped = mapNotionArticleEntry(
-			entry.data as {
-				properties: Record<string, unknown>;
-				cover: unknown | null;
-			},
+			entry.data as NotionEntryData,
 			sourceId,
 			{
 				logger: context.logger,
