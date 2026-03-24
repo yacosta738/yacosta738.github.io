@@ -36,7 +36,7 @@ import {
 	STORAGE_KEY,
 } from "@/configs/theme.consts";
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
-import { isLocalOrPrivateHostname } from "@/utils/public-origin";
+import { getPublicOrigin, resolvePublicOrigin } from "@/utils/public-origin";
 import alkatraRegularWoff2 from "../assets/font/alkatra/alkatra-v3-latin-regular.woff2";
 
 interface Props {
@@ -133,20 +133,14 @@ const getHostname = (urlStr?: string) => {
 	}
 };
 
-const isLocalhostHost = (hostname: string): boolean => {
-	return isLocalOrPrivateHostname(hostname);
-};
-
-const alternatesOrigin =
-	Astro.site && !isLocalhostHost(Astro.site.hostname) ? Astro.site.origin : "";
+const alternatesOrigin = getPublicOrigin(Astro.site);
 
 // Ensure canonicalHref is always an absolute URL
-const fallbackOrigin =
-	alternatesOrigin ||
-	(() => {
-		const host = Astro.request.headers.get("host");
-		return host ? `https://${host}` : Astro.url.origin;
-	})();
+const fallbackOrigin = resolvePublicOrigin(
+	Astro.site,
+	Astro.request,
+	Astro.url,
+);
 const canonicalHref = `${fallbackOrigin}${Astro.url.pathname}`;
 const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 const xAccount =

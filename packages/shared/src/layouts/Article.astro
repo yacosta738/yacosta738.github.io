@@ -8,6 +8,7 @@ import type Article from "@/core/article/article.model";
 import { type Lang, useTranslations } from "@/i18n";
 import BaseLayout from "@/layouts/Layout.astro";
 import { getOgImagePath } from "@/lib/open-graph/og.service";
+import { resolvePublicOrigin } from "@/utils/public-origin";
 
 interface Props extends Article {
 	url: string;
@@ -41,18 +42,20 @@ const authorName = author?.name || DEFAULT_AUTHOR;
 const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 	.href;
 
+const publicOrigin = resolvePublicOrigin(Astro.site, Astro.request, Astro.url);
+
 // Resolve cover image URL for JSON-LD
 const getCoverUrl = (img: typeof cover): string => {
 	if (!img) return ogImage;
 	if (typeof img === "string")
-		return img.startsWith("http") ? img : new URL(img, Astro.url.origin).href;
+		return img.startsWith("http") ? img : new URL(img, publicOrigin).href;
 	if (typeof img === "object" && "src" in img)
-		return new URL(img.src, Astro.url.origin).href;
+		return new URL(img.src, publicOrigin).href;
 	return ogImage;
 };
 
 // Build locale-aware origin and canonical URL
-const siteOrigin = Astro.site?.origin || Astro.url.origin;
+const siteOrigin = publicOrigin;
 const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
 
 // Locale-aware base path (e.g., "" for default, "/es" for Spanish)

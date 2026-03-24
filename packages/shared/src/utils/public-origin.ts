@@ -103,6 +103,20 @@ export const getPublicOrigin = (site?: URL): string => {
 	return site.origin;
 };
 
+export const resolvePublicOrigin = (
+	site: URL | undefined,
+	request: Request,
+	currentUrl: URL,
+): string => {
+	const publicOrigin = getPublicOrigin(site);
+	if (publicOrigin) {
+		return publicOrigin;
+	}
+
+	const host = request.headers.get("host");
+	return host ? `https://${host}` : currentUrl.origin;
+};
+
 export const getOriginAndOg = (
 	site: URL | undefined,
 	defaultLocale: string,
