@@ -9,4 +9,4 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - "@cloudflare/workers-types"
   - wrangler
-  - typescript
+  - typescript@6.0.2
