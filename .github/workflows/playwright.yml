@@ -36,15 +36,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - app: portfolio
-            browser: chromium
-          - app: portfolio
-            browser: firefox
-          - app: portfolio
-            browser: webkit
-          - app: blog
-            browser: chromium
+        app: [portfolio, blog]
+        browser: ${{ github.event.inputs.browser != 'all' && fromJSON(format('["{0}"]', github.event.inputs.browser)) || fromJSON('["chromium","firefox","webkit"]') }}
     
     steps:
       - name: Checkout code

@@ -262,6 +262,7 @@ runs:
         name: coverage-${{ inputs.project }}-${{ github.sha }}
         path: |
           apps/*/coverage/
+          packages/*/coverage/
           coverage/
         retention-days: 7
         if-no-files-found: warn
