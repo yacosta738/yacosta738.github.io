@@ -39,7 +39,12 @@ const normalizeHostname = (hostname: string): string => {
 		previousWasDot = false;
 	}
 
-	return result.replace(/\.+$/, "");
+	// Remove trailing dots without regex (avoids ReDoS with quantifier + anchor)
+	let end = result.length;
+	while (end > 0 && result[end - 1] === ".") {
+		end--;
+	}
+	return result.slice(0, end);
 };
 
 const isLocalHostname = (hostname: string): boolean =>
@@ -101,6 +106,31 @@ export const getPublicOrigin = (site?: URL): string => {
 	}
 
 	return site.origin;
+};
+
+export const resolvePublicOrigin = (
+	site: URL | undefined,
+	request: Request,
+	currentUrl: URL,
+): string => {
+	const publicOrigin = getPublicOrigin(site);
+	if (publicOrigin) {
+		return publicOrigin;
+	}
+
+	const host = request.headers.get("host");
+	if (host) {
+		try {
+			const hostOrigin = getPublicOrigin(new URL(`https://${host}`));
+			if (hostOrigin) {
+				return hostOrigin;
+			}
+		} catch {
+			// fall through to current URL validation
+		}
+	}
+
+	return getPublicOrigin(currentUrl);
 };
 
 export const getOriginAndOg = (

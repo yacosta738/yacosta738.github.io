@@ -25,6 +25,7 @@ import { getArticles, hasArticles } from "@/core/article";
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 import { DEFAULT_LOCALE, type Lang, LOCALES, useTranslations } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
+import { buildPersonJsonLd, safeJsonLd } from "@/lib/seo/json-ld";
 
 export const getStaticPaths = () =>
 	Object.keys(LOCALES)
@@ -52,10 +53,18 @@ const lastArticles = allArticles
 	.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 	.slice(0, NUMBER_OF_POSTS);
 const hasArticlesData = await hasArticles({ lang: currentLocale });
+
+// Person JSON-LD structured data
+const siteOrigin = Astro.site?.origin || Astro.url.origin;
+const personJsonLd = buildPersonJsonLd(
+	resume.basics as Parameters<typeof buildPersonJsonLd>[0],
+	siteOrigin,
+);
 ---
 
 <Layout title={title}>
-  <main id="main-content">
+  <script is:inline slot="head" type="application/ld+json" set:html={safeJsonLd(personJsonLd)} />
+  <div class="portfolio-content">
     <Hero basics={resume.basics} />
     <About basics={resume.basics} skills={resume.skills} />
     <Experience work={resume.work} />
@@ -127,7 +136,7 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
         )
       }
     <Contact />
-  </main>
+  </div>
   <slot name="aside">
     <Social profiles={resume.basics.profiles} />
     <Email email={resume.basics.email} />
@@ -136,7 +145,7 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
 </Layout>
 
 <style>
-  main {
+  .portfolio-content {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 50px;
@@ -144,20 +153,20 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
   }
 
   @media (width <= 1200px) {
-    main {
+    .portfolio-content {
       max-width: 1000px;
       padding: 0 80px;
     }
   }
 
   @media (width <= 900px) {
-    main {
+    .portfolio-content {
       padding: 0 50px;
     }
   }
 
   @media (width <= 700px) {
-    main {
+    .portfolio-content {
       padding: 0 25px;
     }
   }
