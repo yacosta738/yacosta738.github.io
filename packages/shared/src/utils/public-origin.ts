@@ -114,7 +114,18 @@ export const resolvePublicOrigin = (
 	}
 
 	const host = request.headers.get("host");
-	return host ? `https://${host}` : currentUrl.origin;
+	if (host) {
+		try {
+			const hostOrigin = getPublicOrigin(new URL(`https://${host}`));
+			if (hostOrigin) {
+				return hostOrigin;
+			}
+		} catch {
+			// fall through to current URL validation
+		}
+	}
+
+	return getPublicOrigin(currentUrl);
 };
 
 export const getOriginAndOg = (

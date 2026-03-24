@@ -36,7 +36,7 @@ import {
 	STORAGE_KEY,
 } from "@/configs/theme.consts";
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
-import { getPublicOrigin, resolvePublicOrigin } from "@/utils/public-origin";
+import { resolvePublicOrigin } from "@/utils/public-origin";
 import alkatraRegularWoff2 from "../assets/font/alkatra/alkatra-v3-latin-regular.woff2";
 
 interface Props {
@@ -50,8 +50,8 @@ interface Props {
 	articlePublishedTime?: string;
 	/** ISO date string for article last modified date */
 	articleModifiedTime?: string;
-	/** Author name for article OG tags */
-	articleAuthor?: string;
+	/** Author profile URL for article OG tags */
+	articleAuthorUrl?: string;
 	/** Tags for article OG tags */
 	articleTags?: string[];
 	/** When true, Layout skips rendering its own <main> (page provides its own) */
@@ -71,7 +71,7 @@ const {
 	ogType = "website",
 	articlePublishedTime,
 	articleModifiedTime,
-	articleAuthor,
+	articleAuthorUrl,
 	articleTags = [],
 	hasOwnMain = false,
 	ogImageWidth,
@@ -133,15 +133,25 @@ const getHostname = (urlStr?: string) => {
 	}
 };
 
-const alternatesOrigin = getPublicOrigin(Astro.site);
+const isValidAbsoluteUrl = (value?: string): value is string => {
+	if (!value) return false;
+	try {
+		const parsed = new URL(value);
+		return parsed.protocol === "http:" || parsed.protocol === "https:";
+	} catch {
+		return false;
+	}
+};
 
-// Ensure canonicalHref is always an absolute URL
 const fallbackOrigin = resolvePublicOrigin(
 	Astro.site,
 	Astro.request,
 	Astro.url,
 );
-const canonicalHref = `${fallbackOrigin}${Astro.url.pathname}`;
+const alternatesOrigin = fallbackOrigin;
+const canonicalHref = fallbackOrigin
+	? new URL(Astro.url.pathname, fallbackOrigin).href
+	: "";
 const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 const xAccount =
 	typeof X_ACCOUNT === "string"
@@ -270,15 +280,14 @@ const safeJsonLd = (data: Record<string, unknown>): string =>
     <ClientRouter />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {
+    {alternatesOrigin &&
       (await getLocalePathsEnhanced(Astro.url)).map((props) => (
         <link
           rel="alternate"
           hreflang={LOCALES[props.lang].lang || props.lang}
           href={`${alternatesOrigin}${props.path}`}
         />
-      ))
-    }
+      ))}
 
     <!-- Open Graph -->
     <meta property="og:url" content={canonicalHref} />
@@ -299,8 +308,8 @@ const safeJsonLd = (data: Record<string, unknown>): string =>
     {ogType === "article" && articleModifiedTime && (
       <meta property="article:modified_time" content={articleModifiedTime} />
     )}
-    {ogType === "article" && articleAuthor && (
-      <meta property="article:author" content={articleAuthor} />
+    {ogType === "article" && isValidAbsoluteUrl(articleAuthorUrl) && (
+      <meta property="article:author" content={articleAuthorUrl} />
     )}
     {ogType === "article" && articleTags.map((tag) => (
       <meta property="article:tag" content={tag} />

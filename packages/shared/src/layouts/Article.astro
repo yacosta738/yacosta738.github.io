@@ -38,11 +38,11 @@ const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
 const DEFAULT_AUTHOR = "Yuniel Acosta";
 const authorName = author?.name || DEFAULT_AUTHOR;
-
-const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
-	.href;
-
 const publicOrigin = resolvePublicOrigin(Astro.site, Astro.request, Astro.url);
+
+const ogImage = publicOrigin
+	? new URL(getOgImagePath(Astro.url.pathname), publicOrigin).href
+	: "";
 
 // Resolve cover image URL for JSON-LD
 const getCoverUrl = (img: typeof cover): string => {
@@ -63,6 +63,10 @@ const localePrefix =
 	Astro.url.pathname.match(/^\/([a-z]{2})\//)?.[0]?.slice(0, -1) || "";
 const localizedHome = `${siteOrigin}${localePrefix}/`;
 const localizedBlog = `${siteOrigin}${localePrefix}/blog`;
+const authorProfileUrl =
+	publicOrigin && author?.slug
+		? new URL(`${localePrefix}/author/${author.slug}`, `${publicOrigin}/`).href
+		: undefined;
 
 /** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
 const safeJsonLd = (data: Record<string, unknown>): string =>
@@ -134,7 +138,7 @@ const breadcrumbJsonLd = {
 	ogType="article"
 	articlePublishedTime={date?.toISOString()}
 	articleModifiedTime={lastModified?.toISOString()}
-	articleAuthor={authorName}
+	articleAuthorUrl={authorProfileUrl}
 	articleTags={tags.map((tag) => tag.title)}
 	ogImageWidth={1200}
 	ogImageHeight={630}
