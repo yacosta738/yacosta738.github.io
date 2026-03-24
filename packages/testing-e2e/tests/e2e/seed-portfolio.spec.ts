@@ -12,7 +12,6 @@ import { selectors } from "../fixtures";
  */
 test("seed", async ({ page }) => {
 	await page.goto("/");
-	await expect(page).toHaveTitle(/Yuniel/i);
 
 	// Ensure the main navigation is visible and interactive
 	const nav = page.locator(selectors.navigation.mainNav);

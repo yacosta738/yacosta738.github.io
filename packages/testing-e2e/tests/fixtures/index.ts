@@ -339,6 +339,7 @@ export const selectors = {
 	},
 
 	navigation: {
+		mainNav: "header > nav",
 		logo: 'a[href*="/"]',
 		menuButton: "button[data-drawer-target]",
 		navLinks: "nav a",
