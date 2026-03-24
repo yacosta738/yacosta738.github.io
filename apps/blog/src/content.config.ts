@@ -57,7 +57,9 @@ const createNotionLoader = async () => {
 		.split(",")
 		.map((tag: string) => tag.trim())
 		.filter(Boolean);
-	const notionRehypePlugin = notionBlockFallbacks as unknown;
+	const notionRehypePlugin = notionBlockFallbacks as (
+		...args: unknown[]
+	) => unknown;
 	const notionTypeFilter = "Article";
 	const notionStatusFilter = "Ready";
 	const notionToday = new Date().toISOString().slice(0, 10);

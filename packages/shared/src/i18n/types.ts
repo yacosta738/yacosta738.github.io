@@ -25,7 +25,8 @@ export type Translations = Record<string, Record<string, string>>;
  */
 export type Lang = keyof typeof LOCALES;
 
-export const isLang = (value: string): value is Lang => value in LOCALES;
+export const isLang = (value: string): value is Lang =>
+	Object.hasOwn(LOCALES, value);
 
 export const DEFAULT_LOCALE: Lang = DEFAULT_LOCALE_SETTING;
 

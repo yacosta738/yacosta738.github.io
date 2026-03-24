@@ -40,7 +40,7 @@ type NotionLoaderOptions = {
 	sorts?: unknown[];
 	filter?: unknown;
 	archived?: boolean;
-	rehypePlugins?: ReadonlyArray<unknown>;
+	rehypePlugins?: ReadonlyArray<RehypePluginConfig>;
 };
 
 type NotionEntryData = {
@@ -93,7 +93,7 @@ const normalizeUrlValue = (value: unknown): string | undefined => {
 	return undefined;
 };
 
-type RehypePlugin = (tree: unknown, file: unknown) => void;
+type RehypePlugin = (...args: unknown[]) => unknown;
 
 type NotionModuleBlocks = {
 	isFullBlock: (value: unknown) => boolean;
@@ -149,6 +149,24 @@ type RehypePluginConfig =
 	| RehypePlugin
 	| string
 	| readonly [RehypePlugin, unknown];
+
+const isRehypePluginTupleConfig = (
+	config: RehypePluginConfig,
+): config is readonly [RehypePlugin, unknown] => Array.isArray(config);
+
+const isNotionEntryData = (value: unknown): value is NotionEntryData => {
+	if (!value || typeof value !== "object") {
+		return false;
+	}
+
+	const record = value as Record<string, unknown>;
+	return (
+		"cover" in record &&
+		"properties" in record &&
+		typeof record.properties === "object" &&
+		record.properties !== null
+	);
+};
 
 const ensureElementProperties = (node: ElementNode) => {
 	if (!node.properties) {
@@ -504,21 +522,24 @@ const createNotionLoaderNoImages = ({
 	rehypePlugins = [],
 	...clientOptions
 }: NotionLoaderOptions): Loader => {
-	const resolvedRehypePlugins = Promise.all(
-		rehypePlugins.map(async (config) => {
-			let plugin: unknown;
-			let options: unknown;
-			if (Array.isArray(config)) {
-				[plugin, options] = config;
-			} else {
-				plugin = config;
-			}
-			if (typeof plugin === "string") {
-				plugin = (await import(/* @vite-ignore */ plugin)).default;
-			}
-			return [plugin, options] as const;
-		}),
-	);
+	const resolvedRehypePlugins: Promise<ReadonlyArray<RehypePluginConfig>> =
+		Promise.all(
+			rehypePlugins.map(async (config) => {
+				let plugin: RehypePlugin | string;
+				let options: unknown;
+				if (isRehypePluginTupleConfig(config)) {
+					[plugin, options] = config;
+				} else {
+					plugin = config;
+				}
+				if (typeof plugin === "string") {
+					plugin = (await import(/* @vite-ignore */ plugin))
+						.default as RehypePlugin;
+				}
+
+				return options === undefined ? plugin : ([plugin, options] as const);
+			}),
+		);
 	const shouldRender = process.env.NOTION_LOADER_RENDER !== "0";
 
 	return {
@@ -688,19 +709,20 @@ const mapEntries = async (
 	context.store.clear();
 
 	for (const [sourceId, entry] of rawEntries) {
-		const mapped = mapNotionArticleEntry(
-			entry.data as NotionEntryData,
-			sourceId,
-			{
-				logger: context.logger,
-				platformId: options.platformId,
-				requiredType: options.requiredType,
-				requiredStatus: options.requiredStatus,
-				defaultAuthorId: options.defaultAuthorId,
-				defaultCategoryId: options.defaultCategoryId,
-				defaultTags: options.defaultTags,
-			},
-		);
+		if (!isNotionEntryData(entry.data)) {
+			context.logger.warn(`Skipping malformed Notion entry: ${sourceId}`);
+			continue;
+		}
+
+		const mapped = mapNotionArticleEntry(entry.data, sourceId, {
+			logger: context.logger,
+			platformId: options.platformId,
+			requiredType: options.requiredType,
+			requiredStatus: options.requiredStatus,
+			defaultAuthorId: options.defaultAuthorId,
+			defaultCategoryId: options.defaultCategoryId,
+			defaultTags: options.defaultTags,
+		});
 		if (!mapped) {
 			continue;
 		}

@@ -36,7 +36,8 @@ export type NotionArticleEntry = {
 	sourceId?: string;
 };
 
-const isLocale = (value: string): value is Lang => value in LOCALES;
+const isLocale = (value: string): value is Lang =>
+	Object.hasOwn(LOCALES, value);
 
 const trimHyphenEdges = (value: string): string => {
 	let start = 0;
@@ -254,12 +255,12 @@ const normalizeLocale = (value: string | undefined): Lang => {
 		return DEFAULT_LOCALE;
 	}
 
-	const normalized = value.toLowerCase();
-	if (isLocale(normalized)) {
-		return normalized;
+	const normalizedValue = value.toLowerCase();
+	if (isLocale(normalizedValue)) {
+		return normalizedValue;
 	}
 
-	const base = normalized.split("-")[0];
+	const base = value.split("-")[0]?.toLowerCase() ?? "";
 	if (isLocale(base)) {
 		return base;
 	}

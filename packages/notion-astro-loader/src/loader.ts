@@ -171,10 +171,9 @@ export function notionLoader({
 
 				const isCached = existingPageIds.delete(page.id);
 				const existingPage = store.get(page.id);
-				const pageIsUnchanged = existingPage?.digest === page.last_edited_time;
 
 				// If the page has been updated, re-render it
-				if (!pageIsUnchanged) {
+				if (existingPage?.digest !== page.last_edited_time) {
 					const realSavePath = path.resolve(
 						process.cwd(),
 						"src",

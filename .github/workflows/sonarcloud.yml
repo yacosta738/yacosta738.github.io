@@ -34,7 +34,7 @@ jobs:
           upload-coverage: 'false'
 
       - name: Run targeted shared coverage for Sonar
-        run: pnpm --filter=@portfolio/shared exec vitest run src/lib/seo/json-ld.test.ts src/core/tag/tag.mapper.test.ts
+        run: pnpm --filter=@portfolio/shared exec vitest run src/lib/seo/json-ld.test.ts src/core/tag/tag.mapper.test.ts src/i18n/types.test.ts src/i18n/ui.test.ts src/i18n/i18n.test.ts
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v5
