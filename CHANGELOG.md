@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.19...v2.1.0) (2026-03-24)
+
+
+### Features
+
+* **seo:** improve SEO, structured data, and Lighthouse metrics for blog and portfolio ([#1780](https://github.com/yacosta738/yacosta738.github.io/issues/1780)) ([4409f4e](https://github.com/yacosta738/yacosta738.github.io/commit/4409f4e5b83003589f093dfe223f94bdecea69e6))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
