@@ -2,7 +2,7 @@ import { DEFAULT_LOCALE, type Lang, LOCALES } from "@/i18n/types";
 import { type FileObject, fileToUrl } from "./notion-file";
 
 type NotionPageData = {
-	cover: unknown | null;
+	cover: unknown;
 	properties: Record<string, unknown>;
 };
 
@@ -55,7 +55,7 @@ const FEATURED_KEYS = ["Featured"] as const;
 const getProperty = (
 	properties: Record<string, unknown>,
 	keys: readonly string[],
-): unknown | undefined => {
+): unknown => {
 	for (const key of keys) {
 		const value = properties[key];
 		if (value !== undefined) {
@@ -203,21 +203,23 @@ const resolveRelationNames = (property: unknown): string[] => {
 const slugify = (value: string): string => {
 	return value
 		.normalize("NFKD")
-		.replace(/[^\w\s-]/g, "")
+		.replaceAll(/[^\w\s-]/g, "")
 		.trim()
 		.toLowerCase()
-		.replace(/[\s_-]+/g, "-")
-		.replace(/^-+|-+$/g, "");
+		.replaceAll(/[\s_-]+/g, "-")
+		.replace(/^-+/, "")
+		.replace(/-+$/, "");
 };
 
 const normalizeNotionId = (value: string): string => {
-	const match = value.match(
-		/[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
-	);
+	const match =
+		/[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.exec(
+			value,
+		);
 	if (!match) {
 		return value;
 	}
-	return match[0].replace(/-/g, "");
+	return match[0].replaceAll("-", "");
 };
 
 const normalizeUrlValue = (value: unknown): string | undefined => {
@@ -424,6 +426,43 @@ const buildEntryId = (lang: Lang, date: Date, slug: string): string => {
 	return `${lang}/${datePath}/${slug}`;
 };
 
+const matchesPlatformFilter = (
+	properties: Record<string, unknown>,
+	platformId: string | undefined,
+): boolean => {
+	if (!platformId) {
+		return true;
+	}
+	const normalizedPlatformId = normalizeNotionId(platformId);
+	if (!normalizedPlatformId) {
+		return true;
+	}
+	const platforms = resolvePlatforms(properties);
+	return platforms.includes(normalizedPlatformId);
+};
+
+const matchesTypeFilter = (
+	properties: Record<string, unknown>,
+	requiredType: string | undefined,
+): boolean => {
+	if (!requiredType) {
+		return true;
+	}
+	const type = resolveType(properties);
+	return type?.toLowerCase() === requiredType.toLowerCase();
+};
+
+const matchesStatusFilter = (
+	properties: Record<string, unknown>,
+	requiredStatus: string | undefined,
+): boolean => {
+	if (!requiredStatus) {
+		return true;
+	}
+	const status = resolveStatus(properties);
+	return status?.toLowerCase() === requiredStatus.toLowerCase();
+};
+
 export const mapNotionArticleEntry = (
 	page: NotionPageData,
 	sourceId: string,
@@ -452,34 +491,19 @@ export const mapNotionArticleEntry = (
 		return null;
 	}
 
-	const platformId = options.platformId;
-	const normalizedPlatformId = platformId
-		? normalizeNotionId(platformId)
-		: undefined;
-	if (normalizedPlatformId) {
-		const platforms = resolvePlatforms(properties);
-		if (!platforms.includes(normalizedPlatformId)) {
-			warn(`Notion page ${sourceId} skipped: platform filter mismatch.`);
-			return null;
-		}
+	if (!matchesPlatformFilter(properties, options.platformId)) {
+		warn(`Notion page ${sourceId} skipped: platform filter mismatch.`);
+		return null;
 	}
 
-	const requiredType = options.requiredType;
-	if (requiredType) {
-		const type = resolveType(properties);
-		if (!type || type.toLowerCase() !== requiredType.toLowerCase()) {
-			warn(`Notion page ${sourceId} skipped: type filter mismatch.`);
-			return null;
-		}
+	if (!matchesTypeFilter(properties, options.requiredType)) {
+		warn(`Notion page ${sourceId} skipped: type filter mismatch.`);
+		return null;
 	}
 
-	const requiredStatus = options.requiredStatus;
-	if (requiredStatus) {
-		const status = resolveStatus(properties);
-		if (!status || status.toLowerCase() !== requiredStatus.toLowerCase()) {
-			warn(`Notion page ${sourceId} skipped: status filter mismatch.`);
-			return null;
-		}
+	if (!matchesStatusFilter(properties, options.requiredStatus)) {
+		warn(`Notion page ${sourceId} skipped: status filter mismatch.`);
+		return null;
 	}
 
 	const published = resolvePublished(properties);

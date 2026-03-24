@@ -21,7 +21,7 @@ import { LOCALES } from "@/i18n/types";
  */
 export function extractTagSlugFromPath(pathname: string): string | null {
 	const locales = Object.keys(LOCALES).join("|");
-	const tagRoute = routes.tag.replace("/", "\\/");
+	const tagRoute = routes.tag.replace("/", String.raw`\/`);
 	// Pattern: /tag/[slug] or /es/tag/[slug]/page/[number]
 	// Optional locale prefix based on supported locales
 	const tagPagePattern = new RegExp(

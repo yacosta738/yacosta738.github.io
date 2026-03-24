@@ -21,13 +21,14 @@ const normalizeNotionId = (value?: string): string | undefined => {
 	if (!value) {
 		return undefined;
 	}
-	const match = value.match(
-		/[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
-	);
+	const match =
+		/[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.exec(
+			value,
+		);
 	if (!match) {
 		return value;
 	}
-	return match[0].replace(/-/g, "");
+	return match[0].replaceAll("-", "");
 };
 
 const createNotionLoader = async () => {

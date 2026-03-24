@@ -75,12 +75,12 @@ export async function saveImageFromAWS(
 		const buffer = await response.arrayBuffer();
 		await fse.writeFile(filePath, new Uint8Array(buffer));
 
-		log?.(`Saved image \`${fileName}\` ${dim(`created \`${filePath}\``)}`);
+		const createdMsg = dim(`created \`${filePath}\``);
+		log?.(`Saved image \`${fileName}\` ${createdMsg}`);
 		tag?.("download");
 	} else {
-		log?.(
-			`Skipped caching image \`${fileName}\` ${dim(`cached at \`${filePath}\``)}`,
-		);
+		const cachedMsg = dim(`cached at \`${filePath}\``);
+		log?.(`Skipped caching image \`${fileName}\` ${cachedMsg}`);
 		tag?.("cached");
 	}
 

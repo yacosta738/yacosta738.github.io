@@ -61,11 +61,13 @@ export default defineConfig({
 	webServer: (() => {
 		// Always use preview so Pagefind assets are available for search tests.
 		// In CI, the build artifact may already exist. Check before rebuilding.
+		const ciBuildCommand =
+			"test -d dist && test -f dist/index.html && test -f dist/pagefind/pagefind-ui.css && test -f dist/pagefind/pagefind-ui.js && echo 'Using pre-built artifact' || pnpm build";
 		const buildCommand =
 			process.env.E2E_PREBUILT === "1"
 				? "echo 'Using pre-built artifact'"
 				: process.env.CI
-					? "test -d dist && test -f dist/index.html && test -f dist/pagefind/pagefind-ui.css && test -f dist/pagefind/pagefind-ui.js && echo 'Using pre-built artifact' || pnpm build"
+					? ciBuildCommand
 					: "pnpm build";
 		const baseEnv: Record<string, string> = { PLAYWRIGHT_TEST: "true" };
 		const previewCommand = `${buildCommand} && pnpm exec astro preview --host 127.0.0.1 --port ${resolvedPreviewPort}`;

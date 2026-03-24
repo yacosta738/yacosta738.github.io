@@ -99,7 +99,7 @@ export default defineConfig({
 				item.lastmod = new Date();
 
 				// Homepage - highest priority
-				if (pathname === "/" || pathname.match(/^\/es\/?$/)) {
+				if (pathname === "/" || /^\/es\/?$/.test(pathname)) {
 					item.changefreq = "weekly";
 					item.priority = 1;
 					return item;
@@ -108,7 +108,7 @@ export default defineConfig({
 				// Blog posts - high priority, updated frequently
 				if (pathname.includes("/blog/") && !pathname.includes("/page/")) {
 					// Individual blog post
-					if (pathname.match(/\/blog\/[^/]+$/)) {
+					if (/\/blog\/[^/]+$/.test(pathname)) {
 						item.changefreq = "monthly";
 						item.priority = 0.8;
 						return item;
