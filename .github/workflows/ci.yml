@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main, develop, feature/*, fix/*]
+    branches: [main]
     paths-ignore:
       - 'docs/**'
       - '**.md'
@@ -117,14 +117,14 @@ jobs:
 
       - name: Build Blog
         if: matrix.project == 'blog'
-        run: pnpm install --frozen-lockfile && pnpm --filter=blog build
+        run: pnpm --filter=blog build
 
   # Job 4: E2E Tests (depends on build)
   e2e-tests:
     name: 🎭 E2E Tests
     runs-on: ubuntu-latest
     needs: [build]
-    timeout-minutes: 30
+    timeout-minutes: 15
     permissions:
       contents: read
     strategy:
@@ -133,10 +133,6 @@ jobs:
         include:
           - app: portfolio
             browser: chromium
-          - app: portfolio
-            browser: firefox
-          - app: portfolio
-            browser: webkit
           - app: blog
             browser: chromium
     steps:

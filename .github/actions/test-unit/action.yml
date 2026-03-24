@@ -36,18 +36,6 @@ runs:
         key: ${{ runner.os }}-vitest-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-vitest-
-    - name: Install dependencies
-      shell: bash
-      env:
-        PROJECT_INPUT: ${{ inputs.project }}
-      run: |
-        pnpm install --frozen-lockfile
-
-        if [ "$PROJECT_INPUT" == "all" ]; then
-          echo "Installing workspace dependencies for all projects..."
-        else
-          echo "Installing workspace dependencies for $PROJECT_INPUT..."
-        fi
     - name: Run unit tests
       id: run-tests
       shell: bash
@@ -274,8 +262,9 @@ runs:
         name: coverage-${{ inputs.project }}-${{ github.sha }}
         path: |
           apps/*/coverage/
+          packages/*/coverage/
           coverage/
-        retention-days: 14
+        retention-days: 7
         if-no-files-found: warn
 
     - name: Generate test summary
