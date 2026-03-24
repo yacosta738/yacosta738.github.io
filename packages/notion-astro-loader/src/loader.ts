@@ -133,9 +133,8 @@ export function notionLoader({
 			const existingPageIds = new Set<string>(store.keys());
 			const renderPromises: Promise<void>[] = [];
 
-			log_db.info(
-				`Loading database ${dim(`found ${existingPageIds.size} pages in store`)}`,
-			);
+			const storeInfo = dim(`found ${existingPageIds.size} pages in store`);
+			log_db.info(`Loading database ${storeInfo}`);
 
 			const pages = iteratePaginatedAPI(notionClient.databases.query, {
 				database_id,
@@ -162,8 +161,11 @@ export function notionLoader({
 				const pageTitle = transformedPropertySchema.title.safeParse(
 					titleProp ? titleProp[1] : {},
 				);
+				const titleLabel = pageTitle.success
+					? `"${pageTitle.data}"`
+					: "Untitled";
 				const pageMetadata = [
-					`${pageTitle.success ? `"${pageTitle.data}"` : "Untitled"}`,
+					titleLabel,
 					`(last edited ${page.last_edited_time.slice(0, 10)})`,
 				].join(" ");
 
@@ -230,9 +232,8 @@ export function notionLoader({
 				log_pg.info("Deleted page");
 			}
 
-			log_db.info(
-				`Loaded database ${dim(`fetched ${pageCount} pages from API`)}`,
-			);
+			const fetchInfo = dim(`fetched ${pageCount} pages from API`);
+			log_db.info(`Loaded database ${fetchInfo}`);
 
 			if (renderPromises.length === 0) {
 				return;

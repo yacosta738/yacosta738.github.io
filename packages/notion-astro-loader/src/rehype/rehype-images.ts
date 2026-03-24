@@ -5,47 +5,70 @@ interface Config {
 	imagePaths?: string[];
 }
 
+type VisitableNode = Parameters<typeof visit>[0];
+type ElementLikeNode = VisitableNode & {
+	tagName?: string;
+	properties?: Record<string, unknown>;
+};
+
+const decodeImageSrc = (src: string): string => {
+	try {
+		return decodeURI(src);
+	} catch {
+		return src;
+	}
+};
+
+const processImageNode = (
+	node: ElementLikeNode,
+	file: VFile,
+	imagePaths: string[] | undefined,
+	imageOccurrenceMap: Map<string, number>,
+) => {
+	if (node.type !== "element" || node.tagName !== "img") {
+		return;
+	}
+	if (!node.properties?.src) {
+		return;
+	}
+
+	const src = node.properties.src as string;
+	node.properties.src = decodeImageSrc(src);
+
+	const astroData = file.data.astro as { imagePaths?: string[] } | undefined;
+	if (astroData) {
+		astroData.imagePaths = imagePaths;
+	}
+
+	if (!imagePaths?.includes(node.properties.src as string)) {
+		return;
+	}
+
+	const { ...props } = node.properties;
+	const index = imageOccurrenceMap.get(node.properties.src as string) || 0;
+	imageOccurrenceMap.set(node.properties.src as string, index + 1);
+
+	node.properties.__ASTRO_IMAGE_ = JSON.stringify({
+		...props,
+		index,
+	});
+
+	Object.keys(props).forEach((prop) => {
+		delete node.properties?.[prop];
+	});
+};
+
 export function rehypeImages() {
 	return ({ imagePaths }: Config) =>
 		(tree: unknown, file: VFile) => {
-			const imageOccurrenceMap = new Map();
-
-			visit(tree as Parameters<typeof visit>[0], (node) => {
-				if (node.type !== "element") return;
-				if (node.tagName !== "img") return;
-
-				if (node.properties?.src) {
-					let decoded = node.properties.src;
-					try {
-						decoded = decodeURI(node.properties.src);
-					} catch {
-						decoded = node.properties.src;
-					}
-					node.properties.src = decoded;
-					const astroData = file.data.astro as
-						| { imagePaths?: string[] }
-						| undefined;
-					if (astroData) {
-						astroData.imagePaths = imagePaths;
-					}
-
-					if (imagePaths?.includes(node.properties.src)) {
-						const { ...props } = node.properties;
-
-						// Initialize or increment occurrence count for this image
-						const index = imageOccurrenceMap.get(node.properties.src) || 0;
-						imageOccurrenceMap.set(node.properties.src, index + 1);
-
-						node.properties.__ASTRO_IMAGE_ = JSON.stringify({
-							...props,
-							index,
-						});
-
-						Object.keys(props).forEach((prop) => {
-							delete node.properties[prop];
-						});
-					}
-				}
+			const imageOccurrenceMap = new Map<string, number>();
+			visit(tree as VisitableNode, (node) => {
+				processImageNode(
+					node as ElementLikeNode,
+					file,
+					imagePaths,
+					imageOccurrenceMap,
+				);
 			});
 		};
 }

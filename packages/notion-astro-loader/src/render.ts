@@ -101,7 +101,7 @@ async function* listBlocks(
 
 		if (block.has_children) {
 			const children = await awaitAll(listBlocks(client, block.id, fetchImage));
-			// @ts-expect-error -- TODO: Make TypeScript happy here
+			// @ts-expect-error -- block type narrowing not supported for dynamic property access
 			block[block.type].children = children;
 		}
 
@@ -139,7 +139,7 @@ function extractTocHeadings(toc: HtmlElementNode): MarkdownHeading[] {
 
 			const currentHeading: MarkdownHeading = {
 				depth,
-				text: (link?.children?.[0] as TextNode | undefined)?.value ?? "",
+				text: (link?.children?.[0] as TextNode)?.value ?? "",
 				slug: link?.properties?.href?.slice(1) ?? "",
 			};
 
@@ -165,12 +165,12 @@ export interface RenderedNotionEntry {
 }
 
 export class NotionPageRenderer {
-	#imagePaths: string[] = [];
-	#imageAnalytics: Record<"download" | "cached", number> = {
+	readonly #imagePaths: string[] = [];
+	readonly #imageAnalytics: Record<"download" | "cached", number> = {
 		download: 0,
 		cached: 0,
 	};
-	#logger: AstroIntegrationLogger;
+	readonly #logger: AstroIntegrationLogger;
 
 	/**
 	 * @param client Notion API client.
@@ -271,38 +271,37 @@ export class NotionPageRenderer {
 	 * @param imageFileObject Notion file object representing an image.
 	 * @returns Local path to the image, or undefined if the image could not be fetched.
 	 */
-	#fetchImage: (imageFileObject: FileObject) => Promise<string> = async (
-		imageFileObject,
-	) => {
-		try {
-			// only file type will be processed
-			if (imageFileObject.type === "external") {
-				return imageFileObject.external.url;
+	readonly #fetchImage: (imageFileObject: FileObject) => Promise<string> =
+		async (imageFileObject) => {
+			try {
+				// only file type will be processed
+				if (imageFileObject.type === "external") {
+					return imageFileObject.external.url;
+				}
+
+				fse.ensureDirSync(this.imageSavePath);
+
+				// File needs to be downloaded to a specified local directory.
+				const imageUrl = await saveImageFromAWS(
+					imageFileObject.file.url,
+					this.imageSavePath,
+					{
+						log: (message) => {
+							this.#logger.debug(message);
+						},
+						tag: (type) => {
+							this.#imageAnalytics[type]++;
+						},
+					},
+				);
+				this.#imagePaths.push(imageUrl);
+				return imageUrl;
+			} catch (error) {
+				this.#logger.error(`Failed to fetch image: ${getErrorMessage(error)}`);
+				// Fall back to using the remote URL directly.
+				return fileToUrl(imageFileObject);
 			}
-
-			fse.ensureDirSync(this.imageSavePath);
-
-			// File needs to be downloaded to a specified local directory.
-			const imageUrl = await saveImageFromAWS(
-				imageFileObject.file.url,
-				this.imageSavePath,
-				{
-					log: (message) => {
-						this.#logger.debug(message);
-					},
-					tag: (type) => {
-						this.#imageAnalytics[type]++;
-					},
-				},
-			);
-			this.#imagePaths.push(imageUrl);
-			return imageUrl;
-		} catch (error) {
-			this.#logger.error(`Failed to fetch image: ${getErrorMessage(error)}`);
-			// Fall back to using the remote URL directly.
-			return fileToUrl(imageFileObject);
-		}
-	};
+		};
 }
 
 function getErrorMessage(error: unknown): string {

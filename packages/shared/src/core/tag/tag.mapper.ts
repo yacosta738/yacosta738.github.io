@@ -32,8 +32,9 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 		.split(/[^a-z0-9]+/)
 		.filter(Boolean)
 		.join("-")
-		// Remove leading/trailing dashes with bounded operations
-		.replaceAll(/^-+|-+$/g, "");
+		// Remove leading/trailing dashes with separate anchored replacements (no alternation = no backtracking)
+		.replace(/^-+/, "")
+		.replace(/-+$/, "");
 
 	let slug = fallbackSlug;
 	if (slugFromTitle.length > 0) {

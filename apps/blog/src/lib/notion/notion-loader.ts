@@ -115,7 +115,7 @@ type NotionPage = {
 	id: string;
 	last_edited_time: string;
 	properties: Record<string, unknown>;
-	cover?: unknown | null;
+	cover?: unknown;
 };
 
 type HtmlElementNode = {
@@ -124,7 +124,6 @@ type HtmlElementNode = {
 	children?: Array<HtmlElementNode>;
 };
 
-type ListNode = HtmlElementNode;
 type TextNode = { value?: string };
 
 const applyPlugin = (
@@ -142,6 +141,12 @@ const applyPlugin = (
 };
 
 type RehypePluginConfig = unknown | string | readonly [unknown, unknown];
+
+const ensureElementProperties = (node: ElementNode) => {
+	if (!node.properties) {
+		node.properties = {};
+	}
+};
 
 const buildProcessor = (
 	rehypePlugins: Promise<ReadonlyArray<RehypePluginConfig>>,
@@ -167,21 +172,18 @@ const buildProcessor = (
 			import("unist-util-visit"),
 		]);
 
+		const visitElement = visit as (
+			tree: UnistNode,
+			test: "element",
+			visitor: (node: ElementNode) => void,
+		) => void;
+
 		const baseProcessor = unified()
 			.use(notionRehype, {})
 			.use(rehypeSlug)
 			.use(function rehypeKatexWorkaround() {
 				return (tree: unknown) => {
-					const visitElement = visit as (
-						tree: UnistNode,
-						test: "element",
-						visitor: (node: ElementNode) => void,
-					) => void;
-					visitElement(tree as UnistNode, "element", (node: ElementNode) => {
-						if (!node.properties) {
-							node.properties = {};
-						}
-					});
+					visitElement(tree as UnistNode, "element", ensureElementProperties);
 				};
 			})
 			.use(rehypeKatex)
@@ -298,10 +300,10 @@ const extractTocHeadings = (toc: HtmlElementNode): MarkdownHeading[] => {
 	}
 
 	const listElementToTree = (
-		ol: ListNode,
+		ol: HtmlElementNode | undefined,
 		depth: number,
 	): MarkdownHeading[] => {
-		if (!ol.children || ol.children.length === 0) {
+		if (!ol?.children || ol.children.length === 0) {
 			return [];
 		}
 		return ol.children.flatMap((li) => {
@@ -309,21 +311,19 @@ const extractTocHeadings = (toc: HtmlElementNode): MarkdownHeading[] => {
 			const link = _link as HtmlElementNode | undefined;
 			const currentHeading: MarkdownHeading = {
 				depth,
-				text: (link?.children?.[0] as TextNode | undefined)?.value ?? "",
-				slug: (link?.properties?.href as string | undefined)?.slice(1) ?? "",
+				text: (link?.children?.[0] as TextNode)?.value ?? "",
+				slug: link?.properties?.href?.slice(1) ?? "",
 			};
 
 			let headings = [currentHeading];
 			if (subList) {
-				headings = headings.concat(
-					listElementToTree(subList as ListNode, depth + 1),
-				);
+				headings = headings.concat(listElementToTree(subList, depth + 1));
 			}
 			return headings;
 		});
 	};
 
-	return listElementToTree(toc.children?.[0] as ListNode, 0);
+	return listElementToTree(toc.children?.[0], 0);
 };
 
 type RenderedNotionEntry = {
@@ -335,8 +335,8 @@ type RenderedNotionEntry = {
 };
 
 class NotionPageRenderer {
-	#imagePaths: string[] = [];
-	#logger: LoaderContext["logger"];
+	readonly #imagePaths: string[] = [];
+	readonly #logger: LoaderContext["logger"];
 
 	constructor(
 		private readonly client: unknown,
@@ -410,7 +410,7 @@ class NotionPageRenderer {
 		}
 	}
 
-	#resolveImage = (file: unknown): string | undefined => {
+	readonly #resolveImage = (file: unknown): string | undefined => {
 		const url = fileToUrl(file as FileObject | null | undefined);
 		if (url) {
 			this.#imagePaths.push(url);
@@ -418,6 +418,74 @@ class NotionPageRenderer {
 		return url;
 	};
 }
+
+const importNotionModule = async (
+	traceMode: string,
+): Promise<NotionModuleLoad> => {
+	try {
+		return (await import("@notionhq/client")) as unknown as NotionModuleLoad;
+	} catch (error) {
+		if (traceMode) {
+			throw new Error(
+				`notion-loader: failed to import @notionhq/client: ${error instanceof Error ? error.message : String(error)}`,
+			);
+		}
+		throw error;
+	}
+};
+
+const processPageUpdate = async (
+	typedPage: NotionPage,
+	store: LoaderContext["store"],
+	parseData: LoaderContext["parseData"],
+	notionClient: InstanceType<NotionModuleLoad["Client"]>,
+	logger: LoaderContext["logger"],
+	processor: ReturnType<typeof buildProcessor> | null,
+	traceMode: string,
+): Promise<void> => {
+	const existingPage = store.get(typedPage.id);
+	if (existingPage?.digest === typedPage.last_edited_time) {
+		return;
+	}
+	if (traceMode === "before-parse") {
+		throw new Error("notion-loader: reached before-parse stage");
+	}
+	const renderer = new NotionPageRenderer(notionClient, typedPage, logger);
+	const data = await parseData(renderer.getPageData());
+	if (traceMode === "after-parse") {
+		throw new Error("notion-loader: reached after-parse stage");
+	}
+	if (!processor) {
+		store.set({
+			id: typedPage.id,
+			digest: typedPage.last_edited_time,
+			data,
+		});
+		if (traceMode === "after-store") {
+			throw new Error("notion-loader: reached after-store stage");
+		}
+		return;
+	}
+	const rendered = await renderer.render(processor);
+	if (!rendered) {
+		return;
+	}
+	store.set({
+		id: typedPage.id,
+		digest: typedPage.last_edited_time,
+		data,
+		rendered,
+	});
+};
+
+const cleanupStalePages = (
+	store: LoaderContext["store"],
+	existingPageIds: Set<string>,
+) => {
+	for (const deletedPageId of existingPageIds) {
+		store.delete(deletedPageId);
+	}
+};
 
 const createNotionLoaderNoImages = ({
 	database_id,
@@ -449,19 +517,7 @@ const createNotionLoaderNoImages = ({
 		name: "notion-loader-no-images",
 		async load({ store, logger, parseData }) {
 			const traceMode = process.env.NOTION_LOADER_TRACE ?? "";
-			let notionModule: NotionModuleLoad;
-			try {
-				notionModule = (await import(
-					"@notionhq/client"
-				)) as unknown as NotionModuleLoad;
-			} catch (error) {
-				if (traceMode) {
-					throw new Error(
-						`notion-loader: failed to import @notionhq/client: ${error instanceof Error ? error.message : String(error)}`,
-					);
-				}
-				throw error;
-			}
+			const notionModule = await importNotionModule(traceMode);
 			const { Client, isFullPage, iteratePaginatedAPI } = notionModule;
 			let stage = "init";
 			try {
@@ -499,53 +555,21 @@ const createNotionLoaderNoImages = ({
 					}
 					const typedPage = page as NotionPage;
 					existingPageIds.delete(typedPage.id);
-					const existingPage = store.get(typedPage.id);
-					if (existingPage?.digest !== typedPage.last_edited_time) {
-						stage = "render";
-						if (traceMode === "before-parse") {
-							throw new Error("notion-loader: reached before-parse stage");
-						}
-						const renderer = new NotionPageRenderer(
-							notionClient,
+					renderPromises.push(
+						processPageUpdate(
 							typedPage,
+							store,
+							parseData,
+							notionClient,
 							logger,
-						);
-						const data = await parseData(renderer.getPageData());
-						if (traceMode === "after-parse") {
-							throw new Error("notion-loader: reached after-parse stage");
-						}
-						if (!processor) {
-							store.set({
-								id: typedPage.id,
-								digest: typedPage.last_edited_time,
-								data,
-							});
-							if (traceMode === "after-store") {
-								throw new Error("notion-loader: reached after-store stage");
-							}
-							continue;
-						}
-						const renderPromise = renderer
-							.render(processor)
-							.then((rendered) => {
-								if (!rendered) {
-									return;
-								}
-								store.set({
-									id: typedPage.id,
-									digest: typedPage.last_edited_time,
-									data,
-									rendered,
-								});
-							});
-						renderPromises.push(renderPromise);
-					}
+							processor,
+							traceMode,
+						),
+					);
 				}
 
 				stage = "cleanup";
-				for (const deletedPageId of existingPageIds) {
-					store.delete(deletedPageId);
-				}
+				cleanupStalePages(store, existingPageIds);
 
 				stage = "await";
 				await Promise.all(renderPromises);
@@ -607,6 +631,36 @@ const writeCache = async (cacheUrl: URL, cache: NotionLoaderCache) => {
 	await writeFile(cachePath, `${JSON.stringify(cache, null, 2)}\n`, "utf-8");
 };
 
+const importArticleMapper = async (traceMode: string) => {
+	try {
+		const mod = await import("./notion-article.mapper");
+		return mod.mapNotionArticleEntry;
+	} catch (error) {
+		if (traceMode === "map-import") {
+			throw new Error(
+				`notion-loader: mapper import failed: ${error instanceof Error ? error.message : String(error)}`,
+			);
+		}
+		throw error;
+	}
+};
+
+const extractCoverFromContent = (
+	entry: { rendered?: unknown; data: unknown },
+	hasCover: boolean,
+): string | undefined => {
+	if (hasCover) {
+		return undefined;
+	}
+	const renderedMetadata = (
+		entry.rendered as { metadata?: unknown } | undefined
+	)?.metadata as { imagePaths?: unknown } | undefined;
+	const imagePaths = Array.isArray(renderedMetadata?.imagePaths)
+		? renderedMetadata?.imagePaths
+		: [];
+	return normalizeUrlValue(imagePaths[0]);
+};
+
 const mapEntries = async (
 	context: LoaderContext,
 	options: Pick<
@@ -620,17 +674,7 @@ const mapEntries = async (
 	>,
 ) => {
 	const traceMode = process.env.NOTION_LOADER_TRACE ?? "";
-	let mapNotionArticleEntry: typeof import("./notion-article.mapper").mapNotionArticleEntry;
-	try {
-		({ mapNotionArticleEntry } = await import("./notion-article.mapper"));
-	} catch (error) {
-		if (traceMode === "map-import") {
-			throw new Error(
-				`notion-loader: mapper import failed: ${error instanceof Error ? error.message : String(error)}`,
-			);
-		}
-		throw error;
-	}
+	const mapNotionArticleEntry = await importArticleMapper(traceMode);
 	const mappedEntries: CachedEntry[] = [];
 	const rawEntries = context.store.entries();
 	context.store.clear();
@@ -656,15 +700,10 @@ const mapEntries = async (
 			continue;
 		}
 
-		const renderedMetadata = (
-			entry.rendered as { metadata?: unknown } | undefined
-		)?.metadata as { imagePaths?: unknown } | undefined;
-		const imagePaths = Array.isArray(renderedMetadata?.imagePaths)
-			? renderedMetadata?.imagePaths
-			: [];
-		const coverFromContent = !mapped.data.cover
-			? normalizeUrlValue(imagePaths[0])
-			: undefined;
+		const coverFromContent = extractCoverFromContent(
+			entry,
+			!!mapped.data.cover,
+		);
 
 		if (traceMode === "map-before-parse") {
 			throw new Error("notion-loader: reached map-before-parse stage");
