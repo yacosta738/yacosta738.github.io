@@ -24,10 +24,35 @@ if (!resume || !resume.projects) {
 const allProjects = await getAllProjects(resume.projects);
 const t = useTranslations(currentLocale);
 const title = t("allProjects");
+
+// CollectionPage JSON-LD
+const siteOrigin = Astro.site?.origin || Astro.url.origin;
+const collectionJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "CollectionPage",
+	name: title,
+	description: t("allProjectsDescription"),
+	url: `${siteOrigin}${Astro.url.pathname}`,
+	mainEntity: {
+		"@type": "ItemList",
+		numberOfItems: allProjects.length,
+		itemListElement: allProjects.slice(0, 20).map((project, index) => ({
+			"@type": "ListItem",
+			position: index + 1,
+			item: {
+				"@type": "SoftwareSourceCode",
+				name: project.name,
+				...(project.description && { description: project.description }),
+				...(project.url && { url: project.url }),
+			},
+		})),
+	},
+};
 ---
 
 <Layout title={title}>
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(collectionJsonLd)} />
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <header class="text-center mb-12">
       <h1 class="text-4xl md:text-5xl font-bold text-foreground">
         {t("allProjects")}
@@ -37,5 +62,5 @@ const title = t("allProjects");
       </p>
     </header>
     <ProjectsTable projects={allProjects} />
-  </main>
+  </div>
 </Layout>

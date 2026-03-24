@@ -44,10 +44,51 @@ const lastArticles = allArticles
 	.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 	.slice(0, NUMBER_OF_POSTS);
 const hasArticlesData = await hasArticles({ lang: currentLocale });
+
+// Person JSON-LD structured data
+const getImageUrl = (
+	img: string | { src: string } | null | undefined,
+): string => {
+	if (!img) return "";
+	if (typeof img === "string") return img;
+	if (typeof img === "object" && "src" in img) return img.src;
+	return "";
+};
+const siteOrigin = Astro.site?.origin || Astro.url.origin;
+const personJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: resume.basics.name,
+	jobTitle: resume.basics.label,
+	description: resume.basics.summary,
+	url: resume.basics.url || siteOrigin,
+	...(resume.basics.image && {
+		image: new URL(
+			getImageUrl(resume.basics.image as string | { src: string }),
+			siteOrigin,
+		).href,
+	}),
+	...(resume.basics.email && { email: `mailto:${resume.basics.email}` }),
+	...(resume.basics.location && {
+		address: {
+			"@type": "PostalAddress",
+			addressLocality: (resume.basics.location as { city?: string })?.city,
+			addressCountry: (resume.basics.location as { countryCode?: string })
+				?.countryCode,
+		},
+	}),
+	...(resume.basics.profiles &&
+		resume.basics.profiles.length > 0 && {
+			sameAs: (resume.basics.profiles as Array<{ url: string }>).map(
+				(p) => p.url,
+			),
+		}),
+};
 ---
 
 <Layout title={title}>
-	<main id="main-content">
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+	<div class="portfolio-content">
 		<Hero basics={resume.basics} />
 		<About basics={resume.basics} skills={resume.skills} />
 		<Experience work={resume.work} />
@@ -99,7 +140,7 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
 			</Section>
 		)}
 		<Contact />
-	</main>
+	</div>
 	<slot name="aside">
 		<Social profiles={resume.basics.profiles} />
 		<Email email={resume.basics.email} />
@@ -108,7 +149,7 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
 </Layout>
 
 <style>
-	main {
+	.portfolio-content {
 		max-width: 1100px;
 		margin: 0 auto;
 		padding: 0 50px;
@@ -116,20 +157,20 @@ const hasArticlesData = await hasArticles({ lang: currentLocale });
 	}
 
 	@media (width <= 1200px) {
-		main {
+		.portfolio-content {
 			max-width: 1000px;
 			padding: 0 80px;
 		}
 	}
 
 	@media (width <= 900px) {
-		main {
+		.portfolio-content {
 			padding: 0 50px;
 		}
 	}
 
 	@media (width <= 700px) {
-		main {
+		.portfolio-content {
 			padding: 0 25px;
 		}
 	}

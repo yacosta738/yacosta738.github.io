@@ -78,6 +78,7 @@ export const lazyImagesRehypePlugin: RehypePlugin = () => {
 			if (node.tagName === "img") {
 				node.properties = node.properties ?? {};
 				node.properties.loading = "lazy";
+				node.properties.decoding = "async";
 			}
 		});
 	};

@@ -52,18 +52,19 @@ const postSlug = slugParts.join("/");
 	<div class="container mx-auto px-4 blog-shell">
 		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
 		<div class="mx-auto prose lg:prose-xl dark:prose-invert blog-prose">
-			{
-				post.cover &&
-					(typeof post.cover === "string" ? (
-						<img src={post.cover} alt={post.title} loading="eager" />
-					) : (
-						<OptimizedPicture
-							src={post.cover}
-							alt={post.title}
-							loading="eager"
-						/>
-					))
-			}
+		{
+			post.cover &&
+				(typeof post.cover === "string" ? (
+					<img src={post.cover} alt={post.title} loading="eager" fetchpriority="high" decoding="async" class="mx-auto w-full max-w-full rounded-lg" />
+				) : (
+					<OptimizedPicture
+						src={post.cover}
+						alt={post.title}
+						loading="eager"
+						fetchpriority="high"
+					/>
+				))
+		}
 			<Content />
 			<PostFooter post={post} />
 		</div>

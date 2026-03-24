@@ -21,18 +21,104 @@ interface Props extends Article {
 const {
 	title,
 	description,
+	author,
 	tags = [],
+	date,
+	lastModified,
+	cover,
+	category,
 	url = Astro.request.url,
 	minutesRead,
 	enableComments = false,
 	slug,
 } = Astro.props;
-// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
 const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 	.href;
+
+// Resolve cover image URL for JSON-LD
+const getCoverUrl = (img: typeof cover): string => {
+	if (!img) return ogImage;
+	if (typeof img === "string")
+		return img.startsWith("http") ? img : new URL(img, Astro.url.origin).href;
+	if (typeof img === "object" && "src" in img)
+		return new URL(img.src, Astro.url.origin).href;
+	return ogImage;
+};
+
+const canonicalUrl = Astro.site
+	? `${Astro.site.origin}${Astro.url.pathname}`
+	: Astro.url.href;
+
+// BlogPosting JSON-LD structured data
+const blogPostingJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: title,
+	description: description,
+	image: getCoverUrl(cover),
+	url: canonicalUrl,
+	datePublished: date?.toISOString(),
+	...(lastModified && { dateModified: lastModified.toISOString() }),
+	author: {
+		"@type": "Person",
+		name: author?.name || "Yuniel Acosta",
+		...(author?.url && { url: author.url }),
+	},
+	publisher: {
+		"@type": "Person",
+		name: author?.name || "Yuniel Acosta",
+	},
+	...(category && {
+		articleSection: category.title,
+	}),
+	...(tags.length > 0 && {
+		keywords: tags.map((tag) => tag.title).join(", "),
+	}),
+	mainEntityOfPage: {
+		"@type": "WebPage",
+		"@id": canonicalUrl,
+	},
+};
+
+// BreadcrumbList JSON-LD
+const breadcrumbJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "Home",
+			item: Astro.site?.href || Astro.url.origin,
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "Blog",
+			item: `${Astro.site?.origin || Astro.url.origin}/blog`,
+		},
+		{
+			"@type": "ListItem",
+			position: 3,
+			name: title,
+			item: canonicalUrl,
+		},
+	],
+};
 ---
 
-<BaseLayout {title} {description} {ogImage} showSearch={true}>
+<BaseLayout
+	{title}
+	{description}
+	{ogImage}
+	showSearch={true}
+	ogType="article"
+	articlePublishedTime={date?.toISOString()}
+	articleModifiedTime={lastModified?.toISOString()}
+	articleAuthor={author?.name}
+	articleTags={tags.map((tag) => tag.title)}
+>
 	<HeaderProgressBar
 		slot="subheader"
 		title={title}
@@ -61,4 +147,8 @@ const ogImage = new URL(getOgImagePath(Astro.url.pathname), Astro.url.origin)
 	</div>
 	<BlogFooter />
 	<ToTopButton />
+
+	<!-- BlogPosting + BreadcrumbList JSON-LD -->
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 </BaseLayout>
