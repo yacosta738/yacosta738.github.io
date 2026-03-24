@@ -300,10 +300,10 @@ const extractTocHeadings = (toc: HtmlElementNode): MarkdownHeading[] => {
 	}
 
 	const listElementToTree = (
-		ol: HtmlElementNode,
+		ol: HtmlElementNode | undefined,
 		depth: number,
 	): MarkdownHeading[] => {
-		if (!ol.children || ol.children.length === 0) {
+		if (!ol?.children || ol.children.length === 0) {
 			return [];
 		}
 		return ol.children.flatMap((li) => {
@@ -317,15 +317,13 @@ const extractTocHeadings = (toc: HtmlElementNode): MarkdownHeading[] => {
 
 			let headings = [currentHeading];
 			if (subList) {
-				headings = headings.concat(
-					listElementToTree(subList as HtmlElementNode, depth + 1),
-				);
+				headings = headings.concat(listElementToTree(subList, depth + 1));
 			}
 			return headings;
 		});
 	};
 
-	return listElementToTree(toc.children?.[0] as HtmlElementNode, 0);
+	return listElementToTree(toc.children?.[0], 0);
 };
 
 type RenderedNotionEntry = {
@@ -444,10 +442,10 @@ const processPageUpdate = async (
 	logger: LoaderContext["logger"],
 	processor: ReturnType<typeof buildProcessor> | null,
 	traceMode: string,
-): Promise<Promise<void> | null> => {
+): Promise<void> => {
 	const existingPage = store.get(typedPage.id);
 	if (existingPage?.digest === typedPage.last_edited_time) {
-		return null;
+		return;
 	}
 	if (traceMode === "before-parse") {
 		throw new Error("notion-loader: reached before-parse stage");
@@ -466,18 +464,17 @@ const processPageUpdate = async (
 		if (traceMode === "after-store") {
 			throw new Error("notion-loader: reached after-store stage");
 		}
-		return null;
+		return;
 	}
-	return renderer.render(processor).then((rendered) => {
-		if (!rendered) {
-			return;
-		}
-		store.set({
-			id: typedPage.id,
-			digest: typedPage.last_edited_time,
-			data,
-			rendered,
-		});
+	const rendered = await renderer.render(processor);
+	if (!rendered) {
+		return;
+	}
+	store.set({
+		id: typedPage.id,
+		digest: typedPage.last_edited_time,
+		data,
+		rendered,
 	});
 };
 
@@ -558,18 +555,17 @@ const createNotionLoaderNoImages = ({
 					}
 					const typedPage = page as NotionPage;
 					existingPageIds.delete(typedPage.id);
-					const promise = await processPageUpdate(
-						typedPage,
-						store,
-						parseData,
-						notionClient,
-						logger,
-						processor,
-						traceMode,
+					renderPromises.push(
+						processPageUpdate(
+							typedPage,
+							store,
+							parseData,
+							notionClient,
+							logger,
+							processor,
+							traceMode,
+						),
 					);
-					if (promise) {
-						renderPromises.push(promise);
-					}
 				}
 
 				stage = "cleanup";
