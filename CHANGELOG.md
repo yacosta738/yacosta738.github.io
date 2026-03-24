@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.1...v2.1.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* improve Sonar quality gate coverage and safety ([#1787](https://github.com/yacosta738/yacosta738.github.io/issues/1787)) ([211b7a8](https://github.com/yacosta738/yacosta738.github.io/commit/211b7a89d4b638e9d1034799b41d940423dccc98))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
