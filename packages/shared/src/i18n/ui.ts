@@ -1,4 +1,4 @@
-import type { Lang, UIDict, UIMultilingual } from "./types";
+import { isLang, type Lang, type UIDict, type UIMultilingual } from "./types";
 
 // Use import.meta.glob to get all translation files
 const translationModules = import.meta.glob<
@@ -28,10 +28,10 @@ export const ui: UIMultilingual = Object.values(translationModules).reduce(
 
 		// For each language in the export
 		for (const [lang, translations] of Object.entries(translationExport)) {
-			if (lang in acc) {
+			if (isLang(lang)) {
 				// Merge translations into the accumulated object
-				acc[lang as Lang] = {
-					...acc[lang as Lang],
+				acc[lang] = {
+					...acc[lang],
 					...(translations as UIDict),
 				};
 			}

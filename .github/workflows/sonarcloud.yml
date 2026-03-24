@@ -33,6 +33,13 @@ jobs:
           coverage: 'true'
           upload-coverage: 'false'
 
+      - name: Run targeted shared coverage for Sonar
+        run: pnpm --filter=@portfolio/shared exec vitest run src/lib/seo/json-ld.test.ts src/core/tag/tag.mapper.test.ts src/i18n/types.test.ts src/i18n/ui.test.ts src/i18n/i18n.test.ts
+
+      - name: Normalize shared LCOV paths
+        run: |
+          node -e "const fs=require('node:fs'); const path='packages/shared/coverage/lcov.info'; if (fs.existsSync(path)) { const content=fs.readFileSync(path,'utf8').replace(/^SF:src\//gm,'SF:packages/shared/src/'); fs.writeFileSync(path, content); }"
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v5
         env:
@@ -42,9 +49,9 @@ jobs:
           args: >
             -Dsonar.projectKey=yacosta738_yacosta738.github.io
             -Dsonar.organization=yacosta738
-            -Dsonar.sources=apps/
-            -Dsonar.tests=apps/
+            -Dsonar.sources=apps,packages
+            -Dsonar.tests=apps,packages
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
-            -Dsonar.javascript.lcov.reportPaths=apps/*/coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=apps/*/coverage/lcov.info,packages/*/coverage/lcov.info
             -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**
             -Dsonar.cpd.exclusions=**/content.config.ts,**/vitest.config.ts,**/playwright.config.ts,**/astro.config.mjs,**/organize-articles.js

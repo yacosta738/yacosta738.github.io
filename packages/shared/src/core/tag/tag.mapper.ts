@@ -7,6 +7,21 @@ import type { CollectionEntry } from "astro:content";
 import { cleanEntityId } from "@/lib/collection.entity";
 import type Tag from "./tag.model";
 
+const trimHyphenEdges = (value: string): string => {
+	let start = 0;
+	let end = value.length;
+
+	while (start < end && value[start] === "-") {
+		start += 1;
+	}
+
+	while (end > start && value[end - 1] === "-") {
+		end -= 1;
+	}
+
+	return value.slice(start, end);
+};
+
 /**
  * Converts a single tag collection entry to a Tag object
  * @param {CollectionEntry<"tags">} tagData - The tag collection entry to convert
@@ -31,14 +46,13 @@ export function toTag(tagData: CollectionEntry<"tags">): Tag {
 		// Use split-join pattern instead of regex with + to prevent potential ReDoS
 		.split(/[^a-z0-9]+/)
 		.filter(Boolean)
-		.join("-")
-		// Remove leading/trailing dashes with separate anchored replacements (no alternation = no backtracking)
-		.replace(/^-+/, "")
-		.replace(/-+$/, "");
+		.join("-");
+
+	const normalizedSlug = trimHyphenEdges(slugFromTitle);
 
 	let slug = fallbackSlug;
-	if (slugFromTitle.length > 0) {
-		slug = slugFromTitle;
+	if (normalizedSlug.length > 0) {
+		slug = normalizedSlug;
 	}
 
 	return {
