@@ -15,7 +15,7 @@
  */
 import Analytics from "@/components/atoms/Analytics.astro";
 import Header from "@/components/organisms/Header.astro";
-import { SITE_TITLE, X_ACCOUNT } from "@/configs/site.consts";
+import { SITE_DESCRIPTION, SITE_TITLE, X_ACCOUNT } from "@/configs/site.consts";
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 import {
 	getLocalePathsEnhanced,
@@ -143,7 +143,6 @@ const alternatesOrigin =
 // Ensure canonicalHref is always an absolute URL
 const fallbackOrigin =
 	alternatesOrigin ||
-	Astro.site?.origin ||
 	(() => {
 		const host = Astro.request.headers.get("host");
 		return host ? `https://${host}` : Astro.url.origin;
@@ -155,6 +154,10 @@ const xAccount =
 		? X_ACCOUNT
 		: X_ACCOUNT[locale] || X_ACCOUNT.en || "";
 const siteName = typeof SITE_TITLE === "string" ? SITE_TITLE : t(SITE_TITLE);
+const siteDescription =
+	typeof SITE_DESCRIPTION === "string"
+		? SITE_DESCRIPTION
+		: SITE_DESCRIPTION[locale] || SITE_DESCRIPTION.en || metaDescription;
 const localeTag = LOCALES[locale].lang || locale;
 
 /** Safely serialize JSON-LD, escaping `<` to prevent `</script>` breakout */
@@ -328,7 +331,7 @@ const safeJsonLd = (data: Record<string, unknown>): string =>
       "@type": "WebSite",
       "name": siteName,
       "url": fallbackOrigin || canonicalHref,
-      "description": metaDescription,
+      "description": siteDescription,
       "inLanguage": localeTag,
     })} />
 
