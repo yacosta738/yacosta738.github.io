@@ -14,6 +14,40 @@ vi.mock("./api-config", () => ({
 const mockFetch = vi.fn();
 vi.stubGlobal("fetch", mockFetch);
 
+/**
+ * Helper: assert that a callback throws an ApiClientError with the expected
+ * message and statusCode, eliminating repetitive try/catch blocks.
+ */
+const expectApiClientError = async (
+	fn: () => Promise<unknown>,
+	message: string,
+	statusCode: number,
+) => {
+	try {
+		await fn();
+		expect.unreachable("Should have thrown");
+	} catch (err) {
+		expect(err).toBeInstanceOf(ApiClientError);
+		expect((err as ApiClientError).message).toBe(message);
+		expect((err as ApiClientError).statusCode).toBe(statusCode);
+	}
+};
+
+/**
+ * Helper: mock fetch to hang until the AbortSignal fires, simulating a real
+ * timeout via the AbortController wiring in ApiClient.
+ */
+const mockFetchHangsUntilAbort = () => {
+	mockFetch.mockImplementationOnce(
+		(_url: string, options: { signal: AbortSignal }) =>
+			new Promise((_resolve, reject) => {
+				options.signal.addEventListener("abort", () => {
+					reject(new DOMException("The operation was aborted", "AbortError"));
+				});
+			}),
+	);
+};
+
 describe("ApiClient", () => {
 	let client: ApiClient;
 
@@ -83,14 +117,11 @@ describe("ApiClient", () => {
 				json: () => Promise.resolve({ success: false, message: "Bad request" }),
 			});
 
-			try {
-				await client.post("/api/contact", {});
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Bad request");
-				expect((err as ApiClientError).statusCode).toBe(400);
-			}
+			await expectApiClientError(
+				() => client.post("/api/contact", {}),
+				"Bad request",
+				400,
+			);
 		});
 
 		it("throws ApiClientError with HTTP status fallback when no message", async () => {
@@ -100,57 +131,42 @@ describe("ApiClient", () => {
 				json: () => Promise.resolve({ success: false }),
 			});
 
-			try {
-				await client.post("/api/test", {});
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("HTTP error! status: 500");
-				expect((err as ApiClientError).statusCode).toBe(500);
-			}
+			await expectApiClientError(
+				() => client.post("/api/test", {}),
+				"HTTP error! status: 500",
+				500,
+			);
 		});
 
-		it("throws ApiClientError with status 408 on timeout (AbortError)", async () => {
-			const abortError = new DOMException(
-				"The operation was aborted",
-				"AbortError",
-			);
-			mockFetch.mockRejectedValueOnce(abortError);
+		it("triggers real timeout via AbortController wiring", async () => {
+			mockFetchHangsUntilAbort();
 
-			try {
-				await client.post("/api/test", {});
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Request timeout");
-				expect((err as ApiClientError).statusCode).toBe(408);
-			}
+			const promise = client.post("/api/test", {});
+
+			// Advance past the 5000ms timeout to trigger controller.abort()
+			await vi.advanceTimersByTimeAsync(5001);
+
+			await expectApiClientError(() => promise, "Request timeout", 408);
 		});
 
 		it("wraps generic Error with status 0", async () => {
 			mockFetch.mockRejectedValueOnce(new Error("Network failure"));
 
-			try {
-				await client.post("/api/test", {});
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Network failure");
-				expect((err as ApiClientError).statusCode).toBe(0);
-			}
+			await expectApiClientError(
+				() => client.post("/api/test", {}),
+				"Network failure",
+				0,
+			);
 		});
 
 		it("wraps non-Error throws as unknown error", async () => {
 			mockFetch.mockRejectedValueOnce("string error");
 
-			try {
-				await client.post("/api/test", {});
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Unknown error occurred");
-				expect((err as ApiClientError).statusCode).toBe(0);
-			}
+			await expectApiClientError(
+				() => client.post("/api/test", {}),
+				"Unknown error occurred",
+				0,
+			);
 		});
 
 		it("re-throws ApiClientError from non-ok response without wrapping", async () => {
@@ -164,14 +180,11 @@ describe("ApiClient", () => {
 					}),
 			});
 
-			try {
-				await client.post("/api/test", {});
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Validation failed");
-				expect((err as ApiClientError).statusCode).toBe(422);
-			}
+			await expectApiClientError(
+				() => client.post("/api/test", {}),
+				"Validation failed",
+				422,
+			);
 		});
 	});
 
@@ -202,14 +215,11 @@ describe("ApiClient", () => {
 				json: () => Promise.resolve({ success: false, message: "Not found" }),
 			});
 
-			try {
-				await client.get("/api/missing");
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Not found");
-				expect((err as ApiClientError).statusCode).toBe(404);
-			}
+			await expectApiClientError(
+				() => client.get("/api/missing"),
+				"Not found",
+				404,
+			);
 		});
 
 		it("throws ApiClientError with HTTP status fallback when no message", async () => {
@@ -219,57 +229,41 @@ describe("ApiClient", () => {
 				json: () => Promise.resolve({ success: false }),
 			});
 
-			try {
-				await client.get("/api/test");
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("HTTP error! status: 503");
-				expect((err as ApiClientError).statusCode).toBe(503);
-			}
+			await expectApiClientError(
+				() => client.get("/api/test"),
+				"HTTP error! status: 503",
+				503,
+			);
 		});
 
-		it("throws ApiClientError with status 408 on timeout", async () => {
-			const abortError = new DOMException(
-				"The operation was aborted",
-				"AbortError",
-			);
-			mockFetch.mockRejectedValueOnce(abortError);
+		it("triggers real timeout via AbortController wiring", async () => {
+			mockFetchHangsUntilAbort();
 
-			try {
-				await client.get("/api/test");
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Request timeout");
-				expect((err as ApiClientError).statusCode).toBe(408);
-			}
+			const promise = client.get("/api/test");
+
+			await vi.advanceTimersByTimeAsync(5001);
+
+			await expectApiClientError(() => promise, "Request timeout", 408);
 		});
 
 		it("wraps generic Error with status 0", async () => {
 			mockFetch.mockRejectedValueOnce(new Error("DNS resolution failed"));
 
-			try {
-				await client.get("/api/test");
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("DNS resolution failed");
-				expect((err as ApiClientError).statusCode).toBe(0);
-			}
+			await expectApiClientError(
+				() => client.get("/api/test"),
+				"DNS resolution failed",
+				0,
+			);
 		});
 
 		it("wraps non-Error throws as unknown error", async () => {
 			mockFetch.mockRejectedValueOnce(42);
 
-			try {
-				await client.get("/api/test");
-				expect.unreachable("Should have thrown");
-			} catch (err) {
-				expect(err).toBeInstanceOf(ApiClientError);
-				expect((err as ApiClientError).message).toBe("Unknown error occurred");
-				expect((err as ApiClientError).statusCode).toBe(0);
-			}
+			await expectApiClientError(
+				() => client.get("/api/test"),
+				"Unknown error occurred",
+				0,
+			);
 		});
 	});
 });
