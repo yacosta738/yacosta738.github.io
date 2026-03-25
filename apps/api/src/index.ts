@@ -7,11 +7,9 @@ import { handleNewsletterSubscription } from "./endpoints/newsletter-handler";
 // No need for extendZodWithOpenApi from @asteasolutions/zod-to-openapi.
 
 // --- Zod Schemas for OpenAPI ---
-// Note: Using z.string().email() as z.email() is not yet available in Zod v4.1.12
-// The deprecation warning is for future migration when Zod releases standalone z.email()
 const ContactSchema = z.object({
 	name: z.string().openapi({ example: "John Doe" }),
-	email: z.string().email().openapi({ example: "john.doe@example.com" }),
+	email: z.email().openapi({ example: "john.doe@example.com" }),
 	subject: z.string().openapi({ example: "Regarding your services" }),
 	message: z.string().openapi({ example: "I would like to inquire about..." }),
 	hcaptchaToken: z.string().openapi({ description: "hCaptcha client token" }),
@@ -19,7 +17,7 @@ const ContactSchema = z.object({
 });
 
 const NewsletterSchema = z.object({
-	email: z.string().email().openapi({ example: "jane.doe@example.com" }),
+	email: z.email().openapi({ example: "jane.doe@example.com" }),
 	hcaptchaToken: z.string().openapi({ description: "hCaptcha client token" }),
 	_gotcha: z.string().optional().openapi({ description: "Honeypot field" }),
 });

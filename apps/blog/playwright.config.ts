@@ -63,12 +63,16 @@ export default defineConfig({
 		// In CI, the build artifact may already exist. Check before rebuilding.
 		const ciBuildCommand =
 			"test -d dist && test -f dist/index.html && test -f dist/pagefind/pagefind-ui.css && test -f dist/pagefind/pagefind-ui.js && echo 'Using pre-built artifact' || pnpm build";
-		const buildCommand =
-			process.env.E2E_PREBUILT === "1"
-				? "echo 'Using pre-built artifact'"
-				: process.env.CI
-					? ciBuildCommand
-					: "pnpm build";
+		const resolveBuildCommand = (): string => {
+			if (process.env.E2E_PREBUILT === "1") {
+				return "echo 'Using pre-built artifact'";
+			}
+			if (process.env.CI) {
+				return ciBuildCommand;
+			}
+			return "pnpm build";
+		};
+		const buildCommand = resolveBuildCommand();
 		const baseEnv: Record<string, string> = { PLAYWRIGHT_TEST: "true" };
 		const previewCommand = `${buildCommand} && pnpm exec astro preview --host 127.0.0.1 --port ${resolvedPreviewPort}`;
 

@@ -97,4 +97,56 @@ describe("LanguageMapper", () => {
 	it("should fall back to native name if display name is not available", () => {
 		expect(languageMapper.getDisplayName("en", "fr" as string)).toBe("English");
 	});
+
+	it("should return undefined for getDisplayName with unknown language code", () => {
+		expect(languageMapper.getDisplayName("de", "en")).toBeUndefined();
+	});
+
+	it("should return undefined for findLocaleCode with undefined input", () => {
+		expect(languageMapper.findLocaleCode(undefined)).toBeUndefined();
+	});
+
+	it("should return undefined for findLocaleCode with empty string", () => {
+		expect(languageMapper.findLocaleCode("")).toBeUndefined();
+	});
+
+	it("should not re-initialize if already initialized", async () => {
+		vi.mocked(getCollection).mockClear();
+		await languageMapper.initialize();
+		expect(getCollection).not.toHaveBeenCalled();
+	});
+
+	describe("when uninitialized", () => {
+		it("should return undefined for findLocaleCode", () => {
+			const freshMapper = new LanguageMapper();
+			expect(freshMapper.findLocaleCode("English")).toBeUndefined();
+		});
+
+		it("should return empty array for getAllLanguages", () => {
+			const freshMapper = new LanguageMapper();
+			expect(freshMapper.getAllLanguages()).toEqual([]);
+		});
+	});
+
+	describe("when initialization fails", () => {
+		it("should handle errors gracefully and remain uninitialized", async () => {
+			const errorMapper = new LanguageMapper();
+			vi.mocked(getCollection).mockRejectedValueOnce(
+				new Error("Collection not found"),
+			);
+			const consoleSpy = vi
+				.spyOn(console, "error")
+				.mockImplementation(() => {});
+			try {
+				await errorMapper.initialize();
+				expect(consoleSpy).toHaveBeenCalledWith(
+					"Failed to initialize LanguageMapper:",
+					expect.any(Error),
+				);
+				expect(errorMapper.findLocaleCode("English")).toBeUndefined();
+			} finally {
+				consoleSpy.mockRestore();
+			}
+		});
+	});
 });

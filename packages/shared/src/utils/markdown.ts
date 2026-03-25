@@ -54,7 +54,7 @@ export const responsiveTablesRehypePlugin: RehypePlugin = () => {
 				continue;
 			}
 
-			const tableElement = child as Element;
+			const tableElement = child;
 			const wrapper: Element = {
 				type: "element",
 				tagName: "div",
@@ -63,7 +63,6 @@ export const responsiveTablesRehypePlugin: RehypePlugin = () => {
 			};
 
 			children[i] = wrapper;
-			i++;
 		}
 	};
 };

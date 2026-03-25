@@ -63,12 +63,7 @@ export function rehypeImages() {
 		(tree: unknown, file: VFile) => {
 			const imageOccurrenceMap = new Map<string, number>();
 			visit(tree as VisitableNode, (node) => {
-				processImageNode(
-					node as ElementLikeNode,
-					file,
-					imagePaths,
-					imageOccurrenceMap,
-				);
+				processImageNode(node, file, imagePaths, imageOccurrenceMap);
 			});
 		};
 }

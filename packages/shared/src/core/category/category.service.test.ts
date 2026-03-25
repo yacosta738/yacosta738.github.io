@@ -104,6 +104,45 @@ describe("CategoryService", () => {
 			const categories = await getCategories({ orderMin: 1, orderMax: 2 });
 			expect(categories).toHaveLength(2);
 		});
+
+		/** Helper to setup getCollection with custom entries */
+		const setupCollectionMock = (entries: typeof mockCategories) => {
+			vi.mocked(getCollection).mockImplementation(
+				async (_collection, entryFilter) => {
+					if (entryFilter) {
+						return entries.filter((entry) =>
+							Boolean(entryFilter(entry)),
+						) as any;
+					}
+					return entries as any;
+				},
+			);
+		};
+
+		describe("with undefined order entries", () => {
+			const categoriesWithUndefinedOrder = [
+				...mockCategories,
+				{ id: "en/category-4", data: { title: "No Order" } },
+			];
+
+			beforeEach(() => {
+				setupCollectionMock(categoriesWithUndefinedOrder);
+			});
+
+			it("should exclude categories with undefined order when orderMin is set", async () => {
+				const categories = await getCategories({ orderMin: 1 });
+				expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
+					true,
+				);
+			});
+
+			it("should exclude categories with undefined order when orderMax is set", async () => {
+				const categories = await getCategories({ orderMax: 5 });
+				expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
+					true,
+				);
+			});
+		});
 	});
 
 	describe("getCategoryById", () => {

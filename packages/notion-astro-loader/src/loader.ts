@@ -172,8 +172,9 @@ export function notionLoader({
 				const isCached = existingPageIds.delete(page.id);
 				const existingPage = store.get(page.id);
 
-				// If the page has been updated, re-render it
-				if (existingPage?.digest !== page.last_edited_time) {
+				if (existingPage?.digest === page.last_edited_time) {
+					log_pg.debug(`Skipped page ${dim(pageMetadata)}`);
+				} else {
 					const realSavePath = path.resolve(
 						process.cwd(),
 						"src",
@@ -217,8 +218,6 @@ export function notionLoader({
 					log_pg.info(
 						`${isCached ? "Updated" : "Created"} page ${dim(pageMetadata)}`,
 					);
-				} else {
-					log_pg.debug(`Skipped page ${dim(pageMetadata)}`);
 				}
 			}
 
