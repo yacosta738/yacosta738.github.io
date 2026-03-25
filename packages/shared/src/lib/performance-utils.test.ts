@@ -133,8 +133,11 @@ describe("DimensionCache", () => {
 		const startTime = performance.now();
 		const spy = vi.spyOn(performance, "now").mockReturnValue(startTime + 100);
 
-		expect(cache.get(el)).toBeNull();
-		spy.mockRestore();
+		try {
+			expect(cache.get(el)).toBeNull();
+		} finally {
+			spy.mockRestore();
+		}
 	});
 
 	it("invalidates a specific element", () => {

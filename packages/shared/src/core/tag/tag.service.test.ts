@@ -78,6 +78,7 @@ describe("getTags", () => {
 
 		expect(first).toBe(second); // Same reference = cached
 		// getCollection is called only once for this criteria
+		expect(mockGetCollection).toHaveBeenCalledTimes(1);
 	});
 
 	it("should throw when getCollection fails", async () => {

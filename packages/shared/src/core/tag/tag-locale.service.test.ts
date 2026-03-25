@@ -120,6 +120,10 @@ describe("getTagLocalePaths", () => {
 	});
 
 	it("should handle unsupported language codes gracefully", async () => {
+		// Explicitly mock: tag exists only for "en", not for "zz"
+		mockGetTags.mockResolvedValue([]);
+		mockGetTagSlug.mockReturnValue("security");
+
 		const paths = await getTagLocalePaths("security", "en", ["en", "zz"]);
 
 		expect(paths).toHaveLength(2);

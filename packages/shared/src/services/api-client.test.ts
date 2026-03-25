@@ -51,8 +51,7 @@ describe("ApiClient", () => {
 			await c.post("/endpoint", {});
 			// Should use default API_CONFIG.baseUrl
 			const calledUrl = mockFetch.mock.calls[0]?.[0] as string;
-			expect(calledUrl).toContain("/endpoint");
-			expect(c).toBeInstanceOf(ApiClient);
+			expect(calledUrl).toBe("https://api.test.com/endpoint");
 		});
 	});
 

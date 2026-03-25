@@ -112,93 +112,64 @@ describe("ContactService", () => {
 	});
 
 	describe("validation errors", () => {
+		const expectValidationFailure = async (
+			data: Parameters<typeof service.submitContact>[0],
+		) => {
+			const result = await service.submitContact(data);
+			expect(result.success).toBe(false);
+			expect(mockPost).not.toHaveBeenCalled();
+			return result;
+		};
+
 		it("fails when name is empty", async () => {
-			const result = await service.submitContact({
+			const result = await expectValidationFailure({
 				...validData,
 				name: "",
 			});
-			expect(result.success).toBe(false);
 			expect(result.message).toBe("Failed to send message. Please try again.");
 		});
 
 		it("fails when name is whitespace only", async () => {
-			const result = await service.submitContact({
-				...validData,
-				name: "   ",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, name: "   " });
 		});
 
 		it("fails when email is empty", async () => {
-			const result = await service.submitContact({
-				...validData,
-				email: "",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, email: "" });
 		});
 
 		it("fails when email is invalid", async () => {
-			const result = await service.submitContact({
-				...validData,
-				email: "not-an-email",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, email: "not-an-email" });
 		});
 
 		it("fails when subject is empty", async () => {
-			const result = await service.submitContact({
-				...validData,
-				subject: "",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, subject: "" });
 		});
 
 		it("fails when subject is whitespace only", async () => {
-			const result = await service.submitContact({
-				...validData,
-				subject: "   ",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, subject: "   " });
 		});
 
 		it("fails when message is empty", async () => {
-			const result = await service.submitContact({
-				...validData,
-				message: "",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, message: "" });
 		});
 
 		it("fails when message is less than 10 characters", async () => {
-			const result = await service.submitContact({
-				...validData,
-				message: "Short",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, message: "Short" });
 		});
 
 		it("fails when hcaptchaToken is missing", async () => {
-			const result = await service.submitContact({
+			await expectValidationFailure({
 				...validData,
 				hcaptchaToken: undefined,
 			});
-			expect(result.success).toBe(false);
 		});
 
 		it("fails when hcaptchaToken is empty string", async () => {
-			const result = await service.submitContact({
-				...validData,
-				hcaptchaToken: "",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, hcaptchaToken: "" });
 		});
 
 		it("fails when hcaptchaToken is whitespace only", async () => {
-			const result = await service.submitContact({
-				...validData,
-				hcaptchaToken: "   ",
-			});
-			expect(result.success).toBe(false);
+			await expectValidationFailure({ ...validData, hcaptchaToken: "   " });
 		});
 	});
 });
