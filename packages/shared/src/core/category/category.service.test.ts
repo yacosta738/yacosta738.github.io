@@ -104,6 +104,48 @@ describe("CategoryService", () => {
 			const categories = await getCategories({ orderMin: 1, orderMax: 2 });
 			expect(categories).toHaveLength(2);
 		});
+
+		it("should exclude categories with undefined order when orderMin is set", async () => {
+			const categoriesWithUndefinedOrder = [
+				...mockCategories,
+				{ id: "en/category-4", data: { title: "No Order" } },
+			];
+			vi.mocked(getCollection).mockImplementation(
+				async (_collection, entryFilter) => {
+					if (entryFilter) {
+						return categoriesWithUndefinedOrder.filter((entry) =>
+							Boolean(entryFilter(entry)),
+						) as any;
+					}
+					return categoriesWithUndefinedOrder as any;
+				},
+			);
+			const categories = await getCategories({ orderMin: 1 });
+			expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
+				true,
+			);
+		});
+
+		it("should exclude categories with undefined order when orderMax is set", async () => {
+			const categoriesWithUndefinedOrder = [
+				...mockCategories,
+				{ id: "en/category-4", data: { title: "No Order" } },
+			];
+			vi.mocked(getCollection).mockImplementation(
+				async (_collection, entryFilter) => {
+					if (entryFilter) {
+						return categoriesWithUndefinedOrder.filter((entry) =>
+							Boolean(entryFilter(entry)),
+						) as any;
+					}
+					return categoriesWithUndefinedOrder as any;
+				},
+			);
+			const categories = await getCategories({ orderMax: 5 });
+			expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
+				true,
+			);
+		});
 	});
 
 	describe("getCategoryById", () => {

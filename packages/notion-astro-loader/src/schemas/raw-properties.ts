@@ -17,22 +17,17 @@ function propertySchema<Type extends string, Schema extends z.ZodTypeAny>(
 	});
 }
 
-const userObjectResponse = z
-	.object({
-		id: z.string(),
-		object: z.literal("user"),
-	})
-	.passthrough();
+const userObjectResponse = z.looseObject({
+	id: z.string(),
+	object: z.literal("user"),
+});
 
 const selectPropertyResponse = z.object({
 	id: z.string(),
 	name: z.string(),
 	color: z.string(),
 });
-const dateField = z.union([
-	z.string().date(),
-	z.string().datetime({ offset: true }),
-]);
+const dateField = z.union([z.iso.date(), z.iso.datetime({ offset: true })]);
 const dateResponse = z.object({
 	start: dateField,
 	end: dateField.nullable(),
@@ -45,7 +40,7 @@ const formulaPropertyResponse = z.discriminatedUnion("type", [
 	}),
 	z.object({
 		type: z.literal("date"),
-		date: z.string().datetime({ offset: true }).nullable(),
+		date: z.iso.datetime({ offset: true }).nullable(),
 	}),
 	z.object({
 		type: z.literal("number"),
@@ -57,16 +52,14 @@ const formulaPropertyResponse = z.discriminatedUnion("type", [
 	}),
 ]);
 const baseRichTextResponse = z.object({
-	annotations: z
-		.object({
-			bold: z.boolean(),
-			italic: z.boolean(),
-			strikethrough: z.boolean(),
-			underline: z.boolean(),
-			code: z.boolean(),
-			color: z.string(),
-		})
-		.passthrough(),
+	annotations: z.looseObject({
+		bold: z.boolean(),
+		italic: z.boolean(),
+		strikethrough: z.boolean(),
+		underline: z.boolean(),
+		code: z.boolean(),
+		color: z.string(),
+	}),
 	plain_text: z.string(),
 	href: z.string().nullable(),
 });
@@ -84,18 +77,16 @@ const richTextItemResponse = z.discriminatedUnion("type", [
 	}),
 	baseRichTextResponse.extend({
 		type: z.literal("mention"),
-		mention: z
-			.object({
-				type: z.enum([
-					"user",
-					"date",
-					"link_preview",
-					"template_mention",
-					"page",
-					"database",
-				]),
-			})
-			.passthrough(),
+		mention: z.looseObject({
+			type: z.enum([
+				"user",
+				"date",
+				"link_preview",
+				"template_mention",
+				"page",
+				"database",
+			]),
+		}),
 	}),
 	baseRichTextResponse.extend({
 		type: z.literal("equation"),
@@ -139,7 +130,7 @@ export const files = propertySchema(
 export const created_by = propertySchema("created_by", userObjectResponse);
 export const created_time = propertySchema(
 	"created_time",
-	z.string().datetime({ offset: true }),
+	z.iso.datetime({ offset: true }),
 );
 export const last_edited_by = propertySchema(
 	"last_edited_by",
@@ -147,7 +138,7 @@ export const last_edited_by = propertySchema(
 );
 export const last_edited_time = propertySchema(
 	"last_edited_time",
-	z.string().datetime({ offset: true }),
+	z.iso.datetime({ offset: true }),
 );
 export const formula = propertySchema("formula", formulaPropertyResponse);
 export const title = propertySchema("title", z.array(richTextItemResponse));
@@ -168,7 +159,7 @@ export const rollup = propertySchema(
 		z.object({
 			function: z.string(),
 			type: z.literal("date"),
-			date: z.string().datetime({ offset: true }).nullable(),
+			date: z.iso.datetime({ offset: true }).nullable(),
 		}),
 		z.object({
 			function: z.string(),

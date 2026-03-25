@@ -91,9 +91,23 @@ describe("Blog Post Utils", () => {
 			expect(url).toBe("https://example.com/external-article");
 		});
 
+		test("should return external link regardless of domain param", () => {
+			const url = getBlogPostUrl(
+				mockExternalArticle,
+				"es",
+				"https://yunielacosta.com",
+			);
+			expect(url).toBe("https://example.com/external-article");
+		});
+
 		test("should return internal URL for regular articles", () => {
 			const url = getBlogPostUrl(mockArticle, "es");
 			expect(url).toBe("/es/2023/04/06/test-article");
+		});
+
+		test("should return blog URL with domain for regular articles", () => {
+			const url = getBlogPostUrl(mockArticle, "es", "https://yunielacosta.com");
+			expect(url).toContain("/es/2023/04/06/test-article");
 		});
 	});
 

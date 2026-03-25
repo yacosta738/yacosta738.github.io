@@ -23,12 +23,10 @@ export const pageObjectSchema = z.object({
 	url: z.url(),
 	public_url: z.url().nullable(),
 	properties: z.object({}).catchall(
-		z
-			.object({
-				type: z.string(),
-				id: z.string(),
-			})
-			.passthrough(),
+		z.looseObject({
+			type: z.string(),
+			id: z.string(),
+		}),
 	),
 });
 

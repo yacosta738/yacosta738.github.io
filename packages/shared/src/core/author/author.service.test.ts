@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { parseEntityId } from "@/lib/collection.entity";
 import { toAuthors } from "./author.mapper";
-import { getAuthorById, getAuthors } from "./author.service";
+import { getAuthorById, getAuthorBySlug, getAuthors } from "./author.service";
 
 // Mock the dependencies
 vi.mock("astro:content", () => ({
@@ -64,6 +64,7 @@ describe("AuthorService", () => {
 			(authors: any[]) =>
 				authors.map((a) => ({
 					id: a.id,
+					slug: a.id,
 					name: a.data?.name ?? "",
 					email: a.data?.email ?? "",
 					location: a.data?.location ?? "",
@@ -112,6 +113,30 @@ describe("AuthorService", () => {
 
 		it("should return undefined if author not found", async () => {
 			const author = await getAuthorById("non-existent");
+			expect(author).toBeUndefined();
+		});
+	});
+
+	describe("getAuthorBySlug", () => {
+		it("should return an author matching slug and lang", async () => {
+			const author = await getAuthorBySlug("en/author-1", "en");
+			expect(author).toBeDefined();
+			expect(author?.slug).toBe("en/author-1");
+		});
+
+		it("should return undefined if slug does not match", async () => {
+			const author = await getAuthorBySlug("non-existent", "en");
+			expect(author).toBeUndefined();
+		});
+
+		it("should filter by lang when searching by slug", async () => {
+			const author = await getAuthorBySlug("es/author-2", "es");
+			expect(author).toBeDefined();
+			expect(author?.slug).toBe("es/author-2");
+		});
+
+		it("should return undefined when slug exists but in different lang", async () => {
+			const author = await getAuthorBySlug("en/author-1", "es");
 			expect(author).toBeUndefined();
 		});
 	});
