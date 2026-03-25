@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.2...v2.1.3) (2026-03-25)
+
+
+### Bug Fixes
+
+* resolve all SonarQube issues and boost test coverage (250→821 tests) ([#1791](https://github.com/yacosta738/yacosta738.github.io/issues/1791)) ([89718fb](https://github.com/yacosta738/yacosta738.github.io/commit/89718fba4ccce4f3661cbb61060e5626d0b7d7d8))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
