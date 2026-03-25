@@ -143,10 +143,14 @@ describe("ApiClient", () => {
 
 			const promise = client.post("/api/test", {});
 
-			// Advance past the 5000ms timeout to trigger controller.abort()
+			// Attach rejection handler BEFORE advancing timers to avoid unhandled-rejection flakes
+			const assertion = expectApiClientError(
+				() => promise,
+				"Request timeout",
+				408,
+			);
 			await vi.advanceTimersByTimeAsync(5001);
-
-			await expectApiClientError(() => promise, "Request timeout", 408);
+			await assertion;
 		});
 
 		it("wraps generic Error with status 0", async () => {
@@ -241,9 +245,14 @@ describe("ApiClient", () => {
 
 			const promise = client.get("/api/test");
 
+			// Attach rejection handler BEFORE advancing timers to avoid unhandled-rejection flakes
+			const assertion = expectApiClientError(
+				() => promise,
+				"Request timeout",
+				408,
+			);
 			await vi.advanceTimersByTimeAsync(5001);
-
-			await expectApiClientError(() => promise, "Request timeout", 408);
+			await assertion;
 		});
 
 		it("wraps generic Error with status 0", async () => {
