@@ -39,13 +39,6 @@ describe("useTranslations", () => {
 			const t = useTranslations("en");
 			expect(t("nonexistent.key")).toBe("nonexistent.key");
 		});
-
-		it("should return translated text for known key if available in ui", () => {
-			const t = useTranslations("en");
-			// Even if the key doesn't exist in ui, it should fallback to the key
-			const result = t("some.missing.key");
-			expect(result).toBe("some.missing.key");
-		});
 	});
 
 	describe("with Multilingual object", () => {

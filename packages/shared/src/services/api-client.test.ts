@@ -28,19 +28,30 @@ describe("ApiClient", () => {
 	});
 
 	describe("constructor", () => {
-		it("uses provided baseUrl and timeout", () => {
+		it("uses provided baseUrl and timeout", async () => {
 			const c = new ApiClient("https://custom.api", 3000);
-			// Verify it works by making a request
 			mockFetch.mockResolvedValueOnce({
 				ok: true,
 				json: () => Promise.resolve({ success: true }),
 			});
-			// The constructor just sets fields; we test via post/get
-			expect(c).toBeInstanceOf(ApiClient);
+			// Verify custom baseUrl is used by exercising a request
+			await c.post("/test", {});
+			expect(mockFetch).toHaveBeenCalledWith(
+				"https://custom.api/test",
+				expect.objectContaining({ method: "POST" }),
+			);
 		});
 
-		it("falls back to API_CONFIG defaults", () => {
+		it("falls back to API_CONFIG defaults", async () => {
 			const c = new ApiClient();
+			mockFetch.mockResolvedValueOnce({
+				ok: true,
+				json: () => Promise.resolve({ success: true }),
+			});
+			await c.post("/endpoint", {});
+			// Should use default API_CONFIG.baseUrl
+			const calledUrl = mockFetch.mock.calls[0]?.[0] as string;
+			expect(calledUrl).toContain("/endpoint");
 			expect(c).toBeInstanceOf(ApiClient);
 		});
 	});

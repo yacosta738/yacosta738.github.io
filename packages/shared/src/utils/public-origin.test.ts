@@ -103,7 +103,7 @@ describe("isLocalOrPrivateHostname", () => {
 	});
 
 	it("truncates hostnames exceeding 253 characters", () => {
-		const longHost = "a".repeat(260) + ".localhost";
+		const longHost = `${"a".repeat(260)}.localhost`;
 		// After truncation to 253, this won't end with .localhost
 		expect(isLocalOrPrivateHostname(longHost)).toBe(false);
 	});

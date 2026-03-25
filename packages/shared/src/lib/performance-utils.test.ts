@@ -199,17 +199,13 @@ describe("debounceResize", () => {
 
 describe("createManagedResizeObserver", () => {
 	it("returns noop functions when ResizeObserver is unavailable", () => {
-		const original = globalThis.ResizeObserver;
-		// @ts-expect-error - intentionally removing for test
-		delete globalThis.ResizeObserver;
+		vi.stubGlobal("ResizeObserver", undefined);
 
 		const result = createManagedResizeObserver(vi.fn());
 		expect(result.observer).toBeNull();
 		expect(() => result.observe(mockElement())).not.toThrow();
 		expect(() => result.unobserve(mockElement())).not.toThrow();
 		expect(() => result.disconnect()).not.toThrow();
-
-		globalThis.ResizeObserver = original;
 	});
 
 	it("creates a working observer when ResizeObserver exists", () => {
@@ -245,8 +241,8 @@ describe("batchStyleUpdates", () => {
 	it("applies multiple styles at once", () => {
 		const el = mockHTMLElement();
 		batchStyleUpdates(el, { color: "red", fontSize: "16px" });
-		expect((el.style as any).color).toBe("red");
-		expect((el.style as any).fontSize).toBe("16px");
+		expect((el.style as Record<string, string>).color).toBe("red");
+		expect((el.style as Record<string, string>).fontSize).toBe("16px");
 	});
 });
 
@@ -341,17 +337,14 @@ describe("createThrottledScrollHandler", () => {
 
 		const cleanup = createThrottledScrollHandler(handler, el);
 
-		expect((el as any).addEventListener).toHaveBeenCalledWith(
-			"scroll",
-			expect.any(Function),
-			{ passive: true },
-		);
+		expect(
+			(el as unknown as Record<string, unknown>).addEventListener,
+		).toHaveBeenCalledWith("scroll", expect.any(Function), { passive: true });
 
 		cleanup();
-		expect((el as any).removeEventListener).toHaveBeenCalledWith(
-			"scroll",
-			expect.any(Function),
-		);
+		expect(
+			(el as unknown as Record<string, unknown>).removeEventListener,
+		).toHaveBeenCalledWith("scroll", expect.any(Function));
 	});
 
 	it("throttles scroll events via requestAnimationFrame", () => {
@@ -369,12 +362,12 @@ describe("createThrottledScrollHandler", () => {
 		createThrottledScrollHandler(handler, el);
 
 		const scrollEvent = new Event("scroll");
-		listeners["scroll"](scrollEvent);
+		listeners.scroll(scrollEvent);
 
 		// requestAnimationFrame should have been called once
 		expect(rafMock).toHaveBeenCalledTimes(1);
 
-		listeners["scroll"](scrollEvent); // should be ignored (rafId not null)
+		listeners.scroll(scrollEvent); // should be ignored (rafId not null)
 		expect(rafMock).toHaveBeenCalledTimes(1); // no additional call
 
 		expect(handler).not.toHaveBeenCalled();
@@ -387,12 +380,10 @@ describe("createThrottledScrollHandler", () => {
 	});
 
 	it("uses globalThis as default element", () => {
-		const originalAdd = globalThis.addEventListener;
-		const originalRemove = globalThis.removeEventListener;
 		const addSpy = vi.fn();
 		const removeSpy = vi.fn();
-		globalThis.addEventListener = addSpy;
-		globalThis.removeEventListener = removeSpy;
+		vi.stubGlobal("addEventListener", addSpy);
+		vi.stubGlobal("removeEventListener", removeSpy);
 
 		const cleanup = createThrottledScrollHandler(vi.fn());
 		expect(addSpy).toHaveBeenCalledWith("scroll", expect.any(Function), {
@@ -401,8 +392,5 @@ describe("createThrottledScrollHandler", () => {
 
 		cleanup();
 		expect(removeSpy).toHaveBeenCalled();
-
-		globalThis.addEventListener = originalAdd;
-		globalThis.removeEventListener = originalRemove;
 	});
 });

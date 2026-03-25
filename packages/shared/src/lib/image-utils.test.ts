@@ -28,7 +28,7 @@ describe("isLocalImage", () => {
 
 describe("prepareImageForOptimizedPicture", () => {
 	beforeEach(() => {
-		vi.clearAllMocks();
+		vi.resetAllMocks();
 	});
 
 	it("returns ImageMetadata object as-is when valid", async () => {
@@ -94,7 +94,11 @@ describe("prepareImageForOptimizedPicture", () => {
 
 	it("resolves local path via findImage when metadata is returned", async () => {
 		const meta = { src: "/resolved.png", width: 200, height: 100 };
-		mockFindImage.mockResolvedValue(meta as any);
+		mockFindImage.mockResolvedValue(
+			meta as ReturnType<typeof mockFindImage> extends Promise<infer T>
+				? T
+				: never,
+		);
 		const result = await prepareImageForOptimizedPicture("./local/photo.png");
 		expect(mockFindImage).toHaveBeenCalledWith("./local/photo.png");
 		expect(result).toBe(meta);
@@ -109,8 +113,12 @@ describe("prepareImageForOptimizedPicture", () => {
 	it("returns original string when findImage throws", async () => {
 		mockFindImage.mockRejectedValue(new Error("fail"));
 		const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-		const result = await prepareImageForOptimizedPicture("./broken.png");
-		expect(result).toBe("./broken.png");
-		consoleSpy.mockRestore();
+		try {
+			const result = await prepareImageForOptimizedPicture("./broken.png");
+			expect(result).toBe("./broken.png");
+			expect(consoleSpy).toHaveBeenCalled();
+		} finally {
+			consoleSpy.mockRestore();
+		}
 	});
 });

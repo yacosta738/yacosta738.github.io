@@ -131,9 +131,8 @@ describe("responsiveTablesRehypePlugin", () => {
 		expect((tree.children[0] as Element).tagName).toBe("p");
 		// table1 wrapped in div
 		expect((tree.children[1] as Element).tagName).toBe("div");
-		// The plugin does i++ after wrapping, so table2 is now at index 3
-		// but children array still has length 3, table2 stays unwrapped at index 2
-		// because the i++ skip causes it to be missed in a single pass
+		// table2 also wrapped in div
+		expect((tree.children[2] as Element).tagName).toBe("div");
 		expect(tree.children.length).toBe(3);
 	});
 

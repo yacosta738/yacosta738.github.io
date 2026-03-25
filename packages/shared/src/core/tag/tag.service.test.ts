@@ -34,8 +34,12 @@ const fakeTagEntries = [
 describe("getTags", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-		// Reset module-level cache by reimporting would be complex,
-		// so we test with different criteria to avoid cache hits
+		mockGetCollection.mockImplementation(
+			async (_name: string, filter?: (entry: never) => boolean) => {
+				if (!filter) return fakeTagEntries as never;
+				return fakeTagEntries.filter((e) => filter(e as never)) as never;
+			},
+		);
 	});
 
 	afterEach(() => {
@@ -43,13 +47,6 @@ describe("getTags", () => {
 	});
 
 	it("should return all tags when no criteria provided", async () => {
-		mockGetCollection.mockImplementation(
-			async (_name: string, filter?: (entry: never) => boolean) => {
-				if (!filter) return fakeTagEntries as never;
-				return fakeTagEntries.filter((e) => filter(e as never)) as never;
-			},
-		);
-
 		const tags = await getTags();
 
 		expect(mockGetCollection).toHaveBeenCalledWith(
@@ -60,13 +57,6 @@ describe("getTags", () => {
 	});
 
 	it("should filter tags by language", async () => {
-		mockGetCollection.mockImplementation(
-			async (_name: string, filter?: (entry: never) => boolean) => {
-				if (!filter) return fakeTagEntries as never;
-				return fakeTagEntries.filter((e) => filter(e as never)) as never;
-			},
-		);
-
 		const tags = await getTags({ lang: "en" });
 
 		expect(tags).toHaveLength(2);
@@ -74,13 +64,6 @@ describe("getTags", () => {
 	});
 
 	it("should filter tags by title (case-insensitive)", async () => {
-		mockGetCollection.mockImplementation(
-			async (_name: string, filter?: (entry: never) => boolean) => {
-				if (!filter) return fakeTagEntries as never;
-				return fakeTagEntries.filter((e) => filter(e as never)) as never;
-			},
-		);
-
 		const tags = await getTags({ title: "secur" });
 
 		// Only "Security" contains "secur" (case-insensitive). "Seguridad" does not.
@@ -89,12 +72,6 @@ describe("getTags", () => {
 
 	it("should cache results for repeated calls with same criteria", async () => {
 		const uniqueCriteria = { lang: "es", title: "segur" };
-		mockGetCollection.mockImplementation(
-			async (_name: string, filter?: (entry: never) => boolean) => {
-				if (!filter) return fakeTagEntries as never;
-				return fakeTagEntries.filter((e) => filter(e as never)) as never;
-			},
-		);
 
 		const first = await getTags(uniqueCriteria);
 		const second = await getTags(uniqueCriteria);

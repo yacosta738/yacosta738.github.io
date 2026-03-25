@@ -2,8 +2,11 @@
 import { describe, expect, it } from "vitest";
 import { toCategories, toCategory } from "./category.mapper";
 
-const makeCategoryEntry = (overrides: Record<string, any> = {}): any => ({
-	id: "en/software-development",
+const makeCategoryEntry = (
+	overrides: Record<string, any> = {},
+	id = "en/software-development",
+): any => ({
+	id,
 	data: {
 		title: "Software Development",
 		order: 1,
@@ -37,16 +40,14 @@ describe("category.mapper", () => {
 		});
 
 		it("should clean entity id removing language prefix for slug", () => {
-			const entry = makeCategoryEntry();
-			entry.id = "es/desarrollo-software";
+			const entry = makeCategoryEntry({}, "es/desarrollo-software");
 			const result = toCategory(entry);
 			expect(result.slug).toBe("desarrollo-software");
 			expect(result.id).toBe("es/desarrollo-software");
 		});
 
 		it("should handle id without language prefix", () => {
-			const entry = makeCategoryEntry();
-			entry.id = "general";
+			const entry = makeCategoryEntry({}, "general");
 			const result = toCategory(entry);
 			expect(result.slug).toBe("general");
 		});
@@ -88,13 +89,10 @@ describe("category.mapper", () => {
 	describe("toCategories", () => {
 		it("should map and sort categories by order", () => {
 			const entries = [
-				makeCategoryEntry({ title: "B", order: 3 }),
-				makeCategoryEntry({ title: "A", order: 1 }),
-				makeCategoryEntry({ title: "C", order: 2 }),
+				makeCategoryEntry({ title: "B", order: 3 }, "en/b"),
+				makeCategoryEntry({ title: "A", order: 1 }, "en/a"),
+				makeCategoryEntry({ title: "C", order: 2 }, "en/c"),
 			];
-			entries[0].id = "en/b";
-			entries[1].id = "en/a";
-			entries[2].id = "en/c";
 			const result = toCategories(entries);
 			expect(result).toHaveLength(3);
 			expect(result[0].title).toBe("A");
@@ -109,11 +107,12 @@ describe("category.mapper", () => {
 
 		it("should sort categories with undefined order to end", () => {
 			const entries = [
-				makeCategoryEntry({ title: "No Order", order: undefined }),
-				makeCategoryEntry({ title: "First", order: 1 }),
+				makeCategoryEntry(
+					{ title: "No Order", order: undefined },
+					"en/no-order",
+				),
+				makeCategoryEntry({ title: "First", order: 1 }, "en/first"),
 			];
-			entries[0].id = "en/no-order";
-			entries[1].id = "en/first";
 			const result = toCategories(entries);
 			expect(result[0].title).toBe("First");
 			expect(result[1].title).toBe("No Order");

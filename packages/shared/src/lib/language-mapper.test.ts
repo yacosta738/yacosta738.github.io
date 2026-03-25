@@ -137,13 +137,16 @@ describe("LanguageMapper", () => {
 			const consoleSpy = vi
 				.spyOn(console, "error")
 				.mockImplementation(() => {});
-			await errorMapper.initialize();
-			expect(consoleSpy).toHaveBeenCalledWith(
-				"Failed to initialize LanguageMapper:",
-				expect.any(Error),
-			);
-			expect(errorMapper.findLocaleCode("English")).toBeUndefined();
-			consoleSpy.mockRestore();
+			try {
+				await errorMapper.initialize();
+				expect(consoleSpy).toHaveBeenCalledWith(
+					"Failed to initialize LanguageMapper:",
+					expect.any(Error),
+				);
+				expect(errorMapper.findLocaleCode("English")).toBeUndefined();
+			} finally {
+				consoleSpy.mockRestore();
+			}
 		});
 	});
 });

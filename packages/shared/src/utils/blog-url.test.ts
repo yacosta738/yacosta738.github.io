@@ -125,10 +125,6 @@ describe("getBlogBaseUrl", () => {
 			expect(getBlogBaseUrl("::1")).toBe("http://localhost:4322");
 		});
 
-		it("should return localhost for bare ::1 (invalid URL fallback)", () => {
-			expect(getBlogBaseUrl("::1")).toBe("http://localhost:4322");
-		});
-
 		it("should prepend blog. to non-localhost domain in dev", () => {
 			expect(getBlogBaseUrl("https://yunielacosta.com")).toBe(
 				"https://blog.yunielacosta.com",

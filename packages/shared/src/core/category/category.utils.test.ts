@@ -1,34 +1,42 @@
 import { describe, expect, it } from "vitest";
-import { getCategorySlug } from "./category.utils";
+import { type CategoryLike, getCategorySlug } from "./category.utils";
+
+const makeCategory = (
+	overrides: Partial<{ id: string; slug: string }>,
+): CategoryLike => ({ id: "en/default", ...overrides }) as CategoryLike;
 
 describe("getCategorySlug", () => {
 	it("should return slug when category has a slug property", () => {
-		const category = { id: "en/tech", slug: "technology" } as any;
-		expect(getCategorySlug(category)).toBe("technology");
+		expect(
+			getCategorySlug(makeCategory({ id: "en/tech", slug: "technology" })),
+		).toBe("technology");
 	});
 
 	it("should return cleaned id when slug is empty string", () => {
-		const category = { id: "en/tech", slug: "" } as any;
-		expect(getCategorySlug(category)).toBe("tech");
+		expect(getCategorySlug(makeCategory({ id: "en/tech", slug: "" }))).toBe(
+			"tech",
+		);
 	});
 
 	it("should return cleaned id when slug is whitespace", () => {
-		const category = { id: "en/tech", slug: "   " } as any;
-		expect(getCategorySlug(category)).toBe("tech");
+		expect(getCategorySlug(makeCategory({ id: "en/tech", slug: "   " }))).toBe(
+			"tech",
+		);
 	});
 
 	it("should return cleaned id when no slug property exists", () => {
-		const category = { id: "en/programming" } as any;
-		expect(getCategorySlug(category)).toBe("programming");
+		expect(getCategorySlug(makeCategory({ id: "en/programming" }))).toBe(
+			"programming",
+		);
 	});
 
 	it("should strip language prefix from id", () => {
-		const category = { id: "es/desarrollo" } as any;
-		expect(getCategorySlug(category)).toBe("desarrollo");
+		expect(getCategorySlug(makeCategory({ id: "es/desarrollo" }))).toBe(
+			"desarrollo",
+		);
 	});
 
 	it("should handle id without language prefix", () => {
-		const category = { id: "general" } as any;
-		expect(getCategorySlug(category)).toBe("general");
+		expect(getCategorySlug(makeCategory({ id: "general" }))).toBe("general");
 	});
 });

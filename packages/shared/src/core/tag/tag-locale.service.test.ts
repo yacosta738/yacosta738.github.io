@@ -1,8 +1,8 @@
 /**
- * Tests for tag locale service and utilities
+ * Tests for tag locale service functions (findTagInLanguage, getTagLocalePaths).
+ * Pure utility tests for extractTagSlugFromPath / isTagPage live in tag-locale.utils.test.ts.
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { extractTagSlugFromPath, isTagPage } from "./tag-locale.utils";
 
 // Mock getTags for the service functions
 vi.mock("./tag.service", () => ({
@@ -13,87 +13,35 @@ vi.mock("./tag.utils", () => ({
 	getTagSlug: vi.fn((tag: { slug: string }) => tag.slug),
 }));
 
-// ---- Pure utility tests (no mocks needed) ----
+// ---- Shared mock setup for service function tests ----
 
-describe("extractTagSlugFromPath", () => {
-	it("should extract tag slug from English tag page", () => {
-		expect(extractTagSlugFromPath("/tag/security")).toBe("security");
-	});
+let mockGetTags: ReturnType<typeof vi.fn>;
+let mockGetTagSlug: ReturnType<typeof vi.fn>;
 
-	it("should extract tag slug from Spanish tag page", () => {
-		expect(extractTagSlugFromPath("/es/tag/seguridad")).toBe("seguridad");
-	});
+async function importMocks() {
+	const tagService = await import("./tag.service");
+	const tagUtils = await import("./tag.utils");
+	mockGetTags = vi.mocked(tagService.getTags);
+	mockGetTagSlug = vi.mocked(tagUtils.getTagSlug);
+}
 
-	it("should extract tag slug from paginated tag page", () => {
-		expect(extractTagSlugFromPath("/tag/security/page/2")).toBe("security");
-	});
-
-	it("should return null for tag index page", () => {
-		expect(extractTagSlugFromPath("/tag")).toBeNull();
-	});
-
-	it("should return null for tag index page with trailing slash", () => {
-		expect(extractTagSlugFromPath("/tag/")).toBeNull();
-	});
-
-	it("should return null for non-tag page", () => {
-		expect(extractTagSlugFromPath("/about")).toBeNull();
-	});
-
-	it("should return null for home page", () => {
-		expect(extractTagSlugFromPath("/")).toBeNull();
-	});
+beforeEach(async () => {
+	vi.clearAllMocks();
+	await importMocks();
 });
 
-describe("isTagPage", () => {
-	it("should return true for tag page", () => {
-		expect(isTagPage("/tag/security")).toBe(true);
-	});
-
-	it("should return true for paginated tag page", () => {
-		expect(isTagPage("/tag/security/page/2")).toBe(true);
-	});
-
-	it("should return false for tag index", () => {
-		expect(isTagPage("/tag")).toBe(false);
-	});
-
-	it("should return false for tag index with trailing slash", () => {
-		expect(isTagPage("/tag/")).toBe(false);
-	});
-
-	it("should return false for non-tag page", () => {
-		expect(isTagPage("/about")).toBe(false);
-	});
-
-	it("should return false for home page", () => {
-		expect(isTagPage("/")).toBe(false);
-	});
-
-	it("should return false for category page", () => {
-		expect(isTagPage("/category/tech")).toBe(false);
-	});
+afterEach(() => {
+	vi.restoreAllMocks();
 });
 
-// ---- Service function tests (with mocks) ----
+// ---- Service function tests ----
 
 describe("findTagInLanguage", () => {
 	let findTagInLanguage: typeof import("./tag-locale.service")["findTagInLanguage"];
-	let mockGetTags: ReturnType<typeof vi.fn>;
-	let mockGetTagSlug: ReturnType<typeof vi.fn>;
 
 	beforeEach(async () => {
-		vi.clearAllMocks();
-		const tagService = await import("./tag.service");
-		const tagUtils = await import("./tag.utils");
 		const mod = await import("./tag-locale.service");
 		findTagInLanguage = mod.findTagInLanguage;
-		mockGetTags = vi.mocked(tagService.getTags);
-		mockGetTagSlug = vi.mocked(tagUtils.getTagSlug);
-	});
-
-	afterEach(() => {
-		vi.restoreAllMocks();
 	});
 
 	it("should return found:true with matching tag when slug matches", async () => {
@@ -136,21 +84,10 @@ describe("findTagInLanguage", () => {
 
 describe("getTagLocalePaths", () => {
 	let getTagLocalePaths: typeof import("./tag-locale.service")["getTagLocalePaths"];
-	let mockGetTags: ReturnType<typeof vi.fn>;
-	let mockGetTagSlug: ReturnType<typeof vi.fn>;
 
 	beforeEach(async () => {
-		vi.clearAllMocks();
-		const tagService = await import("./tag.service");
-		const tagUtils = await import("./tag.utils");
 		const mod = await import("./tag-locale.service");
 		getTagLocalePaths = mod.getTagLocalePaths;
-		mockGetTags = vi.mocked(tagService.getTags);
-		mockGetTagSlug = vi.mocked(tagUtils.getTagSlug);
-	});
-
-	afterEach(() => {
-		vi.restoreAllMocks();
 	});
 
 	it("should return current language path as tagFound:true", async () => {
@@ -161,6 +98,10 @@ describe("getTagLocalePaths", () => {
 
 		expect(paths).toHaveLength(1);
 		expect(paths[0].lang).toBe("en");
+		// Current language always has tagFound:true because the user is already viewing
+		// this tag page — the slug was resolved from the URL, so we know it exists in
+		// the current language. mockGetTags returning empty here only affects *other*
+		// languages; the current language is unconditionally marked as found.
 		expect(paths[0].tagFound).toBe(true);
 	});
 

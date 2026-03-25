@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
 	type BaseContentCriteria,
 	createContentEntryFilter,
@@ -123,6 +123,18 @@ describe("createContentEntryFilter", () => {
 		const filter = createContentEntryFilter({}, defaultOptions);
 		expect(filter(makeEntry({}, "en/my-post"))).toBe(true);
 		expect(filter(makeEntry({}, "es/my-post"))).toBe(true);
+	});
+
+	it("passes entries without lang prefix when criteria.lang is undefined", () => {
+		const filter = createContentEntryFilter({}, defaultOptions);
+		expect(filter(makeEntry({}, "my-post-no-prefix"))).toBe(true);
+	});
+
+	it("rejects entry with no language prefix when criteria.lang is set", () => {
+		const filter = createContentEntryFilter({ lang: "en" }, defaultOptions);
+		// parseEntityId returns { lang: null, path: "my-post" } for unprefixed IDs,
+		// so the lang filter should reject it
+		expect(filter(makeEntry({}, "my-post"))).toBe(false);
 	});
 
 	it("filters by author", () => {

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiClientError } from "./api-client";
 import { ContactService, contactService } from "./contact.service";
 
@@ -55,6 +55,10 @@ describe("ContactService", () => {
 		service = new ContactService();
 		mockPost.mockReset();
 		vi.spyOn(console, "error").mockImplementation(() => {});
+	});
+
+	afterEach(() => {
+		vi.restoreAllMocks();
 	});
 
 	describe("submitContact", () => {

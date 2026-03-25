@@ -105,46 +105,43 @@ describe("CategoryService", () => {
 			expect(categories).toHaveLength(2);
 		});
 
-		it("should exclude categories with undefined order when orderMin is set", async () => {
-			const categoriesWithUndefinedOrder = [
-				...mockCategories,
-				{ id: "en/category-4", data: { title: "No Order" } },
-			];
+		/** Helper to setup getCollection with custom entries */
+		const setupCollectionMock = (entries: typeof mockCategories) => {
 			vi.mocked(getCollection).mockImplementation(
 				async (_collection, entryFilter) => {
 					if (entryFilter) {
-						return categoriesWithUndefinedOrder.filter((entry) =>
+						return entries.filter((entry) =>
 							Boolean(entryFilter(entry)),
 						) as any;
 					}
-					return categoriesWithUndefinedOrder as any;
+					return entries as any;
 				},
 			);
-			const categories = await getCategories({ orderMin: 1 });
-			expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
-				true,
-			);
-		});
+		};
 
-		it("should exclude categories with undefined order when orderMax is set", async () => {
+		describe("with undefined order entries", () => {
 			const categoriesWithUndefinedOrder = [
 				...mockCategories,
 				{ id: "en/category-4", data: { title: "No Order" } },
 			];
-			vi.mocked(getCollection).mockImplementation(
-				async (_collection, entryFilter) => {
-					if (entryFilter) {
-						return categoriesWithUndefinedOrder.filter((entry) =>
-							Boolean(entryFilter(entry)),
-						) as any;
-					}
-					return categoriesWithUndefinedOrder as any;
-				},
-			);
-			const categories = await getCategories({ orderMax: 5 });
-			expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
-				true,
-			);
+
+			beforeEach(() => {
+				setupCollectionMock(categoriesWithUndefinedOrder);
+			});
+
+			it("should exclude categories with undefined order when orderMin is set", async () => {
+				const categories = await getCategories({ orderMin: 1 });
+				expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
+					true,
+				);
+			});
+
+			it("should exclude categories with undefined order when orderMax is set", async () => {
+				const categories = await getCategories({ orderMax: 5 });
+				expect(categories.every((c: any) => c.data?.order !== undefined)).toBe(
+					true,
+				);
+			});
 		});
 	});
 

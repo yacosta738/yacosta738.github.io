@@ -1,20 +1,27 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 // We need to test that the module reads import.meta.env properly.
 // Since the values are module-level constants, we re-import per test scenario.
 
 describe("site.consts", () => {
+	afterEach(() => {
+		vi.resetModules();
+		vi.unstubAllEnvs();
+	});
+
 	it("exports default BRAND_NAME when env not set", async () => {
 		vi.stubEnv("BRAND_NAME", "");
 
 		const mod = await import("./site.consts");
 
 		// BRAND_NAME falls back to the default when env is falsy
-		// Since the module is cached, we test the exported value directly
 		expect(mod.BRAND_NAME).toBeDefined();
-		expect(
-			typeof mod.BRAND_NAME === "string" || typeof mod.BRAND_NAME === "object",
-		).toBe(true);
+		if (typeof mod.BRAND_NAME === "string") {
+			expect(mod.BRAND_NAME.length).toBeGreaterThan(0);
+		} else {
+			expect(mod.BRAND_NAME).toHaveProperty("default");
+			expect(typeof mod.BRAND_NAME.default).toBe("string");
+		}
 	});
 
 	it("exports SITE_TITLE", async () => {
@@ -42,11 +49,8 @@ describe("site.consts", () => {
 
 	it("exports X_ACCOUNT", async () => {
 		const mod = await import("./site.consts");
-		expect(mod.X_ACCOUNT).toBeDefined();
-		// Default should contain the twitter handle
-		if (typeof mod.X_ACCOUNT === "string") {
-			expect(mod.X_ACCOUNT).toContain("@yacosta738");
-		}
+		expect(typeof mod.X_ACCOUNT).toBe("string");
+		expect(mod.X_ACCOUNT).toContain("@yacosta738");
 	});
 
 	it("exports NOT_TRANSLATED_CAUTION as multilingual object", async () => {
