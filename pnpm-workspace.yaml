@@ -10,3 +10,5 @@ minimumReleaseAgeExclude:
   - "@cloudflare/workers-types"
   - wrangler
   - typescript@6.0.2
+  # Renovate security update: fast-xml-parser@5.5.7
+  - fast-xml-parser@5.5.7
