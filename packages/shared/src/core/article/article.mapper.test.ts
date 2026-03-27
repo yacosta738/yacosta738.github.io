@@ -120,17 +120,28 @@ const makeNotionArticleEntry = (overrides: Record<string, any> = {}): any => ({
 	},
 });
 
+const getMockEntryId = (collectionOrRef: any, maybeId?: any) => {
+	if (typeof maybeId === "string") {
+		return maybeId;
+	}
+	return typeof collectionOrRef === "string"
+		? collectionOrRef
+		: collectionOrRef?.id;
+};
+
 describe("article.mapper", () => {
 	beforeEach(() => {
-		vi.mocked(getEntry).mockImplementation(async (ref: any) => {
-			const id = typeof ref === "string" ? ref : ref?.id;
-			if (!id) return undefined as any;
-			if (id.includes("john-doe") || id.includes("yuniel-acosta"))
-				return mockAuthorEntry as any;
-			if (id.includes("software-development") || id.includes("desarrollo"))
-				return mockCategoryEntry as any;
-			return undefined as any;
-		});
+		vi.mocked(getEntry).mockImplementation(
+			async (collectionOrRef: any, maybeId?: any) => {
+				const id = getMockEntryId(collectionOrRef, maybeId);
+				if (!id) return undefined as any;
+				if (id.includes("john-doe") || id.includes("yuniel-acosta"))
+					return mockAuthorEntry as any;
+				if (id.includes("software-development") || id.includes("desarrollo"))
+					return mockCategoryEntry as any;
+				return undefined as any;
+			},
+		);
 		vi.mocked(getEntries).mockResolvedValue([mockTagEntry] as any);
 	});
 
@@ -217,11 +228,13 @@ describe("article.mapper", () => {
 		});
 
 		it("should throw when category is not found", async () => {
-			vi.mocked(getEntry).mockImplementation(async (ref: any) => {
-				const id = typeof ref === "string" ? ref : ref?.id;
-				if (id?.includes("john-doe")) return mockAuthorEntry as any;
-				return undefined as any;
-			});
+			vi.mocked(getEntry).mockImplementation(
+				async (collectionOrRef: any, maybeId?: any) => {
+					const id = getMockEntryId(collectionOrRef, maybeId);
+					if (id?.includes("john-doe")) return mockAuthorEntry as any;
+					return undefined as any;
+				},
+			);
 			const entry = makeArticleEntry();
 			await expect(toArticle(entry)).rejects.toThrow(
 				"Category not found for article: en/my-article",
@@ -437,11 +450,13 @@ describe("article.mapper", () => {
 		});
 
 		it("should throw when category not found", async () => {
-			vi.mocked(getEntry).mockImplementation(async (ref: any) => {
-				const id = typeof ref === "string" ? ref : ref?.id;
-				if (id?.includes("john-doe")) return mockAuthorEntry as any;
-				return undefined as any;
-			});
+			vi.mocked(getEntry).mockImplementation(
+				async (collectionOrRef: any, maybeId?: any) => {
+					const id = getMockEntryId(collectionOrRef, maybeId);
+					if (id?.includes("john-doe")) return mockAuthorEntry as any;
+					return undefined as any;
+				},
+			);
 			const entry = makeExternalArticleEntry();
 			await expect(toExternalArticle(entry)).rejects.toThrow(
 				"Category not found for external article: en/ext-article",
@@ -546,25 +561,29 @@ describe("article.mapper", () => {
 		it("should use fallback category (es) when id starts with es/", async () => {
 			const entry = makeNotionArticleEntry({ category: null });
 			entry.id = "es/notion-article";
-			vi.mocked(getEntry).mockImplementation(async (ref: any) => {
-				const id = typeof ref === "string" ? ref : ref?.id;
-				if (!id) return undefined as any;
-				if (id.includes("john-doe") || id.includes("yuniel-acosta"))
-					return mockAuthorEntry as any;
-				if (id === "es/software-development") return mockCategoryEntry as any;
-				return undefined as any;
-			});
+			vi.mocked(getEntry).mockImplementation(
+				async (collectionOrRef: any, maybeId?: any) => {
+					const id = getMockEntryId(collectionOrRef, maybeId);
+					if (!id) return undefined as any;
+					if (id.includes("john-doe") || id.includes("yuniel-acosta"))
+						return mockAuthorEntry as any;
+					if (id === "es/software-development") return mockCategoryEntry as any;
+					return undefined as any;
+				},
+			);
 			const result = await toNotionArticle(entry);
 			expect(result.category).toBeDefined();
 		});
 
 		it("should throw when both primary and fallback category not found", async () => {
-			vi.mocked(getEntry).mockImplementation(async (ref: any) => {
-				const id = typeof ref === "string" ? ref : ref?.id;
-				if (id?.includes("john-doe") || id?.includes("yuniel-acosta"))
-					return mockAuthorEntry as any;
-				return undefined as any;
-			});
+			vi.mocked(getEntry).mockImplementation(
+				async (collectionOrRef: any, maybeId?: any) => {
+					const id = getMockEntryId(collectionOrRef, maybeId);
+					if (id?.includes("john-doe") || id?.includes("yuniel-acosta"))
+						return mockAuthorEntry as any;
+					return undefined as any;
+				},
+			);
 			const entry = makeNotionArticleEntry({ category: null });
 			await expect(toNotionArticle(entry)).rejects.toThrow(
 				"Category not found for notion article: en/notion-article",

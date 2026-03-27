@@ -94,7 +94,28 @@ const deduplicateArticles = (articles: Article[]): Article[] => {
 	});
 };
 
-const shouldLoadNotion = (): boolean => import.meta.env.NOTION_LOADER === "1";
+// Notion loader is enabled by default. Set NOTION_LOADER=0 to disable.
+const shouldLoadNotion = (): boolean => import.meta.env.NOTION_LOADER !== "0";
+
+const getNotionArticlesCollection = async (
+	filter: Parameters<typeof getCollection>[1],
+) => {
+	if (!shouldLoadNotion()) {
+		return [];
+	}
+
+	try {
+		return await getCollection("notionArticles", filter);
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error);
+		if (
+			/collection "notionArticles" does not exist or is empty/i.test(message)
+		) {
+			return [];
+		}
+		throw error;
+	}
+};
 
 /**
  * Retrieves articles from the content collection with filtering options
@@ -107,9 +128,7 @@ export async function getArticles(
 ): Promise<Article[]> {
 	const filter = createArticleFilter(criteria, { includeFeatured: true });
 	const articles = await getCollection("articles", filter);
-	const notionArticles = shouldLoadNotion()
-		? await getCollection("notionArticles", filter)
-		: [];
+	const notionArticles = await getNotionArticlesCollection(filter);
 
 	const mappedArticles = await toArticles(articles);
 	const mappedNotion = await toNotionArticles(notionArticles);
@@ -178,9 +197,7 @@ export async function getAllArticlesIncludingExternal(
 	});
 
 	const regularArticles = await getCollection("articles", regularFilter);
-	const notionArticles = shouldLoadNotion()
-		? await getCollection("notionArticles", regularFilter)
-		: [];
+	const notionArticles = await getNotionArticlesCollection(regularFilter);
 	const externalArticles = await getCollection(
 		"externalArticles",
 		externalFilter,

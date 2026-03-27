@@ -58,7 +58,10 @@ export default defineConfig({
 		// set PW_USE_PREVIEW=1 to build and run `astro preview` so the Pagefind
 		// index is available (slower but more stable).
 		const usePreview = process.env.PW_USE_PREVIEW === "1";
-		const baseEnv: Record<string, string> = { PLAYWRIGHT_TEST: "true" };
+		const baseEnv: Record<string, string> = {
+			PLAYWRIGHT_TEST: "true",
+			NOTION_LOADER: "0",
+		};
 		if (usePreview) {
 			// In CI, the build artifact may already exist. Check before rebuilding.
 			// If dist/ exists and has content, skip build. Otherwise, build first.

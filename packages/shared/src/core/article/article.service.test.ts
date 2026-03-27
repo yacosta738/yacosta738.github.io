@@ -169,8 +169,7 @@ const mockExternalArticles = [
 
 describe("ArticleService", () => {
 	beforeEach(() => {
-		// Enable Notion loader so notionArticles collection is queried
-		import.meta.env.NOTION_LOADER = "1";
+		// Notion loader is enabled by default (NOTION_LOADER !== "0")
 
 		// Mock the getCollection to simulate filtering for both collections
 		vi.mocked(getCollection).mockImplementation(
@@ -212,7 +211,6 @@ describe("ArticleService", () => {
 
 	afterEach(() => {
 		vi.restoreAllMocks();
-		delete import.meta.env.NOTION_LOADER;
 	});
 
 	describe("getArticles", () => {

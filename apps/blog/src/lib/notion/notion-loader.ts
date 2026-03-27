@@ -4,6 +4,13 @@ import { fileURLToPath } from "node:url";
 import type { Loader, LoaderContext } from "astro/loaders";
 import type { Element as ElementNode } from "hast";
 import { type FileObject, fileToUrl } from "./notion-file";
+import {
+	downloadImagesInHtml,
+	downloadNotionImage,
+	isNotionS3Url,
+	resolveImageDir,
+	S3_URL_IN_HTML,
+} from "./notion-image";
 
 type NotionArticleData = {
 	title: string;
@@ -107,7 +114,12 @@ type NotionModuleLoad = {
 	Client: new (
 		opts: unknown,
 	) => {
-		databases: { query: (args: Record<string, unknown>) => Promise<unknown> };
+		dataSources: {
+			query: (args: Record<string, unknown>) => Promise<unknown>;
+		};
+	};
+	LogLevel?: {
+		ERROR?: string;
 	};
 	isFullPage: (value: unknown) => boolean;
 	iteratePaginatedAPI: (
@@ -272,12 +284,12 @@ const listBlocks = async function* (
 			children: { list: (args: Record<string, unknown>) => Promise<unknown> };
 		};
 	};
-	for await (const block of iteratePaginatedAPI(
-		typedClient.blocks.children.list,
-		{
-			block_id: blockId,
-		},
-	)) {
+	const listBlockChildren = typedClient.blocks.children.list.bind(
+		typedClient.blocks.children,
+	);
+	for await (const block of iteratePaginatedAPI(listBlockChildren, {
+		block_id: blockId,
+	})) {
 		if (!isFullBlock(block)) {
 			continue;
 		}
@@ -551,7 +563,10 @@ const createNotionLoaderNoImages = ({
 			let stage = "init";
 			try {
 				stage = "create-client";
-				const notionClient = new Client(clientOptions);
+				const notionClient = new Client({
+					...clientOptions,
+					logLevel: notionModule.LogLevel?.ERROR ?? "error",
+				});
 				const processor = shouldRender
 					? buildProcessor(resolvedRehypePlugins)
 					: null;
@@ -564,8 +579,11 @@ const createNotionLoaderNoImages = ({
 				}
 
 				stage = "query";
-				const pages = iteratePaginatedAPI(notionClient.databases.query, {
-					database_id,
+				const queryDatabase = notionClient.dataSources.query.bind(
+					notionClient.dataSources,
+				);
+				const pages = iteratePaginatedAPI(queryDatabase, {
+					data_source_id: database_id,
 					filter_properties,
 					sorts,
 					filter,
@@ -627,8 +645,17 @@ const stripCoverFromRendered = (
 		return rendered;
 	}
 	const html = renderedObj.html;
-	const imageBlock = /<div class="notion-image">[\s\S]*?<\/div>/i;
-	const nextHtml = coverUrl ? html.replace(imageBlock, "") : html;
+	if (!coverUrl) {
+		return rendered;
+	}
+	// Escape special regex characters in the cover URL so it matches literally
+	const escapedUrl = coverUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	// Target the specific notion-image div containing the cover URL, not just the first one
+	const imageBlock = new RegExp(
+		`<div class="notion-image">[\\s\\S]*?${escapedUrl}[\\s\\S]*?<\\/div>`,
+		"i",
+	);
+	const nextHtml = html.replace(imageBlock, "");
 	return nextHtml === renderedObj.html
 		? rendered
 		: { ...renderedObj, html: nextHtml };
@@ -770,6 +797,94 @@ const mapEntries = async (
 	return mappedEntries;
 };
 
+const processNotionImages = async (
+	entries: CachedEntry[],
+	imageDir: string,
+	context: LoaderContext,
+): Promise<CachedEntry[]> => {
+	const logger = context.logger;
+	const processed: CachedEntry[] = [];
+
+	for (const entry of entries) {
+		let { cover } = entry.data;
+		let rendered = entry.rendered;
+
+		// Download cover image if it's a temporary S3 URL
+		if (cover && isNotionS3Url(cover)) {
+			try {
+				cover = await downloadNotionImage(cover, imageDir, logger);
+			} catch (error) {
+				logger.debug(
+					`Failed to download cover for ${entry.id}: ${error instanceof Error ? error.message : String(error)}`,
+				);
+			}
+			// If still an S3 URL after download attempt, the signed URL has expired.
+			// Try to extract the first image from rendered HTML as a fallback cover,
+			// then strip it from the body to avoid showing it twice.
+			if (cover && isNotionS3Url(cover)) {
+				logger.warn(
+					`Cover image expired for ${entry.id}, extracting fallback from content`,
+				);
+				const renderedObj = rendered as { html?: string } | undefined;
+				const htmlContent =
+					typeof renderedObj?.html === "string" ? renderedObj.html : "";
+				const imgMatch = /<img[^>]+src="([^"]+)"/.exec(htmlContent);
+				const fallbackUrl = imgMatch?.[1];
+				// If the fallback image is also an S3 URL it will be equally expired,
+				// so discard it rather than embedding a broken link as the cover.
+				if (fallbackUrl && !isNotionS3Url(fallbackUrl)) {
+					cover = fallbackUrl;
+					if (renderedObj) {
+						rendered = stripCoverFromRendered(rendered, cover);
+					}
+				} else {
+					cover = undefined;
+				}
+			}
+		}
+
+		// Download inline images in rendered HTML
+		if (rendered && typeof rendered === "object") {
+			const renderedObj = rendered as { html?: string };
+			if (typeof renderedObj.html === "string") {
+				try {
+					const processedHtml = await downloadImagesInHtml(
+						renderedObj.html,
+						imageDir,
+						logger,
+					);
+					if (processedHtml !== renderedObj.html) {
+						rendered = { ...renderedObj, html: processedHtml };
+					}
+				} catch (error) {
+					logger.debug(
+						`Failed to process inline images for ${entry.id}: ${error instanceof Error ? error.message : String(error)}`,
+					);
+				}
+			}
+		}
+
+		const updatedEntry: CachedEntry = {
+			...entry,
+			data: { ...entry.data, cover },
+			rendered,
+		};
+
+		// Update the store with persisted image paths
+		context.store.set({
+			id: updatedEntry.id,
+			data: updatedEntry.data,
+			rendered: updatedEntry.rendered as RenderedContent | undefined,
+			body: updatedEntry.body,
+			digest: updatedEntry.digest ?? context.generateDigest(updatedEntry.data),
+		});
+
+		processed.push(updatedEntry);
+	}
+
+	return processed;
+};
+
 const applyCache = async (
 	context: LoaderContext,
 	cacheUrl: URL,
@@ -791,6 +906,38 @@ const applyCache = async (
 			rendered: entry.rendered as RenderedContent | undefined,
 			body: entry.body,
 			digest: entry.digest ?? context.generateDigest(parsedData),
+		});
+	}
+
+	// Download any S3 images that haven't been persisted yet
+	// (e.g. from caches created before image downloading was added).
+	const imageDir = resolveImageDir(cacheUrl);
+	const persistedEntries = await processNotionImages(
+		cache.entries,
+		imageDir,
+		context,
+	);
+
+	// Update the cache with local paths so subsequent builds don't
+	// need to re-download (even if the S3 URLs have expired).
+	const hasS3Urls = cache.entries.some((entry) => {
+		if (entry.data.cover && isNotionS3Url(entry.data.cover)) {
+			return true;
+		}
+		const html =
+			entry.rendered &&
+			typeof entry.rendered === "object" &&
+			typeof (entry.rendered as { html?: string }).html === "string"
+				? (entry.rendered as { html: string }).html
+				: "";
+		// Reset lastIndex since S3_URL_IN_HTML has the global flag
+		S3_URL_IN_HTML.lastIndex = 0;
+		return S3_URL_IN_HTML.test(html);
+	});
+	if (hasS3Urls) {
+		await writeCache(cacheUrl, {
+			...cache,
+			entries: persistedEntries,
 		});
 	}
 
@@ -816,7 +963,7 @@ export const createCachedNotionLoader = (
 		name: "notion-articles-loader",
 		async load(context) {
 			if (!loaderOptions.auth || !loaderOptions.database_id) {
-				context.logger.warn(
+				context.logger.info(
 					"Notion credentials missing; falling back to cached entries.",
 				);
 				const hasCache = await applyCache(context, cacheUrl);
@@ -845,25 +992,35 @@ export const createCachedNotionLoader = (
 					defaultCategoryId,
 					defaultTags,
 				});
+
+				// Download Notion S3 images to local public directory
+				// so they persist beyond the ~1h S3 signed URL expiry.
+				const imageDir = resolveImageDir(cacheUrl);
+				const persistedEntries = await processNotionImages(
+					mappedEntries,
+					imageDir,
+					context,
+				);
+
 				await writeCache(cacheUrl, {
 					version: 1,
 					databaseId: loaderOptions.database_id,
 					lastSync: new Date().toISOString(),
-					entries: mappedEntries,
+					entries: persistedEntries,
 				});
 			} catch (error) {
 				const errorMessage =
 					error instanceof Error ? error.message : String(error);
-				context.logger.warn(
+				context.logger.info(
 					`Notion loader failed; attempting cache fallback. ${errorMessage}`,
 				);
 				if (/api token is invalid/i.test(errorMessage)) {
-					context.logger.warn(
+					context.logger.info(
 						"Notion token rejected. Check NOTION_TOKEN in build env and re-share the database with the integration.",
 					);
 				}
 				if (/could not find database|object not found/i.test(errorMessage)) {
-					context.logger.warn(
+					context.logger.info(
 						"Notion database not found or not shared. Verify NOTION_DATABASE_ID and ensure the integration has access.",
 					);
 				}

@@ -95,7 +95,7 @@ describe("createCachedNotionLoader", () => {
 
 		expect(store.count()).toBe(1);
 		expect(store.get("en/2026/03/11/cached")).toBeDefined();
-		expect(logger.warn).toHaveBeenCalledWith(
+		expect(logger.info).toHaveBeenCalledWith(
 			expect.stringContaining("Notion credentials missing"),
 		);
 
@@ -176,7 +176,7 @@ describe("createCachedNotionLoader", () => {
 
 		expect(store.count()).toBe(1);
 		expect(store.get("en/2026/03/11/fallback")).toBeDefined();
-		expect(logger.warn).toHaveBeenCalledWith(
+		expect(logger.info).toHaveBeenCalledWith(
 			expect.stringContaining(
 				"Notion loader failed; attempting cache fallback.",
 			),
