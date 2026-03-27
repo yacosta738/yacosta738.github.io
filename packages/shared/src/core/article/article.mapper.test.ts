@@ -356,14 +356,16 @@ describe("article.mapper", () => {
 			const good = makeArticleEntry();
 			const bad = makeArticleEntry({ author: null, category: null });
 			bad.id = "en/bad-article";
-			vi.mocked(getEntry).mockImplementation(async (ref: any) => {
-				const id = typeof ref === "string" ? ref : ref?.id;
-				if (!id) return undefined as any;
-				if (id.includes("john-doe")) return mockAuthorEntry as any;
-				if (id.includes("software-development"))
-					return mockCategoryEntry as any;
-				return undefined as any;
-			});
+			vi.mocked(getEntry).mockImplementation(
+				async (collectionOrRef: any, maybeId?: any) => {
+					const id = getMockEntryId(collectionOrRef, maybeId);
+					if (!id) return undefined as any;
+					if (id.includes("john-doe")) return mockAuthorEntry as any;
+					if (id.includes("software-development"))
+						return mockCategoryEntry as any;
+					return undefined as any;
+				},
+			);
 
 			const results = await toArticles([good, bad]);
 			expect(results).toHaveLength(1);

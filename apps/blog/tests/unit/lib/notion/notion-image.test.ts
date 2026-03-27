@@ -13,6 +13,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const S3_URL =
 	"https://prod-files-secure.s3.us-west-2.amazonaws.com/aaaa-bbbb/cccc-dddd/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600";
+const DOUBLE_ENCODED_S3_URL =
+	"https://prod-files-secure.s3.us-west-2.amazonaws.com/aaaa-bbbb/cccc-dddd/image.png?foo=&#x26;amp;bar";
+const SPOOFED_S3_URL =
+	"https://prod-files-secure.s3.evil.com/aaaa-bbbb/cccc-dddd/image.png?X-Amz-Algorithm=test";
+const TRAVERSAL_S3_URL =
+	"https://prod-files-secure.s3.us-west-2.amazonaws.com/../../etc/passwd/cccc-dddd/image.png?X-Amz-Algorithm=test";
 
 const EXTERNAL_URL = "https://media.licdn.com/dms/image/example.png";
 
@@ -23,6 +29,10 @@ describe("isNotionS3Url", () => {
 
 	it("returns false for external URLs", () => {
 		expect(isNotionS3Url(EXTERNAL_URL)).toBe(false);
+	});
+
+	it("returns false for spoofed non-AWS S3-like hostnames", () => {
+		expect(isNotionS3Url(SPOOFED_S3_URL)).toBe(false);
 	});
 
 	it("returns false for local paths", () => {
@@ -45,6 +55,16 @@ describe("downloadNotionImage", () => {
 	it("returns original URL for non-S3 URLs", async () => {
 		const result = await downloadNotionImage(EXTERNAL_URL, tempDir);
 		expect(result).toBe(EXTERNAL_URL);
+	});
+
+	it("returns original URL for spoofed S3-like hostnames", async () => {
+		const result = await downloadNotionImage(SPOOFED_S3_URL, tempDir);
+		expect(result).toBe(SPOOFED_S3_URL);
+	});
+
+	it("returns original URL when path segments are unsafe", async () => {
+		const result = await downloadNotionImage(TRAVERSAL_S3_URL, tempDir);
+		expect(result).toBe(TRAVERSAL_S3_URL);
 	});
 
 	it("downloads S3 image and returns public path", async () => {
@@ -141,6 +161,21 @@ describe("downloadNotionImage", () => {
 		// Non-S3 after decoding? No — the prefix check uses the raw URL
 		// which still starts with the S3 prefix before the query params
 		expect(result).toBe("/images/notion/aaaa-bbbb/cccc-dddd.png");
+	});
+
+	it("does not double-unescape doubly encoded ampersands", async () => {
+		const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+			new Response(new Uint8Array([137, 80, 78, 71]), {
+				status: 200,
+				headers: { "content-type": "image/png" },
+			}),
+		);
+
+		await downloadNotionImage(DOUBLE_ENCODED_S3_URL, tempDir);
+
+		expect(fetchSpy).toHaveBeenCalledWith(
+			expect.stringContaining("foo=&amp;bar"),
+		);
 	});
 });
 

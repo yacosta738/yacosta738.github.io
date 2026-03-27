@@ -4,25 +4,44 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 /** Matches Notion S3 file URLs (covers, inline images). */
-const S3_HOST_PREFIX = "https://prod-files-secure.s3.";
+const NOTION_S3_HOST_RE =
+	/^prod-files-secure\.s3\.[a-z0-9-]+\.amazonaws\.com$/i;
 
 /** Matches S3 URLs in HTML attributes (handles &#x26; and &amp; encoded ampersands). */
 export const S3_URL_IN_HTML = /https:\/\/prod-files-secure\.s3\.[^"'\s)]+/g;
 
 const PUBLIC_SUBDIR = "images/notion";
 
-export const isNotionS3Url = (url: string): boolean =>
-	url.startsWith(S3_HOST_PREFIX);
+export const isNotionS3Url = (url: string): boolean => {
+	try {
+		const parsed = new URL(decodeHtmlEntities(url));
+		return (
+			parsed.protocol === "https:" && NOTION_S3_HOST_RE.test(parsed.hostname)
+		);
+	} catch {
+		return false;
+	}
+};
 
 /**
  * Decode HTML entities that appear in URLs within rendered HTML.
  * Notion S3 URLs contain query parameters joined by `&` which rehype encodes.
  */
 const decodeHtmlEntities = (str: string): string =>
-	str
-		.replaceAll("&amp;", "&")
-		.replaceAll("&#x26;", "&")
-		.replaceAll("&#38;", "&");
+	str.replaceAll(/&#x26;|&#38;|&amp;/g, "&");
+
+const isSafePathSegment = (segment: string): boolean => {
+	if (!segment || segment === "." || segment === "..") {
+		return false;
+	}
+	if (/[/\\]/.test(segment)) {
+		return false;
+	}
+	if (/\p{C}/u.test(segment)) {
+		return false;
+	}
+	return true;
+};
 
 /**
  * Derive a stable local filename from a Notion S3 URL.
@@ -39,6 +58,9 @@ const deriveImagePaths = (
 ): { localPath: string; publicPath: string } | null => {
 	try {
 		const parsed = new URL(decodeHtmlEntities(url));
+		if (!NOTION_S3_HOST_RE.test(parsed.hostname)) {
+			return null;
+		}
 		const segments = parsed.pathname.split("/").filter(Boolean);
 		if (segments.length < 3) {
 			return null;
@@ -46,10 +68,26 @@ const deriveImagePaths = (
 		const parentId = segments[segments.length - 3];
 		const objId = segments[segments.length - 2];
 		const fileName = segments[segments.length - 1];
+		if (![parentId, objId, fileName].every(isSafePathSegment)) {
+			return null;
+		}
 		const ext = path.extname(fileName) || ".png";
 
-		const localDir = path.join(saveDir, parentId);
-		const localPath = path.join(localDir, `${objId}${ext}`);
+		const resolvedSaveDir = path.resolve(saveDir);
+		const localDir = path.resolve(resolvedSaveDir, parentId);
+		const localPath = path.resolve(localDir, `${objId}${ext}`);
+		if (
+			localDir !== resolvedSaveDir &&
+			!localDir.startsWith(`${resolvedSaveDir}${path.sep}`)
+		) {
+			return null;
+		}
+		if (
+			localPath !== resolvedSaveDir &&
+			!localPath.startsWith(`${resolvedSaveDir}${path.sep}`)
+		) {
+			return null;
+		}
 		const publicPath = `/${PUBLIC_SUBDIR}/${parentId}/${objId}${ext}`;
 
 		return { localPath, publicPath };
