@@ -649,7 +649,9 @@ const stripCoverFromRendered = (
 		return rendered;
 	}
 	// Escape special regex characters in the cover URL so it matches literally
-	const escapedUrl = coverUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	const escapedUrl = coverUrl
+		.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+		.replaceAll("&", "(?:&|&amp;|&#x26;|&#38;)");
 	// Target the specific notion-image div containing the cover URL, not just the first one
 	const imageBlock = new RegExp(
 		`<div class="notion-image">[\\s\\S]*?${escapedUrl}[\\s\\S]*?<\\/div>`,
@@ -895,6 +897,7 @@ const applyCache = async (
 	}
 
 	context.store.clear();
+	const parsedEntries: CachedEntry[] = [];
 	for (const entry of cache.entries) {
 		const parsedData = await context.parseData({
 			id: entry.id,
@@ -907,13 +910,21 @@ const applyCache = async (
 			body: entry.body,
 			digest: entry.digest ?? context.generateDigest(parsedData),
 		});
+		parsedEntries.push({
+			id: entry.id,
+			data: parsedData,
+			rendered: entry.rendered as RenderedContent | undefined,
+			body: entry.body,
+			digest: entry.digest,
+			sourceId: entry.sourceId,
+		});
 	}
 
 	// Download any S3 images that haven't been persisted yet
 	// (e.g. from caches created before image downloading was added).
 	const imageDir = resolveImageDir(cacheUrl);
 	const persistedEntries = await processNotionImages(
-		cache.entries,
+		parsedEntries,
 		imageDir,
 		context,
 	);
