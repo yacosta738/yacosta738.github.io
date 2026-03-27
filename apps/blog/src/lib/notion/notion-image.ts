@@ -20,9 +20,9 @@ export const isNotionS3Url = (url: string): boolean =>
  */
 const decodeHtmlEntities = (str: string): string =>
 	str
+		.replaceAll("&amp;", "&")
 		.replaceAll("&#x26;", "&")
-		.replaceAll("&#38;", "&")
-		.replaceAll("&amp;", "&");
+		.replaceAll("&#38;", "&");
 
 /**
  * Derive a stable local filename from a Notion S3 URL.
