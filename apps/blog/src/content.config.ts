@@ -321,7 +321,8 @@ const articles = defineCollection({
 		}),
 });
 
-const useNotionLoader = process.env.NOTION_LOADER === "1";
+// Notion loader is enabled by default. Set NOTION_LOADER=0 to disable.
+const useNotionLoader = process.env.NOTION_LOADER !== "0";
 const emptyNotionLoader = async () => [];
 const notionLoader = useNotionLoader
 	? await createNotionLoader()

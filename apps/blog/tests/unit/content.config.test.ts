@@ -28,13 +28,13 @@ describe("content.config", () => {
 	});
 
 	it("uses the empty notion loader when NOTION_LOADER is disabled", async () => {
+		vi.stubEnv("NOTION_LOADER", "0");
 		const { collections } = await importContentConfig();
 
 		await expect(collections.notionArticles.loader()).resolves.toEqual([]);
 	});
 
 	it("builds the notion loader with normalized ids when NOTION_LOADER is enabled", async () => {
-		vi.stubEnv("NOTION_LOADER", "1");
 		vi.stubEnv("NOTION_TOKEN", "token");
 		vi.stubEnv("NOTION_DATABASE_ID", "12345678-1234-1234-1234-1234567890ab");
 		vi.stubEnv("NOTION_PLATFORM_ID", "87654321-4321-4321-4321-ba0987654321");

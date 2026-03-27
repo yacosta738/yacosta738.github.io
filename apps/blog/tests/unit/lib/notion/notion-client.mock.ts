@@ -1,5 +1,9 @@
 type MockPage = Record<string, unknown>;
 
+export const LogLevel = {
+	ERROR: "error",
+};
+
 declare global {
 	var __notionImportError: string | undefined;
 	var __notionPages: MockPage[] | undefined;
@@ -12,7 +16,7 @@ export class Client {
 		}
 	}
 
-	databases = {
+	dataSources = {
 		query: async () => ({ results: globalThis.__notionPages ?? [] }),
 	};
 	blocks = { children: { list: async () => ({ results: [] }) } };

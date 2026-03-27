@@ -217,7 +217,7 @@ describe("createCachedNotionLoader live sync", () => {
 
 		await loader.load(context);
 
-		expect(logger.warn).toHaveBeenCalledWith(
+		expect(logger.info).toHaveBeenCalledWith(
 			"Notion token rejected. Check NOTION_TOKEN in build env and re-share the database with the integration.",
 		);
 
@@ -241,7 +241,7 @@ describe("createCachedNotionLoader live sync", () => {
 
 		await loader.load(context);
 
-		expect(logger.warn).toHaveBeenCalledWith(
+		expect(logger.info).toHaveBeenCalledWith(
 			"Notion database not found or not shared. Verify NOTION_DATABASE_ID and ensure the integration has access.",
 		);
 

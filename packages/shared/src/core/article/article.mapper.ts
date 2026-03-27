@@ -193,7 +193,7 @@ export async function toNotionArticle(
 	const primaryAuthor = isValidReference(authorRef)
 		? await getEntry(authorRef)
 		: undefined;
-	const author = primaryAuthor ?? (await getEntry(fallbackAuthorId));
+	const author = primaryAuthor ?? (await getEntry("authors", fallbackAuthorId));
 	const category = isValidReference(categoryRef)
 		? await getEntry(categoryRef)
 		: undefined;
@@ -210,7 +210,7 @@ export async function toNotionArticle(
 		const fallbackCategoryId = articleData.id.startsWith("es/")
 			? "es/software-development"
 			: "en/software-development";
-		const fallbackCategory = await getEntry(fallbackCategoryId);
+		const fallbackCategory = await getEntry("categories", fallbackCategoryId);
 		if (!fallbackCategory) {
 			throw new Error(
 				`Category not found for notion article: ${articleData.id}`,
