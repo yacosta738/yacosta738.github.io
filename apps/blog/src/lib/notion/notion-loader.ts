@@ -832,15 +832,11 @@ const processNotionImages = async (
 					typeof renderedObj?.html === "string" ? renderedObj.html : "";
 				const imgMatch = /<img[^>]+src="([^"]+)"/.exec(htmlContent);
 				const fallbackUrl = imgMatch?.[1];
-				// If the fallback image is also an S3 URL it will be equally expired,
-				// so discard it rather than embedding a broken link as the cover.
 				if (fallbackUrl && !isNotionS3Url(fallbackUrl)) {
 					cover = fallbackUrl;
 					if (renderedObj) {
 						rendered = stripCoverFromRendered(rendered, cover);
 					}
-				} else {
-					cover = undefined;
 				}
 			}
 		}
@@ -943,7 +939,9 @@ const applyCache = async (
 				: "";
 		return containsS3Url(html);
 	});
-	if (hasS3Urls) {
+	const entriesChanged =
+		JSON.stringify(persistedEntries) !== JSON.stringify(cache.entries);
+	if (hasS3Urls && entriesChanged) {
 		await writeCache(cacheUrl, {
 			...cache,
 			entries: persistedEntries,
