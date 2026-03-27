@@ -3,11 +3,12 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
+	containsS3Url,
+	createS3UrlRegex,
 	downloadImagesInHtml,
 	downloadNotionImage,
 	isNotionS3Url,
 	resolveImageDir,
-	S3_URL_IN_HTML,
 } from "@blog/lib/notion/notion-image";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -124,6 +125,20 @@ describe("downloadNotionImage", () => {
 		expect(result).toBe(S3_URL);
 	});
 
+	it("aborts slow downloads with a timeout signal", async () => {
+		const fetchSpy = vi
+			.spyOn(globalThis, "fetch")
+			.mockRejectedValueOnce(new Error("The operation was aborted"));
+
+		const result = await downloadNotionImage(S3_URL, tempDir);
+
+		expect(result).toBe(S3_URL);
+		expect(fetchSpy).toHaveBeenCalledWith(
+			S3_URL,
+			expect.objectContaining({ signal: expect.any(AbortSignal) }),
+		);
+	});
+
 	it("falls back to original URL when content-type is not an image", async () => {
 		const xmlBody = "<Error><Code>AccessDenied</Code></Error>";
 		vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
@@ -175,6 +190,7 @@ describe("downloadNotionImage", () => {
 
 		expect(fetchSpy).toHaveBeenCalledWith(
 			expect.stringContaining("foo=&amp;bar"),
+			expect.objectContaining({ signal: expect.any(AbortSignal) }),
 		);
 	});
 });
@@ -251,17 +267,21 @@ describe("downloadImagesInHtml", () => {
 	});
 });
 
-describe("S3_URL_IN_HTML", () => {
+describe("createS3UrlRegex / containsS3Url", () => {
 	it("matches S3 URLs in HTML content", () => {
 		const html = `<img src="${S3_URL}" alt="">`;
-		S3_URL_IN_HTML.lastIndex = 0;
-		expect(S3_URL_IN_HTML.test(html)).toBe(true);
+		expect(createS3UrlRegex().test(html)).toBe(true);
+		expect(containsS3Url(html)).toBe(true);
 	});
 
 	it("does not match non-S3 URLs", () => {
 		const html = `<img src="${EXTERNAL_URL}" alt="">`;
-		S3_URL_IN_HTML.lastIndex = 0;
-		expect(S3_URL_IN_HTML.test(html)).toBe(false);
+		expect(createS3UrlRegex().test(html)).toBe(false);
+		expect(containsS3Url(html)).toBe(false);
+	});
+
+	it("returns independent regex instances", () => {
+		expect(createS3UrlRegex()).not.toBe(createS3UrlRegex());
 	});
 });
 

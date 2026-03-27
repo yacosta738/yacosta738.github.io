@@ -8,9 +8,15 @@ const NOTION_S3_HOST_RE =
 	/^prod-files-secure\.s3\.[a-z0-9-]+\.amazonaws\.com$/i;
 
 /** Matches S3 URLs in HTML attributes (handles &#x26; and &amp; encoded ampersands). */
-export const S3_URL_IN_HTML = /https:\/\/prod-files-secure\.s3\.[^"'\s)]+/g;
+const S3_URL_IN_HTML_SOURCE = String.raw`https:\/\/prod-files-secure\.s3\.[^"'\s)]+`;
+
+export const createS3UrlRegex = (): RegExp => new RegExp(S3_URL_IN_HTML_SOURCE);
+
+export const containsS3Url = (html: string): boolean =>
+	createS3UrlRegex().test(html);
 
 const PUBLIC_SUBDIR = "images/notion";
+const DOWNLOAD_TIMEOUT_MS = 30_000;
 
 export const isNotionS3Url = (url: string): boolean => {
 	try {
@@ -125,7 +131,9 @@ export const downloadNotionImage = async (
 
 	try {
 		await mkdir(path.dirname(paths.localPath), { recursive: true });
-		const response = await fetch(cleanUrl);
+		const response = await fetch(cleanUrl, {
+			signal: AbortSignal.timeout(DOWNLOAD_TIMEOUT_MS),
+		});
 		if (!response.ok) {
 			logger?.debug(
 				`notion-image: download failed (${response.status}): ${cleanUrl}`,
@@ -160,7 +168,9 @@ export const downloadImagesInHtml = async (
 	saveDir: string,
 	logger?: { debug: (message: string) => void },
 ): Promise<string> => {
-	const matches = [...new Set(html.match(S3_URL_IN_HTML) ?? [])];
+	const matches = [
+		...new Set(html.match(new RegExp(S3_URL_IN_HTML_SOURCE, "g")) ?? []),
+	];
 	if (matches.length === 0) {
 		return html;
 	}

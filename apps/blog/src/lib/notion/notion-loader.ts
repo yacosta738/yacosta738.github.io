@@ -5,11 +5,11 @@ import type { Loader, LoaderContext } from "astro/loaders";
 import type { Element as ElementNode } from "hast";
 import { type FileObject, fileToUrl } from "./notion-file";
 import {
+	containsS3Url,
 	downloadImagesInHtml,
 	downloadNotionImage,
 	isNotionS3Url,
 	resolveImageDir,
-	S3_URL_IN_HTML,
 } from "./notion-image";
 
 type NotionArticleData = {
@@ -930,9 +930,7 @@ const applyCache = async (
 			typeof (entry.rendered as { html?: string }).html === "string"
 				? (entry.rendered as { html: string }).html
 				: "";
-		// Reset lastIndex since S3_URL_IN_HTML has the global flag
-		S3_URL_IN_HTML.lastIndex = 0;
-		return S3_URL_IN_HTML.test(html);
+		return containsS3Url(html);
 	});
 	if (hasS3Urls) {
 		await writeCache(cacheUrl, {
