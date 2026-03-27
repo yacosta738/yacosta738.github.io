@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.3...v2.1.4) (2026-03-27)
+
+
+### Bug Fixes
+
+* **content:** persist notion images and clean preflight warnings ([#1797](https://github.com/yacosta738/yacosta738.github.io/issues/1797)) ([e4a4e4a](https://github.com/yacosta738/yacosta738.github.io/commit/e4a4e4ac235bc04a75e857af7c0425c9afd809f4))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
