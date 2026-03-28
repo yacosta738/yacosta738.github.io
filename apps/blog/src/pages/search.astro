@@ -29,11 +29,11 @@ const pagefindJsSrc = `${baseUrl}pagefind/pagefind-ui.js`;
 					</p>
 				</div>
 
-				<div
-					id="search"
-					class="w-full"
-					role="region"
-					aria-label="Search results"
+			<div
+				id="search"
+				class="w-full"
+				role="region"
+				aria-label={t("search.results.label")}
 					data-empty-title={t("search.empty.title")}
 					data-empty-message-template={t("search.empty.message", {
 						query: "__QUERY__",

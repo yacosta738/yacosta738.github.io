@@ -1,8 +1,11 @@
 ---
+import { type Lang, useTranslations } from "@/i18n";
+const locale = (Astro.currentLocale || Astro.params.lang || "en") as Lang;
+const t = useTranslations(locale);
 ---
 <button
   id="to-top-button"
-  aria-label="Go to top"
+  aria-label={t("footer.goToTop")}
   class="hidden fixed bottom-24 right-5 z-50 ui-icon-button"
 >
   <svg

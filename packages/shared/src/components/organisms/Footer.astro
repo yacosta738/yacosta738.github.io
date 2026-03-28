@@ -24,7 +24,8 @@ const t = useTranslations(currentLocale);
 <footer id="main-footer" class="container mx-auto flex flex-col items-center justify-center px-5 py-8 no-print">
   <div class="flex flex-col items-center text-center">
     <!-- Social links for mobile -->
-    <ul class="relative flex list-none flex-wrap justify-center p-0 mb-4 md:hidden">
+    <nav aria-label={t("footer.social.label")} class="mb-4 md:hidden">
+    <ul class="relative flex list-none flex-wrap justify-center p-0">
       {
         profiles.map((profile) => {
           const iconSvg = getSocialIcon(profile.network);
@@ -44,6 +45,7 @@ const t = useTranslations(currentLocale);
         })
       }
     </ul>
+    </nav>
 
     <!-- Credits -->
     <div class="font-mono text-xs text-foreground-subtle">

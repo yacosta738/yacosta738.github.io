@@ -347,7 +347,7 @@ const localeTag = LOCALES[locale].lang || locale;
     {hasOwnMain ? (
       <slot />
     ) : (
-      <main id="main-content">
+      <main id="main-content" tabindex="-1">
         <slot />
       </main>
     )}
