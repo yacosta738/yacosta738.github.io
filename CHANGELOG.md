@@ -6,6 +6,18 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [2.1.8](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.7...v2.1.8) (2026-03-28)
+
+
+### Bug Fixes
+
+* **deps:** update @biomejs/biome to v2.4.9 ([#1813](https://github.com/yacosta738/yacosta738.github.io/issues/1813)) ([7f4d572](https://github.com/yacosta738/yacosta738.github.io/commit/7f4d572ea4f3bc8b31760c5f64efa8c2cd730836))
+* **deps:** update prettier to ^3.8.1 ([#1814](https://github.com/yacosta738/yacosta738.github.io/issues/1814)) ([20cf645](https://github.com/yacosta738/yacosta738.github.io/commit/20cf6451f78f263b7406f4ba4374b327554c3ee2))
+* **deps:** update Testing tools to ^4.1.1 ([#1815](https://github.com/yacosta738/yacosta738.github.io/issues/1815)) ([18baf66](https://github.com/yacosta738/yacosta738.github.io/commit/18baf66f8a21ad2eac3f4f059483f1a98d611f20))
+* Resolve dependency vulnerabilities (handlebars, picomatch, brace-expansion, yaml) ([#1817](https://github.com/yacosta738/yacosta738.github.io/issues/1817)) ([6507b79](https://github.com/yacosta738/yacosta738.github.io/commit/6507b796de4fdb62eef2eb67b547957781db7b4d))
+* Resolve Notion images blocked by ORB in ArticleCard ([#1816](https://github.com/yacosta738/yacosta738.github.io/issues/1816)) ([d30b2f4](https://github.com/yacosta738/yacosta738.github.io/commit/d30b2f4373412c6956f8985f52dd15267f0a29db))
+* Trust empty Notion relations; drop sync diag ([ee9c904](https://github.com/yacosta738/yacosta738.github.io/commit/ee9c90459d6f1142b0f53fad693c23f42f5adf9e))
+
 ## [2.1.7](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.6...v2.1.7) (2026-03-28)
 
 
