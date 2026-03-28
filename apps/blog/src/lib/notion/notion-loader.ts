@@ -114,7 +114,9 @@ type NotionModuleLoad = {
 	Client: new (
 		opts: unknown,
 	) => {
-		blocks: { children: { list: (args: Record<string, unknown>) => Promise<unknown> } };
+		blocks: {
+			children: { list: (args: Record<string, unknown>) => Promise<unknown> };
+		};
 	};
 	LogLevel?: {
 		ERROR?: string;
