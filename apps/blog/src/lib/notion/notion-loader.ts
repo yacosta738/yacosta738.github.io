@@ -114,7 +114,7 @@ type NotionModuleLoad = {
 	Client: new (
 		opts: unknown,
 	) => {
-		dataSources: {
+		databases: {
 			query: (args: Record<string, unknown>) => Promise<unknown>;
 		};
 	};
