@@ -579,11 +579,11 @@ const createNotionLoaderNoImages = ({
 				}
 
 				stage = "query";
-				const queryDatabase = notionClient.dataSources.query.bind(
-					notionClient.dataSources,
+				const queryDatabase = notionClient.databases.query.bind(
+					notionClient.databases,
 				);
 				const pages = iteratePaginatedAPI(queryDatabase, {
-					data_source_id: database_id,
+					database_id,
 					filter_properties,
 					sorts,
 					filter,
