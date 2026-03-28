@@ -12,8 +12,8 @@ catalogs:
 
 overrides:
   fast-xml-parser: ^5.5.6
-  h3: ^1.15.9
-  vite: ^7.0.0
+  h3: ^1.15.10
+  vite: ^7.0.8
 
 importers:
 
@@ -42,7 +42,7 @@ importers:
         version: 25.0.3(typescript@6.0.2)
       vitest:
         specifier: ^4.1.0
-        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
   apps/api:
     dependencies:
@@ -73,13 +73,13 @@ importers:
         version: 2.0.4
       '@vitest/coverage-v8':
         specifier: ^4.1.1
-        version: 4.1.1(vitest@4.1.1(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
+        version: 4.1.1(vitest@4.1.1(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
       vitest:
         specifier: ^4.1.1
-        version: 4.1.1(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+        version: 4.1.1(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
         version: 4.76.0(@cloudflare/workers-types@4.20260317.1)
@@ -91,7 +91,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 5.0.2
-        version: 5.0.2(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 5.0.2(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       '@astrojs/partytown':
         specifier: ^2.1.5
         version: 2.1.5
@@ -114,14 +114,14 @@ importers:
         specifier: workspace:*
         version: link:../../packages/notion-astro-loader
       astro:
-        specifier: 6.0.8
-        version: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+        specifier: 6.1.1
+        version: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       astro-compress:
         specifier: 2.4.0
         version: 2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.2)
       astro-pagefind:
         specifier: ^1.8.5
-        version: 1.8.5(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -209,10 +209,10 @@ importers:
         version: 4.0.4
       '@vitest/coverage-v8':
         specifier: ^4.1.0
-        version: 4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
+        version: 4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
       astro-component-tester:
         specifier: ^0.8.0
-        version: 0.8.0(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 0.8.0(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       astro-critters:
         specifier: 2.2.1
         version: 2.2.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
@@ -226,8 +226,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       happy-dom:
-        specifier: ^20.8.4
-        version: 20.8.4
+        specifier: ^20.8.8
+        version: 20.8.9
       jsdom:
         specifier: ^29.0.1
         version: 29.0.1
@@ -257,7 +257,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
   apps/portfolio:
     dependencies:
@@ -266,7 +266,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 5.0.2
-        version: 5.0.2(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 5.0.2(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       '@astrojs/partytown':
         specifier: ^2.1.5
         version: 2.1.5
@@ -280,14 +280,14 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
       astro:
-        specifier: 6.0.8
-        version: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+        specifier: 6.1.1
+        version: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       astro-compress:
         specifier: 2.4.0
         version: 2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.2)
       astro-pagefind:
         specifier: ^1.8.5
-        version: 1.8.5(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -360,10 +360,10 @@ importers:
         version: 4.0.4
       '@vitest/coverage-v8':
         specifier: ^4.1.0
-        version: 4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
+        version: 4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
       astro-component-tester:
         specifier: ^0.8.0
-        version: 0.8.0(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 0.8.0(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       astro-critters:
         specifier: 2.2.1
         version: 2.2.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
@@ -380,8 +380,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       happy-dom:
-        specifier: ^20.8.4
-        version: 20.8.4
+        specifier: ^20.8.8
+        version: 20.8.9
       jsdom:
         specifier: ^29.0.1
         version: 29.0.1
@@ -414,7 +414,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
   packages/notion-astro-loader:
     dependencies:
@@ -440,13 +440,13 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       rehype-stringify:
-        specifier: ^10.0.0
+        specifier: ^10.0.1
         version: 10.0.1
       slug:
         specifier: ^11.0.1
         version: 11.0.1
       unified:
-        specifier: ^11.0.0
+        specifier: ^11.0.5
         version: 11.0.5
       unist-util-visit:
         specifier: ^5.0.0
@@ -462,8 +462,8 @@ importers:
         specifier: ^5.0.9
         version: 5.0.9
       astro:
-        specifier: 6.0.8
-        version: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+        specifier: 6.1.1
+        version: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       crossrm:
         specifier: ^1.0.0
         version: 1.0.0
@@ -478,7 +478,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.1
-        version: 4.1.1(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+        version: 4.1.1(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
   packages/shared:
     dependencies:
@@ -487,7 +487,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 5.0.2
-        version: 5.0.2(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 5.0.2(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       '@astrojs/partytown':
         specifier: ^2.1.5
         version: 2.1.5
@@ -501,14 +501,14 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
       astro:
-        specifier: 6.0.8
-        version: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+        specifier: 6.1.1
+        version: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       astro-compress:
         specifier: 2.4.0
         version: 2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.2)
       astro-pagefind:
         specifier: ^1.8.5
-        version: 1.8.5(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -578,10 +578,10 @@ importers:
         version: 4.0.4
       '@vitest/coverage-v8':
         specifier: ^4.1.0
-        version: 4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
+        version: 4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))
       astro-component-tester:
         specifier: ^0.8.0
-        version: 0.8.0(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
+        version: 0.8.0(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))
       astro-critters:
         specifier: 2.2.1
         version: 2.2.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
@@ -595,8 +595,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       happy-dom:
-        specifier: ^20.8.4
-        version: 20.8.4
+        specifier: ^20.8.8
+        version: 20.8.9
       jsdom:
         specifier: ^29.0.1
         version: 29.0.1
@@ -629,7 +629,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+        version: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
   packages/testing-e2e:
     devDependencies:
@@ -710,6 +710,9 @@ packages:
 
   '@astrojs/markdown-remark@7.0.1':
     resolution: {integrity: sha512-zAfLJmn07u9SlDNNHTpjv0RT4F8D4k54NR7ReRas8CO4OeGoqSvOuKwqCFg2/cqN3wHwdWlK/7Yv/lMXlhVIaw==}
+
+  '@astrojs/markdown-remark@7.1.0':
+    resolution: {integrity: sha512-P+HnCsu2js3BoTc8kFmu+E9gOcFeMdPris75g+Zl4sY8+bBRbSQV6xzcBDbZ27eE7yBGEGQoqjpChx+KJYIPYQ==}
 
   '@astrojs/mdx@5.0.2':
     resolution: {integrity: sha512-0as6odPH9ZQhS3pdH9dWmVOwgXuDtytJiE4VvYgR0lSFBvF4PSTyE0HdODHm/d7dBghvWTPc2bQaBm4y4nTBNw==}
@@ -2015,7 +2018,7 @@ packages:
   '@tailwindcss/vite@4.2.2':
     resolution: {integrity: sha512-mEiF5HO1QqCLXoNEfXVA1Tzo+cYsrqV7w9Juj2wdUFyW07JRenqMG225MvPwr3ZD9N1bFQj46X7r33iHxLUW0w==}
     peerDependencies:
-      vite: ^7.0.0
+      vite: ^7.0.8
 
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
@@ -2172,7 +2175,7 @@ packages:
     resolution: {integrity: sha512-evxREh+Hork43+Y4IOhTo+h5lGmVRyjqI739Rz4RlUPqwrkFFDF6EMvOOYjTx4E8Tl6gyCLRL8Mu7Ry12a13Tw==}
     peerDependencies:
       msw: ^2.4.9
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       msw:
         optional: true
@@ -2183,7 +2186,7 @@ packages:
     resolution: {integrity: sha512-h3BOylsfsCLPeceuCPAAJ+BvNwSENgJa4hXoXu4im0bs9Lyp4URc4JYK4pWLZ4pG/UQn7AT92K6IByi6rE6g3A==}
     peerDependencies:
       msw: ^2.4.9
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       msw:
         optional: true
@@ -2400,8 +2403,8 @@ packages:
     peerDependencies:
       astro: ^2.0.4 || ^3 || ^4 || ^5
 
-  astro@6.0.8:
-    resolution: {integrity: sha512-DCPeb8GKOoFWh+8whB7Qi/kKWD/6NcQ9nd1QVNzJFxgHkea3WYrNroQRq4whmBdjhkYPTLS/1gmUAl2iA2Es2g==}
+  astro@6.1.1:
+    resolution: {integrity: sha512-vq8sHpu1JsY1fWAunn+tdKNbVDmLQNiVdyuGsVT2csgITdFGXXVAyEXFWc1DzkMN0ehElPeiHnqItyQOJK+GqA==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3270,8 +3273,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@20.8.4:
-    resolution: {integrity: sha512-GKhjq4OQCYB4VLFBzv8mmccUadwlAusOZOI7hC1D9xDIT5HhzkJK17c4el2f6R6C715P9xB4uiMxeKUa2nHMwQ==}
+  happy-dom@20.8.9:
+    resolution: {integrity: sha512-Tz23LR9T9jOGVZm2x1EPdXqwA37G/owYMxRwU0E4miurAtFsPMQ1d2Jc2okUaSjZqAFz2oEn3FLXC5a0a+siyA==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -5516,7 +5519,7 @@ packages:
   vitefu@1.1.2:
     resolution: {integrity: sha512-zpKATdUbzbsycPFBN71nS2uzBUQiVnFoOrr2rvqv34S1lcAgMKKkjWleLGeiJlZ8lwCXvtWaRn7R3ZC16SYRuw==}
     peerDependencies:
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       vite:
         optional: true
@@ -5535,7 +5538,7 @@ packages:
       '@vitest/ui': 4.1.0
       happy-dom: '*'
       jsdom: '*'
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       '@edge-runtime/vm':
         optional: true
@@ -5570,7 +5573,7 @@ packages:
       '@vitest/ui': 4.1.1
       happy-dom: '*'
       jsdom: '*'
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       '@edge-runtime/vm':
         optional: true
@@ -6013,12 +6016,38 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.2(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))':
+  '@astrojs/markdown-remark@7.1.0':
+    dependencies:
+      '@astrojs/internal-helpers': 0.8.0
+      '@astrojs/prism': 4.0.1
+      github-slugger: 2.0.0
+      hast-util-from-html: 2.0.3
+      hast-util-to-text: 4.0.2
+      js-yaml: 4.1.1
+      mdast-util-definitions: 6.0.0
+      rehype-raw: 7.0.0
+      rehype-stringify: 10.0.1
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.2
+      remark-smartypants: 3.0.2
+      retext-smartypants: 6.2.0
+      shiki: 4.0.2
+      smol-toml: 1.6.0
+      unified: 11.0.5
+      unist-util-remove-position: 5.0.0
+      unist-util-visit: 5.1.0
+      unist-util-visit-parents: 6.0.2
+      vfile: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@astrojs/mdx@5.0.2(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2))':
     dependencies:
       '@astrojs/markdown-remark': 7.0.1
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+      astro: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -7261,7 +7290,7 @@ snapshots:
       ms: 2.1.3
     optional: true
 
-  '@vitest/coverage-v8@4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))':
+  '@vitest/coverage-v8@4.1.0(vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.1.0
@@ -7273,9 +7302,9 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.0.3
-      vitest: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+      vitest: 4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
-  '@vitest/coverage-v8@4.1.1(vitest@4.1.1(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))':
+  '@vitest/coverage-v8@4.1.1(vitest@4.1.1(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)))':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.1.1
@@ -7287,7 +7316,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.0.3
-      vitest: 4.1.1(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
+      vitest: 4.1.1(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
 
   '@vitest/expect@4.1.0':
     dependencies:
@@ -7553,16 +7582,16 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-component-tester@0.8.0(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)):
+  astro-component-tester@0.8.0(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)):
     dependencies:
-      astro: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+      astro: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
 
   astro-compress@2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.2):
     dependencies:
       '@playform/pipe': 0.1.4
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+      astro: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       commander: 14.0.3
       csso: 5.0.5
       deepmerge-ts: 7.1.5
@@ -7609,7 +7638,7 @@ snapshots:
   astro-critters@2.2.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2):
     dependencies:
       '@playform/pipe': 0.1.2
-      astro: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+      astro: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       critters: 0.0.25
       deepmerge-ts: 7.1.3
     transitivePeerDependencies:
@@ -7656,18 +7685,18 @@ snapshots:
       - debug
       - supports-color
 
-  astro-pagefind@1.8.5(astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)):
+  astro-pagefind@1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)):
     dependencies:
       '@pagefind/default-ui': 1.4.0
-      astro: 6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
+      astro: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2)
       pagefind: 1.4.0
       sirv: 3.0.2
 
-  astro@6.0.8(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2):
+  astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
-      '@astrojs/markdown-remark': 7.0.1
+      '@astrojs/markdown-remark': 7.1.0
       '@astrojs/telemetry': 3.3.0
       '@capsizecss/unpack': 4.0.0
       '@clack/prompts': 1.1.0
@@ -8718,7 +8747,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@20.8.4:
+  happy-dom@20.8.9:
     dependencies:
       '@types/node': 25.5.0
       '@types/whatwg-mimetype': 3.0.2
@@ -11295,7 +11324,7 @@ snapshots:
     optionalDependencies:
       vite: 7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)
 
-  vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)):
+  vitest@4.1.0(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)):
     dependencies:
       '@vitest/expect': 4.1.0
       '@vitest/mocker': 4.1.0(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
@@ -11319,12 +11348,12 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.5.0
-      happy-dom: 20.8.4
+      happy-dom: 20.8.9
       jsdom: 29.0.1
     transitivePeerDependencies:
       - msw
 
-  vitest@4.1.1(@types/node@25.5.0)(happy-dom@20.8.4)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)):
+  vitest@4.1.1(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2)):
     dependencies:
       '@vitest/expect': 4.1.1
       '@vitest/mocker': 4.1.1(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.2))
@@ -11348,7 +11377,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.5.0
-      happy-dom: 20.8.4
+      happy-dom: 20.8.9
       jsdom: 29.0.1
     transitivePeerDependencies:
       - msw
