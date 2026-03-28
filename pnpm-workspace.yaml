@@ -10,3 +10,5 @@ minimumReleaseAgeExclude:
   - "@cloudflare/workers-types"
   - wrangler
   - typescript@6.0.2
+  # Renovate security update: happy-dom@20.8.8
+  - happy-dom@20.8.8
