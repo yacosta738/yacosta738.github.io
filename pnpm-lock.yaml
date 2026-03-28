@@ -13,7 +13,7 @@ catalogs:
 overrides:
   fast-xml-parser: ^5.5.6
   h3: ^1.15.9
-  vite: ^7.0.0
+  vite: ^7.0.8
 
 importers:
 
@@ -2015,7 +2015,7 @@ packages:
   '@tailwindcss/vite@4.2.2':
     resolution: {integrity: sha512-mEiF5HO1QqCLXoNEfXVA1Tzo+cYsrqV7w9Juj2wdUFyW07JRenqMG225MvPwr3ZD9N1bFQj46X7r33iHxLUW0w==}
     peerDependencies:
-      vite: ^7.0.0
+      vite: ^7.0.8
 
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
@@ -2172,7 +2172,7 @@ packages:
     resolution: {integrity: sha512-evxREh+Hork43+Y4IOhTo+h5lGmVRyjqI739Rz4RlUPqwrkFFDF6EMvOOYjTx4E8Tl6gyCLRL8Mu7Ry12a13Tw==}
     peerDependencies:
       msw: ^2.4.9
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       msw:
         optional: true
@@ -2183,7 +2183,7 @@ packages:
     resolution: {integrity: sha512-h3BOylsfsCLPeceuCPAAJ+BvNwSENgJa4hXoXu4im0bs9Lyp4URc4JYK4pWLZ4pG/UQn7AT92K6IByi6rE6g3A==}
     peerDependencies:
       msw: ^2.4.9
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       msw:
         optional: true
@@ -5516,7 +5516,7 @@ packages:
   vitefu@1.1.2:
     resolution: {integrity: sha512-zpKATdUbzbsycPFBN71nS2uzBUQiVnFoOrr2rvqv34S1lcAgMKKkjWleLGeiJlZ8lwCXvtWaRn7R3ZC16SYRuw==}
     peerDependencies:
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       vite:
         optional: true
@@ -5535,7 +5535,7 @@ packages:
       '@vitest/ui': 4.1.0
       happy-dom: '*'
       jsdom: '*'
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       '@edge-runtime/vm':
         optional: true
@@ -5570,7 +5570,7 @@ packages:
       '@vitest/ui': 4.1.1
       happy-dom: '*'
       jsdom: '*'
-      vite: ^7.0.0
+      vite: ^7.0.8
     peerDependenciesMeta:
       '@edge-runtime/vm':
         optional: true
