@@ -1,38 +1,16 @@
-import AxeBuilder from "@axe-core/playwright";
-import { expect, type Page, test } from "@playwright/test";
+import { test } from "@playwright/test";
+import { auditRoute } from "../fixtures/a11y";
 
 /**
- * Accessibility audit tests using axe-core.
+ * Accessibility audit tests using axe-core (shared routes).
+ * Runs on both portfolio and blog apps.
  *
- * Runs automated WCAG 2.1 AA checks on key pages.
- * This catches ~30-40% of a11y issues; manual testing is still needed.
+ * App-specific routes are in a11y-audit-portfolio.spec.ts and a11y-audit-blog.spec.ts.
  */
-
-const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
-
-async function auditRoute(page: Page, route: string) {
-	await page.goto(route);
-	await page.waitForLoadState("networkidle");
-
-	const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
-
-	expect(results.violations).toEqual([]);
-}
-
 test.describe("Accessibility audit", () => {
-	test("homepage has no critical a11y violations", async ({ page }) => {
+	test("default locale homepage has no critical a11y violations", async ({
+		page,
+	}) => {
 		await auditRoute(page, "/");
-	});
-
-	test("blog homepage has no critical a11y violations", async ({ page }) => {
-		await auditRoute(page, "/blog");
-	});
-
-	test("search page has no critical a11y violations", async ({ page }) => {
-		await auditRoute(page, "/search");
-	});
-
-	test("Spanish homepage has no critical a11y violations", async ({ page }) => {
-		await auditRoute(page, "/es");
 	});
 });
