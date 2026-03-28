@@ -1,6 +1,6 @@
 {
 	"name": "@portfolio/shared",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -50,7 +50,7 @@
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "4.11.1",
-		"@biomejs/biome": "2.4.8",
+		"@biomejs/biome": "2.4.9",
 		"@faker-js/faker": "^10.3.0",
 		"@iconify-json/lucide": "^1.2.98",
 		"@iconify-json/mdi": "^1.2.3",
