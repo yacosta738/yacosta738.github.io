@@ -456,6 +456,13 @@ const matchesPlatformFilter = (
 		return true;
 	}
 	const platforms = resolvePlatforms(properties);
+	// The Notion API may return an empty relation array even when the
+	// server-side query filter already matched on the platform.  When
+	// the relation comes back empty, trust the query filter instead of
+	// rejecting the page.
+	if (platforms.length === 0) {
+		return true;
+	}
 	return platforms.includes(normalizedPlatformId);
 };
 
