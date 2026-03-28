@@ -18,6 +18,9 @@ export const containsS3Url = (html: string): boolean =>
 const PUBLIC_SUBDIR = "images/notion";
 const DOWNLOAD_TIMEOUT_MS = 30_000;
 
+/** Strip query string and fragment from a URL for safe logging. */
+const redactUrl = (url: string): string => url.split("?")[0].split("#")[0];
+
 export const isNotionS3Url = (url: string): boolean => {
 	try {
 		const parsed = new URL(decodeHtmlEntities(url));
@@ -123,7 +126,7 @@ export const downloadNotionImage = async (
 	const paths = deriveImagePaths(cleanUrl, saveDir);
 	if (!paths) {
 		(logger?.warn ?? logger?.debug)?.(
-			`notion-image: unable to parse S3 URL: ${cleanUrl}`,
+			`notion-image: unable to parse S3 URL: ${redactUrl(cleanUrl)}`,
 		);
 		return url;
 	}
@@ -141,17 +144,18 @@ export const downloadNotionImage = async (
 		});
 		if (!response.ok) {
 			(logger?.warn ?? logger?.debug)?.(
-				`notion-image: download failed (${response.status}): ${cleanUrl}`,
+				`notion-image: download failed (${response.status}): ${redactUrl(cleanUrl)}`,
 			);
 			return url;
 		}
 		const contentType = response.headers.get("content-type") ?? "";
+		const mediaType = contentType.split(";")[0].trim().toLowerCase();
 		if (
-			!contentType.startsWith("image/") &&
-			contentType !== "application/octet-stream"
+			!mediaType.startsWith("image/") &&
+			mediaType !== "application/octet-stream"
 		) {
 			(logger?.warn ?? logger?.debug)?.(
-				`notion-image: unexpected content-type "${contentType}" for ${cleanUrl}`,
+				`notion-image: unexpected content-type "${contentType}" for ${redactUrl(cleanUrl)}`,
 			);
 			return url;
 		}
