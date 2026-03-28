@@ -110,7 +110,10 @@ const deriveImagePaths = (
 export const downloadNotionImage = async (
 	url: string,
 	saveDir: string,
-	logger?: { debug: (message: string) => void },
+	logger?: {
+		debug: (message: string) => void;
+		warn?: (message: string) => void;
+	},
 ): Promise<string> => {
 	if (!isNotionS3Url(url)) {
 		return url;
@@ -119,7 +122,9 @@ export const downloadNotionImage = async (
 	const cleanUrl = decodeHtmlEntities(url);
 	const paths = deriveImagePaths(cleanUrl, saveDir);
 	if (!paths) {
-		logger?.debug(`notion-image: unable to parse S3 URL: ${cleanUrl}`);
+		(logger?.warn ?? logger?.debug)?.(
+			`notion-image: unable to parse S3 URL: ${cleanUrl}`,
+		);
 		return url;
 	}
 
@@ -135,14 +140,17 @@ export const downloadNotionImage = async (
 			signal: AbortSignal.timeout(DOWNLOAD_TIMEOUT_MS),
 		});
 		if (!response.ok) {
-			logger?.debug(
+			(logger?.warn ?? logger?.debug)?.(
 				`notion-image: download failed (${response.status}): ${cleanUrl}`,
 			);
 			return url;
 		}
 		const contentType = response.headers.get("content-type") ?? "";
-		if (!contentType.startsWith("image/")) {
-			logger?.debug(
+		if (
+			!contentType.startsWith("image/") &&
+			contentType !== "application/octet-stream"
+		) {
+			(logger?.warn ?? logger?.debug)?.(
 				`notion-image: unexpected content-type "${contentType}" for ${cleanUrl}`,
 			);
 			return url;
@@ -152,7 +160,7 @@ export const downloadNotionImage = async (
 		logger?.debug(`notion-image: downloaded ${paths.publicPath}`);
 		return paths.publicPath;
 	} catch (error) {
-		logger?.debug(
+		(logger?.warn ?? logger?.debug)?.(
 			`notion-image: download error: ${error instanceof Error ? error.message : String(error)}`,
 		);
 		return url;
@@ -166,7 +174,10 @@ export const downloadNotionImage = async (
 export const downloadImagesInHtml = async (
 	html: string,
 	saveDir: string,
-	logger?: { debug: (message: string) => void },
+	logger?: {
+		debug: (message: string) => void;
+		warn?: (message: string) => void;
+	},
 ): Promise<string> => {
 	const matches = [
 		...new Set(html.match(new RegExp(S3_URL_IN_HTML_SOURCE, "g")) ?? []),
