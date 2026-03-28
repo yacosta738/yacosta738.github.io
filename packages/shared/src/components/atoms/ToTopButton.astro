@@ -1,5 +1,6 @@
 ---
 import { type Lang, useTranslations } from "@/i18n";
+
 const locale = (Astro.currentLocale || Astro.params.lang || "en") as Lang;
 const t = useTranslations(locale);
 ---
