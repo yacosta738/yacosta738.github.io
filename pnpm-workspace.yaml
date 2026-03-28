@@ -8,5 +8,6 @@ catalog:
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - "@cloudflare/workers-types"
+  - miniflare
   - wrangler
   - typescript@6.0.2
