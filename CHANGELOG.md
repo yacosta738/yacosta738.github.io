@@ -1,3 +1,11 @@
+## [2.1.6](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.5...v2.1.6) (2026-03-28)
+
+
+### Bug Fixes
+
+* **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
+* **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
