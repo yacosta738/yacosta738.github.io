@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -40,7 +40,7 @@
 		"@tailwindcss/vite": "^4.2.2",
 		"astro": "6.1.1",
 		"astro-compress": "2.4.0",
-		"astro-pagefind": "^1.8.5",
+		"astro-pagefind": "^1.8.6",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "1.4.0",
 		"sharp": "^0.34.5",
