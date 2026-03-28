@@ -49,23 +49,15 @@ const rel = isExternal
 		<span class="sr-only">{title}</span>
 		<div class="blog-article-card__media">
 			{
-				image &&
-					(typeof image === "string" ? (
-						<img
-							src={image}
-							alt={title}
-							loading={loading}
-							class="h-full w-full object-cover"
-						/>
-					) : (
-						<OptimizedPicture
-							src={image}
-							alt={title}
-							loading={loading}
-							inferSize
-							class="h-full w-full object-cover"
-						/>
-					))
+				image && (
+					<OptimizedPicture
+						src={image}
+						alt={title}
+						loading={loading}
+						inferSize
+						class="h-full w-full object-cover"
+					/>
+				)
 			}
 		</div>
 		<footer
