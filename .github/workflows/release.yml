@@ -60,6 +60,8 @@ jobs:
           pnpm-version: '10.32.1'
 
       - name: Build all projects
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: pnpm build
 
       - name: Validation summary
