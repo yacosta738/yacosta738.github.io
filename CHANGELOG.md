@@ -1,3 +1,10 @@
+## [2.1.5](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.4...v2.1.5) (2026-03-28)
+
+
+### Bug Fixes
+
+* **ci:** enforce workspace lockfile ownership ([1330ca6](https://github.com/yacosta738/yacosta738.github.io/commit/1330ca64af64a6500700ca7e41cc86d12f4adbd3))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
