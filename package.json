@@ -57,6 +57,7 @@
 		"cloudflare:preview": "pnpm --filter=portfolio build && pnpm --filter=portfolio preview",
 		"notion:sync-authors": "node scripts/notion-sync-authors.mjs",
 		"notion:sync-taxonomy": "node scripts/notion-sync-taxonomy.mjs",
+		"verify:workspace-lockfiles": "node scripts/verify-workspace-lockfiles.mjs",
 		"clean": "pnpm --filter=portfolio clean && pnpm --filter=blog clean && pnpm --filter=yap-api clean"
 	},
 	"engines": {

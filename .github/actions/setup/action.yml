@@ -54,7 +54,9 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: |
+        pnpm run verify:workspace-lockfiles
+        pnpm install --frozen-lockfile
 
     - id: emit
       name: Emit outputs
