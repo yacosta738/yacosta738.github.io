@@ -1,4 +1,4 @@
-import { readdir, readFile, stat } from "node:fs/promises";
+import { glob, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -36,7 +36,7 @@ if (violations.length > 0) {
 }
 
 console.log(
-	"Workspace lockfile check passed. Update dependencies for packages/notion-astro-loader from the repository root so pnpm-lock.yaml stays canonical.",
+	"Workspace lockfile check passed. Update workspace dependencies from the repository root so the root pnpm-lock.yaml stays canonical.",
 );
 
 function readWorkspacePatterns(content) {
@@ -80,32 +80,58 @@ function readWorkspacePatterns(content) {
 }
 
 async function expandWorkspacePatterns(patterns, rootDir) {
-	const workspaceDirs = new Set();
+	const includedWorkspaceDirs = new Set();
+	const excludedWorkspaceDirs = new Set();
 
 	for (const pattern of patterns) {
-		if (pattern.endsWith("/*")) {
-			const parentDir = path.join(rootDir, pattern.slice(0, -2));
-			if (!(await pathExists(parentDir))) {
-				continue;
-			}
+		const isExclusion = pattern.startsWith("!");
+		const normalizedPattern = isExclusion ? pattern.slice(1) : pattern;
 
-			const entries = await readdir(parentDir, { withFileTypes: true });
-			for (const entry of entries) {
-				if (!entry.isDirectory()) {
-					continue;
-				}
-				workspaceDirs.add(path.join(parentDir, entry.name));
-			}
+		if (normalizedPattern === "") {
 			continue;
 		}
 
-		const workspaceDir = path.join(rootDir, pattern);
-		if (await pathExists(workspaceDir)) {
-			workspaceDirs.add(workspaceDir);
+		for await (const match of glob(normalizedPattern, {
+			cwd: rootDir,
+			exclude: ["**/node_modules/**", "**/.git/**"],
+		})) {
+			const workspaceDir = path.join(rootDir, match);
+			if (!(await isDirectory(workspaceDir))) {
+				continue;
+			}
+
+			if (!(await pathExists(path.join(workspaceDir, "package.json")))) {
+				continue;
+			}
+
+			if (isExclusion) {
+				excludedWorkspaceDirs.add(workspaceDir);
+				continue;
+			}
+
+			includedWorkspaceDirs.add(workspaceDir);
 		}
 	}
 
-	return [...workspaceDirs].sort();
+	return [...includedWorkspaceDirs]
+		.filter((workspaceDir) => !excludedWorkspaceDirs.has(workspaceDir))
+		.sort();
+}
+
+async function isDirectory(targetPath) {
+	try {
+		return (await stat(targetPath)).isDirectory();
+	} catch (error) {
+		if (
+			error &&
+			typeof error === "object" &&
+			"code" in error &&
+			error.code === "ENOENT"
+		) {
+			return false;
+		}
+		throw error;
+	}
 }
 
 async function pathExists(targetPath) {
