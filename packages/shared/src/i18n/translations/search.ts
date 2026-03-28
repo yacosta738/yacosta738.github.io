@@ -10,6 +10,7 @@ export const search = {
 		"search.ariaLabel": "Search for articles",
 		"search.empty.title": "No results",
 		"search.empty.message": 'No results found for "{query}".',
+		"search.results.label": "Search results",
 	},
 	es: {
 		"search.title": "Buscar",
@@ -22,5 +23,6 @@ export const search = {
 		"search.ariaLabel": "Buscar artículos",
 		"search.empty.title": "Sin resultados",
 		"search.empty.message": 'No se encontraron resultados para "{query}".',
+		"search.results.label": "Resultados de búsqueda",
 	},
 };

@@ -48,14 +48,14 @@ const translatePath = useTranslatedPath(currentLocale);
 		"overflow-y-auto scrollbar-thin",
 		className,
 	)}
-	aria-label={t("nav.mobile") || "Mobile navigation"}
+	aria-labelledby="mobile-drawer-title"
 	aria-hidden="true"
 	role="dialog"
 	aria-modal="true"
 >
 	<!-- Header -->
 	<div class="p-4 border-b border-border">
-		<h2 class="text-lg font-semibold text-foreground">
+		<h2 id="mobile-drawer-title" class="text-lg font-semibold text-foreground">
 			{t("nav.menu") || "Menu"}
 		</h2>
 	</div>

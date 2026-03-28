@@ -27,6 +27,7 @@ export const blog: {
 		"blog.footer.aria.contact": "Contact Navigation link",
 		"blog.footer.aria.donate": "Donate Navigation link",
 		"blog.footer.aria.rss": "RSS Navigation link",
+		"article.sidebar": "Article sidebar",
 	},
 	es: {
 		// Widget labels used by sidebar components
@@ -51,5 +52,6 @@ export const blog: {
 		"blog.footer.aria.contact": "Enlace de navegación Contacto",
 		"blog.footer.aria.donate": "Enlace de navegación Donar",
 		"blog.footer.aria.rss": "Enlace de navegación RSS",
+		"article.sidebar": "Barra lateral del artículo",
 	},
 };

@@ -68,7 +68,7 @@ const getPositionClasses = () => {
 const getVariantClasses = () => {
 	switch (variant) {
 		case "glass":
-			return "backdrop-blur-xl bg-white/10 dark:bg-gray-900/80 border border-white/20 dark:border-gray-700/50 shadow-2xl shadow-black/25";
+			return "backdrop-blur-xl bg-white/90 dark:bg-gray-900/80 border border-gray-200/60 dark:border-gray-700/50 shadow-2xl shadow-black/25";
 		case "solid":
 			return "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700";
 		default:
@@ -118,7 +118,7 @@ const sizeClasses = getSizeClasses();
         class={cn(
           "ml-3 transition-colors shrink-0 p-2 rounded-lg",
           variant === "glass" 
-            ? "bg-white/10 dark:bg-gray-800/30 hover:bg-white/20 dark:hover:bg-gray-700/40 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white backdrop-blur-sm" 
+            ? "bg-gray-100 dark:bg-gray-800/30 hover:bg-gray-200 dark:hover:bg-gray-700/40 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white" 
             : variant === "solid"
             ? "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
             : "text-gray-400 hover:text-gray-200 hover:bg-gray-800/50"

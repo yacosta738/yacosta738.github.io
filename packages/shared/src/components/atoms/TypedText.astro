@@ -54,6 +54,7 @@ const fallbackText = allTexts.join(" • ");
 	data-loop={loop ? "true" : "false"}
 	data-cursor={cursor ? "true" : "false"}
 	data-cursor-char={cursorChar}
+	role="status"
 	aria-live="polite"
 	aria-label={texts ? `Dynamic text: ${texts.join(', ')}` : text}
 	{...attrs}
