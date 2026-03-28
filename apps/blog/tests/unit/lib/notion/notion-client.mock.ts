@@ -16,9 +16,8 @@ export class Client {
 		}
 	}
 
-	databases = {
-		query: async () => ({ results: globalThis.__notionPages ?? [] }),
-	};
+	request = async () => ({ results: globalThis.__notionPages ?? [] });
+	databases = {};
 	blocks = { children: { list: async () => ({ results: [] }) } };
 }
 

@@ -114,9 +114,7 @@ type NotionModuleLoad = {
 	Client: new (
 		opts: unknown,
 	) => {
-		databases: {
-			query: (args: Record<string, unknown>) => Promise<unknown>;
-		};
+		blocks: { children: { list: (args: Record<string, unknown>) => Promise<unknown> } };
 	};
 	LogLevel?: {
 		ERROR?: string;
@@ -579,11 +577,32 @@ const createNotionLoaderNoImages = ({
 				}
 
 				stage = "query";
-				const queryDatabase = notionClient.databases.query.bind(
-					notionClient.databases,
-				);
+				const auth = (clientOptions as Record<string, unknown>).auth as string;
+				const queryDatabase = async (
+					args: Record<string, unknown>,
+				): Promise<Record<string, unknown>> => {
+					const res = await fetch(
+						`https://api.notion.com/v1/databases/${database_id}/query`,
+						{
+							method: "POST",
+							headers: {
+								Authorization: `Bearer ${auth}`,
+								"Notion-Version": "2022-06-28",
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify(args),
+						},
+					);
+					if (!res.ok) {
+						const err = await res.json().catch(() => ({}));
+						throw new Error(
+							(err as Record<string, string>).message ??
+								`Notion API error: ${res.status}`,
+						);
+					}
+					return res.json() as Promise<Record<string, unknown>>;
+				};
 				const pages = iteratePaginatedAPI(queryDatabase, {
-					database_id,
 					filter_properties,
 					sorts,
 					filter,
