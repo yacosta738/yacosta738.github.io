@@ -1,6 +1,7 @@
 ## Exploration: sync workspace lockfile
 
 ### Current State
+- Snapshot anchor: repository state at commit `1330ca6` (`2026-03-28T09:16:21+01:00`).
 - The monorepo is configured around a single workspace install from the repository root via `pnpm-workspace.yaml` and `pnpm install --frozen-lockfile` in `.github/actions/setup/action.yml`.
 - The root lockfile already includes the `packages/notion-astro-loader` importer and the `apps/blog` workspace link to `@yap/astro-notion-loader`, so root-level frozen installs succeed.
 - `packages/notion-astro-loader/package.json` has been upgraded to Astro 6-era dependencies (`astro@6.0.8`, `@notionhq/client@^5.14.0`, `rehype-katex@^7.0.1`, `slug@^11.0.1`, `zod@^4.3.6`, `vitest@^4.1.1`).
@@ -37,7 +38,7 @@ Use **Single lockfile source of truth** unless `packages/notion-astro-loader` is
 ### Risks
 - Removing the nested lockfile could break any undocumented standalone install/release workflow that expects `packages/notion-astro-loader/pnpm-lock.yaml`.
 - Keeping both lockfiles without automation will likely reintroduce the same drift on the next dependency update.
-- The package uses `packageManager: pnpm@10.7.0` while the repo root and workflows use newer `pnpm` 10.x versions, which increases the chance of future lockfile inconsistencies.
+- The package originally used `packageManager: pnpm@10.7.0` while the repo root used `pnpm@10.32.1`. This mismatch was fixed as part of this change - the loader package now uses `pnpm@10.32.1` to align with the repo root, eliminating the version inconsistency risk.
 
 ### Ready for Proposal
 Yes — the proposal should decide whether `packages/notion-astro-loader` is a workspace-only package or must remain independently installable, then implement the matching lockfile strategy and add a verification step for the chosen model.
