@@ -6,6 +6,14 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [2.1.7](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.6...v2.1.7) (2026-03-28)
+
+
+### Bug Fixes
+
+* **a11y:** WCAG 2.1 AA accessibility audit improvements ([#1811](https://github.com/yacosta738/yacosta738.github.io/issues/1811)) ([53126ff](https://github.com/yacosta738/yacosta738.github.io/commit/53126ff5a1f236f3034dff22bd3cc656ba7736a7))
+* **deps:** update wrangler to ^4.77.0 ([#1805](https://github.com/yacosta738/yacosta738.github.io/issues/1805)) ([6e50bc5](https://github.com/yacosta738/yacosta738.github.io/commit/6e50bc5edaf16122d70b62fc1379cd7bdc668754))
+
 ## [2.0.10](https://github.com/yacosta738/yacosta738.github.io/compare/v2.0.9...v2.0.10) (2026-03-16)
 
 
