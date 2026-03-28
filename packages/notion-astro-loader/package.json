@@ -65,7 +65,7 @@
 	"devDependencies": {
 		"@types/fs-extra": "^11.0.4",
 		"@types/slug": "^5.0.9",
-		"astro": "6.0.8",
+		"astro": "6.1.1",
 		"crossrm": "^1.0.0",
 		"prettier": "^3.5.3",
 		"typescript": "^6.0.2",
