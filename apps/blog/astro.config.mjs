@@ -19,6 +19,10 @@ import {
 	responsiveTablesRehypePlugin,
 } from "../../packages/shared/src/utils/markdown.ts";
 import { resolveSiteUrl } from "../../packages/shared/src/utils/resolveSiteUrl.ts";
+import {
+	filterBlogSitemapPage,
+	serializeBlogSitemapItem,
+} from "./src/configs/sitemap.ts";
 
 export default defineConfig({
 	site: resolveSiteUrl(),
@@ -75,12 +79,7 @@ export default defineConfig({
 		}),
 		pagefind(),
 		sitemap({
-			filter: (page) => {
-				const pathname = new URL(page).pathname;
-				// Exclude admin, api, and search pages from sitemap
-				const excludedPaths = ["/admin/", "/admin", "/search", "/404"];
-				return !excludedPaths.some((path) => pathname.includes(path));
-			},
+			filter: filterBlogSitemapPage,
 			i18n: {
 				defaultLocale: DEFAULT_LOCALE_SETTING,
 				locales: Object.fromEntries(
@@ -90,61 +89,7 @@ export default defineConfig({
 					]),
 				),
 			},
-			// Serialize function for per-page customization
-			serialize(item) {
-				const url = new URL(item.url);
-				const pathname = url.pathname;
-
-				// Set lastmod to current date for dynamic content
-				item.lastmod = new Date();
-
-				// Homepage - highest priority
-				if (pathname === "/" || /^\/es\/?$/.test(pathname)) {
-					item.changefreq = "weekly";
-					item.priority = 1;
-					return item;
-				}
-
-				// Blog posts - high priority, updated frequently
-				if (pathname.includes("/blog/") && !pathname.includes("/page/")) {
-					// Individual blog post
-					if (/\/blog\/[^/]+$/.test(pathname)) {
-						item.changefreq = "monthly";
-						item.priority = 0.8;
-						return item;
-					}
-					// Blog index pages
-					item.changefreq = "weekly";
-					item.priority = 0.7;
-					return item;
-				}
-
-				// Projects page
-				if (pathname.includes("/projects")) {
-					item.changefreq = "monthly";
-					item.priority = 0.8;
-					return item;
-				}
-
-				// Tag and category pages
-				if (pathname.includes("/tag/") || pathname.includes("/category/")) {
-					item.changefreq = "weekly";
-					item.priority = 0.5;
-					return item;
-				}
-
-				// Author pages
-				if (pathname.includes("/author/")) {
-					item.changefreq = "monthly";
-					item.priority = 0.4;
-					return item;
-				}
-
-				// Default for other pages
-				item.changefreq = "monthly";
-				item.priority = 0.6;
-				return item;
-			},
+			serialize: serializeBlogSitemapItem,
 		}),
 		(await import("astro-compress")).default({
 			// Re-enable CSS compression now that the scoping issue is fixed

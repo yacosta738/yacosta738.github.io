@@ -22,15 +22,15 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Setup Token
-        uses: ./.github/actions/setup-token
+        uses: ./.github/actions/setup
         env:
           PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
 
       - name: Compress Images
-        uses: calibreapp/image-actions@v1
+        uses: calibreapp/image-actions@f32575787d333b0579f0b7d506ff03be63a669d1 # 1.4.1
         with:
           githubToken: ${{ env.PBOT_GITHUB_TOKEN }}
           jpegQuality: '80'

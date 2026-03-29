@@ -40,9 +40,8 @@ if (!resume) {
 	throw new Error("No se pudo obtener el resume principal");
 }
 
-const { name, label } = resume.basics;
 const t = useTranslations(currentLocale);
-const title = t("title", { name, label });
+const title = t("homeTitle");
 const NUMBER_OF_POSTS = 4;
 // Get last $NUMBER_OF_POSTS articles
 const allArticles = await getArticles({

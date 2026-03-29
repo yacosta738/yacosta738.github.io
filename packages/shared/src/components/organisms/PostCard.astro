@@ -71,7 +71,7 @@ const contentLink = buildBlogHref(
 					<a
 						class="w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-foreground-muted"
 						href={buildBlogHref(
-							translatePath(`/${routes.tag}/${getTagSlug(tag)}`),
+							translatePath(`/${routes.tag}/${getTagSlug(tag)}/`),
 						)}
 						aria-label={t("post.aria.tag", { tag: tag.title })}
 					>

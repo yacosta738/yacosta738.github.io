@@ -73,10 +73,10 @@ const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
 const localePrefix =
 	Astro.url.pathname.match(/^\/([a-z]{2})\//)?.[0]?.slice(0, -1) || "";
 const localizedHome = `${siteOrigin}${localePrefix}/`;
-const localizedBlog = `${siteOrigin}${localePrefix}/blog`;
+const localizedBlog = `${siteOrigin}${localePrefix}/`;
 const authorProfileUrl =
 	publicOrigin && author?.slug
-		? new URL(`${localePrefix}/author/${author.slug}`, `${publicOrigin}/`).href
+		? new URL(`${localePrefix}/author/${author.slug}/`, `${publicOrigin}/`).href
 		: undefined;
 
 // BlogPosting JSON-LD structured data
@@ -124,7 +124,7 @@ const breadcrumbJsonLd = {
 		{
 			"@type": "ListItem",
 			position: 2,
-			name: "Blog",
+			name: t("blog.title"),
 			item: localizedBlog,
 		},
 		{

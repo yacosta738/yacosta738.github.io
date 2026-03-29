@@ -21,7 +21,7 @@ const { class: className, ...props } = Astro.props;
 	)}
 	{...props}
 	aria-label={t("search.placeholder") || "Buscar contenido..."}
-	href={translatePath("/search")}
+	href={translatePath("/search/")}
 >
 	<Icon name="mdi:magnify" class="h-5 w-5" aria-hidden="true" />
 </a>

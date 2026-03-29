@@ -65,7 +65,7 @@ const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 
 const basePath = translatePath(`/category/${categorySlug}/page`);
-const indexUrl = translatePath(`/category/${categorySlug}`);
+const indexUrl = translatePath(`/category/${categorySlug}/`);
 const title = `${t("category.title")}: ${category.title}`;
 ---
 
@@ -80,13 +80,13 @@ const title = `${t("category.title")}: ${category.title}`;
 					<p>{t("category.description", { category: category.title })}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={translatePath("/search")}>
+					<a class="blog-pill" href={translatePath("/search/")}>
 						{t("search.title")}
 					</a>
 					<a class="blog-pill" href={translatePath("/")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={translatePath("/category")}>
+					<a class="blog-pill" href={translatePath("/category/")}>
 						{t("categories.title")}
 					</a>
 				</div>
@@ -97,8 +97,8 @@ const title = `${t("category.title")}: ${category.title}`;
 			class="blog-pagination"
 			currentPage={page.currentPage}
 			lastPage={page.lastPage}
-			urlPrev={page.currentPage > 2 ? `${basePath}/${page.currentPage - 1}` : indexUrl}
-			urlNext={page.currentPage < page.lastPage ? `${basePath}/${page.currentPage + 1}` : null}
+			urlPrev={page.currentPage > 2 ? `${basePath}/${page.currentPage - 1}/` : indexUrl}
+			urlNext={page.currentPage < page.lastPage ? `${basePath}/${page.currentPage + 1}/` : null}
 			basePath={basePath}
 			maxDisplayedPages={5}
 			firstPageUrl={indexUrl}

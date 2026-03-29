@@ -60,7 +60,7 @@ const tagArticles = allArticles
 const postsPerPage = 16;
 const totalPages = Math.ceil(tagArticles.length / postsPerPage);
 const basePath = translatePath(`/tag/${tagSlug}/page`);
-const indexUrl = translatePath(`/tag/${tagSlug}`);
+const indexUrl = translatePath(`/tag/${tagSlug}/`);
 
 const title = `${t("tag.title")}: ${tag.title}`;
 ---
@@ -76,13 +76,13 @@ const title = `${t("tag.title")}: ${tag.title}`;
 					<p>{t("tag.description", { tag: tag.title })}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={translatePath("/search")}>
+					<a class="blog-pill" href={translatePath("/search/")}>
 						{t("search.title")}
 					</a>
 					<a class="blog-pill" href={translatePath("/")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={translatePath("/tag")}>
+					<a class="blog-pill" href={translatePath("/tag/")}>
 						{t("tags.title")}
 					</a>
 				</div>
@@ -97,7 +97,7 @@ const title = `${t("tag.title")}: ${tag.title}`;
 			currentPage={1}
 			lastPage={totalPages}
 			urlPrev={null}
-			urlNext={totalPages > 1 ? `${basePath}/2` : null}
+			urlNext={totalPages > 1 ? `${basePath}/2/` : null}
 			basePath={basePath}
 			maxDisplayedPages={5}
 			firstPageUrl={indexUrl}

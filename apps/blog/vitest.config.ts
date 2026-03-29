@@ -26,7 +26,7 @@ export default getViteConfig({
 		coverage: {
 			enabled: true,
 			reporter: ["text", "json", "html", "lcov"],
-			include: ["src/**/*.ts", "src/**/*.astro"],
+			include: ["src/**/*.ts", "src/**/*.js", "src/**/*.astro"],
 			exclude: [
 				"src/env.d.ts",
 				// Exclude all Astro pages - they are hard to unit test

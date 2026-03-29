@@ -18,10 +18,10 @@ const translatePath = useTranslatedPath(currentLocale);
 const blogBaseUrl = baseUrl ? getBlogBaseUrl(baseUrl) : "";
 const authorPath = blogBaseUrl
 	? buildBlogUrl(
-			translatePath(`/author/${cleanEntityId(author.slug).toLowerCase()}`),
+			translatePath(`/author/${cleanEntityId(author.slug).toLowerCase()}/`),
 			baseUrl,
 		)
-	: translatePath(`/author/${cleanEntityId(author.slug).toLowerCase()}`);
+	: translatePath(`/author/${cleanEntityId(author.slug).toLowerCase()}/`);
 ---
 
 <div

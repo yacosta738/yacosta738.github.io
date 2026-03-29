@@ -6,6 +6,7 @@ export const main: {
 } = {
 	en: {
 		title: "Portfolio of {name} - {label}",
+		homeTitle: "Yuniel Acosta | Software Engineer & Architect",
 		titleAltText: "Don't go! Come back! {emoji}",
 		welcome: "Welcome to my portfolio",
 		about: "About me",
@@ -98,6 +99,7 @@ export const main: {
 	},
 	es: {
 		title: "Portafolio de {name} - {label}",
+		homeTitle: "Yuniel Acosta | Ingeniero de Software y Arquitecto",
 		titleAltText: "¡No te vayas! ¡Regresa! {emoji}",
 		welcome: "Bienvenido a mi portafolio",
 		about: "Sobre mí",

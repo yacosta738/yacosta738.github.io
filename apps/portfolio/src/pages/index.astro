@@ -33,9 +33,8 @@ if (!resume) {
 	throw new Error("Failed to fetch main resume");
 }
 
-const { name, label } = resume.basics;
 const t = useTranslations(currentLocale);
-const title = t("title", { name, label });
+const title = t("homeTitle");
 const NUMBER_OF_POSTS = 4;
 const allArticles = await getArticles({
 	lang: currentLocale,
