@@ -1,6 +1,6 @@
 {
 	"name": "blog",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -45,7 +45,7 @@
 		"@yap/astro-notion-loader": "workspace:*",
 		"astro": "6.1.1",
 		"astro-compress": "2.4.0",
-		"astro-pagefind": "^1.8.5",
+		"astro-pagefind": "^1.8.6",
 		"mdast-util-to-string": "^4.0.0",
 		"notion-rehype-k": "^1.1.6",
 		"pagefind": "1.4.0",

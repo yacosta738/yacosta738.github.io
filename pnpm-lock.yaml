@@ -112,8 +112,8 @@ importers:
         specifier: 2.4.0
         version: 2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
-        specifier: ^1.8.5
-        version: 1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        specifier: ^1.8.6
+        version: 1.8.6(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -278,8 +278,8 @@ importers:
         specifier: 2.4.0
         version: 2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
-        specifier: ^1.8.5
-        version: 1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        specifier: ^1.8.6
+        version: 1.8.6(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -499,8 +499,8 @@ importers:
         specifier: 2.4.0
         version: 2.4.0(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
-        specifier: ^1.8.5
-        version: 1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        specifier: ^1.8.6
+        version: 1.8.6(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -2375,10 +2375,10 @@ packages:
   astro-icon@1.1.5:
     resolution: {integrity: sha512-CJYS5nWOw9jz4RpGWmzNQY7D0y2ZZacH7atL2K9DeJXJVaz7/5WrxeyIxO8KASk1jCM96Q4LjRx/F3R+InjJrw==}
 
-  astro-pagefind@1.8.5:
-    resolution: {integrity: sha512-CVhKKA9bTQ7hLsHk9KTNDzOdgR4EI04gn0mjDGfnXzaHx7rL92YkNpFM5AoFl9NWmOUbaIFC2DN7Yvs/ZFPRdA==}
+  astro-pagefind@1.8.6:
+    resolution: {integrity: sha512-pofDcWMgA3qLQX9gSJ1mc3NSJDv6o1PDs68MrtdupxMFIlAFT2yckFSiOoaab2stSDmKyX/wVaTObyj5FuBulA==}
     peerDependencies:
-      astro: ^2.0.4 || ^3 || ^4 || ^5
+      astro: ^2.0.4 || ^3 || ^4 || ^5 || ^6
 
   astro@6.1.1:
     resolution: {integrity: sha512-vq8sHpu1JsY1fWAunn+tdKNbVDmLQNiVdyuGsVT2csgITdFGXXVAyEXFWc1DzkMN0ehElPeiHnqItyQOJK+GqA==}
@@ -7641,7 +7641,7 @@ snapshots:
       - debug
       - supports-color
 
-  astro-pagefind@1.8.5(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)):
+  astro-pagefind@1.8.6(astro@6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)):
     dependencies:
       '@pagefind/default-ui': 1.4.0
       astro: 6.1.1(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
