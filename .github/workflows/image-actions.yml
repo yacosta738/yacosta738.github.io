@@ -22,10 +22,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Setup Token
-        uses: ./.github/actions/setup-token
+        uses: ./.github/actions/setup
         env:
           PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
 

@@ -1,10 +1,10 @@
 ---
 import ProjectsTable from "@/components/organisms/ProjectsTable.astro";
 import { getAllProjects } from "@/core/resume/project/project.service";
+import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 import { DEFAULT_LOCALE, useTranslations } from "@/i18n";
 import Layout from "@/layouts/Layout.astro";
 import { safeJsonLd } from "@/lib/seo/json-ld";
-import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 
 export const prerender = true;
 
