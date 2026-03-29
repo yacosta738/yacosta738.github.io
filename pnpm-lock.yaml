@@ -164,8 +164,8 @@ importers:
         specifier: ^10.4.0
         version: 10.4.0
       '@iconify-json/lucide':
-        specifier: ^1.2.98
-        version: 1.2.98
+        specifier: ^1.2.99
+        version: 1.2.100
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -315,8 +315,8 @@ importers:
         specifier: ^10.4.0
         version: 10.4.0
       '@iconify-json/lucide':
-        specifier: ^1.2.98
-        version: 1.2.98
+        specifier: ^1.2.99
+        version: 1.2.100
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -533,8 +533,8 @@ importers:
         specifier: ^10.4.0
         version: 10.4.0
       '@iconify-json/lucide':
-        specifier: ^1.2.98
-        version: 1.2.98
+        specifier: ^1.2.99
+        version: 1.2.100
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -1301,8 +1301,8 @@ packages:
       hono: '>=3.9.0'
       zod: ^3.25.0 || ^4.0.0
 
-  '@iconify-json/lucide@1.2.98':
-    resolution: {integrity: sha512-Lx2464W8Tty/QEnZ2UPb73nPdML/HpGCj0J0w37jP3/jx3l4fniZBjDxe1TgHiIL5XW9QO3vlx53ZQZ5JsNpzQ==}
+  '@iconify-json/lucide@1.2.100':
+    resolution: {integrity: sha512-vCrhQ/6T530HEMkWOkSyedvMiuQdVU1tMHEs32k4tklJmCmjokH3Dej6ycvfLt7kftBSQ2kPSUiyOpoW3uOF5g==}
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
@@ -6314,7 +6314,7 @@ snapshots:
       hono: 4.12.9
       zod: 4.3.6
 
-  '@iconify-json/lucide@1.2.98':
+  '@iconify-json/lucide@1.2.100':
     dependencies:
       '@iconify/types': 2.0.0
 
