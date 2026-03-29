@@ -19,13 +19,14 @@ const allProjects = await getAllProjects(projects);
 const listedProjects = allProjects.slice(0, 20);
 const t = useTranslations(currentLocale);
 const title = t("allProjects");
+const description = t("allProjectsDescription");
 
 const siteOrigin = Astro.site?.origin || Astro.url.origin;
 const collectionJsonLd = {
 	"@context": "https://schema.org",
 	"@type": "CollectionPage",
 	name: title,
-	description: t("allProjectsDescription"),
+	description,
 	url: `${siteOrigin}${Astro.url.pathname}`,
 	mainEntity: {
 		"@type": "ItemList",
@@ -44,16 +45,14 @@ const collectionJsonLd = {
 };
 ---
 
-<Layout title={title} description={t("allProjectsDescription")}>
+<Layout title={title} description={description}>
 	<script is:inline slot="head" type="application/ld+json" set:html={safeJsonLd(collectionJsonLd)} />
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 		<header class="text-center mb-12">
 			<h1 class="text-4xl md:text-5xl font-bold text-foreground">
 				{t("allProjects")}
 			</h1>
-			<p class="mt-4 text-lg text-primary">
-				{t("allProjectsDescription")}
-			</p>
+			<p class="mt-4 text-lg text-primary">{description}</p>
 		</header>
 		<ProjectsTable projects={allProjects} />
 	</div>
