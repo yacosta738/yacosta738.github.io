@@ -6,6 +6,19 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [2.1.9](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.8...v2.1.9) (2026-03-29)
+
+
+### Bug Fixes
+
+* **deps:** update @faker-js/faker to ^10.4.0 ([#1821](https://github.com/yacosta738/yacosta738.github.io/issues/1821)) ([fa1317d](https://github.com/yacosta738/yacosta738.github.io/commit/fa1317d7c4dc6e496a1e6e5dba3eb11e77816994))
+* **deps:** update astro-pagefind to ^1.8.6 ([#1740](https://github.com/yacosta738/yacosta738.github.io/issues/1740)) ([ff9fe16](https://github.com/yacosta738/yacosta738.github.io/commit/ff9fe16d683aa42b146de432012b43397ecd3a91))
+* **deps:** update cross-env to ^10.1.0 ([#1806](https://github.com/yacosta738/yacosta738.github.io/issues/1806)) ([de6b5d6](https://github.com/yacosta738/yacosta738.github.io/commit/de6b5d68ed6a3e16a650788bb8a3eac3654f63d7))
+* **deps:** update fast-xml-parser to ^5.5.9 ([#1807](https://github.com/yacosta738/yacosta738.github.io/issues/1807)) ([d755de6](https://github.com/yacosta738/yacosta738.github.io/commit/d755de6284e03a8db3473f75c9100e240dbfb029))
+* **deps:** update hono to ^4.12.9 ([#1808](https://github.com/yacosta738/yacosta738.github.io/issues/1808)) ([181b119](https://github.com/yacosta738/yacosta738.github.io/commit/181b1190b7d2506f226efe57ebbca3af49d4696d))
+* **deps:** update Node.js to v22.22.2 ([#1819](https://github.com/yacosta738/yacosta738.github.io/issues/1819)) ([8dacfde](https://github.com/yacosta738/yacosta738.github.io/commit/8dacfde017540d4170b17337628ef4506c978f37))
+* **deps:** update unist-util-visit to ^5.1.0 ([#1820](https://github.com/yacosta738/yacosta738.github.io/issues/1820)) ([ae0e054](https://github.com/yacosta738/yacosta738.github.io/commit/ae0e0547b7157bf3be34dc5b59c2f74e289e0529))
+
 ## [2.1.8](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.7...v2.1.8) (2026-03-28)
 
 
