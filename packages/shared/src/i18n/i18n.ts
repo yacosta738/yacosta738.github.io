@@ -1,4 +1,3 @@
-import { getRelativeLocaleUrl } from "astro:i18n";
 import {
 	extractTagSlugFromPath,
 	getTagLocalePaths,
@@ -80,9 +79,9 @@ export function getLocalePaths(url: URL): LocalePath[] {
 		: "/";
 
 	return Object.keys(LOCALES).map((lang) => {
-		const localePath = getRelativeLocaleUrl(lang, cleanPath);
+		const localePath = buildLocalePath(cleanPath, lang as Lang);
 		return {
-			lang,
+			lang: lang as Lang,
 			path: localePath,
 		};
 	});

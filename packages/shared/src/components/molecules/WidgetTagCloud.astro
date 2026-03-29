@@ -59,7 +59,7 @@ const translatePath = useTranslatedPath(currentLocale);
 		{
 			sortedTags.map(({ slug, title, count }) => (
 				<a
-					href={translatePath(`/${routes.tag}/${slug}`)}
+					href={translatePath(`/${routes.tag}/${slug}/`)}
 					aria-label={title}
 					class={`inline-link ${textSize(count)}`}
 				>

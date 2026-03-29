@@ -69,13 +69,13 @@ npm run nx -- serve client
 npm run nx -- serve api
 ```
 
-The first command will run the default Angular dev-server, compile and serve the frontend under [http://localhost:4200](http://localhost:4200). The second will start the NestJS dev-server, compile the Typescript down to NodeJS-compatible JavaScript and serve the result under [http://localhost:3333/api](http://localhost:3333/api). As a nice bonus, Nx has added a proxy configuration for the Angular dev-server, which will proxy requests to [http://localhost:4200/api](http://localhost:4200/api) to the NestJS dev-server for us, so that we don't run into any CORS issues while developing. The proxy config can be found under `apps/client/proxy.conf.json` and it's referenced inside the `angular.json` project definition file.
+The first command will run the default Angular dev-server, compile and serve the frontend under `http://localhost:4200`. The second will start the NestJS dev-server, compile the Typescript down to NodeJS-compatible JavaScript and serve the result under `http://localhost:3333/api`. As a nice bonus, Nx has added a proxy configuration for the Angular dev-server, which will proxy requests to `http://localhost:4200/api` to the NestJS dev-server for us, so that we don't run into any CORS issues while developing. The proxy config can be found under `apps/client/proxy.conf.json` and it's referenced inside the `angular.json` project definition file.
 
-If you open now your browser on [http://localhost:4200](http://localhost:4200), you should see a page similar to this one:
+If you open now your browser on `http://localhost:4200`, you should see a page similar to this one:
 
 ![localhost:4200](/src/assets/images/localhost.webp 'App running in localhost')
 
-If you inspect the network and refresh, you'll see an XHR request to [http://localhost:4200/api/hello](http://localhost:4200/api/hello) showing that the proxy has been set up properly.
+If you inspect the network and refresh, you'll see an XHR request to `http://localhost:4200/api/hello` showing that the proxy has been set up properly.
 
 ## Wait, what?
 
@@ -107,7 +107,7 @@ The AppController method is annotated with
   }
 ```
 
-which tells NestJS to expose a new GET-endpoint under [http://localhost:3333/api/hello](http://localhost:3333/api/hello) and return our message object, when the server is running.
+which tells NestJS to expose a new GET-endpoint under `http://localhost:3333/api/hello` and return our message object, when the server is running.
 
 On the other end of the stack we have the Angular project, which was configured to do a sample GET request to this exact endpoint. The sample code can be found in the AppComponent of the frontend under `apps/client/src/app/app.component.ts`
 
@@ -124,7 +124,7 @@ and it's invoked using the async pipe directly in the template:
 <div>Message: {{ hello$ | async | json }}</div>
 ```
 
-Now, since the Angular dev-server is running on [http://localhost:4200](http://localhost:4200), the request will go to [http://localhost:4200/api/hello](http://localhost:4200/api/hello) due to the relative path in the `httpClient` call. This gets picked up by the Angular proxy config and is forwarded to our NestJS server. Awesome 🎉
+Now, since the Angular dev-server is running on `http://localhost:4200`, the request will go to `http://localhost:4200/api/hello` due to the relative path in the `httpClient` call. This gets picked up by the Angular proxy config and is forwarded to our NestJS server. Awesome 🎉
 
 ## Tweaking the application for development
 
@@ -201,7 +201,7 @@ export class AppModule {}
 
 which instructs NestJS to traverse into `../client` from its own dist-folder (`dist/apps/api`) and serve the contents on its root path.
 
-And sure enough, running only the backend via `npm run start:be` and navigating to [http://localhost:3333](http://localhost:3333) should yield the same result as before, when we ran the Angular dev-server:
+And sure enough, running only the backend via `npm run start:be` and navigating to `http://localhost:3333` should yield the same result as before, when we ran the Angular dev-server:
 
 ## Packaging the application for production
 

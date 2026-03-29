@@ -34,7 +34,7 @@ const {
 } = Astro.props;
 
 const translatePath = useTranslatedPath(lang);
-const tagPath = translatePath(`/${routes.tag}/${slug}`);
+const tagPath = translatePath(`/${routes.tag}/${slug}/`);
 ---
 
 <a href={tagPath}>

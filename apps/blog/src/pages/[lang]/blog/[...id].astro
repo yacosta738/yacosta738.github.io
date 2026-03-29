@@ -41,7 +41,7 @@ export async function getStaticPaths() {
 }
 
 return Astro.redirect(
-	`/${Astro.params.lang}/${Array.isArray(Astro.params.id) ? Astro.params.id.join("/") : Astro.params.id}${new URL(Astro.request.url).search}`,
+	`/${Astro.params.lang}/${Array.isArray(Astro.params.id) ? Astro.params.id.join("/") : Astro.params.id}/${new URL(Astro.request.url).search}`,
 	301,
 );
 ---

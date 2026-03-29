@@ -90,9 +90,22 @@ const resume = (await getMainResumeWithData()) ?? {
 	},
 };
 
-const localeTitle = title ? `${title} - ${t(SITE_TITLE)}` : t(SITE_TITLE);
+const pageTitle = title.trim();
+const brandLabel =
+	(typeof (resume.basics as { name?: string })?.name === "string" &&
+		(resume.basics as { name?: string }).name?.trim()) ||
+	"Yuniel Acosta";
+const localeTitle = pageTitle
+	? pageTitle.length > 55
+		? pageTitle
+		: `${pageTitle} | ${brandLabel}`
+	: t(SITE_TITLE);
 const { image, summary, url } = resume.basics;
-const metaDescription = description || summary || t("default.summary");
+const rawMetaDescription = description || summary || t("default.summary");
+const metaDescription =
+	rawMetaDescription.length > 160
+		? `${rawMetaDescription.slice(0, 157).trimEnd()}…`
+		: rawMetaDescription;
 
 // Extract the image URL from ImageMetadata if needed
 const getImageUrl = (

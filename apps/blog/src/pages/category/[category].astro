@@ -57,7 +57,7 @@ const categoryArticles = allArticles
 const postsPerPage = 16;
 const totalPages = Math.ceil(categoryArticles.length / postsPerPage);
 const basePath = translatePath(`/category/${categorySlug}/page`);
-const indexUrl = translatePath(`/category/${categorySlug}`);
+const indexUrl = translatePath(`/category/${categorySlug}/`);
 
 const title = `${t("category.title")}: ${category.title}`;
 ---
@@ -73,13 +73,13 @@ const title = `${t("category.title")}: ${category.title}`;
 					<p>{t("category.description", { category: category.title })}</p>
 				</PageHeadline>
 				<div class="blog-hero__actions">
-					<a class="blog-pill" href={translatePath("/search")}>
+					<a class="blog-pill" href={translatePath("/search/")}>
 						{t("search.title")}
 					</a>
 					<a class="blog-pill" href={translatePath("/")}>
 						{t("blog.title")}
 					</a>
-					<a class="blog-pill" href={translatePath("/category")}>
+					<a class="blog-pill" href={translatePath("/category/")}>
 						{t("categories.title")}
 					</a>
 				</div>
@@ -94,7 +94,7 @@ const title = `${t("category.title")}: ${category.title}`;
 			currentPage={1}
 			lastPage={totalPages}
 			urlPrev={null}
-			urlNext={totalPages > 1 ? `${basePath}/2` : null}
+			urlNext={totalPages > 1 ? `${basePath}/2/` : null}
 			basePath={basePath}
 			maxDisplayedPages={5}
 			firstPageUrl={indexUrl}

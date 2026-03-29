@@ -43,7 +43,7 @@ function getPageUrl(pageNumber: number): string {
 	if (pageNumber === 1 && firstPageUrl) {
 		return firstPageUrl;
 	}
-	return `${computedBasePath}${pageNumber}`;
+	return `${computedBasePath}${pageNumber}/`;
 }
 ---
 

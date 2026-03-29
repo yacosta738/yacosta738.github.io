@@ -78,7 +78,15 @@ export default defineConfig({
 			filter: (page) => {
 				const pathname = new URL(page).pathname;
 				// Exclude admin, api, and search pages from sitemap
-				const excludedPaths = ["/admin/", "/admin", "/search", "/404"];
+				const excludedPaths = [
+					"/admin/",
+					"/admin",
+					"/search",
+					"/404",
+					"/blog/",
+					"/es/blog/",
+					"/en/",
+				];
 				return !excludedPaths.some((path) => pathname.includes(path));
 			},
 			i18n: {
@@ -103,6 +111,11 @@ export default defineConfig({
 					item.changefreq = "weekly";
 					item.priority = 1;
 					return item;
+				}
+
+				// Canonical blog posts - high priority, updated frequently
+				if (pathname.startsWith("/blog/") || pathname.startsWith("/es/blog/")) {
+					return undefined;
 				}
 
 				// Blog posts - high priority, updated frequently
