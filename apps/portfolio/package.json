@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -66,7 +66,7 @@
 		"@testing-library/preact": "^3.2.4",
 		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
-		"@vitest/coverage-v8": "^4.1.1",
+		"@vitest/coverage-v8": "^4.1.2",
 		"astro-component-tester": "^0.8.0",
 		"astro-critters": "2.2.1",
 		"astro-icon": "^1.1.5",
@@ -84,6 +84,6 @@
 		"tailwind-merge": "^3.5.0",
 		"unified": "^11.0.5",
 		"vfile": "^6.0.3",
-		"vitest": "^4.1.1"
+		"vitest": "^4.1.2"
 	}
 }
