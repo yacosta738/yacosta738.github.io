@@ -113,11 +113,6 @@ export default defineConfig({
 					return item;
 				}
 
-				// Canonical blog posts - high priority, updated frequently
-				if (pathname.startsWith("/blog/") || pathname.startsWith("/es/blog/")) {
-					return undefined;
-				}
-
 				// Blog posts - high priority, updated frequently
 				if (pathname.includes("/blog/") && !pathname.includes("/page/")) {
 					// Individual blog post

@@ -91,10 +91,8 @@ const resume = (await getMainResumeWithData()) ?? {
 };
 
 const pageTitle = title.trim();
-const brandLabel =
-	(typeof (resume.basics as { name?: string })?.name === "string" &&
-		(resume.basics as { name?: string }).name?.trim()) ||
-	"Yuniel Acosta";
+const basicsName = (resume.basics as { name?: string }).name?.trim();
+const brandLabel = basicsName || "Yuniel Acosta";
 const localeTitle = pageTitle
 	? pageTitle.length > 55
 		? pageTitle

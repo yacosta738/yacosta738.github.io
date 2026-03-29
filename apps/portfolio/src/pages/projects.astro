@@ -1,0 +1,58 @@
+---
+import ProjectsTable from "@/components/organisms/ProjectsTable.astro";
+import { getAllProjects } from "@/core/resume/project/project.service";
+import { DEFAULT_LOCALE, useTranslations } from "@/i18n";
+import Layout from "@/layouts/Layout.astro";
+import { safeJsonLd } from "@/lib/seo/json-ld";
+import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
+
+export const prerender = true;
+
+const currentLocale = DEFAULT_LOCALE;
+const resume = await getMainResumeWithData({ lang: currentLocale });
+if (!resume || !resume.projects) {
+	throw new Error("Failed to fetch main resume");
+}
+
+const allProjects = await getAllProjects(resume.projects);
+const t = useTranslations(currentLocale);
+const title = t("allProjects");
+
+const siteOrigin = Astro.site?.origin || Astro.url.origin;
+const collectionJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "CollectionPage",
+	name: title,
+	description: t("allProjectsDescription"),
+	url: `${siteOrigin}${Astro.url.pathname}`,
+	mainEntity: {
+		"@type": "ItemList",
+		numberOfItems: allProjects.length,
+		itemListElement: allProjects.slice(0, 20).map((project, index) => ({
+			"@type": "ListItem",
+			position: index + 1,
+			item: {
+				"@type": "SoftwareSourceCode",
+				name: project.name,
+				...(project.description && { description: project.description }),
+				...(project.url && { url: project.url }),
+			},
+		})),
+	},
+};
+---
+
+<Layout title={title} description={t("allProjectsDescription")}>
+	<script is:inline slot="head" type="application/ld+json" set:html={safeJsonLd(collectionJsonLd)} />
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<header class="text-center mb-12">
+			<h1 class="text-4xl md:text-5xl font-bold text-foreground">
+				{t("allProjects")}
+			</h1>
+			<p class="mt-4 text-lg text-primary">
+				{t("allProjectsDescription")}
+			</p>
+		</header>
+		<ProjectsTable projects={allProjects} />
+	</div>
+</Layout>

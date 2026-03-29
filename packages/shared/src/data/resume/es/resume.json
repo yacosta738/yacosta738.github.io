@@ -54,31 +54,31 @@
 			"date": "2022-11-07",
 			"issuer": "Udemy",
 			"name": "Principios SOLID: Introducción a Arquitectura y Diseño de Software",
-			"url": "https://ude.my/UC-f863b35b-c53c-4ea7-a2f9-ee6b534c0a36/"
+			"url": "https://www.udemy.com/certificate/UC-f863b35b-c53c-4ea7-a2f9-ee6b534c0a36/"
 		},
 		{
 			"date": "2023-02-07",
 			"issuer": "Udemy",
 			"name": "Master Spring Boot 3 & Spring Framework 6 con Java",
-			"url": "https://ude.my/UC-d6269681-64c6-4fc5-b7dc-e83b10f4dc3b/"
+			"url": "https://www.udemy.com/certificate/UC-d6269681-64c6-4fc5-b7dc-e83b10f4dc3b/"
 		},
 		{
 			"date": "2023-02-17",
 			"issuer": "Udemy",
 			"name": "Keycloak: Single Sign On con Spring Boot & Spring Security",
-			"url": "https://ude.my/UC-ea9fe04c-eae5-4f2f-a624-f04baad72e1f"
+			"url": "https://www.udemy.com/certificate/UC-ea9fe04c-eae5-4f2f-a624-f04baad72e1f/"
 		},
 		{
 			"date": "2023-02-24",
 			"issuer": "Udemy",
 			"name": "Construye Apps Spring Boot con Kotlin",
-			"url": "https://ude.my/UC-94e27fb3-0092-4347-b807-eeae99a2d158"
+			"url": "https://www.udemy.com/certificate/UC-94e27fb3-0092-4347-b807-eeae99a2d158/"
 		},
 		{
 			"date": "2023-11-07",
 			"issuer": "Canvas Credentials (Badgr)",
 			"name": "Certificación Fundamental de Pruebas de Software (ASTFC)™",
-			"url": "https://api.badgr.io/public/assertions/LRv0GmtiR-Sluyso7ElnWA"
+			"url": "https://badgr.com/public/assertions/LRv0GmtiR-Sluyso7ElnWA"
 		}
 	],
 	"education": [
@@ -198,7 +198,7 @@
 			"highlights": ["react", "css3", "html"],
 			"name": "React ToDo App",
 			"startDate": "2021-06-14",
-			"url": "https://yacosta738.github.io/react-todos-app"
+			"url": "https://yacosta738.github.io/react-todos-app/"
 		},
 		{
 			"description": "Plantilla de proyecto simple, opinada, totalmente tipada y lista para producción hecha con Vue 3, TypeScript, Vite y Tailwindcss.",
@@ -344,7 +344,7 @@
 			"position": "Analista de Sistemas | Ingeniero de Software Senior (L4)",
 			"startDate": "2023-03-14",
 			"summary": "Como incorporación reciente al equipo, actualmente trabajo con dedicación para lograr mis objetivos en el rol de Analista de Sistemas e Ingeniero de Software Senior. Colaboro con equipos multifuncionales para recopilar y analizar requisitos de negocio, diseñar e implementar soluciones de software robustas y brindar liderazgo técnico para asegurar entregas de alta calidad.",
-			"url": "https://gft.com"
+			"url": "https://www.gft.com/es/es"
 		},
 		{
 			"endDate": "2023-12-26",
@@ -359,7 +359,7 @@
 			"position": "Ingeniero de Software Senior",
 			"startDate": "2023-04-08",
 			"summary": "Como Ingeniero de Software Senior en Deutsche Bank, aporto experiencia colaborando con equipos multifuncionales para analizar requisitos de negocio, diseñar y entregar soluciones de software que siguen buenas prácticas y altos estándares de codificación, asegurando que los sistemas cumplan objetivos funcionales y de rendimiento.",
-			"url": "https://db.com"
+			"url": "https://www.db.com/"
 		},
 		{
 			"endDate": "2023-03-10",
@@ -391,7 +391,7 @@
 			"position": "Ingeniero de Software Senior | Desarrollador Backend Java",
 			"startDate": "2021-09-01",
 			"summary": "Como desarrollador de software en Scanntech, integré múltiples fuentes de datos y redes de retail mediante APIs, mantuve servicios backend de alta disponibilidad bajo tráfico intenso, mejoré la cobertura de pruebas e incrementé las pruebas de integración para aumentar la confiabilidad del sistema.",
-			"url": "https://scanntech.com"
+			"url": "https://www.scanntech.com.br/es/"
 		},
 		{
 			"endDate": "2017-12-31",
@@ -406,7 +406,7 @@
 			"position": "Desarrollador Web",
 			"startDate": "2017-09-01",
 			"summary": "Desarrollé y mantuve interfaces web y sitios de clientes usando HTML, CSS y JavaScript. Aseguré compatibilidad entre navegadores y layouts responsivos.",
-			"url": "https://www.desoft.cu"
+			"url": "https://www.desoft.cu/es"
 		},
 		{
 			"endDate": "2020-08-09",
@@ -420,7 +420,7 @@
 			"position": "Desarrollador FullStack",
 			"startDate": "2018-01-01",
 			"summary": "Trabajé en frontend y backend para entregar soluciones web robustas; implementé APIs y mejoras de rendimiento.",
-			"url": "https://www.desoft.cu"
+			"url": "https://www.desoft.cu/es"
 		},
 		{
 			"endDate": "2021-09-01",
@@ -433,7 +433,7 @@
 			"position": "Arquitecto de Software",
 			"startDate": "2020-08-21",
 			"summary": "Lideré el diseño de arquitectura y mentoría; introduje patrones basados en microservicios y mejoras de plataforma.",
-			"url": "https://www.desoft.cu"
+			"url": "https://www.desoft.cu/es"
 		}
 	]
 }

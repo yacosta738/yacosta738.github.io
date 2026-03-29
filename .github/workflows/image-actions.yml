@@ -30,7 +30,7 @@ jobs:
           PBOT_GITHUB_TOKEN: ${{ secrets.PBOT_GITHUB_TOKEN }}
 
       - name: Compress Images
-        uses: calibreapp/image-actions@v1
+        uses: calibreapp/image-actions@f32575787d333b0579f0b7d506ff03be63a669d1 # 1.4.1
         with:
           githubToken: ${{ env.PBOT_GITHUB_TOKEN }}
           jpegQuality: '80'

@@ -68,7 +68,7 @@ Ahora que tenemos los proyectos básicos configurados, es hora de iniciarlos. Ab
 `[Terminal 2]: npm run nx -- serve api`
 ```
 
-El primer comando ejecutará el servidor de desarrollo Angular predeterminado, compilará y entregará la interfaz en `http://localhost:4200/`. El segundo iniciará el dev-server de NestJS, compilará el TypeScript en JavaScript compatible con NodeJS y mostrará el resultado en `http://localhost:3333/api`. Como una buena ventaja, Nx ha agregado una configuración de proxy para el servidor de desarrollo Angular, que enviará solicitudes de proxy a `http://localhost:4200/api` al servidor de desarrollo de NestJS para nosotros, para que no nos encontremos con ningún problema de CORS durante el desarrollo. La configuración del proxy se puede encontrar en `apps/client/proxy.conf.json` y se hace referencia a ella dentro del archivo de definición del proyecto`angular.json`.
+El primer comando ejecutará el servidor de desarrollo Angular predeterminado, compilará y entregará la interfaz en `http://localhost:4200/`. El segundo iniciará el dev-server de NestJS, compilará el TypeScript en JavaScript compatible con NodeJS y mostrará el resultado en `http://localhost:3333/api`. Como una buena ventaja, Nx ha agregado una configuración de proxy para el servidor de desarrollo Angular, que enviará solicitudes de proxy a `http://localhost:4200/api` al servidor de desarrollo de NestJS para nosotros, para que no nos encontremos con ningún problema de CORS durante el desarrollo. La configuración del proxy se puede encontrar en `apps/client/proxy.conf.json` y se hace referencia a ella dentro del archivo de definición del proyecto `angular.json`.
 
 Si abre ahora su navegador en `http://localhost:4200/`, debería ver una página similar a esta:
 
@@ -106,7 +106,7 @@ El método AppController está anotado con
   }
 ```
 
-que le dice a NestJS que exponga un nuevo GET-endpoint en `http://localhost:3333/api/hello` y devuelva nuestro objeto mensaje, cuando el servidor se está ejecutando.
+que le dice a NestJS que exponga un nuevo GET-endpoint en `http://localhost:3333/api/hello` y devuelva nuestro objeto mensaje cuando el servidor se está ejecutando.
 
 En el otro extremo del stack tenemos el proyecto Angular, que se configuró para realizar una solicitud GET de muestra a este endpoint exacto. El código de muestra se puede encontrar en AppComponent de la interfaz en `apps/client/src/app/app.component.ts`
 
@@ -123,7 +123,7 @@ y se invoca usando la tubería asíncrona directamente en la plantilla:
 <div>Message: {{ hello$ | async | json }}</div>
 ```
 
-Ahora, dado que el servidor de desarrollo Angular se está ejecutando en `http://localhost:4200/`, la solicitud irá a `http://localhost:4200/api/hello` debido a la ruta relativa en la llamada `httpClient`. Esto es recogido por la configuración del proxy angular y se reenvía a nuestro servidor NestJS. Impresionante 🎉
+Ahora, dado que el servidor de desarrollo Angular se está ejecutando en `http://localhost:4200/`, la solicitud irá a `http://localhost:4200/api/hello` debido a la ruta relativa en la llamada `httpClient`. Esto es recogido por la configuración del Proxy Angular y se reenvía a nuestro servidor NestJS. Impresionante 🎉
 
 ## Ajustar la aplicación para el desarrollo
 

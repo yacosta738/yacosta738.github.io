@@ -24,7 +24,11 @@ describe("root rss route", () => {
 	beforeEach(() => {
 		getCollectionMock.mockReset();
 		rssMock.mockReset();
-		rssMock.mockReturnValue(new Response("rss"));
+		rssMock.mockReturnValue(
+			new Response("rss", {
+				headers: { "content-type": "application/rss+xml; charset=utf-8" },
+			}),
+		);
 	});
 
 	it("builds the default-locale RSS feed at /rss.xml", async () => {
@@ -49,6 +53,31 @@ describe("root rss route", () => {
 			"articles",
 			expect.any(Function),
 		);
+		const articleCall = getCollectionMock.mock.calls.find(
+			([collection]) => collection === "articles",
+		);
+		const predicate = articleCall?.[1] as
+			| ((entry: { id: string; data: { draft?: boolean } }) => boolean)
+			| undefined;
+		expect(predicate).toBeTypeOf("function");
+		expect(
+			predicate?.({
+				id: "en/2026/03/29/published-post",
+				data: { draft: false },
+			}),
+		).toBe(true);
+		expect(
+			predicate?.({
+				id: "en/2026/03/29/draft-post",
+				data: { draft: true },
+			}),
+		).toBe(false);
+		expect(
+			predicate?.({
+				id: "es/2026/03/29/published-post",
+				data: { draft: false },
+			}),
+		).toBe(false);
 		expect(rssMock).toHaveBeenCalledWith(
 			expect.objectContaining({
 				title: "Blog title",
@@ -62,6 +91,9 @@ describe("root rss route", () => {
 				],
 			}),
 		);
-		expect(response).toBeInstanceOf(Response);
+		expect(await response.text()).toContain("rss");
+		expect(response.headers.get("content-type")).toContain(
+			"application/rss+xml",
+		);
 	});
 });
