@@ -10,11 +10,13 @@ export const prerender = true;
 
 const currentLocale = DEFAULT_LOCALE;
 const resume = await getMainResumeWithData({ lang: currentLocale });
-if (!resume || !resume.projects) {
+if (!resume) {
 	throw new Error("Failed to fetch main resume");
 }
 
-const allProjects = await getAllProjects(resume.projects);
+const projects = resume.projects ?? [];
+const allProjects = await getAllProjects(projects);
+const listedProjects = allProjects.slice(0, 20);
 const t = useTranslations(currentLocale);
 const title = t("allProjects");
 
@@ -27,8 +29,8 @@ const collectionJsonLd = {
 	url: `${siteOrigin}${Astro.url.pathname}`,
 	mainEntity: {
 		"@type": "ItemList",
-		numberOfItems: allProjects.length,
-		itemListElement: allProjects.slice(0, 20).map((project, index) => ({
+		numberOfItems: listedProjects.length,
+		itemListElement: listedProjects.map((project, index) => ({
 			"@type": "ListItem",
 			position: index + 1,
 			item: {
