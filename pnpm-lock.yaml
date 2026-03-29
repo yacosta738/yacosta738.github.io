@@ -366,7 +366,7 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       cross-env:
-        specifier: ^10.0.0
+        specifier: ^10.1.0
         version: 10.1.0
       gray-matter:
         specifier: ^4.0.3
