@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.13",
+	"version": "0.0.14",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -53,7 +53,7 @@
 	"devDependencies": {
 		"@axe-core/playwright": "4.11.1",
 		"@biomejs/biome": "2.4.9",
-		"@faker-js/faker": "^10.3.0",
+		"@faker-js/faker": "^10.4.0",
 		"@iconify-json/lucide": "^1.2.98",
 		"@iconify-json/mdi": "^1.2.3",
 		"@iconify-json/simple-icons": "^1.2.75",
