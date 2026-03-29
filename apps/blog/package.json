@@ -1,6 +1,6 @@
 {
 	"name": "blog",
-	"version": "0.0.17",
+	"version": "0.0.18",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -35,10 +35,10 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "0.9.8",
-		"@astrojs/mdx": "5.0.2",
-		"@astrojs/partytown": "^2.1.5",
-		"@astrojs/rss": "^4.0.17",
-		"@astrojs/sitemap": "^3.7.1",
+		"@astrojs/mdx": "5.0.3",
+		"@astrojs/partytown": "^2.1.6",
+		"@astrojs/rss": "^4.0.18",
+		"@astrojs/sitemap": "^3.7.2",
 		"@jsdevtools/rehype-toc": "^3.0.2",
 		"@notionhq/client": "^5.14.0",
 		"@tailwindcss/vite": "^4.2.2",
