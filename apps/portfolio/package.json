@@ -1,6 +1,6 @@
 {
 	"name": "portfolio",
-	"version": "0.0.10",
+	"version": "0.0.14",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -40,7 +40,7 @@
 		"@tailwindcss/vite": "^4.2.2",
 		"astro": "6.1.1",
 		"astro-compress": "2.4.0",
-		"astro-pagefind": "^1.8.5",
+		"astro-pagefind": "^1.8.6",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "1.4.0",
 		"sharp": "^0.34.5",
@@ -52,8 +52,8 @@
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "4.11.1",
-		"@biomejs/biome": "2.4.8",
-		"@faker-js/faker": "^10.3.0",
+		"@biomejs/biome": "2.4.9",
+		"@faker-js/faker": "^10.4.0",
 		"@iconify-json/lucide": "^1.2.98",
 		"@iconify-json/mdi": "^1.2.3",
 		"@iconify-json/simple-icons": "^1.2.75",
@@ -66,12 +66,12 @@
 		"@testing-library/preact": "^3.2.4",
 		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
-		"@vitest/coverage-v8": "^4.1.0",
+		"@vitest/coverage-v8": "^4.1.1",
 		"astro-component-tester": "^0.8.0",
 		"astro-critters": "2.2.1",
 		"astro-icon": "^1.1.5",
 		"clsx": "^2.1.1",
-		"cross-env": "^10.0.0",
+		"cross-env": "^10.1.0",
 		"gray-matter": "^4.0.3",
 		"happy-dom": "^20.8.8",
 		"jsdom": "^29.0.1",
@@ -84,6 +84,6 @@
 		"tailwind-merge": "^3.5.0",
 		"unified": "^11.0.5",
 		"vfile": "^6.0.3",
-		"vitest": "^4.1.0"
+		"vitest": "^4.1.1"
 	}
 }
