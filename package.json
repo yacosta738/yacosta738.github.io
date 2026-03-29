@@ -1,6 +1,6 @@
 {
 	"name": "yacosta-portfolio-monorepo",
-	"version": "2.1.9",
+	"version": "2.1.10",
 	"private": true,
 	"packageManager": "pnpm@10.33.0",
 	"homepage": "https://github.com/yacosta738/yacosta738.github.io",
@@ -60,7 +60,7 @@
 		"clean": "pnpm --filter=portfolio clean && pnpm --filter=blog clean && pnpm --filter=yap-api clean"
 	},
 	"engines": {
-		"node": ">=22.0.0"
+		"node": ">=22.22.2"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.9",

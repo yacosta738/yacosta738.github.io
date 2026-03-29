@@ -1,6 +1,6 @@
 {
 	"name": "@yap/astro-notion-loader",
-	"version": "1.1.6",
+	"version": "1.1.7",
 	"description": "Astro Content Loader to use Notion as a CMS",
 	"keywords": [
 		"astro-loader",
@@ -77,6 +77,6 @@
 	},
 	"packageManager": "pnpm@10.33.0",
 	"engines": {
-		"node": ">=18.20.8"
+		"node": ">=22.22.2"
 	}
 }
