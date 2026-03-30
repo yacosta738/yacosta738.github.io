@@ -125,6 +125,19 @@ describe("Blog Post Utils", () => {
 				"/es/2026/03/26/api-versioning/",
 			);
 		});
+
+		test("should collapse duplicated trailing slashes to a single slash", () => {
+			expect(ensureSingleTrailingSlash("/2023/04/03/understanding-cors-in-web-development//")).toBe(
+				"/2023/04/03/understanding-cors-in-web-development/",
+			);
+			expect(
+				ensureSingleTrailingSlash(
+					"https://blog.yunielacosta.com/2023/04/03/understanding-cors-in-web-development//",
+				),
+			).toBe(
+				"https://blog.yunielacosta.com/2023/04/03/understanding-cors-in-web-development/",
+			);
+		});
 	});
 
 	describe("getBlogPostTarget", () => {

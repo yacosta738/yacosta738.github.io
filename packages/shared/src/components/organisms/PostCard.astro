@@ -5,6 +5,7 @@ import type Article from "@/core/article/article.model";
 import { getTagSlug } from "@/core/tag";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cleanEntityId } from "@/lib/collection.entity";
+import { ensureSingleTrailingSlash } from "@/lib/blog-post.utils";
 import { buildBlogUrl, getBlogBaseUrl } from "@/utils/blog-url";
 
 const currentLocale = Astro.currentLocale as Lang;
@@ -33,8 +34,8 @@ const siteOrigin = Astro.site?.origin;
 const blogBaseUrl = siteOrigin ? getBlogBaseUrl(siteOrigin) : "";
 const buildBlogHref = (path: string) =>
 	blogBaseUrl ? buildBlogUrl(path, siteOrigin) : path;
-const contentLink = buildBlogHref(
-	translatePath(`/${cleanEntityId(id).toLowerCase()}/`),
+const contentLink = ensureSingleTrailingSlash(
+	buildBlogHref(translatePath(`/${cleanEntityId(id).toLowerCase()}/`)),
 );
 ---
 

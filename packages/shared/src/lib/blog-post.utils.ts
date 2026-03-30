@@ -43,7 +43,7 @@ export function getBlogPostUrl(
  * Ensure internal blog links end with exactly one trailing slash.
  */
 export function ensureSingleTrailingSlash(url: string): string {
-	return url.endsWith("/") ? url : `${url}/`;
+	return `${url.replace(/\/+$/g, "")}/`;
 }
 
 /**
