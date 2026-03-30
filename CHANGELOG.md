@@ -6,6 +6,26 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [3.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.9...v3.0.0) (2026-03-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update Node.js to v22.22.2 ([#1827](https://github.com/yacosta738/yacosta738.github.io/issues/1827))
+
+### Features
+
+* **deps:** update Node.js to v22.22.2 ([#1827](https://github.com/yacosta738/yacosta738.github.io/issues/1827)) ([9540df6](https://github.com/yacosta738/yacosta738.github.io/commit/9540df67fec1e61bc65ae40b42f1110e25926d15))
+
+
+### Bug Fixes
+
+* **blog:** clean up SEO routing and metadata ([#1825](https://github.com/yacosta738/yacosta738.github.io/issues/1825)) ([7b870b1](https://github.com/yacosta738/yacosta738.github.io/commit/7b870b11e37ba754ed470d66bab14ee5b1e29a51))
+* **deps:** update @iconify-json/lucide to ^1.2.99 ([#1747](https://github.com/yacosta738/yacosta738.github.io/issues/1747)) ([c256fde](https://github.com/yacosta738/yacosta738.github.io/commit/c256fded511192419a0f4bea3d03e94ec9ec8a6a))
+* **deps:** update Astro ([#1829](https://github.com/yacosta738/yacosta738.github.io/issues/1829)) ([faad3a2](https://github.com/yacosta738/yacosta738.github.io/commit/faad3a240036948515f038d9a14ec9611276f72d))
+* **deps:** update Testing tools to ^4.1.2 ([#1830](https://github.com/yacosta738/yacosta738.github.io/issues/1830)) ([78e9af5](https://github.com/yacosta738/yacosta738.github.io/commit/78e9af5bb8d2800f2740e7a5feeb99765effd984))
+* Improve SEO routing, metadata, and portfolio handling ([#1832](https://github.com/yacosta738/yacosta738.github.io/issues/1832)) ([a272444](https://github.com/yacosta738/yacosta738.github.io/commit/a272444e56b3450e7d95caae9ef9cbb900e36ed0))
+
 ## [2.1.9](https://github.com/yacosta738/yacosta738.github.io/compare/v2.1.8...v2.1.9) (2026-03-29)
 
 
