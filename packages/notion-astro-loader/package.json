@@ -1,6 +1,6 @@
 {
 	"name": "@yap/astro-notion-loader",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"description": "Astro Content Loader to use Notion as a CMS",
 	"keywords": [
 		"astro-loader",
@@ -50,7 +50,7 @@
 	},
 	"dependencies": {
 		"@jsdevtools/rehype-toc": "^3.0.2",
-		"@notionhq/client": "^5.14.0",
+		"@notionhq/client": "^5.15.0",
 		"fs-extra": "^11.3.4",
 		"kleur": "^4.1.5",
 		"notion-rehype-k": "^1.1.6",
