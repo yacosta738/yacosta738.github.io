@@ -19,8 +19,24 @@ const decodeImageSrc = (src: string): string => {
 	}
 };
 
-const OPAQUE_IMAGE_ID_PATTERN =
-	/^(?:[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$/i;
+const HEX_IMAGE_ID_PATTERN = /^[0-9a-f]{32}$/i;
+const UUID_IMAGE_ID_PATTERN =
+	/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+const isOpaqueImageId = (value: string): boolean =>
+	HEX_IMAGE_ID_PATTERN.test(value) || UUID_IMAGE_ID_PATTERN.test(value);
+
+const getImageCaption = (
+	properties: Record<string, unknown>,
+): string | undefined => {
+	if (typeof properties.title === "string") {
+		return properties.title;
+	}
+
+	return typeof properties["data-caption"] === "string"
+		? (properties["data-caption"] as string)
+		: undefined;
+};
 
 const getFallbackAltText = (src: string, caption?: string): string => {
 	const normalizedCaption = caption?.trim();
@@ -33,20 +49,23 @@ const getFallbackAltText = (src: string, caption?: string): string => {
 			? new URL(src)
 			: new URL(src, "https://blog.yunielacosta.com");
 		const fileName =
-			normalizedUrl.pathname.split("/").filter(Boolean).at(-1) || "";
+			normalizedUrl.pathname
+				.split("/")
+				.filter(Boolean)
+				.findLast(() => true) || "";
 		const baseName = fileName.replace(/\.[^.]+$/, "");
-		if (OPAQUE_IMAGE_ID_PATTERN.test(baseName)) {
+		if (isOpaqueImageId(baseName)) {
 			return "";
 		}
 		const normalized = baseName
-			.replace(/[-_]+/g, " ")
-			.replace(/\s+/g, " ")
+			.replaceAll(/[-_]+/g, " ")
+			.replaceAll(/\s+/g, " ")
 			.trim();
 		if (!normalized) {
 			return "";
 		}
-		const compactNormalized = normalized.replace(/\s+/g, "");
-		return OPAQUE_IMAGE_ID_PATTERN.test(compactNormalized) ? "" : normalized;
+		const compactNormalized = normalized.replaceAll(/\s+/g, "");
+		return isOpaqueImageId(compactNormalized) ? "" : normalized;
 	} catch {
 		return "";
 	}
@@ -70,12 +89,7 @@ const processImageNode = (
 	const alt =
 		typeof node.properties.alt === "string" ? node.properties.alt.trim() : "";
 	if (!alt) {
-		const caption =
-			typeof node.properties.title === "string"
-				? node.properties.title
-				: typeof node.properties["data-caption"] === "string"
-					? (node.properties["data-caption"] as string)
-					: undefined;
+		const caption = getImageCaption(node.properties);
 		node.properties.alt = getFallbackAltText(
 			node.properties.src as string,
 			caption,

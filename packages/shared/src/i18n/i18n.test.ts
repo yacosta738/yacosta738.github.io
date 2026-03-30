@@ -12,6 +12,11 @@ const mockShowDefaultLang = vi.fn().mockReturnValue(false);
 const mockExtractTagSlugFromPath = vi.fn();
 const mockGetTagLocalePaths = vi.fn();
 const mockIsTagPage = vi.fn();
+const mockGetArticles = vi.fn();
+
+vi.mock("@/core/article", () => ({
+	getArticles: mockGetArticles,
+}));
 
 vi.mock("@/core/tag", () => ({
 	extractTagSlugFromPath: mockExtractTagSlugFromPath,
@@ -59,6 +64,8 @@ describe("shared i18n helpers", () => {
 		mockExtractTagSlugFromPath.mockReset();
 		mockGetTagLocalePaths.mockReset();
 		mockIsTagPage.mockReset();
+		mockGetArticles.mockReset();
+		mockGetArticles.mockResolvedValue([]);
 		vi.stubEnv("LANG", "es");
 	});
 
@@ -79,6 +86,17 @@ describe("shared i18n helpers", () => {
 		expect(paths).toEqual([
 			{ lang: "en", path: "/about" },
 			{ lang: "es", path: "/es/about" },
+		]);
+	});
+
+	it("normalizes duplicated trailing slashes in locale paths", () => {
+		const paths = getLocalePaths(
+			new URL("https://example.com/es/2026/03/26/api-versioning//"),
+		);
+
+		expect(paths).toEqual([
+			{ lang: "en", path: "/2026/03/26/api-versioning/" },
+			{ lang: "es", path: "/es/2026/03/26/api-versioning/" },
 		]);
 	});
 
@@ -110,6 +128,19 @@ describe("shared i18n helpers", () => {
 		expect(paths).toEqual([
 			{ lang: "en", path: "/about" },
 			{ lang: "es", path: "/es/about" },
+		]);
+	});
+
+	it("omits broken article alternates when a translation slug does not exist", async () => {
+		mockIsTagPage.mockReturnValue(false);
+		mockGetArticles.mockResolvedValue([{ id: "es/2026/03/26/api-versioning" }]);
+
+		const paths = await getLocalePathsEnhanced(
+			new URL("https://example.com/es/2026/03/26/api-versioning/"),
+		);
+
+		expect(paths).toEqual([
+			{ lang: "es", path: "/es/2026/03/26/api-versioning/" },
 		]);
 	});
 

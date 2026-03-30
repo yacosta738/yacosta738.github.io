@@ -11,6 +11,7 @@ test("Logo renders with default props", async () => {
 	});
 
 	expect(result).toContain('href="/"');
+	expect(result).toContain('alt="Yuniel Acosta logo"');
 }, 10000);
 
 test("Logo renders with a different locale", async () => {
@@ -22,4 +23,5 @@ test("Logo renders with a different locale", async () => {
 	});
 
 	expect(result).toContain('href="/es/"');
+	expect(result).toContain('alt="Yuniel Acosta logo"');
 });

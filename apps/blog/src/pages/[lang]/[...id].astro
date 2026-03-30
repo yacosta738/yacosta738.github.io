@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import Layout from "@blog/layouts/Article.astro";
+import { buildLocalizedArticlePaths } from "@blog/lib/article-localization";
 import OptimizedPicture from "@/components/atoms/OptimizedPicture.astro";
 import CtaNewsletterSubscription from "@/components/organisms/CtaNewsletterSubscription.astro";
 import PostFooter from "@/components/organisms/PostFooter.astro";
@@ -24,46 +25,8 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-	const posts = (await getArticles()).filter((post) => {
-		const [lang] = post.id.split("/");
-		return ROUTE_LOCALES.includes(lang as Lang);
-	});
-
-	const bySlug = new Map<string, Map<Lang, Article>>();
-	for (const post of posts) {
-		const [lang, ...id] = post.id.split("/");
-		const idPath = id.join("/");
-		const langKey = lang as Lang;
-		const entry = bySlug.get(idPath) ?? new Map<Lang, Article>();
-		entry.set(langKey, post);
-		bySlug.set(idPath, entry);
-	}
-
-	const paths: Array<{
-		params: { lang: string; id: string };
-		props: Props;
-	}> = [];
-
-	for (const [idPath, langMap] of bySlug.entries()) {
-		const availableLangs = Array.from(langMap.keys());
-		const fallbackLang = (
-			langMap.has(DEFAULT_LOCALE) ? DEFAULT_LOCALE : availableLangs[0]
-		) as Lang;
-		const fallbackPost = langMap.get(fallbackLang);
-		if (!fallbackPost) {
-			continue;
-		}
-
-		for (const lang of ROUTE_LOCALES) {
-			const post = langMap.get(lang) ?? fallbackPost;
-			paths.push({
-				params: { lang, id: idPath },
-				props: { post, usedLangs: availableLangs },
-			});
-		}
-	}
-
-	return paths;
+	const posts = await getArticles();
+	return buildLocalizedArticlePaths(posts, ROUTE_LOCALES);
 }
 
 const { post, usedLangs } = Astro.props;

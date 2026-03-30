@@ -16,7 +16,7 @@ draft: false
 ---
 
 
-No recuerdo exactamente cuándo comencé a escuchar acerca de [Astro](https://astro.build), uno de los últimos generadores de sitios estáticos para ayudar a abordar el problema de crear sitios webs con menos Javascript. El problema es uno con el que todos estamos familiarizados: ¿cómo puedo crear un sitio estático (en mi caso, mi sitio personal) usando los lenguajes y las herramientas que mejor conozco, mientras el desempeño es el mejor posible? Después de migrar desde [jekyll](https://jekyllrb.com/), primero probé [Hugo](https://gohugo.io/), luego [Gridsome](https://gridsome.org/) y más recientemente [Nuxt](https://nuxtjs.org/). Todas estas son excelentes herramientas, y las recomiendo encarecidamente. Pero una cosa que es igual en todos ellos es que están vinculados a su framework específico (React o Vue).
+No recuerdo exactamente cuándo comencé a escuchar acerca de [Astro](https://astro.build), uno de los últimos generadores de sitios estáticos para ayudar a abordar el problema de crear sitios web con menos Javascript. El problema es uno con el que todos estamos familiarizados: ¿cómo puedo crear un sitio estático (en mi caso, mi sitio personal) usando los lenguajes y las herramientas que mejor conozco, mientras el desempeño es el mejor posible? Después de migrar desde [Jekyll](https://jekyllrb.com/), primero probé [Hugo](https://gohugo.io/), luego [Gridsome](https://gridsome.org/) y más recientemente [Nuxt](https://nuxt.com/). Todas estas son excelentes herramientas, y las recomiendo encarecidamente. Pero una cosa que es igual en todos ellos es que están vinculados a su framework específico (React o Vue).
 
 Astro elimina eso, y es una de las cosas que realmente me atrajo del marco. Desde su sitio:
 
@@ -32,7 +32,7 @@ Debo decir, antes de ir más lejos, que me encanta Nuxt como framework. Creo que
 
 Dicho esto, he estado ejecutando varios sitios con Nuxt en modo de sitio estático, y cada uno de ellos tiene algunas peculiaridades extrañas que nunca he podido resolver por completo. Un sitio, una sola página en el sentido más verdadero con solo un poco de reactividad, contiene errores en typescript en VS Code. Esto se debe a que los complementos de VS Code (ya sea Vetur o Volar) no reconocen que el método `asyncData` de Nuxt devuelve el estado al objeto Vue. Esto no es culpa de Nuxt, pero hizo las cosas molestas.
 
-Un segundo sitio (que son puramente estáticos, casi sin interacción JS en el navegador) tenía un problema que cuando se actualizaba el código, cualquier contenido obtenido con el [módulo de contenido de Nuxt](https://content.nuxtjs.org/) no se encuentra después de que se finaliza la recarga del módulo en caliente. Encontré una solución, y no es un gran problema, pero es molesto.
+Un segundo sitio (que son puramente estáticos, casi sin interacción JS en el navegador) tenía el problema de que, cuando se actualizaba el código, cualquier contenido obtenido con el [módulo de contenido de Nuxt](https://content.nuxt.com/) no se encuentra después de que se finaliza la recarga del módulo en caliente. Encontré una solución, y no es un gran problema, pero es molesto.
 
 Todos estos sitios, desde el más pequeño hasta el más grande, tenían un problema unificador: las puntuaciones de rendimiento de Lighthouse nunca fueron excelentes. A continuación se muestran mis puntajes de Lighthouse para este sitio antes de migrar de Nuxt:
 

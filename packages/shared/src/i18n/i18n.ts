@@ -13,6 +13,9 @@ import {
 } from "./types";
 import { useTranslations } from "./utils";
 
+const ARTICLE_PATH_PATTERN = /^\/(?:\d{4}\/\d{2}\/\d{2}\/[^/]+)\/?$/;
+let cachedArticleIds: Set<string> | undefined;
+
 /**
  * Helper to get the translation function
  * @param - The current language
@@ -59,17 +62,40 @@ export function useTranslatedPath(lang: Lang) {
  * Build a regex pattern for matching language prefixes
  */
 const buildLangPrefixRegex = (): RegExp => {
-	const locales = Object.keys(LOCALES);
+	const locales = Object.keys(LOCALES) as Lang[];
 	const pattern = `^/(${locales.join("|")})/`;
 	return new RegExp(pattern);
 };
 
+const normalizeLocalizedPathname = (pathname: string): string => {
+	const collapsedPath = pathname.replaceAll(/\/{2,}/g, "/");
+	return collapsedPath;
+};
+
+const getPathLocale = (pathname: string): Lang => {
+	const langPrefixRegex = buildLangPrefixRegex();
+	const match = langPrefixRegex.exec(pathname);
+	return (match?.[1] as Lang | undefined) ?? DEFAULT_LOCALE;
+};
+
+const isArticlePath = (pathname: string): boolean => {
+	const normalizedPath = normalizeLocalizedPathname(pathname);
+	const pathWithoutLocale = normalizedPath.replace(buildLangPrefixRegex(), "/");
+	return ARTICLE_PATH_PATTERN.test(pathWithoutLocale);
+};
+
+const toArticleId = (pathname: string, lang: Lang): string => {
+	const pathWithoutLocale = pathname.replace(buildLangPrefixRegex(), "/");
+	return `${lang}/${pathWithoutLocale.replace(/^\/+|\/+$/g, "")}`;
+};
+
 export function getLocalePaths(url: URL): LocalePath[] {
+	const normalizedPathname = normalizeLocalizedPathname(url.pathname);
 	// Create a regex pattern that matches only language prefixes
 	const langPrefixRegex = buildLangPrefixRegex();
 
 	// Extract the pathname without the language prefix if it exists
-	const pathWithoutLangPrefix = url.pathname.replace(langPrefixRegex, "");
+	const pathWithoutLangPrefix = normalizedPathname.replace(langPrefixRegex, "");
 
 	// If pathWithoutLangPrefix is empty, it means the URL was just a language prefix
 	// In that case, use "/" as the path
@@ -78,22 +104,28 @@ export function getLocalePaths(url: URL): LocalePath[] {
 		? `/${pathWithoutLangPrefix.replace(/^\/+/, "")}`
 		: "/";
 
-	return Object.keys(LOCALES).map((lang) => {
-		const localePath = buildLocalePath(cleanPath, lang as Lang);
+	const locales = Object.keys(LOCALES) as Lang[];
+	return locales.map((lang) => {
+		const localePath = buildLocalePath(cleanPath, lang);
 		return {
-			lang: lang as Lang,
+			lang,
 			path: localePath,
 		};
 	});
 }
 
 /**
- * Enhanced version of getLocalePaths that handles tag pages intelligently.
+ * Enhanced version of getLocalePaths that handles tag and article pages.
+ *
  * For tag pages, it checks if the tag exists in each language and provides
- * appropriate fallbacks if not.
+ * appropriate fallbacks if not. For article routes, it only returns localized
+ * paths that currently exist in content, plus the current-path fallback when
+ * the current locale route resolves through a fallback article. Callers should
+ * not assume one entry per configured locale.
  *
  * @param url - The URL to extract and transform the pathname
- * @returns Promise resolving to an array of LocalePath objects with smart tag handling
+ * @returns Promise resolving to localized paths that may be filtered and shorter
+ * than the configured locale set when tags or article translations are missing
  *
  * @example
  * // For tag page URL: new URL('https://example.com/en/tag/security')
@@ -102,9 +134,28 @@ export function getLocalePaths(url: URL): LocalePath[] {
  * //   { lang: 'es', path: '/es/tag/security' },  // if tag exists
  * //   { lang: 'de', path: '/de/tag' },           // fallback if tag doesn't exist
  * // ]
+ *
+ * // For article page URL: new URL('https://example.com/es/2026/03/26/api-versioning/')
+ * // Returns only existing alternates, for example:
+ * // [
+ * //   { lang: 'es', path: '/es/2026/03/26/api-versioning/' }
+ * // ]
  */
+
+const getCachedArticleIds = async (): Promise<Set<string>> => {
+	if (cachedArticleIds) {
+		return cachedArticleIds;
+	}
+
+	const { getArticles } = await import("@/core/article");
+	cachedArticleIds = new Set(
+		(await getArticles()).map((article) => article.id),
+	);
+	return cachedArticleIds;
+};
+
 export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
-	const pathname = url.pathname;
+	const pathname = normalizeLocalizedPathname(url.pathname);
 
 	// Check if this is a tag page
 	if (isTagPage(pathname)) {
@@ -138,8 +189,34 @@ export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 		}
 	}
 
+	if (isArticlePath(pathname)) {
+		const articleIds = await getCachedArticleIds();
+		const currentLang = getPathLocale(pathname);
+		const paths = getLocalePaths(new URL(pathname, url.origin));
+		// Article alternates are filtered to routes that exist in content. The
+		// current path is preserved as a fallback when it resolves through a
+		// default-locale article, so callers may receive fewer entries than the
+		// configured locale count.
+		const existingPaths = paths.filter(({ lang, path }) =>
+			articleIds.has(toArticleId(path, lang)),
+		);
+		const currentPath = paths.find(({ lang }) => lang === currentLang);
+
+		if (
+			currentPath &&
+			!existingPaths.some(
+				({ lang, path }) =>
+					lang === currentPath.lang && path === currentPath.path,
+			)
+		) {
+			return [currentPath, ...existingPaths];
+		}
+
+		return existingPaths;
+	}
+
 	// For non-tag pages, use the standard behavior
-	return getLocalePaths(url);
+	return getLocalePaths(new URL(pathname, url.origin));
 }
 
 type LocalePath = {

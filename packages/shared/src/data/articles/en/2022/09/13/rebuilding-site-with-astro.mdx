@@ -14,7 +14,7 @@ draft: false
 ---
 
 
-I don't remember exactly when I started hearing about [Astro](https://astro.build), one of the latest static site generators to help tackle the problem of building sites with less Javascript. The problem is one we're all familiar with - how can I build a static site (in my case, my personal site) using the languages and tools I know best, while performing at its best? After migrating from [jekyll](https://jekyllrb.com/), I first tried [Hugo](https://gohugo.io/), then [Gridsome](https://gridsome.org/), and most recently [Nuxt](https://nuxtjs.org/). All of these are excellent tools, and I highly recommend them. However, one thing that they all have in common is that they are tied to their specific framework (React or Vue).
+I don't remember exactly when I started hearing about [Astro](https://astro.build), one of the latest static site generators to help tackle the problem of building sites with less Javascript. The problem is one we're all familiar with - how can I build a static site (in my case, my personal site) using the languages and tools I know best, while performing at its best? After migrating from [jekyll](https://jekyllrb.com/), I first tried [Hugo](https://gohugo.io/), then [Gridsome](https://gridsome.org/), and most recently [Nuxt](https://nuxt.com/). All of these are excellent tools, and I highly recommend them. However, one thing that they all have in common is that they are tied to their specific framework (React or Vue).
 
 Astro does away with that, and it's one of the things that really drew me to the framework. From their site:
 
@@ -30,7 +30,7 @@ I must say, before going any further, that I love Nuxt as a framework. I think i
 
 That said, I've been running a number of sites with Nuxt in static site mode, and each of them has some odd quirks that I've never been able to fully work out. One site, a single page in the truest sense with only a bit of reactivity, was constantly reporting Typescript errors in VS Code. This was because the VS Code plugins (either Vetur or Volar) did not recognize that Nuxt's `asyncData` method returned state to the Vue object. This is not Nuxt's fault, but it made things annoying.
 
-A second site (which is purely static assets, almost no JS interaction in the browser) had an issue that when code was updated, any content fetched with [Nuxt's Content module](https://content.nuxtjs.org/) would be missing after the hot module reload finished. I found a workaround, and it's not a huge deal, but it's annoying.
+A second site (which is purely static assets, almost no JS interaction in the browser) had an issue that when code was updated, any content fetched with [Nuxt's Content module](https://content.nuxt.com/) would be missing after the hot module reload finished. I found a workaround, and it's not a huge deal, but it's annoying.
 
 All of these sites, from the smallest to the largest, had one unifying issue: Lighthouse performance scores were never great. Below are my Lighthouse scores for this site before migrating from Nuxt:
 
