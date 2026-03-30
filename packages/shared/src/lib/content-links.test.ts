@@ -3,7 +3,8 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 const articlesDir = path.resolve(import.meta.dirname, "../data/articles");
-const brokenRootLevelArticleLinkPattern = /\]\(\/(?:es\/)?[a-z0-9-]+\/?\)/g;
+const brokenRootLevelArticleLinkPattern =
+	/\]\(\/(?:[a-z]+(?:-[a-z]+)?\/)?[a-z0-9-]+\/?\)/g;
 
 const getArticleFiles = (directory: string): string[] => {
 	return readdirSync(directory).flatMap((entry) => {

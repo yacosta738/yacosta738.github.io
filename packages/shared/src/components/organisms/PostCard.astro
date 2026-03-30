@@ -4,8 +4,8 @@ import { routes } from "@/configs/route.path";
 import type Article from "@/core/article/article.model";
 import { getTagSlug } from "@/core/tag";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
-import { cleanEntityId } from "@/lib/collection.entity";
 import { ensureSingleTrailingSlash } from "@/lib/blog-post.utils";
+import { cleanEntityId } from "@/lib/collection.entity";
 import { buildBlogUrl, getBlogBaseUrl } from "@/utils/blog-url";
 
 const currentLocale = Astro.currentLocale as Lang;
@@ -72,7 +72,9 @@ const contentLink = ensureSingleTrailingSlash(
 					<a
 						class="w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none text-foreground-muted"
 						href={buildBlogHref(
-							translatePath(`/${routes.tag}/${getTagSlug(tag)}/`),
+							ensureSingleTrailingSlash(
+								translatePath(`/${routes.tag}/${getTagSlug(tag)}/`),
+							),
 						)}
 						aria-label={t("post.aria.tag", { tag: tag.title })}
 					>
