@@ -5,11 +5,13 @@ import { getSocialIcon } from "@/configs/social.consts";
 import { filterMenuItems, navLinks } from "@/core/menu";
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+import { buildBlogUrl } from "@/utils/blog-url";
 import Logo from "../atoms/Logo.astro";
 
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
+const siteOrigin = Astro.site?.origin;
 const localizedSiteTitle =
 	typeof SITE_TITLE === "string"
 		? SITE_TITLE
@@ -27,7 +29,7 @@ const socials = profiles
 	.filter((profile) => Boolean(profile.icon));
 socials.push({
 	name: "RSS",
-	url: translatePath("/rss.xml"),
+	url: buildBlogUrl(translatePath("/rss.xml"), siteOrigin),
 	icon: "lucide:rss",
 });
 
@@ -64,7 +66,9 @@ const columnsClass = optimalColumns === 1 ? "md:grid-cols-1" : "md:grid-cols-2";
 							filteredNavLinks.map((link) => (
 								<li>
 									<a
-										href={translatePath(link.href)}
+										href={link.href === "/rss.xml"
+											? buildBlogUrl(translatePath(link.href), siteOrigin)
+											: translatePath(link.href)}
 										aria-label={
 											link.ariaLabelKey
 												? t(link.ariaLabelKey)

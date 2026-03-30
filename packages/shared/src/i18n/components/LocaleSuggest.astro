@@ -10,7 +10,7 @@
 import type { HTMLAttributes } from "astro/types";
 import { Icon } from "astro-icon/components";
 import BaseToast from "@/components/atoms/BaseToast.astro";
-import { type Lang, LOCALES } from "@/i18n";
+import { getLocalePathsEnhanced, type Lang, LOCALES } from "@/i18n";
 
 interface Props extends HTMLAttributes<"div"> {
 	position?:
@@ -23,6 +23,7 @@ interface Props extends HTMLAttributes<"div"> {
 
 const { position = "bottom-left", ...attr } = Astro.props;
 const currentLocale = Astro.currentLocale as Lang;
+const paths = await getLocalePathsEnhanced(Astro.url);
 ---
 
 <BaseToast 
@@ -52,7 +53,7 @@ const currentLocale = Astro.currentLocale as Lang;
   </div>
 </BaseToast>
 
-<script is:inline define:vars={{ currentLocale, LOCALES }}>
+<script is:inline define:vars={{ currentLocale, LOCALES, paths }}>
   function initLanguageSuggest() {
     const browserLang = navigator.language.toLowerCase();
     const suggest = document.getElementById("js-languageSuggest");
@@ -93,14 +94,15 @@ const currentLocale = Astro.currentLocale as Lang;
 
     // Function to show suggestion
     const showSuggest = (lang) => {
-      const pathnames = location.pathname.split("/");
       const link = document.getElementById("js-link");
       const linkText = document.getElementById("js-linkText");
 
       if (!link || !linkText) return;
 
-      pathnames[1] = lang;
-      link.href = pathnames.join("/");
+      const targetPath = paths.find((entry) => entry.lang === lang)?.path;
+      if (!targetPath) return;
+
+      link.href = targetPath;
       linkText.innerText = LOCALES[lang].label;
 
       // Show with animation first

@@ -30,8 +30,7 @@ const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 const siteOrigin = Astro.site?.origin || DOMAIN;
 const blogBaseUrl = siteOrigin ? getBlogBaseUrl(siteOrigin) : "";
-const blogHref = (path: string) =>
-	blogBaseUrl ? buildBlogUrl(path, siteOrigin) : path;
+const blogHref = (path: string) => buildBlogUrl(path, siteOrigin || DOMAIN);
 ---
 
 <nav
