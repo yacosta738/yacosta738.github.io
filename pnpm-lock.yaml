@@ -97,8 +97,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       '@notionhq/client':
-        specifier: ^5.14.0
-        version: 5.14.0
+        specifier: ^5.15.0
+        version: 5.15.0
       '@tailwindcss/vite':
         specifier: ^4.2.2
         version: 4.2.2(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.3))
@@ -414,8 +414,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       '@notionhq/client':
-        specifier: ^5.14.0
-        version: 5.14.0
+        specifier: ^5.15.0
+        version: 5.15.0
       fs-extra:
         specifier: ^11.3.4
         version: 11.3.4
@@ -1525,8 +1525,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@notionhq/client@5.14.0':
-    resolution: {integrity: sha512-9bbH7/9M6D9YlHMYCZ1aAFxRCWiKRBpP/XOnAHFtBCFDf00PPhpWRSsGE1FfmjYCNW2BFRj19WshJFH5IFfNvg==}
+  '@notionhq/client@5.15.0':
+    resolution: {integrity: sha512-boQ+zMmTu/HRfPajynYjlXkytkmn0rUgD0FJrbMaz6n1WC6HPxe2Lgn/Ay/VEA2j2dMzB1Hpnhtrtkz4Q1I/rw==}
     engines: {node: '>=18'}
 
   '@octokit/auth-token@6.0.0':
@@ -6556,7 +6556,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@notionhq/client@5.14.0': {}
+  '@notionhq/client@5.15.0': {}
 
   '@octokit/auth-token@6.0.0': {}
 
