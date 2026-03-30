@@ -19,7 +19,7 @@ const currentLocale = Astro.params.lang as Lang;
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
 
 const resume = await getMainResumeWithData({ lang: currentLocale });
-if (!resume || !resume.projects) {
+if (!resume?.projects) {
 	throw new Error("No se pudo obtener el resume principal");
 }
 const allProjects = await getAllProjects(resume.projects);
