@@ -26,13 +26,16 @@ export async function resolveDataSourceForDatabase(
 
 	const requestedDataSourceId = options.dataSourceId;
 	if (!requestedDataSourceId && availableDataSources.length > 1) {
-		const dataSourceList = availableDataSources.map((source) => source.id).join(", ");
+		const dataSourceList = availableDataSources
+			.map((source) => source.id)
+			.join(", ");
 		throw new Error(
 			`Database ${databaseId} has multiple data sources (${dataSourceList}). Pass data_source_id explicitly.`,
 		);
 	}
 
-	const resolvedDataSourceId = requestedDataSourceId ?? availableDataSources[0]?.id;
+	const resolvedDataSourceId =
+		requestedDataSourceId ?? availableDataSources[0]?.id;
 	if (!resolvedDataSourceId) {
 		throw new Error(`Database ${databaseId} has no resolvable data source id`);
 	}

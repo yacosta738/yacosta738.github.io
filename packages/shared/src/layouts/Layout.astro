@@ -168,7 +168,8 @@ const canonicalHref = fallbackOrigin
 	? new URL(Astro.url.pathname, fallbackOrigin).href
 	: Astro.url.href;
 const localePaths = await getLocalePathsEnhanced(Astro.url);
-const xDefaultPath = localePaths.find((props) => props.lang === "en")?.path || "/";
+const xDefaultPath =
+	localePaths.find((props) => props.lang === "en")?.path || "/";
 const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 const xAccount =
 	typeof X_ACCOUNT === "string"
