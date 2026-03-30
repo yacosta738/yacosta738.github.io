@@ -14,6 +14,7 @@ import {
 import { useTranslations } from "./utils";
 
 const ARTICLE_PATH_PATTERN = /^\/(?:\d{4}\/\d{2}\/\d{2}\/[^/]+)\/?$/;
+let cachedArticleIds: Set<string> | undefined;
 
 /**
  * Helper to get the translation function
@@ -114,12 +115,17 @@ export function getLocalePaths(url: URL): LocalePath[] {
 }
 
 /**
- * Enhanced version of getLocalePaths that handles tag pages intelligently.
+ * Enhanced version of getLocalePaths that handles tag and article pages.
+ *
  * For tag pages, it checks if the tag exists in each language and provides
- * appropriate fallbacks if not.
+ * appropriate fallbacks if not. For article routes, it only returns localized
+ * paths that currently exist in content, plus the current-path fallback when
+ * the current locale route resolves through a fallback article. Callers should
+ * not assume one entry per configured locale.
  *
  * @param url - The URL to extract and transform the pathname
- * @returns Promise resolving to an array of LocalePath objects with smart tag handling
+ * @returns Promise resolving to localized paths that may be filtered and shorter
+ * than the configured locale set when tags or article translations are missing
  *
  * @example
  * // For tag page URL: new URL('https://example.com/en/tag/security')
@@ -128,7 +134,26 @@ export function getLocalePaths(url: URL): LocalePath[] {
  * //   { lang: 'es', path: '/es/tag/security' },  // if tag exists
  * //   { lang: 'de', path: '/de/tag' },           // fallback if tag doesn't exist
  * // ]
+ *
+ * // For article page URL: new URL('https://example.com/es/2026/03/26/api-versioning/')
+ * // Returns only existing alternates, for example:
+ * // [
+ * //   { lang: 'es', path: '/es/2026/03/26/api-versioning/' }
+ * // ]
  */
+
+const getCachedArticleIds = async (): Promise<Set<string>> => {
+	if (cachedArticleIds) {
+		return cachedArticleIds;
+	}
+
+	const { getArticles } = await import("@/core/article");
+	cachedArticleIds = new Set(
+		(await getArticles()).map((article) => article.id),
+	);
+	return cachedArticleIds;
+};
+
 export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 	const pathname = normalizeLocalizedPathname(url.pathname);
 
@@ -165,12 +190,13 @@ export async function getLocalePathsEnhanced(url: URL): Promise<LocalePath[]> {
 	}
 
 	if (isArticlePath(pathname)) {
-		const { getArticles } = await import("@/core/article");
-		const articleIds = new Set(
-			(await getArticles()).map((article) => article.id),
-		);
+		const articleIds = await getCachedArticleIds();
 		const currentLang = getPathLocale(pathname);
 		const paths = getLocalePaths(new URL(pathname, url.origin));
+		// Article alternates are filtered to routes that exist in content. The
+		// current path is preserved as a fallback when it resolves through a
+		// default-locale article, so callers may receive fewer entries than the
+		// configured locale count.
 		const existingPaths = paths.filter(({ lang, path }) =>
 			articleIds.has(toArticleId(path, lang)),
 		);
