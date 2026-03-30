@@ -1,9 +1,13 @@
 import * as path from "node:path";
-import { Client, isFullPage, iteratePaginatedAPI } from "@notionhq/client";
-import type { RehypePlugins } from "astro";
+import {
+	Client,
+	isFullPage,
+	iteratePaginatedAPI,
+} from "@notionhq/client";
 import type { Loader } from "astro/loaders";
 import { dim } from "kleur/colors";
 
+import { resolveDataSourceForDatabase } from "./data-source.js";
 import { propertiesSchemaForDatabase } from "./database-properties.js";
 import { VIRTUAL_CONTENT_ROOT } from "./image.js";
 import {
@@ -22,13 +26,16 @@ export interface NotionLoaderOptions
 		>,
 		Pick<
 			QueryDatabaseParameters,
-			"database_id" | "filter_properties" | "sorts" | "filter" | "archived"
+			"data_source_id" | "filter_properties" | "sorts" | "filter" | "archived"
 		> {
+	database_id: string;
 	/**
 	 * Pass rehype plugins to customize how the Notion output HTML is processed.
 	 * You can import and apply the plugin function (recommended), or pass the plugin name as a string.
 	 */
-	rehypePlugins?: RehypePlugins;
+	rehypePlugins?: Array<
+		RehypePlugin | string | readonly [RehypePlugin | string, unknown]
+	>;
 	/**
 	 * The name of the collection, only used for logging and debugging purposes.
 	 * Useful for multiple loaders to differentiate their logs.
@@ -59,6 +66,16 @@ export interface NotionLoaderOptions
 
 const DEFAULT_IMAGE_SAVE_PATH = "assets/images/notion";
 
+type RehypePluginConfig = NonNullable<
+	NotionLoaderOptions["rehypePlugins"]
+>[number];
+
+function isRehypePluginTuple(
+	config: RehypePluginConfig,
+): config is readonly [RehypePlugin | string, unknown] {
+	return Array.isArray(config);
+}
+
 /**
  * Notion loader for the Astro Content Layer API.
  *
@@ -84,6 +101,7 @@ const DEFAULT_IMAGE_SAVE_PATH = "assets/images/notion";
  */
 export function notionLoader({
 	database_id,
+	data_source_id,
 	filter_properties,
 	sorts,
 	filter,
@@ -96,12 +114,27 @@ export function notionLoader({
 	...clientOptions
 }: NotionLoaderOptions): Loader {
 	const notionClient = new Client(clientOptions);
+	let dataSourcePromise:
+		| Promise<Awaited<ReturnType<typeof resolveDataSourceForDatabase>>>
+		| undefined;
+
+	const resolveDataSource = async () => {
+		if (!dataSourcePromise) {
+			dataSourcePromise = resolveDataSourceForDatabase(
+				notionClient,
+				database_id,
+				{ dataSourceId: data_source_id },
+			);
+		}
+
+		return dataSourcePromise;
+	};
 
 	const resolvedRehypePlugins = Promise.all(
 		rehypePlugins.map(async (config) => {
 			let plugin: RehypePlugin | string;
 			let options: unknown;
-			if (Array.isArray(config)) {
+			if (isRehypePluginTuple(config)) {
 				[plugin, options] = config;
 			} else {
 				plugin = config;
@@ -123,12 +156,14 @@ export function notionLoader({
 				properties: await propertiesSchemaForDatabase(
 					notionClient,
 					database_id,
+					data_source_id,
 				),
 			}),
 			types: "",
 		}),
 		async load(ctx) {
 			const { store, logger: log_db, parseData } = ctx;
+			const dataSource = await resolveDataSource();
 
 			const existingPageIds = new Set<string>(store.keys());
 			const renderPromises: Promise<void>[] = [];
@@ -136,12 +171,13 @@ export function notionLoader({
 			const storeInfo = dim(`found ${existingPageIds.size} pages in store`);
 			log_db.info(`Loading database ${storeInfo}`);
 
-			const pages = iteratePaginatedAPI(notionClient.databases.query, {
-				database_id,
+			const pages = iteratePaginatedAPI(notionClient.dataSources.query, {
+				data_source_id: dataSource.id,
 				filter_properties,
 				sorts,
 				filter,
 				archived,
+				result_type: "page",
 			});
 			let pageCount = 0;
 

@@ -53,14 +53,18 @@ export async function saveImageFromAWS(
 	if (segments.length < 3) {
 		throw new Error(`Malformed image URL path: ${url}`);
 	}
-	const [parentId, objId, fileName] = segments.slice(-3);
+	const [parentId, objId, fileName] = segments.slice(-3) as [
+		string,
+		string,
+		string,
+	];
 
 	// Path to parent directory of the image
 	// ./src/{dir}/{parentId}
 	const saveDirPath = path.resolve(dir, parentId);
 	fse.ensureDirSync(saveDirPath);
 
-	const ext = fileName.split(".").at(-1);
+	const ext = path.extname(fileName).slice(1) || "bin";
 
 	// Path to the image file
 	// ./src/{dir}/{parentId}/{objId}.{ext}

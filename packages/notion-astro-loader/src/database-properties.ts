@@ -1,13 +1,17 @@
 import type { Client } from "@notionhq/client";
 import { z } from "zod";
+import { resolveDataSourceForDatabase } from "./data-source.js";
 import * as rawPropertyType from "./schemas/raw-properties.js";
 import type { DatabasePropertyConfigResponse } from "./types.js";
 
 export async function propertiesSchemaForDatabase(
 	client: Client,
 	databaseId: string,
+	dataSourceId?: string,
 ) {
-	const database = await client.databases.retrieve({ database_id: databaseId });
+	const dataSource = await resolveDataSourceForDatabase(client, databaseId, {
+		dataSourceId,
+	});
 
 	const schemaByType: Record<string, z.ZodTypeAny> = {
 		number: rawPropertyType.number,
@@ -38,7 +42,7 @@ export async function propertiesSchemaForDatabase(
 	): z.ZodTypeAny => schemaByType[propertyConfig.type] ?? z.any();
 
 	const schema = Object.fromEntries(
-		Object.entries(database.properties).map(
+		Object.entries(dataSource.properties).map(
 			([key, value]: [string, DatabasePropertyConfigResponse]) => {
 				let propertySchema = schemaForDatabaseProperty(value);
 				if (value.description) {
@@ -51,7 +55,7 @@ export async function propertiesSchemaForDatabase(
 				return [key, propertySchema];
 			},
 		),
-	);
+	) as Record<string, z.ZodTypeAny>;
 
 	return z.object(schema);
 }

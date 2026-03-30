@@ -1,27 +1,26 @@
-import type { Client, isFullDatabase, isFullPage } from "@notionhq/client";
+import type {
+	Client,
+	DataSourceObjectResponse,
+	PageObjectResponse,
+	QueryDataSourceParameters,
+} from "@notionhq/client";
 
 /**
  * @module
  * Types from the internal Notion JS API, exposed for use in this project.
  */
 
-type Asserts<Function> = Function extends (
-	input: unknown,
-) => input is infer Type
-	? Type
-	: never;
-
 export type ClientOptions = NonNullable<
 	ConstructorParameters<typeof Client>[0]
 >;
-export interface QueryDatabaseParameters
-	extends NonNullable<Parameters<Client["databases"]["query"]>[0]> {}
 
-export type DatabasePropertyConfigResponse = Asserts<
-	typeof isFullDatabase
->["properties"][string];
+export interface QueryDatabaseParameters extends QueryDataSourceParameters {}
 
-export type PageObjectResponse = Asserts<typeof isFullPage>;
+export type DatabasePropertyConfigResponse =
+	DataSourceObjectResponse["properties"][string];
+
+export type { PageObjectResponse };
+
 export type PageProperty = PageObjectResponse["properties"][string];
 export type EmojiRequest = Extract<
 	PageObjectResponse["icon"],

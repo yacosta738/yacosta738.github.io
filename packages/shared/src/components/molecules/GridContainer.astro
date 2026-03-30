@@ -5,15 +5,14 @@ import {
 	getSelectionStrategy,
 	type SortingStrategy,
 } from "@/core/article/article-selection.strategy";
-import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
-import { cleanEntityId } from "@/lib/collection.entity";
+import { type Lang, useTranslations } from "@/i18n";
+import { getBlogPostUrl } from "@/lib/blog-post.utils";
 import { cn } from "@/lib/utils";
 import CtaNewsletterSubscription from "../organisms/CtaNewsletterSubscription.astro";
 import ArticleCard from "./ArticleCard.astro";
 
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
-const translatePath = useTranslatedPath(currentLocale);
 
 interface Props extends HTMLAttributes<"div"> {
 	posts: Article[];
@@ -118,7 +117,7 @@ for (let i = 0; i < totalPosts; i++) {
             image={post.cover}
             title={post.title}
             description={post.description}
-						url={translatePath(`/${cleanEntityId(post.id)}`)}
+						url={getBlogPostUrl(post, currentLocale)}
             loading={imageLoading}
           />
         </li>
