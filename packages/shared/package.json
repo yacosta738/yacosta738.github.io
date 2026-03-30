@@ -1,6 +1,6 @@
 {
 	"name": "@portfolio/shared",
-	"version": "0.0.14",
+	"version": "0.0.17",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -32,10 +32,10 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "0.9.8",
-		"@astrojs/mdx": "5.0.2",
-		"@astrojs/partytown": "^2.1.5",
-		"@astrojs/rss": "^4.0.17",
-		"@astrojs/sitemap": "^3.7.1",
+		"@astrojs/mdx": "5.0.3",
+		"@astrojs/partytown": "^2.1.6",
+		"@astrojs/rss": "^4.0.18",
+		"@astrojs/sitemap": "^3.7.2",
 		"@tailwindcss/vite": "^4.2.2",
 		"astro": "6.1.1",
 		"astro-compress": "2.4.0",
@@ -52,7 +52,7 @@
 		"@axe-core/playwright": "4.11.1",
 		"@biomejs/biome": "2.4.9",
 		"@faker-js/faker": "^10.4.0",
-		"@iconify-json/lucide": "^1.2.98",
+		"@iconify-json/lucide": "^1.2.99",
 		"@iconify-json/mdi": "^1.2.3",
 		"@iconify-json/simple-icons": "^1.2.75",
 		"@iconify-json/tabler": "^1.2.32",
@@ -64,7 +64,7 @@
 		"@testing-library/preact": "^3.2.4",
 		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
-		"@vitest/coverage-v8": "^4.1.1",
+		"@vitest/coverage-v8": "^4.1.2",
 		"astro-component-tester": "^0.8.0",
 		"astro-critters": "2.2.1",
 		"astro-icon": "^1.1.5",
@@ -81,6 +81,6 @@
 		"tailwind-merge": "^3.5.0",
 		"unified": "^11.0.5",
 		"vfile": "^6.0.3",
-		"vitest": "^4.1.1"
+		"vitest": "^4.1.2"
 	}
 }
