@@ -6,6 +6,27 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v3.0.1...v4.0.0) (2026-03-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update astro to v6 ([#1824](https://github.com/yacosta738/yacosta738.github.io/issues/1824))
+* **deps:** update vite to v8 ([#1828](https://github.com/yacosta738/yacosta738.github.io/issues/1828))
+
+### Features
+
+* **deps:** update astro to v6 ([#1824](https://github.com/yacosta738/yacosta738.github.io/issues/1824)) ([5daa2d3](https://github.com/yacosta738/yacosta738.github.io/commit/5daa2d362255cc396e310edfeb36dd5b2494c0ae))
+* **deps:** update vite to v8 ([#1828](https://github.com/yacosta738/yacosta738.github.io/issues/1828)) ([a3f880a](https://github.com/yacosta738/yacosta738.github.io/commit/a3f880a8b50247f5e81c01411b52b26d4f2a0ab3))
+
+
+### Bug Fixes
+
+* **blog:** reduce sonar issues in notion pipeline ([#1834](https://github.com/yacosta738/yacosta738.github.io/issues/1834)) ([0166744](https://github.com/yacosta738/yacosta738.github.io/commit/01667444fdf1af70249c99f66671a9b69cb3869b))
+* **deps:** update @notionhq/client to ^5.15.0 ([#1822](https://github.com/yacosta738/yacosta738.github.io/issues/1822)) ([daf776e](https://github.com/yacosta738/yacosta738.github.io/commit/daf776ec632f33f3c51fe3f30085ab42537414a9))
+* **deps:** update vite to ^7.3.1 ([#1823](https://github.com/yacosta738/yacosta738.github.io/issues/1823)) ([c646bf3](https://github.com/yacosta738/yacosta738.github.io/commit/c646bf3729c2eef000ed05800f1ec52faf00e78f))
+* **seo:** repair blog links and trailing slash normalization ([#1836](https://github.com/yacosta738/yacosta738.github.io/issues/1836)) ([f1a0cb0](https://github.com/yacosta738/yacosta738.github.io/commit/f1a0cb003dc039068b40fbbc6222cab6d2c2d237))
+
 ## [3.0.1](https://github.com/yacosta738/yacosta738.github.io/compare/v3.0.0...v3.0.1) (2026-03-30)
 
 
