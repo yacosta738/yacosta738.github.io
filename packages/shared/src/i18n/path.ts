@@ -11,7 +11,7 @@ const buildLocalePrefixRegex = (locales: string[]): RegExp => {
 };
 
 const normalizePath = (path: string): string =>
-	path.startsWith("/") ? path : `/${path}`;
+	(path.startsWith("/") ? path : `/${path}`).replaceAll(/\/{2,}/g, "/");
 
 export const stripLocalePrefix = (path: string): string => {
 	const normalizedPath = normalizePath(path);

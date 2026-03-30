@@ -217,6 +217,23 @@ describe("getLocalePaths", () => {
 		expect(esPath).toBeDefined();
 		expect(esPath?.path).toBe("/es/about");
 	});
+
+	test("normalizes duplicate trailing slashes before building locale paths", () => {
+		const url = new URL(
+			"https://example.com/es/2026/03/23/arquitectura-hexagonal-cqrs-en-kotlin//",
+		);
+		const paths = getLocalePaths(url);
+
+		const enPath = paths.find((p) => p.lang === "en");
+		const esPath = paths.find((p) => p.lang === "es");
+
+		expect(enPath?.path).toBe(
+			"/2026/03/23/arquitectura-hexagonal-cqrs-en-kotlin/",
+		);
+		expect(esPath?.path).toBe(
+			"/es/2026/03/23/arquitectura-hexagonal-cqrs-en-kotlin/",
+		);
+	});
 });
 
 describe("localeParams", () => {

@@ -354,4 +354,72 @@ describe("createCachedNotionLoader", () => {
 
 		await rm(tempDir, { recursive: true, force: true });
 	});
+
+	it("skips expired notion-image blocks when selecting a fallback cover", async () => {
+		const expiredCoverUrl =
+			"https://prod-files-secure.s3.us-west-2.amazonaws.com/zzzz-yyyy/eeee-ffff/expired.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600";
+		const anotherExpiredUrl =
+			"https://prod-files-secure.s3.us-west-2.amazonaws.com/1111-2222/3333-4444/inline.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600";
+		const tempDir = await mkdtemp(path.join(os.tmpdir(), "notion-cache-"));
+		const cacheUrl = new URL(
+			"expired-cover-with-inline-s3-cache.json",
+			pathToFileURL(`${tempDir}/`),
+		);
+		vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+			new Response(null, { status: 403 }),
+		);
+
+		await writeFile(
+			cacheUrl,
+			JSON.stringify(
+				{
+					version: 1,
+					databaseId: "db",
+					lastSync: new Date().toISOString(),
+					entries: [
+						{
+							id: "en/2026/03/11/fallback-cover-skip-s3",
+							data: {
+								title: "Fallback cover skip s3 entry",
+								description: "Cached description",
+								date: "2026-03-11T00:00:00.000Z",
+								author: "en/yuniel-acosta-perez",
+								tags: ["en/tech"],
+								category: "en/software-development",
+								cover: expiredCoverUrl,
+							},
+							rendered: {
+								html: `<div class="notion-image"><img src="${anotherExpiredUrl}" alt="expired"></div><div class="notion-image"><img src="${EXTERNAL_URL}" alt="cover"></div><p>Body</p>`,
+							},
+						},
+					],
+				},
+				null,
+				2,
+			),
+			"utf-8",
+		);
+
+		const loader = createCachedNotionLoader({
+			auth: "",
+			database_id: "",
+			cacheUrl,
+		});
+		const store = createStore();
+		const logger = createLogger();
+		const context = createContext(store, logger);
+
+		await loader.load(context);
+
+		const entry = store.get("en/2026/03/11/fallback-cover-skip-s3") as
+			| { data?: { cover?: string }; rendered?: { html?: string } }
+			| undefined;
+
+		expect(entry?.data?.cover).toBe(EXTERNAL_URL);
+		expect(entry?.rendered?.html).toContain(anotherExpiredUrl);
+		expect(entry?.rendered?.html).not.toContain(`src="${EXTERNAL_URL}"`);
+		expect(entry?.rendered?.html).toContain("<p>Body</p>");
+
+		await rm(tempDir, { recursive: true, force: true });
+	});
 });

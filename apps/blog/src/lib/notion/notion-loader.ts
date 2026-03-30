@@ -101,6 +101,7 @@ const normalizeUrlValue = (value: unknown): string | undefined => {
 };
 
 type RenderedHtmlObject = { html?: string };
+type ImageBlockMatch = { block: string; src: string };
 
 type RehypePlugin = (...args: unknown[]) => unknown;
 
@@ -659,6 +660,7 @@ const createNotionLoaderNoImages = ({
 const stripCoverFromRendered = (
 	rendered: CachedEntry["rendered"],
 	coverUrl?: string,
+	imageBlockToRemove?: string,
 ): CachedEntry["rendered"] => {
 	if (!rendered || typeof rendered !== "object") {
 		return rendered;
@@ -668,9 +670,20 @@ const stripCoverFromRendered = (
 		return rendered;
 	}
 	const html = renderedObj.html;
+	if (!coverUrl && !imageBlockToRemove) {
+		return rendered;
+	}
+	if (imageBlockToRemove) {
+		const nextHtml = html.replace(imageBlockToRemove, "");
+		return nextHtml === renderedObj.html
+			? rendered
+			: { ...renderedObj, html: nextHtml };
+	}
+
 	if (!coverUrl) {
 		return rendered;
 	}
+
 	// Escape special regex characters in the cover URL so it matches literally
 	const escapedUrl = coverUrl
 		.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`)
@@ -757,8 +770,35 @@ const getRenderedHtml = (rendered: CachedEntry["rendered"]): string => {
 	return typeof renderedObj?.html === "string" ? renderedObj.html : "";
 };
 
-const extractFirstImageSrc = (html: string): string | undefined =>
-	/<img[^>]+src="([^"]+)"/.exec(html)?.[1];
+const decodeHtmlAttribute = (value: string): string =>
+	value.replaceAll(/&#x26;|&#38;|&amp;/g, "&");
+
+const NOTION_IMAGE_BLOCK_PATTERN = /<div class="notion-image">[\s\S]*?<\/div>/g;
+
+const extractImageBlocks = (html: string): ImageBlockMatch[] =>
+	Array.from(html.matchAll(NOTION_IMAGE_BLOCK_PATTERN), (match) => {
+		const block = match[0];
+		const src = /<img[^>]+src="([^"]+)"/.exec(block)?.[1];
+		return src
+			? {
+					block,
+					src: decodeHtmlAttribute(src),
+				}
+			: undefined;
+	}).filter((match): match is ImageBlockMatch => match !== undefined);
+
+const findFirstUsableImageBlock = (html: string): ImageBlockMatch | undefined =>
+	extractImageBlocks(html).find(({ src }) => !isNotionS3Url(src));
+
+const findImageBlockBySrc = (
+	html: string,
+	targetSrc: string,
+): ImageBlockMatch | undefined => {
+	const normalizedTargetSrc = decodeHtmlAttribute(targetSrc);
+	return extractImageBlocks(html).find(
+		({ src }) => decodeHtmlAttribute(src) === normalizedTargetSrc,
+	);
+};
 
 const resolvePersistedCover = async (
 	entry: CachedEntry,
@@ -784,10 +824,16 @@ const resolvePersistedCover = async (
 		logger.warn(
 			`Cover image expired for ${entry.id}, extracting fallback from content`,
 		);
-		const fallbackUrl = extractFirstImageSrc(getRenderedHtml(rendered));
-		if (fallbackUrl && !isNotionS3Url(fallbackUrl)) {
-			cover = fallbackUrl;
-			rendered = stripCoverFromRendered(rendered, cover);
+		const fallbackImageBlock = findFirstUsableImageBlock(
+			getRenderedHtml(rendered),
+		);
+		if (fallbackImageBlock) {
+			cover = fallbackImageBlock.src;
+			rendered = stripCoverFromRendered(
+				rendered,
+				cover,
+				fallbackImageBlock.block,
+			);
 		}
 	}
 
@@ -876,8 +922,15 @@ const mapEntries = async (
 		if (traceMode === "map-after-parse") {
 			throw new Error("notion-loader: reached map-after-parse stage");
 		}
+		const coverBlock = coverFromContent
+			? findImageBlockBySrc(getRenderedHtml(entry.rendered), coverFromContent)
+			: undefined;
 		const renderedWithCover = coverFromContent
-			? stripCoverFromRendered(entry.rendered, coverFromContent)
+			? stripCoverFromRendered(
+					entry.rendered,
+					coverFromContent,
+					coverBlock?.block,
+				)
 			: entry.rendered;
 
 		context.store.set({

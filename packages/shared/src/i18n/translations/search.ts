@@ -1,7 +1,8 @@
 export const search = {
 	en: {
 		"search.title": "Search",
-		"search.description": "Search for articles and content",
+		"search.description":
+			"Search articles, tutorials, and engineering notes across the blog.",
 		"search.heading": "Search",
 		"search.subtitle": "Find articles, tutorials, and more",
 		"search.placeholder": "Search articles...",
@@ -14,7 +15,8 @@ export const search = {
 	},
 	es: {
 		"search.title": "Buscar",
-		"search.description": "Buscar artículos y contenido",
+		"search.description":
+			"Busca artículos, tutoriales y notas de ingeniería en todo el blog.",
 		"search.heading": "Buscar",
 		"search.subtitle": "Encuentra artículos, tutoriales y más",
 		"search.placeholder": "Buscar artículos...",

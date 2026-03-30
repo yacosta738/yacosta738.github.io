@@ -102,7 +102,7 @@ describe("Blog Post Utils", () => {
 
 		test("should return internal URL for regular articles", () => {
 			const url = getBlogPostUrl(mockArticle, "es");
-			expect(url).toBe("/es/2023/04/06/test-article");
+			expect(url).toBe("/es/2023/04/06/test-article/");
 		});
 
 		test("should return blog URL with domain for regular articles", () => {

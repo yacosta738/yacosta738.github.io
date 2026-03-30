@@ -164,12 +164,18 @@ const fallbackOrigin = resolvePublicOrigin(
 	Astro.url,
 );
 const alternatesOrigin = fallbackOrigin;
+
+const normalizedPathname = Astro.url.pathname.replaceAll(/\/{2,}/g, "/");
 const canonicalHref = fallbackOrigin
-	? new URL(Astro.url.pathname, fallbackOrigin).href
+	? new URL(normalizedPathname, fallbackOrigin).href
 	: Astro.url.href;
-const localePaths = await getLocalePathsEnhanced(Astro.url);
+const localePaths = await getLocalePathsEnhanced(
+	new URL(normalizedPathname, Astro.url.origin),
+);
 const xDefaultPath =
-	localePaths.find((props) => props.lang === "en")?.path || "/";
+	localePaths.find((props) => props.lang === "en")?.path ||
+	localePaths.find((props) => props.lang === locale)?.path ||
+	"/";
 const showSearch = typeof showSearchProp === "boolean" ? showSearchProp : false;
 const xAccount =
 	typeof X_ACCOUNT === "string"
