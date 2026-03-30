@@ -67,7 +67,6 @@
 		"@types/slug": "^5.0.9",
 		"astro": "6.1.1",
 		"crossrm": "^1.0.0",
-		"prettier": "^3.8.1",
 		"typescript": "^6.0.2",
 		"vfile": "^6.0.3",
 		"vitest": "^4.1.1"

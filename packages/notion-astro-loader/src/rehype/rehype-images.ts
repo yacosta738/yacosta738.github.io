@@ -19,6 +19,24 @@ const decodeImageSrc = (src: string): string => {
 	}
 };
 
+const getFallbackAltText = (src: string): string => {
+	try {
+		const normalizedUrl = src.startsWith("http")
+			? new URL(src)
+			: new URL(src, "https://blog.yunielacosta.com");
+		const fileName =
+			normalizedUrl.pathname.split("/").filter(Boolean).at(-1) || "";
+		const baseName = fileName.replace(/\.[^.]+$/, "");
+		const normalized = baseName
+			.replace(/[-_]+/g, " ")
+			.replace(/\s+/g, " ")
+			.trim();
+		return normalized || "Article image";
+	} catch {
+		return "Article image";
+	}
+};
+
 const processImageNode = (
 	node: ElementLikeNode,
 	file: VFile,
@@ -34,6 +52,11 @@ const processImageNode = (
 
 	const src = node.properties.src as string;
 	node.properties.src = decodeImageSrc(src);
+	const alt =
+		typeof node.properties.alt === "string" ? node.properties.alt.trim() : "";
+	if (!alt) {
+		node.properties.alt = getFallbackAltText(node.properties.src as string);
+	}
 
 	const astroData = file.data.astro as { imagePaths?: string[] } | undefined;
 	if (astroData) {

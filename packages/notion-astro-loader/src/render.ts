@@ -33,14 +33,10 @@ import type {
 const baseProcessor = unified()
 	.use(notionRehype, {}) // Parse Notion blocks to rehype AST
 	.use(rehypeSlug)
-	.use(
-		// @ts-expect-error rehype-katex types don't align with unified/rehype Plugin types yet.
-		// Safe to ignore here; remove once rehype-katex or unified types are updated.
-		rehypeKatex,
-	) // Then you can use any rehype plugins to enrich the AST
+	.use(rehypeKatex) // Then you can use any rehype plugins to enrich the AST
 	.use(rehypeStringify); // Turn AST to HTML string
 
-export type RehypePlugin = Plugin<unknown[], unknown>;
+export type RehypePlugin = Plugin<unknown[]>;
 
 export function buildProcessor(
 	rehypePlugins: Promise<ReadonlyArray<readonly [RehypePlugin, unknown]>>,
@@ -299,7 +295,11 @@ export class NotionPageRenderer {
 			} catch (error) {
 				this.#logger.error(`Failed to fetch image: ${getErrorMessage(error)}`);
 				// Fall back to using the remote URL directly.
-				return fileToUrl(imageFileObject);
+				const fallbackUrl = fileToUrl(imageFileObject);
+				if (!fallbackUrl) {
+					throw new Error("Image object does not contain a usable URL");
+				}
+				return fallbackUrl;
 			}
 		};
 }
