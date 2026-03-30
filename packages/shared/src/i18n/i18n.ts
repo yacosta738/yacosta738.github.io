@@ -68,10 +68,6 @@ const buildLangPrefixRegex = (): RegExp => {
 
 const normalizeLocalizedPathname = (pathname: string): string => {
 	const collapsedPath = pathname.replaceAll(/\/{2,}/g, "/");
-	if (collapsedPath === "/") {
-		return collapsedPath;
-	}
-
 	return collapsedPath;
 };
 
