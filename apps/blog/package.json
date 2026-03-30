@@ -1,6 +1,6 @@
 {
 	"name": "blog",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
 	"scripts": {
@@ -40,7 +40,7 @@
 		"@astrojs/rss": "^4.0.18",
 		"@astrojs/sitemap": "^3.7.2",
 		"@jsdevtools/rehype-toc": "^3.0.2",
-		"@notionhq/client": "^5.14.0",
+		"@notionhq/client": "^5.15.0",
 		"@tailwindcss/vite": "^4.2.2",
 		"@yap/astro-notion-loader": "workspace:*",
 		"astro": "6.1.1",
