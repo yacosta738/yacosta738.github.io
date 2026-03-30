@@ -19,7 +19,15 @@ const decodeImageSrc = (src: string): string => {
 	}
 };
 
-const getFallbackAltText = (src: string): string => {
+const OPAQUE_IMAGE_ID_PATTERN =
+	/^(?:[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$/i;
+
+const getFallbackAltText = (src: string, caption?: string): string => {
+	const normalizedCaption = caption?.trim();
+	if (normalizedCaption) {
+		return normalizedCaption;
+	}
+
 	try {
 		const normalizedUrl = src.startsWith("http")
 			? new URL(src)
@@ -27,13 +35,20 @@ const getFallbackAltText = (src: string): string => {
 		const fileName =
 			normalizedUrl.pathname.split("/").filter(Boolean).at(-1) || "";
 		const baseName = fileName.replace(/\.[^.]+$/, "");
+		if (OPAQUE_IMAGE_ID_PATTERN.test(baseName)) {
+			return "";
+		}
 		const normalized = baseName
 			.replace(/[-_]+/g, " ")
 			.replace(/\s+/g, " ")
 			.trim();
-		return normalized || "Article image";
+		if (!normalized) {
+			return "";
+		}
+		const compactNormalized = normalized.replace(/\s+/g, "");
+		return OPAQUE_IMAGE_ID_PATTERN.test(compactNormalized) ? "" : normalized;
 	} catch {
-		return "Article image";
+		return "";
 	}
 };
 
@@ -55,7 +70,16 @@ const processImageNode = (
 	const alt =
 		typeof node.properties.alt === "string" ? node.properties.alt.trim() : "";
 	if (!alt) {
-		node.properties.alt = getFallbackAltText(node.properties.src as string);
+		const caption =
+			typeof node.properties.title === "string"
+				? node.properties.title
+				: typeof node.properties["data-caption"] === "string"
+					? (node.properties["data-caption"] as string)
+					: undefined;
+		node.properties.alt = getFallbackAltText(
+			node.properties.src as string,
+			caption,
+		);
 	}
 
 	const astroData = file.data.astro as { imagePaths?: string[] } | undefined;

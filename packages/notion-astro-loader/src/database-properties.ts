@@ -1,32 +1,17 @@
-import {
-	type Client,
-	isFullDatabase,
-	isFullDataSource,
-} from "@notionhq/client";
+import type { Client } from "@notionhq/client";
 import { z } from "zod";
+import { resolveDataSourceForDatabase } from "./data-source.js";
 import * as rawPropertyType from "./schemas/raw-properties.js";
 import type { DatabasePropertyConfigResponse } from "./types.js";
 
 export async function propertiesSchemaForDatabase(
 	client: Client,
 	databaseId: string,
+	dataSourceId?: string,
 ) {
-	const database = await client.databases.retrieve({ database_id: databaseId });
-	if (!isFullDatabase(database)) {
-		throw new Error(`Expected full database response for ${databaseId}`);
-	}
-
-	const dataSourceId = database.data_sources[0]?.id;
-	if (!dataSourceId) {
-		throw new Error(`Database ${databaseId} has no data sources`);
-	}
-
-	const dataSource = await client.dataSources.retrieve({
-		data_source_id: dataSourceId,
+	const dataSource = await resolveDataSourceForDatabase(client, databaseId, {
+		dataSourceId,
 	});
-	if (!isFullDataSource(dataSource)) {
-		throw new Error(`Expected full data source response for ${dataSourceId}`);
-	}
 
 	const schemaByType: Record<string, z.ZodTypeAny> = {
 		number: rawPropertyType.number,

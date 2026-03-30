@@ -1,13 +1,13 @@
 import * as path from "node:path";
 import {
 	Client,
-	isFullDatabase,
 	isFullPage,
 	iteratePaginatedAPI,
 } from "@notionhq/client";
 import type { Loader } from "astro/loaders";
 import { dim } from "kleur/colors";
 
+import { resolveDataSourceForDatabase } from "./data-source.js";
 import { propertiesSchemaForDatabase } from "./database-properties.js";
 import { VIRTUAL_CONTENT_ROOT } from "./image.js";
 import {
@@ -26,7 +26,7 @@ export interface NotionLoaderOptions
 		>,
 		Pick<
 			QueryDatabaseParameters,
-			"filter_properties" | "sorts" | "filter" | "archived"
+			"data_source_id" | "filter_properties" | "sorts" | "filter" | "archived"
 		> {
 	database_id: string;
 	/**
@@ -101,6 +101,7 @@ function isRehypePluginTuple(
  */
 export function notionLoader({
 	database_id,
+	data_source_id,
 	filter_properties,
 	sorts,
 	filter,
@@ -113,29 +114,20 @@ export function notionLoader({
 	...clientOptions
 }: NotionLoaderOptions): Loader {
 	const notionClient = new Client(clientOptions);
-	let dataSourceIdPromise: Promise<string> | undefined;
+	let dataSourcePromise:
+		| Promise<Awaited<ReturnType<typeof resolveDataSourceForDatabase>>>
+		| undefined;
 
-	const resolveDataSourceId = async () => {
-		if (!dataSourceIdPromise) {
-			dataSourceIdPromise = notionClient.databases
-				.retrieve({ database_id })
-				.then((database) => {
-					if (!isFullDatabase(database)) {
-						throw new Error(
-							`Expected full database response for ${database_id}`,
-						);
-					}
-
-					const dataSourceId = database.data_sources[0]?.id;
-					if (!dataSourceId) {
-						throw new Error(`Database ${database_id} has no data sources`);
-					}
-
-					return dataSourceId;
-				});
+	const resolveDataSource = async () => {
+		if (!dataSourcePromise) {
+			dataSourcePromise = resolveDataSourceForDatabase(
+				notionClient,
+				database_id,
+				{ dataSourceId: data_source_id },
+			);
 		}
 
-		return dataSourceIdPromise;
+		return dataSourcePromise;
 	};
 
 	const resolvedRehypePlugins = Promise.all(
@@ -164,13 +156,14 @@ export function notionLoader({
 				properties: await propertiesSchemaForDatabase(
 					notionClient,
 					database_id,
+					data_source_id,
 				),
 			}),
 			types: "",
 		}),
 		async load(ctx) {
 			const { store, logger: log_db, parseData } = ctx;
-			const dataSourceId = await resolveDataSourceId();
+			const dataSource = await resolveDataSource();
 
 			const existingPageIds = new Set<string>(store.keys());
 			const renderPromises: Promise<void>[] = [];
@@ -179,7 +172,7 @@ export function notionLoader({
 			log_db.info(`Loading database ${storeInfo}`);
 
 			const pages = iteratePaginatedAPI(notionClient.dataSources.query, {
-				data_source_id: dataSourceId,
+				data_source_id: dataSource.id,
 				filter_properties,
 				sorts,
 				filter,
