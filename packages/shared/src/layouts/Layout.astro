@@ -93,10 +93,13 @@ const resume = (await getMainResumeWithData()) ?? {
 const pageTitle = title.trim();
 const basicsName = (resume.basics as { name?: string }).name?.trim();
 const brandLabel = basicsName || "Yuniel Acosta";
+const brandedTitle = pageTitle ? `${pageTitle} | ${brandLabel}` : "";
 const localeTitle = pageTitle
-	? pageTitle.length > 55
-		? pageTitle
-		: `${pageTitle} | ${brandLabel}`
+	? brandedTitle.length <= 60
+		? brandedTitle
+		: pageTitle.length > 60
+			? `${pageTitle.slice(0, 57).trimEnd()}…`
+			: pageTitle
 	: t(SITE_TITLE);
 const { image, summary, url } = resume.basics;
 const rawMetaDescription = description || summary || t("default.summary");

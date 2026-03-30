@@ -27,7 +27,7 @@ const isExternal = attrs["data-external"] === "true";
 const target = isExternal ? attrs["data-target"] || "_blank" : undefined;
 const rel = isExternal
 	? attrs["data-rel"] || "noopener nofollow ugc"
-	: "noopener nofollow ugc";
+	: undefined;
 ---
 
 <article

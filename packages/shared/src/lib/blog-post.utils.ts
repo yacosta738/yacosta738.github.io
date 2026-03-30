@@ -35,7 +35,7 @@ export function getBlogPostUrl(
 	}
 	// For regular articles, create internal URL
 	const translatePath = useTranslatedPath(lang);
-	const path = translatePath(`/${post.id.split("/").slice(1).join("/")}`);
+	const path = translatePath(`/${post.id.split("/").slice(1).join("/")}/`);
 	return domain ? buildBlogUrl(path, domain) : path;
 }
 
