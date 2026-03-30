@@ -36,7 +36,7 @@ jobs:
       name: ${{ inputs.environment || 'production' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -72,10 +72,10 @@ jobs:
       url: ${{ steps.deploy.outputs.url }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download build artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: portfolio-build-${{ github.sha }}
           path: apps/portfolio/dist/
