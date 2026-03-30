@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import type Article from "@/core/article/article.model";
 import {
+	ensureSingleTrailingSlash,
 	getBlogPostRel,
 	getBlogPostTarget,
 	getBlogPostUrl,
@@ -108,6 +109,21 @@ describe("Blog Post Utils", () => {
 		test("should return blog URL with domain for regular articles", () => {
 			const url = getBlogPostUrl(mockArticle, "es", "https://yunielacosta.com");
 			expect(url).toContain("/es/2023/04/06/test-article");
+		});
+
+		test("should keep a single trailing slash for internal article links", () => {
+			expect(
+				ensureSingleTrailingSlash("/es/2026/03/26/api-versioning/"),
+			).toBe("/es/2026/03/26/api-versioning/");
+			expect(
+				ensureSingleTrailingSlash("https://blog.yunielacosta.com/es/2026/03/26/api-versioning/"),
+			).toBe("https://blog.yunielacosta.com/es/2026/03/26/api-versioning/");
+		});
+
+		test("should append a trailing slash only when missing", () => {
+			expect(ensureSingleTrailingSlash("/es/2026/03/26/api-versioning")).toBe(
+				"/es/2026/03/26/api-versioning/",
+			);
 		});
 	});
 

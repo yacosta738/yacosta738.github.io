@@ -5,6 +5,7 @@ import { type Lang, useTranslations } from "@/i18n";
 import { LOCALES } from "@/i18n/types";
 import type { BlogPost } from "@/lib/blog-post.utils";
 import {
+	ensureSingleTrailingSlash,
 	getBlogPostRel,
 	getBlogPostTarget,
 	getBlogPostUrl,
@@ -55,12 +56,12 @@ const t = useTranslations(currentLocale);
 									name="mdi:chevron-right"
 									class="h-5 w-5 mr-1"
 								/>
-								<a
-									href={`${url}${isExternalArticle(post) ? "" : "/"}`}
-									class="inline-link flex items-center justify-center"
-									target={getBlogPostTarget(post)}
-									rel={getBlogPostRel(post)}
-								>
+							<a
+								href={isExternalArticle(post) ? url : ensureSingleTrailingSlash(url)}
+								class="inline-link flex items-center justify-center"
+								target={getBlogPostTarget(post)}
+								rel={getBlogPostRel(post)}
+							>
 									<p class="pl-2">{post.title}</p>
 								</a>
 							</div>
