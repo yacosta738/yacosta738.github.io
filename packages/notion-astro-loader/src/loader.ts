@@ -1,9 +1,5 @@
 import * as path from "node:path";
-import {
-	Client,
-	isFullPage,
-	iteratePaginatedAPI,
-} from "@notionhq/client";
+import { Client, isFullPage, iteratePaginatedAPI } from "@notionhq/client";
 import type { Loader } from "astro/loaders";
 import { dim } from "kleur/colors";
 
