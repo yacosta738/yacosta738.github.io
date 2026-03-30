@@ -40,6 +40,19 @@ export function getBlogPostUrl(
 }
 
 /**
+ * Ensure internal blog links end with exactly one trailing slash.
+ */
+export function ensureSingleTrailingSlash(url: string): string {
+	let normalizedUrl = url;
+
+	while (normalizedUrl.endsWith("/")) {
+		normalizedUrl = normalizedUrl.slice(0, -1);
+	}
+
+	return `${normalizedUrl}/`;
+}
+
+/**
  * Get the target attribute for a blog post link
  */
 export function getBlogPostTarget(post: BlogPost): "_blank" | undefined {
