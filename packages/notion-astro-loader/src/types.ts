@@ -1,9 +1,10 @@
 import type {
 	Client,
 	DataSourceObjectResponse,
-	PageObjectResponse,
 	QueryDataSourceParameters,
 } from "@notionhq/client";
+
+export type { PageObjectResponse } from "@notionhq/client";
 
 /**
  * @module
@@ -19,11 +20,10 @@ export interface QueryDatabaseParameters extends QueryDataSourceParameters {}
 export type DatabasePropertyConfigResponse =
 	DataSourceObjectResponse["properties"][string];
 
-export type { PageObjectResponse };
-
-export type PageProperty = PageObjectResponse["properties"][string];
+export type PageProperty =
+	import("@notionhq/client").PageObjectResponse["properties"][string];
 export type EmojiRequest = Extract<
-	PageObjectResponse["icon"],
+	import("@notionhq/client").PageObjectResponse["icon"],
 	{ type: "emoji" }
 >["emoji"];
 
@@ -33,7 +33,7 @@ export type RichTextItemResponse = Extract<
 >["rich_text"][number];
 
 export type NotionPageData = Pick<
-	PageObjectResponse,
+	import("@notionhq/client").PageObjectResponse,
 	| "icon"
 	| "cover"
 	| "archived"

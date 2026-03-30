@@ -100,6 +100,8 @@ const normalizeUrlValue = (value: unknown): string | undefined => {
 	return undefined;
 };
 
+type RenderedHtmlObject = { html?: string };
+
 type RehypePlugin = (...args: unknown[]) => unknown;
 
 type NotionModuleBlocks = {
@@ -671,11 +673,11 @@ const stripCoverFromRendered = (
 	}
 	// Escape special regex characters in the cover URL so it matches literally
 	const escapedUrl = coverUrl
-		.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+		.replaceAll(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`)
 		.replaceAll("&", "(?:&|&amp;|&#x26;|&#38;)");
 	// Target the specific notion-image div containing the cover URL, not just the first one
 	const imageBlock = new RegExp(
-		`<div class="notion-image">[\\s\\S]*?${escapedUrl}[\\s\\S]*?<\\/div>`,
+		String.raw`<div class="notion-image">[\s\S]*?${escapedUrl}[\s\S]*?<\/div>`,
 		"i",
 	);
 	const nextHtml = html.replace(imageBlock, "");
@@ -738,6 +740,85 @@ const extractCoverFromContent = (
 		? renderedMetadata?.imagePaths
 		: [];
 	return normalizeUrlValue(imagePaths[0]);
+};
+
+const getRenderedHtmlObject = (
+	rendered: CachedEntry["rendered"],
+): RenderedHtmlObject | undefined => {
+	if (!rendered || typeof rendered !== "object") {
+		return undefined;
+	}
+
+	return rendered as RenderedHtmlObject;
+};
+
+const getRenderedHtml = (rendered: CachedEntry["rendered"]): string => {
+	const renderedObj = getRenderedHtmlObject(rendered);
+	return typeof renderedObj?.html === "string" ? renderedObj.html : "";
+};
+
+const extractFirstImageSrc = (html: string): string | undefined =>
+	/<img[^>]+src="([^"]+)"/.exec(html)?.[1];
+
+const resolvePersistedCover = async (
+	entry: CachedEntry,
+	imageDir: string,
+	logger: LoaderContext["logger"],
+): Promise<Pick<CachedEntry, "data" | "rendered">> => {
+	let { cover } = entry.data;
+	let { rendered } = entry;
+
+	if (!cover || !isNotionS3Url(cover)) {
+		return { data: { ...entry.data, cover }, rendered };
+	}
+
+	try {
+		cover = await downloadNotionImage(cover, imageDir, logger);
+	} catch (error) {
+		logger.debug(
+			`Failed to download cover for ${entry.id}: ${error instanceof Error ? error.message : String(error)}`,
+		);
+	}
+
+	if (cover && isNotionS3Url(cover)) {
+		logger.warn(
+			`Cover image expired for ${entry.id}, extracting fallback from content`,
+		);
+		const fallbackUrl = extractFirstImageSrc(getRenderedHtml(rendered));
+		if (fallbackUrl && !isNotionS3Url(fallbackUrl)) {
+			cover = fallbackUrl;
+			rendered = stripCoverFromRendered(rendered, cover);
+		}
+	}
+
+	return { data: { ...entry.data, cover }, rendered };
+};
+
+const persistInlineRenderedImages = async (
+	entry: CachedEntry,
+	imageDir: string,
+	logger: LoaderContext["logger"],
+): Promise<CachedEntry["rendered"]> => {
+	const renderedObj = getRenderedHtmlObject(entry.rendered);
+	if (typeof renderedObj?.html !== "string") {
+		return entry.rendered;
+	}
+
+	try {
+		const processedHtml = await downloadImagesInHtml(
+			renderedObj.html,
+			imageDir,
+			logger,
+		);
+		return processedHtml === renderedObj.html
+			? entry.rendered
+			: { ...renderedObj, html: processedHtml };
+	} catch (error) {
+		logger.debug(
+			`Failed to process inline images for ${entry.id}: ${error instanceof Error ? error.message : String(error)}`,
+		);
+		return entry.rendered;
+	}
 };
 
 const mapEntries = async (
@@ -829,63 +910,20 @@ const processNotionImages = async (
 	const processed: CachedEntry[] = [];
 
 	for (const entry of entries) {
-		let { cover } = entry.data;
-		let rendered = entry.rendered;
-
-		// Download cover image if it's a temporary S3 URL
-		if (cover && isNotionS3Url(cover)) {
-			try {
-				cover = await downloadNotionImage(cover, imageDir, logger);
-			} catch (error) {
-				logger.debug(
-					`Failed to download cover for ${entry.id}: ${error instanceof Error ? error.message : String(error)}`,
-				);
-			}
-			// If still an S3 URL after download attempt, the signed URL has expired.
-			// Try to extract the first image from rendered HTML as a fallback cover,
-			// then strip it from the body to avoid showing it twice.
-			if (cover && isNotionS3Url(cover)) {
-				logger.warn(
-					`Cover image expired for ${entry.id}, extracting fallback from content`,
-				);
-				const renderedObj = rendered as { html?: string } | undefined;
-				const htmlContent =
-					typeof renderedObj?.html === "string" ? renderedObj.html : "";
-				const imgMatch = /<img[^>]+src="([^"]+)"/.exec(htmlContent);
-				const fallbackUrl = imgMatch?.[1];
-				if (fallbackUrl && !isNotionS3Url(fallbackUrl)) {
-					cover = fallbackUrl;
-					if (renderedObj) {
-						rendered = stripCoverFromRendered(rendered, cover);
-					}
-				}
-			}
-		}
-
-		// Download inline images in rendered HTML
-		if (rendered && typeof rendered === "object") {
-			const renderedObj = rendered as { html?: string };
-			if (typeof renderedObj.html === "string") {
-				try {
-					const processedHtml = await downloadImagesInHtml(
-						renderedObj.html,
-						imageDir,
-						logger,
-					);
-					if (processedHtml !== renderedObj.html) {
-						rendered = { ...renderedObj, html: processedHtml };
-					}
-				} catch (error) {
-					logger.debug(
-						`Failed to process inline images for ${entry.id}: ${error instanceof Error ? error.message : String(error)}`,
-					);
-				}
-			}
-		}
+		const withPersistedCover = await resolvePersistedCover(
+			entry,
+			imageDir,
+			logger,
+		);
+		const rendered = await persistInlineRenderedImages(
+			{ ...entry, ...withPersistedCover },
+			imageDir,
+			logger,
+		);
 
 		const updatedEntry: CachedEntry = {
 			...entry,
-			data: { ...entry.data, cover },
+			data: withPersistedCover.data,
 			rendered,
 		};
 

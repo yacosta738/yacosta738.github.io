@@ -115,13 +115,11 @@ export function notionLoader({
 		| undefined;
 
 	const resolveDataSource = async () => {
-		if (!dataSourcePromise) {
-			dataSourcePromise = resolveDataSourceForDatabase(
-				notionClient,
-				database_id,
-				{ dataSourceId: data_source_id },
-			);
-		}
+		dataSourcePromise ??= resolveDataSourceForDatabase(
+			notionClient,
+			database_id,
+			{ dataSourceId: data_source_id },
+		);
 
 		return dataSourcePromise;
 	};

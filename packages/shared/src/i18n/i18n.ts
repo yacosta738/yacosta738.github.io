@@ -59,7 +59,7 @@ export function useTranslatedPath(lang: Lang) {
  * Build a regex pattern for matching language prefixes
  */
 const buildLangPrefixRegex = (): RegExp => {
-	const locales = Object.keys(LOCALES);
+	const locales = Object.keys(LOCALES) as Lang[];
 	const pattern = `^/(${locales.join("|")})/`;
 	return new RegExp(pattern);
 };
@@ -78,10 +78,11 @@ export function getLocalePaths(url: URL): LocalePath[] {
 		? `/${pathWithoutLangPrefix.replace(/^\/+/, "")}`
 		: "/";
 
-	return Object.keys(LOCALES).map((lang) => {
-		const localePath = buildLocalePath(cleanPath, lang as Lang);
+	const locales = Object.keys(LOCALES) as Lang[];
+	return locales.map((lang) => {
+		const localePath = buildLocalePath(cleanPath, lang);
 		return {
-			lang: lang as Lang,
+			lang,
 			path: localePath,
 		};
 	});

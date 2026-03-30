@@ -74,9 +74,12 @@ const deriveImagePaths = (
 		if (segments.length < 3) {
 			return null;
 		}
-		const parentId = segments[segments.length - 3];
-		const objId = segments[segments.length - 2];
-		const fileName = segments[segments.length - 1];
+		const parentId = segments.at(-3);
+		const objId = segments.at(-2);
+		const fileName = segments.at(-1);
+		if (!parentId || !objId || !fileName) {
+			return null;
+		}
 		if (![parentId, objId, fileName].every(isSafePathSegment)) {
 			return null;
 		}
