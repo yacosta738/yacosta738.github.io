@@ -40,7 +40,7 @@ catalogs:
       specifier: 1.2.4
       version: 1.2.4
     '@iconify-json/lucide':
-      specifier: ^1.2.99
+      specifier: ^1.2.100
       version: 1.2.100
     '@iconify-json/mdi':
       specifier: ^1.2.3
