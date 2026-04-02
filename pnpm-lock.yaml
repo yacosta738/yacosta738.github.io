@@ -127,7 +127,7 @@ catalogs:
       specifier: ^4.0.3
       version: 4.0.3
     happy-dom:
-      specifier: ^20.8.8
+      specifier: ^20.8.9
       version: 20.8.9
     hono:
       specifier: ^4.12.9
@@ -5718,7 +5718,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 24.12.0
+      '@types/node': 25.5.0
 
   '@types/service-worker-mock@2.0.4': {}
 

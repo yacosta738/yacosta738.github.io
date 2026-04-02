@@ -60,7 +60,7 @@ catalog:
   gray-matter: ^4.0.3
   h3: ^1.15.10
   handlebars: ^4.7.9
-  happy-dom: ^20.8.8
+  happy-dom: ^20.8.9
   hono: ^4.12.9
   jsdom: ^29.0.1
   kleur: ^4.1.5
