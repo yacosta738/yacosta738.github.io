@@ -25,11 +25,11 @@ catalogs:
       specifier: 4.11.1
       version: 4.11.1
     '@biomejs/biome':
-      specifier: 2.4.9
-      version: 2.4.9
+      specifier: 2.4.10
+      version: 2.4.10
     '@cloudflare/workers-types':
-      specifier: ^4.20260329.1
-      version: 4.20260329.1
+      specifier: ^4.20260402.1
+      version: 4.20260402.1
     '@faker-js/faker':
       specifier: ^10.4.0
       version: 10.4.0
@@ -40,14 +40,14 @@ catalogs:
       specifier: 1.2.4
       version: 1.2.4
     '@iconify-json/lucide':
-      specifier: ^1.2.99
-      version: 1.2.100
+      specifier: ^1.2.101
+      version: 1.2.101
     '@iconify-json/mdi':
       specifier: ^1.2.3
       version: 1.2.3
     '@iconify-json/simple-icons':
-      specifier: ^1.2.75
-      version: 1.2.75
+      specifier: ^1.2.76
+      version: 1.2.76
     '@iconify-json/tabler':
       specifier: ^1.2.33
       version: 1.2.33
@@ -55,11 +55,11 @@ catalogs:
       specifier: ^3.0.2
       version: 3.0.2
     '@notionhq/client':
-      specifier: ^5.15.0
-      version: 5.15.0
+      specifier: ^5.16.0
+      version: 5.16.0
     '@playwright/test':
-      specifier: 1.58.2
-      version: 1.58.2
+      specifier: 1.59.0
+      version: 1.59.0
     '@tailwindcss/typography':
       specifier: ^0.5.19
       version: 0.5.19
@@ -94,8 +94,8 @@ catalogs:
       specifier: ^4.1.2
       version: 4.1.2
     astro:
-      specifier: 6.1.1
-      version: 6.1.1
+      specifier: 6.1.2
+      version: 6.1.2
     astro-compress:
       specifier: 2.4.0
       version: 2.4.0
@@ -151,8 +151,8 @@ catalogs:
       specifier: 1.4.0
       version: 1.4.0
     playwright:
-      specifier: 1.58.2
-      version: 1.58.2
+      specifier: 1.59.0
+      version: 1.59.0
     preact-render-to-string:
       specifier: ^6.6.7
       version: 6.6.7
@@ -205,8 +205,8 @@ catalogs:
       specifier: ^4.1.2
       version: 4.1.2
     wrangler:
-      specifier: ^4.77.0
-      version: 4.78.0
+      specifier: ^4.79.0
+      version: 4.79.0
     zod:
       specifier: ^4.3.6
       version: 4.3.6
@@ -226,10 +226,10 @@ importers:
     devDependencies:
       '@biomejs/biome':
         specifier: 'catalog:'
-        version: 2.4.9
+        version: 2.4.10
       playwright:
         specifier: 'catalog:'
-        version: 1.58.2
+        version: 1.59.0
       rimraf:
         specifier: 'catalog:'
         version: 6.1.3
@@ -257,7 +257,7 @@ importers:
     devDependencies:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 4.20260329.1
+        version: 4.20260402.1
       '@types/node':
         specifier: 'catalog:'
         version: 25.5.0
@@ -275,7 +275,7 @@ importers:
         version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       wrangler:
         specifier: 'catalog:'
-        version: 4.78.0(@cloudflare/workers-types@4.20260329.1)
+        version: 4.79.0(@cloudflare/workers-types@4.20260402.1)
 
   apps/blog:
     dependencies:
@@ -284,7 +284,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
         version: 2.1.6
@@ -299,7 +299,7 @@ importers:
         version: 3.0.2
       '@notionhq/client':
         specifier: 'catalog:'
-        version: 5.15.0
+        version: 5.16.0
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
@@ -308,13 +308,13 @@ importers:
         version: link:../../packages/notion-astro-loader
       astro:
         specifier: 'catalog:'
-        version: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
         version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -357,28 +357,28 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.1(playwright-core@1.58.2)
+        version: 4.11.1(playwright-core@1.59.0)
       '@biomejs/biome':
         specifier: 'catalog:'
-        version: 2.4.9
+        version: 2.4.10
       '@faker-js/faker':
         specifier: 'catalog:'
         version: 10.4.0
       '@iconify-json/lucide':
         specifier: 'catalog:'
-        version: 1.2.100
+        version: 1.2.101
       '@iconify-json/mdi':
         specifier: 'catalog:'
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.75
+        version: 1.2.76
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
       '@playwright/test':
         specifier: 'catalog:'
-        version: 1.58.2
+        version: 1.59.0
       '@tailwindcss/typography':
         specifier: 'catalog:'
         version: 0.5.19(tailwindcss@4.2.2)
@@ -447,7 +447,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
         version: 2.1.6
@@ -462,13 +462,13 @@ importers:
         version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       astro:
         specifier: 'catalog:'
-        version: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
         version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -496,28 +496,28 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.1(playwright-core@1.58.2)
+        version: 4.11.1(playwright-core@1.59.0)
       '@biomejs/biome':
         specifier: 'catalog:'
-        version: 2.4.9
+        version: 2.4.10
       '@faker-js/faker':
         specifier: 'catalog:'
         version: 10.4.0
       '@iconify-json/lucide':
         specifier: 'catalog:'
-        version: 1.2.100
+        version: 1.2.101
       '@iconify-json/mdi':
         specifier: 'catalog:'
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.75
+        version: 1.2.76
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
       '@playwright/test':
         specifier: 'catalog:'
-        version: 1.58.2
+        version: 1.59.0
       '@tailwindcss/typography':
         specifier: 'catalog:'
         version: 0.5.19(tailwindcss@4.2.2)
@@ -592,7 +592,7 @@ importers:
         version: 3.0.2
       '@notionhq/client':
         specifier: 'catalog:'
-        version: 5.15.0
+        version: 5.16.0
       fs-extra:
         specifier: 'catalog:'
         version: 11.3.4
@@ -632,7 +632,7 @@ importers:
         version: 5.0.9
       astro:
         specifier: 'catalog:'
-        version: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       crossrm:
         specifier: 'catalog:'
         version: 1.0.0
@@ -653,7 +653,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
         version: 2.1.6
@@ -668,13 +668,13 @@ importers:
         version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       astro:
         specifier: 'catalog:'
-        version: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
         version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -699,19 +699,19 @@ importers:
     devDependencies:
       '@biomejs/biome':
         specifier: 'catalog:'
-        version: 2.4.9
+        version: 2.4.10
       '@faker-js/faker':
         specifier: 'catalog:'
         version: 10.4.0
       '@iconify-json/lucide':
         specifier: 'catalog:'
-        version: 1.2.100
+        version: 1.2.101
       '@iconify-json/mdi':
         specifier: 'catalog:'
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.75
+        version: 1.2.76
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -780,10 +780,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.1(playwright-core@1.58.2)
+        version: 4.11.1(playwright-core@1.59.0)
       '@playwright/test':
         specifier: 'catalog:'
-        version: 1.58.2
+        version: 1.59.0
 
 packages:
 
@@ -899,59 +899,59 @@ packages:
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
 
-  '@biomejs/biome@2.4.9':
-    resolution: {integrity: sha512-wvZW92FrwitTcacvCBT8xdAbfbxWfDLwjYMmU3djjqQTh7Ni4ZdiWIT/x5VcZ+RQuxiKzIOzi5D+dcyJDFZMsA==}
+  '@biomejs/biome@2.4.10':
+    resolution: {integrity: sha512-xxA3AphFQ1geij4JTHXv4EeSTda1IFn22ye9LdyVPoJU19fNVl0uzfEuhsfQ4Yue/0FaLs2/ccVi4UDiE7R30w==}
     engines: {node: '>=14.21.3'}
     hasBin: true
 
-  '@biomejs/cli-darwin-arm64@2.4.9':
-    resolution: {integrity: sha512-d5G8Gf2RpH5pYwiHLPA+UpG3G9TLQu4WM+VK6sfL7K68AmhcEQ9r+nkj/DvR/GYhYox6twsHUtmWWWIKfcfQQA==}
+  '@biomejs/cli-darwin-arm64@2.4.10':
+    resolution: {integrity: sha512-vuzzI1cWqDVzOMIkYyHbKqp+AkQq4K7k+UCXWpkYcY/HDn1UxdsbsfgtVpa40shem8Kax4TLDLlx8kMAecgqiw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [darwin]
 
-  '@biomejs/cli-darwin-x64@2.4.9':
-    resolution: {integrity: sha512-LNCLNgqDMG7BLdc3a8aY/dwKPK7+R8/JXJoXjCvZh2gx8KseqBdFDKbhrr7HCWF8SzNhbTaALhTBoh/I6rf9lA==}
+  '@biomejs/cli-darwin-x64@2.4.10':
+    resolution: {integrity: sha512-14fzASRo+BPotwp7nWULy2W5xeUyFnTaq1V13Etrrxkrih+ez/2QfgFm5Ehtf5vSjtgx/IJycMMpn5kPd5ZNaA==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [darwin]
 
-  '@biomejs/cli-linux-arm64-musl@2.4.9':
-    resolution: {integrity: sha512-8RCww5xnPn2wpK4L/QDGDOW0dq80uVWfppPxHIUg6mOs9B6gRmqPp32h1Ls3T8GnW8Wo5A8u7vpTwz4fExN+sw==}
+  '@biomejs/cli-linux-arm64-musl@2.4.10':
+    resolution: {integrity: sha512-WrJY6UuiSD/Dh+nwK2qOTu8kdMDlLV3dLMmychIghHPAysWFq1/DGC1pVZx8POE3ZkzKR3PUUnVrtZfMfaJjyQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@biomejs/cli-linux-arm64@2.4.9':
-    resolution: {integrity: sha512-4adnkAUi6K4C/emPRgYznMOcLlUqZdXWM6aIui4VP4LraE764g6Q4YguygnAUoxKjKIXIWPteKMgRbN0wsgwcg==}
+  '@biomejs/cli-linux-arm64@2.4.10':
+    resolution: {integrity: sha512-7MH1CMW5uuxQ/s7FLST63qF8B3Hgu2HRdZ7tA1X1+mk+St4JOuIrqdhIBnnyqeyWJNI+Bww7Es5QZ0wIc1Cmkw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@biomejs/cli-linux-x64-musl@2.4.9':
-    resolution: {integrity: sha512-5TD+WS9v5vzXKzjetF0hgoaNFHMcpQeBUwKKVi3JbG1e9UCrFuUK3Gt185fyTzvRdwYkJJEMqglRPjmesmVv4A==}
+  '@biomejs/cli-linux-x64-musl@2.4.10':
+    resolution: {integrity: sha512-kDTi3pI6PBN6CiczsWYOyP2zk0IJI08EWEQyDMQWW221rPaaEz6FvjLhnU07KMzLv8q3qSuoB93ua6inSQ55Tw==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@biomejs/cli-linux-x64@2.4.9':
-    resolution: {integrity: sha512-L10na7POF0Ks/cgLFNF1ZvIe+X4onLkTi5oP9hY+Rh60Q+7fWzKDDCeGyiHUFf1nGIa9dQOOUPGe2MyYg8nMSQ==}
+  '@biomejs/cli-linux-x64@2.4.10':
+    resolution: {integrity: sha512-tZLvEEi2u9Xu1zAqRjTcpIDGVtldigVvzug2fTuPG0ME/g8/mXpRPcNgLB22bGn6FvLJpHHnqLnwliOu8xjYrg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@biomejs/cli-win32-arm64@2.4.9':
-    resolution: {integrity: sha512-aDZr0RBC3sMGJOU10BvG7eZIlWLK/i51HRIfScE2lVhfts2dQTreowLiJJd+UYg/tHKxS470IbzpuKmd0MiD6g==}
+  '@biomejs/cli-win32-arm64@2.4.10':
+    resolution: {integrity: sha512-umwQU6qPzH+ISTf/eHyJ/QoQnJs3V9Vpjz2OjZXe9MVBZ7prgGafMy7yYeRGnlmDAn87AKTF3Q6weLoMGpeqdQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [win32]
 
-  '@biomejs/cli-win32-x64@2.4.9':
-    resolution: {integrity: sha512-NS4g/2G9SoQ4ktKtz31pvyc/rmgzlcIDCGU/zWbmHJAqx6gcRj2gj5Q/guXhoWTzCUaQZDIqiCQXHS7BcGYc0w==}
+  '@biomejs/cli-win32-x64@2.4.10':
+    resolution: {integrity: sha512-aW/JU5GuyH4uxMrNYpoC2kjaHlyJGLgIa3XkhPEZI0uKhZhJZU8BuEyJmvgzSPQNGozBwWjC972RaNdcJ9KyJg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
@@ -964,11 +964,11 @@ packages:
     resolution: {integrity: sha512-VERIM64vtTP1C4mxQ5thVT9fK0apjPFobqybMtA1UdUujWka24ERHbRHFGmpbbhp73MhV+KSsHQH9C6uOTdEQA==}
     engines: {node: '>=18'}
 
-  '@clack/core@1.1.0':
-    resolution: {integrity: sha512-SVcm4Dqm2ukn64/8Gub2wnlA5nS2iWJyCkdNHcvNHPIeBTGojpdJ+9cZKwLfmqy7irD4N5qLteSilJlE0WLAtA==}
+  '@clack/core@1.2.0':
+    resolution: {integrity: sha512-qfxof/3T3t9DPU/Rj3OmcFyZInceqj/NVtO9rwIuJqCUgh32gwPjpFQQp/ben07qKlhpwq7GzfWpST4qdJ5Drg==}
 
-  '@clack/prompts@1.1.0':
-    resolution: {integrity: sha512-pkqbPGtohJAvm4Dphs2M8xE29ggupihHdy1x84HNojZuMtFsHiUlRvqD24tM2+XmI+61LlfNceM3Wr7U5QES5g==}
+  '@clack/prompts@1.2.0':
+    resolution: {integrity: sha512-4jmztR9fMqPMjz6H/UZXj0zEmE43ha1euENwkckKKel4XpSfokExPo5AiVStdHSAlHekz4d0CA/r45Ok1E4D3w==}
 
   '@cloudflare/kv-asset-handler@0.4.2':
     resolution: {integrity: sha512-SIOD2DxrRRwQ+jgzlXCqoEFiKOFqaPjhnNTGKXSRLvp1HiOvapLaFG2kEr9dYQTYe8rKrd9uvDUzmAITeNyaHQ==}
@@ -983,38 +983,38 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/workerd-darwin-64@1.20260317.1':
-    resolution: {integrity: sha512-8hjh3sPMwY8M/zedq3/sXoA2Q4BedlGufn3KOOleIG+5a4ReQKLlUah140D7J6zlKmYZAFMJ4tWC7hCuI/s79g==}
+  '@cloudflare/workerd-darwin-64@1.20260329.1':
+    resolution: {integrity: sha512-oyDXYlPBuGXKkZ85+M3jFz0/qYmvA4AEURN8USIGPDCR5q+HFSRwywSd9neTx3Wi7jhey2wuYaEpD3fEFWyWUA==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [darwin]
 
-  '@cloudflare/workerd-darwin-arm64@1.20260317.1':
-    resolution: {integrity: sha512-M/MnNyvO5HMgoIdr3QHjdCj2T1ki9gt0vIUnxYxBu9ISXS/jgtMl6chUVPJ7zHYBn9MyYr8ByeN6frjYxj0MGg==}
+  '@cloudflare/workerd-darwin-arm64@1.20260329.1':
+    resolution: {integrity: sha512-++ZxVa3ovzYeDLEG6zMqql9gzZAG8vak6ZSBQgprGKZp7akr+GKTpw9f3RrMP552NSi3gTisroLobrrkPBtYLQ==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [darwin]
 
-  '@cloudflare/workerd-linux-64@1.20260317.1':
-    resolution: {integrity: sha512-1ltuEjkRcS3fsVF7CxsKlWiRmzq2ZqMfqDN0qUOgbUwkpXsLVJsXmoblaLf5OP00ELlcgF0QsN0p2xPEua4Uug==}
+  '@cloudflare/workerd-linux-64@1.20260329.1':
+    resolution: {integrity: sha512-kkeywAgIHwbqHkVILqbj/YkfbrA6ARbmutjiYzZA2MwMSfNXlw6/kedAKOY8YwcymZIgepx3YTIPnBP50pOotw==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [linux]
 
-  '@cloudflare/workerd-linux-arm64@1.20260317.1':
-    resolution: {integrity: sha512-3QrNnPF1xlaNwkHpasvRvAMidOvQs2NhXQmALJrEfpIJ/IDL2la8g499yXp3eqhG3hVMCB07XVY149GTs42Xtw==}
+  '@cloudflare/workerd-linux-arm64@1.20260329.1':
+    resolution: {integrity: sha512-eYBN20+B7XOUSWEe0mlqkMUbfLoIKjKZnpqQiSxnLbL72JKY0D/KlfN/b7RVGLpewB7i8rTrwTNr0szCKnZzSQ==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
 
-  '@cloudflare/workerd-windows-64@1.20260317.1':
-    resolution: {integrity: sha512-MfZTz+7LfuIpMGTa3RLXHX8Z/pnycZLItn94WRdHr8LPVet+C5/1Nzei399w/jr3+kzT4pDKk26JF/tlI5elpQ==}
+  '@cloudflare/workerd-windows-64@1.20260329.1':
+    resolution: {integrity: sha512-5R+/oxrDhS9nL3oA3ZWtD6ndMOqm7RfKknDNxLcmYW5DkUu7UH3J/s1t/Dz66iFePzr5BJmE7/8gbmve6TjtZQ==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@4.20260329.1':
-    resolution: {integrity: sha512-LxBHrYYI/AZ6OCbUzRqRgg6Rt1qev2KxN2NNd3saye41AO2g52cYvHV+ohts5oPnrIUD7YRjbgN/J3NU7e7m5A==}
+  '@cloudflare/workers-types@4.20260402.1':
+    resolution: {integrity: sha512-+oJ6FmNNYqct9yq2o1K98dIw8Pf1SF8qcs2mjyra40tK3PblB6Gqp890Ndmgj8stXwtJ9dAgSbO8i9tVHKwQyQ==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1439,14 +1439,14 @@ packages:
       hono: '>=3.9.0'
       zod: ^3.25.0 || ^4.0.0
 
-  '@iconify-json/lucide@1.2.100':
-    resolution: {integrity: sha512-vCrhQ/6T530HEMkWOkSyedvMiuQdVU1tMHEs32k4tklJmCmjokH3Dej6ycvfLt7kftBSQ2kPSUiyOpoW3uOF5g==}
+  '@iconify-json/lucide@1.2.101':
+    resolution: {integrity: sha512-JUN7uuSLRG3GK/9c5b8cK9e7sL6EAWDaASIwBOd0zUeKS0ACcokJubo2RMQHyVUVpd8mYkrR3Zd2mkH9ghhw1Q==}
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
-  '@iconify-json/simple-icons@1.2.75':
-    resolution: {integrity: sha512-KvcCUbvcBWb0sbqLIxHoY8z5/piXY08wcY9gfMhF+ph3AfzGMaSmZFkUY71HSXAljQngXkgs4bdKdekO0HQWvg==}
+  '@iconify-json/simple-icons@1.2.76':
+    resolution: {integrity: sha512-lLRlA8yaf+1L5VCPRvR9lynoSklsddKHEylchmZJKdj/q2xVQ1ZAEJ8SCQlv9cbgtMefnlyM98U+8Si2aoFZPA==}
 
   '@iconify-json/tabler@1.2.33':
     resolution: {integrity: sha512-q9nUQfE/cjIrGh5bAKHTphitAZpT0kX9SxDgZo3Sx8ofeDTsaHVdRwrn+CfKiJ5vQ1b1btqVwizXzIgz9KEPjA==}
@@ -1672,8 +1672,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@notionhq/client@5.15.0':
-    resolution: {integrity: sha512-boQ+zMmTu/HRfPajynYjlXkytkmn0rUgD0FJrbMaz6n1WC6HPxe2Lgn/Ay/VEA2j2dMzB1Hpnhtrtkz4Q1I/rw==}
+  '@notionhq/client@5.16.0':
+    resolution: {integrity: sha512-0mxHJNQBLbcG2Y4+oM+XNySr/3zKtK7FKjWhrUo8TB3WCdwtUMhvuooNmEjOo8NLL9qmKm7cCR4GtEsuTD+SNg==}
     engines: {node: '>=18'}
 
   '@oslojs/encoding@1.1.0':
@@ -1721,8 +1721,8 @@ packages:
   '@playform/pipe@0.1.4':
     resolution: {integrity: sha512-SM3iJ5VHA61NsYMrtvk8DAZwkrpPtBCiJnfWjj1iX6Ke/hnHLqVjTmkXG087UMOa9Z+3J/zUoAkzf3Al6tiS8A==}
 
-  '@playwright/test@1.58.2':
-    resolution: {integrity: sha512-akea+6bHYBBfA9uQqSYmlJXn61cTa+jbO87xVLCWbTqbWadRVmhxlXATaOjOgcBaWU4ePo0wB41KMFv3o35IXA==}
+  '@playwright/test@1.59.0':
+    resolution: {integrity: sha512-TOA5sTLd49rTDaZpYpvCQ9hGefHQq/OYOyCVnGqS2mjMfX+lGZv2iddIJd0I48cfxqSPttS9S3OuLKyylHcO1w==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2028,8 +2028,8 @@ packages:
     resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
     engines: {node: '>=18'}
 
-  '@speed-highlight/core@1.2.14':
-    resolution: {integrity: sha512-G4ewlBNhUtlLvrJTb88d2mdy2KRijzs4UhnlrOSRT4bmjh/IqNElZa3zkrZ+TC47TwtlDWzVLFADljF1Ijp5hA==}
+  '@speed-highlight/core@1.2.15':
+    resolution: {integrity: sha512-BMq1K3DsElxDWawkX6eLg9+CKJrTVGCBAWVuHXVUV2u0s2711qiChLSId6ikYPfxhdYocLNt3wWwSvDiTvFabw==}
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -2440,8 +2440,8 @@ packages:
     peerDependencies:
       astro: ^2.0.4 || ^3 || ^4 || ^5 || ^6
 
-  astro@6.1.1:
-    resolution: {integrity: sha512-vq8sHpu1JsY1fWAunn+tdKNbVDmLQNiVdyuGsVT2csgITdFGXXVAyEXFWc1DzkMN0ehElPeiHnqItyQOJK+GqA==}
+  astro@6.1.2:
+    resolution: {integrity: sha512-r3iIvmB6JvQxsdJLvapybKKq7Bojd1iQK6CCx5P55eRnXJIyUpHx/1UB/GdMm+em/lwaCUasxHCmIO0lCLV2uA==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2776,8 +2776,8 @@ packages:
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
 
-  diff@8.0.3:
-    resolution: {integrity: sha512-qejHi7bcSD4hQAZE0tNAawRK1ZtafHDmMTMkrrIGgSLl7hTnQHmKCeB45xAcbfTqK2zowkM3j3bHt/4b/ARbYQ==}
+  diff@8.0.4:
+    resolution: {integrity: sha512-DPi0FmjiSU5EvQV0++GFDOJ9ASQUVFh5kD+OzOnYdi7n3Wpm9hWWGfB/O2blfHcMVTL5WkQXSnRiK9makhrcnw==}
     engines: {node: '>=0.3.1'}
 
   dlv@1.1.3:
@@ -2968,8 +2968,17 @@ packages:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
     engines: {node: '>=8.6.0'}
 
+  fast-string-truncated-width@1.2.1:
+    resolution: {integrity: sha512-Q9acT/+Uu3GwGj+5w/zsGuQjh9O1TyywhIwAxHudtWrgF09nHOPrvTLhQevPbttcxjr/SNN7mJmfOw/B1bXgow==}
+
+  fast-string-width@1.1.0:
+    resolution: {integrity: sha512-O3fwIVIH5gKB38QNbdg+3760ZmGz0SZMgvwJbA1b2TGXceKE6A2cOlfogh1iw8lr049zPyd7YADHy+B7U4W9bQ==}
+
   fast-uri@3.1.0:
     resolution: {integrity: sha512-iPeeDKJSWf4IEOasVVrknXpaBV0IApz/gp7S2bb7Z4Lljbl2MGJRqInZiUrQwV16cpzw/D3S5j5Julj/gT52AA==}
+
+  fast-wrap-ansi@0.1.6:
+    resolution: {integrity: sha512-HlUwET7a5gqjURj70D5jl7aC3Zmy4weA1SHUfM0JFI0Ptq987NH2TwbBFLoERhfwk+E+eaq4EK3jXoT+R3yp3w==}
 
   fast-xml-builder@1.1.4:
     resolution: {integrity: sha512-f2jhpN4Eccy0/Uz9csxh3Nu6q4ErKxf0XIsasomfOihuSUa3/xw6w8dnOtCDgEItQFJG8KyXPzQXzcODDrrbOg==}
@@ -3734,8 +3743,8 @@ packages:
     resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
     engines: {node: '>= 0.6'}
 
-  miniflare@4.20260317.3:
-    resolution: {integrity: sha512-tK78D3X4q30/SXqVwMhWrUfH+ffRou9dJLC+jkhNy5zh1I7i7T4JH6xihOvYxdCSBavJ5fQXaaxDJz6orh09BA==}
+  miniflare@4.20260329.0:
+    resolution: {integrity: sha512-+G+1YFVeuEpw/gZZmUHQR7IfzJV+DDGvnSl0yXzhgvHh8Nbr8Go5uiWIwl17EyZ1Uors3FKUMDUyU6+ejeKZOw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -3962,13 +3971,13 @@ packages:
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
 
-  playwright-core@1.58.2:
-    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
+  playwright-core@1.59.0:
+    resolution: {integrity: sha512-PW/X/IoZ6BMUUy8rpwHEZ8Kc0IiLIkgKYGNFaMs5KmQhcfLILNx9yCQD0rnWeWfz1PNeqcFP1BsihQhDOBCwZw==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.58.2:
-    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
+  playwright@1.59.0:
+    resolution: {integrity: sha512-wihGScriusvATUxmhfENxg0tj1vHEFeIwxlnPFKQTOQVd7aG08mUfvvniRP/PtQOC+2Bs52kBOC/Up1jTXeIbw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -4269,6 +4278,10 @@ packages:
     resolution: {integrity: sha512-4zemZi0HvTnYwLfrpk/CF9LOd9Lt87kAt50GnqhMpyF9U3poDAP2+iukq2bZsO/ufegbYehBkqINbsWxj4l4cw==}
     engines: {node: '>= 18'}
 
+  smol-toml@1.6.1:
+    resolution: {integrity: sha512-dWUG8F5sIIARXih1DTaQAX4SsiTXhInKf1buxdY9DIg4ZYPZK5nGM1VRIYmEbDbsHt7USo99xSLFu5Q1IqTmsg==}
+    engines: {node: '>= 18'}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -4536,8 +4549,8 @@ packages:
   unpic@4.2.2:
     resolution: {integrity: sha512-z6T2ScMgRV2y2H8MwwhY5xHZWXhUx/YxtOCGJwfURSl7ypVy4HpLIMWoIZKnnxQa/RKzM0kg8hUh0paIrpLfvw==}
 
-  unstorage@1.17.4:
-    resolution: {integrity: sha512-fHK0yNg38tBiJKp/Vgsq4j0JEsCmgqH58HAn707S7zGkArbZsVr/CwINoi+nh3h98BRCwKvx1K3Xg9u3VV83sw==}
+  unstorage@1.17.5:
+    resolution: {integrity: sha512-0i3iqvRfx29hkNntHyQvJTpf5W9dQ9ZadSoRU8+xVlhVtT7jAX57fazYO9EHvcRCfBCyi5YRya7XCDOsbTgkPg==}
     peerDependencies:
       '@azure/app-configuration': ^1.8.0
       '@azure/cosmos': ^4.2.0
@@ -4660,8 +4673,8 @@ packages:
       yaml:
         optional: true
 
-  vitefu@1.1.2:
-    resolution: {integrity: sha512-zpKATdUbzbsycPFBN71nS2uzBUQiVnFoOrr2rvqv34S1lcAgMKKkjWleLGeiJlZ8lwCXvtWaRn7R3ZC16SYRuw==}
+  vitefu@1.1.3:
+    resolution: {integrity: sha512-ub4okH7Z5KLjb6hDyjqrGXqWtWvoYdU3IGm/NorpgHncKoLTCfRIbvlhBm7r0YstIaQRYlp4yEbFqDcKSzXSSg==}
     peerDependencies:
       vite: ^8.0.3
     peerDependenciesMeta:
@@ -4858,17 +4871,17 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  workerd@1.20260317.1:
-    resolution: {integrity: sha512-ZuEq1OdrJBS+NV+L5HMYPCzVn49a2O60slQiiLpG44jqtlOo+S167fWC76kEXteXLLLydeuRrluRel7WdOUa4g==}
+  workerd@1.20260329.1:
+    resolution: {integrity: sha512-+ifMv3uBuD33ee7pan5n8+sgVxm2u5HnbgfXzHKwMNTKw86znqBJSnJoBqtP88+2T5U2Lu11xXUt+khPYioXwQ==}
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.78.0:
-    resolution: {integrity: sha512-He/vUhk4ih0D0eFmtNnlbT6Od8j+BEokaSR+oYjbVsH0SWIrIch+eHqfLRSBjBQaOoh6HCNxcafcIkBm2u0Hag==}
+  wrangler@4.79.0:
+    resolution: {integrity: sha512-NMinIdB1pXIqdk+NLw4+RjzB7K5z4+lWMxhTxFTfZomwJu3Pm6N+kZ+a66D3nI7w0oCjsdv/umrZVmSHCBp2cg==}
     engines: {node: '>=20.3.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^4.20260317.1
+      '@cloudflare/workers-types': ^4.20260329.1
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -5070,12 +5083,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.3(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))':
+  '@astrojs/mdx@5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))':
     dependencies:
       '@astrojs/markdown-remark': 7.1.0
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -5126,10 +5139,10 @@ snapshots:
     dependencies:
       yaml: 2.8.3
 
-  '@axe-core/playwright@4.11.1(playwright-core@1.58.2)':
+  '@axe-core/playwright@4.11.1(playwright-core@1.59.0)':
     dependencies:
       axe-core: 4.11.1
-      playwright-core: 1.58.2
+      playwright-core: 1.59.0
 
   '@babel/code-frame@7.29.0':
     dependencies:
@@ -5154,39 +5167,39 @@ snapshots:
 
   '@bcoe/v8-coverage@1.0.2': {}
 
-  '@biomejs/biome@2.4.9':
+  '@biomejs/biome@2.4.10':
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 2.4.9
-      '@biomejs/cli-darwin-x64': 2.4.9
-      '@biomejs/cli-linux-arm64': 2.4.9
-      '@biomejs/cli-linux-arm64-musl': 2.4.9
-      '@biomejs/cli-linux-x64': 2.4.9
-      '@biomejs/cli-linux-x64-musl': 2.4.9
-      '@biomejs/cli-win32-arm64': 2.4.9
-      '@biomejs/cli-win32-x64': 2.4.9
+      '@biomejs/cli-darwin-arm64': 2.4.10
+      '@biomejs/cli-darwin-x64': 2.4.10
+      '@biomejs/cli-linux-arm64': 2.4.10
+      '@biomejs/cli-linux-arm64-musl': 2.4.10
+      '@biomejs/cli-linux-x64': 2.4.10
+      '@biomejs/cli-linux-x64-musl': 2.4.10
+      '@biomejs/cli-win32-arm64': 2.4.10
+      '@biomejs/cli-win32-x64': 2.4.10
 
-  '@biomejs/cli-darwin-arm64@2.4.9':
+  '@biomejs/cli-darwin-arm64@2.4.10':
     optional: true
 
-  '@biomejs/cli-darwin-x64@2.4.9':
+  '@biomejs/cli-darwin-x64@2.4.10':
     optional: true
 
-  '@biomejs/cli-linux-arm64-musl@2.4.9':
+  '@biomejs/cli-linux-arm64-musl@2.4.10':
     optional: true
 
-  '@biomejs/cli-linux-arm64@2.4.9':
+  '@biomejs/cli-linux-arm64@2.4.10':
     optional: true
 
-  '@biomejs/cli-linux-x64-musl@2.4.9':
+  '@biomejs/cli-linux-x64-musl@2.4.10':
     optional: true
 
-  '@biomejs/cli-linux-x64@2.4.9':
+  '@biomejs/cli-linux-x64@2.4.10':
     optional: true
 
-  '@biomejs/cli-win32-arm64@2.4.9':
+  '@biomejs/cli-win32-arm64@2.4.10':
     optional: true
 
-  '@biomejs/cli-win32-x64@2.4.9':
+  '@biomejs/cli-win32-x64@2.4.10':
     optional: true
 
   '@bramus/specificity@2.4.2':
@@ -5197,39 +5210,42 @@ snapshots:
     dependencies:
       fontkitten: 1.0.3
 
-  '@clack/core@1.1.0':
+  '@clack/core@1.2.0':
     dependencies:
+      fast-wrap-ansi: 0.1.6
       sisteransi: 1.0.5
 
-  '@clack/prompts@1.1.0':
+  '@clack/prompts@1.2.0':
     dependencies:
-      '@clack/core': 1.1.0
+      '@clack/core': 1.2.0
+      fast-string-width: 1.1.0
+      fast-wrap-ansi: 0.1.6
       sisteransi: 1.0.5
 
   '@cloudflare/kv-asset-handler@0.4.2': {}
 
-  '@cloudflare/unenv-preset@2.16.0(unenv@2.0.0-rc.24)(workerd@1.20260317.1)':
+  '@cloudflare/unenv-preset@2.16.0(unenv@2.0.0-rc.24)(workerd@1.20260329.1)':
     dependencies:
       unenv: 2.0.0-rc.24
     optionalDependencies:
-      workerd: 1.20260317.1
+      workerd: 1.20260329.1
 
-  '@cloudflare/workerd-darwin-64@1.20260317.1':
+  '@cloudflare/workerd-darwin-64@1.20260329.1':
     optional: true
 
-  '@cloudflare/workerd-darwin-arm64@1.20260317.1':
+  '@cloudflare/workerd-darwin-arm64@1.20260329.1':
     optional: true
 
-  '@cloudflare/workerd-linux-64@1.20260317.1':
+  '@cloudflare/workerd-linux-64@1.20260329.1':
     optional: true
 
-  '@cloudflare/workerd-linux-arm64@1.20260317.1':
+  '@cloudflare/workerd-linux-arm64@1.20260329.1':
     optional: true
 
-  '@cloudflare/workerd-windows-64@1.20260317.1':
+  '@cloudflare/workerd-windows-64@1.20260329.1':
     optional: true
 
-  '@cloudflare/workers-types@4.20260329.1': {}
+  '@cloudflare/workers-types@4.20260402.1': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -5486,7 +5502,7 @@ snapshots:
       hono: 4.12.9
       zod: 4.3.6
 
-  '@iconify-json/lucide@1.2.100':
+  '@iconify-json/lucide@1.2.101':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -5494,7 +5510,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.75':
+  '@iconify-json/simple-icons@1.2.76':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -5738,7 +5754,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@notionhq/client@5.15.0': {}
+  '@notionhq/client@5.16.0': {}
 
   '@oslojs/encoding@1.1.0': {}
 
@@ -5776,9 +5792,9 @@ snapshots:
       deepmerge-ts: 7.1.5
       fast-glob: 3.3.3
 
-  '@playwright/test@1.58.2':
+  '@playwright/test@1.59.0':
     dependencies:
-      playwright: 1.58.2
+      playwright: 1.59.0
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -5980,7 +5996,7 @@ snapshots:
 
   '@sindresorhus/is@7.2.0': {}
 
-  '@speed-highlight/core@1.2.14': {}
+  '@speed-highlight/core@1.2.15': {}
 
   '@standard-schema/spec@1.1.0': {}
 
@@ -6416,7 +6432,7 @@ snapshots:
       '@playform/pipe': 0.1.4
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       commander: 14.0.3
       csso: 5.0.5
       deepmerge-ts: 7.1.5
@@ -6466,7 +6482,7 @@ snapshots:
   astro-critters@2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
     dependencies:
       '@playform/pipe': 0.1.2
-      astro: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       critters: 0.0.25
       deepmerge-ts: 7.1.3
     transitivePeerDependencies:
@@ -6515,21 +6531,21 @@ snapshots:
       - debug
       - supports-color
 
-  astro-pagefind@1.8.6(astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)):
+  astro-pagefind@1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)):
     dependencies:
       '@pagefind/default-ui': 1.4.0
-      astro: 6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       pagefind: 1.4.0
       sirv: 3.0.2
 
-  astro@6.1.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
+  astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@netlify/blobs@10.1.0)(@types/node@25.5.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(rollup@4.60.0)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
       '@astrojs/markdown-remark': 7.1.0
       '@astrojs/telemetry': 3.3.0
       '@capsizecss/unpack': 4.0.0
-      '@clack/prompts': 1.1.0
+      '@clack/prompts': 1.2.0
       '@oslojs/encoding': 1.1.0
       '@rollup/pluginutils': 5.3.0(rollup@4.60.0)
       aria-query: 5.3.2
@@ -6539,7 +6555,7 @@ snapshots:
       common-ancestor-path: 2.0.0
       cookie: 1.1.1
       devalue: 5.6.4
-      diff: 8.0.3
+      diff: 8.0.4
       dlv: 1.1.3
       dset: 3.1.4
       es-module-lexer: 2.0.0
@@ -6563,7 +6579,7 @@ snapshots:
       rehype: 13.0.2
       semver: 7.7.4
       shiki: 4.0.2
-      smol-toml: 1.6.0
+      smol-toml: 1.6.1
       svgo: 4.0.1
       tinyclip: 0.1.12
       tinyexec: 1.0.4
@@ -6572,10 +6588,10 @@ snapshots:
       ultrahtml: 1.6.0
       unifont: 0.7.4
       unist-util-visit: 5.1.0
-      unstorage: 1.17.4(@netlify/blobs@10.1.0)(@vercel/functions@2.2.13)
+      unstorage: 1.17.5(@netlify/blobs@10.1.0)(@vercel/functions@2.2.13)
       vfile: 6.0.3
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
-      vitefu: 1.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+      vitefu: 1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       xxhash-wasm: 1.1.0
       yargs-parser: 22.0.0
       zod: 4.3.6
@@ -6949,7 +6965,7 @@ snapshots:
     dependencies:
       dequal: 2.0.3
 
-  diff@8.0.3: {}
+  diff@8.0.4: {}
 
   dlv@1.1.3: {}
 
@@ -7206,7 +7222,17 @@ snapshots:
       merge2: 1.4.1
       micromatch: 4.0.8
 
+  fast-string-truncated-width@1.2.1: {}
+
+  fast-string-width@1.1.0:
+    dependencies:
+      fast-string-truncated-width: 1.2.1
+
   fast-uri@3.1.0: {}
+
+  fast-wrap-ansi@0.1.6:
+    dependencies:
+      fast-string-width: 1.1.0
 
   fast-xml-builder@1.1.4:
     dependencies:
@@ -8325,12 +8351,12 @@ snapshots:
     dependencies:
       mime-db: 1.52.0
 
-  miniflare@4.20260317.3:
+  miniflare@4.20260329.0:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.34.5
       undici: 7.24.4
-      workerd: 1.20260317.1
+      workerd: 1.20260329.1
       ws: 8.18.0
       youch: 4.1.0-beta.10
     transitivePeerDependencies:
@@ -8572,11 +8598,11 @@ snapshots:
       exsolve: 1.0.7
       pathe: 2.0.3
 
-  playwright-core@1.58.2: {}
+  playwright-core@1.59.0: {}
 
-  playwright@1.58.2:
+  playwright@1.59.0:
     dependencies:
-      playwright-core: 1.58.2
+      playwright-core: 1.59.0
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -9045,6 +9071,8 @@ snapshots:
 
   smol-toml@1.6.0: {}
 
+  smol-toml@1.6.1: {}
+
   source-map-js@1.2.1: {}
 
   source-map-support@0.5.21:
@@ -9307,7 +9335,7 @@ snapshots:
 
   unpic@4.2.2: {}
 
-  unstorage@1.17.4(@netlify/blobs@10.1.0)(@vercel/functions@2.2.13):
+  unstorage@1.17.5(@netlify/blobs@10.1.0)(@vercel/functions@2.2.13):
     dependencies:
       anymatch: 3.1.3
       chokidar: 5.0.0
@@ -9362,7 +9390,7 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  vitefu@1.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)):
+  vitefu@1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)):
     optionalDependencies:
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.8.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
 
@@ -9558,26 +9586,26 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
-  workerd@1.20260317.1:
+  workerd@1.20260329.1:
     optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20260317.1
-      '@cloudflare/workerd-darwin-arm64': 1.20260317.1
-      '@cloudflare/workerd-linux-64': 1.20260317.1
-      '@cloudflare/workerd-linux-arm64': 1.20260317.1
-      '@cloudflare/workerd-windows-64': 1.20260317.1
+      '@cloudflare/workerd-darwin-64': 1.20260329.1
+      '@cloudflare/workerd-darwin-arm64': 1.20260329.1
+      '@cloudflare/workerd-linux-64': 1.20260329.1
+      '@cloudflare/workerd-linux-arm64': 1.20260329.1
+      '@cloudflare/workerd-windows-64': 1.20260329.1
 
-  wrangler@4.78.0(@cloudflare/workers-types@4.20260329.1):
+  wrangler@4.79.0(@cloudflare/workers-types@4.20260402.1):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.2
-      '@cloudflare/unenv-preset': 2.16.0(unenv@2.0.0-rc.24)(workerd@1.20260317.1)
+      '@cloudflare/unenv-preset': 2.16.0(unenv@2.0.0-rc.24)(workerd@1.20260329.1)
       blake3-wasm: 2.1.5
       esbuild: 0.27.3
-      miniflare: 4.20260317.3
+      miniflare: 4.20260329.0
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
-      workerd: 1.20260317.1
+      workerd: 1.20260329.1
     optionalDependencies:
-      '@cloudflare/workers-types': 4.20260329.1
+      '@cloudflare/workers-types': 4.20260402.1
       fsevents: 2.3.3
     transitivePeerDependencies:
       - bufferutil
@@ -9659,7 +9687,7 @@ snapshots:
     dependencies:
       '@poppinss/colors': 4.1.6
       '@poppinss/dumper': 0.6.5
-      '@speed-highlight/core': 1.2.14
+      '@speed-highlight/core': 1.2.15
       cookie: 1.1.1
       youch-core: 0.3.3
 
