@@ -38,9 +38,9 @@
 	 */
 	"vars": {
 		// Example value: Replace with the actual production URL or parameterize via environment variables
-		"CONTACT_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook/v1/contact",
+		"CONTACT_WEBHOOK_URL": "https://n8n.ahome.quest/webhook/v1/contact",
 		// Example value: Replace with the actual production URL or parameterize via environment variables
-		"NEWSLETTER_WEBHOOK_URL": "https://n8n.automation.nullish.homes/webhook/v1/portfolio/newsletter",
+		"NEWSLETTER_WEBHOOK_URL": "https://n8n.ahome.quest/webhook/v1/portfolio/newsletter",
 		// CORS allowed origins (comma-separated list of allowed origins)
 		// Example: "https://yacosta738.github.io,https://www.yunielacosta.com"
 		"ALLOWED_ORIGINS": "https://yacosta738.github.io,https://www.yunielacosta.com,https://yunielacosta.com,https://v4.yunielacosta.com,https://www.v4.yunielacosta.com"
