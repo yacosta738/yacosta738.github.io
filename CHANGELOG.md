@@ -6,6 +6,15 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.0.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.0.0...v4.0.1) (2026-04-04)
+
+
+### Bug Fixes
+
+* **deps:** chore(deps): lock file maintenance ([#1845](https://github.com/yacosta738/yacosta738.github.io/issues/1845)) ([442eade](https://github.com/yacosta738/yacosta738.github.io/commit/442eadee6485e5252a84f3ae11db41462fae2df1))
+* **deps:** update astro to &gt;=6.1.2 ([#1848](https://github.com/yacosta738/yacosta738.github.io/issues/1848)) ([9d47c84](https://github.com/yacosta738/yacosta738.github.io/commit/9d47c846caecc025b6f9f1fa4d9c3c9fd7e8e384))
+* **deps:** update happy-dom to ^20.8.9 ([#1752](https://github.com/yacosta738/yacosta738.github.io/issues/1752)) ([25bb389](https://github.com/yacosta738/yacosta738.github.io/commit/25bb389b7961f9febf85841f9d7188ac5779053a))
+
 ## [4.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v3.0.1...v4.0.0) (2026-03-30)
 
 
