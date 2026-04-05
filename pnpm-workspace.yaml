@@ -89,7 +89,7 @@ catalog:
   vfile: ^6.0.3
   vite: ^8.0.3
   vitest: ^4.1.2
-  wrangler: ^4.79.0
+  wrangler: ^4.80.0
   yaml: ^2.8.3
   zod: ^4.3.6
 
