@@ -4,7 +4,7 @@ packages:
 
 catalog:
   # Build and release tooling
-  
+
   # Astro and frontend
   "@astrojs/check": 0.9.8
   "@astrojs/mdx": 5.0.3
@@ -101,6 +101,8 @@ minimumReleaseAgeExclude:
   - miniflare
   - wrangler
   - typescript@6.0.2
+  # Renovate security update: vite@8.0.5
+  - vite@8.0.5
 
 overrides:
   brace-expansion: "catalog:"
