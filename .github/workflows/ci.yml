@@ -76,6 +76,19 @@ jobs:
         id: flags
         run: |
           run_all=false
+
+          append_json_string() {
+            local json="$1"
+            local value="$2"
+            jq -cn --argjson arr "$json" --arg value "$value" '$arr + [$value]'
+          }
+
+          append_e2e_entry() {
+            local json="$1"
+            local app="$2"
+            jq -cn --argjson arr "$json" --arg app "$app" '$arr + [{app: $app, browser: "chromium"}]'
+          }
+
           if [ "${{ steps.filter.outputs.portfolio }}" = 'true' ] || \
              [ "${{ steps.filter.outputs.blog }}" = 'true' ] || \
              [ "${{ steps.filter.outputs.api }}" = 'true' ] || \
@@ -103,41 +116,20 @@ jobs:
             e2e_matrix='[{"app":"portfolio","browser":"chromium"},{"app":"blog","browser":"chromium"}]'
           else
             if [ "${{ steps.filter.outputs.portfolio }}" = 'true' ]; then
-              test_projects='["portfolio"]'
-              build_projects='["portfolio"]'
-              e2e_matrix='[{"app":"portfolio","browser":"chromium"}]'
+              test_projects="$(append_json_string "$test_projects" 'portfolio')"
+              build_projects="$(append_json_string "$build_projects" 'portfolio')"
+              e2e_matrix="$(append_e2e_entry "$e2e_matrix" 'portfolio')"
             fi
 
             if [ "${{ steps.filter.outputs.blog }}" = 'true' ]; then
-              if [ "$test_projects" = '[]' ]; then
-                test_projects='["blog"]'
-                build_projects='["blog"]'
-              else
-                test_projects='["portfolio","blog"]'
-                build_projects='["portfolio","blog"]'
-              fi
-
-              if [ "$e2e_matrix" = '[]' ]; then
-                e2e_matrix='[{"app":"blog","browser":"chromium"}]'
-              else
-                e2e_matrix='[{"app":"portfolio","browser":"chromium"},{"app":"blog","browser":"chromium"}]'
-              fi
+              test_projects="$(append_json_string "$test_projects" 'blog')"
+              build_projects="$(append_json_string "$build_projects" 'blog')"
+              e2e_matrix="$(append_e2e_entry "$e2e_matrix" 'blog')"
             fi
 
             if [ "${{ steps.filter.outputs.api }}" = 'true' ]; then
-              if [ "$test_projects" = '[]' ]; then
-                test_projects='["api"]'
-                build_projects='["api"]'
-              elif [ "$test_projects" = '["portfolio"]' ]; then
-                test_projects='["portfolio","api"]'
-                build_projects='["portfolio","api"]'
-              elif [ "$test_projects" = '["blog"]' ]; then
-                test_projects='["blog","api"]'
-                build_projects='["blog","api"]'
-              else
-                test_projects='["portfolio","blog","api"]'
-                build_projects='["portfolio","blog","api"]'
-              fi
+              test_projects="$(append_json_string "$test_projects" 'api')"
+              build_projects="$(append_json_string "$build_projects" 'api')"
             fi
           fi
 
@@ -482,7 +474,7 @@ jobs:
             **Workflow**: [View Details](${context.payload.repository.html_url}/actions/runs/${context.runId})
             `;
 
-            const { data: comments } = await github.rest.issues.listComments({
+            const comments = await github.paginate(github.rest.issues.listComments, {
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
