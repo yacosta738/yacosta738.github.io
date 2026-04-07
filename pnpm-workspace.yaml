@@ -29,7 +29,7 @@ catalog:
   # Content and data processing
   "@jsdevtools/rehype-toc": ^3.0.2
   "@notionhq/client": ^5.16.0
-  "@playwright/test": 1.59.0
+  "@playwright/test": 1.59.1
   "@tailwindcss/typography": ^0.5.19
   "@tailwindcss/vite": ^4.2.2
   "@testing-library/dom": ^10.4.1
@@ -39,11 +39,11 @@ catalog:
   "@types/fs-extra": ^11.0.4
   "@types/hast": ^3.0.4
   "@types/mdast": ^4.0.4
-  "@types/node": 25.5.0
+  "@types/node": 25.5.2
   "@types/service-worker-mock": ^2.0.4
   "@types/slug": ^5.0.9
   "@vitest/coverage-v8": ^4.1.2
-  astro: 6.1.2
+  astro: 6.1.3
   astro-compress: 2.4.0
   astro-critters: 2.2.1
   astro-icon: ^1.1.5
@@ -55,7 +55,7 @@ catalog:
   clsx: ^2.1.1
   cross-env: ^10.1.0
   crossrm: ^1.0.0
-  fast-xml-parser: ^5.5.9
+  fast-xml-parser: ^5.5.10
   fs-extra: ^11.3.4
   gray-matter: ^4.0.3
   h3: ^1.15.10
@@ -70,7 +70,7 @@ catalog:
   npm-run-all2: ^8.0.4
   pagefind: 1.4.0
   picomatch: ^4.0.4
-  playwright: 1.59.0
+  playwright: 1.59.1
   preact-render-to-string: ^6.6.7
   reading-time: ^1.5.0
   rehype-katex: ^7.0.1
@@ -87,9 +87,9 @@ catalog:
   unist-util-visit: ^5.1.0
   unpic: ^4.2.2
   vfile: ^6.0.3
-  vite: ^8.0.3
+  vite: ^8.0.5
   vitest: ^4.1.2
-  wrangler: ^4.79.0
+  wrangler: ^4.80.0
   yaml: ^2.8.3
   zod: ^4.3.6
 
