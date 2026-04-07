@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/* Monorepo safety: make Tailwind source detection deterministic across apps.
+   Auto-detection can miss workspace files depending on the active app/build context,
+   so we register the exact source roots that contain utility classes. */
 @source "../../../../apps/portfolio/src";
 @source "../../../../apps/blog/src";
 @source "../../../../packages/shared/src";
