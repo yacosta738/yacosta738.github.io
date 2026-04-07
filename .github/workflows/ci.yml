@@ -24,10 +24,143 @@ env:
   PNPM_VERSION: '10.30.2'
 
 jobs:
+  changes:
+    name: 🧭 Detect Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      portfolio: ${{ steps.filter.outputs.portfolio }}
+      blog: ${{ steps.filter.outputs.blog }}
+      api: ${{ steps.filter.outputs.api }}
+      shared: ${{ steps.filter.outputs.shared }}
+      workflows: ${{ steps.filter.outputs.workflows }}
+      global: ${{ steps.filter.outputs.global }}
+      any_ci: ${{ steps.flags.outputs.any_ci }}
+      test_projects: ${{ steps.flags.outputs.test_projects }}
+      build_projects: ${{ steps.flags.outputs.build_projects }}
+      e2e_matrix: ${{ steps.flags.outputs.e2e_matrix }}
+      has_test_projects: ${{ steps.flags.outputs.has_test_projects }}
+      has_build_projects: ${{ steps.flags.outputs.has_build_projects }}
+      has_e2e_apps: ${{ steps.flags.outputs.has_e2e_apps }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Detect affected areas
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            portfolio:
+              - 'apps/portfolio/**'
+            blog:
+              - 'apps/blog/**'
+            api:
+              - 'apps/api/**'
+            shared:
+              - 'packages/shared/**'
+            workflows:
+              - '.github/workflows/**'
+              - '.github/actions/**'
+            global:
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
+              - 'biome.json'
+
+      - name: Compute CI flags
+        id: flags
+        run: |
+          run_all=false
+
+          append_json_string() {
+            local json="$1"
+            local value="$2"
+            jq -cn --argjson arr "$json" --arg value "$value" '$arr + [$value]'
+          }
+
+          append_e2e_entry() {
+            local json="$1"
+            local app="$2"
+            jq -cn --argjson arr "$json" --arg app "$app" '$arr + [{app: $app, browser: "chromium"}]'
+          }
+
+          if [ "${{ steps.filter.outputs.portfolio }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.blog }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.api }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.shared }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.workflows }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.global }}" = 'true' ]; then
+            echo "any_ci=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "any_ci=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ "${{ steps.filter.outputs.shared }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.workflows }}" = 'true' ] || \
+             [ "${{ steps.filter.outputs.global }}" = 'true' ]; then
+            run_all=true
+          fi
+
+          test_projects='[]'
+          build_projects='[]'
+          e2e_matrix='[]'
+
+          if [ "$run_all" = 'true' ]; then
+            test_projects='["portfolio","blog","api"]'
+            build_projects='["portfolio","blog","api"]'
+            e2e_matrix='[{"app":"portfolio","browser":"chromium"},{"app":"blog","browser":"chromium"}]'
+          else
+            if [ "${{ steps.filter.outputs.portfolio }}" = 'true' ]; then
+              test_projects="$(append_json_string "$test_projects" 'portfolio')"
+              build_projects="$(append_json_string "$build_projects" 'portfolio')"
+              e2e_matrix="$(append_e2e_entry "$e2e_matrix" 'portfolio')"
+            fi
+
+            if [ "${{ steps.filter.outputs.blog }}" = 'true' ]; then
+              test_projects="$(append_json_string "$test_projects" 'blog')"
+              build_projects="$(append_json_string "$build_projects" 'blog')"
+              e2e_matrix="$(append_e2e_entry "$e2e_matrix" 'blog')"
+            fi
+
+            if [ "${{ steps.filter.outputs.api }}" = 'true' ]; then
+              test_projects="$(append_json_string "$test_projects" 'api')"
+              build_projects="$(append_json_string "$build_projects" 'api')"
+            fi
+          fi
+
+          echo "test_projects=$test_projects" >> "$GITHUB_OUTPUT"
+          echo "build_projects=$build_projects" >> "$GITHUB_OUTPUT"
+          echo "e2e_matrix=$e2e_matrix" >> "$GITHUB_OUTPUT"
+
+          if [ "$test_projects" = '[]' ]; then
+            echo "has_test_projects=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_test_projects=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ "$build_projects" = '[]' ]; then
+            echo "has_build_projects=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_build_projects=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ "$e2e_matrix" = '[]' ]; then
+            echo "has_e2e_apps=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_e2e_apps=true" >> "$GITHUB_OUTPUT"
+          fi
+
   # Job 1: Setup & Lint (fastest checks first)
   lint:
     name: 🔍 Lint & Type Check
     runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.any_ci == 'true'
     timeout-minutes: 10
     permissions:
       contents: read
@@ -37,7 +170,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Setup monorepo
         id: setup
@@ -58,13 +191,15 @@ jobs:
   unit-tests:
     name: 🧪 Unit Tests
     runs-on: ubuntu-latest
+    needs: [changes]
+    if: needs.changes.outputs.has_test_projects == 'true'
     timeout-minutes: 15
     permissions:
       contents: read
     strategy:
       fail-fast: false
       matrix:
-        project: [portfolio, blog, api]
+        project: ${{ fromJSON(needs.changes.outputs.test_projects) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -85,14 +220,15 @@ jobs:
   build:
     name: 🏗️ Build
     runs-on: ubuntu-latest
-    needs: [lint]
+    needs: [changes, lint]
+    if: needs.changes.outputs.has_build_projects == 'true'
     timeout-minutes: 15
     permissions:
       contents: read
     strategy:
       fail-fast: false
       matrix:
-        project: [portfolio, blog, api]
+        project: ${{ fromJSON(needs.changes.outputs.build_projects) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -123,18 +259,15 @@ jobs:
   e2e-tests:
     name: 🎭 E2E Tests
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [changes, build]
+    if: needs.changes.outputs.has_e2e_apps == 'true'
     timeout-minutes: 15
     permissions:
       contents: read
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - app: portfolio
-            browser: chromium
-          - app: blog
-            browser: chromium
+        include: ${{ fromJSON(needs.changes.outputs.e2e_matrix) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
@@ -163,8 +296,16 @@ jobs:
   code-quality:
     name: 📊 Code Quality
     runs-on: ubuntu-latest
-    needs: [unit-tests]
-    if: always()
+    needs: [changes, unit-tests]
+    if: |
+      always() && (
+        needs.changes.outputs.portfolio == 'true' ||
+        needs.changes.outputs.blog == 'true' ||
+        needs.changes.outputs.api == 'true' ||
+        needs.changes.outputs.shared == 'true' ||
+        needs.changes.outputs.workflows == 'true' ||
+        needs.changes.outputs.global == 'true'
+      )
     timeout-minutes: 15
     permissions:
       contents: read
@@ -273,7 +414,7 @@ jobs:
   report:
     name: 📋 Final Report
     runs-on: ubuntu-latest
-    needs: [lint, unit-tests, build, e2e-tests, code-quality]
+    needs: [changes, lint, unit-tests, build, e2e-tests, code-quality]
     if: always()
     timeout-minutes: 5
     permissions:
@@ -281,9 +422,6 @@ jobs:
       pull-requests: write
       checks: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
       - name: Generate pipeline summary
         run: |
           cat <<'EOF' >> "$GITHUB_STEP_SUMMARY"
@@ -293,13 +431,14 @@ jobs:
 
           | Job | Status |
           |-----|--------|
-          | 🔍 Lint | ${{ needs.lint.result == 'success' && '✅' || '❌' }} |
-          | 🧪 Unit Tests | ${{ needs.unit-tests.result == 'success' && '✅' || '❌' }} |
-          | 🏗️ Build | ${{ needs.build.result == 'success' && '✅' || '❌' }} |
-          | 🎭 E2E Tests | ${{ needs.e2e-tests.result == 'success' && '✅' || '❌' }} |
-          | 📊 Code Quality | ${{ needs.code-quality.result == 'success' && '✅' || '⚠️' }} |
+          | 🧭 Detect Changes | ${{ needs.changes.result == 'success' && '✅' || needs.changes.result == 'skipped' && '⏭️' || '❌' }} |
+          | 🔍 Lint | ${{ needs.lint.result == 'success' && '✅' || needs.lint.result == 'skipped' && '⏭️' || '❌' }} |
+          | 🧪 Unit Tests | ${{ needs.unit-tests.result == 'success' && '✅' || needs.unit-tests.result == 'skipped' && '⏭️' || '❌' }} |
+          | 🏗️ Build | ${{ needs.build.result == 'success' && '✅' || needs.build.result == 'skipped' && '⏭️' || '❌' }} |
+          | 🎭 E2E Tests | ${{ needs.e2e-tests.result == 'success' && '✅' || needs.e2e-tests.result == 'skipped' && '⏭️' || '❌' }} |
+          | 📊 Code Quality | ${{ needs.code-quality.result == 'success' && '✅' || needs.code-quality.result == 'skipped' && '⏭️' || '⚠️' }} |
 
-          **Overall Status**: ${{ (needs.lint.result == 'success' && needs.unit-tests.result == 'success' && needs.build.result == 'success' && needs.e2e-tests.result == 'success') && '✅ All checks passed!' || '❌ Some checks failed' }}
+          **Overall Status**: ${{ (needs.lint.result != 'failure' && needs.lint.result != 'cancelled' && needs.unit-tests.result != 'failure' && needs.unit-tests.result != 'cancelled' && needs.build.result != 'failure' && needs.build.result != 'cancelled' && needs.e2e-tests.result != 'failure' && needs.e2e-tests.result != 'cancelled') && '✅ CI gates satisfied' || '❌ Some critical checks failed' }}
           EOF
 
       - name: Comment PR
@@ -308,32 +447,72 @@ jobs:
         with:
           script: |
             const status = {
+              changes: '${{ needs.changes.result }}',
               lint: '${{ needs.lint.result }}',
               unit: '${{ needs.unit-tests.result }}',
               build: '${{ needs.build.result }}',
               e2e: '${{ needs.e2e-tests.result }}',
               quality: '${{ needs.code-quality.result }}'
             };
-            
+
             const emoji = (result) => result === 'success' ? '✅' : result === 'skipped' ? '⏭️' : '❌';
-            
-            const body = `## 🤖 CI Pipeline Results
-            
+
+            const marker = '<!-- ci-pipeline-report -->';
+            const body = `${marker}
+            ## 🤖 CI Pipeline Results
+
             | Check | Status |
             |-------|--------|
+            | 🧭 Detect Changes | ${emoji(status.changes)} ${status.changes} |
             | 🔍 Lint & Type Check | ${emoji(status.lint)} ${status.lint} |
             | 🧪 Unit Tests | ${emoji(status.unit)} ${status.unit} |
             | 🏗️ Build | ${emoji(status.build)} ${status.build} |
             | 🎭 E2E Tests | ${emoji(status.e2e)} ${status.e2e} |
             | 📊 Code Quality | ${emoji(status.quality)} ${status.quality} |
-            
+
             **Commit**: ${context.sha.substring(0, 7)}
             **Workflow**: [View Details](${context.payload.repository.html_url}/actions/runs/${context.runId})
             `;
-            
-            github.rest.issues.createComment({
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: body
+              per_page: 100,
             });
+
+            const existing = comments.find((comment) =>
+              comment.user?.type === 'Bot' && comment.body?.includes(marker)
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            }
+
+      - name: Enforce final status
+        run: |
+          critical_fail=0
+
+          for result in "${{ needs.lint.result }}" "${{ needs.unit-tests.result }}" "${{ needs.build.result }}" "${{ needs.e2e-tests.result }}"; do
+            if [ "$result" = 'failure' ] || [ "$result" = 'cancelled' ]; then
+              critical_fail=1
+            fi
+          done
+
+          if [ "${{ github.event_name }}" = 'pull_request' ] && { [ "${{ needs.code-quality.result }}" = 'failure' ] || [ "${{ needs.code-quality.result }}" = 'cancelled' ]; }; then
+            critical_fail=1
+          fi
+
+          exit "$critical_fail"
