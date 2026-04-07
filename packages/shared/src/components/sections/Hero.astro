@@ -18,7 +18,8 @@ import TypedText from "@atoms/TypedText.astro";
 import Typography from "@atoms/Typography.astro";
 import Link from "@/components/atoms/Link.astro";
 import type { Location, Profile } from "@/core/resume";
-import { type Lang, useTranslations } from "@/i18n";
+import { useTranslations } from "@/i18n";
+import { resolveLocaleFromUrl } from "@/i18n/utils/resolveLocaleFromUrl";
 
 // Props interface
 interface Props {
@@ -36,7 +37,7 @@ interface Props {
 const { basics } = Astro.props as Props;
 const { name, label, profiles, phone, email } = basics;
 
-const currentLocale = Astro.params.lang as Lang;
+const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
 const t = useTranslations(currentLocale);
 
 const linkedInfo = profiles.find(({ network }) => network === "LinkedIn");
