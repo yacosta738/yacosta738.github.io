@@ -82,8 +82,8 @@ catalogs:
       specifier: ^4.0.4
       version: 4.0.4
     '@types/node':
-      specifier: 25.5.0
-      version: 25.5.0
+      specifier: 25.5.2
+      version: 25.5.2
     '@types/service-worker-mock':
       specifier: ^2.0.4
       version: 2.0.4
@@ -235,7 +235,7 @@ importers:
         version: 6.1.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
 
   apps/api:
     dependencies:
@@ -260,19 +260,19 @@ importers:
         version: 4.20260402.1
       '@types/node':
         specifier: 'catalog:'
-        version: 25.5.0
+        version: 25.5.2
       '@types/service-worker-mock':
         specifier: 'catalog:'
         version: 2.0.4
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 4.1.2(vitest@4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
+        version: 4.1.2(vitest@4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
       rimraf:
         specifier: 'catalog:'
         version: 6.1.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       wrangler:
         specifier: 'catalog:'
         version: 4.80.0(@cloudflare/workers-types@4.20260402.1)
@@ -284,7 +284,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
         version: 2.1.6
@@ -302,19 +302,19 @@ importers:
         version: 5.16.0
       '@tailwindcss/vite':
         specifier: 'catalog:'
-        version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       '@yap/astro-notion-loader':
         specifier: workspace:*
         version: link:../../packages/notion-astro-loader
       astro:
         specifier: 'catalog:'
-        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
-        version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -396,10 +396,10 @@ importers:
         version: 4.0.4
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 4.1.2(vitest@4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
+        version: 4.1.2(vitest@4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
       astro-critters:
         specifier: 'catalog:'
-        version: 2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-icon:
         specifier: 'catalog:'
         version: 1.1.5
@@ -438,7 +438,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
 
   apps/portfolio:
     dependencies:
@@ -447,7 +447,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
         version: 2.1.6
@@ -459,16 +459,16 @@ importers:
         version: 3.7.2
       '@tailwindcss/vite':
         specifier: 'catalog:'
-        version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       astro:
         specifier: 'catalog:'
-        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
-        version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -535,10 +535,10 @@ importers:
         version: 4.0.4
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 4.1.2(vitest@4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
+        version: 4.1.2(vitest@4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
       astro-critters:
         specifier: 'catalog:'
-        version: 2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-icon:
         specifier: 'catalog:'
         version: 1.1.5
@@ -583,7 +583,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
 
   packages/notion-astro-loader:
     dependencies:
@@ -632,7 +632,7 @@ importers:
         version: 5.0.9
       astro:
         specifier: 'catalog:'
-        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       crossrm:
         specifier: 'catalog:'
         version: 1.0.0
@@ -644,7 +644,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
 
   packages/shared:
     dependencies:
@@ -653,7 +653,7 @@ importers:
         version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
         version: 2.1.6
@@ -665,16 +665,16 @@ importers:
         version: 3.7.2
       '@tailwindcss/vite':
         specifier: 'catalog:'
-        version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       astro:
         specifier: 'catalog:'
-        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
-        version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -732,10 +732,10 @@ importers:
         version: 4.0.4
       '@vitest/coverage-v8':
         specifier: 'catalog:'
-        version: 4.1.2(vitest@4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
+        version: 4.1.2(vitest@4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))
       astro-critters:
         specifier: 'catalog:'
-        version: 2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       astro-icon:
         specifier: 'catalog:'
         version: 1.1.5
@@ -774,7 +774,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: 'catalog:'
-        version: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+        version: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
 
   packages/testing-e2e:
     devDependencies:
@@ -2059,6 +2059,9 @@ packages:
 
   '@types/node@25.5.0':
     resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
+
+  '@types/node@25.5.2':
+    resolution: {integrity: sha512-tO4ZIRKNC+MDWV4qKVZe3Ql/woTnmHDr5JD8UI5hn2pwBrHEwOEMZK7WlNb5RKB6EoJ02gwmQS9OrjuFnZYdpg==}
 
   '@types/sax@1.2.7':
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
@@ -4737,12 +4740,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))':
+  '@astrojs/mdx@5.0.3(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3))':
     dependencies:
       '@astrojs/markdown-remark': 7.1.0
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -5607,12 +5610,12 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.2.2
 
-  '@tailwindcss/vite@4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))':
+  '@tailwindcss/vite@4.2.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))':
     dependencies:
       '@tailwindcss/node': 4.2.2
       '@tailwindcss/oxide': 4.2.2
       tailwindcss: 4.2.2
-      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
+      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
 
   '@testing-library/dom@10.4.1':
     dependencies:
@@ -5716,6 +5719,10 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
+  '@types/node@25.5.2':
+    dependencies:
+      undici-types: 7.18.2
+
   '@types/sax@1.2.7':
     dependencies:
       '@types/node': 25.5.0
@@ -5741,7 +5748,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitest/coverage-v8@4.1.2(vitest@4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))':
+  '@vitest/coverage-v8@4.1.2(vitest@4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)))':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.1.2
@@ -5753,7 +5760,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+      vitest: 4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
 
   '@vitest/expect@4.1.2':
     dependencies:
@@ -5764,13 +5771,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))':
+  '@vitest/mocker@4.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))':
     dependencies:
       '@vitest/spy': 4.1.2
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
+      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
 
   '@vitest/pretty-format@4.1.2':
     dependencies:
@@ -5913,12 +5920,12 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-compress@2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3):
+  astro-compress@2.4.0(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(typescript@6.0.2)(yaml@2.8.3):
     dependencies:
       '@playform/pipe': 0.1.4
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       commander: 14.0.3
       csso: 5.0.5
       deepmerge-ts: 7.1.5
@@ -5965,10 +5972,10 @@ snapshots:
       - uploadthing
       - yaml
 
-  astro-critters@2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
+  astro-critters@2.2.1(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
     dependencies:
       '@playform/pipe': 0.1.2
-      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       critters: 0.0.25
       deepmerge-ts: 7.1.3
     transitivePeerDependencies:
@@ -6016,14 +6023,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-pagefind@1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)):
+  astro-pagefind@1.8.6(astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)):
     dependencies:
       '@pagefind/default-ui': 1.4.0
-      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3)
       pagefind: 1.4.0
       sirv: 3.0.2
 
-  astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
+  astro@6.1.2(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(terser@5.46.0)(typescript@6.0.2)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
@@ -6075,8 +6082,8 @@ snapshots:
       unist-util-visit: 5.1.0
       unstorage: 1.17.5
       vfile: 6.0.3
-      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
-      vitefu: 1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
+      vitefu: 1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       xxhash-wasm: 1.1.0
       yargs-parser: 22.0.0
       zod: 4.3.6
@@ -8695,7 +8702,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3):
+  vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -8703,7 +8710,7 @@ snapshots:
       rolldown: 1.0.0-rc.12(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.5.0
+      '@types/node': 25.5.2
       esbuild: 0.27.4
       fsevents: 2.3.3
       jiti: 2.6.1
@@ -8713,14 +8720,14 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  vitefu@1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)):
+  vitefu@1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)):
     optionalDependencies:
-      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
+      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
 
-  vitest@4.1.2(@types/node@25.5.0)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)):
+  vitest@4.1.2(@types/node@25.5.2)(happy-dom@20.8.9)(jsdom@29.0.1)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)):
     dependencies:
       '@vitest/expect': 4.1.2
-      '@vitest/mocker': 4.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
+      '@vitest/mocker': 4.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3))
       '@vitest/pretty-format': 4.1.2
       '@vitest/runner': 4.1.2
       '@vitest/snapshot': 4.1.2
@@ -8737,10 +8744,10 @@ snapshots:
       tinyexec: 1.0.4
       tinyglobby: 0.2.15
       tinyrainbow: 3.1.0
-      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
+      vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(esbuild@0.27.4)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 25.5.0
+      '@types/node': 25.5.2
       happy-dom: 20.8.9
       jsdom: 29.0.1
     transitivePeerDependencies:
