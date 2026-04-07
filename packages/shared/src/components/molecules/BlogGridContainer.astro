@@ -108,23 +108,6 @@ for (let i = 0; i < totalPosts; i++) {
       // Set loading strategy: eager for first 6 articles that are likely in initial viewport
       const imageLoading = index < 6 ? "eager" : "lazy";
 
-      // If this would be the 7th item (index 6), insert the submit site element instead
-      if (index === 6) {
-        return (
-          <li class="md:col-span-2 lg:col-span-3">
-            <aside
-              class="flex flex-col items-center gap-6 py-6 rounded-lg shadow-md"
-            >
-              <CtaNewsletterSubscription
-								formId="cta-newsletter-subscription-form"
-								title={t("cta.title")}
-								description={t("cta.description")}
-								/>
-            </aside>
-          </li>
-        );
-      }
-
       // Get the URL and link attributes for the post
 		const postUrl = getBlogPostUrl(
 			post,
@@ -135,18 +118,34 @@ for (let i = 0; i < totalPosts; i++) {
       const rel = getBlogPostRel(post);
 
       return (
-        <li class={specialClasses}>
-          <ArticleCard
-            image={post.cover}
-            title={post.title}
-            description={post.description}
-            url={postUrl}
-            loading={imageLoading}
-            data-external={isExternalArticle(post) ? 'true' : 'false'}
-            data-target={target}
-            data-rel={rel}
-          />
-        </li>
+        <>
+          {index === 6 && (
+            <li class="md:col-span-2 lg:col-span-3">
+              <aside
+                class="flex flex-col items-center gap-6 py-6 rounded-lg shadow-md bg-background-surface w-full"
+              >
+                <CtaNewsletterSubscription
+                  formId="cta-newsletter-subscription-form"
+                  title={t("cta.title")}
+                  description={t("cta.description")}
+                  class="px-4 md:px-8"
+                  />
+              </aside>
+            </li>
+          )}
+          <li class={specialClasses}>
+            <ArticleCard
+              image={post.cover}
+              title={post.title}
+              description={post.description}
+              url={postUrl}
+              loading={imageLoading}
+              data-external={isExternalArticle(post) ? 'true' : 'false'}
+              data-target={target}
+              data-rel={rel}
+            />
+          </li>
+        </>
       );
     })}
   </ul>
