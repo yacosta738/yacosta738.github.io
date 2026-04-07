@@ -410,10 +410,6 @@ h6 {
 }
 
 .blog-article-card .blog-article-card__footer {
-	position: static !important;
-	opacity: 1 !important;
-	pointer-events: auto !important;
-	background: transparent !important;
 	padding: 1.2rem 1.35rem 1.4rem;
 	display: flex;
 	flex-direction: column;

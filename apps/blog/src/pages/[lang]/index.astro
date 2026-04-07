@@ -64,6 +64,7 @@ const indexUrl = translatePath("/");
 							description={post.description}
 							url={getBlogPostUrl(post, currentLocale, Astro.site?.origin)}
 							loading="eager"
+							disableHoverAnimation={true}
 						/>
 					))}
 				</div>
