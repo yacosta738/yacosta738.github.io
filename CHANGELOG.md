@@ -6,6 +6,27 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.1.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.0.1...v4.1.0) (2026-04-07)
+
+
+### Features
+
+* add configuration files for AI Search, dynamic routing, and analytics setup ([f38c883](https://github.com/yacosta738/yacosta738.github.io/commit/f38c883f2b380a797f04383b03bc3db2cf298807))
+* add security.txt files, update CSP headers, and refine gitignore patterns ([286c072](https://github.com/yacosta738/yacosta738.github.io/commit/286c072ec765c2942e22df771d373732bec7d62b))
+
+
+### Bug Fixes
+
+* **blog:** adjust padding and footer styles for better readability ([#1859](https://github.com/yacosta738/yacosta738.github.io/issues/1859)) ([248b488](https://github.com/yacosta738/yacosta738.github.io/commit/248b48843a948fc0cc78404d44f7f9c22e5ce3ae))
+* **deps:** update @types/node to v25.5.2 ([#1857](https://github.com/yacosta738/yacosta738.github.io/issues/1857)) ([92e5f7f](https://github.com/yacosta738/yacosta738.github.io/commit/92e5f7f4815561532155c0bb40ae40a47fee1fe4))
+* **deps:** update astro to v6.1.3 ([#1851](https://github.com/yacosta738/yacosta738.github.io/issues/1851)) ([1fd2df3](https://github.com/yacosta738/yacosta738.github.io/commit/1fd2df394715267261b3ea183625c8991ea8feda))
+* **deps:** update fast-xml-parser to ^5.5.10 ([#1858](https://github.com/yacosta738/yacosta738.github.io/issues/1858)) ([6a3a40d](https://github.com/yacosta738/yacosta738.github.io/commit/6a3a40d9ad818cd498041355c1557fa945feacfe))
+* **deps:** update hono to ^4.12.10 ([#1852](https://github.com/yacosta738/yacosta738.github.io/issues/1852)) ([264c85f](https://github.com/yacosta738/yacosta738.github.io/commit/264c85f2423c9a444da0b90470f0bb9d9557759c))
+* **deps:** update Testing tools to v1.59.1 ([#1850](https://github.com/yacosta738/yacosta738.github.io/issues/1850)) ([50e8f82](https://github.com/yacosta738/yacosta738.github.io/commit/50e8f82703d1262f2b8e3712382440a9d1065a69))
+* **deps:** update vite to ^8.0.5 [SECURITY] ([#1854](https://github.com/yacosta738/yacosta738.github.io/issues/1854)) ([21ac44d](https://github.com/yacosta738/yacosta738.github.io/commit/21ac44dc011f3279b6a04df6110fd059e8d02cdc))
+* **deps:** update vite to ^8.0.5 [SECURITY] ([#1855](https://github.com/yacosta738/yacosta738.github.io/issues/1855)) ([f16d13e](https://github.com/yacosta738/yacosta738.github.io/commit/f16d13e07827304bba6773c126a840bc73910e11))
+* **deps:** update wrangler to ^4.80.0 ([#1839](https://github.com/yacosta738/yacosta738.github.io/issues/1839)) ([0624d06](https://github.com/yacosta738/yacosta738.github.io/commit/0624d063fe55b53e8c3a12011148ebb02ebcec4e))
+
 ## [4.0.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.0.0...v4.0.1) (2026-04-04)
 
 
