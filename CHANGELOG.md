@@ -6,6 +6,17 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.1.2](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.1...v4.1.2) (2026-04-07)
+
+
+### Bug Fixes
+
+* **blog:** disable csso restructure to preserve Tailwind v4 responsive breakpoints ([#1863](https://github.com/yacosta738/yacosta738.github.io/issues/1863)) ([9d4dc4e](https://github.com/yacosta738/yacosta738.github.io/commit/9d4dc4efac42ff17708dba1d6bfa12a2fdf7bc16))
+* **blog:** resolve newsletter layout and article skipping ([#1866](https://github.com/yacosta738/yacosta738.github.io/issues/1866)) ([ca6c272](https://github.com/yacosta738/yacosta738.github.io/commit/ca6c272493962934951ee8e2b0d5f83d58c0dce6))
+* **ci:** tighten final gating and scope jobs by changes ([#1865](https://github.com/yacosta738/yacosta738.github.io/issues/1865)) ([0dd039c](https://github.com/yacosta738/yacosta738.github.io/commit/0dd039c9ca2f7b84a7c3acadbc8cd65965be3f52))
+* Potential fix for code scanning alert no. 19: Bad HTML filtering regexp ([#1861](https://github.com/yacosta738/yacosta738.github.io/issues/1861)) ([7e1d022](https://github.com/yacosta738/yacosta738.github.io/commit/7e1d0229f86465f8d24d188dcbd7e4ea75faae9c))
+* **styles:** make Tailwind source detection explicit in monorepo ([#1864](https://github.com/yacosta738/yacosta738.github.io/issues/1864)) ([15574f0](https://github.com/yacosta738/yacosta738.github.io/commit/15574f0180a4b6733d260a355c477ccbfff29018))
+
 ## [4.1.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.0...v4.1.1) (2026-04-07)
 
 
