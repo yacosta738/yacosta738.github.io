@@ -6,6 +6,13 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.1.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.0...v4.1.1) (2026-04-07)
+
+
+### Bug Fixes
+
+* **deps:** update h3 to ^1.15.11 ([#1849](https://github.com/yacosta738/yacosta738.github.io/issues/1849)) ([9aefffc](https://github.com/yacosta738/yacosta738.github.io/commit/9aefffcb1b26d5ab43707005989af9884a03f2a4))
+
 ## [4.1.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.0.1...v4.1.0) (2026-04-07)
 
 
