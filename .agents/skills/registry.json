@@ -1,226 +1,226 @@
 {
-  "schemaVersion": 1,
-  "last_updated": "2026-04-07T11:28:14.418832+00:00",
-  "skills": {
-    "accessibility": {
-      "name": "accessibility",
-      "version": null,
-      "description": "Audit and improve web accessibility following WCAG 2.1 guidelines. Use when the task involves `improve accessibility`, `a11y audit`, `WCAG compliance`, `screen reader support`, `keyboard navigation`, or `make accessible`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpWRvBHG",
-      "installedAt": "2026-04-07T11:27:59.858400+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "astrolicious-astro": {
-      "name": "astro",
-      "version": null,
-      "description": "Skill for building with the Astro web framework. Helps create Astro components and pages, configure SSR adapters, set up content collections, deploy static sites, and manage project structure and CLI commands. Use when the user needs to work with Astro, mentions .astro files, asks about static site generation (SSG), islands architecture, content collections, or deploying an Astro project.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpvxoVNT",
-      "installedAt": "2026-04-07T11:28:00.473411+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "best-practices": {
-      "name": "best-practices",
-      "version": null,
-      "description": "Apply modern web development best practices for security, compatibility, and code quality. Use when the task involves `apply best practices`, `security audit`, `modernize code`, `code quality review`, or `check for vulnerabilities`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpoUZgHy",
-      "installedAt": "2026-04-07T11:28:01.313986+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "cloudflare": {
-      "name": "cloudflare",
-      "version": null,
-      "description": "Comprehensive Cloudflare platform skill covering Workers, Pages, storage (KV, D1, R2), AI (Workers AI, Vectorize, Agents SDK), networking (Tunnel, Spectrum), security (WAF, DDoS), and infrastructure-as-code (Terraform, Pulumi). Use for any Cloudflare development task. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpNL7pZw",
-      "installedAt": "2026-04-07T11:28:02.456190+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "cloudflare-web-perf": {
-      "name": "web-perf",
-      "version": null,
-      "description": "Analyzes web performance using Chrome DevTools MCP. Measures Core Web Vitals (LCP, INP, CLS) and supplementary metrics (FCP, TBT, Speed Index), identifies render-blocking resources, network dependency chains, layout shifts, caching issues, and accessibility gaps. Use when asked to audit, profile, debug, or optimize page load performance, Lighthouse scores, or site speed. Biases towards retrieval from current documentation over pre-trained knowledge.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpil3Txv",
-      "installedAt": "2026-04-07T11:28:03.255726+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "cloudflare-workers-best-practices": {
-      "name": "workers-best-practices",
-      "version": null,
-      "description": "Reviews and authors Cloudflare Workers code against production best practices. Load when writing new Workers, reviewing Worker code, configuring wrangler.jsonc, or checking for common Workers anti-patterns (streaming, floating promises, global state, secrets, bindings, observability). Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpnl4Ip7",
-      "installedAt": "2026-04-07T11:28:03.905722+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "cloudflare-wrangler": {
-      "name": "wrangler",
-      "version": null,
-      "description": "Cloudflare Workers CLI for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Containers, Queues, Workflows, Pipelines, and Secrets Store. Load before running wrangler commands to ensure correct syntax and best practices. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpGz4bpw",
-      "installedAt": "2026-04-07T11:28:04.559023+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "core-web-vitals": {
-      "name": "core-web-vitals",
-      "version": null,
-      "description": "Optimize Core Web Vitals (LCP, INP, CLS) for better page experience and search ranking. Use when the task involves `improve Core Web Vitals`, `fix LCP`, `reduce CLS`, `optimize INP`, `page experience optimization`, or `fix layout shifts`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpU6gqIV",
-      "installedAt": "2026-04-07T11:28:05.127901+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "docker-expert": {
-      "name": "docker-expert",
-      "version": null,
-      "description": "Advanced Docker containerization expert for multi-stage builds, image optimization, security hardening, and Compose orchestration. Use when the task involves `working with Dockerfile`, `docker-compose.yml`, `containerization`, `multi-stage builds`, or `optimizing Docker images`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmp0bYBgy",
-      "installedAt": "2026-04-07T11:28:05.677500+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "frontend-design": {
-      "name": "frontend-design",
-      "version": null,
-      "description": "Create distinctive, production-grade frontend interfaces with high design quality that avoids generic AI aesthetics. Use when the task involves `build web components`, `create frontend interface`, `build web page`, `build web application`, `frontend design`, `create UI component`, or `design web interface`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmp5f7iZt",
-      "installedAt": "2026-04-07T11:28:06.247708+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "github-actions": {
-      "name": "github-actions",
-      "version": null,
-      "description": "Comprehensive guide for building robust, secure, and efficient CI/CD pipelines using GitHub Actions. Use when the task involves `creating or editing GitHub Actions workflows`, `.github/workflows/*.yml`, `CI/CD pipelines`, `GitHub Actions best practices`, or `workflow optimization`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmp6BN65C",
-      "installedAt": "2026-04-07T11:28:06.781764+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "hono": {
-      "name": "hono",
-      "version": null,
-      "description": "Use when building Hono web applications or when the user asks about Hono APIs, routing, middleware, JSX, validation, testing, or streaming. TRIGGER when code imports from 'hono' or 'hono/*', or user mentions Hono. Use `npx hono request` to test endpoints.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpITxjZv",
-      "installedAt": "2026-04-07T11:28:07.385341+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "makefile": {
-      "name": "makefile",
-      "version": null,
-      "description": "Best practices for authoring clean, maintainable, and portable GNU Make Makefiles. Use when the task involves `creating or editing Makefiles`, `Makefile`, `makefile`, `*.mk`, `GNUmakefile`, `GNU Make patterns`, `build automation`, or `makefile troubleshooting`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmph4Z3rO",
-      "installedAt": "2026-04-07T11:28:07.940101+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "nothing-design": {
-      "name": "nothing-design",
-      "version": null,
-      "description": "Guides intentional Nothing-inspired UI and design-system work with typography, spacing, hierarchy, components, and platform-specific execution. Use when the user explicitly asks for Nothing style, Nothing design, or `/nothing-design`, not for generic UI or design tasks.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpBlsg4w",
-      "installedAt": "2026-04-07T11:28:08.478107+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "openai-cloudflare-deploy": {
-      "name": "cloudflare-deploy",
-      "version": null,
-      "description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmprOZlMs",
-      "installedAt": "2026-04-07T11:28:09.581135+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "performance": {
-      "name": "performance",
-      "version": null,
-      "description": "Optimize web performance for faster loading and better user experience. Use when the task involves `speed up my site`, `optimize performance`, `reduce load time`, `fix slow loading`, `improve page speed`, or `performance audit`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpmOtgVo",
-      "installedAt": "2026-04-07T11:28:10.432401+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "pinned-tag": {
-      "name": "pinned-tag",
-      "version": null,
-      "description": "Manage pinned tags and commit SHAs for GitHub Actions security, resolving mutable tags to immutable commit references. Use when the task involves `Unpinned tag for a non-immutable Action`, `pin GitHub Action to commit SHA`, `resolve git tag to SHA`, or `GitHub Actions security hardening`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpxTy9Cp",
-      "installedAt": "2026-04-07T11:28:11.118393+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "playwright-best-practices": {
-      "name": "playwright-best-practices",
-      "version": null,
-      "description": "Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling authentication or OAuth, testing accessibility (axe-core), file uploads/downloads, date/time mocking, WebSockets, geolocation, permissions, multi-tab/popup flows, mobile/responsive layouts, touch gestures, GraphQL, error handling, offline mode, multi-user collaboration, third-party services (payments, email verification), console error monitoring, global setup/teardown, test annotations (skip, fixme, slow), test tags (@smoke, @fast, @critical, filtering with --grep), project dependencies, security testing (XSS, CSRF, auth), performance budgets (Web Vitals, Lighthouse), iframes, component testing, canvas/WebGL, service workers/PWA, test coverage, i18n/localization, Electron apps, or browser extension testing. Covers E2E, component, API, visual, accessibility, security, Electron, and extension testing.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpGQZOlT",
-      "installedAt": "2026-04-07T11:28:11.878829+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "seo": {
-      "name": "seo",
-      "version": null,
-      "description": "Optimize for search engine visibility and ranking. Use when the task involves `improve SEO`, `optimize for search`, `fix meta tags`, `add structured data`, `sitemap optimization`, or `search engine optimization`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpVDnPhI",
-      "installedAt": "2026-04-07T11:28:12.501513+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "testing-library": {
-      "name": "testing-library",
-      "version": null,
-      "description": "Testing Library patterns for user-centric, accessibility-driven component testing. Covers query priority, user events, async utilities, and practical patterns for testing React, Vue, and DOM components the way users interact with them. Use when the task involves `Testing Library`, `@testing-library/react`, `React component testing`, `accessible testing`, or `user-centric testing`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpuAJw0T",
-      "installedAt": "2026-04-07T11:28:13.038280+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "vitest": {
-      "name": "vitest",
-      "version": null,
-      "description": "Vitest fast unit testing framework powered by Vite with Jest-compatible API. Use when writing tests, mocking, configuring coverage, or working with test filtering and fixtures.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmplJnGjf",
-      "installedAt": "2026-04-07T11:28:13.864377+00:00",
-      "files": null,
-      "manifestHash": null
-    },
-    "webapp-testing": {
-      "name": "webapp-testing",
-      "version": null,
-      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. Use when the task involves `test web application`, `test frontend`, `browser testing`, `Playwright test`, `capture browser screenshot`, `debug UI behavior`, or `verify frontend functionality`.",
-      "provider": null,
-      "source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpdUsWH6",
-      "installedAt": "2026-04-07T11:28:14.418759+00:00",
-      "files": null,
-      "manifestHash": null
-    }
-  }
+	"schemaVersion": 1,
+	"last_updated": "2026-04-07T11:28:14.418832+00:00",
+	"skills": {
+		"accessibility": {
+			"name": "accessibility",
+			"version": null,
+			"description": "Audit and improve web accessibility following WCAG 2.1 guidelines. Use when the task involves `improve accessibility`, `a11y audit`, `WCAG compliance`, `screen reader support`, `keyboard navigation`, or `make accessible`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpWRvBHG",
+			"installedAt": "2026-04-07T11:27:59.858400+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"astrolicious-astro": {
+			"name": "astro",
+			"version": null,
+			"description": "Skill for building with the Astro web framework. Helps create Astro components and pages, configure SSR adapters, set up content collections, deploy static sites, and manage project structure and CLI commands. Use when the user needs to work with Astro, mentions .astro files, asks about static site generation (SSG), islands architecture, content collections, or deploying an Astro project.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpvxoVNT",
+			"installedAt": "2026-04-07T11:28:00.473411+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"best-practices": {
+			"name": "best-practices",
+			"version": null,
+			"description": "Apply modern web development best practices for security, compatibility, and code quality. Use when the task involves `apply best practices`, `security audit`, `modernize code`, `code quality review`, or `check for vulnerabilities`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpoUZgHy",
+			"installedAt": "2026-04-07T11:28:01.313986+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"cloudflare": {
+			"name": "cloudflare",
+			"version": null,
+			"description": "Comprehensive Cloudflare platform skill covering Workers, Pages, storage (KV, D1, R2), AI (Workers AI, Vectorize, Agents SDK), networking (Tunnel, Spectrum), security (WAF, DDoS), and infrastructure-as-code (Terraform, Pulumi). Use for any Cloudflare development task. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpNL7pZw",
+			"installedAt": "2026-04-07T11:28:02.456190+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"cloudflare-web-perf": {
+			"name": "web-perf",
+			"version": null,
+			"description": "Analyzes web performance using Chrome DevTools MCP. Measures Core Web Vitals (LCP, INP, CLS) and supplementary metrics (FCP, TBT, Speed Index), identifies render-blocking resources, network dependency chains, layout shifts, caching issues, and accessibility gaps. Use when asked to audit, profile, debug, or optimize page load performance, Lighthouse scores, or site speed. Biases towards retrieval from current documentation over pre-trained knowledge.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpil3Txv",
+			"installedAt": "2026-04-07T11:28:03.255726+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"cloudflare-workers-best-practices": {
+			"name": "workers-best-practices",
+			"version": null,
+			"description": "Reviews and authors Cloudflare Workers code against production best practices. Load when writing new Workers, reviewing Worker code, configuring wrangler.jsonc, or checking for common Workers anti-patterns (streaming, floating promises, global state, secrets, bindings, observability). Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpnl4Ip7",
+			"installedAt": "2026-04-07T11:28:03.905722+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"cloudflare-wrangler": {
+			"name": "wrangler",
+			"version": null,
+			"description": "Cloudflare Workers CLI for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Containers, Queues, Workflows, Pipelines, and Secrets Store. Load before running wrangler commands to ensure correct syntax and best practices. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpGz4bpw",
+			"installedAt": "2026-04-07T11:28:04.559023+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"core-web-vitals": {
+			"name": "core-web-vitals",
+			"version": null,
+			"description": "Optimize Core Web Vitals (LCP, INP, CLS) for better page experience and search ranking. Use when the task involves `improve Core Web Vitals`, `fix LCP`, `reduce CLS`, `optimize INP`, `page experience optimization`, or `fix layout shifts`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpU6gqIV",
+			"installedAt": "2026-04-07T11:28:05.127901+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"docker-expert": {
+			"name": "docker-expert",
+			"version": null,
+			"description": "Advanced Docker containerization expert for multi-stage builds, image optimization, security hardening, and Compose orchestration. Use when the task involves `working with Dockerfile`, `docker-compose.yml`, `containerization`, `multi-stage builds`, or `optimizing Docker images`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmp0bYBgy",
+			"installedAt": "2026-04-07T11:28:05.677500+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"frontend-design": {
+			"name": "frontend-design",
+			"version": null,
+			"description": "Create distinctive, production-grade frontend interfaces with high design quality that avoids generic AI aesthetics. Use when the task involves `build web components`, `create frontend interface`, `build web page`, `build web application`, `frontend design`, `create UI component`, or `design web interface`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmp5f7iZt",
+			"installedAt": "2026-04-07T11:28:06.247708+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"github-actions": {
+			"name": "github-actions",
+			"version": null,
+			"description": "Comprehensive guide for building robust, secure, and efficient CI/CD pipelines using GitHub Actions. Use when the task involves `creating or editing GitHub Actions workflows`, `.github/workflows/*.yml`, `CI/CD pipelines`, `GitHub Actions best practices`, or `workflow optimization`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmp6BN65C",
+			"installedAt": "2026-04-07T11:28:06.781764+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"hono": {
+			"name": "hono",
+			"version": null,
+			"description": "Use when building Hono web applications or when the user asks about Hono APIs, routing, middleware, JSX, validation, testing, or streaming. TRIGGER when code imports from 'hono' or 'hono/*', or user mentions Hono. Use `npx hono request` to test endpoints.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpITxjZv",
+			"installedAt": "2026-04-07T11:28:07.385341+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"makefile": {
+			"name": "makefile",
+			"version": null,
+			"description": "Best practices for authoring clean, maintainable, and portable GNU Make Makefiles. Use when the task involves `creating or editing Makefiles`, `Makefile`, `makefile`, `*.mk`, `GNUmakefile`, `GNU Make patterns`, `build automation`, or `makefile troubleshooting`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmph4Z3rO",
+			"installedAt": "2026-04-07T11:28:07.940101+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"nothing-design": {
+			"name": "nothing-design",
+			"version": null,
+			"description": "Guides intentional Nothing-inspired UI and design-system work with typography, spacing, hierarchy, components, and platform-specific execution. Use when the user explicitly asks for Nothing style, Nothing design, or `/nothing-design`, not for generic UI or design tasks.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpBlsg4w",
+			"installedAt": "2026-04-07T11:28:08.478107+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"openai-cloudflare-deploy": {
+			"name": "cloudflare-deploy",
+			"version": null,
+			"description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmprOZlMs",
+			"installedAt": "2026-04-07T11:28:09.581135+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"performance": {
+			"name": "performance",
+			"version": null,
+			"description": "Optimize web performance for faster loading and better user experience. Use when the task involves `speed up my site`, `optimize performance`, `reduce load time`, `fix slow loading`, `improve page speed`, or `performance audit`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpmOtgVo",
+			"installedAt": "2026-04-07T11:28:10.432401+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"pinned-tag": {
+			"name": "pinned-tag",
+			"version": null,
+			"description": "Manage pinned tags and commit SHAs for GitHub Actions security, resolving mutable tags to immutable commit references. Use when the task involves `Unpinned tag for a non-immutable Action`, `pin GitHub Action to commit SHA`, `resolve git tag to SHA`, or `GitHub Actions security hardening`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpxTy9Cp",
+			"installedAt": "2026-04-07T11:28:11.118393+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"playwright-best-practices": {
+			"name": "playwright-best-practices",
+			"version": null,
+			"description": "Use when writing Playwright tests, fixing flaky tests, debugging failures, implementing Page Object Model, configuring CI/CD, optimizing performance, mocking APIs, handling authentication or OAuth, testing accessibility (axe-core), file uploads/downloads, date/time mocking, WebSockets, geolocation, permissions, multi-tab/popup flows, mobile/responsive layouts, touch gestures, GraphQL, error handling, offline mode, multi-user collaboration, third-party services (payments, email verification), console error monitoring, global setup/teardown, test annotations (skip, fixme, slow), test tags (@smoke, @fast, @critical, filtering with --grep), project dependencies, security testing (XSS, CSRF, auth), performance budgets (Web Vitals, Lighthouse), iframes, component testing, canvas/WebGL, service workers/PWA, test coverage, i18n/localization, Electron apps, or browser extension testing. Covers E2E, component, API, visual, accessibility, security, Electron, and extension testing.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpGQZOlT",
+			"installedAt": "2026-04-07T11:28:11.878829+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"seo": {
+			"name": "seo",
+			"version": null,
+			"description": "Optimize for search engine visibility and ranking. Use when the task involves `improve SEO`, `optimize for search`, `fix meta tags`, `add structured data`, `sitemap optimization`, or `search engine optimization`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpVDnPhI",
+			"installedAt": "2026-04-07T11:28:12.501513+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"testing-library": {
+			"name": "testing-library",
+			"version": null,
+			"description": "Testing Library patterns for user-centric, accessibility-driven component testing. Covers query priority, user events, async utilities, and practical patterns for testing React, Vue, and DOM components the way users interact with them. Use when the task involves `Testing Library`, `@testing-library/react`, `React component testing`, `accessible testing`, or `user-centric testing`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpuAJw0T",
+			"installedAt": "2026-04-07T11:28:13.038280+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"vitest": {
+			"name": "vitest",
+			"version": null,
+			"description": "Vitest fast unit testing framework powered by Vite with Jest-compatible API. Use when writing tests, mocking, configuring coverage, or working with test filtering and fixtures.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmplJnGjf",
+			"installedAt": "2026-04-07T11:28:13.864377+00:00",
+			"files": null,
+			"manifestHash": null
+		},
+		"webapp-testing": {
+			"name": "webapp-testing",
+			"version": null,
+			"description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. Use when the task involves `test web application`, `test frontend`, `browser testing`, `Playwright test`, `capture browser screenshot`, `debug UI behavior`, or `verify frontend functionality`.",
+			"provider": null,
+			"source": "/var/folders/zz/d4kl1hfj1j15nxm43d24px300000gn/T/.tmpdUsWH6",
+			"installedAt": "2026-04-07T11:28:14.418759+00:00",
+			"files": null,
+			"manifestHash": null
+		}
+	}
 }

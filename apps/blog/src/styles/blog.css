@@ -126,12 +126,12 @@ h6 {
 .blog-shell {
 	position: relative;
 	z-index: 1;
-	padding-top: 6.5rem;
+	padding-top: 5rem;
 }
 
 .blog-hero {
 	position: relative;
-	padding: 6rem 0 3.5rem;
+	padding: 3.5rem 0 2.5rem;
 	margin-bottom: 1.5rem;
 	overflow: hidden;
 }
@@ -410,10 +410,6 @@ h6 {
 }
 
 .blog-article-card .blog-article-card__footer {
-	position: static;
-	opacity: 1;
-	pointer-events: auto;
-	background: transparent;
 	padding: 1.2rem 1.35rem 1.4rem;
 	display: flex;
 	flex-direction: column;
@@ -702,19 +698,19 @@ h6 {
 	}
 
 	.blog-article-card .blog-article-card__footer {
-		padding: 1rem;
+		padding: 1rem !important;
 	}
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
 	.blog-shell {
-		padding-top: 7.75rem;
+		padding-top: 5.5rem;
 	}
 }
 
 @media (min-width: 1024px) {
 	.blog-shell {
-		padding-top: 7.5rem;
+		padding-top: 5.5rem;
 	}
 }
 
