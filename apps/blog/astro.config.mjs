@@ -94,9 +94,11 @@ export default defineConfig({
 		(await import("astro-compress")).default({
 			// Re-enable CSS compression now that the scoping issue is fixed
 			CSS: {
-				// Use csso for better CSS minification
+				// Use csso for CSS minification
+				// IMPORTANT: restructure must be false - csso breaks Tailwind v4's
+				// @layer + @media nesting, stripping responsive breakpoint wrappers
 				csso: {
-					restructure: true,
+					restructure: false,
 					forceMediaMerge: false,
 					comments: false,
 				},
