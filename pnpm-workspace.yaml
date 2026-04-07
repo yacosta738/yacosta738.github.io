@@ -55,7 +55,7 @@ catalog:
   clsx: ^2.1.1
   cross-env: ^10.1.0
   crossrm: ^1.0.0
-  fast-xml-parser: ^5.5.9
+  fast-xml-parser: ^5.5.10
   fs-extra: ^11.3.4
   gray-matter: ^4.0.3
   h3: ^1.15.10
