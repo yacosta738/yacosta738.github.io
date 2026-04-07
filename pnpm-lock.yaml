@@ -58,8 +58,8 @@ catalogs:
       specifier: ^5.16.0
       version: 5.16.0
     '@playwright/test':
-      specifier: 1.59.0
-      version: 1.59.0
+      specifier: 1.59.1
+      version: 1.59.1
     '@tailwindcss/typography':
       specifier: ^0.5.19
       version: 0.5.19
@@ -151,8 +151,8 @@ catalogs:
       specifier: 1.4.0
       version: 1.4.0
     playwright:
-      specifier: 1.59.0
-      version: 1.59.0
+      specifier: 1.59.1
+      version: 1.59.1
     preact-render-to-string:
       specifier: ^6.6.7
       version: 6.6.7
@@ -229,7 +229,7 @@ importers:
         version: 2.4.10
       playwright:
         specifier: 'catalog:'
-        version: 1.59.0
+        version: 1.59.1
       rimraf:
         specifier: 'catalog:'
         version: 6.1.3
@@ -357,7 +357,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.1(playwright-core@1.59.0)
+        version: 4.11.1(playwright-core@1.59.1)
       '@biomejs/biome':
         specifier: 'catalog:'
         version: 2.4.10
@@ -378,7 +378,7 @@ importers:
         version: 1.2.33
       '@playwright/test':
         specifier: 'catalog:'
-        version: 1.59.0
+        version: 1.59.1
       '@tailwindcss/typography':
         specifier: 'catalog:'
         version: 0.5.19(tailwindcss@4.2.2)
@@ -496,7 +496,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.1(playwright-core@1.59.0)
+        version: 4.11.1(playwright-core@1.59.1)
       '@biomejs/biome':
         specifier: 'catalog:'
         version: 2.4.10
@@ -517,7 +517,7 @@ importers:
         version: 1.2.33
       '@playwright/test':
         specifier: 'catalog:'
-        version: 1.59.0
+        version: 1.59.1
       '@tailwindcss/typography':
         specifier: 'catalog:'
         version: 0.5.19(tailwindcss@4.2.2)
@@ -780,10 +780,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.1(playwright-core@1.59.0)
+        version: 4.11.1(playwright-core@1.59.1)
       '@playwright/test':
         specifier: 'catalog:'
-        version: 1.59.0
+        version: 1.59.1
 
 packages:
 
@@ -1706,8 +1706,8 @@ packages:
   '@playform/pipe@0.1.4':
     resolution: {integrity: sha512-SM3iJ5VHA61NsYMrtvk8DAZwkrpPtBCiJnfWjj1iX6Ke/hnHLqVjTmkXG087UMOa9Z+3J/zUoAkzf3Al6tiS8A==}
 
-  '@playwright/test@1.59.0':
-    resolution: {integrity: sha512-TOA5sTLd49rTDaZpYpvCQ9hGefHQq/OYOyCVnGqS2mjMfX+lGZv2iddIJd0I48cfxqSPttS9S3OuLKyylHcO1w==}
+  '@playwright/test@1.59.1':
+    resolution: {integrity: sha512-PG6q63nQg5c9rIi4/Z5lR5IVF7yU5MqmKaPOe0HSc0O2cX1fPi96sUQu5j7eo4gKCkB2AnNGoWt7y4/Xx3Kcqg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3670,13 +3670,13 @@ packages:
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
 
-  playwright-core@1.59.0:
-    resolution: {integrity: sha512-PW/X/IoZ6BMUUy8rpwHEZ8Kc0IiLIkgKYGNFaMs5KmQhcfLILNx9yCQD0rnWeWfz1PNeqcFP1BsihQhDOBCwZw==}
+  playwright-core@1.59.1:
+    resolution: {integrity: sha512-HBV/RJg81z5BiiZ9yPzIiClYV/QMsDCKUyogwH9p3MCP6IYjUFu/MActgYAvK0oWyV9NlwM3GLBjADyWgydVyg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.59.0:
-    resolution: {integrity: sha512-wihGScriusvATUxmhfENxg0tj1vHEFeIwxlnPFKQTOQVd7aG08mUfvvniRP/PtQOC+2Bs52kBOC/Up1jTXeIbw==}
+  playwright@1.59.1:
+    resolution: {integrity: sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -4796,10 +4796,10 @@ snapshots:
     dependencies:
       yaml: 2.8.3
 
-  '@axe-core/playwright@4.11.1(playwright-core@1.59.0)':
+  '@axe-core/playwright@4.11.1(playwright-core@1.59.1)':
     dependencies:
       axe-core: 4.11.2
-      playwright-core: 1.59.0
+      playwright-core: 1.59.1
 
   '@babel/code-frame@7.29.0':
     dependencies:
@@ -5413,9 +5413,9 @@ snapshots:
       deepmerge-ts: 7.1.5
       fast-glob: 3.3.3
 
-  '@playwright/test@1.59.0':
+  '@playwright/test@1.59.1':
     dependencies:
-      playwright: 1.59.0
+      playwright: 1.59.1
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -7990,11 +7990,11 @@ snapshots:
       exsolve: 1.0.8
       pathe: 2.0.3
 
-  playwright-core@1.59.0: {}
+  playwright-core@1.59.1: {}
 
-  playwright@1.59.0:
+  playwright@1.59.1:
     dependencies:
-      playwright-core: 1.59.0
+      playwright-core: 1.59.1
     optionalDependencies:
       fsevents: 2.3.2
 
