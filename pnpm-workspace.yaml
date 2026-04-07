@@ -58,7 +58,7 @@ catalog:
   fast-xml-parser: ^5.5.10
   fs-extra: ^11.3.4
   gray-matter: ^4.0.3
-  h3: ^1.15.10
+  h3: ^1.15.11
   handlebars: ^4.7.9
   happy-dom: ^20.8.9
   hono: ^4.12.10
