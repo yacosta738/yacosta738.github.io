@@ -64,7 +64,7 @@ The frontends deploy best as **Pages projects**.
 
 ### API
 
-The API is already configured for Wrangler in [`apps/api/wrangler.jsonc`](/Users/acosta/Dev/yunielacosta.com/apps/api/wrangler.jsonc).
+The API is already configured for Wrangler in [`apps/api/wrangler.jsonc`](/apps/api/wrangler.jsonc).
 
 Useful commands:
 
