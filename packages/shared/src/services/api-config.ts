@@ -3,16 +3,23 @@
  * Centralized configuration for API endpoints
  */
 
+const getConfiguredApiUrl = (): string | undefined => {
+	const value = import.meta.env.API_URL?.trim();
+	return value ? value : undefined;
+};
+
 // Get the API base URL from environment variables or use a default
 const getApiBaseUrl = (): string => {
+	const configuredApiUrl = getConfiguredApiUrl();
+
 	// Check if we're in development or production
 	if (import.meta.env.DEV) {
 		// In development, use the local worker or a dev deployment
-		return import.meta.env.API_URL || "http://localhost:8787";
+		return configuredApiUrl || "http://localhost:8787";
 	}
 
 	// In production, use the deployed worker URL
-	return import.meta.env.API_URL || "https://api.yunielacosta.com";
+	return configuredApiUrl || "https://api.yunielacosta.com";
 };
 
 export const API_CONFIG = {
