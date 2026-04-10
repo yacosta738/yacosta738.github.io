@@ -68,7 +68,7 @@ catalog:
   mdast-util-to-string: ^4.0.0
   notion-rehype-k: ^1.1.6
   npm-run-all2: ^8.0.4
-  pagefind: 1.4.0
+  pagefind: 1.5.0
   picomatch: ^4.0.4
   playwright: 1.59.1
   preact-render-to-string: ^6.6.7
