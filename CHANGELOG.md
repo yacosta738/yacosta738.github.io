@@ -6,6 +6,14 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.1.3](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.2...v4.1.3) (2026-04-09)
+
+
+### Bug Fixes
+
+* **deps:** update @cloudflare/workers-types to ^4.20260405.1 ([#1867](https://github.com/yacosta738/yacosta738.github.io/issues/1867)) ([2489d74](https://github.com/yacosta738/yacosta738.github.io/commit/2489d74a31ddb91eaab1e6ad6313de4e99b64b7b))
+* **deps:** update hono to v4.12.12 [SECURITY] ([#1868](https://github.com/yacosta738/yacosta738.github.io/issues/1868)) ([b400f56](https://github.com/yacosta738/yacosta738.github.io/commit/b400f56b5763c8a702ce75045851223c08eedcb1))
+
 ## [4.1.2](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.1...v4.1.2) (2026-04-07)
 
 
