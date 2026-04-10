@@ -141,7 +141,26 @@ export default defineConfig({
 	],
 
 	vite: {
-		plugins: [tailwindcss()],
+		plugins: [
+			tailwindcss(),
+			{
+				name: "legacy-media-queries-for-cloudflare",
+				enforce: "post",
+				generateBundle(_, bundle) {
+					for (const chunk of Object.values(bundle)) {
+						if (chunk.type === "asset" && chunk.fileName.endsWith(".css")) {
+							let css = chunk.source.toString();
+							css = css.replace(/\(\s*width\s*>=\s*([^)]+)\s*\)/g, "(min-width: $1)");
+							css = css.replace(/\(\s*width\s*<=\s*([^)]+)\s*\)/g, "(max-width: $1)");
+							css = css.replace(/\(\s*width\s*>\s*([^)]+)\s*\)/g, "(min-width: calc($1 + 0.1px))");
+							css = css.replace(/\(\s*width\s*<\s*([^)]+)\s*\)/g, "(max-width: calc($1 - 0.1px))");
+							css = css.replace(/\(\s*width\s*==\s*([^)]+)\s*\)/g, "(width: $1)");
+							chunk.source = css;
+						}
+					}
+				},
+			},
+		],
 		resolve: {
 			alias: {
 				"@blog": fileURLToPath(new URL("./src", import.meta.url)),
