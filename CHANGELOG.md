@@ -6,6 +6,15 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.1.4](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.3...v4.1.4) (2026-04-10)
+
+
+### Bug Fixes
+
+* **deps:** update astro to v6.1.4 ([#1872](https://github.com/yacosta738/yacosta738.github.io/issues/1872)) ([348b1c5](https://github.com/yacosta738/yacosta738.github.io/commit/348b1c5fd8649c747391452bbba6d0ad56c674ef))
+* **deps:** update lefthook to ^2.1.5 ([#1873](https://github.com/yacosta738/yacosta738.github.io/issues/1873)) ([8da1470](https://github.com/yacosta738/yacosta738.github.io/commit/8da14708a1020d8a2f4ff8d4b9b7fc6c24e5974e))
+* **deps:** update pagefind to v1.5.0 ([#1874](https://github.com/yacosta738/yacosta738.github.io/issues/1874)) ([13af53c](https://github.com/yacosta738/yacosta738.github.io/commit/13af53c209e0b9265f007b2aac5cd67c90d1c66a))
+
 ## [4.1.3](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.2...v4.1.3) (2026-04-09)
 
 
