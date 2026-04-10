@@ -4,7 +4,6 @@ import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, sharpImageService } from "astro/config";
-import critters from "astro-critters";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import {
@@ -92,17 +91,11 @@ export default defineConfig({
 			serialize: serializeBlogSitemapItem,
 		}),
 		(await import("astro-compress")).default({
-			// Re-enable CSS compression now that the scoping issue is fixed
-			CSS: {
-				// Use csso for CSS minification
-				// IMPORTANT: restructure must be false - csso breaks Tailwind v4's
-				// @layer + @media nesting, stripping responsive breakpoint wrappers
-				csso: {
-					restructure: false,
-					forceMediaMerge: false,
-					comments: false,
-				},
-			},
+			// NOTE: keep CSS post-processing off.
+			// csso strips Tailwind v4's @media (width>=…) responsive breakpoint
+			// wrappers even with restructure:false, breaking all responsive utilities.
+			// See: portfolio astro.config.mjs for the same fix.
+			CSS: false,
 			HTML: {
 				"html-minifier-terser": {
 					removeAttributeQuotes: false,
@@ -110,7 +103,9 @@ export default defineConfig({
 					removeEmptyAttributes: false,
 					// Don't collapse whitespace aggressively to preserve readability
 					conservativeCollapse: true,
-					minifyCSS: true,
+					// Keep CSS minification off to preserve Tailwind v4 media queries
+					// in inline <style> tags
+					minifyCSS: false,
 					minifyJS: true,
 					removeComments: true,
 					collapseWhitespace: true,
@@ -143,21 +138,6 @@ export default defineConfig({
 			}),
 		),
 		mdx(),
-		// Critical CSS inlining for better PageSpeed scores
-		// This inlines above-the-fold CSS and lazy-loads the rest
-		critters({
-			Critters: false,
-			// Only inline critical CSS to reduce render-blocking
-			pruneSource: false,
-			// Use media attribute for non-critical CSS (print trick)
-			preload: "media",
-			// Inline fonts for faster initial render
-			inlineFonts: false,
-			// Remove unused CSS selectors
-			reduceInlineStyles: true,
-			// Skip legacy redirect pages under /en/
-			Exclude: [/\/en\//],
-		}),
 	],
 
 	vite: {
