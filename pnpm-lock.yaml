@@ -55,8 +55,8 @@ catalogs:
       specifier: ^3.0.2
       version: 3.0.2
     '@notionhq/client':
-      specifier: ^5.16.0
-      version: 5.16.0
+      specifier: ^5.17.0
+      version: 5.17.0
     '@playwright/test':
       specifier: 1.59.1
       version: 1.59.1
@@ -305,7 +305,7 @@ importers:
         version: 3.0.2
       '@notionhq/client':
         specifier: 'catalog:'
-        version: 5.16.0
+        version: 5.17.0
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.2.2(vite@7.3.2(@types/node@25.5.2)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.0)(yaml@2.8.3))
@@ -604,7 +604,7 @@ importers:
         version: 3.0.2
       '@notionhq/client':
         specifier: 'catalog:'
-        version: 5.16.0
+        version: 5.17.0
       fs-extra:
         specifier: 'catalog:'
         version: 11.3.4
@@ -1663,8 +1663,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@notionhq/client@5.16.0':
-    resolution: {integrity: sha512-0mxHJNQBLbcG2Y4+oM+XNySr/3zKtK7FKjWhrUo8TB3WCdwtUMhvuooNmEjOo8NLL9qmKm7cCR4GtEsuTD+SNg==}
+  '@notionhq/client@5.17.0':
+    resolution: {integrity: sha512-hSNm3VUW5+Qs9vPOmegS6r1RT8O1jtTE/22wmSmiJc9kkb2YyddWr8SBQruvp06rALn2r2RAh9mLPirUUonsvw==}
     engines: {node: '>=18'}
 
   '@oslojs/encoding@1.1.0':
@@ -5403,7 +5403,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@notionhq/client@5.16.0': {}
+  '@notionhq/client@5.17.0': {}
 
   '@oslojs/encoding@1.1.0': {}
 
