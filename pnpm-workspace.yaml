@@ -44,7 +44,7 @@ catalog:
   "@types/slug": ^5.0.9
   "@vitest/coverage-v8": ^4.1.4
   astro: 6.1.4
-  astro-compress: 2.4.0
+  astro-compress: 2.4.1
   astro-critters: 2.2.1
   astro-icon: ^1.1.5
   astro-pagefind: ^1.8.6
