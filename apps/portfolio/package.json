@@ -80,6 +80,7 @@
 		"tailwind-merge": "catalog:",
 		"unified": "catalog:",
 		"vfile": "catalog:",
+		"vite": "catalog:",
 		"vitest": "catalog:"
 	}
 }

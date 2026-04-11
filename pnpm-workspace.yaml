@@ -87,7 +87,7 @@ catalog:
   unist-util-visit: ^5.1.0
   unpic: ^4.2.2
   vfile: ^6.0.3
-  vite: ^8.0.5
+  vite: ^7.1.7
   vitest: ^4.1.4
   wrangler: ^4.80.0
   yaml: ^2.8.3
@@ -101,8 +101,8 @@ minimumReleaseAgeExclude:
   - miniflare
   - wrangler
   - typescript@6.0.2
-  # Renovate security update: vite@8.0.5
-  - vite@8.0.5
+  # Vite pinned to v7 for Astro 6 compatibility
+  - vite@7.1.7
   # Renovate security update: hono@4.12.12
   - hono@4.12.12
 

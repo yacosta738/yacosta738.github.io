@@ -29,6 +29,7 @@
 		"@types/service-worker-mock": "catalog:",
 		"@vitest/coverage-v8": "catalog:",
 		"rimraf": "catalog:",
+		"vite": "catalog:",
 		"vitest": "catalog:",
 		"wrangler": "catalog:"
 	}

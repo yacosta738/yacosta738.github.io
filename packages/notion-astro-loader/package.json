@@ -69,6 +69,7 @@
 		"crossrm": "catalog:",
 		"typescript": "catalog:",
 		"vfile": "catalog:",
+		"vite": "catalog:",
 		"vitest": "catalog:"
 	},
 	"peerDependencies": {

@@ -74,6 +74,7 @@
 		"@biomejs/biome": "catalog:",
 		"playwright": "catalog:",
 		"rimraf": "catalog:",
+		"vite": "catalog:",
 		"vitest": "catalog:"
 	},
 	"pnpm": {

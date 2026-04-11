@@ -64,7 +64,7 @@ const t = useTranslations(currentLocale);
 		<Logo currentLocale={currentLocale} />
         
         
-		<div class="hidden md:flex md:items-center md:space-x-4">
+		<div class="header-desktop-nav hidden md:flex md:items-center md:space-x-4">
 			{showSearch && (
 					<SearchButton />
 			)}
@@ -73,7 +73,7 @@ const t = useTranslations(currentLocale);
 	</nav>
 </header>
 
-<MobileMenuButton drawerTarget="mobile-drawer" class="md:hidden" />
+<MobileMenuButton drawerTarget="mobile-drawer" class="header-mobile-menu md:hidden" />
 
 <!-- Mobile Drawer -->
 <MobileDrawer showSearch={showSearch} />
@@ -150,6 +150,27 @@ const t = useTranslations(currentLocale);
 		-webkit-box-pack: justify;
 		-webkit-justify-content: space-between;
 		justify-content: space-between;
+	}
+
+	/* Critical responsive header behavior must not depend only on Tailwind generation.
+	   Keep explicit CSS here so desktop nav/mobile button always swap correctly in production. */
+	.header-desktop-nav {
+		display: none;
+	}
+
+	:global(.header-mobile-menu.menu-btn-box) {
+		display: flex;
+	}
+
+	@media (min-width: 768px) {
+		.header-desktop-nav {
+			display: flex;
+			align-items: center;
+		}
+
+		:global(.header-mobile-menu.menu-btn-box) {
+			display: none !important;
+		}
 	}
 
 	@media (min-width: 1024px) {
