@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { API_CONFIG, ApiResponse, ApiError } from "./api-config";
+import { describe, expect, it } from "vitest";
+import { API_CONFIG, type ApiError, type ApiResponse } from "./api-config";
 
 describe("api-config", () => {
 	describe("API_CONFIG", () => {

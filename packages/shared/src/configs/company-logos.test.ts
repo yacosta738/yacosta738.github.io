@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { COMPANY_LOGOS, getCompanyLogo } from "./company-logos";
 
 describe("company-logos", () => {

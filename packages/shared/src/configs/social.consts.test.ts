@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { SOCIAL_ICONS } from "./social.consts";
 
 describe("SOCIAL_ICONS", () => {
