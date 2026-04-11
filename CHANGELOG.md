@@ -6,6 +6,18 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.4...v4.2.0) (2026-04-10)
+
+
+### Features
+
+* add new image asset for blog post content ([e6ec901](https://github.com/yacosta738/yacosta738.github.io/commit/e6ec901ced5e5b135b035e9e8d31053fb7e18054))
+
+
+### Bug Fixes
+
+* **blog:** preserve Tailwind v4 responsive breakpoints ([8dccfe9](https://github.com/yacosta738/yacosta738.github.io/commit/8dccfe93273fec509aa4b626a0f4fd71eadb4777))
+
 ## [4.1.4](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.3...v4.1.4) (2026-04-10)
 
 
