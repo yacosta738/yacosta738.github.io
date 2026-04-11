@@ -6,6 +6,21 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.0...v4.2.1) (2026-04-11)
+
+
+### Bug Fixes
+
+* **biome:** fix import sorting and use import type ([ea6be07](https://github.com/yacosta738/yacosta738.github.io/commit/ea6be07941f7be7dbad7598fcd2286b7f5e45e26))
+* **biome:** format test files ([8b57abe](https://github.com/yacosta738/yacosta738.github.io/commit/8b57abe2bf1e367294b48c5807de4ad6df29a818))
+* **deps:** update @iconify-json/simple-icons to ^1.2.77 ([#1877](https://github.com/yacosta738/yacosta738.github.io/issues/1877)) ([ce213da](https://github.com/yacosta738/yacosta738.github.io/commit/ce213daf165c0e6863f4a373cdc28f133e28d339))
+* **deps:** update @notionhq/client to ^5.17.0 ([#1882](https://github.com/yacosta738/yacosta738.github.io/issues/1882)) ([759cf41](https://github.com/yacosta738/yacosta738.github.io/commit/759cf418a03a88a6237e99495c05352a0bc3a16c))
+* **deps:** update astro-compress to v2.4.1 ([#1878](https://github.com/yacosta738/yacosta738.github.io/issues/1878)) ([8247b55](https://github.com/yacosta738/yacosta738.github.io/commit/8247b55faaca8e58133df93761fbf18936aa413f))
+* **deps:** update jsdom to ^29.0.2 ([#1879](https://github.com/yacosta738/yacosta738.github.io/issues/1879)) ([447e275](https://github.com/yacosta738/yacosta738.github.io/commit/447e275ac61f8e188dea413a8137faa273a3d271))
+* pin vite 7 for astro compatibility and restore desktop header ([11d6552](https://github.com/yacosta738/yacosta738.github.io/commit/11d6552fd3d092be6a077b49b9d6545a010924a9))
+* resolve remaining SonarCloud issues in i18n ([f5a7682](https://github.com/yacosta738/yacosta738.github.io/commit/f5a768292895d7cf3fbaac9772acfe2193d09300))
+* resolve SonarCloud issues and update deps ([1e02d4b](https://github.com/yacosta738/yacosta738.github.io/commit/1e02d4b955c80c23c64d05d45fd829e9729aa0de))
+
 ## [4.2.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.1.4...v4.2.0) (2026-04-10)
 
 
