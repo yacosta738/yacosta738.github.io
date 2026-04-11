@@ -54,7 +54,11 @@ describe("api-config", () => {
 		});
 
 		it("should allow optional code", () => {
-			const error: ApiError = { success: false, message: "Not found", code: "404" };
+			const error: ApiError = {
+				success: false,
+				message: "Not found",
+				code: "404",
+			};
 			expect(error.code).toBe("404");
 		});
 	});

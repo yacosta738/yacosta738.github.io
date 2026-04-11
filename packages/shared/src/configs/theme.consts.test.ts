@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { LIGHT_COLOR, DARK_COLOR, STORAGE_KEY, HEADER_ID } from "./theme.consts";
+import {
+	LIGHT_COLOR,
+	DARK_COLOR,
+	STORAGE_KEY,
+	HEADER_ID,
+} from "./theme.consts";
 
 describe("theme.consts", () => {
 	describe("LIGHT_COLOR", () => {
