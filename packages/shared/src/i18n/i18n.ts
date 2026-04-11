@@ -62,20 +62,20 @@ export function useTranslatedPath(lang: Lang) {
  * Build a regex pattern for matching language prefixes
  */
 const buildLangPrefixRegex = (): RegExp => {
-	const locales = Object.keys(LOCALES) as Lang[];
+	const locales = Object.keys(LOCALES);
 	const pattern = `^/(${locales.join("|")})/`;
 	return new RegExp(pattern);
 };
 
 const normalizeLocalizedPathname = (pathname: string): string => {
-	const collapsedPath = pathname.replaceAll(/\/{2,}/g, "/");
+	const collapsedPath = pathname.replace(/\/{2,}/g, "/");
 	return collapsedPath;
 };
 
 const getPathLocale = (pathname: string): Lang => {
 	const langPrefixRegex = buildLangPrefixRegex();
 	const match = langPrefixRegex.exec(pathname);
-	return (match?.[1] as Lang | undefined) ?? DEFAULT_LOCALE;
+	return (match?.[1] as Lang) ?? DEFAULT_LOCALE;
 };
 
 const isArticlePath = (pathname: string): boolean => {

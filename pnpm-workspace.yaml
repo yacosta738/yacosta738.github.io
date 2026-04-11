@@ -42,7 +42,7 @@ catalog:
   "@types/node": 25.5.2
   "@types/service-worker-mock": ^2.0.4
   "@types/slug": ^5.0.9
-  "@vitest/coverage-v8": ^4.1.2
+  "@vitest/coverage-v8": ^4.1.4
   astro: 6.1.4
   astro-compress: 2.4.0
   astro-critters: 2.2.1
@@ -88,7 +88,7 @@ catalog:
   unpic: ^4.2.2
   vfile: ^6.0.3
   vite: ^8.0.5
-  vitest: ^4.1.2
+  vitest: ^4.1.4
   wrangler: ^4.80.0
   yaml: ^2.8.3
   zod: ^4.3.6

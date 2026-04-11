@@ -5,7 +5,7 @@
 
 const getConfiguredApiUrl = (): string | undefined => {
 	const value = import.meta.env.API_URL?.trim();
-	return value ? value : undefined;
+	return value ?? undefined;
 };
 
 // Get the API base URL from environment variables or use a default

@@ -34,7 +34,7 @@ export const buildLocalizedArticlePaths = (
 			continue;
 		}
 
-		const langKey = lang as Lang;
+		const langKey = lang;
 		const entry = bySlug.get(idPath) ?? new Map<Lang, Article>();
 		entry.set(langKey, post);
 		bySlug.set(idPath, entry);

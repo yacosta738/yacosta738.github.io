@@ -34,7 +34,7 @@ const getImageCaption = (
 	}
 
 	return typeof properties["data-caption"] === "string"
-		? (properties["data-caption"] as string)
+		? properties["data-caption"]
 		: undefined;
 };
 

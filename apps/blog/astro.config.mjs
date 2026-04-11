@@ -150,11 +150,26 @@ export default defineConfig({
 					for (const chunk of Object.values(bundle)) {
 						if (chunk.type === "asset" && chunk.fileName.endsWith(".css")) {
 							let css = chunk.source.toString();
-							css = css.replace(/\(\s*width\s*>=\s*([^)]+)\s*\)/g, "(min-width: $1)");
-							css = css.replace(/\(\s*width\s*<=\s*([^)]+)\s*\)/g, "(max-width: $1)");
-							css = css.replace(/\(\s*width\s*>\s*([^)]+)\s*\)/g, "(min-width: calc($1 + 0.1px))");
-							css = css.replace(/\(\s*width\s*<\s*([^)]+)\s*\)/g, "(max-width: calc($1 - 0.1px))");
-							css = css.replace(/\(\s*width\s*==\s*([^)]+)\s*\)/g, "(width: $1)");
+							css = css.replaceAll(
+								/\(\s*width\s*>=\s*([^)]+)\s*\)/g,
+								"(min-width: $1)",
+							);
+							css = css.replaceAll(
+								/\(\s*width\s*<=\s*([^)]+)\s*\)/g,
+								"(max-width: $1)",
+							);
+							css = css.replaceAll(
+								/\(\s*width\s*>\s*([^)]+)\s*\)/g,
+								"(min-width: calc($1 + 0.1px))",
+							);
+							css = css.replaceAll(
+								/\(\s*width\s*<\s*([^)]+)\s*\)/g,
+								"(max-width: calc($1 - 0.1px))",
+							);
+							css = css.replaceAll(
+								/\(\s*width\s*==\s*([^)]+)\s*\)/g,
+								"(width: $1)",
+							);
 							chunk.source = css;
 						}
 					}
