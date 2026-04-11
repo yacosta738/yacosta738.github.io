@@ -68,7 +68,7 @@ const buildLangPrefixRegex = (): RegExp => {
 };
 
 const normalizeLocalizedPathname = (pathname: string): string => {
-	const collapsedPath = pathname.replace(/\/{2,}/g, "/");
+	const collapsedPath = pathname.replaceAll(/\/{2,}/g, "/");
 	return collapsedPath;
 };
 
@@ -86,7 +86,7 @@ const isArticlePath = (pathname: string): boolean => {
 
 const toArticleId = (pathname: string, lang: Lang): string => {
 	const pathWithoutLocale = pathname.replace(buildLangPrefixRegex(), "/");
-	return `${lang}/${pathWithoutLocale.replace(/^\/+|\/+$/g, "")}`;
+	return `${lang}/${pathWithoutLocale.replaceAll(/^\/+|\/+$/g, "")}`;
 };
 
 export function getLocalePaths(url: URL): LocalePath[] {
@@ -104,7 +104,7 @@ export function getLocalePaths(url: URL): LocalePath[] {
 		? `/${pathWithoutLangPrefix.replace(/^\/+/, "")}`
 		: "/";
 
-	const locales = Object.keys(LOCALES) as Lang[];
+	const locales = Object.keys(LOCALES);
 	return locales.map((lang) => {
 		const localePath = buildLocalePath(cleanPath, lang);
 		return {
