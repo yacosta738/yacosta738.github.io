@@ -14,7 +14,7 @@ catalog:
 
   # Testing
   "@axe-core/playwright": 4.11.1
-  "@biomejs/biome": 2.4.10
+  "@biomejs/biome": 2.4.11
 
   # API and Cloudflare
   "@cloudflare/workers-types": ^4.20260409.1
