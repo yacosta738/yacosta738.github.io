@@ -87,7 +87,7 @@ catalog:
   unist-util-visit: ^5.1.0
   unpic: ^4.2.2
   vfile: ^6.0.3
-  vite: ^7.1.7
+  vite: ^7.1.12
   vitest: ^4.1.4
   wrangler: ^4.81.0
   yaml: ^2.8.3
