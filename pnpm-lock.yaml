@@ -213,7 +213,7 @@ catalogs:
 
 overrides:
   brace-expansion: ^5.0.5
-  fast-xml-parser: ^5.5.11
+  fast-xml-parser: ^5.5.12
   h3: ^1.15.11
   handlebars: ^4.7.9
   picomatch: ^4.0.4
