@@ -103,8 +103,8 @@ minimumReleaseAgeExclude:
   - typescript@6.0.2
   # Vite pinned to v7 for Astro 6 compatibility
   - vite@7.1.7
-  # Renovate security update: hono@4.12.12
-  - hono@4.12.12
+  # Renovate security update: hono@4.12.12 || 4.12.14
+  - hono@4.12.12 || 4.12.14
 
 overrides:
   brace-expansion: "catalog:"
