@@ -17,7 +17,7 @@ catalog:
   "@biomejs/biome": 2.4.11
 
   # API and Cloudflare
-  "@cloudflare/workers-types": ^4.20260409.1
+  "@cloudflare/workers-types": ^4.20260415.1
   "@faker-js/faker": ^10.4.0
   "@hono/swagger-ui": 0.6.1
   "@hono/zod-openapi": 1.2.4
@@ -89,7 +89,7 @@ catalog:
   vfile: ^6.0.3
   vite: ^7.3.2
   vitest: ^4.1.4
-  wrangler: ^4.81.0
+  wrangler: ^4.83.0
   yaml: ^2.8.3
   zod: ^4.3.6
 
