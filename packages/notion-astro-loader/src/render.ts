@@ -207,7 +207,6 @@ export class NotionPageRenderer {
 			data: {
 				icon: page.icon,
 				cover,
-				archived: page.archived,
 				in_trash: page.in_trash,
 				url: page.url,
 				public_url: page.public_url,

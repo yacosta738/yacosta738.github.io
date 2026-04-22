@@ -22,7 +22,7 @@ export interface NotionLoaderOptions
 		>,
 		Pick<
 			QueryDatabaseParameters,
-			"data_source_id" | "filter_properties" | "sorts" | "filter" | "archived"
+			"data_source_id" | "filter_properties" | "sorts" | "filter" | "in_trash"
 		> {
 	database_id: string;
 	/**
@@ -101,7 +101,7 @@ export function notionLoader({
 	filter_properties,
 	sorts,
 	filter,
-	archived,
+	in_trash,
 	collectionName,
 	imageSavePath = DEFAULT_IMAGE_SAVE_PATH,
 	rehypePlugins = [],
@@ -170,7 +170,7 @@ export function notionLoader({
 				filter_properties,
 				sorts,
 				filter,
-				archived,
+				in_trash,
 				result_type: "page",
 			});
 			let pageCount = 0;
