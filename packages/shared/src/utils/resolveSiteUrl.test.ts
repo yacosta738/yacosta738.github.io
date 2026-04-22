@@ -54,6 +54,9 @@ describe("resolveSiteUrl", () => {
 
 	describe("fallbacks (no env vars set)", () => {
 		it("returns localhost in development (default)", () => {
+			// Force development so the test is deterministic regardless of the
+			// runner's NODE_ENV (clearProviderEnv intentionally preserves NODE_ENV).
+			process.env.NODE_ENV = "development";
 			expect(resolveSiteUrl()).toBe("http://localhost:4321");
 		});
 
