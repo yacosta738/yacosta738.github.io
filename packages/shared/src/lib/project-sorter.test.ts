@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { EnhancedProject } from "@/core/resume/project/project.service";
 import {
 	enhanceProjectsForSorting,
+	isSortableProject,
 	sortProjectsByDate,
 } from "./project-sorter";
 
@@ -136,6 +137,18 @@ describe("project-sorter", () => {
 
 			expect(sorted[0].name).toBe("Project A");
 			expect(sorted[1].name).toBe("Project B");
+		});
+	});
+
+	describe("isSortableProject", () => {
+		it("should return true for an enhanced project with _sortTimestamp and _displayYear", () => {
+			const [enhanced] = enhanceProjectsForSorting([createMockProject()]);
+			expect(isSortableProject(enhanced)).toBe(true);
+		});
+
+		it("should return false for a plain EnhancedProject without cache fields", () => {
+			const plain = createMockProject();
+			expect(isSortableProject(plain)).toBe(false);
 		});
 	});
 });

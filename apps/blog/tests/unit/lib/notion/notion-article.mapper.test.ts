@@ -177,6 +177,80 @@ describe("mapNotionArticleEntry", () => {
 		expect(entry?.data.lastModified).toBe("2024-01-05T00:00:00.000Z");
 	});
 
+	it("skips entries that have an empty slug (slugify returns empty string)", () => {
+		// A title composed only of non-alphanumeric chars slugifies to ""
+		const entry = mapNotionArticleEntry(
+			{
+				cover: null,
+				properties: {
+					Name: titleProperty("---!!!---"),
+					"Schedule Date": dateProperty("2024-02-10"),
+					Platforms: relationProperty([{ id: platformId }]),
+					Type: selectProperty("Article"),
+					Status: statusProperty("Ready"),
+					Published: checkboxProperty(true),
+				},
+			},
+			"page-slug",
+			mapOptions,
+		);
+
+		expect(entry).toBeNull();
+	});
+
+	it("skips entries missing required author when no default is provided", () => {
+		const entry = mapNotionArticleEntry(
+			{
+				cover: null,
+				properties: {
+					Name: titleProperty("No author post"),
+					Description: richTextProperty("Description here"),
+					"Schedule Date": dateProperty("2024-02-10"),
+					Platforms: relationProperty([{ id: platformId }]),
+					Type: selectProperty("Article"),
+					Status: statusProperty("Ready"),
+					Published: checkboxProperty(true),
+				},
+			},
+			"page-author",
+			{
+				...mapOptions,
+				defaultAuthorId: undefined,
+			},
+		);
+
+		expect(entry).toBeNull();
+	});
+
+	it("emits a warning and continues when tags are absent and no default tags are set", () => {
+		const warnSpy = vi.fn();
+		const entry = mapNotionArticleEntry(
+			{
+				cover: null,
+				properties: {
+					Name: titleProperty("No tags post"),
+					Description: richTextProperty("Some description"),
+					"Schedule Date": dateProperty("2024-02-10"),
+					Platforms: relationProperty([{ id: platformId }]),
+					Type: selectProperty("Article"),
+					Status: statusProperty("Ready"),
+					Published: checkboxProperty(true),
+				},
+			},
+			"page-notags",
+			{
+				...mapOptions,
+				defaultTags: [],
+				logger: { warn: warnSpy },
+			},
+		);
+
+		expect(entry).not.toBeNull();
+		expect(warnSpy).toHaveBeenCalledWith(
+			expect.stringContaining("missing tags"),
+		);
+	});
+
 	it("normalizes cover URLs from Notion files", () => {
 		const entry = mapNotionArticleEntry(
 			{
