@@ -43,7 +43,7 @@ catalog:
   "@types/service-worker-mock": ^2.0.4
   "@types/slug": ^5.0.9
   "@vitest/coverage-v8": ^4.1.4
-  astro: 6.1.4
+  astro: 6.1.6
   astro-compress: 2.4.1
   astro-critters: 2.2.1
   astro-icon: ^1.1.5
@@ -105,6 +105,8 @@ minimumReleaseAgeExclude:
   - vite@7.1.7
   # Renovate security update: hono@4.12.12 || 4.12.14
   - hono@4.12.12 || 4.12.14
+  # Renovate security update: astro@6.1.6
+  - astro@6.1.6
 
 overrides:
   brace-expansion: "catalog:"
