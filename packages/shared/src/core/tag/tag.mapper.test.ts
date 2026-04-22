@@ -41,8 +41,12 @@ describe("toTag", () => {
 			data: { title: longTitle },
 		} as never);
 
-		// slug must not exceed 200 chars (all 'a's → single segment)
-		expect(tag.slug.length).toBeLessThanOrEqual(200);
+		// The title is truncated to 200 'a's, which slugifies to exactly "a" * 200
+		// (all one segment, no separators). Both the exact value and the length
+		// must match so a bug that under- or over-truncates will fail.
+		const expectedSlug = "a".repeat(200);
+		expect(tag.slug).toBe(expectedSlug);
+		expect(tag.slug.length).toBe(200);
 	});
 
 	it("preserves the tagData.id on the returned object", () => {

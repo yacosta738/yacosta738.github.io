@@ -11,6 +11,10 @@
  */
 import { GET } from "@blog/pages/robots.txt";
 import type { APIContext } from "astro";
+import {
+	DEFAULT_LOCALE_SETTING,
+	LOCALES_SETTING,
+} from "@/i18n/locales";
 import { describe, expect, it } from "vitest";
 
 /** Build a minimal APIContext with a `site` URL. */
@@ -49,12 +53,15 @@ describe("GET /robots.txt", () => {
 		expect(body).toContain("Disallow: /tag/");
 	});
 
-	it("disallows category and tag pages for the non-default (es) locale with /es prefix", async () => {
+	it("disallows category and tag pages for each non-default locale with the correct prefix", async () => {
 		const res = await GET(makeContext(new URL("https://example.com/")));
 		const body = await res.text();
-		// Non-default locale → /es prefix
-		expect(body).toContain("Disallow: /es/category/");
-		expect(body).toContain("Disallow: /es/tag/");
+		for (const lang of Object.keys(LOCALES_SETTING)) {
+			if (lang === DEFAULT_LOCALE_SETTING) continue;
+			const prefix = `/${lang}`;
+			expect(body).toContain(`Disallow: ${prefix}/category/`);
+			expect(body).toContain(`Disallow: ${prefix}/tag/`);
+		}
 	});
 
 	it("blocks AI training bots (GPTBot, ChatGPT-User, CCBot, ClaudeBot)", async () => {
@@ -71,11 +78,21 @@ describe("GET /robots.txt", () => {
 	it("adds crawl-delay for aggressive scrapers (AhrefsBot, SemrushBot)", async () => {
 		const res = await GET(makeContext(new URL("https://example.com/")));
 		const body = await res.text();
-		expect(body).toContain("User-agent: AhrefsBot");
-		expect(body).toContain("Crawl-delay: 10");
-		expect(body).toContain("User-agent: SemrushBot");
-		expect(body).toMatch(/User-agent: AhrefsBot[\s\S]*?Disallow: \//);
-		expect(body).toMatch(/User-agent: SemrushBot[\s\S]*?Disallow: \//);
+		for (const bot of ["AhrefsBot", "SemrushBot"]) {
+			// Extract only the block that belongs to this bot (up to the next
+			// "User-agent:" line or end-of-file) so assertions are scoped to
+			// that specific section.
+			const blockMatch = body.match(
+				new RegExp(
+					`User-agent: ${bot}([\\s\\S]*?)(?=\\nUser-agent:|$)`,
+				),
+			);
+			expect(blockMatch, `Expected to find a "${bot}" block`).not.toBeNull();
+			const block = blockMatch![0];
+			expect(block).toContain("Crawl-delay: 10");
+			// AhrefsBot and SemrushBot are rate-limited, NOT fully disallowed
+			expect(block).not.toContain("Disallow: /");
+		}
 	});
 
 	it("blocks known bad bots (MJ12bot, DotBot)", async () => {
