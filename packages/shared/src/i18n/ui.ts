@@ -32,7 +32,7 @@ export const ui: UIMultilingual = Object.values(translationModules).reduce(
 				// Merge translations into the accumulated object
 				acc[lang] = {
 					...acc[lang],
-					...(translations as UIDict),
+					...translations,
 				};
 			}
 		}
