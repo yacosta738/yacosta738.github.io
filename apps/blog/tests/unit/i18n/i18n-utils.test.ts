@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import { getLangFromUrl, useTranslations } from "@blog/i18n/utils";
+import { describe, expect, it } from "vitest";
 
 const url = (pathname: string) => new URL(`https://example.com${pathname}`);
 

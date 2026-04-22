@@ -70,6 +70,8 @@ describe("og.service — generateOgImage()", () => {
 		const satori = await import("satori");
 		vi.mocked(satori.default).mockRejectedValueOnce(new Error("satori boom"));
 
-		await expect(generateOgImage("Bad")).rejects.toThrow("Failed to generate OG image");
+		await expect(generateOgImage("Bad")).rejects.toThrow(
+			"Failed to generate OG image",
+		);
 	});
 });

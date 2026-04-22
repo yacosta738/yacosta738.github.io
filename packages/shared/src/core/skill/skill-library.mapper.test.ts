@@ -30,7 +30,12 @@ describe("toSkill", () => {
 
 	it("handles entries with different values", () => {
 		// biome-ignore lint/suspicious/noExplicitAny: test-only cast
-		const result = toSkill(makeEntry({ id: "react", data: { name: "React", icon: "react-icon" } }) as any);
+		const result = toSkill(
+			makeEntry({
+				id: "react",
+				data: { name: "React", icon: "react-icon" },
+			}) as any,
+		);
 
 		expect(result).toEqual({ id: "react", name: "React", icon: "react-icon" });
 	});

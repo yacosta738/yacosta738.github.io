@@ -59,7 +59,10 @@ describe("buildPersonJsonLd", () => {
 	});
 
 	it("uses siteOrigin as url when basics.url is omitted", () => {
-		const person = buildPersonJsonLd({ name: "Yuniel Acosta" }, "https://example.com");
+		const person = buildPersonJsonLd(
+			{ name: "Yuniel Acosta" },
+			"https://example.com",
+		);
 
 		expect(person.url).toBe("https://example.com");
 	});
@@ -67,6 +70,7 @@ describe("buildPersonJsonLd", () => {
 	it("includes email, address and sameAs when all fields are provided", () => {
 		const person = buildPersonJsonLd(
 			{
+				name: "Yuniel Acosta",
 				email: "hello@example.com",
 				location: { city: "Havana", countryCode: "CU" },
 				profiles: [{ url: "https://linkedin.com/in/yuniel" }],
@@ -74,6 +78,7 @@ describe("buildPersonJsonLd", () => {
 			"https://example.com",
 		);
 
+		expect(person.name).toBe("Yuniel Acosta");
 		expect(person.email).toBe("mailto:hello@example.com");
 		expect(person.address).toMatchObject({
 			"@type": "PostalAddress",

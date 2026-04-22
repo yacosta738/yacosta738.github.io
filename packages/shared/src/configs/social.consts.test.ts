@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SOCIAL_ICONS, getSocialIcon } from "./social.consts";
+import { getSocialIcon, SOCIAL_ICONS } from "./social.consts";
 
 describe("SOCIAL_ICONS", () => {
 	it("should have icon for GitHub", () => {

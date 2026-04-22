@@ -10,8 +10,8 @@
  *   - Content assertions: default-locale rules, non-default locale prefixes, AI bot blocks
  */
 import { GET } from "@blog/pages/robots.txt";
-import { describe, expect, it } from "vitest";
 import type { APIContext } from "astro";
+import { describe, expect, it } from "vitest";
 
 /** Build a minimal APIContext with a `site` URL. */
 function makeContext(site: URL | undefined): APIContext {
@@ -22,16 +22,16 @@ describe("GET /robots.txt", () => {
 	it("returns a 200 Response with text/plain content-type", async () => {
 		const res = await GET(makeContext(new URL("https://example.com/")));
 		expect(res.status).toBe(200);
-		expect(res.headers.get("content-type")).toBe(
-			"text/plain; charset=utf-8",
-		);
+		expect(res.headers.get("content-type")).toBe("text/plain; charset=utf-8");
 	});
 
 	it("includes the sitemap URL pointing to sitemap-index.xml", async () => {
 		const site = new URL("https://yunielacosta.com/");
 		const res = await GET(makeContext(site));
 		const body = await res.text();
-		expect(body).toContain("Sitemap: https://yunielacosta.com/sitemap-index.xml");
+		expect(body).toContain(
+			"Sitemap: https://yunielacosta.com/sitemap-index.xml",
+		);
 	});
 
 	it("allows all user-agents by default", async () => {
@@ -62,6 +62,9 @@ describe("GET /robots.txt", () => {
 		const body = await res.text();
 		for (const bot of ["GPTBot", "ChatGPT-User", "CCBot", "ClaudeBot"]) {
 			expect(body).toContain(`User-agent: ${bot}`);
+			expect(body).toMatch(
+				new RegExp(`User-agent: ${bot}[\\s\\S]*?Disallow: \\/`),
+			);
 		}
 	});
 
@@ -71,6 +74,8 @@ describe("GET /robots.txt", () => {
 		expect(body).toContain("User-agent: AhrefsBot");
 		expect(body).toContain("Crawl-delay: 10");
 		expect(body).toContain("User-agent: SemrushBot");
+		expect(body).toMatch(/User-agent: AhrefsBot[\s\S]*?Disallow: \//);
+		expect(body).toMatch(/User-agent: SemrushBot[\s\S]*?Disallow: \//);
 	});
 
 	it("blocks known bad bots (MJ12bot, DotBot)", async () => {
@@ -78,6 +83,8 @@ describe("GET /robots.txt", () => {
 		const body = await res.text();
 		expect(body).toContain("User-agent: MJ12bot");
 		expect(body).toContain("User-agent: DotBot");
+		expect(body).toMatch(/User-agent: MJ12bot[\s\S]*?Disallow: \//);
+		expect(body).toMatch(/User-agent: DotBot[\s\S]*?Disallow: \//);
 	});
 
 	it("throws when site is undefined", () => {

@@ -45,18 +45,6 @@ describe("toTag", () => {
 		expect(tag.slug.length).toBeLessThanOrEqual(200);
 	});
 
-	it("trims leading hyphens produced by slugification", () => {
-		// split on non-alpha produces an empty leading segment → join with "-" still
-		// starts clean, but a title like "-foo" after NFD → "-foo" → split gives ["", "foo"]
-		// filter(Boolean) removes empty → "foo". So we need a title whose slug
-		// after join starts with "-": not possible via the current pipeline.
-		// Instead test trimHyphenEdges directly by forcing a slug that starts with "-":
-		// provide a title where the first char is a hyphen preserved through the pipeline.
-		// Actually the split(/[^a-z0-9]+/) + filter(Boolean) always removes edge hyphens.
-		// These lines (15, 19) are therefore unreachable via toTag — mark as known dead paths.
-		expect(true).toBe(true); // placeholder — see comment above
-	});
-
 	it("preserves the tagData.id on the returned object", () => {
 		const tag = toTag({
 			id: "en/tags/typescript",
