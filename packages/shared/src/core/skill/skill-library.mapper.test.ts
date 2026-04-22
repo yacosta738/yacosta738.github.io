@@ -29,7 +29,6 @@ describe("toSkill", () => {
 	});
 
 	it("handles entries with different values", () => {
-		// biome-ignore lint/suspicious/noExplicitAny: test-only cast
 		const result = toSkill(
 			makeEntry({
 				id: "react",

@@ -46,8 +46,7 @@ describe("og.template — Template()", () => {
 
 	it("falls back to BRAND_NAME when author is omitted", () => {
 		const json = JSON.stringify(Template({ title: "T" }));
-		const brand =
-			typeof BRAND_NAME === "string" ? BRAND_NAME : BRAND_NAME["en"];
+		const brand = typeof BRAND_NAME === "string" ? BRAND_NAME : BRAND_NAME.en;
 		expect(json).toContain(brand);
 	});
 
