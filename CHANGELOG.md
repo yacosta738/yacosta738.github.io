@@ -6,6 +6,35 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.2](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.1...v4.2.2) (2026-04-22)
+
+
+### Bug Fixes
+
+* **blog:** read Notion env vars from process.env with import.meta.env fallback ([c2a1ba1](https://github.com/yacosta738/yacosta738.github.io/commit/c2a1ba1b9a45db12335069311f39df99699b26c4))
+* **blog:** sort imports and fix non-null assertion in robots.txt test ([0d89bb4](https://github.com/yacosta738/yacosta738.github.io/commit/0d89bb4b5599ef9f263da3fdd0b9cebca486191f))
+* **deps:** update @astrojs/partytown to ^2.1.7 ([#1886](https://github.com/yacosta738/yacosta738.github.io/issues/1886)) ([dc96cc7](https://github.com/yacosta738/yacosta738.github.io/commit/dc96cc73d1ae75c70f0827b62b6c38487900a7c1))
+* **deps:** update @biomejs/biome to v2.4.11 ([#1893](https://github.com/yacosta738/yacosta738.github.io/issues/1893)) ([65ebce8](https://github.com/yacosta738/yacosta738.github.io/commit/65ebce8fb6e77e1035bdf3aa8eb3f9c2f038c03c))
+* **deps:** update @biomejs/biome to v2.4.12 ([#1901](https://github.com/yacosta738/yacosta738.github.io/issues/1901)) ([711f964](https://github.com/yacosta738/yacosta738.github.io/commit/711f964e986b2453066a7ea0bd2f13752822d3e6))
+* **deps:** update @iconify-json/lucide to ^1.2.102 ([#1894](https://github.com/yacosta738/yacosta738.github.io/issues/1894)) ([9d97e02](https://github.com/yacosta738/yacosta738.github.io/commit/9d97e02d132515af5a5caa4532bf4d3974f2f675))
+* **deps:** update @iconify-json/simple-icons to ^1.2.78 ([22ce282](https://github.com/yacosta738/yacosta738.github.io/commit/22ce282d6d0a35a130f1e222adbc482c8853aa89))
+* **deps:** update @notionhq/client to ^5.18.0 ([#1903](https://github.com/yacosta738/yacosta738.github.io/issues/1903)) ([06a6904](https://github.com/yacosta738/yacosta738.github.io/commit/06a6904ac7473da6da29d623a38ab497a9eec2a8))
+* **deps:** update @notionhq/client to ^5.19.0 ([73267ec](https://github.com/yacosta738/yacosta738.github.io/commit/73267ec9e4f0386ed1105a111549a23d995a2381))
+* **deps:** update @types/node to v25.6.0 ([#1895](https://github.com/yacosta738/yacosta738.github.io/issues/1895)) ([620d8ea](https://github.com/yacosta738/yacosta738.github.io/commit/620d8eaa9faac5582dc8ff9a210d5277ab022012))
+* **deps:** update astro [SECURITY] ([dd12bd4](https://github.com/yacosta738/yacosta738.github.io/commit/dd12bd4d5ba7cd40e1815ef090dbe1dd1e7c221a))
+* **deps:** update Cloudflare Workers ([#1890](https://github.com/yacosta738/yacosta738.github.io/issues/1890)) ([b96a714](https://github.com/yacosta738/yacosta738.github.io/commit/b96a714cee30383816fc4339b87d79a85e794a19))
+* **deps:** update Cloudflare Workers ([#1904](https://github.com/yacosta738/yacosta738.github.io/issues/1904)) ([8c70b12](https://github.com/yacosta738/yacosta738.github.io/commit/8c70b125e5e6ed6db5c5fd2db72d00b698bc25bf))
+* **deps:** update fast-xml-parser to ^5.5.11 ([#1887](https://github.com/yacosta738/yacosta738.github.io/issues/1887)) ([470476d](https://github.com/yacosta738/yacosta738.github.io/commit/470476d2da00bf300bbd0d3e52ea0d6edf2d02d4))
+* **deps:** update fast-xml-parser to ^5.6.0 ([#1905](https://github.com/yacosta738/yacosta738.github.io/issues/1905)) ([3e603d1](https://github.com/yacosta738/yacosta738.github.io/commit/3e603d181c5107c9bd8ea29a57ab956096f5ab63))
+* **deps:** update fast-xml-parser to ^5.7.1 ([0356bf8](https://github.com/yacosta738/yacosta738.github.io/commit/0356bf8a5eb9e65feb14d9abcf7171a97ba0d212))
+* **deps:** update happy-dom to ^20.9.0 ([#1906](https://github.com/yacosta738/yacosta738.github.io/issues/1906)) ([5492e8e](https://github.com/yacosta738/yacosta738.github.io/commit/5492e8e08dfc1f07f4636ed877a628fb1b495e3d))
+* **deps:** update hono to v4.12.14 [SECURITY] ([#1896](https://github.com/yacosta738/yacosta738.github.io/issues/1896)) ([ea77b93](https://github.com/yacosta738/yacosta738.github.io/commit/ea77b931eb9199655169e2e9e13b4fc744af8c4c))
+* **deps:** update lefthook to ^2.1.6 ([81d272f](https://github.com/yacosta738/yacosta738.github.io/commit/81d272fe662e478c22ad08959f6a9b218f74c52e))
+* **deps:** update typescript to v6.0.3 ([#1908](https://github.com/yacosta738/yacosta738.github.io/issues/1908)) ([854fcb0](https://github.com/yacosta738/yacosta738.github.io/commit/854fcb0638ad1a24a9686ac7230c89f2456ec258))
+* **deps:** update vite to ^7.3.2 ([#1889](https://github.com/yacosta738/yacosta738.github.io/issues/1889)) ([a27daa5](https://github.com/yacosta738/yacosta738.github.io/commit/a27daa5ac156d955c45a00b073a449cdd9ffd6fc))
+* **lint:** resolve biome import sorting and stale suppression in test files ([a28dea9](https://github.com/yacosta738/yacosta738.github.io/commit/a28dea9f23296c579adad1fa4997c8635dd37b94))
+* replace deprecated archived with in_trash and remove unnecessary cast ([2e4ad5b](https://github.com/yacosta738/yacosta738.github.io/commit/2e4ad5b2f79f3f21b0adcaaf6c430e558cfccece))
+
 ## [4.2.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.0...v4.2.1) (2026-04-11)
 
 
