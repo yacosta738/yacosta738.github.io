@@ -28,7 +28,7 @@ catalog:
 
   # Content and data processing
   "@jsdevtools/rehype-toc": ^3.0.2
-  "@notionhq/client": ^5.18.0
+  "@notionhq/client": ^5.19.0
   "@playwright/test": 1.59.1
   "@tailwindcss/typography": ^0.5.19
   "@tailwindcss/vite": ^4.2.2
