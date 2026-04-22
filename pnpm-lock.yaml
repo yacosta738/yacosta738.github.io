@@ -46,8 +46,8 @@ catalogs:
       specifier: ^1.2.3
       version: 1.2.3
     '@iconify-json/simple-icons':
-      specifier: ^1.2.78
-      version: 1.2.78
+      specifier: ^1.2.79
+      version: 1.2.79
     '@iconify-json/tabler':
       specifier: ^1.2.33
       version: 1.2.33
@@ -378,7 +378,7 @@ importers:
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -520,7 +520,7 @@ importers:
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -726,7 +726,7 @@ importers:
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -1450,8 +1450,8 @@ packages:
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
-  '@iconify-json/simple-icons@1.2.78':
-    resolution: {integrity: sha512-I3lkNp0Qu7q2iZWkdcf/I2hqGhzK6qxdILh9T7XqowQrnpmG/BayDsiCf6PktDoWlW0U971xA5g+panm+NFrfQ==}
+  '@iconify-json/simple-icons@1.2.79':
+    resolution: {integrity: sha512-aNyO7Fd1qej9oQfIyohYFRv0lhQLaZ+6UkK1c1qwax0MDPUOZOdq65MlU500kow97pD/W+b2u1And3e25eE24Q==}
 
   '@iconify-json/tabler@1.2.33':
     resolution: {integrity: sha512-q9nUQfE/cjIrGh5bAKHTphitAZpT0kX9SxDgZo3Sx8ofeDTsaHVdRwrn+CfKiJ5vQ1b1btqVwizXzIgz9KEPjA==}
@@ -5196,7 +5196,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.78':
+  '@iconify-json/simple-icons@1.2.79':
     dependencies:
       '@iconify/types': 2.0.0
 
