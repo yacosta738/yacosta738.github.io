@@ -42,17 +42,24 @@ const createNotionLoader = async () => {
 	);
 	const defaultNotionPlatformId = "ea2cff95e1ca82ab97128153e241fe9a";
 	const notionPlatformId =
-		normalizeNotionId(import.meta.env.NOTION_PLATFORM_ID) ??
-		defaultNotionPlatformId;
+		normalizeNotionId(
+			process.env.NOTION_PLATFORM_ID ?? import.meta.env.NOTION_PLATFORM_ID,
+		) ?? defaultNotionPlatformId;
 	const defaultNotionAuthorId = "en/yuniel-acosta-perez";
 	const defaultNotionCategoryId = "en/software-development";
 	const defaultNotionTagIds = ["en/tech"];
 	const notionDefaultAuthorId =
-		import.meta.env.NOTION_DEFAULT_AUTHOR_ID ?? defaultNotionAuthorId;
+		process.env.NOTION_DEFAULT_AUTHOR_ID ??
+		import.meta.env.NOTION_DEFAULT_AUTHOR_ID ??
+		defaultNotionAuthorId;
 	const notionDefaultCategoryId =
-		import.meta.env.NOTION_DEFAULT_CATEGORY_ID ?? defaultNotionCategoryId;
+		process.env.NOTION_DEFAULT_CATEGORY_ID ??
+		import.meta.env.NOTION_DEFAULT_CATEGORY_ID ??
+		defaultNotionCategoryId;
 	const notionDefaultTagIds = (
-		import.meta.env.NOTION_DEFAULT_TAG_IDS ?? defaultNotionTagIds.join(",")
+		process.env.NOTION_DEFAULT_TAG_IDS ??
+		import.meta.env.NOTION_DEFAULT_TAG_IDS ??
+		defaultNotionTagIds.join(",")
 	)
 		.split(",")
 		.map((tag: string) => tag.trim())
@@ -89,8 +96,11 @@ const createNotionLoader = async () => {
 	};
 
 	return createCachedNotionLoader({
-		auth: import.meta.env.NOTION_TOKEN,
-		database_id: normalizeNotionId(import.meta.env.NOTION_DATABASE_ID) ?? "",
+		auth: process.env.NOTION_TOKEN ?? import.meta.env.NOTION_TOKEN,
+		database_id:
+			normalizeNotionId(
+				process.env.NOTION_DATABASE_ID ?? import.meta.env.NOTION_DATABASE_ID,
+			) ?? "",
 		filter: notionPostsFilter,
 		platformId: notionPlatformId,
 		requiredType: notionTypeFilter,
