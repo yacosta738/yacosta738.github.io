@@ -267,6 +267,51 @@ describe("downloadImagesInHtml", () => {
 	});
 });
 
+describe("downloadNotionImage – logger branch", () => {
+	let tempDir: string;
+
+	beforeEach(async () => {
+		tempDir = await mkdtemp(path.join(os.tmpdir(), "notion-logger-"));
+	});
+
+	afterEach(async () => {
+		await rm(tempDir, { recursive: true, force: true });
+		vi.restoreAllMocks();
+	});
+
+	it("calls logger.warn when paths cannot be derived for a valid S3 host URL", async () => {
+		// A URL that passes isNotionS3Url (correct host) but has only 2 path segments,
+		// so deriveImagePaths returns null → triggers the !paths logger branch (lines 131-134).
+		const shortPathUrl =
+			"https://prod-files-secure.s3.us-west-2.amazonaws.com/parentId/objId?X-Amz-Algorithm=AWS4-HMAC-SHA256";
+		const warnSpy = vi.fn();
+		const debugSpy = vi.fn();
+
+		const result = await downloadNotionImage(shortPathUrl, tempDir, {
+			warn: warnSpy,
+			debug: debugSpy,
+		});
+
+		expect(result).toBe(shortPathUrl);
+		expect(warnSpy).toHaveBeenCalledOnce();
+		expect(warnSpy.mock.calls[0][0]).toContain("unable to parse S3 URL");
+	});
+
+	it("falls back to logger.debug when warn is absent and paths cannot be derived", async () => {
+		const shortPathUrl =
+			"https://prod-files-secure.s3.us-west-2.amazonaws.com/parentId/objId?X-Amz-Algorithm=AWS4-HMAC-SHA256";
+		const debugSpy = vi.fn();
+
+		const result = await downloadNotionImage(shortPathUrl, tempDir, {
+			debug: debugSpy,
+		});
+
+		expect(result).toBe(shortPathUrl);
+		expect(debugSpy).toHaveBeenCalledOnce();
+		expect(debugSpy.mock.calls[0][0]).toContain("unable to parse S3 URL");
+	});
+});
+
 describe("createS3UrlRegex / containsS3Url", () => {
 	it("matches S3 URLs in HTML content", () => {
 		const html = `<img src="${S3_URL}" alt="">`;
