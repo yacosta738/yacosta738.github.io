@@ -11,11 +11,8 @@
  */
 import { GET } from "@blog/pages/robots.txt";
 import type { APIContext } from "astro";
-import {
-	DEFAULT_LOCALE_SETTING,
-	LOCALES_SETTING,
-} from "@/i18n/locales";
 import { describe, expect, it } from "vitest";
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/i18n/locales";
 
 /** Build a minimal APIContext with a `site` URL. */
 function makeContext(site: URL | undefined): APIContext {
@@ -83,12 +80,10 @@ describe("GET /robots.txt", () => {
 			// "User-agent:" line or end-of-file) so assertions are scoped to
 			// that specific section.
 			const blockMatch = body.match(
-				new RegExp(
-					`User-agent: ${bot}([\\s\\S]*?)(?=\\nUser-agent:|$)`,
-				),
+				new RegExp(`User-agent: ${bot}([\\s\\S]*?)(?=\\nUser-agent:|$)`),
 			);
 			expect(blockMatch, `Expected to find a "${bot}" block`).not.toBeNull();
-			const block = blockMatch![0];
+			const block = blockMatch?.[0];
 			expect(block).toContain("Crawl-delay: 10");
 			// AhrefsBot and SemrushBot are rate-limited, NOT fully disallowed
 			expect(block).not.toContain("Disallow: /");
