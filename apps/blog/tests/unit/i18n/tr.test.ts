@@ -1,12 +1,12 @@
-import { describe, expect, it } from "vitest";
 import { tr } from "@blog/i18n/index";
+import { describe, expect, it } from "vitest";
 
 /**
  * `tr` wraps a translation function `t` and returns a fallback when
  * the key has no translation (i.e. `t` echoes the key back unchanged).
  */
-const makeT = (dict: Record<string, string>) =>
-	(key: string) => dict[key] ?? key;
+const makeT = (dict: Record<string, string>) => (key: string) =>
+	dict[key] ?? key;
 
 describe("tr", () => {
 	it("returns the translated string when the key exists", () => {

@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import { resolveLocaleFromUrl } from "@blog/i18n/utils/resolveLocaleFromUrl";
+import { describe, expect, it } from "vitest";
 
 const url = (pathname: string) => new URL(`https://example.com${pathname}`);
 

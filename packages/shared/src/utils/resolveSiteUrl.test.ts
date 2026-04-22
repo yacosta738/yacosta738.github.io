@@ -35,6 +35,7 @@ function restoreEnv(snap: EnvSnapshot) {
 
 function clearProviderEnv() {
 	for (const key of ENV_VARS) {
+		if (key === "NODE_ENV") continue;
 		delete process.env[key];
 	}
 }
@@ -116,7 +117,8 @@ describe("resolveSiteUrl", () => {
 
 	describe("DEPLOY_PRIME_URL (Netlify PR preview)", () => {
 		it("uses DEPLOY_PRIME_URL when URL is absent", () => {
-			process.env.DEPLOY_PRIME_URL = "https://deploy-preview-42--my-app.netlify.app";
+			process.env.DEPLOY_PRIME_URL =
+				"https://deploy-preview-42--my-app.netlify.app";
 			expect(resolveSiteUrl()).toBe(
 				"https://deploy-preview-42--my-app.netlify.app",
 			);

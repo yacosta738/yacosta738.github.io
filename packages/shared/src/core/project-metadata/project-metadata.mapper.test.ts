@@ -39,7 +39,9 @@ function makeEntry(
 	};
 }
 
-function makeProject(overrides: Partial<ProjectMetadata> = {}): ProjectMetadata {
+function makeProject(
+	overrides: Partial<ProjectMetadata> = {},
+): ProjectMetadata {
 	return {
 		title: "Project A",
 		date: "2024-01-01",
@@ -80,6 +82,15 @@ describe("fromContentEntry", () => {
 
 		expect(result.date).toBe(d.toISOString());
 		expect(result.year).toBe(d.getFullYear());
+	});
+
+	it("maps a UTC boundary Date and produces correct ISO string and UTC year", () => {
+		const d = new Date("2024-01-01T00:00:00.000Z");
+		const entry = makeEntry({ date: d });
+		const result = fromContentEntry(entry);
+
+		expect(result.date).toBe(d.toISOString());
+		expect(result.year).toBe(d.getUTCFullYear());
 	});
 
 	it("maps tech refs that are objects with id", () => {
@@ -137,9 +148,36 @@ describe("fromContentEntry", () => {
 
 describe("applyCriteria", () => {
 	const projects: ProjectMetadata[] = [
-		makeProject({ title: "Alpha", featured: true, published: true, showInProjects: true, priority: 3, company: "Acme", tech: ["react"], url: "https://a.com", cover: "/a.png" }),
-		makeProject({ title: "Beta", featured: false, published: true, showInProjects: false, priority: 1, company: "Beta Inc", tech: ["vue"], repository: "https://repo.com" }),
-		makeProject({ title: "Gamma", featured: true, published: false, showInProjects: true, priority: 2, company: "Acme", tech: ["react", "typescript"] }),
+		makeProject({
+			title: "Alpha",
+			featured: true,
+			published: true,
+			showInProjects: true,
+			priority: 3,
+			company: "Acme",
+			tech: ["react"],
+			url: "https://a.com",
+			cover: "/a.png",
+		}),
+		makeProject({
+			title: "Beta",
+			featured: false,
+			published: true,
+			showInProjects: false,
+			priority: 1,
+			company: "Beta Inc",
+			tech: ["vue"],
+			repository: "https://repo.com",
+		}),
+		makeProject({
+			title: "Gamma",
+			featured: true,
+			published: false,
+			showInProjects: true,
+			priority: 2,
+			company: "Acme",
+			tech: ["react", "typescript"],
+		}),
 	];
 
 	it("returns all items when criteria is undefined", () => {
@@ -219,12 +257,18 @@ describe("applyCriteria", () => {
 	});
 
 	it("sorts by priority asc", () => {
-		const result = applyCriteria(projects, { sortBy: "priority", sortDirection: "asc" });
+		const result = applyCriteria(projects, {
+			sortBy: "priority",
+			sortDirection: "asc",
+		});
 		expect(result.map((p) => p.priority)).toEqual([1, 2, 3]);
 	});
 
 	it("sorts by priority desc", () => {
-		const result = applyCriteria(projects, { sortBy: "priority", sortDirection: "desc" });
+		const result = applyCriteria(projects, {
+			sortBy: "priority",
+			sortDirection: "desc",
+		});
 		expect(result.map((p) => p.priority)).toEqual([3, 2, 1]);
 	});
 
@@ -234,7 +278,10 @@ describe("applyCriteria", () => {
 	});
 
 	it("sorts by title desc", () => {
-		const result = applyCriteria(projects, { sortBy: "title", sortDirection: "desc" });
+		const result = applyCriteria(projects, {
+			sortBy: "title",
+			sortDirection: "desc",
+		});
 		expect(result.map((p) => p.title)).toEqual(["Gamma", "Beta", "Alpha"]);
 	});
 

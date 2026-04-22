@@ -1,11 +1,13 @@
-import { describe, expect, it } from "vitest";
 import { buildBlogListing } from "@blog/lib/blog-listing";
 import type { BlogPost } from "@blog/lib/blog-post.utils";
-import type Article from "../../../../packages/shared/src/core/article/article.model";
-import type ExternalArticle from "../../../../packages/shared/src/core/external-article/external-article.model";
+import { describe, expect, it } from "vitest";
+import type Article from "@/core/article/article.model";
+import type ExternalArticle from "@/core/external-article/external-article.model";
 
-const makeAuthor = () => ({ name: "Test Author", email: "" }) as Article["author"];
-const makeCategory = () => ({ name: "General", slug: "general" }) as Article["category"];
+const makeAuthor = () =>
+	({ name: "Test Author", email: "" }) as Article["author"];
+const makeCategory = () =>
+	({ name: "General", slug: "general" }) as Article["category"];
 
 const makeArticle = (id: string, date: Date, featured = false): Article => ({
 	id,
@@ -52,7 +54,11 @@ describe("buildBlogListing", () => {
 			makeArticle("es/post-2", new Date("2024-01-02")),
 		];
 
-		const result = buildBlogListing({ articles, externalArticles: [], locale: "en" });
+		const result = buildBlogListing({
+			articles,
+			externalArticles: [],
+			locale: "en",
+		});
 
 		expect(result.sortedPosts).toHaveLength(1);
 		expect(result.sortedPosts[0].id).toBe("en/post-1");
@@ -64,7 +70,11 @@ describe("buildBlogListing", () => {
 			makeExternal("es/ext-2", new Date("2024-01-02")),
 		];
 
-		const result = buildBlogListing({ articles: [], externalArticles, locale: "en" });
+		const result = buildBlogListing({
+			articles: [],
+			externalArticles,
+			locale: "en",
+		});
 
 		expect(result.sortedPosts).toHaveLength(1);
 		expect(result.sortedPosts[0].id).toBe("en/ext-1");
@@ -79,7 +89,11 @@ describe("buildBlogListing", () => {
 			makeExternal("en/mid", new Date("2024-03-01")),
 		];
 
-		const result = buildBlogListing({ articles, externalArticles, locale: "en" });
+		const result = buildBlogListing({
+			articles,
+			externalArticles,
+			locale: "en",
+		});
 
 		expect(result.sortedPosts.map((p) => p.id)).toEqual([
 			"en/new",
@@ -96,9 +110,18 @@ describe("buildBlogListing", () => {
 			makeArticle("en/f4", new Date("2024-04-01"), true),
 		];
 
-		const result = buildBlogListing({ articles, externalArticles: [], locale: "en" });
+		const result = buildBlogListing({
+			articles,
+			externalArticles: [],
+			locale: "en",
+		});
 
 		expect(result.featuredPosts).toHaveLength(3);
+		expect(result.featuredPosts.map((p) => p.id)).toEqual([
+			"en/f4",
+			"en/f3",
+			"en/f2",
+		]);
 	});
 
 	it("respects a custom featuredLimit", () => {
@@ -123,7 +146,11 @@ describe("buildBlogListing", () => {
 			makeArticle("en/regular", new Date("2024-01-01"), false),
 		];
 
-		const result = buildBlogListing({ articles, externalArticles: [], locale: "en" });
+		const result = buildBlogListing({
+			articles,
+			externalArticles: [],
+			locale: "en",
+		});
 
 		const visibleIds = result.visiblePosts.map((p) => p.id);
 		expect(visibleIds).not.toContain("en/featured");
@@ -135,17 +162,29 @@ describe("buildBlogListing", () => {
 			makeExternal("en/ext", new Date("2024-06-01")),
 		];
 
-		const result = buildBlogListing({ articles: [], externalArticles, locale: "en" });
+		const result = buildBlogListing({
+			articles: [],
+			externalArticles,
+			locale: "en",
+		});
 
 		expect(result.featuredPosts).toHaveLength(0);
 		expect(result.visiblePosts).toHaveLength(1);
 	});
 
 	it("sortedPosts includes both articles and externals", () => {
-		const articles: BlogPost[] = [makeArticle("en/art", new Date("2024-01-01"))];
-		const externalArticles: BlogPost[] = [makeExternal("en/ext", new Date("2024-02-01"))];
+		const articles: BlogPost[] = [
+			makeArticle("en/art", new Date("2024-01-01")),
+		];
+		const externalArticles: BlogPost[] = [
+			makeExternal("en/ext", new Date("2024-02-01")),
+		];
 
-		const result = buildBlogListing({ articles, externalArticles, locale: "en" });
+		const result = buildBlogListing({
+			articles,
+			externalArticles,
+			locale: "en",
+		});
 
 		expect(result.sortedPosts).toHaveLength(2);
 	});
@@ -157,7 +196,11 @@ describe("buildBlogListing", () => {
 			makeArticle("en/f2", new Date("2024-02-01"), true),
 		];
 
-		const result = buildBlogListing({ articles, externalArticles: [], locale: "en" });
+		const result = buildBlogListing({
+			articles,
+			externalArticles: [],
+			locale: "en",
+		});
 
 		expect(result.featuredPosts.map((p) => p.id)).toEqual([
 			"en/f3",

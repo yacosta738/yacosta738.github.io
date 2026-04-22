@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { BRAND_NAME } from "@/configs/site.consts";
 import { Template } from "./og.template";
 
 describe("og.template — Template()", () => {
 	it("throws when title is missing", () => {
-		expect(() => Template({ title: "" } as Parameters<typeof Template>[0])).toThrow(
-			"Title is required",
-		);
+		expect(() =>
+			Template({ title: "" } as Parameters<typeof Template>[0]),
+		).toThrow("Title is required");
 	});
 
 	it("returns a root div node", () => {
@@ -25,9 +26,9 @@ describe("og.template — Template()", () => {
 
 	it("does not include a category node when omitted", () => {
 		const result = Template({ title: "T" });
-		// category span is only rendered when category is truthy — verify by absence
 		const json = JSON.stringify(result);
-		expect(json).not.toContain('"category"');
+		// "Tech" is the category used in the paired positive test above
+		expect(json).not.toContain("Tech");
 	});
 
 	it("renders each tag as a span", () => {
@@ -39,17 +40,15 @@ describe("og.template — Template()", () => {
 	});
 
 	it("uses the provided author name", () => {
-		const json = JSON.stringify(
-			Template({ title: "T", author: "Jane Doe" }),
-		);
+		const json = JSON.stringify(Template({ title: "T", author: "Jane Doe" }));
 		expect(json).toContain("Jane Doe");
 	});
 
 	it("falls back to BRAND_NAME when author is omitted", () => {
-		// BRAND_NAME is a string constant — just verify it appears
 		const json = JSON.stringify(Template({ title: "T" }));
-		// As long as children contains a non-empty string the brand name is present
-		expect(json).toMatch(/"children":".+"/);
+		const brand =
+			typeof BRAND_NAME === "string" ? BRAND_NAME : BRAND_NAME["en"];
+		expect(json).toContain(brand);
 	});
 
 	it("formats a Date object for display", () => {

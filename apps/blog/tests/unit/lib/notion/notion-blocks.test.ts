@@ -1,6 +1,6 @@
+import { notionBlockFallbacks } from "@blog/lib/notion/notion-blocks";
 import type { Element } from "hast";
 import { describe, expect, it } from "vitest";
-import { notionBlockFallbacks } from "@blog/lib/notion/notion-blocks";
 
 // Build a minimal HAST root tree containing a single element node so we can
 // run the plugin without a real unified pipeline.
