@@ -1,5 +1,6 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const createCachedNotionLoaderMock = vi.fn(
@@ -8,7 +9,9 @@ const createCachedNotionLoaderMock = vi.fn(
 		config,
 	}),
 );
-const snapshotPath = path.resolve(process.cwd(), ".cache/notion-loader.json");
+const snapshotPath = fileURLToPath(
+	new URL("../../.cache/notion-loader.json", import.meta.url),
+);
 
 const importContentConfig = async () => {
 	vi.resetModules();

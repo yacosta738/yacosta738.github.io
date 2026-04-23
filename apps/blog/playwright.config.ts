@@ -73,7 +73,12 @@ export default defineConfig({
 			return "pnpm build";
 		};
 		const buildCommand = resolveBuildCommand();
-		const baseEnv: Record<string, string> = { PLAYWRIGHT_TEST: "true" };
+		const baseEnv: Record<string, string> = {
+			PLAYWRIGHT_TEST: "true",
+			NOTION_TOKEN: process.env.NOTION_TOKEN ?? "",
+			NOTION_DATABASE_ID: process.env.NOTION_DATABASE_ID ?? "",
+			NOTION_PLATFORM_ID: process.env.NOTION_PLATFORM_ID ?? "",
+		};
 		const previewCommand = `${buildCommand} && pnpm exec astro preview --host 127.0.0.1 --port ${resolvedPreviewPort}`;
 
 		return {
