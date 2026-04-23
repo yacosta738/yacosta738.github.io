@@ -72,6 +72,8 @@ runs:
       run: |
         echo "🔍 Running Astro type checks for portfolio and blog..."
         pnpm --filter=portfolio check:astro
+        pnpm --filter=blog notion:sync
+        pnpm --filter=blog notion:validate
         pnpm --filter=blog check:astro
         STATUS=$?
         

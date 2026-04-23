@@ -27,19 +27,29 @@ describe("content.config", () => {
 		vi.doUnmock("astro:content");
 	});
 
-	it("uses the empty notion loader when NOTION_LOADER is disabled", async () => {
-		vi.stubEnv("NOTION_LOADER", "0");
+	it("uses the empty notion loader when BLOG_CONTENT_SOURCE is disabled", async () => {
+		vi.stubEnv("BLOG_CONTENT_SOURCE", "disabled");
 		const { collections } = await importContentConfig();
 
 		await expect(collections.notionArticles.loader()).resolves.toEqual([]);
 	});
 
-	it("builds the notion loader with normalized ids when NOTION_LOADER is enabled", async () => {
+	it("builds the notion loader with normalized ids when using live Notion content", async () => {
+		vi.stubEnv("BLOG_CONTENT_SOURCE", "live");
 		vi.stubEnv("NOTION_TOKEN", "token");
 		vi.stubEnv("NOTION_DATABASE_ID", "12345678-1234-1234-1234-1234567890ab");
 		vi.stubEnv("NOTION_PLATFORM_ID", "87654321-4321-4321-4321-ba0987654321");
 		vi.stubEnv("NOTION_DEFAULT_TAG_IDS", " en/tech, es/frontend ");
 
+		const { collections } = await importContentConfig();
+
+		expect(collections.notionArticles.loader).toMatchObject({
+			name: "notion-articles-loader",
+		});
+	});
+
+	it("uses the cached notion loader when BLOG_CONTENT_SOURCE is snapshot", async () => {
+		vi.stubEnv("BLOG_CONTENT_SOURCE", "snapshot");
 		const { collections } = await importContentConfig();
 
 		expect(collections.notionArticles.loader).toMatchObject({

@@ -1,6 +1,7 @@
 import { defineCollection, reference, type SchemaContext } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { getNotionLoaderConfig } from "./lib/notion/notion-config";
 
 // Reusable schemas
 const profileSchema = z.object({
@@ -17,19 +18,14 @@ const locationSchema = z.object({
 	region: z.string(),
 });
 
-const normalizeNotionId = (value?: string): string | undefined => {
-	if (!value) {
-		return undefined;
-	}
-	const match =
-		/[0-9a-f]{32}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.exec(
-			value,
-		);
-	if (!match) {
-		return value;
-	}
-	return match[0].replaceAll("-", "");
-};
+const BLOG_CONTENT_SOURCE = {
+	SNAPSHOT: "snapshot",
+	LIVE: "live",
+	DISABLED: "disabled",
+} as const;
+
+type BlogContentSource =
+	(typeof BLOG_CONTENT_SOURCE)[keyof typeof BLOG_CONTENT_SOURCE];
 
 const createNotionLoader = async () => {
 	const { notionBlockFallbacks } = await import("./lib/notion/notion-blocks");
@@ -40,74 +36,29 @@ const createNotionLoader = async () => {
 		"../.cache/notion-loader.json",
 		import.meta.url,
 	);
-	const defaultNotionPlatformId = "ea2cff95e1ca82ab97128153e241fe9a";
-	const notionPlatformId =
-		normalizeNotionId(
-			process.env.NOTION_PLATFORM_ID ?? import.meta.env.NOTION_PLATFORM_ID,
-		) ?? defaultNotionPlatformId;
-	const defaultNotionAuthorId = "en/yuniel-acosta-perez";
-	const defaultNotionCategoryId = "en/software-development";
-	const defaultNotionTagIds = ["en/tech"];
-	const notionDefaultAuthorId =
-		process.env.NOTION_DEFAULT_AUTHOR_ID ??
-		import.meta.env.NOTION_DEFAULT_AUTHOR_ID ??
-		defaultNotionAuthorId;
-	const notionDefaultCategoryId =
-		process.env.NOTION_DEFAULT_CATEGORY_ID ??
-		import.meta.env.NOTION_DEFAULT_CATEGORY_ID ??
-		defaultNotionCategoryId;
-	const notionDefaultTagIds = (
-		process.env.NOTION_DEFAULT_TAG_IDS ??
-		import.meta.env.NOTION_DEFAULT_TAG_IDS ??
-		defaultNotionTagIds.join(",")
-	)
-		.split(",")
-		.map((tag: string) => tag.trim())
-		.filter(Boolean);
 	const notionRehypePlugin = notionBlockFallbacks as (
 		...args: unknown[]
 	) => unknown;
-	const notionTypeFilter = "Article";
-	const notionStatusFilter = "Ready";
-	const notionToday = new Date().toISOString().slice(0, 10);
-	const notionPostsFilter = {
-		and: [
-			{
-				property: "Platforms",
-				relation: { contains: notionPlatformId },
-			},
-			{
-				property: "Type",
-				select: { equals: notionTypeFilter },
-			},
-			{
-				property: "Status",
-				status: { equals: notionStatusFilter },
-			},
-			{
-				property: "Schedule Date",
-				date: { on_or_before: notionToday },
-			},
-			{
-				property: "Published",
-				checkbox: { equals: true },
-			},
-		],
-	};
+	const notionConfig = getNotionLoaderConfig();
+
+	const contentSource =
+		(process.env.BLOG_CONTENT_SOURCE as BlogContentSource | undefined) ??
+		BLOG_CONTENT_SOURCE.LIVE;
+
+	if (contentSource === BLOG_CONTENT_SOURCE.DISABLED) {
+		return async () => [];
+	}
+
+	if (contentSource === BLOG_CONTENT_SOURCE.SNAPSHOT) {
+		return createCachedNotionLoader({
+			auth: "",
+			database_id: "",
+			cacheUrl: notionCacheUrl,
+		});
+	}
 
 	return createCachedNotionLoader({
-		auth: process.env.NOTION_TOKEN ?? import.meta.env.NOTION_TOKEN,
-		database_id:
-			normalizeNotionId(
-				process.env.NOTION_DATABASE_ID ?? import.meta.env.NOTION_DATABASE_ID,
-			) ?? "",
-		filter: notionPostsFilter,
-		platformId: notionPlatformId,
-		requiredType: notionTypeFilter,
-		requiredStatus: notionStatusFilter,
-		defaultAuthorId: notionDefaultAuthorId,
-		defaultCategoryId: notionDefaultCategoryId,
-		defaultTags: notionDefaultTagIds,
+		...notionConfig,
 		cacheUrl: notionCacheUrl,
 		rehypePlugins: [notionRehypePlugin],
 	});
@@ -331,14 +282,8 @@ const articles = defineCollection({
 		}),
 });
 
-// Notion loader is enabled by default. Set NOTION_LOADER=0 to disable.
-const useNotionLoader = process.env.NOTION_LOADER !== "0";
-const emptyNotionLoader = async () => [];
-const notionLoader = useNotionLoader
-	? await createNotionLoader()
-	: emptyNotionLoader;
 const notionArticles = defineCollection({
-	loader: notionLoader,
+	loader: await createNotionLoader(),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),

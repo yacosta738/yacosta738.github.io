@@ -11,6 +11,7 @@ import {
 	isNotionS3Url,
 	resolveImageDir,
 } from "./notion-image";
+import { assertNoRemoteNotionImages } from "./notion-snapshot";
 
 type NotionArticleData = {
 	title: string;
@@ -991,6 +992,14 @@ const processNotionImages = async (
 
 		processed.push(updatedEntry);
 	}
+
+	assertNoRemoteNotionImages(
+		processed.map((entry) => ({
+			id: entry.id,
+			data: { cover: entry.data.cover },
+			body: getRenderedHtml(entry.rendered),
+		})),
+	);
 
 	return processed;
 };
