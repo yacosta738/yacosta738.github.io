@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"astro": "astro",
-		"prebuild": "node ../../scripts/notion-prebuild-sync.mjs",
+		"prebuild": "node ../../scripts/notion-prebuild-sync.mjs && pnpm notion:sync && pnpm notion:validate",
 		"build": "BLOG_CONTENT_SOURCE=snapshot astro check && BLOG_CONTENT_SOURCE=snapshot astro build",
 		"postbuild": "node ./scripts/update-csp-script-hashes.mjs",
 		"build:fast": "BLOG_CONTENT_SOURCE=snapshot astro build",
