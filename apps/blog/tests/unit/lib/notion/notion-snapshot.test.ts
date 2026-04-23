@@ -1,8 +1,10 @@
-import { mkdtempSync, readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import {
+	assertNoRemoteNotionImages,
 	collectLocalNotionAssetPaths,
+	FatalNotionValidationError,
 	readSnapshot,
 	writeSnapshot,
 } from "@blog/lib/notion/notion-snapshot";
@@ -50,6 +52,19 @@ describe("notion-snapshot", () => {
 		expect(snapshot.entries[0]?.id).toBe("es/2026/04/21/merge-queues");
 	});
 
+	it("throws when snapshot file is malformed", () => {
+		const dir = mkdtempSync(path.join(os.tmpdir(), "notion-snapshot-"));
+		const filePath = path.join(dir, "notion-loader.json");
+
+		writeFileSync(
+			filePath,
+			JSON.stringify({ version: 2, entries: [] }),
+			"utf8",
+		);
+
+		expect(() => readSnapshot(filePath)).toThrow(/expected version 1/i);
+	});
+
 	it("collects local notion asset paths from cover and rendered html", () => {
 		const assetPaths = collectLocalNotionAssetPaths([
 			{
@@ -65,5 +80,19 @@ describe("notion-snapshot", () => {
 			"/images/notion/covers/cover.png",
 			"/images/notion/inline/file.gif",
 		]);
+	});
+
+	it("throws a fatal validation error for remote notion image urls", () => {
+		expect(() =>
+			assertNoRemoteNotionImages([
+				{
+					id: "es/2026/04/21/merge-queues",
+					data: {
+						cover:
+							"https://prod-files-secure.s3.eu-central-1.amazonaws.com/a/b/image.png",
+					},
+				},
+			]),
+		).toThrow(FatalNotionValidationError);
 	});
 });
