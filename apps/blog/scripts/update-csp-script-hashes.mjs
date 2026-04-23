@@ -1,10 +1,11 @@
 import { createHash } from "node:crypto";
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const rootDir = resolve(process.cwd());
 const distDir = join(rootDir, "dist");
-const headersPath = join(rootDir, "public", "_headers");
+const functionsDir = join(rootDir, "functions");
+const outputPath = join(functionsDir, "_csp-hashes.generated.js");
 
 const walkHtmlFiles = (dir) => {
 	const entries = readdirSync(dir);
@@ -54,59 +55,18 @@ if (hashes.size === 0) {
 	throw new Error("No inline script hashes found in dist HTML files.");
 }
 
-const headersContent = readFileSync(headersPath, "utf8");
-const headersLines = headersContent.split(/\r?\n/);
-const cspLinePrefix = "Content-Security-Policy:";
-const cspLineIndex = headersLines.findIndex((line) =>
-	line.trimStart().startsWith(cspLinePrefix),
-);
+mkdirSync(functionsDir, { recursive: true });
 
-if (cspLineIndex === -1) {
-	throw new Error(
-		"Could not find Content-Security-Policy line in public/_headers.",
-	);
-}
-
-const cspLine = headersLines[cspLineIndex];
-const cspPrefixIndex = cspLine.indexOf(cspLinePrefix);
-const cspValue = cspLine.slice(cspPrefixIndex + cspLinePrefix.length).trim();
-
-const directives = cspValue
-	.split(";")
-	.map((directive) => directive.trim())
-	.filter(Boolean);
-
-const scriptSrcIndex = directives.findIndex((directive) =>
-	directive.startsWith("script-src "),
-);
-
-if (scriptSrcIndex === -1) {
-	throw new Error("Could not find script-src directive in CSP.");
-}
-
-const scriptSrcValue = directives[scriptSrcIndex].slice("script-src ".length);
-
-const existingTokens = scriptSrcValue
-	.split(/\s+/)
-	.map((token) => token.trim())
-	.filter(Boolean)
-	.filter(
-		(token) => token !== "'unsafe-inline'" && !token.startsWith("'sha256-"),
-	);
-
-const nextTokens = [
-	...existingTokens,
-	...Array.from(hashes).sort((a, b) => a.localeCompare(b)),
+const sortedHashes = Array.from(hashes).sort((a, b) => a.localeCompare(b));
+const hashLines = sortedHashes.map((h) => `  "${h}",`).join("\n");
+const fileContent = `// AUTO-GENERATED — do not edit manually. Run \`pnpm --filter=blog csp:hashes\` to regenerate.
+export const scriptHashes = [
+${hashLines}
 ];
-directives[scriptSrcIndex] = `script-src ${nextTokens.join(" ")}`;
+`;
 
-const nextCspValue = `${directives.join("; ")};`;
-headersLines[cspLineIndex] =
-	`${cspLine.slice(0, cspPrefixIndex + cspLinePrefix.length)} ${nextCspValue}`;
-const nextHeaders = headersLines.join("\n");
-
-writeFileSync(headersPath, nextHeaders, "utf8");
+writeFileSync(outputPath, fileContent, "utf8");
 
 console.log(
-	`Updated CSP script-src with ${hashes.size} inline script hash(es) in ${headersPath}`,
+	`Found ${hashes.size} inline script hash(es). Written to ${outputPath}`,
 );
