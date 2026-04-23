@@ -30,6 +30,8 @@ const target = isExternal ? attrs["data-target"] || "_blank" : undefined;
 const rel = isExternal
 	? attrs["data-rel"] || "noopener nofollow ugc"
 	: undefined;
+
+const isStringImage = typeof image === "string";
 ---
 
 <article
@@ -51,7 +53,15 @@ const rel = isExternal
 		<span class="sr-only">{title}</span>
 		<div class="blog-article-card__media">
 			{
-				image && (
+				image && isStringImage ? (
+					<img
+						src={image}
+						alt={title}
+						loading={loading}
+						decoding="async"
+						class="h-full w-full object-cover"
+					/>
+				) : (
 					<OptimizedPicture
 						src={image}
 						alt={title}
