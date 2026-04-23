@@ -6,6 +6,15 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.3](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.2...v4.2.3) (2026-04-23)
+
+
+### Bug Fixes
+
+* **deps:** update @hono/zod-openapi to v1.3.0 ([#1902](https://github.com/yacosta738/yacosta738.github.io/issues/1902)) ([1cc705a](https://github.com/yacosta738/yacosta738.github.io/commit/1cc705a341bf0b181e3360aae3eb03908dd518d9))
+* **deps:** update @iconify-json/simple-icons to ^1.2.79 ([989375a](https://github.com/yacosta738/yacosta738.github.io/commit/989375a4a9f304da03d169b0ff0f5ba28a7e85d2))
+* **deps:** update pagefind to v1.5.2 ([594a701](https://github.com/yacosta738/yacosta738.github.io/commit/594a701ed780ef4146c28f913fb19d16ae513a7c))
+
 ## [4.2.2](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.1...v4.2.2) (2026-04-22)
 
 
