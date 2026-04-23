@@ -14,6 +14,9 @@
 /GEMINI.md.bak
 # END AI Agent Symlinks
 
+# Generated at build time — do not commit
+functions/_csp-hashes.generated.js
+
 playwright-report/
 reports/
 test-results/
