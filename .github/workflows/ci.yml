@@ -255,6 +255,10 @@ jobs:
 
       - name: Build Blog
         if: matrix.project == 'blog'
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_PLATFORM_ID: ${{ secrets.NOTION_PLATFORM_ID }}
         run: pnpm --filter=blog build
 
   # Job 4: E2E Tests (depends on build)
