@@ -410,7 +410,9 @@ describe("createCachedNotionLoader", () => {
 		const logger = createLogger();
 		const context = createContext(store, logger);
 
-		await expect(loader.load(context)).rejects.toThrow(FatalNotionValidationError);
+		await expect(loader.load(context)).rejects.toThrow(
+			FatalNotionValidationError,
+		);
 
 		await rm(tempDir, { recursive: true, force: true });
 	});
