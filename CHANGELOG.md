@@ -6,6 +6,16 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.5](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.4...v4.2.5) (2026-04-23)
+
+
+### Bug Fixes
+
+* **blog:** apply biome formatting to CSP files ([2037be2](https://github.com/yacosta738/yacosta738.github.io/commit/2037be2a646d0870a5853cde6018af0c2eaa7b6a))
+* **blog:** run csp:hashes as postbuild to ensure wasm-unsafe-eval is preserved ([c6d6889](https://github.com/yacosta738/yacosta738.github.io/commit/c6d6889a4044bf762790a69324d246d2131cd982))
+* **blog:** serve CSP through Pages middleware ([aadcc9b](https://github.com/yacosta738/yacosta738.github.io/commit/aadcc9bf82bc05461de258926b0930667d528963))
+* **blog:** unblock pages middleware typecheck ([ac72bbc](https://github.com/yacosta738/yacosta738.github.io/commit/ac72bbc949a88a3de167eaefa36266348cebba10))
+
 ## [4.2.4](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.3...v4.2.4) (2026-04-23)
 
 
