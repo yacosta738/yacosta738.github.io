@@ -11,7 +11,10 @@ import {
 	isNotionS3Url,
 	resolveImageDir,
 } from "./notion-image";
-import { assertNoRemoteNotionImages } from "./notion-snapshot";
+import {
+	assertNoRemoteNotionImages,
+	FatalNotionValidationError,
+} from "./notion-snapshot";
 
 type NotionArticleData = {
 	title: string;
@@ -1137,6 +1140,10 @@ export const createCachedNotionLoader = (
 					entries: persistedEntries,
 				});
 			} catch (error) {
+				if (error instanceof FatalNotionValidationError) {
+					throw error;
+				}
+
 				const errorMessage =
 					error instanceof Error ? error.message : String(error);
 				context.logger.info(

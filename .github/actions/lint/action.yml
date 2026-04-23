@@ -70,6 +70,7 @@ runs:
       if: inputs.check-astro == 'true'
       shell: bash
       run: |
+        set -euo pipefail
         echo "🔍 Running Astro type checks for portfolio and blog..."
         pnpm --filter=portfolio check:astro
         pnpm --filter=blog notion:sync

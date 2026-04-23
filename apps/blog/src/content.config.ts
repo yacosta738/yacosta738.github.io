@@ -1,4 +1,6 @@
 import { defineCollection, reference, type SchemaContext } from "astro:content";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { getNotionLoaderConfig } from "./lib/notion/notion-config";
@@ -27,6 +29,12 @@ const BLOG_CONTENT_SOURCE = {
 type BlogContentSource =
 	(typeof BLOG_CONTENT_SOURCE)[keyof typeof BLOG_CONTENT_SOURCE];
 
+const isBlogContentSource = (value: string): value is BlogContentSource => {
+	return Object.values(BLOG_CONTENT_SOURCE).includes(
+		value as BlogContentSource,
+	);
+};
+
 const createNotionLoader = async () => {
 	const { notionBlockFallbacks } = await import("./lib/notion/notion-blocks");
 	const { createCachedNotionLoader } = await import(
@@ -40,21 +48,37 @@ const createNotionLoader = async () => {
 		...args: unknown[]
 	) => unknown;
 	const notionConfig = getNotionLoaderConfig();
+	const rawContentSource = process.env.BLOG_CONTENT_SOURCE;
 
-	const contentSource =
-		(process.env.BLOG_CONTENT_SOURCE as BlogContentSource | undefined) ??
-		BLOG_CONTENT_SOURCE.LIVE;
+	const contentSource = rawContentSource
+		? isBlogContentSource(rawContentSource)
+			? rawContentSource
+			: BLOG_CONTENT_SOURCE.DISABLED
+		: BLOG_CONTENT_SOURCE.LIVE;
 
 	if (contentSource === BLOG_CONTENT_SOURCE.DISABLED) {
 		return async () => [];
 	}
 
 	if (contentSource === BLOG_CONTENT_SOURCE.SNAPSHOT) {
+		const cachePath = fileURLToPath(notionCacheUrl);
+		if (!existsSync(cachePath)) {
+			throw new Error(
+				`BLOG_CONTENT_SOURCE=snapshot requires an existing Notion snapshot at ${cachePath}`,
+			);
+		}
+
 		return createCachedNotionLoader({
 			auth: "",
 			database_id: "",
 			cacheUrl: notionCacheUrl,
 		});
+	}
+
+	if (!notionConfig.auth || !notionConfig.database_id) {
+		throw new Error(
+			"BLOG_CONTENT_SOURCE=live requires NOTION_TOKEN and NOTION_DATABASE_ID",
+		);
 	}
 
 	return createCachedNotionLoader({

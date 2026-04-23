@@ -1,7 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+const createCachedNotionLoaderMock = vi.fn(
+	(config: Record<string, unknown>) => ({
+		name: "notion-articles-loader",
+		config,
+	}),
+);
+
 const importContentConfig = async () => {
 	vi.resetModules();
+	createCachedNotionLoaderMock.mockClear();
 	vi.doMock("astro/loaders", () => ({
 		glob: (config: Record<string, unknown>) => ({ type: "glob", ...config }),
 	}));
@@ -12,6 +20,12 @@ const importContentConfig = async () => {
 			reference: () => z.string(),
 		};
 	});
+	vi.doMock("../../src/lib/notion/notion-loader", () => ({
+		createCachedNotionLoader: createCachedNotionLoaderMock,
+	}));
+	vi.doMock("../../src/lib/notion/notion-blocks", () => ({
+		notionBlockFallbacks: vi.fn(),
+	}));
 
 	return import("../../src/content.config");
 };
@@ -25,6 +39,8 @@ describe("content.config", () => {
 		vi.unstubAllEnvs();
 		vi.doUnmock("astro/loaders");
 		vi.doUnmock("astro:content");
+		vi.doUnmock("../../src/lib/notion/notion-loader");
+		vi.doUnmock("../../src/lib/notion/notion-blocks");
 	});
 
 	it("uses the empty notion loader when BLOG_CONTENT_SOURCE is disabled", async () => {
@@ -46,18 +62,35 @@ describe("content.config", () => {
 		expect(collections.notionArticles.loader).toMatchObject({
 			name: "notion-articles-loader",
 		});
+		expect(createCachedNotionLoaderMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				auth: "token",
+				database_id: "123456781234123412341234567890ab",
+				platformId: "87654321432143214321ba0987654321",
+				defaultTags: ["en/tech", "es/frontend"],
+			}),
+		);
 	});
 
 	it("uses the cached notion loader when BLOG_CONTENT_SOURCE is snapshot", async () => {
 		vi.stubEnv("BLOG_CONTENT_SOURCE", "snapshot");
+		vi.stubEnv("NOTION_TOKEN", "token");
+		vi.stubEnv("NOTION_DATABASE_ID", "12345678-1234-1234-1234-1234567890ab");
 		const { collections } = await importContentConfig();
 
 		expect(collections.notionArticles.loader).toMatchObject({
 			name: "notion-articles-loader",
 		});
+		expect(createCachedNotionLoaderMock).toHaveBeenCalledWith(
+			expect.objectContaining({
+				auth: "",
+				database_id: "",
+			}),
+		);
 	});
 
 	it("parses the main collection schemas and applies defaults", async () => {
+		vi.stubEnv("BLOG_CONTENT_SOURCE", "disabled");
 		const { z } = await import("astro/zod");
 		const { collections } = await importContentConfig();
 
