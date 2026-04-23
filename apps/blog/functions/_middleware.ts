@@ -1,5 +1,9 @@
 import { scriptHashes } from "./_csp-hashes.generated.js";
 
+interface PagesFunctionContext {
+	next: () => Promise<Response>;
+}
+
 const SCRIPT_SRC_BASE =
 	"'self' 'wasm-unsafe-eval' https://js.hcaptcha.com https://challenges.cloudflare.com https://static.cloudflareinsights.com https://analytics.ahrefs.com";
 
@@ -20,7 +24,7 @@ const CSP_DIRECTIVES: string[] = [
 
 const CSP_HEADER_VALUE = CSP_DIRECTIVES.join("; ");
 
-export async function onRequest(context: EventContext<unknown, string, unknown>): Promise<Response> {
+export async function onRequest(context: PagesFunctionContext): Promise<Response> {
 	const response = await context.next();
 	response.headers.set("Content-Security-Policy", CSP_HEADER_VALUE);
 	return response;

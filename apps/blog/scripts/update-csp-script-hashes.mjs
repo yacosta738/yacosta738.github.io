@@ -35,7 +35,7 @@ const hashInlineScript = (scriptContent) => {
 
 const scriptRegex =
 	/<script\b([^>]*)>([\s\S]*?)<\/script(?=[\t\n\f\r />])[^>]*>/gi;
-const srcRegex = /\bsrc\s*=/i;
+const srcRegex = /(?:^|\s)src\s*=/i;
 
 const hashes = new Set();
 for (const htmlFile of walkHtmlFiles(distDir)) {
