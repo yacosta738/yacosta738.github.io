@@ -8,10 +8,7 @@ const createCachedNotionLoaderMock = vi.fn(
 		config,
 	}),
 );
-const snapshotPath = path.resolve(
-	process.cwd(),
-	".cache/notion-loader.json",
-);
+const snapshotPath = path.resolve(process.cwd(), ".cache/notion-loader.json");
 
 const importContentConfig = async () => {
 	vi.resetModules();
