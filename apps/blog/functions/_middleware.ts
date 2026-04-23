@@ -24,7 +24,9 @@ const CSP_DIRECTIVES: string[] = [
 
 const CSP_HEADER_VALUE = CSP_DIRECTIVES.join("; ");
 
-export async function onRequest(context: PagesFunctionContext): Promise<Response> {
+export async function onRequest(
+	context: PagesFunctionContext,
+): Promise<Response> {
 	const response = await context.next();
 	response.headers.set("Content-Security-Policy", CSP_HEADER_VALUE);
 	return response;
