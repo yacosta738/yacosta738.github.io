@@ -42,7 +42,7 @@ catalog:
   "@types/node": 25.6.0
   "@types/service-worker-mock": ^2.0.4
   "@types/slug": ^5.0.9
-  "@vitest/coverage-v8": ^4.1.4
+  "@vitest/coverage-v8": ^3.2.4
   astro: 6.1.6
   astro-compress: 2.4.1
   astro-critters: 2.2.1
@@ -51,6 +51,7 @@ catalog:
 
   # Security and compatibility overrides
   brace-expansion: ^5.0.5
+  minimatch: ^10.2.5
   chanfana: ^3.3.0
   clsx: ^2.1.1
   cross-env: ^10.1.0
@@ -88,7 +89,7 @@ catalog:
   unpic: ^4.2.2
   vfile: ^6.0.3
   vite: ^7.3.2
-  vitest: ^4.1.4
+  vitest: ^3.2.4
   wrangler: ^4.83.0
   yaml: ^2.8.3
   zod: ^4.3.6
@@ -110,6 +111,7 @@ minimumReleaseAgeExclude:
 
 overrides:
   brace-expansion: "catalog:"
+  minimatch: "catalog:"
   fast-xml-parser: "catalog:"
   h3: "catalog:"
   handlebars: "catalog:"
