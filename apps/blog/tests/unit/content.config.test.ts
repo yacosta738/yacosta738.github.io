@@ -1,10 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import path from "node:path";
 
 const createCachedNotionLoaderMock = vi.fn(
 	(config: Record<string, unknown>) => ({
 		name: "notion-articles-loader",
 		config,
 	}),
+);
+const snapshotPath = path.resolve(
+	process.cwd(),
+	"apps/blog/.cache/notion-loader.json",
 );
 
 const importContentConfig = async () => {
@@ -33,10 +39,12 @@ const importContentConfig = async () => {
 describe("content.config", () => {
 	beforeEach(() => {
 		vi.unstubAllEnvs();
+		vi.restoreAllMocks();
 	});
 
 	afterEach(() => {
 		vi.unstubAllEnvs();
+		rmSync(snapshotPath, { force: true });
 		vi.doUnmock("astro/loaders");
 		vi.doUnmock("astro:content");
 		vi.doUnmock("../../src/lib/notion/notion-loader");
@@ -76,6 +84,12 @@ describe("content.config", () => {
 		vi.stubEnv("BLOG_CONTENT_SOURCE", "snapshot");
 		vi.stubEnv("NOTION_TOKEN", "token");
 		vi.stubEnv("NOTION_DATABASE_ID", "12345678-1234-1234-1234-1234567890ab");
+		mkdirSync(path.dirname(snapshotPath), { recursive: true });
+		writeFileSync(
+			snapshotPath,
+			JSON.stringify({ version: 1, lastSync: new Date().toISOString(), entries: [] }),
+			"utf8",
+		);
 		const { collections } = await importContentConfig();
 
 		expect(collections.notionArticles.loader).toMatchObject({

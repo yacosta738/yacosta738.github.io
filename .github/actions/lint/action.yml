@@ -11,6 +11,14 @@ inputs:
     description: 'Run Astro check'
     required: false
     default: 'true'
+  notion-token:
+    description: 'Notion token for blog sync in CI'
+    required: false
+    default: ''
+  notion-database-id:
+    description: 'Notion database id for blog sync in CI'
+    required: false
+    default: ''
 
 outputs:
   biome-status:
@@ -69,6 +77,9 @@ runs:
       id: astro
       if: inputs.check-astro == 'true'
       shell: bash
+      env:
+        NOTION_TOKEN: ${{ inputs.notion-token }}
+        NOTION_DATABASE_ID: ${{ inputs.notion-database-id }}
       run: |
         set -euo pipefail
         echo "🔍 Running Astro type checks for portfolio and blog..."

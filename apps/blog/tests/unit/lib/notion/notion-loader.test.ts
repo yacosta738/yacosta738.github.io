@@ -3,6 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { createCachedNotionLoader } from "@blog/lib/notion/notion-loader";
+import { FatalNotionValidationError } from "@blog/lib/notion/notion-snapshot";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 type StoreEntry = { id: string } & Record<string, unknown>;
@@ -355,7 +356,7 @@ describe("createCachedNotionLoader", () => {
 		await rm(tempDir, { recursive: true, force: true });
 	});
 
-	it("skips expired notion-image blocks when selecting a fallback cover", async () => {
+	it("fails when expired notion-image blocks leave remote S3 urls in rendered html", async () => {
 		const expiredCoverUrl =
 			"https://prod-files-secure.s3.us-west-2.amazonaws.com/zzzz-yyyy/eeee-ffff/expired.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=3600";
 		const anotherExpiredUrl =
@@ -409,16 +410,7 @@ describe("createCachedNotionLoader", () => {
 		const logger = createLogger();
 		const context = createContext(store, logger);
 
-		await loader.load(context);
-
-		const entry = store.get("en/2026/03/11/fallback-cover-skip-s3") as
-			| { data?: { cover?: string }; rendered?: { html?: string } }
-			| undefined;
-
-		expect(entry?.data?.cover).toBe(EXTERNAL_URL);
-		expect(entry?.rendered?.html).toContain(anotherExpiredUrl);
-		expect(entry?.rendered?.html).not.toContain(`src="${EXTERNAL_URL}"`);
-		expect(entry?.rendered?.html).toContain("<p>Body</p>");
+		await expect(loader.load(context)).rejects.toThrow(FatalNotionValidationError);
 
 		await rm(tempDir, { recursive: true, force: true });
 	});

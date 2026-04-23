@@ -182,6 +182,8 @@ jobs:
         uses: ./.github/actions/lint
         with:
           check-astro: 'true'
+          notion-token: ${{ secrets.NOTION_TOKEN }}
+          notion-database-id: ${{ secrets.NOTION_DATABASE_ID }}
 
       - name: Check AgentSync conventions
         run: pnpm agents:check
