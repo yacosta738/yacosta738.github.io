@@ -1,6 +1,6 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const createCachedNotionLoaderMock = vi.fn(
 	(config: Record<string, unknown>) => ({
@@ -87,7 +87,11 @@ describe("content.config", () => {
 		mkdirSync(path.dirname(snapshotPath), { recursive: true });
 		writeFileSync(
 			snapshotPath,
-			JSON.stringify({ version: 1, lastSync: new Date().toISOString(), entries: [] }),
+			JSON.stringify({
+				version: 1,
+				lastSync: new Date().toISOString(),
+				entries: [],
+			}),
 			"utf8",
 		);
 		const { collections } = await importContentConfig();
