@@ -13,8 +13,8 @@ catalogs:
       specifier: 5.0.3
       version: 5.0.3
     '@astrojs/partytown':
-      specifier: ^2.1.6
-      version: 2.1.6
+      specifier: ^2.1.7
+      version: 2.1.7
     '@astrojs/rss':
       specifier: ^4.0.18
       version: 4.0.18
@@ -37,8 +37,8 @@ catalogs:
       specifier: 0.6.1
       version: 0.6.1
     '@hono/zod-openapi':
-      specifier: 1.2.4
-      version: 1.2.4
+      specifier: 1.3.0
+      version: 1.3.0
     '@iconify-json/lucide':
       specifier: ^1.2.102
       version: 1.2.102
@@ -46,8 +46,8 @@ catalogs:
       specifier: ^1.2.3
       version: 1.2.3
     '@iconify-json/simple-icons':
-      specifier: ^1.2.78
-      version: 1.2.78
+      specifier: ^1.2.79
+      version: 1.2.79
     '@iconify-json/tabler':
       specifier: ^1.2.33
       version: 1.2.33
@@ -55,8 +55,8 @@ catalogs:
       specifier: ^3.0.2
       version: 3.0.2
     '@notionhq/client':
-      specifier: ^5.18.0
-      version: 5.18.0
+      specifier: ^5.19.0
+      version: 5.20.0
     '@playwright/test':
       specifier: 1.59.1
       version: 1.59.1
@@ -94,8 +94,8 @@ catalogs:
       specifier: ^4.1.4
       version: 4.1.4
     astro:
-      specifier: 6.1.4
-      version: 6.1.4
+      specifier: 6.1.6
+      version: 6.1.6
     astro-compress:
       specifier: 2.4.1
       version: 2.4.1
@@ -187,8 +187,8 @@ catalogs:
       specifier: ^4.2.2
       version: 4.2.2
     typescript:
-      specifier: 6.0.2
-      version: 6.0.2
+      specifier: 6.0.3
+      version: 6.0.3
     unified:
       specifier: ^11.0.5
       version: 11.0.5
@@ -213,7 +213,7 @@ catalogs:
 
 overrides:
   brace-expansion: ^5.0.5
-  fast-xml-parser: ^5.6.0
+  fast-xml-parser: ^5.7.1
   h3: ^1.15.11
   handlebars: ^4.7.9
   picomatch: ^4.0.4
@@ -247,7 +247,7 @@ importers:
         version: 0.6.1(hono@4.12.12)
       '@hono/zod-openapi':
         specifier: 'catalog:'
-        version: 1.2.4(hono@4.12.12)(zod@4.3.6)
+        version: 1.3.0(hono@4.12.12)(zod@4.3.6)
       chanfana:
         specifier: 'catalog:'
         version: 3.3.0
@@ -287,13 +287,13 @@ importers:
     dependencies:
       '@astrojs/check':
         specifier: 'catalog:'
-        version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
+        version: 0.9.8(prettier@3.8.1)(typescript@6.0.3)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
-        version: 2.1.6
+        version: 2.1.7
       '@astrojs/rss':
         specifier: 'catalog:'
         version: 4.0.18
@@ -305,7 +305,7 @@ importers:
         version: 3.0.2
       '@notionhq/client':
         specifier: 'catalog:'
-        version: 5.18.0
+        version: 5.20.0
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
@@ -314,13 +314,13 @@ importers:
         version: link:../../packages/notion-astro-loader
       astro:
         specifier: 'catalog:'
-        version: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
-        version: 2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -347,7 +347,7 @@ importers:
         version: 4.2.2
       typescript:
         specifier: 'catalog:'
-        version: 6.0.2
+        version: 6.0.3
       unified:
         specifier: 'catalog:'
         version: 11.0.5
@@ -378,7 +378,7 @@ importers:
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -405,7 +405,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       astro-critters:
         specifier: 'catalog:'
-        version: 2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-icon:
         specifier: 'catalog:'
         version: 1.1.5
@@ -453,13 +453,13 @@ importers:
     dependencies:
       '@astrojs/check':
         specifier: 'catalog:'
-        version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
+        version: 0.9.8(prettier@3.8.1)(typescript@6.0.3)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
-        version: 2.1.6
+        version: 2.1.7
       '@astrojs/rss':
         specifier: 'catalog:'
         version: 4.0.18
@@ -471,13 +471,13 @@ importers:
         version: 4.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
       astro:
         specifier: 'catalog:'
-        version: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
-        version: 2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -492,7 +492,7 @@ importers:
         version: 4.2.2
       typescript:
         specifier: 'catalog:'
-        version: 6.0.2
+        version: 6.0.3
       unist-util-visit:
         specifier: 'catalog:'
         version: 5.1.0
@@ -520,7 +520,7 @@ importers:
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -547,7 +547,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       astro-critters:
         specifier: 'catalog:'
-        version: 2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-icon:
         specifier: 'catalog:'
         version: 1.1.5
@@ -604,7 +604,7 @@ importers:
         version: 3.0.2
       '@notionhq/client':
         specifier: 'catalog:'
-        version: 5.18.0
+        version: 5.20.0
       fs-extra:
         specifier: 'catalog:'
         version: 11.3.4
@@ -644,13 +644,13 @@ importers:
         version: 5.0.9
       astro:
         specifier: 'catalog:'
-        version: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       crossrm:
         specifier: 'catalog:'
         version: 1.0.0
       typescript:
         specifier: 'catalog:'
-        version: 6.0.2
+        version: 6.0.3
       vfile:
         specifier: 'catalog:'
         version: 6.0.3
@@ -665,13 +665,13 @@ importers:
     dependencies:
       '@astrojs/check':
         specifier: 'catalog:'
-        version: 0.9.8(prettier@3.8.1)(typescript@6.0.2)
+        version: 0.9.8(prettier@3.8.1)(typescript@6.0.3)
       '@astrojs/mdx':
         specifier: 'catalog:'
-        version: 5.0.3(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))
+        version: 5.0.3(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))
       '@astrojs/partytown':
         specifier: 'catalog:'
-        version: 2.1.6
+        version: 2.1.7
       '@astrojs/rss':
         specifier: 'catalog:'
         version: 4.0.18
@@ -683,13 +683,13 @@ importers:
         version: 4.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))
       astro:
         specifier: 'catalog:'
-        version: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-compress:
         specifier: 'catalog:'
-        version: 2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-pagefind:
         specifier: 'catalog:'
-        version: 1.8.6(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))
+        version: 1.8.6(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))
       mdast-util-to-string:
         specifier: 'catalog:'
         version: 4.0.0
@@ -704,7 +704,7 @@ importers:
         version: 4.2.2
       typescript:
         specifier: 'catalog:'
-        version: 6.0.2
+        version: 6.0.3
       unist-util-visit:
         specifier: 'catalog:'
         version: 5.1.0
@@ -726,7 +726,7 @@ importers:
         version: 1.2.3
       '@iconify-json/simple-icons':
         specifier: 'catalog:'
-        version: 1.2.78
+        version: 1.2.79
       '@iconify-json/tabler':
         specifier: 'catalog:'
         version: 1.2.33
@@ -750,7 +750,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       astro-critters:
         specifier: 'catalog:'
-        version: 2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+        version: 2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       astro-icon:
         specifier: 'catalog:'
         version: 1.1.5
@@ -863,8 +863,8 @@ packages:
     peerDependencies:
       astro: ^6.0.0
 
-  '@astrojs/partytown@2.1.6':
-    resolution: {integrity: sha512-pS95OSnPkSmuOHzwLXCea8p4P8bqmA2fm3BUBW6/egzSTaWYte/Gp1jiAoPmCZ6FV7jGx4GHduO2CUltUXc3Og==}
+  '@astrojs/partytown@2.1.7':
+    resolution: {integrity: sha512-dbffmNmJ+sAJ0/aXSaLX4aI04EZS/2C6Mm/+fmd4ikqWO7hV6nIi0sug8Z3c+yqedJNi1swFvpwluWmGjLHNzw==}
 
   '@astrojs/prism@4.0.1':
     resolution: {integrity: sha512-nksZQVjlferuWzhPsBpQ1JE5XuKAf1id1/9Hj4a9KG4+ofrlzxUUwX4YGQF/SuDiuiGKEnzopGOt38F3AnVWsQ==}
@@ -1431,8 +1431,8 @@ packages:
     peerDependencies:
       hono: '>=4.0.0'
 
-  '@hono/zod-openapi@1.2.4':
-    resolution: {integrity: sha512-cZu71bpODTbtIDoUsIIYPrs58wJ565Tbg6FE+JshU0irBAd6KxrP+k62Amm/mjA7tTOQ3+ingODHKGFOnv+Ibw==}
+  '@hono/zod-openapi@1.3.0':
+    resolution: {integrity: sha512-loDVevfMaaNa0slskhpMcqjSdidVXba2QJwNVmnS5Dp6L8AqSgtjJxWGJfRZtosyzYOb5gx4ZzXNCe+QhwY7xw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       hono: '>=4.3.6'
@@ -1450,8 +1450,8 @@ packages:
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
 
-  '@iconify-json/simple-icons@1.2.78':
-    resolution: {integrity: sha512-I3lkNp0Qu7q2iZWkdcf/I2hqGhzK6qxdILh9T7XqowQrnpmG/BayDsiCf6PktDoWlW0U971xA5g+panm+NFrfQ==}
+  '@iconify-json/simple-icons@1.2.79':
+    resolution: {integrity: sha512-aNyO7Fd1qej9oQfIyohYFRv0lhQLaZ+6UkK1c1qwax0MDPUOZOdq65MlU500kow97pD/W+b2u1And3e25eE24Q==}
 
   '@iconify-json/tabler@1.2.33':
     resolution: {integrity: sha512-q9nUQfE/cjIrGh5bAKHTphitAZpT0kX9SxDgZo3Sx8ofeDTsaHVdRwrn+CfKiJ5vQ1b1btqVwizXzIgz9KEPjA==}
@@ -1651,8 +1651,8 @@ packages:
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
 
-  '@nodable/entities@1.1.0':
-    resolution: {integrity: sha512-bidpxmTBP0pOsxULw6XlxzQpTgrAGLDHGBK/JuWhPDL6ZV0GZ/PmN9CA9do6e+A9lYI6qx6ikJUtJYRxup141g==}
+  '@nodable/entities@2.1.0':
+    resolution: {integrity: sha512-nyT7T3nbMyBI/lvr6L5TyWbFJAI9FTgVRakNoBqCD+PmID8DzFrrNdLLtHMwMszOtqZa8PAOV24ZqDnQrhQINA==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1666,8 +1666,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@notionhq/client@5.18.0':
-    resolution: {integrity: sha512-iOd1VJb1ZJl4p0bnjtMC3hGXCcngSUK9bDhAjpAAKSKSL7UD9GTiXJJyCTBTbqHXsfM4D8mBG3NdAiEYD+TfVA==}
+  '@notionhq/client@5.20.0':
+    resolution: {integrity: sha512-MS0DFSfHPLZ0wi+e9mOP16gCCYbWAkaiMuu/rVK9KxDlKac4oAgHReOfTglcd77g/nlg78snp+KB7fNWP75bEw==}
     engines: {node: '>=18'}
 
   '@oslojs/encoding@1.1.0':
@@ -1734,8 +1734,8 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@qwik.dev/partytown@0.11.2':
-    resolution: {integrity: sha512-795y49CqBiKiwKAD+QBZlzlqEK275hVcazZ7wBPSfgC23L+vWuA7PJmMpgxojOucZHzYi5rAAQ+IP1I3BKVZxw==}
+  '@qwik.dev/partytown@0.13.2':
+    resolution: {integrity: sha512-Umls4bSkuzqLVcGvf8OgwIn/OldproSAbaQ/iYGe8VPYBpl2CaOSxabWwkeC72LDFqxVL0b0q8XlI8MuChDyzg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -2291,8 +2291,8 @@ packages:
     peerDependencies:
       astro: ^2.0.4 || ^3 || ^4 || ^5 || ^6
 
-  astro@6.1.4:
-    resolution: {integrity: sha512-SRy1bONuCHkGWhI5JiWCQKVDVbeaXOikjAVZs/Nz+lvUvubtdLoZfnacmuZHQ9RL2IOkU54M8/qZYm9ypJDKrg==}
+  astro@6.1.6:
+    resolution: {integrity: sha512-pRsz+kYriwCV/AUcY/I9OVKtVHuYFs2DtCszAxprXded/kTE53nMwxfnK0Nf6FPfaX9vcUiLnigcSIhuFoKntA==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2792,11 +2792,11 @@ packages:
   fast-wrap-ansi@0.1.6:
     resolution: {integrity: sha512-HlUwET7a5gqjURj70D5jl7aC3Zmy4weA1SHUfM0JFI0Ptq987NH2TwbBFLoERhfwk+E+eaq4EK3jXoT+R3yp3w==}
 
-  fast-xml-builder@1.1.4:
-    resolution: {integrity: sha512-f2jhpN4Eccy0/Uz9csxh3Nu6q4ErKxf0XIsasomfOihuSUa3/xw6w8dnOtCDgEItQFJG8KyXPzQXzcODDrrbOg==}
+  fast-xml-builder@1.1.5:
+    resolution: {integrity: sha512-4TJn/8FKLeslLAH3dnohXqE3QSoxkhvaMzepOIZytwJXZO69Bfz0HBdDHzOTOon6G59Zrk6VQ2bEiv1t61rfkA==}
 
-  fast-xml-parser@5.6.0:
-    resolution: {integrity: sha512-5G+uaEBbOm9M4dgMOV3K/rBzfUNGqGqoUTaYJM3hBwM8t71w07gxLQZoTsjkY8FtfjabqgQHEkeIySBDYeBmJw==}
+  fast-xml-parser@5.7.1:
+    resolution: {integrity: sha512-8Cc3f8GUGUULg34pBch/KGyPLglS+OFs05deyOlY7fL2MTagYPKrVQNmR1fLF/yJ9PH5ZSTd3YDF6pnmeZU+zA==}
     hasBin: true
 
   fastq@1.20.1:
@@ -4181,8 +4181,8 @@ packages:
   typescript-auto-import-cache@0.3.6:
     resolution: {integrity: sha512-RpuHXrknHdVdK7wv/8ug3Fr0WNsNi5l5aB8MYYuXhq2UH5lnEB1htJ1smhtD5VeCsGr2p8mUDtd83LCQDFVgjQ==}
 
-  typescript@6.0.2:
-    resolution: {integrity: sha512-bGdAIrZ0wiGDo5l8c++HWtbaNCWTS4UTv7RaTH/ThVIgjkveJt83m74bBHMJkuCbslY8ixgLBVZJIOiQlQTjfQ==}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -4719,12 +4719,12 @@ snapshots:
       openapi3-ts: 4.5.0
       zod: 4.3.6
 
-  '@astrojs/check@0.9.8(prettier@3.8.1)(typescript@6.0.2)':
+  '@astrojs/check@0.9.8(prettier@3.8.1)(typescript@6.0.3)':
     dependencies:
-      '@astrojs/language-server': 2.16.6(prettier@3.8.1)(typescript@6.0.2)
+      '@astrojs/language-server': 2.16.6(prettier@3.8.1)(typescript@6.0.3)
       chokidar: 4.0.3
       kleur: 4.1.5
-      typescript: 6.0.2
+      typescript: 6.0.3
       yargs: 17.7.2
     transitivePeerDependencies:
       - prettier
@@ -4738,12 +4738,12 @@ snapshots:
     dependencies:
       picomatch: 4.0.4
 
-  '@astrojs/language-server@2.16.6(prettier@3.8.1)(typescript@6.0.2)':
+  '@astrojs/language-server@2.16.6(prettier@3.8.1)(typescript@6.0.3)':
     dependencies:
       '@astrojs/compiler': 2.13.1
       '@astrojs/yaml2ts': 0.2.3
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@volar/kit': 2.4.28(typescript@6.0.2)
+      '@volar/kit': 2.4.28(typescript@6.0.3)
       '@volar/language-core': 2.4.28
       '@volar/language-server': 2.4.28
       '@volar/language-service': 2.4.28
@@ -4789,12 +4789,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.3(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3))':
+  '@astrojs/mdx@5.0.3(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3))':
     dependencies:
       '@astrojs/markdown-remark': 7.1.0
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -4808,9 +4808,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/partytown@2.1.6':
+  '@astrojs/partytown@2.1.7':
     dependencies:
-      '@qwik.dev/partytown': 0.11.2
+      '@qwik.dev/partytown': 0.13.2
       mrmime: 2.0.1
 
   '@astrojs/prism@4.0.1':
@@ -4819,7 +4819,7 @@ snapshots:
 
   '@astrojs/rss@4.0.18':
     dependencies:
-      fast-xml-parser: 5.6.0
+      fast-xml-parser: 5.7.1
       piccolore: 0.1.3
       zod: 4.3.6
 
@@ -5175,7 +5175,7 @@ snapshots:
     dependencies:
       hono: 4.12.12
 
-  '@hono/zod-openapi@1.2.4(hono@4.12.12)(zod@4.3.6)':
+  '@hono/zod-openapi@1.3.0(hono@4.12.12)(zod@4.3.6)':
     dependencies:
       '@asteasolutions/zod-to-openapi': 8.5.0(zod@4.3.6)
       '@hono/zod-validator': 0.7.6(hono@4.12.12)(zod@4.3.6)
@@ -5196,7 +5196,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.78':
+  '@iconify-json/simple-icons@1.2.79':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -5394,7 +5394,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@nodable/entities@1.1.0': {}
+  '@nodable/entities@2.1.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -5408,7 +5408,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@notionhq/client@5.18.0': {}
+  '@notionhq/client@5.20.0': {}
 
   '@oslojs/encoding@1.1.0': {}
 
@@ -5465,7 +5465,7 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@qwik.dev/partytown@0.11.2':
+  '@qwik.dev/partytown@0.13.2':
     dependencies:
       dotenv: 16.6.1
 
@@ -5853,12 +5853,12 @@ snapshots:
       convert-source-map: 2.0.0
       tinyrainbow: 3.1.0
 
-  '@volar/kit@2.4.28(typescript@6.0.2)':
+  '@volar/kit@2.4.28(typescript@6.0.3)':
     dependencies:
       '@volar/language-service': 2.4.28
       '@volar/typescript': 2.4.28
       typesafe-path: 0.2.2
-      typescript: 6.0.2
+      typescript: 6.0.3
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
 
@@ -5970,12 +5970,12 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-compress@2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.2)(yaml@2.8.3):
+  astro-compress@2.4.1(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.60.1)(typescript@6.0.3)(yaml@2.8.3):
     dependencies:
       '@playform/pipe': 0.1.5
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       commander: 14.0.3
       csso: 5.0.5
       deepmerge-ts: 7.1.5
@@ -6019,10 +6019,10 @@ snapshots:
       - uploadthing
       - yaml
 
-  astro-critters@2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3):
+  astro-critters@2.2.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3):
     dependencies:
       '@playform/pipe': 0.1.2
-      astro: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       critters: 0.0.25
       deepmerge-ts: 7.1.3
     transitivePeerDependencies:
@@ -6068,14 +6068,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-pagefind@1.8.6(astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)):
+  astro-pagefind@1.8.6(astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)):
     dependencies:
       '@pagefind/default-ui': 1.4.0
-      astro: 6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3)
+      astro: 6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3)
       pagefind: 1.5.0
       sirv: 3.0.2
 
-  astro@6.1.4(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(yaml@2.8.3):
+  astro@6.1.6(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
@@ -6093,7 +6093,6 @@ snapshots:
       cookie: 1.1.1
       devalue: 5.6.4
       diff: 8.0.4
-      dlv: 1.1.3
       dset: 3.1.4
       es-module-lexer: 2.0.0
       esbuild: 0.27.4
@@ -6121,7 +6120,7 @@ snapshots:
       tinyclip: 0.1.12
       tinyexec: 1.0.4
       tinyglobby: 0.2.15
-      tsconfck: 3.1.6(typescript@6.0.2)
+      tsconfck: 3.1.6(typescript@6.0.3)
       ultrahtml: 1.6.0
       unifont: 0.7.4
       unist-util-visit: 5.1.0
@@ -6724,14 +6723,14 @@ snapshots:
     dependencies:
       fast-string-width: 1.1.0
 
-  fast-xml-builder@1.1.4:
+  fast-xml-builder@1.1.5:
     dependencies:
       path-expression-matcher: 1.5.0
 
-  fast-xml-parser@5.6.0:
+  fast-xml-parser@5.7.1:
     dependencies:
-      '@nodable/entities': 1.1.0
-      fast-xml-builder: 1.1.4
+      '@nodable/entities': 2.1.0
+      fast-xml-builder: 1.1.5
       path-expression-matcher: 1.5.0
       strnum: 2.2.3
 
@@ -8621,9 +8620,9 @@ snapshots:
 
   trough@2.2.0: {}
 
-  tsconfck@3.1.6(typescript@6.0.2):
+  tsconfck@3.1.6(typescript@6.0.3):
     optionalDependencies:
-      typescript: 6.0.2
+      typescript: 6.0.3
 
   tslib@2.8.1: {}
 
@@ -8633,7 +8632,7 @@ snapshots:
     dependencies:
       semver: 7.7.4
 
-  typescript@6.0.2: {}
+  typescript@6.0.3: {}
 
   ufo@1.6.3: {}
 
