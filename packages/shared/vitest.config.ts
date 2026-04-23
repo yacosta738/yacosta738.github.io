@@ -38,7 +38,6 @@ export default getViteConfig({
 			},
 		],
 	},
-	// @ts-expect-error
 	test: {
 		environment: "node",
 		include: ["src/**/*.test.ts"],

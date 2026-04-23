@@ -13,7 +13,6 @@ export default getViteConfig({
 			{ find: "@", replacement: path.resolve("../../packages/shared/src") },
 		],
 	},
-	// @ts-expect-error
 	test: {
 		environment: "node",
 		setupFiles: ["./tests/unit/test-setup.ts"],
