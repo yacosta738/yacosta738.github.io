@@ -11,7 +11,7 @@ jobs:
     name: Agnix Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validate agent configs
         uses: agent-sh/agnix@12a1917d13e7c804bc91768c30dd4159f536c5c6
