@@ -23,6 +23,7 @@ test("ByAuthor renders with default props", async () => {
 
 	expect(result).toContain("John Doe");
 	expect(result).toContain('href="/author/johndoe/"');
+	expect(result).not.toContain("post.aria.author");
 });
 
 test("ByAuthor renders with a different locale", async () => {
@@ -36,4 +37,5 @@ test("ByAuthor renders with a different locale", async () => {
 
 	expect(result).toContain("John Doe");
 	expect(result).toContain('href="/es/author/johndoe/"');
+	expect(result).not.toContain("post.aria.author");
 });

@@ -19,6 +19,7 @@ test("PostTag renders with default props", async () => {
 
 	expect(result).toContain("Astro");
 	expect(result).toContain('href="/tag/astro/"');
+	expect(result).not.toContain("post.aria.tag");
 });
 
 test("PostTag renders with a different locale", async () => {
@@ -32,4 +33,5 @@ test("PostTag renders with a different locale", async () => {
 
 	expect(result).toContain("Astro");
 	expect(result).toContain('href="/es/tag/astro/"');
+	expect(result).not.toContain("post.aria.tag");
 });

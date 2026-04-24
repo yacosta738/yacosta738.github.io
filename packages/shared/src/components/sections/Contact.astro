@@ -39,15 +39,15 @@ const t = useTranslations(Astro.currentLocale as Lang);
         <fieldset class="space-y-4">
           <legend class="sr-only">{t("contact.form_title")}</legend>
           <!-- Honeypot to reduce spam (should remain empty) -->
-          <label for="_gotcha" class="sr-only">Do not fill out this field</label>
-          <input
-            type="text"
-            name="_gotcha"
-            id="_gotcha"
-            autocomplete="off"
-            tabindex="-1"
-            style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;"
-          />
+          <div aria-hidden="true" hidden>
+            <input
+              type="text"
+              name="_gotcha"
+              id="_gotcha"
+              autocomplete="off"
+              tabindex="-1"
+            />
+          </div>
 
           <div>
             <label
@@ -60,6 +60,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               type="text"
               id="name"
               name="name"
+              autocomplete="name"
               placeholder={t("contact.name_placeholder")}
               required
               class="w-full px-4 py-3 border rounded-md bg-[color:var(--color-background-secondary)] text-[color:var(--color-foreground)] border-[color:var(--color-border)] placeholder:text-[color:var(--color-foreground-subtle)] focus:outline-none focus:border-[color:var(--color-primary)] focus:ring-2 focus:ring-[color:var(--color-primary)]/20 transition-colors"
@@ -84,6 +85,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               type="email"
               id="email"
               name="email"
+              autocomplete="email"
               placeholder={t("contact.email_placeholder")}
               required
               class="w-full px-4 py-3 border rounded-md bg-[color:var(--color-background-secondary)] text-[color:var(--color-foreground)] border-[color:var(--color-border)] placeholder:text-[color:var(--color-foreground-subtle)] focus:outline-none focus:border-[color:var(--color-primary)] focus:ring-2 focus:ring-[color:var(--color-primary)]/20 transition-colors"
@@ -108,6 +110,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               type="text"
               id="subject"
               name="subject"
+              autocomplete="off"
               placeholder={t("contact.subject_placeholder")}
               required
               class="w-full px-4 py-3 border rounded-md bg-[color:var(--color-background-secondary)] text-[color:var(--color-foreground)] border-[color:var(--color-border)] placeholder:text-[color:var(--color-foreground-subtle)] focus:outline-none focus:border-[color:var(--color-primary)] focus:ring-2 focus:ring-[color:var(--color-primary)]/20 transition-colors"
@@ -132,6 +135,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
               id="message"
               name="message"
               rows="4"
+              autocomplete="off"
               placeholder={t("contact.message_placeholder")}
               required
               minlength="10"

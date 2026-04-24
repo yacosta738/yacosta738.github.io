@@ -19,6 +19,7 @@ test("PostCategory renders with default props", async () => {
 
 	expect(result).toContain("Technology");
 	expect(result).toContain('href="/category/technology/"');
+	expect(result).not.toContain("post.aria.category");
 });
 
 test("PostCategory renders with a different locale", async () => {
@@ -32,4 +33,5 @@ test("PostCategory renders with a different locale", async () => {
 
 	expect(result).toContain("Technology");
 	expect(result).toContain('href="/es/category/technology/"');
+	expect(result).not.toContain("post.aria.category");
 });

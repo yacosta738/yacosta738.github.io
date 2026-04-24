@@ -31,6 +31,12 @@ describe("i18n/utils", () => {
 			expect(typeof result).toBe("string");
 		});
 
+		it("should resolve select.language to a human-readable string", () => {
+			const t = useTranslations("en");
+			const result = t("select.language");
+			expect(result).toBe("Language selector");
+		});
+
 		it("should return key if translation not found", () => {
 			const t = useTranslations("en");
 			const result = t("nonexistent.key");
