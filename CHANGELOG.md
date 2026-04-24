@@ -6,6 +6,22 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.6](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.5...v4.2.6) (2026-04-24)
+
+
+### Bug Fixes
+
+* **blog:** align ci env and notion tests ([e34b65c](https://github.com/yacosta738/yacosta738.github.io/commit/e34b65cdf340cba796f0d334a777fa5a6f6011d4))
+* **blog:** generate notion snapshot during prebuild ([ee9431b](https://github.com/yacosta738/yacosta738.github.io/commit/ee9431bb3a0df71c12e94027fd404fee332f8976))
+* **blog:** harden image cards and preview env ([599fc63](https://github.com/yacosta738/yacosta738.github.io/commit/599fc63f60bd5909da9a98626459601dc6ba9a5f))
+* **blog:** harden notion snapshot validation ([2ccfc2e](https://github.com/yacosta738/yacosta738.github.io/commit/2ccfc2ec66d279e800959757f67d8a1a55da3613))
+* **blog:** make notion image sync deterministic ([f257d9e](https://github.com/yacosta738/yacosta738.github.io/commit/f257d9ec5195004e7d56aeedf16b26be8d48ecfd))
+* **blog:** support notion cover paths in article cards ([cd7f48e](https://github.com/yacosta738/yacosta738.github.io/commit/cd7f48eabf76de3aed7d2630ef72f7d73d63bf36))
+* **deps:** consolidate open dependency updates ([#1926](https://github.com/yacosta738/yacosta738.github.io/issues/1926)) ([c6dc9d9](https://github.com/yacosta738/yacosta738.github.io/commit/c6dc9d920a2fcb2af5d3e3b23f62ca082d8ec1e5))
+* **deps:** update astro to v6.1.8 ([#1921](https://github.com/yacosta738/yacosta738.github.io/issues/1921)) ([63f3e12](https://github.com/yacosta738/yacosta738.github.io/commit/63f3e123e788ddd6840f4015e39acc783d2cf6cc))
+* **deps:** update Cloudflare Workers ([7f7eedd](https://github.com/yacosta738/yacosta738.github.io/commit/7f7eedd4d13b07789961c667e5c1818579004098))
+* **deps:** update tailwindcss monorepo to ^4.2.3 ([fb156ba](https://github.com/yacosta738/yacosta738.github.io/commit/fb156ba68e92b3e12df30c78f6dd02780a2ca819))
+
 ## [4.2.5](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.4...v4.2.5) (2026-04-23)
 
 
