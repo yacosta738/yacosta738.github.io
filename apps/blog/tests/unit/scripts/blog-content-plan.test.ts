@@ -40,4 +40,28 @@ describe("getBlogContentPlan", () => {
 			requiresSync: false,
 		});
 	});
+
+	it("disables Notion content when only one credential is present", () => {
+		expect(
+			getBlogContentPlan({
+				snapshotExists: false,
+				notionToken: "token",
+				notionDatabaseId: "",
+			}),
+		).toEqual({
+			astroMode: "disabled",
+			requiresSync: false,
+		});
+
+		expect(
+			getBlogContentPlan({
+				snapshotExists: false,
+				notionToken: "",
+				notionDatabaseId: "database",
+			}),
+		).toEqual({
+			astroMode: "disabled",
+			requiresSync: false,
+		});
+	});
 });

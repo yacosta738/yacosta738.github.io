@@ -102,8 +102,8 @@ minimumReleaseAgeExclude:
   - miniflare
   - wrangler
   - typescript@6.0.2
-  # Vite pinned to v7 for Astro 6 compatibility
-  - vite@7.1.7
+  # Vite 8 is validated in this workspace via the grouped dependency integration branch
+  - vite@8.0.9
   # Renovate security update: hono@4.12.12 || 4.12.14
   - hono@4.12.12 || 4.12.14
   # Renovate security update: astro@6.1.6

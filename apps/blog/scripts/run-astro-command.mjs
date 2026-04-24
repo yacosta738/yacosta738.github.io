@@ -4,7 +4,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getBlogContentPlan } from "./blog-content-plan.mjs";
 
-const scriptDir = dirname(fileURLToPath(import.meta.url));
+const currentFilePath = fileURLToPath(import.meta.url);
+const scriptDir = dirname(currentFilePath);
 const appDir = resolve(scriptDir, "..");
 const repoRoot = resolve(appDir, "..", "..");
 const snapshotPath = resolve(appDir, ".cache", "notion-loader.json");
@@ -56,22 +57,29 @@ export const prepareBlogContent = async () => {
 	return plan;
 };
 
-const astroCommand = process.argv[2];
+const isDirectInvocation =
+	process.argv[1] && resolve(process.argv[1]) === currentFilePath;
 
-if (!astroCommand) {
-	throw new Error("Expected an Astro command such as 'check' or 'build'.");
+if (isDirectInvocation) {
+	const rawAstroArgs = process.argv.slice(2);
+	const skipValidation = rawAstroArgs.includes("--skip-validation");
+	const astroArgs = rawAstroArgs.filter((arg) => arg !== "--skip-validation");
+	const astroCommand = astroArgs[0];
+
+	if (!astroCommand) {
+		throw new Error("Expected an Astro command such as 'check' or 'build'.");
+	}
+
+	const plan = await prepareBlogContent();
+	const astroEnv = {
+		...process.env,
+		BLOG_CONTENT_SOURCE: plan.astroMode,
+		PLAYWRIGHT_TEST: process.env.PLAYWRIGHT_TEST ?? "false",
+	};
+
+	if (!skipValidation && astroCommand === "build") {
+		await run(["exec", "astro", "check"], astroEnv);
+	}
+
+	await run(["exec", "astro", ...astroArgs], astroEnv);
 }
-
-const skipValidation = process.argv.includes("--skip-validation");
-const plan = await prepareBlogContent();
-const astroEnv = {
-	...process.env,
-	BLOG_CONTENT_SOURCE: plan.astroMode,
-	PLAYWRIGHT_TEST: process.env.PLAYWRIGHT_TEST ?? "false",
-};
-
-if (!skipValidation && astroCommand === "build") {
-	await run(["exec", "astro", "check"], astroEnv);
-}
-
-await run(["exec", "astro", astroCommand], astroEnv);

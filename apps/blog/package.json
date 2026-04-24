@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"astro": "astro",
-		"prebuild": "node ../../scripts/notion-prebuild-sync.mjs && pnpm notion:sync && pnpm notion:validate",
+		"prebuild": "node ../../scripts/notion-prebuild-sync.mjs",
 		"build": "node ./scripts/run-astro-command.mjs build",
 		"postbuild": "node ./scripts/update-csp-script-hashes.mjs",
 		"build:fast": "node ./scripts/run-astro-command.mjs build --skip-validation",

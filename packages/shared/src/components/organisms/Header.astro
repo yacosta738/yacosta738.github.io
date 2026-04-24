@@ -427,12 +427,23 @@ const t = useTranslations(currentLocale);
 				}
 			});
 
+			const hideBackdrop = () => {
+				mobileDrawerBackdrop.classList.add('hidden');
+				mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
+				mobileDrawerBackdrop.setAttribute('inert', '');
+			};
+
+			const fallbackTimer = window.setTimeout(() => {
+				if (!isOpen) {
+					hideBackdrop();
+				}
+			}, 300);
+
 			const handleTransitionEnd = (e) => {
 				if (e.propertyName === 'opacity' && !isOpen) {
+					window.clearTimeout(fallbackTimer);
 					requestAnimationFrame(() => {
-						mobileDrawerBackdrop.classList.add('hidden');
-						mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
-						mobileDrawerBackdrop.setAttribute('inert', '');
+						hideBackdrop();
 					});
 				}
 			};
