@@ -1,5 +1,5 @@
 # Stage 1: Build the Astro application
-FROM node:22.22.2-slim@sha256:80fdb3f57c815e1b638d221f30a826823467c4a56c8f6a8d7aa091cd9b1675ea AS builder
+FROM node:22.22.2-slim@sha256:d415caac2f1f77b98caaf9415c5f807e14bc8d7bdea62561ea2fef4fbd08a73c AS builder
 
 # Set the working directory
 WORKDIR /app
