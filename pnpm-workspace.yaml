@@ -62,7 +62,7 @@ catalog:
   h3: ^1.15.11
   handlebars: ^4.7.9
   happy-dom: ^20.9.0
-  hono: ^4.12.12
+  hono: ^4.12.14
   jsdom: ^29.0.2
   kleur: ^4.1.5
   lefthook: ^2.1.6
