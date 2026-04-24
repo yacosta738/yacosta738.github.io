@@ -20,8 +20,9 @@ function makeEntry(overrides: Partial<FakeEntry> = {}): FakeEntry {
 
 describe("toSkill", () => {
 	it("maps id, name, and icon from the entry", () => {
-		// biome-ignore lint/suspicious/noExplicitAny: test-only cast
-		const result: Skill = toSkill(makeEntry() as any);
+		const result: Skill = toSkill(
+			makeEntry() as unknown as Parameters<typeof toSkill>[0],
+		);
 
 		expect(result.id).toBe("typescript");
 		expect(result.name).toBe("TypeScript");
@@ -33,7 +34,7 @@ describe("toSkill", () => {
 			makeEntry({
 				id: "react",
 				data: { name: "React", icon: "react-icon" },
-			}) as any,
+			}) as unknown as Parameters<typeof toSkill>[0],
 		);
 
 		expect(result).toEqual({ id: "react", name: "React", icon: "react-icon" });
@@ -51,8 +52,9 @@ describe("toSkills", () => {
 			makeEntry({ id: "ts", data: { name: "TypeScript", icon: "ts" } }),
 			makeEntry({ id: "go", data: { name: "Go", icon: "go" } }),
 		];
-		// biome-ignore lint/suspicious/noExplicitAny: test-only cast
-		const result = await toSkills(entries as any);
+		const result = await toSkills(
+			entries as unknown as Parameters<typeof toSkills>[0],
+		);
 
 		expect(result).toHaveLength(2);
 		expect(result[0]).toEqual({ id: "ts", name: "TypeScript", icon: "ts" });
