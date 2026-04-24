@@ -35,6 +35,7 @@ const translatePath = useTranslatedPath(currentLocale);
 	id="mobile-drawer-backdrop"
 	class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-300"
 	aria-hidden="true"
+	inert
 >
 </div>
 
@@ -52,6 +53,7 @@ const translatePath = useTranslatedPath(currentLocale);
 	aria-hidden="true"
 	role="dialog"
 	aria-modal="true"
+	inert
 >
 	<!-- Header -->
 	<div class="p-4 border-b border-border">
@@ -146,14 +148,5 @@ const translatePath = useTranslatedPath(currentLocale);
 
 	.scrollbar-thin::-webkit-scrollbar-thumb:hover {
 		background-color: var(--color-muted-hover);
-	}
-
-	/* Focus trap styles */
-	[aria-hidden="true"] {
-		pointer-events: none;
-	}
-
-	[aria-hidden="false"] {
-		pointer-events: auto;
 	}
 </style>
