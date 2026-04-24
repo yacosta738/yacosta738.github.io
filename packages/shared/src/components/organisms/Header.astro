@@ -381,10 +381,12 @@ const t = useTranslations(currentLocale);
 				mobileMenuButton.setAttribute('aria-expanded', 'true');
 				mobileMenuButton.setAttribute('aria-label', ariaCloseMenu);
 
+				mobileDrawer.removeAttribute('inert');
 				mobileDrawer.setAttribute('aria-hidden', 'false');
 				mobileDrawer.classList.remove('translate-x-full');
 
 				mobileDrawerBackdrop.classList.remove('hidden', 'opacity-0');
+				mobileDrawerBackdrop.removeAttribute('inert');
 				mobileDrawerBackdrop.setAttribute('aria-hidden', 'false');
 
 				document.body.style.overflow = 'hidden';
@@ -414,6 +416,7 @@ const t = useTranslations(currentLocale);
 				mobileMenuButton.setAttribute('aria-label', ariaOpenMenu);
 
 				mobileDrawer.setAttribute('aria-hidden', 'true');
+				mobileDrawer.setAttribute('inert', '');
 				mobileDrawer.classList.add('translate-x-full');
 
 				mobileDrawerBackdrop.classList.add('opacity-0');
@@ -429,6 +432,7 @@ const t = useTranslations(currentLocale);
 					requestAnimationFrame(() => {
 						mobileDrawerBackdrop.classList.add('hidden');
 						mobileDrawerBackdrop.setAttribute('aria-hidden', 'true');
+						mobileDrawerBackdrop.setAttribute('inert', '');
 					});
 				}
 			};
