@@ -292,6 +292,10 @@ jobs:
         continue-on-error: true
 
       - name: Run E2E tests
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_PLATFORM_ID: ${{ secrets.NOTION_PLATFORM_ID }}
         uses: ./.github/actions/test-playwright
         with:
           app: ${{ matrix.app }}
