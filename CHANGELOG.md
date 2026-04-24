@@ -6,6 +6,14 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.2.7](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.6...v4.2.7) (2026-04-24)
+
+
+### Bug Fixes
+
+* **a11y:** improve portfolio and blog accessibility ([#1929](https://github.com/yacosta738/yacosta738.github.io/issues/1929)) ([426f41e](https://github.com/yacosta738/yacosta738.github.io/commit/426f41e182f1b66e240cb830de9919a9dd2ecbb0))
+* **ci:** exclude Sonar support files from coverage gating ([#1927](https://github.com/yacosta738/yacosta738.github.io/issues/1927)) ([92f4a6c](https://github.com/yacosta738/yacosta738.github.io/commit/92f4a6c52870bd0fa619c872b36f96c13b2a04b7))
+
 ## [4.2.6](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.5...v4.2.6) (2026-04-24)
 
 
