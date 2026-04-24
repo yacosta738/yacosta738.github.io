@@ -29,14 +29,12 @@ const authorPath = blogBaseUrl
 		"flex items-baseline text-secondary-foreground-light dark:text-secondary-foreground-dark font-inter text-xs leading-[140%] tracking-widest uppercase rounded gap-1",
 		attrs.class,
 	)}
-	aria-label={t("post.aria.author", { name: author.name })}
 	{...attrs}
 >
 	<span class="text-[9px]">{t("by")}</span>
 	<a
 		href={authorPath}
 		class="capitalize leading-[140%] min-w-max transition-colors hover:opacity-80 font-inter font-bold tracking-normal"
-		aria-label={t("post.aria.author", { name: author.name })}
 	>
 		{author.name}
 	</a>

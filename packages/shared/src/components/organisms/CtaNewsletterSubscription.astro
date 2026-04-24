@@ -67,13 +67,14 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 					/>
 					<div class="flex-1 w-full">
 						<label for="newsletter-email" class="sr-only">
-							{t("cta.email_placeholder")}
+							{t("cta.email_label")}
 						</label>
 						<input
 							data-test="newsletter-email"
 							type="email"
 							id="newsletter-email"
 							name="email"
+							autocomplete="email"
 							placeholder={t("cta.email_placeholder")}
 							required
 							class={cn(

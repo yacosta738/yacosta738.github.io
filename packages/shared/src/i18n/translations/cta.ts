@@ -9,6 +9,7 @@ export const cta: {
 		"cta.description":
 			"Join thousands of users leveraging AI to boost their productivity.",
 		"cta.button": "Sign Up Now",
+		"cta.email_label": "Email address",
 		"cta.email_placeholder": "your@email.com",
 		"cta.subscribe_button": "Subscribe",
 		"cta.subscribing": "Subscribing...",
@@ -22,6 +23,7 @@ export const cta: {
 		"cta.description":
 			"Únete a miles de usuarios que aprovechan la IA para aumentar su productividad.",
 		"cta.button": "Regístrate ahora",
+		"cta.email_label": "Correo electrónico",
 		"cta.email_placeholder": "tu@correo.com",
 		"cta.subscribe_button": "Suscribirse",
 		"cta.subscribing": "Suscribiendo...",

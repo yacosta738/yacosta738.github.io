@@ -69,6 +69,7 @@ const columnsClass = optimalColumns === 1 ? "md:grid-cols-1" : "md:grid-cols-2";
 										href={link.href === "/rss.xml"
 											? buildBlogUrl(translatePath(link.href), siteOrigin)
 											: translatePath(link.href)}
+										class="inline-flex items-center min-h-6 px-2 py-1 rounded-sm font-inter text-sm text-footer-link-light dark:text-footer-link-dark hover:text-footer-link-hover-light dark:hover:text-footer-link-hover-dark transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
 										aria-label={
 											link.ariaLabelKey
 												? t(link.ariaLabelKey)

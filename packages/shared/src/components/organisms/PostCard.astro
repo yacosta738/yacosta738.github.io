@@ -45,7 +45,7 @@ const contentLink = ensureSingleTrailingSlash(
   <div class="hidden md:flex w-35 h-35 items-center justify-center flex-col text-center flex-shrink-0 overflow-hidden relative bg-[var(--color-brand-navy-lighter)] dark:bg-[var(--color-brand-navy-light)] rounded font-inter text-sm leading-[140%] tracking-widest uppercase p-3">
       <time datetime={date.toISOString().split('T')[0]} class="flex flex-col items-center">
           <span class="font-inter text-7xl leading-[100%] tracking-[-0.04em] -mt-1.5">{date.getDate()}</span>
-          <span class="text-foreground-muted text-[9px]">
+          <span class="text-foreground-muted dark:text-gray-300 text-[11px]">
             {formatMonthForDisplay(date)}, {date.getFullYear()}
           </span>
       </time>
@@ -55,7 +55,6 @@ const contentLink = ensureSingleTrailingSlash(
           <a
             href={contentLink}
             class="transition-colors hover:text-brand-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
-            aria-label={`${t("post.aria.title")}: ${title}`}
           >
             {title}
           </a>
@@ -76,7 +75,6 @@ const contentLink = ensureSingleTrailingSlash(
 								translatePath(`/${routes.tag}/${getTagSlug(tag)}/`),
 							),
 						)}
-						aria-label={t("post.aria.tag", { tag: tag.title })}
 					>
                   {tag.title}
                 </a>

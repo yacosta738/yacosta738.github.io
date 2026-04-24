@@ -12,19 +12,17 @@ interface Props extends HTMLAttributes<"a"> {
 }
 const { tag, type, currentLocale, ...attrs } = Astro.props;
 
-const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 ---
 
 <a
 	class={cn(
-		"w-fit inline text-[9px] tracking-widest uppercase transition-colors hover:opacity-80",
+		"inline-flex items-center min-h-6 px-2 py-1 rounded-sm w-fit text-[11px] tracking-widest uppercase transition-colors hover:opacity-80 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
 		attrs.class
 	)}
 	href={translatePath(
 		`/${routes.tag}/${getTagSlug(tag).toLowerCase()}/`,
 	)}
-	aria-label={t("post.aria.tag", { tag: tag.title })}
 	{...attrs}
 >
 	{tag.title}

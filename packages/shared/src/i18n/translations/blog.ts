@@ -27,6 +27,8 @@ export const blog: {
 		"blog.footer.aria.contact": "Contact Navigation link",
 		"blog.footer.aria.donate": "Donate Navigation link",
 		"blog.footer.aria.rss": "RSS Navigation link",
+		"read.article": "Read article",
+		"read.article.external": "Read article: {title} (external site)",
 		"article.sidebar": "Article sidebar",
 	},
 	es: {
@@ -52,6 +54,8 @@ export const blog: {
 		"blog.footer.aria.contact": "Enlace de navegación Contacto",
 		"blog.footer.aria.donate": "Enlace de navegación Donar",
 		"blog.footer.aria.rss": "Enlace de navegación RSS",
+		"read.article": "Leer artículo",
+		"read.article.external": "Leer artículo: {title} (sitio externo)",
 		"article.sidebar": "Barra lateral del artículo",
 	},
 };

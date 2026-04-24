@@ -48,7 +48,11 @@ const isStringImage = typeof image === "string";
 		rel={rel}
 		target={target}
 		class="h-full w-full blog-article-card__link"
-		aria-label={`${t("read.article")}: ${title}`}
+		aria-label={
+			isExternal
+				? t("read.article.external", { title })
+				: `${t("read.article")}: ${title}`
+		}
 	>
 		<span class="sr-only">{title}</span>
 		<div class="blog-article-card__media">

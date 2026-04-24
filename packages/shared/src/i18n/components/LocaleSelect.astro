@@ -29,6 +29,8 @@ const DEFAULT_FLAG = "openmoji:flag-united-nations";
 
 const { variant = "text", width, tabindex, ...attrs } = Astro.props;
 const isTextVariant = variant === "text";
+const generatedSelectId = `locale-select-${Math.random().toString(36).slice(2, 10)}`;
+const selectId = attrs.id || generatedSelectId;
 
 const paths = await getLocalePathsEnhanced(Astro.url);
 const pathsData = JSON.stringify(paths);
@@ -52,6 +54,7 @@ const localesData = JSON.stringify(LOCALES);
   {...attrs}
 >
   <label
+    for={selectId}
     class={cn("relative inline-flex items-center w-full")}
     style={width ? `--select-width: ${width}` : `--select-width: ${isTextVariant ? '8rem' : '6rem'}`}
   >
@@ -67,6 +70,8 @@ const localesData = JSON.stringify(LOCALES);
     )}
 
     <select
+      id={selectId}
+      aria-label={t('select.language')}
       data-test="lang-toggle"
       class={cn(
         "appearance-none bg-transparent border-0 cursor-pointer outline-none",
