@@ -55,7 +55,7 @@ catalogs:
       specifier: ^3.0.2
       version: 3.0.2
     '@notionhq/client':
-      specifier: ^5.19.0
+      specifier: ^5.20.0
       version: 5.20.0
     '@playwright/test':
       specifier: 1.59.1
