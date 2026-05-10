@@ -494,6 +494,15 @@ body {
 	}
 }
 
+/* Theme-switch view transition: suppress default cross-fade and let JS drive a
+   top-to-bottom clip-path wipe. The attribute is set only during the theme
+   toggle so page-navigation transitions are unaffected. */
+:root[data-theme-transition]::view-transition-old(root),
+:root[data-theme-transition]::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+
 body,
 figure {
 	margin: 0;

@@ -105,15 +105,56 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
 
     // Handle theme toggle button click
     button.addEventListener("click", (): void => {
-      // Use the global theme system API
-      if (window.themeSystem) {
-        window.themeSystem.toggle();
-        // Update visibility immediately for this button
+      if (!window.themeSystem) return;
+
+      const applyToggle = (): void => {
+        window.themeSystem!.toggle();
         const newTheme: Theme = document.documentElement.classList.contains("dark")
-          ? "dark" 
+          ? "dark"
           : "light";
         setVisibility(newTheme);
+      };
+
+      // Skip animated transition when the user prefers reduced motion or the
+      // View Transitions API is not supported.
+      if (
+        !document.startViewTransition ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        applyToggle();
+        return;
       }
+
+      // Mark the document so CSS can suppress the default cross-fade only
+      // during theme switches (page-navigation transitions are unaffected).
+      document.documentElement.setAttribute("data-theme-transition", "");
+
+      const transition = document.startViewTransition(applyToggle);
+
+      // Once the snapshots are ready, drive a top-to-bottom clip-path wipe on
+      // the incoming (new) view, revealing it from the top edge downward.
+      // Chain cleanup to animation.finished so the [data-theme-transition]
+      // attribute (which suppresses the default cross-fade) is never removed
+      // before the 600ms wipe completes.
+      transition.ready
+        .then(() => {
+          const animation = document.documentElement.animate(
+            { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
+            {
+              duration: 600,
+              easing: "ease-in-out",
+              pseudoElement: "::view-transition-new(root)",
+            },
+          );
+          return animation.finished;
+        })
+        .then(() => {
+          document.documentElement.removeAttribute("data-theme-transition");
+        })
+        .catch(() => {
+          // Transition was skipped before ready – clean up the marker anyway.
+          document.documentElement.removeAttribute("data-theme-transition");
+        });
     });
   }
 
