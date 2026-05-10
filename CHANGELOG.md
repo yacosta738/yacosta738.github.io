@@ -6,6 +6,18 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.3.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.7...v4.3.0) (2026-05-10)
+
+
+### Features
+
+* animate theme switches with view-transitions and clip-path wipe ([fbdc8a4](https://github.com/yacosta738/yacosta738.github.io/commit/fbdc8a4ebc144bd07b183fb5e188296857f87ec6))
+
+
+### Bug Fixes
+
+* **deps:** update hono to v4.12.18 [SECURITY] ([#1941](https://github.com/yacosta738/yacosta738.github.io/issues/1941)) ([2db2602](https://github.com/yacosta738/yacosta738.github.io/commit/2db2602d1e0ee3605aeba88a84d5d586b42e9041))
+
 ## [4.2.7](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.6...v4.2.7) (2026-04-24)
 
 
