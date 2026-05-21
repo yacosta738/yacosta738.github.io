@@ -34,6 +34,7 @@ const translatePath = useTranslatedPath(currentLocale);
 <dialog
 	id={id}
 	class={cn(
+		"drawer-dialog",
 		"fixed top-0 right-0 m-0 h-screen w-80 max-w-[90vw]",
 		"bg-background border-l border-border shadow-2xl",
 		"overflow-y-auto scrollbar-thin",
@@ -117,7 +118,7 @@ const translatePath = useTranslatedPath(currentLocale);
 
 <style>
 	/* Native dialog drawer styles */
-	#mobile-drawer {
+	.drawer-dialog {
 		/* Remove default dialog styles */
 		border: none;
 		max-width: 90vw;
@@ -133,19 +134,19 @@ const translatePath = useTranslatedPath(currentLocale);
 	}
 	
 	/* Open state */
-	#mobile-drawer[open] {
+	.drawer-dialog[open] {
 		translate: 0 0;
 	}
 	
 	/* Starting style for entry animation */
 	@starting-style {
-		#mobile-drawer[open] {
+		.drawer-dialog[open] {
 			translate: 100% 0;
 		}
 	}
 	
 	/* Backdrop animation */
-	#mobile-drawer::backdrop {
+	.drawer-dialog::backdrop {
 		background-color: rgb(0 0 0 / 0);
 		backdrop-filter: blur(0px);
 		transition: 
@@ -155,13 +156,13 @@ const translatePath = useTranslatedPath(currentLocale);
 			display 0.3s ease-in-out allow-discrete;
 	}
 	
-	#mobile-drawer[open]::backdrop {
+	.drawer-dialog[open]::backdrop {
 		background-color: rgb(0 0 0 / 0.5);
 		backdrop-filter: blur(4px);
 	}
 	
 	@starting-style {
-		#mobile-drawer[open]::backdrop {
+		.drawer-dialog[open]::backdrop {
 			background-color: rgb(0 0 0 / 0);
 			backdrop-filter: blur(0px);
 		}

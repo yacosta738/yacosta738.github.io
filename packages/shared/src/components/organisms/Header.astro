@@ -358,6 +358,7 @@ const t = useTranslations(currentLocale);
 		if (!mobileMenuButton || !mobileDrawer) return;
 
 		const DRAWER_CLOSE_SELECTOR = '[data-drawer-close], nav a';
+		let closeInitiatedByNavLink = false;
 
 		const handleButtonClick = (e) => {
 			e.preventDefault();
@@ -390,15 +391,32 @@ const t = useTranslations(currentLocale);
 				liveRegion.textContent = ariaDrawerClosed;
 			}
 			
-			// Return focus to button
-			mobileMenuButton.focus();
+			// Only return focus to button if not a same-page hash link
+			if (!closeInitiatedByNavLink) {
+				mobileMenuButton.focus();
+			}
+			
+			// Reset flag
+			closeInitiatedByNavLink = false;
+		};
+
+		// Backdrop click fallback for browsers that don't support closedby="any"
+		const handleBackdropClick = (e) => {
+			if (e.target === mobileDrawer) {
+				mobileDrawer.close();
+			}
 		};
 
 		// Handle clicks on drawer close elements (nav links, close button)
 		const drawerCloseElements = mobileDrawer.querySelectorAll(DRAWER_CLOSE_SELECTOR);
 		const drawerCloseHandlers = [];
 		drawerCloseElements.forEach((element) => {
-			const handler = () => {
+			const handler = (e) => {
+				// Check if this is a same-page hash link
+				const href = element.getAttribute('href');
+				if (href && href.startsWith('#')) {
+					closeInitiatedByNavLink = true;
+				}
 				mobileDrawer.close();
 			};
 			drawerCloseHandlers.push({ element, handler });
@@ -407,10 +425,12 @@ const t = useTranslations(currentLocale);
 
 		mobileMenuButton.addEventListener('click', handleButtonClick);
 		mobileDrawer.addEventListener('close', handleClose);
+		mobileDrawer.addEventListener('click', handleBackdropClick);
 
 		window[CLEANUP_KEY] = () => {
 			mobileMenuButton.removeEventListener('click', handleButtonClick);
 			mobileDrawer.removeEventListener('close', handleClose);
+			mobileDrawer.removeEventListener('click', handleBackdropClick);
 
 			drawerCloseHandlers.forEach(({ element, handler }) => {
 				element.removeEventListener('click', handler);

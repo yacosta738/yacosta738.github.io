@@ -115,6 +115,8 @@ const obfuscatedEmail = email
 
 <script>
     class ObfuscateSideEmail extends HTMLElement {
+        private hideTimeoutId: number | null = null;
+
         connectedCallback() {
             const button = this.querySelector("button");
             const tooltip = this.querySelector("[popover]") as HTMLElement;
@@ -152,17 +154,29 @@ const obfuscatedEmail = email
                 try {
                     await navigator.clipboard.writeText(originalEmail);
                     
+                    // Clear any existing hide timer
+                    if (this.hideTimeoutId !== null) {
+                        clearTimeout(this.hideTimeoutId);
+                        this.hideTimeoutId = null;
+                    }
+                    
                     // Show popover tooltip
                     if ('showPopover' in tooltip) {
                         tooltip.showPopover();
-                        setTimeout(() => {
+                        this.hideTimeoutId = window.setTimeout(() => {
                             tooltip.hidePopover();
+                            this.hideTimeoutId = null;
                         }, 2000);
                     } else {
                         // Fallback for browsers without Popover API
                         tooltip.style.display = 'block';
-                        setTimeout(() => {
-                            tooltip.style.display = 'none';
+                        tooltip.style.opacity = '1';
+                        this.hideTimeoutId = window.setTimeout(() => {
+                            tooltip.style.opacity = '0';
+                            setTimeout(() => {
+                                tooltip.style.display = 'none';
+                            }, 200); // Wait for opacity transition
+                            this.hideTimeoutId = null;
                         }, 2000);
                     }
                 } catch (err) {
