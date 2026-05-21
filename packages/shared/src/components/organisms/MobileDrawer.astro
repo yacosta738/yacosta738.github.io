@@ -30,30 +30,19 @@ const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 ---
 
-<!-- Backdrop -->
-<div
-	id="mobile-drawer-backdrop"
-	class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-300"
-	aria-hidden="true"
-	inert
->
-</div>
-
-<!-- Drawer -->
-<aside
+<!-- Native Dialog Drawer -->
+<dialog
 	id={id}
 	class={cn(
-		"fixed top-0 right-0 z-60 h-screen w-80 max-w-[90vw]",
+		"drawer-dialog",
+		"fixed top-0 right-0 m-0 h-screen w-80 max-w-[90vw]",
 		"bg-background border-l border-border shadow-2xl",
-		"transform translate-x-full transition-transform duration-300 ease-in-out",
 		"overflow-y-auto scrollbar-thin",
+		"p-0",
 		className,
 	)}
 	aria-labelledby="mobile-drawer-title"
-	aria-hidden="true"
-	role="dialog"
-	aria-modal="true"
-	inert
+	closedby="any"
 >
 	<!-- Header -->
 	<div class="p-4 border-b border-border">
@@ -125,8 +114,60 @@ const translatePath = useTranslatedPath(currentLocale);
 			</div>
 		</div>
 	</nav>
-</aside>
+</dialog>
+
 <style>
+	/* Native dialog drawer styles */
+	.drawer-dialog {
+		/* Remove default dialog styles */
+		border: none;
+		max-width: 90vw;
+		max-height: 100vh;
+		
+		/* Position at right edge */
+		inset-inline-end: 0;
+		inset-block-start: 0;
+		
+		/* Slide-in animation */
+		translate: 100% 0;
+		transition: translate 0.3s ease-in-out, overlay 0.3s ease-in-out allow-discrete, display 0.3s ease-in-out allow-discrete;
+	}
+	
+	/* Open state */
+	.drawer-dialog[open] {
+		translate: 0 0;
+	}
+	
+	/* Starting style for entry animation */
+	@starting-style {
+		.drawer-dialog[open] {
+			translate: 100% 0;
+		}
+	}
+	
+	/* Backdrop animation */
+	.drawer-dialog::backdrop {
+		background-color: rgb(0 0 0 / 0);
+		backdrop-filter: blur(0px);
+		transition: 
+			background-color 0.3s ease-in-out,
+			backdrop-filter 0.3s ease-in-out,
+			overlay 0.3s ease-in-out allow-discrete,
+			display 0.3s ease-in-out allow-discrete;
+	}
+	
+	.drawer-dialog[open]::backdrop {
+		background-color: rgb(0 0 0 / 0.5);
+		backdrop-filter: blur(4px);
+	}
+	
+	@starting-style {
+		.drawer-dialog[open]::backdrop {
+			background-color: rgb(0 0 0 / 0);
+			backdrop-filter: blur(0px);
+		}
+	}
+
 	/* Custom scrollbar for the drawer */
 	.scrollbar-thin {
 		scrollbar-width: thin;

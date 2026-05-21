@@ -18,7 +18,7 @@ import { type Lang, LOCALES, useTranslatedPath } from "@/i18n";
         <li>
           <a
             href={href}
-            onclick={`localStorage.selectedLang = "${lang}"`}
+            data-lang={lang}
             dir={LOCALES[lang].dir || null}
           >
             {label}
@@ -28,3 +28,17 @@ import { type Lang, LOCALES, useTranslatedPath } from "@/i18n";
     },
   )
 }
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const langLinks = document.querySelectorAll('a[data-lang]');
+    langLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const lang = (e.currentTarget as HTMLAnchorElement).getAttribute('data-lang');
+        if (lang) {
+          localStorage.setItem('selectedLang', lang);
+        }
+      });
+    });
+  });
+</script>
