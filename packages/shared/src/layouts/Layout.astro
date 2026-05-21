@@ -14,6 +14,7 @@
  * @prop {string} [title] - The title of the page, which will be combined with the site title.
  */
 import Analytics from "@/components/atoms/Analytics.astro";
+import LinkPrefetch from "@/components/atoms/LinkPrefetch.astro";
 import Header from "@/components/organisms/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE, X_ACCOUNT } from "@/configs/site.consts";
 import { getMainResumeWithData } from "@/core/resume/resume/resume.service";
@@ -382,5 +383,6 @@ const localeTag = LOCALES[locale].lang || locale;
     <Technologies />
     <AppScripts />
     <TorchEffect />
+    <LinkPrefetch hoverDelay={100} priority="low" />
   </body>
 </html>

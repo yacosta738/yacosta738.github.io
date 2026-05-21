@@ -1,0 +1,107 @@
+---
+/**
+ * LinkPrefetch component - Initializes intelligent link prefetching
+ *
+ * Usage: Add to your layout file
+ * <LinkPrefetch />
+ *
+ * Or with custom options:
+ * <LinkPrefetch
+ *   hoverDelay={150}
+ *   selector="a[href^='/']:not([data-no-prefetch])"
+ *   priority="high"
+ * />
+ */
+
+interface Props {
+	/**
+	 * Delay before starting prefetch (ms)
+	 * Default: 100ms
+	 */
+	hoverDelay?: number;
+
+	/**
+	 * CSS selector for links to prefetch
+	 * Default: 'a[href^="/"]' (all internal links)
+	 */
+	selector?: string;
+
+	/**
+	 * Maximum concurrent prefetches
+	 * Default: 3
+	 */
+	maxConcurrent?: number;
+
+	/**
+	 * Prefetch on touchstart for mobile
+	 * Default: true
+	 */
+	prefetchOnTouch?: boolean;
+
+	/**
+	 * Prefetch priority
+	 * Default: 'low'
+	 */
+	priority?: "high" | "low" | "auto";
+
+	/**
+	 * Enable debug logging
+	 * Default: false
+	 */
+	debug?: boolean;
+}
+
+const {
+	hoverDelay = 100,
+	selector = 'a[href^="/"]',
+	maxConcurrent = 3,
+	prefetchOnTouch = true,
+	priority = "low",
+	debug = false,
+} = Astro.props;
+
+const config = {
+	hoverDelay,
+	selector,
+	maxConcurrent,
+	prefetchOnTouch,
+	priority,
+	debug,
+};
+---
+
+<script define:vars={{ config }}>
+  import { initLinkPrefetch, getPrefetchStats } from '../../utils/link-prefetch';
+
+  // Initialize prefetching when DOM is ready
+  function initPrefetch() {
+    const cleanup = initLinkPrefetch({
+      hoverDelay: config.hoverDelay,
+      selector: config.selector,
+      maxConcurrent: config.maxConcurrent,
+      prefetchOnTouch: config.prefetchOnTouch,
+      priority: config.priority,
+    });
+
+    // Debug logging
+    if (config.debug) {
+      setInterval(() => {
+        const stats = getPrefetchStats();
+        console.log('[Prefetch Stats]', stats);
+      }, 5000);
+    }
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', cleanup);
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPrefetch);
+  } else {
+    initPrefetch();
+  }
+
+  // Re-run on Astro view transitions
+  document.addEventListener('astro:page-load', initPrefetch);
+</script>
