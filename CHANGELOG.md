@@ -6,6 +6,29 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.3.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.7...v4.3.0) (2026-05-22)
+
+
+### Features
+
+* add ultra-premium text and card animations ([#1946](https://github.com/yacosta738/yacosta738.github.io/issues/1946)) ([379dbf1](https://github.com/yacosta738/yacosta738.github.io/commit/379dbf1aa440724d08af0a88b98ca375219373e7))
+* animate theme switches with view-transitions and clip-path wipe ([fbdc8a4](https://github.com/yacosta738/yacosta738.github.io/commit/fbdc8a4ebc144bd07b183fb5e188296857f87ec6))
+* modernize UI with native dialog, popover API, and secure CSP ([#1945](https://github.com/yacosta738/yacosta738.github.io/issues/1945)) ([5c599da](https://github.com/yacosta738/yacosta738.github.io/commit/5c599da230aa1bd15c4ad0bc76e8a14b5399f5d1))
+* **perf:** improve CLS and LCP with WAAPI animations and aspect-ratio fixes ([a5e56a3](https://github.com/yacosta738/yacosta738.github.io/commit/a5e56a354bdc733028020689acf996841ae6d79b))
+
+
+### Bug Fixes
+
+* **deps:** update hono to v4.12.18 [SECURITY] ([#1941](https://github.com/yacosta738/yacosta738.github.io/issues/1941)) ([2db2602](https://github.com/yacosta738/yacosta738.github.io/commit/2db2602d1e0ee3605aeba88a84d5d586b42e9041))
+* **deps:** update tailwindcss monorepo to ^4.2.4 ([#1931](https://github.com/yacosta738/yacosta738.github.io/issues/1931)) ([8294877](https://github.com/yacosta738/yacosta738.github.io/commit/8294877bb236911271aef1d4a441d6619b1dc286))
+* **deps:** update vite to ^8.0.13 ([#1938](https://github.com/yacosta738/yacosta738.github.io/issues/1938)) ([152672b](https://github.com/yacosta738/yacosta738.github.io/commit/152672b5df32d2423da5cb97ee72bf5ee1f118fd))
+* restore animation and client script initialization ([d9119ed](https://github.com/yacosta738/yacosta738.github.io/commit/d9119ede2445396a9ea569e3eda62a9ffbb2a3e4))
+
+
+### Performance Improvements
+
+* **fonts:** add size-adjust fallback for Alkatra and optimize profile image hover ([6c4f2e4](https://github.com/yacosta738/yacosta738.github.io/commit/6c4f2e4722379e1803dedd912f37c4c7862a51a1))
+
 ## [4.2.7](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.6...v4.2.7) (2026-04-24)
 
 
