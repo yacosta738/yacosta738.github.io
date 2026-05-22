@@ -43,7 +43,8 @@ catalog:
   "@types/service-worker-mock": ^2.0.4
   "@types/slug": ^5.0.9
   "@vitest/coverage-v8": ^4.1.4
-  astro: 6.1.8
+  ajv: 8.20.0
+  astro: 6.1.10
   astro-compress: 2.4.1
   astro-critters: 2.2.1
   astro-icon: ^1.1.5
@@ -51,7 +52,6 @@ catalog:
 
   # Security and compatibility overrides
   brace-expansion: ^5.0.5
-  minimatch: ^10.2.5
   chanfana: ^3.3.0
   clsx: ^2.1.1
   cross-env: ^10.1.0
@@ -62,11 +62,12 @@ catalog:
   h3: ^1.15.11
   handlebars: ^4.7.9
   happy-dom: ^20.9.0
-  hono: ^4.12.14
+  hono: ^4.12.21
   jsdom: ^29.0.2
   kleur: ^4.1.5
   lefthook: ^2.1.6
   mdast-util-to-string: ^4.0.0
+  minimatch: ^10.2.5
   notion-rehype-k: ^1.1.6
   npm-run-all2: ^8.0.4
   pagefind: 1.5.2
@@ -111,10 +112,13 @@ minimumReleaseAgeExclude:
 
 overrides:
   brace-expansion: "catalog:"
-  minimatch: "catalog:"
   fast-xml-parser: "catalog:"
   h3: "catalog:"
   handlebars: "catalog:"
+  minimatch: "catalog:"
   picomatch: "catalog:"
   vite: "catalog:"
   yaml: "catalog:"
+  fast-uri: ">=3.1.2"
+  devalue: ">=5.8.1"
+  ws: ">=8.20.1"
