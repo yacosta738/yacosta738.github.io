@@ -93,7 +93,7 @@ catalog:
   vitest: ^4.1.4
   wrangler: ^4.84.0
   yaml: ^2.8.3
-  zod: ^4.3.6
+  zod: 4.3.6
 
 catalogMode: strict
 
