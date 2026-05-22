@@ -1,5 +1,4 @@
 ---
-import AnimatedCard from "@/components/atoms/AnimatedCard.astro";
 /**
  * FeaturedProjects section component.
  * This component renders a section that showcases a list of featured projects.
@@ -46,14 +45,12 @@ const translated = (
           const isOdd = i % 2 === 1;
           
           return (
-            <AnimatedCard effect="micro-scale-fade" delay={i * 45}>
-              <FeaturedProjectCard
-                project={project}
-                isOdd={isOdd}
-                lang={currentLocale}
-                isFirst={i === 0}
-              />
-            </AnimatedCard>
+            <FeaturedProjectCard
+              project={project}
+              isOdd={isOdd}
+              lang={currentLocale}
+              isFirst={i === 0}
+            />
           )
         })
       }
