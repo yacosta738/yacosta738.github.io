@@ -34,9 +34,12 @@ const obfuscatedEmail = email
           class="my-5 px-2.5 py-2 font-mono text-xs tracking-widest transition-transform duration-150 hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-foreground focus:text-foreground"
           style="writing-mode: vertical-rl;"
           aria-label={t("copy.email.address")}
+          id="side-email-btn"
         >
         </button>
-        <span class="tooltip">{t("email.copied")}</span>
+        <div popover="manual" id="side-email-tooltip" role="tooltip">
+            {t("email.copied")}
+        </div>
     </obfuscate-side-email>
     <span
       class="block w-px mx-auto"
@@ -65,33 +68,58 @@ const obfuscatedEmail = email
         align-items: center;
     }
 
-    obfuscate-side-email .tooltip {
-        position: absolute;
-        top: 50%;
-        right: 3rem; /* Position to the left of the vertical text */
-        transform: translateY(-50%);
+    /* Popover tooltip styles */
+    obfuscate-side-email [popover] {
+        /* Reset default popover styles */
+        margin: 0;
+        border: none;
+        padding: 0.25rem 0.5rem;
+        
+        /* Custom styling */
         background-color: rgb(31 41 55);
         color: white;
         font-size: 0.75rem;
         border-radius: 0.25rem;
-        padding: 0.25rem 0.5rem;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease-in-out;
         white-space: nowrap;
-        z-index: 10;
+        
+        /* Anchor positioning */
+        position-anchor: --side-email-btn;
+        top: anchor(center);
+        right: anchor(left);
+        translate: calc(-100% - 1rem) -50%;
+        
+        /* Animations */
+        opacity: 0;
+        transition: 
+            opacity 0.2s ease-in-out,
+            translate 0.2s ease-in-out,
+            overlay 0.2s ease-in-out allow-discrete,
+            display 0.2s ease-in-out allow-discrete;
     }
-
-    obfuscate-side-email .tooltip.show {
+    
+    obfuscate-side-email [popover]:popover-open {
         opacity: 1;
+    }
+    
+    @starting-style {
+        obfuscate-side-email [popover]:popover-open {
+            opacity: 0;
+        }
+    }
+    
+    /* Anchor name for positioning */
+    obfuscate-side-email button {
+        anchor-name: --side-email-btn;
     }
 </style>
 
 <script>
     class ObfuscateSideEmail extends HTMLElement {
+        private hideTimeoutId: number | null = null;
+
         connectedCallback() {
             const button = this.querySelector("button");
-            const tooltip = this.querySelector(".tooltip");
+            const tooltip = this.querySelector("[popover]") as HTMLElement;
 
             if (!button || !tooltip) return;
 
@@ -125,10 +153,32 @@ const obfuscatedEmail = email
 
                 try {
                     await navigator.clipboard.writeText(originalEmail);
-                    tooltip.classList.add("show");
-                    setTimeout(() => {
-                        tooltip.classList.remove("show");
-                    }, 2000);
+                    
+                    // Clear any existing hide timer
+                    if (this.hideTimeoutId !== null) {
+                        clearTimeout(this.hideTimeoutId);
+                        this.hideTimeoutId = null;
+                    }
+                    
+                    // Show popover tooltip
+                    if ('showPopover' in tooltip) {
+                        tooltip.showPopover();
+                        this.hideTimeoutId = window.setTimeout(() => {
+                            tooltip.hidePopover();
+                            this.hideTimeoutId = null;
+                        }, 2000);
+                    } else {
+                        // Fallback for browsers without Popover API
+                        tooltip.style.display = 'block';
+                        tooltip.style.opacity = '1';
+                        this.hideTimeoutId = window.setTimeout(() => {
+                            tooltip.style.opacity = '0';
+                            setTimeout(() => {
+                                tooltip.style.display = 'none';
+                            }, 200); // Wait for opacity transition
+                            this.hideTimeoutId = null;
+                        }, 2000);
+                    }
                 } catch (err) {
                     console.error("Failed to copy email:", err);
                 }
