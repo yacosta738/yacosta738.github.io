@@ -5,9 +5,17 @@
  */
 
 interface Props {
-	effect: "soft-blur-in" | "micro-scale-fade" | "per-word-crossfade";
+	effect:
+		| "soft-blur-in"
+		| "micro-scale-fade"
+		| "per-word-crossfade"
+		| "per-character-rise"
+		| "spring-scale-in"
+		| "line-by-line-slide"
+		| "bottom-up-letters"
+		| "mask-reveal-up";
 	class?: string;
-	tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+	tag?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
 	delay?: number;
 }
 
@@ -33,6 +41,11 @@ const {
     softBlurIn,
     microScaleFade,
     perWordCrossfade,
+    perCharacterRise,
+    springScaleIn,
+    lineByLineSlide,
+    bottomUpLetters,
+    maskRevealUp,
     observeAndAnimate,
   } from '../../utils/text-animations';
 
@@ -41,6 +54,11 @@ const {
     'soft-blur-in': softBlurIn,
     'micro-scale-fade': microScaleFade,
     'per-word-crossfade': perWordCrossfade,
+    'per-character-rise': perCharacterRise,
+    'spring-scale-in': springScaleIn,
+    'line-by-line-slide': lineByLineSlide,
+    'bottom-up-letters': bottomUpLetters,
+    'mask-reveal-up': maskRevealUp,
   };
 
   // Initialize animations when DOM is ready

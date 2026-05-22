@@ -8,6 +8,7 @@
  * @prop {Project[]} [projects=[]] - An array of project objects from the resume.
  */
 import Section from "@/components/atoms/Section.astro";
+import AnimatedCard from "@/components/atoms/AnimatedCard.astro";
 import FeaturedProjectCard from "@/components/organisms/FeaturedProjectCard.astro";
 import type Project from "@/core/resume/project/project.model";
 import {
@@ -45,12 +46,14 @@ const translated = (
           const isOdd = i % 2 === 1;
           
           return (
-            <FeaturedProjectCard
-              project={project}
-              isOdd={isOdd}
-              lang={currentLocale}
-              isFirst={i === 0}
-            />
+            <AnimatedCard effect="micro-scale-fade" delay={i * 45}>
+              <FeaturedProjectCard
+                project={project}
+                isOdd={isOdd}
+                lang={currentLocale}
+                isFirst={i === 0}
+              />
+            </AnimatedCard>
           )
         })
       }
