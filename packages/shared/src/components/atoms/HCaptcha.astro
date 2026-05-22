@@ -168,10 +168,16 @@ if (!siteKey) {
 			return;
 		}
 
-		// Check if already rendered
-		if (window.hcaptchaWidgets?.has(captchaId)) {
+		// Check if already rendered or currently initializing
+		if (window.hcaptchaWidgets?.has(captchaId) || container.dataset.ready === 'true') {
 			return;
 		}
+
+		if (container.dataset.initializing === 'true') {
+			return;
+		}
+
+		container.dataset.initializing = 'true';
 
 		try {
 			// Load script if needed
@@ -206,11 +212,13 @@ if (!siteKey) {
 			});
 
 			window.hcaptchaWidgets?.set(captchaId, widgetId);
-			container.dataset.widgetId = widgetId;
+			container.dataset.widgetId = String(widgetId);
 			container.dataset.ready = 'true';
 		} catch (error) {
 			console.error(`Failed to initialize hCaptcha widget "${captchaId}":`, error);
 			container.innerHTML = '<div style="color: red; padding: 10px;">Failed to load captcha. Please refresh.</div>';
+		} finally {
+			delete container.dataset.initializing;
 		}
 	}
 

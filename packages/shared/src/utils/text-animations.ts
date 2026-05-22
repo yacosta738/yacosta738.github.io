@@ -621,6 +621,8 @@ export async function maskRevealUp(
 	await Promise.all(animations.map((anim) => anim.finished));
 }
 
+const activeTextAnimationObservers = new Set<IntersectionObserver>();
+
 /**
  * Observes elements and triggers animation when they enter viewport
  */
@@ -638,7 +640,9 @@ export function observeAndAnimate(
 	).matches;
 
 	if (prefersReducedMotion) {
-		// Skip animations if user prefers reduced motion
+		// Skip animations but still make elements visible
+		const elements = document.querySelectorAll<HTMLElement>(selector);
+		elements.forEach((el) => el.classList.add('text-animation--initialized'));
 		return () => {};
 	}
 
@@ -650,15 +654,22 @@ export function observeAndAnimate(
 			if (entry.isIntersecting && !animated.has(entry.target as HTMLElement)) {
 				const element = entry.target as HTMLElement;
 				animated.add(element);
+				element.classList.add('text-animation--initialized');
+				observer.unobserve(element);
 				animationFn(element).catch(console.error);
 			}
 		});
 	}, options);
+
+	activeTextAnimationObservers.add(observer);
 
 	elements.forEach((el) => {
 		observer.observe(el);
 	});
 
 	// Return cleanup function
-	return () => observer.disconnect();
+	return () => {
+		observer.disconnect();
+		activeTextAnimationObservers.delete(observer);
+	};
 }

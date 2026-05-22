@@ -171,11 +171,22 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 		};
 
 		// Lazy show + initialize captcha when user starts typing
-		let captchaShown = false;
+		let captchaShown = captchaWrapper?.dataset.initialized === 'true';
 
 		const revealCaptcha = async () => {
 			if (captchaShown || !captchaWrapper) return;
 			captchaShown = true;
+
+			const placeholder = document.getElementById('newsletter-captcha-placeholder') as HTMLDivElement | null;
+			if (!placeholder) return;
+
+			if (placeholder.dataset.widgetId || captchaWrapper.dataset.initialized === 'true') {
+				captchaWrapper.classList.remove('max-h-0', 'opacity-0');
+				captchaWrapper.style.maxHeight = '400px';
+				captchaWrapper.style.opacity = '1';
+				captchaWrapper.setAttribute('aria-hidden', 'false');
+				return;
+			}
 
 			// Reveal visually and for assistive tech
 			captchaWrapper.classList.remove('max-h-0', 'opacity-0');
@@ -209,9 +220,12 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 				}
 
 				// Render hCaptcha widget
-				const placeholder = document.getElementById('newsletter-captcha-placeholder');
 				const sitekey = captchaWrapper.dataset.sitekey || '';
 				if (placeholder && sitekey && (window as any).hcaptcha) {
+					if (placeholder.dataset.widgetId || captchaWrapper.dataset.initialized === 'true') {
+						return;
+					}
+
 					const widgetId = (window as any).hcaptcha.render(placeholder, {
 						sitekey,
 						callback: (token: string) => {
@@ -223,8 +237,10 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 							placeholder.dispatchEvent(new CustomEvent('hcaptcha-expired'));
 						},
 					});
+					placeholder.dataset.widgetId = String(widgetId);
+					captchaWrapper.dataset.initialized = 'true';
 					(window as any).hcaptchaWidgets = (window as any).hcaptchaWidgets || new Map();
-					(window as any).hcaptchaWidgets.set('newsletter-captcha', widgetId);
+					(window as any).hcaptchaWidgets.set('newsletter-captcha-placeholder', widgetId);
 				}
 			} catch (err) {
 				console.warn('Failed to initialize hCaptcha:', err);
@@ -334,7 +350,7 @@ import { HCAPTCHA_SITE_KEY } from "astro:env/client";
 					
 					// Reset captcha
 					if ((window as any).resetCaptcha) {
-						(window as any).resetCaptcha("newsletter-captcha");
+						(window as any).resetCaptcha("newsletter-captcha-placeholder");
 					}
 					
 					// Hide success message after 5 seconds

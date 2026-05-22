@@ -65,9 +65,13 @@ const warnedForInvalidTag = tag && tag !== "span";
     'mask-reveal-up': maskRevealUp,
   };
 
+  let animationInstanceCounter = 0;
+
   // Initialize animations when DOM is ready
   function initTextAnimations() {
-    const elements = document.querySelectorAll<HTMLElement>('[data-text-animation]');
+    const elements = document.querySelectorAll<HTMLElement>(
+      '[data-text-animation]:not([data-text-animation-bound="true"])'
+    );
     
     elements.forEach((element) => {
       const effect = element.dataset.textAnimation as keyof typeof effectMap;
@@ -79,6 +83,10 @@ const warnedForInvalidTag = tag && tag !== "span";
         return;
       }
 
+      const animationId = `text-animation-${animationInstanceCounter++}`;
+      element.dataset.textAnimationId = animationId;
+      element.dataset.textAnimationBound = 'true';
+
       // Wrap in delayed function if delay is specified
       const delayedAnimation = async (el: HTMLElement) => {
         if (delay > 0) {
@@ -89,7 +97,7 @@ const warnedForInvalidTag = tag && tag !== "span";
 
       // Use intersection observer to trigger animation on scroll
       observeAndAnimate(
-        `[data-text-animation="${effect}"]`,
+        `[data-text-animation-id="${animationId}"]`,
         delayedAnimation,
         { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
       );

@@ -68,40 +68,53 @@ const config = {
 	priority,
 	debug,
 };
+
+const serializedConfig = JSON.stringify(config);
 ---
 
-<script define:vars={{ config }}>
+<script id="link-prefetch-config" type="application/json" set:html={serializedConfig}></script>
+
+<script>
   import { initLinkPrefetch, getPrefetchStats } from '../../utils/link-prefetch';
 
-  // Initialize prefetching when DOM is ready
-  function initPrefetch() {
-    const cleanup = initLinkPrefetch({
-      hoverDelay: config.hoverDelay,
-      selector: config.selector,
-      maxConcurrent: config.maxConcurrent,
-      prefetchOnTouch: config.prefetchOnTouch,
-      priority: config.priority,
-    });
-
-    // Debug logging
-    if (config.debug) {
-      setInterval(() => {
-        const stats = getPrefetchStats();
-        console.log('[Prefetch Stats]', stats);
-      }, 5000);
-    }
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', cleanup);
+  function readConfig() {
+    const el = document.getElementById('link-prefetch-config');
+    if (!el?.textContent) return null;
+    try { return JSON.parse(el.textContent); } catch { return null; }
   }
 
-  // Run on page load
+  let cleanup: (() => void) | null = null;
+  let debugTimer: ReturnType<typeof setInterval> | null = null;
+
+  function initPrefetch() {
+    cleanup?.();
+    if (debugTimer) { clearInterval(debugTimer); debugTimer = null; }
+
+    const cfg = readConfig() ?? {
+      hoverDelay: 100, selector: 'a[href^="/"]', maxConcurrent: 3,
+      prefetchOnTouch: true, priority: 'low' as const, debug: false,
+    };
+
+    cleanup = initLinkPrefetch({
+      hoverDelay: cfg.hoverDelay,
+      selector: cfg.selector,
+      maxConcurrent: cfg.maxConcurrent,
+      prefetchOnTouch: cfg.prefetchOnTouch,
+      priority: cfg.priority,
+    });
+
+    if (cfg.debug) {
+      debugTimer = setInterval(() => console.log('[Prefetch Stats]', getPrefetchStats()), 5000);
+    }
+  }
+
+  window.addEventListener('beforeunload', () => { cleanup?.(); if (debugTimer) clearInterval(debugTimer); });
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPrefetch);
+    document.addEventListener('DOMContentLoaded', initPrefetch, { once: true });
   } else {
     initPrefetch();
   }
 
-  // Re-run on Astro view transitions
   document.addEventListener('astro:page-load', initPrefetch);
 </script>
