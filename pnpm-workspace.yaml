@@ -92,7 +92,7 @@ catalog:
   vitest: ^4.1.4
   wrangler: ^4.84.0
   yaml: ^2.8.3
-  zod: ^4.4.1
+  zod: 4.3.6
 
 catalogMode: strict
 
@@ -108,8 +108,6 @@ minimumReleaseAgeExclude:
   - hono@4.12.12 || 4.12.14 || 4.12.18
   # Renovate security update: astro@6.1.6
   - astro@6.1.6
-  # Renovate update: zod@4.4.1
-  - zod@4.4.1
 
 overrides:
   brace-expansion: "catalog:"
@@ -120,3 +118,4 @@ overrides:
   picomatch: "catalog:"
   vite: "catalog:"
   yaml: "catalog:"
+  zod: "catalog:"
