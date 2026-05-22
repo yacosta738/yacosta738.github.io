@@ -1,0 +1,119 @@
+---
+/**
+ * TextAnimation component - Wraps text elements with animation capabilities
+ * Usage: <TextAnimation effect="soft-blur-in" class="hero-title">Your text</TextAnimation>
+ */
+
+interface Props {
+	effect:
+		| "soft-blur-in"
+		| "micro-scale-fade"
+		| "per-word-crossfade"
+		| "per-character-rise"
+		| "spring-scale-in"
+		| "line-by-line-slide"
+		| "bottom-up-letters"
+		| "mask-reveal-up";
+	class?: string;
+	tag?: "span";
+	delay?: number;
+}
+
+const { effect, class: className = "", tag, delay = 0 } = Astro.props;
+
+const Tag = tag && tag !== "span" ? "span" : "span";
+const warnedForInvalidTag = tag && tag !== "span";
+---
+
+{warnedForInvalidTag && (
+	<script is:inline>
+		console.warn("TextAnimation only supports tag='span'. Falling back to span.");
+	</script>
+)}
+
+<Tag 
+  class:list={['text-animation', `text-animation--${effect}`, className]}
+  data-text-animation={effect}
+  data-animation-delay={delay}
+  style="display: inline-block; transform-style: preserve-3d;"
+>
+  <slot />
+</Tag>
+
+<script>
+  import {
+    softBlurIn,
+    microScaleFade,
+    perWordCrossfade,
+    perCharacterRise,
+    springScaleIn,
+    lineByLineSlide,
+    bottomUpLetters,
+    maskRevealUp,
+    observeAndAnimate,
+  } from '../../utils/text-animations';
+
+  // Animation effect mapping
+  const effectMap = {
+    'soft-blur-in': softBlurIn,
+    'micro-scale-fade': microScaleFade,
+    'per-word-crossfade': perWordCrossfade,
+    'per-character-rise': perCharacterRise,
+    'spring-scale-in': springScaleIn,
+    'line-by-line-slide': lineByLineSlide,
+    'bottom-up-letters': bottomUpLetters,
+    'mask-reveal-up': maskRevealUp,
+  };
+
+  // Initialize animations when DOM is ready
+  function initTextAnimations() {
+    const elements = document.querySelectorAll<HTMLElement>('[data-text-animation]');
+    
+    elements.forEach((element) => {
+      const effect = element.dataset.textAnimation as keyof typeof effectMap;
+      const delay = Number(element.dataset.animationDelay) || 0;
+      const animationFn = effectMap[effect];
+
+      if (!animationFn) {
+        console.warn(`Unknown text animation effect: ${effect}`);
+        return;
+      }
+
+      // Wrap in delayed function if delay is specified
+      const delayedAnimation = async (el: HTMLElement) => {
+        if (delay > 0) {
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+        return animationFn(el);
+      };
+
+      // Use intersection observer to trigger animation on scroll
+      observeAndAnimate(
+        `[data-text-animation="${effect}"]`,
+        delayedAnimation,
+        { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+      );
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTextAnimations);
+  } else {
+    initTextAnimations();
+  }
+
+  // Re-run on view transitions (Astro)
+  document.addEventListener('astro:page-load', initTextAnimations);
+</script>
+
+<style>
+  .text-animation {
+    perspective: 900px;
+  }
+
+  /* Prevent flash of unstyled content */
+  .text-animation:not(.text-animation--initialized) {
+    opacity: 0;
+  }
+</style>

@@ -10,6 +10,7 @@
  */
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "@/lib/utils";
+import TextAnimation from "./TextAnimation.astro";
 import Typography from "./Typography.astro";
 
 interface Props extends HTMLAttributes<"section"> {
@@ -27,13 +28,17 @@ const classes = cn(
 
 <section class={classes} {...rest}>
 	{title && (
-		<Typography 
-			as="h2" 
-			variant="subtitle" 
-			class="numbered-heading flex items-center relative my-2.5 mb-10 w-full font-bold whitespace-nowrap"
-		>
-			{title}
-		</Typography>
+		<h2>
+			<TextAnimation effect="micro-scale-fade" tag="span">
+				<Typography 
+					as="span" 
+					variant="subtitle" 
+					class="numbered-heading flex items-center relative my-2.5 mb-10 w-full font-bold whitespace-nowrap"
+				>
+					{title}
+				</Typography>
+			</TextAnimation>
+		</h2>
 	)}
 	<slot />
 </section>

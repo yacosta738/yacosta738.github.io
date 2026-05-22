@@ -16,6 +16,7 @@ import type { EnhancedProject } from "@/core/resume/project/project.service";
 import { type Lang, tr, useTranslations } from "@/i18n";
 import { findImage } from "@/utils/images";
 import Link from "../atoms/Link.astro";
+import TextAnimation from "../atoms/TextAnimation.astro";
 
 interface Props {
 	project: EnhancedProject;
@@ -54,14 +55,16 @@ const projectUrl =
       </p>
 
       <h3 class="project-title">
-        <Link
-          href={projectUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          title={`${translated('viewProject', {}, 'View project')}: ${project.name}`}
-        >
-          {project.name}
-        </Link>
+        <TextAnimation effect="per-word-crossfade" tag="span">
+          <Link
+            href={projectUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`${translated('viewProject', {}, 'View project')}: ${project.name}`}
+          >
+            {project.name}
+          </Link>
+        </TextAnimation>
       </h3>
 
       <div class="project-description">

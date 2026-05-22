@@ -152,6 +152,12 @@ const recentTechnologies =
 	.image-wrapper:focus {
 		outline: 0;
 		transform: translate(-4px, -4px);
+		will-change: transform;
+	}
+
+	.image-wrapper:hover .profile-image,
+	.image-wrapper:focus .profile-image {
+		will-change: filter;
 	}
 
 	.image-wrapper:hover::after,
@@ -173,6 +179,7 @@ const recentTechnologies =
 		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 		width: 100%;
 		height: auto;
+		aspect-ratio: 1 / 1;
 		object-fit: cover;
 	}
 

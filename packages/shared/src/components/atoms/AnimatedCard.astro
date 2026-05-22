@@ -1,0 +1,115 @@
+---
+/**
+ * AnimatedCard - Wrapper component that adds scroll-triggered animations to cards
+ * Uses intersection observer to trigger animations when cards enter viewport
+ */
+interface Props {
+	effect?:
+		| "spring-scale-in"
+		| "bottom-up-letters"
+		| "mask-reveal-up"
+		| "micro-scale-fade";
+	delay?: number;
+	class?: string;
+}
+
+const {
+	effect = "spring-scale-in",
+	delay = 0,
+	class: className = "",
+} = Astro.props;
+---
+
+<div 
+  class:list={['animated-card', `animated-card--${effect}`, className]}
+  data-card-animation={effect}
+  data-animation-delay={delay}
+>
+  <slot />
+</div>
+
+<script>
+  import {
+    springScaleIn,
+    bottomUpLetters,
+    maskRevealUp,
+    microScaleFade,
+    observeAndAnimate,
+  } from '../../utils/text-animations';
+
+  // Animation effect mapping for cards
+  const cardEffectMap = {
+    'spring-scale-in': springScaleIn,
+    'bottom-up-letters': bottomUpLetters,
+    'mask-reveal-up': maskRevealUp,
+    'micro-scale-fade': microScaleFade,
+  };
+
+  // Initialize card animations when DOM is ready
+  function initCardAnimations() {
+    const elements = document.querySelectorAll<HTMLElement>('[data-card-animation]');
+    const animationGroups = new Map<string, { effect: keyof typeof cardEffectMap; delay: number }>();
+
+    elements.forEach((element) => {
+      const effect = element.dataset.cardAnimation as keyof typeof cardEffectMap;
+      const delay = Number(element.dataset.animationDelay) || 0;
+      const animationFn = cardEffectMap[effect];
+
+      if (!animationFn) {
+        console.warn(`Unknown card animation effect: ${effect}`);
+        return;
+      }
+
+      const groupKey = `${effect}:${delay}`;
+      if (!animationGroups.has(groupKey)) {
+        animationGroups.set(groupKey, { effect, delay });
+      }
+    });
+
+    animationGroups.forEach(({ effect, delay }) => {
+      const delayedAnimation = async (el: HTMLElement) => {
+        if (delay > 0) {
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+
+        // Card wrappers contain complex DOM; keep a lightweight reveal instead of
+        // calling the text-splitting animation helpers from cardEffectMap.
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px) scale(0.985)';
+
+        await new Promise((resolve) => setTimeout(resolve, 20));
+
+        el.style.transition = 'opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1), transform 0.48s cubic-bezier(0.22, 1, 0.36, 1)';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0) scale(1)';
+      };
+
+      observeAndAnimate(
+        `[data-card-animation="${effect}"][data-animation-delay="${delay}"]`,
+        delayedAnimation,
+        { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+      );
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCardAnimations);
+  } else {
+    initCardAnimations();
+  }
+
+  // Re-run on view transitions (Astro)
+  document.addEventListener('astro:page-load', initCardAnimations);
+</script>
+
+<style>
+  .animated-card {
+    display: contents;
+  }
+
+  /* Prevent flash of unstyled content */
+  .animated-card:not(.animated-card--initialized) {
+    opacity: 0;
+  }
+</style>
