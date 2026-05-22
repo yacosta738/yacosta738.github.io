@@ -28,6 +28,7 @@ apps/blog/.cache/notion-loader.json
 # test coverage
 coverage/
 playwright-report/
+.playwright-mcp/
 test-results/
 
 
