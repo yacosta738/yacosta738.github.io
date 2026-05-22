@@ -47,6 +47,7 @@ const companyLogo = getCompanyLogo(company.name);
 	tabindex={isActive ? "0" : "-1"}
 	aria-labelledby={`tab-${panelIndex}`}
 	aria-hidden={isActive ? "false" : "true"}
+	data-panel-index={panelIndex}
 	style={isActive ? "" : "display: none;"}
 >
 	{!hasMultiplePositions ? (
@@ -111,11 +112,28 @@ const companyLogo = getCompanyLogo(company.name);
 		height: auto;
 		padding: 10px 5px;
 		opacity: 1;
+		transform: translateY(0);
 		transition: opacity 0.25s ease-in-out;
 	}
 
 	.tab-panel[aria-hidden="true"] {
 		opacity: 0;
+	}
+
+	.tab-panel.panel-enter {
+		will-change: transform, opacity;
+		animation: panel-enter 0.24s ease-out both;
+	}
+
+	@keyframes panel-enter {
+		from {
+			opacity: 0;
+			transform: translateY(4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	/* Company overview for multiple positions */

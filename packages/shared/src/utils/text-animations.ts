@@ -18,9 +18,9 @@ interface RuntimeConfig {
 }
 
 const DEFAULT_RUNTIME: RuntimeConfig = {
-	speedMultiplier: 0.72,
-	yTravelMultiplier: 0.58,
-	initialDelayRange: [0, 400],
+	speedMultiplier: 0.68,
+	yTravelMultiplier: 0.5,
+	initialDelayRange: [0, 140],
 };
 
 /**
@@ -263,6 +263,319 @@ export async function perWordCrossfade(
 	};
 
 	const units = wrapTextUnits(element, "per-word");
+	applyInitialState(units, config, runtime);
+
+	const [min, max] = runtime.initialDelayRange;
+	const initialDelay = Math.random() * (max - min) + min;
+
+	await new Promise((resolve) => setTimeout(resolve, initialDelay));
+
+	const animations = units.map((unit, index) => {
+		const delay = index * config.stagger;
+
+		return unit.animate(
+			[
+				{
+					opacity: config.from.opacity,
+					transform: createTransform(
+						0,
+						config.from.y_px,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+				{
+					opacity: config.to.opacity,
+					transform: createTransform(
+						0,
+						config.to.y_px,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+			],
+			{
+				delay,
+				duration: config.duration,
+				easing: config.easing,
+				fill: "forwards",
+			},
+		);
+	});
+
+	await Promise.all(animations.map((anim) => anim.finished));
+}
+
+/**
+ * Per-Character Rise - Letters slide up from below with no blur
+ * Apple's clean tvOS-style reveal
+ */
+export async function perCharacterRise(
+	element: HTMLElement,
+	runtime: RuntimeConfig = DEFAULT_RUNTIME,
+): Promise<void> {
+	const config: AnimationConfig = {
+		duration: 700 * runtime.speedMultiplier,
+		stagger: 24 * runtime.speedMultiplier,
+		easing: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+		from: { opacity: 0, y_px: 32 },
+		to: { opacity: 1, y_px: 0 },
+	};
+
+	const units = wrapTextUnits(element, "per-character");
+	applyInitialState(units, config, runtime);
+
+	const [min, max] = runtime.initialDelayRange;
+	const initialDelay = Math.random() * (max - min) + min;
+
+	await new Promise((resolve) => setTimeout(resolve, initialDelay));
+
+	const animations = units.map((unit, index) => {
+		const delay = index * config.stagger;
+
+		return unit.animate(
+			[
+				{
+					opacity: config.from.opacity,
+					transform: createTransform(
+						0,
+						config.from.y_px,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+				{
+					opacity: config.to.opacity,
+					transform: createTransform(
+						0,
+						config.to.y_px,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+			],
+			{
+				delay,
+				duration: config.duration,
+				easing: config.easing,
+				fill: "forwards",
+			},
+		);
+	});
+
+	await Promise.all(animations.map((anim) => anim.finished));
+}
+
+/**
+ * Spring Scale In - Words pop in with soft overshoot scale
+ * iOS app icons bouncing into home screen
+ */
+export async function springScaleIn(
+	element: HTMLElement,
+	runtime: RuntimeConfig = DEFAULT_RUNTIME,
+): Promise<void> {
+	const config: AnimationConfig = {
+		duration: 360 * runtime.speedMultiplier,
+		stagger: 95 * runtime.speedMultiplier,
+		easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+		from: { opacity: 0, scale: 0.7 },
+		to: { opacity: 1, scale: 1 },
+	};
+
+	const units = wrapTextUnits(element, "per-word");
+	applyInitialState(units, config, runtime);
+
+	const [min, max] = runtime.initialDelayRange;
+	const initialDelay = Math.random() * (max - min) + min;
+
+	await new Promise((resolve) => setTimeout(resolve, initialDelay));
+
+	const animations = units.map((unit, index) => {
+		const delay = index * config.stagger;
+
+		return unit.animate(
+			[
+				{
+					opacity: config.from.opacity,
+					transform: createTransform(
+						0,
+						0,
+						0,
+						config.from.scale,
+						runtime.yTravelMultiplier,
+					),
+				},
+				{
+					opacity: config.to.opacity,
+					transform: createTransform(
+						0,
+						0,
+						0,
+						config.to.scale,
+						runtime.yTravelMultiplier,
+					),
+				},
+			],
+			{
+				delay,
+				duration: config.duration,
+				easing: config.easing,
+				fill: "forwards",
+			},
+		);
+	});
+
+	await Promise.all(animations.map((anim) => anim.finished));
+}
+
+/**
+ * Line-by-Line Slide - Each line enters from left with staggered slide
+ * Apple landing page subheads
+ */
+export async function lineByLineSlide(
+	element: HTMLElement,
+	runtime: RuntimeConfig = DEFAULT_RUNTIME,
+): Promise<void> {
+	const config: AnimationConfig = {
+		duration: 900 * runtime.speedMultiplier,
+		stagger: 120 * runtime.speedMultiplier,
+		easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+		from: { opacity: 0, x_px: -48 },
+		to: { opacity: 1, x_px: 0 },
+	};
+
+	const units = wrapTextUnits(element, "per-line");
+	applyInitialState(units, config, runtime);
+
+	const [min, max] = runtime.initialDelayRange;
+	const initialDelay = Math.random() * (max - min) + min;
+
+	await new Promise((resolve) => setTimeout(resolve, initialDelay));
+
+	const animations = units.map((unit, index) => {
+		const delay = index * config.stagger;
+
+		return unit.animate(
+			[
+				{
+					opacity: config.from.opacity,
+					transform: createTransform(
+						config.from.x_px,
+						0,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+				{
+					opacity: config.to.opacity,
+					transform: createTransform(
+						config.to.x_px,
+						0,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+			],
+			{
+				delay,
+				duration: config.duration,
+				easing: config.easing,
+				fill: "forwards",
+			},
+		);
+	});
+
+	await Promise.all(animations.map((anim) => anim.finished));
+}
+
+/**
+ * Bottom-Up Letters - Letters rise from below in pronounced staircase
+ * Zero blur, one symbol at a time
+ */
+export async function bottomUpLetters(
+	element: HTMLElement,
+	runtime: RuntimeConfig = DEFAULT_RUNTIME,
+): Promise<void> {
+	const config: AnimationConfig = {
+		duration: 600 * runtime.speedMultiplier,
+		stagger: 35 * runtime.speedMultiplier,
+		easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		from: { opacity: 0, y_px: 48 },
+		to: { opacity: 1, y_px: 0 },
+	};
+
+	const units = wrapTextUnits(element, "per-character");
+	applyInitialState(units, config, runtime);
+
+	const [min, max] = runtime.initialDelayRange;
+	const initialDelay = Math.random() * (max - min) + min;
+
+	await new Promise((resolve) => setTimeout(resolve, initialDelay));
+
+	const animations = units.map((unit, index) => {
+		const delay = index * config.stagger;
+
+		return unit.animate(
+			[
+				{
+					opacity: config.from.opacity,
+					transform: createTransform(
+						0,
+						config.from.y_px,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+				{
+					opacity: config.to.opacity,
+					transform: createTransform(
+						0,
+						config.to.y_px,
+						0,
+						1,
+						runtime.yTravelMultiplier,
+					),
+				},
+			],
+			{
+				delay,
+				duration: config.duration,
+				easing: config.easing,
+				fill: "forwards",
+			},
+		);
+	});
+
+	await Promise.all(animations.map((anim) => anim.finished));
+}
+
+/**
+ * Mask Reveal Up - Lines reveal upward with soft masked feel
+ */
+export async function maskRevealUp(
+	element: HTMLElement,
+	runtime: RuntimeConfig = DEFAULT_RUNTIME,
+): Promise<void> {
+	const config: AnimationConfig = {
+		duration: 800 * runtime.speedMultiplier,
+		stagger: 90 * runtime.speedMultiplier,
+		easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+		from: { opacity: 0, y_px: 24 },
+		to: { opacity: 1, y_px: 0 },
+	};
+
+	const units = wrapTextUnits(element, "per-line");
+
+	// Add overflow hidden to parent for mask effect
+	element.style.overflow = "hidden";
+
 	applyInitialState(units, config, runtime);
 
 	const [min, max] = runtime.initialDelayRange;

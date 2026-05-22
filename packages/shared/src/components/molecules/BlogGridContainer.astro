@@ -14,6 +14,7 @@ import {
 	isExternalArticle,
 } from "@/lib/blog-post.utils";
 import { cn } from "@/lib/utils";
+import AnimatedCard from "../atoms/AnimatedCard.astro";
 import CtaNewsletterSubscription from "../organisms/CtaNewsletterSubscription.astro";
 import ArticleCard from "./ArticleCard.astro";
 
@@ -134,16 +135,18 @@ for (let i = 0; i < totalPosts; i++) {
             </li>
           )}
           <li class={specialClasses}>
-            <ArticleCard
-              image={post.cover}
-              title={post.title}
-              description={post.description}
-              url={postUrl}
-              loading={imageLoading}
-              data-external={isExternalArticle(post) ? 'true' : 'false'}
-              data-target={target}
-              data-rel={rel}
-            />
+            <AnimatedCard effect="spring-scale-in" delay={index * 50}>
+              <ArticleCard
+                image={post.cover}
+                title={post.title}
+                description={post.description}
+                url={postUrl}
+                loading={imageLoading}
+                data-external={isExternalArticle(post) ? 'true' : 'false'}
+                data-target={target}
+                data-rel={rel}
+              />
+            </AnimatedCard>
           </li>
         </>
       );

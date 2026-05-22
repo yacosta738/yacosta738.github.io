@@ -1,4 +1,5 @@
 ---
+import AnimatedCard from "@atoms/AnimatedCard.astro";
 import Section from "@atoms/Section.astro";
 import { Icon } from "astro-icon/components";
 /**
@@ -33,61 +34,63 @@ const skillMap = new Map(
 {skills.length > 0 && (
   <Section title={t("skills")}>
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {skills.map(({ name, keywords = [], level }) => {
+      {skills.map(({ name, keywords = [], level }, index) => {
         const matchedSkill = skillMap.get(name.toLowerCase());
         return (
           <li>
-            <Card class="h-full">
-              <header class="card-header mb-4">
-                <div class="flex items-start gap-3 mb-3">
-                  <div class="text-primary flex-shrink-0">
-                    {matchedSkill?.icon && (
-                      <Icon name={matchedSkill.icon} class="w-6 h-6" aria-hidden="true" />
-                    )}
+            <AnimatedCard effect="micro-scale-fade" delay={index * 35}>
+              <Card class="h-full">
+                <header class="card-header mb-4">
+                  <div class="flex items-start gap-3 mb-3">
+                    <div class="text-primary flex-shrink-0">
+                      {matchedSkill?.icon && (
+                        <Icon name={matchedSkill.icon} class="w-6 h-6" aria-hidden="true" />
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div class="flex-1">
-                  <h3 class="font-semibold text-foreground text-lg leading-tight mb-1">
-                    {name}
-                  </h3>
-                  <div class="flex items-center gap-2">
-                    {level?.toLowerCase() === "expert" && (
-                      <span
-                        class="inline-flex items-center text-brand-accent/80"
-                        title={t("skills.level.expert") || "Expert level"}
-                      >
-                        <Icon name="lucide:award" class="w-4 h-4" aria-hidden="true" />
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-foreground text-lg leading-tight mb-1">
+                      {name}
+                    </h3>
+                    <div class="flex items-center gap-2">
+                      {level?.toLowerCase() === "expert" && (
+                        <span
+                          class="inline-flex items-center text-brand-accent/80"
+                          title={t("skills.level.expert") || "Expert level"}
+                        >
+                          <Icon name="lucide:award" class="w-4 h-4" aria-hidden="true" />
+                        </span>
+                      )}
+                      {level?.toLowerCase() === "advanced" && (
+                        <span
+                          class="inline-flex items-center text-brand-accent/80"
+                          title={t("skills.level.advanced") || "Advanced level"}
+                        >
+                          <Icon name="lucide:star" class="w-4 h-4" aria-hidden="true" />
+                        </span>
+                      )}
+                      {level?.toLowerCase() !== "expert" && level?.toLowerCase() !== "advanced" && (
+                        <span
+                          class="inline-flex items-center text-muted-foreground/60"
+                          title={t("skills.level.other", { level }) || `${level} level`}
+                        >
+                          <Icon name="lucide:circle" class="w-4 h-4" aria-hidden="true" />
+                        </span>
+                      )}
+                      <span class="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                        {level}
                       </span>
-                    )}
-                    {level?.toLowerCase() === "advanced" && (
-                      <span
-                        class="inline-flex items-center text-brand-accent/80"
-                        title={t("skills.level.advanced") || "Advanced level"}
-                      >
-                        <Icon name="lucide:star" class="w-4 h-4" aria-hidden="true" />
-                      </span>
-                    )}
-                    {level?.toLowerCase() !== "expert" && level?.toLowerCase() !== "advanced" && (
-                      <span
-                        class="inline-flex items-center text-muted-foreground/60"
-                        title={t("skills.level.other", { level }) || `${level} level`}
-                      >
-                        <Icon name="lucide:circle" class="w-4 h-4" aria-hidden="true" />
-                      </span>
-                    )}
-                    <span class="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                      {level}
-                    </span>
+                    </div>
                   </div>
-                </div>
-              </header>
-              
-              {keywords.length > 0 && (
-                <div class="mt-4">
-                  <HighlightsList highlights={keywords} columns={2} />
-                </div>
-              )}
-            </Card>
+                </header>
+                
+                {keywords.length > 0 && (
+                  <div class="mt-4">
+                    <HighlightsList highlights={keywords} columns={2} />
+                  </div>
+                )}
+              </Card>
+            </AnimatedCard>
           </li>
         );
       })}

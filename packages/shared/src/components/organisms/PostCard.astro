@@ -52,14 +52,16 @@ const contentLink = ensureSingleTrailingSlash(
       </time>
   </div>
   <div class="flex-1">
-      <TextAnimation effect="per-word-crossfade" tag="h3" class="font-display text-3xl font-semibold leading-[124%] tracking-[-0.04em] mb-3 max-w-[470px] w-full line-clamp-3 text-foreground">
-          <a
-            href={contentLink}
-            class="transition-colors hover:text-brand-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
-          >
-            {title}
-          </a>
-      </TextAnimation>
+      <h3 class="font-display text-3xl font-semibold leading-[124%] tracking-[-0.04em] mb-3 max-w-[470px] w-full line-clamp-3 text-foreground">
+          <TextAnimation effect="per-word-crossfade" tag="span">
+            <a
+              href={contentLink}
+              class="transition-colors hover:text-brand-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+            >
+              {title}
+            </a>
+          </TextAnimation>
+      </h3>
       <p class="font-body text-lg leading-[140%] tracking-normal mb-3 max-w-[430px] w-full line-clamp-4 text-foreground-muted">{description}</p>
       <div class="flex items-center flex-wrap gap-2">
 							<ByAuthor

@@ -127,7 +127,8 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 				<div class="tab-list" role="tablist" aria-label="Job tabs">
 					{sortedCompanies.map((company, i) => (
 						<button
-							class="tab-button"
+							class="tab-button animate-experience-tab"
+							style={`animation-delay: ${i * 80}ms;`}
 							data-tab={i}
 							id={`tab-${i}`}
 							role="tab"
@@ -236,6 +237,23 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 		background-color: var(--light-navy);
 		color: var(--green);
 		outline: none;
+	}
+
+	.animate-experience-tab {
+		opacity: 0;
+		transform: translateY(4px);
+		animation: experience-tab-enter 0.28s ease-out forwards;
+	}
+
+	@keyframes experience-tab-enter {
+		from {
+			opacity: 0;
+			transform: translateY(4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.tab-button[aria-selected="true"] {
@@ -385,8 +403,8 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 
 			if (this.tabs.length === 0) return;
 
-			// Set initial active state
-			this.setActiveTab(0);
+			// Set initial active state without replaying panel animation on first load
+			this.setActiveTab(0, false);
 
 			// Add click event listeners
 			this.tabs.forEach((tab, index) => {
@@ -403,7 +421,7 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 			window.addEventListener('resize', () => this.updateHighlight());
 		}
 
-		setActiveTab(index: number) {
+		setActiveTab(index: number, animate = true) {
 			if (index < 0 || index >= this.tabs.length) return;
 
 			// Update active tab
@@ -433,10 +451,19 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 			// Update panel states
 			this.panels.forEach((panel, i) => {
 				const isActive = i === index;
+				const panelEl = panel as HTMLElement;
 				panel.setAttribute('tabindex', isActive ? '0' : '-1');
 				panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-				(panel as HTMLElement).style.display = isActive ? 'block' : 'none';
+				panelEl.style.display = isActive ? 'block' : 'none';
+				panelEl.classList.remove('panel-enter');
 			});
+
+			const activePanel = this.panels[index] as HTMLElement | undefined;
+			if (activePanel && animate) {
+				requestAnimationFrame(() => {
+					activePanel.classList.add('panel-enter');
+				});
+			}
 
 			// Update highlight position
 			this.updateHighlight();
