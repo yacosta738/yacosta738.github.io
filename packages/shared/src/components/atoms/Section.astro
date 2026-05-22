@@ -28,15 +28,17 @@ const classes = cn(
 
 <section class={classes} {...rest}>
 	{title && (
-		<TextAnimation effect="micro-scale-fade" tag="h2">
-			<Typography 
-				as="span" 
-				variant="subtitle" 
-				class="numbered-heading flex items-center relative my-2.5 mb-10 w-full font-bold whitespace-nowrap"
-			>
-				{title}
-			</Typography>
-		</TextAnimation>
+		<h2>
+			<TextAnimation effect="micro-scale-fade" tag="span">
+				<Typography 
+					as="span" 
+					variant="subtitle" 
+					class="numbered-heading flex items-center relative my-2.5 mb-10 w-full font-bold whitespace-nowrap"
+				>
+					{title}
+				</Typography>
+			</TextAnimation>
+		</h2>
 	)}
 	<slot />
 </section>

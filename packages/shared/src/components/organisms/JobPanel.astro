@@ -121,6 +121,7 @@ const companyLogo = getCompanyLogo(company.name);
 	}
 
 	.tab-panel.panel-enter {
+		will-change: transform, opacity;
 		animation: panel-enter 0.24s ease-out both;
 	}
 
@@ -128,12 +129,10 @@ const companyLogo = getCompanyLogo(company.name);
 		from {
 			opacity: 0;
 			transform: translateY(4px);
-			filter: blur(1.5px);
 		}
 		to {
 			opacity: 1;
 			transform: translateY(0);
-			filter: blur(0);
 		}
 	}
 

@@ -1,4 +1,5 @@
 ---
+import AnimatedCard from "@/components/atoms/AnimatedCard.astro";
 /**
  * FeaturedProjects section component.
  * This component renders a section that showcases a list of featured projects.
@@ -8,7 +9,6 @@
  * @prop {Project[]} [projects=[]] - An array of project objects from the resume.
  */
 import Section from "@/components/atoms/Section.astro";
-import AnimatedCard from "@/components/atoms/AnimatedCard.astro";
 import FeaturedProjectCard from "@/components/organisms/FeaturedProjectCard.astro";
 import type Project from "@/core/resume/project/project.model";
 import {

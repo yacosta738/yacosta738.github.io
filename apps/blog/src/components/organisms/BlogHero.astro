@@ -20,18 +20,19 @@ const translatePath = useTranslatedPath(currentLocale);
 				{t({ en: "Technical journal", es: "Diario técnico" })}
 			</span>
 		</TextAnimation>
-		<TextAnimation effect="line-by-line-slide" tag="div" delay={200}>
-			<PageHeadline class="blog-headline" {title}>
-				<p>
+		<PageHeadline class="blog-headline" {title}>
+			<TextAnimation effect="line-by-line-slide" tag="span" delay={200}>
+				<span>
 					{
 						t({
 							en: "Deep dives, engineering notes, and lessons learned from building.",
-						es: "Análisis, notas de ingeniería y aprendizajes reales de construir.",
+							es: "Análisis, notas de ingeniería y aprendizajes reales de construir.",
 						})
 					}
-				</p>
-			</PageHeadline>
-		</TextAnimation>
+				</span>
+			</TextAnimation>
+		</PageHeadline>
+
 		<div class="blog-hero__actions">
 			<TextAnimation effect="micro-scale-fade" tag="span" delay={260}>
 				<a class="blog-pill" href={translatePath("/search/")}>

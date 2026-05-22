@@ -54,16 +54,18 @@ const projectUrl =
         {translated('featuredProject', {}, 'Featured Project')}
       </p>
 
-      <TextAnimation effect="per-word-crossfade" tag="h3" class="project-title">
-        <Link
-          href={projectUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          title={`${translated('viewProject', {}, 'View project')}: ${project.name}`}
-        >
-          {project.name}
-        </Link>
-      </TextAnimation>
+      <h3 class="project-title">
+        <TextAnimation effect="per-word-crossfade" tag="span">
+          <Link
+            href={projectUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`${translated('viewProject', {}, 'View project')}: ${project.name}`}
+          >
+            {project.name}
+          </Link>
+        </TextAnimation>
+      </h3>
 
       <div class="project-description">
         <p>{project.description}</p>

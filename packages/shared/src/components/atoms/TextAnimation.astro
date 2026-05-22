@@ -15,17 +15,21 @@ interface Props {
 		| "bottom-up-letters"
 		| "mask-reveal-up";
 	class?: string;
-	tag?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
+	tag?: "span";
 	delay?: number;
 }
 
-const {
-	effect,
-	class: className = "",
-	tag: Tag = "span",
-	delay = 0,
-} = Astro.props;
+const { effect, class: className = "", tag, delay = 0 } = Astro.props;
+
+const Tag = tag && tag !== "span" ? "span" : "span";
+const warnedForInvalidTag = tag && tag !== "span";
 ---
+
+{warnedForInvalidTag && (
+	<script is:inline>
+		console.warn("TextAnimation only supports tag='span'. Falling back to span.");
+	</script>
+)}
 
 <Tag 
   class:list={['text-animation', `text-animation--${effect}`, className]}

@@ -48,7 +48,8 @@ const {
   // Initialize card animations when DOM is ready
   function initCardAnimations() {
     const elements = document.querySelectorAll<HTMLElement>('[data-card-animation]');
-    
+    const animationGroups = new Map<string, { effect: keyof typeof cardEffectMap; delay: number }>();
+
     elements.forEach((element) => {
       const effect = element.dataset.cardAnimation as keyof typeof cardEffectMap;
       const delay = Number(element.dataset.animationDelay) || 0;
@@ -59,28 +60,32 @@ const {
         return;
       }
 
-      // Wrap in delayed function if delay is specified
+      const groupKey = `${effect}:${delay}`;
+      if (!animationGroups.has(groupKey)) {
+        animationGroups.set(groupKey, { effect, delay });
+      }
+    });
+
+    animationGroups.forEach(({ effect, delay }) => {
       const delayedAnimation = async (el: HTMLElement) => {
         if (delay > 0) {
           await new Promise((resolve) => setTimeout(resolve, delay));
         }
-        
-        // For card animations, keep motion subtle and premium
+
+        // Card wrappers contain complex DOM; keep a lightweight reveal instead of
+        // calling the text-splitting animation helpers from cardEffectMap.
         el.style.opacity = '0';
         el.style.transform = 'translateY(10px) scale(0.985)';
-        
+
         await new Promise((resolve) => setTimeout(resolve, 20));
-        
+
         el.style.transition = 'opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1), transform 0.48s cubic-bezier(0.22, 1, 0.36, 1)';
         el.style.opacity = '1';
         el.style.transform = 'translateY(0) scale(1)';
-        
-        return Promise.resolve();
       };
 
-      // Use intersection observer to trigger animation on scroll
       observeAndAnimate(
-        `[data-card-animation="${effect}"]`,
+        `[data-card-animation="${effect}"][data-animation-delay="${delay}"]`,
         delayedAnimation,
         { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
       );

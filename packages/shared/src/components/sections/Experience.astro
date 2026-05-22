@@ -403,8 +403,8 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 
 			if (this.tabs.length === 0) return;
 
-			// Set initial active state
-			this.setActiveTab(0);
+			// Set initial active state without replaying panel animation on first load
+			this.setActiveTab(0, false);
 
 			// Add click event listeners
 			this.tabs.forEach((tab, index) => {
@@ -421,7 +421,7 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 			window.addEventListener('resize', () => this.updateHighlight());
 		}
 
-		setActiveTab(index: number) {
+		setActiveTab(index: number, animate = true) {
 			if (index < 0 || index >= this.tabs.length) return;
 
 			// Update active tab
@@ -459,7 +459,7 @@ const sortedCompanies: GroupedCompany[] = Object.values(groupedWork)
 			});
 
 			const activePanel = this.panels[index] as HTMLElement | undefined;
-			if (activePanel) {
+			if (activePanel && animate) {
 				requestAnimationFrame(() => {
 					activePanel.classList.add('panel-enter');
 				});
