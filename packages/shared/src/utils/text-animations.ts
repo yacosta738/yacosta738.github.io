@@ -642,7 +642,9 @@ export function observeAndAnimate(
 	if (prefersReducedMotion) {
 		// Skip animations but still make elements visible
 		const elements = document.querySelectorAll<HTMLElement>(selector);
-		elements.forEach((el) => el.classList.add('text-animation--initialized'));
+		elements.forEach((el) => {
+			el.classList.add("text-animation--initialized");
+		});
 		return () => {};
 	}
 
@@ -654,7 +656,7 @@ export function observeAndAnimate(
 			if (entry.isIntersecting && !animated.has(entry.target as HTMLElement)) {
 				const element = entry.target as HTMLElement;
 				animated.add(element);
-				element.classList.add('text-animation--initialized');
+				element.classList.add("text-animation--initialized");
 				observer.unobserve(element);
 				animationFn(element).catch(console.error);
 			}
