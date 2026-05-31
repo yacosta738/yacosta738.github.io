@@ -42,10 +42,12 @@ jobs:
 
       - name: Cleanup old caches
         uses: actions/github-script@v9
+        env:
+          CACHE_TYPE: ${{ inputs.cache-type || 'all' }}
         with:
           script: |
             const { owner, repo } = context.repo;
-            const cacheType = '${{ inputs.cache-type || 'all' }}';
+            const cacheType = process.env.CACHE_TYPE;
             
             console.log(`🧹 Cleaning ${cacheType} caches...`);
             
