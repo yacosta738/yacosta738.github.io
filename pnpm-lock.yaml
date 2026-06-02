@@ -22,8 +22,8 @@ catalogs:
       specifier: ^3.7.2
       version: 3.7.2
     '@axe-core/playwright':
-      specifier: 4.11.2
-      version: 4.11.2
+      specifier: 4.11.3
+      version: 4.11.3
     '@biomejs/biome':
       specifier: 2.4.12
       version: 2.4.12
@@ -373,7 +373,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.2(playwright-core@1.59.1)
+        version: 4.11.3(playwright-core@1.59.1)
       '@biomejs/biome':
         specifier: 'catalog:'
         version: 2.4.12
@@ -518,7 +518,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.2(playwright-core@1.59.1)
+        version: 4.11.3(playwright-core@1.59.1)
       '@biomejs/biome':
         specifier: 'catalog:'
         version: 2.4.12
@@ -811,7 +811,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
-        version: 4.11.2(playwright-core@1.59.1)
+        version: 4.11.3(playwright-core@1.59.1)
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.59.1
@@ -902,8 +902,8 @@ packages:
   '@astrojs/yaml2ts@0.2.3':
     resolution: {integrity: sha512-PJzRmgQzUxI2uwpdX2lXSHtP4G8ocp24/t+bZyf5Fy0SZLSF9f9KXZoMlFM/XCGue+B0nH/2IZ7FpBYQATBsCg==}
 
-  '@axe-core/playwright@4.11.2':
-    resolution: {integrity: sha512-iP6hfNl9G0j/SEUSo8M7D80RbcDo9KRAAfDP4IT5OHB+Wm6zUHIrm8Y51BKI+Oyqduvipf9u1hcRy57zCBKzWQ==}
+  '@axe-core/playwright@4.11.3':
+    resolution: {integrity: sha512-h/kfksv4F0cVIDlKpT4700OehdRgpvuVskuQ2nb7/JmtWUXpe9ftHAPtwyXGvVSsa6SJ64A9ER7Zrzc/sIvC4w==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
 
@@ -2463,8 +2463,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axe-core@4.11.3:
-    resolution: {integrity: sha512-zBQouZixDTbo3jMGqHKyePxYxr1e5W8UdTmBQ7sNtaA9M2bE32daxxPLS/jojhKOHxQ7LWwPjfiwf/fhaJWzlg==}
+  axe-core@4.11.4:
+    resolution: {integrity: sha512-KunSNx+TVpkAw/6ULfhnx+HWRecjqZGTOyquAoWHYLRSdK1tB5Ihce1ZW+UY3fj33bYAFWPu7W/GRSmmrCGuxA==}
     engines: {node: '>=4'}
 
   axobject-query@4.1.0:
@@ -5054,9 +5054,9 @@ snapshots:
     dependencies:
       yaml: 2.8.3
 
-  '@axe-core/playwright@4.11.2(playwright-core@1.59.1)':
+  '@axe-core/playwright@4.11.3(playwright-core@1.59.1)':
     dependencies:
-      axe-core: 4.11.3
+      axe-core: 4.11.4
       playwright-core: 1.59.1
 
   '@babel/code-frame@7.29.0':
@@ -6496,7 +6496,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axe-core@4.11.3: {}
+  axe-core@4.11.4: {}
 
   axobject-query@4.1.0: {}
 
