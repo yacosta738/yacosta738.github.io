@@ -51,7 +51,7 @@ catalog:
   astro-pagefind: ^1.8.6
 
   # Security and compatibility overrides
-  brace-expansion: ^5.0.5
+  brace-expansion: ^5.0.6
   chanfana: ^3.3.0
   clsx: ^2.1.1
   cross-env: ^10.1.0
