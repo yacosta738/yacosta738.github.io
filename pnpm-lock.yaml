@@ -124,8 +124,8 @@ catalogs:
       specifier: ^1.0.0
       version: 1.0.0
     fs-extra:
-      specifier: ^11.3.5
-      version: 11.3.5
+      specifier: ^11.3.4
+      version: 11.3.4
     gray-matter:
       specifier: ^4.0.3
       version: 4.0.3
@@ -133,8 +133,8 @@ catalogs:
       specifier: ^20.9.0
       version: 20.9.0
     hono:
-      specifier: ^4.12.23
-      version: 4.12.23
+      specifier: ^4.12.21
+      version: 4.12.21
     jsdom:
       specifier: ^29.0.2
       version: 29.0.2
@@ -215,8 +215,8 @@ catalogs:
       version: 4.3.6
 
 overrides:
-  brace-expansion: ^5.0.5
-  fast-xml-parser: ^5.7.3
+  brace-expansion: ^5.0.6
+  fast-xml-parser: ^5.7.1
   h3: ^1.15.11
   handlebars: ^4.7.9
   minimatch: ^10.2.5
@@ -254,16 +254,16 @@ importers:
     dependencies:
       '@hono/swagger-ui':
         specifier: 'catalog:'
-        version: 0.6.1(hono@4.12.23)
+        version: 0.6.1(hono@4.12.21)
       '@hono/zod-openapi':
         specifier: 'catalog:'
-        version: 1.3.0(hono@4.12.23)(zod@4.3.6)
+        version: 1.3.0(hono@4.12.21)(zod@4.3.6)
       chanfana:
         specifier: 'catalog:'
         version: 3.3.0
       hono:
         specifier: 'catalog:'
-        version: 4.12.23
+        version: 4.12.21
       zod:
         specifier: 'catalog:'
         version: 4.3.6
@@ -620,7 +620,7 @@ importers:
         version: 5.20.0
       fs-extra:
         specifier: 'catalog:'
-        version: 11.3.5
+        version: 11.3.4
       kleur:
         specifier: 'catalog:'
         version: 4.1.5
@@ -2491,8 +2491,8 @@ packages:
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
 
-  brace-expansion@5.0.5:
-    resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
+  brace-expansion@5.0.6:
+    resolution: {integrity: sha512-kLpxurY4Z4r9sgMsyG0Z9uzsBlgiU/EFKhj/h91/8yHu0edo7XuixOIH3VcJ8kkxs6/jPzoI6U9Vj3WqbMQ94g==}
     engines: {node: 18 || 20 || >=22}
 
   braces@3.0.3:
@@ -2958,8 +2958,8 @@ packages:
   fast-xml-builder@1.2.0:
     resolution: {integrity: sha512-00aAWieqff+ZJhsXA4g1g7M8k+7AYoMUUHF+/zFb5U6Uv/P0Vl4QZo84/IcufzYalLuEj9928bXN9PbbFzMF0Q==}
 
-  fast-xml-parser@5.8.0:
-    resolution: {integrity: sha512-6bIM7fsJxeo3uXv7OncQYsBAMPJ7V16Slahl/6M98C/i2q+vB1+4a0MtrvYwDFEUrwDSbAmeLDRXsOBwrL7yAg==}
+  fast-xml-parser@5.7.1:
+    resolution: {integrity: sha512-8Cc3f8GUGUULg34pBch/KGyPLglS+OFs05deyOlY7fL2MTagYPKrVQNmR1fLF/yJ9PH5ZSTd3YDF6pnmeZU+zA==}
     hasBin: true
 
   fastq@1.20.1:
@@ -2999,8 +2999,8 @@ packages:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
 
-  fs-extra@11.3.5:
-    resolution: {integrity: sha512-eKpRKAovdpZtR1WopLHxlBWvAgPny3c4gX1G5Jhwmmw4XJj0ifSD5qB5TOo8hmA0wlRKDAOAhEE1yVPgs6Fgcg==}
+  fs-extra@11.3.4:
+    resolution: {integrity: sha512-CTXd6rk/M3/ULNQj8FBqBWHYBVYybQ3VPBw0xGKFe3tuH7ytT6ACnvzpIQ3UZtB8yvUKC2cXn1a+x+5EVQLovA==}
     engines: {node: '>=14.14'}
 
   fsevents@2.3.2:
@@ -3143,8 +3143,8 @@ packages:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
 
-  hono@4.12.23:
-    resolution: {integrity: sha512-eIaZ9qDgu7XV0pxOCrg7/WhnQ6Ivm22UcxhXx/A3dcbqbbYgBEkc6e/J/s7j2tS96zoB0S9VBdLwQNCWwUo4LA==}
+  hono@4.12.21:
+    resolution: {integrity: sha512-uV63apnb0kyPtAUwoWgaGh9HyIFcv8lgmzPZSiTBQAFOFGIzka5EZ1dZocmGnn0XdX0+XTqJ6Tqv7selMuGLRQ==}
     engines: {node: '>=16.9.0'}
 
   html-encoding-sniffer@6.0.0:
@@ -4245,8 +4245,8 @@ packages:
     resolution: {integrity: sha512-uCC2VHvQRYu+lMh4My/sFNmF2klFymLX1wHJeXnbEJERpV/ZsVuonzerjfrGpIGF7LBVa1O7i9kjiWvJiFck8g==}
     engines: {node: '>=0.10.0'}
 
-  strnum@2.3.0:
-    resolution: {integrity: sha512-ums3KNd42PGyx5xaoVTO1mjU1bH3NpY4vsrVlnv9PNGqQj8wd7rJ6nEypLrJ7z5vxK5RP0yMLo6J/Gsm62DI5Q==}
+  strnum@2.2.3:
+    resolution: {integrity: sha512-oKx6RUCuHfT3oyVjtnrmn19H1SiCqgJSg+54XqURKp5aCMbrXrhLjRN9TjuwMjiYstZ0MzDrHqkGZ5dFTKd+zg==}
 
   style-to-js@1.1.21:
     resolution: {integrity: sha512-RjQetxJrrUJLQPHbLku6U/ocGtzyjbJMP9lCNK7Ag0CNh690nSH8woqWH9u16nMjYBAok+i7JO1NP2pOy8IsPQ==}
@@ -5031,7 +5031,7 @@ snapshots:
 
   '@astrojs/rss@4.0.18':
     dependencies:
-      fast-xml-parser: 5.8.0
+      fast-xml-parser: 5.7.1
       piccolore: 0.1.3
       zod: 4.3.6
 
@@ -5391,21 +5391,21 @@ snapshots:
 
   '@faker-js/faker@10.4.0': {}
 
-  '@hono/swagger-ui@0.6.1(hono@4.12.23)':
+  '@hono/swagger-ui@0.6.1(hono@4.12.21)':
     dependencies:
-      hono: 4.12.23
+      hono: 4.12.21
 
-  '@hono/zod-openapi@1.3.0(hono@4.12.23)(zod@4.3.6)':
+  '@hono/zod-openapi@1.3.0(hono@4.12.21)(zod@4.3.6)':
     dependencies:
       '@asteasolutions/zod-to-openapi': 8.5.0(zod@4.3.6)
-      '@hono/zod-validator': 0.7.6(hono@4.12.23)(zod@4.3.6)
-      hono: 4.12.23
+      '@hono/zod-validator': 0.7.6(hono@4.12.21)(zod@4.3.6)
+      hono: 4.12.21
       openapi3-ts: 4.5.0
       zod: 4.3.6
 
-  '@hono/zod-validator@0.7.6(hono@4.12.23)(zod@4.3.6)':
+  '@hono/zod-validator@0.7.6(hono@4.12.21)(zod@4.3.6)':
     dependencies:
-      hono: 4.12.23
+      hono: 4.12.21
       zod: 4.3.6
 
   '@iconify-json/lucide@1.2.102':
@@ -6514,7 +6514,7 @@ snapshots:
 
   boolbase@1.0.0: {}
 
-  brace-expansion@5.0.5:
+  brace-expansion@5.0.6:
     dependencies:
       balanced-match: 4.0.4
 
@@ -7052,13 +7052,12 @@ snapshots:
       path-expression-matcher: 1.5.0
       xml-naming: 0.1.0
 
-  fast-xml-parser@5.8.0:
+  fast-xml-parser@5.7.1:
     dependencies:
       '@nodable/entities': 2.1.0
       fast-xml-builder: 1.2.0
       path-expression-matcher: 1.5.0
-      strnum: 2.3.0
-      xml-naming: 0.1.0
+      strnum: 2.2.3
 
   fastq@1.20.1:
     dependencies:
@@ -7092,7 +7091,7 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
-  fs-extra@11.3.5:
+  fs-extra@11.3.4:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.2.0
@@ -7350,7 +7349,7 @@ snapshots:
 
   hex-rgb@4.3.0: {}
 
-  hono@4.12.23: {}
+  hono@4.12.21: {}
 
   html-encoding-sniffer@6.0.0:
     dependencies:
@@ -8144,7 +8143,7 @@ snapshots:
 
   minimatch@10.2.5:
     dependencies:
-      brace-expansion: 5.0.5
+      brace-expansion: 5.0.6
 
   minipass@7.1.3: {}
 
@@ -8891,7 +8890,7 @@ snapshots:
 
   strip-bom-string@1.0.0: {}
 
-  strnum@2.3.0: {}
+  strnum@2.2.3: {}
 
   style-to-js@1.1.21:
     dependencies:
