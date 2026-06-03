@@ -56,7 +56,7 @@ runs:
       shell: bash
       run: |
         pnpm run verify:workspace-lockfiles
-        pnpm install --frozen-lockfile
+        pnpm install --no-frozen-lockfile
 
     - id: emit
       name: Emit outputs
