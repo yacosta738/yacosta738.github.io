@@ -75,7 +75,7 @@
 	"peerDependencies": {
 		"astro": ">=6.1.10"
 	},
-	"packageManager": "pnpm@10.33.0",
+	"packageManager": "pnpm@10.33.4",
 	"engines": {
 		"node": ">=22.22.2"
 	}
