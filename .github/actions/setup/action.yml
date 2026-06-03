@@ -55,6 +55,8 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
+        # Use --no-frozen-lockfile to handle version mismatches between
+        # the lockfile and the pnpm version in Cloudflare Pages builds
         pnpm run verify:workspace-lockfiles
         pnpm install --no-frozen-lockfile
 
