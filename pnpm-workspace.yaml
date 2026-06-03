@@ -57,7 +57,7 @@ catalog:
   cross-env: ^10.1.0
   crossrm: ^1.0.0
   fast-xml-parser: ^5.7.1
-  fs-extra: ^11.3.4
+  fs-extra: ^11.3.5
   gray-matter: ^4.0.3
   h3: ^1.15.11
   handlebars: ^4.7.9
