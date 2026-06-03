@@ -29,7 +29,8 @@ runs:
       shell: bash
       run: |
         corepack enable
-        corepack prepare pnpm@${{ inputs.pnpm-version }} --activate
+        pnpm_version="${PNPM_VERSION:-${{ inputs.pnpm-version }}}"
+        corepack prepare "pnpm@${pnpm_version}" --activate
 
     - name: Verify pnpm installation
       shell: bash
@@ -41,16 +42,18 @@ runs:
     - name: Get pnpm store directory
       id: pnpm-store
       shell: bash
-      run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
+      run: |
+        pnpm_version="${PNPM_VERSION:-${{ inputs.pnpm-version }}}"
+        echo "path=$(pnpm store path --engine-string="${pnpm_version}")" >> $GITHUB_OUTPUT
 
     - name: Cache pnpm store
       id: pnpm-cache
       uses: actions/cache@v5
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
-        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        key: ${{ runner.os }}-pnpm-${{ env.PNPM_VERSION || inputs.pnpm-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-pnpm-
+          ${{ runner.os }}-pnpm-${{ env.PNPM_VERSION || inputs.pnpm-version }}-
 
     - name: Install dependencies
       shell: bash
