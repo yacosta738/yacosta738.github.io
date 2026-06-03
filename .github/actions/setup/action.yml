@@ -29,8 +29,7 @@ runs:
       shell: bash
       run: |
         corepack enable
-        pnpm_version="${PNPM_VERSION:-${{ inputs.pnpm-version }}}"
-        corepack prepare "pnpm@${pnpm_version}" --activate
+        corepack prepare "pnpm@${PNPM_VERSION:-10}" --activate
 
     - name: Verify pnpm installation
       shell: bash
@@ -42,9 +41,7 @@ runs:
     - name: Get pnpm store directory
       id: pnpm-store
       shell: bash
-      run: |
-        pnpm_version="${PNPM_VERSION:-${{ inputs.pnpm-version }}}"
-        echo "path=$(pnpm store path --engine-string="${pnpm_version}")" >> $GITHUB_OUTPUT
+      run: echo "path=$(pnpm store path)" >> $GITHUB_OUTPUT
 
     - name: Cache pnpm store
       id: pnpm-cache
