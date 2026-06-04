@@ -245,18 +245,9 @@ test.describe("Contact Form", () => {
 		// Check if form is cleared (implementation-dependent)
 		await page.waitForTimeout(1000); // Give time for any clear animation
 
-		const nameValue = await page.locator(selectors.contact.name).inputValue();
-		const emailValue = await page.locator(selectors.contact.email).inputValue();
-		const messageValue = await page
-			.locator(selectors.contact.message)
-			.inputValue();
-
 		// Note: Form clearing behavior is implementation-dependent.
 		// Some implementations clear the form after success, others preserve data for re-submission.
 		// Both behaviors are acceptable, so we just document the observed state without asserting.
-		const formWasCleared =
-			nameValue === "" && emailValue === "" && messageValue === "";
-		void formWasCleared; // Document observed state, no assertion needed
 	});
 
 	test("should disable submit button while submitting", async ({ page }) => {
@@ -273,13 +264,11 @@ test.describe("Contact Form", () => {
 		await page.fill(selectors.contact.email, testData.contact.valid.email);
 		await page.fill(selectors.contact.message, testData.contact.valid.message);
 
-		// Capture disabled state before submission
-		const isDisabledBeforeSubmit = await page
-			.locator(selectors.contact.submit)
-			.isDisabled();
-
-		// Click submit and wait for response to complete
+		// Click submit and verify the button is disabled during submission
 		await page.click(selectors.contact.submit);
+		await expect(page.locator(selectors.contact.submit)).toBeDisabled();
+
+		// Wait for response to complete
 		await page.waitForResponse("**/api/contact**", { timeout: 10_000 });
 
 		// Button should be enabled after successful submission completes
@@ -289,6 +278,5 @@ test.describe("Contact Form", () => {
 
 		// Assert expected behavior: button is enabled after submission completes
 		expect(isEnabledAfterSubmit).toBe(true);
-		void isDisabledBeforeSubmit; // Captured for documentation
 	});
 });
