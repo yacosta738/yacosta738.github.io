@@ -6,6 +6,19 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.3.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.3.0...v4.3.1) (2026-06-04)
+
+
+### Bug Fixes
+
+* **blog:** skip notion validation when cache file is absent ([adab579](https://github.com/yacosta738/yacosta738.github.io/commit/adab579683f21acb6b83b7d9968d631d5fd7b1ca))
+* **ci:** prevent script injection in cache-cleanup workflow ([#1957](https://github.com/yacosta738/yacosta738.github.io/issues/1957)) ([316f01f](https://github.com/yacosta738/yacosta738.github.io/commit/316f01f4e7b78bc546489d42629bab4c83d6dc7b))
+* **deps:** update caddy Docker tag to v2.11.3 ([#1955](https://github.com/yacosta738/yacosta738.github.io/issues/1955)) ([cca63e2](https://github.com/yacosta738/yacosta738.github.io/commit/cca63e25d4d24dd9b1b68d7b6738bc713f3b7ac9))
+* **deps:** update caddy:2.11.2-alpine Docker digest to 8344681 ([#1935](https://github.com/yacosta738/yacosta738.github.io/issues/1935)) ([87f0ad4](https://github.com/yacosta738/yacosta738.github.io/commit/87f0ad481ede25fe02efdc90899e2c30cd594e79))
+* **deps:** update mcr.microsoft.com/devcontainers/typescript-node:4-20-bullseye Docker digest to c0da2b9 ([#1936](https://github.com/yacosta738/yacosta738.github.io/issues/1936)) ([98d572f](https://github.com/yacosta738/yacosta738.github.io/commit/98d572fd0c4c7c1037072a6f475851d47b6e75e8))
+* **deps:** update Node.js to 9f6d597 ([#1937](https://github.com/yacosta738/yacosta738.github.io/issues/1937)) ([7c44358](https://github.com/yacosta738/yacosta738.github.io/commit/7c44358e2b761e5a5ad6451a62221a3aa4b53d73))
+* **shared:** use dataset instead of getAttribute for data-prefetch-priority ([4c37a87](https://github.com/yacosta738/yacosta738.github.io/commit/4c37a87d78158ce1a924055ea8a10bbfc6ae2f8d))
+
 ## [4.3.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.2.7...v4.3.0) (2026-05-22)
 
 
