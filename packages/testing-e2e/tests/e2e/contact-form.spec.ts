@@ -267,7 +267,8 @@ test.describe("Contact Form", () => {
 
 		// Mock hCaptcha token before submitting
 		await page.evaluate(() => {
-			(window as { getCaptchaToken?: (id: string) => string }).getCaptchaToken = () => "mock-captcha-token";
+			(window as { getCaptchaToken?: (id: string) => string }).getCaptchaToken =
+				() => "mock-captcha-token";
 		});
 		await page.waitForTimeout(100);
 
