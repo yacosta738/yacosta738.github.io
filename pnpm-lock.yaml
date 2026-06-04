@@ -91,7 +91,7 @@ catalogs:
       specifier: ^5.0.9
       version: 5.0.9
     '@vitest/coverage-v8':
-      specifier: ^4.1.7
+      specifier: ^4.1.4
       version: 4.1.8
     ajv:
       specifier: 8.20.0
@@ -205,7 +205,7 @@ catalogs:
       specifier: ^6.0.3
       version: 6.0.3
     vitest:
-      specifier: ^4.1.7
+      specifier: ^4.1.4
       version: 4.1.8
     wrangler:
       specifier: ^4.84.1
