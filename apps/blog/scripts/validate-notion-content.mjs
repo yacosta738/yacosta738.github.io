@@ -88,6 +88,13 @@ const collectLocalNotionAssetPaths = (entries) => {
 };
 
 const run = async () => {
+	if (!existsSync(snapshotPath)) {
+		console.log(
+			"[notion:validate] no cache file found (may be rate limited or first build) — skipping validation",
+		);
+		return;
+	}
+
 	const snapshot = readSnapshot(snapshotPath);
 	assertNoRemoteNotionImages(snapshot.entries);
 
