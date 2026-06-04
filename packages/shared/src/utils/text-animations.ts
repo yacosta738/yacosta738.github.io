@@ -23,6 +23,11 @@ const DEFAULT_RUNTIME: RuntimeConfig = {
 	initialDelayRange: [0, 140],
 };
 
+const DEFAULT_OBSERVER_OPTIONS: IntersectionObserverInit = {
+	threshold: 0.1,
+	rootMargin: "0px 0px -10% 0px",
+};
+
 /**
  * Creates transform string from animation frame
  */
@@ -621,18 +626,13 @@ export async function maskRevealUp(
 	await Promise.all(animations.map((anim) => anim.finished));
 }
 
-const activeTextAnimationObservers = new Set<IntersectionObserver>();
-
 /**
  * Observes elements and triggers animation when they enter viewport
  */
 export function observeAndAnimate(
 	selector: string,
 	animationFn: (el: HTMLElement) => Promise<void>,
-	options: IntersectionObserverInit = {
-		threshold: 0.1,
-		rootMargin: "0px 0px -10% 0px",
-	},
+	options: IntersectionObserverInit = DEFAULT_OBSERVER_OPTIONS,
 ): () => void {
 	// Check for reduced motion preference
 	const prefersReducedMotion = window.matchMedia(
@@ -663,8 +663,6 @@ export function observeAndAnimate(
 		});
 	}, options);
 
-	activeTextAnimationObservers.add(observer);
-
 	elements.forEach((el) => {
 		observer.observe(el);
 	});
@@ -672,6 +670,5 @@ export function observeAndAnimate(
 	// Return cleanup function
 	return () => {
 		observer.disconnect();
-		activeTextAnimationObservers.delete(observer);
 	};
 }

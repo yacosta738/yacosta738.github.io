@@ -110,7 +110,9 @@ const run = async () => {
 	);
 };
 
-run().catch((error) => {
+try {
+	await run();
+} catch (error) {
 	console.error("[notion:validate] failed", error);
 	process.exitCode = 1;
-});
+}
