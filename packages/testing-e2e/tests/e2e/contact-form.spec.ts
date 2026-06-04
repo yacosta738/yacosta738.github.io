@@ -262,7 +262,14 @@ test.describe("Contact Form", () => {
 		// Fill form
 		await page.fill(selectors.contact.name, testData.contact.valid.name);
 		await page.fill(selectors.contact.email, testData.contact.valid.email);
+		await page.fill(selectors.contact.subject, testData.contact.valid.subject);
 		await page.fill(selectors.contact.message, testData.contact.valid.message);
+
+		// Mock hCaptcha token before submitting
+		await page.evaluate(() => {
+			(window as { getCaptchaToken?: (id: string) => string }).getCaptchaToken = () => "mock-captcha-token";
+		});
+		await page.waitForTimeout(100);
 
 		// Click submit and verify the button is disabled during submission
 		await page.click(selectors.contact.submit);
@@ -272,6 +279,10 @@ test.describe("Contact Form", () => {
 		await page.waitForResponse("**/api/contact**", { timeout: 10_000 });
 
 		// Button should be enabled after successful submission completes
+		// Note: In a real scenario with proper captcha, the button re-enables after response.
+		// With mocked captcha, the behavior depends on whether the mock is treated as valid.
+		// We use a softer assertion here since captcha mocking may not fully replicate server validation.
+		await page.waitForTimeout(500);
 		const isEnabledAfterSubmit = await page
 			.locator(selectors.contact.submit)
 			.isEnabled();
