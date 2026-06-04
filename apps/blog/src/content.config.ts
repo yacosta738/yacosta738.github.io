@@ -50,11 +50,16 @@ const createNotionLoader = async () => {
 	const notionConfig = getNotionLoaderConfig();
 	const rawContentSource = process.env.BLOG_CONTENT_SOURCE;
 
-	const contentSource = rawContentSource
-		? isBlogContentSource(rawContentSource)
-			? rawContentSource
-			: BLOG_CONTENT_SOURCE.DISABLED
-		: BLOG_CONTENT_SOURCE.LIVE;
+	const getContentSource = (raw: string | undefined): BlogContentSource => {
+		if (raw === undefined) return BLOG_CONTENT_SOURCE.LIVE;
+		if (isBlogContentSource(raw)) return raw;
+		console.warn(
+			`[blog:content] Invalid BLOG_CONTENT_SOURCE value "${raw}", falling back to DISABLED`,
+		);
+		return BLOG_CONTENT_SOURCE.DISABLED;
+	};
+
+	const contentSource = getContentSource(rawContentSource);
 
 	if (contentSource === BLOG_CONTENT_SOURCE.DISABLED) {
 		return async () => [];

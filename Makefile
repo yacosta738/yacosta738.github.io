@@ -6,17 +6,25 @@ API_FILTER := --filter=yap-api
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install clean dev build check check-biome test unit e2e preflight ready-to-push \
+.PHONY: all help install clean dev build check check-biome test unit e2e preflight ready-to-push \
 	portfolio-dev portfolio-build portfolio-check \
 	api-dev api-build api-test deploy \
-	e2e-headed e2e-debug e2e-ui e2e-report
+	e2e-headed e2e-debug e2e-ui e2e-report \
+	ci install-playwright
 
 help: ## Show available targets
 	@printf "\nProject task runner\n\n"
+	@printf "  %-20s %s\n" "preflight" "Fast local pre-push (check + unit + build, no e2e)"
+	@printf "  %-20s %s\n" "ci" "Full CI pipeline (check + unit + e2e + build)"
+	@printf "  %-20s %s\n" "install-playwright" "Install Playwright browsers (needed once for e2e)"
+	@printf "\n"
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_.-]+:.*## / {printf "  %-20s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 install: ## Install dependencies
 	$(PNPM) install
+
+install-playwright: ## Install Playwright browsers (needed once for e2e)
+	$(PNPM) exec playwright install
 
 clean: ## Clean portfolio generated artifacts
 	$(PNPM) $(PORTFOLIO_FILTER) clean
@@ -42,9 +50,11 @@ unit: ## Run unit tests for all apps
 e2e: ## Run end-to-end tests
 	$(PNPM) test:e2e
 
-preflight: check test build ## Run full pre-push validation (format/lint/check + tests + build)
+preflight: check unit build ## Fast local pre-push (format/lint/check + unit tests + build, no e2e)
 
-all: preflight ## Alias for full pre-push validation
+ci: check test build ## Full CI pipeline (format/lint/check + all tests + build)
+
+all: preflight ## Alias for preflight
 
 portfolio-dev: ## Start portfolio dev server (http://localhost:4321)
 	$(PNPM) $(PORTFOLIO_FILTER) dev
