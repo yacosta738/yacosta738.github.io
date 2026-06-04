@@ -205,11 +205,8 @@ function handleLinkHover(
 
 		// Determine priority based on link attributes
 		let priority: "high" | "low" | "auto" = options.priority;
-		if (link.hasAttribute("data-prefetch-priority")) {
-			priority = link.getAttribute("data-prefetch-priority") as
-				| "high"
-				| "low"
-				| "auto";
+		if (link.dataset.prefetchPriority) {
+			priority = link.dataset.prefetchPriority as "high" | "low" | "auto";
 		}
 
 		prefetchUrl(url, priority);
