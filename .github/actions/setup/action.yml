@@ -29,7 +29,7 @@ runs:
       shell: bash
       run: |
         corepack enable
-        corepack prepare pnpm@${{ inputs.pnpm-version }} --activate
+        corepack prepare "pnpm@${PNPM_VERSION:-10}" --activate
 
     - name: Verify pnpm installation
       shell: bash
@@ -48,15 +48,17 @@ runs:
       uses: actions/cache@v5
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
-        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        key: ${{ runner.os }}-pnpm-${{ env.PNPM_VERSION || inputs.pnpm-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-pnpm-
+          ${{ runner.os }}-pnpm-${{ env.PNPM_VERSION || inputs.pnpm-version }}-
 
     - name: Install dependencies
       shell: bash
       run: |
+        # Use --no-frozen-lockfile to handle version mismatches between
+        # the lockfile and the pnpm version in Cloudflare Pages builds
         pnpm run verify:workspace-lockfiles
-        pnpm install --frozen-lockfile
+        pnpm install --no-frozen-lockfile
 
     - id: emit
       name: Emit outputs

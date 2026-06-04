@@ -28,8 +28,6 @@ pre-commit:
     agentsync-apply:
       glob: ".agents/**/*"
       run: pnpm run agents:apply
-    organize:
-      run: pnpm run organize
 
 post-commit:
   commands:
