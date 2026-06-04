@@ -6,7 +6,7 @@ API_FILTER := --filter=yap-api
 
 .DEFAULT_GOAL := help
 
-.PHONY: help install clean dev build check check-biome test unit e2e preflight ready-to-push \
+.PHONY: all help install clean dev build check check-biome test unit e2e preflight ready-to-push \
 	portfolio-dev portfolio-build portfolio-check \
 	api-dev api-build api-test deploy \
 	e2e-headed e2e-debug e2e-ui e2e-report \
