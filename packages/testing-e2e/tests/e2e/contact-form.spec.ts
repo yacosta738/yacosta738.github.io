@@ -261,7 +261,7 @@ test.describe("Contact Form", () => {
 
 	test("should disable submit button while submitting", async ({ page }) => {
 		// Mock slow response
-		await page.route("**/api/contact.json", async (route) => {
+		await page.route("**/api/contact**", async (route) => {
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 			route.fulfill(mockResponses.contact.success);
 		});
