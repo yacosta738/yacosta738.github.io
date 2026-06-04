@@ -24,7 +24,7 @@ catalog:
   "@iconify-json/lucide": ^1.2.102
   "@iconify-json/mdi": ^1.2.3
   "@iconify-json/simple-icons": ^1.2.79
-  "@iconify-json/tabler": ^1.2.33
+  "@iconify-json/tabler": ^1.2.35
 
   # Content and data processing
   "@jsdevtools/rehype-toc": ^3.0.2
