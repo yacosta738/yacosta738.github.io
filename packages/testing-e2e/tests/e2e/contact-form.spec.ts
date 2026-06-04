@@ -252,11 +252,11 @@ test.describe("Contact Form", () => {
 			.inputValue();
 
 		// Note: Form clearing behavior is implementation-dependent.
-// Some implementations clear the form after success, others preserve data for re-submission.
-// Both behaviors are acceptable, so we just document the observed state without asserting.
-const formWasCleared =
-	nameValue === "" && emailValue === "" && messageValue === "";
-void formWasCleared; // Document observed state, no assertion needed
+		// Some implementations clear the form after success, others preserve data for re-submission.
+		// Both behaviors are acceptable, so we just document the observed state without asserting.
+		const formWasCleared =
+			nameValue === "" && emailValue === "" && messageValue === "";
+		void formWasCleared; // Document observed state, no assertion needed
 	});
 
 	test("should disable submit button while submitting", async ({ page }) => {
@@ -274,21 +274,21 @@ void formWasCleared; // Document observed state, no assertion needed
 		await page.fill(selectors.contact.message, testData.contact.valid.message);
 
 		// Capture disabled state before submission
-const isDisabledBeforeSubmit = await page
-	.locator(selectors.contact.submit)
-	.isDisabled();
+		const isDisabledBeforeSubmit = await page
+			.locator(selectors.contact.submit)
+			.isDisabled();
 
-// Click submit and wait for response to complete
-await page.click(selectors.contact.submit);
-await page.waitForResponse("**/api/contact**", { timeout: 10_000 });
+		// Click submit and wait for response to complete
+		await page.click(selectors.contact.submit);
+		await page.waitForResponse("**/api/contact**", { timeout: 10_000 });
 
-// Button should be enabled after successful submission completes
-const isEnabledAfterSubmit = await page
-	.locator(selectors.contact.submit)
-	.isEnabled();
+		// Button should be enabled after successful submission completes
+		const isEnabledAfterSubmit = await page
+			.locator(selectors.contact.submit)
+			.isEnabled();
 
-// Assert expected behavior: button is enabled after submission completes
-expect(isEnabledAfterSubmit).toBe(true);
-void isDisabledBeforeSubmit; // Captured for documentation
+		// Assert expected behavior: button is enabled after submission completes
+		expect(isEnabledAfterSubmit).toBe(true);
+		void isDisabledBeforeSubmit; // Captured for documentation
 	});
 });
