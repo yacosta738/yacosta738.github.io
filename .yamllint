@@ -1,0 +1,11 @@
+---
+# Exclude generated files that can't be reformatted
+extends: default
+
+rules:
+  line-length:
+    max: 120
+    level: warning
+
+ignore:
+  - pnpm-lock.yaml

@@ -14,7 +14,7 @@ catalog:
 
   # Testing
   "@axe-core/playwright": 4.11.2
-  "@biomejs/biome": 2.4.12
+  "@biomejs/biome": 2.4.16
 
   # API and Cloudflare
   "@cloudflare/workers-types": ^4.20260421.1
@@ -103,7 +103,7 @@ minimumReleaseAgeExclude:
   - miniflare
   - wrangler
   - typescript@6.0.2
-  # Vite 8 is validated in this workspace via the grouped dependency integration branch
+  # Vite 8 validated in this workspace via grouped dependency integration branch
   - vite@8.0.9
   # Renovate security update: hono@4.12.12 || 4.12.14 || 4.12.18
   - hono@4.12.12 || 4.12.14 || 4.12.18

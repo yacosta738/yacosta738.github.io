@@ -3,10 +3,10 @@
 	"basics": {
 		"email": "contact@yunielacosta.com",
 		"image": "/me.webp",
-		"label": "Ingeniero de software experimentado en tecnologías frontend y backend. Dominio de principios de diseño de software, patrones de diseño y arquitecturas limpias.",
+		"label": "Ingeniero de Software Senior",
 		"location": {
 			"address": "🍃",
-			"city": "valencia",
+			"city": "Valencia",
 			"countryCode": "ES",
 			"postalCode": "✉️",
 			"region": "Valencia"
@@ -40,7 +40,7 @@
 				"username": "yacosta738"
 			}
 		],
-		"summary": "Ingeniero de software con aproximadamente 7 años de experiencia en desarrollo de software. Dominio de tecnologías frontend y backend. Entusiasta de la tecnología y la ciencia. Experiencia en Arquitectura de Aplicaciones Web, Principios de Diseño de Software y Patrones de Diseño de Software. Interesado en programación orientada a objetos, patrones de diseño, programación funcional, diseño dirigido por el dominio y microservicios. Soy una persona versátil con habilidades multidisciplinarias, con ganas de aprender y lista para enfrentar nuevos y difíciles retos dentro o fuera de mi país.",
+		"summary": "Soy Ingeniero de Software Senior especializado en sistemas distribuidos para entornos de alto impacto — banca, fintech y e-commerce a escala. Mi core es el ecosistema JVM: Kotlin y Java en producción, arquitecturas orientadas a eventos con Kafka, y sistemas backend que deben funcionar correctamente a la primera porque el costo del fallo es real. Actualmente lidero migraciones de ESB a Kafka en BBVA dentro de un marco empresarial complejo. Antes de eso, sistemas de prevención de fraude en Mercado Libre procesando millones de eventos diarios de autenticación. Trabajo con IA de la manera en que la mayoría de los ingenieros trabajarán en dos años — no como una novedad, sino como infraestructura. He construido mi propio entorno de ingeniería basado en OpenCode: agentes personalizados, subagentes, librerías de prompts y flujos de trabajo de Desarrollo Guiado por Especificaciones (SDD) que reducen el tiempo de andamiaje y disminuyen la carga cognitiva en integraciones complejas. Fuera del trabajo con clientes, construyo en público. Escribo sobre sistemas distribuidos, Kafka, Rust y observabilidad en mi blog y canal de YouTube. Proyectos personales: Cortex (github.com/dallay/cortex) — un monorepo en Rust para herramientas de homelab y orquestación de agentes de IA. Profile Tailors — un SaaS para distribución de contenido multicanal. No estoy buscando el próximo framework que aprender. Me interesan los problemas difíciles, los sistemas bien diseñados y los equipos que se preocupan por el oficio.",
 		"url": "https://yunielacosta.com"
 	},
 	"certificates": [
@@ -88,7 +88,7 @@
 				"Inteligencia Artificial",
 				"Máquinas Computadoras",
 				"Programación Orientada a Objetos",
-				"Ensablador",
+				"Ensamblador",
 				"Programación Web",
 				"Sistemas de Bases de Datos (SQL y NoSQL)",
 				"Compiladores",
@@ -97,10 +97,10 @@
 				"Lógica",
 				"Matemática Computacional"
 			],
-			"endDate": "2013-01-01",
+			"endDate": "2017-07-01",
 			"institution": "Universidad Central \"Marta Abreu\" de Las Villas",
 			"score": "4.0",
-			"startDate": "2011-01-01",
+			"startDate": "2012-09-01",
 			"studyType": "Licenciatura",
 			"url": "https://www.uclv.edu.cu"
 		}
@@ -112,7 +112,7 @@
 		},
 		{
 			"keywords": ["Fútbol", "Correr", "Ciclismo de montaña"],
-			"name": "Actividades al aire libre"
+			"name": "Actividades al Aire Libre"
 		}
 	],
 	"languages": [
@@ -127,40 +127,40 @@
 	],
 	"projects": [
 		{
-			"description": "Aplicación que permite garantizar el control de la disponibilidad financiera de la Empresa Eléctrica de Ciego de Ávila. Desarrollada con arquitectura monolítica usando Lumen en el backend y Angular en el frontend.",
+			"description": "Aplicación que permite garantizar el control de la disponibilidad financiera de la Empresa Eléctrica de Ciego de Ávila. La aplicación fue desarrollada con arquitectura monolítica usando el framework Lumen en el backend y Angular en el frontend.",
 			"highlights": ["angular", "typescript", "lumen", "php", "postgresql"],
 			"name": "Finis",
 			"startDate": "2018-09-05"
 		},
 		{
-			"description": "Aplicación sencilla hecha en Flutter para una tienda online. Permite agregar, eliminar y editar objetos para vender, añadir a favoritos y realizar compras verificando el estado del pedido.",
+			"description": "Una aplicación sencilla hecha en Flutter para una tienda online. Donde puedes agregar, eliminar y editar productos para vender, añadirlos a favoritos y realizar una compra verificando el estado del pedido.",
 			"highlights": ["flutter", "dart", "idea"],
 			"name": "ShopApp",
 			"startDate": "2020-12-06",
 			"url": "https://github.com/yacosta738/flutter_shop_app"
 		},
 		{
-			"description": "Aplicación sencilla hecha en Flutter para llevar el control de gastos personales diarios. Permite controlar cuánto se ha gastado semanal y diariamente.",
+			"description": "Una aplicación sencilla hecha en Flutter para llevar el control de tus gastos personales diarios. Puedes tener control de cuánto has gastado semanalmente así como diariamente.",
 			"highlights": ["dart", "flutter"],
 			"name": "ExpensesApp",
 			"startDate": "2020-12-12",
 			"url": "https://github.com/yacosta738/flutter_expenses_app"
 		},
 		{
-			"description": "Aplicación sencilla hecha en Flutter donde se muestra una lista por categorías de platos e ingredientes.",
+			"description": "Una aplicación sencilla hecha en Flutter donde se muestra una lista por categorías de los platos y sus ingredientes.",
 			"highlights": ["flutter", "dart", "idea"],
 			"name": "MealApp",
 			"startDate": "2020-12-25",
 			"url": "https://github.com/yacosta738/flutter_meal_app"
 		},
 		{
-			"description": "Módulo que permite a Odoo usar escáneres remotos en la misma subred.",
+			"description": "Módulo que permite que el ORM de Odoo use escáneres remotamente que están en la misma subred.",
 			"highlights": ["flask", "python", "libinsane"],
 			"name": "scanner-odoo",
 			"startDate": "2021-01-14"
 		},
 		{
-			"description": "Permite controlar la producción avícola de la empresa CAN. Realizada con JHIPSTER, arquitectura monolítica, diseñada para multiempresas.",
+			"description": "Permite mantener el control de la producción avícola de la empresa CAN. Hecha usando JHIPSTER, con arquitectura monolítica, diseñada para multiempresas.",
 			"highlights": ["java", "spring", "vuejs", "postgresql", "typescript"],
 			"name": "Bankiva",
 			"startDate": "2020-02-17"
@@ -173,16 +173,16 @@
 			"url": "https://yacosta738.github.io/"
 		},
 		{
-			"description": "Plantilla para blog personal y portafolio hecha con HUGO. Parte de la migración de mi blog personal a la versión 2 con el generador de sitios estáticos HUGO.",
+			"description": "Plantilla para blog personal y portafolio hecha con HUGO. La plantilla es parte de la migración de mi blog personal a la versión 2 con el generador de sitios estáticos HUGO.",
 			"highlights": ["hugo", "go", "scss"],
 			"name": "Portfolio Blog V2",
 			"startDate": "2020-03-12",
 			"url": "https://yacosta738.github.io/nomada.digital/"
 		},
 		{
-			"description": "Aplicación para buscar música usando la API de ITunes. Hecha con Vue 3, Vite y Tailwindcss.",
+			"description": "Aplicación para buscar música usando la API de iTunes. Hecha con Vue 3, Vite y Tailwindcss.",
 			"highlights": ["vuejs", "tailwind", "vite", "itunes-api"],
-			"name": "Buscador de música ITunes",
+			"name": "Buscador de música iTunes",
 			"startDate": "2021-05-01",
 			"url": "https://itunes-search-music.vercel.app/"
 		},
@@ -194,7 +194,7 @@
 			"url": "https://weather-app-vuejs-acosta.vercel.app/"
 		},
 		{
-			"description": "Aplicación de lista de tareas para demostrar conocimientos en React. Solo frontend, sin backend ni almacenamiento en base de datos.",
+			"description": "Una aplicación sencilla de lista de tareas para demostrar mis conocimientos en React. Proyecto de frontend únicamente, sin backend ni almacenamiento en base de datos.",
 			"highlights": ["react", "css3", "html"],
 			"name": "React ToDo App",
 			"startDate": "2021-06-14",
@@ -208,7 +208,7 @@
 			"url": "https://vue3-vite-typescript-tailwind-starter.vercel.app/"
 		},
 		{
-			"description": "Aplicación para gestionar una lista de tareas. Permite agregar, marcar como completada y eliminar tareas. Tiene tres vistas principales (Todas, Activas y Completadas)",
+			"description": "Aplicación para gestionar una lista de tareas. Permite agregar, marcar como completada y eliminar tareas. La app tiene tres vistas principales (Todas, Activas y Completadas)",
 			"highlights": ["vuejs", "tailwind", "typescript", "vite", "nuxtjs"],
 			"name": "Nuxt ToDo App",
 			"startDate": "2022-01-05",
@@ -222,14 +222,14 @@
 			"url": "https://nuxt3-tailwindcss-typescript.vercel.app/"
 		},
 		{
-			"description": "MAN es una app de búsqueda de películas que muestra y ordena todas las películas disponibles en la API de TMDB. Construida con ReactJS, Tailwindcss y Typescript. Desplegada en Vercel.",
+			"description": "MAN es una app de búsqueda de películas que ayuda a mostrar y ordenar todas las películas disponibles en la API de TMDB. Esta app está construida con ReactJS, Tailwindcss y TypeScript. También usa Vercel para el despliegue.",
 			"highlights": ["typescript", "react", "nextjs"],
 			"name": "Movie App",
 			"startDate": "2022-04-06",
 			"url": "https://movie-app-nextjs-nine.vercel.app/"
 		},
 		{
-			"description": "Sistema de pedidos de comida que utiliza arquitectura de microservicios con Kafka para la comunicación entre servicios y PostgreSQL como base de datos. Proyecto en desarrollo.",
+			"description": "Este es un sistema de pedidos de comida que usa arquitectura de microservicios con Kafka para la comunicación entre servicios y PostgreSQL como base de datos. Es un trabajo en progreso.",
 			"highlights": ["java", "postgresql", "kafka"],
 			"name": "Food Ordering System",
 			"startDate": "2022-08-05",
@@ -240,11 +240,11 @@
 	"references": [
 		{
 			"name": "Mayret Lodos",
-			"reference": "He tenido el privilegio de conocer a Yuniel y he sido testigo de su tenacidad, compromiso y pasión por el desarrollo de software. Destaca por sus habilidades de liderazgo, demostradas en la toma de decisiones técnicas acertadas, el mantenimiento del equilibrio en el equipo y la integración de diferentes perspectivas para lograr los mejores resultados posibles.\n\nSu adaptabilidad a las tecnologías emergentes y su capacidad para diseñar soluciones efectivas lo convierten en un profesional de software altamente confiable. Además, su entusiasmo por el desarrollo va más allá de lo técnico: vive y respira programación, abordando cada proyecto con dedicación y excelencia, demostrando que para él no es solo una profesión, sino una verdadera vocación."
+			"reference": "He tenido el privilegio de conocer a Yuniel y he sido testigo de primera mano de su tenacidad, compromiso y pasión por el desarrollo de software. Se destaca por sus habilidades de liderazgo, demostradas en la forma en que toma decisiones técnicas acertadas, mantiene el equilibrio dentro del equipo e integra diferentes perspectivas para entregar los mejores resultados posibles.\n\nSu adaptabilidad a las tecnologías emergentes y su capacidad para diseñar soluciones efectivas lo convierten en un profesional de software altamente confiable. Además, su entusiasmo por el desarrollo va más allá de la dimensión técnica: respira y sangra programación, abordando cada proyecto con dedicación y excelencia, mostrando claramente que para él no es solo una profesión, sino una verdadera vocación."
 		},
 		{
 			"name": "Yuniesky Martinez Espinosa",
-			"reference": "Enfocado, inteligente y movido por la curiosidad constante, Yuniel es un desarrollador full stack senior con gran experiencia en su campo y un amplio conocimiento de tecnologías y disciplinas complementarias. Integra rápidamente nuevos conocimientos y los aplica eficazmente para construir soluciones escalables y de alta calidad.\n\nSu capacidad para combinar una profunda experiencia técnica con una perspectiva interdisciplinaria le permite abordar proyectos complejos de manera holística, asegurando una arquitectura robusta, código mantenible y una mentalidad orientada a la eficiencia. Su sentido de la responsabilidad y rigor profesional entregan resultados de valor excepcional."
+			"reference": "Enfocado, inteligente y impulsado por la curiosidad constante, Yuniel es un desarrollador full stack senior con gran experiencia en su campo y un amplio entendimiento de tecnologías y disciplinas complementarias. Integra rápidamente nuevos conocimientos y los aplica efectivamente para construir soluciones escalables y de alta calidad.\n\nSu capacidad para combinar una profunda experiencia técnica con una perspectiva interdisciplinaria le permite abordar proyectos complejos de manera holística, asegurando arquitectura robusta, código mantenible y una mentalidad orientada a la eficiencia. Su sentido de responsabilidad y rigor profesional entrega consistentemente resultados de valor excepcional."
 		}
 	],
 	"skills": [
@@ -296,10 +296,10 @@
 		{
 			"keywords": [
 				"Microservicios",
-				"Arquitectura orientada a eventos",
-				"Arquitectura limpia",
-				"Alta disponibilidad",
-				"Configuración centralizada",
+				"Arquitectura Orientada a Eventos",
+				"Arquitectura Limpia",
+				"Alta Disponibilidad",
+				"Configuración Centralizada",
 				"Diseño de APIs"
 			],
 			"level": "Experto",
@@ -308,14 +308,14 @@
 		{
 			"keywords": [
 				"Seguridad de APIs",
-				"Políticas de riesgo",
-				"Sistemas de scoring"
+				"Políticas de Riesgo",
+				"Sistemas de Scoring"
 			],
 			"level": "Avanzado",
 			"name": "Seguridad y Gestión de Riesgos"
 		},
 		{
-			"keywords": ["JUnit", "Pruebas automatizadas", "Revisión de código"],
+			"keywords": ["JUnit", "Pruebas Automatizadas", "Revisión de Código"],
 			"level": "Avanzado",
 			"name": "Testing y Aseguramiento de Calidad"
 		},
@@ -330,109 +330,111 @@
 		{
 			"endDate": "",
 			"highlights": [
-				"Colaboré con equipos multifuncionales para recopilar y analizar requisitos de negocio para sistemas de software.",
-				"Diseñé, desarrollé e implementé soluciones de software siguiendo buenas prácticas y estándares de codificación.",
-				"Realicé pruebas y aseguramiento de calidad para garantizar que el software cumpliera con los requisitos funcionales y de rendimiento.",
-				"Proporcioné liderazgo técnico y mentoría a ingenieros y desarrolladores junior.",
-				"Solucioné y resolví problemas técnicos relacionados con sistemas de software en entornos de producción y pruebas.",
-				"Evalué tecnologías emergentes y metodologías de desarrollo para proponer mejoras y oportunidades de innovación.",
-				"Participé en revisiones de código y contribuí a la definición de estándares y buenas prácticas de codificación.",
-				"Desarrollé y mantuve documentación técnica, incluidos diagramas de arquitectura, guías de usuario y notas de lanzamiento.",
-				"Colaboré con stakeholders para definir cronogramas, hitos y entregables de proyectos, comunicando el estado y riesgos a la dirección."
+				"Liderando la migración de integraciones ESB (TIBCO) a Apache Camel y pipelines de Kafka dentro del marco NOVA de BBVA — replanteando el flujo de datos en una arquitectura distribuida a escala real.",
+				"Previamente en Deutsche Bank CLM: construí servicios Spring Boot y Kafka estableciendo patrones de arquitectura que el equipo adoptó como estándar.",
+				"Diseñar e implementar microservicios siguiendo principios de Arquitectura Limpia y DDD.",
+				"Traducir requisitos regulatorios en especificaciones técnicas concretas.",
+				"Liderar talleres sobre arquitectura orientada a eventos y patrones de Kafka.",
+				"Mentorear desarrolladores junior en principios SOLID y TDD.",
+				"Impulsar la adopción de CI/CD en equipos con ciclos de entrega complejos.",
+				"Construir y mantener un entorno personalizado de ingeniería de IA — librerías de prompts, agentes autónomos, subagentes, MCPs y flujos de trabajo de Desarrollo Guiado por Especificaciones (SDD) usando OpenCode — para acelerar la entrega y reducir la carga cognitiva en integraciones complejas.",
+				"Reduje el tiempo promedio de entrega de features en un 30% mediante mejor estimación, planificación de sprints y generación de especificaciones asistida por IA.",
+				"Establecí estándares de codificación adoptados por 4 equipos de proyecto en dos clientes bancarios.",
+				"Entregué 6 features de cumplimiento regulatorio antes del plazo, evitando potenciales hallazgos de auditoría.",
+				"Reduje el tiempo de andamiaje de código repetitivo en ~60% introduciendo flujos de trabajo SDD y orquestación de agentes de IA en el ciclo de desarrollo del equipo."
 			],
-			"name": "GFT",
+			"name": "GFT Technologies",
 			"position": "Analista de Sistemas | Ingeniero de Software Senior (L4)",
-			"startDate": "2023-03-14",
-			"summary": "Como incorporación reciente al equipo, actualmente trabajo con dedicación para lograr mis objetivos en el rol de Analista de Sistemas e Ingeniero de Software Senior. Colaboro con equipos multifuncionales para recopilar y analizar requisitos de negocio, diseñar e implementar soluciones de software robustas y brindar liderazgo técnico para asegurar entregas de alta calidad.",
+			"startDate": "2023-03-01",
+			"summary": "Trabajo en proyectos de transformación bancaria para instituciones financieras europeas de primer nivel — actualmente BBVA, previamente Deutsche Bank CLM. En BBVA estoy liderando la migración de integraciones ESB (TIBCO) a Apache Camel y pipelines de Kafka dentro del marco NOVA. No es solo un intercambio de tecnología — significa replantear cómo fluyen los datos a través de una arquitectura distribuida a escala real.",
 			"url": "https://www.gft.com/es/es"
 		},
 		{
-			"endDate": "2025-12-26",
+			"endDate": "2025-12-01",
 			"highlights": [
-				"Colaboré con equipos multifuncionales para analizar requisitos de negocio y diseñar soluciones de software siguiendo buenas prácticas y estándares de codificación.",
-				"Proporcioné liderazgo técnico y mentoría a desarrolladores junior; resolví problemas técnicos complejos para mantener la confiabilidad del sistema.",
-				"Aseguré que el software cumpliera con los requisitos funcionales y de rendimiento mediante pruebas y actividades de aseguramiento de calidad.",
-				"Evalué tecnologías y metodologías emergentes para identificar oportunidades de mejora e innovación.",
-				"Comuniqué el estado del proyecto, hitos y riesgos a stakeholders y dirección para apoyar la toma de decisiones informada."
+				"Lideré la migración de servicios core de Spring Boot 2.7 a Spring Boot 3, reduciendo dependencias de runtime en un 40% y mejorando el tiempo de inicio en 3x.",
+				"Diseñé e implementé un nuevo servicio de integración basado en eventos desde cero usando Kafka, consolidando datos de más de 12 fuentes externas y habilitando el prellenado instantáneo de datos del cliente durante el onboarding.",
+				"Reduje el tiempo de onboarding de usuarios de StreamLine optimizando flujos de validación de datos y automatizando verificaciones de cumplimiento.",
+				"Modernicé 4 microservicios manteniendo disponibilidad del 99.9% durante todas las fases de migración.",
+				"Colaboré con equipos multifuncionales (Cumplimiento, Legal, Frontend) para entregar features regulatorios a tiempo."
 			],
 			"name": "Deutsche Bank",
 			"position": "Ingeniero de Software Senior",
-			"startDate": "2023-04-08",
-			"summary": "Como Ingeniero de Software Senior en Deutsche Bank, aporto experiencia colaborando con equipos multifuncionales para analizar requisitos de negocio, diseñar y entregar soluciones de software que siguen buenas prácticas y altos estándares de codificación, asegurando que los sistemas cumplan objetivos funcionales y de rendimiento.",
+			"startDate": "2023-04-01",
+			"summary": "Ingeniero de Software Senior en el equipo de Gestión del Ciclo de Vida del Cliente (CLM), contribuyendo a la plataforma de onboarding Conoce a Tu Cliente del banco que sirve a clientes de Banca de Inversión globalmente. Enfocado en modernización de servicios, integraciones basadas en eventos y entrega de cumplimiento regulatorio.",
 			"url": "https://www.deutsche-bank.de/pk.html"
 		},
 		{
-			"endDate": "2023-03-10",
+			"endDate": "2023-03-01",
 			"highlights": [
-				"Desarrollé y mantuve APIs internas para detección de comportamientos maliciosos, mejorando la seguridad y previniendo amenazas; implementé políticas y scorers para detectar y prevenir usos maliciosos en registro y login para MercadoLibre.com y MercadoPago.com.",
-				"Colaboré con equipos multifuncionales para diseñar e implementar soluciones de software escalables y eficientes para operaciones de e-commerce.",
-				"Realicé pruebas y análisis exhaustivos para garantizar la confiabilidad y el rendimiento de las aplicaciones, minimizando tiempos de inactividad y mejorando la experiencia de usuario.",
-				"Trabajé estrechamente con product managers y diseñadores para crear interfaces amigables y mejorar la experiencia de usuario.",
-				"Implementé pruebas automatizadas y prácticas de integración continua para mejorar la calidad del software y reducir riesgos de despliegue.",
-				"Participé en revisiones de código y contribuí al desarrollo de estándares y buenas prácticas de codificación.",
-				"Colaboré con equipos DevOps para optimizar el rendimiento y la escalabilidad de las aplicaciones."
+				"Construí APIs internas para detección de comportamiento malicioso en flujos de login y registro de MercadoLibre.com y MercadoPago.com — sistemas que procesan más de 3M de eventos diarios de autenticación.",
+				"Diseñé e implementé políticas de riesgo y sistemas de scoring para identificar y bloquear actividad fraudulenta de cuentas en tiempo real.",
+				"Reduje los registros de cuentas fraudulentas en un 22% mediante nuevas heurísticas de scoring.",
+				"Mejoré la latencia de detección en un 40% tras la refactorización de APIs y optimización de la capa de caché.",
+				"Colaboré con equipos multifuncionales para entregar soluciones backend escalables soportando operaciones de retail y pagos de alto tráfico.",
+				"Realicé pruebas de rendimiento y confiabilidad para minimizar tiempos de inactividad y mejorar la experiencia de usuario a escala."
 			],
 			"name": "Mercado Libre",
-			"position": "Ingeniero de Software",
-			"startDate": "2022-11-08",
-			"summary": "Como Ingeniero de Software en Mercado Libre, colaboré con equipos multifuncionales para recopilar y analizar requisitos de negocio, diseñé e implementé soluciones de software siguiendo buenas prácticas y estándares de codificación, y aseguré entregas de alta calidad mediante pruebas y aseguramiento de calidad.",
+			"position": "Ingeniero de Software | Desarrollador Backend Kotlin & Java",
+			"startDate": "2021-02-01",
+			"summary": "Parte del equipo de Confianza y Seguridad, construyendo los sistemas que protegen los flujos de login y registro para MercadoLibre.com y MercadoPago.com a través de millones de transacciones diarias en el ecosistema de retail y pagos.",
 			"url": "https://mercadolibre.com"
 		},
 		{
-			"endDate": "2022-11-01",
+			"endDate": "2021-02-01",
 			"highlights": [
-				"Mejoré la ejecución de sincronización de datos entre nuestras APIs y MMC de aproximadamente 40 minutos a ~6 minutos, reduciendo significativamente el tiempo de procesamiento y los costos operativos.",
-				"Mejoré la calidad del código agregando pruebas unitarias e integrales y promoviendo principios SOLID en toda la base de código.",
+				"Reduje el tiempo de sincronización de datos entre las APIs de la plataforma y MMC de aproximadamente 40 minutos a ~6 minutos, reduciendo significativamente el tiempo de procesamiento y los costos operativos.",
+				"Mejoré la calidad del código introduciendo pruebas unitarias y de integración y promoviendo principios SOLID en toda la base de código.",
 				"Diseñé e implementé un patrón de configuración centralizada para todos los microservicios de la plataforma, simplificando despliegues y gestión de configuración.",
-				"Implementé un sistema de integración continua con GitLab CI para permitir entregas rápidas y confiables de código actualizado, aumentando la eficiencia y reduciendo errores de entrega.",
-				"Mantuve y optimicé APIs de alto tráfico para asegurar disponibilidad y rendimiento en múltiples integraciones de mercado."
+				"Implementé un pipeline de integración continua con GitLab CI habilitando entregas rápidas y confiables y reduciendo errores de despliegue.",
+				"Mantuve y optimicé APIs de alto tráfico asegurando disponibilidad y rendimiento a través de múltiples integraciones de mercado retail."
 			],
 			"name": "Scanntech",
 			"position": "Ingeniero de Software Senior | Desarrollador Backend Java",
-			"startDate": "2021-09-01",
-			"summary": "Como desarrollador de software en Scanntech, integré múltiples fuentes de datos y redes de retail mediante APIs, mantuve servicios backend de alta disponibilidad bajo tráfico intenso, mejoré la cobertura de pruebas e incrementé las pruebas de integración para aumentar la confiabilidad del sistema.",
+			"startDate": "2019-12-01",
+			"summary": "Integré múltiples fuentes de datos y redes de retail a través de APIs backend de alta disponibilidad. Enfocado en optimización de rendimiento, cobertura de pruebas y adopción de CI/CD en una plataforma de alto tráfico.",
 			"url": "https://www.scanntech.com.br/es/"
 		},
 		{
-			"endDate": "2017-12-31",
+			"endDate": "2019-04-01",
 			"highlights": [
-				"Diseñé y desarrollé un sistema de gestión de reputación online basado en microservicios.",
-				"Proporcioné liderazgo técnico y mentoría durante todo el ciclo de entrega.",
-				"Entregué interfaces web (Angular/Vue) y APIs REST internas.",
-				"Solucioné defectos críticos y realicé mejoras que optimizaron el rendimiento web.",
-				"Tecnologías: HTML, CSS, TypeScript, Angular, Vue.js, Java, Spring Boot, JUnit, REST, SQL, PostgreSQL, PHP (Laravel), Python (Flask), Kubernetes, Istio, Docker, JHipster, Linux"
+				"Diseñé e implementé un sistema de gestión de reputación online basado en microservicios.",
+				"Lideré decisiones de arquitectura y mentoreé al equipo a través de la descomposición de servicios y modernización de plataforma.",
+				"Capacité a más de 15 personas en patrones de arquitectura de microservicios con Kubernetes e Istio.",
+				"Introduje prácticas de infraestructura como código y orquestación de contenedores en todo el equipo."
 			],
 			"name": "Desoft",
-			"position": "Desarrollador Web",
-			"startDate": "2017-09-01",
-			"summary": "Desarrollé y mantuve interfaces web y sitios de clientes usando HTML, CSS y JavaScript. Aseguré compatibilidad entre navegadores y layouts responsivos.",
+			"position": "Arquitecto de Software",
+			"startDate": "2019-04-01",
+			"summary": "Lideré el diseño de arquitectura y esfuerzos de mentoría; introduje patrones basados en microservicios y prácticas de orquestación de contenedores.",
 			"url": "https://www.desoft.cu/es"
 		},
 		{
-			"endDate": "2020-08-09",
+			"endDate": "2019-04-01",
 			"highlights": [
 				"Desarrollé sitios web dinámicos e interactivos usando frameworks JS modernos, mejorando la experiencia de usuario y el tráfico.",
-				"Diseñé procesos de limpieza y mejoras de rendimiento que minimizaron tiempos de inactividad y aumentaron la confiabilidad.",
+				"Diseñé procesos de limpieza y rendimiento que minimizaron tiempos de inactividad y aumentaron la confiabilidad.",
 				"Solucioné bugs e implementé mejoras que mejoraron significativamente la funcionalidad y velocidad del sitio.",
-				"Desarrollé APIs internas para la comunicación entre diferentes sistemas."
+				"Desarrollé APIs REST internas para la comunicación entre diferentes sistemas."
 			],
 			"name": "Desoft",
-			"position": "Desarrollador FullStack",
-			"startDate": "2018-01-01",
+			"position": "Desarrollador Full Stack",
+			"startDate": "2017-11-01",
 			"summary": "Trabajé en frontend y backend para entregar soluciones web robustas; implementé APIs y mejoras de rendimiento.",
 			"url": "https://www.desoft.cu/es"
 		},
 		{
-			"endDate": "2021-09-01",
+			"endDate": "2017-11-01",
 			"highlights": [
-				"Capacité al personal en funciones web internas y guié al equipo en la implementación de nuevos requisitos de software.",
-				"Lideré la adopción de arquitectura de microservicios y formé al personal en Kubernetes e Istio.",
-				"Diseñé e implementé la arquitectura de microservicios para un sistema de gestión de reputación online."
+				"Desarrollé interfaces de sitios web usando HTML, CSS y JavaScript.",
+				"Construí y solucioné problemas de sitios web internos y de clientes usando HTML, CSS, TypeScript, Angular y Vue.js.",
+				"Probé manualmente sitios en múltiples navegadores y dispositivos móviles para asegurar compatibilidad y responsividad.",
+				"Capacité a más de 10 miembros del personal en funciones web internas y actualizaciones menores de contenido."
 			],
 			"name": "Desoft",
-			"position": "Arquitecto de Software",
-			"startDate": "2020-08-21",
-			"summary": "Lideré el diseño de arquitectura y mentoría; introduje patrones basados en microservicios y mejoras de plataforma.",
+			"position": "Desarrollador Web Junior",
+			"startDate": "2016-09-01",
+			"summary": "Desarrollé y mantuve interfaces web y sitios de clientes. Aseguré compatibilidad entre navegadores y layouts responsivos.",
 			"url": "https://www.desoft.cu/es"
 		}
 	]
