@@ -3,10 +3,10 @@
   "basics": {
     "email": "contact@yunielacosta.com",
     "image": "/me.webp",
-    "label": "Ingeniero de Software Senior | Sistemas Distribuidos · JVM · Kafka · Ingeniería Aumentada con IA. Ingeniero de software experimentado con dominio de tecnologías frontend y backend. Experto en principios de diseño de software, patrones de diseño y arquitecturas limpias.",
+    "label": "Ingeniero de Software Senior",
     "location": {
       "address": "🍃",
-      "city": "valencia",
+      "city": "Valencia",
       "countryCode": "ES",
       "postalCode": "✉️",
       "region": "Valencia"
@@ -482,7 +482,7 @@
       "endDate": "2021-02-01",
       "highlights": [
         "Reduje el tiempo de sincronización de datos entre las APIs de la plataforma y MMC de aproximadamente 40 minutos a ~6 minutos, reduciendo significativamente el tiempo de procesamiento y los costos operativos.",
-        "Mejoré la calidad del código introduciendo pruebas unitarias e de integración y promoviendo principios SOLID en toda la base de código.",
+        "Mejoré la calidad del código introduciendo pruebas unitarias y de integración y promoviendo principios SOLID en toda la base de código.",
         "Diseñé e implementé un patrón de configuración centralizada para todos los microservicios de la plataforma, simplificando despliegues y gestión de configuración.",
         "Implementé un pipeline de integración continua con GitLab CI habilitando entregas rápidas y confiables y reduciendo errores de despliegue.",
         "Mantuve y optimicé APIs de alto tráfico asegurando disponibilidad y rendimiento a través de múltiples integraciones de mercado retail."
