@@ -6,11 +6,11 @@ catalog:
   # Build and release tooling
 
   # Astro and frontend
-  "@astrojs/check": 0.9.8
-  "@astrojs/mdx": 5.0.3
+  "@astrojs/check": 0.9.9
+  "@astrojs/mdx": 5.0.6
   "@astrojs/partytown": ^2.1.7
   "@astrojs/rss": ^4.0.18
-  "@astrojs/sitemap": ^3.7.2
+  "@astrojs/sitemap": ^3.7.3
 
   # Testing
   "@axe-core/playwright": 4.11.2
