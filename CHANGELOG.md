@@ -6,6 +6,21 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [4.4.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.3.1...v4.4.0) (2026-06-10)
+
+
+### Features
+
+* **shared:** translate spanish resume to match english version ([#1980](https://github.com/yacosta738/yacosta738.github.io/issues/1980)) ([3945110](https://github.com/yacosta738/yacosta738.github.io/commit/3945110ba329d856978be7f6e584cd6ffe849f28))
+
+
+### Bug Fixes
+
+* **biome:** update formatting and linter rules in biome.json ([39d2007](https://github.com/yacosta738/yacosta738.github.io/commit/39d2007a44a7671240e441496edf04414c986bbd))
+* **code-quality:** resolve SonarQube issues and improve Makefile ([#1963](https://github.com/yacosta738/yacosta738.github.io/issues/1963)) ([b7d717e](https://github.com/yacosta738/yacosta738.github.io/commit/b7d717ec6f21ce3ee56332b87f55d76efbb4c535))
+* **deps:** update Astro ([#1965](https://github.com/yacosta738/yacosta738.github.io/issues/1965)) ([783c564](https://github.com/yacosta738/yacosta738.github.io/commit/783c564d9d245b67d6f07e0a0162da656df90f2e))
+* **resume:** update label to improve clarity and remove redundancy ([730d4dc](https://github.com/yacosta738/yacosta738.github.io/commit/730d4dc61fea298535c37e92f61edfc05d2e104a))
+
 ## [4.3.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.3.0...v4.3.1) (2026-06-04)
 
 
