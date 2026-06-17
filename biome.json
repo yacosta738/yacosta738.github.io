@@ -11,26 +11,28 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!**/node_modules",
-			"!**/coverage",
-			"!**/playwright-report",
-			"!**/test-results",
-			"!**/.astro",
-			"!**/.cache",
-			"!**/.git",
-			"!**/.vscode",
-			"!**/.idea",
-			"!**/.pnpm",
-			"!**/.yarn",
-			"!**/dist",
-			"!**/out",
+			"public/scripts/**",
+			"!**/node_modules/**",
+			"!**/coverage/**",
+			"!**/playwright-report/**",
+			"!**/test-results/**",
+			"!**/.astro/**",
+			"!**/.cache/**",
+			"!**/.git/**",
+			"!**/.vscode/**",
+			"!**/.idea/**",
+			"!**/.pnpm/**",
+			"!**/.yarn/**",
+			"!**/dist/**",
+			"!**/out/**",
 			"!**/public/**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf,eot,otf,avif,mp4,webm,ogg,mov}",
 			"!**/public/**/*.min.*",
-			"!**/public/**/fonts",
-			"!**/public/**/images",
-			"!**/public/**/assets",
-			"public/scripts/**",
-			"!**/.vscode",
+			"!**/public/**/fonts/**",
+			"!**/public/**/images/**",
+			"!**/public/**/assets/**",
+			"!**/src/assets/font/**/*.svg",
+			"!**/packages/shared/src/icons/**/*.svg",
+			"!**/apps/blog/src/assets/font/**/*.svg",
 			"!**/src/styles/global.css",
 			"!**/worker-configuration.d.ts",
 			"!**/components/ui",
@@ -56,6 +58,7 @@
 			"a11y": {
 				"noSvgWithoutTitle": "error"
 			},
+			"preset": "recommended",
 			"style": {
 				"noInferrableTypes": "error",
 				"noParameterAssign": "error",
@@ -84,6 +87,12 @@
 						"useImportType": "off"
 					}
 				}
+			}
+		},
+		{
+			"includes": ["**/*.css"],
+			"linter": {
+				"enabled": false
 			}
 		}
 	],

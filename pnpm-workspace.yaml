@@ -44,7 +44,7 @@ catalog:
   "@types/slug": ^5.0.9
   "@vitest/coverage-v8": ^4.1.4
   ajv: 8.20.0
-  astro: 6.1.10
+  astro: 6.4.6
   astro-compress: 2.4.1
   astro-critters: 2.2.1
   astro-icon: ^1.1.5
@@ -107,8 +107,8 @@ minimumReleaseAgeExclude:
   - vite@8.0.9
   # Renovate security update: hono@4.12.12 || 4.12.14 || 4.12.18
   - hono@4.12.12 || 4.12.14 || 4.12.18
-  # Renovate security update: astro@6.1.6
-  - astro@6.1.6
+  # Renovate security update: astro@6.1.6 || 6.4.6
+  - astro@6.1.6 || 6.4.6
 
 overrides:
   brace-expansion: "catalog:"
