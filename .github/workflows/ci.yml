@@ -1,3 +1,4 @@
+---
 name: CI Pipeline
 
 on:
@@ -359,16 +360,21 @@ jobs:
           fi
 
       - name: Validate Sonar token
+        id: sonar-validation
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           if [ -z "${SONAR_TOKEN}" ]; then
-            echo "❌ SONAR_TOKEN is not configured in repository secrets."
-            exit 1
+            echo "⚠️ SONAR_TOKEN is not configured in repository secrets."
+            echo "ℹ️ This is expected for PRs from forks or when secrets are not configured."
+            echo "sonar_available=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "✅ SONAR_TOKEN is configured."
+            echo "sonar_available=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: SonarCloud Scan (PR)
-        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request'
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request' && steps.sonar-validation.outputs.sonar_available == 'true'
         uses: SonarSource/sonarcloud-github-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -387,7 +393,7 @@ jobs:
 
       - name: SonarCloud Scan (Push/Main)
         id: sonar-main-scan
-        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.sonar-validation.outputs.sonar_available == 'true'
         continue-on-error: true
         uses: SonarSource/sonarcloud-github-action@v5
         env:
@@ -419,6 +425,12 @@ jobs:
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref != 'refs/heads/main'
         run: |
           echo "ℹ️ SonarCloud scan skipped on non-main pushes to avoid branch-analysis conflicts with Automatic Analysis."
+
+      - name: SonarCloud skipped (no token)
+        if: steps.sonar-validation.outputs.sonar_available != 'true'
+        run: |
+          echo "⚠️ SonarCloud scan skipped because SONAR_TOKEN is not configured."
+          echo "ℹ️ This is expected for PRs from forks or when secrets are not configured."
 
   # Job 6: Final Report
   report:
@@ -454,6 +466,7 @@ jobs:
       - name: Comment PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v9
+        continue-on-error: true
         with:
           script: |
             const status = {

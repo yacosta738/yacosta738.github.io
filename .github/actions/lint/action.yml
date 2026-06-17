@@ -1,3 +1,4 @@
+---
 name: 'Lint & Type Check'
 description: 'Run Biome linting and TypeScript type checking'
 author: 'yacosta738'
@@ -53,7 +54,6 @@ runs:
         FIX_INPUT: ${{ inputs.fix }}
       run: |
         echo "🔍 Running Biome checks..."
-        
         if [ "$FIX_INPUT" == "true" ]; then
           echo "🔧 Auto-fixing issues..."
           biome check . --write
@@ -63,7 +63,6 @@ runs:
           biome ci . --diagnostic-level=error
           STATUS=$?
         fi
-        
         if [ $STATUS -eq 0 ]; then
           echo "status=success" >> $GITHUB_OUTPUT
           echo "✅ Biome checks passed"
@@ -83,12 +82,27 @@ runs:
       run: |
         set -euo pipefail
         echo "🔍 Running Astro type checks for portfolio and blog..."
+        # Check if Notion tokens are available
+        HAS_NOTION_TOKENS="false"
+        if [ -n "${NOTION_TOKEN:-}" ] && [ -n "${NOTION_DATABASE_ID:-}" ]; then
+          HAS_NOTION_TOKENS="true"
+        fi
+        # Portfolio always works (uses NOTION_LOADER=0 fallback)
         pnpm --filter=portfolio check:astro
-        pnpm --filter=blog notion:sync
-        pnpm --filter=blog notion:validate
-        pnpm --filter=blog check:astro
+        # Blog requires Notion tokens for sync/validate, but can still check types
+        if [ "$HAS_NOTION_TOKENS" = "true" ]; then
+          echo "✅ Notion tokens available, running full blog checks..."
+          pnpm --filter=blog notion:sync
+          pnpm --filter=blog notion:validate
+          pnpm --filter=blog check:astro
+        else
+          echo "⚠️ Notion tokens not available, skipping blog sync/validate..."
+          echo "ℹ️ This is expected for PRs from forks or when secrets are not configured."
+          echo "ℹ️ Blog type checking will use local content only."
+          # Run check:astro with BLOG_CONTENT_SOURCE=disabled to skip Notion loader
+          BLOG_CONTENT_SOURCE=disabled pnpm --filter=blog check:astro
+        fi
         STATUS=$?
-        
         if [ $STATUS -eq 0 ]; then
           echo "status=success" >> $GITHUB_OUTPUT
           echo "✅ Astro checks passed"
