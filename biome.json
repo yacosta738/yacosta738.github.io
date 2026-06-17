@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
 	"assist": {
 		"actions": {
 			"source": {
@@ -34,7 +34,10 @@
 			"!**/src/styles/global.css",
 			"!**/worker-configuration.d.ts",
 			"!**/components/ui",
-			"!**/components.d.ts"
+			"!**/components.d.ts",
+			"!**/src/assets/font/**/*.svg",
+			"!**/packages/shared/src/assets/font/**/*.svg",
+			"!**/apps/blog/src/assets/font/**/*.svg"
 		]
 	},
 	"formatter": {
@@ -50,6 +53,9 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"a11y": {
+				"noSvgWithoutTitle": "error"
+			},
 			"style": {
 				"noInferrableTypes": "error",
 				"noParameterAssign": "error",
