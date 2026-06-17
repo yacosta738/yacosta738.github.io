@@ -157,8 +157,8 @@ catalogs:
       specifier: 1.59.1
       version: 1.59.1
     preact-render-to-string:
-      specifier: ^6.6.7
-      version: 6.6.7
+      specifier: ^6.7.0
+      version: 6.7.0
     reading-time:
       specifier: ^1.5.0
       version: 1.5.0
@@ -439,7 +439,7 @@ importers:
         version: 8.0.4
       preact-render-to-string:
         specifier: 'catalog:'
-        version: 6.6.7(preact@10.29.0)
+        version: 6.7.0(preact@10.29.0)
       reading-time:
         specifier: 'catalog:'
         version: 1.5.0
@@ -584,7 +584,7 @@ importers:
         version: 8.0.4
       preact-render-to-string:
         specifier: 'catalog:'
-        version: 6.6.7(preact@10.29.0)
+        version: 6.7.0(preact@10.29.0)
       reading-time:
         specifier: 'catalog:'
         version: 1.5.0
@@ -781,7 +781,7 @@ importers:
         version: 8.0.4
       preact-render-to-string:
         specifier: 'catalog:'
-        version: 6.6.7(preact@10.29.0)
+        version: 6.7.0(preact@10.29.0)
       reading-time:
         specifier: 'catalog:'
         version: 1.5.0
@@ -3884,8 +3884,8 @@ packages:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
-  preact-render-to-string@6.6.7:
-    resolution: {integrity: sha512-3XdbsX3+vn9dQW+jJI/FsI9rlkgl6dbeUpqLsChak6jp3j3auFqBCkno7VChbMFs5Q8ylBj6DrUkKRwtVN3nvw==}
+  preact-render-to-string@6.7.0:
+    resolution: {integrity: sha512-Z4WR8fmLMRpdYqJ9i7vrlXSsSrxVJydwrkEXHapexfARbWfGb7vGcnvNQnIzN0cXciMVOlz/XLoiMCi9gUsy9Q==}
     peerDependencies:
       preact: '>=10 || >= 11.0.0-0'
 
@@ -8302,7 +8302,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  preact-render-to-string@6.6.7(preact@10.29.0):
+  preact-render-to-string@6.7.0(preact@10.29.0):
     dependencies:
       preact: 10.29.0
 
