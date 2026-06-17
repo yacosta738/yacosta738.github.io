@@ -89,7 +89,7 @@ catalog:
   unist-util-visit: ^5.1.0
   unpic: ^4.2.2
   vfile: ^6.0.3
-  vite: ^8.0.13
+  vite: ^8.0.16
   vitest: ^4.1.4
   wrangler: ^4.84.1
   yaml: ^2.8.3
@@ -103,8 +103,8 @@ minimumReleaseAgeExclude:
   - miniflare
   - wrangler
   - typescript@6.0.2
-  # Vite 8 validated in this workspace via grouped dependency integration branch
-  - vite@8.0.9
+  # Vite 8 validated in this workspace via grouped dependency integration branch || 8.0.16
+  - vite@8.0.9 || 8.0.16
   # Renovate security update: hono@4.12.12 || 4.12.14 || 4.12.18
   - hono@4.12.12 || 4.12.14 || 4.12.18
   # Renovate security update: astro@6.1.6 || 6.4.6
