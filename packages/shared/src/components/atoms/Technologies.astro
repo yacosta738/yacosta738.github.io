@@ -31,51 +31,63 @@ const techs: Skill[] = techData.filter(
 	</div>
 </div>
 <script>
-	// Wait for the page to fully load
-	window.addEventListener('load', function() {
-		// Add a delay to ensure all elements are rendered
-		setTimeout(function() {
+	(function() {
+		// Respect reduced motion preference - skip animation entirely
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReducedMotion) return;
+
+		function initAnimation() {
 			const iconsContainer = document.getElementById('icons');
-			const techIcons = Array.from(iconsContainer?.querySelectorAll('.tech-icon') ?? []);
-			if (techIcons.length === 0) {
-				console.warn('No tech icons found for animation');
-				return;
-			}
+			if (!iconsContainer) return;
+			const techIcons = Array.from(iconsContainer.querySelectorAll('.tech-icon') ?? []);
+			if (techIcons.length === 0) return;
+
+			// Disable animation on low-end devices / slow connections
+			const isLowEnd = navigator.connection?.saveData === true ||
+				(navigator.connection?.effectiveType === 'slow-2g' || navigator.connection?.effectiveType === '2g');
+			if (isLowEnd) return;
 
 			const w = window.innerWidth;
 			const h = window.innerHeight;
+			let intervalId = null;
 
-			function animateBackgroundIcons() {
-				const availableIcons = techIcons.filter((icon) => !icon.getAttribute('data-is-animating'));
-				if (availableIcons.length === 0) return;
-				
-				const iconToAnimate = availableIcons[Math.floor(Math.random() * availableIcons.length)];
-                if (!iconToAnimate) return;
+			function animateIcon() {
+				const available = techIcons.filter((icon) => !icon.getAttribute('data-is-animating'));
+				if (available.length === 0) return;
 
-				iconToAnimate.addEventListener(
-					'animationend',
-					() => {
-						iconToAnimate.classList.remove('animate-moving-background');
-						iconToAnimate.removeAttribute('style');
-						iconToAnimate.removeAttribute('data-is-animating');
-					},
-					{ once: true }
-				);
+				const iconToAnimate = available[Math.floor(Math.random() * available.length)];
 
-				// Random position
-				const x = Math.floor(Math.random() * (w - 96)); // subtract icon width
-				const y = Math.floor(Math.random() * (h - 96)); // subtract icon height
-				
-				iconToAnimate.setAttribute(
-					'style',
-					`top: ${y}px; left: ${x}px;`
-				);
+				iconToAnimate.addEventListener('animationend', () => {
+					iconToAnimate.classList.remove('animate-moving-background');
+					iconToAnimate.removeAttribute('style');
+					iconToAnimate.removeAttribute('data-is-animating');
+				}, { once: true });
 
+				const x = Math.floor(Math.random() * (w - 96));
+				const y = Math.floor(Math.random() * (h - 96));
+				iconToAnimate.setAttribute('style', `top: ${y}px; left: ${x}px;`);
 				iconToAnimate.classList.add('animate-moving-background');
 				iconToAnimate.setAttribute('data-is-animating', 'true');
 			}
-			animateBackgroundIcons();
-			setInterval(animateBackgroundIcons, 2000);
-		}, 2000); // 2 second delay to ensure astro-icon has loaded
-	});
+
+			function scheduleAnimation() {
+				// Use requestIdleCallback when available to avoid blocking main thread
+				if ('requestIdleCallback' in window) {
+					requestIdleCallback(animateIcon, { timeout: 500 });
+				} else {
+					setTimeout(animateIcon, 0);
+				}
+			}
+
+			// Start animation, then repeat every 3s (was 2s)
+			scheduleAnimation();
+			intervalId = setInterval(scheduleAnimation, 3000);
+		}
+
+		// Wait for page load, then give astro-icon time to render
+		// Init on Astro page-load lifecycle (works with client navigation too)
+		document.addEventListener('astro:page-load', () => {
+			setTimeout(initAnimation, 2000);
+		});
+	})();
 </script>

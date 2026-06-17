@@ -35,8 +35,11 @@
 			"!**/apps/blog/src/assets/font/**/*.svg",
 			"!**/src/styles/global.css",
 			"!**/worker-configuration.d.ts",
-			"!**/components/ui/**",
-			"!**/components.d.ts"
+			"!**/components/ui",
+			"!**/components.d.ts",
+			"!**/src/assets/font/**/*.svg",
+			"!**/packages/shared/src/assets/font/**/*.svg",
+			"!**/apps/blog/src/assets/font/**/*.svg"
 		]
 	},
 	"formatter": {
@@ -51,6 +54,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"recommended": true,
+			"a11y": {
+				"noSvgWithoutTitle": "error"
+			},
 			"preset": "recommended",
 			"style": {
 				"noInferrableTypes": "error",
