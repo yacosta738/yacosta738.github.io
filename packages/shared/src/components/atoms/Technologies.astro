@@ -85,7 +85,8 @@ const techs: Skill[] = techData.filter(
 		}
 
 		// Wait for page load, then give astro-icon time to render
-		window.addEventListener('load', function() {
+		// Init on Astro page-load lifecycle (works with client navigation too)
+		document.addEventListener('astro:page-load', () => {
 			setTimeout(initAnimation, 2000);
 		});
 	})();
