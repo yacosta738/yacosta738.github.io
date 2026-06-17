@@ -1,539 +1,437 @@
 {
-  "awards": [],
-  "basics": {
-    "email": "contact@yunielacosta.com",
-    "image": "/me.webp",
-    "label": "Experienced software engineer skilled in front-end and back-end technologies. Proficient in software design principles, design patterns, and clean architectures.",
-    "location": {
-      "address": "🍃",
-      "city": "valencia",
-      "countryCode": "ES",
-      "postalCode": "✉️",
-      "region": "Valencia"
-    },
-    "name": "Yuniel Acosta",
-    "phone": "+34 687 687 869",
-    "profiles": [
-      {
-        "network": "X",
-        "url": "https://x.com/yacosta738",
-        "username": "yacosta738"
-      },
-      {
-        "network": "GitHub",
-        "url": "https://github.com/yacosta738",
-        "username": "yacosta738"
-      },
-      {
-        "network": "LinkedIn",
-        "url": "https://www.linkedin.com/in/yacosta738/",
-        "username": "yacosta738"
-      },
-      {
-        "network": "Instagram",
-        "url": "https://instagram.com/yacosta738",
-        "username": "yacosta738"
-      },
-      {
-        "network": "Codepen",
-        "url": "https://codepen.io/yacosta738",
-        "username": "yacosta738"
-      }
-    ],
-    "summary": "I'm a Senior Software Engineer specializing in distributed systems for high-stakes environments — banking, fintech, and e-commerce at scale. My core is the JVM ecosystem: Kotlin and Java in production, event-driven architectures with Kafka, and backend systems that need to be right the first time because the cost of failure is real. Right now I'm leading ESB-to-Kafka migrations at BBVA within a complex enterprise framework. Before that, fraud prevention systems at Mercado Libre processing millions of daily authentication events. I work with AI the way most engineers will in two years — not as a novelty, but as infrastructure. I've built my own engineering harness on top of OpenCode: custom agents, subagents, prompt libraries, and Spec-Driven Development workflows that cut scaffolding time and reduce cognitive overhead on complex integrations. Outside client work, I build in public. I write about distributed systems, Kafka, Rust, and observability on my blog and YouTube channel. Side projects: Cortex (github.com/dallay/cortex) — a Rust monorepo for homelab tooling and AI agent orchestration. Profile Tailors — a SaaS for multi-channel content distribution. I'm not looking for the next framework to learn. I'm interested in hard problems, well-designed systems, and teams that care about the craft.",
-    "url": "https://yunielacosta.com"
-  },
-  "certificates": [
-    {
-      "date": "2022-07-07",
-      "issuer": "Udemy",
-      "name": "Microservices: Clean Architecture, DDD, SAGA, Outbox & Kafka",
-      "url": "https://www.udemy.com/certificate/UC-5c9457a6-f77d-4152-a860-c6132c9a61f4/"
-    },
-    {
-      "date": "2022-11-07",
-      "issuer": "Udemy",
-      "name": "SOLID Principles: Introducing Software Architecture & Design",
-      "url": "https://www.udemy.com/certificate/UC-f863b35b-c53c-4ea7-a2f9-ee6b534c0a36/"
-    },
-    {
-      "date": "2023-02-07",
-      "issuer": "Udemy",
-      "name": "Master Spring Boot 3 & Spring Framework 6 with Java",
-      "url": "https://www.udemy.com/certificate/UC-d6269681-64c6-4fc5-b7dc-e83b10f4dc3b/"
-    },
-    {
-      "date": "2023-02-17",
-      "issuer": "Udemy",
-      "name": "Keycloak : Single Sign On with Spring Boot & Spring Security",
-      "url": "https://www.udemy.com/certificate/UC-ea9fe04c-eae5-4f2f-a624-f04baad72e1f/"
-    },
-    {
-      "date": "2023-02-24",
-      "issuer": "Udemy",
-      "name": "Build Spring Boot Apps with the Kotlin Programming Language",
-      "url": "https://www.udemy.com/certificate/UC-94e27fb3-0092-4347-b807-eeae99a2d158/"
-    },
-    {
-      "date": "2023-11-07",
-      "issuer": "Canvas Credentials (Badgr)",
-      "name": "Accredited Software Testing Fundamentals Certification (ASTFC)™",
-      "url": "https://www.credential.net/LRv0GmtiR-Sluyso7ElnWA"
-    }
-  ],
-  "education": [
-    {
-      "area": "Computer Science",
-      "courses": [
-        "Artificial intelligence",
-        "Computer Machines",
-        "Object-oriented programming",
-        "Assembly",
-        "Web programming",
-        "Systems of Databases (SQL and NoSQL)",
-        "Compilers",
-        "Analysis and Design of Algorithms",
-        "Data Structures",
-        "Logic",
-        "Computational Math"
-      ],
-      "endDate": "2017-07-01",
-      "institution": "Central University \"Marta Abreu\" of Las Villas",
-      "score": "4.0",
-      "startDate": "2012-09-01",
-      "studyType": "Bachelor",
-      "url": "https://www.uclv.edu.cu"
-    }
-  ],
-  "interests": [
-    {
-      "keywords": [
-        "Startups",
-        "Automation",
-        "AI Tools"
-      ],
-      "name": "Technology Trends"
-    },
-    {
-      "keywords": [
-        "Football",
-        "Running",
-        "Mountain Biking"
-      ],
-      "name": "Outdoor Activities"
-    }
-  ],
-  "languages": [
-    {
-      "fluency": "Native speaker",
-      "language": "Spanish"
-    },
-    {
-      "fluency": "Intermediate B2",
-      "language": "English"
-    }
-  ],
-  "projects": [
-    {
-      "description": "Application that allows to guarantee the control of the financial availability of the Electric Company of Ciego de Ávila. The application was developed with monolithic architecture using the Lumen framework on the backend and Angular on the frontend.",
-      "highlights": [
-        "angular",
-        "typescript",
-        "lumen",
-        "php",
-        "postgresql"
-      ],
-      "name": "Finis",
-      "startDate": "2018-09-05"
-    },
-    {
-      "description": "A simple application made in Flutter for an online store. Where you can add, delete and edit objects to sell, add them to favorites and make a purchase checking the status of your order.",
-      "highlights": [
-        "flutter",
-        "dart",
-        "idea"
-      ],
-      "name": "ShopApp",
-      "startDate": "2020-12-06",
-      "url": "https://github.com/yacosta738/flutter_shop_app"
-    },
-    {
-      "description": "A simple application made in Flutter to keep track of your daily personal expenses. You can have control of how much you have spent weekly as well as daily.",
-      "highlights": [
-        "dart",
-        "flutter"
-      ],
-      "name": "ExpensesApp",
-      "startDate": "2020-12-12",
-      "url": "https://github.com/yacosta738/flutter_expenses_app"
-    },
-    {
-      "description": "A simple application made in Flutter where a list by categories of the dishes and their ingredients is shown.",
-      "highlights": [
-        "flutter",
-        "dart",
-        "idea"
-      ],
-      "name": "MealApp",
-      "startDate": "2020-12-25",
-      "url": "https://github.com/yacosta738/flutter_meal_app"
-    },
-    {
-      "description": "Module that allows the ORM odoo to use scanners remotely that are on the same subnet.",
-      "highlights": [
-        "flask",
-        "python",
-        "libinsane"
-      ],
-      "name": "scanner-odoo",
-      "startDate": "2021-01-14"
-    },
-    {
-      "description": "It allows keeping control of the poultry production of the CAN Company. Made using JHIPSTER, with a monolithic architecture, designed for multi-companies.",
-      "highlights": [
-        "java",
-        "spring",
-        "vuejs",
-        "postgresql",
-        "typescript"
-      ],
-      "name": "Bankiva",
-      "startDate": "2020-02-17"
-    },
-    {
-      "description": "My first personal blog made with Jekyll static websites generator and deployed in Github Pages.",
-      "highlights": [
-        "jekyll",
-        "ruby",
-        "scss"
-      ],
-      "name": "Personal Blog v1.0",
-      "startDate": "2019-11-14",
-      "url": "https://yacosta738.github.io/"
-    },
-    {
-      "description": "Template for personal Blog and portfolio made with HUGO. The template is part of the migration of my personal blog in its version 2 with the static website generator HUGO.",
-      "highlights": [
-        "hugo",
-        "go",
-        "scss"
-      ],
-      "name": "Portfolio Blog V2",
-      "startDate": "2020-03-12",
-      "url": "https://yacosta738.github.io/nomada.digital/"
-    },
-    {
-      "description": "Application to search for music using the ITunes Api. Made with Vue 3, Vite and Tailwindcss.",
-      "highlights": [
-        "vuejs",
-        "tailwind",
-        "vite",
-        "itunes-api"
-      ],
-      "name": "ITunes music search engine",
-      "startDate": "2021-05-01",
-      "url": "https://itunes-search-music.vercel.app/"
-    },
-    {
-      "description": "A weather Application that use the Metaweather API. Made with Vue 3, Vite and Tailwindcss.",
-      "highlights": [
-        "vuejs",
-        "tailwind",
-        "vite"
-      ],
-      "name": "Weather App",
-      "startDate": "2021-05-21",
-      "url": "https://weather-app-vuejs-acosta.vercel.app/"
-    },
-    {
-      "description": "A simple to-do list application to demonstrate my React knowledge. Front-end project only, no backend or database storage.",
-      "highlights": [
-        "react",
-        "css3",
-        "html"
-      ],
-      "name": "React ToDo App",
-      "startDate": "2021-06-14",
-      "url": "https://yacosta738.github.io/react-todos-app/"
-    },
-    {
-      "description": "Simple, opinionated, fully typed, and production-ready project template made with Vue 3, TypeScript, Vite and Tailwindcss.",
-      "highlights": [
-        "vuejs",
-        "tailwind",
-        "vite",
-        "typescript"
-      ],
-      "name": "Vue3 Starter",
-      "startDate": "2021-10-21",
-      "url": "https://vue3-vite-typescript-tailwind-starter.vercel.app/"
-    },
-    {
-      "description": "Application for manage a task list. It allows us add, mark as completed and delete a task. The App has three principal Views (All, Aactive and Completed)",
-      "highlights": [
-        "vuejs",
-        "tailwind",
-        "typescript",
-        "vite",
-        "nuxtjs"
-      ],
-      "name": "Nuxt ToDo App",
-      "startDate": "2022-01-05",
-      "url": "https://task-app-acosta.vercel.app/"
-    },
-    {
-      "description": "Simple, opinionated, fully typed, and production-ready project template made with Vue 3, TypeScript, Vite and Tailwindcss.",
-      "highlights": [
-        "nuxtjs",
-        "vuejs",
-        "typescript",
-        "vite",
-        "tailwind"
-      ],
-      "name": "Nuxt 3 Template",
-      "startDate": "2022-01-05",
-      "url": "https://nuxt3-tailwindcss-typescript.vercel.app/"
-    },
-    {
-      "description": "MAN is a movie search app that helps display and sort all movies available in the TMDB API. This App is built with ReactJS, Tailwindcss, and Typescript. Also, uses Vercel to deploy.",
-      "highlights": [
-        "typescript",
-        "react",
-        "nextjs"
-      ],
-      "name": "Movie App",
-      "startDate": "2022-04-06",
-      "url": "https://movie-app-nextjs-nine.vercel.app/"
-    },
-    {
-      "description": "This is a food ordering system that uses a microservice architecture with Kafka for inter-service communication and PostgreSQL as a database. It's a work in progress.",
-      "highlights": [
-        "java",
-        "postgresql",
-        "kafka"
-      ],
-      "name": "Food Ordering System",
-      "startDate": "2022-08-05",
-      "url": "https://github.com/yacosta738/food-ordering-system"
-    }
-  ],
-  "publications": [],
-  "references": [
-    {
-      "name": "Mayret Lodos",
-      "reference": "I have had the privilege of knowing Yuniel and have witnessed firsthand his tenacity, commitment, and passion for software development. He stands out for his leadership skills, demonstrated in the way he makes sound technical decisions, maintains balance within the team, and integrates different perspectives to deliver the best possible outcomes.\n\nHis adaptability to evolving technologies and his ability to design effective solutions make him a highly reliable software professional. Moreover, his enthusiasm for development goes beyond the technical dimension: he breathes and bleeds programming, approaching each project with dedication and excellence, showing clearly that for him it is not just a profession, but a true vocation."
-    },
-    {
-      "name": "Yuniesky Martinez Espinosa",
-      "reference": "Focused, intelligent, and driven by constant curiosity, Yuniel is a senior full stack developer with strong expertise in his field and a broad understanding of complementary technologies and disciplines. He quickly integrates new knowledge and applies it effectively to build scalable, high-quality solutions.\n\nHis ability to combine deep technical expertise with a cross-disciplinary perspective allows him to approach complex projects holistically, ensuring robust architecture, maintainable code, and an efficiency-oriented mindset. His sense of responsibility and professional rigor consistently deliver results of exceptional value."
-    }
-  ],
-  "skills": [
-    {
-      "keywords": [
-        "Java",
-        "Kotlin",
-        "Spring Boot",
-        "Vert.x",
-        "REST APIs",
-        "Microservices",
-        "SOLID Principles"
-      ],
-      "level": "Expert",
-      "name": "Backend Development"
-    },
-    {
-      "keywords": [
-        "HTML",
-        "CSS",
-        "TypeScript",
-        "Angular",
-        "Vue.js"
-      ],
-      "level": "Advanced",
-      "name": "Frontend Development"
-    },
-    {
-      "keywords": [
-        "PostgreSQL",
-        "Oracle DB",
-        "BigQuery",
-        "MySQL",
-        "MongoDB",
-        "Query Optimization",
-        "SQL"
-      ],
-      "level": "Expert",
-      "name": "Database Systems"
-    },
-    {
-      "keywords": [
-        "AWS",
-        "Docker",
-        "Kubernetes",
-        "Terraform",
-        "CI/CD",
-        "GitLab CI",
-        "Serverless",
-        "Infrastructure as Code"
-      ],
-      "level": "Expert",
-      "name": "Cloud & DevOps"
-    },
-    {
-      "keywords": [
-        "Microservices",
-        "Event-Driven Architecture",
-        "Clean Architecture",
-        "High Availability",
-        "Centralized Configuration",
-        "API Design"
-      ],
-      "level": "Expert",
-      "name": "System Architecture"
-    },
-    {
-      "keywords": [
-        "API Security",
-        "Risk Policies",
-        "Scoring Systems"
-      ],
-      "level": "Advanced",
-      "name": "Security & Risk Management"
-    },
-    {
-      "keywords": [
-        "JUnit",
-        "Automated Testing",
-        "Code Review"
-      ],
-      "level": "Advanced",
-      "name": "Testing & Quality Assurance"
-    },
-    {
-      "keywords": [
-        "Git",
-        "Docker",
-        "Linux",
-        "JHipster",
-        "Istio",
-        "Zookeeper"
-      ],
-      "level": "Advanced",
-      "name": "Tools & Platforms"
-    }
-  ],
-  "volunteer": [],
-  "work": [
-    {
-      "endDate": "",
-      "highlights": [
-        "Leading migration of ESB integrations (TIBCO) to Apache Camel and Kafka pipelines within BBVA's NOVA framework — rethinking data flow across a distributed architecture at real scale.",
-        "Previously at Deutsche Bank CLM: built Spring Boot and Kafka services establishing architecture patterns the team adopted as standard.",
-        "Design and implement microservices following Clean Architecture and DDD principles.",
-        "Translate regulatory requirements into concrete technical specifications.",
-        "Lead workshops on event-driven architecture and Kafka patterns.",
-        "Mentor junior developers on SOLID principles and TDD.",
-        "Drive CI/CD adoption across teams with complex delivery cycles.",
-        "Build and maintain a custom AI engineering harness — prompt libraries, autonomous agents, subagents, MCPs, and Spec-Driven Development (SDD) workflows using OpenCode — to accelerate delivery and reduce cognitive overhead on complex integrations.",
-        "Reduced average feature delivery time by 30% through improved estimation, sprint planning, and AI-assisted spec generation.",
-        "Established coding standards adopted by 4 project teams across two banking clients.",
-        "Delivered 6 regulatory compliance features ahead of deadline, avoiding potential audit findings.",
-        "Cut boilerplate scaffolding time by ~60% by introducing SDD workflows and AI agent orchestration into the team's development cycle."
-      ],
-      "name": "GFT Technologies",
-      "position": "System Analyst | Senior Software Engineer (L4)",
-      "startDate": "2023-03-01",
-      "summary": "I work on banking transformation projects for top-tier European financial institutions — currently BBVA, previously Deutsche Bank CLM. At BBVA I'm leading the migration of ESB integrations (TIBCO) to Apache Camel and Kafka pipelines within the NOVA framework. It's not just a technology swap — it means rethinking how data flows across a distributed architecture at real scale.",
-      "url": "https://www.gft.com/es/es"
-    },
-    {
-      "endDate": "2025-12-01",
-      "highlights": [
-        "Led migration of core services from Spring Boot 2.7 to Spring Boot 3, reducing runtime dependencies by 40% and improving startup time by 3x.",
-        "Designed and implemented a new event-driven integration service from scratch using Kafka, consolidating data from 12+ external sources and enabling instant client data pre-fill during onboarding.",
-        "Reduced StreamLine user onboarding time by optimizing data validation workflows and automating compliance checks.",
-        "Modernized 4 microservices maintaining 99.9% uptime during all migration phases.",
-        "Collaborated with cross-functional teams (Compliance, Legal, Frontend) to deliver regulatory-compliant features on time."
-      ],
-      "name": "Deutsche Bank",
-      "position": "Senior Software Engineer",
-      "startDate": "2023-04-01",
-      "summary": "Senior Software Engineer in the Client Lifecycle Management (CLM) team, contributing to the bank's Know Your Client onboarding platform serving Investment Banking clients globally. Focused on service modernization, event-driven integrations, and regulatory compliance delivery.",
-      "url": "https://www.deutsche-bank.de/pk.html"
-    },
-    {
-      "endDate": "2023-03-01",
-      "highlights": [
-        "Built internal APIs for malicious behavior detection across MercadoLibre.com and MercadoPago.com login and registration flows — systems processing 3M+ daily authentication events.",
-        "Designed and implemented risk policies and scoring systems to identify and block fraudulent account activity in real time.",
-        "Reduced fraudulent account registrations by 22% through new scoring heuristics.",
-        "Improved detection latency by 40% after API refactoring and caching layer optimization.",
-        "Collaborated with cross-functional teams to deliver scalable backend solutions supporting high-traffic retail and payments operations.",
-        "Conducted performance and reliability testing to minimize downtime and improve user experience at scale."
-      ],
-      "name": "Mercado Libre",
-      "position": "Software Engineer | Kotlin & Java Backend Developer",
-      "startDate": "2021-02-01",
-      "summary": "Part of the Trust & Safety team, building the systems that protect login and registration flows for both MercadoLibre.com and MercadoPago.com across millions of daily transactions in the retail and payments ecosystem.",
-      "url": "https://mercadolibre.com"
-    },
-    {
-      "endDate": "2021-02-01",
-      "highlights": [
-        "Reduced data synchronization time between platform APIs and MMC from ~40 minutes to ~6 minutes, significantly cutting processing time and operational costs.",
-        "Improved code quality by introducing unit and integration tests and promoting SOLID principles across the codebase.",
-        "Designed and implemented a centralized configuration pattern for all platform microservices, simplifying deployments and configuration management.",
-        "Implemented a GitLab CI continuous integration pipeline enabling fast, reliable delivery and reducing deployment errors.",
-        "Maintained and optimized high-traffic APIs ensuring availability and performance across multiple retail market integrations."
-      ],
-      "name": "Scanntech",
-      "position": "Senior Software Engineer | Java Backend Developer",
-      "startDate": "2019-12-01",
-      "summary": "Integrated multiple data sources and retail networks through high-availability backend APIs. Focused on performance optimization, test coverage, and CI/CD adoption across a high-traffic platform.",
-      "url": "https://www.scanntech.com.br/es/"
-    },
-    {
-      "endDate": "2019-12-01",
-      "highlights": [
-        "Designed and implemented a microservices-based online reputation management system.",
-        "Led architecture decisions and mentored the team through service decomposition and platform modernization.",
-        "Trained 15+ staff on microservices architecture patterns with Kubernetes and Istio.",
-        "Introduced infrastructure-as-code and container orchestration practices across the team."
-      ],
-      "name": "Desoft",
-      "position": "Software Architect",
-      "startDate": "2019-04-01",
-      "summary": "Led architecture design and mentorship efforts; introduced microservices-based patterns and container orchestration practices.",
-      "url": "https://www.desoft.cu/es"
-    },
-    {
-      "endDate": "2019-04-01",
-      "highlights": [
-        "Developed dynamic and interactive websites using modern JS frameworks, improving user experience and traffic.",
-        "Designed cleanup and performance processes that minimized downtime and increased reliability.",
-        "Fixed bugs and implemented enhancements to significantly improve functionality and site speed.",
-        "Developed internal REST APIs for communication between different systems."
-      ],
-      "name": "Desoft",
-      "position": "Full Stack Developer",
-      "startDate": "2017-11-01",
-      "summary": "Worked across frontend and backend to deliver robust web solutions; implemented APIs and performance improvements.",
-      "url": "https://www.desoft.cu/es"
-    },
-    {
-      "endDate": "2017-11-01",
-      "highlights": [
-        "Developed website interfaces using HTML, CSS, and JavaScript.",
-        "Built and fixed issues for internal and client websites using HTML, CSS, TypeScript, Angular, and Vue.js.",
-        "Manually tested sites across browsers and mobile devices to ensure cross-browser compatibility and responsiveness.",
-        "Trained 10+ staff members in internal web functions and minor content updates."
-      ],
-      "name": "Desoft",
-      "position": "Junior Web Developer",
-      "startDate": "2016-09-01",
-      "summary": "Developed and maintained web interfaces and client sites. Ensured cross-browser compatibility and responsive layouts.",
-      "url": "https://www.desoft.cu/es"
-    }
-  ]
+	"awards": [],
+	"basics": {
+		"email": "contact@yunielacosta.com",
+		"image": "/me.webp",
+		"label": "Experienced software engineer skilled in front-end and back-end technologies. Proficient in software design principles, design patterns, and clean architectures.",
+		"location": {
+			"address": "🍃",
+			"city": "valencia",
+			"countryCode": "ES",
+			"postalCode": "✉️",
+			"region": "Valencia"
+		},
+		"name": "Yuniel Acosta",
+		"phone": "+34 687 687 869",
+		"profiles": [
+			{
+				"network": "X",
+				"url": "https://x.com/yacosta738",
+				"username": "yacosta738"
+			},
+			{
+				"network": "GitHub",
+				"url": "https://github.com/yacosta738",
+				"username": "yacosta738"
+			},
+			{
+				"network": "LinkedIn",
+				"url": "https://www.linkedin.com/in/yacosta738/",
+				"username": "yacosta738"
+			},
+			{
+				"network": "Instagram",
+				"url": "https://instagram.com/yacosta738",
+				"username": "yacosta738"
+			},
+			{
+				"network": "Codepen",
+				"url": "https://codepen.io/yacosta738",
+				"username": "yacosta738"
+			}
+		],
+		"summary": "I build backend systems that have to be right the first time — Kafka pipelines moving millions of events a day in banking and fintech, where a silent failure costs more than a slow sprint.\n\nMy core conviction: software that's hard to change was designed wrong from day one. Hexagonal Architecture and Domain-Driven Design aren't conference buzzwords to me — they're how I keep business logic isolated from infrastructure noise, so a database swap or a new integration never turns into a six-month migration.\n\nThe same logic drives how I verify that logic. TDD gives me a tight feedback loop while I write the code. BDD keeps the conversation with the business anchored to real scenarios instead of assumptions. Spec-Driven Development — writing the spec before a line of implementation, often with an AI agent doing the first pass — is now the backbone of how I scope complex integrations.\n\nStack: Kotlin or Java and the JVM for production backend systems. Spring Boot when its conventions earn their keep. Apache Kafka as the spine of event-driven architectures built to scale without falling over under load. On the frontend, I reach for Astro and Vue.js — islands architecture and reactivity, without the framework weight a page didn't ask for.\n\nI've spent years inside high-stakes environments: banking core systems, fraud detection processing millions of daily authentication events, fintech platforms where downtime is a regulatory incident, not an inconvenience. That's where I learned \"good enough\" architecture fails exactly when you can least afford it.\n\nMore recently, I've built my own AI engineering harness on top of OpenCode — custom agents, subagents, and prompt libraries that absorb the scaffolding so I can focus on decisions that actually need a human brain. I think this is closer to how most engineers will work within a couple of years, not a novelty bolted onto a normal workflow.\n\nOutside client work, I build in public: distributed systems, Kafka, Rust, and observability content on my blog and YouTube channel. Current side projects: Corvus, an autonomous AI agent framework in Kotlin and Rust for long-running orchestration, and Profile Tailors, a multi-channel content distribution SaaS on Spring Boot 4, Kotlin, and WebFlux.\n\nNot chasing the next framework hype cycle, or a team that confuses moving fast with moving anywhere. Looking for hard problems, systems worth designing properly, and teams that still care about the craft.",
+		"url": "https://yunielacosta.com"
+	},
+	"certificates": [
+		{
+			"date": "2022-07-07",
+			"issuer": "Udemy",
+			"name": "Microservices: Clean Architecture, DDD, SAGA, Outbox & Kafka",
+			"url": "https://www.udemy.com/certificate/UC-5c9457a6-f77d-4152-a860-c6132c9a61f4/"
+		},
+		{
+			"date": "2022-11-07",
+			"issuer": "Udemy",
+			"name": "SOLID Principles: Introducing Software Architecture & Design",
+			"url": "https://www.udemy.com/certificate/UC-f863b35b-c53c-4ea7-a2f9-ee6b534c0a36/"
+		},
+		{
+			"date": "2023-02-07",
+			"issuer": "Udemy",
+			"name": "Master Spring Boot 3 & Spring Framework 6 with Java",
+			"url": "https://www.udemy.com/certificate/UC-d6269681-64c6-4fc5-b7dc-e83b10f4dc3b/"
+		},
+		{
+			"date": "2023-02-17",
+			"issuer": "Udemy",
+			"name": "Keycloak : Single Sign On with Spring Boot & Spring Security",
+			"url": "https://www.udemy.com/certificate/UC-ea9fe04c-eae5-4f2f-a624-f04baad72e1f/"
+		},
+		{
+			"date": "2023-02-24",
+			"issuer": "Udemy",
+			"name": "Build Spring Boot Apps with the Kotlin Programming Language",
+			"url": "https://www.udemy.com/certificate/UC-94e27fb3-0092-4347-b807-eeae99a2d158/"
+		},
+		{
+			"date": "2023-11-07",
+			"issuer": "Canvas Credentials (Badgr)",
+			"name": "Accredited Software Testing Fundamentals Certification (ASTFC)™",
+			"url": "https://www.credential.net/LRv0GmtiR-Sluyso7ElnWA"
+		}
+	],
+	"education": [
+		{
+			"area": "Computer Science",
+			"courses": [
+				"Artificial intelligence",
+				"Computer Machines",
+				"Object-oriented programming",
+				"Assembly",
+				"Web programming",
+				"Systems of Databases (SQL and NoSQL)",
+				"Compilers",
+				"Analysis and Design of Algorithms",
+				"Data Structures",
+				"Logic",
+				"Computational Math"
+			],
+			"endDate": "2017-07-01",
+			"institution": "Central University \"Marta Abreu\" of Las Villas",
+			"score": "4.0",
+			"startDate": "2012-09-01",
+			"studyType": "Bachelor",
+			"url": "https://www.uclv.edu.cu"
+		}
+	],
+	"interests": [
+		{
+			"keywords": ["Startups", "Automation", "AI Tools"],
+			"name": "Technology Trends"
+		},
+		{
+			"keywords": ["Football", "Running", "Mountain Biking"],
+			"name": "Outdoor Activities"
+		}
+	],
+	"languages": [
+		{
+			"fluency": "Native speaker",
+			"language": "Spanish"
+		},
+		{
+			"fluency": "Intermediate B2",
+			"language": "English"
+		}
+	],
+	"projects": [
+		{
+			"description": "Application that allows to guarantee the control of the financial availability of the Electric Company of Ciego de Ávila. The application was developed with monolithic architecture using the Lumen framework on the backend and Angular on the frontend.",
+			"highlights": ["angular", "typescript", "lumen", "php", "postgresql"],
+			"name": "Finis",
+			"startDate": "2018-09-05"
+		},
+		{
+			"description": "A simple application made in Flutter for an online store. Where you can add, delete and edit objects to sell, add them to favorites and make a purchase checking the status of your order.",
+			"highlights": ["flutter", "dart", "idea"],
+			"name": "ShopApp",
+			"startDate": "2020-12-06",
+			"url": "https://github.com/yacosta738/flutter_shop_app"
+		},
+		{
+			"description": "A simple application made in Flutter to keep track of your daily personal expenses. You can have control of how much you have spent weekly as well as daily.",
+			"highlights": ["dart", "flutter"],
+			"name": "ExpensesApp",
+			"startDate": "2020-12-12",
+			"url": "https://github.com/yacosta738/flutter_expenses_app"
+		},
+		{
+			"description": "A simple application made in Flutter where a list by categories of the dishes and their ingredients is shown.",
+			"highlights": ["flutter", "dart", "idea"],
+			"name": "MealApp",
+			"startDate": "2020-12-25",
+			"url": "https://github.com/yacosta738/flutter_meal_app"
+		},
+		{
+			"description": "Module that allows the ORM odoo to use scanners remotely that are on the same subnet.",
+			"highlights": ["flask", "python", "libinsane"],
+			"name": "scanner-odoo",
+			"startDate": "2021-01-14"
+		},
+		{
+			"description": "It allows keeping control of the poultry production of the CAN Company. Made using JHIPSTER, with a monolithic architecture, designed for multi-companies.",
+			"highlights": ["java", "spring", "vuejs", "postgresql", "typescript"],
+			"name": "Bankiva",
+			"startDate": "2020-02-17"
+		},
+		{
+			"description": "My first personal blog made with Jekyll static websites generator and deployed in Github Pages.",
+			"highlights": ["jekyll", "ruby", "scss"],
+			"name": "Personal Blog v1.0",
+			"startDate": "2019-11-14",
+			"url": "https://yacosta738.github.io/"
+		},
+		{
+			"description": "Template for personal Blog and portfolio made with HUGO. The template is part of the migration of my personal blog in its version 2 with the static website generator HUGO.",
+			"highlights": ["hugo", "go", "scss"],
+			"name": "Portfolio Blog V2",
+			"startDate": "2020-03-12",
+			"url": "https://yacosta738.github.io/nomada.digital/"
+		},
+		{
+			"description": "Application to search for music using the ITunes Api. Made with Vue 3, Vite and Tailwindcss.",
+			"highlights": ["vuejs", "tailwind", "vite", "itunes-api"],
+			"name": "ITunes music search engine",
+			"startDate": "2021-05-01",
+			"url": "https://itunes-search-music.vercel.app/"
+		},
+		{
+			"description": "A weather Application that use the Metaweather API. Made with Vue 3, Vite and Tailwindcss.",
+			"highlights": ["vuejs", "tailwind", "vite"],
+			"name": "Weather App",
+			"startDate": "2021-05-21",
+			"url": "https://weather-app-vuejs-acosta.vercel.app/"
+		},
+		{
+			"description": "A simple to-do list application to demonstrate my React knowledge. Front-end project only, no backend or database storage.",
+			"highlights": ["react", "css3", "html"],
+			"name": "React ToDo App",
+			"startDate": "2021-06-14",
+			"url": "https://yacosta738.github.io/react-todos-app/"
+		},
+		{
+			"description": "Simple, opinionated, fully typed, and production-ready project template made with Vue 3, TypeScript, Vite and Tailwindcss.",
+			"highlights": ["vuejs", "tailwind", "vite", "typescript"],
+			"name": "Vue3 Starter",
+			"startDate": "2021-10-21",
+			"url": "https://vue3-vite-typescript-tailwind-starter.vercel.app/"
+		},
+		{
+			"description": "Application for manage a task list. It allows us add, mark as completed and delete a task. The App has three principal Views (All, Aactive and Completed)",
+			"highlights": ["vuejs", "tailwind", "typescript", "vite", "nuxtjs"],
+			"name": "Nuxt ToDo App",
+			"startDate": "2022-01-05",
+			"url": "https://task-app-acosta.vercel.app/"
+		},
+		{
+			"description": "Simple, opinionated, fully typed, and production-ready project template made with Vue 3, TypeScript, Vite and Tailwindcss.",
+			"highlights": ["nuxtjs", "vuejs", "typescript", "vite", "tailwind"],
+			"name": "Nuxt 3 Template",
+			"startDate": "2022-01-05",
+			"url": "https://nuxt3-tailwindcss-typescript.vercel.app/"
+		},
+		{
+			"description": "MAN is a movie search app that helps display and sort all movies available in the TMDB API. This App is built with ReactJS, Tailwindcss, and Typescript. Also, uses Vercel to deploy.",
+			"highlights": ["typescript", "react", "nextjs"],
+			"name": "Movie App",
+			"startDate": "2022-04-06",
+			"url": "https://movie-app-nextjs-nine.vercel.app/"
+		},
+		{
+			"description": "This is a food ordering system that uses a microservice architecture with Kafka for inter-service communication and PostgreSQL as a database. It's a work in progress.",
+			"highlights": ["java", "postgresql", "kafka"],
+			"name": "Food Ordering System",
+			"startDate": "2022-08-05",
+			"url": "https://github.com/yacosta738/food-ordering-system"
+		}
+	],
+	"publications": [],
+	"references": [
+		{
+			"name": "Mayret Lodos",
+			"reference": "I have had the privilege of knowing Yuniel and have witnessed firsthand his tenacity, commitment, and passion for software development. He stands out for his leadership skills, demonstrated in the way he makes sound technical decisions, maintains balance within the team, and integrates different perspectives to deliver the best possible outcomes.\n\nHis adaptability to evolving technologies and his ability to design effective solutions make him a highly reliable software professional. Moreover, his enthusiasm for development goes beyond the technical dimension: he breathes and bleeds programming, approaching each project with dedication and excellence, showing clearly that for him it is not just a profession, but a true vocation."
+		},
+		{
+			"name": "Yuniesky Martinez Espinosa",
+			"reference": "Focused, intelligent, and driven by constant curiosity, Yuniel is a senior full stack developer with strong expertise in his field and a broad understanding of complementary technologies and disciplines. He quickly integrates new knowledge and applies it effectively to build scalable, high-quality solutions.\n\nHis ability to combine deep technical expertise with a cross-disciplinary perspective allows him to approach complex projects holistically, ensuring robust architecture, maintainable code, and an efficiency-oriented mindset. His sense of responsibility and professional rigor consistently deliver results of exceptional value."
+		}
+	],
+	"skills": [
+		{
+			"keywords": [
+				"Java",
+				"Kotlin",
+				"Spring Boot",
+				"Vert.x",
+				"REST APIs",
+				"Microservices",
+				"SOLID Principles"
+			],
+			"level": "Expert",
+			"name": "Backend Development"
+		},
+		{
+			"keywords": ["HTML", "CSS", "TypeScript", "Angular", "Vue.js"],
+			"level": "Advanced",
+			"name": "Frontend Development"
+		},
+		{
+			"keywords": [
+				"PostgreSQL",
+				"Oracle DB",
+				"BigQuery",
+				"MySQL",
+				"MongoDB",
+				"Query Optimization",
+				"SQL"
+			],
+			"level": "Expert",
+			"name": "Database Systems"
+		},
+		{
+			"keywords": [
+				"AWS",
+				"Docker",
+				"Kubernetes",
+				"Terraform",
+				"CI/CD",
+				"GitLab CI",
+				"Serverless",
+				"Infrastructure as Code"
+			],
+			"level": "Expert",
+			"name": "Cloud & DevOps"
+		},
+		{
+			"keywords": [
+				"Microservices",
+				"Event-Driven Architecture",
+				"Clean Architecture",
+				"High Availability",
+				"Centralized Configuration",
+				"API Design"
+			],
+			"level": "Expert",
+			"name": "System Architecture"
+		},
+		{
+			"keywords": ["API Security", "Risk Policies", "Scoring Systems"],
+			"level": "Advanced",
+			"name": "Security & Risk Management"
+		},
+		{
+			"keywords": ["JUnit", "Automated Testing", "Code Review"],
+			"level": "Advanced",
+			"name": "Testing & Quality Assurance"
+		},
+		{
+			"keywords": ["Git", "Docker", "Linux", "JHipster", "Istio", "Zookeeper"],
+			"level": "Advanced",
+			"name": "Tools & Platforms"
+		}
+	],
+	"volunteer": [],
+	"work": [
+		{
+			"endDate": "",
+			"highlights": [
+				"Leading migration of ESB integrations (TIBCO) to Apache Camel and Kafka pipelines within BBVA's NOVA framework — rethinking data flow across a distributed architecture at real scale.",
+				"Previously at Deutsche Bank CLM: built Spring Boot and Kafka services establishing architecture patterns the team adopted as standard.",
+				"Design and implement microservices following Clean Architecture and DDD principles.",
+				"Translate regulatory requirements into concrete technical specifications.",
+				"Lead workshops on event-driven architecture and Kafka patterns.",
+				"Mentor junior developers on SOLID principles and TDD.",
+				"Drive CI/CD adoption across teams with complex delivery cycles.",
+				"Build and maintain a custom AI engineering harness — prompt libraries, autonomous agents, subagents, MCPs, and Spec-Driven Development (SDD) workflows using OpenCode — to accelerate delivery and reduce cognitive overhead on complex integrations.",
+				"Reduced average feature delivery time by 30% through improved estimation, sprint planning, and AI-assisted spec generation.",
+				"Established coding standards adopted by 4 project teams across two banking clients.",
+				"Delivered 6 regulatory compliance features ahead of deadline, avoiding potential audit findings.",
+				"Cut boilerplate scaffolding time by ~60% by introducing SDD workflows and AI agent orchestration into the team's development cycle."
+			],
+			"name": "GFT Technologies",
+			"position": "System Analyst | Senior Software Engineer (L4)",
+			"startDate": "2023-03-01",
+			"summary": "I work on banking transformation projects for top-tier European financial institutions — currently BBVA, previously Deutsche Bank CLM. At BBVA I'm leading the migration of ESB integrations (TIBCO) to Apache Camel and Kafka pipelines within the NOVA framework. It's not just a technology swap — it means rethinking how data flows across a distributed architecture at real scale.",
+			"url": "https://www.gft.com/es/es"
+		},
+		{
+			"endDate": "2025-12-01",
+			"highlights": [
+				"Led migration of core services from Spring Boot 2.7 to Spring Boot 3, reducing runtime dependencies by 40% and improving startup time by 3x.",
+				"Designed and implemented a new event-driven integration service from scratch using Kafka, consolidating data from 12+ external sources and enabling instant client data pre-fill during onboarding.",
+				"Reduced StreamLine user onboarding time by optimizing data validation workflows and automating compliance checks.",
+				"Modernized 4 microservices maintaining 99.9% uptime during all migration phases.",
+				"Collaborated with cross-functional teams (Compliance, Legal, Frontend) to deliver regulatory-compliant features on time."
+			],
+			"name": "Deutsche Bank",
+			"position": "Senior Software Engineer",
+			"startDate": "2023-04-01",
+			"summary": "Senior Software Engineer in the Client Lifecycle Management (CLM) team, contributing to the bank's Know Your Client onboarding platform serving Investment Banking clients globally. Focused on service modernization, event-driven integrations, and regulatory compliance delivery.",
+			"url": "https://www.deutsche-bank.de/pk.html"
+		},
+		{
+			"endDate": "2023-03-01",
+			"highlights": [
+				"Built internal APIs for malicious behavior detection across MercadoLibre.com and MercadoPago.com login and registration flows — systems processing 3M+ daily authentication events.",
+				"Designed and implemented risk policies and scoring systems to identify and block fraudulent account activity in real time.",
+				"Reduced fraudulent account registrations by 22% through new scoring heuristics.",
+				"Improved detection latency by 40% after API refactoring and caching layer optimization.",
+				"Collaborated with cross-functional teams to deliver scalable backend solutions supporting high-traffic retail and payments operations.",
+				"Conducted performance and reliability testing to minimize downtime and improve user experience at scale."
+			],
+			"name": "Mercado Libre",
+			"position": "Software Engineer | Kotlin & Java Backend Developer",
+			"startDate": "2021-02-01",
+			"summary": "Part of the Trust & Safety team, building the systems that protect login and registration flows for both MercadoLibre.com and MercadoPago.com across millions of daily transactions in the retail and payments ecosystem.",
+			"url": "https://mercadolibre.com"
+		},
+		{
+			"endDate": "2021-02-01",
+			"highlights": [
+				"Reduced data synchronization time between platform APIs and MMC from ~40 minutes to ~6 minutes, significantly cutting processing time and operational costs.",
+				"Improved code quality by introducing unit and integration tests and promoting SOLID principles across the codebase.",
+				"Designed and implemented a centralized configuration pattern for all platform microservices, simplifying deployments and configuration management.",
+				"Implemented a GitLab CI continuous integration pipeline enabling fast, reliable delivery and reducing deployment errors.",
+				"Maintained and optimized high-traffic APIs ensuring availability and performance across multiple retail market integrations."
+			],
+			"name": "Scanntech",
+			"position": "Senior Software Engineer | Java Backend Developer",
+			"startDate": "2019-12-01",
+			"summary": "Integrated multiple data sources and retail networks through high-availability backend APIs. Focused on performance optimization, test coverage, and CI/CD adoption across a high-traffic platform.",
+			"url": "https://www.scanntech.com.br/es/"
+		},
+		{
+			"endDate": "2019-12-01",
+			"highlights": [
+				"Designed and implemented a microservices-based online reputation management system.",
+				"Led architecture decisions and mentored the team through service decomposition and platform modernization.",
+				"Trained 15+ staff on microservices architecture patterns with Kubernetes and Istio.",
+				"Introduced infrastructure-as-code and container orchestration practices across the team."
+			],
+			"name": "Desoft",
+			"position": "Software Architect",
+			"startDate": "2019-04-01",
+			"summary": "Led architecture design and mentorship efforts; introduced microservices-based patterns and container orchestration practices.",
+			"url": "https://www.desoft.cu/es"
+		},
+		{
+			"endDate": "2019-04-01",
+			"highlights": [
+				"Developed dynamic and interactive websites using modern JS frameworks, improving user experience and traffic.",
+				"Designed cleanup and performance processes that minimized downtime and increased reliability.",
+				"Fixed bugs and implemented enhancements to significantly improve functionality and site speed.",
+				"Developed internal REST APIs for communication between different systems."
+			],
+			"name": "Desoft",
+			"position": "Full Stack Developer",
+			"startDate": "2017-11-01",
+			"summary": "Worked across frontend and backend to deliver robust web solutions; implemented APIs and performance improvements.",
+			"url": "https://www.desoft.cu/es"
+		},
+		{
+			"endDate": "2017-11-01",
+			"highlights": [
+				"Developed website interfaces using HTML, CSS, and JavaScript.",
+				"Built and fixed issues for internal and client websites using HTML, CSS, TypeScript, Angular, and Vue.js.",
+				"Manually tested sites across browsers and mobile devices to ensure cross-browser compatibility and responsiveness.",
+				"Trained 10+ staff members in internal web functions and minor content updates."
+			],
+			"name": "Desoft",
+			"position": "Junior Web Developer",
+			"startDate": "2016-09-01",
+			"summary": "Developed and maintained web interfaces and client sites. Ensured cross-browser compatibility and responsive layouts.",
+			"url": "https://www.desoft.cu/es"
+		}
+	]
 }

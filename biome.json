@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
 	"assist": {
 		"actions": {
 			"source": {
@@ -11,29 +11,31 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!**/node_modules",
-			"!**/coverage",
-			"!**/playwright-report",
-			"!**/test-results",
-			"!**/.astro",
-			"!**/.cache",
-			"!**/.git",
-			"!**/.vscode",
-			"!**/.idea",
-			"!**/.pnpm",
-			"!**/.yarn",
-			"!**/dist",
-			"!**/out",
+			"public/scripts/**",
+			"!**/node_modules/**",
+			"!**/coverage/**",
+			"!**/playwright-report/**",
+			"!**/test-results/**",
+			"!**/.astro/**",
+			"!**/.cache/**",
+			"!**/.git/**",
+			"!**/.vscode/**",
+			"!**/.idea/**",
+			"!**/.pnpm/**",
+			"!**/.yarn/**",
+			"!**/dist/**",
+			"!**/out/**",
 			"!**/public/**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf,eot,otf,avif,mp4,webm,ogg,mov}",
 			"!**/public/**/*.min.*",
-			"!**/public/**/fonts",
-			"!**/public/**/images",
-			"!**/public/**/assets",
-			"public/scripts/**",
-			"!**/.vscode",
+			"!**/public/**/fonts/**",
+			"!**/public/**/images/**",
+			"!**/public/**/assets/**",
+			"!**/src/assets/font/**/*.svg",
+			"!**/packages/shared/src/icons/**/*.svg",
+			"!**/apps/blog/src/assets/font/**/*.svg",
 			"!**/src/styles/global.css",
 			"!**/worker-configuration.d.ts",
-			"!**/components/ui",
+			"!**/components/ui/**",
 			"!**/components.d.ts"
 		]
 	},
@@ -49,7 +51,7 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
 			"style": {
 				"noInferrableTypes": "error",
 				"noParameterAssign": "error",
@@ -78,6 +80,12 @@
 						"useImportType": "off"
 					}
 				}
+			}
+		},
+		{
+			"includes": ["**/*.css"],
+			"linter": {
+				"enabled": false
 			}
 		}
 	],
