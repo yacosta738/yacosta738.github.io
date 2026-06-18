@@ -69,7 +69,7 @@ catalog:
   mdast-util-to-string: ^4.0.0
   minimatch: ^10.2.5
   notion-rehype-k: ^1.1.6
-  npm-run-all2: ^8.0.4
+  npm-run-all2: ^9.0.2
   pagefind: 1.5.2
   picomatch: ^4.0.4
   playwright: 1.59.1
