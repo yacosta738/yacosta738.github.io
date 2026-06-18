@@ -121,4 +121,4 @@ overrides:
   yaml: "catalog:"
   fast-uri: ">=4.0.0"
   devalue: ">=5.8.1"
-  ws: ">=8.20.1"
+  ws: ">=8.21.0"
