@@ -65,7 +65,7 @@ catalog:
   hono: ^4.12.21
   jsdom: ^29.0.2
   kleur: ^4.1.5
-  lefthook: ^2.1.6
+  lefthook: ^2.1.9
   mdast-util-to-string: ^4.0.0
   minimatch: ^10.2.5
   notion-rehype-k: ^1.1.6
