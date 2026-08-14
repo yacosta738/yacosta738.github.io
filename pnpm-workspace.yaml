@@ -9,7 +9,7 @@ catalog:
   "@astrojs/check": 0.9.9
   "@astrojs/mdx": 5.0.6
   "@astrojs/partytown": ^2.1.7
-  "@astrojs/rss": ^4.0.18
+  "@astrojs/rss": ^4.0.19
   "@astrojs/sitemap": ^3.7.3
 
   # Testing
@@ -44,14 +44,14 @@ catalog:
   "@types/slug": ^5.0.9
   "@vitest/coverage-v8": ^4.1.4
   ajv: 8.20.0
-  astro: 6.4.6
+  astro: 7.1.1
   astro-compress: 2.4.1
   astro-critters: 2.2.1
   astro-icon: ^1.1.5
   astro-pagefind: ^2.0.0
 
   # Security and compatibility overrides
-  brace-expansion: ^5.0.5
+  brace-expansion: ^5.0.9
   chanfana: ^3.3.0
   clsx: ^2.1.1
   cross-env: ^10.1.0
@@ -62,7 +62,7 @@ catalog:
   h3: ^1.15.11
   handlebars: ^4.7.9
   happy-dom: ^20.9.0
-  hono: ^4.12.25
+  hono: ^4.12.34
   jsdom: ^29.0.2
   kleur: ^4.1.5
   lefthook: ^2.1.6
@@ -80,7 +80,7 @@ catalog:
   rehype-stringify: ^10.0.1
   rimraf: ^6.1.3
   satori: 0.26.0
-  sharp: ^0.34.5
+  sharp: ^0.35.0
   slug: ^11.0.1
   tailwind-merge: ^3.5.0
   tailwindcss: ^4.2.4
