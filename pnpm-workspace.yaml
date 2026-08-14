@@ -30,7 +30,7 @@ catalog:
   "@jsdevtools/rehype-toc": ^3.0.2
   "@notionhq/client": ^5.19.0
   "@playwright/test": 1.59.1
-  "@tailwindcss/typography": ^0.5.19
+  "@tailwindcss/typography": ^0.5.20
   "@tailwindcss/vite": ^4.2.4
   "@testing-library/dom": ^10.4.1
   "@testing-library/preact": ^3.2.4
