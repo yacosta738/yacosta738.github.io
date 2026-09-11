@@ -42,7 +42,7 @@ catalog:
   "@types/node": 25.6.0
   "@types/service-worker-mock": ^2.0.4
   "@types/slug": ^5.0.9
-  "@vitest/coverage-v8": ^4.1.4
+  "@vitest/coverage-v8": ^4.1.11
   ajv: 8.20.0
   astro: 6.4.6
   astro-compress: 2.4.1
