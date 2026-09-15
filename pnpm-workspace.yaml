@@ -82,7 +82,7 @@ catalog:
   satori: 0.26.0
   sharp: ^0.34.5
   slug: ^11.0.1
-  tailwind-merge: ^3.5.0
+  tailwind-merge: ^3.6.0
   tailwindcss: ^4.2.4
   typescript: 6.0.3
   unified: ^11.0.5
