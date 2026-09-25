@@ -109,6 +109,8 @@ minimumReleaseAgeExclude:
   - hono@4.12.12 || 4.12.14 || 4.12.18
   # Renovate security update: astro@6.1.6 || 6.4.6
   - astro@6.1.6 || 6.4.6
+  # Renovate security update: devalue@5.9.2
+  - devalue@5.9.2
 
 overrides:
   brace-expansion: "catalog:"
@@ -120,5 +122,5 @@ overrides:
   vite: "catalog:"
   yaml: "catalog:"
   fast-uri: ">=4.0.0"
-  devalue: ">=5.8.1"
+  devalue: ">=5.9.2"
   ws: ">=8.20.1"
