@@ -51,7 +51,7 @@ catalog:
   astro-pagefind: ^2.0.0
 
   # Security and compatibility overrides
-  brace-expansion: ^5.0.5
+  brace-expansion: ^5.0.7
   chanfana: ^3.3.0
   clsx: ^2.1.1
   cross-env: ^10.1.0
@@ -109,6 +109,8 @@ minimumReleaseAgeExclude:
   - hono@4.12.12 || 4.12.14 || 4.12.18
   # Renovate security update: astro@6.1.6 || 6.4.6
   - astro@6.1.6 || 6.4.6
+  # Renovate security update: brace-expansion@5.0.7
+  - brace-expansion@5.0.7
 
 overrides:
   brace-expansion: "catalog:"
