@@ -1,8 +1,8 @@
-import type { Element } from "hast";
+import type { Element, ElementContent } from "hast";
 import type { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
-type ElementNode = Element & {
+type ElementNode = Omit<Element, "properties"> & {
 	properties?: Record<string, unknown>;
 };
 
@@ -72,22 +72,18 @@ const replaceWithFallback = (
 	node.tagName = "p";
 	appendClass(node, "notion-embed-fallback");
 	const linkText = url ? url.toString() : undefined;
-	const children = [] as ElementNode["children"];
-	children.push({
-		type: "text",
-		value: message,
-	} as ElementNode["children"][number]);
+	const children: ElementContent[] = [{ type: "text", value: message }];
 	if (linkText) {
 		children.push({
 			type: "element",
 			tagName: "a",
 			properties: {
 				href: linkText,
-				rel: "noopener noreferrer",
+				rel: ["noopener", "noreferrer"],
 				target: "_blank",
 			},
 			children: [{ type: "text", value: linkText }],
-		} as ElementNode["children"][number]);
+		});
 	}
 	node.children = children;
 };

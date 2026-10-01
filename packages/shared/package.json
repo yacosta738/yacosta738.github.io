@@ -52,7 +52,6 @@
 		"@types/hast": "catalog:",
 		"@types/mdast": "catalog:",
 		"@vitest/coverage-v8": "catalog:",
-		"astro-critters": "catalog:",
 		"astro-icon": "catalog:",
 		"clsx": "catalog:",
 		"gray-matter": "catalog:",

@@ -2,7 +2,6 @@
 import type { HTMLAttributes } from "astro/types";
 import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
 import { cn } from "@/lib/utils";
-import OptimizedPicture from "./OptimizedPicture.astro";
 
 interface Props extends HTMLAttributes<"a"> {
 	currentLocale: Lang;
@@ -19,7 +18,7 @@ const translatePath = useTranslatedPath(lang);
 	{...attrs}
 	aria-label={t("nav.home") || "Go to homepage"}
 >
-	<OptimizedPicture
+	<img
 		src="/favicon.svg"
 		class="w-10 h-10 transition-transform hover:scale-110"
 		alt="Yuniel Acosta logo"

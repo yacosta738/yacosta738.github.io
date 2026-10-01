@@ -57,9 +57,9 @@ describe("notionBlockFallbacks — image", () => {
 		const node = makeElement("img", { src: "" });
 		run(node);
 		expect(node.tagName).toBe("p");
-		expect((node.properties?.className as string[]).join(" ")).toContain(
-			"notion-embed-fallback",
-		);
+		expect(
+			((node.properties?.className as string[] | undefined) ?? []).join(" "),
+		).toContain("notion-embed-fallback");
 	});
 
 	it("replaces an <img> with no src property with a fallback <p>", () => {
@@ -109,9 +109,9 @@ describe("notionBlockFallbacks — embed", () => {
 		});
 		run(node);
 		expect(node.tagName).toBe("p");
-		expect((node.properties?.className as string[]).join(" ")).toContain(
-			"notion-embed-fallback",
-		);
+		expect(
+			((node.properties?.className as string[] | undefined) ?? []).join(" "),
+		).toContain("notion-embed-fallback");
 	});
 
 	it("replaces an <embed> with an invalid src with a fallback <p>", () => {
