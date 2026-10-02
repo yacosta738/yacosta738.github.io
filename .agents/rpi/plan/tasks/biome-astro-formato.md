@@ -34,11 +34,19 @@ Completar el commit local `8f5efef7` y actualizar la PR #2025, habilitando el fo
 - [x] Ejecutar `pnpm check` y capturar exit 0 y evidencia por paquete.
 - [x] Limitar la excepción de Git a los 20 wrappers Astro formateados por Biome y verificar `git diff --check`.
 - [x] Ejecutar Lychee del pre-push: 13 errores preexistentes en 8 archivos Markdown no modificados por este cambio.
-- [x] Crear commit convencional `c6af1141` con la excepción de EOF path-specific y actualizar la evidencia.
-- [ ] Empujar la rama y confirmar SHA remoto/estado de checks; la validación Lychee tiene 13 errores preexistentes y requiere ejecución por separado.
+- [x] Publicar la rama y confirmar el SHA remoto `a2ef174d`.
+- [x] Corregir el error de compilación de `TextAnimation.astro`: en un script Astro `is:inline` Biome refluía el literal con salto de línea a una cadena JavaScript inválida; se redujo el aviso a un literal corto válido.
+- [x] Formatear `cloudflare-small.svg` y `fonts.css` según Biome CI; `pnpm exec biome ci . --diagnostic-level=error` pasó.
+- [x] Blog coverage local: 41 archivos de prueba, 221 tests; statements 69.26%, lines 69.32%.
+- [x] Validar inclusión de `packages/shared/src` en Portfolio. Vitest requiere `coverage.allowExternal`; con exclusiones para tests y mocks, coverage pasa de 0% a 39.04% statements / 39.44% líneas (13 suites, 66 tests). V8 advierte que no puede parsear algunos modelos/utilidades TypeScript externos y los excluye; porcentaje orientativo, no cobertura completa de Shared.
+- [x] Confirmar logs del Pages blog: en `a2ef174d` los prerenders fallaban por referencias de contenido inválidas de `programming` y cuatro tecnologías faltantes; estas referencias están corregidas en la rama publicada. Pages portfolio fallaba por `TextAnimation.astro:30` y el script inline inválido.
+- [ ] Confirmar resultado de Sonar con el siguiente CI. El pre-CI `coverage-check` solo comprueba que hay LCOV; los jobs unitarios fallidos no subieron cobertura.
+- [ ] Repetir gates fallidos, registrar evidencia y actualizar la PR #2025.
 
 ## Riesgos y limitaciones
 
-- Las 79 advertencias y 5 infos Biome son diagnósticos no bloqueantes preexistentes/no resueltos en este alcance; no se silencian.
-- Los wrappers Astro formateados contienen el LF final que Biome genera; `git diff --check` lo marca como línea vacía adicional.
+- Las 79 advertencias y 5 infos Biome son diagnósticos no bloqueantes; no se silencian.
+- Los wrappers Astro formateados contienen el LF final que Biome genera; Git whitespace se exceptúa solo para esas 20 rutas.
+- CI indicó que falla la compilación de `TextAnimation.astro:30` por una cadena que cruza una línea. Las pruebas Blog/Portfolio no alcanzan a generar cobertura en ese estado.
+- SonarCloud y Cloudflare Pages deben confirmarse con sus logs; no inferir que el 0% de cobertura sea una métrica real hasta ver LCOV subido y procesado.
 - No se ejecutó verificación E2E visual del comportamiento de scroll extraído.

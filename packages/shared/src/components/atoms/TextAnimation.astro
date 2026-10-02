@@ -27,8 +27,7 @@ const warnedForInvalidTag = tag && tag !== "span";
 
 {warnedForInvalidTag && (
 	<script is:inline>
-		console.warn("TextAnimation only supports tag='span'. Falling back to
-		span.");
+		console.warn("Invalid TextAnimation tag; using span.");
 	</script>
 )}
 

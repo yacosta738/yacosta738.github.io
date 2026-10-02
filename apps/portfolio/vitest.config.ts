@@ -18,9 +18,15 @@ export default getViteConfig({
 		setupFiles: ["./tests/unit/test-setup.ts"],
 		include: ["tests/unit/**/*.test.ts"],
 		coverage: {
+			allowExternal: true,
 			enabled: true,
 			reporter: ["text", "json", "html", "lcov"],
-			include: ["src/**/*.ts", "src/**/*.astro"],
+			include: [
+				"src/**/*.ts",
+				"src/**/*.astro",
+				"../../packages/shared/src/**/*.ts",
+				"../../packages/shared/src/**/*.astro",
+			],
 			exclude: [
 				"src/env.d.ts",
 				// Exclude all Astro pages - they are hard to unit test
@@ -32,8 +38,12 @@ export default getViteConfig({
 				"src/i18n/components/**/*.astro",
 				// Exclude RSC components
 				"rsc/**/*.astro",
+				// Exclude test files discovered through the shared-source coverage globs
+				"../../packages/shared/src/**/*.test.ts",
+				"../../packages/shared/src/**/__tests__/**",
 				// Exclude test mocks
 				"src/utils/test/**/*.ts",
+				"../../packages/shared/src/utils/test/**/*.ts",
 			],
 		},
 		exclude: ["tests/e2e/**/*.spec.ts"],
