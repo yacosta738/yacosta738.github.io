@@ -216,7 +216,7 @@ overrides:
   devalue: '>=5.8.1'
   deepmerge-ts: ^8.0.2
   fast-uri: '>=4.0.0'
-  fast-xml-parser: ^5.7.1
+  fast-xml-parser: ^5.11.2
   h3: ^1.15.11
   handlebars: ^4.7.9
   minimatch: ^10.2.5
