@@ -46,6 +46,12 @@
 		"enabled": true,
 		"indentStyle": "tab"
 	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"enabled": true
+		}
+	},
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double"
