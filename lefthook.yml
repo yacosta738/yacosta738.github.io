@@ -1,4 +1,3 @@
-
 # @file lefthook.yml
 # @ref https://evilmartians.github.io/lefthook/
 
@@ -22,7 +21,12 @@ remotes:
       - hooks/jsonlint/.lefthook.yaml
 
 pre-commit:
+  parallel: false
   commands:
+    biome-format:
+      glob: "*.{astro,css,cjs,html,js,json,jsonc,mjs,scss,ts,tsx,jsx}"
+      run: pnpm exec biome format --write {staged_files}
+      stage_fixed: true
     git-update:
       run: git update-index --again
     agentsync-apply:
