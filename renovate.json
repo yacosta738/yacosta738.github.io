@@ -21,6 +21,7 @@
 		"every weekend"
 	],
 	"labels": ["dependencies", "renovate"],
+	"assignees": ["yacosta738"],
 	"assigneesFromCodeOwners": true,
 	"reviewersFromCodeOwners": true,
 	"packageRules": [
