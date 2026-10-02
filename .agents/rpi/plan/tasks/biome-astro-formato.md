@@ -34,7 +34,8 @@ Completar el commit local `8f5efef7` y actualizar la PR #2025, habilitando el fo
 - [x] Ejecutar `pnpm check` y capturar exit 0 y evidencia por paquete.
 - [x] Limitar la excepción de Git a los 20 wrappers Astro formateados por Biome y verificar `git diff --check`.
 - [x] Ejecutar Lychee del pre-push: 13 errores preexistentes en 8 archivos Markdown no modificados por este cambio.
-- [ ] Crear commit convencional para `.gitattributes`/evidencia y actualizar la rama de la PR #2025; confirmar SHA remoto y estado de checks.
+- [x] Crear commit convencional `c6af1141` con la excepción de EOF path-specific y actualizar la evidencia.
+- [ ] Empujar la rama y confirmar SHA remoto/estado de checks; la validación Lychee tiene 13 errores preexistentes y requiere ejecución por separado.
 
 ## Riesgos y limitaciones
 
