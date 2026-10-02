@@ -12,7 +12,9 @@ interface Props {
 const { socials, email, className = "mt-2" } = Astro.props;
 ---
 
-<SocialLinks socials={socials} class={`flex items-center w-full max-w-fit gap-4 ${className}`}>
-    {email && (<ObfuscateEmail email={email} />)}
+<SocialLinks
+	socials={socials}
+	class={`flex items-center w-full max-w-fit gap-4 ${className}`}
+>
+	{email && <ObfuscateEmail email={email} />}
 </SocialLinks>
-

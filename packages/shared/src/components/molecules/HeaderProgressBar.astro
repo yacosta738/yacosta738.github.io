@@ -63,166 +63,174 @@ const {
 			aria-valuemin="0"
 			aria-valuemax="100"
 			aria-valuetext={t("progress.aria.label")}
-		>
-		</div>
+		></div>
 	</div>
 </div>
 
 <style is:global>
-	/* Progress bar styles to match main header */
+/* Progress bar styles to match main header */
+#progress-bar {
+	background-color: rgba(17, 34, 51, 0.75);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-bottom: 1px solid rgba(35, 53, 84, 0.3);
+}
+
+:global(.dark) #progress-bar {
+	background-color: rgba(17, 34, 51, 0.75);
+	border-bottom: 1px solid rgba(35, 53, 84, 0.3);
+}
+
+/* Enhanced blur on hover to match main header */
+#progress-bar:hover {
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
 	#progress-bar {
-		background-color: rgba(17,34,51,0.75);
-		backdrop-filter: blur(16px);
-		-webkit-backdrop-filter: blur(16px);
-		border-bottom: 1px solid rgba(35,53,84,0.3);
+		transition: none !important;
 	}
-
-	:global(.dark) #progress-bar {
-	background-color: rgba(17,34,51,0.75);
-	border-bottom: 1px solid rgba(35,53,84,0.3);
-	}
-
-	/* Enhanced blur on hover to match main header */
-	#progress-bar:hover {
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-	}
-
-	/* Respect user's motion preferences */
-	@media (prefers-reduced-motion: reduce) {
-		#progress-bar {
-			transition: none !important;
-		}
-	}
+}
 </style>
 
 <script>
-	(() => {
-		const CLEANUP_KEY = "__headerProgressBarCleanup";
+(() => {
+	const CLEANUP_KEY = "__headerProgressBarCleanup";
 
-		const cleanup = () => {
-			const currentCleanup = window[CLEANUP_KEY];
-			if (typeof currentCleanup === "function") {
-				currentCleanup();
-				window[CLEANUP_KEY] = undefined;
+	const cleanup = () => {
+		const currentCleanup = window[CLEANUP_KEY];
+		if (typeof currentCleanup === "function") {
+			currentCleanup();
+			window[CLEANUP_KEY] = undefined;
+		}
+	};
+
+	const initialize = () => {
+		cleanup();
+
+		const progressBar = document.getElementById("progress-bar");
+		const progressIndicator = document.getElementById("progress-indicator");
+
+		if (!progressBar || !progressIndicator) {
+			return;
+		}
+
+		let progressUpdateId: number | null = null;
+		let cachedArticleRect: { top: number; height: number } | null = null;
+		let cacheTime = 0;
+		const CACHE_DURATION = 100;
+		const headerHeight = 80;
+		let isVisible = false;
+
+		const getArticleRect = () => {
+			const article = document.querySelector("article");
+			if (!article) return null;
+
+			const now = performance.now();
+			if (!cachedArticleRect || now - cacheTime > CACHE_DURATION) {
+				const scrollY = window.scrollY;
+				const articleRect = article.getBoundingClientRect();
+				cachedArticleRect = {
+					top: articleRect.top + scrollY,
+					height: article.scrollHeight,
+				};
+				cacheTime = now;
+			}
+
+			return cachedArticleRect;
+		};
+
+		const updateProgress = () => {
+			const articleRect = getArticleRect();
+			if (!articleRect) return;
+
+			const scrollY = window.scrollY;
+			const windowHeight = window.innerHeight;
+			const scrollStart = articleRect.top;
+			const scrollEnd = articleRect.top + articleRect.height - windowHeight;
+			const scrollDistance = scrollEnd - scrollStart;
+
+			if (scrollDistance <= 0) return;
+
+			const progress = Math.max(
+				0,
+				Math.min(100, ((scrollY - scrollStart) / scrollDistance) * 100),
+			);
+			const roundedProgress = Math.round(progress);
+
+			progressIndicator.style.width = `${progress}%`;
+			progressIndicator.setAttribute(
+				"aria-valuenow",
+				roundedProgress.toString(),
+			);
+			progressIndicator.setAttribute(
+				"aria-label",
+				`Reading progress: ${roundedProgress}%`,
+			);
+		};
+
+		const updateVisibility = () => {
+			const articleRect = getArticleRect();
+			if (!articleRect) return;
+
+			const scrollY = window.scrollY;
+			const shouldShow =
+				scrollY > headerHeight &&
+				scrollY < articleRect.top + articleRect.height - window.innerHeight / 4;
+
+			if (shouldShow && !isVisible) {
+				progressBar.style.top = "0";
+				progressBar.style.opacity = "1";
+				progressBar.style.transform = "translateY(0)";
+				isVisible = true;
+			} else if (!shouldShow && isVisible) {
+				progressBar.style.top = "-80px";
+				progressBar.style.opacity = "0";
+				progressBar.style.transform = "translateY(-100%)";
+				isVisible = false;
 			}
 		};
 
-		const initialize = () => {
-			cleanup();
+		const handleScroll = () => {
+			if (progressUpdateId) return;
 
-			const progressBar = document.getElementById("progress-bar");
-			const progressIndicator = document.getElementById("progress-indicator");
+			progressUpdateId = requestAnimationFrame(() => {
+				updateProgress();
+				updateVisibility();
+				progressUpdateId = null;
+			});
+		};
 
-			if (!progressBar || !progressIndicator) {
-				return;
-			}
-
-			let progressUpdateId: number | null = null;
-			let cachedArticleRect: { top: number; height: number } | null = null;
-			let cacheTime = 0;
-			const CACHE_DURATION = 100;
-			const headerHeight = 80;
-			let isVisible = false;
-
-			const getArticleRect = () => {
-				const article = document.querySelector("article");
-				if (!article) return null;
-
-				const now = performance.now();
-				if (!cachedArticleRect || now - cacheTime > CACHE_DURATION) {
-					const scrollY = window.scrollY;
-					const articleRect = article.getBoundingClientRect();
-					cachedArticleRect = {
-						top: articleRect.top + scrollY,
-						height: article.scrollHeight,
-					};
-					cacheTime = now;
-				}
-
-				return cachedArticleRect;
-			};
-
-			const updateProgress = () => {
-				const articleRect = getArticleRect();
-				if (!articleRect) return;
-
-				const scrollY = window.scrollY;
-				const windowHeight = window.innerHeight;
-				const scrollStart = articleRect.top;
-				const scrollEnd = articleRect.top + articleRect.height - windowHeight;
-				const scrollDistance = scrollEnd - scrollStart;
-
-				if (scrollDistance <= 0) return;
-
-				const progress = Math.max(0, Math.min(100, ((scrollY - scrollStart) / scrollDistance) * 100));
-				const roundedProgress = Math.round(progress);
-
-				progressIndicator.style.width = `${progress}%`;
-				progressIndicator.setAttribute("aria-valuenow", roundedProgress.toString());
-				progressIndicator.setAttribute("aria-label", `Reading progress: ${roundedProgress}%`);
-			};
-
-			const updateVisibility = () => {
-				const articleRect = getArticleRect();
-				if (!articleRect) return;
-
-				const scrollY = window.scrollY;
-				const shouldShow =
-					scrollY > headerHeight &&
-					scrollY < articleRect.top + articleRect.height - window.innerHeight / 4;
-
-				if (shouldShow && !isVisible) {
-					progressBar.style.top = "0";
-					progressBar.style.opacity = "1";
-					progressBar.style.transform = "translateY(0)";
-					isVisible = true;
-				} else if (!shouldShow && isVisible) {
-					progressBar.style.top = "-80px";
-					progressBar.style.opacity = "0";
-					progressBar.style.transform = "translateY(-100%)";
-					isVisible = false;
-				}
-			};
-
-			const handleScroll = () => {
-				if (progressUpdateId) return;
-
-				progressUpdateId = requestAnimationFrame(() => {
-					updateProgress();
-					updateVisibility();
-					progressUpdateId = null;
-				});
-			};
-
-			const handleResize = () => {
-				cachedArticleRect = null;
-				cacheTime = 0;
-				handleScroll();
-			};
-
-			progressBar.style.position = "fixed";
-			progressBar.style.top = "-80px";
-			progressBar.style.opacity = "0";
-			progressBar.style.transition = "all 0.3s ease-in-out";
-			progressBar.style.zIndex = "40";
-
-			window.addEventListener("scroll", handleScroll, { passive: true });
-			window.addEventListener("resize", handleResize, { passive: true });
+		const handleResize = () => {
+			cachedArticleRect = null;
+			cacheTime = 0;
 			handleScroll();
-
-			window[CLEANUP_KEY] = () => {
-				window.removeEventListener("scroll", handleScroll);
-				window.removeEventListener("resize", handleResize);
-
-				if (progressUpdateId) {
-					cancelAnimationFrame(progressUpdateId);
-					progressUpdateId = null;
-				}
-			};
 		};
 
-		document.addEventListener("astro:page-load", initialize);
-		document.addEventListener("astro:before-preparation", cleanup);
-	})();
+		progressBar.style.position = "fixed";
+		progressBar.style.top = "-80px";
+		progressBar.style.opacity = "0";
+		progressBar.style.transition = "all 0.3s ease-in-out";
+		progressBar.style.zIndex = "40";
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		window.addEventListener("resize", handleResize, { passive: true });
+		handleScroll();
+
+		window[CLEANUP_KEY] = () => {
+			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("resize", handleResize);
+
+			if (progressUpdateId) {
+				cancelAnimationFrame(progressUpdateId);
+				progressUpdateId = null;
+			}
+		};
+	};
+
+	document.addEventListener("astro:page-load", initialize);
+	document.addEventListener("astro:before-preparation", cleanup);
+})();
 </script>

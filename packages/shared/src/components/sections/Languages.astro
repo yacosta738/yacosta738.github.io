@@ -26,7 +26,7 @@ await languageMapper.initialize();
 ---
 
 {languages.length > 0 && (
-	<Section title={t('languages')}>
+	<Section title={t("languages")}>
 		<div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
 			{languages.map((language) => {
 				const key = languageMapper.findLocaleCode(language.language);
@@ -36,7 +36,7 @@ await languageMapper.initialize();
 						? (key as Lang)
 						: undefined;
 				return (
-					<LanguageCard 
+					<LanguageCard
 						language={language}
 						showLink={!!localeCode}
 						href={localeCode ? translatePath("/", localeCode) : undefined}
@@ -46,4 +46,3 @@ await languageMapper.initialize();
 		</div>
 	</Section>
 )}
-

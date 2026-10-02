@@ -20,8 +20,6 @@ const currentLocale = Astro.params.lang as Lang;
 const t = useTranslations(currentLocale);
 ---
 
-<Section title={t('education')}>
-  <EducationTimeline education={education} locale={currentLocale} />
+<Section title={t("education")}>
+	<EducationTimeline education={education} locale={currentLocale} />
 </Section>
-
-

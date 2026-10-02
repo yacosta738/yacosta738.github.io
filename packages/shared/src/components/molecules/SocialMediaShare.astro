@@ -68,31 +68,37 @@ const socialMediaLinkShare: {
 ];
 ---
 
-<div class="flex items-center justify-center md:justify-end gap-3 not-prose w-full" {...attrs}>
+<div
+	class="flex items-center justify-center md:justify-end gap-3 not-prose w-full"
+	{...attrs}
+>
 	<span
 		class="font-inter text-xs tracking-widest uppercase leading-[140%] rounded flex-shrink-0"
 	>
 		{t("share")}
 	</span>
 	<SocialLinks
-		class={cn("flex items-center justify-center md:justify-end gap-4", className)}
+		class={cn(
+			"flex items-center justify-center md:justify-end gap-4",
+			className,
+		)}
 		socials={socialMediaLinkShare}
 	>
-			<IconButton
-				id="copy-url-button"
-				aria-label={t("copy.link")}
-				title={t("copy.link")}
-				class="opacity-80 hover:opacity-100 transition-opacity cursor-pointer py-2 px-0"
-				type="button"
-			>
-				<Icon name="tabler:copy" class="size-5" id="copy-icon" />
-				<Icon name="tabler:check" class="size-5 hidden" id="copied-icon" />
-			</IconButton>
+		<IconButton
+			id="copy-url-button"
+			aria-label={t("copy.link")}
+			title={t("copy.link")}
+			class="opacity-80 hover:opacity-100 transition-opacity cursor-pointer py-2 px-0"
+			type="button"
+		>
+			<Icon name="tabler:copy" class="size-5" id="copy-icon" />
+			<Icon name="tabler:check" class="size-5 hidden" id="copied-icon" />
+		</IconButton>
 	</SocialLinks>
 </div>
 
 <script is:inline type="module">
-	(() => {
+(() => {
 	const copyButton = document.getElementById("copy-url-button");
 	const copyIcon = document.getElementById("copy-icon");
 	const copiedIcon = document.getElementById("copied-icon");

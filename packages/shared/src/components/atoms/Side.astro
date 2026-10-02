@@ -27,20 +27,17 @@ const {
 } = Astro.props as Props;
 ---
 
-{
-	show && (
-		<div
-			{...(attrs as HTMLAttributes<"div">)}
-			role="complementary"
-			class={cn(
-				"fixed bottom-0 z-10 w-10 text-foreground-muted",
-				orientation === "left"
-					? "right-auto md:left-5 lg:left-10"
-					: "left-auto md:right-5 lg:right-10",
-				className
-			)}
-		>
-			<slot />
-		</div>
-	)
-}
+{show && (
+	<aside
+		{...(attrs as HTMLAttributes<"div">)}
+		class={cn(
+			"fixed bottom-0 z-10 w-10 text-foreground-muted",
+			orientation === "left"
+				? "right-auto md:left-5 lg:left-10"
+				: "left-auto md:right-5 lg:right-10",
+			className,
+		)}
+	>
+		<slot />
+	</aside>
+)}

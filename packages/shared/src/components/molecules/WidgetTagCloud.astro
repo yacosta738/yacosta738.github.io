@@ -54,46 +54,46 @@ const t = useTranslations(currentLocale);
 const translatePath = useTranslatedPath(currentLocale);
 ---
 
-<WidgetCard title={t('tags')}>
+<WidgetCard title={t("tags")}>
 	<div class="tag-cloud-tags">
-		{
-			sortedTags.map(({ slug, title, count }) => (
-				<a
-					href={translatePath(`/${routes.tag}/${slug}/`)}
-					aria-label={title}
-					class={`inline-link ${textSize(count)}`}
-				>
-					<span class="capitalize">{title}</span>
-				</a>
-			))
-		}
+		{sortedTags.map(({ slug, title, count }) => (
+			<a
+				href={translatePath(`/${routes.tag}/${slug}/`)}
+				aria-label={title}
+				class={`inline-link ${textSize(count)}`}
+			>
+				<span class="capitalize">{title}</span>
+			</a>
+		))}
 	</div>
-	{sortedTags.length === 0 && <div class="text-center text-gray-500">{t('noTags')}</div>}
+	{sortedTags.length === 0 && (
+		<div class="text-center text-gray-500">{t("noTags")}</div>
+	)}
 </WidgetCard>
 
 <style scoped>
-	.tag-cloud-tags {
-		display: block;
-		margin: 0;
-		list-style-type: none;
-		a {
-			display: inline-block;
-			padding: 0.3rem;
-			line-height: 1em;
-			word-break: break-word;
-			white-space: normal;
-		}
-		a:nth-child(5n + 1) {
-			transform: rotate(-2deg);
-		}
-		a:nth-child(3n + 3) {
-			transform: rotate(1deg);
-		}
-		a:nth-child(3n + 4) {
-			transform: rotate(-3deg);
-		}
-		a:nth-child(5n + 5) {
-			transform: rotate(3deg);
-		}
+.tag-cloud-tags {
+	display: block;
+	margin: 0;
+	list-style-type: none;
+	a {
+		display: inline-block;
+		padding: 0.3rem;
+		line-height: 1em;
+		word-break: break-word;
+		white-space: normal;
 	}
+	a:nth-child(5n + 1) {
+		transform: rotate(-2deg);
+	}
+	a:nth-child(3n + 3) {
+		transform: rotate(1deg);
+	}
+	a:nth-child(3n + 4) {
+		transform: rotate(-3deg);
+	}
+	a:nth-child(5n + 5) {
+		transform: rotate(3deg);
+	}
+}
 </style>

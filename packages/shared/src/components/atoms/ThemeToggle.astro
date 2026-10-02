@@ -31,173 +31,202 @@ const uniqueId = Math.random().toString(36).substring(2, 9);
 ---
 
 <button
-  id={`theme-toggle-button-${uniqueId}`}
-  class={cn(
-    "rounded bg-transparent p-2 text-sm text-foreground-muted hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 border border-transparent hover:border-brand-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent",
-    "cursor-pointer print:hidden",
-    showText ? "flex items-center gap-3" : "",
-    className,
-  )}
-  aria-label={t("theme.toggle.button")}
-  title={t("theme.toggle.tooltip")}
-  type="button"
-  {...attrs}
+	id={`theme-toggle-button-${uniqueId}`}
+	class={cn(
+		"rounded bg-transparent p-2 text-sm text-foreground-muted hover:text-brand-accent hover:bg-brand-accent/10 transition-all duration-200 border border-transparent hover:border-brand-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-accent",
+		"cursor-pointer print:hidden",
+		showText ? "flex items-center gap-3" : "",
+		className,
+	)}
+	aria-label={t("theme.toggle.button")}
+	title={t("theme.toggle.tooltip")}
+	type="button"
+	{...attrs}
 >
-  <div class="flex items-center">
-    <Icon id={`theme-toggle-dark-icon-${uniqueId}`} class="w-5 h-5 theme-toggle-dark-icon hidden" name="lucide:moon" />
-    <Icon id={`theme-toggle-light-icon-${uniqueId}`} class="w-5 h-5 theme-toggle-light-icon hidden" name="lucide:sun" />
-  </div>
-  {showText && (
-    <span class="theme-toggle-text text-sm font-medium">
-      <span class="theme-toggle-light-text hidden">{t("theme.light") || "Light"}</span>
-      <span class="theme-toggle-dark-text hidden">{t("theme.dark") || "Dark"}</span>
-    </span>
-  )}
+	<div class="flex items-center">
+		<Icon
+			id={`theme-toggle-dark-icon-${uniqueId}`}
+			class="w-5 h-5 theme-toggle-dark-icon hidden"
+			name="lucide:moon"
+		/>
+		<Icon
+			id={`theme-toggle-light-icon-${uniqueId}`}
+			class="w-5 h-5 theme-toggle-light-icon hidden"
+			name="lucide:sun"
+		/>
+	</div>
+	{showText && (
+		<span class="theme-toggle-text text-sm font-medium">
+			<span class="theme-toggle-light-text hidden">
+				{t("theme.light") || "Light"}
+			</span>
+			<span class="theme-toggle-dark-text hidden">
+				{t("theme.dark") || "Dark"}
+			</span>
+		</span>
+	)}
 </button>
 
 <script>
-  import type { Theme } from "@/types";
+import type { Theme } from "@/types";
 
-  // Function to initialize a single theme toggle button
-  function initializeThemeToggle(button: HTMLElement): void {
-    if (button.dataset.themeInitialized === "true") return;
-    
-    const lightIcon = button.querySelector('.theme-toggle-light-icon') as HTMLElement;
-    const darkIcon = button.querySelector('.theme-toggle-dark-icon') as HTMLElement;
-    const lightText = button.querySelector('.theme-toggle-light-text') as HTMLElement;
-    const darkText = button.querySelector('.theme-toggle-dark-text') as HTMLElement;
+// Function to initialize a single theme toggle button
+function initializeThemeToggle(button: HTMLElement): void {
+	if (button.dataset.themeInitialized === "true") return;
 
-    // Type guard to ensure elements exist
-    if (!lightIcon || !darkIcon) {
-      console.warn("Theme toggle: some icons are missing. This toggle will be disabled.");
-      button.setAttribute("aria-hidden", "true");
-      button.setAttribute("disabled", "true");
-      button.classList.add("opacity-50", "pointer-events-none");
-      return;
-    }
+	const lightIcon = button.querySelector(
+		".theme-toggle-light-icon",
+	) as HTMLElement;
+	const darkIcon = button.querySelector(
+		".theme-toggle-dark-icon",
+	) as HTMLElement;
+	const lightText = button.querySelector(
+		".theme-toggle-light-text",
+	) as HTMLElement;
+	const darkText = button.querySelector(
+		".theme-toggle-dark-text",
+	) as HTMLElement;
 
-    button.dataset.themeInitialized = "true";
+	// Type guard to ensure elements exist
+	if (!lightIcon || !darkIcon) {
+		console.warn(
+			"Theme toggle: some icons are missing. This toggle will be disabled.",
+		);
+		button.setAttribute("aria-hidden", "true");
+		button.setAttribute("disabled", "true");
+		button.classList.add("opacity-50", "pointer-events-none");
+		return;
+	}
 
-    // Function to set the icons and text visibility
-    const setVisibility = (theme: Theme): void => {
-      if (theme === "dark") {
-        lightIcon.classList.remove("hidden");
-        darkIcon.classList.add("hidden");
-        if (lightText && darkText) {
-          lightText.classList.remove("hidden");
-          darkText.classList.add("hidden");
-        }
-      } else {
-        darkIcon.classList.remove("hidden");
-        lightIcon.classList.add("hidden");
-        if (lightText && darkText) {
-          darkText.classList.remove("hidden");
-          lightText.classList.add("hidden");
-        }
-      }
-    };
+	button.dataset.themeInitialized = "true";
 
-    // Set initial visibility based on current theme
-    const initialTheme: Theme = document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
-    setVisibility(initialTheme);
+	// Function to set the icons and text visibility
+	const setVisibility = (theme: Theme): void => {
+		if (theme === "dark") {
+			lightIcon.classList.remove("hidden");
+			darkIcon.classList.add("hidden");
+			if (lightText && darkText) {
+				lightText.classList.remove("hidden");
+				darkText.classList.add("hidden");
+			}
+		} else {
+			darkIcon.classList.remove("hidden");
+			lightIcon.classList.add("hidden");
+			if (lightText && darkText) {
+				darkText.classList.remove("hidden");
+				lightText.classList.add("hidden");
+			}
+		}
+	};
 
-    // Handle theme toggle button click
-    button.addEventListener("click", (): void => {
-      if (!window.themeSystem) return;
+	// Set initial visibility based on current theme
+	const initialTheme: Theme = document.documentElement.classList.contains(
+		"dark",
+	)
+		? "dark"
+		: "light";
+	setVisibility(initialTheme);
 
-      const applyToggle = (): void => {
-        window.themeSystem!.toggle();
-        const newTheme: Theme = document.documentElement.classList.contains("dark")
-          ? "dark"
-          : "light";
-        setVisibility(newTheme);
-      };
+	// Handle theme toggle button click
+	button.addEventListener("click", (): void => {
+		if (!window.themeSystem) return;
 
-      // Skip animated transition when the user prefers reduced motion or the
-      // View Transitions API is not supported.
-      if (
-        !document.startViewTransition ||
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
-        applyToggle();
-        return;
-      }
+		const applyToggle = (): void => {
+			window.themeSystem!.toggle();
+			const newTheme: Theme = document.documentElement.classList.contains(
+				"dark",
+			)
+				? "dark"
+				: "light";
+			setVisibility(newTheme);
+		};
 
-      // Mark the document so CSS can suppress the default cross-fade only
-      // during theme switches (page-navigation transitions are unaffected).
-      document.documentElement.setAttribute("data-theme-transition", "");
+		// Skip animated transition when the user prefers reduced motion or the
+		// View Transitions API is not supported.
+		if (
+			!document.startViewTransition ||
+			window.matchMedia("(prefers-reduced-motion: reduce)").matches
+		) {
+			applyToggle();
+			return;
+		}
 
-      const transition = document.startViewTransition(applyToggle);
+		// Mark the document so CSS can suppress the default cross-fade only
+		// during theme switches (page-navigation transitions are unaffected).
+		document.documentElement.setAttribute("data-theme-transition", "");
 
-      // Once the snapshots are ready, drive a top-to-bottom clip-path wipe on
-      // the incoming (new) view, revealing it from the top edge downward.
-      // Chain cleanup to animation.finished so the [data-theme-transition]
-      // attribute (which suppresses the default cross-fade) is never removed
-      // before the 600ms wipe completes.
-      transition.ready
-        .then(() => {
-          const animation = document.documentElement.animate(
-            { clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
-            {
-              duration: 600,
-              easing: "ease-in-out",
-              pseudoElement: "::view-transition-new(root)",
-            },
-          );
-          return animation.finished;
-        })
-        .then(() => {
-          document.documentElement.removeAttribute("data-theme-transition");
-        })
-        .catch(() => {
-          // Transition was skipped before ready – clean up the marker anyway.
-          document.documentElement.removeAttribute("data-theme-transition");
-        });
-    });
-  }
+		const transition = document.startViewTransition(applyToggle);
 
-  // Keep track of the observer to prevent memory leaks across View Transitions
-  let observer: MutationObserver | null = null;
+		// Once the snapshots are ready, drive a top-to-bottom clip-path wipe on
+		// the incoming (new) view, revealing it from the top edge downward.
+		// Chain cleanup to animation.finished so the [data-theme-transition]
+		// attribute (which suppresses the default cross-fade) is never removed
+		// before the 600ms wipe completes.
+		transition.ready
+			.then(() => {
+				const animation = document.documentElement.animate(
+					{ clipPath: ["inset(0 0 100% 0)", "inset(0)"] },
+					{
+						duration: 600,
+						easing: "ease-in-out",
+						pseudoElement: "::view-transition-new(root)",
+					},
+				);
+				return animation.finished;
+			})
+			.then(() => {
+				document.documentElement.removeAttribute("data-theme-transition");
+			})
+			.catch(() => {
+				// Transition was skipped before ready – clean up the marker anyway.
+				document.documentElement.removeAttribute("data-theme-transition");
+			});
+	});
+}
 
-  // Initialize all theme toggle buttons on the page
-  document.addEventListener('astro:page-load', () => {
-    const themeToggleButtons = document.querySelectorAll('[id^="theme-toggle-button-"]');
-    themeToggleButtons.forEach((button) => {
-      if (button instanceof HTMLElement) {
-        initializeThemeToggle(button);
-      }
-    });
+// Keep track of the observer to prevent memory leaks across View Transitions
+let observer: MutationObserver | null = null;
 
-    // Clean up any existing observer before creating a new one on the fresh body
-    if (observer) {
-      observer.disconnect();
-    }
+// Initialize all theme toggle buttons on the page
+document.addEventListener("astro:page-load", () => {
+	const themeToggleButtons = document.querySelectorAll(
+		'[id^="theme-toggle-button-"]',
+	);
+	themeToggleButtons.forEach((button) => {
+		if (button instanceof HTMLElement) {
+			initializeThemeToggle(button);
+		}
+	});
 
-    // Also handle dynamically added theme toggles (e.g., in mobile drawer)
-    observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof HTMLElement) {
-            // Check if the added node is a theme toggle button
-            if (node.id && node.id.startsWith('theme-toggle-button-')) {
-              initializeThemeToggle(node);
-            }
-            // Check if the added node contains theme toggle buttons
-            const themeToggles = node.querySelectorAll('[id^="theme-toggle-button-"]');
-            themeToggles.forEach((toggle) => {
-              if (toggle instanceof HTMLElement) {
-                initializeThemeToggle(toggle);
-              }
-            });
-          }
-        });
-      });
-    });
+	// Clean up any existing observer before creating a new one on the fresh body
+	if (observer) {
+		observer.disconnect();
+	}
 
-    // Start observing for theme toggle buttons being added to the new document.body
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
+	// Also handle dynamically added theme toggles (e.g., in mobile drawer)
+	observer = new MutationObserver((mutations) => {
+		mutations.forEach((mutation) => {
+			mutation.addedNodes.forEach((node) => {
+				if (node instanceof HTMLElement) {
+					// Check if the added node is a theme toggle button
+					if (node.id && node.id.startsWith("theme-toggle-button-")) {
+						initializeThemeToggle(node);
+					}
+					// Check if the added node contains theme toggle buttons
+					const themeToggles = node.querySelectorAll(
+						'[id^="theme-toggle-button-"]',
+					);
+					themeToggles.forEach((toggle) => {
+						if (toggle instanceof HTMLElement) {
+							initializeThemeToggle(toggle);
+						}
+					});
+				}
+			});
+		});
+	});
+
+	// Start observing for theme toggle buttons being added to the new document.body
+	observer.observe(document.body, { childList: true, subtree: true });
+});
 </script>
-

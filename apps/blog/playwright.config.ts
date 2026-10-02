@@ -74,6 +74,7 @@ export default defineConfig({
 		};
 		const buildCommand = resolveBuildCommand();
 		const baseEnv: Record<string, string> = {
+			ASTRO_PREVIEW_BACKGROUND: "0",
 			PLAYWRIGHT_TEST: "true",
 			NOTION_TOKEN: process.env.NOTION_TOKEN ?? "",
 			NOTION_DATABASE_ID: process.env.NOTION_DATABASE_ID ?? "",

@@ -28,7 +28,9 @@ const currentLocale = Astro.currentLocale as Lang;
 		<div class="flex flex-col gap-2">
 			<ByAuthor author={post.author} currentLocale={currentLocale} />
 			<FormattedDate date={post.date} currentLocale={currentLocale} />
-			{"category" in post && <PostCategory category={post.category} currentLocale={currentLocale} />}
+			{"category" in post && (
+				<PostCategory category={post.category} currentLocale={currentLocale} />
+			)}
 		</div>
 		<PostTags tags={post.tags} currentLocale={currentLocale} />
 	</div>

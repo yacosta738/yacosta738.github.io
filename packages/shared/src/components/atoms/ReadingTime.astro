@@ -12,15 +12,13 @@ const { readingTime, currentLocale, ...attrs } = Astro.props;
 const t = useTranslations(currentLocale);
 ---
 
-{
-	readingTime && (
-		<span
-			class={
-				cn("text-secondary-foreground-light dark:text-secondary-foreground-dark font-inter text-[9px] leading-[140%] tracking-widest uppercase rounded gap-1", attrs.class)
-			}
-			aria-label={t("post.reading.time.aria", { time: readingTime })}
-		>
-			{t("post.reading.time", { time: readingTime })}
-		</span>
-	)
-}
+{readingTime && (
+	<span
+		class={cn(
+			"text-secondary-foreground-light dark:text-secondary-foreground-dark font-inter text-[9px] leading-[140%] tracking-widest uppercase rounded gap-1",
+			attrs.class,
+		)}
+	>
+		{t("post.reading.time", { time: readingTime })}
+	</span>
+)}

@@ -62,13 +62,15 @@ const classes = cn("p-2", className);
 				</Typography>
 			)}
 		</div>
-		<div class="flex gap-1 text-foreground-muted text-sm min-w-[102px] text-right max-sm:text-right">
+		<div
+			class="flex gap-1 text-foreground-muted text-sm min-w-[102px] text-right max-sm:text-right"
+		>
 			<Typography as="time" variant="date">
 				{startDate}
 			</Typography>
 			<span>-</span>
 			<Typography as="time" variant="date">
-				{endDate || 'Actual'}
+				{endDate || "Actual"}
 			</Typography>
 		</div>
 	</header>

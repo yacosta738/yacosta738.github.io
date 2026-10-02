@@ -56,14 +56,14 @@ const fallbackText = allTexts.join(" • ");
 	data-cursor-char={cursorChar}
 	role="status"
 	aria-live="polite"
-	aria-label={texts ? `Dynamic text: ${texts.join(', ')}` : text}
+	aria-label={texts ? `Dynamic text: ${texts.join(", ")}` : text}
 	{...attrs}
 >
 	<!-- SEO-friendly fallback content -->
 	<span class="typed-content">
 		{fallbackText}
 	</span>
-	
+
 	<!-- Cursor element -->
 	{cursor && (
 		<span class="typed-cursor" aria-hidden="true">
@@ -73,74 +73,79 @@ const fallbackText = allTexts.join(" • ");
 </span>
 
 <script is:inline define:vars={{ speed, delay, loop, cursor }}>
-	// Optimized TypedText - Single class definition, no redundant code
-	if (typeof TypedText === 'undefined') {
-		window.TypedText = class TypedText {
+// Optimized TypedText - Single class definition, no redundant code
+if (typeof TypedText === "undefined") {
+	window.TypedText = class TypedText {
 		constructor(element) {
 			this.element = element;
-			this.contentEl = element.querySelector('.typed-content');
-			this.cursorEl = element.querySelector('.typed-cursor');
-			
+			this.contentEl = element.querySelector(".typed-content");
+			this.cursorEl = element.querySelector(".typed-cursor");
+
 			if (!this.contentEl) return;
-			
+
 			// Get configuration from data attributes
 			this.text = element.dataset.text || "";
-			this.texts = element.dataset.texts ? JSON.parse(element.dataset.texts) : [];
-			this.speed = parseInt(element.dataset.speed) || 80;
-			this.delay = parseInt(element.dataset.delay) || 1000;
+			this.texts = element.dataset.texts
+				? JSON.parse(element.dataset.texts)
+				: [];
+			this.speed = Number.parseInt(element.dataset.speed) || 80;
+			this.delay = Number.parseInt(element.dataset.delay) || 1000;
 			this.loop = element.dataset.loop === "true";
 			this.showCursor = element.dataset.cursor === "true";
-			
+
 			// State
 			this.isTyping = false;
-			
+
 			// Check for reduced motion
-			if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
 				this.showFinalState();
 				return;
 			}
-			
+
 			// Setup intersection observer for lazy initialization
 			this.setupObserver();
 		}
-		
+
 		showFinalState() {
 			const allTexts = this.texts.length > 0 ? this.texts : [this.text];
 			this.contentEl.textContent = allTexts.join(" • ");
-			if (this.cursorEl) this.cursorEl.style.display = 'none';
+			if (this.cursorEl) this.cursorEl.style.display = "none";
 		}
-		
+
 		setupObserver() {
-			this.observer = new IntersectionObserver((entries) => {
-				if (entries[0].isIntersecting && !this.isTyping) {
-					this.startTyping();
-					if (!this.loop) this.observer.disconnect();
-				}
-			}, { threshold: 0.1, rootMargin: '100px' });
-			
+			this.observer = new IntersectionObserver(
+				(entries) => {
+					if (entries[0].isIntersecting && !this.isTyping) {
+						this.startTyping();
+						if (!this.loop) this.observer.disconnect();
+					}
+				},
+				{ threshold: 0.1, rootMargin: "100px" },
+			);
+
 			this.observer.observe(this.element);
 		}
-		
+
 		async startTyping() {
 			if (this.isTyping) return;
 			this.isTyping = true;
-			
+
 			this.contentEl.textContent = "";
 			if (this.cursorEl && this.showCursor) {
-				this.cursorEl.style.display = 'inline-block';
+				this.cursorEl.style.display = "inline-block";
 			}
-			
+
 			await this.sleep(this.delay);
-			
+
 			const textsToType = this.texts.length > 0 ? this.texts : [this.text];
-			
+
 			do {
 				for (let i = 0; i < textsToType.length; i++) {
 					const currentText = textsToType[i];
 					if (!currentText) continue;
-					
+
 					await this.typeText(currentText);
-					
+
 					if (i < textsToType.length - 1 || this.loop) {
 						await this.sleep(2000);
 						if (this.loop || i < textsToType.length - 1) {
@@ -150,114 +155,116 @@ const fallbackText = allTexts.join(" • ");
 					}
 				}
 			} while (this.loop);
-			
+
 			if (this.cursorEl && !this.loop) {
 				await this.sleep(1000);
-				this.cursorEl.style.display = 'none';
+				this.cursorEl.style.display = "none";
 			}
-			
+
 			this.isTyping = false;
 		}
-		
+
 		async typeText(text) {
 			for (let i = 0; i <= text.length; i++) {
 				this.contentEl.textContent = text.substring(0, i);
 				if (i < text.length) await this.sleep(this.speed);
 			}
 		}
-		
+
 		async deleteText(text) {
 			for (let i = text.length; i >= 0; i--) {
 				this.contentEl.textContent = text.substring(0, i);
 				if (i > 0) await this.sleep(this.speed / 2);
 			}
 		}
-		
-			sleep(ms) {
-				return new Promise(resolve => setTimeout(resolve, ms));
-			}
-			
-			destroy() {
-				this.isTyping = false;
-				if (this.observer) this.observer.disconnect();
-			}
-		};
-	}
-	
-	// Initialize instances (only once)
-	if (!window.typedTextInstances) {
-		window.typedTextInstances = new Map();
-	}
-	
-	function initializeTypedTexts() {
-		// Initialize new instances only for elements not yet initialized
-		document.querySelectorAll('.typed-text').forEach(element => {
-			if (!window.typedTextInstances.has(element)) {
-				window.typedTextInstances.set(element, new window.TypedText(element));
-			}
-		});
-	}
-	
-	// Initialize when page loads or during view transitions
-	document.addEventListener('astro:page-load', initializeTypedTexts);
+
+		sleep(ms) {
+			return new Promise((resolve) => setTimeout(resolve, ms));
+		}
+
+		destroy() {
+			this.isTyping = false;
+			if (this.observer) this.observer.disconnect();
+		}
+	};
+}
+
+// Initialize instances (only once)
+if (!window.typedTextInstances) {
+	window.typedTextInstances = new Map();
+}
+
+function initializeTypedTexts() {
+	// Initialize new instances only for elements not yet initialized
+	document.querySelectorAll(".typed-text").forEach((element) => {
+		if (!window.typedTextInstances.has(element)) {
+			window.typedTextInstances.set(element, new window.TypedText(element));
+		}
+	});
+}
+
+// Initialize when page loads or during view transitions
+document.addEventListener("astro:page-load", initializeTypedTexts);
 </script>
 
 <style>
-	/* Simple and functional typed text styles */
-	.typed-text {
-		display: inline-block;
-		position: relative;
-	}
+/* Simple and functional typed text styles */
+.typed-text {
+	display: inline-block;
+	position: relative;
+}
 
-	/* Content area - always visible for SEO */
-	.typed-content {
-		display: inline;
-		white-space: pre-wrap;
-	}
+/* Content area - always visible for SEO */
+.typed-content {
+	display: inline;
+	white-space: pre-wrap;
+}
 
-	/* Cursor - hidden by default, shown by JavaScript */
+/* Cursor - hidden by default, shown by JavaScript */
+.typed-cursor {
+	display: none;
+	color: currentColor;
+	font-weight: inherit;
+	animation: cursor-blink 1s infinite;
+	margin-left: 2px;
+}
+
+/* Cursor blinking animation */
+@keyframes cursor-blink {
+	0%,
+	50% {
+		opacity: 1;
+	}
+	51%,
+	100% {
+		opacity: 0;
+	}
+}
+
+/* Progressive enhancement: ensure content is visible without JS */
+.no-js .typed-content {
+	display: inline !important;
+}
+
+.no-js .typed-cursor {
+	display: none !important;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
 	.typed-cursor {
-		display: none;
-		color: currentColor;
-		font-weight: inherit;
-		animation: cursor-blink 1s infinite;
-		margin-left: 2px;
-	}
-
-	/* Cursor blinking animation */
-	@keyframes cursor-blink {
-		0%, 50% {
-			opacity: 1;
-		}
-		51%, 100% {
-			opacity: 0;
-		}
-	}
-
-	/* Progressive enhancement: ensure content is visible without JS */
-	.no-js .typed-content {
-		display: inline !important;
-	}
-
-	.no-js .typed-cursor {
+		animation: none !important;
 		display: none !important;
 	}
+}
 
-	/* Respect reduced motion preferences */
-	@media (prefers-reduced-motion: reduce) {
-		.typed-cursor {
-			animation: none !important;
-			display: none !important;
-		}
+/* Print styles */
+@media print {
+	.typed-content {
+		display: inline !important;
 	}
-
-	/* Print styles */
-	@media print {
-		.typed-content {
-			display: inline !important;
-		}
-		.typed-cursor {
-			display: none !important;
-		}
+	.typed-cursor {
+		display: none !important;
 	}
+}
 </style>

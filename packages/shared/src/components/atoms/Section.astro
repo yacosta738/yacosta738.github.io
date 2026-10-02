@@ -30,9 +30,9 @@ const classes = cn(
 	{title && (
 		<h2>
 			<TextAnimation effect="micro-scale-fade" tag="span">
-				<Typography 
-					as="span" 
-					variant="subtitle" 
+				<Typography
+					as="span"
+					variant="subtitle"
 					class="numbered-heading flex items-center relative my-2.5 mb-10 w-full font-bold whitespace-nowrap"
 				>
 					{title}
@@ -44,52 +44,52 @@ const classes = cn(
 </section>
 
 <style>
-	.numbered-heading {
-		font-size: clamp(1.625rem, 5vw, 2rem); /* 26px to 32px responsive */
-	}
+.numbered-heading {
+	font-size: clamp(1.625rem, 5vw, 2rem); /* 26px to 32px responsive */
+}
 
+.numbered-heading::before {
+	position: relative;
+	counter-increment: section;
+	content: "0" counter(section) ".";
+	margin-right: 10px;
+	color: var(--color-primary);
+	font-family: var(--font-sans);
+	font-size: clamp(1rem, 3vw, 1.25rem); /* 16px to 20px responsive */
+	font-weight: 400;
+}
+
+.numbered-heading::after {
+	content: "";
+	flex: 1;
+	height: 1px;
+	margin-left: 20px;
+	background-color: var(--color-brand-navy-lighter);
+	max-width: 300px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
 	.numbered-heading::before {
-		position: relative;
-		counter-increment: section;
-		content: '0' counter(section) '.';
-		margin-right: 10px;
-		color: var(--color-primary);
-		font-family: var(--font-sans);
-		font-size: clamp(1rem, 3vw, 1.25rem); /* 16px to 20px responsive */
-		font-weight: 400;
+		margin-right: 5px;
 	}
+}
 
+@media (max-width: 1080px) {
 	.numbered-heading::after {
-		content: '';
-		flex: 1;
-		height: 1px;
-		margin-left: 20px;
-		background-color: var(--color-brand-navy-lighter);
-		max-width: 300px;
+		max-width: 200px;
 	}
+}
 
-	/* Responsive adjustments */
-	@media (max-width: 480px) {
-		.numbered-heading::before {
-			margin-right: 5px;
-		}
+@media (max-width: 768px) {
+	.numbered-heading::after {
+		max-width: none;
 	}
+}
 
-	@media (max-width: 1080px) {
-		.numbered-heading::after {
-			max-width: 200px;
-		}
+@media (max-width: 600px) {
+	.numbered-heading::after {
+		margin-left: 10px;
 	}
-
-	@media (max-width: 768px) {
-		.numbered-heading::after {
-			max-width: none;
-		}
-	}
-
-	@media (max-width: 600px) {
-		.numbered-heading::after {
-			margin-left: 10px;
-		}
-	}
+}
 </style>

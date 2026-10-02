@@ -39,26 +39,26 @@ const innerClasses = cn(
 </article>
 
 <style>
-	/* Scoped styles to prevent global header interference */
-	:global(.card-header) {
-		/* Reset any global header styles that might leak in */
-		padding: 0;
-		background-color: transparent;
-		filter: none;
-		backdrop-filter: none;
-		user-select: auto;
-		pointer-events: auto;
+/* Scoped styles to prevent global header interference */
+:global(.card-header) {
+	/* Reset any global header styles that might leak in */
+	padding: 0;
+	background-color: transparent;
+	filter: none;
+	backdrop-filter: none;
+	user-select: auto;
+	pointer-events: auto;
+	transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.group {
 		transition: none;
 	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.group {
-			transition: none;
-		}
-
-		.group:hover,
-		.group:focus-within {
-			transform: none;
-		}
+	.group:hover,
+	.group:focus-within {
+		transform: none;
 	}
+}
 </style>

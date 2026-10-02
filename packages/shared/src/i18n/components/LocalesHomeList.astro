@@ -8,37 +8,33 @@
 import { type Lang, LOCALES, useTranslatedPath } from "@/i18n";
 ---
 
-{
-  (Object.entries(LOCALES) as Array<[Lang, (typeof LOCALES)[Lang]]>).map(
-    ([lang, { label }]) => {
-      const translatePath = useTranslatedPath(lang);
-      const href = translatePath("/");
+{(Object.entries(LOCALES) as Array<[Lang, (typeof LOCALES)[Lang]]>).map(
+	([lang, { label }]) => {
+		const translatePath = useTranslatedPath(lang);
+		const href = translatePath("/");
 
-      return (
-        <li>
-          <a
-            href={href}
-            data-lang={lang}
-            dir={LOCALES[lang].dir || null}
-          >
-            {label}
-          </a>
-        </li>
-      );
-    },
-  )
-}
+		return (
+			<li>
+				<a href={href} data-lang={lang} dir={LOCALES[lang].dir || null}>
+					{label}
+				</a>
+			</li>
+		);
+	},
+)}
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const langLinks = document.querySelectorAll('a[data-lang]');
-    langLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const lang = (e.currentTarget as HTMLAnchorElement).getAttribute('data-lang');
-        if (lang) {
-          localStorage.setItem('selectedLang', lang);
-        }
-      });
-    });
-  });
+document.addEventListener("astro:page-load", () => {
+	const langLinks = document.querySelectorAll("a[data-lang]");
+	langLinks.forEach((link) => {
+		link.addEventListener("click", (e) => {
+			const lang = (e.currentTarget as HTMLAnchorElement).getAttribute(
+				"data-lang",
+			);
+			if (lang) {
+				localStorage.setItem("selectedLang", lang);
+			}
+		});
+	});
+});
 </script>

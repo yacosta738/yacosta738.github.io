@@ -76,98 +76,97 @@ for (let i = 0; i < totalPosts; i++) {
 ---
 
 <div class={cn("backgrounds grid-container relative", attrs.class)} {...attrs}>
-  <ul
-    class="grid gap-5 md:grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3"
-    role="list"
-    aria-label={t("news.articles")}
-    aria-labelledby="articles"
-  >
-    {finalDisplayPosts.map((post, index) => {
-      // Determine special grid classes based on position
-      let specialClasses = "";
+	<ul
+		class="grid gap-5 md:grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3"
+		aria-label={t("news.articles")}
+		aria-labelledby="articles"
+	>
+		{finalDisplayPosts.map((post, index) => {
+			// Determine special grid classes based on position
+			let specialClasses = "";
 
-      // Apply large layout to positions defined in largePositions array
-      if (largePositions.includes(index)) {
-        specialClasses = "md:col-span-2 md:row-span-2";
-      }
+			// Apply large layout to positions defined in largePositions array
+			if (largePositions.includes(index)) {
+				specialClasses = "md:col-span-2 md:row-span-2";
+			}
 
-      // Set loading strategy: eager for first 6 articles that are likely in initial viewport
-      const imageLoading = index < 6 ? "eager" : "lazy";
+			// Set loading strategy: eager for first 6 articles that are likely in initial viewport
+			const imageLoading = index < 6 ? "eager" : "lazy";
 
-      return (
-        <>
-          {index === 6 && (
-            <li class="md:col-span-2 lg:col-span-3 bleed-full">
-              <aside
-                class="flex flex-col items-center gap-6 py-12 rounded-lg shadow-md bg-background-surface w-full"
-              >
-                <CtaNewsletterSubscription
-                  formId="cta-newsletter-subscription-form"
-                  title={t("cta.title")}
-                  description={t("cta.description")}
-                  class="w-full"
-                  />
-              </aside>
-            </li>
-          )}
-          <li class={specialClasses}>
-            <ArticleCard
-              image={post.cover}
-              title={post.title}
-              description={post.description}
-              url={getBlogPostUrl(post, currentLocale)}
-              loading={imageLoading}
-            />
-          </li>
-        </>
-      );
-    })}
-  </ul>
+			return (
+				<>
+					{index === 6 && (
+						<li class="md:col-span-2 lg:col-span-3 bleed-full">
+							<aside class="flex flex-col items-center gap-6 py-12 rounded-lg shadow-md bg-background-surface w-full">
+								<CtaNewsletterSubscription
+									formId="cta-newsletter-subscription-form"
+									title={t("cta.title")}
+									description={t("cta.description")}
+									class="w-full"
+								/>
+							</aside>
+						</li>
+					)}
+					<li class={specialClasses}>
+						<ArticleCard
+							image={post.cover}
+							title={post.title}
+							description={post.description}
+							url={getBlogPostUrl(post, currentLocale)}
+							loading={imageLoading}
+						/>
+					</li>
+				</>
+			);
+		})}
+	</ul>
 </div>
 
 <style>
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1fr min(var(--container-width, 1280px),calc(100% - (2 * var(--container-gutter-size, 24px)))) 1fr;
-    grid-column-gap: var(--container-gutter-size, 24px);
-    overflow: clip;
-    width: 100%;
-    row-gap: 6rem;
-    padding-bottom: 6rem
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr min(
+			var(--container-width, 1280px),
+			calc(100% - (2 * var(--container-gutter-size, 24px)))
+		) 1fr;
+	grid-column-gap: var(--container-gutter-size, 24px);
+	overflow: clip;
+	width: 100%;
+	row-gap: 6rem;
+	padding-bottom: 6rem;
 }
 
 @media (min-width: 768px) {
-    .grid-container {
-        row-gap:8rem;
-        padding-bottom: 8rem
-    }
+	.grid-container {
+		row-gap: 8rem;
+		padding-bottom: 8rem;
+	}
 }
 
 @media (min-width: 1024px) {
-    .grid-container {
-        row-gap:10rem;
-        padding-bottom: 10rem
-    }
+	.grid-container {
+		row-gap: 10rem;
+		padding-bottom: 10rem;
+	}
 }
 
-.grid-container>* {
-    grid-column: 2
+.grid-container > * {
+	grid-column: 2;
 }
 
-.grid-container>.bleed-full {
-    grid-column: 1 / -1
+.grid-container > .bleed-full {
+	grid-column: 1 / -1;
 }
 
-.grid-container>.bleed-start {
-    grid-column: 1 / 3
+.grid-container > .bleed-start {
+	grid-column: 1 / 3;
 }
 
-.grid-container>.bleed-end {
-    grid-column: 2 / -1
+.grid-container > .bleed-end {
+	grid-column: 2 / -1;
 }
 
-.grid-container>.bleed-none {
-    grid-column: 2!important
+.grid-container > .bleed-none {
+	grid-column: 2 !important;
 }
-
 </style>

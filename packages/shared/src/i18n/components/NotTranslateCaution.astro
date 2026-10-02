@@ -22,11 +22,11 @@ const { usedLangs } = Astro.props;
 const currentLocale = Astro.currentLocale as Lang;
 ---
 
-{
-  !usedLangs.includes(currentLocale) && (
-    <p class="p-2 my-4 text-lg font-semibold tracking-tight text-gray-800 bg-yellow-100 rounded-md">
-      <span class="material-icons-sharp mr-2 align-middle opacity-80">warning</span>
-      {t(NOT_TRANSLATED_CAUTION)}
-    </p>
-  )
-}
+{!usedLangs.includes(currentLocale) && (
+	<p class="p-2 my-4 text-lg font-semibold tracking-tight text-gray-800 bg-yellow-100 rounded-md">
+		<span class="material-icons-sharp mr-2 align-middle opacity-80">
+			warning
+		</span>
+		{t(NOT_TRANSLATED_CAUTION)}
+	</p>
+)}

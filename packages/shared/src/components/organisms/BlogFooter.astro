@@ -62,26 +62,24 @@ const columnsClass = optimalColumns === 1 ? "md:grid-cols-1" : "md:grid-cols-2";
 							? `grid-template-rows: repeat(${Math.ceil(totalLinks / 2)}, auto)`
 							: ""}
 					>
-						{
-							filteredNavLinks.map((link) => (
-								<li>
-									<a
-										href={link.href === "/rss.xml"
+						{filteredNavLinks.map((link) => (
+							<li>
+								<a
+									href={
+										link.href === "/rss.xml"
 											? buildBlogUrl(translatePath(link.href), siteOrigin)
-											: translatePath(link.href)}
-										class="inline-flex items-center min-h-6 px-2 py-1 rounded-sm font-inter text-sm text-footer-link-light dark:text-footer-link-dark hover:text-footer-link-hover-light dark:hover:text-footer-link-hover-dark transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
-										aria-label={
-											link.ariaLabelKey
-												? t(link.ariaLabelKey)
-												: undefined
-										}
-										target={link.target}
-									>
-										{t(link.translationKey)}
-									</a>
-								</li>
-							))
-						}
+											: translatePath(link.href)
+									}
+									class="inline-flex items-center min-h-6 px-2 py-1 rounded-sm font-inter text-sm text-footer-link-light dark:text-footer-link-dark hover:text-footer-link-hover-light dark:hover:text-footer-link-hover-dark transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+									aria-label={
+										link.ariaLabelKey ? t(link.ariaLabelKey) : undefined
+									}
+									target={link.target}
+								>
+									{t(link.translationKey)}
+								</a>
+							</li>
+						))}
 					</ul>
 				</nav>
 			</div>
@@ -89,7 +87,8 @@ const columnsClass = optimalColumns === 1 ? "md:grid-cols-1" : "md:grid-cols-2";
 		<p
 			class="text-footer-copyright-light dark:text-footer-copyright-dark text-xs font-inter font-normal leading-[140%] tracking-normal"
 		>
-			{t("blog.footer.copyright")} © {new Date().getFullYear()}
+			{t("blog.footer.copyright")}
+			© {new Date().getFullYear()}
 			{localizedSiteTitle}
 		</p>
 	</div>

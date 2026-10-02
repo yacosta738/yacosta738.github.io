@@ -19,18 +19,18 @@ const preparedImage = await findImage(avatar || "");
 ---
 
 <div class="author-card">
-    <OptimizedPicture
-        src={preparedImage as unknown as any}
-        alt={name}
-        class="author-avatar"
-        loading="eager"
-    />
-    <div class="author-card__meta">
-        <h1 class="author-name">{name}</h1>
-        <div class="author-location">
-            <Icon name="lucide:map-pin" class="author-location__icon" />
-            {location}
-        </div>
-        <AuthorSocials socials={socials} email={email} className="author-socials" />
-    </div>
+	<OptimizedPicture
+		src={preparedImage as unknown as any}
+		alt={name}
+		class="author-avatar"
+		loading="eager"
+	/>
+	<div class="author-card__meta">
+		<h1 class="author-name">{name}</h1>
+		<div class="author-location">
+			<Icon name="lucide:map-pin" class="author-location__icon" />
+			{location}
+		</div>
+		<AuthorSocials socials={socials} email={email} className="author-socials" />
+	</div>
 </div>

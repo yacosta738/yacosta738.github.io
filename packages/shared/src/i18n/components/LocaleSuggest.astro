@@ -26,124 +26,133 @@ const currentLocale = Astro.currentLocale as Lang;
 const paths = await getLocalePathsEnhanced(Astro.url);
 ---
 
-<BaseToast 
-  id="js-languageSuggest" 
-  position={position}
-  variant="glass"
-  size="md"
-  showCloseButton={true}
-  closeButtonId="js-close"
-  closeButtonLabel="Close"
-  class="hidden"
-  {...attr}
+<BaseToast
+	id="js-languageSuggest"
+	position={position}
+	variant="glass"
+	size="md"
+	showCloseButton={true}
+	closeButtonId="js-close"
+	closeButtonLabel="Close"
+	class="hidden"
+	{...attr}
 >
-  <div class="flex items-center gap-3">
-    <div class="shrink-0">
-      <Icon name="tabler:language" class="size-5 text-emerald-700 dark:text-[#34d399]" />
-    </div>
+	<div class="flex items-center gap-3">
+		<div class="shrink-0">
+			<Icon
+				name="tabler:language"
+				class="size-5 text-emerald-700 dark:text-[#34d399]"
+			/>
+		</div>
 
-    <div class="grow">
-      <p class="text-sm text-gray-800 dark:text-[#e2e8f0] font-medium">
-        <span class="font-normal" id="js-suggestionText"></span>
-        <a id="js-link" href="#" class="text-emerald-700 dark:text-[#34d399] hover:text-emerald-800 dark:hover:text-emerald-300 underline-offset-2 hover:underline font-semibold transition-colors duration-200" aria-label="Cambiar idioma">
-          <span id="js-linkText"></span>
-        </a>
-      </p>
-    </div>
-  </div>
+		<div class="grow">
+			<p class="text-sm text-gray-800 dark:text-[#e2e8f0] font-medium">
+				<span class="font-normal" id="js-suggestionText"></span>
+				<a
+					id="js-link"
+					href={Astro.url.href}
+					class="text-emerald-700 dark:text-[#34d399] hover:text-emerald-800 dark:hover:text-emerald-300 underline-offset-2 hover:underline font-semibold transition-colors duration-200"
+					aria-label="Cambiar idioma"
+				>
+					<span id="js-linkText">Cambiar idioma</span>
+				</a>
+			</p>
+		</div>
+	</div>
 </BaseToast>
 
 <script is:inline define:vars={{ currentLocale, LOCALES, paths }}>
-  function initLanguageSuggest() {
-    const browserLang = navigator.language.toLowerCase();
-    const suggest = document.getElementById("js-languageSuggest");
-    
-    if (!suggest) return;
+function initLanguageSuggest() {
+	const browserLang = navigator.language.toLowerCase();
+	const suggest = document.getElementById("js-languageSuggest");
 
-    // Translation texts
-    const translations = {
-      en: { 
-        suggestion: "This page is also available in English", 
-        close: "Close" 
-      },
-      es: { 
-        suggestion: "Esta página también está disponible en español", 
-        close: "Cerrar" 
-      },
-    };
+	if (!suggest) return;
 
-    // Get the appropriate translation
-    function getTranslation() {
-      if (translations[browserLang]) {
-        return translations[browserLang];
-      }
-      const baseLang = browserLang.split("-")[0];
-      if (translations[baseLang]) {
-        return translations[baseLang];
-      }
-      return translations[currentLocale] || translations["en"];
-    }
+	// Translation texts
+	const translations = {
+		en: {
+			suggestion: "This page is also available in English",
+			close: "Close",
+		},
+		es: {
+			suggestion: "Esta página también está disponible en español",
+			close: "Cerrar",
+		},
+	};
 
-    const t = getTranslation();
+	// Get the appropriate translation
+	function getTranslation() {
+		if (translations[browserLang]) {
+			return translations[browserLang];
+		}
+		const baseLang = browserLang.split("-")[0];
+		if (translations[baseLang]) {
+			return translations[baseLang];
+		}
+		return translations[currentLocale] || translations["en"];
+	}
 
-    // Set UI texts
-    const suggestionText = document.getElementById("js-suggestionText");
-    if (suggestionText) {
-      suggestionText.innerText = t.suggestion + ": ";
-    }
+	const t = getTranslation();
 
-    // Function to show suggestion
-    const showSuggest = (lang) => {
-      const link = document.getElementById("js-link");
-      const linkText = document.getElementById("js-linkText");
+	// Set UI texts
+	const suggestionText = document.getElementById("js-suggestionText");
+	if (suggestionText) {
+		suggestionText.innerText = t.suggestion + ": ";
+	}
 
-      if (!link || !linkText) return;
+	// Function to show suggestion
+	const showSuggest = (lang) => {
+		const link = document.getElementById("js-link");
+		const linkText = document.getElementById("js-linkText");
 
-      const targetPath = paths.find((entry) => entry.lang === lang)?.path;
-      if (!targetPath) return;
+		if (!link || !linkText) return;
 
-      link.href = targetPath;
-      linkText.innerText = LOCALES[lang].label;
+		const targetPath = paths.find((entry) => entry.lang === lang)?.path;
+		if (!targetPath) return;
 
-      // Show with animation first
-      suggest.classList.remove("hidden");
-      setTimeout(() => {
-        suggest.classList.remove('translate-y-full', 'opacity-0');
-        suggest.classList.add('translate-y-0', 'opacity-100');
-        
-        // Toast is now visible
-      }, 100);
-    };
+		link.href = targetPath;
+		linkText.innerText = LOCALES[lang].label;
 
-    // Check if we should show the suggestion
-    if (
-      currentLocale === browserLang ||
-      currentLocale === browserLang.split("-")[0] ||
-      localStorage.getItem('languageSuggestDenied') ||
-      localStorage.getItem('selectedLang')
-    ) {
-      return;
-    } else if (Object.keys(LOCALES).includes(browserLang)) {
-      showSuggest(browserLang);
-    } else if (Object.keys(LOCALES).includes(browserLang.split("-")[0])) {
-      showSuggest(browserLang.split("-")[0]);
-    }
+		// Show with animation first
+		suggest.classList.remove("hidden");
+		setTimeout(() => {
+			suggest.classList.remove("translate-y-full", "opacity-0");
+			suggest.classList.add("translate-y-0", "opacity-100");
 
-    const closeButton = document.getElementById("js-close");
-    if (closeButton) {
+			// Toast is now visible
+		}, 100);
+	};
+
+	// Check if we should show the suggestion
+	if (
+		currentLocale === browserLang ||
+		currentLocale === browserLang.split("-")[0] ||
+		localStorage.getItem("languageSuggestDenied") ||
+		localStorage.getItem("selectedLang")
+	) {
+		return;
+	}
+	if (Object.keys(LOCALES).includes(browserLang)) {
+		showSuggest(browserLang);
+	} else if (Object.keys(LOCALES).includes(browserLang.split("-")[0])) {
+		showSuggest(browserLang.split("-")[0]);
+	}
+
+	const closeButton = document.getElementById("js-close");
+	if (closeButton) {
 		closeButton.onclick = () => {
 			// Hide with animation
-			suggest.classList.remove('translate-y-0', 'opacity-100');
-			suggest.classList.add('translate-y-full', 'opacity-0');
-			
+			suggest.classList.remove("translate-y-0", "opacity-100");
+			suggest.classList.add("translate-y-full", "opacity-0");
+
 			setTimeout(() => {
 				suggest.classList.add("hidden");
 			}, 500);
-			
-			localStorage.setItem('languageSuggestDenied', 'true');
-		};
-    }
-  }
 
-	document.addEventListener('astro:page-load', initLanguageSuggest);
+			localStorage.setItem("languageSuggestDenied", "true");
+		};
+	}
+}
+
+document.addEventListener("astro:page-load", initLanguageSuggest);
 </script>

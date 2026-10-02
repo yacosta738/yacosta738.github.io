@@ -48,10 +48,19 @@ const postSlug = slugParts.join("/");
 		<NotTranslateCaution usedLangs={usedLangs} />
 		<PostHeader post={post} readingTime={remarkPluginFrontmatter.minutesRead} />
 		<div class="mx-auto prose lg:prose-xl dark:prose-invert blog-prose">
-		{
-			post.cover &&
+			{post.cover &&
 				(typeof post.cover === "string" ? (
-					<img src={post.cover} alt={post.title} width="1200" height="675" loading="eager" fetchpriority="high" decoding="async" style="aspect-ratio:16/9;object-fit:cover" class="mx-auto w-full max-w-full rounded-lg" />
+					<img
+						src={post.cover}
+						alt={post.title}
+						width="1200"
+						height="675"
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+						style="aspect-ratio:16/9;object-fit:cover"
+						class="mx-auto w-full max-w-full rounded-lg"
+					/>
 				) : (
 					<OptimizedPicture
 						src={post.cover}
@@ -59,13 +68,14 @@ const postSlug = slugParts.join("/");
 						loading="eager"
 						fetchpriority="high"
 					/>
-				))
-		}
+				))}
 			<Content />
 			<PostFooter post={post} />
 		</div>
 	</div>
-	<div class="border-y border-y-secondary-foreground-light dark:border-y-secondary-foreground-dark mt-12">
+	<div
+		class="border-y border-y-secondary-foreground-light dark:border-y-secondary-foreground-dark mt-12"
+	>
 		<CtaNewsletterSubscription
 			formId="article-cta-newsletter-subscription-form"
 			title={t("cta.title")}
@@ -73,5 +83,4 @@ const postSlug = slugParts.join("/");
 			class="my-10 py-5 mx-auto container px-4"
 		/>
 	</div>
-
 </Layout>

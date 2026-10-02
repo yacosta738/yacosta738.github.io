@@ -33,6 +33,7 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "catalog:",
+		"@astrojs/markdown-remark": "catalog:",
 		"@astrojs/mdx": "catalog:",
 		"@astrojs/partytown": "catalog:",
 		"@astrojs/rss": "catalog:",
@@ -65,7 +66,6 @@
 		"@types/hast": "catalog:",
 		"@types/mdast": "catalog:",
 		"@vitest/coverage-v8": "catalog:",
-		"astro-critters": "catalog:",
 		"astro-icon": "catalog:",
 		"clsx": "catalog:",
 		"cross-env": "catalog:",

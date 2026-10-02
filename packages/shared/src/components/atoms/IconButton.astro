@@ -6,12 +6,6 @@ export interface Props extends HTMLAttributes<"button"> {}
 const { class: className, ...attrs } = Astro.props;
 ---
 
-<button
-  class={cn(
-    "ui-icon-button",
-    className
-  )}
-    {...attrs}
->
-  <slot />
+<button type="button" class={cn("ui-icon-button", className)} {...attrs}>
+	<slot />
 </button>

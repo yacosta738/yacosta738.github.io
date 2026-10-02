@@ -134,109 +134,109 @@ const recentTechnologies =
 </Section>
 
 <style>
-	.image-container {
-		position: relative;
-	}
+.image-container {
+	position: relative;
+}
 
-	.image-wrapper {
-		display: block;
-		position: relative;
-		width: 100%;
-		border-radius: 4px;
-		background-color: var(--color-brand-accent);
-		box-shadow: 0 10px 30px -15px var(--color-background-secondary);
-		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-	}
+.image-wrapper {
+	display: block;
+	position: relative;
+	width: 100%;
+	border-radius: 4px;
+	background-color: var(--color-brand-accent);
+	box-shadow: 0 10px 30px -15px var(--color-background-secondary);
+	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 
-	.image-wrapper:hover,
-	.image-wrapper:focus {
-		outline: 0;
-		transform: translate(-4px, -4px);
-		will-change: transform;
-	}
+.image-wrapper:hover,
+.image-wrapper:focus {
+	outline: 0;
+	transform: translate(-4px, -4px);
+	will-change: transform;
+}
 
-	.image-wrapper:hover .profile-image,
-	.image-wrapper:focus .profile-image {
-		will-change: filter;
-	}
+.image-wrapper:hover .profile-image,
+.image-wrapper:focus .profile-image {
+	will-change: filter;
+}
 
-	.image-wrapper:hover::after,
-	.image-wrapper:focus::after {
-		transform: translate(8px, 8px);
-	}
+.image-wrapper:hover::after,
+.image-wrapper:focus::after {
+	transform: translate(8px, 8px);
+}
 
-	.image-wrapper:hover .profile-image,
-	.image-wrapper:focus .profile-image {
-		filter: none;
-		mix-blend-mode: normal;
-	}
+.image-wrapper:hover .profile-image,
+.image-wrapper:focus .profile-image {
+	filter: none;
+	mix-blend-mode: normal;
+}
 
-	.profile-image {
-		position: relative;
-		border-radius: 4px;
-		mix-blend-mode: multiply;
-		filter: grayscale(100%) contrast(1);
-		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-		width: 100%;
-		height: auto;
-		aspect-ratio: 1 / 1;
-		object-fit: cover;
-	}
+.profile-image {
+	position: relative;
+	border-radius: 4px;
+	mix-blend-mode: multiply;
+	filter: grayscale(100%) contrast(1);
+	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+}
 
-	.image-wrapper::before,
-	.image-wrapper::after {
-		content: "";
-		display: block;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		border-radius: 4px;
-		transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-	}
+.image-wrapper::before,
+.image-wrapper::after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 4px;
+	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 
-	.image-wrapper::before {
-		top: 0;
-		left: 0;
-		background-color: var(--color-background-secondary);
-		mix-blend-mode: screen;
-	}
+.image-wrapper::before {
+	top: 0;
+	left: 0;
+	background-color: var(--color-background-secondary);
+	mix-blend-mode: screen;
+}
 
-	.image-wrapper::after {
-		border: 2px solid var(--color-brand-accent);
-		top: 14px;
-		left: 14px;
-		z-index: -1;
-	}
+.image-wrapper::after {
+	border: 2px solid var(--color-brand-accent);
+	top: 14px;
+	left: 14px;
+	z-index: -1;
+}
 
-	/* Remove default summary styles */
-	summary::-webkit-details-marker {
-		display: none;
-	}
+/* Remove default summary styles */
+summary::-webkit-details-marker {
+	display: none;
+}
 
-	summary::marker {
-		display: none;
-	}
+summary::marker {
+	display: none;
+}
 
-	/* Details open state */
-	details[open] summary::before {
-		transform: rotate(90deg);
-	}
+/* Details open state */
+details[open] summary::before {
+	transform: rotate(90deg);
+}
 
-	/* Light mode overrides for better photo visibility */
-	html:not(.dark) .profile-image {
-		filter: brightness(0.9) grayscale(100%) contrast(1);
-		mix-blend-mode: normal;
-	}
+/* Light mode overrides for better photo visibility */
+html:not(.dark) .profile-image {
+	filter: brightness(0.9) grayscale(100%) contrast(1);
+	mix-blend-mode: normal;
+}
 
-	html:not(.dark) .image-wrapper::before {
-		background-color: transparent;
-		mix-blend-mode: normal;
-	}
+html:not(.dark) .image-wrapper::before {
+	background-color: transparent;
+	mix-blend-mode: normal;
+}
 
-	/* Light mode hover effects - apply a subtle filter on hover instead */
-	html:not(.dark) .image-wrapper:hover .profile-image,
-	html:not(.dark) .image-wrapper:focus .profile-image {
-		filter: brightness(1.1) contrast(1.05);
-		mix-blend-mode: normal;
-	}
+/* Light mode hover effects - apply a subtle filter on hover instead */
+html:not(.dark) .image-wrapper:hover .profile-image,
+html:not(.dark) .image-wrapper:focus .profile-image {
+	filter: brightness(1.1) contrast(1.05);
+	mix-blend-mode: normal;
+}
 </style>

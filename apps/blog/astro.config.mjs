@@ -1,4 +1,5 @@
 import { fileURLToPath } from "node:url";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
@@ -195,7 +196,9 @@ export default defineConfig({
 		},
 	},
 	markdown: {
-		remarkPlugins: [readingTimeRemarkPlugin],
-		rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+		processor: unified({
+			remarkPlugins: [readingTimeRemarkPlugin],
+			rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
+		}),
 	},
 });

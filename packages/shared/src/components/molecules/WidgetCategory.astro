@@ -21,20 +21,21 @@ const translatePath = useTranslatedPath(currentLocale);
 const { categories } = Astro.props;
 ---
 
-<WidgetCard title={t('categories')}>
+<WidgetCard title={t("categories")}>
 	<ul class="relative my-4 flex list-none flex-col p-0">
-		{
-			categories.map(({ slug, title, count }) => (
-				<li class="my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate">
-					<Icon name="mdi:chevron-right" class="h-5 w-5 mr-1" />
-					<a href={translatePath(`/${routes.category}/${slug}/`)} class="inline-link">
-						<div class="flex items-center justify-center">
-							<span>{title}</span>
-						</div>
-					</a>
-					<p>({count})</p>
-				</li>
-			))
-		}
+		{categories.map(({ slug, title, count }) => (
+			<li class="my-2 flex flex-row whitespace-nowrap font-mono text-base text-light-slate">
+				<Icon name="mdi:chevron-right" class="h-5 w-5 mr-1" />
+				<a
+					href={translatePath(`/${routes.category}/${slug}/`)}
+					class="inline-link"
+				>
+					<div class="flex items-center justify-center">
+						<span>{title}</span>
+					</div>
+				</a>
+				<p>({count})</p>
+			</li>
+		))}
 	</ul>
 </WidgetCard>
