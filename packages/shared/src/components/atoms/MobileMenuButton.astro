@@ -16,10 +16,7 @@ const currentLocale = Astro.params.lang as Lang;
 const t = useTranslations(currentLocale);
 ---
 
-<div
-	id={DRAWER_MENU_BUTTON_BOX_ID}
-	class={cn("menu-btn-box", className)}
->
+<div id={DRAWER_MENU_BUTTON_BOX_ID} class={cn("menu-btn-box", className)}>
 	<button
 		id={DRAWER_MENU_BUTTON_ID}
 		type="button"
@@ -60,7 +57,9 @@ const t = useTranslations(currentLocale);
 	z-index: 70;
 	display: flex;
 	align-items: center;
-	transition: transform 240ms ease, opacity 180ms ease;
+	transition:
+		transform 240ms ease,
+		opacity 180ms ease;
 }
 
 .menu-btn-box.is-hidden {

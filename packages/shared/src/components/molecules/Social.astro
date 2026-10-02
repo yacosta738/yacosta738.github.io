@@ -22,26 +22,37 @@ interface Props extends HTMLAttributes<"ul"> {
 const { profiles, class: className = "", ...attrs } = Astro.props as Props;
 ---
 
-<Side show={true} orientation="left" class="hidden lg:block animate-fade-in-left animate-delay-700 animate-duration-slower">
-  <ul class={cn("social-links flex flex-col items-center m-0 p-0 list-none", className)} {...(attrs as HTMLAttributes<"ul">)}>
-    {
-      profiles.map((social, idx) => (
-        <li class={cn(idx === profiles.length - 1 ? "mb-5" : "", "") }>
-          <a
-            id={social.network.toLowerCase()}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="my-1.5 p-0.5 inline-flex items-center justify-center transition-all duration-200 ease-in-out hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-brand-accent focus:text-brand-accent"
-            aria-label={social.network}
-          >
-            <Icon name={getSocialIcon(social.network)} class="w-5 h-5" />
-          </a>
-        </li>
-      ))
-    }
-    <li aria-hidden="true" class="mt-2">
-      <span class="block w-px mx-auto" style="height: 90px; background-color: var(--color-slate)"></span>
-    </li>
-  </ul>
+<Side
+	show={true}
+	orientation="left"
+	class="hidden lg:block animate-fade-in-left animate-delay-700 animate-duration-slower"
+>
+	<ul
+		class={cn(
+			"social-links flex flex-col items-center m-0 p-0 list-none",
+			className,
+		)}
+		{...attrs as HTMLAttributes<"ul">}
+	>
+		{profiles.map((social, idx) => (
+			<li class={cn(idx === profiles.length - 1 ? "mb-5" : "", "")}>
+				<a
+					id={social.network.toLowerCase()}
+					href={social.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="my-1.5 p-0.5 inline-flex items-center justify-center transition-all duration-200 ease-in-out hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-brand-accent focus:text-brand-accent"
+					aria-label={social.network}
+				>
+					<Icon name={getSocialIcon(social.network)} class="w-5 h-5" />
+				</a>
+			</li>
+		))}
+		<li aria-hidden="true" class="mt-2">
+			<span
+				class="block w-px mx-auto"
+				style="height: 90px; background-color: var(--color-slate)"
+			></span>
+		</li>
+	</ul>
 </Side>

@@ -47,7 +47,7 @@ const isPdf = resumePath.toLowerCase().endsWith(".pdf");
 <a
 	data-test="download-cv"
 	href={resumePath}
-	{...(isPdf ? { download: true } : {})}
+	{...isPdf ? { download: true } : {}}
 	target="_blank"
 	rel="noopener noreferrer"
 	aria-label={t("nav.resume")}
@@ -55,13 +55,13 @@ const isPdf = resumePath.toLowerCase().endsWith(".pdf");
 		baseClasses,
 		variantClasses[variant],
 		fullWidth && "w-full flex items-center justify-center gap-2",
-		className
+		className,
 	)}
 	{...attrs}
 >
 	<slot name="prefix">
-        <Icon name="lucide:download" class="w-4 h-4" />
-    </slot>
+		<Icon name="lucide:download" class="w-4 h-4" />
+	</slot>
 	<span>{t("nav.resume") || "Resume"}</span>
 	<slot name="suffix" />
 </a>

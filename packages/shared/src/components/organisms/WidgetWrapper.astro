@@ -90,13 +90,11 @@ const categoryList = Array.from(categories.values());
 	data-locale-roots={JSON.stringify(localeRootList)}
 >
 	<slot name="widget">
-		{
-			!isBlogRoot && (
-				<div id="categoryWidget">
-					<WidgetRecentPost recentPosts={allPosts.slice(0, 5)} />
-				</div>
-			)
-		}
+		{!isBlogRoot && (
+			<div id="categoryWidget">
+				<WidgetRecentPost recentPosts={allPosts.slice(0, 5)} />
+			</div>
+		)}
 		<WidgetTagCloud tags={tagList} />
 		<WidgetCategory categories={categoryList} />
 	</slot>
@@ -104,12 +102,12 @@ const categoryList = Array.from(categories.values());
 
 <script>
 // Only run in the browser
-if (typeof window !== 'undefined') {
-	const CLEANUP_KEY = '__widgetWrapperCleanup';
+if (typeof window !== "undefined") {
+	const CLEANUP_KEY = "__widgetWrapperCleanup";
 
 	const cleanup = () => {
 		const currentCleanup = window[CLEANUP_KEY];
-		if (typeof currentCleanup === 'function') {
+		if (typeof currentCleanup === "function") {
 			currentCleanup();
 			window[CLEANUP_KEY] = undefined;
 		}
@@ -118,48 +116,48 @@ if (typeof window !== 'undefined') {
 	const initWidgetBehavior = () => {
 		cleanup();
 
-		const categoryEl = document.getElementById('categoryWidget');
+		const categoryEl = document.getElementById("categoryWidget");
 		// if the url is / or /{lang}, remove the category widget
 		if (categoryEl) {
-			const path = new URL(window.location?.href || '', window.location.origin).pathname;
-			const normalized = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
+			const path = new URL(window.location?.href || "", window.location.origin)
+				.pathname;
+			const normalized =
+				path.endsWith("/") && path !== "/" ? path.slice(0, -1) : path;
 			const localeRoots = JSON.parse(
-				document
-					.getElementById('widget-wrapper')
-					?.dataset.localeRoots ?? '[]',
+				document.getElementById("widget-wrapper")?.dataset.localeRoots ?? "[]",
 			);
-			const isBlogRoot = normalized === '/' || localeRoots.includes(normalized);
+			const isBlogRoot = normalized === "/" || localeRoots.includes(normalized);
 			if (isBlogRoot) {
-				categoryEl.classList.add('hidden');
+				categoryEl.classList.add("hidden");
 			} else {
-				categoryEl.classList.remove('hidden');
+				categoryEl.classList.remove("hidden");
 			}
 		}
 
 		const adjustTopOnNavbar = () => {
-			const navbar = document.getElementById('navbar-header');
-			const widgetWrapper = document.getElementById('widget-wrapper');
+			const navbar = document.getElementById("navbar-header");
+			const widgetWrapper = document.getElementById("widget-wrapper");
 			// if navbar is not null and navbar has 'navbar--show' class, keep a comfortable top gap (top-8); otherwise tighten it (top-4)
 			if (navbar && widgetWrapper) {
-				if (navbar.classList.contains('navbar--show')) {
-					widgetWrapper.classList.remove('top-4');
-					widgetWrapper.classList.add('top-8');
+				if (navbar.classList.contains("navbar--show")) {
+					widgetWrapper.classList.remove("top-4");
+					widgetWrapper.classList.add("top-8");
 				} else {
-					widgetWrapper.classList.remove('top-8');
-					widgetWrapper.classList.add('top-4');
+					widgetWrapper.classList.remove("top-8");
+					widgetWrapper.classList.add("top-4");
 				}
 			}
 		};
 
 		adjustTopOnNavbar();
-		window.addEventListener('scroll', adjustTopOnNavbar);
+		window.addEventListener("scroll", adjustTopOnNavbar);
 
 		window[CLEANUP_KEY] = () => {
-			window.removeEventListener('scroll', adjustTopOnNavbar);
+			window.removeEventListener("scroll", adjustTopOnNavbar);
 		};
 	};
 
-	document.addEventListener('astro:page-load', initWidgetBehavior);
-	document.addEventListener('astro:before-preparation', cleanup);
+	document.addEventListener("astro:page-load", initWidgetBehavior);
+	document.addEventListener("astro:before-preparation", cleanup);
 }
 </script>

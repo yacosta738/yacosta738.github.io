@@ -35,16 +35,19 @@ const currentLocale = resolveLocaleFromUrl(Astro.url, Astro.params.lang);
 const t = useTranslations(currentLocale);
 ---
 
-<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-color-primary focus:text-color-primary-foreground focus:rounded focus:outline-none focus:ring-2 focus:ring-accent min-h-6 inline-flex items-center">
+<a
+	href="#main-content"
+	class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-color-primary focus:text-color-primary-foreground focus:rounded focus:outline-none focus:ring-2 focus:ring-accent min-h-6 inline-flex items-center"
+>
 	{t("nav.skipToContent") || "Skip to main content"}
 </a>
 
 <!-- Live region for drawer state announcements -->
-<div 
-	id="drawer-live-region" 
-	role="status" 
-	aria-live="polite" 
-	aria-atomic="true" 
+<div
+	id="drawer-live-region"
+	role="status"
+	aria-live="polite"
+	aria-atomic="true"
 	class="sr-only"
 ></div>
 
@@ -52,297 +55,189 @@ const t = useTranslations(currentLocale);
 	id={id}
 	class={cn(
 		"fixed top-0 left-0 w-full z-50 border-b border-transparent",
-	"animate-fade-in-down animate-delay-100 animate-duration-slower animate-fill-forwards",
+		"animate-fade-in-down animate-delay-100 animate-duration-slower animate-fill-forwards",
 		"transition-all duration-[400ms] ease-in-out [transition-property:top,background-color,border-bottom-color]",
 	)}
+	data-header-scroll={hideOnScroll ? "" : undefined}
+	data-scroll-threshold={SCROLL_THRESHOLD}
+	data-hide-threshold={HIDE_THRESHOLD}
+	data-drawer-menu-button-box-id={DRAWER_MENU_BUTTON_BOX_ID}
 	{...attrs}
 >
-	<nav 
+	<nav
 		class="container mx-auto px-4 lg:px-12 pr-16 md:pr-4 flex items-center justify-between h-16 lg:h-20 safari-header-nav"
 		aria-label={t("nav.main") || "Main navigation"}
 	>
 		<Logo currentLocale={currentLocale} />
-        
-        
+
 		<div class="header-desktop-nav hidden md:flex md:items-center md:space-x-4">
-			{showSearch && (
-					<SearchButton />
-			)}
+			{showSearch && <SearchButton />}
 			<Menu />
 		</div>
 	</nav>
 </header>
 
-<MobileMenuButton drawerTarget="mobile-drawer" class="header-mobile-menu md:hidden" />
+<MobileMenuButton
+	drawerTarget="mobile-drawer"
+	class="header-mobile-menu md:hidden"
+/>
 
 <!-- Mobile Drawer -->
 <MobileDrawer showSearch={showSearch} />
 
 <style is:global>
-	/* Header states */
-	header {
-		background-color: transparent;
-		transform: translateY(0);
-		-webkit-transform: translateY(0);
-	}
+/* Header states */
+header {
+	background-color: transparent;
+	transform: translateY(0);
+	-webkit-transform: translateY(0);
+}
 
-	header.scrolled {
-		background-color: rgba(246, 245, 242, 0.9);
-		backdrop-filter: blur(16px);
-		-webkit-backdrop-filter: blur(16px);
-		border-bottom: 1px solid rgba(148, 163, 184, 0.45);
-		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-		transition: all 0.3s ease;
-	}
+header.scrolled {
+	background-color: rgba(246, 245, 242, 0.9);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-bottom: 1px solid rgba(148, 163, 184, 0.45);
+	box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+	transition: all 0.3s ease;
+}
 
-	header.scrolled #site-title,
-	header.scrolled nav a,
-	header.scrolled button:not([class*="bg-"]) {
-		color: var(--color-foreground);
-	}
+header.scrolled #site-title,
+header.scrolled nav a,
+header.scrolled button:not([class*="bg-"]) {
+	color: var(--color-foreground);
+}
 
-	.dark header.scrolled {
-		background-color: rgba(17,34,51,0.75);
-		border-bottom: 1px solid rgba(35,53,84,0.3);
-	}
+.dark header.scrolled {
+	background-color: rgba(17, 34, 51, 0.75);
+	border-bottom: 1px solid rgba(35, 53, 84, 0.3);
+}
 
-	.dark header.scrolled #site-title,
-	.dark header.scrolled nav a,
-	.dark header.scrolled button:not([class*="bg-"]) {
-		color: var(--color-foreground);
-	}
+.dark header.scrolled #site-title,
+.dark header.scrolled nav a,
+.dark header.scrolled button:not([class*="bg-"]) {
+	color: var(--color-foreground);
+}
 
-	/* Enhanced blur on hover */
-	header.scrolled:hover {
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-	}
+/* Enhanced blur on hover */
+header.scrolled:hover {
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+}
 
-	header.scrolled nav a:hover {
-		color: var(--color-brand-accent);
-	}
+header.scrolled nav a:hover {
+	color: var(--color-brand-accent);
+}
 
-	header.hide {
-		transform: translateY(-100%) !important;
-		-webkit-transform: translateY(-100%) !important;
-	}
+header.hide {
+	transform: translateY(-100%) !important;
+	-webkit-transform: translateY(-100%) !important;
+}
 
-	/* Search container integration */
-	.search-container {
-		flex: 1;
-		min-width: 200px;
-		max-width: 300px;
-	}
+/* Search container integration */
+.search-container {
+	flex: 1;
+	min-width: 200px;
+	max-width: 300px;
+}
 
-	/* Compact layout for header */
-	nav {
-		gap: 1rem;
-	}
+/* Compact layout for header */
+nav {
+	gap: 1rem;
+}
 
-	/* Safari-specific header navigation fixes */
-	nav.safari-header-nav {
-		display: -webkit-box;
-		display: -webkit-flex;
-		display: flex;
-		-webkit-box-align: center;
-		-webkit-align-items: center;
-		align-items: center;
-		-webkit-box-pack: justify;
-		-webkit-justify-content: space-between;
-		justify-content: space-between;
-	}
+/* Safari-specific header navigation fixes */
+nav.safari-header-nav {
+	display: -webkit-box; /* biome-ignore lint/suspicious/noDuplicateProperties: Safari 6.1–8.0 fallback */
+	display: -webkit-flex; /* biome-ignore lint/suspicious/noDuplicateProperties: Safari 8–15.0 fallback */
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+}
 
-	/* Critical responsive header behavior must not depend only on Tailwind generation.
+/* Critical responsive header behavior must not depend only on Tailwind generation.
 	   Keep explicit CSS here so desktop nav/mobile button always swap correctly in production. */
+.header-desktop-nav {
+	display: none;
+}
+
+:global(.header-mobile-menu.menu-btn-box) {
+	display: flex;
+}
+
+@media (min-width: 768px) {
 	.header-desktop-nav {
-		display: none;
+		display: flex;
+		align-items: center;
 	}
 
 	:global(.header-mobile-menu.menu-btn-box) {
-		display: flex;
+		display: none !important;
+	}
+}
+
+@media (min-width: 1024px) {
+	nav {
+		gap: 2rem;
 	}
 
-	@media (min-width: 768px) {
-		.header-desktop-nav {
-			display: flex;
-			align-items: center;
-		}
-
-		:global(.header-mobile-menu.menu-btn-box) {
-			display: none !important;
-		}
+	.search-container {
+		max-width: 280px;
 	}
+}
 
-	@media (min-width: 1024px) {
-		nav {
-			gap: 2rem;
-		}
-		
-		.search-container {
-			max-width: 280px;
-		}
-	}
+/* Improved focus visibility for accessibility */
+header a:focus-visible,
+header button:focus-visible {
+	outline: 2px solid var(--color-brand-accent);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
 
-	/* Improved focus visibility for accessibility */
-	header a:focus-visible,
-	header button:focus-visible {
-		outline: 2px solid var(--color-brand-accent);
-		outline-offset: 2px;
-		border-radius: 4px;
-	}
-
-	/* Respect user's motion preferences */
-	@media (prefers-reduced-motion: reduce) {
-		header {
-			transition: none !important;
-			animation: none !important;
-		}
-		header.hide {
-			display: none;
-		}
-		.w-10.h-10 {
-			transition: none !important;
-		}
-	}
-
-	/* Ensure proper z-index stacking */
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
 	header {
-		z-index: 50;
+		transition: none !important;
+		animation: none !important;
 	}
+	header.hide {
+		display: none;
+	}
+	.w-10.h-10 {
+		transition: none !important;
+	}
+}
+
+/* Ensure proper z-index stacking */
+header {
+	z-index: 50;
+}
 </style>
 
 <!-- Scroll header behavior: Only load if hideOnScroll is enabled -->
-{hideOnScroll && (
-	<script is:inline define:vars={{ id, SCROLL_THRESHOLD, HIDE_THRESHOLD, DRAWER_MENU_BUTTON_BOX_ID }}>
-	// Optimized header scroll behavior with View Transitions-safe lifecycle
-	(() => {
-		const CLEANUP_KEY = '__mainHeaderScrollCleanup';
-
-		const cleanup = () => {
-			const currentCleanup = window[CLEANUP_KEY];
-			if (typeof currentCleanup === 'function') {
-				currentCleanup();
-				window[CLEANUP_KEY] = undefined;
-			}
-		};
-
-		const initialize = () => {
-			cleanup();
-
-			const header = document.getElementById(id);
-			if (!header) return;
-
-			const mobileMenuButtonBox = document.getElementById(DRAWER_MENU_BUTTON_BOX_ID);
-			const HIDE_CLASS = 'hide';
-			const SCROLLED_CLASS = 'scrolled';
-			const HIDDEN_CLASS = 'is-hidden';
-			const ANIMATION_CLASSES = ['animate-fade-in-down', 'animate-delay-100', 'animate-duration-slower', 'animate-fill-forwards'];
-
-			let lastScrollY = window.scrollY;
-			let ticking = false;
-			let animationCleaned = false;
-			let currentState = '';
-
-			const batchUpdate = (newState, shouldHideButton) => {
-				if (currentState === newState) return;
-				currentState = newState;
-
-				requestAnimationFrame(() => {
-					const classList = header.classList;
-
-					switch (newState) {
-						case 'top':
-							classList.remove(HIDE_CLASS, SCROLLED_CLASS);
-							break;
-						case 'visible':
-							classList.remove(HIDE_CLASS);
-							classList.add(SCROLLED_CLASS);
-							break;
-						case 'hidden':
-							classList.add(HIDE_CLASS, SCROLLED_CLASS);
-							break;
-					}
-
-					if (mobileMenuButtonBox) {
-						mobileMenuButtonBox.classList.toggle(HIDDEN_CLASS, shouldHideButton);
-					}
-				});
-			};
-
-			const cleanupAnimation = () => {
-				if (animationCleaned) return;
-				animationCleaned = true;
-
-				requestAnimationFrame(() => {
-					ANIMATION_CLASSES.forEach((cls) => header.classList.remove(cls));
-				});
-			};
-
-			const updateHeader = () => {
-				const y = window.scrollY;
-				const delta = y - lastScrollY;
-
-				if (!animationCleaned) {
-					cleanupAnimation();
-				}
-
-				let newState;
-				let shouldHideButton;
-
-				if (y <= SCROLL_THRESHOLD) {
-					newState = 'top';
-					shouldHideButton = false;
-				} else if (delta < 0) {
-					newState = 'visible';
-					shouldHideButton = false;
-				} else if (delta > 0 && y > HIDE_THRESHOLD) {
-					newState = 'hidden';
-					shouldHideButton = true;
-				} else {
-					ticking = false;
-					return;
-				}
-
-				batchUpdate(newState, shouldHideButton);
-				lastScrollY = y;
-				ticking = false;
-			};
-
-			const handleScroll = () => {
-				if (!ticking) {
-					ticking = true;
-					requestAnimationFrame(updateHeader);
-				}
-			};
-
-			window.addEventListener('scroll', handleScroll, { passive: true });
-			updateHeader();
-
-			window[CLEANUP_KEY] = () => {
-				window.removeEventListener('scroll', handleScroll);
-			};
-		};
-
-		document.addEventListener('astro:page-load', initialize);
-		document.addEventListener('astro:before-preparation', cleanup);
-	})();
-	</script>
-)}
+{hideOnScroll && <script src="./header-scroll.ts" />}
 
 <!-- Native dialog drawer functionality: Simplified with View Transitions support -->
-<script is:inline define:vars={{ 
-	ariaOpenMenu: t("nav.openMenu") || "Abrir menú",
-	ariaCloseMenu: t("nav.closeMenu") || "Cerrar menú",
-	ariaDrawerOpened: t("nav.drawerOpened") || "Menú abierto",
-	ariaDrawerClosed: t("nav.drawerClosed") || "Menú cerrado"
-}}>
+<script
+	is:inline
+	define:vars={{
+		ariaOpenMenu: t("nav.openMenu") || "Abrir menú",
+		ariaCloseMenu: t("nav.closeMenu") || "Cerrar menú",
+		ariaDrawerOpened: t("nav.drawerOpened") || "Menú abierto",
+		ariaDrawerClosed: t("nav.drawerClosed") || "Menú cerrado",
+	}}
+>
 // Native dialog drawer with View Transitions-safe lifecycle
 (() => {
-	const CLEANUP_KEY = '__mobileDrawerCleanup';
+	const CLEANUP_KEY = "__mobileDrawerCleanup";
 
 	const cleanup = () => {
 		const currentCleanup = window[CLEANUP_KEY];
-		if (typeof currentCleanup === 'function') {
+		if (typeof currentCleanup === "function") {
 			currentCleanup();
 			window[CLEANUP_KEY] = undefined;
 		}
@@ -351,28 +246,28 @@ const t = useTranslations(currentLocale);
 	const initialize = () => {
 		cleanup();
 
-		const mobileMenuButton = document.getElementById('drawer-menu-button');
-		const mobileDrawer = document.getElementById('mobile-drawer');
-		const liveRegion = document.getElementById('drawer-live-region');
+		const mobileMenuButton = document.getElementById("drawer-menu-button");
+		const mobileDrawer = document.getElementById("mobile-drawer");
+		const liveRegion = document.getElementById("drawer-live-region");
 
 		if (!mobileMenuButton || !mobileDrawer) return;
 
-		const DRAWER_CLOSE_SELECTOR = '[data-drawer-close], nav a';
+		const DRAWER_CLOSE_SELECTOR = "[data-drawer-close], nav a";
 		let closeInitiatedByNavLink = false;
 
 		const handleButtonClick = (e) => {
 			e.preventDefault();
-			
+
 			if (mobileDrawer.open) {
 				mobileDrawer.close();
 			} else {
 				mobileDrawer.showModal();
-				
+
 				// Update button state
-				mobileMenuButton.classList.add('active-menu');
-				mobileMenuButton.setAttribute('aria-expanded', 'true');
-				mobileMenuButton.setAttribute('aria-label', ariaCloseMenu);
-				
+				mobileMenuButton.classList.add("active-menu");
+				mobileMenuButton.setAttribute("aria-expanded", "true");
+				mobileMenuButton.setAttribute("aria-label", ariaCloseMenu);
+
 				// Announce to screen readers
 				if (liveRegion) {
 					liveRegion.textContent = ariaDrawerOpened;
@@ -382,20 +277,20 @@ const t = useTranslations(currentLocale);
 
 		const handleClose = () => {
 			// Update button state
-			mobileMenuButton.classList.remove('active-menu');
-			mobileMenuButton.setAttribute('aria-expanded', 'false');
-			mobileMenuButton.setAttribute('aria-label', ariaOpenMenu);
-			
+			mobileMenuButton.classList.remove("active-menu");
+			mobileMenuButton.setAttribute("aria-expanded", "false");
+			mobileMenuButton.setAttribute("aria-label", ariaOpenMenu);
+
 			// Announce to screen readers
 			if (liveRegion) {
 				liveRegion.textContent = ariaDrawerClosed;
 			}
-			
+
 			// Only return focus to button if not a same-page hash link
 			if (!closeInitiatedByNavLink) {
 				mobileMenuButton.focus();
 			}
-			
+
 			// Reset flag
 			closeInitiatedByNavLink = false;
 		};
@@ -408,32 +303,34 @@ const t = useTranslations(currentLocale);
 		};
 
 		// Handle clicks on drawer close elements (nav links, close button)
-		const drawerCloseElements = mobileDrawer.querySelectorAll(DRAWER_CLOSE_SELECTOR);
+		const drawerCloseElements = mobileDrawer.querySelectorAll(
+			DRAWER_CLOSE_SELECTOR,
+		);
 		const drawerCloseHandlers = [];
 		drawerCloseElements.forEach((element) => {
 			const handler = (e) => {
 				// Check if this is a same-page hash link
-				const href = element.getAttribute('href');
-				if (href && href.startsWith('#')) {
+				const href = element.getAttribute("href");
+				if (href && href.startsWith("#")) {
 					closeInitiatedByNavLink = true;
 				}
 				mobileDrawer.close();
 			};
 			drawerCloseHandlers.push({ element, handler });
-			element.addEventListener('click', handler);
+			element.addEventListener("click", handler);
 		});
 
-		mobileMenuButton.addEventListener('click', handleButtonClick);
-		mobileDrawer.addEventListener('close', handleClose);
-		mobileDrawer.addEventListener('click', handleBackdropClick);
+		mobileMenuButton.addEventListener("click", handleButtonClick);
+		mobileDrawer.addEventListener("close", handleClose);
+		mobileDrawer.addEventListener("click", handleBackdropClick);
 
 		window[CLEANUP_KEY] = () => {
-			mobileMenuButton.removeEventListener('click', handleButtonClick);
-			mobileDrawer.removeEventListener('close', handleClose);
-			mobileDrawer.removeEventListener('click', handleBackdropClick);
+			mobileMenuButton.removeEventListener("click", handleButtonClick);
+			mobileDrawer.removeEventListener("close", handleClose);
+			mobileDrawer.removeEventListener("click", handleBackdropClick);
 
 			drawerCloseHandlers.forEach(({ element, handler }) => {
-				element.removeEventListener('click', handler);
+				element.removeEventListener("click", handler);
 			});
 
 			if (mobileDrawer.open) {
@@ -442,7 +339,7 @@ const t = useTranslations(currentLocale);
 		};
 	};
 
-	document.addEventListener('astro:page-load', initialize);
-	document.addEventListener('astro:before-preparation', cleanup);
+	document.addEventListener("astro:page-load", initialize);
+	document.addEventListener("astro:before-preparation", cleanup);
 })();
 </script>

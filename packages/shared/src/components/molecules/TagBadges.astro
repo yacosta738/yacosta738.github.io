@@ -33,15 +33,13 @@ const {
 ---
 
 <div class={cn("flex flex-wrap gap-2", className)} {...attrs}>
-	{
-		tags?.map((tag) => (
-			<TagBadge
-				title={tag.title}
-				slug={tag.slug}
-				lang={lang}
-				variant={variant}
-				size={size}
-			/>
-		))
-	}
+	{tags?.map((tag) => (
+		<TagBadge
+			title={tag.title}
+			slug={tag.slug}
+			lang={lang}
+			variant={variant}
+			size={size}
+		/>
+	))}
 </div>

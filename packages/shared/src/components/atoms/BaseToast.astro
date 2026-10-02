@@ -93,57 +93,64 @@ const variantClasses = getVariantClasses();
 const sizeClasses = getSizeClasses();
 ---
 
-<div 
-  class={cn(
-    "fixed z-50 transform translate-y-full transition-all duration-500 ease-out opacity-0 rounded-xl shadow-2xl",
-    positionClasses,
-    variantClasses,
-    sizeClasses,
-    className
-  )}
-  role="alert"
-  aria-live="polite"
-  data-toast="true"
-  {...attrs}
+<div
+	class={cn(
+		"fixed z-50 transform translate-y-full transition-all duration-500 ease-out opacity-0 rounded-xl shadow-2xl",
+		positionClasses,
+		variantClasses,
+		sizeClasses,
+		className,
+	)}
+	role="alert"
+	aria-live="polite"
+	data-toast="true"
+	{...attrs}
 >
-  
-  <div class="flex items-start">
-    <div class="flex-1">
-      <slot />
-    </div>
-    
-    {showCloseButton && (
-      <button 
-        id={closeButtonId}
-        class={cn(
-          "ml-3 transition-colors shrink-0 p-2 rounded-lg",
-          variant === "glass" 
-            ? "bg-gray-100 dark:bg-gray-800/30 hover:bg-gray-200 dark:hover:bg-gray-700/40 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white" 
-            : variant === "solid"
-            ? "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-            : "text-gray-400 hover:text-gray-200 hover:bg-gray-800/50"
-        )}
-        aria-label={closeButtonLabel}
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-    )}
-  </div>
+	<div class="flex items-start">
+		<div class="flex-1">
+			<slot />
+		</div>
+
+		{showCloseButton && (
+			<button
+				type="button"
+				id={closeButtonId}
+				class={cn(
+					"ml-3 transition-colors shrink-0 p-2 rounded-lg",
+					variant === "glass"
+						? "bg-gray-100 dark:bg-gray-800/30 hover:bg-gray-200 dark:hover:bg-gray-700/40 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white"
+						: variant === "solid"
+							? "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+							: "text-gray-400 hover:text-gray-200 hover:bg-gray-800/50",
+				)}
+				aria-label={closeButtonLabel}
+			>
+				<svg
+					aria-hidden="true"
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M6 18L18 6M6 6l12 12"
+					/>
+				</svg>
+			</button>
+		)}
+	</div>
 </div>
 
 {autoHide && (
-  <script is:inline define:vars={{ autoHideDelay }}>
-    // Auto-hide functionality
-    const toastElement = document.currentScript.previousElementSibling;
-    if (toastElement) {
-      setTimeout(() => {
-        if (toastElement.classList.contains('opacity-100')) {
-          toastElement.classList.remove('translate-y-0', 'opacity-100');
-          toastElement.classList.add('translate-y-full', 'opacity-0');
-        }
-      }, autoHideDelay);
-    }
-  </script>
+	<script is:inline define:vars={{ autoHideDelay }}>
+		const toastElement = document.currentScript.previousElementSibling; if
+		(toastElement) { setTimeout(() => { if
+		(toastElement.classList.contains('opacity-100')) {
+		toastElement.classList.remove('translate-y-0', 'opacity-100');
+		toastElement.classList.add('translate-y-full', 'opacity-0'); } },
+		autoHideDelay); }
+	</script>
 )}

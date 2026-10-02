@@ -62,26 +62,34 @@ const title = t("categories.title");
 				</div>
 			</div>
 		</section>
-		<div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 blog-category-grid">
-			{
-				categories.map((category) => (
-					<article class="group relative rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
-						<a href={translatePath(`/category/${category.slug}/`)} class="block hover:no-underline">
-							<div class="flex items-center gap-3">
-								<div class="flex-1">
-									<h3 class="text-lg font-medium text-foreground dark:text-foreground-dark">{category.title}</h3>
-									{/* category.description not present in Category model; omit description */}
-								</div>
-								<div aria-hidden="true">
-									<Badge size="sm" class="text-xs font-medium bg-brand-accent text-white px-3 py-1">
-										{String(categoryCounts.get(category.slug) ?? 0)}
-									</Badge>
-								</div>
+		<div
+			class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 blog-category-grid"
+		>
+			{categories.map((category) => (
+				<article class="group relative rounded-lg border border-border bg-card p-4 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
+					<a
+						href={translatePath(`/category/${category.slug}/`)}
+						class="block hover:no-underline"
+					>
+						<div class="flex items-center gap-3">
+							<div class="flex-1">
+								<h3 class="text-lg font-medium text-foreground dark:text-foreground-dark">
+									{category.title}
+								</h3>
+								{/* category.description not present in Category model; omit description */}
 							</div>
-						</a>
-					</article>
-				))
-			}
+							<div aria-hidden="true">
+								<Badge
+									size="sm"
+									class="text-xs font-medium bg-brand-accent text-white px-3 py-1"
+								>
+									{String(categoryCounts.get(category.slug) ?? 0)}
+								</Badge>
+							</div>
+						</div>
+					</a>
+				</article>
+			))}
 		</div>
 	</div>
 	<Footer />

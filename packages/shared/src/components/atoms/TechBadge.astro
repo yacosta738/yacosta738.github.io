@@ -29,9 +29,11 @@ const {
 } = Astro.props;
 ---
 
-<Badge size={size} class={`inline-flex items-center gap-1.5 ${className}`} {...attrs}>
-	{icon && (
-		<Icon name={icon} class="size-3" aria-hidden="true" />
-	)}
+<Badge
+	size={size}
+	class={`inline-flex items-center gap-1.5 ${className}`}
+	{...attrs}
+>
+	{icon && <Icon name={icon} class="size-3" aria-hidden="true" />}
 	<span>{name}</span>
 </Badge>

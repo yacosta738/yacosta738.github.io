@@ -8,14 +8,12 @@
 import { AHREFS_KEY } from "astro:env/client";
 ---
 
-{
-	AHREFS_KEY && (
-		<script
-			type="text/partytown"
-			is:inline
-			src="https://analytics.ahrefs.com/analytics.js"
-			data-key={AHREFS_KEY}
-			async
-		/>
-	)
-}
+{AHREFS_KEY && (
+	<script
+		type="text/partytown"
+		is:inline
+		src="https://analytics.ahrefs.com/analytics.js"
+		data-key={AHREFS_KEY}
+		async
+	/>
+)}

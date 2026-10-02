@@ -12,14 +12,14 @@ const { name, email, avatar, bio, location, socials } = author;
 ---
 
 <div class={cn("author-hero", attrs.class)} {...attrs}>
-    <div class="author-hero__content">
-        <AuthorCard
-            name={name}
-            email={email}
-            avatar={avatar}
-            location={location}
-            socials={socials}
-        />
-        <p class="author-hero__bio">{bio}</p>
-    </div>
+	<div class="author-hero__content">
+		<AuthorCard
+			name={name}
+			email={email}
+			avatar={avatar}
+			location={location}
+			socials={socials}
+		/>
+		<p class="author-hero__bio">{bio}</p>
+	</div>
 </div>

@@ -18,7 +18,10 @@ const t = useTranslations(currentLocale);
 ---
 
 <div
-	class={cn("flex flex-col items-center gap-4 my-8 blog-post-header", attrs.class)}
+	class={cn(
+		"flex flex-col items-center gap-4 my-8 blog-post-header",
+		attrs.class,
+	)}
 	{...attrs}
 >
 	<h1

@@ -65,75 +65,90 @@ const safeHref = typeof href === "string" ? href : undefined;
 const shouldShowLink = showLink && safeHref;
 ---
 
-<div class="group relative rounded-lg border border-border bg-card p-3 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark">
-  {shouldShowLink ? (
-    <a 
-      href={safeHref} 
-      class="block hover:no-underline"
-    >
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 flex-1">
-          <span class="text-lg flex items-center" aria-hidden="true">
-            <Icon name={config.icon} class="w-5 h-5 text-foreground-muted dark:text-foreground-muted" aria-hidden="true" />
-          </span>
-          <div class="flex-1">
-            <h3 class="text-sm font-medium text-foreground dark:text-foreground-dark">
-              {language.language}
-            </h3>
-            <div class="flex items-center gap-2 mt-1">
-               <Badge size="sm" class="text-xs font-medium">
-                {language.fluency}
-              </Badge>
-              
-              <div class="flex gap-1" aria-label={`Language level: ${config.level} out of 5`}>
-                {Array.from({ length: 5 }, (_, i) => (
-                  <div
-                    class={`w-1.5 h-1.5 rounded-full ${
-                      i < config.level
-                        ? 'bg-brand-accent' // semantic primary accent
-                        : 'bg-gray-300 dark:bg-gray-600'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </a>
-  ) : (
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-2 flex-1">
-        <span class="text-lg flex items-center" aria-hidden="true">
-          <Icon name={config.icon} class="w-5 h-5 text-foreground-muted dark:text-foreground-muted" aria-hidden="true" />
-        </span>
-        <div class="flex-1">
-          <h3 class="text-sm font-medium text-foreground dark:text-foreground-dark">
-            {language.language}
-          </h3>
-          <div class="flex items-center gap-2 mt-1">
-            <Badge
-              variant={config.variant}
-              size="sm"
-              class={`text-xs ${badgeOverride}`}
-            >
-              {language.fluency}
-            </Badge>
-            
-            <div class="flex gap-1" aria-label={t('languageLevel', { level: String(config.level) })}>
-              {Array.from({ length: 5 }, (_, i) => (
-                <div
-                  class={`w-1.5 h-1.5 rounded-full ${
-                    i < config.level
-                      ? 'bg-brand-accent'
-                      : 'bg-gray-300 dark:bg-gray-600'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )}
+<div
+	class="group relative rounded-lg border border-border bg-card p-3 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark"
+>
+	{shouldShowLink ? (
+		<a href={safeHref} class="block hover:no-underline">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center gap-2 flex-1">
+					<span class="text-lg flex items-center" aria-hidden="true">
+						<Icon
+							name={config.icon}
+							class="w-5 h-5 text-foreground-muted dark:text-foreground-muted"
+							aria-hidden="true"
+						/>
+					</span>
+					<div class="flex-1">
+						<h3 class="text-sm font-medium text-foreground dark:text-foreground-dark">
+							{language.language}
+						</h3>
+						<div class="flex items-center gap-2 mt-1">
+							<Badge size="sm" class="text-xs font-medium">
+								{language.fluency}
+							</Badge>
+
+							<div
+								class="flex gap-1"
+								role="img"
+								aria-label={`Language level: ${config.level} out of 5`}
+							>
+								{Array.from({ length: 5 }, (_, i) => (
+									<div
+										class={`w-1.5 h-1.5 rounded-full ${
+											i < config.level
+												? "bg-brand-accent" // semantic primary accent
+												: "bg-gray-300 dark:bg-gray-600"
+										}`}
+									/>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	) : (
+		<div class="flex items-center justify-between">
+			<div class="flex items-center gap-2 flex-1">
+				<span class="text-lg flex items-center" aria-hidden="true">
+					<Icon
+						name={config.icon}
+						class="w-5 h-5 text-foreground-muted dark:text-foreground-muted"
+						aria-hidden="true"
+					/>
+				</span>
+				<div class="flex-1">
+					<h3 class="text-sm font-medium text-foreground dark:text-foreground-dark">
+						{language.language}
+					</h3>
+					<div class="flex items-center gap-2 mt-1">
+						<Badge
+							variant={config.variant}
+							size="sm"
+							class={`text-xs ${badgeOverride}`}
+						>
+							{language.fluency}
+						</Badge>
+
+						<div
+							class="flex gap-1"
+							role="img"
+							aria-label={t("languageLevel", { level: String(config.level) })}
+						>
+							{Array.from({ length: 5 }, (_, i) => (
+								<div
+									class={`w-1.5 h-1.5 rounded-full ${
+										i < config.level
+											? "bg-brand-accent"
+											: "bg-gray-300 dark:bg-gray-600"
+									}`}
+								/>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	)}
 </div>

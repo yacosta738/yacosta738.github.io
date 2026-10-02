@@ -38,36 +38,37 @@ const translated = (
 ---
 
 {featuredProjects.length > 0 && (
-  <Section title={translated('featuredProjects', {}, 'Some Things I\'ve Built')} id="projects">
-    <ul class="featured-projects-grid">
-      {
-        featuredProjects.map((project, i) => {
-          const isOdd = i % 2 === 1;
-          
-          return (
-            <FeaturedProjectCard
-              project={project}
-              isOdd={isOdd}
-              lang={currentLocale}
-              isFirst={i === 0}
-            />
-          )
-        })
-      }
-    </ul>
-  </Section>
+	<Section
+		title={translated("featuredProjects", {}, "Some Things I've Built")}
+		id="projects"
+	>
+		<ul class="featured-projects-grid">
+			{featuredProjects.map((project, i) => {
+				const isOdd = i % 2 === 1;
+
+				return (
+					<FeaturedProjectCard
+						project={project}
+						isOdd={isOdd}
+						lang={currentLocale}
+						isFirst={i === 0}
+					/>
+				);
+			})}
+		</ul>
+	</Section>
 )}
 
 <style>
-  /* Featured Projects Grid */
-  .featured-projects-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+/* Featured Projects Grid */
+.featured-projects-grid {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
 
-  .featured-projects-grid a {
-    position: relative;
-    z-index: 1;
-  }
+.featured-projects-grid a {
+	position: relative;
+	z-index: 1;
+}
 </style>

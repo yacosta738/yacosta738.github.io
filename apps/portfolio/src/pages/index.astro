@@ -54,20 +54,23 @@ const personJsonLd = buildPersonJsonLd(
 ---
 
 <Layout title={title}>
-	<script is:inline slot="head" type="application/ld+json" set:html={safeJsonLd(personJsonLd)} />
+	<script
+		is:inline
+		slot="head"
+		type="application/ld+json"
+		set:html={safeJsonLd(personJsonLd)}
+	/>
 	<div class="portfolio-content">
 		<Hero basics={resume.basics} />
 		<About basics={resume.basics} skills={resume.skills} />
 		<Experience work={resume.work} />
 
-		{
-			resume.projects && resume.projects.length > 0 && (
-				<>
-					<FeaturedProjects projects={resume.projects} />
-					<AllProjects projects={resume.projects} />
-				</>
-			)
-		}
+		{resume.projects && resume.projects.length > 0 && (
+			<>
+				<FeaturedProjects projects={resume.projects} />
+				<AllProjects projects={resume.projects} />
+			</>
+		)}
 
 		<Education education={resume.education} />
 		{resume.skills && resume.skills.length > 0 && (
@@ -116,29 +119,29 @@ const personJsonLd = buildPersonJsonLd(
 </Layout>
 
 <style>
+.portfolio-content {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 50px;
+	width: 100%;
+}
+
+@media (width <= 1200px) {
 	.portfolio-content {
-		max-width: 1100px;
-		margin: 0 auto;
+		max-width: 1000px;
+		padding: 0 80px;
+	}
+}
+
+@media (width <= 900px) {
+	.portfolio-content {
 		padding: 0 50px;
-		width: 100%;
 	}
+}
 
-	@media (width <= 1200px) {
-		.portfolio-content {
-			max-width: 1000px;
-			padding: 0 80px;
-		}
+@media (width <= 700px) {
+	.portfolio-content {
+		padding: 0 25px;
 	}
-
-	@media (width <= 900px) {
-		.portfolio-content {
-			padding: 0 50px;
-		}
-	}
-
-	@media (width <= 700px) {
-		.portfolio-content {
-			padding: 0 25px;
-		}
-	}
+}
 </style>

@@ -43,280 +43,303 @@ const translated = (
 ---
 
 {otherProjects.length > 0 && (
-  <section class="projects-section flex flex-col items-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
-      {translated('otherNoteworthyProjects', {}, 'Other Noteworthy Projects')}
-    </h2>
-    <a href={translatePath('/projects/')} class="archive-link inline-flex items-center min-h-6 px-2 py-1 rounded-sm hover:underline mb-12 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none">
-      {translated('viewArchive', {}, 'View the Archive')}
-    </a>
+	<section class="projects-section flex flex-col items-center">
+		<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
+			{translated("otherNoteworthyProjects", {}, "Other Noteworthy Projects")}
+		</h2>
+		<a
+			href={translatePath("/projects/")}
+			class="archive-link inline-flex items-center min-h-6 px-2 py-1 rounded-sm hover:underline mb-12 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+		>
+			{translated("viewArchive", {}, "View the Archive")}
+		</a>
 
-    <ul 
-      class="projects-grid grid grid-cols-1 md:grid-cols-4 gap-4 w-full mb-12 max-w-7xl"
-      id="projects-grid"
-    >
-      {
-        initialProjects.map((project, i) => {
-          const isWide = i % 4 === 0 || i % 4 === 3;
-          const bentoClasses = isWide ? "md:col-span-2" : "md:col-span-1";
-          return (
-          <li class={`project-item opacity-0 ${bentoClasses}`} data-project-item>
-            <EnhancedProjectCard
-              name={project.name}
-              description={project.description}
-              tech={project.metadata?.tech || []}
-              url={project.metadata?.url || project.url}
-              github={project.metadata?.repository || project.github}
-              isActive={project.isActive}
-              class="h-full"
-            />
-          </li>
-          );
-        })
-      }
+		<ul
+			class="projects-grid grid grid-cols-1 md:grid-cols-4 gap-4 w-full mb-12 max-w-7xl"
+			id="projects-grid"
+		>
+			{initialProjects.map((project, i) => {
+				const isWide = i % 4 === 0 || i % 4 === 3;
+				const bentoClasses = isWide ? "md:col-span-2" : "md:col-span-1";
+				return (
+					<li
+						class={`project-item opacity-0 ${bentoClasses}`}
+						data-project-item
+					>
+						<EnhancedProjectCard
+							name={project.name}
+							description={project.description}
+							tech={project.metadata?.tech || []}
+							url={project.metadata?.url || project.url}
+							github={project.metadata?.repository || project.github}
+							isActive={project.isActive}
+							class="h-full"
+						/>
+					</li>
+				);
+			})}
 
-      {hasMoreProjects && (
-        <template id="additional-projects">
-          {
-            otherProjects.slice(limit).map((project, index) => {
-              const i = index + limit;
-              const isWide = i % 4 === 0 || i % 4 === 3;
-              const bentoClasses = isWide ? "md:col-span-2" : "md:col-span-1";
-              return (
-              <li class={`project-item hidden opacity-0 ${bentoClasses}`} data-additional-project data-project-item>
-                <EnhancedProjectCard
-                  name={project.name}
-                  description={project.description}
-                  tech={project.metadata?.tech || []}
-                  url={project.metadata?.url || project.url}
-                  github={project.metadata?.repository || project.github}
-                  isActive={project.isActive}
-                  class="h-full"
-                />
-              </li>
-            );
-          })
-          }
-        </template>
-      )}
-    </ul>
+			{hasMoreProjects && (
+				<template id="additional-projects">
+					{otherProjects.slice(limit).map((project, index) => {
+						const i = index + limit;
+						const isWide = i % 4 === 0 || i % 4 === 3;
+						const bentoClasses = isWide ? "md:col-span-2" : "md:col-span-1";
+						return (
+							<li
+								class={`project-item hidden opacity-0 ${bentoClasses}`}
+								data-additional-project
+								data-project-item
+							>
+								<EnhancedProjectCard
+									name={project.name}
+									description={project.description}
+									tech={project.metadata?.tech || []}
+									url={project.metadata?.url || project.url}
+									github={project.metadata?.repository || project.github}
+									isActive={project.isActive}
+									class="h-full"
+								/>
+							</li>
+						);
+					})}
+				</template>
+			)}
+		</ul>
 
-    {hasMoreProjects && (
-      <button
-        id="toggle-projects-btn"
-        class="more-button ui-button ui-button--outline ui-button--lg uppercase tracking-wide flex items-center justify-center gap-2"
-        data-show-text={translated('showMore', {}, 'Show More')}
-        data-hide-text={translated('showLess', {}, 'Show Less')}
-        aria-expanded="false"
-      >
-        <span id="toggle-btn-text">{translated('showMore', {}, 'Show More')}</span>
-        <span id="toggle-btn-spinner" class="hidden w-4 h-4 border-2 border-brand-accent border-t-transparent rounded-full animate-spin"></span>
-      </button>
-    )}
-  </section>
+		{hasMoreProjects && (
+			<button
+				type="button"
+				id="toggle-projects-btn"
+				class="more-button ui-button ui-button--outline ui-button--lg uppercase tracking-wide flex items-center justify-center gap-2"
+				data-show-text={translated("showMore", {}, "Show More")}
+				data-hide-text={translated("showLess", {}, "Show Less")}
+				aria-expanded="false"
+			>
+				<span id="toggle-btn-text">
+					{translated("showMore", {}, "Show More")}
+				</span>
+				<span
+					id="toggle-btn-spinner"
+					class="hidden w-4 h-4 border-2 border-brand-accent border-t-transparent rounded-full animate-spin"
+				/>
+			</button>
+		)}
+	</section>
 )}
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const toggleBtn = document.getElementById('toggle-projects-btn');
-    const btnText = document.getElementById('toggle-btn-text');
-    const btnSpinner = document.getElementById('toggle-btn-spinner');
-    const projectsGrid = document.getElementById('projects-grid');
-    const projectItems = document.querySelectorAll('[data-project-item]');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.addEventListener("astro:page-load", () => {
+	const toggleBtn = document.getElementById("toggle-projects-btn");
+	const btnText = document.getElementById("toggle-btn-text");
+	const btnSpinner = document.getElementById("toggle-btn-spinner");
+	const projectsGrid = document.getElementById("projects-grid");
+	const projectItems = document.querySelectorAll("[data-project-item]");
+	const prefersReducedMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
 
-    if (!prefersReducedMotion) {
-      projectItems.forEach((item, index) => {
-        setTimeout(() => {
-          (item as HTMLElement).style.animation = `fadeInUp 0.6s ease-out ${index * 100}ms both`;
-          (item as HTMLElement).classList.remove('opacity-0');
-        }, index * 100);
-      });
-    } else {
-      projectItems.forEach((item) => {
-        (item as HTMLElement).classList.remove('opacity-0');
-      });
-    }
+	if (!prefersReducedMotion) {
+		projectItems.forEach((item, index) => {
+			setTimeout(() => {
+				(item as HTMLElement).style.animation =
+					`fadeInUp 0.6s ease-out ${index * 100}ms both`;
+				(item as HTMLElement).classList.remove("opacity-0");
+			}, index * 100);
+		});
+	} else {
+		projectItems.forEach((item) => {
+			(item as HTMLElement).classList.remove("opacity-0");
+		});
+	}
 
-    if (toggleBtn && projectsGrid && btnText && btnSpinner) {
-      let isExpanded = false;
-      let isLoading = false;
+	if (toggleBtn && projectsGrid && btnText && btnSpinner) {
+		let isExpanded = false;
+		let isLoading = false;
 
-      const updateButtonVisibility = () => {
-        const additionalProjects = projectsGrid.querySelectorAll('[data-additional-project]');
-        const allProjectsShown = Array.from(additionalProjects).every(
-          (project) => !project.classList.contains('hidden')
-        );
+		const updateButtonVisibility = () => {
+			const additionalProjects = projectsGrid.querySelectorAll(
+				"[data-additional-project]",
+			);
+			const allProjectsShown = Array.from(additionalProjects).every(
+				(project) => !project.classList.contains("hidden"),
+			);
 
-        // Hide button if all projects are shown
-        if (allProjectsShown) {
-          toggleBtn.style.display = 'none';
-        } else {
-          toggleBtn.style.display = '';
-        }
-      };
+			// Hide button if all projects are shown
+			if (allProjectsShown) {
+				toggleBtn.style.display = "none";
+			} else {
+				toggleBtn.style.display = "";
+			}
+		};
 
-      toggleBtn.addEventListener('click', () => {
-        if (isLoading) return;
-        isLoading = true;
-        btnSpinner.classList.remove('hidden');
-        btnText.classList.add('opacity-50');
-        toggleBtn.setAttribute('aria-busy', 'true');
+		toggleBtn.addEventListener("click", () => {
+			if (isLoading) return;
+			isLoading = true;
+			btnSpinner.classList.remove("hidden");
+			btnText.classList.add("opacity-50");
+			toggleBtn.setAttribute("aria-busy", "true");
 
-        setTimeout(() => {
-          const additionalProjects = projectsGrid.querySelectorAll('[data-additional-project]');
-          const showText = toggleBtn.getAttribute('data-show-text') || 'Show More';
-          const hideText = toggleBtn.getAttribute('data-hide-text') || 'Show Less';
+			setTimeout(() => {
+				const additionalProjects = projectsGrid.querySelectorAll(
+					"[data-additional-project]",
+				);
+				const showText =
+					toggleBtn.getAttribute("data-show-text") || "Show More";
+				const hideText =
+					toggleBtn.getAttribute("data-hide-text") || "Show Less";
 
-          if (!isExpanded) {
-            additionalProjects.forEach((project, index) => {
-              const element = project as HTMLElement;
-              element.classList.remove('hidden');
-              if (!prefersReducedMotion) {
-                setTimeout(() => {
-                  element.style.animation = `fadeInUp 0.6s ease-out ${index * 100}ms both`;
-                  element.classList.remove('opacity-0');
-                }, index * 50);
-              } else {
-                element.classList.remove('opacity-0');
-              }
-            });
-            btnText.textContent = hideText;
-            isExpanded = true;
-            updateButtonVisibility();
-          } else {
-            additionalProjects.forEach((project) => {
-              const element = project as HTMLElement;
-              if (!prefersReducedMotion) {
-                element.style.animation = 'fadeOutDown 0.3s ease-in both';
-                setTimeout(() => {
-                  element.classList.add('hidden', 'opacity-0');
-                  element.style.animation = '';
-                }, 300);
-              } else {
-                element.classList.add('hidden', 'opacity-0');
-              }
-            });
-            btnText.textContent = showText;
-            isExpanded = false;
-            updateButtonVisibility();
-          }
-          btnSpinner.classList.add('hidden');
-          btnText.classList.remove('opacity-50');
-          toggleBtn.removeAttribute('aria-busy');
-          isLoading = false;
-        }, 500); // Simulate loading
-      });
+				if (!isExpanded) {
+					additionalProjects.forEach((project, index) => {
+						const element = project as HTMLElement;
+						element.classList.remove("hidden");
+						if (!prefersReducedMotion) {
+							setTimeout(() => {
+								element.style.animation = `fadeInUp 0.6s ease-out ${index * 100}ms both`;
+								element.classList.remove("opacity-0");
+							}, index * 50);
+						} else {
+							element.classList.remove("opacity-0");
+						}
+					});
+					btnText.textContent = hideText;
+					isExpanded = true;
+					updateButtonVisibility();
+				} else {
+					additionalProjects.forEach((project) => {
+						const element = project as HTMLElement;
+						if (!prefersReducedMotion) {
+							element.style.animation = "fadeOutDown 0.3s ease-in both";
+							setTimeout(() => {
+								element.classList.add("hidden", "opacity-0");
+								element.style.animation = "";
+							}, 300);
+						} else {
+							element.classList.add("hidden", "opacity-0");
+						}
+					});
+					btnText.textContent = showText;
+					isExpanded = false;
+					updateButtonVisibility();
+				}
+				btnSpinner.classList.add("hidden");
+				btnText.classList.remove("opacity-50");
+				toggleBtn.removeAttribute("aria-busy");
+				isLoading = false;
+			}, 500); // Simulate loading
+		});
 
-      // Update visibility on load
-      updateButtonVisibility();
-    }
-  });
+		// Update visibility on load
+		updateButtonVisibility();
+	}
+});
 </script>
 
 <style>
-  .projects-section {
-    --transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
+.projects-section {
+	--transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
 
-  /* Archive link - WCAG AA compliant contrast */
-  .archive-link {
-    color: #047857; /* emerald-700 - 5.5:1 contrast on white */
-    transition: color 0.2s ease;
-  }
+/* Archive link - WCAG AA compliant contrast */
+.archive-link {
+	color: #047857; /* emerald-700 - 5.5:1 contrast on white */
+	transition: color 0.2s ease;
+}
 
-  .archive-link:hover,
-  .archive-link:focus {
-    color: #065f46; /* emerald-800 - even higher contrast on hover */
-  }
+.archive-link:hover,
+.archive-link:focus {
+	color: #065f46; /* emerald-800 - even higher contrast on hover */
+}
 
-  .dark .archive-link {
-    color: #9fffe7; /* brighter cyan with stronger contrast on dark backgrounds */
-  }
+.dark .archive-link {
+	color: #9fffe7; /* brighter cyan with stronger contrast on dark backgrounds */
+}
 
-  .dark .archive-link:hover,
-  .dark .archive-link:focus {
-    color: #c2fff1; /* lighter cyan on hover/focus */
-  }
+.dark .archive-link:hover,
+.dark .archive-link:focus {
+	color: #c2fff1; /* lighter cyan on hover/focus */
+}
 
-  .projects-grid {
-    position: relative;
-  }
+.projects-grid {
+	position: relative;
+}
 
-  @media (max-width: 1080px) {
-    /* Removed custom grid overrides to respect tailwind bento */
-  }
+@media (max-width: 1080px) {
+	/* Removed custom grid overrides to respect tailwind bento */
+}
 
-  .more-button {
-    font-family: var(--font-mono, 'Courier New', monospace);
-    letter-spacing: 0.05em;
-    transition: all 0.25s var(--transition-timing);
-  }
+.more-button {
+	font-family: var(--font-mono, "Courier New", monospace);
+	letter-spacing: 0.05em;
+	transition: all 0.25s var(--transition-timing);
+}
 
-  .more-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px -15px rgba(var(--primary-rgb, 100 116 139), 0.4);
-  }
+.more-button:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 10px 30px -15px rgba(var(--primary-rgb, 100 116 139), 0.4);
+}
 
-  .archive-link::after {
-    bottom: 0.1em;
-  }
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 30px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
+.archive-link::after {
+	bottom: 0.1em;
+}
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 30px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
 
-  @keyframes fadeOutDown {
-    from {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      opacity: 0;
-      transform: translate3d(0, 20px, 0);
-    }
-  }
+@keyframes fadeOutDown {
+	from {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+	to {
+		opacity: 0;
+		transform: translate3d(0, 20px, 0);
+	}
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    .more-button:hover {
-      transform: none;
-    }
-    
-    .project-item {
-      animation: none !important;
-    }
-    
-    @keyframes fadeInUp {
-      from, to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-    
-    @keyframes fadeOutDown {
-      from, to {
-        opacity: 0;
-        transform: none;
-      }
-    }
-  }
-  .more-button:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-  .projects-grid {
-    grid-gap: 15px;
-  }
+@media (prefers-reduced-motion: reduce) {
+	.more-button:hover {
+		transform: none;
+	}
 
-  @media (min-width: 768px) {
-    .projects-grid {
-      grid-gap: 20px;
-    }
-  }
+	.project-item {
+		animation: none !important;
+	}
+
+	@keyframes fadeInUp {
+		from,
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes fadeOutDown {
+		from,
+		to {
+			opacity: 0;
+			transform: none;
+		}
+	}
+}
+.more-button:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+.projects-grid {
+	grid-gap: 15px;
+}
+
+@media (min-width: 768px) {
+	.projects-grid {
+		grid-gap: 20px;
+	}
+}
 </style>

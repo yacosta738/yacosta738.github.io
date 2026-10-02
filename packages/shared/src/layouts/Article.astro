@@ -159,21 +159,27 @@ const breadcrumbJsonLd = {
 		tags={tags.map((tag) => tag.title)}
 		minutesRead={minutesRead}
 	/>
-	<div class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28">
+	<div
+		class="container mx-auto px-4 lg:px-12 flex flex-col lg:flex-row gap-8 py-28"
+	>
 		<article class="flex-1 lg:basis-3/4" data-pagefind-body>
 			<slot />
-			
+
 			<!-- Comments Section (if enabled) -->
 			{enableComments && slug && (
-				<Comments 
-					slug={slug} 
+				<Comments
+					slug={slug}
 					locale={Astro.currentLocale as Lang}
 					class="mt-12"
 					data-pagefind-ignore
 				/>
 			)}
 		</article>
-		<aside class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start" aria-label={t("article.sidebar")} data-pagefind-ignore>
+		<aside
+			class="w-full lg:w-80 lg:sticky lg:top-8 lg:self-start"
+			aria-label={t("article.sidebar")}
+			data-pagefind-ignore
+		>
 			<WidgetWrapper />
 		</aside>
 	</div>
@@ -181,6 +187,14 @@ const breadcrumbJsonLd = {
 	<ToTopButton />
 
 	<!-- BlogPosting + BreadcrumbList JSON-LD -->
-	<script slot="head" type="application/ld+json" set:html={safeJsonLd(blogPostingJsonLd)} />
-	<script slot="head" type="application/ld+json" set:html={safeJsonLd(breadcrumbJsonLd)} />
+	<script
+		slot="head"
+		type="application/ld+json"
+		set:html={safeJsonLd(blogPostingJsonLd)}
+	/>
+	<script
+		slot="head"
+		type="application/ld+json"
+		set:html={safeJsonLd(breadcrumbJsonLd)}
+	/>
 </BaseLayout>

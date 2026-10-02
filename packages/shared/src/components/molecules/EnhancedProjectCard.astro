@@ -74,7 +74,9 @@ const skillMap = new Map(
 				<div class="folder text-primary flex-shrink-0">
 					<Icon name="lucide:folder" class="w-8 h-8" aria-hidden="true" />
 				</div>
-				<div class="project-links flex items-center gap-1 -mr-1 text-muted-foreground">
+				<div
+					class="project-links flex items-center gap-1 -mr-1 text-muted-foreground"
+				>
 					{github && (
 						<Link
 							href={github}
@@ -96,14 +98,18 @@ const skillMap = new Map(
 							aria-label={`Visit ${name} project`}
 							title="External Link"
 						>
-							<Icon name="lucide:external-link" class="w-5 h-5" aria-hidden="true" />
+							<Icon
+								name="lucide:external-link"
+								class="w-5 h-5"
+								aria-hidden="true"
+							/>
 						</Link>
 					)}
 				</div>
 			</div>
 
-			<Typography 
-				as="h3" 
+			<Typography
+				as="h3"
 				class="project-title mb-2 font-semibold text-foreground text-base leading-tight relative"
 			>
 				{url ? (
@@ -120,16 +126,16 @@ const skillMap = new Map(
 				)}
 				{isActive && (
 					<span class="ml-2 inline-flex items-center">
-						<span 
-							aria-hidden="true" 
+						<span
+							aria-hidden="true"
 							class="w-2 h-2 rounded-full bg-brand-accent motion-safe:animate-pulse"
-						></span>
+						/>
 						<span class="sr-only">Active Project</span>
 					</span>
 				)}
 			</Typography>
 
-			<div 
+			<div
 				class="project-description text-muted-foreground text-sm leading-relaxed mb-4"
 				set:html={description}
 			/>
@@ -140,13 +146,13 @@ const skillMap = new Map(
 				{tech.slice(0, 6).map((techName) => {
 					const matchedSkill = skillMap.get(techName.toLowerCase());
 					return (
-						<Badge
-							size="sm"
-							class="text-xs font-medium"
-							variant="primary"
-						>
+						<Badge size="sm" class="text-xs font-medium" variant="primary">
 							{matchedSkill?.icon && (
-								<Icon name={matchedSkill.icon} class="mr-1" aria-hidden="true" />
+								<Icon
+									name={matchedSkill.icon}
+									class="mr-1"
+									aria-hidden="true"
+								/>
 							)}
 							{techName}
 						</Badge>
@@ -163,65 +169,65 @@ const skillMap = new Map(
 </article>
 
 <style>
-	/* Scoped styles to prevent global header interference */
-	.project-card-header {
-		/* Reset any global header styles that might leak in */
-		padding: 0;
-		background-color: transparent;
-		filter: none;
-		backdrop-filter: none;
-		user-select: auto;
-		pointer-events: auto;
+/* Scoped styles to prevent global header interference */
+.project-card-header {
+	/* Reset any global header styles that might leak in */
+	padding: 0;
+	background-color: transparent;
+	filter: none;
+	backdrop-filter: none;
+	user-select: auto;
+	pointer-events: auto;
+	transition: none;
+}
+
+.project-links a {
+	position: relative;
+	z-index: 1;
+}
+
+.project-title a {
+	position: static;
+}
+
+.project-title a:before {
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.tech-item {
+	font-family: var(--font-mono, "Courier New", monospace);
+	line-height: 1.2;
+	white-space: nowrap;
+	font-size: 11px;
+}
+
+.project-description {
+	line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.group {
 		transition: none;
 	}
 
+	.group:hover,
+	.group:focus-within {
+		transform: none;
+	}
+
 	.project-links a {
-		position: relative;
-		z-index: 1;
-	}
-
-	.project-title a {
-		position: static;
-	}
-
-	.project-title a:before {
-		content: '';
-		display: block;
-		position: absolute;
-		z-index: 0;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
+		transition: none;
 	}
 
 	.tech-item {
-		font-family: var(--font-mono, 'Courier New', monospace);
-		line-height: 1.2;
-		white-space: nowrap;
-		font-size: 11px;
+		transition: none;
 	}
-
-	.project-description {
-		line-height: 1.4;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.group {
-			transition: none;
-		}
-
-		.group:hover,
-		.group:focus-within {
-			transform: none;
-		}
-
-		.project-links a {
-			transition: none;
-		}
-
-		.tech-item {
-			transition: none;
-		}
-	}
+}
 </style>

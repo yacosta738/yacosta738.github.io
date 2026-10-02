@@ -21,26 +21,26 @@ const { certificates, locale } = Astro.props;
 ---
 
 <div class="certificate-timeline">
-  {certificates.map((certificate) => (
-    <TimelineItem
-      startDate={certificate.date}
-      endDate={null}
-      locale={locale}
-      showDates={true}
-      variant="default"
-    >
-      <CertificateHeader
-        name={certificate.name}
-        issuer={certificate.issuer}
-        url={certificate.url}
-      />
-    </TimelineItem>
-  ))}
+	{certificates.map((certificate) => (
+		<TimelineItem
+			startDate={certificate.date}
+			endDate={null}
+			locale={locale}
+			showDates={true}
+			variant="default"
+		>
+			<CertificateHeader
+				name={certificate.name}
+				issuer={certificate.issuer}
+				url={certificate.url}
+			/>
+		</TimelineItem>
+	))}
 </div>
 
 <style>
-  .certificate-timeline {
-    position: relative;
-    margin-top: 10px;
-  }
+.certificate-timeline {
+	position: relative;
+	margin-top: 10px;
+}
 </style>

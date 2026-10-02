@@ -13,16 +13,16 @@ const t = useTranslations(currentLocale);
 ---
 
 <span
-class={
-	cn(
+	class={cn(
 		"text-secondary-foreground-light dark:text-secondary-foreground-dark font-inter text-[9px] leading-[140%] tracking-widest uppercase rounded gap-1",
-		attrs.class
-	)
-}
-aria-label={t("post.date.aria", { date: new Intl.DateTimeFormat(currentLocale, { day: "numeric", month: "long" }).format(date) })}
-{...attrs}
+		attrs.class,
+	)}
+	{...attrs}
 >
-<time datetime={date.toISOString()}>
-	{new Intl.DateTimeFormat(currentLocale, { day: "numeric", month: "long" }).format(date)}, {date.getFullYear()}
-</time>
+	<time datetime={date.toISOString()}>
+		{new Intl.DateTimeFormat(currentLocale, {
+			day: "numeric",
+			month: "long",
+		}).format(date)}, {date.getFullYear()}
+	</time>
 </span>

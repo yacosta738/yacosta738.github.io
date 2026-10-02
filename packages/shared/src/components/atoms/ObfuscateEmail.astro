@@ -18,166 +18,169 @@ const obfuscatedEmail = email
 	: null;
 ---
 
-<obfuscate-email
-    data-email={obfuscatedEmail}
-    class={cn(className)}
->
-    <button aria-label={t("copy.email.address")} type="button" id="email-copy-btn">
-        <Icon name="lucide:mail" class="size-5" />
-    </button>
-    <div popover="manual" id="email-tooltip" role="tooltip">
-        {t("email.copied")}
-    </div>
+<obfuscate-email data-email={obfuscatedEmail} class={cn(className)}>
+	<button
+		aria-label={t("copy.email.address")}
+		type="button"
+		id="email-copy-btn"
+	>
+		<Icon name="lucide:mail" class="size-5" />
+	</button>
+	<div popover="manual" id="email-tooltip" role="tooltip">
+		{t("email.copied")}
+	</div>
 </obfuscate-email>
 
 <style>
-    obfuscate-email {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        cursor: pointer;
-        color: var(--color-foreground);
-        transition: opacity 0.2s ease-in-out;
-    }
+obfuscate-email {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	color: var(--color-foreground);
+	transition: opacity 0.2s ease-in-out;
+}
 
-    obfuscate-email:hover {
-        color: var(--color-brand-accent);
-    }
+obfuscate-email:hover {
+	color: var(--color-brand-accent);
+}
 
-    :global(.dark) obfuscate-email {
-        color: var(--color-foreground-muted);
-    }
+:global(.dark) obfuscate-email {
+	color: var(--color-foreground-muted);
+}
 
-    :global(.dark) obfuscate-email:hover {
-        color: var(--color-brand-accent);
-    }
+:global(.dark) obfuscate-email:hover {
+	color: var(--color-brand-accent);
+}
 
-    obfuscate-email button {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        color: inherit;
-        padding: 0.25rem 0;
-        margin: 0;
-        display: inline-flex;
-        align-items: center;
-        transition: color 0.2s ease-in-out;
-        vertical-align: baseline;
-        line-height: 1;
-    }
+obfuscate-email button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: inherit;
+	padding: 0.25rem 0;
+	margin: 0;
+	display: inline-flex;
+	align-items: center;
+	transition: color 0.2s ease-in-out;
+	vertical-align: baseline;
+	line-height: 1;
+}
 
-    /* Popover tooltip styles */
-    obfuscate-email [popover] {
-        /* Reset default popover styles */
-        margin: 0;
-        border: none;
-        padding: 0.35rem 0.6rem;
-        
-        /* Custom styling */
-        background-color: var(--color-brand-accent);
-        color: var(--color-bg-primary);
-        font-weight: 600;
-        font-size: 0.75rem;
-        border-radius: 0.35rem;
-        white-space: nowrap;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        
-        /* Anchor positioning */
-        position-anchor: --email-btn;
-        top: anchor(top);
-        left: anchor(center);
-        translate: -50% calc(-100% - 0.5rem);
-        
-        /* Animations */
-        opacity: 0;
-        transition: 
-            opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-            translate 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-            overlay 0.3s cubic-bezier(0.4, 0, 0.2, 1) allow-discrete,
-            display 0.3s cubic-bezier(0.4, 0, 0.2, 1) allow-discrete;
-    }
-    
-    obfuscate-email [popover]:popover-open {
-        opacity: 1;
-    }
-    
-    @starting-style {
-        obfuscate-email [popover]:popover-open {
-            opacity: 0;
-            translate: -50% calc(-100% - 0.25rem);
-        }
-    }
-    
-    /* Anchor name for positioning */
-    obfuscate-email button {
-        anchor-name: --email-btn;
-    }
+/* Popover tooltip styles */
+obfuscate-email [popover] {
+	/* Reset default popover styles */
+	margin: 0;
+	border: none;
+	padding: 0.35rem 0.6rem;
+
+	/* Custom styling */
+	background-color: var(--color-brand-accent);
+	color: var(--color-bg-primary);
+	font-weight: 600;
+	font-size: 0.75rem;
+	border-radius: 0.35rem;
+	white-space: nowrap;
+	box-shadow:
+		0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+	/* Anchor positioning */
+	position-anchor: --email-btn;
+	top: anchor(top);
+	left: anchor(center);
+	translate: -50% calc(-100% - 0.5rem);
+
+	/* Animations */
+	opacity: 0;
+	transition:
+		opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		translate 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		overlay 0.3s cubic-bezier(0.4, 0, 0.2, 1) allow-discrete,
+		display 0.3s cubic-bezier(0.4, 0, 0.2, 1) allow-discrete;
+}
+
+obfuscate-email [popover]:popover-open {
+	opacity: 1;
+}
+
+@starting-style {
+	obfuscate-email [popover]:popover-open {
+		opacity: 0;
+		translate: -50% calc(-100% - 0.25rem);
+	}
+}
+
+/* Anchor name for positioning */
+obfuscate-email button {
+	anchor-name: --email-btn;
+}
 </style>
 
 <script>
-    class ObfuscateEmail extends HTMLElement {
-        private hideTimeoutId: number | null = null;
+class ObfuscateEmail extends HTMLElement {
+	private hideTimeoutId: number | null = null;
 
-        connectedCallback() {
-            const button = this.querySelector("button");
-            const tooltip = this.querySelector("[popover]") as HTMLElement;
+	connectedCallback() {
+		const button = this.querySelector("button");
+		const tooltip = this.querySelector("[popover]") as HTMLElement;
 
-            if (!button || !tooltip) return;
+		if (!button || !tooltip) return;
 
-            const decodeBase64 = (base64String: string): string => {
-                try {
-                    const binaryString = window.atob(base64String);
-                    const bytes = new Uint8Array(binaryString.length);
-                    for (let i = 0; i < binaryString.length; i++) {
-                        bytes[i] = binaryString.charCodeAt(i);
-                    }
-                    return new TextDecoder().decode(bytes);
-                } catch (e) {
-                    console.error("Failed to decode base64 string:", e);
-                    return "";
-                }
-            };
+		const decodeBase64 = (base64String: string): string => {
+			try {
+				const binaryString = window.atob(base64String);
+				const bytes = new Uint8Array(binaryString.length);
+				for (let i = 0; i < binaryString.length; i++) {
+					bytes[i] = binaryString.charCodeAt(i);
+				}
+				return new TextDecoder().decode(bytes);
+			} catch (e) {
+				console.error("Failed to decode base64 string:", e);
+				return "";
+			}
+		};
 
-            button.addEventListener("click", async () => {
-                const obfuscatedEmail = this.getAttribute("data-email") || "";
-                const decodedEmail = decodeBase64(obfuscatedEmail);
-                const originalEmail = decodedEmail.split("").reverse().join("");
+		button.addEventListener("click", async () => {
+			const obfuscatedEmail = this.getAttribute("data-email") || "";
+			const decodedEmail = decodeBase64(obfuscatedEmail);
+			const originalEmail = decodedEmail.split("").reverse().join("");
 
-                try {
-                    await navigator.clipboard.writeText(originalEmail);
-                    
-                    // Clear any existing hide timer
-                    if (this.hideTimeoutId !== null) {
-                        clearTimeout(this.hideTimeoutId);
-                        this.hideTimeoutId = null;
-                    }
-                    
-                    // Show popover tooltip
-                    if ('showPopover' in tooltip) {
-                        tooltip.showPopover();
-                        this.hideTimeoutId = window.setTimeout(() => {
-                            tooltip.hidePopover();
-                            this.hideTimeoutId = null;
-                        }, 2000);
-                    } else {
-                        // Fallback for browsers without Popover API
-                        tooltip.style.display = 'block';
-                        tooltip.style.opacity = '1';
-                        this.hideTimeoutId = window.setTimeout(() => {
-                            tooltip.style.opacity = '0';
-                            setTimeout(() => {
-                                tooltip.style.display = 'none';
-                            }, 300); // Wait for opacity transition
-                            this.hideTimeoutId = null;
-                        }, 2000);
-                    }
-                } catch (err) {
-                    console.error("Failed to copy email:", err);
-                }
-            });
-        }
-    }
-    if (!customElements.get("obfuscate-email")) {
-        customElements.define("obfuscate-email", ObfuscateEmail);
-    }
+			try {
+				await navigator.clipboard.writeText(originalEmail);
+
+				// Clear any existing hide timer
+				if (this.hideTimeoutId !== null) {
+					clearTimeout(this.hideTimeoutId);
+					this.hideTimeoutId = null;
+				}
+
+				// Show popover tooltip
+				if ("showPopover" in tooltip) {
+					tooltip.showPopover();
+					this.hideTimeoutId = window.setTimeout(() => {
+						tooltip.hidePopover();
+						this.hideTimeoutId = null;
+					}, 2000);
+				} else {
+					// Fallback for browsers without Popover API
+					tooltip.style.display = "block";
+					tooltip.style.opacity = "1";
+					this.hideTimeoutId = window.setTimeout(() => {
+						tooltip.style.opacity = "0";
+						setTimeout(() => {
+							tooltip.style.display = "none";
+						}, 300); // Wait for opacity transition
+						this.hideTimeoutId = null;
+					}, 2000);
+				}
+			} catch (err) {
+				console.error("Failed to copy email:", err);
+			}
+		});
+	}
+}
+if (!customElements.get("obfuscate-email")) {
+	customElements.define("obfuscate-email", ObfuscateEmail);
+}
 </script>

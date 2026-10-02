@@ -26,166 +26,172 @@ const obfuscatedEmail = email
 	: null;
 ---
 
-<Side show={true} orientation="right" class="hidden lg:block animate-fade-in-right animate-delay-800 animate-duration-slower">
-  <div class={cn("email-side flex flex-col items-center relative", className)} {...(attrs as HTMLAttributes<"div">)}>
-    <obfuscate-side-email data-email={obfuscatedEmail}>
-        <button
-          type="button"
-          class="my-5 px-2.5 py-2 font-mono text-xs tracking-widest transition-transform duration-150 hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-foreground focus:text-foreground"
-          style="writing-mode: vertical-rl;"
-          aria-label={t("copy.email.address")}
-          id="side-email-btn"
-        >
-        </button>
-        <div popover="manual" id="side-email-tooltip" role="tooltip">
-            {t("email.copied")}
-        </div>
-    </obfuscate-side-email>
-    <span
-      class="block w-px mx-auto"
-      style="height: 90px; background-color: var(--color-slate);"
-      aria-hidden="true"
-    ></span>
-  </div>
+<Side
+	show={true}
+	orientation="right"
+	class="hidden lg:block animate-fade-in-right animate-delay-800 animate-duration-slower"
+>
+	<div
+		class={cn("email-side flex flex-col items-center relative", className)}
+		{...attrs as HTMLAttributes<"div">}
+	>
+		<obfuscate-side-email data-email={obfuscatedEmail}>
+			<button
+				type="button"
+				class="my-5 px-2.5 py-2 font-mono text-xs tracking-widest transition-transform duration-150 hover:-translate-y-1 focus:-translate-y-1 text-foreground-muted hover:text-foreground focus:text-foreground"
+				style="writing-mode: vertical-rl;"
+				aria-label={t("copy.email.address")}
+				id="side-email-btn"
+			></button>
+			<div popover="manual" id="side-email-tooltip" role="tooltip">
+				{t("email.copied")}
+			</div>
+		</obfuscate-side-email>
+		<span
+			class="block w-px mx-auto"
+			style="height: 90px; background-color: var(--color-slate);"
+			aria-hidden="true"
+		></span>
+	</div>
 </Side>
 
 <style>
-    obfuscate-side-email {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        cursor: pointer;
-    }
+obfuscate-side-email {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+}
 
-    obfuscate-side-email button {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        /* color is inherited from parent div's class */
-        padding: 0;
-        margin: 0;
-        display: inline-flex;
-        align-items: center;
-    }
+obfuscate-side-email button {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	/* color is inherited from parent div's class */
+	padding: 0;
+	margin: 0;
+	display: inline-flex;
+	align-items: center;
+}
 
-    /* Popover tooltip styles */
-    obfuscate-side-email [popover] {
-        /* Reset default popover styles */
-        margin: 0;
-        border: none;
-        padding: 0.25rem 0.5rem;
-        
-        /* Custom styling */
-        background-color: rgb(31 41 55);
-        color: white;
-        font-size: 0.75rem;
-        border-radius: 0.25rem;
-        white-space: nowrap;
-        
-        /* Anchor positioning */
-        position-anchor: --side-email-btn;
-        top: anchor(center);
-        right: anchor(left);
-        translate: calc(-100% - 1rem) -50%;
-        
-        /* Animations */
-        opacity: 0;
-        transition: 
-            opacity 0.2s ease-in-out,
-            translate 0.2s ease-in-out,
-            overlay 0.2s ease-in-out allow-discrete,
-            display 0.2s ease-in-out allow-discrete;
-    }
-    
-    obfuscate-side-email [popover]:popover-open {
-        opacity: 1;
-    }
-    
-    @starting-style {
-        obfuscate-side-email [popover]:popover-open {
-            opacity: 0;
-        }
-    }
-    
-    /* Anchor name for positioning */
-    obfuscate-side-email button {
-        anchor-name: --side-email-btn;
-    }
+/* Popover tooltip styles */
+obfuscate-side-email [popover] {
+	/* Reset default popover styles */
+	margin: 0;
+	border: none;
+	padding: 0.25rem 0.5rem;
+
+	/* Custom styling */
+	background-color: rgb(31 41 55);
+	color: white;
+	font-size: 0.75rem;
+	border-radius: 0.25rem;
+	white-space: nowrap;
+
+	/* Anchor positioning */
+	position-anchor: --side-email-btn;
+	top: anchor(center);
+	right: anchor(left);
+	translate: calc(-100% - 1rem) -50%;
+
+	/* Animations */
+	opacity: 0;
+	transition:
+		opacity 0.2s ease-in-out,
+		translate 0.2s ease-in-out,
+		overlay 0.2s ease-in-out allow-discrete,
+		display 0.2s ease-in-out allow-discrete;
+}
+
+obfuscate-side-email [popover]:popover-open {
+	opacity: 1;
+}
+
+@starting-style {
+	obfuscate-side-email [popover]:popover-open {
+		opacity: 0;
+	}
+}
+
+/* Anchor name for positioning */
+obfuscate-side-email button {
+	anchor-name: --side-email-btn;
+}
 </style>
 
 <script>
-    class ObfuscateSideEmail extends HTMLElement {
-        private hideTimeoutId: number | null = null;
+class ObfuscateSideEmail extends HTMLElement {
+	private hideTimeoutId: number | null = null;
 
-        connectedCallback() {
-            const button = this.querySelector("button");
-            const tooltip = this.querySelector("[popover]") as HTMLElement;
+	connectedCallback() {
+		const button = this.querySelector("button");
+		const tooltip = this.querySelector("[popover]") as HTMLElement;
 
-            if (!button || !tooltip) return;
+		if (!button || !tooltip) return;
 
-            const decodeBase64 = (base64String: string): string => {
-                try {
-                    // Use client-side decoding
-                    const binaryString = window.atob(base64String);
-                    // The rest of the decoding logic is to handle UTF-8 characters correctly,
-                    // though for an email it's less likely to be an issue.
-                    const bytes = new Uint8Array(binaryString.length);
-                    for (let i = 0; i < binaryString.length; i++) {
-                        bytes[i] = binaryString.charCodeAt(i);
-                    }
-                    return new TextDecoder().decode(bytes);
-                } catch (e) {
-                    console.error("Failed to decode base64 string:", e);
-                    return "";
-                }
-            };
+		const decodeBase64 = (base64String: string): string => {
+			try {
+				// Use client-side decoding
+				const binaryString = window.atob(base64String);
+				// The rest of the decoding logic is to handle UTF-8 characters correctly,
+				// though for an email it's less likely to be an issue.
+				const bytes = new Uint8Array(binaryString.length);
+				for (let i = 0; i < binaryString.length; i++) {
+					bytes[i] = binaryString.charCodeAt(i);
+				}
+				return new TextDecoder().decode(bytes);
+			} catch (e) {
+				console.error("Failed to decode base64 string:", e);
+				return "";
+			}
+		};
 
-            const obfuscatedEmail = this.getAttribute("data-email") || "";
-            const decodedEmail = decodeBase64(obfuscatedEmail);
-            const originalEmail = decodedEmail.split("").reverse().join("");
+		const obfuscatedEmail = this.getAttribute("data-email") || "";
+		const decodedEmail = decodeBase64(obfuscatedEmail);
+		const originalEmail = decodedEmail.split("").reverse().join("");
 
-            if (originalEmail) {
-                button.textContent = originalEmail;
-            }
+		if (originalEmail) {
+			button.textContent = originalEmail;
+		}
 
-            button.addEventListener("click", async () => {
-                if (!originalEmail) return;
+		button.addEventListener("click", async () => {
+			if (!originalEmail) return;
 
-                try {
-                    await navigator.clipboard.writeText(originalEmail);
-                    
-                    // Clear any existing hide timer
-                    if (this.hideTimeoutId !== null) {
-                        clearTimeout(this.hideTimeoutId);
-                        this.hideTimeoutId = null;
-                    }
-                    
-                    // Show popover tooltip
-                    if ('showPopover' in tooltip) {
-                        tooltip.showPopover();
-                        this.hideTimeoutId = window.setTimeout(() => {
-                            tooltip.hidePopover();
-                            this.hideTimeoutId = null;
-                        }, 2000);
-                    } else {
-                        // Fallback for browsers without Popover API
-                        tooltip.style.display = 'block';
-                        tooltip.style.opacity = '1';
-                        this.hideTimeoutId = window.setTimeout(() => {
-                            tooltip.style.opacity = '0';
-                            setTimeout(() => {
-                                tooltip.style.display = 'none';
-                            }, 200); // Wait for opacity transition
-                            this.hideTimeoutId = null;
-                        }, 2000);
-                    }
-                } catch (err) {
-                    console.error("Failed to copy email:", err);
-                }
-            });
-        }
-    }
-    if (!customElements.get("obfuscate-side-email")) {
-        customElements.define("obfuscate-side-email", ObfuscateSideEmail);
-    }
+			try {
+				await navigator.clipboard.writeText(originalEmail);
+
+				// Clear any existing hide timer
+				if (this.hideTimeoutId !== null) {
+					clearTimeout(this.hideTimeoutId);
+					this.hideTimeoutId = null;
+				}
+
+				// Show popover tooltip
+				if ("showPopover" in tooltip) {
+					tooltip.showPopover();
+					this.hideTimeoutId = window.setTimeout(() => {
+						tooltip.hidePopover();
+						this.hideTimeoutId = null;
+					}, 2000);
+				} else {
+					// Fallback for browsers without Popover API
+					tooltip.style.display = "block";
+					tooltip.style.opacity = "1";
+					this.hideTimeoutId = window.setTimeout(() => {
+						tooltip.style.opacity = "0";
+						setTimeout(() => {
+							tooltip.style.display = "none";
+						}, 200); // Wait for opacity transition
+						this.hideTimeoutId = null;
+					}, 2000);
+				}
+			} catch (err) {
+				console.error("Failed to copy email:", err);
+			}
+		});
+	}
+}
+if (!customElements.get("obfuscate-side-email")) {
+	customElements.define("obfuscate-side-email", ObfuscateSideEmail);
+}
 </script>

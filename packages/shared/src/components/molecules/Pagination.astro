@@ -48,66 +48,60 @@ function getPageUrl(pageNumber: number): string {
 ---
 
 <nav
-  class="mt-8 flex items-center justify-center gap-x-1"
-  aria-label="Pagination"
-  {...attrs}
+	class="mt-8 flex items-center justify-center gap-x-1"
+	aria-label="Pagination"
+	{...attrs}
 >
-  {
-    urlPrev ? (
-      <a
-        href={urlPrev}
-        aria-label="Previous page"
-        data-test="pagination-prev"
-        class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-      >
-        <Icon name="tabler:chevron-left" class="icon-base" />
-      </a>
-    ) : (
-      <span
-        aria-disabled="true"
-        class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-400 cursor-not-allowed"
-      >
-        <Icon name="tabler:chevron-left" class="icon-base" />
-      </span>
-    )
-  }
-  <ul class="flex items-center gap-x-1">
-    {
-      Array.from({ length: endPage - startPage + 1 }, (_, i) => {
-        const pageNumber = startPage + i;
-        const isActive = currentPage === pageNumber;
-        const pageClass = `min-h-[38px] min-w-[38px] flex justify-center items-center py-2 px-3 text-sm rounded-lg ${isActive ? "bg-neutral-200 focus:bg-neutral-300 dark:bg-neutral-600 dark:focus:bg-neutral-500 dark:text-white" : "text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"}`;
-        return (
-          <li>
-            <a
-              href={getPageUrl(pageNumber)}
-              class={pageClass}
-              aria-current={isActive ? "page" : undefined}
-            >
-              {pageNumber}
-            </a>
-          </li>
-        );
-      })
-    }
-  </ul>
-  {
-    urlNext ? (
-      <a
-        href={urlNext}
-        aria-label="Next page"
-        data-test="pagination-next"
-        class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-      >
-        <Icon name="tabler:chevron-right" class="icon-base" />
-      </a>
-    ) : (
-      <span
-        aria-disabled="true"
-        class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-400 cursor-not-allowed"
-      >
-        <Icon name="tabler:chevron-right" class="icon-base" />
-      </span>
-    )
-  }
+	{urlPrev ? (
+		<a
+			href={urlPrev}
+			aria-label="Previous page"
+			data-test="pagination-prev"
+			class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-hidden dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+		>
+			<Icon name="tabler:chevron-left" class="icon-base" />
+		</a>
+	) : (
+		<span
+			aria-disabled="true"
+			class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-400 cursor-not-allowed"
+		>
+			<Icon name="tabler:chevron-left" class="icon-base" />
+		</span>
+	)}
+	<ul class="flex items-center gap-x-1">
+		{Array.from({ length: endPage - startPage + 1 }, (_, i) => {
+			const pageNumber = startPage + i;
+			const isActive = currentPage === pageNumber;
+			const pageClass = `min-h-[38px] min-w-[38px] flex justify-center items-center py-2 px-3 text-sm rounded-lg ${isActive ? "bg-neutral-200 focus:bg-neutral-300 dark:bg-neutral-600 dark:focus:bg-neutral-500 dark:text-white" : "text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"}`;
+			return (
+				<li>
+					<a
+						href={getPageUrl(pageNumber)}
+						class={pageClass}
+						aria-current={isActive ? "page" : undefined}
+					>
+						{pageNumber}
+					</a>
+				</li>
+			);
+		})}
+	</ul>
+	{urlNext ? (
+		<a
+			href={urlNext}
+			aria-label="Next page"
+			data-test="pagination-next"
+			class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-800 hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+		>
+			<Icon name="tabler:chevron-right" class="icon-base" />
+		</a>
+	) : (
+		<span
+			aria-disabled="true"
+			class="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-1.5 rounded-lg px-2.5 py-2 text-sm text-neutral-400 cursor-not-allowed"
+		>
+			<Icon name="tabler:chevron-right" class="icon-base" />
+		</span>
+	)}
 </nav>

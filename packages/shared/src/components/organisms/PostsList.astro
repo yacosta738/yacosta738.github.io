@@ -45,89 +45,71 @@ switch (orderBy) {
 ---
 
 <div>
-  {title && (
-    <h2 class="mx-auto py-10 font-inter text-foreground text-[14px] font-semibold capitalize mb-8 leading-5 tracking-tight">
-      {title}
-    </h2>
-  )}
+	{title && (
+		<h2 class="mx-auto py-10 font-inter text-foreground text-[14px] font-semibold capitalize mb-8 leading-5 tracking-tight">
+			{title}
+		</h2>
+	)}
 
-  {hasPosts ? (
-    <div id="posts-container" class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-10 overflow-hidden">
-      {orderedPosts.map((post, index) => (
-        <div class={index >= postsPerPage ? "hidden-post" : ""}>
-          <PostCard
-            {...post}
-            animationDelay={index < postsPerPage ? index : 0}
-          />
-        </div>
-      ))}
-    </div>
-  ) : (
-    <div class="text-center py-16">
-      <p class="text-foreground-muted text-lg">
-        {t("no.posts.available")}
-      </p>
-    </div>
-  )}
+	{hasPosts ? (
+		<div
+			id="posts-container"
+			class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-10 overflow-hidden"
+		>
+			{orderedPosts.map((post, index) => (
+				<div class={index >= postsPerPage ? "hidden-post" : ""}>
+					<PostCard
+						{...post}
+						animationDelay={index < postsPerPage ? index : 0}
+					/>
+				</div>
+			))}
+		</div>
+	) : (
+		<div class="text-center py-16">
+			<p class="text-foreground-muted text-lg">{t("no.posts.available")}</p>
+		</div>
+	)}
 
-  {hasPosts && showLoadMore && hasMorePosts && (
-    <div id="load-more-container" class="flex justify-center mt-12">
-      <Button
-        id="load-more-button"
-        aria-label={t("load.more")}
-        tabindex="0"
-        variant="primary"
-        size="md">
-        {t("load.more")}
-      </Button>
-    </div>
-  )}
+	{hasPosts && showLoadMore && hasMorePosts && (
+		<div id="load-more-container" class="flex justify-center mt-12">
+			<Button
+				id="load-more-button"
+				aria-label={t("load.more")}
+				tabindex="0"
+				variant="primary"
+				size="md"
+			>
+				{t("load.more")}
+			</Button>
+		</div>
+	)}
 </div>
 
 {hasPosts && showLoadMore && hasMorePosts && (
-  <script is:inline>
-    const initLoadMorePosts = () => {
-      const loadMoreButton = document.getElementById('load-more-button');
-      const loadMoreContainer = document.getElementById('load-more-container');
-      const hiddenPosts = Array.from(document.querySelectorAll('.hidden-post'));
-      const postsPerBatch = 6;
-
-      if (loadMoreButton?.dataset.boundLoadMore === 'true') {
-        return;
-      }
-
-      if (loadMoreButton && hiddenPosts.length > 0) {
-        loadMoreButton.dataset.boundLoadMore = 'true';
-        loadMoreButton.addEventListener('click', () => {
-          const postsToShow = hiddenPosts.slice(0, postsPerBatch);
-
-          if (postsToShow.length > 0) {
-            postsToShow.forEach((postContainer, index) => {
-              postContainer.classList.remove('hidden-post');
-
-              const article = postContainer.querySelector('article');
-              if (article) {
-                article.classList.add('post-card-animation');
-                article.style.setProperty('--i', index.toString());
-              }
-
-              hiddenPosts.splice(0, 1);
-            });
-
-            if (hiddenPosts.length === 0 && loadMoreContainer) {
-              loadMoreContainer.style.display = 'none';
-            }
-          }
-        });
-      }
-    };
-
-    document.addEventListener('astro:page-load', initLoadMorePosts);
-  </script>
+	<script is:inline>
+		const initLoadMorePosts = () => { const loadMoreButton =
+		document.getElementById('load-more-button'); const loadMoreContainer =
+		document.getElementById('load-more-container'); const hiddenPosts =
+		Array.from(document.querySelectorAll('.hidden-post')); const postsPerBatch =
+		6; if (loadMoreButton?.dataset.boundLoadMore === 'true') { return; } if
+		(loadMoreButton && hiddenPosts.length > 0) {
+		loadMoreButton.dataset.boundLoadMore = 'true';
+		loadMoreButton.addEventListener('click', () => { const postsToShow =
+		hiddenPosts.slice(0, postsPerBatch); if (postsToShow.length > 0) {
+		postsToShow.forEach((postContainer, index) => {
+		postContainer.classList.remove('hidden-post'); const article =
+		postContainer.querySelector('article'); if (article) {
+		article.classList.add('post-card-animation');
+		article.style.setProperty('--i', index.toString()); } hiddenPosts.splice(0,
+		1); }); if (hiddenPosts.length === 0 && loadMoreContainer) {
+		loadMoreContainer.style.display = 'none'; } } }); } };
+		document.addEventListener('astro:page-load', initLoadMorePosts);
+	</script>
 )}
 <style>
-  /* Hide posts that should not be initially visible */
-  .hidden-post {
-    display: none;
-  }
+/* Hide posts that should not be initially visible */
+.hidden-post {
+	display: none;
+}
 </style>

@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 
 <Layout title={t("search.title")} description={t("search.description")}>
 	<div class="container mx-auto px-4 blog-shell">
-		<link href={pagefindCssHref} rel="stylesheet" />
+		<link href={pagefindCssHref} rel="stylesheet">
 		<script is:inline src={pagefindJsSrc}></script>
 
 		<section
@@ -35,256 +35,252 @@ export async function getStaticPaths() {
 					</p>
 				</div>
 
-			<div
-				id="search"
-				class="w-full"
-				role="region"
-				aria-label={t("search.results.label")}
+				<div
+					id="search"
+					class="w-full"
 					data-empty-title={t("search.empty.title")}
 					data-empty-message-template={t("search.empty.message", {
 						query: "__QUERY__",
 					})}
-				>
-				</div>
+				></div>
 			</div>
 		</section>
 	</div>
 </Layout>
 
 <script>
-	const CLEANUP_KEY = "__searchPageCleanup";
-	const HANDLERS_KEY = "__searchPageHandlers";
-	const cleanupStore = window as typeof window &
-		Record<string, (() => void) | undefined>;
-	const handlerStore = window as typeof window &
-		Record<
-			string,
-			| {
-					pageLoad?: () => void;
-					beforePreparation?: () => void;
-				}
-			| undefined
-		>;
+const CLEANUP_KEY = "__searchPageCleanup";
+const HANDLERS_KEY = "__searchPageHandlers";
+const cleanupStore = window as typeof window &
+	Record<string, (() => void) | undefined>;
+const handlerStore = window as typeof window &
+	Record<
+		string,
+		| {
+				pageLoad?: () => void;
+				beforePreparation?: () => void;
+		  }
+		| undefined
+	>;
 
-	const cleanupSearchPage = () => {
-		const currentCleanup = cleanupStore[CLEANUP_KEY];
-		if (typeof currentCleanup === "function") {
-			currentCleanup();
-			cleanupStore[CLEANUP_KEY] = undefined;
-		}
+const cleanupSearchPage = () => {
+	const currentCleanup = cleanupStore[CLEANUP_KEY];
+	if (typeof currentCleanup === "function") {
+		currentCleanup();
+		cleanupStore[CLEANUP_KEY] = undefined;
+	}
 
-		const handlers = handlerStore[HANDLERS_KEY];
-		if (handlers?.pageLoad) {
-			document.removeEventListener("astro:page-load", handlers.pageLoad);
-		}
-		if (handlers?.beforePreparation) {
-			document.removeEventListener(
-				"astro:before-preparation",
-				handlers.beforePreparation,
-			);
-		}
-		handlerStore[HANDLERS_KEY] = undefined;
-	};
+	const handlers = handlerStore[HANDLERS_KEY];
+	if (handlers?.pageLoad) {
+		document.removeEventListener("astro:page-load", handlers.pageLoad);
+	}
+	if (handlers?.beforePreparation) {
+		document.removeEventListener(
+			"astro:before-preparation",
+			handlers.beforePreparation,
+		);
+	}
+	handlerStore[HANDLERS_KEY] = undefined;
+};
 
-	const initSearchPage = async () => {
-		const PagefindUI = (window as any).PagefindUI;
-		if (typeof PagefindUI !== "function") {
-			console.warn(
-				"PagefindUI is not available. Make sure /pagefind/pagefind-ui.js is served.",
-			);
-			return;
-		}
+const initSearchPage = async () => {
+	const PagefindUI = (window as any).PagefindUI;
+	if (typeof PagefindUI !== "function") {
+		console.warn(
+			"PagefindUI is not available. Make sure /pagefind/pagefind-ui.js is served.",
+		);
+		return;
+	}
 
-		const pf = new PagefindUI({
-			element: "#search",
-			showSubResults: true,
-			autofocus: true,
-		});
+	const pf = new PagefindUI({
+		element: "#search",
+		showSubResults: true,
+		autofocus: true,
+	});
 
-		setTimeout(() => {
-			if (typeof pf?.relayout === "function") pf.relayout();
-			const el = document.querySelector(".pagefind-ui");
-			const input = el?.querySelector<HTMLInputElement>(`input[type="text"]`);
-			if (input) input.focus({ preventScroll: true });
-		}, 50);
-
+	setTimeout(() => {
+		if (typeof pf?.relayout === "function") pf.relayout();
 		const el = document.querySelector(".pagefind-ui");
 		const input = el?.querySelector<HTMLInputElement>(`input[type="text"]`);
-		const clearButton = el?.querySelector(".pagefind-ui__search-clear");
+		if (input) input.focus({ preventScroll: true });
+	}, 50);
 
-		const searchContainer = document.getElementById("search");
-		const emptyTitle = searchContainer?.dataset.emptyTitle || "No results";
-		const emptyMessageTemplate =
-			searchContainer?.dataset.emptyMessageTemplate ||
-			'No results found for "__QUERY__".';
+	const el = document.querySelector(".pagefind-ui");
+	const input = el?.querySelector<HTMLInputElement>(`input[type="text"]`);
+	const clearButton = el?.querySelector(".pagefind-ui__search-clear");
 
-		let resultsObserver: MutationObserver | null = null;
-		let intervalId: number | null = null;
+	const searchContainer = document.getElementById("search");
+	const emptyTitle = searchContainer?.dataset.emptyTitle || "No results";
+	const emptyMessageTemplate =
+		searchContainer?.dataset.emptyMessageTemplate ||
+		'No results found for "__QUERY__".';
 
-		const ensureEmptyNode = () => {
-			let node = document.querySelector(".pf-empty");
-			if (!node) {
-				node = document.createElement("div");
-				node.className = "pf-empty";
-				(searchContainer || document.body).appendChild(node);
-			}
-			return node;
-		};
+	let resultsObserver: MutationObserver | null = null;
+	let intervalId: number | null = null;
 
-			const resultsRoot = () =>
-				document.querySelector(".pagefind-ui__results") ||
-				document.querySelector(".pagefind-ui__results-list");
-
-			const renderEmptyState = (node: Element, query: string) => {
-				const title = document.createElement("h3");
-				title.style.fontWeight = "700";
-				title.textContent = emptyTitle;
-
-				const message = document.createElement("p");
-			message.textContent = emptyMessageTemplate.replace("__QUERY__", query);
-
-				node.replaceChildren(title, message);
-			};
-
-			const enhanceResults = async () => {
-				const results = Array.from(
-					document.querySelectorAll(".pagefind-ui__result"),
-				) as HTMLElement[];
-				document
-					.querySelectorAll(".pf-top-result")
-					.forEach((el) => el.classList.remove("pf-top-result"));
-
-				if (results.length === 0) {
-					const node = ensureEmptyNode();
-					const q = new URL(window.location.href).searchParams.get("q") || "";
-					renderEmptyState(node, q);
-					return;
-				} else {
-					const node = document.querySelector(".pf-empty");
-					if (node) node.remove();
-				}
-
-				const first = results[0];
-				if (first) first.classList.add("pf-top-result");
-
-				results.forEach(async (r) => {
-					if (r.querySelector(".pf-badge")) return;
-					const link = r.querySelector("a[href]") as HTMLAnchorElement | null;
-					const meta = document.createElement("div");
-					meta.className = "meta";
-
-					let type = "Page";
-					try {
-						if (link) {
-							const href = link.getAttribute("href") || "";
-							const stripLocalePrefix = (path: string) =>
-								path.replace(/^\/[a-z]{2}(?:-[a-z]{2})?(?=\/)/i, "");
-							const normalizedHref = stripLocalePrefix(href);
-							const postPattern =
-								/^\/(?!tag\/|category\/|author\/|search\/|projects\/|page\/)([^/]+)(\/|$)/i;
-							if (postPattern.test(normalizedHref)) type = "Post";
-							else if (/\bproject\b|\/projects\//i.test(href)) type = "Project";
-							else if (/\/about\b|contact/i.test(href)) type = "Page";
-						}
-					} catch (e) {
-						/* ignore */
-					}
-
-					const badge = document.createElement("span");
-					badge.className = "pf-badge";
-					badge.textContent = type;
-					meta.appendChild(badge);
-
-					const dateEl =
-						r.querySelector("time") || r.querySelector(".pagefind-ui__meta-date");
-					if (dateEl) meta.appendChild(dateEl.cloneNode(true));
-
-					r.appendChild(meta);
-				});
-			};
-
-		const obsTarget = resultsRoot();
-		if (obsTarget) {
-			resultsObserver = new MutationObserver(() => {
-				enhanceResults();
-			});
-			resultsObserver.observe(obsTarget, { childList: true, subtree: true });
-			enhanceResults();
-		} else {
-			intervalId = window.setInterval(() => {
-				const rt = resultsRoot();
-				if (rt) {
-					if (intervalId) {
-						window.clearInterval(intervalId);
-						intervalId = null;
-					}
-					resultsObserver = new MutationObserver(() => {
-						enhanceResults();
-					});
-					resultsObserver.observe(rt, { childList: true, subtree: true });
-					enhanceResults();
-				}
-			}, 150);
+	const ensureEmptyNode = () => {
+		let node = document.querySelector(".pf-empty");
+		if (!node) {
+			node = document.createElement("div");
+			node.className = "pf-empty";
+			(searchContainer || document.body).appendChild(node);
 		}
+		return node;
+	};
 
+	const resultsRoot = () =>
+		document.querySelector(".pagefind-ui__results") ||
+		document.querySelector(".pagefind-ui__results-list");
+
+	const renderEmptyState = (node: Element, query: string) => {
+		const title = document.createElement("h3");
+		title.style.fontWeight = "700";
+		title.textContent = emptyTitle;
+
+		const message = document.createElement("p");
+		message.textContent = emptyMessageTemplate.replace("__QUERY__", query);
+
+		node.replaceChildren(title, message);
+	};
+
+	const enhanceResults = async () => {
+		const results = Array.from(
+			document.querySelectorAll(".pagefind-ui__result"),
+		) as HTMLElement[];
+		document.querySelectorAll(".pf-top-result").forEach((el) => {
+			el.classList.remove("pf-top-result");
+		});
+
+		if (results.length === 0) {
+			const node = ensureEmptyNode();
+			const q = new URL(window.location.href).searchParams.get("q") || "";
+			renderEmptyState(node, q);
+			return;
+		}
+		const node = document.querySelector(".pf-empty");
+		if (node) node.remove();
+
+		const first = results[0];
+		if (first) first.classList.add("pf-top-result");
+
+		results.forEach(async (r) => {
+			if (r.querySelector(".pf-badge")) return;
+			const link = r.querySelector("a[href]") as HTMLAnchorElement | null;
+			const meta = document.createElement("div");
+			meta.className = "meta";
+
+			let type = "Page";
+			try {
+				if (link) {
+					const href = link.getAttribute("href") || "";
+					const stripLocalePrefix = (path: string) =>
+						path.replace(/^\/[a-z]{2}(?:-[a-z]{2})?(?=\/)/i, "");
+					const normalizedHref = stripLocalePrefix(href);
+					const postPattern =
+						/^\/(?!tag\/|category\/|author\/|search\/|projects\/|page\/)([^/]+)(\/|$)/i;
+					if (postPattern.test(normalizedHref)) type = "Post";
+					else if (/\bproject\b|\/projects\//i.test(href)) type = "Project";
+					else if (/\/about\b|contact/i.test(href)) type = "Page";
+				}
+			} catch (e) {
+				/* ignore */
+			}
+
+			const badge = document.createElement("span");
+			badge.className = "pf-badge";
+			badge.textContent = type;
+			meta.appendChild(badge);
+
+			const dateEl =
+				r.querySelector("time") || r.querySelector(".pagefind-ui__meta-date");
+			if (dateEl) meta.appendChild(dateEl.cloneNode(true));
+
+			r.appendChild(meta);
+		});
+	};
+
+	const obsTarget = resultsRoot();
+	if (obsTarget) {
+		resultsObserver = new MutationObserver(() => {
+			enhanceResults();
+		});
+		resultsObserver.observe(obsTarget, { childList: true, subtree: true });
+		enhanceResults();
+	} else {
+		intervalId = window.setInterval(() => {
+			const rt = resultsRoot();
+			if (rt) {
+				if (intervalId) {
+					window.clearInterval(intervalId);
+					intervalId = null;
+				}
+				resultsObserver = new MutationObserver(() => {
+					enhanceResults();
+				});
+				resultsObserver.observe(rt, { childList: true, subtree: true });
+				enhanceResults();
+			}
+		}, 150);
+	}
+
+	const url = new URL(window.location.href);
+	const params = new URLSearchParams(url.search);
+	const query = params.get("q");
+
+	if (query && input) {
+		input.value = query;
+		input.dispatchEvent(new Event("input", { bubbles: true }));
+	}
+
+	const handleInput = (e: Event) => {
+		const target = e.target as HTMLInputElement;
 		const url = new URL(window.location.href);
 		const params = new URLSearchParams(url.search);
-		const query = params.get("q");
+		if (target.value) params.set("q", target.value);
+		else params.delete("q");
+		const newSearch = params.toString();
+		window.history.replaceState(
+			{},
+			"",
+			`${url.pathname}${newSearch ? `?${newSearch}` : ""}`,
+		);
+	};
 
-		if (query && input) {
-			input.value = query;
-			input.dispatchEvent(new Event("input", { bubbles: true }));
+	const handleClear = () => {
+		const url = new URL(window.location.href);
+		window.history.replaceState({}, "", `${url.pathname}`);
+	};
+
+	input?.addEventListener("input", handleInput);
+	clearButton?.addEventListener("click", handleClear);
+
+	cleanupStore[CLEANUP_KEY] = () => {
+		if (resultsObserver) {
+			resultsObserver.disconnect();
+			resultsObserver = null;
 		}
 
-		const handleInput = (e: Event) => {
-			const target = e.target as HTMLInputElement;
-			const url = new URL(window.location.href);
-			const params = new URLSearchParams(url.search);
-			if (target.value) params.set("q", target.value);
-			else params.delete("q");
-			const newSearch = params.toString();
-			window.history.replaceState(
-				{},
-				"",
-				`${url.pathname}${newSearch ? `?${newSearch}` : ""}`,
-			);
-		};
+		if (intervalId) {
+			window.clearInterval(intervalId);
+			intervalId = null;
+		}
 
-		const handleClear = () => {
-			const url = new URL(window.location.href);
-			window.history.replaceState({}, "", `${url.pathname}`);
-		};
-
-		input?.addEventListener("input", handleInput);
-		clearButton?.addEventListener("click", handleClear);
-
-		cleanupStore[CLEANUP_KEY] = () => {
-			if (resultsObserver) {
-				resultsObserver.disconnect();
-				resultsObserver = null;
-			}
-
-			if (intervalId) {
-				window.clearInterval(intervalId);
-				intervalId = null;
-			}
-
-			input?.removeEventListener("input", handleInput);
-			clearButton?.removeEventListener("click", handleClear);
-		};
+		input?.removeEventListener("input", handleInput);
+		clearButton?.removeEventListener("click", handleClear);
 	};
+};
 
-	cleanupSearchPage();
-	const handlePageLoad = () => {
-		void initSearchPage();
-	};
-	const handleBeforePreparation = () => cleanupSearchPage();
+cleanupSearchPage();
+const handlePageLoad = () => {
+	void initSearchPage();
+};
+const handleBeforePreparation = () => cleanupSearchPage();
 
-	handlerStore[HANDLERS_KEY] = {
-		pageLoad: handlePageLoad,
-		beforePreparation: handleBeforePreparation,
-	};
+handlerStore[HANDLERS_KEY] = {
+	pageLoad: handlePageLoad,
+	beforePreparation: handleBeforePreparation,
+};
 
-	document.addEventListener("astro:page-load", handlePageLoad);
-	document.addEventListener("astro:before-preparation", handleBeforePreparation);
+document.addEventListener("astro:page-load", handlePageLoad);
+document.addEventListener("astro:before-preparation", handleBeforePreparation);
 </script>
