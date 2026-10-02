@@ -1,0 +1,22 @@
+# Biome 2.5 formats these 20 Astro route files with a blank terminal line.
+# Keep the exception path-specific; all other files retain Git's EOF check.
+apps/blog/src/pages/[[]lang]/blog/[[]...id].astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/category/[[]category].astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/category/[[]category]/page/[[]page].astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/category/index.astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/index.astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/page/[[]page].astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/tag/[[]tag].astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/tag/[[]tag]/page/[[]page].astro whitespace=-blank-at-eof
+apps/blog/src/pages/[[]lang]/blog/tag/index.astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/[[]...id].astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/category/[[]category].astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/category/[[]category]/page/[[]page].astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/category/index.astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/index.astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/page/[[]page].astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/tag/[[]tag].astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/tag/[[]tag]/page/[[]page].astro whitespace=-blank-at-eof
+apps/blog/src/pages/blog/tag/index.astro whitespace=-blank-at-eof
+apps/blog/src/pages/en/[[]...path].astro whitespace=-blank-at-eof
+apps/portfolio/src/pages/en/[[]...path].astro whitespace=-blank-at-eof
