@@ -49,7 +49,7 @@ const translated = (
 		</h2>
 		<a
 			href={translatePath("/projects/")}
-			class="archive-link inline-flex items-center min-h-6 px-2 py-1 rounded-sm hover:underline mb-12 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+			class="archive-link link-underline inline-flex items-center min-h-6 px-2 py-1 rounded-sm hover:underline mb-12 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
 		>
 			{translated("viewArchive", {}, "View the Archive")}
 		</a>
@@ -240,24 +240,24 @@ document.addEventListener("astro:page-load", () => {
 	--transition-timing: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-/* Archive link - WCAG AA compliant contrast */
+/* Archive link - keep the accent readable against both theme surfaces. */
 .archive-link {
-	color: #047857; /* emerald-700 - 5.5:1 contrast on white */
+	color: #047857;
 	transition: color 0.2s ease;
 }
 
 .archive-link:hover,
 .archive-link:focus {
-	color: #065f46; /* emerald-800 - even higher contrast on hover */
+	color: #065f46;
 }
 
-.dark .archive-link {
-	color: #9fffe7; /* brighter cyan with stronger contrast on dark backgrounds */
+:global(.dark) .archive-link {
+	color: #cbd5e0;
 }
 
-.dark .archive-link:hover,
-.dark .archive-link:focus {
-	color: #c2fff1; /* lighter cyan on hover/focus */
+:global(.dark) .archive-link:hover,
+:global(.dark) .archive-link:focus {
+	color: #64ffda;
 }
 
 .projects-grid {

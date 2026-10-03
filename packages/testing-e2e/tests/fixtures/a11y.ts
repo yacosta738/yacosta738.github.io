@@ -17,7 +17,19 @@ export async function auditRoute(
 ) {
 	await page.goto(route);
 	await page.waitForLoadState("networkidle");
-	if (theme) await setTheme(page, theme);
+	if (theme) {
+		await page.addStyleTag({
+			content:
+				"*, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }",
+		});
+		await setTheme(page, theme);
+		await page.evaluate(
+			() =>
+				new Promise<void>((resolve) =>
+					requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+				),
+		);
+	}
 
 	const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
 
