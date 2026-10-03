@@ -90,7 +90,7 @@ const formatDateRange = (
 					{companyUrl ? (
 						<a
 							href={companyUrl}
-							class="text-brand-accent no-underline relative inline-block transition-all duration-250 ease-out hover:after:w-full focus:after:w-full after:content-[''] after:absolute after:w-0 after:h-px after:-bottom-0.5 after:left-0 after:bg-brand-accent after:transition-all after:duration-250 after:ease-out after:opacity-50"
+							class="company-link text-brand-accent no-underline relative inline-block transition-all duration-250 ease-out hover:after:w-full focus:after:w-full after:content-[''] after:absolute after:w-0 after:h-px after:-bottom-0.5 after:left-0 after:bg-brand-accent after:transition-all after:duration-250 after:ease-out after:opacity-50"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -121,13 +121,19 @@ const formatDateRange = (
 </div>
 
 <style>
-/* Job date styling - WCAG AA compliant */
-.job-date {
-	color: #047857; /* emerald-700 - 5.5:1 contrast on white */
+/* Links in prose remain distinct without relying on color alone. */
+.company-link {
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
 }
 
-.dark .job-date {
-	color: #64ffda; /* cyan accent for dark mode */
+/* Job date styling - WCAG AA compliant in both themes */
+.job-date {
+	color: #047857 !important;
+}
+
+:global(html.dark) .job-date {
+	color: #cbd5e0 !important;
 }
 
 /* Job location styling */
@@ -135,7 +141,7 @@ const formatDateRange = (
 	color: #475569; /* slate-600 - 5.5:1 contrast on white */
 }
 
-.dark .job-location {
+:global(.dark) .job-location {
 	color: #a8b2d1; /* light slate for dark mode */
 }
 

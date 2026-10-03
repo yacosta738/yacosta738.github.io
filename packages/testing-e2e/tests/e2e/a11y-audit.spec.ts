@@ -8,9 +8,11 @@ import { auditRoute } from "../fixtures/a11y";
  * App-specific routes are in a11y-audit-portfolio.spec.ts and a11y-audit-blog.spec.ts.
  */
 test.describe("Accessibility audit", () => {
-	test("default locale homepage has no critical a11y violations", async ({
-		page,
-	}) => {
-		await auditRoute(page, "/");
-	});
+	for (const theme of ["light", "dark"] as const) {
+		test(`default locale homepage has no ${theme} theme violations`, async ({
+			page,
+		}) => {
+			await auditRoute(page, "/", theme);
+		});
+	}
 });

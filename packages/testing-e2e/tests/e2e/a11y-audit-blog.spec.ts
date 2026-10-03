@@ -6,17 +6,19 @@ import { auditRoute } from "../fixtures/a11y";
  * Excluded from portfolio test runs via testIgnore pattern.
  */
 test.describe("Accessibility audit (blog)", () => {
-	test("blog homepage has no critical a11y violations", async ({ page }) => {
-		await auditRoute(page, "/");
-	});
+	for (const theme of ["light", "dark"] as const) {
+		test(`blog homepage has no ${theme} theme violations`, async ({ page }) => {
+			await auditRoute(page, "/", theme);
+		});
 
-	test("search page has no critical a11y violations", async ({ page }) => {
-		await auditRoute(page, "/search");
-	});
+		test(`search page has no ${theme} theme violations`, async ({ page }) => {
+			await auditRoute(page, "/search", theme);
+		});
 
-	test("Spanish blog homepage has no critical a11y violations", async ({
-		page,
-	}) => {
-		await auditRoute(page, "/es");
-	});
+		test(`Spanish blog homepage has no ${theme} theme violations`, async ({
+			page,
+		}) => {
+			await auditRoute(page, "/es", theme);
+		});
+	}
 });
