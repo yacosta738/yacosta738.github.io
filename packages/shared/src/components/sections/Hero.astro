@@ -135,7 +135,7 @@ const passionItems =
 
 		<!-- Get in Touch Button -->
 		<div
-			class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print"
+			class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print flex flex-wrap items-center gap-5"
 		>
 			<Link
 				href={`mailto:${email}`}
@@ -143,6 +143,15 @@ const passionItems =
 			>
 				👋🏻 {t("hero.getInTouch")}
 			</Link>
+			<a
+				href="#projects"
+				class="inline-flex min-h-11 items-center font-semibold text-foreground-muted underline decoration-primary underline-offset-4 transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+			>
+				{currentLocale === "en"
+					? "View selected work"
+					: "Ver proyectos destacados"}
+				<span class="ml-2" aria-hidden="true">↘</span>
+			</a>
 		</div>
 
 		<!-- Print Info -->

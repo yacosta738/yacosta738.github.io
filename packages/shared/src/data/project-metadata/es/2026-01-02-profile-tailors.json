@@ -1,0 +1,12 @@
+{
+	"title": "Profile Tailors",
+	"cover": "/src/assets/images/placeholder-1280x720.avif",
+	"date": "2026-01-01T00:00:00.000Z",
+	"repository": "https://github.com/dallay/profiletailors.com",
+	"company": "Personal",
+	"tech": ["kotlin", "spring-boot"],
+	"showInProjects": true,
+	"featured": true,
+	"priority": 0.02,
+	"published": true
+}

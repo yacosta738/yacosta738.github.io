@@ -104,12 +104,15 @@ const recentTechnologies =
 	<div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
 		<div class="lg:col-span-3 space-y-6">
 			<div class="space-y-4 text-foreground-muted">
-				<Typography as="p" variant="body" class="text-justify leading-relaxed">
+				<Typography as="p" variant="body" class="leading-relaxed">
 					{summary}
 				</Typography>
 
 				<Typography as="p" variant="body" class="leading-relaxed">
-					Here are a few technologies that I've been working with recently:
+					{t({
+						en: "A few technologies I work with regularly:",
+						es: "Tecnologías con las que trabajo habitualmente:",
+					})}
 				</Typography>
 			</div>
 			<HighlightsList highlights={recentTechnologies} columns={2} />

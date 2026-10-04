@@ -3,7 +3,7 @@
 	"basics": {
 		"email": "contact@yunielacosta.com",
 		"image": "/me.webp",
-		"label": "Ingeniero de software experimentado en tecnologías frontend y backend. Dominio de principios de diseño de software, patrones de diseño y arquitecturas limpias.",
+		"label": "Ingeniero de software sénior y arquitecto, especializado en sistemas distribuidos fiables para banca y fintech.",
 		"location": {
 			"address": "🍃",
 			"city": "Valencia",
@@ -40,7 +40,7 @@
 				"username": "yacosta738"
 			}
 		],
-		"summary": "Construyo sistemas backend que deben funcionar correctamente desde el primer día: tuberías de Kafka que mueven millones de eventos diarios en banca y fintech, donde un fallo silencioso cuesta más que un sprint lento.\n\nMi convicción central: el software que es difícil de cambiar fue diseñado incorrectamente desde el primer día. La Arquitectura Hexagonal y el Diseño Orientado al Dominio (DDD) no son solo términos de moda para mí; son la forma en que mantengo la lógica de negocio aislada del ruido de la infraestructura, de modo que un cambio de base de datos o una nueva integración nunca se convierta en una migración de seis meses.\n\nLa misma lógica impulsa cómo verifico esa lógica. TDD me da un ciclo de retroalimentación rápido mientras escribo el código. BDD mantiene la conversación con el negocio anclada en escenarios reales en lugar de suposiciones. Spec-Driven Development (SDD) —escribir la especificación antes de una línea de implementación, a menudo con un agente de IA realizando el primer paso— es ahora la base de cómo abordo integraciones complejas.\n\nStack: Kotlin o Java y la JVM para sistemas backend de producción. Spring Boot cuando sus convenciones aportan valor real. Apache Kafka como columna vertebral de arquitecturas orientadas a eventos diseñadas para escalar sin problemas bajo carga. En el frontend, utilizo Astro y Vue.js: arquitectura de islas y reactividad sin el peso innecesario de un framework.\n\nHe pasado años en entornos críticos: sistemas bancarios centrales, detección de fraude procesando millones de eventos de autenticación diarios, plataformas fintech donde el tiempo de inactividad es un incidente regulatorio, no una inconveniencia. Ahí es donde aprendí que una arquitectura 'suficientemente buena' falla exactamente cuando menos puedes permitírtelo.\n\nMás recientemente, he construido mi propio arnés de ingeniería de IA sobre OpenCode — agentes personalizados, subagentes y librerías de prompts que absorben el trabajo repetitivo para que pueda centrarme en las decisiones que realmente necesitan un cerebro humano. Creo que esto se acerca más a cómo trabajarán la mayoría de los ingenieros en un par de años, no es una novedad añadida a un flujo de trabajo normal.\n\nFuera del trabajo para clientes, construyo en público: sistemas distribuidos, Kafka, Rust y contenido sobre observabilidad en mi blog y canal de YouTube. Proyectos actuales: Corvus, un framework de agentes de IA autónomos en Kotlin y Rust para orquestación de larga duración, y Profile Tailors, un SaaS de distribución de contenido multicanal sobre Spring Boot 4, Kotlin y WebFlux.\n\nNo busco el hype del próximo framework, ni un equipo que confunda moverse rápido con moverse a cualquier parte. Busco problemas difíciles, sistemas que valga la pena diseñar correctamente y equipos que aún se preocupan por la artesanía del código.",
+		"summary": "Diseño sistemas backend para productos donde la fiabilidad es crítica: desde flujos de eventos con Kafka hasta servicios JVM para banca y fintech. Me centro en crear integraciones fiables y software fácil de evolucionar con DDD, Arquitectura Hexagonal y pruebas automatizadas.\n\nTrabajo principalmente con Kotlin, Java, Spring Boot y Apache Kafka, y uso Astro y Vue.js para crear interfaces ligeras. También desarrollo herramientas de ingeniería asistidas por IA y comparto notas prácticas sobre sistemas distribuidos, Rust y observabilidad.\n\nVivo en Valencia, España. Me interesan los retos de ingeniería complejos y los equipos que valoran una arquitectura bien pensada.",
 		"url": "https://yunielacosta.com"
 	},
 	"certificates": [
@@ -234,6 +234,18 @@
 			"name": "Food Ordering System",
 			"startDate": "2022-08-05",
 			"url": "https://github.com/yacosta738/food-ordering-system"
+		},
+		{
+			"description": "Plataforma autónoma de agentes de IA con varias interfaces, diseñada para orquestar tareas de larga duración y construida con Kotlin Multiplatform y un runtime en Rust.",
+			"highlights": ["kotlin", "rust", "agentes de IA"],
+			"name": "Corvus",
+			"url": "https://github.com/dallay/corvus"
+		},
+		{
+			"description": "Plataforma de distribución de contenido en múltiples canales, desarrollada con Spring Boot, Kotlin y WebFlux.",
+			"highlights": ["kotlin", "spring boot", "webflux"],
+			"name": "Profile Tailors",
+			"url": "https://github.com/dallay/profiletailors.com"
 		}
 	],
 	"publications": [],

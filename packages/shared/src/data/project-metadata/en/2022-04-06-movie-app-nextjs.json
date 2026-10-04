@@ -7,7 +7,7 @@
 	"company": "Personal",
 	"tech": ["typescript", "react", "nextjs"],
 	"showInProjects": false,
-	"featured": true,
+	"featured": false,
 	"priority": 0.06,
 	"published": true
 }
