@@ -96,9 +96,11 @@ const passionItems =
 			{name}
 		</Typography>
 
-		<!-- Motto/Philosophy -->
+		<!-- Motto/Philosophy: rendered as a paragraph to keep the heading
+		     hierarchy clean (h1 = name, h2 = section content like Experience,
+		     Education, Contact, etc.). The visual styling is preserved. -->
 		<Typography
-			as="h2"
+			as="p"
 			variant="subtitle"
 			class="animate-fade-in-up animate-delay-300 animate-duration-slower text-3xl sm:text-3xl my-3 md:my-2 md:text-4xl lg:text-5xl text-balance font-display mb-8 leading-tight max-w-6xl"
 		>

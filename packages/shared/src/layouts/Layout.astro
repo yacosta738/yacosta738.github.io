@@ -39,7 +39,6 @@ import {
 import LocaleSuggest from "@/i18n/components/LocaleSuggest.astro";
 import { safeJsonLd } from "@/lib/seo/json-ld";
 import { resolvePublicOrigin } from "@/utils/public-origin";
-import alkatraRegularWoff2 from "../assets/font/alkatra/alkatra-v3-latin-regular.woff2";
 
 interface Props {
 	title?: string;
@@ -103,11 +102,14 @@ const localeTitle = pageTitle
 			: pageTitle
 	: t(SITE_TITLE);
 const { image, summary, url } = resume.basics;
-const rawMetaDescription = description || summary || t("default.summary");
-const metaDescription =
-	rawMetaDescription.length > 160
-		? `${rawMetaDescription.slice(0, 157).trimEnd()}…`
-		: rawMetaDescription;
+const localizedSiteDescription =
+	typeof SITE_DESCRIPTION === "string"
+		? SITE_DESCRIPTION
+		: SITE_DESCRIPTION[locale] || SITE_DESCRIPTION.en || "";
+const rawMetaDescription =
+	description || localizedSiteDescription || summary || "";
+// Keep full sentences; do not truncate with an ellipsis.
+const metaDescription = rawMetaDescription;
 
 // Extract the image URL from ImageMetadata if needed
 const getImageUrl = (
@@ -302,14 +304,9 @@ const localeTag = LOCALES[locale].lang || locale;
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="manifest" href="/site.webmanifest">
 
-		<!-- Preload critical fonts to reduce render blocking -->
-		<link
-			rel="preload"
-			href={alkatraRegularWoff2}
-			as="font"
-			type="font/woff2"
-			crossorigin
-		>
+		<!-- Note: Alkatra font is declared in fonts.css but unused (font-display
+		     resolves to Calibre/Inter). Preload removed to avoid loading ~16 KB
+		     of a font that never paints. -->
 
 		<!-- DNS prefetch and preconnect for Cloudflare optimization -->
 		<link rel="dns-prefetch" href="https://analytics.ahrefs.com">
