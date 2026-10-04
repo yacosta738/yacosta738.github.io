@@ -212,7 +212,7 @@ catalogs:
       version: 4.4.3
 
 overrides:
-  brace-expansion: ^5.0.5
+  brace-expansion: ^5.0.12
   devalue: '>=5.8.1'
   deepmerge-ts: ^8.0.2
   fast-uri: '>=4.0.0'
