@@ -6,6 +6,49 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [5.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.3.1...v5.0.0) (2026-10-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update npm-run-all2 to v9 ([#2008](https://github.com/yacosta738/yacosta738.github.io/issues/2008))
+* **deps:** update astro-pagefind to v2 ([#2006](https://github.com/yacosta738/yacosta738.github.io/issues/2006))
+* **deps:** update fast-uri to v4 ([#2007](https://github.com/yacosta738/yacosta738.github.io/issues/2007))
+
+### Features
+
+* **deps:** update astro-pagefind to v2 ([#2006](https://github.com/yacosta738/yacosta738.github.io/issues/2006)) ([8a39ccb](https://github.com/yacosta738/yacosta738.github.io/commit/8a39ccbe61df721fd4491e4554ccd67355d610e0))
+* **deps:** update fast-uri to v4 ([#2007](https://github.com/yacosta738/yacosta738.github.io/issues/2007)) ([7ae29bf](https://github.com/yacosta738/yacosta738.github.io/commit/7ae29bfa3cdc1cc1eeef9ba397504fff765d256d))
+* **deps:** update npm-run-all2 to v9 ([#2008](https://github.com/yacosta738/yacosta738.github.io/issues/2008)) ([d9a42c1](https://github.com/yacosta738/yacosta738.github.io/commit/d9a42c18d778f0265a720570a4996f6b56ce3f26))
+* **shared:** translate spanish resume to match english version ([#1980](https://github.com/yacosta738/yacosta738.github.io/issues/1980)) ([3945110](https://github.com/yacosta738/yacosta738.github.io/commit/3945110ba329d856978be7f6e584cd6ffe849f28))
+
+
+### Bug Fixes
+
+* **a11y:** improve theme contrast audits ([#2028](https://github.com/yacosta738/yacosta738.github.io/issues/2028)) ([6b53d18](https://github.com/yacosta738/yacosta738.github.io/commit/6b53d1896f2d423ec8dc74586cea9085e450d8f7))
+* **biome:** update formatting and linter rules in biome.json ([39d2007](https://github.com/yacosta738/yacosta738.github.io/commit/39d2007a44a7671240e441496edf04414c986bbd))
+* **ci:** make CI pipeline tolerant of missing secrets for fork PRs ([50a2b57](https://github.com/yacosta738/yacosta738.github.io/commit/50a2b57131a14493bea761cce39923ea064e9ec4))
+* **code-quality:** resolve SonarQube issues and improve Makefile ([#1963](https://github.com/yacosta738/yacosta738.github.io/issues/1963)) ([b7d717e](https://github.com/yacosta738/yacosta738.github.io/commit/b7d717ec6f21ce3ee56332b87f55d76efbb4c535))
+* **deps:** update @hono/zod-openapi to v1.6.3 ([#1975](https://github.com/yacosta738/yacosta738.github.io/issues/1975)) ([79b6ca3](https://github.com/yacosta738/yacosta738.github.io/commit/79b6ca3443d1a38c7948d945ff48aaf35e96bd15))
+* **deps:** update @types/node to v25.6.2 ([#2026](https://github.com/yacosta738/yacosta738.github.io/issues/2026)) ([66acbdc](https://github.com/yacosta738/yacosta738.github.io/commit/66acbdcb52d85f2bfe493df6e157f6028f7fb09e))
+* **deps:** update @types/node to v25.9.8 ([#2001](https://github.com/yacosta738/yacosta738.github.io/issues/2001)) ([bb22507](https://github.com/yacosta738/yacosta738.github.io/commit/bb225076d2d60226c907944f782d5ed2a0b938d8))
+* **deps:** update Astro ([#1965](https://github.com/yacosta738/yacosta738.github.io/issues/1965)) ([783c564](https://github.com/yacosta738/yacosta738.github.io/commit/783c564d9d245b67d6f07e0a0162da656df90f2e))
+* **deps:** update Astro ([#2027](https://github.com/yacosta738/yacosta738.github.io/issues/2027)) ([342afc6](https://github.com/yacosta738/yacosta738.github.io/commit/342afc682383bdf93aabd1c50bea2112be06ea3f))
+* **deps:** update astro to v6.4.6 [SECURITY] ([#1986](https://github.com/yacosta738/yacosta738.github.io/issues/1986)) ([e1c7351](https://github.com/yacosta738/yacosta738.github.io/commit/e1c73517f8e584c751944343fc3434e515e4577d))
+* **deps:** update brace-expansion to ^5.0.12 ([#2033](https://github.com/yacosta738/yacosta738.github.io/issues/2033)) ([862e480](https://github.com/yacosta738/yacosta738.github.io/commit/862e480faa59d1b4916bd4460700aceebd16abad))
+* **deps:** update caddy Docker tag to v2.11.4 ([#1994](https://github.com/yacosta738/yacosta738.github.io/issues/1994)) ([b342ae7](https://github.com/yacosta738/yacosta738.github.io/commit/b342ae7de89d1fb1c456c55055e178c4e849682a))
+* **deps:** update fast-xml-parser to ^5.11.2 ([#1973](https://github.com/yacosta738/yacosta738.github.io/issues/1973)) ([038a1c6](https://github.com/yacosta738/yacosta738.github.io/commit/038a1c64d633f7217de9da4bd4814b7057df98f8))
+* **deps:** update lefthook to ^2.1.15 ([#1966](https://github.com/yacosta738/yacosta738.github.io/issues/1966)) ([7a7736f](https://github.com/yacosta738/yacosta738.github.io/commit/7a7736fe25a5654646e05ad4ff26a725725d47e7))
+* **deps:** update minimatch to ^10.2.6 ([#2034](https://github.com/yacosta738/yacosta738.github.io/issues/2034)) ([f47ff80](https://github.com/yacosta738/yacosta738.github.io/commit/f47ff80ba45b1bc4f85cad95fde00b8e64a8b609))
+* **deps:** update pnpm to v10.34.6 ([#1977](https://github.com/yacosta738/yacosta738.github.io/issues/1977)) ([f24cab3](https://github.com/yacosta738/yacosta738.github.io/commit/f24cab34cdca48ae7c4fd9012024d50ddf6b30b6))
+* **deps:** update preact-render-to-string to ^6.7.0 ([#1978](https://github.com/yacosta738/yacosta738.github.io/issues/1978)) ([a54f9bb](https://github.com/yacosta738/yacosta738.github.io/commit/a54f9bb46d0c609b59e768a34ca87f1387d1c58f))
+* **deps:** update Testing tools to v1.63.0 ([#2000](https://github.com/yacosta738/yacosta738.github.io/issues/2000)) ([455dba0](https://github.com/yacosta738/yacosta738.github.io/commit/455dba06b563abf76321dae4f494c002ac22ac18))
+* **deps:** update yaml to ^2.8.4 ([#1970](https://github.com/yacosta738/yacosta738.github.io/issues/1970)) ([7decdae](https://github.com/yacosta738/yacosta738.github.io/commit/7decdae9f78c9e23fc62c46280b5ddc9595ad6c5))
+* **deps:** update yaml to ^2.9.1 ([#2003](https://github.com/yacosta738/yacosta738.github.io/issues/2003)) ([1a40b0c](https://github.com/yacosta738/yacosta738.github.io/commit/1a40b0c1f5b40d539042e28846ae336787c78c5c))
+* **deps:** update zod to v4.4.3 ([#2004](https://github.com/yacosta738/yacosta738.github.io/issues/2004)) ([5a7443b](https://github.com/yacosta738/yacosta738.github.io/commit/5a7443bf6ff4f45f47c1e9562f037ce985c7cda3))
+* **portfolio:** localize meta description and enrich Person JSON-LD ([#2035](https://github.com/yacosta738/yacosta738.github.io/issues/2035)) ([31850fd](https://github.com/yacosta738/yacosta738.github.io/commit/31850fdf388591102f8f80bc14ada85d04f41cde))
+* **resume:** update label to improve clarity and remove redundancy ([730d4dc](https://github.com/yacosta738/yacosta738.github.io/commit/730d4dc61fea298535c37e92f61edfc05d2e104a))
+
 ## [4.3.1](https://github.com/yacosta738/yacosta738.github.io/compare/v4.3.0...v4.3.1) (2026-06-04)
 
 
