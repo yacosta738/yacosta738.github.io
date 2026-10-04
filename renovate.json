@@ -1,6 +1,20 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"assignees": ["yacosta738"],
+	"assigneesFromCodeOwners": true,
+	"bumpVersion": "patch",
+	"commitMessageAction": "update",
+	"commitMessageExtra": "to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isMajor}}{{prettyNewMajor}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}{{/if}}",
+	"commitMessagePrefix": "fix(deps):",
+	"commitMessageTopic": "{{depName}}",
+	"customManagers": [],
+	"dependencyDashboardApproval": false,
+	"dependencyDashboardAutoclose": true,
+	"dependencyDashboardFooter": "---\n\n🔧 Configure Renovate in [renovate.json](https://github.com/yacosta738/yacosta738.github.io/blob/main/renovate.json)",
+	"dependencyDashboardHeader": "This issue lists Renovate updates and detected dependencies. Read the [Dependency Dashboard docs](https://docs.renovatebot.com/key-concepts/dashboard/) to learn more.",
+	"dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
 	"description": "Renovate configuration for yacosta738.github.io monorepo",
+	"enabledManagers": ["npm", "github-actions", "dockerfile", "docker-compose"],
 	"extends": [
 		"config:recommended",
 		":dependencyDashboard",
@@ -14,177 +28,6 @@
 		"group:recommended",
 		"workarounds:all"
 	],
-	"timezone": "Europe/Madrid",
-	"schedule": [
-		"after 10pm every weekday",
-		"before 5am every weekday",
-		"every weekend"
-	],
-	"labels": ["dependencies", "renovate"],
-	"assignees": ["yacosta738"],
-	"assigneesFromCodeOwners": true,
-	"reviewersFromCodeOwners": true,
-	"packageRules": [
-		{
-			"description": "Security updates - auto-merge patch and minor",
-			"matchUpdateTypes": ["patch", "pin", "digest"],
-			"matchDepTypes": ["dependencies"],
-			"matchPackageNames": ["*"],
-			"automerge": true,
-			"automergeType": "pr",
-			"platformAutomerge": true,
-			"labels": ["dependencies", "security", "automerge"],
-			"schedule": ["at any time"]
-		},
-		{
-			"description": "Development dependencies - auto-merge non-major",
-			"matchDepTypes": ["devDependencies"],
-			"matchUpdateTypes": ["patch", "minor"],
-			"automerge": true,
-			"automergeType": "pr",
-			"platformAutomerge": true,
-			"labels": ["dependencies", "devDependencies", "automerge"]
-		},
-		{
-			"description": "Major updates - require review",
-			"matchUpdateTypes": ["major"],
-			"automerge": false,
-			"labels": ["dependencies", "major-update"],
-			"commitMessagePrefix": "feat(deps)!:",
-			"reviewers": ["yacosta738"]
-		},
-		{
-			"description": "Astro monorepo - group all together",
-			"groupName": "Astro",
-			"matchPackageNames": ["/^astro/", "/^@astrojs//"],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true,
-			"labels": ["dependencies", "astro"]
-		},
-		{
-			"description": "Vue ecosystem - group together",
-			"groupName": "Vue ecosystem",
-			"matchPackageNames": ["/^vue/", "/^@vue//", "/^@vueuse//", "/^pinia/"],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true,
-			"labels": ["dependencies", "vue"]
-		},
-		{
-			"description": "TypeScript and related tools",
-			"groupName": "TypeScript",
-			"matchPackageNames": ["/^typescript/", "/^@types//", "/^ts-/"],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true,
-			"labels": ["dependencies", "typescript"]
-		},
-		{
-			"description": "Testing tools - Vitest, Playwright",
-			"groupName": "Testing tools",
-			"matchPackageNames": [
-				"/^vitest/",
-				"/^@vitest//",
-				"/^playwright/",
-				"/^@playwright//",
-				"/^@testing-library//"
-			],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true,
-			"labels": ["dependencies", "testing"]
-		},
-		{
-			"description": "Biome linter/formatter",
-			"groupName": "Biome",
-			"matchPackageNames": ["/^@biomejs//"],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true,
-			"labels": ["dependencies", "linting"]
-		},
-		{
-			"description": "Cloudflare Workers ecosystem",
-			"groupName": "Cloudflare Workers",
-			"matchPackageNames": [
-				"/^@cloudflare//",
-				"/^wrangler/",
-				"/^miniflare/",
-				"/^workerd/"
-			],
-			"matchUpdateTypes": ["minor", "patch"],
-			"labels": ["dependencies", "cloudflare"]
-		},
-		{
-			"description": "Hono framework and plugins",
-			"groupName": "Hono",
-			"matchPackageNames": ["/^hono/", "/^@hono//"],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": true,
-			"labels": ["dependencies", "hono"]
-		},
-		{
-			"description": "GitHub Actions - monthly updates",
-			"matchManagers": ["github-actions"],
-			"schedule": ["before 5am on the first day of the month"],
-			"automerge": false,
-			"labels": ["dependencies", "github-actions"],
-			"commitMessagePrefix": "ci(deps):",
-			"groupName": "GitHub Actions"
-		},
-		{
-			"description": "Pin Dockerfile base images",
-			"matchManagers": ["dockerfile"],
-			"pinDigests": true,
-			"automerge": false,
-			"labels": ["dependencies", "docker"]
-		},
-		{
-			"description": "Semantic Release and related plugins",
-			"groupName": "Semantic Release",
-			"matchPackageNames": ["/^semantic-release/", "/^@semantic-release//"],
-			"matchUpdateTypes": ["minor", "patch"],
-			"automerge": false,
-			"labels": ["dependencies", "semantic-release"],
-			"reviewers": ["yacosta738"]
-		},
-		{
-			"description": "pnpm package manager",
-			"matchManagers": ["npm"],
-			"matchPackageNames": ["pnpm"],
-			"automerge": false,
-			"labels": ["dependencies", "pnpm"],
-			"reviewers": ["yacosta738"]
-		}
-	],
-	"vulnerabilityAlerts": {
-		"labels": ["security", "vulnerability"],
-		"automerge": false,
-		"schedule": ["at any time"]
-	},
-	"lockFileMaintenance": {
-		"enabled": true,
-		"schedule": ["before 5am on monday"],
-		"automerge": true,
-		"automergeType": "pr",
-		"platformAutomerge": true,
-		"commitMessageAction": "chore(deps):",
-		"commitMessageTopic": "lock file maintenance"
-	},
-	"semanticCommits": "enabled",
-	"commitMessagePrefix": "fix(deps):",
-	"commitMessageAction": "update",
-	"commitMessageTopic": "{{depName}}",
-	"commitMessageExtra": "to {{#if isPinDigest}}{{{newDigestShort}}}{{else}}{{#if isMajor}}{{prettyNewMajor}}{{else}}{{#if isSingleVersion}}{{prettyNewVersion}}{{else}}{{#if newValue}}{{{newValue}}}{{else}}{{{newDigestShort}}}{{/if}}{{/if}}{{/if}}{{/if}}",
-	"prCreation": "not-pending",
-	"rebaseWhen": "behind-base-branch",
-	"platformAutomerge": true,
-	"ignorePresets": [":prHourlyLimit2"],
-	"prHourlyLimit": 3,
-	"prConcurrentLimit": 15,
-	"minimumReleaseAge": "3 days",
-	"internalChecksFilter": "strict",
-	"separateMinorPatch": true,
-	"separateMultipleMajor": true,
-	"separateMajorMinor": true,
-	"rangeStrategy": "bump",
-	"bumpVersion": "patch",
 	"ignoreDeps": [],
 	"ignorePaths": [
 		"**/node_modules/**",
@@ -195,11 +38,180 @@
 		"**/tests/**",
 		"**/__mocks__/**"
 	],
-	"enabledManagers": ["npm", "github-actions", "dockerfile", "docker-compose"],
-	"dependencyDashboardApproval": false,
-	"dependencyDashboardAutoclose": true,
-	"dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
-	"dependencyDashboardHeader": "This issue lists Renovate updates and detected dependencies. Read the [Dependency Dashboard docs](https://docs.renovatebot.com/key-concepts/dashboard/) to learn more.",
-	"dependencyDashboardFooter": "---\n\n🔧 Configure Renovate in [renovate.json](https://github.com/yacosta738/yacosta738.github.io/blob/main/renovate.json)",
-	"customManagers": []
+	"internalChecksFilter": "strict",
+	"labels": ["dependencies", "renovate"],
+	"lockFileMaintenance": {
+		"automerge": true,
+		"automergeType": "pr",
+		"commitMessageAction": "chore(deps):",
+		"commitMessageTopic": "lock file maintenance",
+		"enabled": true,
+		"platformAutomerge": true,
+		"schedule": ["before 7am on monday"]
+	},
+	"minimumReleaseAge": "3 days",
+	"packageRules": [
+		{
+			"automerge": true,
+			"automergeType": "pr",
+			"description": "Security updates - auto-merge patch and minor",
+			"labels": ["dependencies", "security", "automerge"],
+			"matchDepTypes": ["dependencies"],
+			"matchPackageNames": ["*"],
+			"matchUpdateTypes": ["patch", "pin", "digest"],
+			"platformAutomerge": true,
+			"schedule": ["at any time"]
+		},
+		{
+			"automerge": true,
+			"automergeType": "pr",
+			"description": "Development dependencies - auto-merge non-major",
+			"labels": ["dependencies", "devDependencies", "automerge"],
+			"matchDepTypes": ["devDependencies"],
+			"matchUpdateTypes": ["patch", "minor"],
+			"platformAutomerge": true
+		},
+		{
+			"automerge": false,
+			"commitMessagePrefix": "feat(deps)!:",
+			"description": "Major updates - require review",
+			"labels": ["dependencies", "major-update"],
+			"matchUpdateTypes": ["major"],
+			"reviewers": ["yacosta738"]
+		},
+		{
+			"automerge": true,
+			"description": "Astro monorepo - group all together",
+			"groupName": "Astro",
+			"labels": ["dependencies", "astro"],
+			"matchPackageNames": ["/^astro/", "/^@astrojs//"],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": true,
+			"description": "TypeScript and related tools",
+			"groupName": "TypeScript",
+			"labels": ["dependencies", "typescript"],
+			"matchPackageNames": ["/^typescript/", "/^@types//", "/^ts-/"],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": true,
+			"description": "Testing tools - Vitest, Playwright",
+			"groupName": "Testing tools",
+			"labels": ["dependencies", "testing"],
+			"matchPackageNames": [
+				"/^vitest/",
+				"/^@vitest//",
+				"/^playwright/",
+				"/^@playwright//",
+				"/^@testing-library//"
+			],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": true,
+			"description": "Biome linter/formatter",
+			"groupName": "Biome",
+			"labels": ["dependencies", "linting"],
+			"matchPackageNames": ["/^@biomejs//"],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"description": "Cloudflare Workers ecosystem",
+			"groupName": "Cloudflare Workers",
+			"labels": ["dependencies", "cloudflare"],
+			"matchPackageNames": [
+				"/^@cloudflare//",
+				"/^wrangler/",
+				"/^miniflare/",
+				"/^workerd/"
+			],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": true,
+			"description": "Hono framework and plugins",
+			"groupName": "Hono",
+			"labels": ["dependencies", "hono"],
+			"matchPackageNames": ["/^hono/", "/^@hono//"],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": true,
+			"description": "Tailwind CSS ecosystem",
+			"groupName": "Tailwind",
+			"labels": ["dependencies", "tailwind"],
+			"matchPackageNames": [
+				"/^tailwindcss/",
+				"/^@tailwindcss//",
+				"/^tailwind-merge/"
+			],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": true,
+			"description": "Notion and content pipeline",
+			"groupName": "Notion content",
+			"labels": ["dependencies", "notion"],
+			"matchPackageNames": [
+				"/^@notionhq//",
+				"/^notion-/",
+				"/^rehype-/",
+				"/^remark-/",
+				"/^unified/",
+				"/^vfile/",
+				"/^mdast-/",
+				"/^unist-/"
+			],
+			"matchUpdateTypes": ["minor", "patch"]
+		},
+		{
+			"automerge": false,
+			"commitMessagePrefix": "ci(deps):",
+			"description": "GitHub Actions - monthly updates",
+			"groupName": "GitHub Actions",
+			"labels": ["dependencies", "github-actions"],
+			"matchManagers": ["github-actions"],
+			"schedule": ["before 7am on the first day of the month"]
+		},
+		{
+			"automerge": false,
+			"description": "Pin Dockerfile base images",
+			"labels": ["dependencies", "docker"],
+			"matchManagers": ["dockerfile"],
+			"pinDigests": true
+		},
+		{
+			"automerge": false,
+			"description": "pnpm package manager",
+			"labels": ["dependencies", "pnpm"],
+			"matchManagers": ["npm"],
+			"matchPackageNames": ["pnpm"],
+			"reviewers": ["yacosta738"]
+		}
+	],
+	"platformAutomerge": true,
+	"prConcurrentLimit": 6,
+	"prCreation": "not-pending",
+	"prHourlyLimit": 2,
+	"rangeStrategy": "bump",
+	"rebaseWhen": "behind-base-branch",
+	"reviewers": ["yacosta738"],
+	"reviewersFromCodeOwners": true,
+	"schedule": [
+		"after 6pm every weekday",
+		"before 7am every weekday",
+		"every weekend"
+	],
+	"semanticCommits": "enabled",
+	"separateMajorMinor": true,
+	"separateMinorPatch": false,
+	"separateMultipleMajor": true,
+	"timezone": "Europe/Madrid",
+	"vulnerabilityAlerts": {
+		"automerge": false,
+		"labels": ["security", "vulnerability"],
+		"schedule": ["at any time"]
+	}
 }
