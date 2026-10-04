@@ -172,4 +172,13 @@ switch (orderBy) {
 	width: 1.125rem;
 	height: 1.125rem;
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.blog-home-link,
+	.blog-home-link:hover,
+	.blog-home-link:focus-visible {
+		transition: none;
+		transform: none;
+	}
+}
 </style>

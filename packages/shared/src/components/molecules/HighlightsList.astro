@@ -91,21 +91,19 @@ const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 	.highlights.project-tech-highlights li {
 		margin: 0;
 		padding-inline-start: 1rem;
-		white-space: nowrap;
 	}
 }
 
 @container project-highlights (width >= 20rem) {
 	.highlights.project-tech-highlights {
 		display: flex;
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
 		gap: 0 clamp(0.75rem, 4cqi, 1.5rem);
 	}
 
 	.highlights.project-tech-highlights li {
 		margin: 0;
 		padding-inline-start: 1rem;
-		white-space: nowrap;
 	}
 }
 

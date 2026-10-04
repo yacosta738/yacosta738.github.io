@@ -127,6 +127,9 @@ const projectUrl =
 
 @media (max-width: 768px) {
 	.featured-project {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
 		margin-bottom: 70px;
 		box-shadow:
 			0 10px 30px -15px rgba(2, 12, 27, 0.7),
@@ -155,11 +158,8 @@ const projectUrl =
 
 @media (max-width: 768px) {
 	.project-content {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		height: 100%;
-		grid-column: 1 / -1;
+		width: 100%;
+		height: auto;
 		padding: 40px 40px 30px;
 		z-index: 5;
 	}
@@ -181,8 +181,9 @@ const projectUrl =
 
 @media (max-width: 768px) {
 	.project-image {
-		grid-column: 1 / -1;
-		height: 100%;
+		order: -1;
+		width: 100%;
+		height: auto;
 	}
 }
 

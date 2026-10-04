@@ -75,7 +75,10 @@ const t = useTranslations(currentLocale);
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.menu-btn-box {
+	.menu-btn-box,
+	.menu-toggle,
+	.menu-toggle .ham,
+	.menu-toggle .line {
 		transition: none;
 	}
 }
