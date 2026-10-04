@@ -178,4 +178,3 @@ rama `chore/portfolio-seo-audit-qw-2026-10` (worktree
   parte del HTML es el CV-vivo, que no se tocó; la ganancia real es que
   el navegador ya no solicita el woff2 de Alkatra (~16 KB) en la ruta
   crítica.
-
