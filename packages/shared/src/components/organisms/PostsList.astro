@@ -1,6 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import { DOMAIN } from "astro:env/client";
+import { Icon } from "astro-icon/components";
 import Button from "@/components/atoms/Button.astro";
 import PostCard from "@/components/organisms/PostCard.astro";
 import type Article from "@/core/article/article.model";
@@ -83,7 +83,11 @@ switch (orderBy) {
 		<div class="mt-12 flex justify-center">
 			<a class="blog-home-link" href={blogHomeUrl}>
 				{t({ en: "Visit the blog", es: "Visita el blog" }) || "Visit the blog"}
-				<Icon name="lucide:arrow-up-right" class="blog-home-link-icon" aria-hidden="true" />
+				<Icon
+					name="lucide:arrow-up-right"
+					class="blog-home-link-icon"
+					aria-hidden="true"
+				/>
 			</a>
 		</div>
 	)}
