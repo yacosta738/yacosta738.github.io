@@ -1,8 +1,8 @@
 {
 	"name": "yap-api",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"private": true,
-	"packageManager": "pnpm@10.34.6",
+	"packageManager": "pnpm@11.28.3",
 	"scripts": {
 		"build": "echo '🚀 Validating configuration...' && wrangler deploy --dry-run",
 		"check": "pnpm test:unit && pnpm build",

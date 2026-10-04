@@ -1,8 +1,8 @@
 {
 	"name": "yacosta-portfolio-monorepo",
-	"version": "4.3.2",
+	"version": "4.3.3",
 	"private": true,
-	"packageManager": "pnpm@10.34.6",
+	"packageManager": "pnpm@11.28.3",
 	"homepage": "https://github.com/yacosta738/yacosta738.github.io",
 	"bugs": {
 		"url": "https://github.com/yacosta738/yacosta738.github.io/issues"

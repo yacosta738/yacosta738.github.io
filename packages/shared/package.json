@@ -1,7 +1,7 @@
 {
 	"name": "@portfolio/shared",
-	"version": "0.0.19",
-	"packageManager": "pnpm@10.34.6",
+	"version": "0.0.20",
+	"packageManager": "pnpm@11.28.3",
 	"type": "module",
 	"scripts": {
 		"astro": "astro",
