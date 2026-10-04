@@ -112,7 +112,11 @@ const personJsonLd = buildPersonJsonLd(
 		)}
 		{hasArticlesData && (
 			<Section title={t({ en: "Posts", es: "Publicaciones" }) || "Posts"}>
-				<PostsList posts={lastArticles} showLoadMore={false} />
+				<PostsList
+					posts={lastArticles}
+					showLoadMore={false}
+					showBlogLink={true}
+				/>
 			</Section>
 		)}
 		<Contact />

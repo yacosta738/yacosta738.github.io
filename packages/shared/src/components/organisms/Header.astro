@@ -65,22 +65,21 @@ const t = useTranslations(currentLocale);
 	{...attrs}
 >
 	<nav
-		class="container mx-auto px-4 lg:px-12 pr-16 md:pr-4 flex items-center justify-between h-16 lg:h-20 safari-header-nav"
+		class="container mx-auto px-4 lg:px-12 pr-16 min-[1100px]:pr-4 flex items-center justify-between h-16 lg:h-20 safari-header-nav"
 		aria-label={t("nav.main") || "Main navigation"}
 	>
 		<Logo currentLocale={currentLocale} />
 
-		<div class="header-desktop-nav hidden md:flex md:items-center md:space-x-4">
+		<div
+			class="header-desktop-nav hidden min-[1100px]:flex min-[1100px]:items-center min-[1100px]:space-x-4"
+		>
 			{showSearch && <SearchButton />}
 			<Menu />
 		</div>
 	</nav>
 </header>
 
-<MobileMenuButton
-	drawerTarget="mobile-drawer"
-	class="header-mobile-menu md:hidden"
-/>
+<MobileMenuButton drawerTarget="mobile-drawer" class="header-mobile-menu" />
 
 <!-- Mobile Drawer -->
 <MobileDrawer showSearch={showSearch} />
@@ -169,7 +168,7 @@ nav.safari-header-nav {
 	display: flex;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
 	.header-desktop-nav {
 		display: flex;
 		align-items: center;

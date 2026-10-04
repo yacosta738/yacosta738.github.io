@@ -76,7 +76,7 @@ const passionItems =
 	aria-label={t("hero.greeting")}
 >
 	<div
-		class="hero-content flex flex-col items-start justify-center min-h-screen max-w-4xl pb-16 max-sm:h-[40vh] print:min-h-0"
+		class="hero-content flex flex-col items-start justify-center min-h-[78vh] min-[1100px]:min-h-screen max-w-4xl pb-16 pt-28 print:min-h-0 print:pt-0"
 	>
 		<!-- Greeting -->
 		<Typography
@@ -135,7 +135,7 @@ const passionItems =
 
 		<!-- Get in Touch Button -->
 		<div
-			class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print flex flex-wrap items-center gap-5"
+			class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print flex flex-wrap items-center"
 		>
 			<Link
 				href={`mailto:${email}`}
@@ -143,15 +143,6 @@ const passionItems =
 			>
 				👋🏻 {t("hero.getInTouch")}
 			</Link>
-			<a
-				href="#projects"
-				class="inline-flex min-h-11 items-center font-semibold text-foreground-muted underline decoration-primary underline-offset-4 transition-colors hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
-			>
-				{currentLocale === "en"
-					? "View selected work"
-					: "Ver proyectos destacados"}
-				<span class="ml-2" aria-hidden="true">↘</span>
-			</a>
 		</div>
 
 		<!-- Print Info -->

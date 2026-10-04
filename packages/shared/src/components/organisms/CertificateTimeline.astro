@@ -23,15 +23,17 @@ const { certificates, locale } = Astro.props;
 <div class="certificate-timeline">
 	{certificates.map((certificate) => (
 		<TimelineItem
-			startDate={certificate.date}
+			startDate={certificate.date ?? undefined}
 			endDate={null}
 			locale={locale}
-			showDates={true}
+			showDates={Boolean(certificate.date)}
 			variant="default"
 		>
 			<CertificateHeader
 				name={certificate.name}
 				issuer={certificate.issuer}
+				source={certificate.source}
+				locale={locale}
 				url={certificate.url}
 			/>
 		</TimelineItem>

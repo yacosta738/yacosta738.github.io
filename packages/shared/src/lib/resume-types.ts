@@ -90,8 +90,9 @@ export interface RawAward {
 
 export interface RawCertificate {
 	name: string;
-	date: string;
-	issuer: string;
+	date?: string;
+	issuer?: string;
+	source?: string;
 	url?: string;
 }
 

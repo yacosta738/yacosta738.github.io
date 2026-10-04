@@ -17,14 +17,14 @@ const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 ---
 
 {highlights && highlights.length > 0 && (
-	<ul class={`highlights ${className}`} {...attrs}>
+	<ul class={`highlights ${className || ""}`} data-columns={columns} {...attrs}>
 		{highlights.map((highlight) => (
 			<li set:html={highlight} />
 		))}
 	</ul>
 )}
 
-<style define:vars={{ columns }}>
+<style>
 .highlights {
 	padding: 0;
 	margin: 0;
@@ -33,12 +33,22 @@ const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 
 	/* CSS Grid implementation */
 	display: grid;
-	grid-template-columns: repeat(var(--columns), 1fr);
+	grid-template-columns: repeat(var(--columns, 1), minmax(0, 1fr));
 	gap: 0 1.5rem;
 	direction: ltr;
 }
 
+.highlights[data-columns="2"] {
+	--columns: 2;
+}
+
+.highlights[data-columns="3"] {
+	--columns: 3;
+}
+
 .highlights li {
+	min-width: 0;
+	overflow-wrap: break-word;
 	position: relative;
 	padding-inline-start: 30px;
 	margin-block-end: 5px;
@@ -51,8 +61,7 @@ const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 	content: "▹";
 	position: absolute;
 	inset-inline-start: 0;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 0.15em;
 	color: var(--color-brand-accent);
 	font-size: var(--fz-sm);
 	line-height: inherit;
@@ -67,6 +76,39 @@ const { highlights, columns = 1, class: className, ...attrs } = Astro.props;
 	margin-bottom: 0;
 }
 
+:global(.project-highlights-container) {
+	container-name: project-highlights;
+	container-type: inline-size;
+}
+
+@container project-highlights (width < 20rem) {
+	.highlights.project-tech-highlights {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1rem;
+	}
+
+	.highlights.project-tech-highlights li {
+		margin: 0;
+		padding-inline-start: 1rem;
+		white-space: nowrap;
+	}
+}
+
+@container project-highlights (width >= 20rem) {
+	.highlights.project-tech-highlights {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0 clamp(0.75rem, 4cqi, 1.5rem);
+	}
+
+	.highlights.project-tech-highlights li {
+		margin: 0;
+		padding-inline-start: 1rem;
+		white-space: nowrap;
+	}
+}
+
 /* Light mode overrides */
 html:not(.dark) .highlights li {
 	color: #64748b; /* readable gray for light mode */
@@ -76,8 +118,14 @@ html:not(.dark) .highlights li:before {
 	color: var(--brand-accent);
 }
 
+@media (max-width: 1080px) {
+	.highlights[data-columns="3"] {
+		--columns: 2;
+	}
+}
+
 @media (max-width: 768px) {
-	.highlights {
+	.highlights[data-columns] {
 		--columns: 1;
 	}
 }
