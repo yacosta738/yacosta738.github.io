@@ -197,10 +197,12 @@ const main = () => {
 	const nextCspValue = `${directives.join("; ")};`;
 	lines[cspLineIndex] = prefix + nextCspValue;
 
-	writeFileSync(headersPath, lines.join(separator), "utf8");
+	const updatedHeaders = lines.join(separator);
+	writeFileSync(headersPath, updatedHeaders, "utf8");
+	writeFileSync(join(distDir, "_headers"), updatedHeaders, "utf8");
 
 	console.log(
-		`Updated CSP script-src with ${allHashes.size} inline script hash(es) in ${headersPath}`,
+		`Updated CSP script-src with ${allHashes.size} inline script hash(es) in public and dist _headers`,
 	);
 };
 

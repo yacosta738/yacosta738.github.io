@@ -118,7 +118,7 @@ const passionItems =
 		<Typography
 			as="p"
 			variant="body"
-			class="animate-fade-in-up animate-delay-400 animate-duration-slower text-lg text-foreground-muted max-w-4xl mb-12 leading-relaxed"
+			class="text-lg text-foreground-muted max-w-4xl mb-12 leading-relaxed"
 		>
 			{`${label} ${t("hero.passion")}`}
 
@@ -134,12 +134,10 @@ const passionItems =
 		</Typography>
 
 		<!-- Get in Touch Button -->
-		<div
-			class="animate-fade-in-up animate-delay-500 animate-duration-slower no-print flex flex-wrap items-center"
-		>
+		<div class="no-print flex flex-wrap items-center">
 			<Link
 				href={`mailto:${email}`}
-				class="get-in-touch-btn animate-pulse animate-delay-10s animate-fill-both inline-block px-8 py-4 border-2 font-display text-lg font-semibold rounded transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+				class="get-in-touch-btn inline-block px-8 py-4 border-2 font-display text-lg font-semibold rounded transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
 			>
 				👋🏻 {t("hero.getInTouch")}
 			</Link>
@@ -165,6 +163,9 @@ const passionItems =
 /* Hero typed text - WCAG AA compliant contrast */
 :global(.hero-typed-text) {
 	color: #047857;
+	/* Reserve room for the longest phrase so typing never changes line wraps. */
+	min-width: min(25ch, 100%);
+	vertical-align: baseline;
 }
 
 :global(.dark .hero-typed-text) {
