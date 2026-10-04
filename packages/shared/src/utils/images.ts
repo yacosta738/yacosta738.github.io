@@ -8,10 +8,10 @@ import {
 
 const load = async () => {
 	const localImages = import.meta.glob(
-		"/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
+		"/src/assets/images/**/*.{avif,jpeg,jpg,png,tiff,webp,gif,svg,AVIF,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
 	);
 	const sharedImages = import.meta.glob(
-		"/../../packages/shared/src/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
+		"/../../packages/shared/src/assets/images/**/*.{avif,jpeg,jpg,png,tiff,webp,gif,svg,AVIF,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}",
 	);
 
 	return { ...localImages, ...sharedImages };

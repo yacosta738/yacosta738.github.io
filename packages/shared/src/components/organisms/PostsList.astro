@@ -1,8 +1,11 @@
 ---
+import { DOMAIN } from "astro:env/client";
+import { Icon } from "astro-icon/components";
 import Button from "@/components/atoms/Button.astro";
 import PostCard from "@/components/organisms/PostCard.astro";
 import type Article from "@/core/article/article.model";
-import { type Lang, useTranslations } from "@/i18n";
+import { type Lang, useTranslatedPath, useTranslations } from "@/i18n";
+import { buildBlogUrl } from "@/utils/blog-url";
 
 interface Props {
 	posts: Article[];
@@ -10,6 +13,7 @@ interface Props {
 	showLoadMore?: boolean;
 	postsPerPage?: number;
 	orderBy?: "newest" | "oldest" | "alphabetical";
+	showBlogLink?: boolean;
 }
 
 const {
@@ -18,10 +22,14 @@ const {
 	showLoadMore = true,
 	postsPerPage = 6,
 	orderBy = "newest",
+	showBlogLink = false,
 } = Astro.props;
 
 const currentLocale = Astro.currentLocale as Lang;
 const t = useTranslations(currentLocale);
+const translatePath = useTranslatedPath(currentLocale);
+const siteOrigin = Astro.site?.origin || DOMAIN;
+const blogHomeUrl = buildBlogUrl(translatePath("/"), siteOrigin);
 const hasPosts = posts.length > 0;
 const hasMorePosts = posts.length > postsPerPage;
 
@@ -71,6 +79,19 @@ switch (orderBy) {
 		</div>
 	)}
 
+	{hasPosts && showBlogLink && (
+		<div class="mt-12 flex justify-center">
+			<a class="blog-home-link" href={blogHomeUrl}>
+				{t({ en: "Visit the blog", es: "Visita el blog" }) || "Visit the blog"}
+				<Icon
+					name="lucide:arrow-up-right"
+					class="blog-home-link-icon"
+					aria-hidden="true"
+				/>
+			</a>
+		</div>
+	)}
+
 	{hasPosts && showLoadMore && hasMorePosts && (
 		<div id="load-more-container" class="flex justify-center mt-12">
 			<Button
@@ -111,5 +132,53 @@ switch (orderBy) {
 /* Hide posts that should not be initially visible */
 .hidden-post {
 	display: none;
+}
+
+.blog-home-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.65rem;
+	min-height: 48px;
+	padding: 0.75rem 1.25rem;
+	border: 1.5px solid var(--color-brand-accent);
+	border-radius: 0.5rem;
+	background-color: transparent;
+	color: var(--color-brand-accent);
+	font-size: 1rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition:
+		background-color 180ms ease,
+		border-color 180ms ease,
+		color 180ms ease,
+		transform 180ms ease;
+}
+
+.blog-home-link:hover,
+.blog-home-link:focus-visible {
+	border-color: var(--color-brand-accent-hover);
+	background-color: var(--color-brand-accent);
+	color: var(--color-background);
+	transform: translateY(-2px);
+}
+
+.blog-home-link:focus-visible {
+	outline: 2px solid var(--color-brand-accent);
+	outline-offset: 3px;
+}
+
+.blog-home-link-icon {
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.blog-home-link,
+	.blog-home-link:hover,
+	.blog-home-link:focus-visible {
+		transition: none;
+		transform: none;
+	}
 }
 </style>

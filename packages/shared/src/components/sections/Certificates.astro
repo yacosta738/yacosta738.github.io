@@ -22,6 +22,49 @@ const t = useTranslations(currentLocale);
 
 {certificates.length > 0 && (
 	<Section title={t("certificates")}>
-		<CertificateTimeline certificates={certificates} locale={currentLocale} />
+		<CertificateTimeline
+			certificates={certificates.slice(0, 6)}
+			locale={currentLocale}
+		/>
+		{certificates.length > 6 && (
+			<a
+				class="certificate-archive-link"
+				href={
+					currentLocale === "es" ? "/es/certificaciones/" : "/certifications/"
+				}
+			>
+				{currentLocale === "es"
+					? `Ver las ${certificates.length} certificaciones`
+					: `View all ${certificates.length} certifications`}
+				<span aria-hidden="true">↗</span>
+			</a>
+		)}
 	</Section>
 )}
+
+<style>
+.certificate-archive-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	margin: 1.5rem 0 0 clamp(0rem, 18vw, 12.5rem);
+	color: var(--color-brand-accent);
+	font-weight: 600;
+	text-underline-offset: 0.25em;
+}
+
+.certificate-archive-link:hover {
+	text-decoration: underline;
+}
+
+.certificate-archive-link:focus-visible {
+	outline: 2px solid var(--color-brand-accent);
+	outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+	.certificate-archive-link {
+		margin-left: 0;
+	}
+}
+</style>

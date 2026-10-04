@@ -17,7 +17,10 @@ const techs: Skill[] = techData.filter(
 );
 ---
 
-<div class="fixed inset-0 -z-10 pointer-events-none">
+<div
+	class="fixed inset-0 -z-10 pointer-events-none hidden min-[1081px]:block"
+	aria-hidden="true"
+>
 	<div id="icons" class="relative h-full w-full">
 		{techs.map((tech) => (
 			<Icon

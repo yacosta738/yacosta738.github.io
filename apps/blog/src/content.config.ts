@@ -222,8 +222,9 @@ const resume = defineCollection({
 			.array(
 				z.object({
 					name: z.string(),
-					date: z.coerce.date(),
-					issuer: z.string(),
+					date: z.coerce.date().optional(),
+					issuer: z.string().optional(),
+					source: z.string().optional(),
 					url: z.url().optional(),
 				}),
 			)

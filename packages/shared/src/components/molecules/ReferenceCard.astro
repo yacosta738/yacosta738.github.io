@@ -6,6 +6,8 @@
  *
  * @prop {Reference} reference - The reference object containing the name and text.
  */
+
+import { Icon } from "astro-icon/components";
 import type Reference from "@/core/resume/reference/reference.model";
 
 type Props = {
@@ -16,34 +18,26 @@ const { reference } = Astro.props;
 ---
 
 <div
-	class="group relative rounded-lg border border-border bg-card p-6 transition-all duration-200 hover:shadow-md dark:border-border-dark dark:bg-card-dark"
+	class="group relative overflow-hidden rounded-lg border border-border bg-card p-6 md:p-8 transition-colors duration-200 hover:border-brand-accent/50 dark:border-border-dark dark:bg-card-dark"
 >
-	<div class="space-y-4">
+	<div class="space-y-6">
 		<!-- Quote/Reference Text -->
-		<blockquote class="relative">
-			<div
-				class="text-lg leading-relaxed text-muted-foreground dark:text-muted-foreground-dark"
-			>
-				<span
-					class="absolute -left-2 -top-2 text-4xl text-primary/20 dark:text-primary-dark/20"
-					>"</span
-				>
-				<p class="relative pl-6">
-					{reference.reference}
-				</p>
-				<span
-					class="absolute -bottom-4 right-0 text-4xl text-primary/20 dark:text-primary-dark/20"
-					>"</span
-				>
-			</div>
+		<blockquote class="relative max-w-[72ch]">
+			<Icon
+				name="lucide:quote"
+				class="mb-3 h-6 w-6 text-brand-accent"
+				aria-hidden="true"
+			/>
+			<p class="text-base leading-7 text-foreground-muted">
+				{reference.reference}
+			</p>
 		</blockquote>
 
 		<!-- Author Name -->
-		<footer class="border-l-4 border-primary pl-4 dark:border-primary-dark">
-			<cite
-				class="text-sm font-medium text-foreground dark:text-foreground-dark"
-			>
-				— {reference.name}
+		<footer class="flex items-center gap-3 border-t border-border pt-5">
+			<span class="h-px w-8 bg-brand-accent" aria-hidden="true"></span>
+			<cite class="text-sm font-semibold not-italic text-foreground">
+				{reference.name}
 			</cite>
 		</footer>
 	</div>

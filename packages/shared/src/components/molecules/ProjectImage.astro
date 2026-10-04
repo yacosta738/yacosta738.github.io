@@ -21,6 +21,7 @@ interface Props {
 	lang: Lang;
 	loading?: "lazy" | "eager";
 	fetchpriority?: "auto" | "high" | "low";
+	containImage?: boolean;
 }
 
 const {
@@ -30,6 +31,7 @@ const {
 	lang,
 	loading = "lazy",
 	fetchpriority = "auto",
+	containImage = false,
 } = Astro.props as Props;
 const t = useTranslations(lang);
 
@@ -42,7 +44,7 @@ const translated = (
 };
 ---
 
-<div class="project-image-wrapper">
+<div class:list={["project-image-wrapper", { "contain-image": containImage }]}>
 	<a
 		href={url}
 		target="_blank"
@@ -69,111 +71,82 @@ const translated = (
 </div>
 
 <style>
-/* Project Image Wrapper */
 .project-image-wrapper {
-	box-shadow:
-		0 10px 30px -15px rgba(2, 12, 27, 0.7),
-		0 4px 6px -2px rgba(2, 12, 27, 0.1);
 	position: relative;
-	z-index: 1;
-}
-
-.dark .project-image-wrapper {
-	box-shadow:
-		0 10px 30px -15px rgba(2, 12, 27, 0.9),
-		0 4px 6px -2px rgba(2, 12, 27, 0.3);
-}
-
-@media (max-width: 768px) {
-	.project-image-wrapper {
-		height: 100%;
-	}
+	box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
 }
 
 .project-image-wrapper a {
-	width: 100%;
-	height: 100%;
-	background-color: var(--color-brand-accent);
-	border-radius: 4px;
-	vertical-align: middle;
 	display: block;
 	position: relative;
+	isolation: isolate;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border-radius: 4px;
+	background-color: var(--color-brand-accent);
+	transition: background-color 250ms ease;
 }
 
-.project-image-wrapper a:hover,
-.project-image-wrapper a:focus {
-	background: transparent;
-	outline: 0;
-}
-
-.project-image-wrapper a:hover:before,
-.project-image-wrapper a:focus:before,
-.project-image-wrapper a:hover .img,
-.project-image-wrapper a:hover picture,
-.project-image-wrapper a:hover picture img,
-.project-image-wrapper a:focus .img,
-.project-image-wrapper a:focus picture,
-.project-image-wrapper a:focus picture img {
-	background: transparent;
-	filter: none;
-}
-
-.project-image-wrapper a:before {
+.project-image-wrapper a::before {
 	content: "";
 	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 3;
-	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	inset: 0;
+	z-index: 1;
 	background-color: var(--color-brand-navy);
 	mix-blend-mode: screen;
+	pointer-events: none;
+	transition: opacity 250ms ease;
 }
 
-.dark .project-image-wrapper a:before {
-	background-color: var(--color-brand-navy);
+.project-image-wrapper :global(picture) {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
-picture,
-picture img,
-.img {
-	border-radius: 4px;
-	mix-blend-mode: multiply;
-	filter: grayscale(100%) contrast(1) brightness(90%);
+.project-image-wrapper :global(img) {
+	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+	object-position: center;
+	filter: grayscale(100%) contrast(1) brightness(90%);
+	mix-blend-mode: multiply;
+	transition: filter 250ms ease;
 }
 
-@media (max-width: 768px) {
-	picture,
-	picture img,
-	.img {
-		object-fit: cover;
-		width: auto;
-		height: 100%;
-		filter: grayscale(0%) contrast(1) brightness(40%);
-		mix-blend-mode: normal;
-	}
+.project-image-wrapper.contain-image a {
+	aspect-ratio: 1200 / 630;
+}
+
+.project-image-wrapper.contain-image :global(img) {
+	object-fit: contain;
+}
+
+.project-image-wrapper a:is(:hover, :focus-visible) {
+	background-color: transparent;
+}
+
+.project-image-wrapper a:is(:hover, :focus-visible)::before {
+	opacity: 0;
+}
+
+.project-image-wrapper a:is(:hover, :focus-visible) :global(img) {
+	filter: none;
+	mix-blend-mode: normal;
+}
+
+.project-image-wrapper a:focus-visible {
+	outline: 2px solid var(--color-brand-accent);
+	outline-offset: 4px;
 }
 
 .img-placeholder {
-	border-radius: 4px;
-	width: 100%;
-	height: 100%;
-	min-height: 300px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(
-		135deg,
-		var(--color-primary) 0%,
-		var(--color-primary) 50%
-	);
+	min-height: 300px;
 	color: var(--color-primary-foreground);
 }
 
@@ -183,16 +156,39 @@ picture img,
 	opacity: 0.5;
 }
 
-/* Light mode overrides for better image visibility */
-html:not(.dark) picture,
-html:not(.dark) picture img,
-html:not(.dark) .img {
+:global(html:not(.dark)) .project-image-wrapper a {
+	background-color: transparent;
+}
+
+:global(html:not(.dark)) .project-image-wrapper a::before {
+	opacity: 0;
+}
+
+:global(html:not(.dark)) .project-image-wrapper :global(img) {
 	filter: none;
 	mix-blend-mode: normal;
 }
 
-html:not(.dark) .project-image-wrapper a:before {
-	background-color: transparent;
-	mix-blend-mode: normal;
+@media (hover: none) {
+	.project-image-wrapper a {
+		background-color: transparent;
+	}
+
+	.project-image-wrapper a::before {
+		opacity: 0;
+	}
+
+	.project-image-wrapper :global(img) {
+		filter: none;
+		mix-blend-mode: normal;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.project-image-wrapper a,
+	.project-image-wrapper a::before,
+	.project-image-wrapper :global(img) {
+		transition: none;
+	}
 }
 </style>

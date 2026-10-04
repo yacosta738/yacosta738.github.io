@@ -7,6 +7,6 @@
 	"company": "Personal",
 	"tech": ["vuejs", "tailwind", "vite", "itunes-api"],
 	"showInProjects": false,
-	"featured": true,
+	"featured": false,
 	"published": true
 }

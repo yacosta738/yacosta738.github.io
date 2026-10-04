@@ -69,13 +69,13 @@ const personJsonLd = buildPersonJsonLd(
 	<div class="portfolio-content">
 		<Hero basics={resume.basics} />
 		<About basics={resume.basics} skills={resume.skills} />
-		<Experience work={resume.work} />
 
 		{resume.projects && resume.projects.length > 0 && (
-			<>
-				<FeaturedProjects projects={resume.projects} />
-				<AllProjects projects={resume.projects} />
-			</>
+			<FeaturedProjects projects={resume.projects} />
+		)}
+		<Experience work={resume.work} />
+		{resume.projects && resume.projects.length > 0 && (
+			<AllProjects projects={resume.projects} />
 		)}
 
 		<Education education={resume.education} />
@@ -112,7 +112,11 @@ const personJsonLd = buildPersonJsonLd(
 		)}
 		{hasArticlesData && (
 			<Section title={t({ en: "Posts", es: "Publicaciones" }) || "Posts"}>
-				<PostsList posts={lastArticles} showLoadMore={false} />
+				<PostsList
+					posts={lastArticles}
+					showLoadMore={false}
+					showBlogLink={true}
+				/>
 			</Section>
 		)}
 		<Contact />

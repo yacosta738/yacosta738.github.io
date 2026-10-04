@@ -10,11 +10,20 @@
  */
 interface Props {
 	name: string;
-	issuer: string;
+	issuer?: string;
+	source?: string;
+	locale: "en" | "es";
 	url?: string;
 }
 
-const { name, issuer, url } = Astro.props;
+const { name, issuer, source, locale, url } = Astro.props;
+const attribution =
+	issuer ||
+	(source === "LinkedIn"
+		? locale === "es"
+			? "Incluido en LinkedIn"
+			: "Listed on LinkedIn"
+		: source);
 ---
 
 <div class="certificate-header">
@@ -33,11 +42,13 @@ const { name, issuer, url } = Astro.props;
 		)}
 	</h3>
 
-	<div class="certificate-info">
-		<p class="issuer">
-			<span class="issuer-name">{issuer}</span>
-		</p>
-	</div>
+	{attribution && (
+		<div class="certificate-info">
+			<p class="issuer">
+				<span class="issuer-name">{attribution}</span>
+			</p>
+		</div>
+	)}
 </div>
 
 <style>

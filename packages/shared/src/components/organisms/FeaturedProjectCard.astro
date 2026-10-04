@@ -16,7 +16,6 @@ import type { EnhancedProject } from "@/core/resume/project/project.service";
 import { type Lang, tr, useTranslations } from "@/i18n";
 import { findImage } from "@/utils/images";
 import Link from "../atoms/Link.astro";
-import TextAnimation from "../atoms/TextAnimation.astro";
 
 interface Props {
 	project: EnhancedProject;
@@ -55,25 +54,25 @@ const projectUrl =
 			</p>
 
 			<h3 class="project-title">
-				<TextAnimation effect="per-word-crossfade" tag="span">
-					<Link
-						href={projectUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						title={`${translated("viewProject", {}, "View project")}: ${project.name}`}
-					>
-						{project.name}
-					</Link>
-				</TextAnimation>
+				<Link
+					href={projectUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					title={`${translated("viewProject", {}, "View project")}: ${project.name}`}
+				>
+					{project.name}
+				</Link>
 			</h3>
 
 			<div class="project-description">
 				<p>{project.description}</p>
-				<HighlightsList
-					highlights={project.highlights || []}
-					columns={2}
-					class="w-1/2"
-				/>
+				<div class="project-highlights-container">
+					<HighlightsList
+						highlights={project.highlights || []}
+						columns={2}
+						class="project-tech-highlights"
+					/>
+				</div>
 			</div>
 
 			<ProjectTechList
@@ -98,6 +97,7 @@ const projectUrl =
 			name={project.name}
 			url={projectUrl}
 			lang={lang}
+			containImage={project.name === "Profile Tailors"}
 			loading="lazy"
 			fetchpriority={isFirst ? "high" : "auto"}
 		/>
@@ -127,6 +127,9 @@ const projectUrl =
 
 @media (max-width: 768px) {
 	.featured-project {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
 		margin-bottom: 70px;
 		box-shadow:
 			0 10px 30px -15px rgba(2, 12, 27, 0.7),
@@ -155,11 +158,8 @@ const projectUrl =
 
 @media (max-width: 768px) {
 	.project-content {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		height: 100%;
-		grid-column: 1 / -1;
+		width: 100%;
+		height: auto;
 		padding: 40px 40px 30px;
 		z-index: 5;
 	}
@@ -181,8 +181,28 @@ const projectUrl =
 
 @media (max-width: 768px) {
 	.project-image {
-		grid-column: 1 / -1;
-		height: 100%;
+		order: -1;
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* Keep the original overlap at medium widths and scale the OG image around its center. */
+@media (min-width: 769px) and (max-width: 1080px) {
+	.featured-project:not(.odd) .project-content {
+		grid-column: 1 / 7;
+	}
+
+	.featured-project:not(.odd) .project-image {
+		grid-column: 6 / -1;
+	}
+
+	.featured-project .project-image,
+	.featured-project.odd .project-image {
+		margin-top: 0;
+		align-self: center;
+		transform: scale(1.08);
+		transform-origin: center;
 	}
 }
 

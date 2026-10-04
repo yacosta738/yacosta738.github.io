@@ -3,7 +3,7 @@
 	"basics": {
 		"email": "contact@yunielacosta.com",
 		"image": "/me.webp",
-		"label": "Ingeniero de software experimentado en tecnologías frontend y backend. Dominio de principios de diseño de software, patrones de diseño y arquitecturas limpias.",
+		"label": "Ingeniero de software sénior y arquitecto, especializado en sistemas distribuidos fiables para banca y fintech.",
 		"location": {
 			"address": "🍃",
 			"city": "Valencia",
@@ -40,33 +40,180 @@
 				"username": "yacosta738"
 			}
 		],
-		"summary": "Construyo sistemas backend que deben funcionar correctamente desde el primer día: tuberías de Kafka que mueven millones de eventos diarios en banca y fintech, donde un fallo silencioso cuesta más que un sprint lento.\n\nMi convicción central: el software que es difícil de cambiar fue diseñado incorrectamente desde el primer día. La Arquitectura Hexagonal y el Diseño Orientado al Dominio (DDD) no son solo términos de moda para mí; son la forma en que mantengo la lógica de negocio aislada del ruido de la infraestructura, de modo que un cambio de base de datos o una nueva integración nunca se convierta en una migración de seis meses.\n\nLa misma lógica impulsa cómo verifico esa lógica. TDD me da un ciclo de retroalimentación rápido mientras escribo el código. BDD mantiene la conversación con el negocio anclada en escenarios reales en lugar de suposiciones. Spec-Driven Development (SDD) —escribir la especificación antes de una línea de implementación, a menudo con un agente de IA realizando el primer paso— es ahora la base de cómo abordo integraciones complejas.\n\nStack: Kotlin o Java y la JVM para sistemas backend de producción. Spring Boot cuando sus convenciones aportan valor real. Apache Kafka como columna vertebral de arquitecturas orientadas a eventos diseñadas para escalar sin problemas bajo carga. En el frontend, utilizo Astro y Vue.js: arquitectura de islas y reactividad sin el peso innecesario de un framework.\n\nHe pasado años en entornos críticos: sistemas bancarios centrales, detección de fraude procesando millones de eventos de autenticación diarios, plataformas fintech donde el tiempo de inactividad es un incidente regulatorio, no una inconveniencia. Ahí es donde aprendí que una arquitectura 'suficientemente buena' falla exactamente cuando menos puedes permitírtelo.\n\nMás recientemente, he construido mi propio arnés de ingeniería de IA sobre OpenCode — agentes personalizados, subagentes y librerías de prompts que absorben el trabajo repetitivo para que pueda centrarme en las decisiones que realmente necesitan un cerebro humano. Creo que esto se acerca más a cómo trabajarán la mayoría de los ingenieros en un par de años, no es una novedad añadida a un flujo de trabajo normal.\n\nFuera del trabajo para clientes, construyo en público: sistemas distribuidos, Kafka, Rust y contenido sobre observabilidad en mi blog y canal de YouTube. Proyectos actuales: Corvus, un framework de agentes de IA autónomos en Kotlin y Rust para orquestación de larga duración, y Profile Tailors, un SaaS de distribución de contenido multicanal sobre Spring Boot 4, Kotlin y WebFlux.\n\nNo busco el hype del próximo framework, ni un equipo que confunda moverse rápido con moverse a cualquier parte. Busco problemas difíciles, sistemas que valga la pena diseñar correctamente y equipos que aún se preocupan por la artesanía del código.",
+		"summary": "Diseño sistemas backend para productos donde la fiabilidad es crítica: desde flujos de eventos con Kafka hasta servicios JVM para banca y fintech. Me centro en crear integraciones fiables y software fácil de evolucionar con DDD, Arquitectura Hexagonal y pruebas automatizadas.\n\nTrabajo principalmente con Kotlin, Java, Spring Boot y Apache Kafka, y uso Astro y Vue.js para crear interfaces ligeras. También desarrollo herramientas de ingeniería asistidas por IA y comparto notas prácticas sobre sistemas distribuidos, Rust y observabilidad.\n\nVivo en Valencia, España. Me interesan los retos de ingeniería complejos y los equipos que valoran una arquitectura bien pensada.",
 		"url": "https://yunielacosta.com"
 	},
 	"certificates": [
 		{
-			"date": "2022-07-07",
-			"issuer": "Udemy",
-			"name": "Microservicios: Clean Architecture, DDD, SAGA, Outbox & Kafka",
-			"url": "https://www.udemy.com/certificate/UC-5c9457a6-f77d-4152-a860-c6132c9a61f4/"
+			"name": "Developer use cases for AI with GitHub Copilot",
+			"date": "2026-09-01",
+			"issuer": "Microsoft"
 		},
 		{
-			"date": "2022-11-07",
-			"issuer": "Udemy",
-			"name": "Principios SOLID: Introducción a Arquitectura y Diseño de Software",
-			"url": "https://www.udemy.com/certificate/UC-f863b35b-c53c-4ea7-a2f9-ee6b534c0a36/"
+			"name": "Introduction to vibe coding",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
 		},
 		{
-			"date": "2023-02-07",
-			"issuer": "Udemy",
-			"name": "Master Spring Boot 3 & Spring Framework 6 con Java",
-			"url": "https://www.udemy.com/certificate/UC-d6269681-64c6-4fc5-b7dc-e83b10f4dc3b/"
+			"name": "Building applications with GitHub Copilot agent mode",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
 		},
 		{
-			"date": "2023-02-17",
+			"name": "Implement code improvements using GitHub Copilot tools",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "GitHub Copilot Fundamentals Part 1 of 2",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Develop unit tests using GitHub Copilot tools",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Develop code features using GitHub Copilot tools",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "GitHub Copilot Across Environments: IDE, Chat, GitHub.com, Command Line Techniques, and the GitHub Copilot App",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Using advanced GitHub Copilot features",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Introduction to prompt engineering with GitHub Copilot",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Get started with GitHub Copilot",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Introduction to Copilot Spaces",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Introduction to MCP Server",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Management and customization considerations with GitHub Copilot",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Introduction to GitHub Copilot",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Microsoft Certified Professional Developer",
+			"issuer": "Microsoft",
+			"date": "2026-09-01"
+		},
+		{
+			"name": "SOLID Principles of Object Oriented Design and Architecture",
 			"issuer": "Udemy",
-			"name": "Keycloak: Single Sign On con Spring Boot & Spring Security",
-			"url": "https://www.udemy.com/certificate/UC-ea9fe04c-eae5-4f2f-a624-f04baad72e1f/"
+			"date": "2026-09-01"
+		},
+		{
+			"name": "Practical Test Driven Development for Java Programmers",
+			"issuer": "Udemy",
+			"date": "2026-01-01"
+		},
+		{
+			"name": "Career Essentials in Generative AI by Microsoft and LinkedIn",
+			"issuer": "Microsoft",
+			"date": "2026-01-01"
+		},
+		{
+			"name": "Using Generative AI Ethically at Work",
+			"issuer": "LinkedIn",
+			"date": "2026-01-01"
+		},
+		{
+			"name": "Your Top AI Questions Answered: AI Literacy for Everyone",
+			"issuer": "LinkedIn",
+			"date": "2026-01-01"
+		},
+		{
+			"name": "Spring Boot & Spring WebFlux: Programación Reactiva RESTful",
+			"date": "2025-12-01",
+			"issuer": "Udemy"
+		},
+		{
+			"name": "What Is Generative AI?",
+			"issuer": "LinkedIn",
+			"date": "2025-12-01"
+		},
+		{
+			"name": "Desarrolla tus habilidades de productividad con IA generativa con Microsoft y LinkedIn",
+			"issuer": "Microsoft",
+			"date": "2025-11-01"
+		},
+		{
+			"name": "Copilot en PowerPoint: crea presentaciones impactantes con inteligencia artificial",
+			"issuer": "LinkedIn",
+			"date": "2025-01-01"
+		},
+		{
+			"name": "Inteligencia artificial generativa para profesionales creativos: Oportunidades, retos y ética",
+			"issuer": "LinkedIn",
+			"date": "2025-01-01"
+		},
+		{
+			"name": "Trucos de productividad con IA para reimaginar tu jornada laboral y tu carrera profesional",
+			"issuer": "LinkedIn",
+			"date": "2025-01-01"
+		},
+		{
+			"name": "Prompt Engineering: Aprende a hablar con una inteligencia artificial generativa",
+			"issuer": "LinkedIn",
+			"date": "2024-12-01"
+		},
+		{
+			"name": "GitHub Universe 2023 Cloud Skills Challenge",
+			"issuer": "Microsoft",
+			"date": "2024-12-01"
+		},
+		{
+			"date": "2023-11-07",
+			"issuer": "Canvas Credentials (Badgr)",
+			"name": "Certificación Fundamental de Pruebas de Software (ASTFC)™",
+			"url": "https://www.credential.net/LRv0GmtiR-Sluyso7ElnWA"
+		},
+		{
+			"name": "Collaborate with Git",
+			"date": "2023-11-01",
+			"issuer": "Microsoft"
+		},
+		{
+			"name": "How to create and modify a Git project",
+			"issuer": "Microsoft",
+			"date": "2023-11-01"
+		},
+		{
+			"name": "Introduction to Git",
+			"issuer": "Microsoft",
+			"date": "2023-11-01"
+		},
+		{
+			"name": "Guía Completa JUnit y Mockito incluye Spring Boot Test 2023",
+			"issuer": "Udemy",
+			"date": "2023-10-01"
 		},
 		{
 			"date": "2023-02-24",
@@ -75,10 +222,98 @@
 			"url": "https://www.udemy.com/certificate/UC-94e27fb3-0092-4347-b807-eeae99a2d158/"
 		},
 		{
-			"date": "2023-11-07",
-			"issuer": "Canvas Credentials (Badgr)",
-			"name": "Certificación Fundamental de Pruebas de Software (ASTFC)™",
-			"url": "https://www.credential.net/LRv0GmtiR-Sluyso7ElnWA"
+			"date": "2023-02-17",
+			"issuer": "Udemy",
+			"name": "Keycloak: Single Sign On con Spring Boot & Spring Security",
+			"url": "https://www.udemy.com/certificate/UC-ea9fe04c-eae5-4f2f-a624-f04baad72e1f/"
+		},
+		{
+			"date": "2023-02-07",
+			"issuer": "Udemy",
+			"name": "Master Spring Boot 3 & Spring Framework 6 con Java",
+			"url": "https://www.udemy.com/certificate/UC-d6269681-64c6-4fc5-b7dc-e83b10f4dc3b/"
+		},
+		{
+			"name": "JAVASCRIPT",
+			"issuer": "TestDome",
+			"date": "2023-02-01"
+		},
+		{
+			"name": "Programación Reactiva con Spring Boot y Spring WebFlux",
+			"issuer": "Udemy",
+			"date": "2023-02-01"
+		},
+		{
+			"name": "Fundamentos para el diseño de Bases de Datos Relacionales",
+			"issuer": "Udemy",
+			"date": "2023-02-01"
+		},
+		{
+			"date": "2022-11-07",
+			"issuer": "Udemy",
+			"name": "Principios SOLID: Introducción a Arquitectura y Diseño de Software",
+			"url": "https://www.udemy.com/certificate/UC-f863b35b-c53c-4ea7-a2f9-ee6b534c0a36/"
+		},
+		{
+			"date": "2022-07-07",
+			"issuer": "Udemy",
+			"name": "Microservicios: Clean Architecture, DDD, SAGA, Outbox & Kafka",
+			"url": "https://www.udemy.com/certificate/UC-5c9457a6-f77d-4152-a860-c6132c9a61f4/"
+		},
+		{
+			"name": "Java Algorithms and SQL",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java Algorithms",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java, Hibernate, and Spring Boot",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java, Hibernate, and Spring Framework",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java and Hibernate",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java and Spring Boot",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java and Spring Framework",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java and SQL",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "Java",
+			"issuer": "TestDome",
+			"date": "2022-04-01"
+		},
+		{
+			"name": "SQL (Basic)",
+			"source": "LinkedIn",
+			"date": "2022-07-01",
+			"issuer": "HackerRank"
+		},
+		{
+			"name": "Get started with AI-assisted development",
+			"issuer": "Microsoft"
 		}
 	],
 	"education": [
@@ -234,6 +469,12 @@
 			"name": "Food Ordering System",
 			"startDate": "2022-08-05",
 			"url": "https://github.com/yacosta738/food-ordering-system"
+		},
+		{
+			"description": "Plataforma de distribución de contenido en múltiples canales, desarrollada con Spring Boot, Kotlin y WebFlux.",
+			"highlights": ["kotlin", "spring boot", "webflux"],
+			"name": "Profile Tailors",
+			"url": "https://github.com/dallay/profiletailors.com"
 		}
 	],
 	"publications": [],
@@ -288,7 +529,9 @@
 				"CI/CD",
 				"GitLab CI",
 				"Serverless",
-				"Infraestructura como Código"
+				"Infraestructura como Código",
+				"Google Cloud Platform (GCP)",
+				"Continuous Integration (CI)"
 			],
 			"level": "Experto",
 			"name": "Cloud & DevOps"

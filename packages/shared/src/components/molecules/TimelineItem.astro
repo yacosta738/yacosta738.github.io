@@ -45,10 +45,10 @@ const formatTimelineDate = (date: Date, locale: Lang): string => {
 ---
 
 <div class="timeline-item" data-variant={variant}>
-	{showDates && startDate && (
+	{(variant === "default" || (showDates && startDate)) && (
 		<div class="timeline-date">
-			{formatTimelineDate(startDate, locale)}
-			{endDate && (
+			{showDates && startDate && formatTimelineDate(startDate, locale)}
+			{showDates && startDate && endDate && (
 				<div class="timeline-end-date">
 					{formatTimelineDate(endDate, locale)}
 				</div>
@@ -79,7 +79,7 @@ const formatTimelineDate = (date: Date, locale: Lang): string => {
 
 .timeline-item {
 	display: grid;
-	grid-template-columns: 120px 60px 1fr;
+	grid-template-columns: 120px 60px minmax(0, 1fr);
 	gap: 0;
 	margin-bottom: 30px;
 	position: relative;
@@ -152,6 +152,8 @@ const formatTimelineDate = (date: Date, locale: Lang): string => {
 
 /* Timeline Content */
 .timeline-content {
+	min-width: 0;
+	overflow-wrap: break-word;
 	padding-left: 20px;
 }
 
@@ -175,8 +177,9 @@ const formatTimelineDate = (date: Date, locale: Lang): string => {
 }
 
 @media (max-width: 600px) {
-	.timeline-item {
-		grid-template-columns: 1fr;
+	.timeline-item,
+	.timeline-item[data-variant="compact"] {
+		grid-template-columns: minmax(0, 1fr);
 		gap: 15px;
 	}
 
