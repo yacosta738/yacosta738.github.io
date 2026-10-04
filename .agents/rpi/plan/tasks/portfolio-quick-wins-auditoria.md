@@ -107,6 +107,75 @@ con mantener el portfolio como CV-vivo (decisión explícita del usuario).
 
 ## Estado
 
-Ready — Quick Wins acordados con el usuario (CV-vivo, sin restructuración).
-Pendiente crear la rama de trabajo, ejecutar RPI-001 antes de cualquier
-escritura en código fuente y registrar la evidencia real de cada cambio.
+Done — Quick Wins implementados, validados localmente y commiteados en la
+rama `chore/portfolio-seo-audit-qw-2026-10` (worktree
+`/Users/acosta/Dev/worktrees/portfolio-seo-audit-qw`).
+
+### Cambios aplicados (commit `587801ea`)
+
+- `packages/shared/src/configs/site.consts.ts`: SITE_DESCRIPTION localizado
+  en `en` y `es` con propuesta técnica en primera persona, ~150 caracteres
+  cada uno, sin truncado.
+- `packages/shared/src/layouts/Layout.astro`: el meta description usa
+  `SITE_DESCRIPTION` localizado como fallback y se eliminó el truncado
+  artificial a 160 chars (causa del "…" forzado que reportó la auditoría).
+- `packages/shared/src/lib/seo/json-ld.ts`: añadido `knowsAbout` con 11
+  skills (Java, Kotlin, Spring Boot, Kafka, DDD, arquitectura hexagonal,
+  etc.).
+- `packages/shared/src/components/sections/Hero.astro`: la cita rotatoria
+  pasa de `h2` a `p` para limpiar el outline semántico.
+- `packages/shared/src/layouts/Layout.astro`: eliminado el preload de
+  Alkatra (fuente huérfana — ningún selector CSS la usa).
+
+### Cambios registrados en el plan (commit `df11b6c1`)
+
+- `docs(rpi)`: este plan agregado al árbol `.agents/rpi/plan/tasks/`.
+
+### Hallazgos que no se aplicaron (decisión editorial)
+
+- La auditoría propuso reescribir hero, recortar la portada, mover CV a
+  páginas secundarias y crear `/services/` y `/case-studies/`. El usuario
+  eligió mantener el portfolio como CV-vivo completo, así que esos cambios
+  quedan fuera de este plan.
+- La auditoría reportó "beacon.min.js duplicado": falso, el conteo de
+  `grep -c "cloudflareinsights"` incluía el `preconnect` y el script del
+  beacon como si fueran duplicados cuando son cosas distintas. Solo hay
+  una inyección real.
+- La auditoría reportó "meta description en español sigue en inglés": en
+  realidad está en inglés en **ambas** URLs (`/` y `/es/`). El fix
+  mecánico fue sustituir el fallback roto (`t("default.summary")`, clave
+  inexistente en el diccionario) por el `SITE_DESCRIPTION` localizado.
+- La auditoría reportó TTFB ~1.88 s; curl desde este entorno midió
+  0.32 s para la portada y 0.32 s para `/es/`. La cifra de la auditoría
+  parece provenir de una corrida con throttling móvil.
+
+### Hallazgos adicionales descubiertos (fuera del scope de este plan)
+
+- Web Analytics huérfano de Cloudflare (`site_tag:
+  00073f5867ca4ed381c23786f4d7d0c6`, `auto_install: false`, sin `ruleset`
+  ni `rules`). El real y activo es
+  `4c9f2cb7b262481e86a0b7f36a73dc64` (`auto_install: true`, ruleset
+  enlazado al zone `yunielacosta.com`). El huérfano se intentó pausar vía
+  API de Cloudflare (PUT) y devolvió `Authentication error (10000)` por
+  scope insuficiente del token. Queda como acción manual desde el
+  dashboard de Cloudflare Pages.
+- Alkatra está declarada en `fonts.css` (múltiples formatos) y el archivo
+  SVG vive en `packages/shared/src/assets/font/alkatra/` y duplicado en
+  `apps/blog/src/assets/font/alkatra/`. Si Alkatra no se va a usar, se
+  pueden eliminar los archivos de fuente por completo en un pase
+  independiente.
+
+### Verificación focalizada
+
+- `pnpm --filter=portfolio check`: 0 errores, 0 warnings, 0 hints.
+- `pnpm --filter=portfolio build`: 20 páginas, sin errores.
+- `pnpm test:unit:portfolio`: 13 archivos, 66 tests, todos en verde.
+- HTML de `dist/index.html` y `dist/es/index.html` validados con `python`
+  + regex: meta description localizada y sin elipsis, `knowsAbout`
+  presente en JSON-LD Person, sin preload de Alkatra.
+- Tamaño HTML sin comprimir: 274989 → 273455 bytes (root) y
+  274989 → 274202 bytes (`/es/`). Reducción marginal porque la mayor
+  parte del HTML es el CV-vivo, que no se tocó; la ganancia real es que
+  el navegador ya no solicita el woff2 de Alkatra (~16 KB) en la ruta
+  crítica.
+
