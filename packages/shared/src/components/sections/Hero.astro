@@ -165,7 +165,14 @@ const passionItems =
 	color: #047857;
 	/* Reserve room for the longest phrase so typing never changes line wraps. */
 	min-width: min(25ch, 100%);
+	min-block-size: 2lh;
 	vertical-align: baseline;
+}
+
+@media (max-width: 480px) {
+	:global(.hero-typed-text) {
+		min-block-size: 3lh;
+	}
 }
 
 :global(.dark .hero-typed-text) {
