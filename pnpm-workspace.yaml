@@ -116,7 +116,7 @@ overrides:
   brace-expansion: "catalog:"
   devalue: ">=5.8.1"
   deepmerge-ts: ^8.0.2
-  fast-uri: ">=4.0.0"
+  fast-uri: ">=4.0.1"
   fast-xml-parser: "catalog:"
   h3: "catalog:"
   handlebars: "catalog:"
