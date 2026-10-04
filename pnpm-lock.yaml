@@ -219,7 +219,7 @@ overrides:
   fast-xml-parser: ^5.11.2
   h3: ^1.15.11
   handlebars: ^4.7.9
-  minimatch: ^10.2.5
+  minimatch: ^10.2.6
   picomatch: ^4.0.4
   svgo: ^4.1.0
   vite: ^8.0.16
