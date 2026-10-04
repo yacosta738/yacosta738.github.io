@@ -40,6 +40,19 @@ export function buildPersonJsonLd(
 		jobTitle: basics.label,
 		description: basics.summary,
 		url: basics.url || siteOrigin,
+		knowsAbout: [
+			"Java",
+			"Kotlin",
+			"Spring Boot",
+			"Apache Kafka",
+			"Domain-Driven Design",
+			"Hexagonal Architecture",
+			"Distributed Systems",
+			"Event-Driven Architecture",
+			"Software Architecture",
+			"Backend Development",
+			"Microservices",
+		],
 		...(imageUrl && {
 			image: imageUrl.startsWith("http")
 				? imageUrl

@@ -25,8 +25,8 @@ export const SITE_TITLE: string | Multilingual =
 export const SITE_DESCRIPTION: Multilingual = {
 	en:
 		import.meta.env.SITE_DESCRIPTION_EN ||
-		"Portfolio of Yuniel Acosta, Senior Software Engineer & Software Architect specializing in Distributed Systems and DDD.",
-	es: "Portafolio de Yuniel Acosta, Ingeniero de Software Senior y Arquitecto de Software especializado en Sistemas Distribuidos y DDD.",
+		"I build backend systems that have to be right the first time — Kafka pipelines, Spring Boot services and hexagonal architectures for banking and fintech.",
+	es: "Diseño servicios backend que tienen que funcionar a la primera: pipelines Kafka, servicios Spring Boot y arquitecturas hexagonales para banca y fintech.",
 };
 
 /**
