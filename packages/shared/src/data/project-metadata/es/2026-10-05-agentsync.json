@@ -1,0 +1,13 @@
+{
+	"title": "AgentSync",
+	"cover": "~/assets/images/agentsync-cover.png",
+	"date": "2026-10-05T00:00:00.000Z",
+	"repository": "https://github.com/dallay/agentsync",
+	"url": "https://dallay.github.io/agentsync/",
+	"company": "Personal",
+	"tech": ["rust"],
+	"showInProjects": true,
+	"featured": true,
+	"priority": 0.01,
+	"published": true
+}
