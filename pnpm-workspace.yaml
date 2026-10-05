@@ -14,7 +14,7 @@ catalog:
   "@astrojs/sitemap": ^3.7.4
 
   # Testing
-  "@axe-core/playwright": 4.11.2
+  "@axe-core/playwright": 4.13.0
   "@biomejs/biome": 2.5.15
 
   # API and Cloudflare
