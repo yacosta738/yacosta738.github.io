@@ -475,6 +475,13 @@
 			"highlights": ["kotlin", "spring boot", "webflux"],
 			"name": "Profile Tailors",
 			"url": "https://github.com/dallay/profiletailors.com"
+		},
+		{
+			"description": "A fast, portable CLI tool for synchronizing AI agent configurations across multiple AI coding assistants using symbolic links.",
+			"highlights": ["rust", "cli", "ai", "agents"],
+			"name": "AgentSync",
+			"startDate": "2026-10-05",
+			"url": "https://dallay.github.io/agentsync/"
 		}
 	],
 	"publications": [],
