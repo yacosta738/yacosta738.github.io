@@ -50,6 +50,7 @@ const translated = (
 		target="_blank"
 		rel="noopener noreferrer"
 		aria-label={`${translated("viewProject", {}, "View project")}: ${name}`}
+		style={`aspect-ratio: ${containImage ? "1200 / 630" : "16 / 9"}`}
 	>
 		{image ? (
 			<OptimizedPicture

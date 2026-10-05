@@ -41,7 +41,9 @@ const {
 const id = `typed-text-${crypto.randomUUID()}`;
 const allTexts =
 	texts && texts.length > 0 ? texts : ([text].filter(Boolean) as string[]);
-const fallbackText = allTexts.join(" • ");
+// Keep the initial markup close to the first animated state. Rendering every
+// alternative here makes the block shrink as soon as the typewriter starts.
+const fallbackText = allTexts[0] || "";
 ---
 
 <span

@@ -1,3 +1,4 @@
+---
 name: 'Build Portfolio (Astro)'
 description: 'Build Astro portfolio application with caching'
 author: 'yacosta738'
@@ -50,6 +51,11 @@ runs:
         echo "⚡ Fast building Astro portfolio..."
         pnpm build:fast
 
+    - name: Update CSP hashes in deployment artifact
+      shell: bash
+      working-directory: apps/portfolio
+      run: node ./scripts/update-csp-script-hashes.mjs
+
     - name: Build statistics
       id: build-stats
       shell: bash
@@ -60,10 +66,10 @@ runs:
           SIZE_MB=$(du -sm dist | cut -f1)
           echo "size=$SIZE_MB" >> $GITHUB_OUTPUT
           echo "📊 Build size: $SIZE"
-          
+
           echo "📦 Build contents:"
           ls -lah dist/
-          
+
           echo "🔢 File count:"
           find dist -type f | wc -l
         else

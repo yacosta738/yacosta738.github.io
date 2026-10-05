@@ -15,7 +15,7 @@ const titleTextAlt = t("titleAltText", { emoji: "😥" });
 <!-- Optimized title change script - minimal impact -->
 <script is:inline define:vars={{ titleTextAlt }}>
 let prevTitle = document.title;
-let tid: ReturnType<typeof setTimeout>;
+let tid = 0;
 window.addEventListener("blur", () => {
 	clearTimeout(tid);
 	prevTitle = document.title;
