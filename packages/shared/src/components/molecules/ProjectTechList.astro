@@ -25,15 +25,21 @@ const {
 	...attrs
 } = Astro.props as Props;
 
-// Get all skills from the library for tech mapping
+// Get all skills from the library for tech mapping.
+// Metadata references technologies by skill id (e.g. "spring-boot"),
+// so fall back to the id when the display name does not match.
 const allSkills = await getSkills();
-const skillsMap = new Map(
+const skillsByName = new Map(
 	allSkills.map((skill) => [skill.name.toLowerCase(), skill]),
+);
+const skillsById = new Map(
+	allSkills.map((skill) => [skill.id.toLowerCase(), skill]),
 );
 
 // Helper function to get skill info for a technology
 const getTechWithIcon = (techName: string) => {
-	const skill = skillsMap.get(techName.toLowerCase());
+	const key = techName.toLowerCase();
+	const skill = skillsByName.get(key) ?? skillsById.get(key);
 	return {
 		name: techName,
 		icon: skill?.icon,
