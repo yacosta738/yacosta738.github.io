@@ -6,6 +6,25 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [5.1.0](https://github.com/yacosta738/yacosta738.github.io/compare/v5.0.0...v5.1.0) (2026-10-05)
+
+
+### Features
+
+* **portfolio:** add AgentSync to featured projects ([#2044](https://github.com/yacosta738/yacosta738.github.io/issues/2044)) ([877ccb1](https://github.com/yacosta738/yacosta738.github.io/commit/877ccb1e53d1aeeb354b9063c32de24f0538a588))
+* **portfolio:** refresh homepage positioning and featured work ([f0729b8](https://github.com/yacosta738/yacosta738.github.io/commit/f0729b81631a66bec215fac9043c72b4d81c8277))
+
+
+### Bug Fixes
+
+* **ci:** resolve biome lint failures ([95a1fa6](https://github.com/yacosta738/yacosta738.github.io/commit/95a1fa659a6b957e6e060907ce66d68dc37183de))
+* **deps:** update @axe-core/playwright to v4.13.0 ([#2042](https://github.com/yacosta738/yacosta738.github.io/issues/2042)) ([d3e9369](https://github.com/yacosta738/yacosta738.github.io/commit/d3e93698d1e3f52e8612d86f02dc500b8cad3110))
+* **deps:** update devalue to &gt;=5.9.4 ([#2043](https://github.com/yacosta738/yacosta738.github.io/issues/2043)) ([70266b9](https://github.com/yacosta738/yacosta738.github.io/commit/70266b97807c87004fb7d9dc598e56eb0b847208))
+* **deps:** update lefthook to ^2.1.16 ([#2041](https://github.com/yacosta738/yacosta738.github.io/issues/2041)) ([58f9834](https://github.com/yacosta738/yacosta738.github.io/commit/58f98345c5fb886089abfcae87854f315e733479))
+* **deps:** update picomatch to ^4.0.7 ([#2037](https://github.com/yacosta738/yacosta738.github.io/issues/2037)) ([d791491](https://github.com/yacosta738/yacosta738.github.io/commit/d791491d0be44a71e42c33f44e119076fd8a132e))
+* **deps:** update sharp to &gt;=0.35.5 ([#2038](https://github.com/yacosta738/yacosta738.github.io/issues/2038)) ([2fee3dd](https://github.com/yacosta738/yacosta738.github.io/commit/2fee3dd753fe8e26a2865d9bee8aa22ef4e0158e))
+* **portfolio:** resolve tech icons by skill id fallback ([#2045](https://github.com/yacosta738/yacosta738.github.io/issues/2045)) ([3c34b17](https://github.com/yacosta738/yacosta738.github.io/commit/3c34b1796214cab537b384837c476fbcbb0ef2a5))
+
 ## [5.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v4.3.1...v5.0.0) (2026-10-04)
 
 
