@@ -6,6 +6,16 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [5.1.1](https://github.com/yacosta738/yacosta738.github.io/compare/v5.1.0...v5.1.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **deps:** update Cloudflare Workers ([#2048](https://github.com/yacosta738/yacosta738.github.io/issues/2048)) ([057212a](https://github.com/yacosta738/yacosta738.github.io/commit/057212af536cef79523166b60bdf9ffcb4f7a48a))
+* **deps:** update Node.js ([#2049](https://github.com/yacosta738/yacosta738.github.io/issues/2049)) ([f47ca82](https://github.com/yacosta738/yacosta738.github.io/commit/f47ca821d06b0d450cc019f9235f2f499ce7099e))
+* **deps:** update preact-render-to-string to ^6.8.0 ([#2050](https://github.com/yacosta738/yacosta738.github.io/issues/2050)) ([cde76af](https://github.com/yacosta738/yacosta738.github.io/commit/cde76af24f5c1e267ed4f17bfdfd763e93ab0196))
+* **deps:** update satori to v0.35.0 ([#2051](https://github.com/yacosta738/yacosta738.github.io/issues/2051)) ([00891c0](https://github.com/yacosta738/yacosta738.github.io/commit/00891c030f0ad16537b8d0f64629b379dcea4377))
+
 ## [5.1.0](https://github.com/yacosta738/yacosta738.github.io/compare/v5.0.0...v5.1.0) (2026-10-05)
 
 
