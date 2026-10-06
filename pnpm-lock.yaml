@@ -215,7 +215,7 @@ overrides:
   brace-expansion: ^5.0.12
   devalue: '>=5.9.4'
   deepmerge-ts: ^8.0.2
-  fast-uri: '>=4.0.0'
+  fast-uri: '>=4.2.1'
   fast-xml-parser: ^5.11.2
   h3: ^1.15.11
   handlebars: ^4.7.9
