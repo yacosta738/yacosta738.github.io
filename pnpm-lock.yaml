@@ -208,8 +208,8 @@ catalogs:
       specifier: 4.147.0
       version: 4.147.0
     zod:
-      specifier: 4.4.3
-      version: 4.4.3
+      specifier: 4.6.5
+      version: 4.6.5
 
 overrides:
   brace-expansion: ^5.0.12
@@ -257,7 +257,7 @@ importers:
         version: 0.6.1(hono@4.13.12)
       '@hono/zod-openapi':
         specifier: 'catalog:'
-        version: 1.6.3(hono@4.13.12)(zod@4.4.3)
+        version: 1.6.3(hono@4.13.12)(zod@4.6.5)
       chanfana:
         specifier: 'catalog:'
         version: 3.4.0
@@ -266,7 +266,7 @@ importers:
         version: 4.13.12
       zod:
         specifier: 'catalog:'
-        version: 4.4.3
+        version: 4.6.5
     devDependencies:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
@@ -372,7 +372,7 @@ importers:
         version: 4.2.2
       zod:
         specifier: 'catalog:'
-        version: 4.4.3
+        version: 4.6.5
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
@@ -517,7 +517,7 @@ importers:
         version: 4.2.2
       zod:
         specifier: 'catalog:'
-        version: 4.4.3
+        version: 4.6.5
     devDependencies:
       '@axe-core/playwright':
         specifier: 'catalog:'
@@ -647,7 +647,7 @@ importers:
         version: 5.1.0
       zod:
         specifier: 'catalog:'
-        version: 4.4.3
+        version: 4.6.5
     devDependencies:
       '@types/fs-extra':
         specifier: 'catalog:'
@@ -4791,9 +4791,6 @@ packages:
   youch@4.1.0-beta.10:
     resolution: {integrity: sha512-rLfVLB4FgQneDr0dv1oddCVZmKjcJ6yX6mS4pU82Mq/Dt9a3cLZQ62pDBL4AUO+uVrCvtWz3ZFUL2HFAFJ/BXQ==}
 
-  zod@4.4.3:
-    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
-
   zod@4.6.5:
     resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
 
@@ -4827,15 +4824,15 @@ snapshots:
 
   '@asamuzakjp/nwsapi@2.3.9': {}
 
-  '@asteasolutions/zod-to-openapi@8.5.0(zod@4.4.3)':
+  '@asteasolutions/zod-to-openapi@8.5.0(zod@4.6.5)':
     dependencies:
       openapi3-ts: 4.6.1
-      zod: 4.4.3
+      zod: 4.6.5
 
-  '@asteasolutions/zod-to-openapi@9.1.0(zod@4.4.3)':
+  '@asteasolutions/zod-to-openapi@9.1.0(zod@4.6.5)':
     dependencies:
       openapi3-ts: 4.6.1
-      zod: 4.4.3
+      zod: 4.6.5
 
   '@astrojs/astro2tsx@0.1.2(@emnapi/runtime@1.11.3)':
     dependencies:
@@ -4999,12 +4996,12 @@ snapshots:
     dependencies:
       fast-xml-parser: 5.11.2
       piccolore: 0.1.3
-      zod: 4.4.3
+      zod: 4.6.5
 
   '@astrojs/sitemap@3.7.4':
     dependencies:
       sitemap: 9.0.1
-      zod: 4.4.3
+      zod: 4.6.5
 
   '@astrojs/telemetry@3.3.3':
     dependencies:
@@ -5406,18 +5403,18 @@ snapshots:
     dependencies:
       hono: 4.13.12
 
-  '@hono/zod-openapi@1.6.3(hono@4.13.12)(zod@4.4.3)':
+  '@hono/zod-openapi@1.6.3(hono@4.13.12)(zod@4.6.5)':
     dependencies:
-      '@asteasolutions/zod-to-openapi': 9.1.0(zod@4.4.3)
-      '@hono/zod-validator': 0.9.1(hono@4.13.12)(zod@4.4.3)
+      '@asteasolutions/zod-to-openapi': 9.1.0(zod@4.6.5)
+      '@hono/zod-validator': 0.9.1(hono@4.13.12)(zod@4.6.5)
       hono: 4.13.12
       openapi3-ts: 4.6.1
-      zod: 4.4.3
+      zod: 4.6.5
 
-  '@hono/zod-validator@0.9.1(hono@4.13.12)(zod@4.4.3)':
+  '@hono/zod-validator@0.9.1(hono@4.13.12)(zod@4.6.5)':
     dependencies:
       hono: 4.13.12
-      zod: 4.4.3
+      zod: 4.6.5
 
   '@iconify-json/lucide@1.2.138':
     dependencies:
@@ -6421,11 +6418,11 @@ snapshots:
 
   chanfana@3.4.0:
     dependencies:
-      '@asteasolutions/zod-to-openapi': 8.5.0(zod@4.4.3)
+      '@asteasolutions/zod-to-openapi': 8.5.0(zod@4.6.5)
       js-yaml: 4.3.2
       openapi3-ts: 4.6.1
       yargs-parser: 22.0.0
-      zod: 4.4.3
+      zod: 4.6.5
 
   character-entities-html4@2.1.0: {}
 
@@ -9218,8 +9215,6 @@ snapshots:
       '@speed-highlight/core': 1.2.24
       cookie: 1.1.1
       youch-core: 0.3.3
-
-  zod@4.4.3: {}
 
   zod@4.6.5: {}
 
