@@ -114,7 +114,7 @@ minimumReleaseAgeExclude:
 
 overrides:
   brace-expansion: "catalog:"
-  devalue: ">=5.9.4"
+  devalue: ">=6.0.2"
   deepmerge-ts: ^8.0.2
   fast-uri: ">=4.0.0"
   fast-xml-parser: "catalog:"
