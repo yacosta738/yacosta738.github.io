@@ -59,7 +59,7 @@
 		"vitest": "catalog:"
 	},
 	"name": "blog",
-	"packageManager": "pnpm@10.34.6",
+	"packageManager": "pnpm@12.10.1",
 	"scripts": {
 		"astro": "astro",
 		"build": "node ./scripts/run-astro-command.mjs build",
@@ -95,5 +95,5 @@
 		"test:unit:coverage": "vitest run --coverage"
 	},
 	"type": "module",
-	"version": "0.0.22"
+	"version": "0.0.23"
 }
