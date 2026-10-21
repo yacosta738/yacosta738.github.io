@@ -213,7 +213,7 @@ catalogs:
 
 overrides:
   brace-expansion: ^5.0.12
-  devalue: '>=5.9.4'
+  devalue: '>=6.0.3'
   deepmerge-ts: ^8.0.2
   fast-uri: '>=4.2.2'
   fast-xml-parser: ^5.11.2
@@ -2726,9 +2726,9 @@ packages:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
-  devalue@6.0.2:
-    resolution: {integrity: sha512-6V1HzU4to74skg//ScZR2mp9bdz+rESC9jQzVIIG/ha0HYgymHcXIQQCjH0+ivRaSuY82fa9fZ7Ro6QZT4s4uw==}
-    engines: {node: '>=22.17'}
+  devalue@6.0.3:
+    resolution: {integrity: sha512-3woMEITftG1wKeO/4d/QXH1DVKctTSZg3jNGPpjp9hNr5Hos8MCFF5McTML5ZtgKDObm2R591B0spRp2IVernA==}
+    engines: {node: '>=18'}
 
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
@@ -6267,7 +6267,7 @@ snapshots:
       clsx: 2.1.1
       common-ancestor-path: 2.0.0
       cookie: 2.0.1
-      devalue: 6.0.2
+      devalue: 6.0.3
       diff: 9.0.0
       dset: 3.1.4
       es-module-lexer: 2.3.2
@@ -6601,7 +6601,7 @@ snapshots:
 
   detect-libc@2.1.2: {}
 
-  devalue@6.0.2: {}
+  devalue@6.0.3: {}
 
   devlop@1.1.0:
     dependencies:
