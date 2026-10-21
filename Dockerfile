@@ -26,7 +26,7 @@ COPY . .
 RUN pnpm build
 
 # Stage 2: Serve the static files with Caddy
-FROM caddy:2.11.4-alpine@sha256:77c07d5ebfa5be9fd6c820d2094ae662c9e7eeb9bf98346b7f639900263ee2a2
+FROM caddy:2.11.4-alpine@sha256:6aeddd44c3078b0f9a35206472a11420648a79c184603ef95957d0a20044cb2b
 
 # Set the working directory
 WORKDIR /srv
