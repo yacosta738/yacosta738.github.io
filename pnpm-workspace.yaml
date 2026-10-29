@@ -111,12 +111,14 @@ minimumReleaseAgeExclude:
   - hono@4.12.12 || 4.12.14 || 4.12.18
   # Renovate security update: astro@6.1.6 || 6.4.6
   - astro@6.1.6 || 6.4.6
+  # Renovate security update: fast-uri@4.2.3
+  - fast-uri@4.2.3
 
 overrides:
   brace-expansion: "catalog:"
   devalue: ">=5.9.4"
   deepmerge-ts: ^8.0.2
-  fast-uri: ">=4.2.2"
+  fast-uri: ">=4.2.3"
   fast-xml-parser: "catalog:"
   h3: "catalog:"
   handlebars: "catalog:"
