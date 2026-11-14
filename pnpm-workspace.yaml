@@ -109,8 +109,8 @@ minimumReleaseAgeExclude:
   - vite@8.0.9
   # Renovate security update: hono@4.12.12 || 4.12.14 || 4.12.18
   - hono@4.12.12 || 4.12.14 || 4.12.18
-  # Renovate security update: astro@6.1.6 || 6.4.6
-  - astro@6.1.6 || 6.4.6
+  # Renovate security update: astro@6.1.6 || 6.4.6 || 7.4.7
+  - astro@6.1.6 || 6.4.6 || 7.4.7
 
 overrides:
   brace-expansion: "catalog:"
