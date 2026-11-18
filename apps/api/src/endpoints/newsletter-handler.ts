@@ -106,6 +106,27 @@ export async function handleNewsletterSubscription(
 			return c.json({ success: false, message: "Failed to subscribe" }, 500);
 		}
 
+		// Validate webhook response body
+		let webhookResponse: unknown;
+		try {
+			webhookResponse = await response.json();
+		} catch {
+			// Non-JSON response is acceptable — some webhooks return plain text on success
+			return c.json({ success: true, message: "Subscription successful" }, 200);
+		}
+
+		// Check for error indicators in the response
+		if (
+			typeof webhookResponse === "object" &&
+			webhookResponse !== null &&
+			"error" in webhookResponse
+		) {
+			console.error(
+				`Webhook returned error: ${(webhookResponse as Record<string, unknown>).error}`,
+			);
+			return c.json({ success: false, message: "Failed to subscribe" }, 500);
+		}
+
 		return c.json({ success: true, message: "Subscription successful" }, 200);
 	} catch (error) {
 		console.error("Error in newsletter endpoint:", error);

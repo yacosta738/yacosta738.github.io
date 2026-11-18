@@ -5,11 +5,11 @@ on:
   push:
     branches: [main]
     paths-ignore:
-      - 'docs/**'
-      - '**.md'
-      - 'specs/**'
-      - '.github/ISSUE_TEMPLATE/**'
-      - '.github/PULL_REQUEST_TEMPLATE/**'
+      - "docs/**"
+      - "**.md"
+      - "specs/**"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/PULL_REQUEST_TEMPLATE/**"
   pull_request:
     branches: [main, develop]
     types: [opened, synchronize, reopened]
@@ -21,8 +21,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: '22'
-  PNPM_VERSION: '11.5.1'
+  NODE_VERSION: "22"
+  PNPM_VERSION: "11.5.1"
 
 jobs:
   changes:
@@ -47,13 +47,13 @@ jobs:
       has_e2e_apps: ${{ steps.flags.outputs.has_e2e_apps }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0
 
       - name: Detect affected areas
         id: filter
-        uses: dorny/paths-filter@v4
+        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         with:
           filters: |
             portfolio:
@@ -169,7 +169,7 @@ jobs:
       cache-key: ${{ steps.setup.outputs.cache-hit }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 1
 
@@ -182,7 +182,7 @@ jobs:
       - name: Run lint checks
         uses: ./.github/actions/lint
         with:
-          check-astro: 'true'
+          check-astro: "true"
           notion-token: ${{ secrets.NOTION_TOKEN }}
           notion-database-id: ${{ secrets.NOTION_DATABASE_ID }}
 
@@ -205,7 +205,7 @@ jobs:
         project: ${{ fromJSON(needs.changes.outputs.test_projects) }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -216,8 +216,8 @@ jobs:
         uses: ./.github/actions/test-unit
         with:
           project: ${{ matrix.project }}
-          coverage: 'true'
-          upload-coverage: 'true'
+          coverage: "true"
+          upload-coverage: "true"
 
   # Job 3: Build Projects (depends on lint)
   build:
@@ -234,7 +234,7 @@ jobs:
         project: ${{ fromJSON(needs.changes.outputs.build_projects) }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -245,14 +245,14 @@ jobs:
         if: matrix.project == 'portfolio'
         uses: ./.github/actions/build-portfolio
         with:
-          skip-check: 'false'
-          upload-artifact: 'true'
+          skip-check: "false"
+          upload-artifact: "true"
 
       - name: Build API
         if: matrix.project == 'api'
         uses: ./.github/actions/build-api
         with:
-          dry-run: 'true'
+          dry-run: "true"
 
       - name: Build Blog
         if: matrix.project == 'blog'
@@ -277,7 +277,7 @@ jobs:
         include: ${{ fromJSON(needs.changes.outputs.e2e_matrix) }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -286,7 +286,7 @@ jobs:
 
       - name: Download portfolio build
         if: matrix.app == 'portfolio'
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: portfolio-dist-${{ github.sha }}
           path: apps/portfolio/dist/
@@ -301,7 +301,7 @@ jobs:
         with:
           app: ${{ matrix.app }}
           browser: ${{ matrix.browser }}
-          upload-results: 'true'
+          upload-results: "true"
 
   # Job 5: Code Quality Analysis
   code-quality:
@@ -323,12 +323,12 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0
 
       - name: Download coverage artifacts
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           pattern: coverage-*
           path: coverage/
@@ -375,7 +375,7 @@ jobs:
 
       - name: SonarCloud Scan (PR)
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request' && steps.sonar-validation.outputs.sonar_available == 'true'
-        uses: SonarSource/sonarcloud-github-action@v5
+        uses: SonarSource/sonarcloud-github-action@ffc3010689be73b8e5ae0c57ce35968afd7909e8 # v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -395,7 +395,7 @@ jobs:
         id: sonar-main-scan
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.sonar-validation.outputs.sonar_available == 'true'
         continue-on-error: true
-        uses: SonarSource/sonarcloud-github-action@v5
+        uses: SonarSource/sonarcloud-github-action@ffc3010689be73b8e5ae0c57ce35968afd7909e8 # v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -465,7 +465,7 @@ jobs:
 
       - name: Comment PR
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v9
+        uses: actions/github-script@d746ffe35508b1917358783b479e04febd2b8f71 # v9.0.0
         continue-on-error: true
         with:
           script: |

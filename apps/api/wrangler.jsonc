@@ -44,7 +44,17 @@
 		// CORS allowed origins (comma-separated list of allowed origins)
 		// Example: "https://yacosta738.github.io,https://www.yunielacosta.com"
 		"ALLOWED_ORIGINS": "https://yacosta738.github.io,https://www.yunielacosta.com,https://yunielacosta.com,https://v4.yunielacosta.com,https://www.v4.yunielacosta.com"
-	}
+	},
+	/**
+	 * KV Namespace Bindings
+	 * https://developers.cloudflare.com/kv/bindings/
+	 */
+	"kv_namespaces": [
+		{
+			"binding": "RATE_LIMIT_KV",
+			"id": "placeholder-rate-limit-kv-id"
+		}
+	]
 	/**
 	 * Secrets - Sensitive data (DO NOT add values here)
 	 * Use: wrangler secret put <KEY_NAME>

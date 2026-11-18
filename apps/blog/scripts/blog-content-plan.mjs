@@ -5,7 +5,7 @@
  * @param {boolean} params.snapshotExists Whether a cached Notion snapshot already exists.
  * @param {string} [params.notionToken] Optional Notion token from the environment.
  * @param {string} [params.notionDatabaseId] Optional Notion database id from the environment.
- * @returns {{ astroMode: "snapshot" | "disabled", requiresSync: boolean }}
+ * @returns {{ astroMode: "snapshot" | "disabled", requiresSync: boolean, _setAstroMode?: function }}
  * The returned astroMode is the source of truth for the downstream BLOG_CONTENT_SOURCE
  * environment variable, and requiresSync indicates whether callers must run the Notion
  * sync/validation steps before invoking Astro.

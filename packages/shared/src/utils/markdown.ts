@@ -82,3 +82,37 @@ export const lazyImagesRehypePlugin: RehypePlugin = () => {
 		});
 	};
 };
+
+/**
+ * Rehype plugin that sanitizes HTML generated from Notion content.
+ * Removes dangerous event handler attributes and javascript: URLs
+ * as defense-in-depth against compromised Notion content.
+ */
+export const sanitizeHtmlRehypePlugin: RehypePlugin = () => {
+	return (tree: HastRoot) => {
+		visit(tree, "element", (node: Element) => {
+			if (!node.properties) return;
+
+			const props = node.properties as Record<string, unknown>;
+
+			// Remove event handler attributes (on*)
+			for (const key of Object.keys(props)) {
+				if (key.toLowerCase().startsWith("on")) {
+					delete props[key];
+				}
+			}
+
+			// Sanitize dangerous URL attributes
+			const urlAttributes = ["href", "src", "action", "xlink:href"];
+			for (const attr of urlAttributes) {
+				const value = props[attr];
+				if (
+					typeof value === "string" &&
+					value.trim().toLowerCase().startsWith("javascript:")
+				) {
+					delete props[attr];
+				}
+			}
+		});
+	};
+};

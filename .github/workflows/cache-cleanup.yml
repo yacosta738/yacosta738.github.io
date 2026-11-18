@@ -3,11 +3,11 @@ name: Cache Cleanup
 on:
   schedule:
     # Run every Sunday at 00:00 UTC
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch:
     inputs:
       cache-type:
-        description: 'Type of cache to clean'
+        description: "Type of cache to clean"
         required: true
         type: choice
         options:
@@ -15,7 +15,7 @@ on:
           - pnpm
           - playwright
           - build
-        default: 'all'
+        default: "all"
 
 permissions:
   actions: write
@@ -28,29 +28,29 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Get cache keys
         id: cache-keys
         run: |
           echo "Listing cache keys..."
-          
+
           # This is a placeholder - GitHub doesn't provide a direct API to list all cache keys
           # You would typically use the GitHub REST API or a custom script
-          
+
           echo "Cache cleanup will be performed by age and size limits set in cache actions"
 
       - name: Cleanup old caches
-        uses: actions/github-script@v9
+        uses: actions/github-script@d746ffe35508b1917358783b479e04febd2b8f71 # v9.0.0
         env:
           CACHE_TYPE: ${{ inputs.cache-type || 'all' }}
         with:
           script: |
             const { owner, repo } = context.repo;
             const cacheType = process.env.CACHE_TYPE;
-            
+
             console.log(`🧹 Cleaning ${cacheType} caches...`);
-            
+
             try {
               // Get all caches
               const caches = await github.rest.actions.getActionsCacheList({
@@ -58,15 +58,15 @@ jobs:
                 repo,
                 per_page: 100
               });
-              
+
               console.log(`Found ${caches.data.total_count} caches`);
-              
+
               // Filter caches based on type and age
               const oneWeekAgo = new Date();
               oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-              
+
               let deletedCount = 0;
-              
+
               // NOTE: cache keys should follow the convention: "<type>-<descriptive-name>"
               // e.g. "pnpm-deps-2025-10-12" or "playwright-browsers-v1".
               // This avoids ambiguous substring matches (e.g. 'build' appearing inside another token).
@@ -98,9 +98,9 @@ jobs:
                   }
                 }
               }
-              
+
               console.log(`🎉 Cleaned ${deletedCount} old caches`);
-              
+
               core.summary
                 .addHeading('🧹 Cache Cleanup Report')
                 .addTable([
@@ -111,7 +111,7 @@ jobs:
                   ['Retention Period', '7 days']
                 ])
                 .write();
-              
+
             } catch (error) {
               console.error('Error cleaning caches:', error);
               core.setFailed(error.message);
