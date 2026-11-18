@@ -52,6 +52,14 @@
 	"minimumReleaseAge": "3 days",
 	"packageRules": [
 		{
+			"automerge": false,
+			"commitMessagePrefix": "feat(deps)!:",
+			"description": "Major updates - require review",
+			"labels": ["dependencies", "major-update"],
+			"matchUpdateTypes": ["major"],
+			"reviewers": ["yacosta738"]
+		},
+		{
 			"automerge": true,
 			"automergeType": "pr",
 			"description": "Security updates - auto-merge patch and minor",
@@ -72,12 +80,47 @@
 			"platformAutomerge": true
 		},
 		{
-			"automerge": false,
-			"commitMessagePrefix": "feat(deps)!:",
-			"description": "Major updates - require review",
-			"labels": ["dependencies", "major-update"],
-			"matchUpdateTypes": ["major"],
-			"reviewers": ["yacosta738"]
+			"automerge": true,
+			"automergeType": "pr",
+			"description": "Group all non-major npm/yarn dependencies into one PR",
+			"excludePackageNames": [
+				"pnpm",
+				"/^astro/",
+				"/^@astrojs//",
+				"/^typescript/",
+				"/^@types//",
+				"/^ts-/",
+				"/^vitest/",
+				"/^@vitest//",
+				"/^playwright/",
+				"/^@playwright//",
+				"/^@testing-library//",
+				"/^@biomejs//",
+				"/^@cloudflare//",
+				"/^wrangler/",
+				"/^miniflare/",
+				"/^workerd/",
+				"/^hono/",
+				"/^@hono//",
+				"/^tailwindcss/",
+				"/^@tailwindcss//",
+				"/^tailwind-merge/",
+				"/^@notionhq//",
+				"/^notion-/",
+				"/^rehype-/",
+				"/^remark-/",
+				"/^unified/",
+				"/^vfile/",
+				"/^mdast-/",
+				"/^unist-/"
+			],
+			"groupName": "npm/yarn dependencies",
+			"groupSlug": "npm-yarn-all",
+			"labels": ["dependencies"],
+			"matchManagers": ["npm"],
+			"matchPackageNames": ["*"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"platformAutomerge": true
 		},
 		{
 			"automerge": true,
