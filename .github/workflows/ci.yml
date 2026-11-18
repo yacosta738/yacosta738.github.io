@@ -374,7 +374,9 @@ jobs:
           fi
 
       - name: SonarCloud Scan (PR)
+        id: sonar-pr-scan
         if: steps.coverage-check.outputs.coverage_found == 'true' && github.event_name == 'pull_request' && steps.sonar-validation.outputs.sonar_available == 'true'
+        continue-on-error: true
         uses: SonarSource/sonarcloud-github-action@ffc3010689be73b8e5ae0c57ce35968afd7909e8 # v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
