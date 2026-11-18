@@ -50,8 +50,22 @@ export const prepareBlogContent = async () => {
 	});
 
 	if (plan.requiresSync) {
-		await run(["notion:sync"]);
-		await run(["notion:validate"]);
+		try {
+			await run(["notion:sync"]);
+			await run(["notion:validate"]);
+		} catch {
+			console.warn(
+				"[blog:build] Notion sync failed; falling back to disabled mode (no blog content).",
+			);
+			plan.astroMode = "disabled";
+		}
+		// Even if sync exits 0, the cache may not exist (e.g., Notion API error with fallback)
+		if (plan.astroMode === "snapshot" && !existsSync(snapshotPath)) {
+			console.warn(
+				"[blog:build] Notion sync completed but no cache file found; falling back to disabled mode (no blog content).",
+			);
+			plan.astroMode = "disabled";
+		}
 	}
 
 	return plan;

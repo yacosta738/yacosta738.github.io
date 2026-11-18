@@ -13,4 +13,3 @@ description: This case study enabled the creation of files in scientific spatio-
 isExternal: true
 draft: false
 ---
-

@@ -46,6 +46,21 @@
 		"ALLOWED_ORIGINS": "https://yacosta738.github.io,https://www.yunielacosta.com,https://yunielacosta.com,https://v4.yunielacosta.com,https://www.v4.yunielacosta.com"
 	}
 	/**
+	 * KV Namespace Bindings
+	 * https://developers.cloudflare.com/kv/bindings/
+	 *
+	 * To enable distributed rate limiting in production:
+	 * 1. Create a KV namespace: wrangler kv:namespace create RATE_LIMIT_KV
+	 * 2. Add the binding below with the real ID:
+	 *    "kv_namespaces": [{ "binding": "RATE_LIMIT_KV", "id": "<real-id>" }]
+	 * 3. Regenerate types: pnpm cloudflare:typegen:api
+	 *
+	 * Without this binding, rate limiting falls back to in-memory (per-isolate).
+	 */
+	// "kv_namespaces": [
+	//   { "binding": "RATE_LIMIT_KV", "id": "<real-kv-namespace-id>" }
+	// ]
+	/**
 	 * Secrets - Sensitive data (DO NOT add values here)
 	 * Use: wrangler secret put <KEY_NAME>
 	 *

@@ -4,26 +4,26 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/api/**'
-      - '.github/workflows/deploy-api.yml'
-      - '.github/actions/**'
+      - "apps/api/**"
+      - ".github/workflows/deploy-api.yml"
+      - ".github/actions/**"
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Deployment environment'
+        description: "Deployment environment"
         required: true
         type: choice
         options:
           - production
           - staging
-        default: 'production'
+        default: "production"
 
 concurrency:
   group: deploy-api-${{ github.ref }}
   cancel-in-progress: false
 
 env:
-  NODE_VERSION: '22'
+  NODE_VERSION: "22"
 
 jobs:
   validate:
@@ -34,7 +34,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -45,12 +45,12 @@ jobs:
         uses: ./.github/actions/test-unit
         with:
           project: api
-          coverage: 'true'
+          coverage: "true"
 
       - name: Validate build
         uses: ./.github/actions/build-api
         with:
-          dry-run: 'true'
+          dry-run: "true"
 
   deploy:
     name: 🚀 Deploy to Cloudflare Workers
@@ -65,7 +65,7 @@ jobs:
       url: https://api.yacosta.dev
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
@@ -104,12 +104,12 @@ jobs:
       - name: Health check
         run: |
           echo "🏥 Checking API health..."
-          
+
           # Customize this URL to your actual health endpoint
           HEALTH_URL="https://api.yacosta.dev/health"
-          
+
           RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "$HEALTH_URL" || echo "000")
-          
+
           if [ "$RESPONSE" == "200" ] || [ "$RESPONSE" == "404" ]; then
             echo "✅ API is healthy (HTTP $RESPONSE)"
           else
@@ -120,8 +120,8 @@ jobs:
         continue-on-error: true
         run: |
           echo "🧪 Testing API endpoints..."
-          
+
           # Add your API endpoint tests here
           # curl -X GET https://api.yacosta.dev/api/v1/status
-          
+
           echo "✅ Basic endpoint tests passed"

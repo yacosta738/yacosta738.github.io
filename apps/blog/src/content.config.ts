@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { sanitizeHtmlRehypePlugin } from "../../../packages/shared/src/utils/markdown";
 import { getNotionLoaderConfig } from "./lib/notion/notion-config";
 
 // Reusable schemas
@@ -89,7 +90,7 @@ const createNotionLoader = async () => {
 	return createCachedNotionLoader({
 		...notionConfig,
 		cacheUrl: notionCacheUrl,
-		rehypePlugins: [notionRehypePlugin],
+		rehypePlugins: [notionRehypePlugin, sanitizeHtmlRehypePlugin],
 	});
 };
 

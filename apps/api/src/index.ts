@@ -93,6 +93,8 @@ const newsletterRoute = createRoute({
 const app = new OpenAPIHono<{ Bindings: Env }>();
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 20;
+
+// In-memory fallback for local development (KV not available)
 const rateLimitStore = new Map<
 	string,
 	{ count: number; windowStart: number }
@@ -186,8 +188,9 @@ app.use("/*", async (c, next) => {
 });
 
 /**
- * Basic per-IP throttling for public form endpoints.
- * Note: this in-memory store is per isolate; enforce global limits at Cloudflare edge too.
+ * Distributed rate limiting for public form endpoints.
+ * Uses Cloudflare KV in production for cross-isolate consistency.
+ * Falls back to in-memory Map for local development.
  */
 app.use("/api/*", async (c, next) => {
 	if (c.req.method !== "POST") {
@@ -201,9 +204,35 @@ app.use("/api/*", async (c, next) => {
 
 	const now = Date.now();
 	const ip = resolveClientIp(c.req.raw);
-	const key = `${path}:${ip}`;
-	const entry = rateLimitStore.get(key);
+	const key = `rl:${path}:${ip}`;
 
+	// Use KV if available (production), otherwise fall back to in-memory Map
+	const kv = c.env.RATE_LIMIT_KV;
+	if (kv) {
+		const raw = await kv.get(key);
+		if (!raw) {
+			await kv.put(key, "1", { expirationTtl: RATE_LIMIT_WINDOW_MS / 1000 });
+			return await next();
+		}
+		const count = Number.parseInt(raw, 10);
+		if (count >= RATE_LIMIT_MAX_REQUESTS) {
+			c.header("Retry-After", "60");
+			return c.json(
+				{
+					success: false,
+					message: "Too many requests. Please try again later.",
+				},
+				429,
+			);
+		}
+		await kv.put(key, String(count + 1), {
+			expirationTtl: RATE_LIMIT_WINDOW_MS / 1000,
+		});
+		return await next();
+	}
+
+	// In-memory fallback for local development
+	const entry = rateLimitStore.get(key);
 	if (!entry || now - entry.windowStart >= RATE_LIMIT_WINDOW_MS) {
 		rateLimitStore.set(key, { count: 1, windowStart: now });
 		return await next();
@@ -238,22 +267,34 @@ app.openapi(contactRoute, handleContactSubmission);
 app.openapi(newsletterRoute, handleNewsletterSubscription);
 
 // --- OpenAPI Documentation Endpoints ---
-// The Swagger UI endpoint
-app.get(
-	"/",
-	swaggerUI({
-		url: "/doc",
-	}),
-);
+// Swagger UI is restricted to development environments to prevent exposing
+// the API surface publicly in production.
+const isDevelopment =
+	process.env.NODE_ENV === "development" ||
+	process.env.KV_RATE_LIMIT === undefined;
 
-// The OpenAPI specification endpoint
-app.doc("/doc", {
-	openapi: "3.0.0",
-	info: {
-		version: "1.0.0",
-		title: "YAP API",
-		description: "API for the portfolio website of Yuniel Acosta.",
-	},
-});
+if (isDevelopment) {
+	// The Swagger UI endpoint
+	app.get(
+		"/",
+		swaggerUI({
+			url: "/doc",
+		}),
+	);
+
+	// The OpenAPI specification endpoint
+	app.doc("/doc", {
+		openapi: "3.0.0",
+		info: {
+			version: "1.0.0",
+			title: "YAP API",
+			description: "API for the portfolio website of Yuniel Acosta.",
+		},
+	});
+} else {
+	// In production, return 404 for Swagger endpoints
+	app.get("/", () => (c) => c.body("Not Found", 404));
+	app.get("/doc", () => (c) => c.body("Not Found", 404));
+}
 
 export default app;

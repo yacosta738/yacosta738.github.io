@@ -12,6 +12,7 @@
 		"includes": [
 			"**",
 			"public/scripts/**",
+			"!**/.agents",
 			"!**/node_modules",
 			"!**/coverage",
 			"!**/playwright-report",
@@ -60,10 +61,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"preset": "recommended",
 			"a11y": {
 				"noSvgWithoutTitle": "error"
 			},
+			"preset": "recommended",
 			"style": {
 				"noInferrableTypes": "error",
 				"noParameterAssign": "error",

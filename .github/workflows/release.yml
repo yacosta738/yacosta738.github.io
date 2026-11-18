@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Run release-please
         id: release
-        uses: googleapis/release-please-action@v5
+        uses: googleapis/release-please-action@e4764fc281fdd476c5934f96d317bfbd64843f9a # v5.0.0
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
@@ -49,15 +49,15 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           ref: ${{ needs.release-please.outputs.tag_name }}
 
       - name: Setup monorepo
         uses: ./.github/actions/setup
         with:
-          node-version: '22'
-          pnpm-version: '11.5.1'
+          node-version: "22"
+          pnpm-version: "11.5.1"
 
       - name: Build all projects
         env:

@@ -103,6 +103,30 @@ export async function handleContactSubmission(c: Context<{ Bindings: Env }>) {
 			return c.json({ success: false, message: "Failed to send message" }, 500);
 		}
 
+		// Validate webhook response body
+		let webhookResponse: unknown;
+		try {
+			webhookResponse = await response.json();
+		} catch {
+			// Non-JSON response is acceptable — some webhooks return plain text on success
+			return c.json(
+				{ success: true, message: "Message sent successfully" },
+				200,
+			);
+		}
+
+		// Check for error indicators in the response
+		if (
+			typeof webhookResponse === "object" &&
+			webhookResponse !== null &&
+			"error" in webhookResponse
+		) {
+			console.error(
+				`Webhook returned error: ${(webhookResponse as Record<string, unknown>).error}`,
+			);
+			return c.json({ success: false, message: "Failed to send message" }, 500);
+		}
+
 		return c.json({ success: true, message: "Message sent successfully" }, 200);
 	} catch (error) {
 		console.error("Error in contact endpoint:", error);
