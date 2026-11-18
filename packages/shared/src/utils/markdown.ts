@@ -108,7 +108,9 @@ export const sanitizeHtmlRehypePlugin: RehypePlugin = () => {
 				const value = props[attr];
 				if (
 					typeof value === "string" &&
-					value.trim().toLowerCase().startsWith("javascript:")
+					(value.trim().toLowerCase().startsWith("javascript:") ||
+						value.trim().toLowerCase().startsWith("data:") ||
+						value.trim().toLowerCase().startsWith("vbscript:"))
 				) {
 					delete props[attr];
 				}
