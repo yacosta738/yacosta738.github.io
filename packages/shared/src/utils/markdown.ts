@@ -103,16 +103,17 @@ export const sanitizeHtmlRehypePlugin: RehypePlugin = () => {
 			}
 
 			// Sanitize dangerous URL attributes
+			const dangerousSchemes = ["javascript:", "data:", "vbscript:"];
 			const urlAttributes = ["href", "src", "action", "xlink:href"];
 			for (const attr of urlAttributes) {
 				const value = props[attr];
-				if (
-					typeof value === "string" &&
-					(value.trim().toLowerCase().startsWith("javascript:") ||
-						value.trim().toLowerCase().startsWith("data:") ||
-						value.trim().toLowerCase().startsWith("vbscript:"))
-				) {
-					delete props[attr];
+				if (typeof value === "string") {
+					const normalized = value.trim().toLowerCase();
+					if (
+						dangerousSchemes.some((scheme) => normalized.startsWith(scheme))
+					) {
+						delete props[attr];
+					}
 				}
 			}
 		});

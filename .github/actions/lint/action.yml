@@ -1,32 +1,32 @@
 ---
-name: 'Lint & Type Check'
-description: 'Run Biome linting and TypeScript type checking'
-author: 'yacosta738'
+name: "Lint & Type Check"
+description: "Run Biome linting and TypeScript type checking"
+author: "yacosta738"
 
 inputs:
   fix:
-    description: 'Auto-fix issues (for local use)'
+    description: "Auto-fix issues (for local use)"
     required: false
-    default: 'false'
+    default: "false"
   check-astro:
-    description: 'Run Astro check'
+    description: "Run Astro check"
     required: false
-    default: 'true'
+    default: "true"
   notion-token:
-    description: 'Notion token for blog sync in CI'
+    description: "Notion token for blog sync in CI"
     required: false
-    default: ''
+    default: ""
   notion-database-id:
-    description: 'Notion database id for blog sync in CI'
+    description: "Notion database id for blog sync in CI"
     required: false
-    default: ''
+    default: ""
 
 outputs:
   biome-status:
-    description: 'Biome check status'
+    description: "Biome check status"
     value: ${{ steps.biome.outputs.status }}
   astro-status:
-    description: 'Astro check status'
+    description: "Astro check status"
     value: ${{ steps.astro.outputs.status }}
 
 runs:
@@ -35,7 +35,7 @@ runs:
     - name: Setup Biome
       uses: biomejs/setup-biome@v2
       with:
-        version: latest
+        version: 2.5.15
 
     - name: Cache Biome
       uses: actions/cache@v5

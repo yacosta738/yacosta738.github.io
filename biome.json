@@ -1,116 +1,110 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
-  "assist": {
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
-  },
-  "files": {
-    "ignoreUnknown": false,
-    "includes": [
-      "**",
-      "public/scripts/**",
-      "!**/.agents",
-      "!**/node_modules",
-      "!**/coverage",
-      "!**/playwright-report",
-      "!**/test-results",
-      "!**/.astro",
-      "!**/.cache",
-      "!**/.git",
-      "!**/.vscode",
-      "!**/.idea",
-      "!**/.pnpm",
-      "!**/.yarn",
-      "!**/dist",
-      "!**/out",
-      "!**/public/**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf,eot,otf,avif,mp4,webm,ogg,mov}",
-      "!**/public/**/*.min.*",
-      "!**/public/**/fonts",
-      "!**/public/**/images",
-      "!**/public/**/assets",
-      "!**/src/assets/font/**/*.svg",
-      "!**/packages/shared/src/icons/**/*.svg",
-      "!**/apps/blog/src/assets/font/**/*.svg",
-      "!**/src/styles/global.css",
-      "!**/worker-configuration.d.ts",
-      "!**/components/ui",
-      "!**/components.d.ts",
-      "!**/src/assets/font/**/*.svg",
-      "!**/packages/shared/src/assets/font/**/*.svg",
-      "!**/apps/blog/src/assets/font/**/*.svg"
-    ]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "tab"
-  },
-  "html": {
-    "experimentalFullSupportEnabled": true,
-    "formatter": {
-      "enabled": true
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double"
-    }
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "a11y": {
-        "noSvgWithoutTitle": "error"
-      },
-      "preset": "recommended",
-      "style": {
-        "noInferrableTypes": "error",
-        "noParameterAssign": "error",
-        "noUnusedTemplateLiteral": "error",
-        "noUselessElse": "error",
-        "useAsConstAssertion": "error",
-        "useDefaultParameterLast": "error",
-        "useEnumInitializers": "error",
-        "useNumberNamespace": "error",
-        "useSelfClosingElements": "error",
-        "useSingleVarDeclarator": "error"
-      }
-    }
-  },
-  "overrides": [
-    {
-      "includes": [
-        "**/*.svelte",
-        "**/*.astro",
-        "**/*.vue"
-      ],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noUnusedImports": "off",
-            "noUnusedVariables": "off"
-          },
-          "style": {
-            "useConst": "off",
-            "useImportType": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": [
-        "**/*.css"
-      ],
-      "linter": {
-        "enabled": false
-      }
-    }
-  ],
-  "vcs": {
-    "clientKind": "git",
-    "enabled": true,
-    "useIgnoreFile": true
-  }
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**",
+			"public/scripts/**",
+			"!**/.agents",
+			"!**/node_modules",
+			"!**/coverage",
+			"!**/playwright-report",
+			"!**/test-results",
+			"!**/.astro",
+			"!**/.cache",
+			"!**/.git",
+			"!**/.vscode",
+			"!**/.idea",
+			"!**/.pnpm",
+			"!**/.yarn",
+			"!**/dist",
+			"!**/out",
+			"!**/public/**/*.{png,jpg,jpeg,gif,webp,svg,ico,woff,woff2,ttf,eot,otf,avif,mp4,webm,ogg,mov}",
+			"!**/public/**/*.min.*",
+			"!**/public/**/fonts",
+			"!**/public/**/images",
+			"!**/public/**/assets",
+			"!**/src/assets/font/**/*.svg",
+			"!**/packages/shared/src/icons/**/*.svg",
+			"!**/apps/blog/src/assets/font/**/*.svg",
+			"!**/src/styles/global.css",
+			"!**/worker-configuration.d.ts",
+			"!**/components/ui",
+			"!**/components.d.ts",
+			"!**/src/assets/font/**/*.svg",
+			"!**/packages/shared/src/assets/font/**/*.svg",
+			"!**/apps/blog/src/assets/font/**/*.svg"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"enabled": true
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"a11y": {
+				"noSvgWithoutTitle": "error"
+			},
+			"preset": "recommended",
+			"style": {
+				"noInferrableTypes": "error",
+				"noParameterAssign": "error",
+				"noUnusedTemplateLiteral": "error",
+				"noUselessElse": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useNumberNamespace": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					},
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["**/*.css"],
+			"linter": {
+				"enabled": false
+			}
+		}
+	],
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }
