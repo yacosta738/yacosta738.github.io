@@ -59,7 +59,7 @@
 		"vitest": "catalog:"
 	},
 	"name": "blog",
-	"packageManager": "pnpm@10.34.6",
+	"packageManager": "pnpm@12.21.0",
 	"scripts": {
 		"astro": "astro",
 		"build": "node ./scripts/run-astro-command.mjs build",
