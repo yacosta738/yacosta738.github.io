@@ -39,7 +39,7 @@
 		"check:api": "pnpm --filter=yap-api check",
 		"precommit": "pnpm -w run agents:apply",
 		"preinstall": "npx only-allow pnpm",
-		"prepare": "pnpm -w run agents:apply && npx lefthook install",
+		"prepare": "pnpm -w run agents:apply || true; npx lefthook install || true",
 		"agents:apply": "pnpm dlx @dallay/agentsync apply",
 		"agents:check": "pnpm dlx @dallay/agentsync status",
 		"update": "pnpm update",
