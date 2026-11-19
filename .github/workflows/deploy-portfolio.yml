@@ -53,7 +53,9 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: portfolio-build-${{ github.sha }}
-          path: apps/portfolio/dist/
+          path: |
+            apps/portfolio/dist/
+            apps/portfolio/functions/
           retention-days: 1
 
   deploy-cloudflare:
@@ -78,7 +80,7 @@ jobs:
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: portfolio-build-${{ github.sha }}
-          path: apps/portfolio/dist/
+          path: apps/portfolio/
 
       - name: Deploy to Cloudflare Pages
         id: deploy
@@ -86,7 +88,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/portfolio/dist --project-name=yap-portfolio --branch=${{ github.ref_name }}
+          command: pages deploy dist --project-name=yap-portfolio --branch=${{ github.ref_name }}
+          workingDirectory: apps/portfolio
 
       - name: Deployment summary
         run: |
