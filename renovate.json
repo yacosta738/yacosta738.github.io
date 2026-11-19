@@ -118,8 +118,8 @@
 			"groupSlug": "npm-yarn-all",
 			"labels": ["dependencies"],
 			"matchManagers": ["npm"],
-			"matchPackageNames": ["*"],
 			"matchUpdateTypes": ["minor", "patch"],
+			"minimumReleaseAge": "7 days",
 			"platformAutomerge": true
 		},
 		{
