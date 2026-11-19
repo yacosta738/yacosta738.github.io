@@ -115,12 +115,14 @@ minimumReleaseAgeExclude:
   - minimatch@11.0.9
   # Renovate security update: fast-xml-parser@5.12.1
   - fast-xml-parser@5.12.1
+  # Renovate security update: fast-uri@4.2.3
+  - fast-uri@4.2.3
 
 overrides:
   brace-expansion: "catalog:"
   devalue: ">=6.0.3"
   deepmerge-ts: ^8.0.2
-  fast-uri: ">=4.2.2"
+  fast-uri: ">=4.2.3"
   fast-xml-parser: "catalog:"
   h3: "catalog:"
   handlebars: "catalog:"
