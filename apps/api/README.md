@@ -143,7 +143,7 @@ The tests work perfectly from the command line. We've disabled the Vitest extens
 - Newsletter endpoint tests  
 - Integration tests
 
-See [TESTING.md](./TESTING.md) for detailed testing documentation and [TEST-SUMMARY.md](./TEST-SUMMARY.md) for the latest test results.
+Tests cover both endpoints and core functionality, including integration tests.
 
 ## API Endpoints
 

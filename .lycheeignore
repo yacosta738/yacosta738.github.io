@@ -1,1 +1,48 @@
+# Local development URLs (not reachable in CI)
+localhost:4321
+localhost:8787
+
+# Decommissioned/unreachable sites
+https://v4.yunielacosta.com
+https://the.exa.website
+
+# Sites with bot protection/rate limiting
+https://codesandbox.io
+https://tabnine.com
+
+# External 404s (content removed by publishers)
+https://github.com/hi/issues/contrast
+https://towardsdatascience.com/data-structures-simplified-and-classified-e0c1e304436b
+https://www.tencentcloud.com/techpedia/108081
+https://imgs.search.brave.com
+
+# Notion pages (private or removed)
+https://www.notion.so/yacosta738/Differences-Between-TreeMap-HashMap-and-LinkedHashMap-in-Java
+https://www.notion.so/yacosta738/Java-Developers-Check-Out-These-GitHub-Repositories
+https://www.notion.so/yacosta738/Lista-de-array-vs-lista-enlazada-de-colecciones-de-Java
+
+# Known unstable links
 https://dspace.uclv.edu.cu/handle/123456789/9227
+
+# Root-relative links in MDX (resolved at build time by Astro, not in source)
+/src/assets/
+/2023/
+/2024/
+/2025/
+
+# Internal repo paths not published to the live site
+/docs/
+/architecture/
+/reference/
+/guides/
+/getting-started/
+/archive/
+/assets/font/
+/apps/
+/composite-actions
+/CODE_OF_CONDUCT
+/docs%2Fimages%2F
+
+# Sites with HTTP/2 or bot protection issues
+https://www.tabnine.com
+https://www.linkedin.com
