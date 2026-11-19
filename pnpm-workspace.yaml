@@ -68,7 +68,7 @@ catalog:
   kleur: ^4.1.5
   lefthook: ^2.1.16
   mdast-util-to-string: ^4.0.0
-  minimatch: ^10.2.6
+  minimatch: ^11.0.9
   notion-rehype-k: ^1.1.6
   npm-run-all2: ^9.0.3
   pagefind: 1.5.2
@@ -111,6 +111,8 @@ minimumReleaseAgeExclude:
   - hono@4.12.12 || 4.12.14 || 4.12.18
   # Renovate security update: astro@6.1.6 || 6.4.6
   - astro@6.1.6 || 6.4.6
+  # Renovate security update: minimatch@11.0.9
+  - minimatch@11.0.9
 
 overrides:
   brace-expansion: "catalog:"
