@@ -6,6 +6,45 @@
 * **ci:** address workspace lockfile review notes ([71a6c6a](https://github.com/yacosta738/yacosta738.github.io/commit/71a6c6a0d6dd3cf50a8f5c8857f603170dc340c7))
 * **docs:** clarify pnpm version mismatch in exploration ([2b33fe3](https://github.com/yacosta738/yacosta738.github.io/commit/2b33fe3b68284e1db3cca22f5f9e5f8c3788d9e2))
 
+## [6.0.0](https://github.com/yacosta738/yacosta738.github.io/compare/v5.1.0...v6.0.0) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update pnpm to v12 ([#2077](https://github.com/yacosta738/yacosta738.github.io/issues/2077))
+* **deps:** update slug to v12 ([#2062](https://github.com/yacosta738/yacosta738.github.io/issues/2062))
+* **deps:** update devalue to v6 ([#2057](https://github.com/yacosta738/yacosta738.github.io/issues/2057))
+* **deps:** update jsdom to v30 ([#2058](https://github.com/yacosta738/yacosta738.github.io/issues/2058))
+* **deps:** update minimatch to v11 [SECURITY] ([#2071](https://github.com/yacosta738/yacosta738.github.io/issues/2071))
+* **deps:** update astro to v7 ([#2056](https://github.com/yacosta738/yacosta738.github.io/issues/2056))
+
+### Features
+
+* **deps:** update astro to v7 ([#2056](https://github.com/yacosta738/yacosta738.github.io/issues/2056)) ([f132321](https://github.com/yacosta738/yacosta738.github.io/commit/f1323213b17728f2d6511f4cd881ecd9f7d2d48d))
+* **deps:** update devalue to v6 ([#2057](https://github.com/yacosta738/yacosta738.github.io/issues/2057)) ([a4c505e](https://github.com/yacosta738/yacosta738.github.io/commit/a4c505e164d63203688eca2d5f790ba55ae94895))
+* **deps:** update jsdom to v30 ([#2058](https://github.com/yacosta738/yacosta738.github.io/issues/2058)) ([fa52ef5](https://github.com/yacosta738/yacosta738.github.io/commit/fa52ef5dc7127d5768fefcbc2913646311a4d5f6))
+* **deps:** update minimatch to v11 [SECURITY] ([#2071](https://github.com/yacosta738/yacosta738.github.io/issues/2071)) ([dc406ce](https://github.com/yacosta738/yacosta738.github.io/commit/dc406cedf30964ba66d9df1350358831af8eed1e))
+* **deps:** update pnpm to v12 ([#2077](https://github.com/yacosta738/yacosta738.github.io/issues/2077)) ([42003fb](https://github.com/yacosta738/yacosta738.github.io/commit/42003fb23011b1636994533df377c10455619f50))
+* **deps:** update slug to v12 ([#2062](https://github.com/yacosta738/yacosta738.github.io/issues/2062)) ([3e2ab0f](https://github.com/yacosta738/yacosta738.github.io/commit/3e2ab0f0bb86dfbf7ee16b51041a1d4001f933bc))
+* **portfolio:** add CSP middleware for security headers ([#2079](https://github.com/yacosta738/yacosta738.github.io/issues/2079)) ([94d5871](https://github.com/yacosta738/yacosta738.github.io/commit/94d5871d8d5f1808246de2d035bc3c077b239971))
+
+
+### Bug Fixes
+
+* **ci:** stabilize scheduled Markdown link validation ([#2075](https://github.com/yacosta738/yacosta738.github.io/issues/2075)) ([353f606](https://github.com/yacosta738/yacosta738.github.io/commit/353f606b4c8595e02ee60eb514e1017af83af479)), closes [#2069](https://github.com/yacosta738/yacosta738.github.io/issues/2069)
+* **deploy:** run wrangler from app directory to include functions/ ([#2080](https://github.com/yacosta738/yacosta738.github.io/issues/2080)) ([1e32437](https://github.com/yacosta738/yacosta738.github.io/commit/1e32437b7ba13a144a13c5de35695d89e998e5aa))
+* **deps:** remove invalid wildcard pattern from Renovate config ([#2074](https://github.com/yacosta738/yacosta738.github.io/issues/2074)) ([c47c9db](https://github.com/yacosta738/yacosta738.github.io/commit/c47c9db1228ad90f28b1125f196f10b96f6becdb))
+* **deps:** update @types/node to v25.9.9 ([#2046](https://github.com/yacosta738/yacosta738.github.io/issues/2046)) ([1dcfc48](https://github.com/yacosta738/yacosta738.github.io/commit/1dcfc48cc89459db616a6c406a02aa0660a42530))
+* **deps:** update Cloudflare Workers ([#2048](https://github.com/yacosta738/yacosta738.github.io/issues/2048)) ([057212a](https://github.com/yacosta738/yacosta738.github.io/commit/057212af536cef79523166b60bdf9ffcb4f7a48a))
+* **deps:** update fast-uri to &gt;=4.2.2 ([#2047](https://github.com/yacosta738/yacosta738.github.io/issues/2047)) ([5c757e3](https://github.com/yacosta738/yacosta738.github.io/commit/5c757e3714ee115fe9d50ce9a11db69ba68df347))
+* **deps:** update fast-xml-parser to ^5.12.1 [SECURITY] ([#2066](https://github.com/yacosta738/yacosta738.github.io/issues/2066)) ([16665b5](https://github.com/yacosta738/yacosta738.github.io/commit/16665b514d4075ab9a23c251e2bebb0bc33ff56e))
+* **deps:** update Node.js ([#2049](https://github.com/yacosta738/yacosta738.github.io/issues/2049)) ([f47ca82](https://github.com/yacosta738/yacosta738.github.io/commit/f47ca821d06b0d450cc019f9235f2f499ce7099e))
+* **deps:** update preact-render-to-string to ^6.8.0 ([#2050](https://github.com/yacosta738/yacosta738.github.io/issues/2050)) ([cde76af](https://github.com/yacosta738/yacosta738.github.io/commit/cde76af24f5c1e267ed4f17bfdfd763e93ab0196))
+* **deps:** update satori to v0.35.0 ([#2051](https://github.com/yacosta738/yacosta738.github.io/issues/2051)) ([00891c0](https://github.com/yacosta738/yacosta738.github.io/commit/00891c030f0ad16537b8d0f64629b379dcea4377))
+* **deps:** update ws to &gt;=8.23.0 ([#2054](https://github.com/yacosta738/yacosta738.github.io/issues/2054)) ([4d3da3a](https://github.com/yacosta738/yacosta738.github.io/commit/4d3da3a6d86527b56f21d287928230721c73e71c))
+* **deps:** update zod to v4.6.7 ([#2055](https://github.com/yacosta738/yacosta738.github.io/issues/2055)) ([73960c1](https://github.com/yacosta738/yacosta738.github.io/commit/73960c1b02acdca7a909ad1a96b22587ff9727c2))
+* **security:** apply audit recommendations and fix builds ([#2070](https://github.com/yacosta738/yacosta738.github.io/issues/2070)) ([54e2c09](https://github.com/yacosta738/yacosta738.github.io/commit/54e2c0941ac76ccbcade99a08c99f1f5e55c20df))
+
 ## [5.1.0](https://github.com/yacosta738/yacosta738.github.io/compare/v5.0.0...v5.1.0) (2026-10-05)
 
 
