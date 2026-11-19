@@ -28,7 +28,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout code
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Get cache keys
         id: cache-keys
@@ -41,7 +41,7 @@ jobs:
           echo "Cache cleanup will be performed by age and size limits set in cache actions"
 
       - name: Cleanup old caches
-        uses: actions/github-script@d746ffe35508b1917358783b479e04febd2b8f71 # v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           CACHE_TYPE: ${{ inputs.cache-type || 'all' }}
         with:
