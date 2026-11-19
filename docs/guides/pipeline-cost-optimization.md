@@ -306,7 +306,6 @@ Both tests should pass with **0 failures**.
 
 - [CI/CD Pipeline Overview](../getting-started/portfolio-guide.md)
 - [Composite Actions Guide](./composite-actions.md)
-- [Pipeline Troubleshooting](./pipeline-troubleshooting.md)
 
 ---
 

@@ -36,9 +36,12 @@ jobs:
             --max-retries 5
             --timeout 10
             --user-agent "Mozilla/5.0 (compatible; LinkChecker/1.0)"
+            --base-url https://yunielacosta.com
             --exclude-path ./node_modules
             --exclude-path ./dist
             --exclude-path ./.astro
+            --exclude-loopback
+            --exclude-all-private
             .
           fail: true
 

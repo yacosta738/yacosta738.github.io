@@ -141,5 +141,5 @@
 
 ## Related Documentation
 
-- [CORS Implementation Guide](./docs/guides/cors-implementation.md)
-- [API Endpoints Reference](./docs/reference/api-endpoints.md)
+- [CORS Implementation Guide](../guides/cors-implementation.md)
+- [API Endpoints Reference](../reference/api-endpoints.md)
