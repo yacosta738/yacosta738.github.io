@@ -389,8 +389,8 @@ jobs:
             -Dsonar.tests=apps,packages
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info,packages/*/coverage/lcov.info
-            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**,**/*.md,.github/**
-            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**,**/playwright.config.ts,**/scripts/run-notion-sync.mjs,**/scripts/validate-notion-content.mjs,**/functions/_middleware.ts,**/functions/_csp-hashes.generated.js
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**,**/*.md,.github/**,**/functions/_middleware.ts,**/functions/_csp-hashes.generated.js
+            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**,**/playwright.config.ts,**/scripts/run-notion-sync.mjs,**/scripts/validate-notion-content.mjs
             -Dsonar.cpd.exclusions=**/content.config.ts,**/vitest.config.ts,**/playwright.config.ts,**/astro.config.mjs,**/organize-articles.js,**/functions/_middleware.ts,**/functions/_csp-hashes.generated.js
 
       - name: SonarCloud Scan (Push/Main)
@@ -409,8 +409,8 @@ jobs:
             -Dsonar.tests=apps,packages
             -Dsonar.test.inclusions=**/*.test.ts,**/*.spec.ts,**/tests/**
             -Dsonar.javascript.lcov.reportPaths=coverage/**/lcov.info,packages/*/coverage/lcov.info
-            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**,**/*.md,.github/**
-            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**,**/playwright.config.ts,**/scripts/run-notion-sync.mjs,**/scripts/validate-notion-content.mjs,**/functions/_middleware.ts,**/functions/_csp-hashes.generated.js
+            -Dsonar.exclusions=**/dist/**,**/coverage/**,**/node_modules/**,**/.astro/**,apps/blog/src/data/**,packages/shared/src/data/**,**/*.md,.github/**,**/functions/_middleware.ts,**/functions/_csp-hashes.generated.js
+            -Dsonar.coverage.exclusions=**/*.test.ts,**/*.spec.ts,**/__tests__/**,**/tests/**,**/playwright.config.ts,**/scripts/run-notion-sync.mjs,**/scripts/validate-notion-content.mjs
             -Dsonar.cpd.exclusions=**/content.config.ts,**/vitest.config.ts,**/playwright.config.ts,**/astro.config.mjs,**/organize-articles.js,**/functions/_middleware.ts,**/functions/_csp-hashes.generated.js
 
       - name: SonarCloud main scan warning
