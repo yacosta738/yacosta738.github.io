@@ -22,7 +22,7 @@ concurrency:
 
 env:
   NODE_VERSION: "22"
-  PNPM_VERSION: "11.5.1"
+  PNPM_VERSION: "12.21.0"
 
 jobs:
   changes:

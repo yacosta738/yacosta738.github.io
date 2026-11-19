@@ -5,7 +5,7 @@ FROM node:22.23.3-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe423
 WORKDIR /app
 
 # Install pnpm with a pinned version
-RUN npm install -g pnpm@10.30.2
+RUN npm install -g pnpm@12.21.0
 
 # Copy dependency definition files
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -26,7 +26,7 @@ COPY . .
 RUN pnpm build
 
 # Stage 2: Serve the static files with Caddy
-FROM caddy:2.11.4-alpine@sha256:77c07d5ebfa5be9fd6c820d2094ae662c9e7eeb9bf98346b7f639900263ee2a2
+FROM caddy:2.11.4-alpine@sha256:6aeddd44c3078b0f9a35206472a11420648a79c184603ef95957d0a20044cb2b
 
 # Set the working directory
 WORKDIR /srv
@@ -38,3 +38,7 @@ COPY --from=builder /app/dist .
 # The default Caddyfile will serve index.html as the root
 # Expose the port Caddy listens on
 EXPOSE 80
+
+# Health check to detect if Caddy is unresponsive
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD wget -q -O /dev/null http://127.0.0.1/ || exit 1
