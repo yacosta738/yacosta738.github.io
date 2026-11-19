@@ -56,7 +56,7 @@ catalog:
   clsx: ^2.1.1
   cross-env: ^10.1.0
   crossrm: ^1.0.0
-  fast-xml-parser: ^5.11.2
+  fast-xml-parser: ^5.12.1
   fs-extra: ^11.4.1
   gray-matter: ^4.0.3
   deepmerge-ts: ^8.0.2
@@ -113,6 +113,8 @@ minimumReleaseAgeExclude:
   - astro@6.1.6 || 6.4.6
   # Renovate security update: minimatch@11.0.9
   - minimatch@11.0.9
+  # Renovate security update: fast-xml-parser@5.12.1
+  - fast-xml-parser@5.12.1
 
 overrides:
   brace-expansion: "catalog:"
