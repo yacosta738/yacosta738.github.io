@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import {
 	existsSync,
+	mkdirSync,
 	readdirSync,
 	readFileSync,
 	statSync,
@@ -10,7 +11,8 @@ import { join, resolve } from "node:path";
 
 const rootDir = resolve(process.cwd());
 const distDir = join(rootDir, "dist");
-const headersPath = join(rootDir, "public", "_headers");
+const functionsDir = join(rootDir, "functions");
+const outputPath = join(functionsDir, "_csp-hashes.generated.js");
 
 /**
  * Walk through a directory and find all HTML files
@@ -133,76 +135,20 @@ const main = () => {
 		return;
 	}
 
-	if (!existsSync(headersPath)) {
-		console.error(`_headers file not found at ${headersPath}`);
-		process.exit(1);
-	}
-
-	const headersContent = readFileSync(headersPath, "utf8");
-	const separator = headersContent.includes("\r\n") ? "\r\n" : "\n";
-	const lines = headersContent.split(/\r?\n/);
-	let cspLineIndex = -1;
-
-	for (let i = 0; i < lines.length; i++) {
-		if (lines[i].trim().toLowerCase().startsWith("content-security-policy:")) {
-			cspLineIndex = i;
-			break;
-		}
-	}
-
-	if (cspLineIndex === -1) {
-		console.error("Could not find Content-Security-Policy line in _headers.");
-		process.exit(1);
-	}
-
-	const originalLine = lines[cspLineIndex];
-	const colonIndex = originalLine.indexOf(":");
-	const prefix = `${originalLine.slice(0, colonIndex + 1).trimEnd()} `;
-	const cspValue = originalLine.slice(colonIndex + 1).trim();
-
-	const directives = cspValue
-		.split(";")
-		.map((d) => d.trim())
-		.filter((d) => d.length > 0);
-
-	let scriptSrcIndex = -1;
-	for (let i = 0; i < directives.length; i++) {
-		const dLower = directives[i].toLowerCase();
-		if (dLower === "script-src" || dLower.startsWith("script-src ")) {
-			scriptSrcIndex = i;
-			break;
-		}
-	}
-
-	if (scriptSrcIndex === -1) {
-		console.error("Could not find script-src directive in CSP.");
-		process.exit(1);
-	}
-
-	const scriptSrcDirective = directives[scriptSrcIndex];
-	const tokens = scriptSrcDirective
-		.replaceAll(/[\t\n\r]/g, " ")
-		.split(" ")
-		.filter((t) => t.length > 0);
-
-	const filteredTokens = tokens.slice(1).filter((token) => {
-		const tLower = token.toLowerCase();
-		return tLower !== "'unsafe-inline'" && !tLower.startsWith("'sha256-");
-	});
+	mkdirSync(functionsDir, { recursive: true });
 
 	const sortedHashes = Array.from(allHashes).sort((a, b) => a.localeCompare(b));
-	const nextTokens = ["script-src", ...filteredTokens, ...sortedHashes];
-	directives[scriptSrcIndex] = nextTokens.join(" ");
+	const hashLines = sortedHashes.map((h) => `  "${h}",`).join("\n");
+	const fileContent = `// AUTO-GENERATED — do not edit manually. Run \`pnpm --filter=portfolio csp:hashes\` to regenerate.
+export const scriptHashes = [
+${hashLines}
+];
+`;
 
-	const nextCspValue = `${directives.join("; ")};`;
-	lines[cspLineIndex] = prefix + nextCspValue;
-
-	const updatedHeaders = lines.join(separator);
-	writeFileSync(headersPath, updatedHeaders, "utf8");
-	writeFileSync(join(distDir, "_headers"), updatedHeaders, "utf8");
+	writeFileSync(outputPath, fileContent, "utf8");
 
 	console.log(
-		`Updated CSP script-src with ${allHashes.size} inline script hash(es) in public and dist _headers`,
+		`Found ${allHashes.size} inline script hash(es). Written to ${outputPath}`,
 	);
 };
 
