@@ -29,7 +29,7 @@ catalog:
 
   # Content and data processing
   "@jsdevtools/rehype-toc": ^3.0.2
-  "@notionhq/client": ^5.27.0
+  "@notionhq/client": ^5.31.1
   "@playwright/test": 1.63.0
   "@tailwindcss/typography": ^0.5.20
   "@tailwindcss/vite": ^4.3.3
@@ -88,7 +88,7 @@ catalog:
   tailwindcss: ^4.3.3
   typescript: 6.0.3
   unified: ^11.0.5
-  unist-util-visit: ^5.1.0
+  unist-util-visit: ^5.2.0
   unpic: ^4.2.2
   vfile: ^6.0.3
   vite: ^8.3.8
