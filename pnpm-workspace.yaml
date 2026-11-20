@@ -14,7 +14,7 @@ catalog:
   "@astrojs/sitemap": ^3.7.4
 
   # Testing
-  "@axe-core/playwright": 4.13.0
+  "@axe-core/playwright": 4.14.0
   "@biomejs/biome": 2.5.15
 
   # API and Cloudflare
@@ -22,10 +22,10 @@ catalog:
   "@faker-js/faker": ^10.6.0
   "@hono/swagger-ui": 0.6.1
   "@hono/zod-openapi": 1.6.3
-  "@iconify-json/lucide": ^1.2.138
+  "@iconify-json/lucide": ^1.2.154
   "@iconify-json/mdi": ^1.2.3
-  "@iconify-json/simple-icons": ^1.2.98
-  "@iconify-json/tabler": ^1.2.41
+  "@iconify-json/simple-icons": ^1.2.102
+  "@iconify-json/tabler": ^1.2.45
 
   # Content and data processing
   "@jsdevtools/rehype-toc": ^3.0.2
@@ -51,8 +51,8 @@ catalog:
   astro-pagefind: ^2.0.1
 
   # Security and compatibility overrides
-  brace-expansion: ^5.0.12
-  chanfana: ^3.4.0
+  brace-expansion: ^5.0.13
+  chanfana: ^3.6.0
   clsx: ^2.1.1
   cross-env: ^10.1.0
   crossrm: ^1.0.0
@@ -61,26 +61,26 @@ catalog:
   gray-matter: ^4.0.3
   deepmerge-ts: ^8.0.2
   h3: ^1.15.11
-  handlebars: ^4.7.9
-  happy-dom: ^21.0.0
+  handlebars: ^4.7.10
+  happy-dom: ^21.0.4
   hono: ^4.13.12
   jsdom: ^30.1.3
   kleur: ^4.1.5
-  lefthook: ^2.1.16
+  lefthook: ^2.2.2
   mdast-util-to-string: ^4.0.0
   minimatch: ^11.0.9
   notion-rehype-k: ^1.1.6
-  npm-run-all2: ^9.0.3
-  pagefind: 1.5.2
+  npm-run-all2: ^9.0.4
+  pagefind: 1.6.0
   picomatch: ^4.0.7
   playwright: 1.63.0
-  preact-render-to-string: ^6.8.0
+  preact-render-to-string: ^6.8.3
   reading-time: ^1.5.0
   rehype-katex: ^7.0.1
   rehype-slug: ^6.0.0
   rehype-stringify: ^10.0.1
-  rimraf: ^6.1.3
-  satori: 0.35.0
+  rimraf: ^6.1.4
+  satori: 0.63.2
   sharp: ^0.35.5
   svgo: ^4.1.0
   slug: ^12.0.1
