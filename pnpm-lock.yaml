@@ -204,8 +204,8 @@ catalogs:
       specifier: ^10.6.0
       version: 10.6.0
     '@hono/swagger-ui':
-      specifier: 0.6.1
-      version: 0.6.1
+      specifier: 0.6.2
+      version: 0.6.2
     '@hono/zod-openapi':
       specifier: 1.6.3
       version: 1.6.3
@@ -421,7 +421,7 @@ importers:
     dependencies:
       '@hono/swagger-ui':
         specifier: 'catalog:'
-        version: 0.6.1(hono@4.13.12)
+        version: 0.6.2(hono@4.13.12)
       '@hono/zod-openapi':
         specifier: 'catalog:'
         version: 1.6.3(hono@4.13.12)(zod@4.6.7)
@@ -1757,8 +1757,8 @@ packages:
     resolution: {integrity: sha512-3RQHgEtvL1Frl/d1cSreo7qhJ3Gk1OdNUai/CtZ8G+wYeRQnJih3s9xJ9/kgYekPQRdwgh0HXRPqMlzWGwivIQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || ^23.5.0 || >=24.0.0, npm: '>=10'}
 
-  '@hono/swagger-ui@0.6.1':
-    resolution: {integrity: sha512-sJTvldu1GPeEPfyeLG7gRj+W4vEuD+JDi+JjJ3TJs/DvMUtBLs0KJO5yokGegWWdy5qrbdnQGekbhgNRmPmYKQ==}
+  '@hono/swagger-ui@0.6.2':
+    resolution: {integrity: sha512-EDLlBS+LwpAhhh5K45YH85Yyk9GJuD2E7rKdjTZsBObksXaBz+8jPsen5XZqOS9unw6H1CDq0LKzp0c51K6lsA==}
     peerDependencies:
       hono: '>=4.0.0'
 
@@ -5612,7 +5612,7 @@ snapshots:
 
   '@faker-js/faker@10.6.0': {}
 
-  '@hono/swagger-ui@0.6.1(hono@4.13.12)':
+  '@hono/swagger-ui@0.6.2(hono@4.13.12)':
     dependencies:
       hono: 4.13.12
 

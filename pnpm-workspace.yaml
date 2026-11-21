@@ -20,7 +20,7 @@ catalog:
   # API and Cloudflare
   "@cloudflare/workers-types": ^5.20261003.1
   "@faker-js/faker": ^10.6.0
-  "@hono/swagger-ui": 0.6.1
+  "@hono/swagger-ui": 0.6.2
   "@hono/zod-openapi": 1.6.3
   "@iconify-json/lucide": ^1.2.138
   "@iconify-json/mdi": ^1.2.3
