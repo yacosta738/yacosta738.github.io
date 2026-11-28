@@ -12,7 +12,7 @@
 	],
 	"timezone": "Europe/Madrid",
 	"schedule": [
-		"* 0-23 * * 1"
+		"* * * * 1"
 	],
 	"updateNotScheduled": true,
 	"semanticCommits": "enabled",
@@ -64,7 +64,7 @@
 	"lockFileMaintenance": {
 		"enabled": true,
 		"schedule": [
-			"* 0-23 * * 1"
+			"* * * * 1"
 		],
 		"automerge": true,
 		"addLabels": [
@@ -97,11 +97,13 @@
 			"groupSlug": "npm-patch",
 			"groupSingleUpdates": true,
 			"automerge": true,
-			"addLabels": [
+			"prPriority": 5,
+			"labels": [
+				"dependencies",
+				"renovate",
 				"patch-update",
 				"automerge"
-			],
-			"prPriority": 5
+			]
 		},
 		{
 			"description": "Batch minor updates for npm/pnpm dependencies.",
@@ -115,10 +117,12 @@
 			"groupSlug": "npm-minor",
 			"groupSingleUpdates": true,
 			"automerge": false,
-			"addLabels": [
+			"prPriority": 3,
+			"labels": [
+				"dependencies",
+				"renovate",
 				"minor-update"
-			],
-			"prPriority": 3
+			]
 		},
 		{
 			"description": "Batch patch updates for GitHub Actions.",
@@ -132,12 +136,14 @@
 			"groupSlug": "github-actions-patch",
 			"groupSingleUpdates": true,
 			"automerge": true,
-			"addLabels": [
+			"prPriority": 5,
+			"labels": [
+				"dependencies",
+				"renovate",
 				"patch-update",
 				"github-actions",
 				"automerge"
-			],
-			"prPriority": 5
+			]
 		},
 		{
 			"description": "Batch minor updates for GitHub Actions.",
@@ -151,11 +157,13 @@
 			"groupSlug": "github-actions-minor",
 			"groupSingleUpdates": true,
 			"automerge": false,
-			"addLabels": [
+			"prPriority": 3,
+			"labels": [
+				"dependencies",
+				"renovate",
 				"minor-update",
 				"github-actions"
-			],
-			"prPriority": 3
+			]
 		},
 		{
 			"description": "Batch patch updates for Docker images.",
@@ -170,12 +178,14 @@
 			"groupSlug": "docker-patch",
 			"groupSingleUpdates": true,
 			"automerge": true,
-			"addLabels": [
+			"prPriority": 5,
+			"labels": [
+				"dependencies",
+				"renovate",
 				"patch-update",
 				"docker",
 				"automerge"
-			],
-			"prPriority": 5
+			]
 		},
 		{
 			"description": "Batch minor updates for Docker images.",
@@ -190,11 +200,13 @@
 			"groupSlug": "docker-minor",
 			"groupSingleUpdates": true,
 			"automerge": false,
-			"addLabels": [
+			"prPriority": 3,
+			"labels": [
+				"dependencies",
+				"renovate",
 				"minor-update",
 				"docker"
-			],
-			"prPriority": 3
+			]
 		},
 		{
 			"description": "Keep pnpm toolchain updates separate from application dependencies.",
@@ -212,7 +224,8 @@
 			"groupSlug": null,
 			"addLabels": [
 				"pnpm"
-			]
+			],
+			"groupSingleUpdates": false
 		},
 		{
 			"description": "Batch GitHub Actions pin and digest changes for manual review.",
@@ -267,9 +280,7 @@
 				"patch-update",
 				"pre-1.0"
 			],
-			"addLabels": [
-				"pre-1.0"
-			]
+			"rebaseWhen": "conflicted"
 		},
 		{
 			"description": "Keep manual-review branches from rebasing solely because main advanced.",
@@ -296,7 +307,6 @@
 			"renovate",
 			"security",
 			"vulnerability"
-		],
-		"addLabels": []
+		]
 	}
 }
