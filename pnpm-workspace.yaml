@@ -60,7 +60,7 @@ catalog:
   fs-extra: ^11.4.1
   gray-matter: ^4.0.3
   deepmerge-ts: ^8.0.2
-  h3: ^1.15.11
+  h3: ^2.0.8
   handlebars: ^4.7.9
   happy-dom: ^21.0.0
   hono: ^4.13.12
